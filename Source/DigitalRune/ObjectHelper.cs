@@ -4,13 +4,9 @@
 
 using System;
 using System.Globalization;
-#if !NETFX_CORE && !PORTABLE
 using System.ComponentModel;  // TypeDescriptor
-#endif
-#if !XBOX
 using System.Linq.Expressions;
 using System.Reflection;
-#endif
 
 
 namespace DigitalRune
@@ -20,7 +16,6 @@ namespace DigitalRune
   /// </summary>
   public static class ObjectHelper
   {
-#if !XBOX && !PORTABLE
     /// <overloads>
     /// <summary>
     /// Retrieves the name of a property identified by a lambda expression.
@@ -138,8 +133,6 @@ namespace DigitalRune
 
       return memberExpression.Member.Name;
     }
-#endif
-
 
     /// <summary>
     /// Parses the specified value (using the invariant culture).
@@ -209,19 +202,12 @@ namespace DigitalRune
 
       // Enumerations implement IConvertible - but do not support conversion from string! Therefore,
       // we use class Enum. This class supports [Flags] enums too: e.g. "EnumVal0, EnumVal1".
-#if !NETFX_CORE && !NET45
       if (type.IsEnum)
         return Enum.Parse(type, value, true);
-#else
-      var typeInfo = type.GetTypeInfo();
-      if (typeInfo.IsEnum)
-        return Enum.Parse(type, value, true);
-#endif
 
       if (IsConvertible(type))
         return Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
 
-#if !NETFX_CORE && !NET45
       var parseMethod = type.GetMethod("Parse", new[] { typeof(string), typeof(IFormatProvider) });
       if (parseMethod != null && parseMethod.IsStatic)
         return parseMethod.Invoke(null, new object[] { value, CultureInfo.InvariantCulture });
@@ -229,34 +215,7 @@ namespace DigitalRune
       parseMethod = type.GetMethod("Parse", new[] { typeof(string) });
       if (parseMethod != null && parseMethod.IsStatic)
         return parseMethod.Invoke(null, new object[] { value });
-#else
-      var methods = typeInfo.GetDeclaredMethods("Parse");
-      MethodInfo parseString = null;
-      MethodInfo parseStringFormat = null;
-      foreach (var method in methods)
-      {
-        var parameters = method.GetParameters();
-        if (parseString == null && parameters.Length == 1 && parameters[0].ParameterType == typeof(string))
-        {
-          parseString = method;
-        }
-        else if (parameters.Length == 2 && parameters[0].ParameterType == typeof(string) && parameters[1].ParameterType == typeof(IFormatProvider))
-        {
-          parseStringFormat = method;
-        }
 
-        if (parseStringFormat != null)
-          break;
-      }
-
-      if (parseStringFormat != null)
-        return parseStringFormat.Invoke(null, new object[] { value, CultureInfo.InvariantCulture });
-
-      if (parseString != null)
-        return parseString.Invoke(null, new object[] { value });
-#endif
-
-#if !NETFX_CORE && !PORTABLE
       var converter = GetTypeConverter(type);
       if (converter != null)
       {
@@ -266,10 +225,6 @@ namespace DigitalRune
       }
 
       throw new NotSupportedException("Cannot convert string to type '{0}'. No Parse(string) method or TypeConverter found.");
-
-#else
-      throw new NotSupportedException("Cannot convert string to type '{0}'. No Parse(string) method found.");
-#endif
     }
 
 
@@ -292,28 +247,20 @@ namespace DigitalRune
       if (type == typeof(string))
         return true;
 
-#if !NETFX_CORE && !NET45
       if (type.IsEnum)
         return true;
-#else
-      if (type.GetTypeInfo().IsEnum)
-        return true;
-#endif
 
       if (IsConvertible(type))
         return true;
 
-#if !NETFX_CORE && !PORTABLE
       var converter = GetTypeConverter(type);
       if (converter != null && converter.CanConvertFrom(typeof(string)))
         return true;
-#endif
 
       return false;
     }
 
 
-#if !NETFX_CORE && !PORTABLE
     /// <summary>
     /// Gets the type converter for the given type.
     /// </summary>
@@ -330,30 +277,8 @@ namespace DigitalRune
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
     public static TypeConverter GetTypeConverter(Type type)
     {
-#if !SILVERLIGHT && !WP7 && !WP8 && !XBOX
       return TypeDescriptor.GetConverter(type);
-#else
-      TypeConverterAttribute attribute = (TypeConverterAttribute)Attribute.GetCustomAttribute(type, typeof(TypeConverterAttribute), false); 
-      if (attribute != null)
-      {
-        try
-        {
-          var converterType = Type.GetType(attribute.ConverterTypeName, false); 
-          if (converterType != null)
-          {
-            return (Activator.CreateInstance(converterType) as TypeConverter);
-          }
-        } 
-        // ReSharper disable once EmptyGeneralCatchClause
-        catch
-        {
-        }
-      }
-      return null;
-#endif
     }
-#endif
-
 
     /// <overloads>
     /// <summary>
@@ -374,11 +299,7 @@ namespace DigitalRune
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "obj")]
     public static bool IsConvertible(object obj)
     {
-#if NETFX_CORE || NET45
-      return obj != null && IsConvertible(obj.GetType());
-#else
       return obj is IConvertible;
-#endif
     }
 
 
@@ -393,16 +314,7 @@ namespace DigitalRune
     /// </returns>
     public static bool IsConvertible(Type type)
     {
-#if NETFX_CORE || NET45
-      return type == typeof(bool)
-             || type == typeof(int) || type == typeof(byte) || type == typeof(short) || type == typeof(long)
-             || type == typeof(float) || type == typeof(double) || type == typeof(decimal)
-             || type == typeof(char) || type == typeof(string) || type == typeof(DateTime)
-             || type == typeof(uint) || type == typeof(sbyte) || type == typeof(ushort) || type == typeof(ulong)
-             || type.GetTypeInfo().IsEnum;
-#else
       return typeof(IConvertible).IsAssignableFrom(type);
-#endif
     }
 
 
@@ -440,11 +352,7 @@ namespace DigitalRune
       if (value is T)
         return (T)value;
 
-#if SILVERLIGHT || WP7 || XBOX || PORTABLE
-      return ConvertTo<T>(value, CultureInfo.CurrentCulture);
-#else
       return (T)Convert.ChangeType(value, typeof(T));
-#endif
     }
 
 

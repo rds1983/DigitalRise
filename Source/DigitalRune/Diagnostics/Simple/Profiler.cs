@@ -203,8 +203,6 @@ namespace DigitalRune.Diagnostics
     /// </remarks>
     internal static Dictionary<string, ProfilerDataFormat> Formats { get; private set; }
 
-
-#if !PORTABLE && !SILVERLIGHT
     /// <summary>
     /// Gets the stopwatch.
     /// </summary>
@@ -213,8 +211,7 @@ namespace DigitalRune.Diagnostics
     /// This <see cref="Stopwatch"/> is started when the <see cref="Profiler"/> class is 
     /// loaded and it runs permanently.
     /// </remarks>
-    internal static System.Diagnostics.Stopwatch Stopwatch { get; private set; }
-#endif
+    internal static Stopwatch Stopwatch { get; private set; }
     #endregion
 
 
@@ -230,9 +227,7 @@ namespace DigitalRune.Diagnostics
       ClearAll();
 
       // Create and start the stopwatch.
-#if !PORTABLE && !SILVERLIGHT
-      Stopwatch = System.Diagnostics.Stopwatch.StartNew();
-#endif
+      Stopwatch = Stopwatch.StartNew();
 
       Formats = new Dictionary<string, ProfilerDataFormat>();
     }
@@ -253,13 +248,7 @@ namespace DigitalRune.Diagnostics
     public static void ClearAll()
     {
       // TODO: Add SynchronizedHashtable.Clear method.
-
-#if WP7
-      // Cannot access Environment.ProcessorCount in phone app. (Security issue).
-      _data = new SynchronizedHashtable<int, ProfilerDataCollection>(8);
-#else
       _data = new SynchronizedHashtable<int, ProfilerDataCollection>(Environment.ProcessorCount * 4);
-#endif
     }
 
 
@@ -275,11 +264,7 @@ namespace DigitalRune.Diagnostics
     /// <returns>The <see cref="ProfilerDataCollection"/> for the current thread.</returns>
     public static ProfilerDataCollection Get()
     {
-#if !NETFX_CORE && !NET45
       return Get(Thread.CurrentThread.ManagedThreadId);
-#else
-      return Get(Environment.CurrentManagedThreadId);
-#endif
     }
 
 
@@ -311,7 +296,6 @@ namespace DigitalRune.Diagnostics
     }
 
 
-#if !NETFX_CORE && !PORTABLE
     /// <summary>
     /// Gets the <see cref="ProfilerDataCollection"/> for the specified thread. 
     /// (Not available on these platforms: WinRT)
@@ -346,8 +330,6 @@ namespace DigitalRune.Diagnostics
 
       return collection;
     }
-#endif
-
 
     /// <summary>
     /// Gets the <see cref="ProfilerData"/> with the given name for the current thread.
@@ -427,16 +409,9 @@ namespace DigitalRune.Diagnostics
     [Conditional("DIGITALRUNE_PROFILE")]
     public static void Reset()
     {
-#if NETFX_CORE || NET45
-      Reset(Environment.CurrentManagedThreadId);
-#else
       Reset(Thread.CurrentThread.ManagedThreadId);
-#endif
-
     }
 
-
-#if !NETFX_CORE && !PORTABLE
     /// <summary>
     /// Resets all <see cref="ProfilerData"/> for the given thread.
     /// (Not available on these platforms: WinRT)
@@ -456,8 +431,6 @@ namespace DigitalRune.Diagnostics
     {
       Get(thread).Reset();
     }
-#endif
-
 
     /// <summary>
     /// Resets all <see cref="ProfilerData"/> for the given thread.
@@ -483,47 +456,6 @@ namespace DigitalRune.Diagnostics
     {
       Get(name).Reset();
     }
-
-    
-    // This method should not be used because we cannot decorate it with the ConditionalAttribute.
-    // (ConditionalAttribute can only be used if return type is void.)
-
-    ///// <summary>
-    ///// Starts time measurement for the given profiler data and returns an object that can be used 
-    ///// to stop the time measurement.
-    ///// </summary>
-    ///// <param name="name">The name of the <see cref="ProfilerData"/>.</param>
-    ///// <returns>An object that can be used to stop the time measurement.</returns>
-    ///// <remarks>
-    ///// <para>
-    ///// This method starts time measurement for the given profiler data and returns an object 
-    ///// (<see cref="IDisposable"/>) that can be used to stop the time measurement. The measurement
-    ///// is stopped when <see cref="IDisposable.Dispose"/> is called on the returned object.
-    ///// </para>
-    ///// <para>
-    ///// In C# the method can be used in combination with a <c>using</c> statement.
-    ///// </para>
-    ///// </remarks>
-    ///// <example>
-    ///// Use <see cref="Sample"/> instead of calling Start/Stop of the profiler manually:
-    ///// <code lang="csharp">
-    ///// <![CDATA[
-    ///// public void Foo()
-    ///// {
-    /////   using (Profiler.Sample("Foo"))     // Profile time of Foo().
-    /////   {
-    /////     // Do work of this method.
-    /////     ...
-    /////   }
-    ///// }
-    ///// ]]>
-    ///// </code>
-    ///// </example>
-    //public static ProfilerSample Sample(string name)
-    //{
-    //  return new ProfilerSample(name);
-    //}
-
 
     /// <summary>
     /// Starts time measurement for the <see cref="ProfilerData"/> with the given name.
@@ -656,7 +588,6 @@ namespace DigitalRune.Diagnostics
     }
 
 
-#if !NETFX_CORE && !PORTABLE
     /// <summary>
     /// Returns a string that contains a table with all <see cref="ProfilerData"/> instances for the
     /// given thread.
@@ -679,8 +610,6 @@ namespace DigitalRune.Diagnostics
     {
       return Get(thread).Dump();
     }
-#endif
-
 
     /// <summary>
     /// Returns a string that contains a table with all <see cref="ProfilerData"/> instances for the

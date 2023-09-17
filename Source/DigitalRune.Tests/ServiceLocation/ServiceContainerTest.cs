@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Design;
 using System.Linq;
-using Microsoft.Practices.ServiceLocation;
 using NUnit.Framework;
 
 

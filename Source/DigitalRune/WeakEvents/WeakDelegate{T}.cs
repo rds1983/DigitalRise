@@ -3,10 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if NETFX_CORE || NET45
-using System.Reflection;
-#endif
-
 
 namespace DigitalRune
 {
@@ -32,14 +28,8 @@ namespace DigitalRune
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
     static WeakDelegate()
     {
-#if !NETFX_CORE && !NET45
       if (!typeof(T).IsSubclassOf(typeof(Delegate)))
         throw new ArgumentException("T must be a delegate type");
-#else
-      if (!typeof(T).GetTypeInfo().IsSubclassOf(typeof(Delegate)))
-        throw new ArgumentException("T must be a delegate type");
-#endif
-
     }
 
 

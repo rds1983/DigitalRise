@@ -3,7 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using System.Globalization;
 using System.Linq;
 
 
@@ -29,20 +28,7 @@ namespace DigitalRune
     /// </exception>
     public static object[] GetValues(Type enumType)
     {
-#if !NETFX_CORE && !NET45
-      if (enumType == null)
-        throw new ArgumentNullException("enumType");
-
-      if (!enumType.IsEnum)
-        throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "Type '{0}' is not an enumeration.", enumType.Name));
-
-      return enumType.GetFields()
-                     .Where(field => field.IsLiteral)
-                     .Select(field => field.GetValue(enumType))
-                     .ToArray();
-#else
       return Enum.GetValues(enumType).Cast<object>().ToArray();
-#endif
     }
 
 
@@ -60,7 +46,6 @@ namespace DigitalRune
     /// <see langword="true"/> if the string was converted successfully; otherwise, 
     /// <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
     public static bool TryParse<T>(string text, bool ignoreCase, out T value)
     {
       try

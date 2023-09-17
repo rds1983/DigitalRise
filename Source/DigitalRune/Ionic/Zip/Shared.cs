@@ -65,13 +65,7 @@ namespace DigitalRune.Ionic.Zip
             return SimplifyFwdSlashPath(pathName);
         }
 
-#if !WINDOWS
         // See https://dotnetzip.codeplex.com/workitem/14049
-        static System.Text.Encoding ibm437 = System.Text.Encoding.GetEncoding("UTF-8");
-#else
-        static System.Text.Encoding ibm437 = System.Text.Encoding.GetEncoding("IBM437");
-#endif
-
         static System.Text.Encoding utf8 = System.Text.Encoding.GetEncoding("UTF-8");
 
         internal static byte[] StringToByteArray(string value, System.Text.Encoding encoding)
@@ -81,7 +75,7 @@ namespace DigitalRune.Ionic.Zip
         }
         internal static byte[] StringToByteArray(string value)
         {
-            return StringToByteArray(value, ibm437);
+            return StringToByteArray(value, utf8);
         }
 
         //internal static byte[] Utf8StringToByteArray(string value)

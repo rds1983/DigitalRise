@@ -89,9 +89,6 @@
 
 using System;
 using System.Diagnostics;
-#if NETFX_CORE || NET45
-using System.Linq;
-#endif
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -146,19 +143,11 @@ namespace DigitalRune
       get
       {
         if (TargetReference == null)
-#if !NETFX_CORE && !NET45
           return Delegate.CreateDelegate(DelegateType, null, MethodInfo);
-#else
-          return MethodInfo.CreateDelegate(DelegateType);
-#endif
        
         object target = TargetReference.Target;
         if (target != null)
-#if !NETFX_CORE && !NET45
           return Delegate.CreateDelegate(DelegateType, target, MethodInfo);
-#else
-          return MethodInfo.CreateDelegate(DelegateType, target);
-#endif
           
         return null;
       }
@@ -218,11 +207,7 @@ namespace DigitalRune
 
       object target = @delegate.Target;
       TargetReference = (target != null) ? new WeakReference(target) : null;
-#if !NETFX_CORE && !NET45
       MethodInfo = @delegate.Method;
-#else
-      MethodInfo = @delegate.GetMethodInfo();
-#endif
 
       DelegateType = @delegate.GetType();
 
@@ -267,24 +252,15 @@ namespace DigitalRune
     [Conditional("DEBUG")]
     private static void CheckForClosure(MethodInfo methodInfo)
     {
-#if !NETFX_CORE && !NET45
       if (methodInfo.DeclaringType.GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Length != 0)
         Debug.WriteLine("Warning: Creating weak-delegate to anonymous method with closure.");
-#else
-      if (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Count() != 0)
-        Debug.WriteLine("Warning: Creating weak-delegate to anonymous method with closure.");
-#endif      
     }
 
 
     [Conditional("SILVERLIGHT")]
     private static void CheckForNonPublicEventHandler(object target, MethodInfo methodInfo)
     {
-#if !NETFX_CORE && !NET45
       if (target != null && !target.GetType().IsPublic)
-#else
-      if (target != null && !target.GetType().GetTypeInfo().IsPublic)
-#endif
         Debug.WriteLine(
           "Warning: Creating weak-delegate to private or internal type. The target of a " +
           "weak-delegate or a weak-event needs to be public. This is necessary because of " +

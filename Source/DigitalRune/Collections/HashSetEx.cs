@@ -51,17 +51,12 @@
 // - Some code inlined in set operations to improve performance.
 #endregion
 
-#if WP7 || XBOX
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
-#if !SILVERLIGHT && !WP7 && !XBOX
 using System.Runtime.Serialization;
-#endif
-
 
 namespace DigitalRune.Collections
 {
@@ -81,17 +76,11 @@ namespace DigitalRune.Collections
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
   [ComVisible(false)]
-#if !SILVERLIGHT && !WP7 && !XBOX
   [Serializable]
-#endif
   [DebuggerDisplay("{GetType().Name,nq}(Count = {Count})")]
   [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
   public class HashSetEx<T> :
-#if !SILVERLIGHT && !WP7 && !XBOX
     ISet<T>, ISerializable, IDeserializationCallback
-#else
-    ICollection<T>
-#endif
   {
     // The implementation of this class uses a hash table with chaining:
     // A hash table stores the index of the first slot in the chain.
@@ -126,9 +115,7 @@ namespace DigitalRune.Collections
     /// <summary>
     /// Enumerates the elements of a <see cref="HashSetEx{T}"/>. 
     /// </summary>
-#if !SILVERLIGHT && !WP7 && !XBOX
     [Serializable]
-#endif
     public struct Enumerator : IEnumerator<T>
     {
       private HashSetEx<T> _hashSet;
@@ -331,11 +318,9 @@ namespace DigitalRune.Collections
     // to detect changes.
     private int _version;
 
-#if !SILVERLIGHT && !WP7 && !XBOX
     private SerializationInfo _serializationInfo;
-#endif
-    #endregion
 
+    #endregion
 
     //--------------------------------------------------------------
     #region Properties & Events
@@ -440,7 +425,6 @@ namespace DigitalRune.Collections
     }
 
 
-#if !SILVERLIGHT && !WP7 && !XBOX
     /// <summary>
     /// Initializes a new instance of the <see cref="HashSetEx{T}" /> class.
     /// </summary>
@@ -450,8 +434,6 @@ namespace DigitalRune.Collections
     {
       _serializationInfo = info;
     }
-#endif
-
 
     private void Initialize(int capacity, IEqualityComparer<T> comparer)
     {
@@ -472,7 +454,6 @@ namespace DigitalRune.Collections
     #region Methods
     //--------------------------------------------------------------
 
-#if !SILVERLIGHT && !WP7 && !XBOX
     /// <summary>
     /// Populates a <see cref="SerializationInfo"/> with the data needed to serialize the target object. 
     /// </summary>
@@ -536,8 +517,6 @@ namespace DigitalRune.Collections
         _serializationInfo = null;
       }
     }
-#endif
-
 
     int GetItemHashCode(T item)
     {
@@ -1341,4 +1320,3 @@ namespace DigitalRune.Collections
     #endregion
   }
 }
-#endif

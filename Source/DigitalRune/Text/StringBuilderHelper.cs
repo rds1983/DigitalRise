@@ -331,23 +331,5 @@ namespace DigitalRune.Text
       // Added converted string to StringBuilder.
       builder.Append(NumberString, idx, NumberString.Length - idx);
     }
-
-
-#if SILVERLIGHT || WP7 || XBOX
-    /// <summary>
-    /// Removes all characters from the <see cref="StringBuilder"/> instance.
-    /// </summary>
-    /// <param name="builder">The string builder.</param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="builder"/> is <see langword="null"/>.
-    /// </exception>
-    public static void Clear(this StringBuilder builder)
-    {
-      if (builder == null)
-        throw new ArgumentNullException("builder");
-
-    builder.Remove(0, builder.Length);
-    }
-#endif
   }
 }

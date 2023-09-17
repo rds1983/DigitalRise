@@ -229,11 +229,8 @@ namespace DigitalRune.Collections
     {
       int hash = (KeyComparer.GetHashCode(key) & int.MaxValue) % _buckets.Length;
       var node = _buckets[hash];
-#if NETFX_CORE || NET45
-      Interlocked.MemoryBarrier();
-#else
+
       Thread.MemoryBarrier();
-#endif
 
       while (node != null)
       {

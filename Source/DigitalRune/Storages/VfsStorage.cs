@@ -130,11 +130,7 @@ namespace DigitalRune.Storages
       if (stream != null)
         return stream;
 
-#if SILVERLIGHT || WP7 || XBOX || PORTABLE
-      throw new FileNotFoundException("The file was not found in the virtual file system.");
-#else
       throw new FileNotFoundException("The file was not found in the virtual file system.", path);
-#endif
     }
 
 

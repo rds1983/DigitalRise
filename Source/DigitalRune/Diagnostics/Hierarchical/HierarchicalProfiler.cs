@@ -173,13 +173,11 @@ namespace DigitalRune.Diagnostics
     private HierarchicalProfilerNode CurrentNode { get; set; }
 
 
-#if !PORTABLE && !SILVERLIGHT
     /// <summary>
     /// Gets the stopwatch.
     /// </summary>
     /// <value>The stopwatch.</value>
-    internal System.Diagnostics.Stopwatch Stopwatch { get; private set; }
-#endif
+    internal Stopwatch Stopwatch { get; private set; }
 
 
     /// <summary>
@@ -197,13 +195,7 @@ namespace DigitalRune.Diagnostics
     {
       get
       {
-#if PORTABLE
-        throw Portable.NotImplementedException;
-#elif SILVERLIGHT
-        throw new NotSupportedException();
-#else
         return Stopwatch.Elapsed;
-#endif
       }
     }
     #endregion
@@ -219,16 +211,10 @@ namespace DigitalRune.Diagnostics
     /// <param name="name">The name of this profiler.</param>
     public HierarchicalProfiler(string name)
     {
-#if PORTABLE
-      throw Portable.NotImplementedException;
-#elif SILVERLIGHT
-      throw new NotSupportedException();
-#else
       Name = name;
       Root = new HierarchicalProfilerNode("Root", this);
       CurrentNode = Root;
-      Stopwatch = System.Diagnostics.Stopwatch.StartNew();
-#endif
+      Stopwatch = Stopwatch.StartNew();
     }
     #endregion
 
@@ -249,10 +235,8 @@ namespace DigitalRune.Diagnostics
       Root.Reset();
       CurrentNode = Root;
       FrameCount = 0;
-#if !PORTABLE && !SILVERLIGHT
       Stopwatch.Reset();
       Stopwatch.Start();
-#endif
     }
 
 

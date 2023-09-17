@@ -16,9 +16,7 @@
 
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY
 using System.Runtime.Serialization;
-#endif
 
 namespace DigitalRune.Ionic.Zip
 {
@@ -27,9 +25,7 @@ namespace DigitalRune.Ionic.Zip
     /// with an incorrect password.
     /// </summary>
     /// <exclude />
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     [Serializable]
-#endif
     public class BadPasswordException : ZipException
     {
         /// <summary>
@@ -56,7 +52,6 @@ namespace DigitalRune.Ionic.Zip
         }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
         /// <summary>
         /// Come on, you know how exceptions work. Why are you looking at this documentation?
         /// </summary>
@@ -65,8 +60,6 @@ namespace DigitalRune.Ionic.Zip
         protected BadPasswordException(SerializationInfo info, StreamingContext context)
             : base(info, context)
           {  }
-#endif
-
     }
 
     /// <summary>
@@ -74,12 +67,7 @@ namespace DigitalRune.Ionic.Zip
     /// received.
     /// </summary>
     /// <exclude />
-#if UNITY
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
-#endif
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     [Serializable]
-#endif
     public class BadReadException : ZipException
     {
         /// <summary>
@@ -105,7 +93,6 @@ namespace DigitalRune.Ionic.Zip
         {
         }
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
         /// <summary>
         /// Come on, you know how exceptions work. Why are you looking at this documentation?
         /// </summary>
@@ -114,8 +101,6 @@ namespace DigitalRune.Ionic.Zip
         protected BadReadException(SerializationInfo info, StreamingContext context)
             : base(info, context)
           {  }
-#endif
-
     }
 
 
@@ -126,9 +111,7 @@ namespace DigitalRune.Ionic.Zip
     /// <exclude />
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Crc")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors")]
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     [Serializable]
-#endif
     public class BadCrcException : ZipException
     {
         /// <summary>
@@ -145,7 +128,6 @@ namespace DigitalRune.Ionic.Zip
         { }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
         /// <summary>
         /// Come on, you know how exceptions work. Why are you looking at this documentation?
         /// </summary>
@@ -154,8 +136,6 @@ namespace DigitalRune.Ionic.Zip
         protected BadCrcException(SerializationInfo info, StreamingContext context)
             : base(info, context)
           {  }
-#endif
-
     }
 
 
@@ -165,9 +145,7 @@ namespace DigitalRune.Ionic.Zip
     /// which has no filename set, you can get this exception.
     /// </summary>
     /// <exclude />
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     [Serializable]
-#endif
     public class BadStateException : ZipException
     {
         /// <summary>
@@ -192,7 +170,6 @@ namespace DigitalRune.Ionic.Zip
             : base(message, innerException)
         { }
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
         /// <summary>
         /// Come on, you know how exceptions work. Why are you looking at this documentation?
         /// </summary>
@@ -201,17 +178,13 @@ namespace DigitalRune.Ionic.Zip
         protected BadStateException(SerializationInfo info, StreamingContext context)
             : base(info, context)
           {  }
-#endif
-
     }
 
     /// <summary>
     /// Base class for all exceptions defined by and throw by the Zip library.
     /// </summary>
     /// <exclude />
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     [Serializable]
-#endif
     public class ZipException : Exception
     {
         /// <summary>
@@ -234,7 +207,6 @@ namespace DigitalRune.Ionic.Zip
             : base(message, innerException)
         { }
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
         /// <summary>
         /// Come on, you know how exceptions work. Why are you looking at this documentation?
         /// </summary>
@@ -243,8 +215,5 @@ namespace DigitalRune.Ionic.Zip
         protected ZipException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         { }
-#endif
-
     }
-
 }

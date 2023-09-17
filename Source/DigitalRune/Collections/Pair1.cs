@@ -19,9 +19,7 @@ namespace DigitalRune.Collections
   /// objects. The order of the objects does not matter. If the order of the objects is relevant,
   /// use <see cref="Pair{TFirst, TSecond}"/> instead of <see cref="Pair{T}"/>.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public struct Pair<T> : IEquatable<Pair<T>>
   {
     //--------------------------------------------------------------

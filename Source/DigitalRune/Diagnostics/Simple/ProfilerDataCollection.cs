@@ -68,11 +68,7 @@ namespace DigitalRune.Diagnostics
       {
         var formatProvider = CultureInfo.InvariantCulture;
         StringBuilder stringBuilder = new StringBuilder();
-#if NETFX_CORE
-        stringBuilder.Append(string.Format(formatProvider, "Thread: #{0}\n", ThreadId));
-#else
         stringBuilder.Append(string.Format(formatProvider, "Thread: {0} (#{1})\n", ThreadName, ThreadId));
-#endif
         stringBuilder.Append("Name              Calls      Sum          Min        Avg        Max Description\n");
         stringBuilder.Append("-------------------------------------------------------------------------------\n");
         foreach (var data in this)

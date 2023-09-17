@@ -34,7 +34,6 @@
 using System;
 using System.Reflection;
 
-
 namespace DigitalRune
 {
   /// <summary>
@@ -84,11 +83,7 @@ namespace DigitalRune
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
     static WeakEvent()
     {
-#if !NETFX_CORE && !NET45
       MethodInfo invoke = typeof(T).GetMethod("Invoke");
-#else
-      MethodInfo invoke = typeof(T).GetTypeInfo().GetDeclaredMethod("Invoke");
-#endif
 
       if (invoke == null || invoke.GetParameters().Length != 2)
         throw new ArgumentException("T must be a delegate type taking 2 parameters");
@@ -98,12 +93,8 @@ namespace DigitalRune
         throw new ArgumentException("The first delegate parameter must be of type 'object'");
 
       ParameterInfo argsParameter = invoke.GetParameters()[1];
-#if !NETFX_CORE && !NET45
       if (!(typeof(EventArgs).IsAssignableFrom(argsParameter.ParameterType)))
-#else
-      if (!(typeof(EventArgs).GetTypeInfo().IsAssignableFrom(argsParameter.ParameterType.GetTypeInfo())))
-#endif
-      throw new ArgumentException("The second delegate parameter must be derived from type 'EventArgs'");
+         throw new ArgumentException("The second delegate parameter must be derived from type 'EventArgs'");
 
       if (invoke.ReturnType != typeof(void))
         throw new ArgumentException("The delegate return type must be void.");

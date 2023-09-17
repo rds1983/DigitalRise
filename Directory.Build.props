@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <Authors>DigitalRuneTeam</Authors>
+    <Product>DigitalRune</Product>
+    <PackageLicenseExpression>BSD2</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/rds1983/DigitalRune</PackageProjectUrl>
+    <RootNamespace>DigitalRune</RootNamespace>
+    <Version>1.2.8</Version>
+    <StbImageSharpVersion>2.27.13</StbImageSharpVersion>
+    <MonoGameVersion>3.8.1.303</MonoGameVersion>
+	<NUnitVersion>3.13.3</NUnitVersion>
+	<NUnit3TestAdapterVersion>4.2.1</NUnit3TestAdapterVersion>
+	<MNTestSdkVersion>17.2.0</MNTestSdkVersion>
+  </PropertyGroup>
+</Project>
