@@ -160,11 +160,7 @@ namespace DigitalRune.Tests
       Assert.IsTrue(Numeric.AreEqual(va.X, 1.01f));
       Assert.IsTrue(Numeric.AreEqual(va.Y, 2.02f));
 
-#if WINDOWS_PHONE
-      var vb = (VectorB)ObjectHelper.Parse(typeof(VectorB), "(1.01; 2.02)");
-#else
-      var vb = (VectorB)ObjectHelper.Parse(typeof(VectorB), "(1,01; 2,02)");      // Use this if culture in the test is de.
-#endif
+      var vb = (VectorB)ObjectHelper.Parse(typeof(VectorB), "(1.01; 2.02)");      // Use this if culture in the test is de.
       Assert.IsTrue(Numeric.AreEqual(vb.X, 1.01f));
       Assert.IsTrue(Numeric.AreEqual(vb.Y, 2.02f));
 
