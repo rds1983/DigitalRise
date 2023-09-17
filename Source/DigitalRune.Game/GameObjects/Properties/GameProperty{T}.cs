@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using DigitalRune.Animation;
 
 
@@ -219,7 +220,7 @@ namespace DigitalRune.Game
     /// object will be updated and set to the same value.
     /// </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+    [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
     public EventHandler<GamePropertyEventArgs<T>> Change
     {
       get
@@ -506,7 +507,7 @@ namespace DigitalRune.Game
     /// </summary>
     /// <param name="property">The game object property.</param>
     /// <returns>The value of the game object property.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "Users can simply read Value instead.")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "Users can simply read Value instead.")]
     public static explicit operator T(GameProperty<T> property)
     {
       return property.Value;
@@ -529,7 +530,7 @@ namespace DigitalRune.Game
     /// instance is removed too, and the next call of <see cref="AsAnimatable"/> will return a new 
     /// <see cref="IAnimatableProperty{T}"/> instance.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public IAnimatableProperty<T> AsAnimatable()
     {
       // Try to get existing animatable.

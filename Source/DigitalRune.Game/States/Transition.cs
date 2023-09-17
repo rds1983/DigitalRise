@@ -4,7 +4,7 @@
 
 using System;
 using System.Diagnostics;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DigitalRune.Game.States
 {
@@ -178,7 +178,7 @@ namespace DigitalRune.Game.States
     /// in the next time step of the <see cref="StateMachine"/>. If the <see cref="Guard"/>
     /// condition is <see langword="true"/>, the transition is performed.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
     public void Fire()
     {
       _fired = true;
@@ -202,7 +202,7 @@ namespace DigitalRune.Game.States
     /// This method can be used as an event handler.
     /// </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
     public void Fire(object sender, EventArgs eventArgs)
     {
       _fired = true;

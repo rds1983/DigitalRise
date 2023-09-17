@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 
@@ -165,7 +166,7 @@ namespace DigitalRune.Game
     /// The property is not defined. Properties must be defined with 
     /// <see cref="GameObject.CreateProperty{T}"/> before they can be added.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public void Add<T>(string name)
     {
       GamePropertyMetadata<T> metadata = GetMetadataChecked<T>(name);
@@ -182,7 +183,7 @@ namespace DigitalRune.Game
     /// The <paramref name="id"/> is invalid. Properties must be defined with 
     /// <see cref="GameObject.CreateProperty{T}"/> before they can be added.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public void Add<T>(int id)
     {
       if (Owner.PropertyData.Get(id) != null)
@@ -321,7 +322,7 @@ namespace DigitalRune.Game
     /// The property is not defined. Properties must be defined with 
     /// <see cref="GameObject.CreateProperty{T}"/> before they can be used.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public bool Remove<T>(string name)
     {
       GamePropertyMetadata<T> metadata = GetMetadataChecked<T>(name);

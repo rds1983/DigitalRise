@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using DigitalRune.Collections;
 
@@ -57,7 +58,7 @@ namespace DigitalRune.Game.States
     /// <exception cref="InvalidOperationException">
     /// Cannot change name of a state because it is already part of <see cref="StateCollection"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     public string Name
     {
       get { return _name; }
@@ -280,7 +281,7 @@ namespace DigitalRune.Game.States
     /// <returns>
     /// The firing transition; or <see langword="null"/> if no transition is firing.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     internal Transition UpdateTransitions(StateEventArgs eventArgs)
     {
       Transition firingTransition = null;

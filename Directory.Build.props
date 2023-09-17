@@ -11,5 +11,6 @@
 	<NUnitVersion>3.13.3</NUnitVersion>
 	<NUnit3TestAdapterVersion>4.2.1</NUnit3TestAdapterVersion>
 	<MNTestSdkVersion>17.2.0</MNTestSdkVersion>
+	<ReactiveVersion>6.0.0</ReactiveVersion>
   </PropertyGroup>
 </Project>

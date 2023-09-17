@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 
@@ -161,7 +162,7 @@ namespace DigitalRune.Game
     /// The event is not defined. Events must be defined with 
     /// <see cref="GameObject.CreateEvent{T}"/> before they can be added.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public void Add<T>(string name) where T : EventArgs
     {
       GameEventMetadata<T> metadata = GetMetadataChecked<T>(name);
@@ -178,7 +179,7 @@ namespace DigitalRune.Game
     /// The <paramref name="id"/> is invalid. Events must be defined with 
     /// <see cref="GameObject.CreateEvent{T}"/> before they can be added.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public void Add<T>(int id) where T : EventArgs
     {
       if (Owner.EventData.Get(id) != null)
@@ -317,7 +318,7 @@ namespace DigitalRune.Game
     /// The event is not defined. Events must be defined with 
     /// <see cref="GameObject.CreateEvent{T}"/> before they can be used.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+    [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
     public bool Remove<T>(string name) where T : EventArgs
     {
       GameEventMetadata<T> metadata = GetMetadataChecked<T>(name);

@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DigitalRune.Game.Timing
 {
@@ -110,7 +110,7 @@ namespace DigitalRune.Game.Timing
     /// <exception cref="NotSupportedException">
     /// This method is called.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+    [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
     void IGameClock.ResetDeltaTime()
     {
       throw new NotSupportedException();

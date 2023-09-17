@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using DigitalRune.Collections;
 
 
@@ -47,7 +48,7 @@ namespace DigitalRune.Game.States
     /// Per default and if this value is set to <see langword="null"/>, the first state in the 
     /// collection is the initial state. 
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     public State InitialState
     {
       get 
@@ -90,7 +91,7 @@ namespace DigitalRune.Game.States
     /// active before any event-less transitions can fire.
     /// </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     public State FinalState
     {
       get
@@ -288,7 +289,7 @@ namespace DigitalRune.Game.States
     /// <paramref name="index"/> is less than zero. Or <paramref name="index"/> is greater than 
     /// <see cref="Collection{T}.Count"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     protected override void InsertItem(int index, State item)
     {
       if (ReferenceEquals(item, null))
@@ -358,7 +359,7 @@ namespace DigitalRune.Game.States
     /// <paramref name="index"/> is less than zero.
     /// Or <paramref name="index"/> is greater than <see cref="Collection{T}.Count"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     protected override void SetItem(int index, State item)
     {
       State removedObject = this[index];

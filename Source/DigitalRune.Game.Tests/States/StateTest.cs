@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 
 namespace DigitalRune.Game.States.Tests
@@ -7,7 +8,7 @@ namespace DigitalRune.Game.States.Tests
   public class StateTest
   {
     [Test]
-    [ExpectedException("System.ArgumentException")]
+    [ExpectedException(typeof(ArgumentException))]
     public void AddingTransitionTwiceThrowsException()
     {
       var s = new State();

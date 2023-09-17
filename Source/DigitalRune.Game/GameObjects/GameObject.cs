@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using DigitalRune.Animation;
 
@@ -451,7 +452,7 @@ namespace DigitalRune.Game
 
 
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+    [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
     IEnumerable<IAnimatableProperty> IAnimatableObject.GetAnimatedProperties()
     {
       var count = _propertyData.Count;
@@ -465,7 +466,7 @@ namespace DigitalRune.Game
 
 
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+    [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
     IAnimatableProperty<T> IAnimatableObject.GetAnimatableProperty<T>(string name)
     {
       GamePropertyMetadata<T> metadata;

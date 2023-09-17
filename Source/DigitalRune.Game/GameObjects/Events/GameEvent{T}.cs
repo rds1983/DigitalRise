@@ -4,7 +4,7 @@
 
 using System;
 using System.Diagnostics;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DigitalRune.Game
 {
@@ -162,7 +162,7 @@ namespace DigitalRune.Game
     /// <summary>
     /// Raises the event with default arguments.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
     public void Raise()
     {
       IGameEventData untypedData = Owner.EventData.Get(_metadata.Id);
@@ -178,7 +178,7 @@ namespace DigitalRune.Game
     /// Raises the event with the given arguments.
     /// </summary>
     /// <param name="eventArgs">The event arguments.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
     public void Raise(T eventArgs)
     {
       IGameEventData untypedData = Owner.EventData.Get(_metadata.Id);

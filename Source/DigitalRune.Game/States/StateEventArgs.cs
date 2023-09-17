@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-
+using System.Diagnostics;
 
 namespace DigitalRune.Game.States
 {
@@ -11,19 +11,16 @@ namespace DigitalRune.Game.States
   /// Provides arguments for the <see cref="State.Enter"/>, <see cref="State.Update"/> and
   /// <see cref="State.Exit"/> events of a <see cref="State"/>.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
   [Serializable]
-#endif
   public class StateEventArgs : EventArgs
   {
-    /// <summary>
-    /// Represents an event with no event data.
-    /// </summary>
-    /// <remarks>
-    /// The value of <see cref="Empty"/> is a read-only instance of <see cref="StateEventArgs"/> 
-    /// equivalent to the result of calling the <see cref="StateEventArgs"/> constructor.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+		/// <summary>
+		/// Represents an event with no event data.
+		/// </summary>
+		/// <remarks>
+		/// The value of <see cref="Empty"/> is a read-only instance of <see cref="StateEventArgs"/> 
+		/// equivalent to the result of calling the <see cref="StateEventArgs"/> constructor.
+		/// </remarks>
     public new static readonly StateEventArgs Empty = new StateEventArgs();
 
 
