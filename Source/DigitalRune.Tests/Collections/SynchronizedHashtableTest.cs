@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using DigitalRune.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -16,10 +16,10 @@ namespace DigitalRune.Collections.Tests
     {
       _stop = false;
       _c = new SynchronizedHashtable<int, object>(10);
-      var t1 = Parallel.Start(Query1);
-      var t2 = Parallel.Start(Query2);
-      var t3 = Parallel.Start(Add);
-      var t4 = Parallel.Start(Remove);
+      var t1 = Task.Run(Query1);
+      var t2 = Task.Run(Query2);
+      var t3 = Task.Run(Add);
+      var t4 = Task.Run(Remove);
 
       Thread.Sleep(2000);
 

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using CommonServiceLocator;
 using DigitalRune.Collections;
-using Microsoft.Practices.ServiceLocation;
 
 // Workaround for C# 6 (Roslyn) bug:
 // See http://stackoverflow.com/questions/31541390/visual-studio-2015-c-sharp-6-roslyn-cant-compile-xml-comments-in-pcl-projec

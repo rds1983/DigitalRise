@@ -3,12 +3,8 @@ using System;
 using System.Threading;
 using NUnit.Framework;
 
-#if WINDOWS_PHONE
-using Microsoft.Phone.Reactive;
-#else
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-#endif
 
 
 namespace DigitalRune.Linq.Tests
