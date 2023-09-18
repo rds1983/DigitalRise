@@ -16,6 +16,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Text;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -448,7 +449,7 @@ namespace DigitalRune.Graphics.Rendering
     /// <value>
     /// The sprite font. The default value is <see langword="null"/> - all texts are ignored!
     /// </value>
-    public SpriteFont SpriteFont
+    public SpriteFontBase SpriteFont
     {
       get { return _spriteFont; }
       set
@@ -465,7 +466,7 @@ namespace DigitalRune.Graphics.Rendering
           _overScene3DTextBatch.SpriteFont = value;
       }
     }
-    private SpriteFont _spriteFont;
+    private SpriteFontBase _spriteFont;
 
 
     /// <summary>
@@ -556,17 +557,17 @@ namespace DigitalRune.Graphics.Rendering
     /// Initializes a new instance of the <see cref="DebugRenderer"/> class.
     /// </summary>
     /// <param name="graphicsService">The graphics service.</param>
-    /// <param name="spriteFont">The sprite font.</param>
+    /// <param name="SpriteFontBase">The sprite font.</param>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public DebugRenderer(IGraphicsService graphicsService, SpriteFont spriteFont)
+    public DebugRenderer(IGraphicsService graphicsService, SpriteFontBase SpriteFontBase)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
       _graphicsService = graphicsService;
-      _spriteFont = spriteFont;
+      _spriteFont = SpriteFontBase;
       Enabled = true;
       DefaultColor = Color.LightGreen;
       _pointSize = 5;
@@ -579,14 +580,14 @@ namespace DigitalRune.Graphics.Rendering
     /// </summary>
     /// <param name="graphicsService">The graphics service.</param>
     /// <param name="spriteBatch">The sprite batch.</param>
-    /// <param name="spriteFont">The sprite font.</param>
+    /// <param name="SpriteFontBase">The sprite font.</param>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
     [Obsolete("It is no longer necessary to specify a SpriteBatch.")]
-    public DebugRenderer(IGraphicsService graphicsService, SpriteBatch spriteBatch, SpriteFont spriteFont)
-      : this(graphicsService, spriteFont)
+    public DebugRenderer(IGraphicsService graphicsService, SpriteBatch spriteBatch, SpriteFontBase SpriteFontBase)
+      : this(graphicsService, SpriteFontBase)
     {
     }
 
@@ -791,7 +792,7 @@ namespace DigitalRune.Graphics.Rendering
           position.Y = titleSafeLocation.Y;
         }
 
-        spriteBatch.DrawString(_spriteFont, _stringBuilder, position, DefaultColor, 0, new Vector2(), 1.0f, SpriteEffects.None, 0.5f);
+        spriteBatch.DrawString(_spriteFont, _stringBuilder, position, DefaultColor, layerDepth: 0.5f);
         spriteBatch.End();
       }
 

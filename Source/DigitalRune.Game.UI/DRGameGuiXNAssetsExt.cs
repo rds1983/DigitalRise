@@ -162,7 +162,11 @@ namespace AssetManagementBase
 					Name = GetMandatoryAttributeString(styleElement, "Name")
 				};
 
-				inherits[style.Name] = (string)styleElement.Attribute("Inherits");
+				var inheritValue = (string)styleElement.Attribute("Inherits");
+				if (!string.IsNullOrEmpty(inheritValue))
+				{
+					inherits[style.Name] = inheritValue;
+				}
 
 				foreach (var element in styleElement.Elements())
 				{

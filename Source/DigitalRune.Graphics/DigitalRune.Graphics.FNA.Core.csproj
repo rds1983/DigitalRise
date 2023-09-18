@@ -9,6 +9,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Animation\DigitalRune.Animation.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Geometry\DigitalRune.Geometry.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Particles\DigitalRune.Particles.FNA.Core.csproj" />

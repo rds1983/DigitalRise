@@ -5,8 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DigitalRune.Geometry;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -111,7 +113,7 @@ namespace DigitalRune.Graphics.Rendering
     /// <remarks>
     /// If this value is <see langword="null"/>, then <see cref="Render"/> does nothing.
     /// </remarks>
-    public SpriteFont SpriteFont { get; set; }
+    public SpriteFontBase SpriteFont { get; set; }
 
 
     /// <summary>
@@ -139,7 +141,7 @@ namespace DigitalRune.Graphics.Rendering
     /// The sprite font. If this value is <see langword="null"/>, then the batch will not draw 
     /// anything when <see cref="Render"/> is called.
     /// </param>
-    public TextBatch(SpriteBatch spriteBatch, SpriteFont spriteFont)
+    public TextBatch(SpriteBatch spriteBatch, SpriteFontBase spriteFont)
     {
       SpriteBatch = spriteBatch;
       SpriteFont = spriteFont;
@@ -334,7 +336,7 @@ namespace DigitalRune.Graphics.Rendering
           if (!string.IsNullOrEmpty(textAsString))
           {
             var textOrigin = GetOrigin(textAsString, textInfo.RelativeOrigin);
-            SpriteBatch.DrawString(SpriteFont, textAsString, new Vector2(pos.X, pos.Y), textInfo.Color, 0, textOrigin, 1.0f, SpriteEffects.None, pos.Z);
+            SpriteBatch.DrawString(SpriteFont, textAsString, new Vector2(pos.X, pos.Y), textInfo.Color, origin: textOrigin, layerDepth: pos.Z);
           }
           else
           {
@@ -342,7 +344,7 @@ namespace DigitalRune.Graphics.Rendering
             if (textAsStringBuilder != null && textAsStringBuilder.Length > 0)
             {
               var textOrigin = GetOrigin(textAsStringBuilder, textInfo.RelativeOrigin);
-              SpriteBatch.DrawString(SpriteFont, textAsStringBuilder, new Vector2(pos.X, pos.Y), textInfo.Color, 0, textOrigin, 1, SpriteEffects.None, pos.Z);
+              SpriteBatch.DrawString(SpriteFont, textAsStringBuilder, new Vector2(pos.X, pos.Y), textInfo.Color, origin: textOrigin, layerDepth: pos.Z);
             }
           }
         }
@@ -355,7 +357,7 @@ namespace DigitalRune.Graphics.Rendering
         if (!string.IsNullOrEmpty(textAsString))
         {
           var textOrigin = GetOrigin(textAsString, textInfo.RelativeOrigin);
-          SpriteBatch.DrawString(SpriteFont, textAsString, (Vector2)textInfo.Position, textInfo.Color, 0, textOrigin, 1, SpriteEffects.None, 0);
+          SpriteBatch.DrawString(SpriteFont, textAsString, (Vector2)textInfo.Position, textInfo.Color, origin: textOrigin);
         }
         else
         {
@@ -363,7 +365,7 @@ namespace DigitalRune.Graphics.Rendering
           if (textAsStringBuilder != null && textAsStringBuilder.Length > 0)
           {
             var textOrigin = GetOrigin(textAsStringBuilder, textInfo.RelativeOrigin);
-            SpriteBatch.DrawString(SpriteFont, textAsStringBuilder, (Vector2)textInfo.Position, textInfo.Color, 0, textOrigin, 1, SpriteEffects.None, 0);
+            SpriteBatch.DrawString(SpriteFont, textAsStringBuilder, (Vector2)textInfo.Position, textInfo.Color, origin: textOrigin);
           }
         }
       }
