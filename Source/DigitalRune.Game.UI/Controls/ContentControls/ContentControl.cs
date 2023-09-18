@@ -81,9 +81,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ContentStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ContentStylePropertyId = CreateProperty<string>(
       typeof(ContentControl), "ContentStyle", GamePropertyCategories.Style, null, null,
       UIPropertyOptions.None);
@@ -106,9 +104,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ClipContent"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ClipContentPropertyId = CreateProperty(
       typeof(ContentControl), "ClipContent", GamePropertyCategories.Appearance, null, false,
       UIPropertyOptions.AffectsRender);

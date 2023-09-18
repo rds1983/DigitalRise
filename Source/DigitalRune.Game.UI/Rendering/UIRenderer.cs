@@ -11,10 +11,6 @@ using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-#if PORTABLE || WINDOWS_UWP
-#pragma warning disable 1574  // Disable warning "XML comment has cref attribute that could not be resolved."
-#endif
-
 
 namespace DigitalRune.Game.UI.Rendering
 {
@@ -114,7 +110,6 @@ namespace DigitalRune.Game.UI.Rendering
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-#if !SILVERLIGHT
     /// <overloads>
     /// <summary>
     /// Initializes a new instance of the <see cref="UIRenderer"/> class.
@@ -146,7 +141,6 @@ namespace DigitalRune.Game.UI.Rendering
       InitializeDefaultTexture();
       InitializeRendering();
     }
-#endif
 
 
     /// <summary>
@@ -177,7 +171,6 @@ namespace DigitalRune.Game.UI.Rendering
 
     private void InitializeDefaultCursor()
     {
-#if !WP7 && !XBOX
       if (Theme.Cursors != null)
       {
         // Get cursor with attribute "IsDefault=true".
@@ -195,15 +188,6 @@ namespace DigitalRune.Game.UI.Rendering
                                 .FirstOrDefault();
         }
       }
-
-      if (_defaultCursor == null)
-      {
-        // Nothing found - use the default windows cursor.
-        _defaultCursor = PlatformHelper.DefaultCursor;
-      }
-#else
-      _defaultCursor = null;
-#endif
     }
 
 
@@ -404,19 +388,11 @@ namespace DigitalRune.Game.UI.Rendering
       {
         result = (T)(object)ThemeHelper.ParseColor(attribute.Value, Color.Black);
       }
-#if !NETFX_CORE && !NET45
       else if (typeof(T).IsAssignableFrom(typeof(Rectangle)))
-#else
-      else if (typeof(T).GetTypeInfo().IsAssignableFrom(typeof(Rectangle).GetTypeInfo()))
-#endif      
       {
         result = (T)(object)ThemeHelper.ParseRectangle(attribute.Value);
       }
-#if !NETFX_CORE && !NET45
       else if (typeof(T).IsAssignableFrom(typeof(Texture2D)))
-#else
-      else if (typeof(T).GetTypeInfo().IsAssignableFrom(typeof(Texture2D).GetTypeInfo()))
-#endif
       {
         result = (T)(object)GetTexture(attribute.Value);
       }

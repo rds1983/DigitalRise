@@ -58,9 +58,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Orientation"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int OrientationPropertyId = CreateProperty(
       typeof(StackPanel), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
       UIPropertyOptions.AffectsMeasure);

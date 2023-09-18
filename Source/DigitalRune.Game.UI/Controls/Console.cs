@@ -12,12 +12,6 @@ using DigitalRune.Game.UI.Consoles;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
-#if WP7 || XBOX
-using DigitalRune.Text;
-#endif
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -88,13 +82,11 @@ namespace DigitalRune.Game.UI.Controls
     // The index of the selected history index. -1 means no history entry is selected.
     private int _historyIndex = -1;
 
-#if !SILVERLIGHT
     // Pressing ChatPadGreen changes the keyboard mode until another key is pressed.
     // Normally, the ChatPadGreen/Orange modes are time limited, but XNA cannot access this
     // info :-(.
     private bool _chatPadGreenIsActive;
     private bool _chatPadOrangeIsActive;
-#endif
 
     // Measures of the current console layout.
     private float _charWidth;
@@ -254,9 +246,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="LineOffset"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int LineOffsetPropertyId = CreateProperty(
       typeof(Console), "LineOffset", GamePropertyCategories.Default, null, 0, 
       UIPropertyOptions.AffectsArrange);
@@ -279,9 +269,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MaxLines"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MaxLinesPropertyId = CreateProperty(
       typeof(Console), "MaxLines", GamePropertyCategories.Default, null, 100, 
       UIPropertyOptions.None);
@@ -305,9 +293,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int VerticalScrollBarStylePropertyId = CreateProperty(
       typeof(Console), "VerticalScrollBarStyle", GamePropertyCategories.Style, null, 
       "VerticalScrollBar", UIPropertyOptions.None);
@@ -650,7 +636,6 @@ namespace DigitalRune.Game.UI.Controls
         }
       }
 
-#if !SILVERLIGHT
       // Move caret with left stick and d-pad.
       // Move through history with left stick and d-pad.
       // Scroll with right stick.
@@ -692,7 +677,6 @@ namespace DigitalRune.Game.UI.Controls
           LineOffset--;
         }
       }
-#endif
 
       if (!inputService.IsKeyboardHandled 
           && IsFocusWithin
@@ -700,7 +684,6 @@ namespace DigitalRune.Game.UI.Controls
       {
         int numberOfPressedKeys = inputService.PressedKeys.Count;
 
-#if !SILVERLIGHT
         // Handle ChatPadOrange/Green.
         if (inputService.IsPressed(Keys.ChatPadOrange, false))
         {
@@ -716,11 +699,9 @@ namespace DigitalRune.Game.UI.Controls
           else if (numberOfPressedKeys == 1)
             _chatPadGreenIsActive = true;     // ChatPadGreen is pressed alone to enable the mode.
         }
-#endif
 
         // Check which modifier keys are pressed. We check this manually to detect ChatPadOrange/Green.
         ModifierKeys modifierKeys = ModifierKeys.None;
-#if !SILVERLIGHT
         if (inputService.IsDown(Keys.LeftShift) || inputService.IsDown(Keys.RightShift))
           modifierKeys = modifierKeys | ModifierKeys.Shift;
         if (inputService.IsDown(Keys.LeftControl) || inputService.IsDown(Keys.RightControl))
@@ -731,14 +712,6 @@ namespace DigitalRune.Game.UI.Controls
           modifierKeys = modifierKeys | ModifierKeys.ChatPadGreen;
         if (_chatPadOrangeIsActive || inputService.IsDown(Keys.ChatPadOrange))
           modifierKeys = modifierKeys | ModifierKeys.ChatPadOrange;
-#else
-        if (inputService.IsDown(Keys.Shift))
-          modifierKeys = modifierKeys | ModifierKeys.Shift;
-        if (inputService.IsDown(Keys.Ctrl))
-          modifierKeys = modifierKeys | ModifierKeys.Control;
-        if (inputService.IsDown(Keys.Alt))
-          modifierKeys = modifierKeys | ModifierKeys.Alt;
-#endif
 
         if (inputService.IsPressed(Keys.Enter, true))
         {
@@ -885,13 +858,11 @@ namespace DigitalRune.Game.UI.Controls
           inputService.IsKeyboardHandled = true;
         }
 
-#if !SILVERLIGHT
         // Handle ChatPadOrange/Green.
         if (_chatPadOrangeIsActive && inputService.PressedKeys.Any(k => k != Keys.ChatPadOrange))
           _chatPadOrangeIsActive = false;   // Any other key is pressed. This disables the ChatPadOrangeMode.
         if (_chatPadGreenIsActive && inputService.PressedKeys.Any(k => k != Keys.ChatPadGreen))
           _chatPadGreenIsActive = false;   // Any other key is pressed. This disables the ChatPadGreenMode.
-#endif
       }
     }
 
@@ -1050,8 +1021,8 @@ namespace DigitalRune.Game.UI.Controls
       if (Text.Length == 0)
         return;
 
-      if (PlatformHelper.IsClipboardSupported)
-        PlatformHelper.SetClipboardText(Text.ToString());
+      if (Utility.IsClipboardSupported)
+        Utility.SetClipboardText(Text.ToString());
       else
         TextBox.ClipboardData = Text.ToString();
 
@@ -1069,8 +1040,8 @@ namespace DigitalRune.Game.UI.Controls
       if (Text.Length == 0)
         return;
 
-      if (PlatformHelper.IsClipboardSupported)
-        PlatformHelper.SetClipboardText(Text.ToString());
+      if (Utility.IsClipboardSupported)
+        Utility.SetClipboardText(Text.ToString());
       else
         TextBox.ClipboardData = Text.ToString();
 
@@ -1084,8 +1055,8 @@ namespace DigitalRune.Game.UI.Controls
     public void Paste()
     {
       string data;
-      if (PlatformHelper.IsClipboardSupported)
-        data = PlatformHelper.GetClipboardText();
+      if (Utility.IsClipboardSupported)
+        data = Utility.GetClipboardText();
       else
         data = TextBox.ClipboardData;
 

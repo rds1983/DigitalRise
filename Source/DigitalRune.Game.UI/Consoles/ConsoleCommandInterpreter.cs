@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using DigitalRune.Collections;
@@ -193,18 +194,11 @@ namespace DigitalRune.Game.UI.Consoles
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods")]
     private void CollectGarbage(string[] args)
     {
-#if !SILVERLIGHT
-      var stopwatch = new DigitalRune.Diagnostics.Stopwatch();
+      var stopwatch = new Stopwatch();
       stopwatch.Start();
       GC.Collect();
       stopwatch.Stop();
       Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Performed full garbage collection ({0} ms)", stopwatch.Elapsed.TotalMilliseconds));
-#else
-      long start = DateTime.UtcNow.Ticks;
-      GC.Collect();
-      TimeSpan elapsed = new TimeSpan(DateTime.UtcNow.Ticks - start);
-      Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Performed full garbage collection ({0} ms)", elapsed.TotalMilliseconds));
-#endif
     }
 
 

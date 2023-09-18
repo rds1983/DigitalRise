@@ -41,10 +41,7 @@ namespace DigitalRune.Game.UI.Controls
   /// thumbstick/direction pad input.
   /// </para>
   /// </remarks>
-  public class UIScreen : UIControl
-#if !SILVERLIGHT
-    , IDrawable
-#endif
+  public class UIScreen : UIControl, IDrawable
   {
     //--------------------------------------------------------------
     #region Fields
@@ -143,7 +140,6 @@ namespace DigitalRune.Game.UI.Controls
     public ToolTipManager ToolTipManager { get; private set; }
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Returns the same value as <see cref="UIControl.IsVisible"/>.
     /// </summary>
@@ -155,7 +151,6 @@ namespace DigitalRune.Game.UI.Controls
     {
       get { return IsVisible; }
     }
-#endif
 
 
     /// <summary>
@@ -180,15 +175,12 @@ namespace DigitalRune.Game.UI.Controls
           return;
 
         _drawOrder = value;
-#if !SILVERLIGHT
         OnDrawOrderChanged(EventArgs.Empty);
-#endif
       }
     }
     private int _drawOrder;
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Returns the same value as <see cref="ZIndex"/>.
     /// </summary>
@@ -224,7 +216,7 @@ namespace DigitalRune.Game.UI.Controls
       remove { ZIndexChanged -= value; }
     }
     private event EventHandler<EventArgs> ZIndexChanged;
-#endif
+
     #endregion
 
 
@@ -235,9 +227,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ToolTipDelay"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ToolTipDelayPropertyId = CreateProperty(
       typeof(UIScreen), "ToolTipDelay", GamePropertyCategories.Default, null, 
       TimeSpan.FromMilliseconds(500), UIPropertyOptions.None);
@@ -257,9 +247,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ToolTipOffset"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ToolTipOffsetPropertyId = CreateProperty(
       typeof(UIScreen), "ToolTipOffset", GamePropertyCategories.Default, null, 20f,
       UIPropertyOptions.None);
@@ -279,12 +267,10 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MouseWheelScrollDelta"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MouseWheelScrollDeltaPropertyId = CreateProperty(
       typeof(UIScreen), "MouseWheelScrollDelta", GamePropertyCategories.Behavior, null,
-      PlatformHelper.MouseWheelScrollDelta,
+      Utility.MouseWheelScrollDelta,
       UIPropertyOptions.None);
 
     /// <summary>
@@ -303,12 +289,10 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MouseWheelScrollLines"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MouseWheelScrollLinesPropertyId = CreateProperty(
       typeof(UIScreen), "MouseWheelScrollLines", GamePropertyCategories.Behavior, null,
-      PlatformHelper.MouseWheelScrollLines,
+			Utility.MouseWheelScrollLines,
       UIPropertyOptions.None);
 
     /// <summary>
@@ -373,11 +357,9 @@ namespace DigitalRune.Game.UI.Controls
       _focusManager = new FocusManager(this);
       ToolTipManager = new ToolTipManager(this);
 
-#if !SILVERLIGHT
       // Call OnVisibleChanged when IsVisible changes.
       var isVisible = Properties.Get<bool>(IsVisiblePropertyId);
       isVisible.Changed += (s, e) => OnVisibleChanged(EventArgs.Empty);
-#endif
 
       InputEnabled = true;
     }
@@ -489,7 +471,6 @@ namespace DigitalRune.Game.UI.Controls
     }
 
 
-#if !SILVERLIGHT
     /// <overloads>
     /// <summary>
     /// Draws the screen with all controls.
@@ -510,7 +491,6 @@ namespace DigitalRune.Game.UI.Controls
 
       Draw(gameTime.ElapsedGameTime);
     }
-#endif
 
     
     /// <summary>
@@ -573,7 +553,6 @@ namespace DigitalRune.Game.UI.Controls
     }
 
  
-#if !SILVERLIGHT
     /// <summary>
     /// Raises the <see cref="IDrawable.DrawOrderChanged"/> event.
     /// </summary>
@@ -612,7 +591,7 @@ namespace DigitalRune.Game.UI.Controls
       if (handler != null)
         handler(this, eventArgs);
     }
-#endif
+
     #endregion
   }
 }

@@ -12,7 +12,6 @@ namespace DigitalRune.Game.UI.Controls
 {
   public partial class TextBox
   {
-#if !WP7 && !XBOX
     /// <summary>
     /// Inserts a newline, but only for multiline text boxes and if <see cref="MaxLength"/> is not 
     /// yet reached.
@@ -262,8 +261,6 @@ namespace DigitalRune.Game.UI.Controls
       if (IsMultiline)
         CaretIndex = GetIndex(VisualCaret + new Vector2F(0, VisualClip.Height), Screen);
     }
-#endif
-
 
     /// <summary>
     /// Clears the text selection.
@@ -349,8 +346,8 @@ namespace DigitalRune.Game.UI.Controls
 
       DeleteSelection();
 
-      if (PlatformHelper.IsClipboardSupported)
-        PlatformHelper.SetClipboardText(selectedText);
+      if (Utility.IsClipboardSupported)
+        Utility.SetClipboardText(selectedText);
       else
         ClipboardData = selectedText;
     }
@@ -368,8 +365,8 @@ namespace DigitalRune.Game.UI.Controls
       if (string.IsNullOrEmpty(selectedText))
         return;
 
-      if (PlatformHelper.IsClipboardSupported)
-        PlatformHelper.SetClipboardText(selectedText);
+      if (Utility.IsClipboardSupported)
+        Utility.SetClipboardText(selectedText);
       else
         ClipboardData = selectedText;
     }
@@ -388,8 +385,8 @@ namespace DigitalRune.Game.UI.Controls
       string text = Text ?? string.Empty;
 
       string data = null;
-      if (PlatformHelper.IsClipboardSupported)
-        data = PlatformHelper.GetClipboardText();
+      if (Utility.IsClipboardSupported)
+        data = Utility.GetClipboardText();
       else
         data = ClipboardData;
 
@@ -401,7 +398,6 @@ namespace DigitalRune.Game.UI.Controls
     }
 
 
-#if !WP7 && !XBOX
     /// <summary>
     /// Selects the word or white-space at the given index.
     /// </summary>
@@ -468,8 +464,6 @@ namespace DigitalRune.Game.UI.Controls
         InvalidateArrange();
       }
     }
-#endif
-
 
     /// <summary>
     /// Deletes the currently selected text.

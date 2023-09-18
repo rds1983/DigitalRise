@@ -37,9 +37,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Minimum"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MinimumPropertyId = CreateProperty(
       typeof(RangeBase), "Minimum", GamePropertyCategories.Common, null, 0.0f,
       UIPropertyOptions.AffectsArrange);
@@ -61,9 +59,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Maximum"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MaximumPropertyId = CreateProperty(
       typeof(RangeBase), "Maximum", GamePropertyCategories.Common, null, float.MaxValue,
       UIPropertyOptions.AffectsArrange);
@@ -85,9 +81,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Value"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ValuePropertyId = CreateProperty(
       typeof(RangeBase), "Value", GamePropertyCategories.Common, null, 0.0f,
       UIPropertyOptions.AffectsArrange);
@@ -110,9 +104,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="SmallChange"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int SmallChangePropertyId = CreateProperty(
       typeof(RangeBase), "SmallChange", GamePropertyCategories.Common, null, 1.0f,
       UIPropertyOptions.None);
@@ -138,9 +130,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="LargeChange"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int LargeChangePropertyId = CreateProperty(
       typeof(RangeBase), "LargeChange", GamePropertyCategories.Common, null, 10.0f,
       UIPropertyOptions.None);

@@ -23,29 +23,6 @@ namespace DigitalRune.Game.UI.Rendering
     // changed even if itself has not changed. This is because the VisualState can be inherited
     // (a text block of a button uses the Focused state from the parent).
 
-#if SILVERLIGHT
-    // A primitive replacement for the Stopwatch class which does not exist in Silverlight.
-    private sealed class Stopwatch
-    {
-      private long _startTicks;
-      public TimeSpan Elapsed { get { return new TimeSpan(DateTime.UtcNow.Ticks - _startTicks);} }
-      public static Stopwatch StartNew()
-      {
-        var s = new Stopwatch();
-        s.Start();
-        return s;
-      }
-      public void Start()
-      {
-        _startTicks = DateTime.UtcNow.Ticks;
-      }
-      public void Reset()
-      {
-        _startTicks = DateTime.UtcNow.Ticks;
-      }
-    }
-#endif
-
     //--------------------------------------------------------------
     #region Fields
     //--------------------------------------------------------------
@@ -55,11 +32,7 @@ namespace DigitalRune.Game.UI.Rendering
     // TODO: We could cache the caret animation info in UIControl.RenderData.
     private const float CaretBlinkTime = 0.4f;
     private const string StateId = "State";
-#if XNA
     private readonly System.Diagnostics.Stopwatch _caretTimer = System.Diagnostics.Stopwatch.StartNew();
-#else
-    private readonly DigitalRune.Diagnostics.Stopwatch _caretTimer = DigitalRune.Diagnostics.Stopwatch.StartNew();
-#endif
     private Vector2F _lastCaretPosition;
     private Action<UIControl, UIRenderContext> _renderUIControl;
     #endregion
@@ -312,11 +285,7 @@ namespace DigitalRune.Game.UI.Rendering
       Color background = (state != null && state.Background.HasValue) ? state.Background.Value : control.Background;
 
       // Premultiply with alpha.
-#if !SILVERLIGHT
       return Color.FromNonPremultiplied(background.ToVector4() * new Vector4(1, 1, 1, opacity));
-#else
-      return ColorFromNonPremultiplied(background.ToVector4() * new Vector4(1, 1, 1, opacity));
-#endif
     }
 
 
@@ -328,11 +297,7 @@ namespace DigitalRune.Game.UI.Rendering
       Color foreground = (state != null && state.Foreground.HasValue) ? state.Foreground.Value : control.Foreground;
 
       // Premultiply with alpha.
-#if !SILVERLIGHT
       return Color.FromNonPremultiplied(foreground.ToVector4() * new Vector4(1, 1, 1, opacity));
-#else
-      return ColorFromNonPremultiplied(foreground.ToVector4() * new Vector4(1, 1, 1, opacity));
-#endif
     }
 
 
@@ -374,11 +339,7 @@ namespace DigitalRune.Game.UI.Rendering
       // Render Content and clip with scissor rectangle.
       Rectangle originalScissorRectangle = GraphicsDevice.ScissorRectangle;
       Rectangle scissorRectangle = context.RenderTransform.Transform(contentControl.ContentBounds).ToRectangle(true);
-#if !SILVERLIGHT
       GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
-#else
-      GraphicsDevice.ScissorRectangle = RectangleIntersect(scissorRectangle, originalScissorRectangle);
-#endif
 
       BeginBatch();
       contentControl.Content.Render(context);
@@ -422,11 +383,7 @@ namespace DigitalRune.Game.UI.Rendering
           EndBatch();
 
           Rectangle scissorRectangle = context.RenderTransform.Transform(contentBounds).ToRectangle(true);
-#if !SILVERLIGHT
           GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
-#else
-          GraphicsDevice.ScissorRectangle = RectangleIntersect(scissorRectangle, originalScissorRectangle);
-#endif
 
           BeginBatch();
         }
@@ -463,16 +420,7 @@ namespace DigitalRune.Game.UI.Rendering
       if (image != null && image.Texture != null)
       {
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
-#if !WINDOWS_UWP
         context.RenderTransform.Draw(SpriteBatch, image.Texture, GetContentBoundsRounded(image), image.SourceRectangle, foreground);
-#else
-        context.RenderTransform.Draw(
-          SpriteBatch, 
-          image.Texture, 
-          GetContentBoundsRounded(image), 
-          image.SourceRectangle != Rectangle.Empty ? image.SourceRectangle : image.Texture.Bounds,
-          foreground);
-#endif
       }
 
       // Visual children.
@@ -654,11 +602,7 @@ namespace DigitalRune.Game.UI.Rendering
 
         EndBatch();
         Rectangle scissorRectangle = context.RenderTransform.Transform(textBox.VisualClip).ToRectangle(true);
-#if !SILVERLIGHT
         GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
-#else
-        GraphicsDevice.ScissorRectangle = RectangleIntersect(scissorRectangle, originalScissorRectangle);
-#endif
         BeginBatch();
 
         bool hasSelection = (textBox.VisualSelectionBounds.Count > 0);
@@ -667,11 +611,7 @@ namespace DigitalRune.Game.UI.Rendering
         {
           // Render selection.
           Color selectionColor = textBox.SelectionColor;
-#if !SILVERLIGHT
           selectionColor = Color.FromNonPremultiplied(selectionColor.ToVector4() * new Vector4(1, 1, 1, context.Opacity));
-#else
-          selectionColor = ColorFromNonPremultiplied(selectionColor.ToVector4() * new Vector4(1, 1, 1, context.Opacity));
-#endif
           foreach (RectangleF selection in textBox.VisualSelectionBounds)
           {
             // The selection rectangle of an empty line has zero width.
@@ -813,11 +753,7 @@ namespace DigitalRune.Game.UI.Rendering
       // Get tint color and premultiply alpha.
       Vector4 colorVector = image.Color.ToVector4();
       colorVector.W *= opacity;
-#if !SILVERLIGHT
       Color color = Color.FromNonPremultiplied(colorVector);
-#else
-      Color color = ColorFromNonPremultiplied(colorVector);
-#endif
 
 
       if (image.HorizontalAlignment == HorizontalAlignment.Stretch || image.VerticalAlignment == VerticalAlignment.Stretch)
@@ -1250,27 +1186,6 @@ namespace DigitalRune.Game.UI.Rendering
       return false;
     }
 
-#if SILVERLIGHT
-    // Rectangle.Intersect does not exist in Silverlight. Here is a replacement.
-    private static Rectangle RectangleIntersect(Rectangle rectangle1, Rectangle rectangle2)
-    {
-      int left = Math.Max(rectangle1.X, rectangle2.X);
-      int top = Math.Max(rectangle1.Y, rectangle2.Y);
-      int right = Math.Min(rectangle1.Right, rectangle2.Right);
-      int bottom = Math.Min(rectangle1.Bottom, rectangle2.Bottom);
-
-      if (left < right && top < bottom)
-        return new Rectangle(left, top, right - left, bottom - top);
-
-      return Rectangle.Empty;
-    }
-
-    // Color.FromNonPremultiplied(Vector4) does not exist in Silverlight. Here is a replacement.
-    private static Color ColorFromNonPremultiplied(Vector4 vector)
-    {
-      return new Color(vector.X * vector.W, vector.Y * vector.W, vector.Z * vector.W, vector.W);
-    }
-#endif
     #endregion
   }
 }

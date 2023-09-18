@@ -52,7 +52,6 @@ namespace DigitalRune.Game.UI
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="UIException"/> class with serialized data.
     /// </summary>
@@ -74,6 +73,5 @@ namespace DigitalRune.Game.UI
       : base(info, context)
     {
     }
-#endif
   }
 }

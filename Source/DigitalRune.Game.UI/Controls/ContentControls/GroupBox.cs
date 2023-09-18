@@ -119,9 +119,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
       typeof(GroupBox), "TitleTextBlockStyle", GamePropertyCategories.Style, null, "TitleTextBlock", 
       UIPropertyOptions.AffectsRender);
@@ -144,9 +142,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Title"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitlePropertyId = CreateProperty(
       typeof(GroupBox), "Title", GamePropertyCategories.Common, null, "Unnamed", 
       UIPropertyOptions.AffectsRender);

@@ -8,9 +8,6 @@ using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -185,9 +182,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="CanDrag"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int CanDragPropertyId = CreateProperty(
       typeof(Window), "CanDrag", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.AffectsRender);
@@ -210,9 +205,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="CanResize"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int CanResizePropertyId = CreateProperty(
       typeof(Window), "CanResize", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.AffectsRender);
@@ -239,9 +232,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ResizeBorder"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ResizeBorderPropertyId = CreateProperty(
       typeof(Window), "ResizeBorder", GamePropertyCategories.Layout, null, new Vector4F(4),
       UIPropertyOptions.AffectsRender);
@@ -261,13 +252,10 @@ namespace DigitalRune.Game.UI.Controls
     }
 
 
-#if !WINDOWS_UWP
     /// <summary> 
     /// The ID of the <see cref="DialogResult"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int DialogResultPropertyId = CreateProperty<bool?>(
       typeof(Window), "DialogResult", GamePropertyCategories.Default, null, null,
       UIPropertyOptions.None);
@@ -298,52 +286,11 @@ namespace DigitalRune.Game.UI.Controls
       get { return GetValue<bool?>(DialogResultPropertyId); }
       set { SetValue(DialogResultPropertyId, value); }
     }
-#else
-    // .NET Native bug: Nullable game object properties (e.g. bool?, Rectangle?) cannot be used 
-    // because the create an access violation.
-
-    /// <summary> 
-    /// The ID of the <see cref="DialogResult"/> game object property.
-    /// </summary>
-    public static readonly int DialogResultPropertyId = CreateProperty<bool>(
-      typeof(Window), "DialogResult", GamePropertyCategories.Default, null, false,
-      UIPropertyOptions.None);
-
-    /// <summary>
-    /// Gets or sets the dialog result. 
-    /// This is a game object property.
-    /// </summary>
-    /// <value>The dialog result.</value>
-    /// <remarks>
-    /// <para>
-    /// This property is set to <see langword="null"/> when <see cref="Show"/> is called. Otherwise
-    /// this property is not changed automatically. It is typically expected that OK buttons set
-    /// this property to <see langword="true"/> and Cancel buttons set this property to 
-    /// <see langword="false"/>.
-    /// </para>
-    /// <para>
-    /// <strong>Special notes for Windows Universal (UWP):</strong> <br/>
-    /// Usually, the type of this property is a nullable Boolean. In UWP nullable game object
-    /// properties cannot be used because of a bug in .NET Native. Therefore, the type of this
-    /// property is not nullable in the UWP build. A possible workaround is to use a different
-    /// property for the dialog result, e.g. a property that uses returns an integer or an
-    /// enumeration.
-    /// </para>
-    /// </remarks>
-    public bool DialogResult
-    {
-      get { return GetValue<bool>(DialogResultPropertyId); }
-      set { SetValue(DialogResultPropertyId, value); }
-    }
-#endif
-
 
     /// <summary> 
     /// The ID of the <see cref="HideOnClose"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int HideOnClosePropertyId = CreateProperty(
       typeof(Window), "HideOnClose", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.None);
@@ -368,9 +315,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsActive"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsActivePropertyId = CreateProperty(
       typeof(Window), "IsActive", GamePropertyCategories.Common, null, false,
       UIPropertyOptions.AffectsRender);
@@ -399,9 +344,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsModal"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsModalPropertyId = CreateProperty(
       typeof(Window), "IsModal", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.AffectsRender);
@@ -428,9 +371,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IconStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IconStylePropertyId = CreateProperty(
       typeof(Window), "IconStyle", GamePropertyCategories.Style, null, "Icon",
       UIPropertyOptions.None);
@@ -454,9 +395,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Icon"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IconPropertyId = CreateProperty<Texture2D>(
       typeof(Window), "Icon", GamePropertyCategories.Appearance, null, null,
       UIPropertyOptions.AffectsRender);
@@ -475,13 +414,10 @@ namespace DigitalRune.Game.UI.Controls
     }
 
 
-#if !WINDOWS_UWP
     /// <summary> 
     /// The ID of the <see cref="IconSourceRectangle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IconSourceRectanglePropertyId = CreateProperty<Rectangle?>(
       typeof(Window), "IconSourceRectangle", GamePropertyCategories.Appearance, null, null,
       UIPropertyOptions.AffectsRender);
@@ -509,51 +445,12 @@ namespace DigitalRune.Game.UI.Controls
       get { return GetValue<Rectangle?>(IconSourceRectanglePropertyId); }
       set { SetValue(IconSourceRectanglePropertyId, value); }
     }
-#else
-    // .NET Native bug: Nullable game object properties (e.g. bool?, Rectangle?) cannot be used 
-    // because the create an access violation.
 
-    /// <summary> 
-    /// The ID of the <see cref="IconSourceRectangle"/> game object property.
-    /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
-    [Browsable(false)]
-#endif
-    public static readonly int IconSourceRectanglePropertyId = CreateProperty<Rectangle>(
-      typeof(Window), "IconSourceRectangle", GamePropertyCategories.Appearance, null, Rectangle.Empty,
-      UIPropertyOptions.AffectsRender);
-
-    /// <summary>
-    /// Gets or sets the region of the <see cref="Icon"/> texture that contains the icon. 
-    /// This is a game object property.
-    /// </summary>
-    /// <value>
-    /// The region of the <see cref="Icon"/> texture that contains the icon. Can be 
-    /// <see langword="null"/> if the whole <see cref="Icon"/> texture should be drawn. 
-    /// The default value is <see langword="null"/>.
-    /// </value>
-    /// <remarks>
-    /// <para>
-    /// <strong>Special notes for Windows Universal (UWP):</strong> <br/>
-    /// Usually, the type of this property is a nullable rectangle. In UWP nullable game object
-    /// properties cannot be used because of a bug in .NET Native. Therefore, the type of this
-    /// property is not nullable in the UWP build. Use an <see cref="Rectangle.Empty"/> rectangle if
-    /// the whole texture should be displayed.
-    /// </para>
-    /// </remarks>
-    public Rectangle IconSourceRectangle
-    {
-      get { return GetValue<Rectangle>(IconSourceRectanglePropertyId); }
-      set { SetValue(IconSourceRectanglePropertyId, value); }
-    }
-#endif
 
     /// <summary> 
     /// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
       typeof(Window), "TitleTextBlockStyle", GamePropertyCategories.Style, null, "TitleTextBlock",
       UIPropertyOptions.None);
@@ -577,9 +474,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Title"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitlePropertyId = CreateProperty(
       typeof(Window), "Title", GamePropertyCategories.Common, null, "Unnamed",
       UIPropertyOptions.AffectsRender);
@@ -601,9 +496,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="CloseButtonStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int CloseButtonStylePropertyId = CreateProperty(
       typeof(Window), "CloseButtonStyle", GamePropertyCategories.Style, null, "CloseButton",
       UIPropertyOptions.None);
@@ -626,9 +519,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Closing"/> game object event.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ClosingEventId = CreateEvent(
       typeof(Window), "Closing", GamePropertyCategories.Default, null, new CancelEventArgs());
 
@@ -654,9 +545,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Closed"/> game object event.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ClosedEventId = CreateEvent(
       typeof(Window), "Closed", GamePropertyCategories.Default, null, EventArgs.Empty);
 
@@ -738,17 +627,10 @@ namespace DigitalRune.Game.UI.Controls
         GameProperty<Texture2D> imageTexture = _icon.Properties.Get<Texture2D>(Image.TexturePropertyId);
         icon.Changed += imageTexture.Change;
 
-#if !WINDOWS_UWP
         // Connect IconSourceRectangle property with Image.SourceRectangle.
         GameProperty<Rectangle?> iconSourceRectangle = Properties.Get<Rectangle?>(IconSourceRectanglePropertyId);
         GameProperty<Rectangle?> imageSourceRectangle = _icon.Properties.Get<Rectangle?>(Image.SourceRectanglePropertyId);
         iconSourceRectangle.Changed += imageSourceRectangle.Change;
-#else
-        // Connect IconSourceRectangle property with Image.SourceRectangle.
-        GameProperty<Rectangle> iconSourceRectangle = Properties.Get<Rectangle>(IconSourceRectanglePropertyId);
-        GameProperty<Rectangle> imageSourceRectangle = _icon.Properties.Get<Rectangle>(Image.SourceRectanglePropertyId);
-        iconSourceRectangle.Changed += imageSourceRectangle.Change;
-#endif
       }
 
       // Create text block for title.
@@ -796,15 +678,9 @@ namespace DigitalRune.Game.UI.Controls
         var imageTexture = _icon.Properties.Get<Texture2D>(Image.TexturePropertyId);
         icon.Changed -= imageTexture.Change;
 
-#if !WINDOWS_UWP
         var iconSourceRectangle = Properties.Get<Rectangle?>(IconSourceRectanglePropertyId);
         var imageSourceRectangle = _icon.Properties.Get<Rectangle?>(Image.SourceRectanglePropertyId);
         iconSourceRectangle.Changed -= imageSourceRectangle.Change;
-#else
-        var iconSourceRectangle = Properties.Get<Rectangle>(IconSourceRectanglePropertyId);
-        var imageSourceRectangle = _icon.Properties.Get<Rectangle>(Image.SourceRectanglePropertyId);
-        iconSourceRectangle.Changed -= imageSourceRectangle.Change;
-#endif
 
         VisualChildren.Remove(_icon);
         _icon = null;
@@ -927,11 +803,7 @@ namespace DigitalRune.Game.UI.Controls
         screen.Children.Add(this);
 
       Activate();
-#if !WINDOWS_UWP
       DialogResult = null;
-#else
-      DialogResult = false;
-#endif
     }
 
 
@@ -1092,9 +964,7 @@ namespace DigitalRune.Game.UI.Controls
       {
         // Modal windows absorb all input.
         inputService.IsMouseOrTouchHandled = true;
-#if !SILVERLIGHT
         inputService.SetGamePadHandled(context.AllowedPlayer, true);
-#endif
         inputService.IsKeyboardHandled = true;
       }
     }

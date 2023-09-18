@@ -134,9 +134,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsSelected"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsSelectedPropertyId = CreateProperty(
       typeof(TabItem), "IsSelected", GamePropertyCategories.Common, null, false, 
       UIPropertyOptions.AffectsRender);

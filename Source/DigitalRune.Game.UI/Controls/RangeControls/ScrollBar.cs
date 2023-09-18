@@ -53,9 +53,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Orientation"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int OrientationPropertyId = CreateProperty(
       typeof(ScrollBar), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
       UIPropertyOptions.AffectsMeasure);
@@ -78,9 +76,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ViewportSize"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ViewportSizePropertyId = CreateProperty(
       typeof(ScrollBar), "ViewportSize", GamePropertyCategories.Default, null, 0f,
       UIPropertyOptions.AffectsArrange);
@@ -109,9 +105,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ThumbStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ThumbStylePropertyId = CreateProperty(
       typeof(ScrollBar), "ThumbStyle", GamePropertyCategories.Style, null, "Thumb",
       UIPropertyOptions.None);
@@ -134,9 +128,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="DecrementButtonStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int DecrementButtonStylePropertyId = CreateProperty(
       typeof(ScrollBar), "DecrementButtonStyle", GamePropertyCategories.Style, null,
       "ScrollBarButton", UIPropertyOptions.None);
@@ -159,9 +151,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IncrementButtonStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IncrementButtonStylePropertyId = CreateProperty(
       typeof(ScrollBar), "IncrementButtonStyle", GamePropertyCategories.Style, null,
       "ScrollBarButton", UIPropertyOptions.None);

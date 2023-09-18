@@ -11,9 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Xml;
-#if !PORTABLE
 using System.Xml.Linq;
-#endif
 
 
 namespace DigitalRune.Game.UI
@@ -106,7 +104,6 @@ namespace DigitalRune.Game.UI
     protected string DefaultNamespace { get; private set; }
 
 
-#if !PORTABLE
     /// <overloads>
     /// <summary>
     /// Loads the objects specified in the given XML container.
@@ -145,7 +142,6 @@ namespace DigitalRune.Game.UI
 
       return objects;
     }
-#endif
 
 
     /// <summary>
@@ -185,18 +181,10 @@ namespace DigitalRune.Game.UI
         var innerReader = xmlReader.ReadSubtree();
         innerReader.Read();
         objects.Add(CreateInstance(innerReader));
-#if PORTABLE || WINDOWS_UWP
         innerReader.Dispose();
-#else
-        innerReader.Close();
-#endif
       }
 
-#if PORTABLE || WINDOWS_UWP
       xmlReader.Dispose();
-#else
-      xmlReader.Close();
-#endif
 
       DefaultNamespace = null;
 
@@ -204,7 +192,6 @@ namespace DigitalRune.Game.UI
     }
 
 
-#if !PORTABLE
     private object CreateInstance(XElement element)
     {
       // Get type. Probably need to search other assemblies too.
@@ -228,7 +215,6 @@ namespace DigitalRune.Game.UI
 
       return obj;
     }
-#endif
 
 
     private object CreateInstance(XmlReader reader)
@@ -256,7 +242,6 @@ namespace DigitalRune.Game.UI
     }
 
 
-#if !PORTABLE
     /// <overloads>
     /// <summary>
     /// Called to find a type for the given XML element.
@@ -296,7 +281,6 @@ namespace DigitalRune.Game.UI
 
       return null;
     }
-#endif
 
 
     /// <summary>
@@ -335,7 +319,6 @@ namespace DigitalRune.Game.UI
     }
 
 
-#if !PORTABLE
     /// <overloads>
     /// <summary>
     /// Called when a game instance needs to be created.
@@ -356,7 +339,6 @@ namespace DigitalRune.Game.UI
     {
       return Activator.CreateInstance(type);
     }
-#endif
 
 
     /// <summary>
@@ -378,7 +360,6 @@ namespace DigitalRune.Game.UI
     }
 
 
-#if !PORTABLE
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     private void LoadProperties(object instance, XElement controlElement)
     {
@@ -395,11 +376,7 @@ namespace DigitalRune.Game.UI
 
         try
         {
-#if !NETFX_CORE
           PropertyInfo property = type.GetProperty(name);
-#else
-          PropertyInfo property = type.GetRuntimeProperty(name);
-#endif
 
           if (property != null)
             property.SetValue(instance, ObjectHelper.Parse(property.PropertyType, value), null);
@@ -428,11 +405,7 @@ namespace DigitalRune.Game.UI
         try
         {
           // Get a .NET property.
-#if !NETFX_CORE
           PropertyInfo property = type.GetProperty(name);
-#else
-          PropertyInfo property = type.GetRuntimeProperty(name);
-#endif
           if (property == null)
             continue;
 
@@ -489,7 +462,6 @@ namespace DigitalRune.Game.UI
         }
       }
     }
-#endif
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
@@ -510,11 +482,7 @@ namespace DigitalRune.Game.UI
 
           try
           {
-#if !NETFX_CORE && !NET45
             PropertyInfo property = type.GetProperty(name);
-#else
-            PropertyInfo property = type.GetRuntimeProperty(name);
-#endif
 
             if (property != null)
               property.SetValue(instance, ObjectHelper.Parse(property.PropertyType, value), null);
@@ -549,11 +517,7 @@ namespace DigitalRune.Game.UI
         try
         {
           // Get a .NET property.
-#if !NETFX_CORE && !NET45
           PropertyInfo property = type.GetProperty(name);
-#else
-          PropertyInfo property = type.GetRuntimeProperty(name);
-#endif
           if (property == null)
             continue;
 
@@ -577,11 +541,7 @@ namespace DigitalRune.Game.UI
               var childReader = reader.ReadSubtree();
               childReader.Read();
               children.Add(CreateInstance(childReader));
-#if PORTABLE || WINDOWS_UWP
               childReader.Dispose();
-#else
-              childReader.Close();
-#endif
               reader.ReadEndElement();
             }
             else

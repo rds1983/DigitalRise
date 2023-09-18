@@ -7,9 +7,6 @@ using System.ComponentModel;
 using DigitalRune.Game.Input;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -85,9 +82,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="DropDownItemStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int DropDownItemStylePropertyId = CreateProperty(
       typeof(DropDown), "DropDownItemStyle", GamePropertyCategories.Style, null, "DropDownItem",
       UIPropertyOptions.None);
@@ -109,9 +104,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
       typeof(DropDown), "TitleTextBlockStyle", GamePropertyCategories.Style, null,
       "TitleTextBlock", UIPropertyOptions.None);
@@ -199,47 +192,8 @@ namespace DigitalRune.Game.UI.Controls
         Content = _itemsPanel,
       };
 
-      if (GlobalSettings.PlatformID == PlatformID.WindowsPhone7 
-          || GlobalSettings.PlatformID == PlatformID.WindowsPhone8)
-      {
-        // On Windows Phone the DropDown fills the whole screen and a title is displayed on top.
-        var titleTextBlockStyle = TitleTextBlockStyle;
-        if (!string.IsNullOrEmpty(titleTextBlockStyle))
-        {
-          var title = new TextBlock
-          {
-            Style = titleTextBlockStyle,
-            Text = Owner.Title,
-          };
 
-          // Connect DropDownButton.Title with title.Text.
-          var titleProperty = Owner.Properties.Get<string>(DropDownButton.TitlePropertyId);
-          var textProperty = title.Properties.Get<string>(TextBlock.TextPropertyId);
-          titleProperty.Changed += textProperty.Change;
-
-          var outerPanel = new StackPanel
-          {
-            HorizontalAlignment = HorizontalAlignment.Stretch,
-            VerticalAlignment = VerticalAlignment.Stretch,
-            Orientation = Orientation.Vertical,
-          };
-          outerPanel.Children.Add(title);
-          outerPanel.Children.Add(_scrollViewer);
-          Content = outerPanel;
-
-          // The ContentStyle should be applied to the scroll viewer - not the outer panel:
-          outerPanel.Style = "StackPanel";
-          _scrollViewer.Style = ContentStyle;
-        }
-        else
-        {
-          Content = _scrollViewer;
-        }
-      }
-      else
-      {
-        Content = _scrollViewer;
-      }
+      Content = _scrollViewer;
     }
 
 
@@ -264,25 +218,10 @@ namespace DigitalRune.Game.UI.Controls
         Close();
       }
 
-#if !SILVERLIGHT
       // BACK on gamepad --> Close drop-down.
       if (inputService.IsPressed(Buttons.Back, false, context.AllowedPlayer))
       {
         inputService.SetGamePadHandled(context.AllowedPlayer, true);
-
-#if WP7 || PORTABLE
-        // Special: The SelectedIndex needs to be set to the item that has focus.
-        // (Only on Windows Phone.)
-#if PORTABLE
-        if (GlobalSettings.PlatformID == PlatformID.WindowsPhone8)
-#endif
-        {
-          var focusedControl = Screen.FocusManager.FocusedControl;
-          int index = _itemsPanel.Children.IndexOf(focusedControl);
-          if (index >= 0)
-            Owner.SelectedIndex = index;
-        }
-#endif
 
         Close();
       }
@@ -293,7 +232,6 @@ namespace DigitalRune.Game.UI.Controls
         inputService.SetGamePadHandled(context.AllowedPlayer, true);
         Close();
       }
-#endif
 
       // If another control is opened above this popup, then this popup closes. 
       // Exception: Tooltips are okay above the popup.
@@ -368,15 +306,6 @@ namespace DigitalRune.Game.UI.Controls
 
     private void UpdatePosition()
     {
-      // Fill entire screen on WP.
-      if (GlobalSettings.PlatformID == PlatformID.WindowsPhone7 
-          || GlobalSettings.PlatformID == PlatformID.WindowsPhone8)
-      {
-        HorizontalAlignment = HorizontalAlignment.Stretch;
-        VerticalAlignment = VerticalAlignment.Stretch;
-        return;
-      }
-
       // Choose position near owner.
       var screen = Screen;
 

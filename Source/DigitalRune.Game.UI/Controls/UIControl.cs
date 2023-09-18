@@ -11,9 +11,7 @@ using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-#if !SILVERLIGHT
 using Microsoft.Xna.Framework.Input.Touch;
-#endif
 using MouseButtons = DigitalRune.Game.Input.MouseButtons;
 
 
@@ -489,9 +487,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Background"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int BackgroundPropertyId = CreateProperty(
       typeof(UIControl), "Background", GamePropertyCategories.Appearance, null, Color.Transparent,
       UIPropertyOptions.AffectsRender);
@@ -516,9 +512,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Foreground"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ForegroundPropertyId = CreateProperty(
       typeof(UIControl), "Foreground", GamePropertyCategories.Appearance, null, Color.Black,
       UIPropertyOptions.AffectsRender);
@@ -541,9 +535,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Opacity"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int OpacityPropertyId = CreateProperty(
       typeof(UIControl), "Opacity", GamePropertyCategories.Appearance, null, 1.0f,
       UIPropertyOptions.AffectsRender);
@@ -569,9 +561,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Font"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int FontPropertyId = CreateProperty<string>(
       typeof(UIControl), "Font", GamePropertyCategories.Appearance, null, null,
       UIPropertyOptions.AffectsMeasure);
@@ -591,9 +581,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsEnabled"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsEnabledPropertyId = CreateProperty(
       typeof(UIControl), "IsEnabled", GamePropertyCategories.Common, null, true,
       UIPropertyOptions.AffectsRender);
@@ -619,9 +607,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsVisible"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsVisiblePropertyId = CreateProperty(
       typeof(UIControl), "IsVisible", GamePropertyCategories.Appearance, null, true,
       UIPropertyOptions.AffectsMeasure);
@@ -648,9 +634,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsMouseOver"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsMouseOverPropertyId = CreateProperty(
       typeof(UIControl), "IsMouseOver", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.AffectsRender);
@@ -684,9 +668,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ToolTip"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ToolTipPropertyId = CreateProperty<object>(
       typeof(UIControl), "ToolTip", GamePropertyCategories.Default, null, null,
       UIPropertyOptions.None);
@@ -748,9 +730,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="RenderTransformOrigin"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int RenderTransformOriginPropertyId = CreateProperty(
       typeof(UIControl), "RenderTransformOrigin", GamePropertyCategories.Appearance, null,
       Vector2F.Zero, UIPropertyOptions.AffectsRender);
@@ -774,9 +754,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="RenderScale"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int RenderScalePropertyId = CreateProperty(
       typeof(UIControl), "RenderScale", GamePropertyCategories.Appearance, null, Vector2F.One,
       UIPropertyOptions.AffectsRender);
@@ -797,9 +775,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="RenderRotation"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int RenderRotationPropertyId = CreateProperty(
       typeof(UIControl), "RenderRotation", GamePropertyCategories.Appearance, null, 0.0f,
       UIPropertyOptions.AffectsRender);
@@ -820,9 +796,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="RenderTranslation"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int RenderTranslationPropertyId = CreateProperty(
       typeof(UIControl), "RenderTranslation", GamePropertyCategories.Appearance, null,
       Vector2F.Zero, UIPropertyOptions.AffectsRender);
@@ -843,9 +817,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsFocused"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsFocusedPropertyId = CreateProperty(
       typeof(UIControl), "IsFocused", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.AffectsRender);
@@ -871,9 +843,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsFocusScope"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsFocusScopePropertyId = CreateProperty(
       typeof(UIControl), "IsFocusScope", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.None);
@@ -900,9 +870,7 @@ namespace DigitalRune.Game.UI.Controls
     /// The ID of the <see cref="AutoUnfocus"/> game object property.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Unfocus")]
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int AutoUnfocusPropertyId = CreateProperty(
       typeof(UIControl), "AutoUnfocus", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.None);
@@ -931,9 +899,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Focusable"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int FocusablePropertyId = CreateProperty(
       typeof(UIControl), "Focusable", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.AffectsRender);
@@ -960,9 +926,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="FocusWhenMouseOver"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int FocusWhenMouseOverPropertyId = CreateProperty(
       typeof(UIControl), "FocusWhenMouseOver", GamePropertyCategories.Input, null, false,
       UIPropertyOptions.AffectsRender);
@@ -995,9 +959,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="X"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int XPropertyId = CreateProperty(
       typeof(UIControl), "X", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsArrange);
@@ -1018,9 +980,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Y"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int YPropertyId = CreateProperty(
       typeof(UIControl), "Y", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsArrange);
@@ -1041,9 +1001,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Width"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int WidthPropertyId = CreateProperty(
       typeof(UIControl), "Width", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsMeasure);
@@ -1066,9 +1024,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Height"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int HeightPropertyId = CreateProperty(
       typeof(UIControl), "Height", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsMeasure);
@@ -1091,9 +1047,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MinWidth"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MinWidthPropertyId = CreateProperty(
       typeof(UIControl), "MinWidth", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsMeasure);
@@ -1113,9 +1067,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MinHeight"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MinHeightPropertyId = CreateProperty(
       typeof(UIControl), "MinHeight", GamePropertyCategories.Layout, null, 0.0f,
       UIPropertyOptions.AffectsMeasure);
@@ -1135,9 +1087,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MaxWidth"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MaxWidthPropertyId = CreateProperty(
       typeof(UIControl), "MaxWidth", GamePropertyCategories.Layout, null, float.NaN,
       UIPropertyOptions.AffectsMeasure);
@@ -1157,9 +1107,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MaxHeight"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MaxHeightPropertyId = CreateProperty(
       typeof(UIControl), "MaxHeight", GamePropertyCategories.Layout, null, float.NaN,
       UIPropertyOptions.AffectsMeasure);
@@ -1179,9 +1127,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Padding"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int PaddingPropertyId = CreateProperty(
       typeof(UIControl), "Padding", GamePropertyCategories.Layout, null, Vector4F.Zero,
       UIPropertyOptions.AffectsMeasure);
@@ -1204,9 +1150,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Margin"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MarginPropertyId = CreateProperty(
       typeof(UIControl), "Margin", GamePropertyCategories.Layout, null, Vector4F.Zero,
       UIPropertyOptions.AffectsMeasure);
@@ -1226,9 +1170,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="HorizontalAlignment"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int HorizontalAlignmentPropertyId = CreateProperty(
       typeof(UIControl), "HorizontalAlignment", GamePropertyCategories.Layout, null,
       HorizontalAlignment.Left, UIPropertyOptions.AffectsMeasure);
@@ -1253,9 +1195,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="VerticalAlignment"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int VerticalAlignmentPropertyId = CreateProperty(
       typeof(UIControl), "VerticalAlignment", GamePropertyCategories.Layout, null,
       VerticalAlignment.Top, UIPropertyOptions.AffectsMeasure);
@@ -1576,7 +1516,6 @@ namespace DigitalRune.Game.UI.Controls
           inputService.IsMouseOrTouchHandled = true;
           ContextMenu.Open(this, context.MousePosition);
         }
-#if !SILVERLIGHT
         else
         {
           foreach (var gesture in inputService.Gestures)
@@ -1589,7 +1528,6 @@ namespace DigitalRune.Game.UI.Controls
             }
           }
         }
-#endif
       }
 
       // Now the focus manager gets a chance to check if any input was not handled and the 

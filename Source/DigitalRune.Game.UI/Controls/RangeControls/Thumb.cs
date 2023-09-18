@@ -62,9 +62,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsDragging"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsDraggingPropertyId = CreateProperty(
       typeof(Thumb), "IsDragging", GamePropertyCategories.Default, null, false,
       UIPropertyOptions.AffectsRender);
@@ -87,9 +85,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="DragDelta"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int DragDeltaPropertyId = CreateProperty(
       typeof(Thumb), "DragDelta", GamePropertyCategories.Default, null, Vector2F.Zero,
       UIPropertyOptions.AffectsRender);

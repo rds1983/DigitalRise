@@ -11,9 +11,6 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Graphics;
 
-#if WP7 || XBOX
-using DigitalRune.Text;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -89,19 +86,17 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="UseEllipsis"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int UseEllipsisPropertyId = CreateProperty(
       typeof(TextBlock), "UseEllipsis", GamePropertyCategories.Appearance, null, false,
       UIPropertyOptions.AffectsRender);
 
     /// <summary>
-    /// Gets or sets a value indicating whether an ellipsis ("…") should be appended when the text
+    /// Gets or sets a value indicating whether an ellipsis ("ï¿½") should be appended when the text
     /// must be clipped. This is a game object property.
     /// </summary>
     /// <value>
-    /// <see langword="true"/> if an ellipsis ("…") should be appended; otherwise, 
+    /// <see langword="true"/> if an ellipsis ("ï¿½") should be appended; otherwise, 
     /// <see langword="false"/>.
     /// </value>
     public bool UseEllipsis
@@ -114,9 +109,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="WrapText"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int WrapTextPropertyId = CreateProperty(
       typeof(TextBlock), "WrapText", GamePropertyCategories.Layout, null, false,
       UIPropertyOptions.AffectsMeasure);
@@ -139,9 +132,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Text"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TextPropertyId = CreateProperty(
       typeof(TextBlock), "Text", GamePropertyCategories.Common, null, string.Empty,
       UIPropertyOptions.AffectsMeasure);
@@ -353,7 +344,7 @@ namespace DigitalRune.Game.UI.Controls
             || font.MeasureString(line).X > contentSize.X)) // The last line is too long and needs to be trimmed.
         {
           // Trim the last line and add an ellipsis.
-          line.Append("…");
+          line.Append("ï¿½");
           while (lineWordCount > 0 && font.MeasureString(line).X > contentSize.X)
           {
             index--;
@@ -388,10 +379,10 @@ namespace DigitalRune.Game.UI.Controls
       text.Remove(text.Length - 1, 1);
 
       // Add ellipsis.
-      text.Append("…");
+      text.Append("ï¿½");
 
-      // Remove characters before "…" until the string is shorter than or equal to maxWidth.
-      // (Note: The ellipsis "…" is also removed if there is not enough space for single 
+      // Remove characters before "ï¿½" until the string is shorter than or equal to maxWidth.
+      // (Note: The ellipsis "ï¿½" is also removed if there is not enough space for single 
       // character.)
       while (font.MeasureString(text).X > maxWidth && text.Length > 0)
       {

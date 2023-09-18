@@ -8,9 +8,6 @@ using DigitalRune.Game.Input;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI
@@ -189,16 +186,9 @@ namespace DigitalRune.Game.UI
         return false;
       }
 
-#if !WP7
-#if PORTABLE
-      if (GlobalSettings.PlatformID != PlatformID.WindowsPhone8)
-#endif
-      {
-        // Move control to visible area. On phone this is typically not done to avoid non-smooth
-        // scrolling.
-        control.BringIntoView();
-      }
-#endif
+      // Move control to visible area. On phone this is typically not done to avoid non-smooth
+      // scrolling.
+      control.BringIntoView();
 
       // Abort if control is already focused. 
       // (Note: We do the check here and not at the beginning of the method because we still want
@@ -294,7 +284,6 @@ namespace DigitalRune.Game.UI
         }
       }
 
-#if !SILVERLIGHT
       // Check left thumb stick and d-pad.
       if (!moveLeft && !moveRight && !moveUp && !moveDown && !inputService.IsGamePadHandled(allowedPlayer))
       {
@@ -319,7 +308,6 @@ namespace DigitalRune.Game.UI
           moveDown = true;
         }
       }
-#endif
 
       // Now, we know in which direction the focus should move.
 

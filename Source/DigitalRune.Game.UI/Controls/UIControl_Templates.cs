@@ -275,11 +275,7 @@ namespace DigitalRune.Game.UI.Controls
             uiEvent.AddToTemplate(template);
 
         // Do the same for base class.
-#if !NETFX_CORE && !NET45
         type = type.BaseType;
-#else
-        type = type.GetTypeInfo().BaseType;
-#endif
       } while (type != typeof(GameObject) && type != null);
 
       // Template has been filled with properties and values.

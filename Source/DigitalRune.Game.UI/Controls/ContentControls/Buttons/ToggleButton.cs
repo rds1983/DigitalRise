@@ -60,9 +60,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsChecked"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsCheckedPropertyId = CreateProperty(
       typeof(ToggleButton), "IsChecked", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.AffectsRender);

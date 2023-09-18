@@ -7,9 +7,6 @@ using System.ComponentModel;
 using DigitalRune.Game.Input;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -96,9 +93,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ThumbStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ThumbStylePropertyId = CreateProperty(
       typeof(Slider), "ThumbStyle", GamePropertyCategories.Style, null, "Thumb", 
       UIPropertyOptions.None);
@@ -226,7 +221,6 @@ namespace DigitalRune.Game.UI.Controls
           }
         }
 
-#if !SILVERLIGHT
         // Change value if left thumb stick or DPad is pressed.
         if (!inputService.IsGamePadHandled(context.AllowedPlayer))
         {
@@ -244,7 +238,6 @@ namespace DigitalRune.Game.UI.Controls
             change += Math.Sign(range) * SmallChange;
           }
         }
-#endif
       }
 
       if (!inputService.IsMouseOrTouchHandled)

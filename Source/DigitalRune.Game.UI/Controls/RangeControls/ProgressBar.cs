@@ -60,9 +60,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsIndeterminate"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsIndeterminatePropertyId = CreateProperty(
       typeof(ProgressBar), "IsIndeterminate", GamePropertyCategories.Behavior, null, false,
       UIPropertyOptions.AffectsRender);
@@ -87,9 +85,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsIndeterminate"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IndeterminateCycleTimePropertyId = CreateProperty(
       typeof(ProgressBar), "IndeterminateCycleTime", GamePropertyCategories.Appearance, null,
       TimeSpan.FromSeconds(4), UIPropertyOptions.AffectsRender);

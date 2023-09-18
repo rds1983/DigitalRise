@@ -6,9 +6,6 @@ using System;
 using System.ComponentModel;
 using DigitalRune.Game.Input;
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI.Controls
@@ -68,9 +65,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="ClickMode"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ClickModePropertyId = CreateProperty(
       typeof(ButtonBase), "ClickMode", GamePropertyCategories.Behavior, null, ClickMode.Release, 
       UIPropertyOptions.None);
@@ -90,9 +85,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsDown"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsDownPropertyId = CreateProperty(
       typeof(ButtonBase), "IsDown", GamePropertyCategories.Default, null, false, 
       UIPropertyOptions.AffectsRender);
@@ -115,9 +108,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="IsClicked"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int IsClickedPropertyId = CreateProperty(
       typeof(ButtonBase), "IsClicked", GamePropertyCategories.Default, null, false, 
       UIPropertyOptions.AffectsRender);
@@ -140,9 +131,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Click"/> game object event.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int ClickEventId = CreateEvent(
       typeof(ButtonBase), "Click", GamePropertyCategories.Default, null, EventArgs.Empty);
     
@@ -258,7 +247,6 @@ namespace DigitalRune.Game.UI.Controls
           IsClicked = true;
         }
 
-#if !SILVERLIGHT
         if (IsFocusWithin 
             && !inputService.IsGamePadHandled(context.AllowedPlayer) 
             && inputService.IsPressed(Buttons.A, false, context.AllowedPlayer))
@@ -267,15 +255,12 @@ namespace DigitalRune.Game.UI.Controls
           IsDown = true;
           IsClicked = true;
         }
-#endif
       }
       else
       {
         if ((!inputService.IsMouseOrTouchHandled && inputService.IsDown(MouseButtons.Left))
             || (!inputService.IsKeyboardHandled && (inputService.IsDown(Keys.Enter) || inputService.IsDown(Keys.Space)))
-#if !SILVERLIGHT
             || (!inputService.IsGamePadHandled(context.AllowedPlayer) && inputService.IsDown(Buttons.A, context.AllowedPlayer))
-#endif
           )
         {
           // IsDown stays true.
@@ -288,9 +273,7 @@ namespace DigitalRune.Game.UI.Controls
         // Input is still captured for this frame.
         inputService.IsMouseOrTouchHandled = true;
         inputService.IsKeyboardHandled = true;
-#if !SILVERLIGHT
         inputService.SetGamePadHandled(context.AllowedPlayer, true);
-#endif
       }
     }
 
@@ -319,7 +302,6 @@ namespace DigitalRune.Game.UI.Controls
           IsDown = true;
         }
 
-#if !SILVERLIGHT
         if (IsFocusWithin 
             && !inputService.IsGamePadHandled(context.AllowedPlayer) 
             && inputService.IsPressed(Buttons.A, false, context.AllowedPlayer))
@@ -327,15 +309,12 @@ namespace DigitalRune.Game.UI.Controls
           inputService.SetGamePadHandled(context.AllowedPlayer, true);
           IsDown = true;
         }
-#endif
       }
       else
       {
         if ((!inputService.IsMouseOrTouchHandled && inputService.IsDown(MouseButtons.Left))
             || (!inputService.IsKeyboardHandled && (inputService.IsDown(Keys.Enter) || inputService.IsDown(Keys.Space)))
-#if !SILVERLIGHT
             || (!inputService.IsGamePadHandled(context.AllowedPlayer) && inputService.IsDown(Buttons.A, context.AllowedPlayer))
-#endif
           )
         {
           // IsDown stays true.
@@ -349,9 +328,7 @@ namespace DigitalRune.Game.UI.Controls
           // the release comes from a button/key when the control is focused.
           if (IsMouseOver && !inputService.IsMouseOrTouchHandled && inputService.IsReleased(MouseButtons.Left)
               || IsFocusWithin && !inputService.IsKeyboardHandled && (inputService.IsReleased(Keys.Enter) || inputService.IsReleased(Keys.Space))
-#if !SILVERLIGHT
               || IsFocusWithin && !inputService.IsGamePadHandled(context.AllowedPlayer) && inputService.IsReleased(Buttons.A, context.AllowedPlayer)
-#endif
             )
           {
             IsClicked = true;
@@ -361,9 +338,7 @@ namespace DigitalRune.Game.UI.Controls
         // Input is still captured for this frame.
         inputService.IsMouseOrTouchHandled = true;
         inputService.IsKeyboardHandled = true;
-#if !SILVERLIGHT
         inputService.SetGamePadHandled(context.AllowedPlayer, true);
-#endif
       }
     }
 

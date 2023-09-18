@@ -62,10 +62,6 @@ namespace DigitalRune.Game.UI
 
 
     /// <inheritdoc/>
-    public object GameForm { get; private set; }
-
-
-    /// <inheritdoc/>
     public IInputService InputService { get; private set; }
 
 
@@ -96,8 +92,7 @@ namespace DigitalRune.Game.UI
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-#if !SILVERLIGHT
-    /// <summary>
+      /// <summary>
     /// Initializes a new instance of the <see cref="UIManager"/> class.
     /// </summary>
     /// <param name="game">The XNA game instance.</param>
@@ -114,35 +109,13 @@ namespace DigitalRune.Game.UI
 
       _sortedScreens = new List<UIScreen>();
 
-      GameForm = PlatformHelper.GetForm(game.Window.Handle);
-
       game.Window.OrientationChanged += OnGameWindowOrientationChanged;
 
       InputService = inputService;
       KeyMap = KeyMap.AutoKeyMap;
       Screens = new UIScreenCollection(this);
     }
-#else
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UIManager"/> class.
-    /// </summary>
-    /// <param name="inputService">The input service.</param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="inputService"/> is <see langword="null"/>.
-    /// </exception>
-    public UIManager(IInputService inputService)
-    {
-      if (inputService == null)
-        throw new ArgumentNullException("inputService");
-
-      _sortedScreens = new List<UIScreen>();
-
-      InputService = inputService;
-      KeyMap = KeyMap.AutoKeyMap;
-      Screens = new UIScreenCollection(this);
-    }
-#endif
     #endregion
 
 
@@ -194,51 +167,7 @@ namespace DigitalRune.Game.UI
         screen.Update(deltaTime);
 
       // ----- Update mouse cursor.
-
-      // The cursor set in UIService.Cursor has top priority.
-      if (GameForm != null)
-      {
-        var desiredCursor = Cursor;
-
-        if (desiredCursor == null)
-        {
-          // Search screens and check if the control under the mouse wants a special cursor.
-          foreach (var screen in _sortedScreens)
-          {
-            if (screen.IsEnabled && screen.IsVisible)
-            {
-              // Search for Cursor beginning at ControlUnderMouse up the control hierarchy.
-              var control = screen.ControlUnderMouse;
-              while (control != null)
-              {
-                if (control.Cursor != null)
-                {
-                  desiredCursor = control.Cursor;
-                  break;
-                }
-                control = control.VisualParent;
-              }
-            }
-          }
-        }
-
-        if (desiredCursor == null)
-        {
-          // Search for a default cursor in screens.
-          foreach (var screen in _sortedScreens)
-          {
-            if (screen.Renderer != null && screen.IsEnabled && screen.IsVisible)
-            {
-              desiredCursor = screen.Renderer.GetCursor(null);
-              if (desiredCursor != null)
-                break;
-            }
-          }
-        }
-
-        // Set the desired cursor.
-        PlatformHelper.SetCursor(GameForm, desiredCursor);
-      }
+      // TODO:
     }
     #endregion
   }

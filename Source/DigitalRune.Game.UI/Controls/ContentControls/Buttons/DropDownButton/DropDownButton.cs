@@ -104,9 +104,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="DropDownStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int DropDownStylePropertyId = CreateProperty(
       typeof(DropDownButton), "DropDownStyle", GamePropertyCategories.Style, null, "DropDown",
       UIPropertyOptions.None);
@@ -129,9 +127,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="SelectedIndex"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int SelectedIndexPropertyId = CreateProperty(
       typeof(DropDownButton), "SelectedIndex", GamePropertyCategories.Default, null, -1,
       UIPropertyOptions.AffectsMeasure);
@@ -152,9 +148,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="MaxDropDownHeight"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int MaxDropDownHeightPropertyId = CreateProperty(
       typeof(DropDownButton), "MaxDropDownHeight", GamePropertyCategories.Default, null, 400.0f,
       UIPropertyOptions.None);
@@ -175,9 +169,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="Title"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TitlePropertyId = CreateProperty(
       typeof(DropDownButton), "Title", GamePropertyCategories.Common, null, "Unnamed",
       UIPropertyOptions.AffectsMeasure);

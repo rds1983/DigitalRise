@@ -5,11 +5,7 @@
 using System;
 using DigitalRune.Game.Input;
 using DigitalRune.Game.UI.Controls;
-#if !SILVERLIGHT
 using Keys = Microsoft.Xna.Framework.Input.Keys;
-#else
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.UI
@@ -44,24 +40,6 @@ namespace DigitalRune.Game.UI
     /// </para>
     /// </remarks>
     object Cursor { get; set; }
-
-
-    /// <summary>
-    /// Gets the <strong>Form</strong> of the XNA <strong>Game</strong>.
-    /// </summary>
-    /// <value>The <strong>Form</strong> of the XNA <strong>Game</strong>.</value>
-    /// <remarks>
-    /// <para>
-    /// This property is only set in Windows (desktop) builds. On most other platforms it is 
-    /// <see langword="null"/>.
-    /// </para>
-    /// <para>
-    /// This object must be of type <strong>System.Windows.Forms.Form</strong>. (The type 
-    /// <see cref="System.Object"/> is used to avoid referencing 
-    /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
-    /// </para>
-    /// </remarks>
-    object GameForm { get; }
 
 
     /// <summary>

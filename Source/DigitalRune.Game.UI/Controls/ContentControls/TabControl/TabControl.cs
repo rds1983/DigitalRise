@@ -86,9 +86,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="SelectedIndex"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int SelectedIndexPropertyId = CreateProperty(
       typeof(TabControl), "SelectedIndex", GamePropertyCategories.Default, null, -1, 
       UIPropertyOptions.AffectsMeasure);
@@ -110,9 +108,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <summary> 
     /// The ID of the <see cref="TabItemPanelStyle"/> game object property.
     /// </summary>
-#if !NETFX_CORE && !XBOX && !PORTABLE
     [Browsable(false)]
-#endif
     public static readonly int TabItemPanelStylePropertyId = CreateProperty(
       typeof(TabControl), "TabItemPanelStyle", GamePropertyCategories.Style, null, "TabItemPanel", 
       UIPropertyOptions.None);
@@ -268,7 +264,6 @@ namespace DigitalRune.Game.UI.Controls
       var screen = Screen;
       var inputService = InputService;
 
-#if !SILVERLIGHT
       // Gamepad shoulder buttons switches tab items.
       if (!inputService.IsGamePadHandled(context.AllowedPlayer))
       {
@@ -297,7 +292,6 @@ namespace DigitalRune.Game.UI.Controls
             screen.FocusManager.Focus(this);
         }
       }
-#endif
     }
 
 
