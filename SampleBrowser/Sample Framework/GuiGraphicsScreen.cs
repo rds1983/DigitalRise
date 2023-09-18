@@ -5,7 +5,7 @@ using DigitalRune.Game.UI;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 

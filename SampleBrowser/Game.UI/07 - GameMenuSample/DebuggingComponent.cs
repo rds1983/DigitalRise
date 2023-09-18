@@ -6,7 +6,7 @@ using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;

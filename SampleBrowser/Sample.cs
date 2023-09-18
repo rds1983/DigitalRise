@@ -9,7 +9,7 @@ using DigitalRune.Graphics;
 using DigitalRune.Particles;
 using DigitalRune.Physics;
 using DigitalRune.ServiceLocation;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 

@@ -10,7 +10,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using DigitalRune.ServiceLocation;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

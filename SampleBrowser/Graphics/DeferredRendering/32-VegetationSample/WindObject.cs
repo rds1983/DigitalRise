@@ -5,7 +5,7 @@ using DigitalRune.Mathematics.Interpolation;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;

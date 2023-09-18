@@ -11,7 +11,7 @@ using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using DigitalRune.Physics.Constraints;
 using DigitalRune.Physics.Materials;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 
 namespace Samples.Physics.Specialized

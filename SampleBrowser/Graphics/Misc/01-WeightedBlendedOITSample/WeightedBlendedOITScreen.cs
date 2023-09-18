@@ -2,7 +2,7 @@ using System;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

@@ -14,10 +14,10 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using DigitalRune.ServiceLocation;
 using DigitalRune.Text;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
+using System.Diagnostics;
 
 namespace Samples
 {

@@ -8,7 +8,7 @@ using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 
 

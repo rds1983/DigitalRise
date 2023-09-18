@@ -7,11 +7,8 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.SignalProcessing;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
-#if MONOGAME || WINDOWS_PHONE
-using Microsoft.Xna.Framework.Input.Touch;
-#endif
 using MathHelper = DigitalRune.Mathematics.MathHelper;
 
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using DigitalRune.Game;
 using DigitalRune.Game.Input;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 
 

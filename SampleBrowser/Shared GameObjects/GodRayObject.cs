@@ -6,7 +6,7 @@ using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 
 namespace Samples

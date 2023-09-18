@@ -7,8 +7,10 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Source\DigitalRune.Game.Input\DigitalRune.Game.Input.FNA.Core.csproj" />
+    <ProjectReference Include="..\Source\DigitalRune.Game.UI\DigitalRune.Game.UI.FNA.Core.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.Game\DigitalRune.Game.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.Graphics\DigitalRune.Graphics.FNA.Core.csproj" />
+    <ProjectReference Include="..\Source\DigitalRune.Physics.Specialized\DigitalRune.Physics.Specialized.FNA.Core.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.ServiceLocation\DigitalRune.ServiceLocation.csproj" />
   </ItemGroup>
 </Project>

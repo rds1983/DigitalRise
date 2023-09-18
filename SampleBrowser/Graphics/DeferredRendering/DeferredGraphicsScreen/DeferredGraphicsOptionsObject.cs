@@ -6,7 +6,7 @@ using DigitalRune.Game;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 
 namespace Samples

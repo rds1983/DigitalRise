@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using CommonServiceLocator;
 using DigitalRune.Animation;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
-using Microsoft.Practices.ServiceLocation;
 
 
 namespace Samples.Game.UI

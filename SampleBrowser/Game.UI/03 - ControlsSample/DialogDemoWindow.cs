@@ -6,7 +6,7 @@ using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
 #if MONOGAME
 using DigitalRune.Storages;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 #endif
 
 

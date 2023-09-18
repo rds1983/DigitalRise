@@ -6,7 +6,7 @@ using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 
 

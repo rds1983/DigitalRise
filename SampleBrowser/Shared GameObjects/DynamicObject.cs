@@ -10,7 +10,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

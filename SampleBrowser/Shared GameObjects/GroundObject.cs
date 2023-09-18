@@ -3,7 +3,7 @@ using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 
 

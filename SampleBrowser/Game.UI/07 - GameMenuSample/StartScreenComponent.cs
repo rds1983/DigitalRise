@@ -1,4 +1,3 @@
-#if !WP7 && !WP8
 using System;
 using DigitalRune.Game.Input;
 using DigitalRune.Game.UI;
@@ -7,11 +6,11 @@ using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Threading;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-
+using System.Threading.Tasks;
 
 namespace Samples.Game.UI
 {
@@ -47,7 +46,7 @@ namespace Samples.Game.UI
       _graphicsService.Screens.Insert(0, _graphicsScreen);
 
       // Load stuff in a parallel task.
-      _loadStuffTask = Parallel.Start(LoadStuff);
+      _loadStuffTask = Task.Run(LoadStuff);
     }
 
 
@@ -136,4 +135,3 @@ namespace Samples.Game.UI
     }
   }
 }
-#endif

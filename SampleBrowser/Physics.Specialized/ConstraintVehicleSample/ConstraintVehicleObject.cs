@@ -11,7 +11,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using DigitalRune.Physics.Materials;
 using DigitalRune.Physics.Specialized;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;

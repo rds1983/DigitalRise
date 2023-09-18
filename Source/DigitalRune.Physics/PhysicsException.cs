@@ -3,9 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
 using System.Runtime.Serialization;
-#endif
 
 
 namespace DigitalRune.Physics
@@ -56,7 +54,6 @@ namespace DigitalRune.Physics
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="PhysicsException"/> class with serialized data.
     /// </summary>
@@ -78,6 +75,5 @@ namespace DigitalRune.Physics
       : base(info, context)
     {
     }
-#endif
   }
 }

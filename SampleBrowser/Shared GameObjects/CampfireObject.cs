@@ -9,7 +9,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

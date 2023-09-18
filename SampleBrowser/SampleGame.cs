@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using CommonServiceLocator;
 using DigitalRune.Animation;
 using DigitalRune.Diagnostics;
 using DigitalRune.Game;
@@ -9,6 +10,7 @@ using DigitalRune.Geometry.Collisions;
 using DigitalRune.Geometry.Partitioning;
 using DigitalRune.Graphics;
 using DigitalRune.Particles;
+using DigitalRune.Physics;
 using DigitalRune.ServiceLocation;
 using DigitalRune.Storages;
 using Microsoft.Xna.Framework;
@@ -37,8 +39,8 @@ namespace Samples
     private InputManager _inputManager;                   // Input
     private GraphicsManager _graphicsManager;             // Graphics
     private UIManager _uiManager;                         // GUI
-    private AnimationManager _animationManager;           // Animation
-    private ParticleSystemManager _particleSystemManager; // Particle simulation
+		private AnimationManager _animationManager;           // Animation
+		private ParticleSystemManager _particleSystemManager; // Particle simulation
     private Simulation _simulation;                       // Physics simulation
     private GameObjectManager _gameObjectManager;         // Game logic
     private HierarchicalProfiler _profiler;               // Profiler for game loop
@@ -451,9 +453,9 @@ namespace Samples
       {
         // Start animation, physics and particle simulation. They will be executed 
         // parallel to the graphics rendering in Draw().
-        _updateAnimationTask = Parallel.Start(_updateAnimation);
-        _updatePhysicsTask = Parallel.Start(_updatePhysics);
-        _updateParticlesTask = Parallel.Start(_updateParticles);
+        _updateAnimationTask = Task.Run(_updateAnimation);
+        _updatePhysicsTask = Task.Run(_updatePhysics);
+        _updateParticlesTask = Task.Run(_updateParticles);
       }
 
       _profiler.Stop();

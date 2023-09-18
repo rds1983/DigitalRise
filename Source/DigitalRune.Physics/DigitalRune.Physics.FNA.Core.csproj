@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DigitalRune.Physics.FNA</PackageId>
+    <AssemblyName>DigitalRune.Physics</AssemblyName>
+    <Description>DigitalRune.Physics for FNA.Core</Description>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRune.Geometry\DigitalRune.Geometry.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -7,7 +7,7 @@ using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;

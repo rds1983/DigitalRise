@@ -1,7 +1,7 @@
 ﻿using DigitalRune.Game;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 
 namespace Samples

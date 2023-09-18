@@ -2,7 +2,7 @@
 using DigitalRune.Animation;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 
 namespace Samples.Game.UI
