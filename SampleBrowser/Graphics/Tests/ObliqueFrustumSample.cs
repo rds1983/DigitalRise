@@ -37,7 +37,7 @@ namespace Samples.Graphics
       _cameraObject = new CameraObject(Services);
       GameObjectService.Objects.Add(_cameraObject);
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
 
       TestClippedProjection();

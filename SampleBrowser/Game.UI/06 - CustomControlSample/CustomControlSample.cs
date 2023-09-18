@@ -39,7 +39,7 @@ The DigitalRune Blog contains a detailed description for this project; see secti
 
       // Create a theme. A theme defines the images of the controls and the default values of 
       // the UI control properties.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      Theme theme = DefaultAssets.DefaultTheme;
 
       // Create a renderer that uses the theme information. We do not use the default UIRenderer
       // class, instead we use our own MyUIRenderer that adds rendering of tree view items.

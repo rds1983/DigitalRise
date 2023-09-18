@@ -4,7 +4,7 @@ using DigitalRune.Animation.Easing;
 using DigitalRune.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
+using FontStashSharp;
 
 namespace Samples.Animation
 {

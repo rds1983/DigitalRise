@@ -947,7 +947,7 @@ namespace Samples
         // we land here.
 
         // Throw inner exception, which is more useful.
-        throw exception.InnerException;
+        // throw exception.InnerException;
 
         // To break at the actual code line which caused the exception, you can tell the Visual 
         // studio debugger to break at "first chance" exceptions:

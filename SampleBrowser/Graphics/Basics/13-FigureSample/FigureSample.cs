@@ -6,6 +6,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Interpolation;
 using DigitalRune.Mathematics.Statistics;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
@@ -46,7 +47,7 @@ can be observed between the big grid and the smaller transparent figures.",
       _cameraObject = new CameraObject(Services);
       GameObjectService.Objects.Add(_cameraObject);
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
 
       _figureRenderer = new FigureRenderer(GraphicsService, 2048);
       _spriteRenderer = new SpriteRenderer(GraphicsService, spriteFont);
@@ -492,7 +493,7 @@ can be observed between the big grid and the smaller transparent figures.",
 
 
     // Add a 3D coordinate cross.
-    private void CreateGizmo(SpriteFont spriteFont)
+    private void CreateGizmo(SpriteFontBase spriteFont)
     {
       var gizmoNode = new SceneNode
       {

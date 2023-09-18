@@ -1,5 +1,6 @@
 ﻿using System;
 using DigitalRune.Graphics;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,7 +17,7 @@ callback methods.",
   public class DelegateGraphicsScreenSample : Sample
   {
     private readonly SpriteBatch _spriteBatch;
-    private readonly SpriteFont _spriteFont;
+    private readonly SpriteFontBase _spriteFont;
 
 
     public DelegateGraphicsScreenSample(Microsoft.Xna.Framework.Game game)
@@ -39,7 +40,7 @@ callback methods.",
       _spriteBatch = new SpriteBatch(GraphicsService.GraphicsDevice);
 
       // Load a sprite font.
-      _spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      _spriteFont = DefaultAssets.DefaultFont;
     }
 
 

@@ -41,7 +41,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       GameObjectService.Objects.Add(_cameraObject);
 
       // Load a sprite font.
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
 
       // Create a new debug renderer.
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont)

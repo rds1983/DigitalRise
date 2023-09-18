@@ -8,7 +8,7 @@ using DigitalRune.Graphics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -58,11 +58,11 @@ namespace Samples
       // Get required services.
       _inputService = services.GetInstance<IInputService>();
       _uiService = services.GetInstance<IUIService>();
-      var contentManager = services.GetInstance<ContentManager>("UIContent");
+      var assetManager = services.GetInstance<AssetManager>();
 
       // Load a UI theme and create the UI renderer and the UI screen. See the
       // DigitalRune Game UI documentation and samples for more details.
-      var theme = contentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      var theme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsService.GraphicsDevice);
       var renderer = new UIRenderer(GraphicsService.GraphicsDevice, theme);
       UIScreen = new UIScreen("Default", renderer)
       {

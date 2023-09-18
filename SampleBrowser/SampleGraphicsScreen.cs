@@ -8,7 +8,9 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
+using FontStashSharp;
+using DigitalRune;
 
 namespace Samples
 {
@@ -22,8 +24,8 @@ namespace Samples
     private readonly SampleFramework _sampleFramework;
 
     private readonly SpriteBatch _spriteBatch;
-    private readonly SpriteFont _defaultFont;
-    private readonly SpriteFont _fixedWidthFont;
+    private readonly SpriteFontBase _defaultFont;
+    private readonly SpriteFontBase _fixedWidthFont;
     private readonly Texture2D _reticle;
 
     // Scene node renderers
@@ -72,17 +74,16 @@ namespace Samples
       UseFixedWidthFont = false;
 
       // Use 2D texture for reticle.
-      var contentManager = services.GetInstance<ContentManager>();
-      _reticle = contentManager.Load<Texture2D>("Reticle");
+      var assetManager = services.GetInstance<AssetManager>();
+			var graphicsDevice = GraphicsService.GraphicsDevice;
+			_reticle = assetManager.LoadTexture2D(graphicsDevice, "Reticle.png");
 
       // Get the sprite fonts used in the UI theme.
-      var uiContentManager = services.GetInstance<ContentManager>("UIContent");
-      _defaultFont = uiContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
-      _fixedWidthFont = uiContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Console");
+      _defaultFont = DefaultAssets.DefaultFont;
+      _fixedWidthFont = _defaultFont;
 
       // Set up 2D camera such that (0, 0) is upper, left corner of screen and 
       // (screenWidth, screenHeight) is lower, right corner of screen.
-      var graphicsDevice = GraphicsService.GraphicsDevice;
       int screenWidth = graphicsDevice.PresentationParameters.BackBufferWidth;
       int screenHeight = graphicsDevice.PresentationParameters.BackBufferHeight;
       var projection = new OrthographicProjection

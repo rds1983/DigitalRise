@@ -47,7 +47,7 @@ namespace Samples.Graphics
       _billboardRenderer = new BillboardRenderer(GraphicsService, 2048);
 
       // The DebugRenderer is used to draw text.
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
 
       // Create a new empty scene.

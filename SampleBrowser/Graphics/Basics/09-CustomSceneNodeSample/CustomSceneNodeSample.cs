@@ -58,7 +58,7 @@ renderer is implemented.",
       }
 
       // Initialize the TextRenderer.
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _textRenderer = new TextRenderer(GraphicsService, spriteFont);
 
       // For debugging:

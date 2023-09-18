@@ -67,7 +67,7 @@ namespace Samples.Game.UI
     {
       // Load a UI theme, which defines the appearance and default values of UI controls.
       var contentManager = _services.GetInstance<ContentManager>();
-      var theme = contentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      var theme = DefaultAssets.DefaultTheme;
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);

@@ -3,7 +3,7 @@ using DigitalRune.Animation;
 using DigitalRune.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using FontStashSharp;
 
 namespace Samples.Animation
 {
@@ -72,11 +72,7 @@ used in a custom animation (see StringKeyFrameAnimation.cs).",
           _animatableString.Value,
           position,
           Color.Black,
-          0,
-          new Vector2(0),
-          new Vector2(scale),
-          SpriteEffects.None,
-          0);
+          scale: new Vector2(scale));
 
         SpriteBatch.End();
       }

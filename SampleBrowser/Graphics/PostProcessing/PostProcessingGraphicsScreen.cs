@@ -83,7 +83,7 @@ namespace Samples
 
       // Use the sprite font of the GUI.
       var uiContentManager = services.GetInstance<ContentManager>("UIContent");
-      var spriteFont = uiContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       DebugRenderer = new DebugRenderer(GraphicsService, spriteFont)
       {
         DefaultColor = new Color(0, 0, 0),

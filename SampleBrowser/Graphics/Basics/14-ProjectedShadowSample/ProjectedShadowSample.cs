@@ -80,7 +80,7 @@ turns the mesh into the flat, black shadow.",
       // Create the renderers.
       _meshRenderer = new MeshRenderer();
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
 
       _projectedShadowRenderer = new ProjectedShadowRenderer(GraphicsService)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,10 +15,10 @@ namespace Samples.Graphics
   public class TextRenderer : SceneNodeRenderer
   {
     private readonly SpriteBatch _spriteBatch;
-    private readonly SpriteFont _spriteFont;
+    private readonly SpriteFontBase _spriteFont;
 
 
-    public TextRenderer(IGraphicsService graphicsService, SpriteFont font)
+    public TextRenderer(IGraphicsService graphicsService, SpriteFontBase font)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");

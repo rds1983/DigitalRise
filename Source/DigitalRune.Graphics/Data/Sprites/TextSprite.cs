@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Text;
+using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -58,7 +59,7 @@ namespace DigitalRune.Graphics
     /// Gets or sets the font.
     /// </summary>
     /// <value>The font. Can be <see langword="null"/>.</value>
-    public SpriteFont Font { get; set; }
+    public SpriteFontBase Font { get; set; }
     #endregion
 
 
@@ -85,7 +86,7 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <param name="text">The text. See <see cref="Text"/> for more information.</param>
     /// <param name="font">The font.</param>
-    public TextSprite(object text, SpriteFont font)
+    public TextSprite(object text, SpriteFontBase font)
     {
       Text = text;
       Font = font;

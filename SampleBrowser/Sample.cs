@@ -12,7 +12,7 @@ using DigitalRune.ServiceLocation;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -33,8 +33,8 @@ namespace Samples
   {
     // Services which can be used in derived classes.
     protected readonly ServiceContainer Services;
+    protected readonly AssetManager AssetManager;
     protected readonly ContentManager ContentManager;
-    protected readonly ContentManager UIContentManager;
     protected readonly IInputService InputService;
     protected readonly IAnimationService AnimationService;
     protected readonly Simulation Simulation;
@@ -53,8 +53,8 @@ namespace Samples
       // Get services from the global service container.
       var services = (ServiceContainer)ServiceLocator.Current;
       SampleFramework = services.GetInstance<SampleFramework>();
+      AssetManager assetManager = services.GetInstance<AssetManager>();
       ContentManager = services.GetInstance<ContentManager>();
-      UIContentManager = services.GetInstance<ContentManager>("UIContent");
       InputService = services.GetInstance<IInputService>();
       AnimationService = services.GetInstance<IAnimationService>();
       Simulation = services.GetInstance<Simulation>();

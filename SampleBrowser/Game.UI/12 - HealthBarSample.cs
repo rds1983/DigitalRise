@@ -51,7 +51,7 @@ controls. The controls are sorted by their z value before rendering.",
       GraphicsService.Screens.Insert(1, graphicsScreen);
 
       // Create a UIScreen.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      Theme theme = DefaultAssets.DefaultTheme;
       UIRenderer renderer = new UIRenderer(Game, theme);
       _uiScreen = new UIScreen("HealthBarScreen", renderer)
       {

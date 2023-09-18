@@ -1,4 +1,5 @@
 ﻿using DigitalRune.Graphics;
+using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -11,7 +12,7 @@ namespace Samples.Animation
   {
     // Properties which can be used by derived sample classes.
     protected readonly SpriteBatch SpriteBatch;
-    protected readonly SpriteFont SpriteFont;
+    protected readonly SpriteFontBase SpriteFont;
     protected readonly Texture2D Logo;
     protected readonly Texture2D Reticle;
 
@@ -32,7 +33,7 @@ namespace Samples.Animation
 
       // Provide a SpriteBatch, SpriteFont and images for rendering.
       SpriteBatch = GraphicsService.GetSpriteBatch();
-      SpriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      SpriteFont = DefaultAssets.DefaultFont;
       Logo = ContentManager.Load<Texture2D>("Logo");
       Reticle = ContentManager.Load<Texture2D>("Reticle");
     }

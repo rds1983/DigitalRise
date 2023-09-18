@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -29,7 +30,7 @@ namespace DigitalRune.Graphics.Rendering
     //--------------------------------------------------------------
 
     private readonly SpriteBatch _spriteBatch;
-    private readonly SpriteFont _spriteFont;
+    private readonly SpriteFontBase _spriteFont;
     #endregion
 
 
@@ -57,7 +58,7 @@ namespace DigitalRune.Graphics.Rendering
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
     public SpriteRenderer(IGraphicsService graphicsService)
-      : this(graphicsService, (SpriteFont)null)
+      : this(graphicsService, (SpriteFontBase)null)
     {
     }
 
@@ -75,7 +76,7 @@ namespace DigitalRune.Graphics.Rendering
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
     [Obsolete("It is no longer necessary to specify a SpriteBatch.")]
     public SpriteRenderer(IGraphicsService graphicsService, SpriteBatch spriteBatch)
-      : this(graphicsService, (SpriteFont)null)
+      : this(graphicsService, (SpriteFontBase)null)
     {
     }
 
@@ -91,7 +92,7 @@ namespace DigitalRune.Graphics.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public SpriteRenderer(IGraphicsService graphicsService, SpriteFont spriteFont)
+    public SpriteRenderer(IGraphicsService graphicsService, SpriteFontBase spriteFont)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
@@ -118,7 +119,7 @@ namespace DigitalRune.Graphics.Rendering
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
     [Obsolete("It is no longer necessary to specify a SpriteBatch.")]
-    public SpriteRenderer(IGraphicsService graphicsService, SpriteBatch spriteBatch, SpriteFont spriteFont)
+    public SpriteRenderer(IGraphicsService graphicsService, SpriteBatch spriteBatch, SpriteFontBase spriteFont)
       : this(graphicsService, spriteFont)
     {
     }
@@ -260,8 +261,8 @@ namespace DigitalRune.Graphics.Rendering
                   // Draw using SpriteBatch.
                   _spriteBatch.DrawString(
                     font, text, new Vector2(position.X, position.Y),
-                    color, node.Rotation, origin, (Vector2)node.Scale,
-                    SpriteEffects.None, position.Z);
+                    color, (Vector2)node.Scale, node.Rotation, origin,
+										layerDepth: position.Z);
                 }
               }
               else
@@ -286,8 +287,8 @@ namespace DigitalRune.Graphics.Rendering
                   // Draw using SpriteBatch.
                   _spriteBatch.DrawString(
                     font, stringBuilder, new Vector2(position.X, position.Y),
-                    color, node.Rotation, origin, (Vector2)node.Scale,
-                    SpriteEffects.None, position.Z);
+                    color, (Vector2)node.Scale, node.Rotation, origin,
+										layerDepth:  position.Z);
                 }
               }
             }

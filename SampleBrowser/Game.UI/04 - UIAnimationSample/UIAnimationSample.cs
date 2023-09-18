@@ -46,7 +46,7 @@ The DigitalRune Animation library is used to animate the GUI controls.",
       GraphicsService.Screens.Insert(0, _graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      Theme theme = DefaultAssets.DefaultTheme;
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);

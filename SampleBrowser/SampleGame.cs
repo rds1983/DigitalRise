@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using AssetManagementBase;
 using CommonServiceLocator;
+using DigitalRune;
 using DigitalRune.Animation;
 using DigitalRune.Diagnostics;
 using DigitalRune.Game;
@@ -17,7 +19,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Samples.Game.UI;
 
 namespace Samples
 {
@@ -92,8 +94,8 @@ namespace Samples
         IsFullScreen = true,
         SupportedOrientations = DisplayOrientation.LandscapeLeft,
 #else
-        PreferredBackBufferWidth = 1280,
-        PreferredBackBufferHeight = 720,
+        PreferredBackBufferWidth =1600,
+        PreferredBackBufferHeight = 900,
 #endif
         PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8,
         PreferMultiSampling = false,
@@ -290,10 +292,18 @@ namespace Samples
 #elif WINDOWS || WINDOWS_UWP
       var initialSample = typeof(Graphics.DeferredLightingSample);
 #else
-      var initialSample = typeof(Graphics.BasicEffectSample);
+      var initialSample = typeof(AnimatedWindow);
 #endif
+      var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
+      DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
+			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);
+
+			_services.Register(typeof(AssetManager), null, assetManager);
+
       _sampleFramework = new SampleFramework(this, initialSample);
       _services.Register(typeof(SampleFramework), null, _sampleFramework);
+
+      IsMouseVisible = true;
 
       base.Initialize();
     }

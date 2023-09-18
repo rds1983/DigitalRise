@@ -110,7 +110,7 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
 
       _meshRenderer = new MeshRenderer();
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
     }
 

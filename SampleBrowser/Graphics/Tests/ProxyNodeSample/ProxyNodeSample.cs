@@ -70,7 +70,7 @@ namespace Samples.Graphics
       _scene.Children.Add(_proxyNode);
       _proxyNode.Node = modelNode2;
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
 
       var mesh = meshNode.Mesh;

@@ -1,4 +1,5 @@
 ﻿using DigitalRune.Graphics;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,8 +20,8 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
     private readonly ButtonSequenceCommand _buttonSequenceCommand;
 
     private readonly SpriteBatch _spriteBatch;
-    private readonly SpriteFont _textFont;
-    private readonly SpriteFont _buttonFont;
+    private readonly SpriteFontBase _textFont;
+    private readonly SpriteFontBase  _buttonFont;
 
     private float _buttonHoldProgress;
     private float _buttonTapProgress;
@@ -41,8 +42,10 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
       _spriteBatch = GraphicsService.GetSpriteBatch();
 
       // Load a few SpriteFonts for rendering.
-      _textFont = UIContentManager.Load<SpriteFont>("UI Themes/WindowsPhone7/Segoe15");
-      _buttonFont = ContentManager.Load<SpriteFont>("ButtonImages/xboxControllerSpriteFont");
+      _textFont = DefaultAssets.Segoe15;
+
+      // TODO:
+      // _buttonFont = ContentManager.Load<SpriteFont>("ButtonImages/xboxControllerSpriteFont");
 
       // Add custom commands to input service.
       _buttonHoldCommand = new ButtonHoldCommand(Buttons.A, 1.0f) { Name = "Hold A" };
@@ -101,7 +104,7 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
     }
 
 
-    private void DrawRightAlignedText(Vector2 position, SpriteFont font0, string text0, float scale0, SpriteFont font1, string text1, float scale1)
+    private void DrawRightAlignedText(Vector2 position, SpriteFontBase font0, string text0, float scale0, SpriteFontBase font1, string text1, float scale1)
     {
       Vector2 size0 = font0.MeasureString(text0) * scale0;
       Vector2 size1 = font1.MeasureString(text1) * scale1;
@@ -109,8 +112,8 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
       Vector2 position0 = new Vector2(position.X - size0.X - size1.X, position.Y - size0.Y / 2);
       Vector2 position1 = new Vector2(position.X - size1.X, position.Y - size1.Y / 2);
 
-      _spriteBatch.DrawString(font0, text0, position0, Color.White, 0, Vector2.Zero, new Vector2(scale0), SpriteEffects.None, 0);
-      _spriteBatch.DrawString(font1, text1, position1, Color.White, 0, Vector2.Zero, new Vector2(scale1), SpriteEffects.None, 0);
+      _spriteBatch.DrawString(font0, text0, position0, Color.White, scale: new Vector2(scale0));
+      _spriteBatch.DrawString(font1, text1, position1, Color.White, scale: new Vector2(scale1));
     }
 
 

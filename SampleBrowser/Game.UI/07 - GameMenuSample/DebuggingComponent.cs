@@ -51,7 +51,7 @@ namespace Samples.Game.UI
       // But usually, the debug screen will use a more efficient theme (smaller fonts, no
       // fancy graphics). Here, we simply use the BlendBlue theme again.
       var contentManager = services.GetInstance<ContentManager>();
-      var theme = contentManager.Load<Theme>("UI Themes/BlendBlue/Theme");
+      var theme = DefaultAssets.DefaultTheme;
       UIRenderer renderer = new UIRenderer(Game, theme);
 
       // Create a UIScreen and add it to the UI service. 

@@ -81,7 +81,7 @@ namespace Samples.Graphics
       GameObjectService.Objects.Add(_cameraObject);
 
 
-      var spriteFont = UIContentManager.Load<SpriteFont>("UI Themes/BlendBlue/Default");
+      var spriteFont = DefaultAssets.DefaultFont;
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont);
 
       _cieSkyFilter = new CieSkyFilter(GraphicsService);
