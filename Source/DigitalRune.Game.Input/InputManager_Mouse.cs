@@ -190,7 +190,7 @@ namespace DigitalRune.Game.Input
       // ----- Reset mouse position if mouse-centering is enabled. 
       if (EnableMouseCentering)
       {
-#if ANDROID || IOS
+#if !ANDROID && !IOS
           Mouse.SetPosition((int)Settings.MouseCenter.X, (int)Settings.MouseCenter.Y);
 #endif
       }
