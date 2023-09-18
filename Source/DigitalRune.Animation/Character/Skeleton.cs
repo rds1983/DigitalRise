@@ -5,12 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if !PORTABLE
 using System.ComponentModel;
-#endif
-#if PORTABLE || WINDOWS
 using System.Dynamic;
-#endif
 
 
 namespace DigitalRune.Animation.Character
@@ -89,11 +85,8 @@ namespace DigitalRune.Animation.Character
     public int NumberOfBones { get { return Bones.Length; } }
 
 
-#if PORTABLE || WINDOWS
     /// <exclude/>
-#if !PORTABLE
     [Browsable(false)]
-#endif
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
     {
@@ -118,7 +111,7 @@ namespace DigitalRune.Animation.Character
         return internals;
       }
     }
-#endif
+
     #endregion
 
 

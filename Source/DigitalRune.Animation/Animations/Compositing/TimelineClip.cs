@@ -85,9 +85,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the original animation timeline from which a clip is played back.
     /// </summary>
     /// <value>The original animation timeline from which a clip played back.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public ITimeline Timeline { get; set; }
 
 

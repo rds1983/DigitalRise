@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using DigitalRune.Animation.Traits;
 using DigitalRune.Animation.Transitions;
 using DigitalRune.Threading;
@@ -113,15 +114,11 @@ namespace DigitalRune.Animation
       _tempProperties = new List<IAnimatableProperty>();
       _tempTransitions = new List<AnimationTransition>();
 
-#if WP7 || UNITY
-      // Cannot access Environment.ProcessorCount in phone app. (Security issue.)
-      EnableMultithreading = false;
-#else
       // Enable multithreading by default if the current system has multiple processors.
       EnableMultithreading = Environment.ProcessorCount > 1;
 
       // Multithreading works but Parallel.For of Xamarin.Android/iOS is very inefficient.
-      if (GlobalSettings.PlatformID == PlatformID.Android || GlobalSettings.PlatformID == PlatformID.iOS)
+#if ANDROID || IOS
         EnableMultithreading = false;
 #endif
 

@@ -78,9 +78,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation path.
     /// </summary>
     /// <value>The animation path.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public TPath Path { get; set; }
 
 

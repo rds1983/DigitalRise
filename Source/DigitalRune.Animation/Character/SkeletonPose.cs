@@ -8,9 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using DigitalRune.Mathematics.Algebra;
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
-#endif
 
 
 namespace DigitalRune.Animation.Character
@@ -188,7 +186,6 @@ namespace DigitalRune.Animation.Character
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Gets the skinning matrices. (Only available in the XNA-compatible build.)
     /// </summary>
@@ -215,7 +212,7 @@ namespace DigitalRune.Animation.Character
         return _boneAccessor.SkinningMatricesXna;
       }
     }
-#endif
+
     #endregion
 
 

@@ -81,9 +81,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the curve that defines the animation.
     /// </summary>
     /// <value>The curve that defines the animation.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public TCurve Curve { get; set; }
 
 

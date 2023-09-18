@@ -37,9 +37,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Scale"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Scale"/> value.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<Vector3F> Scale { get; set; }
 
 
@@ -47,9 +44,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Rotation"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Rotation"/> value.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<QuaternionF> Rotation { get; set; }
 
 
@@ -57,9 +51,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Translation"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Translation"/> value.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<Vector3F> Translation { get; set; }
     #endregion
 

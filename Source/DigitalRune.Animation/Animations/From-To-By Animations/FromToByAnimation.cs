@@ -196,9 +196,6 @@ namespace DigitalRune.Animation
     /// <see cref="ElasticEase"/> can be used to create special animation effects, such as bounces
     /// or oscillations.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IEasingFunction EasingFunction { get; set; }
     #endregion
 

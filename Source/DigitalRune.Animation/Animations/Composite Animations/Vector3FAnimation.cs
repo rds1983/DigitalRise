@@ -36,9 +36,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="Vector3F.X"/> component.
     /// </summary>
     /// <value>The animation of the <see cref="Vector3F.X"/> component.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<float> X { get; set; }
 
 
@@ -46,9 +43,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="Vector3F.Y"/> component.
     /// </summary>
     /// <value>The animation of the <see cref="Vector3F.Y"/> component.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<float> Y { get; set; }
 
 
@@ -56,9 +50,6 @@ namespace DigitalRune.Animation
     /// Gets or sets the animation of the <see cref="Vector3F.Z"/> component.
     /// </summary>
     /// <value>The animation of the <see cref="Vector3F.Z"/> component.</value>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true)]
-#endif
     public IAnimation<float> Z { get; set; }
     #endregion
 

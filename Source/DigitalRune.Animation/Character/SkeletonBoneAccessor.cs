@@ -8,9 +8,7 @@ using System.Threading;
 using DigitalRune.Collections;
 using DigitalRune.Mathematics.Algebra;
 
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
-#endif
 
 
 namespace DigitalRune.Animation.Character
@@ -68,9 +66,7 @@ namespace DigitalRune.Animation.Character
     private FastBitArray _isBonePoseAbsoluteDirty;
 
     private volatile Matrix44F[] _skinningMatrices;
-#if XNA || MONOGAME
     private volatile Matrix[] _skinningMatricesXna;
-#endif
     private FastBitArray _isSkinningMatrixDirty;
 
     // Object to lock when updating stuff in reads.
@@ -106,7 +102,6 @@ namespace DigitalRune.Animation.Character
     }
 
 
-#if XNA || MONOGAME
     // Array must not be modified by user!
     public Matrix[] SkinningMatricesXna
     {
@@ -129,7 +124,7 @@ namespace DigitalRune.Animation.Character
         return _skinningMatricesXna;
       }
     }
-#endif
+
     #endregion
 
 
@@ -366,7 +361,6 @@ namespace DigitalRune.Animation.Character
               }
             }
 
-#if XNA || MONOGAME
             if (_skinningMatricesXna != null)
             {
               if (_skinningMatrices != null)
@@ -384,13 +378,8 @@ namespace DigitalRune.Animation.Character
                 }
               }
             }
-#endif
 
-#if !NETFX_CORE && !NET45
             Thread.MemoryBarrier();
-#else
-            Interlocked.MemoryBarrier();
-#endif
 
             _isBonePoseRelativeDirty.SetAll(false);
             _isBonePoseAbsoluteDirty.SetAll(false);
@@ -418,11 +407,7 @@ namespace DigitalRune.Animation.Character
             SrtTransform.Multiply(ref _skeletonPose.Skeleton.BindPosesRelative[boneIndex],
                                   ref _skeletonPose.BoneTransforms[boneIndex], out _bonePoseRelative[boneIndex]);
 
-#if !NETFX_CORE && !NET45
             Thread.MemoryBarrier();
-#else
-            Interlocked.MemoryBarrier();
-#endif
 
             _isBonePoseRelativeDirty[boneIndex] = false;
           }
@@ -462,11 +447,7 @@ namespace DigitalRune.Animation.Character
                                     out _bonePoseAbsolute[boneIndex]);
             }
 
-#if !NETFX_CORE && !NET45
             Thread.MemoryBarrier();
-#else
-            Interlocked.MemoryBarrier();
-#endif
 
             _isBonePoseAbsoluteDirty[boneIndex] = false;
           }

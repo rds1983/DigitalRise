@@ -6,10 +6,8 @@ using System;
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
 
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-#endif
 
 
 namespace DigitalRune.Animation.Character
@@ -19,7 +17,6 @@ namespace DigitalRune.Animation.Character
   /// </summary>
   public static class SkeletonHelper
   {
-#if XNA || MONOGAME
     /// <summary>
     /// Draws the skeleton bones, bone space axes and bone names for debugging. 
     /// (Only available in the XNA-compatible build.)
@@ -128,7 +125,6 @@ namespace DigitalRune.Animation.Character
       
       effect.VertexColorEnabled = oldVertexColorEnabled;
     }
-#endif
 
 
     //public static void RotateBoneWorld(this SkeletonPose SkeletonPose, int boneIndex, QuaternionF rotation, Matrix44F world)

@@ -75,9 +75,6 @@ namespace DigitalRune.Animation
     /// Gets the collection of key frames.
     /// </summary>
     /// <value>The collection of key frames.</value>
-#if XNA || MONOGAME
-    [ContentSerializer]
-#endif
     public KeyFrameCollection<T> KeyFrames { get; private set; }
     #endregion
 

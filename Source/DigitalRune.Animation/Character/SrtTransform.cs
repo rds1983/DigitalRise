@@ -8,10 +8,8 @@ using DigitalRune.Geometry;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 
-#if XNA || MONOGAME
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
-#endif
 
 
 namespace DigitalRune.Animation.Character
@@ -50,9 +48,7 @@ namespace DigitalRune.Animation.Character
   /// </code>
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
   [Serializable]
-#endif
   public struct SrtTransform : IEquatable<SrtTransform>
   {
     //--------------------------------------------------------------
@@ -380,7 +376,6 @@ namespace DigitalRune.Animation.Character
     }
 
 
-#if XNA || MONOGAME
     /// <overloads>
     /// <summary>
     /// Creates an <see cref="SrtTransform"/> from a matrix that contains a scale, a rotation and 
@@ -439,8 +434,6 @@ namespace DigitalRune.Animation.Character
                         s.Z * r.M02, s.Z * r.M12, s.Z * r.M22, 0,
                         t.X, t.Y, t.Z, 1);
     }
-#endif
-
 
 
     /// <summary>
@@ -850,7 +843,6 @@ namespace DigitalRune.Animation.Character
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Multiplies two SRT transforms. (Only available in the XNA-compatible build.)
     /// </summary>
@@ -909,7 +901,6 @@ namespace DigitalRune.Animation.Character
 
       result = srtResult;
     }
-#endif
 
 
     /// <summary>
@@ -1097,7 +1088,6 @@ namespace DigitalRune.Animation.Character
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Converts a SRT transform to a 4x4 transformation matrix (XNA Framework). 
     /// (Only available in the XNA-compatible build.)
@@ -1140,7 +1130,7 @@ namespace DigitalRune.Animation.Character
                         srt.Scale.Z *(twoYW + twoXZ),        srt.Scale.Z * (twoYZ - twoXW),       srt.Scale.Z * (1 - (twoXX + twoYY)), 0,
                         srt.Translation.X,                   srt.Translation.Y,                   srt.Translation.Z,                   1);
     }
-#endif
+
     #endregion
   }
 }

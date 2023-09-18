@@ -3,9 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
 using System.Runtime.Serialization;
-#endif
 
 
 namespace DigitalRune.Animation
@@ -13,9 +11,7 @@ namespace DigitalRune.Animation
   /// <summary>
   /// The exception that is thrown when an error occurs in the animation system.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
   [Serializable]
-#endif
   public class AnimationException : Exception
   {
     /// <overloads>
@@ -58,7 +54,6 @@ namespace DigitalRune.Animation
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="AnimationException"/> class with serialized
     /// data.
@@ -81,6 +76,5 @@ namespace DigitalRune.Animation
       : base(info, context)
     {
     }
-#endif
   }
 }

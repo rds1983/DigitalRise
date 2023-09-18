@@ -4,11 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !UNITY
 using System.Collections.ObjectModel;
-#else
-using DigitalRune.Collections.ObjectModel;
-#endif
 using System.Diagnostics;
 using System.Linq;
 using DigitalRune.Animation.Traits;
