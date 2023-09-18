@@ -53,7 +53,7 @@ namespace Samples
       // Get services from the global service container.
       var services = (ServiceContainer)ServiceLocator.Current;
       SampleFramework = services.GetInstance<SampleFramework>();
-      AssetManager assetManager = services.GetInstance<AssetManager>();
+      AssetManager = services.GetInstance<AssetManager>();
       ContentManager = services.GetInstance<ContentManager>();
       InputService = services.GetInstance<IInputService>();
       AnimationService = services.GetInstance<IAnimationService>();

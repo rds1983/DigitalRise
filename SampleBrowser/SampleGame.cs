@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Samples.Base;
 using Samples.Game.UI;
 
 namespace Samples
@@ -284,17 +285,17 @@ namespace Samples
       _updatePhysics = () => _simulation.Update(_deltaTime);
       _updateParticles = () => _particleSystemManager.Update(_deltaTime);
 
-      // SampleFramework
-      // The SampleFramework automatically discovers all samples using reflection, provides 
-      // controls for switching samples and starts the initial sample.
+			// SampleFramework
+			// The SampleFramework automatically discovers all samples using reflection, provides 
+			// controls for switching samples and starts the initial sample.
 #if KINECT
       var initialSample = typeof(Kinect.KinectSkeletonMappingSample);
 #elif WINDOWS || WINDOWS_UWP
       var initialSample = typeof(Graphics.DeferredLightingSample);
 #else
-      var initialSample = typeof(AnimatedWindow);
+			var initialSample = typeof(Graphics.BasicEffectSample);
 #endif
-      var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
+			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);
 

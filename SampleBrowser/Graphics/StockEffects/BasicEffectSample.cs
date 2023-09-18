@@ -6,7 +6,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -60,8 +60,8 @@ tank model are animated.",
       // Each model itself is a tree of scene nodes. The grid model 
       // contains one mesh node. The tank model contains several mesh nodes (turret, 
       // cannon, hatch, wheels, ...).
-      _grid = ContentManager.Load<ModelNode>("Ground/Ground");
-      _tank = ContentManager.Load<ModelNode>("Tank/tank");
+      _grid = AssetManager.LoadGltf(GraphicsService.GraphicsDevice, "Ground/Ground.gltf");
+      _tank = AssetManager.LoadGltf(GraphicsService.GraphicsDevice, "Tank/tank.gltf");
 
       // The XNA ContentManager manages a single instance of each model. We clone 
       // the models, to get a copy that we can modify without changing the original 

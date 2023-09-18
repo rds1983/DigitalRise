@@ -9,7 +9,7 @@ using DigitalRune.Animation.Traits;
 using DigitalRune.Mathematics.Algebra;
 using System.ComponentModel;
 using System.Dynamic;
-
+using DigitalRune.Character.Skeleton_Animations;
 
 namespace DigitalRune.Animation.Character
 {
@@ -1113,5 +1113,111 @@ namespace DigitalRune.Animation.Character
       }
     }
     #endregion
+
+    public static SkeletonKeyFrameAnimation FromData(Dictionary<int, SkeletonKeyFrameAnimationData> data)
+    {
+      if (data == null)
+      {
+        throw new ArgumentNullException(nameof(data));
+      }
+
+      var result = new SkeletonKeyFrameAnimation
+      {
+        _channels = new int[data.Count],
+        _keyFrames = new object[data.Count]
+      };
+
+      var boneIndex = 0;
+      foreach (var pair in data)
+      {
+        result._channels[boneIndex] = pair.Key;
+
+        var boneTransforms = pair.Value;
+        if (boneTransforms == null)
+        {
+          throw new ArgumentNullException($"data[{pair.Key}]");
+        }
+
+        if (boneTransforms.Times == null)
+        {
+          throw new ArgumentNullException($"data[{pair.Key}].Times");
+        }
+
+        if (boneTransforms.Translations != null && boneTransforms.Translations.Length != boneTransforms.Times.Length)
+        {
+          throw new ArgumentException($"Number of translations for bone {pair.Key} differ from number of times");
+        }
+
+        if (boneTransforms.Rotations != null && boneTransforms.Rotations.Length != boneTransforms.Times.Length)
+        {
+          throw new ArgumentException($"Number of rotations for bone {pair.Key} differ from number of times");
+        }
+
+        if (boneTransforms.Scales != null && boneTransforms.Scales.Length != boneTransforms.Times.Length)
+        {
+          throw new ArgumentException($"Number of scales for bone {pair.Key} differ from number of times");
+        }
+
+        var numberOfKeyFrames = boneTransforms.Times.Length;
+        if (boneTransforms.Rotations != null &&
+            boneTransforms.Translations == null &&
+            boneTransforms.Scales == null)
+        {
+          var keyFrames = new BoneKeyFrameR[numberOfKeyFrames];
+          for (var i = 0; i < numberOfKeyFrames; ++i)
+          {
+            keyFrames[i] = new BoneKeyFrameR
+            {
+              Time = TimeSpan.FromSeconds(boneTransforms.Times[i]),
+              Rotation = boneTransforms.Rotations[i]
+            };
+          }
+
+          result._keyFrames[boneIndex] = keyFrames;
+        }
+        else if (boneTransforms.Rotations != null &&
+            boneTransforms.Translations != null &&
+            boneTransforms.Scales == null)
+        {
+          var keyFrames = new BoneKeyFrameRT[numberOfKeyFrames];
+          for (var i = 0; i < numberOfKeyFrames; ++i)
+          {
+            keyFrames[i] = new BoneKeyFrameRT
+            {
+              Time = TimeSpan.FromSeconds(boneTransforms.Times[i]),
+              Rotation = boneTransforms.Rotations[i],
+              Translation = boneTransforms.Translations[i]
+            };
+          }
+
+          result._keyFrames[boneIndex] = keyFrames;
+        }
+        else
+        {
+          var keyFrames = new BoneKeyFrameSRT[numberOfKeyFrames];
+          for (var i = 0; i < numberOfKeyFrames; ++i)
+          {
+            var transform = new SrtTransform
+            {
+              Scale = boneTransforms.Scales != null ? boneTransforms.Scales[i] : Vector3F.One,
+              Rotation = boneTransforms.Rotations != null ? boneTransforms.Rotations[i] : QuaternionF.Identity,
+              Translation = boneTransforms.Translations != null ? boneTransforms.Translations[i] : Vector3F.Zero
+            };
+
+            keyFrames[i] = new BoneKeyFrameSRT
+            {
+              Time = TimeSpan.FromSeconds(boneTransforms.Times[i]),
+              Transform = transform
+            };
+          }
+
+          result._keyFrames[boneIndex] = keyFrames;
+        }
+
+        ++boneIndex;
+      }
+
+      return result;
+    }
   }
 }
