@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using DigitalRune.Animation;
 using DigitalRune.Collections;
 using DigitalRune.Geometry;
@@ -197,9 +198,6 @@ namespace DigitalRune.Particles
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public Random Random
     {
       get
@@ -279,9 +277,6 @@ namespace DigitalRune.Particles
     /// Cannot change the name because the particle system has already been added to a particle 
     /// system service or another particle system.
     /// </exception>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public string Name
     {
       get { return _name; }
@@ -310,9 +305,6 @@ namespace DigitalRune.Particles
     /// If <see cref="Enabled"/> is <see langword="false"/> the particle system is paused and does 
     /// not change its state when <see cref="Update"/> is called.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public bool Enabled { get; set; }
 
 
@@ -426,9 +418,6 @@ namespace DigitalRune.Particles
     /// The particle system behavior is undefined if the value is negative. (Some particle system 
     /// might support a negative <see cref="TimeScaling"/> to simulate backwards in time.)
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public float TimeScaling { get; set; }
 
 
@@ -447,9 +436,6 @@ namespace DigitalRune.Particles
     /// specified time until it starts to create and simulate particles. 
     /// </para>
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public TimeSpan InitialDelay { get; set; }
 
 
@@ -472,9 +458,6 @@ namespace DigitalRune.Particles
     /// <see cref="InitialDelay"/>
     /// </para>
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public TimeSpan CurrentDelay { get; set; }
 
 
@@ -503,9 +486,6 @@ namespace DigitalRune.Particles
     /// will also reduce the needed time for preloading.
     /// </para>
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public TimeSpan PreloadDuration { get; set; }
 
 
@@ -519,9 +499,6 @@ namespace DigitalRune.Particles
     /// <see cref="PreloadDeltaTime"/> is the time step size used by the particle system while 
     /// preloading. See <see cref="PreloadDuration"/> for more information.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public TimeSpan PreloadDeltaTime { get; set; }
 
 
@@ -560,9 +537,6 @@ namespace DigitalRune.Particles
     /// </para>
     /// </remarks>
     /// <seealso cref="Parallel"/>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public bool EnableMultithreading { get; set; }
 
 
@@ -594,9 +568,6 @@ namespace DigitalRune.Particles
     /// by the <see cref="Pose"/> of this particle system and all parent particle systems.
     /// </para>
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public ParticleReferenceFrame ReferenceFrame { get; set; }
 
 
@@ -607,8 +578,6 @@ namespace DigitalRune.Particles
     public ParticleParameterCollection Parameters { get; private set; }
 
 
-#if XNA || MONOGAME
-    [ContentSerializer(ElementName = "Parameters", Optional = true, CollectionItemName = "Parameter")]
     internal IParticleParameter[] ParametersInternal    // For serialization only.
     {
       get
@@ -628,8 +597,6 @@ namespace DigitalRune.Particles
           parameter.AddCopyToCollection(Parameters);
       }
     }
-#endif
-
 
     /// <summary>
     /// Gets the particle effectors.
@@ -638,8 +605,6 @@ namespace DigitalRune.Particles
     public ParticleEffectorCollection Effectors { get; private set; }
 
 
-#if XNA || MONOGAME
-    [ContentSerializer(ElementName = "Effectors", Optional = true, CollectionItemName = "Effector")]
     internal ParticleEffector[] EffectorsInternal    // For serialization only.
     {
       get
@@ -656,8 +621,6 @@ namespace DigitalRune.Particles
           Effectors.Add(effector);
       }
     }
-#endif
-
 
     /// <summary>
     /// Gets or sets the collection of child particle systems.
@@ -702,8 +665,6 @@ namespace DigitalRune.Particles
     private ParticleSystemCollection _children;
 
 
-#if XNA || MONOGAME
-    [ContentSerializer(ElementName = "Children", Optional = true, CollectionItemName = "ParticleSystem")]
     internal ParticleSystem[] ChildrenInternal    // For serialization only.
     {
       get
@@ -720,8 +681,6 @@ namespace DigitalRune.Particles
           Children.Add(child);
       }
     }
-#endif
-
 
     /// <summary>
     /// Gets or sets the render data.
@@ -731,9 +690,6 @@ namespace DigitalRune.Particles
     /// This property is not used by the particle system itself. A particle renderer can use this
     /// property to store data.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public object RenderData { get; set; }
 
 
@@ -745,9 +701,6 @@ namespace DigitalRune.Particles
     /// This property is not used by the particle system itself. This property can be used to store 
     /// application specific data.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public object UserData { get; set; }
     #endregion
 

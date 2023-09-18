@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DigitalRune.Collections;
-using DigitalRune.Threading;
 
 
 namespace DigitalRune.Particles
@@ -96,16 +96,12 @@ namespace DigitalRune.Particles
     {
       _updateParticleSystem = UpdateParticleSystem;
 
-#if WP7 || UNITY
-      // Cannot access Environment.ProcessorCount in phone app. (Security issue.)
-      EnableMultithreading = false;
-#else
       // Enable multithreading by default if the current system has multiple processors.
       EnableMultithreading = Environment.ProcessorCount > 1;
 
       // Multithreading works but Parallel.For of Xamarin.Android/iOS is very inefficient.
-      if (GlobalSettings.PlatformID == PlatformID.Android || GlobalSettings.PlatformID == PlatformID.iOS)
-        EnableMultithreading = false;
+#if ANDROID || IOS
+      EnableMultithreading = false;
 #endif
 
       ParticleSystems = new ParticleSystemCollection();

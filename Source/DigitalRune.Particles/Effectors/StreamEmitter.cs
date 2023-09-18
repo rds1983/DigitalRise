@@ -58,9 +58,6 @@ namespace DigitalRune.Particles.Effectors
     /// This property needs to be set before the particle system is running. The particle effector 
     /// might ignore any changes that occur while the particle system is running.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer (Optional = true)]
-#endif
     [ParticleParameter(ParticleParameterUsage.In, Optional = true)]
     public string EmissionRateParameter { get; set; }
 
@@ -72,9 +69,6 @@ namespace DigitalRune.Particles.Effectors
     /// <value>
     /// The default emission rate (particles per second). The default value is 10.
     /// </value>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public float DefaultEmissionRate { get; set; }
 
 

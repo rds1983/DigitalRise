@@ -3,7 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-//using System.Runtime.Serialization;
 
 
 namespace DigitalRune.Particles
@@ -77,33 +76,5 @@ namespace DigitalRune.Particles
       : base(message, innerException)
     {
     }
-
-
-/*
-#if !NETFX_CORE && !WP7 && !WP8 && !XBOX
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ParticleSystemException"/> class with
-    /// serialized data.
-    /// </summary>
-    /// <param name="info">
-    /// The <see cref="SerializationInfo"/> that holds the serialized object data about the
-    /// exception being thrown.
-    /// </param>
-    /// <param name="context">
-    /// The <see cref="StreamingContext"/> that contains contextual information about the source or
-    /// destination.
-    /// </param>
-    /// <exception cref="SerializationException">
-    /// The class name is <see langword="null"/> or <see cref="Exception.HResult"/> is zero (0).
-    /// </exception>
-    /// <exception cref="ArgumentNullException">
-    /// The info parameter is <see langword="null"/>.
-    /// </exception>
-    protected ParticleSystemException(SerializationInfo info, StreamingContext context)
-      : base(info, context)
-    {
-    }
-#endif
-*/
   }
 }

@@ -126,9 +126,6 @@ namespace DigitalRune.Particles.Effectors
     /// <value>
     /// The strength of the bias, usually in the range [0, 1]. The default value is 1.
     /// </value>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public float Strength { get; set; }
 
 

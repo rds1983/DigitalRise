@@ -95,9 +95,6 @@ namespace DigitalRune.Particles
     /// Cannot change the name because the particle effector has already been added to a particle 
     /// system.
     /// </exception>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public string Name
     {
       get { return _name; }
@@ -138,9 +135,6 @@ namespace DigitalRune.Particles
     /// <see cref="OnBeginUpdate"/>, <see cref="OnUpdateParticles"/>, <see cref="OnEndUpdate"/> and 
     /// <see cref="OnInitializeParticles"/>.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public bool Enabled { get; set; }
     #endregion
 

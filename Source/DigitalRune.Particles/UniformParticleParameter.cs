@@ -31,9 +31,6 @@ namespace DigitalRune.Particles
     /// Gets the name of the particle parameter.
     /// </summary>
     /// <value>The name of the particle parameter.</value>
-#if XNA || MONOGAME
-    [ContentSerializer]
-#endif
     public string Name { get; private set; }
 
 

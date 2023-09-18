@@ -78,9 +78,6 @@ namespace DigitalRune.Particles.Effectors
     /// particles. The default is <see langword="null"/>, which means that the start value is set to
     /// <see cref="DefaultValue"/>.
     /// </value>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public Distribution<Vector3F> Distribution { get; set; }
 
 
@@ -91,9 +88,6 @@ namespace DigitalRune.Particles.Effectors
     /// <value>
     /// The default start value that is used if <see cref="Distribution"/> is <see langword="null"/>.
     /// </value>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public Vector3F DefaultValue { get; set; }
 
 

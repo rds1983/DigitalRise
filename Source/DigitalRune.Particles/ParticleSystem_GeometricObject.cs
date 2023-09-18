@@ -56,9 +56,6 @@ namespace DigitalRune.Particles
     /// Changing this property raises the <see cref="PoseChanged"/> event.
     /// </para>
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public Pose Pose
     {
       get { return _pose; }
@@ -115,9 +112,6 @@ namespace DigitalRune.Particles
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-#if XNA || MONOGAME
-    [ContentSerializer(SharedResource = true, Optional = true)]
-#endif
     public Shape Shape
     {
       get { return _shape; }
