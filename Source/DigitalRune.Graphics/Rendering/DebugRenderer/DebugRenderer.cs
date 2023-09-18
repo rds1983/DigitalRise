@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-#if ANIMATION
 using DigitalRune.Animation.Character;
-#endif
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Collisions;
 using DigitalRune.Geometry.Meshes;
@@ -690,8 +688,12 @@ namespace DigitalRune.Graphics.Rendering
         graphicsDevice.BlendState = BlendState.Opaque;
       }
 
+      bool skipWireframes = false;
+
       // No wireframe mode in OpenGLES
-      bool skipWireframes = (GlobalSettings.PlatformID == PlatformID.Android || GlobalSettings.PlatformID == PlatformID.iOS); 
+#if ANDROID || IOS
+      skipWireframes = true;
+#endif
 
       if (_inSceneLineBatch != null)
         _inSceneLineBatch.Render(context);
@@ -2305,9 +2307,6 @@ namespace DigitalRune.Graphics.Rendering
           batch.AddSubmesh(submesh, meshNode.PoseWorld, meshNode.ScaleWorld, color);
     }
 
-
-#if ANIMATION
-
     /// <overloads>
     /// <summary>
     /// Draws skeleton bones, bone space axes and bone names of a <see cref="MeshNode"/> for debugging.
@@ -2407,7 +2406,7 @@ namespace DigitalRune.Graphics.Rendering
           color);
       }
     }
-#endif
+
     #endregion
   }
 }

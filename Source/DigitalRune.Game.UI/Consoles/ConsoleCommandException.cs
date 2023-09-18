@@ -13,9 +13,6 @@ namespace DigitalRune.Game.UI.Consoles
   /// <summary>
   /// Is raised when a console command needs to report errors.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public class ConsoleCommandException : Exception
   {
     /// <summary>The default error message for an invalid argument.</summary>

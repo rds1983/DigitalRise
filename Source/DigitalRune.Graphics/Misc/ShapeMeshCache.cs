@@ -27,12 +27,7 @@ namespace DigitalRune.Graphics
   /// time. This is useful for the <see cref="DebugRenderer"/>, which get the submeshes regularly.
   /// </para>
   /// </remarks>
-#if SILVERLIGHT || WP7
-  public       // WeakEvent handler (OnClearingResourcePools) must be public on WP7.
-#else
-  internal
-#endif
-  sealed class ShapeMeshCache : IDisposable
+  internal sealed class ShapeMeshCache : IDisposable
   {
     // Note:
     // We could also cache submeshes for ITriangleMesh - but we would not know if the
@@ -279,12 +274,7 @@ namespace DigitalRune.Graphics
     }
 
 
-#if SILVERLIGHT || WP7
-    public 
-#else
-    private
-#endif
-    void OnClearingResourcePools(object sender, EventArgs eventArgs)
+    private void OnClearingResourcePools(object sender, EventArgs eventArgs)
     {
       // We release all strong references, when the resource pools are cleared. This usually
       // happens when the game loads a new level.

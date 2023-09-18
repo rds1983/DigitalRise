@@ -13,9 +13,6 @@ namespace DigitalRune.Game.UI
   /// <summary>
   /// Represents a 2-dimensional rectangle (single precision).
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public struct RectangleF : IEquatable<RectangleF>
   {
     //--------------------------------------------------------------

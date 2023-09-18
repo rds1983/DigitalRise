@@ -105,7 +105,6 @@ namespace DigitalRune.Graphics.Effects
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
     internal static EffectParameterHint? GetHintFromAnnotations(EffectParameter parameter)
     {
-#if !MONOGAME
       var annotation = parameter.Annotations["Hint"];
       if (annotation != null && annotation.ParameterType == EffectParameterType.String)
       {
@@ -117,7 +116,6 @@ namespace DigitalRune.Graphics.Effects
           return hint;
         }
       }
-#endif
 
       return null;
     }

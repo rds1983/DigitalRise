@@ -4,9 +4,7 @@
 
 using System;
 using DigitalRune.Graphics.SceneGraph;
-#if PARTICLES
 using DigitalRune.Particles;
-#endif
 
 
 namespace DigitalRune.Graphics
@@ -81,9 +79,6 @@ namespace DigitalRune.Graphics
   /// </remarks>
   /// <seealso cref="Billboard"/>
   /// <seealso cref="BillboardNormal"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public struct BillboardOrientation : IEquatable<BillboardOrientation>
   {
     // Possible combinations:

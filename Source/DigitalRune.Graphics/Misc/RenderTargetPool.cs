@@ -171,21 +171,18 @@ namespace DigitalRune.Graphics
     /// </summary>
     public void Clear()
     {
-#if XNA
       // Warning: If we dispose a render target, and this render target is still
       // set in an effect parameter, then XNA might dispose the GraphicsDevice when the
       // device is reset and a garbage collection is performed. :-(
       foreach (var item in RenderTargets2D)
         if (item != null)
           item.Dispose();
-#endif
       RenderTargets2D.Clear();
 
-#if XNA
       foreach (var item in RenderTargetsCube)
         if (item != null)
           item.Dispose();
-#endif
+
       RenderTargetsCube.Clear();
 
       Counters2D.Clear();

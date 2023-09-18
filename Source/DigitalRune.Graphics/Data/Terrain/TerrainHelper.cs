@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Threading.Tasks;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Threading;
@@ -512,7 +513,7 @@ namespace DigitalRune.Graphics
       Parallel.For(0, data.Length, i =>
       {
         data[i] = data[i] * scale + bias;
-      }, 128);
+      });
     }
     #endregion
 

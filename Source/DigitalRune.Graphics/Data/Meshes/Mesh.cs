@@ -8,9 +8,7 @@ using System.ComponentModel;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Graphics.SceneGraph;
-#if ANIMATION
 using DigitalRune.Animation.Character;
-#endif
 
 
 namespace DigitalRune.Graphics
@@ -110,9 +108,7 @@ namespace DigitalRune.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Shape BoundingShape
     {
       get { return _boundingShape; }
@@ -138,9 +134,7 @@ namespace DigitalRune.Graphics
     /// </remarks>
     /// <seealso cref="EffectBinding"/>
     /// <seealso cref="Material"/>
-#if !PORTABLE && !NETFX_CORE
     [Category("Material")]
-#endif
     public MaterialCollection Materials { get; private set; }
 
 
@@ -150,9 +144,7 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <value>The <see cref="Submesh"/>es that make up this mesh.</value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !PORTABLE && !NETFX_CORE
     [Category("Common")]
-#endif
     public SubmeshCollection Submeshes { get; private set; }
 
 
@@ -160,9 +152,7 @@ namespace DigitalRune.Graphics
     /// Gets or sets the name of this mesh.
     /// </summary>
     /// <value>The name of this mesh.</value>
-#if !PORTABLE && !NETFX_CORE
     [Category("Common")]
-#endif
     public string Name { get; set; }
 
 
@@ -171,20 +161,15 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <value>The occluder. The default value is <see langword="null"/>.</value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !PORTABLE && !NETFX_CORE
     [Category("Misc")]
-#endif
     public Occluder Occluder { get; set; }
 
 
-#if ANIMATION
     /// <summary>
     /// Gets or sets the skeleton for mesh skinning.
     /// </summary>
     /// <value>The skeleton. Can be <see langword="null"/>.</value>
-#if !PORTABLE && !NETFX_CORE
     [Category("Animation")]
-#endif
     public Skeleton Skeleton { get; set; }
 
 
@@ -193,11 +178,8 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <value>The animations. Can be <see langword="null"/> if there are no animations.</value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-#if !PORTABLE && !NETFX_CORE
     [Category("Animation")]
-#endif
     public Dictionary<string, SkeletonKeyFrameAnimation> Animations { get; set; }
-#endif
 
 
     /// <summary>
@@ -207,9 +189,7 @@ namespace DigitalRune.Graphics
     /// <remarks>
     /// This property is intended for application-specific data and is not used by the mesh itself. 
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Misc")]
-#endif
     public object UserData { get; set; }
     #endregion
 

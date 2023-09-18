@@ -502,12 +502,8 @@ namespace DigitalRune.Graphics.Rendering
         graphicsDevice.SetVertexBuffer(nodeRenderData.FillVertexBuffer);
         graphicsDevice.Indices = nodeRenderData.FillIndexBuffer;
         int primitiveCount = nodeRenderData.FillIndexBuffer.IndexCount / 3;
-#if MONOGAME
-        graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, primitiveCount);
-#else
         int vertexCount = nodeRenderData.FillVertexBuffer.VertexCount;
         graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexCount, 0, primitiveCount);
-#endif
         return;
       }
 
@@ -589,12 +585,8 @@ namespace DigitalRune.Graphics.Rendering
         graphicsDevice.SetVertexBuffer(nodeRenderData.StrokeVertexBuffer);
         graphicsDevice.Indices = nodeRenderData.StrokeIndexBuffer;
         int primitiveCount = nodeRenderData.StrokeIndexBuffer.IndexCount / 3;
-#if MONOGAME
-        graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, primitiveCount);
-#else
         int vertexCount = nodeRenderData.StrokeVertexBuffer.VertexCount;
         graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexCount, 0, primitiveCount);
-#endif
         return;
       }
 

@@ -3,10 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX
 using System.Runtime.Serialization;
-#endif
-
 
 namespace DigitalRune.Windows.Docking
 {

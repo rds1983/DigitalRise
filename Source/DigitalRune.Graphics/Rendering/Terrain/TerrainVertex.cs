@@ -15,9 +15,6 @@ namespace DigitalRune.Graphics
   /// <summary>
   /// Describes a custom vertex format structure for terrain rendering.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   [StructLayout(LayoutKind.Sequential)]
   internal struct TerrainVertex : IVertexType
   {

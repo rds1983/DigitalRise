@@ -244,10 +244,7 @@ namespace DigitalRune.Graphics
         return Color.Black;
 
       int hashCode = obj.GetHashCode();
-#if XBOX || WP7
-      // Xbox objects hash codes are not chaotic enough. Make them more chaotic.
-      hashCode = hashCode ^ (hashCode * 37777) ^ (hashCode * 197) ^ (hashCode / 177) ^ (hashCode / 19977);
-#endif
+
       byte r = (byte)((hashCode & 0x00ff0000) >> 16);
       byte g = (byte)((hashCode & 0x0000ff00) >> 8);
       byte b = (byte)((hashCode & 0x000000ff));
@@ -335,7 +332,6 @@ namespace DigitalRune.Graphics
     }
 
 
-#if !MONOGAME
     /// <summary>
     /// Creates a texture containing the content of the current back buffer.
     /// (Only available in the HiDef profile.)
@@ -371,7 +367,6 @@ namespace DigitalRune.Graphics
 
       return texture;
     }
-#endif
 
 
     /// <summary>

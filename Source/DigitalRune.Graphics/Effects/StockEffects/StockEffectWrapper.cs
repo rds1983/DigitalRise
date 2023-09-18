@@ -13,55 +13,35 @@ namespace DigitalRune.Graphics.Effects
   internal sealed class WrappedAlphaTestEffect : AlphaTestEffect
   {
     public WrappedAlphaTestEffect(GraphicsDevice graphicsDevice) : base(graphicsDevice) { }
-#if !MONOGAME
     protected override void OnApply() { }
-#else
-    protected override bool OnApply() { return false; }
-#endif
   }
 
 
   internal sealed class WrappedBasicEffect : BasicEffect
   {
     public WrappedBasicEffect(GraphicsDevice graphicsDevice) : base(graphicsDevice) { }
-#if !MONOGAME
     protected override void OnApply() { }
-#else
-    protected override bool OnApply() { return false; }
-#endif
   }
 
 
   internal sealed class WrappedDualTextureEffect : DualTextureEffect
   {
     public WrappedDualTextureEffect(GraphicsDevice graphicsDevice) : base(graphicsDevice) { }
-#if !MONOGAME
     protected override void OnApply() { }
-#else
-    protected override bool OnApply() { return false; }
-#endif
   }
 
 
   internal sealed class WrappedEnvironmentMapEffect : EnvironmentMapEffect
   {
     public WrappedEnvironmentMapEffect(GraphicsDevice graphicsDevice) : base(graphicsDevice) { }
-#if !MONOGAME
     protected override void OnApply() { }
-#else
-    protected override bool OnApply() { return false; }
-#endif
   }
 
 
   internal sealed class WrappedSkinnedEffect : SkinnedEffect
   {
     public WrappedSkinnedEffect(GraphicsDevice graphicsDevice) : base(graphicsDevice) { }
-#if !MONOGAME
     protected override void OnApply() { }
-#else
-    protected override bool OnApply() { return false; }
-#endif
   }
 
 

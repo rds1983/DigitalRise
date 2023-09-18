@@ -917,11 +917,7 @@ namespace DigitalRune.Graphics.Rendering
         {
           graphicsDevice.SetVertexBuffer(part.VertexBuffer);
           graphicsDevice.Indices = part.IndexBuffer;
-#if MONOGAME
-          graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, part.VertexOffset, part.StartIndex, part.PrimitiveCount);
-#else
           graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, part.VertexOffset, 0, part.NumVertices, part.StartIndex, part.PrimitiveCount);
-#endif
         }
       }
     }

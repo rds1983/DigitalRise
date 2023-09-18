@@ -10,9 +10,7 @@ using DigitalRune.Graphics.Rendering;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Graphics.Interop;
-#if !WP7
 using DigitalRune.Graphics.PostProcessing;
-#endif
 using DigitalRune.Graphics.SceneGraph;
 using Microsoft.Xna.Framework.Graphics;
 

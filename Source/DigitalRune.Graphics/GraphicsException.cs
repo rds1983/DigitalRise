@@ -3,19 +3,13 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX
 using System.Runtime.Serialization;
-#endif
-
 
 namespace DigitalRune.Graphics
 {
   /// <summary>
   /// The exception that is raised when an error occurs in DigitalRune Graphics.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public class GraphicsException : Exception
   {
     /// <overloads>
@@ -58,7 +52,6 @@ namespace DigitalRune.Graphics
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="GraphicsException"/> class with serialized
     /// data.
@@ -81,6 +74,5 @@ namespace DigitalRune.Graphics
       : base(info, context)
     {
     }
-#endif
   }
 }

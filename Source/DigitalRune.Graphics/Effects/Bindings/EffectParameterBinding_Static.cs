@@ -34,9 +34,7 @@ namespace DigitalRune.Graphics.Effects
       { typeof(Quaternion),   ValidateVector4     },
       { typeof(QuaternionF),  ValidateVector4     },
       { typeof(float),        ValidateSingle      },
-#if !MONOGAME
       { typeof(string),       ValidateString      },
-#endif
       { typeof(Texture),      ValidateTexture     },
       { typeof(Texture2D),    ValidateTexture2D   },
       { typeof(Texture3D),    ValidateTexture3D   },
@@ -65,9 +63,7 @@ namespace DigitalRune.Graphics.Effects
       { typeof(Quaternion),  (Action<EffectParameter, Quaternion>) ((parameter, value) => parameter.SetValue(value))             },
       { typeof(QuaternionF), (Action<EffectParameter, QuaternionF>)((parameter, value) => parameter.SetValue((Quaternion)value)) },
       { typeof(float),       (Action<EffectParameter, float>)      ((parameter, value) => parameter.SetValue(value))             },
-#if !MONOGAME
       { typeof(string),      (Action<EffectParameter, string>)     ((parameter, value) => parameter.SetValue(value))             },
-#endif
       { typeof(Texture),     (Action<EffectParameter, Texture>)    ((parameter, value) => parameter.SetValue(value))             },
       { typeof(Texture2D),   (Action<EffectParameter, Texture2D>)  ((parameter, value) => parameter.SetValue(value))             },
       { typeof(Texture3D),   (Action<EffectParameter, Texture3D>)  ((parameter, value) => parameter.SetValue(value))             },
@@ -88,14 +84,10 @@ namespace DigitalRune.Graphics.Effects
     {
       // DigitalRune data types are not supported at the moment because we have to copy the
       // array each time (slow + garbage).
-#if !MONOGAME
       { typeof(bool),        (Action<EffectParameter, bool[]>)       ((parameter, value) => parameter.SetValue(value)) },
       { typeof(int),         (Action<EffectParameter, int[]>)        ((parameter, value) => parameter.SetValue(value)) },
-#endif
       { typeof(Matrix),      (Action<EffectParameter, Matrix[]>)     ((parameter, value) => parameter.SetValue(value)) },
-#if !MONOGAME
       { typeof(Quaternion),  (Action<EffectParameter, Quaternion[]>) ((parameter, value) => parameter.SetValue(value)) },
-#endif
       //{ typeof(QuaternionF), (Action<EffectParameter, QuaternionF[]>)((parameter, value) => parameter.SetValue(value)) },
       { typeof(float),       (Action<EffectParameter, float[]>)      ((parameter, value) => parameter.SetValue(value)) },
       { typeof(Vector2),     (Action<EffectParameter, Vector2[]>)    ((parameter, value) => parameter.SetValue(value)) },
@@ -311,12 +303,10 @@ namespace DigitalRune.Graphics.Effects
     }
 
 
-#if !MONOGAME
     private static bool ValidateString(EffectParameter parameter)
     {
       return parameter.ParameterType == EffectParameterType.String;
     }
-#endif
 
 
     private static bool ValidateTexture(EffectParameter parameter)

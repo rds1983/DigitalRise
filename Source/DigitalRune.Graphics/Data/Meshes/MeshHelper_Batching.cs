@@ -109,10 +109,8 @@ namespace DigitalRune.Graphics
         {
           var mesh = meshNode.Mesh;
 
-#if ANIMATION
           if (mesh.Skeleton != null)
             throw new NotSupportedException("Cannot merge skinned meshes.");
-#endif
 
           foreach (var submesh in mesh.Submeshes)
           {
@@ -276,10 +274,8 @@ namespace DigitalRune.Graphics
     {
       if (mesh == null)
         throw new ArgumentNullException("mesh");
-#if ANIMATION
       if (mesh.Skeleton != null)
         throw new NotSupportedException("Cannot merge skinned meshes.");
-#endif
       if (poses == null)
         throw new ArgumentNullException("poses");
 
@@ -599,7 +595,6 @@ namespace DigitalRune.Graphics
 
       int vertexStride = vertexDeclaration.VertexStride;
 
-#if WINDOWS || WINDOWS_UWP || XBOX           // Some PCL profiles can use unsafe. Profile328 cannot.
       unsafe
       {
         fixed (byte* pBuffer = buffer)
@@ -641,56 +636,9 @@ namespace DigitalRune.Graphics
           }
         }
       }
-#else
-      using (var stream = new MemoryStream(buffer))
-      using (var reader = new BinaryReader(stream))
-      using (var writer = new BinaryWriter(stream))
-      {
-        foreach (var element in vertexDeclaration.GetVertexElements())
-        {
-          if (element.UsageIndex > 0)
-            continue;
-
-          var usage = element.VertexElementUsage;
-          if (usage != VertexElementUsage.Position && usage != VertexElementUsage.Normal
-              && usage != VertexElementUsage.Tangent && usage != VertexElementUsage.Binormal)
-          {
-            continue;
-          }
-
-          if (element.VertexElementFormat != VertexElementFormat.Vector3)
-            throw new NotSupportedException(
-              "Cannot merge meshes. Vertex elements with the semantic Position, Normal, Tangent or Binormal must use format Vector3.");
-
-          int offset = element.Offset;
-          if (usage == VertexElementUsage.Position)
-          {
-            for (int i = 0; i < vertexCount; i++)
-            {
-              int startIndex = (startVertex + i) * vertexStride + offset;
-              Vector3 vector3 = ReadVector3(reader, startIndex);
-              Vector3.Transform(ref vector3, ref world, out vector3);
-              WriteVector3(writer, vector3, startIndex);
-            }
-          }
-          else
-          {
-            for (int i = 0; i < vertexCount; i++)
-            {
-              int startIndex = (startVertex + i) * vertexStride + offset;
-              Vector3 vector3 = ReadVector3(reader, startIndex);
-              Vector3.TransformNormal(ref vector3, ref worldInverseTranspose, out vector3);
-              vector3.Normalize();
-              WriteVector3(writer, vector3, startIndex);
-            }
-          }
-        }
-      }
-#endif
     }
 
 
-#if !(WINDOWS || WINDOWS_UWP || XBOX)
     private static Vector3 ReadVector3(BinaryReader reader, int startIndex)
     {
       // Does endianness play a role? - It should not. DirectX vertex and index buffers are little 
@@ -714,7 +662,6 @@ namespace DigitalRune.Graphics
       writer.Write(vector.Y);
       writer.Write(vector.Z);
     }
-#endif
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Occluders")]

@@ -628,13 +628,7 @@ namespace DigitalRune.Graphics.Effects
                  && parameter.ParameterType == EffectParameterType.Single)
         {
           // Matrix value.
-#if !MONOGAME
           value = parameter.GetValueMatrix();
-#else
-          // MonoGame throws exception if following condition is not met.
-          if (parameter.RowCount == 4 || parameter.ColumnCount == 4)       
-            value = parameter.GetValueMatrix();
-#endif
         }
         else if (parameter.ParameterClass == EffectParameterClass.Object)
         {
@@ -657,7 +651,6 @@ namespace DigitalRune.Graphics.Effects
 
         if (parameter.ParameterClass == EffectParameterClass.Scalar)
         {
-#if !MONOGAME
           // Scalar value bindings.
           if (parameter.ParameterType == EffectParameterType.Bool)
             value = parameter.GetValueBooleanArray(length);
@@ -665,24 +658,19 @@ namespace DigitalRune.Graphics.Effects
             value = parameter.GetValueInt32Array(length);
           else if (parameter.ParameterType == EffectParameterType.Single)
             value = parameter.GetValueSingleArray(length);
-#endif
         }
         else if (parameter.ParameterClass == EffectParameterClass.Vector && parameter.ParameterType == EffectParameterType.Single)
         {
-#if !MONOGAME
           if (parameter.ColumnCount == 2 || parameter.RowCount == 2)
             value = parameter.GetValueVector2Array(length);
           else if (parameter.ColumnCount == 3 || parameter.RowCount == 3)
             value = parameter.GetValueVector3Array(length);
           else if (parameter.ColumnCount == 4 || parameter.RowCount == 4)
             value = parameter.GetValueVector4Array(length);
-#endif
         }
         else if (parameter.ParameterClass == EffectParameterClass.Matrix && parameter.ParameterType == EffectParameterType.Single)
         {
-#if !MONOGAME
           value = parameter.GetValueMatrixArray(length);
-#endif
         }
         else if (parameter.ParameterClass == EffectParameterClass.Object)
         {

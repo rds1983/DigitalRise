@@ -48,9 +48,6 @@ namespace DigitalRune.Graphics
   /// knows how to interpret the data.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   [StructLayout(LayoutKind.Sequential)]
   public struct InstanceData : IVertexType
   {

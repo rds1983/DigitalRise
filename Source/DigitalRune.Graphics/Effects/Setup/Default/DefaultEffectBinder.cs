@@ -109,9 +109,7 @@ namespace DigitalRune.Graphics.Effects
       lut.Add(DefaultEffectParameterSemantics.MorphWeight, (e, p, o) => new ConstParameterArrayBinding<float>(e, p, new float[p.Elements.Count]));
 
       lut = MatrixArrayBindings;
-#if ANIMATION
       lut.Add(DefaultEffectParameterSemantics.Bones, (e, p, o) => new SkeletonPoseParameterBinding(e, p));
-#endif
 
       lut = Vector2Bindings;
       //lut.Add(DefaultEffectParameterSemantics.RenderTargetSize, (e, p, o) => CreateDelegateParameterBinding<Vector2>(e, p, GetRenderTargetSize));

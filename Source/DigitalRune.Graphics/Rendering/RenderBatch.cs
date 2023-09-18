@@ -251,15 +251,6 @@ namespace DigitalRune.Graphics.Rendering
       {
         var graphicsDevice = _vertexBuffer.GraphicsDevice;
 
-#if XBOX   
-      // Required by Xbox 360:
-      if (_setDataOptions == SetDataOptions.Discard)
-      {
-        graphicsDevice.SetVertexBuffer(null);
-        graphicsDevice.Indices = null;
-      }
-#endif
-
         // Copy vertices to vertex buffer.
         if (_isVertexBufferDynamic)
         {
@@ -297,11 +288,7 @@ namespace DigitalRune.Graphics.Rendering
 
         graphicsDevice.SetVertexBuffer(_vertexBuffer);
         graphicsDevice.Indices = _indexBuffer;
-#if MONOGAME
-        graphicsDevice.DrawIndexedPrimitives(_primitiveType.Value, 0, _startIndex, numberOfPrimitives);
-#else
         graphicsDevice.DrawIndexedPrimitives(_primitiveType.Value, 0, _startVertex, numberOfVertices, _startIndex, numberOfPrimitives);
-#endif
 
         _setDataOptions = SetDataOptions.NoOverwrite;
       }

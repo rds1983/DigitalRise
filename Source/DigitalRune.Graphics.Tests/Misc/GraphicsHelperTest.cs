@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NUnit.Framework;
@@ -18,14 +17,12 @@ namespace DigitalRune.Graphics.Tests
     [SetUp]
     public void SetUp()
     {
-      var form = new Form();
       var parameters = new PresentationParameters
       {
         BackBufferWidth = 1280,
         BackBufferHeight = 720,
         BackBufferFormat = SurfaceFormat.Color,
         DepthStencilFormat = DepthFormat.Depth24Stencil8,
-        DeviceWindowHandle = form.Handle,
         PresentationInterval = PresentInterval.Immediate,
         IsFullScreen = false
       };

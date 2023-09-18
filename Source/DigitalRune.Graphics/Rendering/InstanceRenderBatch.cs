@@ -201,15 +201,6 @@ namespace DigitalRune.Graphics.Rendering
       int numberOfInstances = _nextInstance - _startInstance;
       if (numberOfInstances > 0)
       {
-#if XBOX
-        // Required by Xbox 360:
-        if (_setDataOptions == SetDataOptions.Discard)
-        {
-          graphicsDevice.SetVertexBuffer(null);
-          graphicsDevice.Indices = null;
-        }
-#endif
-
         var vertexBuffer = _submesh.VertexBuffer;
         var indexBuffer = _submesh.IndexBuffer;
         Debug.Assert(indexBuffer != null, "Hardware instancing failed: The submesh has no index buffer.");

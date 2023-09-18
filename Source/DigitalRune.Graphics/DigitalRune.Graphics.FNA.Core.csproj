@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DigitalRune.Graphics.FNA</PackageId>
+    <AssemblyName>DigitalRune.Graphics</AssemblyName>
+    <Description>DigitalRune.Graphics for FNA.Core</Description>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRune.Animation\DigitalRune.Animation.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune.Geometry\DigitalRune.Geometry.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune.Particles\DigitalRune.Particles.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

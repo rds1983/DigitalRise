@@ -53,12 +53,8 @@ namespace DigitalRune.Graphics.Effects
       if (_parameterShaderIndex == null)
         _parameterShaderIndex = effect.Parameters["ShaderIndex"];
 
-#if !MONOGAME
       _parameterShaderIndex.SetValue(Id);
       return effect.Techniques[0];
-#else
-      return effect.Techniques[Id];
-#endif
     }
   }
 }

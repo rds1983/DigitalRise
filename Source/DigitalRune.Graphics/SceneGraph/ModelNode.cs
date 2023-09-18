@@ -3,12 +3,9 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if ANIMATION
 using System.Collections.Generic;
 using System.Linq;
 using DigitalRune.Animation.Character;
-#endif
-
 
 namespace DigitalRune.Graphics.SceneGraph
 {
@@ -91,7 +88,6 @@ namespace DigitalRune.Graphics.SceneGraph
 
     internal void OnAssetLoaded(object sender, EventArgs eventArgs)
     {
-#if ANIMATION
       // Create MeshNode.SkeletonPoses for all mesh.Skeletons. 
       // (Skeletons can be shared and for each skeleton we create only one SkeletonPose.)
       Dictionary<Skeleton, SkeletonPose> skeletons = new Dictionary<Skeleton,SkeletonPose>();
@@ -111,7 +107,6 @@ namespace DigitalRune.Graphics.SceneGraph
           meshNode.SkeletonPose = skeletonPose;
         }
       }
-#endif
     }
     #endregion
 
@@ -142,7 +137,6 @@ namespace DigitalRune.Graphics.SceneGraph
       // Clone SceneNode properties.
       base.CloneCore(source);
 
-#if ANIMATION
       // Each clone of a MeshNode creates its own SkeletonPose clone, but
       // if the SkeletonPoses are shared in the source, then the clone
       // should also use shared SkeletonPoses.
@@ -175,7 +169,6 @@ namespace DigitalRune.Graphics.SceneGraph
           }
         }
       }
-#endif
     }
     #endregion
 

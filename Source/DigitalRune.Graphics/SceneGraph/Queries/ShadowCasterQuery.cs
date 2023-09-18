@@ -187,12 +187,8 @@ namespace DigitalRune.Graphics.SceneGraph
       }
       else
       {
-#if !WINDOWS_PHONE && !XBOX360
         return node.GetFlag(SceneNodeFlags.CastsShadows)
                && !(node is TerrainNode);      // Terrain node is only rendered into directional light shadow.
-#else
-        return node.GetFlag(SceneNodeFlags.CastsShadows);
-#endif
       }
     }
 

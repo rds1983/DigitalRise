@@ -555,9 +555,7 @@ namespace DigitalRune.Graphics.SceneGraph
         return 1;
 
       if (sceneNode is DecalNode
-#if PARTICLES
           || sceneNode is ParticleSystemNode
-#endif
           || sceneNode is BillboardNode
           || sceneNode is LensFlareNode
           || sceneNode is FogNode

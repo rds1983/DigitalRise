@@ -3,9 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRune.Graphics.SceneGraph;
-#if PARTICLES
 using DigitalRune.Particles;
-#endif
 
 
 namespace DigitalRune.Graphics

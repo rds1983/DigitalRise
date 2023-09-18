@@ -5,9 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-#if ANIMATION
 using DigitalRune.Animation.Character;
-#endif
 using DigitalRune.Graphics.Effects;
 
 
@@ -63,9 +61,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// Gets a collection of <see cref="MaterialInstance"/>s associated with the mesh.
     /// </summary>
     /// <value>A collection of <see cref="MaterialInstance"/>s associated with the mesh.</value>
-#if !PORTABLE && !NETFX_CORE
     [Category("Material")]
-#endif
     public MaterialInstanceCollection MaterialInstances
     {
       get { return _materialInstances; }
@@ -80,9 +76,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-#if !PORTABLE && !NETFX_CORE
     [Category("Graphics")]
-#endif
     public Mesh Mesh
     {
       get { return _mesh; }
@@ -106,11 +100,9 @@ namespace DigitalRune.Graphics.SceneGraph
 
           OnInitializeShape();
 
-#if ANIMATION
           // Reset skeleton pose if it has become invalid.
           if (_skeletonPose != null && _skeletonPose.Skeleton != value.Skeleton)
             _skeletonPose = null;
-#endif
 
           // Invalidate OccluderData.
           RenderData = null;
@@ -122,9 +114,7 @@ namespace DigitalRune.Graphics.SceneGraph
           // --> The MeshNode will be initialized in OnAssetLoaded().
           Debug.Assert(MaterialInstances == null);
           Debug.Assert(MorphWeights == null);
-#if ANIMATION
           Debug.Assert(SkeletonPose == null);
-#endif
           Debug.Assert(RenderData == null);
         }
       }
@@ -154,9 +144,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "MorphWeights")]
-#if !PORTABLE && !NETFX_CORE
     [Category("Animation")]
-#endif
     public MorphWeightCollection MorphWeights
     {
       get { return _morphWeights; }
@@ -189,7 +177,6 @@ namespace DigitalRune.Graphics.SceneGraph
     private MorphWeightCollection _morphWeights;
 
 
-#if ANIMATION
     /// <summary>
     /// Gets or sets the skeleton pose for mesh skinning.
     /// </summary>
@@ -198,9 +185,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// The <see cref="Skeleton"/> of the <see cref="SkeletonPose"/> is different from the 
     /// <see cref="Skeleton"/> of the <see cref="Mesh"/>.
     /// </exception>
-#if !PORTABLE && !NETFX_CORE
     [Category("Animation")]
-#endif
     public SkeletonPose SkeletonPose
     {
       get { return _skeletonPose; }
@@ -213,7 +198,7 @@ namespace DigitalRune.Graphics.SceneGraph
       }
     }
     private SkeletonPose _skeletonPose;
-#endif
+
     #endregion
 
 
@@ -347,10 +332,8 @@ namespace DigitalRune.Graphics.SceneGraph
       if (sourceTyped.MorphWeights != null)
         MorphWeights = sourceTyped.MorphWeights.Clone();
 
-#if ANIMATION
       if (sourceTyped.SkeletonPose != null)
         _skeletonPose = sourceTyped.SkeletonPose.Clone();
-#endif
     }
     #endregion
 

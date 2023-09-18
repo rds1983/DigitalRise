@@ -7,16 +7,8 @@ using System.Collections.Generic;
 using DigitalRune.Graphics.Effects;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-#if !NETFX_CORE && !WP7 && !WP8 && !XBOX && !PORTABLE
-using System.Windows.Forms;
-#endif
 using DigitalRune.Graphics.Interop;
 using Microsoft.Xna.Framework;
-
-#if PORTABLE || WINDOWS_UWP
-#pragma warning disable 1574  // Disable warning "XML comment has cref attribute that could not be resolved."
-#endif
-
 
 namespace DigitalRune.Graphics
 {
@@ -92,7 +84,7 @@ namespace DigitalRune.Graphics
     /// The game window form (<strong>System.Windows.Forms.Form</strong>). This property is set on 
     /// Windows (desktop) and is <see langword="null"/> on all other platforms. 
     /// </value>
-    object GameForm { get; }
+    IntPtr GameFormHandle { get; }
 
 
     /// <summary>

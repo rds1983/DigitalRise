@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using DigitalRune.Collections;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics;

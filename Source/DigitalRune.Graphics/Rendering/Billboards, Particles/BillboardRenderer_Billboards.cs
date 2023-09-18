@@ -4,20 +4,16 @@
 
 using DigitalRune.Collections;
 using Microsoft.Xna.Framework.Content;
-#if !WP7
 using DigitalRune.Graphics.PostProcessing;
-#endif
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-#if PARTICLES
 using System;
 using System.Collections.Generic;
 using DigitalRune.Geometry;
 using DigitalRune.Particles;
-#endif
 
 
 namespace DigitalRune.Graphics.Rendering
@@ -28,7 +24,6 @@ namespace DigitalRune.Graphics.Rendering
     #region Nested Types
     //--------------------------------------------------------------
 
-#if PARTICLES
     /// <summary>
     /// Stores the index of a particle and its distance for per-particle depth sorting.
     /// </summary>
@@ -58,7 +53,6 @@ namespace DigitalRune.Graphics.Rendering
         return 0;
       }
     }
-#endif
     #endregion
 
 
@@ -129,18 +123,14 @@ namespace DigitalRune.Graphics.Rendering
 
     private Texture2D _depthBufferHalf;
     private RenderTarget2D _offscreenBuffer;
-#if !WP7
     private UpsampleFilter _upsampleFilter;
-#endif
 
     // true, if rendering billboards or particles. (The value is set in 
     // BeginBillboards() and reset in EndBillboards().)
     private bool _billboardMode;
 
-#if PARTICLES
     // For depth-sorting of particles, created on demand.
     private ArrayList<ParticleIndex> _particleIndices;
-#endif
     #endregion
 
 
@@ -338,7 +328,6 @@ namespace DigitalRune.Graphics.Rendering
       // Reset texture to prevent "memory leak".
       SetTexture(null);
 
-#if !WP7
       if (EnableOffscreenRendering)
       {
         // ----- Combine off-screen buffer with scene.
@@ -370,7 +359,6 @@ namespace DigitalRune.Graphics.Rendering
         _depthBufferHalf = null;
         _offscreenBuffer = null;
       }
-#endif
     }
 
 
@@ -387,12 +375,10 @@ namespace DigitalRune.Graphics.Rendering
       {
         var node = jobs[index].Node;
 
-#if PARTICLES
         var particleSystemData = jobs[index].ParticleSystemData;
         if (particleSystemData != null)
           Draw((ParticleSystemNode)node, particleSystemData);
         else
-#endif
           Draw((BillboardNode)node);
 
         index++;
@@ -407,7 +393,6 @@ namespace DigitalRune.Graphics.Rendering
       var jobs = _jobs.Array;
       PackedTexture texture;
 
-#if PARTICLES
       var particleSystemData = jobs[index].ParticleSystemData;
       if (particleSystemData != null)
       {
@@ -415,7 +400,6 @@ namespace DigitalRune.Graphics.Rendering
         texture = particleSystemData.Texture;
       }
       else
-#endif
       {
         // Billboard
         var billboardNode = (BillboardNode)jobs[index].Node;
@@ -472,7 +456,6 @@ namespace DigitalRune.Graphics.Rendering
     }
 
 
-#if PARTICLES
     private void Draw(ParticleSystemNode node, ParticleSystemData particleSystemData)
     {
       // Scale and pose.
@@ -1016,7 +999,6 @@ namespace DigitalRune.Graphics.Rendering
       return texCoordU;
     }
     #endregion
-#endif
 
     #endregion
   }

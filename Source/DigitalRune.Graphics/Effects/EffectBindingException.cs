@@ -4,19 +4,13 @@
 
 using System;
 using Microsoft.Xna.Framework.Graphics;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX
 using System.Runtime.Serialization;
-#endif
-
 
 namespace DigitalRune.Graphics.Effects
 {
   /// <summary>
   /// Occurs if an effect binding fails.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public class EffectBindingException : GraphicsException
   {
     /// <summary>
@@ -132,7 +126,6 @@ namespace DigitalRune.Graphics.Effects
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="EffectBindingException"/> class with 
     /// serialized data.
@@ -183,6 +176,5 @@ namespace DigitalRune.Graphics.Effects
       info.AddValue("EffectName", EffectName);
       info.AddValue("EffectParameterName", EffectParameterName);
     }
-#endif
   }
 }

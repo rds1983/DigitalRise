@@ -15,9 +15,6 @@ namespace DigitalRune.Graphics.Rendering
   /// <summary>
   /// Vertex format used in "Line.fx".
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  //[Serializable] // HalfVector4 is not serializable!
-#endif
   [StructLayout(LayoutKind.Sequential)]
   internal struct StrokeVertex : IVertexType
   {

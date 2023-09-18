@@ -14,9 +14,6 @@ namespace DigitalRune.Graphics.Rendering
   /// <summary>
   /// Vertex format used in "Billboard.fx".
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   [StructLayout(LayoutKind.Sequential)]
   internal struct BillboardVertex : IVertexType
   {

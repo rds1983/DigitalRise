@@ -158,7 +158,6 @@ namespace DigitalRune.Graphics.Effects
       Technique = technique;
       Index = GetIndex(effect, technique);
 
-#if !MONOGAME
       // Check if there is an associated technique for hardware instancing.
       var annotation = technique.Annotations["InstancingTechnique"];
       if (annotation != null && annotation.ParameterType == EffectParameterType.String)
@@ -175,33 +174,6 @@ namespace DigitalRune.Graphics.Effects
           }
         }
       }
-#else
-      // Workaround: MonoGame does not support effect semantics and annotations.
-      if (technique.Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) == -1)
-      {
-        if (effect.Techniques.Count == 2
-            && effect.Techniques[1].Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) >= 0)
-        {
-          InstancingTechnique = effect.Techniques[1];
-        }
-
-        if (InstancingTechnique == null)
-        {
-          foreach (var otherTechnique in effect.Techniques)
-          {
-            if (technique == otherTechnique)
-              continue;
-
-            if (otherTechnique.Name.IndexOf(technique.Name, StringComparison.OrdinalIgnoreCase) >= 0
-                && otherTechnique.Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-              InstancingTechnique = otherTechnique;
-              break;
-            }
-          }
-        }
-      }
-#endif
     }
     #endregion
 

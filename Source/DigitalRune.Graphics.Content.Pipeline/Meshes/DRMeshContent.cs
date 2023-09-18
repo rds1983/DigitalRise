@@ -5,9 +5,7 @@
 using System.Collections.Generic;
 using DigitalRune.Geometry.Shapes;
 using Microsoft.Xna.Framework.Content;
-#if ANIMATION
 using DigitalRune.Animation.Character;
-#endif
 
 
 namespace DigitalRune.Graphics.Content.Pipeline

@@ -1,6 +1,6 @@
 ﻿using System;
+using Moq;
 using NUnit.Framework;
-using Rhino.Mocks;
 
 
 namespace DigitalRune.Graphics.Tests
@@ -27,11 +27,11 @@ namespace DigitalRune.Graphics.Tests
     [Test]
     public void Constructor()
     {
-      var graphicsServiceStub = MockRepository.GenerateStub<IGraphicsService>();
+      var graphicsServiceStub = new Mock<IGraphicsService>();
 
-      var graphicsScreen0 = new MyGraphicsScreen(graphicsServiceStub);
-      var graphicsScreen1 = new MyGraphicsScreen(graphicsServiceStub);
-      var graphicsScreen2 = new MyGraphicsScreen(graphicsServiceStub);
+      var graphicsScreen0 = new MyGraphicsScreen(graphicsServiceStub.Object);
+      var graphicsScreen1 = new MyGraphicsScreen(graphicsServiceStub.Object);
+      var graphicsScreen2 = new MyGraphicsScreen(graphicsServiceStub.Object);
       GraphicsScreenCollection graphicsScreenCollection = new GraphicsScreenCollection 
       { 
         graphicsScreen0, 

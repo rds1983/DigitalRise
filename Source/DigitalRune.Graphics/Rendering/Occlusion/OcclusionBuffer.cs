@@ -2,10 +2,10 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !WP7
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.SceneGraph;
@@ -558,20 +558,6 @@ namespace DigitalRune.Graphics.Rendering
 
       _shadowCasters = new List<SceneNode>();
 
-/*
-      // By default, enable multithreading on multi-core systems.
-#if WP7 || UNITY
-      // Cannot access Environment.ProcessorCount in phone app. (Security issue.)
-      EnableMultithreading = false;
-#else
-      // Enable multithreading by default if the current system has multiple processors.
-      EnableMultithreading = Environment.ProcessorCount > 1;
-
-      // Multithreading works but Parallel.For of Xamarin.Android/iOS is very inefficient.
-      if (GlobalSettings.PlatformID == PlatformID.Android || GlobalSettings.PlatformID == PlatformID.iOS)
-        EnableMultithreading = false;
-#endif
-*/
       // Disable multithreading by default. Multithreading causes massive lags in the
       // XNA version, but the MonoGame version is not affected!?
       EnableMultithreading = false;
@@ -774,7 +760,7 @@ namespace DigitalRune.Graphics.Rendering
       if (_occlusionProxies.Count > 0)
       {
         if (EnableMultithreading)
-          _updateTask = Parallel.Start(_updateOcclusionProxies);
+          _updateTask = Task.Run(_updateOcclusionProxies);
         else
           UpdateOcclusionProxies();
       }
@@ -1266,11 +1252,7 @@ namespace DigitalRune.Graphics.Rendering
       _effect.CurrentTechnique = _techniqueQuery;
       _techniqueQuery.Passes[0].Apply();
 
-#if MONOGAME
-      var primitiveType = PrimitiveType.PointList;
-#else
       var primitiveType = PrimitiveType.LineStrip;
-#endif
 
       graphicsDevice.DrawUserPrimitives(primitiveType, _queryData, 0, actualNumberOfNodes);
 
@@ -1631,4 +1613,3 @@ namespace DigitalRune.Graphics.Rendering
     #endregion
   }
 }
-#endif

@@ -4,10 +4,7 @@
 
 using System;
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX
 using System.Runtime.Serialization;
-#endif
-
 
 namespace DigitalRune.Windows
 {

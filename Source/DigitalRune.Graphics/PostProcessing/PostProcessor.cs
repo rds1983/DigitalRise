@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !WP7
 using System;
 using System.Diagnostics;
 using DigitalRune.Graphics.SceneGraph;
@@ -281,10 +280,8 @@ namespace DigitalRune.Graphics.PostProcessing
       savedRenderState.Restore();
 
       // Reset the texture stages. If a floating point texture is set, we get exceptions
-        // when a sampler with bilinear filtering is set.
-#if !MONOGAME
+      // when a sampler with bilinear filtering is set.
       graphicsDevice.ResetTextures();
-#endif
     }
 
 
@@ -303,4 +300,3 @@ namespace DigitalRune.Graphics.PostProcessing
     #endregion
   }
 }
-#endif

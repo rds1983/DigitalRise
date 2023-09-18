@@ -41,9 +41,6 @@ namespace DigitalRune.Game.UI.Rendering
   /// the parent element has a non-uniform scaling, the child element won't be rendered correctly.)
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   public struct RenderTransform : IEquatable<RenderTransform>
   {
     //--------------------------------------------------------------

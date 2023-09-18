@@ -17,9 +17,7 @@ namespace DigitalRune.Graphics.Effects
   internal sealed class SkinnedEffectTechniqueBinding : EffectTechniqueBinding
   {
     private EffectParameter _parameterEmissive;
-#if !MONOGAME
     private EffectParameter _parameterShaderIndex;
-#endif
     private Vector3 _effectiveEmissive;
 
 
@@ -97,19 +95,13 @@ namespace DigitalRune.Graphics.Effects
       if (_parameterEmissive == null)
       {
         _parameterEmissive = effect.Parameters["EmissiveColor"];
-#if !MONOGAME
         _parameterShaderIndex = effect.Parameters["ShaderIndex"];
-#endif
       }
 
       _parameterEmissive.SetValue(_effectiveEmissive);
 
-#if !MONOGAME
       _parameterShaderIndex.SetValue(Id);
       return effect.Techniques[0];
-#else
-      return effect.Techniques[Id];
-#endif
     }
   }
 }

@@ -15,9 +15,6 @@ namespace DigitalRune.Graphics
   /// Describes a custom vertex format structure that contains position, normal vector, color and
   /// texture coordinates.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !PORTABLE
-  [Serializable]
-#endif
   [StructLayout(LayoutKind.Sequential)]
   public struct VertexPositionNormalColorTexture : IVertexType
   {

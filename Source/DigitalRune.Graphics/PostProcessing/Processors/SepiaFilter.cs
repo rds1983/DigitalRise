@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !WP7
 using System;
 using DigitalRune.Mathematics;
 using Microsoft.Xna.Framework;
@@ -89,4 +88,3 @@ namespace DigitalRune.Graphics.PostProcessing
     }
   }
 }
-#endif

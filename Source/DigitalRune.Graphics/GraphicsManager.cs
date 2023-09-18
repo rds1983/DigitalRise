@@ -12,11 +12,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-#if PORTABLE || WINDOWS_UWP
-#pragma warning disable 1574  // Disable warning "XML comment has cref attribute that could not be resolved."
-#endif
-
-
 namespace DigitalRune.Graphics
 {
   /// <summary>
@@ -113,7 +108,7 @@ namespace DigitalRune.Graphics
 
 
     /// <inheritdoc/>
-    public object GameForm { get; set; }
+    public IntPtr GameFormHandle { get; set; } = IntPtr.Zero;
 
 
     /// <inheritdoc/>
@@ -250,7 +245,9 @@ namespace DigitalRune.Graphics
       Screens = new GraphicsScreenCollection();
 
       if (gameWindow != null)
-        GameForm = PlatformHelper.GetForm(gameWindow.Handle);
+      {
+        GameFormHandle = gameWindow.Handle;
+      }
 
       PresentationTargets = new PresentationTargetCollection();
       PresentationTargets.CollectionChanged += OnPresentationTargetsChanged;
@@ -260,9 +257,7 @@ namespace DigitalRune.Graphics
         new StockEffectInterpreter(),
         new DefaultEffectInterpreter(),
         new SceneEffectInterpreter(),
-#if !WINDOWS_PHONE && !XBOX360
         new TerrainEffectInterpreter(),
-#endif
         new Dxsas08EffectInterpreter(),
       };
       EffectBinders = new EffectBinderCollection
@@ -270,9 +265,7 @@ namespace DigitalRune.Graphics
         new StockEffectBinder(),
         new DefaultEffectBinder(this),
         new SceneEffectBinder(),
-#if !WINDOWS_PHONE && !XBOX360
         new TerrainEffectBinder(),
-#endif
       };
 
       Data = new Dictionary<string, object>();
@@ -527,16 +520,12 @@ namespace DigitalRune.Graphics
     /// currently hidden. If set to <see langword="false"/>, the rendering is skipped if the game
     /// window is currently not visible.
     /// </param>
-    /// <returns>
-    /// <see langword="true"/> if the graphics screens were rendered; <see langword="false"/> if 
-    /// rendering was skipped because the game window is currently not visible.
-    /// </returns>
     /// <remarks>
     /// The graphics screens are rendered to the back buffer using the viewport which is currently
     /// set in the graphics device.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    public bool Render(bool forceRendering)
+    public void Render()
     {
       ThrowIfDisposed();
 
@@ -551,14 +540,7 @@ namespace DigitalRune.Graphics
 
       try
       {
-        // Draw scene for game window.
-        if (forceRendering || GameForm == null || PlatformHelper.IsFormVisible(GameForm))
-        {
-          RenderScreens(Screens);
-          return true;
-        }
-
-        return false;
+        RenderScreens(Screens);
       }
       finally
       {
@@ -681,12 +663,8 @@ namespace DigitalRune.Graphics
       Rectangle sourceRectangle = new Rectangle(0, 0, width, height);
       try
       {
-#if !MONOGAME
         GraphicsDevice.Present(sourceRectangle, null, presentationTarget.Handle);
         return true;
-#else
-        throw new NotImplementedException("MonoGame builds support only D3DImagePresentationTargets.");
-#endif
       }
       // ReSharper disable EmptyGeneralCatchClause
       catch

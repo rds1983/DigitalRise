@@ -634,11 +634,7 @@ namespace DigitalRune.Graphics.Rendering
               setBoxBuffers = false;
             }
 
-#if MONOGAME
-            graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, NumberOfPrimitives);
-#else
             graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, NumberOfVertices, 0, NumberOfPrimitives);
-#endif
           }
           else
           {

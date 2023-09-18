@@ -43,9 +43,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// The AABB is automatically determined based on <see cref="Shape"/> and 
     /// <see cref="PoseWorld"/>.
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Aabb Aabb
     {
       get
@@ -92,9 +90,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// <value>
     /// The total effective scale (which incorporates the scale factors of parent scene nodes).
     /// </value>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Vector3F ScaleWorld
     {
       get
@@ -117,9 +113,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// Changing this property raises the <see cref="IGeometricObject.PoseChanged"/> event.
     /// </para>
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Pose PoseWorld
     {
       get
@@ -161,9 +155,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// Changing this property raises the <see cref="IGeometricObject.ShapeChanged"/> event.
     /// </para>
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Vector3F ScaleLocal
     {
       get { return _scaleLocal; }
@@ -189,9 +181,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// Changing this property raises the <see cref="IGeometricObject.PoseChanged"/> event.
     /// </para>
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Pose PoseLocal
     {
       get { return _poseLocal; }
@@ -229,9 +219,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// application logic whenever the transformation of the scene node is changed.
     /// </para>
     /// </remarks>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Vector3F? LastScaleWorld
     {
       get { return GetFlag(SceneNodeFlags.HasLastScaleWorld) ? _lastScaleWorld : (Vector3F?)null; }
@@ -258,9 +246,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// <see cref="PoseWorld"/> of the last frame in world space. Can be <see langword="null"/>.
     /// </value>
     /// <inheritdoc cref="LastScaleWorld"/>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Pose? LastPoseWorld
     {
       get { return GetFlag(SceneNodeFlags.HasLastPoseWorld) ? _lastPoseWorld : (Pose?)null; }
@@ -323,9 +309,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-#if !PORTABLE && !NETFX_CORE
     [Category("Geometry")]
-#endif
     public Shape Shape
     {
       get { return _shape; }
