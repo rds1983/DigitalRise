@@ -311,7 +311,7 @@ namespace DigitalRune.Game.UI.Controls
     /// The character that is used instead of normal character if <see cref="IsPassword"/> is set.
     /// </value>
     /// <remarks>
-    /// Note: The password character must be included in the used SpriteFont (see 
+    /// Note: The password character must be included in the used SpriteFontBase (see 
     /// <see cref="UIControl.Font"/>)!
     /// </remarks>
     public char PasswordCharacter

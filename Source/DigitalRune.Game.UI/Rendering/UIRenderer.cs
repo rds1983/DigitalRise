@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -62,7 +63,7 @@ namespace DigitalRune.Game.UI.Rendering
     };
 
     private object _defaultCursor;
-    private SpriteFont _defaultFont;
+    private SpriteFontBase _defaultFont;
     private Texture2D _defaultTexture;
     private bool _batchIsActive;
     #endregion
@@ -425,7 +426,7 @@ namespace DigitalRune.Game.UI.Rendering
 
 
     /// <inheritdoc/>
-    public SpriteFont GetFont(string name)
+    public SpriteFontBase GetFont(string name)
     {
       if (string.IsNullOrEmpty(name))
         return _defaultFont;

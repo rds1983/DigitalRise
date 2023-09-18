@@ -552,7 +552,7 @@ namespace DigitalRune.Game.UI.Rendering
               SpriteBatch,
               font,
               console.VisualLines[i],
-              new Vector2F(contentBounds.X, contentBounds.Y + i * font.LineSpacing),
+              new Vector2F(contentBounds.X, contentBounds.Y + i * font.LineHeight),
               foreground);
         }
 
@@ -566,9 +566,9 @@ namespace DigitalRune.Game.UI.Rendering
           Vector4F padding = console.Padding;
           RectangleF caretRectangle = new RectangleF(
             console.ActualX + padding.X + console.VisualCaretX * charWidth - 1,  // minus 1 pixel
-            console.ActualY + padding.Y + console.VisualCaretY * font.LineSpacing - 1,
+            console.ActualY + padding.Y + console.VisualCaretY * font.LineHeight - 1,
             1,
-            font.LineSpacing + 2);
+            font.LineHeight + 2);
 
           context.RenderTransform.Draw(SpriteBatch, WhiteTexture, caretRectangle, null, foreground);
         }
@@ -641,7 +641,7 @@ namespace DigitalRune.Game.UI.Rendering
             && IsCaretVisible(textBox.VisualCaret))
         {
           // Render caret.
-          RectangleF caret = new RectangleF(textBox.VisualCaret.X, textBox.VisualCaret.Y, 2, font.LineSpacing);
+          RectangleF caret = new RectangleF(textBox.VisualCaret.X, textBox.VisualCaret.Y, 2, font.LineHeight);
           context.RenderTransform.Draw(SpriteBatch, WhiteTexture, caret, null, foreground);
         }
 

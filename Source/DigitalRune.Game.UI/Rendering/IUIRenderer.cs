@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRune.Game.UI.Controls;
+using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -101,7 +102,7 @@ namespace DigitalRune.Game.UI.Rendering
     /// font, e.g. "Console". Can be <see langword="null"/> to get the default font.
     /// </param>
     /// <returns>The font.</returns>
-    SpriteFont GetFont(string name);
+    SpriteFontBase GetFont(string name);
 
 
     /// <summary>

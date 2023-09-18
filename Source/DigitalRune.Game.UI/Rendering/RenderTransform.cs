@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Text;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -641,7 +642,7 @@ namespace DigitalRune.Game.UI.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="spriteBatch"/> or <paramref name="spriteFont"/> is <see langword="null"/>.
     /// </exception>
-    public void DrawString(SpriteBatch spriteBatch, SpriteFont spriteFont, string text, Vector2F position, Color color)
+    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, string text, Vector2F position, Color color)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -661,7 +662,7 @@ namespace DigitalRune.Game.UI.Rendering
         origin.Y = (int)origin.Y;
       }
 
-      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, Rotation, (Vector2)origin, (Vector2)Scale, SpriteEffects.None, 0.0f);
+      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin);
     }
 
 
@@ -676,7 +677,7 @@ namespace DigitalRune.Game.UI.Rendering
     /// <param name="color">
     /// The color to tint a sprite. Use white for full color with no tinting.
     /// </param>
-    public void DrawString(SpriteBatch spriteBatch, SpriteFont spriteFont, StringBuilder text,
+    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, StringBuilder text,
                            Vector2F position, Color color)
     {
       if (spriteBatch == null)
@@ -697,7 +698,7 @@ namespace DigitalRune.Game.UI.Rendering
         origin.Y = (int)origin.Y;
       }
 
-      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, Rotation, (Vector2)origin, (Vector2)Scale, SpriteEffects.None, 0.0f);
+      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin);
     }
 
 

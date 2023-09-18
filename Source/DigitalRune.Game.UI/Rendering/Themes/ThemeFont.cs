@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
+using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -33,6 +34,6 @@ namespace DigitalRune.Game.UI.Rendering
     /// Gets or sets the font.
     /// </summary>
     /// <value>The font.</value>
-    public SpriteFont Font { get; set; }
+    public SpriteFontBase Font { get; set; }
   }
 }

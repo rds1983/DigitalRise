@@ -10,7 +10,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRune.Text;
-
+using FontStashSharp;
 
 namespace DigitalRune.Game.UI.Controls
 {
@@ -117,7 +117,7 @@ namespace DigitalRune.Game.UI.Controls
       // Limit height if MaxLines is set.
       if (!hasHeight)
       {
-        float maxHeight = MaxLines * font.LineSpacing;
+        float maxHeight = MaxLines * font.LineHeight;
         if (contentSize.Y > maxHeight)
           contentSize.Y = maxHeight;
       }
@@ -152,13 +152,13 @@ namespace DigitalRune.Game.UI.Controls
         // Automatic height.
         // Don't use font.MeasureString(VisualText).Y. The measured height may vary
         // by some pixels depending on the content. Instead calculate height with
-        // font.LineSpacing, which is constant.
+        // font.LineHeight, which is constant.
         int numberOfLines = (IsMultiline) ? _lineStarts.Count : 1;
-        float textHeight = numberOfLines * font.LineSpacing;
+        float textHeight = numberOfLines * font.LineHeight;
         desiredSize.Y = Math.Min(contentSize.Y, textHeight);
 
         // Ensure minimum height if MinLines is set.
-        float minHeight = MinLines * font.LineSpacing;
+        float minHeight = MinLines * font.LineHeight;
         if (desiredSize.Y < minHeight && minHeight <= contentSize.Y)
           desiredSize.Y = minHeight;
       }
@@ -239,7 +239,7 @@ namespace DigitalRune.Game.UI.Controls
       // The scroll offset depends on actual size of control. Make sure scroll offset
       // is within the limits.
       int numberOfLines = (IsMultiline) ? _lineStarts.Count : 1;
-      float textHeight = numberOfLines * font.LineSpacing;
+      float textHeight = numberOfLines * font.LineHeight;
       float maximum = Math.Max(0, textHeight - contentBounds.Height);
       if (IsMultiline)
       {
@@ -266,7 +266,7 @@ namespace DigitalRune.Game.UI.Controls
         _verticalScrollBar.Minimum = 0;
         _verticalScrollBar.Maximum = maximum;
         _verticalScrollBar.ViewportSize = Math.Min(1, contentBounds.Height / textHeight);
-        _verticalScrollBar.SmallChange = font.LineSpacing;
+        _verticalScrollBar.SmallChange = font.LineHeight;
         _verticalScrollBar.LargeChange = contentBounds.Height;
         _verticalScrollBar.Value = VisualOffset;
         _verticalScrollBar.Arrange(
@@ -288,7 +288,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <see langword="true"/> if the <see cref="VisualText"/> has been updated; otherwise,
     /// <see langword="false"/> when the <see cref="VisualText"/> still needs to be updated.
     /// </returns>
-    private bool UpdateScrollBarVisibility(string text, Vector2F contentSize, SpriteFont font)
+    private bool UpdateScrollBarVisibility(string text, Vector2F contentSize, SpriteFontBase font)
     {
       bool visualTextUpdated = false;
       if (_verticalScrollBar != null)
@@ -301,7 +301,7 @@ namespace DigitalRune.Game.UI.Controls
           {
             // Scroll bar is visible if the text is too large for the available space.
             UpdateVisualText(text, contentSize.X, font);
-            float textHeight = _lineStarts.Count * font.LineSpacing;
+            float textHeight = _lineStarts.Count * font.LineHeight;
             bool isScrollBarVisible = (textHeight > contentSize.Y);
             _verticalScrollBar.IsVisible = isScrollBarVisible;
 
@@ -335,7 +335,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <param name="text">The text.</param>
     /// <param name="textWidth">The available width.</param>
     /// <param name="font">The font.</param>
-    private void UpdateVisualText(string text, float textWidth, SpriteFont font)
+    private void UpdateVisualText(string text, float textWidth, SpriteFontBase font)
     {
       VisualText.Clear();
       WrapText(textWidth, font);
@@ -369,7 +369,7 @@ namespace DigitalRune.Game.UI.Controls
     /// </summary>
     /// <param name="maxWidth">The max width in pixels.</param>
     /// <param name="font">The font.</param>
-    private void WrapText(float maxWidth, SpriteFont font)
+    private void WrapText(float maxWidth, SpriteFontBase font)
     {
       if (!IsMultiline)
       {
@@ -472,7 +472,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <param name="text">The text.</param>
     /// <param name="textBounds">The text bounds.</param>
     /// <param name="font">The font.</param>
-    private void UpdateVisualCaret(string text, RectangleF textBounds, SpriteFont font)
+    private void UpdateVisualCaret(string text, RectangleF textBounds, SpriteFontBase font)
     {
       if (IsReadOnly)
       {
@@ -509,10 +509,10 @@ namespace DigitalRune.Game.UI.Controls
             VisualOffset -= textBounds.Y - caret.Y;
             caret.Y = textBounds.Y;
           }
-          else if (caret.Y + font.LineSpacing > textBounds.Bottom)
+          else if (caret.Y + font.LineHeight > textBounds.Bottom)
           {
-            VisualOffset += caret.Y - textBounds.Bottom + font.LineSpacing;
-            caret.Y = textBounds.Bottom - font.LineSpacing;
+            VisualOffset += caret.Y - textBounds.Bottom + font.LineHeight;
+            caret.Y = textBounds.Bottom - font.LineHeight;
           }
         }
       }
@@ -527,7 +527,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <param name="text">The text.</param>
     /// <param name="textBounds">The text bounds.</param>
     /// <param name="font">The font.</param>
-    private void UpdateSelectionBounds(string text, RectangleF textBounds, SpriteFont font)
+    private void UpdateSelectionBounds(string text, RectangleF textBounds, SpriteFontBase font)
     {
       VisualSelectionBounds.Clear();
 
@@ -563,7 +563,7 @@ namespace DigitalRune.Game.UI.Controls
       if (startLine == endLine)
       {
         // ----- Single-line selection.
-        VisualSelectionBounds.Add(new RectangleF(selectionStartPosition.X, selectionStartPosition.Y, selectionEndPosition.X - selectionStartPosition.X, font.LineSpacing));
+        VisualSelectionBounds.Add(new RectangleF(selectionStartPosition.X, selectionStartPosition.Y, selectionEndPosition.X - selectionStartPosition.X, font.LineHeight));
       }
       else
       {
@@ -574,7 +574,7 @@ namespace DigitalRune.Game.UI.Controls
         // First line.
         lineEndIndex = Math.Abs(_lineStarts[startLine + 1]) - 1;
         lineEndPosition = GetPosition(lineEndIndex, startLine, text, textBounds, font);
-        VisualSelectionBounds.Add(new RectangleF(selectionStartPosition.X, selectionStartPosition.Y, lineEndPosition.X - selectionStartPosition.X, font.LineSpacing));
+        VisualSelectionBounds.Add(new RectangleF(selectionStartPosition.X, selectionStartPosition.Y, lineEndPosition.X - selectionStartPosition.X, font.LineHeight));
 
         // Intermediate lines.
         for (int line = startLine + 1; line < endLine; line++)
@@ -583,13 +583,13 @@ namespace DigitalRune.Game.UI.Controls
           lineEndIndex = Math.Abs(_lineStarts[line + 1]) - 1;
           lineStartPosition = GetPosition(lineStartIndex, line, text, textBounds, font);
           lineEndPosition = GetPosition(lineEndIndex, line, text, textBounds, font);
-          VisualSelectionBounds.Add(new RectangleF(lineStartPosition.X, lineStartPosition.Y, lineEndPosition.X - lineStartPosition.X, font.LineSpacing));
+          VisualSelectionBounds.Add(new RectangleF(lineStartPosition.X, lineStartPosition.Y, lineEndPosition.X - lineStartPosition.X, font.LineHeight));
         }
 
         // Last line.
         lineStartIndex = lineEndIndex + 1;
         lineStartPosition = GetPosition(lineStartIndex, endLine, text, textBounds, font);
-        VisualSelectionBounds.Add(new RectangleF(lineStartPosition.X, lineStartPosition.Y, selectionEndPosition.X - lineStartPosition.X, font.LineSpacing));
+        VisualSelectionBounds.Add(new RectangleF(lineStartPosition.X, lineStartPosition.Y, selectionEndPosition.X - lineStartPosition.X, font.LineHeight));
       }
     }
 
@@ -625,7 +625,7 @@ namespace DigitalRune.Game.UI.Controls
       // ----- Multi-line
       // Find line number.
       float textY = VisualClip.Y - VisualOffset;
-      int line = (int)(position.Y - textY) / font.LineSpacing;
+      int line = (int)(position.Y - textY) / font.LineHeight;
       if (line < 0)
         return 0;
       if (line >= _lineStarts.Count)
@@ -693,7 +693,7 @@ namespace DigitalRune.Game.UI.Controls
     /// <param name="textBounds">The text bounds.</param>
     /// <param name="font">The font.</param>
     /// <returns>The upper, left corner of the character</returns>
-    private Vector2F GetPosition(int index, string text, RectangleF textBounds, SpriteFont font)
+    private Vector2F GetPosition(int index, string text, RectangleF textBounds, SpriteFontBase font)
     {
       // Find line number using _lineStarts.
       int line = GetLine(index);
@@ -704,12 +704,12 @@ namespace DigitalRune.Game.UI.Controls
 
     // Same as GetPosition() above except that line number is already known. 
     // (Avoids recomputation of line number.)
-    private Vector2F GetPosition(int index, int line, string text, RectangleF textBounds, SpriteFont font)
+    private Vector2F GetPosition(int index, int line, string text, RectangleF textBounds, SpriteFontBase font)
     {
       Debug.Assert(line == GetLine(index), "The line does not contain the given character index.");
 
       int lineStartIndex = (line == 0) ? 0 : Math.Abs(_lineStarts[line]);
-      float y = textBounds.Y + line * font.LineSpacing;
+      float y = textBounds.Y + line * font.LineHeight;
 
       // Find column using sprite font.
       string textBeforeCaret = text.Substring(lineStartIndex, index - lineStartIndex);

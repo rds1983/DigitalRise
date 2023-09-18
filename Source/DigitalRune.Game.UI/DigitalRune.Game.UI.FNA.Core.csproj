@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Game.Input\DigitalRune.Game.Input.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Game\DigitalRune.Game.csproj" />
     <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.FNA.Core.csproj" />

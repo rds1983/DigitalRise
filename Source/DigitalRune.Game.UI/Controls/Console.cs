@@ -880,7 +880,7 @@ namespace DigitalRune.Game.UI.Controls
 
         // The number of visual rows and columns that fit into the console.
         Vector4F padding = Padding;
-        _numberOfLines = (int)((size.Y - padding.Y - padding.W) / font.LineSpacing);
+        _numberOfLines = (int)((size.Y - padding.Y - padding.W) / font.LineHeight);
         _numberOfColumns = (int)((size.X - padding.X - padding.Z) / _charWidth);
 
         // Wrap text lines.

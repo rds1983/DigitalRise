@@ -179,7 +179,7 @@ namespace DigitalRune.Game.UI.Controls
 
       var screen = Screen;
       var font = screen.Renderer.GetFont(Font);
-      int lineHeight = font.LineSpacing;
+      int lineHeight = font.LineHeight;
       CaretIndex = GetIndex(VisualCaret - new Vector2F(0, lineHeight), screen);
     }
 
@@ -194,7 +194,7 @@ namespace DigitalRune.Game.UI.Controls
 
       var screen = Screen;
       var font = screen.Renderer.GetFont(Font);
-      int lineHeight = font.LineSpacing;
+      int lineHeight = font.LineHeight;
       CaretIndex = GetIndex(VisualCaret + new Vector2F(0, lineHeight), screen);
     }
 

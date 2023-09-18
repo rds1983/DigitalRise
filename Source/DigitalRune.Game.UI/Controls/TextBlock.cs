@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Text;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
+using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -273,7 +274,7 @@ namespace DigitalRune.Game.UI.Controls
 
       // Note: We can compute line heights without font.MeasureString(). But we cannot compute 
       // line widths without font.MeasureString() because we do not have kerning information.
-      int lineHeight = font.LineSpacing;
+      int lineHeight = font.LineHeight;
       Debug.Assert(lineHeight <= contentSize.Y, "At least one line must fit into content");
       float currentHeight = lineHeight;
 
@@ -373,7 +374,7 @@ namespace DigitalRune.Game.UI.Controls
     }
 
 
-    private static void TrimText(StringBuilder text, SpriteFont font, float maxWidth)
+    private static void TrimText(StringBuilder text, SpriteFontBase font, float maxWidth)
     {
       // Remove last character because we know that we have to trim at least 1 but probably more.
       text.Remove(text.Length - 1, 1);
