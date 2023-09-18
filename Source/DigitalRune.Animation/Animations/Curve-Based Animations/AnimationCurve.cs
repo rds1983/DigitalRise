@@ -6,9 +6,6 @@ using System;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Interpolation;
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Animation

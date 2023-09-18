@@ -6,9 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-#if NETFX_CORE || NET45
-using System.Reflection;
-#endif
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;

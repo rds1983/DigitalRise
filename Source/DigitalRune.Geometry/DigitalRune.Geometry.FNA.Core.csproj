@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>DigitalRune.Mathematics.FNA</PackageId>
-    <AssemblyName>DigitalRune.Mathematics</AssemblyName>
-    <Description>DigitalRune.Mathematics for FNA.Core</Description>
+    <PackageId>DigitalRune.Geometry.FNA</PackageId>
+    <AssemblyName>DigitalRune.Geometry</AssemblyName>
+    <Description>DigitalRune.Geometry for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
   </ItemGroup>
 </Project>

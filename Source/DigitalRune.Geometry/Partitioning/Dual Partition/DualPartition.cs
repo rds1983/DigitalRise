@@ -29,9 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if PORTABLE || WINDOWS
 using System.Dynamic;
-#endif
 using DigitalRune.Collections;
 using DigitalRune.Geometry.Collisions;
 using DigitalRune.Geometry.Shapes;
@@ -131,7 +129,6 @@ namespace DigitalRune.Geometry.Partitioning
     private IBroadPhase<T> _broadPhase;
 
 
-#if PORTABLE || WINDOWS
     /// <exclude/>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
@@ -151,7 +148,7 @@ namespace DigitalRune.Geometry.Partitioning
         return internals;
       }
     }
-#endif
+
     #endregion
 
 

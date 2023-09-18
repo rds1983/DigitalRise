@@ -4,9 +4,6 @@
 
 using DigitalRune.Mathematics.Statistics;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Particles.Effectors

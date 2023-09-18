@@ -176,7 +176,6 @@ namespace DigitalRune.Geometry.Shapes
     #region Methods
     //--------------------------------------------------------------
 
-#if XNA || MONOGAME
     /// <summary>
     /// Sets the spatial partition. (For use by the content pipeline only.)
     /// </summary>
@@ -212,7 +211,6 @@ namespace DigitalRune.Geometry.Shapes
         }
       }
     }
-#endif
 
 
     #region ----- Cloning -----

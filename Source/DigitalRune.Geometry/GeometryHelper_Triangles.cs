@@ -133,7 +133,6 @@ namespace DigitalRune.Geometry
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    [CLSCompliant(false)]
     public static void GetBarycentricFromPoint(ref Triangle triangle, ref Vector3F point, out float u, out float v, out float w)
     {
       Vector3F v0 = triangle.Vertex0;
@@ -337,7 +336,6 @@ namespace DigitalRune.Geometry
     /// </summary>
     /// <inheritdoc cref="IsOver(Triangle, Vector3F)"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-    [CLSCompliant(false)]
     public static bool IsOver(ref Triangle triangle, ref Vector3F point)
     {
       float u, v, w;

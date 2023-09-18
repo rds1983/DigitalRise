@@ -14,9 +14,6 @@ using DigitalRune.Linq;
 using DigitalRune.Mathematics;
 using DigitalRune.Threading;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Particles

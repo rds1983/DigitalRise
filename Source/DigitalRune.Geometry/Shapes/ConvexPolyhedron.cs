@@ -11,12 +11,8 @@ using System.Linq;
 using System.Xml.Serialization;
 using DigitalRune.Geometry.Meshes;
 using DigitalRune.Mathematics.Algebra;
-#if !PORTABLE
 using System.ComponentModel;
-#endif
-#if PORTABLE || WINDOWS
 using System.Dynamic;
-#endif
 
 
 namespace DigitalRune.Geometry.Shapes
@@ -263,11 +259,8 @@ namespace DigitalRune.Geometry.Shapes
     private VertexAdjacency _vertexAdjacency;
 
 
-#if PORTABLE || WINDOWS
     /// <exclude/>
-#if !PORTABLE
     [Browsable(false)]
-#endif
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
     {
@@ -286,7 +279,7 @@ namespace DigitalRune.Geometry.Shapes
         return internals;
       }
     }
-#endif
+
     #endregion
 
 

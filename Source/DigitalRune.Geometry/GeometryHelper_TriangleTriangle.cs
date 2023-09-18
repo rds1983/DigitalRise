@@ -249,7 +249,6 @@ namespace DigitalRune.Geometry
     /// <see langword="true" /> if the specified triangles intersect;
     /// otherwise, <see langword="false" />.
     /// </returns>
-    [CLSCompliant(false)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public static bool HaveContact(ref Triangle triangle0, ref Triangle triangle1)

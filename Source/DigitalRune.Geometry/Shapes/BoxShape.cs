@@ -8,10 +8,6 @@ using System.Xml.Serialization;
 using DigitalRune.Geometry.Meshes;
 using DigitalRune.Mathematics.Algebra;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
-
 
 namespace DigitalRune.Geometry.Shapes
 {

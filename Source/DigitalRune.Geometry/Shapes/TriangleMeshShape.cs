@@ -13,12 +13,8 @@ using DigitalRune.Geometry.Meshes;
 using DigitalRune.Geometry.Partitioning;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
-#if !PORTABLE
 using System.ComponentModel;
-#endif
-#if PORTABLE || WINDOWS
 using System.Dynamic;
-#endif
 
 
 namespace DigitalRune.Geometry.Shapes
@@ -257,11 +253,8 @@ namespace DigitalRune.Geometry.Shapes
     public bool IsTwoSided { get; set; }
 
 
-#if PORTABLE || WINDOWS
     /// <exclude/>
-#if !PORTABLE
     [Browsable(false)]
-#endif
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
     {
@@ -280,7 +273,7 @@ namespace DigitalRune.Geometry.Shapes
         return internals;
       }
     }
-#endif
+
     #endregion
 
 
@@ -374,7 +367,6 @@ namespace DigitalRune.Geometry.Shapes
     #region Methods
     //--------------------------------------------------------------
 
-#if XNA || MONOGAME
     /// <summary>
     /// Sets the triangle mesh. (For use by the content pipeline only.)
     /// </summary>
@@ -420,7 +412,6 @@ namespace DigitalRune.Geometry.Shapes
         }
       }
     }
-#endif
 
 
     #region ----- Cloning -----

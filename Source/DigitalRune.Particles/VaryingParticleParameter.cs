@@ -5,9 +5,6 @@
 using System;
 using System.Diagnostics;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Particles

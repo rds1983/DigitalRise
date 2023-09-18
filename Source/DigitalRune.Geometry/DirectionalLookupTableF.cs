@@ -4,20 +4,15 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRune.Mathematics.Algebra;
-#if !PORTABLE
 using System.ComponentModel;
-#endif
-#if PORTABLE || WINDOWS
 using System.Diagnostics;
 using System.Dynamic;
-#endif
+using DigitalRune.Mathematics.Algebra;
 
 
 namespace DigitalRune.Geometry
 {
   /// <exclude/>
-  [CLSCompliant(false)]
   [Serializable]
   public class DirectionalLookupTableUInt16F : DirectionalLookupTableF<ushort>
   {
@@ -108,11 +103,7 @@ namespace DigitalRune.Geometry
     }
 
 
-#if PORTABLE || WINDOWS
-    /// <exclude/>
-#if !PORTABLE
     [Browsable(false)]
-#endif
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
     {
@@ -131,7 +122,6 @@ namespace DigitalRune.Geometry
         return internals;
       }
     }
-#endif
     #endregion
 
 

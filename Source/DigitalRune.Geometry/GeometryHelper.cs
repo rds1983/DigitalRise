@@ -8,11 +8,7 @@ using DigitalRune.Geometry.Meshes;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics.Algebra;
 using Plane = DigitalRune.Geometry.Shapes.Plane;
-
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
-#endif
-
 
 namespace DigitalRune.Geometry
 {
@@ -334,7 +330,6 @@ namespace DigitalRune.Geometry
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Extracts the viewing frustum planes of a world-view-projection matrix. (Only available in
     /// the XNA-compatible build.)
@@ -419,7 +414,7 @@ namespace DigitalRune.Geometry
         }
       }
     }
-#endif
+    
     #endregion
   }
 }

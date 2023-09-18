@@ -17,9 +17,7 @@ namespace DigitalRune.Geometry.Shapes
   /// The shapes of A and B must be of type <see cref="ConvexShape"/>.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]   
-#endif
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public class MinkowskiSumShape : ConvexShape
   {

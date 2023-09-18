@@ -33,12 +33,8 @@ using DigitalRune.Geometry.Shapes;
 using DigitalRune.Linq;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
-#if !PORTABLE
 using System.ComponentModel;
-#endif
-#if PORTABLE || WINDOWS
 using System.Dynamic;
-#endif
 
 
 namespace DigitalRune.Geometry.Partitioning
@@ -216,11 +212,7 @@ namespace DigitalRune.Geometry.Partitioning
     bool ICollection<int>.IsReadOnly { get { return false; } }
 
 
-#if PORTABLE || WINDOWS
-    /// <exclude/>
-#if !PORTABLE
     [Browsable(false)]
-#endif
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public /*dynamic*/ object Internals
     {
@@ -261,7 +253,7 @@ namespace DigitalRune.Geometry.Partitioning
         return internals;
       }
     }
-#endif
+
     #endregion
 
 

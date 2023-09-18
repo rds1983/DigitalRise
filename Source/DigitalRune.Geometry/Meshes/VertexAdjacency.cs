@@ -37,7 +37,6 @@ namespace DigitalRune.Geometry.Meshes
     /// start and end indices of a adjacency list can be determined using <c>ListIndices[i]</c> and 
     /// <c>ListIndices[i + 1] - 1</c>. No need to check the indices.
     /// </remarks>
-    [CLSCompliant(false)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Indices")]
     public ushort[] ListIndices;
@@ -55,7 +54,6 @@ namespace DigitalRune.Geometry.Meshes
     /// <c>Lists[ListIndices[i + 1] - 1]</c>.
     /// </para>
     /// </remarks>
-    [CLSCompliant(false)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     public ushort[] Lists;
 

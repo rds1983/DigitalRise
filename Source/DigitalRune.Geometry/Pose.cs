@@ -10,9 +10,7 @@ using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Interpolation;
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
-#endif
 
 
 namespace DigitalRune.Geometry
@@ -48,9 +46,7 @@ namespace DigitalRune.Geometry
   /// </para>
   /// </remarks>
   [Serializable]
-#if !XBOX && !UNITY
   [DataContract]
-#endif
   public struct Pose : IEquatable<Pose>
   {
     //--------------------------------------------------------------
@@ -71,9 +67,7 @@ namespace DigitalRune.Geometry
     /// <summary>
     /// The position.
     /// </summary>
-#if !XBOX && !UNITY
     [DataMember]
-#endif
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     public Vector3F Position;
 
@@ -84,9 +78,7 @@ namespace DigitalRune.Geometry
     /// <remarks>
     /// The orientation is stored as a 3x3 matrix. The matrix must represent a rotation.
     /// </remarks>
-#if !XBOX && !UNITY
     [DataMember]
-#endif
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     public Matrix33F Orientation;
     #endregion
@@ -401,7 +393,6 @@ namespace DigitalRune.Geometry
     }
 
 
-#if XNA || MONOGAME
     /// <overloads>
     /// <summary>
     /// Creates a <see cref="Pose"/> from a matrix that contains a translation and a rotation.
@@ -454,7 +445,7 @@ namespace DigitalRune.Geometry
                         m.M02, m.M12, m.M22, 0,
                         Position.X, Position.Y, Position.Z, 1);
     }
-#endif
+
     #endregion
 
 
@@ -835,7 +826,6 @@ namespace DigitalRune.Geometry
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Converts a pose to a 4x4 transformation matrix (XNA Framework). (Only available in the 
     /// XNA-compatible build.)
@@ -856,7 +846,7 @@ namespace DigitalRune.Geometry
                         m.M02, m.M12, m.M22, 0,
                         v.X, v.Y, v.Z, 1);
     }
-#endif
+
     #endregion
   }
 }

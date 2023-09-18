@@ -5,9 +5,6 @@
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Particles.Effectors

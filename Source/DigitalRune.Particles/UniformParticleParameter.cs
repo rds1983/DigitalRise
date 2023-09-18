@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRune.Animation;
 
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Particles

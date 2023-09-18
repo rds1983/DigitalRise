@@ -9,11 +9,8 @@ using System.Linq;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
-
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-#endif
 
 
 namespace DigitalRune.Geometry.Meshes
@@ -717,7 +714,6 @@ namespace DigitalRune.Geometry.Meshes
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Creates a triangle mesh from an XNA <see cref="Model"/>. (Only available in the
     /// XNA-compatible build, except Silverlight.)
@@ -839,7 +835,7 @@ namespace DigitalRune.Geometry.Meshes
         return Matrix.Identity;
       return bone.Transform * GetAbsoluteTransform(bone.Parent);
     }
-#endif
+
     #endregion
   }
 }

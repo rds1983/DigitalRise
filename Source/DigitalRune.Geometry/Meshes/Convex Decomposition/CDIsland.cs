@@ -2,11 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !NETFX_CORE && !WP7 && !XBOX
 using System.Diagnostics;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics.Algebra;
-
 
 namespace DigitalRune.Geometry.Meshes
 {
@@ -32,4 +30,3 @@ namespace DigitalRune.Geometry.Meshes
     public ConvexHullBuilder ConvexHullBuilder;
   }
 }
-#endif

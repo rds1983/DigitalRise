@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !NETFX_CORE && !WP7 && !XBOX
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -355,4 +354,3 @@ namespace DigitalRune.Geometry.Meshes
     #endregion
   }
 }
-#endif

@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !NETFX_CORE && !WP7 && !XBOX
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using DigitalRune.Threading;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
-
+using System.Threading.Tasks;
 
 namespace DigitalRune.Geometry.Meshes
 {
@@ -322,7 +321,8 @@ namespace DigitalRune.Geometry.Meshes
       _cancel = false;
       IsBusy = true;
 
-      Parallel.Start(DoWork);
+
+      Task.Run(DoWork);
     }
 
 
@@ -740,4 +740,3 @@ namespace DigitalRune.Geometry.Meshes
     #endregion
   }
 }
-#endif

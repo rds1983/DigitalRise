@@ -4,9 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-#if NETFX_CORE || NET45
-using System.Reflection;
-#endif
 using DigitalRune.Game.UI.Rendering;
 
 

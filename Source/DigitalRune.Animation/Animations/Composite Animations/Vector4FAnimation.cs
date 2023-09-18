@@ -5,9 +5,6 @@
 using System;
 using DigitalRune.Animation.Traits;
 using DigitalRune.Mathematics.Algebra;
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 
