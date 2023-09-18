@@ -30,7 +30,7 @@ namespace Samples
         catch (Exception exception)
         {
           string message = SampleHelper.GetExceptionMessage(exception);
-          MessageBox.Show(message, "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          Console.WriteLine(message);
         }
       }
     }

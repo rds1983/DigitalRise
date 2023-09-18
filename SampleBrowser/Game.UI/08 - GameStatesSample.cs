@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DigitalRune.Animation;
 using DigitalRune.Animation.Easing;
 using DigitalRune.Game.Input;
@@ -237,7 +238,7 @@ GameComponent with a StateMachine.",
       _uiScreen.Children.Add(_loadingTextBlock);
 
       // Start loading assets in the background.
-      Parallel.StartBackground(LoadAssets);
+      Task.Run(LoadAssets);
     }
 
 

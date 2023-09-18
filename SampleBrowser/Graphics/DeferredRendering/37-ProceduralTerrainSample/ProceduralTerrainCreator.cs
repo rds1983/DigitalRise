@@ -13,6 +13,7 @@
 
 
 using System;
+using System.Threading.Tasks;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Interpolation;

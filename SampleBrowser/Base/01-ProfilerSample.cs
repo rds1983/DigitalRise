@@ -3,6 +3,7 @@
 #define DIGITALRUNE_PROFILE
 
 using System;
+using System.Threading.Tasks;
 using DigitalRune.Diagnostics;
 using DigitalRune.Threading;
 

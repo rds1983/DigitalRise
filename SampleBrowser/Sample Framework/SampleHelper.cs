@@ -714,20 +714,9 @@ namespace Samples
     {
       var stringBuilder = new StringBuilder();
 
-      var taskException = exception as DigitalRune.Threading.TaskException;
-      if (taskException != null)
-      {
-        // Exception on parallel worker thread.
-        stringBuilder.AppendLine("One or more unexpected errors have occurred in a parallel task.");
-        for (int i = 0; i < taskException.InnerExceptions.Length; i++)
-          WriteMessagesAndStackTraces(stringBuilder, taskException.InnerExceptions[i]);
-      }
-      else
-      {
-        // Exception on main thread.
-        stringBuilder.AppendLine("An unexpected error has occurred.");
-        WriteMessagesAndStackTraces(stringBuilder, exception);
-      }
+      // Exception on main thread.
+      stringBuilder.AppendLine("An unexpected error has occurred.");
+      WriteMessagesAndStackTraces(stringBuilder, exception);
 
       return stringBuilder.ToString();
     }

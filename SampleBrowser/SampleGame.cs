@@ -423,7 +423,8 @@ namespace Samples
 
       // Run any task completion callbacks that have been scheduled.
       _profiler.Start("Parallel.RunCallbacks           ");
-      Parallel.RunCallbacks();
+      // TODO:
+      // Parallel.RunCallbacks();
       _profiler.Stop();
 
       // When the menu is visible, update SampleFramework before the game logic.
@@ -491,7 +492,7 @@ namespace Samples
 
       // Render graphics screens to the back buffer.
       _profiler.Start("GraphicsManager.Render          ");
-      _graphicsManager.Render(false);
+      _graphicsManager.Render();
       _profiler.Stop();
 
       _profiler.Stop();

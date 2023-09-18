@@ -99,7 +99,7 @@ namespace Samples.Game.UI
         new Vector2F(375, 200),
         Color.Black);
 
-      if (!_loadStuffTask.IsComplete)
+      if (!_loadStuffTask.IsCompleted)
       {
         debugRenderer.DrawText("Loading...", new Vector2F(575, 400), Color.Black);
       }
