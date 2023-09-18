@@ -12,9 +12,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// Defines a control point on a <see cref="Curve2F"/> (single-precision).
   /// </summary>
   /// <inheritdoc cref="Curve2F"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class CurveKey2F : CurveKey<float, Vector2F>
   {
     /// <summary>

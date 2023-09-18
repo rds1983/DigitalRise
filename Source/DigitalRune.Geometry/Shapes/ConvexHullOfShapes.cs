@@ -20,9 +20,7 @@ namespace DigitalRune.Geometry.Shapes
   /// </para>
   /// </remarks>
   // Not much to do in this class because the ConvexShape implements the correct support mapping.
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class ConvexHullOfShapes : ConvexShape
   {
     //--------------------------------------------------------------

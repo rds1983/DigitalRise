@@ -9,15 +9,11 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
+using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
-#endif
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Mathematics.Algebra
@@ -25,16 +21,9 @@ namespace DigitalRune.Mathematics.Algebra
   /// <summary>
   /// Defines an n-dimensional vector (double-precision).
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
   [TypeConverter(typeof(ExpandableObjectConverter))]
-#endif
-  public class VectorD 
-    : IEquatable<VectorD>,
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
-      ISerializable,
-#endif
-      IXmlSerializable
+  public class VectorD: IEquatable<VectorD>, IXmlSerializable, ISerializable
   {
     // TODO: Remove ArgumentNullException and let runtime throw NullReferenceException. (Minor optimization)
 
@@ -60,7 +49,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentNullException">
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+    [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
     public double[] InternalArray
     {
       get { return _v; }
@@ -155,9 +144,6 @@ namespace DigitalRune.Mathematics.Algebra
     /// The vector has a length of 0. The length cannot be changed.
     /// </exception>
     [XmlIgnore]
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public double Length
     {
       get
@@ -391,7 +377,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public VectorD(double[] elements)
       : this(elements.Length)
     {
@@ -411,7 +397,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public VectorD(IList<double> elements)
       : this(elements.Count)
     {
@@ -420,7 +406,6 @@ namespace DigitalRune.Mathematics.Algebra
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="VectorD"/> class with serialized data.
     /// </summary>
@@ -429,8 +414,8 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="SerializationException">
     /// Couldn't deserialize <see cref="VectorD"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     protected VectorD(SerializationInfo info, StreamingContext context)
     {
       try
@@ -442,7 +427,7 @@ namespace DigitalRune.Mathematics.Algebra
         throw new SerializationException("Couldn't deserialize VectorD.", exception);
       }
     }
-#endif
+
     #endregion
 
 
@@ -548,7 +533,6 @@ namespace DigitalRune.Mathematics.Algebra
 
     #region ISerializable Members
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     /// <summary>
     /// Populates a <see cref="SerializationInfo"/> with the data needed to serialize the target 
     /// object.
@@ -560,8 +544,8 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="SecurityException">
     /// The caller does not have the required permission.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
     protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
     {
@@ -588,7 +572,7 @@ namespace DigitalRune.Mathematics.Algebra
 
       GetObjectData(info, context);
     }
-#endif
+
     #endregion
 
 
@@ -615,7 +599,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <param name="reader">
     /// The <see cref="XmlReader"/> stream from which the object is deserialized.
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public void ReadXml(XmlReader reader)
     {
       reader.ReadStartElement();
@@ -639,7 +623,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <param name="writer">
     /// The <see cref="XmlWriter"/> stream to which the object is serialized.
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public void WriteXml(XmlWriter writer)
     {
       writer.WriteStartElement("Dimension");
@@ -1053,7 +1037,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentException">
     /// The numbers of elements of the two vectors do not match.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator >(VectorD vector1, VectorD vector2)
     {
       if (vector1 == null)
@@ -1088,7 +1072,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentException">
     /// The numbers of elements of the two vectors do not match.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator >=(VectorD vector1, VectorD vector2)
     {
       if (vector1 == null)
@@ -1122,7 +1106,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentException">
     /// The numbers of elements of the two vectors do not match.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator <(VectorD vector1, VectorD vector2)
     {
       if (vector1 == null)
@@ -1157,7 +1141,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentException">
     /// The numbers of elements of the two vectors do not match.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator <=(VectorD vector1, VectorD vector2)
     {
       if (vector1 == null)
@@ -1215,7 +1199,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// </summary>
     /// <param name="vector">The vector.</param>
     /// <returns>The list with of <see langword="double"/> values.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+    [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
     public static explicit operator List<double>(VectorD vector)
     {
       if (vector == null)
@@ -1233,7 +1217,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// Converts this vector to a list of <see langword="double"/> values.
     /// </summary>
     /// <returns>The list of <see langword="double"/> values.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+    [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
     public List<double> ToList()
     {
       return (List<double>)this;
@@ -1513,7 +1497,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// The <paramref name="subvectorLength"/> is less than 1. Or <paramref name="startIndex"/> + 
     /// <paramref name="subvectorLength"/> exceeds the <see cref="NumberOfElements"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public VectorD GetSubvector(int startIndex, int subvectorLength)
     {
       if (startIndex < 0 || startIndex >= NumberOfElements)
@@ -1615,7 +1599,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="vector"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public void Set(VectorD vector)
     {
       for (int i = 0; i < NumberOfElements; i++)
@@ -1701,7 +1685,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// The <paramref name="startIndex"/> or the number of elements of the subvector is to high, so 
     /// that the subvector does not fit into this vector.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public void SetSubvector(int startIndex, VectorD subvector)
     {
       if (subvector == null)

@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using DigitalRune.Mathematics.Algebra;
 
 
@@ -48,7 +49,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// number generator (see <see cref="RandomHelper.Random"/>) is used.
     /// </param>
     /// <returns>A random boolean value.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+    [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
     public static bool NextBool(this Random random)
     {
       if (random == null)
@@ -120,7 +121,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <param name="min">The minimal allowed value.</param>
     /// <param name="max">The maximal allowed value.</param>
     /// <returns>A random <see langword="float"/> value within the bounds [min, max].</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+    [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
     public static float NextFloat(this Random random, float min, float max)
     {
       if (random == null)
@@ -163,8 +164,8 @@ namespace DigitalRune.Mathematics.Statistics
     /// The maximal allowed value. (Must be less than <see cref="int.MaxValue"/>.)
     /// </param>
     /// <returns>A random integer value within the bounds [min, max].</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "max+1")]
+    [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+    [SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "max+1")]
     public static int NextInteger(this Random random, int min, int max)
     {
       if (random == null)
@@ -312,7 +313,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <param name="min">The minimal allowed value for a vector element.</param>
     /// <param name="max">The maximal allowed value for a vector element.</param>
     /// <returns>A random <see cref="VectorF"/>.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static void NextVectorF(this Random random, VectorF vector, float min, float max)
     {
       if (random == null)
@@ -334,7 +335,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <param name="min">The minimal allowed value for a vector element.</param>
     /// <param name="max">The maximal allowed value for a vector element.</param>
     /// <returns>A random <see cref="VectorD"/>.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static void NextVectorD(this Random random, VectorD vector, double min, double max)
     {
       if (random == null)
@@ -480,7 +481,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <param name="matrix">The matrix that is filled with random values.</param>
     /// <param name="min">The minimal allowed value for a matrix element.</param>
     /// <param name="max">The maximal allowed value for a matrix element.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static void NextMatrixF(this Random random, MatrixF matrix, float min, float max)
     {
       if (random == null)
@@ -502,7 +503,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <param name="matrix">The matrix that is filled with random values.</param>
     /// <param name="min">The minimal allowed value for a matrix element.</param>
     /// <param name="max">The maximal allowed value for a matrix element.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static void NextMatrixD(this Random random, MatrixD matrix, double min, double max)
     {
       if (random == null)
@@ -524,7 +525,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// </param>
     /// <param name="distribution">The probability distribution.</param>
     /// <returns>A random value.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static T Next<T>(this Random random, Distribution<T> distribution)
     {
       if (random == null)

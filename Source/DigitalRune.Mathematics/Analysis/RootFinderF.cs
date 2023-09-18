@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -195,8 +196,8 @@ namespace DigitalRune.Mathematics.Analysis
     /// <returns>
     /// <see langword="true"/> if a valid bracket was found; otherwise <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public bool ExpandBracket(ref float x0, ref float x1)
     {
       return ExpandBracket(Function, ref x0, ref x1);
@@ -214,8 +215,8 @@ namespace DigitalRune.Mathematics.Analysis
     /// <returns>
     /// <see langword="true"/> if a valid bracket was found; otherwise <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public bool ExpandBracket(ref float x0, ref float x1, float y)
     {
       // Reformulate f(x) = y as simple root finding f(x) - y = 0.
@@ -285,7 +286,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// An x value such that the root lies between <paramref name="x0"/> and <paramref name="x1"/>.
     /// </param>
     /// <returns>The x value such that <i>f(x) = 0</i>; or <i>NaN</i> if no root is found.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public float FindRoot(float x0, float x1)
     {
       return FindRoot(Function, x0, x1);
@@ -307,7 +308,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <returns>
     /// The x value such that <i>f(x) = y</i>; or <i>NaN</i> if no suitable x is found.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public float FindRoot(float x0, float x1, float y)
     {
       // Reformulate as simple root finding.
@@ -326,8 +327,8 @@ namespace DigitalRune.Mathematics.Analysis
     /// An x value such that the root lies between <paramref name="x0"/> and <paramref name="x1"/>.
     /// </param>
     /// <returns>The x value such that <i>f(x) = 0</i>; or <i>NaN</i> if no root is found.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
     protected abstract float FindRoot(Func<float, float> function, float x0, float x1);
     #endregion
   }

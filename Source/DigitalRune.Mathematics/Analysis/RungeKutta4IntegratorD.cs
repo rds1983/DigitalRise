@@ -4,6 +4,7 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -14,7 +15,7 @@ namespace DigitalRune.Mathematics.Analysis
   /// <remarks>
   /// See <see cref="OdeIntegratorD"/> for a description of numerical integration of ODE.
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public class RungeKutta4IntegratorD : OdeIntegratorD
   {
     /// <summary>

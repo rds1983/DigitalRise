@@ -4,9 +4,6 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Mathematics.Statistics
@@ -99,9 +96,6 @@ namespace DigitalRune.Mathematics.Statistics
     /// Gets or sets the scale factors that are multiplied to the random position.
     /// </summary>
     /// <value>The scale factors in x, y and z direction. The default value is (1, 1, 1).</value>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public Vector3F Scale
     {
       get { return _scale; }

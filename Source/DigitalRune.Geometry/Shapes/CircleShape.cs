@@ -18,9 +18,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <remarks>
   /// The front face is visible from the positive z half-space.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class CircleShape : ConvexShape
   {
     // TODO: Optimize: AABB could be more efficiently than the default implementation.

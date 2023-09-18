@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -44,7 +45,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// are the start/end tangents.
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public class HermiteSegment2F : ICurve<float, Vector2F>, IRecyclable
   {
     /// <summary>

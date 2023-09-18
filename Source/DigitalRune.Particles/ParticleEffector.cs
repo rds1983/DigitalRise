@@ -126,9 +126,6 @@ namespace DigitalRune.Particles
     /// This property is automatically set when the effector is added to a particle system (see
     /// property <see cref="DigitalRune.Particles.ParticleSystem.Effectors"/>).
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public ParticleSystem ParticleSystem { get; set; }
 
 

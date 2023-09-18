@@ -13,9 +13,7 @@ namespace DigitalRune.Physics
   /// <summary>
   /// The exception that is thrown when a general error in the physics library occurs.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class PhysicsException : Exception
   {
     /// <overloads>

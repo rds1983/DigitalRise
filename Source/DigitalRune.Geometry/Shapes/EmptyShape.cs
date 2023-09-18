@@ -13,9 +13,7 @@ namespace DigitalRune.Geometry.Shapes
   /// Defines a shape that represents an empty volume. This shape will not collide with any other 
   /// shape.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public sealed class EmptyShape : Shape
   {
     //--------------------------------------------------------------

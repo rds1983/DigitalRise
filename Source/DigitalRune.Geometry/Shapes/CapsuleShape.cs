@@ -17,9 +17,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <remarks>
   /// A capsule is like a <see cref="CylinderShape"/> with spherical caps.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class CapsuleShape : ConvexShape
   {
     //--------------------------------------------------------------

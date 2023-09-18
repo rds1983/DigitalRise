@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DigitalRune.Mathematics.Interpolation
 {
@@ -45,7 +45,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// returns the end point <see cref="Point3"/>.
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Catmull")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Catmull")]
   public class CatmullRomSegment1F : ICurve<float, float>, IRecyclable
   {
     /// <summary>
@@ -111,7 +111,7 @@ namespace DigitalRune.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public void Flatten(ICollection<float> points, int maxNumberOfIterations, float tolerance)
     {
       points.Add(Point2);

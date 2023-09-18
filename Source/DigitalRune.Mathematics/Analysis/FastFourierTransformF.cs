@@ -4,6 +4,7 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -248,7 +249,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <exception cref="ArgumentException">
     /// The width or height of the array exceeds the internal buffer or is not a power of two.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
+    [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
     public void Transform2D(Vector2F[,] values, bool forward)
     {
       if (values == null)

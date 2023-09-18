@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -20,10 +21,8 @@ namespace DigitalRune.Mathematics.Interpolation
   /// The type of the curve key. (A type derived from <see cref="CurveKey{TParam,TPoint}"/>.)
   /// </typeparam>
   /// <inheritdoc cref="PiecewiseCurve{TParam,TPoint,TCurveKey}"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public abstract class PiecewiseCurveF<TPoint, TCurveKey> 
     : PiecewiseCurve<float, TPoint, TCurveKey>
       where TCurveKey : CurveKey<float, TPoint>

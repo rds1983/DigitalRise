@@ -3,11 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !UNITY
 using System.Collections.ObjectModel;
-#else
-using DigitalRune.Collections.ObjectModel;
-#endif
+using System.Diagnostics.CodeAnalysis;
 using DigitalRune.Collections;
 using DigitalRune.Mathematics.Algebra;
 
@@ -63,7 +60,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// <see cref="OnSetup"/> and <see cref="OnCompute"/>. 
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public abstract class ScatteredInterpolationF : Collection<Pair<VectorF, VectorF>>
   {
     // TODO: Manage data pairs in a Collection similar to the Curve class design.
@@ -240,7 +237,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <exception cref="MathematicsException">
     /// No reference data pairs were added.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public VectorF Compute(VectorF x)
     {
       if (x == null)
@@ -275,7 +272,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// executed. The parameter <paramref name="x"/> is not <see langword="null"/> and there is at 
     /// least 1 reference data pair.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     protected abstract VectorF OnCompute(VectorF x);
     #endregion
   }

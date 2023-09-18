@@ -4,9 +4,6 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
-#if XNA || MONOGAME
-using Microsoft.Xna.Framework.Content;
-#endif
 
 
 namespace DigitalRune.Mathematics.Statistics
@@ -84,9 +81,6 @@ namespace DigitalRune.Mathematics.Statistics
     /// For the Gaussian distribution an approximated Gaussian distribution is used similar to 
     /// <see cref="FastGaussianDistributionF"/>.
     /// </remarks>
-#if XNA || MONOGAME
-    [ContentSerializer(Optional = true)]
-#endif
     public bool IsUniform
     {
       get { return _isUniform; }

@@ -20,9 +20,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <see cref="ViewVolume.Far"/> specify the distance from the origin (observer) to the near and 
   /// far clip planes (<see cref="ViewVolume.Near"/> &lt; <see cref="ViewVolume.Far"/>).
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class OrthographicViewVolume : ViewVolume
   {
     //--------------------------------------------------------------

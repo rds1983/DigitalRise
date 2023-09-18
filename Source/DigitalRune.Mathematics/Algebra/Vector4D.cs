@@ -9,14 +9,9 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-#if !NETFX_CORE && !PORTABLE
+using System.Diagnostics.CodeAnalysis;
 using DigitalRune.Mathematics.Algebra.Design;
-#endif
-#if XNA || MONOGAME
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-#endif
-
 
 namespace DigitalRune.Mathematics.Algebra
 {
@@ -26,15 +21,9 @@ namespace DigitalRune.Mathematics.Algebra
   /// <remarks>
   /// The four components (x, y, z, w) are stored with double-precision.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-#if !NETFX_CORE && !PORTABLE
   [TypeConverter(typeof(Vector4DConverter))]
-#endif
-#if !XBOX && !UNITY
   [DataContract]
-#endif
   public struct Vector4D : IEquatable<Vector4D>
   {
     //--------------------------------------------------------------
@@ -80,41 +69,33 @@ namespace DigitalRune.Mathematics.Algebra
     /// <summary>
     /// The x component.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [DataMember]
-#endif
     public double X;
 
     /// <summary>
     /// The y component.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [DataMember]
-#endif
     public double Y;
 
     /// <summary>
     /// The z component.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [DataMember]
-#endif
     public double Z;
 
     /// <summary>
     /// The w component.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [DataMember]
-#endif
     public double W;
     #endregion
 
@@ -218,9 +199,6 @@ namespace DigitalRune.Mathematics.Algebra
     /// The vector has a length of 0. The length cannot be changed.
     /// </exception>
     [XmlIgnore]
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public double Length
     {
       get
@@ -281,7 +259,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// Gets or sets the components x, y and z as a <see cref="Vector3D"/>.
     /// </summary>
     /// <value>The 3-dimensional vector (x, y, z).</value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
     public Vector3D XYZ
     {
       get { return new Vector3D(X, Y, Z); }
@@ -420,7 +398,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <param name="y">Initial value for the y component.</param>
     /// <param name="z">Initial value for the z component.</param>
     /// <param name="w">Initial value for the z component.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Vector4D(double x, double y, double z, double w)
     {
       X = x;
@@ -458,7 +436,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="components"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Vector4D(double[] components)
     {
       X = components[0];
@@ -480,7 +458,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="components"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Vector4D(IList<double> components)
     {
       X = components[0];
@@ -495,7 +473,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// </summary>
     /// <param name="vector">The vector (x, y, z).</param>
     /// <param name="w">The w component.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Vector4D(Vector3D vector, double w)
     {
       X = vector.X;
@@ -916,7 +894,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <see langword="true"/> if each component of <paramref name="vector1"/> is greater than its
     /// counterpart in <paramref name="vector2"/>; otherwise, <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator >(Vector4D vector1, Vector4D vector2)
     {
       return vector1.X > vector2.X
@@ -936,7 +914,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <see langword="true"/> if each component of <paramref name="vector1"/> is greater or equal
     /// than its counterpart in <paramref name="vector2"/>; otherwise, <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator >=(Vector4D vector1, Vector4D vector2)
     {
       return vector1.X >= vector2.X
@@ -956,7 +934,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <see langword="true"/> if each component of <paramref name="vector1"/> is less than its 
     /// counterpart in <paramref name="vector2"/>; otherwise, <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator <(Vector4D vector1, Vector4D vector2)
     {
       return vector1.X < vector2.X
@@ -976,7 +954,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <see langword="true"/> if each component of <paramref name="vector1"/> is less or equal than
     /// its counterpart in <paramref name="vector2"/>; otherwise, <see langword="false"/>.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
+    [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates")]
     public static bool operator <=(Vector4D vector1, Vector4D vector2)
     {
       return vector1.X <= vector2.X
@@ -1024,7 +1002,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <returns>
     /// The list with 4 <see langword="double"/> values. The order of the elements is: x, y, z, w
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+    [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
     public static explicit operator List<double>(Vector4D vector)
     {
       List<double> result = new List<double>(4) { vector.X, vector.Y, vector.Z, vector.W };
@@ -1038,7 +1016,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <returns>
     /// The list with 4 <see langword="double"/> values. The order of the elements is: x, y, z, w
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+    [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
     public List<double> ToList()
     {
       return (List<double>)this;
@@ -1092,7 +1070,6 @@ namespace DigitalRune.Mathematics.Algebra
     }
 
 
-#if XNA || MONOGAME
     /// <summary>
     /// Performs an conversion from <see cref="Vector4"/> (XNA Framework) to <see cref="Vector4D"/>
     /// (DigitalRune Mathematics).
@@ -1119,7 +1096,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// This method is available only in the XNA-compatible build of the 
     /// DigitalRune.Mathematics.dll.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static Vector4D FromXna(Vector4 vector)
     {
       return new Vector4D(vector.X, vector.Y, vector.Z, vector.W);
@@ -1151,12 +1128,12 @@ namespace DigitalRune.Mathematics.Algebra
     /// This method is available only in the XNA-compatible build of the 
     /// DigitalRune.Mathematics.dll.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Vector4 ToXna()
     {
       return new Vector4((float)X, (float)Y, (float)Z, (float)W);
     }
-#endif
+
     #endregion
 
 
@@ -1550,7 +1527,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="FormatException">
     /// <paramref name="s"/> is not a valid <see cref="Vector4D"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static Vector4D Parse(string s)
     {
       return Parse(s, CultureInfo.CurrentCulture);
@@ -1572,7 +1549,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="FormatException">
     /// <paramref name="s"/> is not a valid <see cref="Vector4D"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static Vector4D Parse(string s, IFormatProvider provider)
     {
       Match m = Regex.Match(s, @"\((?<x>.*);(?<y>.*);(?<z>.*);(?<w>.*)\)", RegexOptions.None);

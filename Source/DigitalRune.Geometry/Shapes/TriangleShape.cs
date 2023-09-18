@@ -23,9 +23,7 @@ namespace DigitalRune.Geometry.Shapes
   /// The triangle front face is where the vertices are ordered counter-clockwise.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class TriangleShape : ConvexShape
   {
     //--------------------------------------------------------------

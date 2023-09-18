@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -38,7 +39,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <returns>
     /// The x value such that <i>f(x) = 0</i>; or <i>NaN</i> if no root is found.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected override float FindRoot(Func<float, float> function, float x0, float x1)
     {
       NumberOfIterations = 0;

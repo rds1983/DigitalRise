@@ -4,6 +4,7 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -15,7 +16,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// Implemented as described in the paper "Pose Space Deformation: A Unified Approach to Shape 
   /// Interpolation and Skeleton-Driven Deformation".
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public class ShepardInterpolationF : ScatteredInterpolationF
   {
     //--------------------------------------------------------------

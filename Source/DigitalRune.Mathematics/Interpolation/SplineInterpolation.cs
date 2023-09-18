@@ -1,6 +1,7 @@
 ﻿// DigitalRune Engine - Copyright (C) DigitalRune GmbH
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -43,13 +44,13 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <summary>
     /// Interpolation using a cubic Hermite spline.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     Hermite,
     
     /// <summary>
     /// Interpolation using a Catmull-Rom spline.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     CatmullRom,
   }
 }

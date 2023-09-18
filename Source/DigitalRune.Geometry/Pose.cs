@@ -47,9 +47,7 @@ namespace DigitalRune.Geometry
   /// in place".</i>
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
 #if !XBOX && !UNITY
   [DataContract]
 #endif

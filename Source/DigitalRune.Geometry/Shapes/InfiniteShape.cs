@@ -13,9 +13,7 @@ namespace DigitalRune.Geometry.Shapes
   /// Defines a shape that represents an infinitely large volume. This shape will collide with 
   /// every other shape (except an <see cref="DigitalRune.Geometry.Shapes.EmptyShape"/>).
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public sealed class InfiniteShape : Shape
   {
     //--------------------------------------------------------------

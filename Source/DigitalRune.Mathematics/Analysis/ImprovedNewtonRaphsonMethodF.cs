@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -21,7 +22,7 @@ namespace DigitalRune.Mathematics.Analysis
   /// <i>f(x)</i> as additional inputs.
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public class ImprovedNewtonRaphsonMethodF : NewtonRaphsonMethodF
   {
     /// <summary>
@@ -54,7 +55,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <returns>
     /// The x value such that <i>f(x) = 0</i>; or <i>NaN</i> if no root is found.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected override float FindRoot(Func<float, float> function, float x0, float x1)
     {
       Debug.Assert(function != null);

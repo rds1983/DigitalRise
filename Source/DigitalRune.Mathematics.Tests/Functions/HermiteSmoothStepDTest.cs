@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DigitalRune.Mathematics.Interpolation;
+using NUnit.Framework;
 
 
 namespace DigitalRune.Mathematics.Functions.Tests
@@ -9,13 +10,13 @@ namespace DigitalRune.Mathematics.Functions.Tests
     [Test]
     public void Compute()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, new HermiteSmoothStepD().Compute(-1)));
-      Assert.IsTrue(Numeric.AreEqual(0, new HermiteSmoothStepD().Compute(0)));
-      Assert.IsTrue(Numeric.AreEqual(0.5, new HermiteSmoothStepD().Compute(0.5)));
-      Assert.IsTrue(Numeric.AreEqual(1, new HermiteSmoothStepD().Compute(1)));
-      Assert.IsTrue(Numeric.AreEqual(1, new HermiteSmoothStepD().Compute(2)));
-      Assert.IsTrue(Numeric.AreEqual(1 - new HermiteSmoothStepD().Compute(1-0.3), new HermiteSmoothStepD().Compute(0.3)));
-      Assert.Greater(new HermiteSmoothStepD().Compute(1 - 0.3), new HermiteSmoothStepD().Compute(0.3));
+      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(-1)));
+      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(0)));
+      Assert.IsTrue(Numeric.AreEqual(0.5, InterpolationHelper.HermiteSmoothStep(0.5)));
+      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(1)));
+      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(2)));
+      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.HermiteSmoothStep(1-0.3), InterpolationHelper.HermiteSmoothStep(0.3)));
+      Assert.Greater(InterpolationHelper.HermiteSmoothStep(1 - 0.3), InterpolationHelper.HermiteSmoothStep(0.3));
     }
   }
 }

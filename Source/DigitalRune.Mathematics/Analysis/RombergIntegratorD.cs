@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -25,7 +26,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <exception cref="ArgumentNullException">
     /// <paramref name="function"/> is <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
+    [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
     public override double Integrate(Func<double, double> function, double lowerBound, double upperBound)
     {
       NumberOfIterations = 0;

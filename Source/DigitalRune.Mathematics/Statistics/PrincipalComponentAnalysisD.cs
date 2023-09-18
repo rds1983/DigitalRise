@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Statistics
@@ -48,7 +49,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// Each column in this matrix represents a principal component. Columns are ordered by
     /// decreasing variance. 
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public MatrixD V { get; private set; }
 
 

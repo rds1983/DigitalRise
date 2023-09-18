@@ -21,9 +21,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <remarks>
   /// The front face is visible from the positive z half-space.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class RectangleShape : ConvexShape
   {
     //--------------------------------------------------------------
@@ -44,9 +42,6 @@ namespace DigitalRune.Geometry.Shapes
     /// A component of <paramref name="value"/> is negative.
     /// </exception>
     [XmlIgnore]
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public Vector2F Extent
     {
       get { return new Vector2F(_widthX, _widthY); }

@@ -5,11 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-#if !UNITY
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.ObjectModel;
-#else
-using DigitalRune.Collections.ObjectModel;
-#endif
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
@@ -56,12 +53,10 @@ namespace DigitalRune.Mathematics.Interpolation
   /// can call <see cref="Sort"/> to sort keys.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public abstract class PiecewiseCurve<TParam, TPoint, TCurveKey> 
     : Collection<TCurveKey>, ICurve<TParam, TPoint>
       where TCurveKey : CurveKey<TParam, TPoint>
@@ -281,7 +276,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <param name="reader">
     /// The <see cref="XmlReader"/> stream from which the object is deserialized. 
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected void ReadXml(XmlReader reader)
     {
       reader.ReadStartElement("PreLoop");
@@ -316,7 +311,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <param name="writer">
     /// The <see cref="XmlWriter"/> stream to which the object is serialized. 
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected void WriteXml(XmlWriter writer)
     {
       writer.WriteStartElement("PreLoop");

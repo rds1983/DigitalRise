@@ -22,9 +22,7 @@ namespace DigitalRune.Geometry.Shapes
   /// same order.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public struct Triangle : IEquatable<Triangle>
   {
     //--------------------------------------------------------------

@@ -16,9 +16,7 @@ namespace DigitalRune.Geometry
   /// orientation). (Default implementation of <see cref="IGeometricObject"/>.)
   /// </summary>
   /// <inheritdoc cref="IGeometricObject"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   [DebuggerDisplay("{GetType().Name,nq}(Shape = {Shape})")]
   public class GeometricObject : IGeometricObject
   {

@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -35,10 +36,8 @@ namespace DigitalRune.Mathematics.Interpolation
   /// <see cref="CurveKey{TParam,TValue}.TangentOut"/>.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public class Path3F : PiecewiseCurveF<Vector3F, PathKey3F>, IXmlSerializable
   {
     /// <inheritdoc/>
@@ -149,7 +148,7 @@ namespace DigitalRune.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+    [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     public override Vector3F GetTangent(float parameter)
     {
       int numberOfKeys = Count;
@@ -620,7 +619,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// produced by the <see cref="IXmlSerializable.WriteXml(XmlWriter)"/> method and consumed by
     /// the <see cref="IXmlSerializable.ReadXml(XmlReader)"/> method.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+    [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
     XmlSchema IXmlSerializable.GetSchema()
     {
       return null;
@@ -633,7 +632,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <param name="reader">
     /// The <see cref="XmlReader"/> stream from which the object is deserialized. 
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
       reader.ReadStartElement();

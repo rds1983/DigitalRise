@@ -14,9 +14,7 @@ namespace DigitalRune.Geometry
   /// <summary>
   /// The exception that is thrown when an error in the geometry library occurs.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class GeometryException : Exception
   {
 #if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE

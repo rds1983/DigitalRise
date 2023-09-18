@@ -30,9 +30,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <see cref="DistanceFromOrigin"/> are equal.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public struct Plane : IEquatable<Plane>
   {
     //--------------------------------------------------------------

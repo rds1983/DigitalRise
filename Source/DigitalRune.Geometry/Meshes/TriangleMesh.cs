@@ -67,9 +67,7 @@ namespace DigitalRune.Geometry.Meshes
   /// </code>
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public sealed class TriangleMesh : ITriangleMesh
   {
     // NOTE: TriangleMesh is sealed because it implements a non-virtual Clone().

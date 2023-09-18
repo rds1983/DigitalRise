@@ -12,9 +12,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// Defines a waypoint of a 2-dimensional path (singe-precision).
   /// </summary>
   /// <inheritdoc cref="Path2F"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class PathKey2F : CurveKey<float, Vector2F>
   {
     private float _parameter;

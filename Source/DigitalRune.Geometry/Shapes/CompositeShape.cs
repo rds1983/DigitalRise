@@ -60,9 +60,7 @@ namespace DigitalRune.Geometry.Shapes
   /// partition (if any is in use) will be cloned (deep copy).
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class CompositeShape : Shape
   {
     //--------------------------------------------------------------

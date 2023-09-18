@@ -28,9 +28,7 @@ namespace DigitalRune.Geometry.Shapes
   /// (<see cref="ViewVolume.Near"/> ≤ <see cref="ViewVolume.Far"/>).
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class PerspectiveViewVolume : ViewVolume
   {
     //--------------------------------------------------------------

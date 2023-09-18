@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -19,10 +20,8 @@ namespace DigitalRune.Mathematics.Interpolation
   /// The type of the curve points (such as <see cref="Vector2F"/>, <see cref="Vector3F"/>, etc.).
   /// </typeparam>
   /// <inheritdoc cref="PiecewiseCurve{TParam,TPoint,TCurveKey}"/>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   [DebuggerDisplay("{GetType().Name,nq}(Parameter = {Parameter}, Point = {Point}, TangentIn = {TangentIn}, TangentOut = {TangentOut}, Interpolation = {Interpolation})")]
   public abstract class CurveKey<TParam, TPoint>
   {
@@ -41,7 +40,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// the distance from the start of the curve). Other interpretations can be used as well.
     /// </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
+    [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
     public TParam Parameter
     {
       get { return GetParameter(); }
@@ -96,7 +95,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <see cref="SplineInterpolation.Bezier"/>
     /// </term>
     /// <description>
-    /// Bézier splines require additional control points. Therefore, this property defines the 
+    /// Bï¿½zier splines require additional control points. Therefore, this property defines the 
     /// control point before this curve key.
     /// </description>
     /// </item>
@@ -146,7 +145,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <see cref="SplineInterpolation.Bezier"/>
     /// </term>
     /// <description>
-    /// Bézier splines require additional control points. Therefore, this property defines the 
+    /// Bï¿½zier splines require additional control points. Therefore, this property defines the 
     /// control point after this curve key.
     /// </description>
     /// </item>
@@ -180,7 +179,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// Gets the parameter.
     /// </summary>
     /// <returns>The parameter.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+    [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
     protected abstract TParam GetParameter();
 
 

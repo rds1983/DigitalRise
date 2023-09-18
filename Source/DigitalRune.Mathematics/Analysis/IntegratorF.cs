@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -132,7 +133,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// The integral of the given function over the interval 
     /// [<paramref name="lowerBound"/>, <paramref name="upperBound"/>].
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+    [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
     public abstract float Integrate(Func<float, float> function, float lowerBound, float upperBound);
     #endregion
   }

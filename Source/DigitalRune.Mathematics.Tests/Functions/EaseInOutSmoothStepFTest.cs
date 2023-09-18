@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DigitalRune.Mathematics.Interpolation;
+using NUnit.Framework;
 
 
 namespace DigitalRune.Mathematics.Functions.Tests
@@ -9,13 +10,13 @@ namespace DigitalRune.Mathematics.Functions.Tests
     [Test]
     public void Compute()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, new EaseInOutSmoothStepF().Compute(-1)));
-      Assert.IsTrue(Numeric.AreEqual(0, new EaseInOutSmoothStepF().Compute(0)));
-      Assert.Greater(0.5f, new EaseInOutSmoothStepF().Compute(0.3f));
-      Assert.IsTrue(Numeric.AreEqual(0.5f, new EaseInOutSmoothStepF().Compute(0.5f)));
-      Assert.Less(0.5f, new EaseInOutSmoothStepF().Compute(0.6f));
-      Assert.IsTrue(Numeric.AreEqual(1, new EaseInOutSmoothStepF().Compute(1)));
-      Assert.IsTrue(Numeric.AreEqual(1, new EaseInOutSmoothStepF().Compute(2)));
+      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(-1)));
+      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(0)));
+      Assert.Greater(0.5f, InterpolationHelper.EaseInOutSmoothStep(0.3f));
+      Assert.IsTrue(Numeric.AreEqual(0.5f, InterpolationHelper.EaseInOutSmoothStep(0.5f)));
+      Assert.Less(0.5f, InterpolationHelper.EaseInOutSmoothStep(0.6f));
+      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(1)));
+      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(2)));
     }
   }
 }

@@ -36,9 +36,7 @@ namespace DigitalRune.Geometry.Shapes
   /// runtime.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class ConvexPolyhedron : ConvexShape
   {
     // ConvexPolyhedron uses a directional lookup table (LUT) and vertex adjacency lists for support 

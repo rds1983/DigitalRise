@@ -24,9 +24,7 @@ namespace DigitalRune.Geometry.Shapes
   /// not enforced; no exceptions are thrown in the setter of the properties.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Aabb")]
   public struct Aabb : IEquatable<Aabb>
   {

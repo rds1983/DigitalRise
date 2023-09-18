@@ -3,9 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY
 using System.Runtime.Serialization;
-#endif
 
 
 namespace DigitalRune.Mathematics
@@ -13,9 +11,7 @@ namespace DigitalRune.Mathematics
   /// <summary>
   /// The exception that is thrown when a general error in the mathematics library occurs.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class MathematicsException : Exception
   {
     /// <overloads>
@@ -58,7 +54,6 @@ namespace DigitalRune.Mathematics
     }
 
 
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
     /// <summary>
     /// Initializes a new instance of the <see cref="MathematicsException"/> class with serialized
     /// data.
@@ -81,6 +76,5 @@ namespace DigitalRune.Mathematics
       : base(info, context)
     {
     }
-#endif
   }
 }

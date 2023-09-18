@@ -15,9 +15,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <summary>
   /// Represents a cylinder centered at the local origin and upright along the y-axis.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class CylinderShape : ConvexShape
   {
     //--------------------------------------------------------------

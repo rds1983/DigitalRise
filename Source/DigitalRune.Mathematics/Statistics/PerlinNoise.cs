@@ -9,6 +9,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Statistics
@@ -53,7 +54,7 @@ namespace DigitalRune.Mathematics.Statistics
   /// <c>Compute(x, y, z, periodX, periodY, periodZ) == Compute(x + periodX, y + periodY, z + periodZ, periodX, periodY, periodZ)</c>
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public static class PerlinNoise
   {
     // Notes: 
@@ -74,7 +75,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <summary>
     /// Permutation table for <i>improved noise</i> by Ken Perlin.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2105:ArrayFieldsShouldNotBeReadOnly")]
+    [SuppressMessage("Microsoft.Security", "CA2105:ArrayFieldsShouldNotBeReadOnly")]
     public static readonly byte[] Permutation;
     #endregion
 
@@ -86,7 +87,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <summary>
     /// Initializes static members of the <see cref="PerlinNoise"/> class.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
+    [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
     static PerlinNoise()
     {
       var values = new byte[]
@@ -190,7 +191,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x)
     {
       int ix0 = (int)Math.Floor(x);
@@ -218,7 +219,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, int periodX)
     {
       // Make position positive using "positive modulo".
@@ -249,7 +250,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y)
     {
       int ix0 = (int)Math.Floor(x);
@@ -291,7 +292,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y, int periodX, int periodY)
     {
       // Make position positive using "positive modulo".
@@ -338,7 +339,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See <see cref="PerlinNoise"/> for details about Perlin Noise.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y, double z)
     {
       int ix0 = (int)Math.Floor(x);
@@ -400,7 +401,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y, double z, int periodX, int periodY, int periodZ)
     {
       // Make position positive using "positive modulo".
@@ -467,7 +468,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y, double z, double w)
     {
       int ix0 = (int)Math.Floor(x);
@@ -561,7 +562,7 @@ namespace DigitalRune.Mathematics.Statistics
     /// <remarks>
     /// See class description of <see cref="PerlinNoise" /> for more details.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public static double Compute(double x, double y, double z, double w,
                                  int periodX, int periodY, int periodZ, int periodW)
     {

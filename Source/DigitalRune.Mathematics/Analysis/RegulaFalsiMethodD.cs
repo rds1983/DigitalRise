@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -15,7 +16,7 @@ namespace DigitalRune.Mathematics.Analysis
   /// The false position method is a standard textbook method. If a faster method is required take a
   /// look at <i>Ridder's method</i> or <i>Brent's method</i>.
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public class RegulaFalsiMethodD : RootFinderD
   {
     /// <summary>
@@ -42,7 +43,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// An x value such that the root lies between <paramref name="x0"/> and <paramref name="x1"/>.
     /// </param>
     /// <returns>The x value such that <i>f(x) = 0</i>; or <i>NaN</i> if no root is found.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected override double FindRoot(Func<double, double> function, double x0, double x1)
     {
       NumberOfIterations = 0;

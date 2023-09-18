@@ -19,9 +19,7 @@ namespace DigitalRune.Geometry.Shapes
   /// A point is like a sphere where the radius is zero.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class PointShape : ConvexShape
   {
     //--------------------------------------------------------------

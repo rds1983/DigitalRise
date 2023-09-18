@@ -44,9 +44,7 @@ namespace DigitalRune.Geometry.Shapes
   /// copy of the shape - except when documented otherwise (see description of derived classes).
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   [XmlInclude(typeof(BoxShape))]
   [XmlInclude(typeof(CapsuleShape))]
   [XmlInclude(typeof(CircleShape))]

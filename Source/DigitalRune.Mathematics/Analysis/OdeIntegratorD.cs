@@ -4,6 +4,7 @@
 
 using System;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Analysis
@@ -76,7 +77,7 @@ namespace DigitalRune.Mathematics.Analysis
     /// <param name="t0">The time t0.</param>
     /// <param name="t1">The target time t1 for which the new state x1 is computed.</param>
     /// <returns>The new state x1 at time t1.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public abstract VectorD Integrate(VectorD x0, double t0, double t1);
   }
 }

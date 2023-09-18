@@ -18,9 +18,7 @@ namespace DigitalRune.Geometry
 {
   /// <exclude/>
   [CLSCompliant(false)]
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class DirectionalLookupTableUInt16F : DirectionalLookupTableF<ushort>
   {
     internal DirectionalLookupTableUInt16F(ushort[,,] cubeMap) : base(cubeMap)
@@ -42,9 +40,7 @@ namespace DigitalRune.Geometry
   /// <remarks>
   /// The directional lookup table internally uses a cube map to store the data.
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class DirectionalLookupTableF<T>
   {
     // Note: DirectionalLookupTableF<T> is only binary serializable, not xml-serializable.

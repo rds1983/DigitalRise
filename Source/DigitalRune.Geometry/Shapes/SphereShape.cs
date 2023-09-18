@@ -14,9 +14,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <summary>
   /// Represents a sphere.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class SphereShape : ConvexShape
   {
     //--------------------------------------------------------------

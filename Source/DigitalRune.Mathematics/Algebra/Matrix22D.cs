@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -23,13 +24,9 @@ namespace DigitalRune.Mathematics.Algebra
   /// </code>
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
   [TypeConverter(typeof(ExpandableObjectConverter))]
-#endif
-#if !XBOX && !UNITY
   [DataContract]
-#endif
   public struct Matrix22D : IEquatable<Matrix22D>
   {
     //--------------------------------------------------------------
@@ -63,37 +60,29 @@ namespace DigitalRune.Mathematics.Algebra
     /// <summary>
     /// The element in first row, first column.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [DataMember]
-#endif
     public double M00;
 
     /// <summary>
     /// The element in first row, second column.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [DataMember]
-#endif
     public double M01;
 
     /// <summary>
     /// The element in second row, first column.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [DataMember]
-#endif
     public double M10;
 
     /// <summary>
     /// The element in second row, second column.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-#if !XBOX && !UNITY
+    [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [DataMember]
-#endif
     public double M11;
     #endregion
 
@@ -160,7 +149,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="ArgumentOutOfRangeException">
     /// The index [<paramref name="row"/>, <paramref name="column"/>] is out of range.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+    [SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
     public double this[int row, int column]
     {
       get
@@ -350,7 +339,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <param name="m01">The element in the first row, second column.</param>
     /// <param name="m10">The element in the second row, first column.</param>
     /// <param name="m11">The element in the second row, second column.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Matrix22D(double m00, double m01,
                      double m10, double m11)
     {
@@ -370,7 +359,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Matrix22D(double[] elements, MatrixOrder order)
     {
       if (order == MatrixOrder.RowMajor)
@@ -401,7 +390,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Matrix22D(IList<double> elements, MatrixOrder order)
     {
       if (order == MatrixOrder.RowMajor)
@@ -431,8 +420,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    [CLSCompliant(false)]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Matrix22D(double[,] elements)
     {
       M00 = elements[0, 0]; M01 = elements[0, 1];
@@ -450,7 +438,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// <exception cref="NullReferenceException">
     /// <paramref name="elements"/> or the arrays in elements[0] must not be <see langword="null"/>.
     /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public Matrix22D(double[][] elements)
     {
       M00 = elements[0][0]; M01 = elements[0][1];
@@ -843,7 +831,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// </summary>
     /// <param name="matrix">The matrix.</param>
     /// <returns>The result of the conversion.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
+    [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
     public static explicit operator double[,](Matrix22D matrix)
     {
       double[,] result = new double[2, 2];
@@ -859,7 +847,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// Converts this <see cref="Matrix22D"/> to a 2-dimensional <see langword="double"/> array.
     /// </summary>
     /// <returns>The result of the conversion.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
+    [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
     public double[,] ToArray2D()
     {
       return (double[,])this;

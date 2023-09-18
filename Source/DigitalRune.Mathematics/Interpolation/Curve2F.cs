@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -61,15 +62,13 @@ namespace DigitalRune.Mathematics.Interpolation
   /// are a valid. In general, the results are undefined if a curve contains invalid tangents.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+  [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
   public class Curve2F : PiecewiseCurveF<Vector2F, CurveKey2F>, IXmlSerializable
   {
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+    [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+    [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
     public override Vector2F GetPoint(float parameter)
     {
       int numberOfKeys = Count;
@@ -304,8 +303,8 @@ namespace DigitalRune.Mathematics.Interpolation
     /// If the curve keys contain invalid tangents, the results are undefined.
     /// </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+    [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+    [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
     public override Vector2F GetTangent(float parameter)
     {
       int numberOfKeys = Count;
@@ -562,7 +561,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <param name="index">The index.</param>
     /// <param name="xSpline">The x spline.</param>
     /// <param name="ySpline">The y spline.</param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+    [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     private void GetSplines(int index, out ICurve<float, float> xSpline, out ICurve<float, float> ySpline)
     {
       // Spline keys
@@ -783,7 +782,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// produced by the <see cref="IXmlSerializable.WriteXml(XmlWriter)"/> method and consumed by
     /// the <see cref="IXmlSerializable.ReadXml(XmlReader)"/> method.
     /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+    [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
     XmlSchema IXmlSerializable.GetSchema()
     {
       return null;
@@ -796,7 +795,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// <param name="reader">
     /// The <see cref="XmlReader"/> stream from which the object is deserialized. 
     /// </param>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
       reader.ReadStartElement();

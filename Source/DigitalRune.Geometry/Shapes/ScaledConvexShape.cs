@@ -19,9 +19,7 @@ namespace DigitalRune.Geometry.Shapes
   /// the box extent (e.g. <see cref="BoxShape.WidthX"/>) directly.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class ScaledConvexShape : ConvexShape
   {
     //--------------------------------------------------------------

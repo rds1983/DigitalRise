@@ -669,9 +669,6 @@ namespace DigitalRune.Particles
     /// The collection of child particle systems. The default value is <see langword="null"/>.
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public ParticleSystemCollection Children
     {
       get { return _children; }

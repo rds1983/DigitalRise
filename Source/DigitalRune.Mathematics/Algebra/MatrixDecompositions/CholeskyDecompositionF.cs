@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DigitalRune.Mathematics.Algebra
 {
@@ -37,7 +37,7 @@ namespace DigitalRune.Mathematics.Algebra
   /// </list>
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cholesky")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cholesky")]
   public class CholeskyDecompositionF
   {
     //--------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace DigitalRune.Mathematics.Algebra
     /// Gets the lower triangular matrix L. (This property returns the internal matrix, not a copy.)
     /// </summary>
     /// <value>The lower triangular matrix L.</value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public MatrixF L
     {
       get { return _l; }

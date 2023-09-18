@@ -69,9 +69,7 @@ namespace DigitalRune.Geometry.Shapes
   /// If a <see cref="Partition"/> is in use, the spatial partition will be cloned. 
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class TriangleMeshShape : Shape
   {
     //--------------------------------------------------------------

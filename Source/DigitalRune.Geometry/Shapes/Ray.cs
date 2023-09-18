@@ -24,9 +24,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <see cref="Direction"/> and <see cref="Length"/> are equal.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public struct Ray : IEquatable<Ray>
   {
     //--------------------------------------------------------------

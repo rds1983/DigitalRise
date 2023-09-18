@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -27,7 +28,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// parameter</i> is a scalar. The result of <i>C(parameter)</i> is a <i>point</i> on the curve.
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
   public interface ICurve<TParam, TPoint>
   {
     /// <summary>
@@ -74,7 +75,7 @@ namespace DigitalRune.Mathematics.Interpolation
     /// the <paramref name="maxNumberOfIterations"/> were performed, or when the 
     /// <paramref name="tolerance"/> criterion is met - whichever comes first.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+    [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
     TParam GetLength(TParam start, TParam end, int maxNumberOfIterations, TParam tolerance);
 
 

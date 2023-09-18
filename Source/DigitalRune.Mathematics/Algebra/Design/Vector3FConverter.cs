@@ -2,8 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !NETFX_CORE && !PORTABLE
-
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -14,12 +12,7 @@ namespace DigitalRune.Mathematics.Algebra.Design
   /// <summary>
   /// Converts a <see cref="Vector3F"/> to and from string representation.
   /// </summary>
-  public class Vector3FConverter 
-#if !SILVERLIGHT && !WP7 && !WP8 && !XBOX
-    : ExpandableObjectConverter
-#else
-    : TypeConverter
-#endif
+  public class Vector3FConverter: ExpandableObjectConverter
   {
     /// <summary>
     /// Returns whether this converter can convert an object of the given type to the type of this
@@ -109,4 +102,3 @@ namespace DigitalRune.Mathematics.Algebra.Design
     }
   }
 }
-#endif

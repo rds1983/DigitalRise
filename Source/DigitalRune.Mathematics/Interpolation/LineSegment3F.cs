@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -64,7 +65,7 @@ namespace DigitalRune.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     public void Flatten(ICollection<Vector3F> points, int maxNumberOfIterations, float tolerance)
     {
       points.Add(Point1);

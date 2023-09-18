@@ -22,9 +22,7 @@ namespace DigitalRune.Geometry.Meshes
   /// <c>Lists[ListIndices[i + 1] - 1]</c>.
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class VertexAdjacency
   {
     // Note: DirectionalLookupTableF<T> is only binary serializable, not xml-serializable.

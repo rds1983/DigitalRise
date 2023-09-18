@@ -18,9 +18,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <summary>
   /// Represents a box centered at the origin.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class BoxShape : ConvexShape
   {
     // TODO: Optimize: The support vertex distance could be simply computed as Dot(v.absolute().Normalized, halfExtentVector).
@@ -45,9 +43,6 @@ namespace DigitalRune.Geometry.Shapes
     /// A component of <paramref name="value"/> is negative.
     /// </exception>
     [XmlIgnore]
-#if XNA || MONOGAME
-    [ContentSerializerIgnore]
-#endif
     public Vector3F Extent
     {
       get { return new Vector3F(_widthX, _widthY, _widthZ); }

@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using DigitalRune.Mathematics.Algebra;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace DigitalRune.Mathematics.Interpolation
@@ -45,7 +46,7 @@ namespace DigitalRune.Mathematics.Interpolation
   /// returns the end point <see cref="Point3"/>.
   /// </para>
   /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Catmull")]
+  [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Catmull")]
   public class CatmullRomSegment2F : ICurve<float, Vector2F>, IRecyclable
   {
     /// <summary>

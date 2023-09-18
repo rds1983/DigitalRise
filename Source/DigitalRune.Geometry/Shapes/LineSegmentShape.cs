@@ -21,9 +21,7 @@ namespace DigitalRune.Geometry.Shapes
   /// representation of a line segment (avoids allocating memory on the heap).
   /// </para>
   /// </remarks>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public class LineSegmentShape : ConvexShape
   {
     //--------------------------------------------------------------

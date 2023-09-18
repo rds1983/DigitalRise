@@ -10,9 +10,7 @@ namespace DigitalRune.Geometry.Shapes
   /// <summary>
   /// Provides arguments for an <see cref="Shape.Changed"/> event of a <see cref="Shape"/>.
   /// </summary>
-#if !NETFX_CORE && !SILVERLIGHT && !WP7 && !WP8 && !XBOX && !UNITY && !PORTABLE
   [Serializable]
-#endif
   public sealed class ShapeChangedEventArgs : EventArgs, IRecyclable
   {
     private static readonly ResourcePool<ShapeChangedEventArgs> Pool =
