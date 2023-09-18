@@ -3,9 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using Microsoft.Xna.Framework.Input;
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.Input
@@ -68,14 +65,12 @@ namespace DigitalRune.Game.Input
     public ModifierKeys ModifierKeys { get; set; }
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Gets or sets the modifier buttons that must be down. Gamepad buttons do not trigger any 
     /// actions if the modifier buttons are released. (Not available in Silverlight.)
     /// </summary>
     /// <value>The modifier buttons.</value>
     public Buttons? ModifierButtons { get; set; }
-#endif
 
 
     /// <summary>
@@ -110,7 +105,6 @@ namespace DigitalRune.Game.Input
     public Keys? NegativeKey { get; set; }
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Gets or sets the gamepad button that triggers a positive action.
     /// (Not available in Silverlight.)
@@ -125,7 +119,6 @@ namespace DigitalRune.Game.Input
     /// </summary>
     /// <value>The gamepad button that triggers a negative action.</value>
     public Buttons? NegativeButton { get; set; }
-#endif
 
 
     /// <summary>

@@ -4,13 +4,7 @@
 
 using System;
 using Microsoft.Xna.Framework.Input;
-
-#if USE_DIGITALRUNE_MATHEMATICS
 using DigitalRune.Mathematics.Algebra;
-#else
-using Vector2F = Microsoft.Xna.Framework.Vector2;
-using Vector3F = Microsoft.Xna.Framework.Vector3;
-#endif
 
 
 namespace DigitalRune.Game.Input
@@ -101,7 +95,6 @@ namespace DigitalRune.Game.Input
     public float TriggerThreshold { get; set; }
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Gets or sets the type of gamepad dead zone processing that is used for analog sticks
     /// of the gamepads. (Not available in Silverlight.)
@@ -112,7 +105,6 @@ namespace DigitalRune.Game.Input
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "GamePad")]
     public GamePadDeadZone GamePadDeadZone { get; set; }
-#endif
 
 
     /// <summary>
@@ -121,29 +113,20 @@ namespace DigitalRune.Game.Input
     public InputSettings()
     {
       DoubleClickTime = new TimeSpan(0, 0, 0, 0, 500);    // 500 ms
-      if (GlobalSettings.PlatformID == PlatformID.WindowsPhone7
-          || GlobalSettings.PlatformID == PlatformID.WindowsPhone8
-          || GlobalSettings.PlatformID == PlatformID.WindowsStore
-          || GlobalSettings.PlatformID == PlatformID.Android
-          || GlobalSettings.PlatformID == PlatformID.iOS)
-      {
-        // No mouse on phone. Mouse is always used for touch input.
-        // Use 100 pixels for big fingers.
-        DoubleClickSize = new Vector2F(100);
-      }
-      else
-      {
-        DoubleClickSize = new Vector2F(4);
-      }
+#if ANDROID || IOS
+      // No mouse on phone. Mouse is always used for touch input.
+      // Use 100 pixels for big fingers.
+      DoubleClickSize = new Vector2F(100);
+#else
+      DoubleClickSize = new Vector2F(4);
+#endif
 
       MouseCenter = new Vector2F(300, 300);
       RepetitionDelay = new TimeSpan(0, 0, 0, 0, 500);    // 500 ms
       RepetitionInterval = new TimeSpan(0, 0, 0, 0, 100); // 100 ms
       ThumbstickThreshold = 0.5f;
       TriggerThreshold = 0.2f;
-#if !SILVERLIGHT
       GamePadDeadZone = GamePadDeadZone.IndependentAxes;
-#endif
     }
   }
 }

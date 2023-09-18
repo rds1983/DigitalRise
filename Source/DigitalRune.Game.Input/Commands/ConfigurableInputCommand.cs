@@ -243,14 +243,12 @@ namespace DigitalRune.Game.Input
         HandleMouseButtons(mapping);
       }
 
-#if !SILVERLIGHT
       if (mapping.ModifierButtons == null
           || InputService.IsDown(mapping.ModifierButtons.Value, LogicalPlayerIndex))
       {
         // No modifiers necessary, or all modifiers are down.
         HandleButtons(mapping);
       }
-#endif
 
       Value = MathHelper.Clamp(Value, -1, 1);
       
@@ -299,7 +297,6 @@ namespace DigitalRune.Game.Input
       }
     }
 
-#if !SILVERLIGHT
     private void HandleButtons(InputMapping mapping)
     {
       if (mapping.PositiveButton == null && mapping.NegativeButton == null)
@@ -329,8 +326,6 @@ namespace DigitalRune.Game.Input
           Value--;
       }
     }
-#endif
-
 
     private void HandleMouseButtons(InputMapping mapping)
     {
@@ -387,7 +382,6 @@ namespace DigitalRune.Game.Input
         case DeviceAxis.MouseWheel:
           axisValue = InputService.MouseWheelDelta;
           break;
-#if !SILVERLIGHT
         case DeviceAxis.GamePadStickLeftX:
           axisValue = InputService.GetGamePadState(LogicalPlayerIndex).ThumbSticks.Left.X;
           break;
@@ -406,7 +400,6 @@ namespace DigitalRune.Game.Input
         case DeviceAxis.GamePadTriggerRight:
           axisValue = InputService.GetGamePadState(LogicalPlayerIndex).Triggers.Right;
           break;
-#endif
         default:
           Debug.Assert(false, "Unhandled device axis.");
           break;

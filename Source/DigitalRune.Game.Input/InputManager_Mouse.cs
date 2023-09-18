@@ -4,13 +4,7 @@
 
 using System;
 using Microsoft.Xna.Framework.Input;
-
-#if USE_DIGITALRUNE_MATHEMATICS
 using DigitalRune.Mathematics.Algebra;
-#else
-using Vector2F = Microsoft.Xna.Framework.Vector2;
-using Vector3F = Microsoft.Xna.Framework.Vector3;
-#endif
 
 
 namespace DigitalRune.Game.Input
@@ -38,14 +32,9 @@ namespace DigitalRune.Game.Input
 
         _enableMouseCentering = value;
 
-#if MONOGAME
-        Mouse.IsRelative = value;
-#endif
-        
         if (_enableMouseCentering)
         {
-          if (GlobalSettings.PlatformID != PlatformID.WindowsPhone7 && GlobalSettings.PlatformID != PlatformID.WindowsPhone8 && GlobalSettings.PlatformID != PlatformID.Android && GlobalSettings.PlatformID != PlatformID.iOS)
-          { 
+#if ANDROID || IOS
             // Immediately reset mouse position, so that mouse delta is zero in the next frame.
             // Otherwise, the 3D camera would make a jump in the next frame.
             var mouseCenter = Settings.MouseCenter;
@@ -53,7 +42,7 @@ namespace DigitalRune.Game.Input
             _newMouseState = Mouse.GetState();
             MousePosition = MousePositionRaw;
             MousePositionDelta = MousePositionDeltaRaw;
-          }
+#endif
         }
       }
     }
@@ -94,11 +83,7 @@ namespace DigitalRune.Game.Input
         if (!EnableMouseCentering)
           return new Vector2F(_newMouseState.X - _previousMouseState.X, _newMouseState.Y - _previousMouseState.Y);
 
-#if MONOGAME
-        return new Vector2F(_newMouseState.DeltaX, _newMouseState.DeltaY);
-#else
         return new Vector2F(_newMouseState.X - Settings.MouseCenter.X, _newMouseState.Y - Settings.MouseCenter.Y);
-#endif
       }
     }
 
@@ -116,7 +101,7 @@ namespace DigitalRune.Game.Input
     {
       get { return _newMouseState.ScrollWheelValue - _previousMouseState.ScrollWheelValue; }
     }
-    #endregion
+#endregion
 
 
     //--------------------------------------------------------------
@@ -204,8 +189,11 @@ namespace DigitalRune.Game.Input
 
       // ----- Reset mouse position if mouse-centering is enabled. 
       if (EnableMouseCentering)
-        if (GlobalSettings.PlatformID != PlatformID.WindowsPhone7 && GlobalSettings.PlatformID != PlatformID.WindowsPhone8 && GlobalSettings.PlatformID != PlatformID.Android && GlobalSettings.PlatformID != PlatformID.iOS)
+      {
+#if ANDROID || IOS
           Mouse.SetPosition((int)Settings.MouseCenter.X, (int)Settings.MouseCenter.Y);
+#endif
+      }
     }
 
 
@@ -320,6 +308,6 @@ namespace DigitalRune.Game.Input
     {
       return _lastMouseButton.Button == button && _lastMouseButton.IsDoubleClick;
     }
-    #endregion
+#endregion
   }
 }

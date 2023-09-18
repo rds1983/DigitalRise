@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-#if !SILVERLIGHT
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -93,15 +92,13 @@ namespace DigitalRune.Game.Input
         var lastGamePadButton = _lastGamePadButtons[player];
 
         var isConnected = newGamePadState.IsConnected;
-        if (GlobalSettings.PlatformID == PlatformID.WindowsPhone7
-            || GlobalSettings.PlatformID == PlatformID.WindowsPhone8)
-        {
+#if ANDROID || IOS
           // In WP7 the first gamepad is never connected but it is used for the Back button.
           // In MonoGame/WP8 the first gamepad is connected when the back button is down.
           // To detect Back double-clicks, we treat the first gamepad as connected.
           if (playerIndex == PlayerIndex.One)
             isConnected = true;
-        }
+#endif
 
         // ---- Reset state and skip rest of loop if this gamepad is not connected.
         if (!isConnected)
@@ -499,7 +496,6 @@ namespace DigitalRune.Game.Input
       var lastGamePadButton = _lastGamePadButtons[index];
       return lastGamePadButton.Button == button && lastGamePadButton.IsDoubleClick;
     }
-    #endregion
+#endregion
   }
 }
-#endif

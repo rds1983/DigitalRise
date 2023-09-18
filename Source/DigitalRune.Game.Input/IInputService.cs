@@ -5,19 +5,10 @@
 using System;
 using System.Collections.ObjectModel;
 using Microsoft.Xna.Framework.Input;
-#if !SILVERLIGHT
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-#else
-using Keys = System.Windows.Input.Key;
-#endif
-#if USE_DIGITALRUNE_MATHEMATICS
 using DigitalRune.Mathematics.Algebra;
-#else
-using Vector2F = Microsoft.Xna.Framework.Vector2;
-using Vector3F = Microsoft.Xna.Framework.Vector3;
-#endif
 
 
 namespace DigitalRune.Game.Input
@@ -178,7 +169,6 @@ namespace DigitalRune.Game.Input
     bool IsKeyboardHandled { get; set; }
 
 
-#if !SILVERLIGHT
     /// <summary>
     /// Gets the game controller assigned to the specified player. (Not available in Silverlight.)
     /// </summary>
@@ -291,7 +281,6 @@ namespace DigitalRune.Game.Input
     /// <inheritdoc cref="IsGamePadHandled(LogicalPlayerIndex)"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Consistent with XNA.")]
     bool IsGamePadHandled(PlayerIndex controller);
-#endif
 
 
     /// <summary>
@@ -438,7 +427,6 @@ namespace DigitalRune.Game.Input
     ModifierKeys ModifierKeys { get; }
 
 
-#if !SILVERLIGHT
     /// <overloads>
     /// <summary>
     /// Gets the state of a game controller. (Not available in Silverlight.)
@@ -502,36 +490,6 @@ namespace DigitalRune.Game.Input
     GamePadState GetPreviousGamePadState(PlayerIndex controller);
 
 
-#if !MONOGAME
-    /// <summary>
-    /// Gets a value indicating whether an accelerometer is connected and can be used. 
-    /// (Only available in XNA Windows Phone builds.)
-    /// </summary>
-    /// <value>
-    /// <see langword="true"/> if an accelerometer is connected and can be used; otherwise, 
-    /// <see langword="false"/>.
-    /// </value>
-    /// <remarks>
-    /// This type is only available on the following platforms: XNA Windows Phone.
-    /// </remarks>
-    bool IsAccelerometerActive { get; }
-
-
-    /// <summary>
-    /// Gets the accelerometer value. 
-    /// (Only available in XNA Windows Phone builds.)
-    /// </summary>
-    /// <value>The accelerometer value.</value>
-    /// <remarks>
-    /// Use <see cref="IsAccelerometerActive"/> to check if an accelerometer is actually connected.
-    /// </remarks>
-    /// <remarks>
-    /// This type is only available on the following platforms: XNA Windows Phone.
-    /// </remarks>
-    Vector3F AccelerometerValue { get; }
-#endif
-
-
     /// <summary>
     /// Gets the touch collection. (Not available in Silverlight.)
     /// </summary>
@@ -549,7 +507,6 @@ namespace DigitalRune.Game.Input
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Performance")]
     List<GestureSample> Gestures { get; }
-#endif
 
 
     /// <summary>
@@ -559,7 +516,6 @@ namespace DigitalRune.Game.Input
     InputCommandCollection Commands { get; }
 
 
-#if !SILVERLIGHT
     /// <overloads>
     /// <summary>
     /// Determines whether the specified button or key is down. (Not available in Silverlight.)
@@ -757,7 +713,6 @@ namespace DigitalRune.Game.Input
     /// <see langword="false"/>.
     /// </returns>
     bool IsDoubleClick(Buttons button, PlayerIndex controller);
-#endif
 
 
     /// <summary>

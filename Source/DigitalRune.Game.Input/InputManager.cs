@@ -6,16 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using DigitalRune.Mathematics.Algebra;
-#if !SILVERLIGHT
 using Microsoft.Xna.Framework;
-#if XNA
-using Microsoft.Xna.Framework.GamerServices;
-#endif
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-#else
-using Keys = System.Windows.Input.Key;
-#endif
 
 
 namespace DigitalRune.Game.Input
@@ -69,9 +62,7 @@ namespace DigitalRune.Game.Input
 
     // Arrays containing all keys and buttons so that we can enumerate them easily.
     private static readonly Keys[] _keys;
-#if !SILVERLIGHT
     private static readonly Buttons[] _gamePadButtons;
-#endif
     private static readonly MouseButtons[] _mouseButtons;
     #endregion
 
@@ -80,18 +71,14 @@ namespace DigitalRune.Game.Input
     #region Fields
     //--------------------------------------------------------------
 
-#if XNA
     private readonly bool _gamerServicesEnabled;
-#endif
 
     private readonly LastMouseButtonInfo<MouseButtons> _lastMouseButton;
     private readonly LastButtonInfo<Keys> _lastKey;
-#if !SILVERLIGHT
     private readonly LastButtonInfo<Buttons>[] _lastGamePadButtons;
 
     private readonly PlayerIndex?[] _logicalPlayers;
     private readonly bool[] _areGamePadsHandled;   // Index is PlayerIndex (not LogicalPlayerIndex).
-#endif
     #endregion
 
 
@@ -154,14 +141,12 @@ namespace DigitalRune.Game.Input
       for (int i = 0; i < maxNumberOfKeys; i++)
         _keys[i] = (Keys)keysValues[i];
 
-#if !SILVERLIGHT
       // Gamepad buttons:
       var buttonsValues = EnumHelper.GetValues(typeof(Buttons));
       var maxNumberOfButtons = buttonsValues.Length;
       _gamePadButtons = new Buttons[maxNumberOfButtons];
       for (int i = 0; i < maxNumberOfButtons; i++)
         _gamePadButtons[i] = (Buttons)buttonsValues[i];
-#endif
 
       // Mouse buttons:
       var mouseButtonsValues = EnumHelper.GetValues(typeof(MouseButtons));
@@ -182,62 +167,30 @@ namespace DigitalRune.Game.Input
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "gamerServicesEnabled", Justification = "The parameter should be removed when we stop supporting XNA.")]
     public InputManager(bool gamerServicesEnabled)
     {
-#if XNA
       _gamerServicesEnabled = gamerServicesEnabled;
-#endif
 
-#if XNA
       MaxNumberOfPlayers = 4;
       int gamePadArrayLength = 4;
-#else
-      // MonoGame supports a different number of game pads on each platform. Currently, there is no
-      // way to query the number of supported game pads. It is also different within the same
-      // platform: WindowStore on desktop 4 game pads vs. WindowsStore on phone 1 game pad
-      // Workaround:
-      MaxNumberOfPlayers = 0;
-      for (int i = 0; i < 4; i++)  // Some MonoGame platforms support up to 16 game pads but we only go up to 4.
-      {
-        try
-        {
-          GamePad.GetCapabilities(i);
-          MaxNumberOfPlayers = i + 1;
-        }
-        catch (InvalidOperationException)
-        {
-          break;
-        }
-      }
-
-      // Since the PlayerIndex/LogicalPlayerIndex enumeration has 4 values, we create arrays with
-      // at least 4 elements. The only platforms with less than 4 gamepads are iOS (0) and 
-      // WP8.1 (1).
-      var gamePadArrayLength = Math.Max(4, MaxNumberOfPlayers);
-#endif
 
       // Create default settings.
       Settings = new InputSettings();
 
-#if !SILVERLIGHT
       // Create map: logical player --> game controller.
       _logicalPlayers = new PlayerIndex?[gamePadArrayLength];
-#endif
 
       // Create last-button-info that stores the last pressed button for double-click detection
       // and button repetition (virtual button presses).
       _lastKey = new LastButtonInfo<Keys>();
       _lastMouseButton = new LastMouseButtonInfo<MouseButtons>();
-#if !SILVERLIGHT
       _lastGamePadButtons = new LastButtonInfo<Buttons>[gamePadArrayLength];
       for (int i = 0; i < _lastGamePadButtons.Length; i++)
         _lastGamePadButtons[i] = new LastButtonInfo<Buttons>();
-#endif
 
       // Keyboard
       _pressedKeys = new List<Keys>(10);                // Initial capacity: 10 (fingers)
       _pressedKeysAsReadOnly = new ReadOnlyCollection<Keys>(_pressedKeys); // Public read-only wrapper
 
 
-#if !SILVERLIGHT
       // Gamepads
       _areGamePadsHandled = new bool[gamePadArrayLength];
       _previousGamePadStates = new GamePadState[gamePadArrayLength];
@@ -258,7 +211,6 @@ namespace DigitalRune.Game.Input
       }
 
       _gestures = new List<GestureSample>();
-#endif
 
       // Input commands
       Commands = new InputCommandCollection(this);
@@ -270,7 +222,6 @@ namespace DigitalRune.Game.Input
     #region Methods
     //--------------------------------------------------------------
 
-#if !SILVERLIGHT
     /// <inheritdoc/>
     public void SetGamePadHandled(LogicalPlayerIndex player, bool value)
     {
@@ -327,7 +278,6 @@ namespace DigitalRune.Game.Input
       int index = (int)controller;
       return _areGamePadsHandled[index];
     }
-#endif
 
     /// <inheritdoc/>
     public void SetAllHandled(bool value)
@@ -335,10 +285,8 @@ namespace DigitalRune.Game.Input
       IsAccelerometerHandled = value;
       IsKeyboardHandled = value;
       IsMouseOrTouchHandled = value;
-#if !SILVERLIGHT
       for (int i = 0; i < _areGamePadsHandled.Length; i++)
         _areGamePadsHandled[i] = value;
-#endif
     }
 
 
@@ -350,11 +298,8 @@ namespace DigitalRune.Game.Input
     {
       // Reset IsHandled flags.
       // If the XNA guide or MonoGame guide replacement is visible, we have to ignore input.
-#if XNA
-      bool isHandled = (_gamerServicesEnabled && Guide.IsVisible);
-#else
-      bool isHandled = (KeyboardInput.IsVisible || MessageBox.IsVisible);
-#endif
+      bool isHandled = (_gamerServicesEnabled);
+
       IsAccelerometerHandled = isHandled;
       IsKeyboardHandled = isHandled;
       IsMouseOrTouchHandled = isHandled;
@@ -364,13 +309,8 @@ namespace DigitalRune.Game.Input
       // Update input devices.
       UpdateKeyboard(deltaTime);
       UpdateMouse(deltaTime);
-#if !SILVERLIGHT
       UpdateGamePads(deltaTime);
       UpdateTouch(deltaTime);
-#if !MONOGAME
-      UpdateAccelerometer();
-#endif
-#endif
 
       // Update commands.
       foreach (var command in Commands)

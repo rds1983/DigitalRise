@@ -7,31 +7,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Microsoft.Xna.Framework.Input;
 
-#if !WP7 && !XBOX
-using System.Runtime.InteropServices;
-#endif
-#if SILVERLIGHT
-using Keys = System.Windows.Input.Key;
-#endif
-
 
 namespace DigitalRune.Game.Input
 {
   partial class InputManager
   {
-    //--------------------------------------------------------------
-    #region Native Methods
-      //--------------------------------------------------------------
-
-#if WINDOWS
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1060:MovePInvokesToNativeMethodsClass")]
-    [DllImport("user32.dll")]
-    private static extern short GetKeyState(int key);
-#endif
-    #endregion
-
-
-    //--------------------------------------------------------------
     #region Fields
     //--------------------------------------------------------------
     #endregion
@@ -77,7 +57,6 @@ namespace DigitalRune.Game.Input
         // Lazy evaluation. _modifierKeys is automatically reset to null in Update().
         // Check which modifier keys are pressed.
         _modifierKeys = ModifierKeys.None;
-#if !SILVERLIGHT
         if (IsDown(Keys.LeftShift) || IsDown(Keys.RightShift))
           _modifierKeys = _modifierKeys | ModifierKeys.Shift;
         if (IsDown(Keys.LeftControl) || IsDown(Keys.RightControl))
@@ -86,15 +65,6 @@ namespace DigitalRune.Game.Input
           _modifierKeys = _modifierKeys | ModifierKeys.Alt;
         if (IsDown(Keys.RightAlt))
           _modifierKeys = _modifierKeys | ModifierKeys.ControlAlt;
-#else
-        if (IsDown(Keys.Shift))
-          _modifierKeys = _modifierKeys | ModifierKeys.Shift;
-        if (IsDown(Keys.Ctrl))
-          _modifierKeys = _modifierKeys | ModifierKeys.Control;
-        if (IsDown(Keys.Alt))
-          _modifierKeys = _modifierKeys | ModifierKeys.Alt;
-#endif
-
 
         return _modifierKeys.Value;
       }
@@ -190,14 +160,6 @@ namespace DigitalRune.Game.Input
     /// <inheritdoc/>
     public bool IsDown(Keys key)
     {
-#if WINDOWS
-      if (key == Keys.CapsLock)
-      {
-        // Special handling of Caps Lock.
-        return (((ushort)GetKeyState(0x14)) & 0xffff) != 0;
-      }
-#endif
-
       return _newKeyboardState.IsKeyDown(key);
     }
 
@@ -205,14 +167,6 @@ namespace DigitalRune.Game.Input
     /// <inheritdoc/>
     public bool IsUp(Keys key)
     {
-#if WINDOWS
-      if (key == Keys.CapsLock)
-      {
-        // Special handling of Caps Lock.
-        return (((ushort)GetKeyState(0x14)) & 0xffff) == 0;
-      }
-#endif
-
       return _newKeyboardState.IsKeyUp(key);
     }
 

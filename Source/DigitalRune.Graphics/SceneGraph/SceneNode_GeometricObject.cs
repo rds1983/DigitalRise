@@ -584,3 +584,4 @@ namespace DigitalRune.Graphics.SceneGraph
     #endregion
   }
 }
+  
