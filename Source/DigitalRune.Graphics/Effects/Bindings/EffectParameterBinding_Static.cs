@@ -115,7 +115,7 @@ namespace DigitalRune.Graphics.Effects
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     internal static void ThrowIfArray(Effect effect, EffectParameterDescription description)
     {
-      if (description.Parameter.Elements.Count > 0)
+      if (description.Parameter.ElementsCount() > 0)
       {
         string message = string.Format(
           CultureInfo.InvariantCulture,
@@ -132,7 +132,7 @@ namespace DigitalRune.Graphics.Effects
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     internal static void ThrowIfNotArray(Effect effect, EffectParameterDescription description)
     {
-      if (description.Parameter.Elements.Count == 0)
+      if (description.Parameter.ElementsCount() == 0)
       {
         string message = string.Format(
           CultureInfo.InvariantCulture,
@@ -187,7 +187,7 @@ namespace DigitalRune.Graphics.Effects
 
       // Smaller arrays are ok, for example: Setting 58 skinning matrices out of max 72.
       // Bigger arrays are not allowed.
-      if (numberOfElements > parameter.Elements.Count)
+      if (numberOfElements > parameter.ElementsCount())
       {
         string message = String.Format(
           CultureInfo.InvariantCulture,
@@ -268,7 +268,7 @@ namespace DigitalRune.Graphics.Effects
         parameter.ParameterType,
         parameter.RowCount,
         parameter.ColumnCount,
-        parameter.Elements.Count,
+        parameter.ElementsCount(),
         description.Semantic,
         description.Index,
         description.Hint);

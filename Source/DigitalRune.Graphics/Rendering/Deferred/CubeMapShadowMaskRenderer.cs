@@ -81,7 +81,7 @@ namespace DigitalRune.Graphics.Rendering
       _parameterShadowMap = _effect.Parameters["ShadowMap"];
       _parameterSamples = _effect.Parameters["Samples"];
 
-      Debug.Assert(_parameterSamples.Elements.Count == _samples.Length);
+      Debug.Assert(_parameterSamples.ElementsCount() == _samples.Length);
 
       // TODO: Use struct parameter. Not yet supported in MonoGame.
       // Struct effect parameters are not yet supported in the MonoGame effect processor.

@@ -82,13 +82,13 @@ namespace DigitalRune.Graphics.Effects
 
         // Smaller arrays are ok, for example: Setting 58 skinning matrices out of max 72.
         // Bigger arrays are not allowed.
-        if (value.Length > Parameter.Elements.Count)
+        if (value.Length > Parameter.ElementsCount())
         {
           string message = String.Format(
             CultureInfo.InvariantCulture,
             "Length of the array ({0}) is greater than the number of elements of the effect parameter ({1}).",
             value.Length,
-            Parameter.Elements.Count);
+            Parameter.ElementsCount());
           throw new ArgumentException(message);
         }
 
@@ -226,7 +226,7 @@ namespace DigitalRune.Graphics.Effects
       if (parameter == null)
         return new T[0];
 
-      int numberOfElements = parameter.Elements.Count;
+      int numberOfElements = parameter.ElementsCount();
       T[] values = new T[numberOfElements];
       for (int i = 0; i < numberOfElements; i++)
         values[i] = value;

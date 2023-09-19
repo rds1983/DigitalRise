@@ -332,7 +332,7 @@ namespace DigitalRune.Graphics.PostProcessing
 
       _lastViewportSize = viewportSize;
 
-      int numberOfSamples = _offsetsParameter.Elements.Count;
+      int numberOfSamples = _offsetsParameter.ElementsCount();
       float standardDeviation = numberOfSamples / 3.0f * BlurStrength;
 
       if (_horizontalOffsets == null)

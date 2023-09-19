@@ -429,7 +429,7 @@ namespace DigitalRune.Graphics.Effects
     {
       Dictionary<string, CreateEffectParameterBinding> dictionary = null;
 
-      var isArray = parameter.Elements.Count > 0;
+      var isArray = parameter.ElementsCount() > 0;
 
       if (parameter.ParameterType == EffectParameterType.Bool)
       {

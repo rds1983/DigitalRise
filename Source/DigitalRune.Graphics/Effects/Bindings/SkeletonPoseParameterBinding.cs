@@ -108,7 +108,7 @@ namespace DigitalRune.Graphics.Effects
         Value = meshNode.SkeletonPose;
         if (Value != null)
         {
-          if (Value.Skeleton.NumberOfBones > Parameter.Elements.Count)
+          if (Value.Skeleton.NumberOfBones > Parameter.ElementsCount())
           {
             Value = null;
 
@@ -117,7 +117,7 @@ namespace DigitalRune.Graphics.Effects
               "Cannot update skeleton pose effect parameter binding: " +
               "The skeleton has {0} bones. The effect supports only {1} bones.",
               meshNode.SkeletonPose.Skeleton.NumberOfBones,
-              Parameter.Elements.Count);
+              Parameter.ElementsCount());
             throw new GraphicsException(message);
           }
 

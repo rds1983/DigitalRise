@@ -106,7 +106,7 @@ namespace DigitalRune.Graphics.Effects
       lut.Add(DefaultEffectParameterSemantics.NaN, (e, p, o) => new ConstParameterBinding<float>(e, p, float.NaN));
 
       lut = SingleArrayBindings;
-      lut.Add(DefaultEffectParameterSemantics.MorphWeight, (e, p, o) => new ConstParameterArrayBinding<float>(e, p, new float[p.Elements.Count]));
+      lut.Add(DefaultEffectParameterSemantics.MorphWeight, (e, p, o) => new ConstParameterArrayBinding<float>(e, p, new float[p.ElementsCount()]));
 
       lut = MatrixArrayBindings;
       lut.Add(DefaultEffectParameterSemantics.Bones, (e, p, o) => new SkeletonPoseParameterBinding(e, p));

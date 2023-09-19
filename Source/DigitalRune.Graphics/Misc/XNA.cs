@@ -36,5 +36,15 @@ namespace DigitalRune.Graphics
 
 			return 0;
 		}
+
+		public static int ElementsCount(this EffectParameter parameter)
+		{
+			if (parameter == null || parameter.Elements == null)
+			{
+				return 0;
+			}
+
+			return parameter.Elements.Count;
+		}
 	}
 }

@@ -108,7 +108,7 @@ namespace DigitalRune.Graphics.Effects
     {
       try
       {
-        if (Parameter.Elements.Count > 0)
+        if (Parameter.ElementsCount() > 0)
           return;
 
         if (Parameter.StructureMembers.Count == 0)

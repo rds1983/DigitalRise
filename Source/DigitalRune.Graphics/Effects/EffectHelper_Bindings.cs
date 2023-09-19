@@ -97,7 +97,7 @@ namespace DigitalRune.Graphics.Effects
         // structs. We bind the struct members directly.
         if (parameter.ParameterClass == EffectParameterClass.Struct)
         {
-          if (parameter.Elements.Count > 0)
+          if (parameter.ElementsCount() > 0)
           {
             // Effect parameter is an array of structs. 
             foreach (EffectParameter element in parameter.Elements)
@@ -161,7 +161,7 @@ namespace DigitalRune.Graphics.Effects
         return false;
 
       EffectParameterBinding binding = null;
-      if (parameter.Elements.Count == 0)
+      if (parameter.ElementsCount() == 0)
       {
         // ----- Parameter is not an array.
         if (parameter.ParameterClass == EffectParameterClass.Scalar)
@@ -328,7 +328,7 @@ namespace DigitalRune.Graphics.Effects
 
       if (parameter.ParameterClass == EffectParameterClass.Struct)
       {
-        if (parameter.Elements.Count > 0)
+        if (parameter.ElementsCount() > 0)
         {
           // ----- Effect parameter is an array of structs. --> Recursively process elements of array.
           foreach (EffectParameter element in parameter.Elements)
@@ -349,7 +349,7 @@ namespace DigitalRune.Graphics.Effects
       object originalValue;
       effectEx.OriginalParameterValues.TryGetValue(parameter, out originalValue);
       EffectParameterBinding binding = null;
-      if (parameter.Elements.Count == 0)
+      if (parameter.ElementsCount() == 0)
       {
         // ----- Parameter is not an array.
 
@@ -434,7 +434,7 @@ namespace DigitalRune.Graphics.Effects
       else
       {
         // ----- Parameter is array.
-        int length = parameter.Elements.Count;
+        int length = parameter.ElementsCount();
         Debug.Assert(length > 0, "Effect parameter should be an array.");
 
         // Note: In XNA originalValue is valid. In MonoGame originalValue is null and we have to
@@ -444,24 +444,24 @@ namespace DigitalRune.Graphics.Effects
         {
           // Scalar value bindings.
           if (parameter.ParameterType == EffectParameterType.Bool)
-            binding = new ConstParameterArrayBinding<bool>(effect, parameter, (bool[])originalValue ?? new bool[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<bool>(effect, parameter, (bool[])originalValue ?? new bool[parameter.ElementsCount()]);
           else if (parameter.ParameterType == EffectParameterType.Int32)
-            binding = new ConstParameterArrayBinding<int>(effect, parameter, (int[])originalValue ?? new int[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<int>(effect, parameter, (int[])originalValue ?? new int[parameter.ElementsCount()]);
           else if (parameter.ParameterType == EffectParameterType.Single)
-            binding = new ConstParameterArrayBinding<float>(effect, parameter, (float[])originalValue ?? new float[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<float>(effect, parameter, (float[])originalValue ?? new float[parameter.ElementsCount()]);
         }
         else if (parameter.ParameterClass == EffectParameterClass.Vector && parameter.ParameterType == EffectParameterType.Single)
         {
           if (parameter.ColumnCount == 2 || parameter.RowCount == 2)
-            binding = new ConstParameterArrayBinding<Vector2>(effect, parameter, (Vector2[])originalValue ?? new Vector2[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<Vector2>(effect, parameter, (Vector2[])originalValue ?? new Vector2[parameter.ElementsCount()]);
           else if (parameter.ColumnCount == 3 || parameter.RowCount == 3)
-            binding = new ConstParameterArrayBinding<Vector3>(effect, parameter, (Vector3[])originalValue ?? new Vector3[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<Vector3>(effect, parameter, (Vector3[])originalValue ?? new Vector3[parameter.ElementsCount()]);
           else if (parameter.ColumnCount == 4 || parameter.RowCount == 4)
-            binding = new ConstParameterArrayBinding<Vector4>(effect, parameter, (Vector4[])originalValue ?? new Vector4[parameter.Elements.Count]);
+            binding = new ConstParameterArrayBinding<Vector4>(effect, parameter, (Vector4[])originalValue ?? new Vector4[parameter.ElementsCount()]);
         }
         else if (parameter.ParameterClass == EffectParameterClass.Matrix && parameter.ParameterType == EffectParameterType.Single)
         {
-          binding = new ConstParameterArrayBinding<Matrix>(effect, parameter, (Matrix[])originalValue ?? new Matrix[parameter.Elements.Count]);
+          binding = new ConstParameterArrayBinding<Matrix>(effect, parameter, (Matrix[])originalValue ?? new Matrix[parameter.ElementsCount()]);
         }
         else if (parameter.ParameterClass == EffectParameterClass.Object)
         {
@@ -583,7 +583,7 @@ namespace DigitalRune.Graphics.Effects
     {
       if (parameter.ParameterClass == EffectParameterClass.Struct)
       {
-        if (parameter.Elements.Count > 0)
+        if (parameter.ElementsCount() > 0)
         {
           // ----- Effect parameter is an array of structs.
           foreach (EffectParameter element in parameter.Elements)
@@ -600,7 +600,7 @@ namespace DigitalRune.Graphics.Effects
       }
 
       object value = null;
-      if (parameter.Elements.Count == 0)
+      if (parameter.Elements == null || parameter.ElementsCount() == 0)
       {
         // ----- Parameter is not an array.
         if (parameter.ParameterClass == EffectParameterClass.Scalar)
@@ -646,7 +646,7 @@ namespace DigitalRune.Graphics.Effects
       else
       {
         // ----- Parameter is array.
-        int length = parameter.Elements.Count;
+        int length = parameter.ElementsCount();
         Debug.Assert(length > 0, "Effect parameter should be an array.");
 
         if (parameter.ParameterClass == EffectParameterClass.Scalar)

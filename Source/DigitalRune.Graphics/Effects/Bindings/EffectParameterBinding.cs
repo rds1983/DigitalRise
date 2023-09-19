@@ -247,7 +247,7 @@ namespace DigitalRune.Graphics.Effects
       // Compare Parameter recursively with all array elements.
       foreach (var parameter in effect.Parameters)
       {
-        if (parameter.Elements.Count > 0)
+        if (parameter.ElementsCount() > 0)
         {
           if (parameter.ParameterClass == EffectParameterClass.Struct // parameter is an array of structs. --> A field of the structs might contain the wanted parameter.
               || parameter.ParameterClass == Parameter.ParameterClass // Element type matches parameter. --> Check elements. (e.g. parameter is array of LightDirections and Parameter is LightDirection3).
@@ -310,7 +310,7 @@ namespace DigitalRune.Graphics.Effects
       // Recursively compare with all array elements.
       foreach (EffectParameter parameter in parameterCollection)
       {
-        if (parameter.Elements.Count > 0)
+        if (parameter.ElementsCount() > 0)
         {
           // Current parameter in parameterCollection is an array.
           // -> Recursively check elements of array.

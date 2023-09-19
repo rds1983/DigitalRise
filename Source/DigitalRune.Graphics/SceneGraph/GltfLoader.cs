@@ -5,12 +5,14 @@ using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
 using DigitalRune.Geometry;
+using DigitalRune.Graphics.Effects;
 using DigitalRune.Mathematics.Algebra;
 using glTFLoader;
 using glTFLoader.Schema;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
+using StbImageSharp;
 using static glTFLoader.Schema.AnimationChannelTarget;
 
 namespace DigitalRune.Graphics.SceneGraph
@@ -62,7 +64,7 @@ namespace DigitalRune.Graphics.SceneGraph
 			}
 		}
 
-		private GraphicsDevice _device;
+		private IGraphicsService _graphicsService;
 		private AssetManager _assetManager;
 		private string _assetName;
 		private Gltf _gltf;
@@ -290,7 +292,7 @@ namespace DigitalRune.Graphics.SceneGraph
 					}
 
 					var vd = new VertexDeclaration(vertexElements);
-					var vertexBuffer = new VertexBuffer(_device, vd, vertexCount.Value, BufferUsage.None);
+					var vertexBuffer = new VertexBuffer(_graphicsService.GraphicsDevice, vd, vertexCount.Value, BufferUsage.None);
 
 					// Set vertex data
 					var vertexData = new byte[vertexCount.Value * vd.VertexStride];
@@ -346,16 +348,54 @@ namespace DigitalRune.Graphics.SceneGraph
 					var elementSize = (indexAccessor.ComponentType == Accessor.ComponentTypeEnum.SHORT ||
 						indexAccessor.ComponentType == Accessor.ComponentTypeEnum.UNSIGNED_SHORT) ?
 						IndexElementSize.SixteenBits : IndexElementSize.ThirtyTwoBits;
-					var indexBuffer = new IndexBuffer(_device, elementSize, indexAccessor.Count, BufferUsage.None);
+					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.None);
 					indexBuffer.SetData(0, indexData.Array, indexData.Offset, indexData.Count);
 
 					var subMesh = new Submesh
 					{
 						VertexBuffer = vertexBuffer,
-						IndexBuffer = indexBuffer
+						IndexBuffer = indexBuffer,
+						VertexCount = vertexBuffer.VertexCount,
+						PrimitiveCount = indexBuffer.IndexCount / 3
 					};
 
-					mesh.Submeshes.Add(subMesh);
+          mesh.Submeshes.Add(subMesh);
+          if (primitive.Material != null)
+          {
+            var gltfMaterial = _gltf.Materials[primitive.Material.Value];
+            if (gltfMaterial.PbrMetallicRoughness != null)
+            {
+              var opaqueData = new Dictionary<string, object>
+              {
+                ["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
+                ["SpecularColor"] = new Vector3(0.1f),
+                ["SpecularPower"] = 10.0f
+              };
+
+              if (gltfMaterial.PbrMetallicRoughness.BaseColorTexture != null)
+              {
+                var gltfTexture = _gltf.Textures[gltfMaterial.PbrMetallicRoughness.BaseColorTexture.Index];
+                if (gltfTexture.Source != null)
+                {
+                  using (var stream = _gltf.OpenImageFile(gltfTexture.Source.Value, path => FileResolver(path)))
+                  {
+                    var imageResult = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+                    var texture = new Texture2D(_graphicsService.GraphicsDevice, imageResult.Width, imageResult.Height);
+                    texture.SetData(imageResult.Data);
+
+										opaqueData["Texture"] = texture;
+                  }
+                }
+              }
+
+							var binding = new BasicEffectBinding(_graphicsService, opaqueData);
+              var material = new Material
+              {
+                { "Default", binding }
+              };
+              subMesh.SetMaterial(material);
+            }
+          }
 				}
 
 				_meshes.Add(mesh);
@@ -399,10 +439,7 @@ namespace DigitalRune.Graphics.SceneGraph
 				SceneNode node;
 				if (gltfNode.Mesh != null)
 				{
-					var meshNode = new MeshNode
-					{
-						Mesh = _meshes[gltfNode.Mesh.Value]
-					};
+					var meshNode = new MeshNode(_meshes[gltfNode.Mesh.Value]);
 
 					if (gltfNode.Skin != null)
 					{
@@ -461,9 +498,9 @@ namespace DigitalRune.Graphics.SceneGraph
 			}
 		}
 
-		public ModelNode Load(AssetManager manager, GraphicsDevice device, string assetName)
+		public ModelNode Load(AssetManager manager, IGraphicsService graphicsService, string assetName)
 		{
-			_device = device;
+			_graphicsService = graphicsService;
 			_meshes.Clear();
 			_nodes.Clear();
 			_skinCache.Clear();

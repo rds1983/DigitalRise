@@ -117,7 +117,7 @@ namespace DigitalRune.Graphics.Effects
       // we check the structure members.
       if (parameter.ParameterClass == EffectParameterClass.Struct)
       {
-        if (parameter.Elements.Count > 0)
+        if (parameter.ElementsCount() > 0)
         {
           // Effect parameter is an array of structs. 
           foreach (EffectParameter element in parameter.Elements)
@@ -214,11 +214,11 @@ namespace DigitalRune.Graphics.Effects
           continue;
         }
 
-        if (otherDescription.Parameter.Elements.Count > 0)
+        if (otherDescription.Parameter.ElementsCount() > 0)
         {
           // Effect parameter is an array, hence it has multiple indices.
           int startIndex = otherDescription.Index;
-          int nextIndex = startIndex + otherDescription.Parameter.Elements.Count;
+          int nextIndex = startIndex + otherDescription.Parameter.ElementsCount();
           if (startIndex <= index && index < nextIndex)
             return true;
         }
