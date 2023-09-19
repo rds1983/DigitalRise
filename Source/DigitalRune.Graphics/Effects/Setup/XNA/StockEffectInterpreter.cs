@@ -61,6 +61,8 @@ namespace DigitalRune.Graphics.Effects
 
       // The ShaderIndex is a local parameter: It depends on material settings and local lights.
       ParameterDescriptions.Add("ShaderIndex", (p, i) => new EffectParameterDescription(p, "XnaShaderIndex", 0, EffectParameterHint.PerInstance));
+      ParameterDescriptions.Add("VSIndices", (p, i) => new EffectParameterDescription(p, "VSIndices", 0, EffectParameterHint.PerInstance));
+      ParameterDescriptions.Add("PSIndices", (p, i) => new EffectParameterDescription(p, "PSIndices", 0, EffectParameterHint.PerInstance));
     }
 
 

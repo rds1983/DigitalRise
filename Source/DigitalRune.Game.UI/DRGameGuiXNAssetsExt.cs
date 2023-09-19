@@ -262,7 +262,7 @@ namespace AssetManagementBase
 
 		private static AssetLoader<Theme> _themeLoader = (manager, assetName, settings, tag) =>
 		{
-			var document = XDocument.Parse(manager.ReadAssetAsString(assetName), LoadOptions.SetLineInfo);
+			var document = XDocument.Parse(manager.ReadAsString(assetName), LoadOptions.SetLineInfo);
 			if (document.Root == null)
 			{
 				string message = string.Format("Root element \"<Theme>\" is missing in XML.");
