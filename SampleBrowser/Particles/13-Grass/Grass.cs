@@ -1,4 +1,6 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
@@ -11,9 +13,12 @@ namespace Samples.Particles
 {
   public static class Grass
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Grass",
         MaxNumberOfParticles = 400,
@@ -57,7 +62,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Grass");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Grass.png");
 
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =
         BillboardOrientation.AxialViewPlaneAligned;

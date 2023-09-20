@@ -93,8 +93,7 @@ namespace DigitalRune.Graphics.PostProcessing
       //  ReferenceStencil = 1,
       //};
 
-      var content = GraphicsService.Content;
-      _effect = content.Load<Effect>("DigitalRune/PostProcessing/SmaaFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/SmaaFilter");
       _pixelSizeParameter = _effect.Parameters["PixelSize"];
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
@@ -106,8 +105,8 @@ namespace DigitalRune.Graphics.PostProcessing
       _blendWeightCalculationPass = _effect.CurrentTechnique.Passes["BlendWeightCalculation"];
       _neighborhoodBlendingPass = _effect.CurrentTechnique.Passes["NeighborhoodBlending"];
 
-      _areaLookupTexture = content.Load<Texture2D>("DigitalRune/PostProcessing/SmaaAreaTexDX9");
-      _searchLookupTexture = content.Load<Texture2D>("DigitalRune/PostProcessing/SmaaSearchTex");
+/*      _areaLookupTexture = content.Load<Texture2D>("DigitalRune/PostProcessing/SmaaAreaTexDX9");
+      _searchLookupTexture = content.Load<Texture2D>("DigitalRune/PostProcessing/SmaaSearchTex");*/
     }
     #endregion
 

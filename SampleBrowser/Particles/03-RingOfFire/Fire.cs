@@ -1,4 +1,7 @@
-﻿using DigitalRune.Mathematics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
+using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
@@ -12,9 +15,12 @@ namespace Samples.Particles
   // Creates a fire effect.
   public static class Fire 
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      ParticleSystem ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			ParticleSystem ps = new ParticleSystem
       {
         Name = "Fire",
         MaxNumberOfParticles = 300
@@ -82,7 +88,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Fire");
+        assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Fire.png");
 
       // Fire needs additive blending.
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0.0f; 

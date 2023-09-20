@@ -1,4 +1,6 @@
-﻿using DigitalRune.Geometry.Shapes;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -14,9 +16,12 @@ namespace Samples.Particles
   // particles bounce. Particles are stretched in motion direction.
   public static class BouncingSparks
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "BouncingSparks",
         MaxNumberOfParticles = 200,
@@ -140,7 +145,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Spark");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spark.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0.0f;
       

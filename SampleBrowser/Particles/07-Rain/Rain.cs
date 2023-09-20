@@ -1,9 +1,10 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -12,9 +13,12 @@ namespace Samples.Particles
   // A simple rain effect.
   public static class Rain
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Rain",
         MaxNumberOfParticles = 2000,
@@ -63,7 +67,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Alpha).DefaultValue = 0.5f;
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/RainDrop");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/RainDrop.png");
 
       // DigitalRune Graphics can render particles with different billboard orientations. 
       // The rain drops should use axial billboards in the up direction (a.k.a. cylindrical 

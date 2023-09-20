@@ -51,7 +51,7 @@ namespace Samples.Particles
 
         // Create teleport effect (the effect comes from a resource pool).
         var teleport = _pool.Obtain();
-        teleport.Initialize(ContentManager);
+        teleport.Initialize(Services);
         teleport.Pose = new Pose(position);
 
         // Add the teleport effect to the particle system service and the scene.

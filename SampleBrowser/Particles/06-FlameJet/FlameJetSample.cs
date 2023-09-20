@@ -26,7 +26,7 @@ namespace Samples.Particles
     public FlameJetSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      _flameJet = FlameJet.Create(ContentManager);
+      _flameJet = FlameJet.Create(Services);
       _flameJet.Pose = new Pose(new Vector3F(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.PiOver2));
       ParticleSystemService.ParticleSystems.Add(_flameJet);
 

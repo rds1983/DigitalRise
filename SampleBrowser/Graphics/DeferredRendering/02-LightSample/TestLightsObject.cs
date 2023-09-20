@@ -1,7 +1,5 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DigitalRune.Game;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
@@ -14,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
+using AssetManagementBase;
 
 
 namespace Samples
@@ -35,7 +34,8 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
+      var assetManager = _services.GetInstance<AssetManager>();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
 
       _lights.Add(new LightNode(new AmbientLight
       {
@@ -97,7 +97,7 @@ namespace Samples
         SpecularIntensity = 4,
         Range = 3,
         Attenuation = 1f,
-        Texture = contentManager.Load<TextureCube>("LavaBall/LavaCubeMap"),
+        Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "LavaBall/LavaCubeMap.dds"),
       })
       {
         Name = "PointLightWithTexture",
@@ -128,7 +128,7 @@ namespace Samples
         SpecularIntensity = 4,
         Range = 3,
         Attenuation = 1f,
-        Texture = contentManager.Load<TextureCube>("MagicSphere/ColorCube"),
+        Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "MagicSphere/ColorCube.dds"),
       })
       {
         Name = "PointLightWithTextureAndShadow",
@@ -139,24 +139,24 @@ namespace Samples
         }
       });
 
-      _lights.Add(new LightNode(new ProjectorLight
-      {
-        Texture = contentManager.Load<Texture2D>("TVBox/TestCard"),
+			_lights.Add(new LightNode(new ProjectorLight
+			{
+        Texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "TVBox/TestCard.png"),
       })
       {
         Name = "ProjectorLight",
         PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(-1, 1, -7), new Vector3F(-5, 0, -7), new Vector3F(0, 1, 0))).Inverse,
       });
 
-      _lights.Add(new LightNode(new ProjectorLight
-      {
-        Texture = contentManager.Load<Texture2D>("TVBox/TestCard"),
+			_lights.Add(new LightNode(new ProjectorLight
+			{
+        Texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "TVBox/TestCard.png"),
       })
       {
         Name = "ProjectorLightWithShadow",
         PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(5, 1, -7), new Vector3F(1, 0, -7), new Vector3F(0, 1, 0))).Inverse,
         Shadow = new StandardShadow
-        {
+				{
           PreferredSize = 128,
         }
       });
@@ -172,11 +172,11 @@ namespace Samples
         PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(-7, 1, -14), new Vector3F(-10, 0, -14), new Vector3F(0, 1, 0))).Inverse,
       });
 
-      _lights.Add(new LightNode(new Spotlight
-      {
+			_lights.Add(new LightNode(new Spotlight
+			{
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
-        Texture = contentManager.Load<Texture2D>("TVBox/TestCard"),
+        Texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "TVBox/TestCard.png"),
       })
       {
         Name = "SpotlightWithTexture",
@@ -197,18 +197,18 @@ namespace Samples
         }
       });
 
-      _lights.Add(new LightNode(new Spotlight
-      {
+			_lights.Add(new LightNode(new Spotlight
+			{
         Color = new Vector3F(1, 1, 0),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
-        Texture = contentManager.Load<Texture2D>("TVBox/TestCard"),
+        Texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "TVBox/TestCard.png"),
       })
       {
         Name = "SpotlightWithTextureAndShadow",
         PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(11, 1, -14), new Vector3F(5, 0, -14), new Vector3F(0, 1, 0))).Inverse,
         Shadow = new StandardShadow
-        {
+				{
           PreferredSize = 128,
         }
       });
@@ -246,4 +246,3 @@ namespace Samples
     }
   }
 }
-#endif

@@ -45,7 +45,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public SepiaFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/SepiaFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/SepiaFilter");
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _strengthParameter = _effect.Parameters["Strength"];
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];

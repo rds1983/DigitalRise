@@ -78,7 +78,7 @@ namespace DigitalRune.Graphics.PostProcessing
     /// </exception>
     public RadialBlur(IGraphicsService graphicsService) : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/RadialBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/RadialBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _numberOfSamplesParameter = _effect.Parameters["NumberOfSamples"];

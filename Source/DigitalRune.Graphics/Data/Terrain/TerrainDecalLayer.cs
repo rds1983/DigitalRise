@@ -343,7 +343,7 @@ namespace DigitalRune.Graphics
       // Use a down orientation per default.
       Pose = new Pose(Matrix33F.CreateRotationX(-ConstantsF.PiOver2));
 
-      var effect = graphicService.Content.Load<Effect>("DigitalRune/Terrain/TerrainDecalLayer");
+      var effect = graphicService.GetStockEffect("DigitalRune/Terrain/TerrainDecalLayer");
       Material = new Material
       {
         { "Detail", new EffectBinding(graphicService, effect, null, EffectParameterHint.Material) }

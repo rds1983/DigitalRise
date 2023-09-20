@@ -20,7 +20,7 @@ much faster.)",
     public GrassSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      ParticleSystem particleSystem = Grass.Create(ContentManager);
+      ParticleSystem particleSystem = Grass.Create(Services);
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 
       _particleSystemNode = new ParticleSystemNode(particleSystem);

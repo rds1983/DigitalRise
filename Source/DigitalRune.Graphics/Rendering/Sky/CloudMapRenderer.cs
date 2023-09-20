@@ -89,7 +89,7 @@ namespace DigitalRune.Graphics.Rendering
       // a user defined texture uses a part of this texture.
       _noiseTexture = NoiseHelper.GetGrainTexture(graphicsService, 512);
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/CloudLayer");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/CloudLayer");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterTexture0Parameters = _effect.Parameters["Texture0Parameters"];
       _parameterTexture1Parameters = _effect.Parameters["Texture1Parameters"];

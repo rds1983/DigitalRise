@@ -1,4 +1,6 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -13,9 +15,12 @@ namespace Samples.Particles
   // Creates a flame jet effect. 
   public static class FlameJet
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "FlameJet",
         MaxNumberOfParticles = 500,
@@ -126,7 +131,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Flames",
-          contentManager.Load<Texture2D>("Particles/Flames"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flames.png"),
           Vector2F.Zero, Vector2F.One,
           4, 1);
 

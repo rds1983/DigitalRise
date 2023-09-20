@@ -1,4 +1,6 @@
-﻿using DigitalRune.Geometry;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -14,9 +16,12 @@ namespace Samples.Particles
   // The "CameraPose" particle parameter must be set externally each frame.
   public class BeeSwarm
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "BeeSwarm",
         MaxNumberOfParticles = 100,
@@ -67,7 +72,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Bee",
-          contentManager.Load<Texture2D>("Particles/beeWingFlap"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/beeWingFlap.png"),
           Vector2F.Zero, Vector2F.One,
           3, 1);
 

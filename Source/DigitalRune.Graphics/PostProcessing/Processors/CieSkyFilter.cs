@@ -110,7 +110,7 @@ namespace DigitalRune.Graphics.PostProcessing
     /// </exception>
     public CieSkyFilter(IGraphicsService graphicsService) : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/CieSkyFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/CieSkyFilter");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterSunDirection = _effect.Parameters["SunDirection"];

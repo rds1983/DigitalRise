@@ -12,17 +12,17 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Samples.Graphics;
 using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
-
+using AssetManagementBase;
 
 namespace Samples
 {
-  // Implements a deferred lighting render pipeline, supporting lights and shadows,
-  // Screen Space Ambient Occlusion (SSAO), High Dynamic Range (HDR) lighting, sky
-  // rendering, post-processing, ...
-  // The intermediate render targets (G-buffer, light buffer, shadow masks) can be
-  // visualized for debugging.
-  // Beginners can use this graphics screen as it is. Advanced developers can adapt
-  // the render pipeline to their needs.
+	// Implements a deferred lighting render pipeline, supporting lights and shadows,
+	// Screen Space Ambient Occlusion (SSAO), High Dynamic Range (HDR) lighting, sky
+	// rendering, post-processing, ...
+	// The intermediate render targets (G-buffer, light buffer, shadow masks) can be
+	// visualized for debugging.
+	// Beginners can use this graphics screen as it is. Advanced developers can adapt
+	// the render pipeline to their needs.
   class DeferredGraphicsScreen : GraphicsScreen, IDisposable
   {
     //--------------------------------------------------------------
@@ -110,7 +110,6 @@ namespace Samples
       : base(services.GetInstance<IGraphicsService>())
     {
       _sampleFramework = services.GetInstance<SampleFramework>();
-      var contentManager = services.GetInstance<ContentManager>();
 
       SpriteBatch = GraphicsService.GetSpriteBatch();
 
@@ -254,11 +253,12 @@ namespace Samples
         BloomIntensity = 1,
         BloomThreshold = 0.6f,
       });
-      _underwaterPostProcessor = new UnderwaterPostProcessor(GraphicsService, contentManager);
+			var assetManager = services.GetInstance<AssetManager>();
+			_underwaterPostProcessor = new UnderwaterPostProcessor(GraphicsService, assetManager);
       PostProcessors.Add(_underwaterPostProcessor);
 
-      // Use 2D texture for reticle.
-      _reticle = contentManager.Load<Texture2D>("Reticle");
+			// Use 2D texture for reticle.
+			_reticle = assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.
       var uiContentManager = services.GetInstance<ContentManager>("UIContent");

@@ -45,7 +45,7 @@ namespace DigitalRune.Graphics.PostProcessing
     /// </exception>
     public MadFilter(IGraphicsService graphicsService) : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/MadFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/MadFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _scaleParameter = _effect.Parameters["Scale"];
       _offsetParameter = _effect.Parameters["Offset"];

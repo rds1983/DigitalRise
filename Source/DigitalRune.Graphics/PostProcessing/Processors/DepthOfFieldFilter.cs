@@ -147,7 +147,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public DepthOfFieldFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/DepthOfFieldFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/DepthOfFieldFilter");
       _screenSizeParameter = _effect.Parameters["ScreenSize"];
       _depthTextureParameter = _effect.Parameters["DepthTexture"];
       _nearBlurDistanceParameter = _effect.Parameters["NearBlurDistance"];

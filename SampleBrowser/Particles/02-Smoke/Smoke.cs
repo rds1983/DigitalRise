@@ -1,4 +1,7 @@
-﻿using DigitalRune.Mathematics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
+using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
@@ -6,14 +9,16 @@ using DigitalRune.Particles.Effectors;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace Samples.Particles
 {
   // Creates a smoke effect.
   public static class Smoke
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
+      var assetManager = services.GetInstance<AssetManager>();
+      var graphicsService = services.GetInstance<IGraphicsService>();
+
       ParticleSystem ps = new ParticleSystem
       {
         Name = "Smoke",
@@ -139,7 +144,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Smoke");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Smoke.png");
 
       ParticleSystemValidator.Validate(ps);
 

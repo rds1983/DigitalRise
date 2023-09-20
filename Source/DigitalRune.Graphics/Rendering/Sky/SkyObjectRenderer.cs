@@ -78,7 +78,7 @@ namespace DigitalRune.Graphics.Rendering
         throw new NotSupportedException("The SkyObjectRenderer does not support the Reach profile.");
 
       // Load effect.
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/SkyObject");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/SkyObject");
       _effectParameterViewProjection = _effect.Parameters["ViewProjection"];
       _effectParameterUp = _effect.Parameters["Up"];
       _effectParameterRight = _effect.Parameters["Right"];

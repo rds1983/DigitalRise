@@ -76,7 +76,7 @@ namespace DigitalRune.Graphics.Rendering
 
       _graphicsService = graphicsService;
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Water/Ocean");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Water/Ocean");
       _parameterSize = _effect.Parameters["Size"];
       _parameterSpectrumParameters = _effect.Parameters["SpectrumParameters"];
       _parameterSourceTexture = _effect.Parameters["SourceTexture0"];

@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Meshes;
@@ -17,6 +16,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -106,8 +106,8 @@ the water and then the alpha-blended objects above the water surface.",
         SpecularColor = new Vector3F(10f),
 
         // Small water ripples/waves are created using scrolling normal maps.
-        NormalMap0 = ContentManager.Load<Texture2D>("Water/Wave0"),
-        NormalMap1 = ContentManager.Load<Texture2D>("Water/Wave1"),
+        NormalMap0 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave0.png"),
+        NormalMap1 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave1.png"),
         NormalMap0Scale = 1.8f,
         NormalMap1Scale = 2.2f,
         NormalMap0Velocity = new Vector3F(-0.02f, 0, 0.03f),
@@ -306,4 +306,3 @@ the water and then the alpha-blended objects above the water surface.",
     }
   }
 }
-#endif

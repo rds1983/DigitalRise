@@ -1,4 +1,6 @@
 ﻿using System;
+using AssetManagementBase;
+using CommonServiceLocator;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
@@ -30,7 +32,7 @@ namespace Samples.Particles
     }
 
 
-    public void Initialize(ContentManager contentManager)
+    public void Initialize(IServiceLocator services)
     {
       if (ParticleSystemNode == null)
       {
@@ -42,9 +44,9 @@ namespace Samples.Particles
           ReferenceFrame = ParticleReferenceFrame.Local,
           Children = new ParticleSystemCollection
           {
-            CreateSparkles(contentManager),
-            CreateFastBeams(contentManager),
-            CreateSlowBeams(contentManager),
+            CreateSparkles(services),
+            CreateFastBeams(services),
+            CreateSlowBeams(services),
           }
         };
 
@@ -93,9 +95,12 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSparkles(ContentManager contentManager)
+    private static ParticleSystem CreateSparkles(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Sparkles",
         MaxNumberOfParticles = 100,
@@ -170,7 +175,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/LensFlare");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/LensFlare.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 
@@ -178,9 +183,12 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateFastBeams(ContentManager contentManager)
+    private static ParticleSystem CreateFastBeams(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "FastBeams",
         MaxNumberOfParticles = 50,
@@ -226,7 +234,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Beam");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Beam.png");
 
       // Use cylindrical billboards.
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =
@@ -238,9 +246,12 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSlowBeams(ContentManager contentManager)
+    private static ParticleSystem CreateSlowBeams(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "SlowBeams",
         MaxNumberOfParticles = 10,
@@ -292,7 +303,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/BeamBlurred");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/BeamBlurred.png");
 
       // Use cylindrical billboards.
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =

@@ -237,7 +237,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public GodRayFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      Effect effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/GodRayFilter");
+      Effect effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/GodRayFilter");
       _viewportSizeParameter = effect.Parameters["ViewportSize"];
       _parameters0Parameter = effect.Parameters["Parameters0"];
       _parameters1Parameter = effect.Parameters["Parameters1"];

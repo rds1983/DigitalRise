@@ -14,7 +14,7 @@ namespace Samples.Particles
   public class RocketExplosion : ParticleSystem
   {
     private static readonly ResourcePool<ParticleSystem> Pool = new ResourcePool<ParticleSystem>(
-      () => new RocketExplosion(ServiceLocator.Current.GetInstance<ContentManager>()),
+      () => new RocketExplosion(ServiceLocator.Current),
       null,
       null);
 
@@ -25,12 +25,12 @@ namespace Samples.Particles
     }
 
 
-    private RocketExplosion(ContentManager contentManager)
+    private RocketExplosion(IServiceLocator services)
     {
       Children = new ParticleSystemCollection
       {
-        new RocketExplosionSmoke(contentManager),
-        new RocketExplosionCore(contentManager),
+        new RocketExplosionSmoke(services),
+        new RocketExplosionCore(services),
       };
 
       // This EmitterVelocity parameter can be used by all child particle systems.

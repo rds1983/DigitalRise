@@ -35,7 +35,7 @@ for a sky dome.",
       SetCamera(new Vector3F(1, 1, 3), 0.2f, 0);
 
       // Create a sky mesh and add an instance of this mesh to the scene.
-      var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, ContentManager.Load<Texture2D>("sky"));
+      var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "sky.bmp"));
       _sky = new MeshNode(skyMesh);
       _sky.Name = "Sky"; // Always set a name - very useful for debugging!
       GraphicsScreen.Scene.Children.Add(_sky);
@@ -75,12 +75,12 @@ for a sky dome.",
       // Start the first animation of the dude and let it loop forever.
       // (We keep the animation controller to be able to stop the animation in 
       // Dispose() below.)
-      var timeline = new TimelineClip(mesh.Animations.Values.First())
+/*      var timeline = new TimelineClip(mesh.Animations.Values.First())
       {
         Duration = TimeSpan.MaxValue,
         LoopBehavior = LoopBehavior.Cycle,
       };
-      _animationController = AnimationService.StartAnimation(timeline, (IAnimatableProperty)dudeMeshNode.SkeletonPose);
+      _animationController = AnimationService.StartAnimation(timeline, (IAnimatableProperty)dudeMeshNode.SkeletonPose);*/
     }
 
 

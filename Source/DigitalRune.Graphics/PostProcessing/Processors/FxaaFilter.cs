@@ -64,7 +64,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public FxaaFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/FxaaFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/FxaaFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _luminanceToAlphaPass = _effect.CurrentTechnique.Passes["LuminanceToAlpha"];

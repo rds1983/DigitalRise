@@ -76,7 +76,7 @@ namespace DigitalRune.Graphics.Rendering
         throw new NotSupportedException("The ScatteringSkyRenderer does not support the Reach profile.");
 
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/ScatteringSky");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/ScatteringSky");
       _parameterView = _effect.Parameters["View"];
       _parameterProjection = _effect.Parameters["Projection"];
       _parameterSunDirection = _effect.Parameters["SunDirection"];

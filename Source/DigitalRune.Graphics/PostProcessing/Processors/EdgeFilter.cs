@@ -166,7 +166,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public EdgeFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/EdgeFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/EdgeFilter");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterHalfEdgeWidth = _effect.Parameters["HalfEdgeWidth"];
       _parameterDepthThreshold = _effect.Parameters["DepthThreshold"];

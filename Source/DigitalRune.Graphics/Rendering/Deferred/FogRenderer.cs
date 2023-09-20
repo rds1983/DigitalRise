@@ -79,7 +79,7 @@ namespace DigitalRune.Graphics.Rendering
         throw new ArgumentNullException("graphicsService");
 
       Order = 3;
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/Fog");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/Fog");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterFogParameters = _effect.Parameters["FogParameters"];

@@ -75,7 +75,7 @@ and search the sky!",
       // The PackedTexture identifies an element within the texture atlas.
       // See file Media/LensFlare/LensFlares.png.
       // (Credits: The sun lens flare was copied from the XNA racing game - http://exdream.com/XnaRacingGame/.)
-      var lensFlareTexture = ContentManager.Load<Texture2D>("LensFlare/LensFlares");
+      var lensFlareTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "LensFlare/LensFlares.png");
       var circleTexture = new PackedTexture("Circle", lensFlareTexture, new Vector2F(0, 0), new Vector2F(0.25f, 0.5f));
       var glowTexture = new PackedTexture("Glow", lensFlareTexture, new Vector2F(0.25f, 0), new Vector2F(0.25f, 0.5f));
       var ringTexture = new PackedTexture("Ring", lensFlareTexture, new Vector2F(0.5f, 0), new Vector2F(0.25f, 0.5f));
@@ -128,7 +128,7 @@ and search the sky!",
       lensFlare.QuerySize = 0.2f; // 0.2 meters 
 
       // Add some elements (glow, horizontal streaks, ...) to the lens flare effect.
-      var anamorphicFlareTexture = ContentManager.Load<Texture2D>("LensFlare/AnamorphicFlare");
+      var anamorphicFlareTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "LensFlare/AnamorphicFlare.png");
       flareTexture = new PackedTexture("AnamorphicFlare", anamorphicFlareTexture, new Vector2F(0, 0), new Vector2F(1.0f, 87f / 256f));
       var flare1Texture = new PackedTexture("Flare0", anamorphicFlareTexture, new Vector2F(227f / 512f, 88f / 256f), new Vector2F(285f / 512f, 15f / 256f));
       var flare2Texture = new PackedTexture("Flare1", anamorphicFlareTexture, new Vector2F(0, 87f / 256f), new Vector2F(226f / 512f, 168f / 256f));

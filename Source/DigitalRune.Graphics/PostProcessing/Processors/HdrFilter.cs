@@ -285,7 +285,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public HdrFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/HdrFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/HdrFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _bloomThresholdParameter = _effect.Parameters["BloomThreshold"];
       _middleGrayParameter = _effect.Parameters["MiddleGray"];

@@ -133,7 +133,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public LuminanceFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/LuminanceFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/LuminanceFilter");
       _useGeometricMeanParameter = _effect.Parameters["UseGeometricMean"];
       _useAdaptionParameter = _effect.Parameters["UseAdaption"];
       _deltaTimeParameter = _effect.Parameters["DeltaTime"];

@@ -1,9 +1,11 @@
-﻿using DigitalRune.Mathematics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
+using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -12,9 +14,12 @@ namespace Samples.Particles
   // Creates the hot glowing core of an explosion.
   public class RocketExplosionCore : ParticleSystem
   {
-    public RocketExplosionCore(ContentManager contentManager)
+    public RocketExplosionCore(IServiceLocator services)
     {
-      MaxNumberOfParticles = 200;
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			MaxNumberOfParticles = 200;
 
       Parameters.AddUniform<float>(ParticleParameterNames.Lifetime).DefaultValue = 1;
 
@@ -99,7 +104,7 @@ namespace Samples.Particles
       });
 
       Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Explosion");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion.png");
 
       Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 

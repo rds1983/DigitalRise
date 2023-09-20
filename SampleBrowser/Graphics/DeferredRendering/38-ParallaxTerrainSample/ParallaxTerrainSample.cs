@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8 && !XBOX
-using DigitalRune.Graphics;
+﻿using DigitalRune.Graphics;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
@@ -7,7 +6,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -70,10 +69,10 @@ namespace Samples.Graphics
             DiffuseColor = new Vector3F(1),
             SpecularColor = new Vector3F(5),
             SpecularPower = 20,
-            DiffuseTexture = ContentManager.Load<Texture2D>("Parallax/AgedPavement_diffuse"),
-            NormalTexture = ContentManager.Load<Texture2D>("Parallax/AgedPavement_normal"),
-            SpecularTexture = ContentManager.Load<Texture2D>("Parallax/AgedPavement_specular"),
-            HeightTexture = ContentManager.Load<Texture2D>("Parallax/AgedPavement_height"),
+            DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_diffuse.png"),
+            NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_normal.png"),
+            SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_specular.png"),
+            HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_height.png"),
             TileSize = 0.005f * 512,
             BlendTexture = ContentManager.Load<Texture2D>("Terrain/Terrain001-Blend-Grass" + tilePostfix),
             BlendTextureChannel = 0,
@@ -138,4 +137,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

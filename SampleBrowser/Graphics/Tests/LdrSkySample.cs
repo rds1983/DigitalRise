@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,7 +15,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -101,8 +100,8 @@ namespace Samples.Graphics
       _gradientTextureSky = new GradientTextureSkyNode();
       _gradientTextureSky.TimeOfDay = _time.TimeOfDay;
       _gradientTextureSky.Color = new Vector4F(1);
-      _gradientTextureSky.FrontTexture = ContentManager.Load<Texture2D>("Sky/GradientSkyFront");
-      _gradientTextureSky.BackTexture = ContentManager.Load<Texture2D>("Sky/GradientSkyBack");
+      _gradientTextureSky.FrontTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Sky/GradientSkyFront.png");
+      _gradientTextureSky.BackTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Sky/GradientSkyBack.png");
       _gradientTextureSky.CieSkyStrength = 1;
 
       _scatteringSky = new ScatteringSkyNode();
@@ -130,7 +129,7 @@ namespace Samples.Graphics
 
       _moon = new SkyObjectNode
       {
-        Texture = new PackedTexture(ContentManager.Load<Texture2D>("Sky/Moon")),
+        Texture = new PackedTexture(AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Sky/Moon.png")),
         SunLight = new Vector3F(1, 1, 1) * 1,
         AmbientLight = new Vector3F(0.001f) * 1,
         LightWrap = 0.1f,
@@ -548,4 +547,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

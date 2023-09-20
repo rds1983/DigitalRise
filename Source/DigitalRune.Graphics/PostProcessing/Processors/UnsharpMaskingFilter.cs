@@ -56,7 +56,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public UnsharpMaskingFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/UnsharpMaskingFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/UnsharpMaskingFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sharpnessParameter = _effect.Parameters["Sharpness"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

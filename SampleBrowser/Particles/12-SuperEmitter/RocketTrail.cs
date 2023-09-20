@@ -8,17 +8,18 @@ using DigitalRune.Particles.Effectors;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples.Particles
 {
-  // A rocket smoke trail that supports resource pooling.
-  // The particle parameter "EmitterVelocity" can be set to modify initial movement of the 
-  // explosion particles.
+	// A rocket smoke trail that supports resource pooling.
+	// The particle parameter "EmitterVelocity" can be set to modify initial movement of the 
+	// explosion particles.
   public class RocketTrail : ParticleSystem
   {
     private static readonly ResourcePool<ParticleSystem> Pool = new ResourcePool<ParticleSystem>(
-      () => new RocketTrail(ServiceLocator.Current.GetInstance<ContentManager>()),
+      () => new RocketTrail(ServiceLocator.Current),
       null,
       null);
 
@@ -29,9 +30,12 @@ namespace Samples.Particles
     }
 
 
-    private RocketTrail(ContentManager contentManager)
+    private RocketTrail(IServiceLocator services)
     {
-      MaxNumberOfParticles = 200;
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			MaxNumberOfParticles = 200;
 
       Parameters.AddVarying<float>(ParticleParameterNames.Lifetime);
       Effectors.Add(new StartValueEffector<float>
@@ -133,7 +137,7 @@ namespace Samples.Particles
 
 
       Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Smoke");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Smoke.png");
 
       // Draw behind explosion.
       Parameters.AddUniform<int>(ParticleParameterNames.DrawOrder).DefaultValue = -100;

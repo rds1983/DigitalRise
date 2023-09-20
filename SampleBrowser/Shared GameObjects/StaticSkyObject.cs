@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -37,8 +37,9 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var content = _services.GetInstance<ContentManager>();
-      _skyboxNode = new SkyboxNode(content.Load<TextureCube>("Sky2"))
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetInstance<AssetManager>();
+      _skyboxNode = new SkyboxNode(assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "Sky2.dds"))
       {
         Color = new Vector3F(SkyExposure),
       };
@@ -84,7 +85,7 @@ namespace Samples
 
       // Add a lens flare for the key light.
       var lensFlare = new LensFlare(true) { QuerySize = 0.2f, Size = 0.2f, Name = "Sun Flare" };
-      var lensFlareTexture = content.Load<Texture2D>("LensFlare/LensFlares");
+      var lensFlareTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "LensFlare/LensFlares.png");
       var circleTexture = new PackedTexture("Circle", lensFlareTexture, new Vector2F(0, 0), new Vector2F(0.25f, 0.5f));
       var glowTexture = new PackedTexture("Glow", lensFlareTexture, new Vector2F(0.25f, 0), new Vector2F(0.25f, 0.5f));
       var ringTexture = new PackedTexture("Ring", lensFlareTexture, new Vector2F(0.5f, 0), new Vector2F(0.25f, 0.5f));

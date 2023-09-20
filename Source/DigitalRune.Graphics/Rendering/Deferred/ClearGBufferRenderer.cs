@@ -39,7 +39,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/ClearGBuffer");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/ClearGBuffer");
       _parameterDepth = _effect.Parameters["Depth"];
       _parameterNormal = _effect.Parameters["Normal"];
       _parameterSpecularPower = _effect.Parameters["SpecularPower"];

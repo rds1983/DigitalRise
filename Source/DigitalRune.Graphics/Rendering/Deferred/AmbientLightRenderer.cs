@@ -57,7 +57,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/AmbientLight");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/AmbientLight");
       _parameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterLightColor = _effect.Parameters["AmbientLight"];

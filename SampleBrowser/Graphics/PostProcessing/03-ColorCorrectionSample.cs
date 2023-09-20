@@ -1,11 +1,10 @@
-﻿#if !WP7 && !WP8
-using DigitalRune.Game.Input;
+﻿using DigitalRune.Game.Input;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -25,7 +24,7 @@ namespace Samples.Graphics
       _filter = new ColorCorrectionFilter(GraphicsService);
       GraphicsScreen.PostProcessors.Add(_filter);
       
-      var lookupTexture2D = ContentManager.Load<Texture2D>("PostProcessing/ColorLookupModified");
+      var lookupTexture2D = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "PostProcessing/ColorLookupModified.png");
       var lookupTexture3D = ColorCorrectionFilter.ConvertLookupTexture(lookupTexture2D);
       _filter.LookupTextureA = lookupTexture3D;
     }
@@ -51,4 +50,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

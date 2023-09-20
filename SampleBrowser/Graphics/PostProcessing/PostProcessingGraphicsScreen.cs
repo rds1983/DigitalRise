@@ -10,7 +10,7 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -78,8 +78,8 @@ namespace Samples
       PostProcessors = new PostProcessorChain(GraphicsService);
 
       // Use 2D texture for reticle.
-      var contentManager = services.GetInstance<ContentManager>();
-      _reticle = contentManager.Load<Texture2D>("Reticle");
+      var assetManager = services.GetInstance<AssetManager>();
+      _reticle = assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.
       var uiContentManager = services.GetInstance<ContentManager>("UIContent");

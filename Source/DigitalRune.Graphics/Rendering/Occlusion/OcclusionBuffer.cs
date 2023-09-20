@@ -519,7 +519,7 @@ namespace DigitalRune.Graphics.Rendering
         vertices, true,
         indices, true);
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/OcclusionCulling");
+      _effect = graphicsService.GetStockEffect("DigitalRune/OcclusionCulling");
       _parameterClampAabbMinimum = _effect.Parameters["ClampAabbMinimum"];
       _parameterClampAabbMaximum = _effect.Parameters["ClampAabbMaximum"];
       _parameterCameraViewProj = _effect.Parameters["CameraViewProj"];

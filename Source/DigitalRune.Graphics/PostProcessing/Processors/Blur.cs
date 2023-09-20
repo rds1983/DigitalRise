@@ -360,7 +360,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public Blur(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/Blur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/Blur");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterWeights = _effect.Parameters["Weights"];
       _parameterSourceTexture = _effect.Parameters["SourceTexture"];

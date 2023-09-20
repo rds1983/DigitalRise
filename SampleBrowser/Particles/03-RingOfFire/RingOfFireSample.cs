@@ -29,8 +29,8 @@ The effect is a ring of fire consisting of a fire and a smoke effect.",
 
       // Particle systems can have child particle systems. 
       // Add a fire and a smoke effect as children.
-      var fire = Fire.Create(ContentManager);
-      var smoke = Smoke.Create(ContentManager);  // The smoke effect from the previous sample.
+      var fire = Fire.Create(Services);
+      var smoke = Smoke.Create(Services);  // The smoke effect from the previous sample.
       particleSystem.Children = new ParticleSystemCollection { fire, smoke };
 
       // If we need to, we can modify the predefined effects.

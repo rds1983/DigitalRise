@@ -1,11 +1,11 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
 
 namespace Samples.Particles
@@ -13,9 +13,12 @@ namespace Samples.Particles
   // Creates a fire effect for a campfire.
   public class Campfire
   {
-    public static ParticleSystem CreateCampfire(ContentManager contentManager)
+    public static ParticleSystem CreateCampfire(IServiceLocator services)
     {
-      ParticleSystem ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			ParticleSystem ps = new ParticleSystem
       {
         Name = "Campfire",
         MaxNumberOfParticles = 50
@@ -106,7 +109,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "FireParticles",
-          contentManager.Load<Texture2D>("Campfire/FireParticles"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.png"),
           Vector2F.Zero, Vector2F.One,
           4, 1);
 

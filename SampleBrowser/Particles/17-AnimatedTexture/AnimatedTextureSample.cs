@@ -21,7 +21,7 @@ namespace Samples.Particles
     public AnimatedTextureSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      _beeSwarm = BeeSwarm.Create(ContentManager);
+      _beeSwarm = BeeSwarm.Create(Services);
       _beeSwarm.Pose = new Pose(new Vector3F(0, 4, 0));
 
       // Create 100 bees.

@@ -176,7 +176,7 @@ namespace DigitalRune.Graphics.Rendering
         // Use custom effect with sRGB reads in pixel shader.
         try
         {
-          _effect = graphicsService.Content.Load<Effect>("DigitalRune/SpriteEffect");
+          _effect = graphicsService.GetStockEffect("DigitalRune/SpriteEffect");
           _transformParameter = _effect.Parameters["Transform"];
           _techniqueLinear = _effect.Techniques["Sprite"];
           _techniqueGamma = _effect.Techniques["SpriteWithGamma"];

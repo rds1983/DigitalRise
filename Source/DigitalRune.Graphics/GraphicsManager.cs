@@ -92,10 +92,6 @@ namespace DigitalRune.Graphics
 
 
     /// <inheritdoc/>
-    public ContentManager Content { get; private set; }
-
-
-    /// <inheritdoc/>
     public RenderTargetPool RenderTargetPool { get; private set; }
 
 
@@ -216,10 +212,6 @@ namespace DigitalRune.Graphics
     /// The game window in Windows. <see langword="null"/> on non-Windows platforms (Xbox 360, 
     /// Windows Phone 7, etc.).
     /// </param>
-    /// <param name="content">
-    /// The content manager that can be used to load predefined DigitalRune Graphics content (e.g. 
-    /// post-processing effects, lookup textures, etc.).
-    /// </param>
     /// <remarks>
     /// Use this constructor in Windows if <see cref="PresentationTargets"/> are used.
     /// </remarks>
@@ -227,19 +219,15 @@ namespace DigitalRune.Graphics
     /// <paramref name="graphicsDevice"/> or <paramref name="content"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-    public GraphicsManager(GraphicsDevice graphicsDevice, GameWindow gameWindow, ContentManager content)
+    public GraphicsManager(GraphicsDevice graphicsDevice, GameWindow gameWindow)
     {
       if (graphicsDevice == null)
         throw new ArgumentNullException("graphicsDevice");
-      if (content == null)
-        throw new ArgumentNullException("content");
 
       GraphicsDevice = graphicsDevice;
       graphicsDevice.DeviceResetting += OnGraphicsDeviceResetting;
       //graphicsDevice.DeviceReset += OnGraphicsDeviceReset;
       GraphicsDevice.Disposing += OnGraphicsDeviceDisposing;
-
-      Content = content;
 
       RenderTargetPool = new RenderTargetPool(this);
       Screens = new GraphicsScreenCollection();
@@ -282,8 +270,8 @@ namespace DigitalRune.Graphics
     /// The content manager that can be used to load predefined DigitalRune Graphics content
     /// (e.g. post-processing effects, lookup textures, etc.).
     /// </param>
-    public GraphicsManager(GraphicsDevice graphicsDevice, ContentManager content)
-      : this(graphicsDevice, null, content)
+    public GraphicsManager(GraphicsDevice graphicsDevice)
+      : this(graphicsDevice, null)
     {
     }
 
@@ -796,6 +784,18 @@ namespace DigitalRune.Graphics
 
       return 0;
     }
-    #endregion
-  }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+		public Effect GetStockEffect(string path)
+		{
+      return Resources.GetDREffect(GraphicsDevice, path);
+		}
+
+
+		#endregion
+	}
 }

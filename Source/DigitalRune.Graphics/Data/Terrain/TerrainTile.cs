@@ -451,7 +451,7 @@ namespace DigitalRune.Graphics
             "Base",
             new EffectBinding(
               graphicsService,
-              graphicsService.Content.Load<Effect>("DigitalRune/Terrain/TerrainGeometryLayer"),
+              graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGeometryLayer"),
               null,
               EffectParameterHint.Material)
           },
@@ -459,7 +459,7 @@ namespace DigitalRune.Graphics
             "Detail",
             new EffectBinding(
               graphicsService,
-              graphicsService.Content.Load<Effect>("DigitalRune/Terrain/TerrainHoleLayer"),
+              graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainHoleLayer"),
               null,
               EffectParameterHint.Material)
           }

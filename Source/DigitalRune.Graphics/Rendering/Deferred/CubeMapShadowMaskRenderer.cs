@@ -68,7 +68,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/CubeMapShadowMask");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/CubeMapShadowMask");
       _parameterViewInverse = _effect.Parameters["ViewInverse"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];

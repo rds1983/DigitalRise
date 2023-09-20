@@ -1,9 +1,11 @@
-﻿using DigitalRune.Mathematics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
+using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -12,9 +14,12 @@ namespace Samples.Particles
   // Creates a smoke effect for an explosion.
   public class RocketExplosionSmoke : ParticleSystem
   {
-    public RocketExplosionSmoke(ContentManager contentManager)
+    public RocketExplosionSmoke(IServiceLocator services)
     {
-      MaxNumberOfParticles = 200;
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			MaxNumberOfParticles = 200;
 
       Parameters.AddVarying<float>(ParticleParameterNames.Lifetime);
       Effectors.Add(new StartValueEffector<float>
@@ -117,7 +122,7 @@ namespace Samples.Particles
       });
 
       Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Smoke");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Smoke.png");
     }
   }
 }

@@ -29,8 +29,8 @@ namespace DigitalRune.Graphics.Tests
 
       _graphicsDevice0 = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, parameters);
       _graphicsDevice1 = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, parameters);
-      _graphicsService0 = new GraphicsManager(_graphicsDevice0, new ContentManager(new GameServiceContainer()));
-      _graphicsService1 = new GraphicsManager(_graphicsDevice1, new ContentManager(new GameServiceContainer()));
+      _graphicsService0 = new GraphicsManager(_graphicsDevice0);
+      _graphicsService1 = new GraphicsManager(_graphicsDevice1);
     }
 
     [TearDown]

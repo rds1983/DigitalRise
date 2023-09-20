@@ -75,7 +75,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public CameraMotionBlur(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/CameraMotionBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/CameraMotionBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

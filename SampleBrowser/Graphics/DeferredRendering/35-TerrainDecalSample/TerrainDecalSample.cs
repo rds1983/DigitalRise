@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8 && !XBOX
-using DigitalRune.Geometry;
+﻿using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
@@ -8,8 +7,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -72,9 +70,9 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
         DiffuseColor = new Vector3F(0.08f),
         SpecularColor = new Vector3F(0.2f),
         SpecularPower = 100,
-        DiffuseTexture = ContentManager.Load<Texture2D>("Decals/Decal_diffuse_mask"), // Original: "Decals/Blood_diffuse_mask",
-        NormalTexture =  GraphicsService.GetDefaultNormalTexture(),   // Original: ContentManager.Load<Texture2D>("Decals/Blood_normal"),
-        SpecularTexture = GraphicsService.GetDefaultTexture2DWhite(), // Original: ContentManager.Load<Texture2D>("Decals/Blood_specular"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Decal_diffuse_mask.png"), // Original: "Decals/Blood_diffuse_mask",
+        NormalTexture =  GraphicsService.GetDefaultNormalTexture(),   // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_normal.png"),
+        SpecularTexture = GraphicsService.GetDefaultTexture2DWhite(), // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_specular.png"),
         FadeOutStart = 3,
         FadeOutEnd = 5,
         Alpha = 0.9f,
@@ -90,9 +88,9 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
         DiffuseColor = new Vector3F(0.0f),
         SpecularColor = new Vector3F(0.5f),
         SpecularPower = 100,
-        DiffuseTexture = ContentManager.Load<Texture2D>("Decals/Decal_diffuse_mask"), // Original: "Decals/Blood_diffuse_mask",
-        NormalTexture = GraphicsService.GetDefaultNormalTexture(),   // Original: ContentManager.Load<Texture2D>("Decals/Blood_normal"),
-        SpecularTexture = GraphicsService.GetDefaultTexture2DWhite(), // Original: ContentManager.Load<Texture2D>("Decals/Blood_specular"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Decal_diffuse_mask.png"), // Original: "Decals/Blood_diffuse_mask",
+        NormalTexture = GraphicsService.GetDefaultNormalTexture(),   // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_normal.png"),
+        SpecularTexture = GraphicsService.GetDefaultTexture2DWhite(), // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_specular.png"),
         FadeOutStart = 3,
         FadeOutEnd = 5,
       };
@@ -149,4 +147,3 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
     }
   }
 }
-#endif

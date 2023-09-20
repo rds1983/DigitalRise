@@ -22,7 +22,7 @@ the direction of the water flow.",
     public WaterFallSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      ParticleSystem particleSystem = WaterFall.CreateWaterFall(ContentManager);
+      ParticleSystem particleSystem = WaterFall.CreateWaterFall(Services);
       particleSystem.Pose = new Pose(new Vector3F(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 

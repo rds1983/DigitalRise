@@ -101,7 +101,7 @@ namespace DigitalRune.Graphics.PostProcessing
     {
       _random = new Random();
 
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/GrainFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/GrainFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _strengthParameter = _effect.Parameters["Strength"];

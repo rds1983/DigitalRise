@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRune.Game.Input;
 using DigitalRune.Geometry;
@@ -17,7 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
 using Plane = DigitalRune.Geometry.Shapes.Plane;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -110,7 +109,7 @@ namespace Samples.Graphics
 
         // Foam is automatically rendered where the water intersects geometry and
         // where wave are high.
-        FoamMap = ContentManager.Load<Texture2D>("Water/Foam"),
+        FoamMap = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Foam.png"),
         FoamMapScale = 5,
         FoamColor = new Vector3F(1),
         FoamCrestMin = 0.3f,
@@ -305,4 +304,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

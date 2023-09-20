@@ -1,4 +1,5 @@
 ﻿#if !WP7 && !WP8
+using AssetManagementBase;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework.Content;
@@ -17,8 +18,8 @@ namespace Samples.Graphics
   // be set automatically.
   public class UnderwaterPostProcessor : EffectPostProcessor
   {
-    public UnderwaterPostProcessor(IGraphicsService graphicsService, ContentManager content)
-      : base(graphicsService, content.Load<Effect>("Water/Underwater"))
+    public UnderwaterPostProcessor(IGraphicsService graphicsService, AssetManager content)
+      : base(graphicsService, content.LoadEffect(graphicsService.GraphicsDevice, "Water/Underwater"))
     {
     }
   }

@@ -70,7 +70,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/DirectionalLight");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/DirectionalLight");
       _parameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];

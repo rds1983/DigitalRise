@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.Rendering;
@@ -14,7 +13,7 @@ using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -210,7 +209,7 @@ Press <K> to trigger nova effect.")]
 
       // Texture
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        ContentManager.Load<Texture2D>("Particles/Distortion");
+      AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/Distortion.png");
 
       // Softness
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Softness).DefaultValue = float.NaN; // NaN = automatic
@@ -313,7 +312,7 @@ Press <K> to trigger nova effect.")]
 
       // Texture
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        ContentManager.Load<Texture2D>("Particles/Distortion");
+        AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/Distortion.png");
 
       // Softness
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Softness).DefaultValue = float.NaN; // NaN = automatic
@@ -376,7 +375,7 @@ Press <K> to trigger nova effect.")]
 
       // Texture
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        ContentManager.Load<Texture2D>("Particles/Distortion");
+        AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/Distortion.png");
 
       // Softness
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Softness).DefaultValue = float.NaN; // NaN = automatic
@@ -424,4 +423,3 @@ Press <K> to trigger nova effect.")]
     }
   }
 }
-#endif

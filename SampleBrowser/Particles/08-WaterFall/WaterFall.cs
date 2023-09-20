@@ -1,4 +1,6 @@
 ﻿using System;
+using AssetManagementBase;
+using CommonServiceLocator;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
@@ -16,7 +18,7 @@ namespace Samples.Particles
   // water. The whole effect is preloaded to hide the start of the waterfall from the user.
   public static class WaterFall
   {
-    public static ParticleSystem CreateWaterFall(ContentManager contentManager)
+    public static ParticleSystem CreateWaterFall(IServiceLocator services)
     {
       var ps = new ParticleSystem
       {
@@ -28,8 +30,8 @@ namespace Samples.Particles
 
         Children = new ParticleSystemCollection
         {
-          CreateSpray(contentManager),
-          CreateWater(contentManager),
+          CreateSpray(services),
+          CreateWater(services),
         }
       };
 
@@ -45,9 +47,12 @@ namespace Samples.Particles
       return ps;
     }
 
-    public static ParticleSystem CreateSpray(ContentManager contentManager)
+    public static ParticleSystem CreateSpray(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Spray",
         MaxNumberOfParticles = 100
@@ -125,7 +130,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Spray");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spray.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 1;
 
@@ -136,9 +141,12 @@ namespace Samples.Particles
     }
 
 
-    public static ParticleSystem CreateWater(ContentManager contentManager)
+    public static ParticleSystem CreateWater(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Water",
         MaxNumberOfParticles = 50
@@ -224,7 +232,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Water");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Water.png");
 
       return ps;
     }

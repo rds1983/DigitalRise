@@ -230,7 +230,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public SaoFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      Effect effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/SaoFilter");
+      Effect effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/SaoFilter");
       _frustumInfoParameter = effect.Parameters["FrustumInfo"];
       _numberOfAOSamplesParameter = effect.Parameters["NumberOfAOSamples"];
       _aoParameters0 = effect.Parameters["AOParameters0"];

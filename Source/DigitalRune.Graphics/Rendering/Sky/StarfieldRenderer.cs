@@ -112,7 +112,7 @@ namespace DigitalRune.Graphics.Rendering
         throw new NotSupportedException("The StarfieldRenderer does not support the Reach profile.");
 
       // Load effect.
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/Starfield");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/Starfield");
       _effectParameterViewportSize = _effect.Parameters["ViewportSize"];
       _effectParameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _effectParameterIntensity = _effect.Parameters["Intensity"];

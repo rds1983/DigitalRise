@@ -268,7 +268,7 @@ namespace DigitalRune.Graphics.Rendering
     private void InitializeHiDef(IGraphicsService graphicsService)
     {
       _submesh = MeshHelper.GetBox(graphicsService);
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/Skybox");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/Skybox");
       _parameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _parameterExposure = _effect.Parameters["Color"];
       _textureParameter = _effect.Parameters["Texture"];

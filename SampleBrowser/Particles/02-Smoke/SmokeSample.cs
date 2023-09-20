@@ -28,7 +28,7 @@ App Hub XNA Particle Sample).",
       // graph ("instancing"). By default, all instances look identical. The 
       // properties ParticleSystemNode.Color/Alpha/AngleOffset can be used to 
       // render the particles with some variations.
-      var particleSystem = Smoke.Create(ContentManager);
+      var particleSystem = Smoke.Create(Services);
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 
       _particleSystemNode0 = new ParticleSystemNode(particleSystem);

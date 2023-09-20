@@ -258,7 +258,7 @@ namespace Samples
       //PostProcessors.Add(_underwaterPostProcessor);
 
       // Use 2D texture for reticle.
-      //_reticle = contentManager.Load<Texture2D>("Reticle");
+      //_reticle = AssetManager.AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.
       //var uiContentManager = services.GetInstance<ContentManager>("UIContent");

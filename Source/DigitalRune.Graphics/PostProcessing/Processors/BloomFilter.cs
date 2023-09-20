@@ -111,7 +111,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public BloomFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/BloomFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/BloomFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _bloomThresholdParameter = _effect.Parameters["BloomThreshold"];
       _bloomIntensityParameter = _effect.Parameters["BloomIntensity"];

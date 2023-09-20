@@ -55,14 +55,6 @@ namespace DigitalRune.Graphics
   public interface IGraphicsService
   {
     /// <summary>
-    /// Gets the content manager that can be used to load predefined DigitalRune Graphics content
-    /// (e.g. predefined shaders, post-processing effects, lookup textures, etc.).
-    /// </summary>
-    /// <value>The content manager.</value>
-    ContentManager Content { get; }
-
-
-    /// <summary>
     /// Gets or sets the render target pool.
     /// </summary>
     /// <value>The render target pool.</value>
@@ -233,5 +225,12 @@ namespace DigitalRune.Graphics
     /// the graphics device is disposed.
     /// </remarks>
     Dictionary<string, object> Data { get; }
+
+    /// <summary>
+    /// Retrieves stock digital rune effect
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    Effect GetStockEffect(string path);
   }
 }

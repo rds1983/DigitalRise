@@ -193,7 +193,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public ColorCorrectionFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      var effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/ColorCorrectionFilter");
+      var effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/ColorCorrectionFilter");
       _viewportSizeParameter = effect.Parameters["ViewportSize"];
       _strengthParameter = effect.Parameters["Strength"];
       _sourceTextureParameter = effect.Parameters["SourceTexture"];

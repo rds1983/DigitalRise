@@ -68,7 +68,7 @@ namespace Samples.Graphics
         throw new ArgumentNullException("graphicsService");
 
       // Load effect.
-      _effect = graphicsService.Content.Load<Effect>("FogSphere");
+      _effect = graphicsService.GetStockEffect("FogSphere");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterWorld = _effect.Parameters["World"];
       _parameterWorldInverse = _effect.Parameters["WorldInverse"];

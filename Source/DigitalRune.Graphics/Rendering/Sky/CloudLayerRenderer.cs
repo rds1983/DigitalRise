@@ -82,7 +82,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService.GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
         throw new NotSupportedException("The CloudLayerRenderer does not support the Reach profile.");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/CloudLayer");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/CloudLayer");
       _parameterView = _effect.Parameters["View"];
       _parameterProjection = _effect.Parameters["Projection"];
       _parameterSunDirection = _effect.Parameters["SunDirection"];

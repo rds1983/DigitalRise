@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
@@ -26,13 +25,15 @@ namespace DigitalRune.Graphics.SceneGraph
 		{
 			public VertexElementFormat Format;
 			public VertexElementUsage Usage;
+			public int UsageIndex;
 			public int AccessorIndex;
 
-			public VertexElementInfo(VertexElementFormat format, VertexElementUsage usage, int accessorIndex)
+			public VertexElementInfo(VertexElementFormat format, VertexElementUsage usage, int accessorIndex, int usageIndex)
 			{
 				Format = format;
 				Usage = usage;
 				AccessorIndex = accessorIndex;
+				UsageIndex = usageIndex;
 			}
 		}
 
@@ -265,18 +266,25 @@ namespace DigitalRune.Graphics.SceneGraph
 						else if (pair.Key == "TANGENT")
 						{
 							element.Usage = VertexElementUsage.Tangent;
-						}
-						if (pair.Key.StartsWith("TEXCOORD_"))
+						} 
+						else if (pair.Key.StartsWith("TEXCOORD_"))
 						{
 							element.Usage = VertexElementUsage.TextureCoordinate;
+							element.UsageIndex = int.Parse(pair.Key.Substring(9));
 						}
 						else if (pair.Key.StartsWith("JOINTS_"))
 						{
 							element.Usage = VertexElementUsage.BlendIndices;
+							element.UsageIndex = int.Parse(pair.Key.Substring(7));
 						}
 						else if (pair.Key.StartsWith("WEIGHTS_"))
 						{
 							element.Usage = VertexElementUsage.BlendWeight;
+							element.UsageIndex = int.Parse(pair.Key.Substring(8));
+						}
+						else
+						{
+							throw new Exception($"Attribute of type '{pair.Key}' isn't supported.");
 						}
 
 						element.Format = GetAccessorFormat(pair.Value);
@@ -294,12 +302,12 @@ namespace DigitalRune.Graphics.SceneGraph
 					var offset = 0;
 					for (var i = 0; i < vertexInfos.Count; ++i)
 					{
-						vertexElements[i] = new VertexElement(offset, vertexInfos[i].Format, vertexInfos[i].Usage, 0);
+						vertexElements[i] = new VertexElement(offset, vertexInfos[i].Format, vertexInfos[i].Usage, vertexInfos[i].UsageIndex);
 						offset += vertexInfos[i].Format.GetSize();
 					}
 
 					var vd = new VertexDeclaration(vertexElements);
-					var vertexBuffer = new VertexBuffer(_graphicsService.GraphicsDevice, vd, vertexCount.Value, BufferUsage.WriteOnly);
+					var vertexBuffer = new VertexBuffer(_graphicsService.GraphicsDevice, vd, vertexCount.Value, BufferUsage.None);
 
 					// Set vertex data
 					var vertexData = new byte[vertexCount.Value * vd.VertexStride];
@@ -367,8 +375,37 @@ namespace DigitalRune.Graphics.SceneGraph
 					var elementSize = (indexAccessor.ComponentType == Accessor.ComponentTypeEnum.SHORT ||
 						indexAccessor.ComponentType == Accessor.ComponentTypeEnum.UNSIGNED_SHORT) ?
 						IndexElementSize.SixteenBits : IndexElementSize.ThirtyTwoBits;
-					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.WriteOnly);
-					indexBuffer.SetData(0, indexData.Array, indexData.Offset, indexData.Count);
+					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.None);
+
+					if (elementSize == IndexElementSize.SixteenBits)
+					{
+						var dataShort = new ushort[indexData.Count / 2];
+						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataShort, 0, indexData.Count);
+
+						// Flip winding
+						for(var i = 0; i < dataShort.Length / 3; i++)
+						{
+							var temp = dataShort[i * 3];
+							dataShort[i * 3] = dataShort[i * 3 + 2];
+							dataShort[i * 3 + 2] = temp;
+						}
+
+						indexBuffer.SetData(dataShort);
+					} else
+					{
+						var dataInt = new uint[indexData.Count / 4];
+						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataInt, 0, indexData.Count);
+
+						// Flip winding
+						for (var i = 0; i < dataInt.Length / 3; i++)
+						{
+							var temp = dataInt[i * 3];
+							dataInt[i * 3] = dataInt[i * 3 + 2];
+							dataInt[i * 3 + 2] = temp;
+						}
+
+						indexBuffer.SetData(dataInt);
+					}
 
 					var subMesh = new Submesh
 					{

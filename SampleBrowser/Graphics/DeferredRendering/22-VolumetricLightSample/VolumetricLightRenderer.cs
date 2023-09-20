@@ -187,7 +187,7 @@ namespace Samples.Graphics
         throw new ArgumentNullException("graphicsService");
 
       // Load effect.
-      var effect = graphicsService.Content.Load<Effect>("VolumetricLight");
+      var effect = graphicsService.GetStockEffect("VolumetricLight");
       _parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];

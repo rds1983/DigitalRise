@@ -59,7 +59,7 @@ namespace DigitalRune.Graphics
       if (graphicService == null)
         throw new ArgumentNullException("graphicService");
 
-      var effect = graphicService.Content.Load<Effect>("DigitalRune/Terrain/TerrainClearLayer");
+      var effect = graphicService.GetStockEffect("DigitalRune/Terrain/TerrainClearLayer");
       var effectBinding = new EffectBinding(graphicService, effect, null, EffectParameterHint.Material);
       Material = new Material
       {

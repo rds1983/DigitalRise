@@ -127,7 +127,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public ObjectMotionBlur(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/ObjectMotionBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/ObjectMotionBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _numberOfSamplesParameter = _effect.Parameters["NumberOfSamples"];

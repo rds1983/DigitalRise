@@ -57,7 +57,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public KawaseBlur(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/KawaseBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/KawaseBlur");
       _iterationParameter = _effect.Parameters["Iteration"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _useHalfPixelOffsetParameter = _effect.Parameters["UseHalfPixelOffset"];

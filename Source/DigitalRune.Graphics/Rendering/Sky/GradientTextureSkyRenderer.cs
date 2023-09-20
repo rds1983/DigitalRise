@@ -73,7 +73,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService.GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
         throw new NotSupportedException("The GradientTextureSkyRenderer does not support the Reach profile.");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Sky/GradientTextureSky");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Sky/GradientTextureSky");
       _parameterView = _effect.Parameters["View"];
       _parameterProjection = _effect.Parameters["Projection"];
       _parameterSunDirection = _effect.Parameters["SunDirection"];

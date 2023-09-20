@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune;
 using DigitalRune.Animation;
 using DigitalRune.Diagnostics;
 using DigitalRune.Game;
@@ -206,13 +205,6 @@ namespace Samples
       Content = new StorageContentManager(_services, vfsStorage);
       _services.Register(typeof(ContentManager), null, Content);
 
-      // Create content manager that will be used exclusively by the graphics service
-      // to load the pre-built effects and resources of DigitalRune.Graphics. (We
-      // could use Game.Content, but it is recommended to separate the content. This 
-      // allows to unload the content of the samples without unloading the other 
-      // content.)
-      var graphicsContentManager = new StorageContentManager(_services, vfsStorage);
-
       // ----- Initialize Services
       // Register the game class.
       _services.Register(typeof(Microsoft.Xna.Framework.Game), null, this);
@@ -233,7 +225,7 @@ namespace Samples
       _services.Register(typeof(IInputService), null, _inputManager);
 
       // Graphics
-      _graphicsManager = new GraphicsManager(GraphicsDevice, Window, graphicsContentManager);
+      _graphicsManager = new GraphicsManager(GraphicsDevice, Window);
       _services.Register(typeof(IGraphicsService), null, _graphicsManager);
 
       // GUI
@@ -269,7 +261,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(Graphics.SkinnedEffectSample);
+			var initialSample = typeof(Graphics.BasicEffectSample);
 			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);

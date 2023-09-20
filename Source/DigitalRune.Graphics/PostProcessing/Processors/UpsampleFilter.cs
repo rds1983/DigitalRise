@@ -187,7 +187,7 @@ namespace DigitalRune.Graphics.PostProcessing
       DepthSensitivity = 1000;
       DepthThreshold = 1;
       
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/UpsampleFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/UpsampleFilter");
       _parameterSourceSize = _effect.Parameters["SourceSize"];
       _parameterTargetSize = _effect.Parameters["TargetSize"];
       _parameterProjection = _effect.Parameters["Projection"];

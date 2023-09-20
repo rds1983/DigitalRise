@@ -192,7 +192,7 @@ namespace DigitalRune.Graphics.Rendering
 
       _graphicsService = graphicsService;
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Water/Water");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Water/Water");
 
       _parameterView = _effect.Parameters["View"];
       _parameterProjection = _effect.Parameters["Projection"];

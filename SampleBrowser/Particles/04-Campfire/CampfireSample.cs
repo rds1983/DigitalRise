@@ -22,11 +22,11 @@ from texture atlases.",
     public CampfireSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var particleSystem = Campfire.CreateCampfire(ContentManager);
+      var particleSystem = Campfire.CreateCampfire(Services);
 
       // Add a smoke effect as a child to the campfire.
       particleSystem.Children = new ParticleSystemCollection();
-      particleSystem.Children.Add(CampfireSmoke.CreateCampfireSmoke(ContentManager));
+      particleSystem.Children.Add(CampfireSmoke.CreateCampfireSmoke(Services));
 
       // Position the campfire (including its child) in the level.
       // (The fire effect lies in the xy plane and shoots into the forward direction (= -z axis).

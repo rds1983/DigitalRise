@@ -48,7 +48,7 @@ namespace Samples.Particles
       };
       Simulation.RigidBodies.Add(_rigidBody);
 
-      _particleSystem = RibbonEffect.Create(ContentManager);
+      _particleSystem = RibbonEffect.Create(Services);
       ParticleSystemService.ParticleSystems.Add(_particleSystem);
       _particleSystemNode = new ParticleSystemNode(_particleSystem);
       GraphicsScreen.Scene.Children.Add(_particleSystemNode);

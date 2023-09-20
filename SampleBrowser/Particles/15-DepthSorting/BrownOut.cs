@@ -1,4 +1,7 @@
-﻿using DigitalRune.Geometry;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Geometry;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -20,12 +23,12 @@ namespace Samples.Particles
     private readonly IParticleParameter<bool> _isDepthSortedParameter;
 
 
-    public BrownOut(ContentManager contentManager)
+    public BrownOut(IServiceLocator services)
     {
-      Pose = new Pose(Matrix33F.CreateRotationX(-ConstantsF.PiOver2));
+			Pose = new Pose(Matrix33F.CreateRotationX(-ConstantsF.PiOver2));
 
       // Smoke on a ring.
-      var outerRingSmoke = CreateSmoke(contentManager);
+      var outerRingSmoke = CreateSmoke(services);
       outerRingSmoke.Effectors.Add(new StreamEmitter { DefaultEmissionRate = 30 });
       outerRingSmoke.Effectors.Add(new StartPositionEffector
       {
@@ -33,7 +36,7 @@ namespace Samples.Particles
       });
 
       // Smoke in the area inside the ring.
-      var innerCircleSmoke = CreateSmoke(contentManager);
+      var innerCircleSmoke = CreateSmoke(services);
       innerCircleSmoke.Effectors.Add(new StreamEmitter { DefaultEmissionRate = 10 });
       innerCircleSmoke.Effectors.Add(new StartPositionEffector
       {
@@ -49,9 +52,12 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSmoke(ContentManager contentManager)
+    private static ParticleSystem CreateSmoke(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         MaxNumberOfParticles = 200,
       };
@@ -128,7 +134,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Smoke");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Smoke.png");
 
       return ps;
     }

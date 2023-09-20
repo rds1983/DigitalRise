@@ -21,7 +21,7 @@ axial billboards for the raindrops.",
     public RainSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      _particleSystem = Rain.Create(ContentManager);
+      _particleSystem = Rain.Create(Services);
       ParticleSystemService.ParticleSystems.Add(_particleSystem);
 
       _particleSystemNode = new ParticleSystemNode(_particleSystem);

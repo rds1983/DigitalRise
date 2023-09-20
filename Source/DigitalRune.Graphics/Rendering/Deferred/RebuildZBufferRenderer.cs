@@ -81,7 +81,7 @@ namespace DigitalRune.Graphics.Rendering
       NearBias = 1;
       FarBias = 0.995f;
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/RebuildZBuffer");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/RebuildZBuffer");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterProjection = _effect.Parameters["Projection"];
       _parameterCameraFar = _effect.Parameters["CameraFar"];

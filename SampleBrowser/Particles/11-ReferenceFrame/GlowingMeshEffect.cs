@@ -1,10 +1,11 @@
-﻿using DigitalRune.Geometry.Meshes;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Geometry.Meshes;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
 using DigitalRune.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -12,9 +13,12 @@ namespace Samples.Particles
 {
   public static class GlowingMeshEffect
   {
-    public static ParticleSystem Create(ITriangleMesh mesh, ContentManager contentManager)
+    public static ParticleSystem Create(ITriangleMesh mesh, IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "GlowingMeshEffect",
         MaxNumberOfParticles = 100
@@ -65,7 +69,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Star");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Star.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 

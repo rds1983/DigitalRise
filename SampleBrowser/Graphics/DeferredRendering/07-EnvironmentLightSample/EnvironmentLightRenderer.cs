@@ -55,7 +55,7 @@ namespace Samples.Graphics
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("EnvironmentLight");
+      _effect = graphicsService.GetStockEffect("EnvironmentLight");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["DiffuseColor"];

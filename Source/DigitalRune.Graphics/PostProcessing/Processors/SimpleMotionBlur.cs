@@ -94,7 +94,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public SimpleMotionBlur(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/SimpleMotionBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/SimpleMotionBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _strengthParameter = _effect.Parameters["Strength"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

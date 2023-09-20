@@ -24,7 +24,7 @@ and this does not look good.",
     public DepthSortingSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      _brownOut = new BrownOut(ContentManager);
+      _brownOut = new BrownOut(Services);
       ParticleSystemService.ParticleSystems.Add(_brownOut);
 
       _particleSystemNode = new ParticleSystemNode(_brownOut);

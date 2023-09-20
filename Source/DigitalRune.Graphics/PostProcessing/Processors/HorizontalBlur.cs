@@ -49,7 +49,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public HorizontalBlur(IGraphicsService graphicsService) 
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/HorizontalBlur");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/HorizontalBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _numberOfSamplesParameter = _effect.Parameters["NumberOfSamples"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

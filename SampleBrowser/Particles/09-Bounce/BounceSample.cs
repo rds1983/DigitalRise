@@ -17,7 +17,7 @@ namespace Samples.Particles
     public BounceSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var particleSystem = BouncingSparks.Create(ContentManager);
+      var particleSystem = BouncingSparks.Create(Services);
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 
       _particleSystemNode = new ParticleSystemNode(particleSystem);

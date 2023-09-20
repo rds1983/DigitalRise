@@ -104,7 +104,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public NormalMapDistortionFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/NormalMapDistortionFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/NormalMapDistortionFilter");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _scaleParameter = _effect.Parameters["Scale"];
       _offsetParameter = _effect.Parameters["Offset"];

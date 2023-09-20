@@ -122,7 +122,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Deferred/ImageBasedLight");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/ImageBasedLight");
       _parameterTransform = _effect.Parameters["Transform"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];

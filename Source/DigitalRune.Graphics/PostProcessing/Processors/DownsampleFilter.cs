@@ -59,7 +59,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public DownsampleFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/DownsampleFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/DownsampleFilter");
       _sourceSizeParameter = _effect.Parameters["SourceSize"];
       _targetSizeParameter = _effect.Parameters["TargetSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

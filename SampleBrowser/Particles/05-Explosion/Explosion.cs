@@ -1,4 +1,6 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -13,15 +15,15 @@ namespace Samples.Particles
   // This class inherits from class ParticleSystem and creates an explosion effect.
   public class Explosion : ParticleSystem
   {
-    public Explosion(ContentManager contentManager)
+    public Explosion(IServiceLocator services)
     {
       // The explosion particle systems owns 3 child particle systems. 
       // (The parent particle system does not have any particles.)
       Children = new ParticleSystemCollection
       {
-        CreateFlash(contentManager),
-        CreateHotCore(contentManager),
-        CreateSmoke(contentManager),
+        CreateFlash(services),
+        CreateHotCore(services),
+        CreateSmoke(services),
       };
 
       ParticleSystemValidator.Validate(Children[0]);
@@ -41,9 +43,12 @@ namespace Samples.Particles
 
     // Creates a particle system that display a single particle: a bright billboard 
     // for a "flash" effect.
-    private ParticleSystem CreateFlash(ContentManager contentManager)
+    private ParticleSystem CreateFlash(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Flash",
         MaxNumberOfParticles = 1,
@@ -90,7 +95,7 @@ namespace Samples.Particles
         new Vector3F(1, 1, 216.0f / 255.0f);
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Flash");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flash.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 
@@ -99,9 +104,12 @@ namespace Samples.Particles
 
 
     // Creates a hot red glowing core particle system for an explosion effect.
-    private ParticleSystem CreateHotCore(ContentManager contentManager)
+    private ParticleSystem CreateHotCore(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "HotCore",
         MaxNumberOfParticles = 10,
@@ -202,7 +210,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Explosion2");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion2.png");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 
@@ -210,9 +218,12 @@ namespace Samples.Particles
     }
 
 
-    private ParticleSystem CreateSmoke(ContentManager contentManager)
+    private ParticleSystem CreateSmoke(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Smoke",
         MaxNumberOfParticles = 20,
@@ -322,7 +333,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Clouds",
-          contentManager.Load<Texture2D>("Particles/Clouds"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Clouds.png"),
           Vector2F.Zero, Vector2F.One,
           2, 1);
 

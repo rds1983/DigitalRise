@@ -65,7 +65,7 @@ namespace Samples.Graphics
       // of BasicEffect.EnableDefaultLighting().
       SceneSample.InitializeDefaultXnaLights(_scene);
 
-      var texture = new PackedTexture(ContentManager.Load<Texture2D>("Billboard/BillboardReference"));
+      var texture = new PackedTexture(AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Billboard/BillboardReference.png"));
 
       // ----- View plane-aligned billboards with variations.
       // View plane-aligned billboards are rendered parallel to the screen.
@@ -345,7 +345,7 @@ namespace Samples.Graphics
       // Update().)
       pose0.Position.X += 2;
       pose1 = pose0;
-      texture = new PackedTexture("Bee", ContentManager.Load<Texture2D>("Particles/beeWingFlap"), Vector2F.Zero, Vector2F.One, 3, 1);
+      texture = new PackedTexture("Bee", AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/beeWingFlap.png"), Vector2F.Zero, Vector2F.One, 3, 1);
       _animatedBillboard = new ImageBillboard(texture);
       billboardNode = new BillboardNode(_animatedBillboard);
       billboardNode.Name = "Animated billboards";

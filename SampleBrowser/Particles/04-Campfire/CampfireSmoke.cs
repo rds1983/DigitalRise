@@ -1,4 +1,6 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
@@ -13,9 +15,12 @@ namespace Samples.Particles
   // Creates a smoke effect for a campfire.
   public static class CampfireSmoke
   {
-    public static ParticleSystem CreateCampfireSmoke(ContentManager contentManager)
+    public static ParticleSystem CreateCampfireSmoke(IServiceLocator services)
     {
-      ParticleSystem ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			ParticleSystem ps = new ParticleSystem
       {
         Name = "CampfireSmoke",
         MaxNumberOfParticles = 50,
@@ -151,7 +156,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Smoke2",
-          contentManager.Load<Texture2D>("Campfire/Smoke2"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/Smoke2.png"),
           Vector2F.Zero, Vector2F.One,
           2, 1);
 

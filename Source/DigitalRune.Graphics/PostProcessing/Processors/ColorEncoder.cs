@@ -97,7 +97,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public ColorEncoder(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/ColorEncoder");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/ColorEncoder");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _sourceEncodingParameter = _effect.Parameters["SourceEncoding"];

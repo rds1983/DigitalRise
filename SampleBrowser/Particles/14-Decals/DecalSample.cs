@@ -33,7 +33,7 @@ decals are not created using generic particle systems",
       GraphicsScreen.DrawReticle = true;
       SetCamera(new Vector3F(0, 2, 6), 0, 0);
 
-      _decals = Decals.Create(ContentManager);
+      _decals = Decals.Create(Services);
       ParticleSystemService.ParticleSystems.Add(_decals);
 
       _particleSystemNode = new ParticleSystemNode(_decals);

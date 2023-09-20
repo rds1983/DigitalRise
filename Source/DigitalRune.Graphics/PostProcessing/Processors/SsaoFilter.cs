@@ -237,7 +237,7 @@ namespace DigitalRune.Graphics.PostProcessing
     public SsaoFilter(IGraphicsService graphicsService)
       : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/SsaoFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/SsaoFilter");
       _farParameter = _effect.Parameters["Far"];
       _radiusParameter = _effect.Parameters["Radius"];
       _strengthParameter = _effect.Parameters["Strength"];

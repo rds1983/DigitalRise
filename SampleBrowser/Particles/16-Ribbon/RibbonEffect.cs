@@ -1,4 +1,6 @@
-﻿using DigitalRune.Graphics;
+﻿using AssetManagementBase;
+using CommonServiceLocator;
+using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Particles;
@@ -12,9 +14,12 @@ namespace Samples.Particles
   // A particle system that draws one ribbon by connecting all particles.
   public static class RibbonEffect
   {
-    public static ParticleSystem Create(ContentManager contentManager)
+    public static ParticleSystem Create(IServiceLocator services)
     {
-      var ps = new ParticleSystem
+			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetInstance<IGraphicsService>();
+
+			var ps = new ParticleSystem
       {
         Name = "Ribbon",
         MaxNumberOfParticles = 50,
@@ -60,7 +65,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        contentManager.Load<Texture2D>("Particles/Ribbon");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Ribbon.png");
 
       // The parameter "TextureTiling" defines how the texture spreads across the ribbon.
       // 0 ... no tiling, 

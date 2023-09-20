@@ -82,7 +82,7 @@ The right ball uses ParticleReferenceFrame.Local.",
       // particle systems. Particles are all relative to world space. The particle system pose 
       // determines the start positions and direction (when the StartPositionEffector and 
       // StartDirectionEffector are in use). Particles do not move with the particle system.
-      _particleSystem0 = GlowingMeshEffect.Create(triangleMesh, ContentManager);
+      _particleSystem0 = GlowingMeshEffect.Create(triangleMesh, Services);
       _particleSystem0.ReferenceFrame = ParticleReferenceFrame.World;
       ParticleSystemService.ParticleSystems.Add(_particleSystem0);
 
@@ -92,7 +92,7 @@ The right ball uses ParticleReferenceFrame.Local.",
       // Create a particle system for the right ball. This particle system uses
       // ReferenceFrame == ParticleReferenceFrame.Local. Particles are all relative to the 
       // particle system pose. Particles move with the particle system.
-      _particleSystem1 = GlowingMeshEffect.Create(triangleMesh, ContentManager);
+      _particleSystem1 = GlowingMeshEffect.Create(triangleMesh, Services);
       _particleSystem1.ReferenceFrame = ParticleReferenceFrame.Local;
       ParticleSystemService.ParticleSystems.Add(_particleSystem1);
 

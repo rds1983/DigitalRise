@@ -76,7 +76,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.Content.Load<Effect>("DigitalRune/Water/Ocean");
+      _effect = graphicsService.GetStockEffect("DigitalRune/Water/Ocean");
       _parameterSize = _effect.Parameters["Size"];
       _parameterButterflyIndex = _effect.Parameters["ButterflyIndex"];
       //_parameterIsLastPass = _effect.Parameters["IsLastPass"];

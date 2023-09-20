@@ -28,7 +28,7 @@ namespace DigitalRune.Graphics.PostProcessing
     /// </exception>
     public CopyFilter(IGraphicsService graphicsService) : base(graphicsService)
     {
-      _effect = GraphicsService.Content.Load<Effect>("DigitalRune/PostProcessing/CopyFilter");
+      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/CopyFilter");
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
     }

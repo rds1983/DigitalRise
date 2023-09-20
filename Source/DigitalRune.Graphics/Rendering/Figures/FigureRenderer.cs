@@ -282,7 +282,7 @@ namespace DigitalRune.Graphics.Rendering
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected virtual Effect OnLoadEffect(IGraphicsService graphicsService)
     {
-      return graphicsService.Content.Load<Effect>("DigitalRune/Line");
+      return graphicsService.GetStockEffect("DigitalRune/Line");
     }
 
 
