@@ -70,11 +70,11 @@ LightNodes, CameraNodes, ...) and how to animate a skinned model.",
       _scene.Children.Add(_model1);
 
       // The dude model contains a single mesh node.
-      var meshNode0 = (MeshNode)_model0.Children[0];
-      var meshNode1 = (MeshNode)_model1.Children[0];
+      var meshNode0 = (MeshNode)_model0.GetSceneNode("him");
+      var meshNode1 = (MeshNode)_model1.GetSceneNode("him");
 
-      // The imported animation data (skeleton and animations) is stored with the mesh.
-      var animations = meshNode0.Mesh.Animations;
+			// The imported animation data (skeleton and animations) is stored with the mesh.
+			var animations = meshNode0.Mesh.Animations;
 
       // The MeshNodes of skinned models has a SkeletonPose which can be animated.
       // Let's start the first animation.

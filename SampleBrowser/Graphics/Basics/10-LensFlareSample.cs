@@ -1,4 +1,6 @@
-﻿#if !ANDROID && !IOS
+﻿#if false
+
+#if !ANDROID && !IOS
 using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
@@ -217,4 +219,6 @@ and search the sky!",
     }
   }
 }
+#endif
+
 #endif

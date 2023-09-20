@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if false
+
+using System;
 using System.Linq;
 using DigitalRune.Animation;
 using DigitalRune.Geometry;
@@ -319,3 +321,5 @@ See source code for more details.",
     }
   }
 }
+
+#endif
