@@ -45,15 +45,6 @@ namespace DigitalRune.Graphics.SceneGraph
   public class MeshNode : SceneNode, IOcclusionProxy
   {
     //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-
-    // Optimization: Store the hash values of all render passes for fast lookup.
-    private int[] _passHashes;
-    #endregion
-
-
-    //--------------------------------------------------------------
     #region Properties & Events
     //--------------------------------------------------------------
 
@@ -64,9 +55,19 @@ namespace DigitalRune.Graphics.SceneGraph
     [Category("Material")]
     public MaterialInstanceCollection MaterialInstances
     {
-      get { return _materialInstances; }
+      get
+      {
+        if (_materialInstances == null && Mesh != null)
+        {
+          _materialInstances = new MaterialInstanceCollection(Mesh.Materials);
+        }
+
+        return _materialInstances;
+      }
     }
     private MaterialInstanceCollection _materialInstances;
+
+    private int[] PassHashes => MaterialInstances.PassHashes;
 
 
     /// <summary>
@@ -85,44 +86,43 @@ namespace DigitalRune.Graphics.SceneGraph
         if (value == null)
           throw new ArgumentNullException("value");
 
-        bool isLoadedFromContentPipeline = (_mesh == null);
+        if (_mesh != null)
+        {
+          _mesh.Materials.CollectionChanged -= Materials_CollectionChanged;
+        }
 
         _mesh = value;
 
-        if (!isLoadedFromContentPipeline)
+        SetHasAlpha();
+
+        // Ensure that MorphWeights are set. (Required for correct rendering.)
+        MorphWeights = value.HasMorphTargets() ? new MorphWeightCollection(value) : null;
+
+        OnInitializeShape();
+
+        // Reset skeleton pose if it has become invalid.
+        if (_skeletonPose != null && _skeletonPose.Skeleton != value.Skeleton)
+          _skeletonPose = null;
+
+        // Invalidate OccluderData.
+        RenderData = null;
+
+        if (_mesh != null)
         {
-          _materialInstances = new MaterialInstanceCollection(_mesh.Materials);
-          _passHashes = _materialInstances.PassHashes;
-          SetHasAlpha();
+					_mesh.Materials.CollectionChanged += Materials_CollectionChanged;
+				}
 
-          // Ensure that MorphWeights are set. (Required for correct rendering.)
-          MorphWeights = value.HasMorphTargets() ? new MorphWeightCollection(value) : null;
-
-          OnInitializeShape();
-
-          // Reset skeleton pose if it has become invalid.
-          if (_skeletonPose != null && _skeletonPose.Skeleton != value.Skeleton)
-            _skeletonPose = null;
-
-          // Invalidate OccluderData.
-          RenderData = null;
-        }
-        else
-        {
-          // The MeshNode is loaded via the content pipeline. At this point shared
-          // resources (e.g. Materials) may be missing.
-          // --> The MeshNode will be initialized in OnAssetLoaded().
-          Debug.Assert(MaterialInstances == null);
-          Debug.Assert(MorphWeights == null);
-          Debug.Assert(SkeletonPose == null);
-          Debug.Assert(RenderData == null);
-        }
+        _materialInstances = null;
       }
     }
-    private Mesh _mesh;
+		private Mesh _mesh;
 
+		private void Materials_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+      _materialInstances = null;
+		}
 
-    /// <summary>
+/// <summary>
     /// Gets or sets the weights of the morph targets.
     /// </summary>
     /// <value>
@@ -169,7 +169,7 @@ namespace DigitalRune.Graphics.SceneGraph
         {
           var submesh = _mesh.Submeshes[i];
           if (submesh.HasMorphTargets)
-            foreach (var materialInstanceBinding in _materialInstances[submesh.MaterialIndex].EffectBindings)
+            foreach (var materialInstanceBinding in MaterialInstances[submesh.MaterialIndex].EffectBindings)
               materialInstanceBinding.MorphWeights = value;
         }
       }
@@ -236,46 +236,8 @@ namespace DigitalRune.Graphics.SceneGraph
       IsRenderable = true;
       CastsShadows = true;
 
-      _mesh = mesh;
-
-      _materialInstances = new MaterialInstanceCollection(_mesh.Materials);
-      _passHashes = _materialInstances.PassHashes;
-      SetHasAlpha();
-
-      // Ensure that MorphWeights are set. (Required for correct rendering.)
-      if (mesh.HasMorphTargets())
-        MorphWeights = new MorphWeightCollection(mesh);
-
-      // We do not call OnInitializeShape here because virtual methods should not be called
-      // in constructor.
-      Shape = mesh.BoundingShape;
+      Mesh = mesh;
     }
-
-
-    /// <summary>
-    /// Called when all fix-ups are executed and the asset is fully loaded.
-    /// </summary>
-    /// <param name="sender">The sender.</param>
-    /// <param name="eventArgs">
-    /// The <see cref="EventArgs"/> instance containing the event data.
-    /// </param>
-    internal void OnAssetLoaded(object sender, EventArgs eventArgs)
-    {
-      // Meshes are shared resources, so they are loaded deferred.
-      // OnAssetLoaded is called when all shared resources are loaded.
-      _materialInstances = new MaterialInstanceCollection(Mesh.Materials);
-      _passHashes = _materialInstances.PassHashes;
-      SetHasAlpha();
-
-      // Ensure that MorphWeights are set. (Required for correct rendering.)
-      if (_mesh.HasMorphTargets())
-        MorphWeights = new MorphWeightCollection(_mesh);
-
-      OnInitializeShape();
-      
-      // Note: The SkeletonPose is created by the ModelNode when the asset is loaded.
-    }
-
 
     /// <inheritdoc/>
     protected override void Dispose(bool disposing, bool disposeData)
@@ -327,7 +289,6 @@ namespace DigitalRune.Graphics.SceneGraph
       var sourceTyped = (MeshNode)source;
       _mesh = sourceTyped.Mesh;
       _materialInstances = new MaterialInstanceCollection(sourceTyped.MaterialInstances);
-      _passHashes = _materialInstances.PassHashes;
 
       if (sourceTyped.MorphWeights != null)
         MorphWeights = sourceTyped.MorphWeights.Clone();
@@ -353,8 +314,8 @@ namespace DigitalRune.Graphics.SceneGraph
     /// </remarks>
     internal bool IsPassSupported(int passHash)
     {
-      for (int i = 0; i < _passHashes.Length; i++)
-        if (_passHashes[i] == passHash)
+      for (int i = 0; i < PassHashes.Length; i++)
+        if (PassHashes[i] == passHash)
           return true;
 
       return false;
@@ -367,7 +328,7 @@ namespace DigitalRune.Graphics.SceneGraph
     /// </summary>
     private void SetHasAlpha()
     {
-      foreach (var materialInstance in _materialInstances)
+      foreach (var materialInstance in MaterialInstances)
       {
         foreach (var effectBinding in materialInstance.EffectBindings)
         {

@@ -7,6 +7,7 @@ using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Geometry

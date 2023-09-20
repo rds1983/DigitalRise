@@ -105,6 +105,8 @@ namespace Samples
         // The DigitalRune builds for Windows, Universal Windows Apps and Xbox 360 support
         // HiDef effects. The other platforms support currently only Reach.
         GraphicsProfile = GraphicsProfile.Reach,
+#else
+        GraphicsProfile = GraphicsProfile.HiDef
 #endif
       };
 
@@ -184,19 +186,6 @@ namespace Samples
       // --> Create a TitleStorage that reads files from "<gameLocation>/Content".
       var titleStorage = new TitleStorage("Content");
 
-#if MONOGAME
-      // A ZipStorage can be used to access files inside a ZIP archive.
-      // --> Mount the sample assets to the root of the virtual file system.
-      var assetsStorage = new ZipStorage(titleStorage, "Content.zip");
-      vfsStorage.MountInfos.Add(new VfsMountInfo(assetsStorage, null));
-
-#if !ANDROID && !IOS && !LINUX && !MACOS
-      // --> Mount the DigitalRune assets to the root of the virtual file system.
-      var drStorage = new ZipStorage(titleStorage, "DigitalRune.zip");
-      vfsStorage.MountInfos.Add(new VfsMountInfo(drStorage, null));
-#endif
-#endif
-
       // Finally, map the TitleStorage to the root of the virtual file system.
       // (The TitleStorage is added as the last mount point. The ZIP archives
       // have priority.)
@@ -216,14 +205,6 @@ namespace Samples
       // file system. (Replaces the content manager stored in Game.Content.)
       Content = new StorageContentManager(_services, vfsStorage);
       _services.Register(typeof(ContentManager), null, Content);
-
-      // Create and register content manager that will be used to load the GUI.
-#if !MONOGAME
-      var uiContentManager = new ContentManager(_services, "Content");
-#else
-      var uiContentManager = new StorageContentManager(_services, assetsStorage);
-#endif
-      _services.Register(typeof(ContentManager), "UIContent", uiContentManager);
 
       // Create content manager that will be used exclusively by the graphics service
       // to load the pre-built effects and resources of DigitalRune.Graphics. (We
@@ -288,13 +269,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-#if KINECT
-      var initialSample = typeof(Kinect.KinectSkeletonMappingSample);
-#elif WINDOWS || WINDOWS_UWP
-      var initialSample = typeof(Graphics.DeferredLightingSample);
-#else
 			var initialSample = typeof(Graphics.BasicEffectSample);
-#endif
 			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);

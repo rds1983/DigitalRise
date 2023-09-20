@@ -3,7 +3,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
-    <DefineConstants>$(DefineConstants);FNA;</DefineConstants>
+    <DefineConstants>$(DefineConstants);FNA;WINDOWS;MONOGAME;DIGITALRUNE_PROFILE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Source\DigitalRune.Game.Input\DigitalRune.Game.Input.FNA.Core.csproj" />

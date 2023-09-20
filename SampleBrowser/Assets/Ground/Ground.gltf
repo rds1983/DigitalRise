@@ -1,186 +1,251 @@
 {
     "asset": {
-        "version": "2.0",
-        "generator": "Open Asset Import Library (assimp v5.2.0)"
+        "generator": "FBX2glTF v0.13.1",
+        "version": "2.0"
     },
+    "scene": 0,
     "extensionsUsed": [
-        "KHR_materials_pbrSpecularGlossiness",
-        "FB_ngon_encoding"
-    ],
-    "accessors": [
-        {
-            "bufferView": 0,
-            "byteOffset": 0,
-            "componentType": 5126,
-            "count": 6,
-            "type": "VEC3",
-            "max": [
-                200.0,
-                0.0,
-                200.0
-            ],
-            "min": [
-                -200.0,
-                0.0,
-                -200.0
-            ]
-        },
-        {
-            "bufferView": 1,
-            "byteOffset": 0,
-            "componentType": 5126,
-            "count": 6,
-            "type": "VEC3",
-            "max": [
-                0.0,
-                -1.0,
-                -0.0
-            ],
-            "min": [
-                0.0,
-                -1.0,
-                -0.0
-            ]
-        },
-        {
-            "bufferView": 2,
-            "byteOffset": 0,
-            "componentType": 5126,
-            "count": 6,
-            "type": "VEC2",
-            "max": [
-                32.0,
-                32.0
-            ],
-            "min": [
-                0.0,
-                0.0
-            ]
-        },
-        {
-            "bufferView": 3,
-            "byteOffset": 0,
-            "componentType": 5125,
-            "count": 6,
-            "type": "SCALAR",
-            "max": [
-                5
-            ],
-            "min": [
-                0
-            ]
-        }
+        "KHR_lights_punctual"
     ],
     "buffers": [
         {
-            "byteLength": 216,
-            "uri": "Ground.bin"
+            "byteLength": 140,
+            "uri": "buffer.bin"
         }
     ],
     "bufferViews": [
         {
             "buffer": 0,
+            "byteLength": 12,
             "byteOffset": 0,
-            "byteLength": 72,
-            "target": 34962
-        },
-        {
-            "buffer": 0,
-            "byteOffset": 72,
-            "byteLength": 72,
-            "target": 34962
-        },
-        {
-            "buffer": 0,
-            "byteOffset": 144,
-            "byteLength": 48,
-            "target": 34962
-        },
-        {
-            "buffer": 0,
-            "byteOffset": 192,
-            "byteLength": 24,
             "target": 34963
-        }
-    ],
-    "images": [
+        },
         {
-            "uri": "ground.png"
-        }
-    ],
-    "materials": [
+            "buffer": 0,
+            "byteLength": 48,
+            "byteOffset": 12,
+            "target": 34962
+        },
         {
-            "name": "material61",
-            "pbrMetallicRoughness": {
-                "baseColorTexture": {
-                    "index": 0
-                },
-                "baseColorFactor": [
-                    0.800000011920929,
-                    0.800000011920929,
-                    0.800000011920929,
-                    1.0
-                ],
-                "metallicFactor": 0.0
-            },
-            "extensions": {
-                "KHR_materials_pbrSpecularGlossiness": {
-                    "diffuseFactor": [
-                        0.800000011920929,
-                        0.800000011920929,
-                        0.800000011920929,
-                        1.0
-                    ],
-                    "specularFactor": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "glossinessFactor": 0.0,
-                    "diffuseTexture": {
-                        "index": 0
-                    }
-                }
-            }
-        }
-    ],
-    "meshes": [
+            "buffer": 0,
+            "byteLength": 48,
+            "byteOffset": 60,
+            "target": 34962
+        },
         {
-            "primitives": [
-                {
-                    "mode": 4,
-                    "material": 0,
-                    "indices": 3,
-                    "attributes": {
-                        "POSITION": 0,
-                        "NORMAL": 1,
-                        "TEXCOORD_0": 2
-                    }
-                }
-            ]
+            "buffer": 0,
+            "byteLength": 32,
+            "byteOffset": 108,
+            "target": 34962
         }
-    ],
-    "nodes": [
-        {
-            "name": "$dummy_node",
-            "mesh": 0
-        }
-    ],
-    "samplers": [
-        {}
     ],
     "scenes": [
         {
+            "name": "Root Scene",
             "nodes": [
                 0
             ]
         }
     ],
-    "textures": [
+    "accessors": [
         {
-            "source": 0,
-            "sampler": 0
+            "componentType": 5123,
+            "type": "SCALAR",
+            "count": 6,
+            "bufferView": 0,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 4,
+            "bufferView": 1,
+            "byteOffset": 0,
+            "min": [
+                -2.0,
+                0.0,
+                -2.0
+            ],
+            "max": [
+                2.0,
+                0.0,
+                2.0
+            ]
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC3",
+            "count": 4,
+            "bufferView": 2,
+            "byteOffset": 0
+        },
+        {
+            "componentType": 5126,
+            "type": "VEC2",
+            "count": 4,
+            "bufferView": 3,
+            "byteOffset": 0
         }
     ],
-    "scene": 0
+    "samplers": [
+        {}
+    ],
+    "materials": [
+        {
+            "name": "DefaultMaterial",
+            "alphaMode": "OPAQUE",
+            "doubleSided": false,
+            "extras": {
+                "fromFBX": {
+                    "shadingModel": "Lambert",
+                    "isTruePBR": false
+                }
+            },
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.5,
+                    0.5,
+                    0.5,
+                    1.0
+                ],
+                "metallicFactor": 0.200000002980232,
+                "roughnessFactor": 0.800000011920929
+            }
+        }
+    ],
+    "meshes": [
+        {
+            "name": "Plane",
+            "primitives": [
+                {
+                    "material": 0,
+                    "mode": 4,
+                    "attributes": {
+                        "NORMAL": 2,
+                        "POSITION": 1,
+                        "TEXCOORD_0": 3
+                    },
+                    "indices": 0
+                }
+            ]
+        }
+    ],
+    "cameras": [
+        {
+            "name": "",
+            "type": "perspective",
+            "perspective": {
+                "znear": 10.0,
+                "zfar": 10000.0,
+                "aspectRatio": 1.5,
+                "yfov": 0.471089959144592
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "name": "RootNode",
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "children": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "name": "Light",
+            "translation": [
+                4.07624530792236,
+                5.90386199951172,
+                -1.00545394420624
+            ],
+            "rotation": [
+                0.169075757265091,
+                0.755880355834961,
+                -0.272171378135681,
+                0.570947468280792
+            ],
+            "scale": [
+                100.000007629395,
+                100.0,
+                100.0
+            ],
+            "extensions": {
+                "KHR_lights_punctual": {
+                    "light": 0
+                }
+            }
+        },
+        {
+            "name": "Camera",
+            "translation": [
+                7.35889148712158,
+                4.95830917358398,
+                6.92579078674316
+            ],
+            "rotation": [
+                -0.209972962737083,
+                0.385779857635498,
+                0.0906284600496292,
+                0.89379620552063
+            ],
+            "scale": [
+                100.0,
+                100.000007629395,
+                99.9999923706055
+            ],
+            "camera": 0
+        },
+        {
+            "name": "Plane",
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                -3.77489506320217e-08,
+                -0.0,
+                0.0,
+                1.0
+            ],
+            "scale": [
+                100.0,
+                100.0,
+                100.0
+            ],
+            "mesh": 0
+        }
+    ],
+    "extensions": {
+        "KHR_lights_punctual": {
+            "lights": [
+                {
+                    "name": "",
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "intensity": 1000.0,
+                    "type": "point"
+                }
+            ]
+        }
+    }
 }

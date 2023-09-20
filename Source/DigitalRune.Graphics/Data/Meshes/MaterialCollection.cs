@@ -15,7 +15,7 @@ namespace DigitalRune.Graphics
   /// <remarks>
   /// Items in this collection must not be <see langword="null"/>.
   /// </remarks>
-  public class MaterialCollection : Collection<Material>
+  public class MaterialCollection : ObservableCollection<Material>
   {
     /// <summary>
     /// Returns an enumerator that iterates through the <see cref="MaterialCollection"/>. 

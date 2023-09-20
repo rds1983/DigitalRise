@@ -155,7 +155,7 @@ namespace DigitalRune.Graphics.Rendering
       if (_hiDef)
       {
         // ----- HiDef profile
-        _billboardEffect = GraphicsService.Content.Load<Effect>("DigitalRune/Billboard");
+        _billboardEffect = Resources.GetDREffect(graphicsDevice, "DigitalRune/Billboard");
         _parameterView = _billboardEffect.Parameters["View"];
         _parameterViewInverse = _billboardEffect.Parameters["ViewInverse"];
         _parameterViewProjection = _billboardEffect.Parameters["ViewProjection"];

@@ -84,6 +84,8 @@ namespace DigitalRune.Graphics
 					string fileName = textureElement.GetMandatoryAttribute("File");
 
 					// Texture processor parameters.
+					// TODO: Do something with those params
+					/*
 					var colorKeyAttribute = textureElement.Attribute("ColorKey");
 					bool colorKeyEnabled = colorKeyAttribute != null;
 					Color colorKeyColor = colorKeyAttribute.ToColor(Color.Magenta);
@@ -93,13 +95,9 @@ namespace DigitalRune.Graphics
 					bool premultiplyAlpha = (bool?)textureElement.Attribute("PremultiplyAlpha") ?? true;
 					bool resizeToPowerOfTwo = (bool?)textureElement.Attribute("ResizeToPowerOfTwo") ?? false;
 					float referenceAlpha = (float?)textureElement.Attribute("ReferenceAlpha") ?? 0.9f;
-					bool scaleAlphaToCoverage = (bool?)textureElement.Attribute("ScaleAlphaToCoverage") ?? false;
+					bool scaleAlphaToCoverage = (bool?)textureElement.Attribute("ScaleAlphaToCoverage") ?? false;*/
 
-					var settings = new TextureLoadingSettings(colorKeyColor, colorKeyEnabled,
-						generateMipmaps, inputGamma, outputGamma,
-						premultiplyAlpha, resizeToPowerOfTwo, referenceAlpha, scaleAlphaToCoverage);
-
-					var texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, fileName, settings); ;
+					var texture = assetManager.LoadTexture(graphicsService.GraphicsDevice, fileName);
 					opaqueData[name] = texture;
 				}
 

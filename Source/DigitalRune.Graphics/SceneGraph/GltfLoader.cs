@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
@@ -14,6 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
 using StbImageSharp;
 using static glTFLoader.Schema.AnimationChannelTarget;
+using Buffer = System.Buffer;
 
 namespace DigitalRune.Graphics.SceneGraph
 {
@@ -70,7 +72,7 @@ namespace DigitalRune.Graphics.SceneGraph
 		private Gltf _gltf;
 		private readonly Dictionary<int, byte[]> _bufferCache = new Dictionary<int, byte[]>();
 		private readonly List<Mesh> _meshes = new List<Mesh>();
-		private readonly List<SceneNode> _nodes = new List<SceneNode> ();
+		private readonly List<SceneNode> _nodes = new List<SceneNode>();
 		private ModelNode _model;
 		private readonly Dictionary<int, Skeleton> _skinCache = new Dictionary<int, Skeleton>();
 
@@ -250,26 +252,29 @@ namespace DigitalRune.Graphics.SceneGraph
 						vertexCount = newVertexCount;
 
 						var element = new VertexElementInfo();
-						switch (pair.Key)
+						if (pair.Key == "POSITION")
 						{
-							case "POSITION":
-								element.Usage = VertexElementUsage.Position;
-								break;
-							case "NORMAL":
-								element.Usage = VertexElementUsage.Normal;
-								break;
-							case "TEXCOORD_0":
-								element.Usage = VertexElementUsage.TextureCoordinate;
-								break;
-							case "TANGENT":
-								element.Usage = VertexElementUsage.Tangent;
-								break;
-							case "JOINTS_0":
-								element.Usage = VertexElementUsage.BlendIndices;
-								break;
-							case "WEIGHTS_0":
-								element.Usage = VertexElementUsage.BlendWeight;
-								break;
+							element.Usage = VertexElementUsage.Position;
+						}
+						else if (pair.Key == "NORMAL")
+						{
+							element.Usage = VertexElementUsage.Normal;
+						}
+						else if (pair.Key == "TANGENT")
+						{
+							element.Usage = VertexElementUsage.Tangent;
+						}
+						if (pair.Key.StartsWith("TEXCOORD_"))
+						{
+							element.Usage = VertexElementUsage.TextureCoordinate;
+						}
+						else if (pair.Key.StartsWith("JOINTS_"))
+						{
+							element.Usage = VertexElementUsage.BlendIndices;
+						}
+						else if (pair.Key.StartsWith("WEIGHTS_"))
+						{
+							element.Usage = VertexElementUsage.BlendWeight;
 						}
 
 						element.Format = GetAccessorFormat(pair.Value);
@@ -292,7 +297,7 @@ namespace DigitalRune.Graphics.SceneGraph
 					}
 
 					var vd = new VertexDeclaration(vertexElements);
-					var vertexBuffer = new VertexBuffer(_graphicsService.GraphicsDevice, vd, vertexCount.Value, BufferUsage.None);
+					var vertexBuffer = new VertexBuffer(_graphicsService.GraphicsDevice, vd, vertexCount.Value, BufferUsage.WriteOnly);
 
 					// Set vertex data
 					var vertexData = new byte[vertexCount.Value * vd.VertexStride];
@@ -323,6 +328,15 @@ namespace DigitalRune.Graphics.SceneGraph
 						offset += sz;
 					}
 
+					/*					var vertices = new VertexPositionNormalTexture[vertexCount.Value];
+										unsafe
+										{
+											fixed(VertexPositionNormalTexture *ptr = vertices)
+											{
+												Marshal.Copy(vertexData, 0, new IntPtr(ptr), vertexData.Length);
+											}
+										}*/
+
 					vertexBuffer.SetData(vertexData);
 
 					if (primitive.Indices == null)
@@ -348,7 +362,7 @@ namespace DigitalRune.Graphics.SceneGraph
 					var elementSize = (indexAccessor.ComponentType == Accessor.ComponentTypeEnum.SHORT ||
 						indexAccessor.ComponentType == Accessor.ComponentTypeEnum.UNSIGNED_SHORT) ?
 						IndexElementSize.SixteenBits : IndexElementSize.ThirtyTwoBits;
-					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.None);
+					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.WriteOnly);
 					indexBuffer.SetData(0, indexData.Array, indexData.Offset, indexData.Count);
 
 					var subMesh = new Submesh
@@ -359,43 +373,43 @@ namespace DigitalRune.Graphics.SceneGraph
 						PrimitiveCount = indexBuffer.IndexCount / 3
 					};
 
-          mesh.Submeshes.Add(subMesh);
-          if (primitive.Material != null)
-          {
-            var gltfMaterial = _gltf.Materials[primitive.Material.Value];
-            if (gltfMaterial.PbrMetallicRoughness != null)
-            {
-              var opaqueData = new Dictionary<string, object>
-              {
-                ["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
-                ["SpecularColor"] = new Vector3(0.1f),
-                ["SpecularPower"] = 10.0f
-              };
+					mesh.Submeshes.Add(subMesh);
+					if (primitive.Material != null)
+					{
+						var gltfMaterial = _gltf.Materials[primitive.Material.Value];
+						if (gltfMaterial.PbrMetallicRoughness != null)
+						{
+							var opaqueData = new Dictionary<string, object>
+							{
+								["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
+								["SpecularColor"] = new Vector3(0.1f),
+								["SpecularPower"] = 10.0f
+							};
 
-              if (gltfMaterial.PbrMetallicRoughness.BaseColorTexture != null)
-              {
-                var gltfTexture = _gltf.Textures[gltfMaterial.PbrMetallicRoughness.BaseColorTexture.Index];
-                if (gltfTexture.Source != null)
-                {
-                  using (var stream = _gltf.OpenImageFile(gltfTexture.Source.Value, path => FileResolver(path)))
-                  {
-                    var imageResult = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
-                    var texture = new Texture2D(_graphicsService.GraphicsDevice, imageResult.Width, imageResult.Height);
-                    texture.SetData(imageResult.Data);
+							if (gltfMaterial.PbrMetallicRoughness.BaseColorTexture != null)
+							{
+								var gltfTexture = _gltf.Textures[gltfMaterial.PbrMetallicRoughness.BaseColorTexture.Index];
+								if (gltfTexture.Source != null)
+								{
+									using (var stream = _gltf.OpenImageFile(gltfTexture.Source.Value, path => FileResolver(path)))
+									{
+										var imageResult = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+										var texture = new Texture2D(_graphicsService.GraphicsDevice, imageResult.Width, imageResult.Height);
+										texture.SetData(imageResult.Data);
 
 										opaqueData["Texture"] = texture;
-                  }
-                }
-              }
+									}
+								}
+							}
 
 							var binding = new BasicEffectBinding(_graphicsService, opaqueData);
-              var material = new Material
-              {
-                { "Default", binding }
-              };
-              subMesh.SetMaterial(material);
-            }
-          }
+							var material = new Material
+							{
+								{ "Default", binding }
+							};
+							subMesh.SetMaterial(material);
+						}
+					}
 				}
 
 				_meshes.Add(mesh);
@@ -443,7 +457,7 @@ namespace DigitalRune.Graphics.SceneGraph
 
 					if (gltfNode.Skin != null)
 					{
-						meshNode.Mesh.Skeleton = LoadSkin(gltfNode.Skin.Value);
+						//						meshNode.Mesh.Skeleton = LoadSkin(gltfNode.Skin.Value);
 					}
 
 					node = meshNode;
@@ -530,58 +544,58 @@ namespace DigitalRune.Graphics.SceneGraph
 
 			if (_gltf.Animations != null)
 			{
-/*				foreach (var gltfAnimation in _gltf.Animations)
-				{
-					var animation = new ModelAnimation
-					{
-						Id = gltfAnimation.Name
-					};
+				/*				foreach (var gltfAnimation in _gltf.Animations)
+								{
+									var animation = new ModelAnimation
+									{
+										Id = gltfAnimation.Name
+									};
 
-					var channelsDict = new Dictionary<int, List<PathInfo>>();
-					foreach (var channel in gltfAnimation.Channels)
-					{
-						if (!channelsDict.TryGetValue(channel.Target.Node.Value, out List<PathInfo> targets))
-						{
-							targets = new List<PathInfo>();
-							channelsDict[channel.Target.Node.Value] = targets;
-						}
+									var channelsDict = new Dictionary<int, List<PathInfo>>();
+									foreach (var channel in gltfAnimation.Channels)
+									{
+										if (!channelsDict.TryGetValue(channel.Target.Node.Value, out List<PathInfo> targets))
+										{
+											targets = new List<PathInfo>();
+											channelsDict[channel.Target.Node.Value] = targets;
+										}
 
-						targets.Add(new PathInfo(channel.Sampler, channel.Target.Path));
-					}
+										targets.Add(new PathInfo(channel.Sampler, channel.Target.Path));
+									}
 
-					foreach (var pair in channelsDict)
-					{
-						var nodeAnimation = new NodeAnimation(pair.Key);
+									foreach (var pair in channelsDict)
+									{
+										var nodeAnimation = new NodeAnimation(pair.Key);
 
-						foreach (var pathInfo in pair.Value)
-						{
-							var sampler = gltfAnimation.Samplers[pathInfo.Sampler];
-							var times = GetAccessorAs<float>(sampler.Input);
+										foreach (var pathInfo in pair.Value)
+										{
+											var sampler = gltfAnimation.Samplers[pathInfo.Sampler];
+											var times = GetAccessorAs<float>(sampler.Input);
 
-							switch (pathInfo.Path)
-							{
-								case PathEnum.translation:
-									LoadAnimationTransforms(nodeAnimation.Translations, times, sampler);
-									break;
-								case PathEnum.rotation:
-									LoadAnimationTransforms(nodeAnimation.Rotations, times, sampler);
-									break;
-								case PathEnum.scale:
-									LoadAnimationTransforms(nodeAnimation.Scales, times, sampler);
-									break;
-								case PathEnum.weights:
-									break;
-							}
-						}
+											switch (pathInfo.Path)
+											{
+												case PathEnum.translation:
+													LoadAnimationTransforms(nodeAnimation.Translations, times, sampler);
+													break;
+												case PathEnum.rotation:
+													LoadAnimationTransforms(nodeAnimation.Rotations, times, sampler);
+													break;
+												case PathEnum.scale:
+													LoadAnimationTransforms(nodeAnimation.Scales, times, sampler);
+													break;
+												case PathEnum.weights:
+													break;
+											}
+										}
 
-						animation.BoneAnimations.Add(nodeAnimation);
-					}
+										animation.BoneAnimations.Add(nodeAnimation);
+									}
 
-					animation.UpdateStartEnd();
+									animation.UpdateStartEnd();
 
-					var id = animation.Id ?? "(default)";
-					_model.Animations[id] = animation;
-				}*/
+									var id = animation.Id ?? "(default)";
+									_model.Animations[id] = animation;
+								}*/
 			}
 
 			return _model;
