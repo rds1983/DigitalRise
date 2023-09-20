@@ -1,7 +1,4 @@
-﻿#if WINDOWS
-using System.Windows.Forms;
-#endif
-using DigitalRune.Game.UI.Controls;
+﻿using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
@@ -165,7 +162,7 @@ The DigitalRune Blog contains a detailed description for this project; see secti
         // A tree view item was double-clicked. Show a message box with the data of the item.
         // This is only for debugging, so we simply use the Windows Forms MessageBox.
 #if WINDOWS
-        MessageBox.Show((string)selectedItem.UserData);
+//        MessageBox.Show((string)selectedItem.UserData);
 #endif
       }
 

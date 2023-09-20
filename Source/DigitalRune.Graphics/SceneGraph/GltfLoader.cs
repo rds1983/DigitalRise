@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
 using DigitalRune.Geometry;
+using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Mathematics.Algebra;
 using glTFLoader;
@@ -230,6 +231,7 @@ namespace DigitalRune.Graphics.SceneGraph
 			foreach (var gltfMesh in _gltf.Meshes)
 			{
 				var mesh = new Mesh();
+				var boundingBox = new BoundingBox();
 				foreach (var primitive in gltfMesh.Primitives)
 				{
 					if (primitive.Mode != MeshPrimitive.ModeEnum.TRIANGLES)
@@ -328,6 +330,9 @@ namespace DigitalRune.Graphics.SceneGraph
 						offset += sz;
 					}
 
+					var newBoundingBox = BoundingBox.CreateFromPoints(positions);
+					boundingBox = BoundingBox.CreateMerged(boundingBox, newBoundingBox);
+
 					/*					var vertices = new VertexPositionNormalTexture[vertexCount.Value];
 										unsafe
 										{
@@ -411,6 +416,10 @@ namespace DigitalRune.Graphics.SceneGraph
 						}
 					}
 				}
+
+				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
+				boundingBox.Max.Y - boundingBox.Min.Y,
+				boundingBox.Max.Z - boundingBox.Min.Z);
 
 				_meshes.Add(mesh);
 			}

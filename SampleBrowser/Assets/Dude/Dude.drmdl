@@ -5,7 +5,7 @@
   Dude.drmdl needs to be located in the same folder as Dude.fbx. The content processor
   will automatically look for a file with the same name and the extension ".drmdl".
 -->
-<Model File="Dude.fbx" 
+<Model File="Dude.gltf" 
        AabbMinimum="-1,-0.2,-1"
        AabbMaximum="1,2,1"
        GenerateTangentFrames="True"
