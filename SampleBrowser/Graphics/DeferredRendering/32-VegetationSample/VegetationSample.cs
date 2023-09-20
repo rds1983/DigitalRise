@@ -10,6 +10,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using System.Linq;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -130,15 +131,15 @@ window.",
 
       // Load three different plant models.
       // The palm tree consists of a single mesh. It uses the *Vegetation.fx effects.
-      ModelNode palmModelNode = ContentManager.Load<ModelNode>("Vegetation/PalmTree/palm_tree");
+      ModelNode palmModelNode = AssetManager.LoadDRModel(GraphicsService, "Vegetation/PalmTree/palm_tree.drmdl");
       Mesh palmMesh = ((MeshNode)palmModelNode.Children[0]).Mesh;
 
       // The bird's nest plant consists of 2 LODs. It uses the *Vegetation.fx effects.
-      ModelNode plantModelNode = ContentManager.Load<ModelNode>("Vegetation/BirdnestPlant/BirdnestPlant");
+      ModelNode plantModelNode = AssetManager.LoadDRModel(GraphicsService, "Vegetation/BirdnestPlant/BirdnestPlant.drmdl");
       LodGroupNode plantLodGroupNode = plantModelNode.GetDescendants().OfType<LodGroupNode>().First().Clone();
 
       // The grass model consists of one mesh. It uses the *Grass.fx effects.
-      ModelNode grassModelNode = ContentManager.Load<ModelNode>("Vegetation/Grass/grass");
+      ModelNode grassModelNode = AssetManager.LoadDRModel(GraphicsService, "Vegetation/Grass/grass.drmdl");
       Mesh grassMesh = ((MeshNode)grassModelNode.Children[0]).Mesh;
 
       // Store all used meshes in a list for use in UpdateMaterialEffectParameters.

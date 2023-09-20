@@ -9,6 +9,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -33,7 +34,7 @@ visually compare the compression results.",
     public CompressionSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       SampleHelper.EnablePerPixelLighting(modelNode);
 
       _meshNodeUncompressed = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();

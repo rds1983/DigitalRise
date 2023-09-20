@@ -8,6 +8,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -32,7 +33,7 @@ other jiggle effects. ;-)",
     public BoneJiggleSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_meshNode);

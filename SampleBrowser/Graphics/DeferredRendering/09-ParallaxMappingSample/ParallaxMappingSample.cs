@@ -16,6 +16,7 @@ using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -93,7 +94,7 @@ For more info, have a look at the material and effect files of the loaded ground
       }
 
       // Load ground model which uses normal mapping.
-      var modelNode = ContentManager.Load<ModelNode>("Parallax/Ground");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Parallax/Ground.drmdl");
       _meshNode = modelNode.Children.OfType<MeshNode>().First().Clone();
       _meshNode.ScaleLocal = new Vector3F(0.1f);
       _meshNode.IsStatic = true;

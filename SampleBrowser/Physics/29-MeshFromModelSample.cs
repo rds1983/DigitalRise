@@ -9,6 +9,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
+using AssetManagementBase;
 
 
 namespace Samples.Physics
@@ -36,7 +37,7 @@ mesh as a collision shape.",
       Simulation.RigidBodies.Add(groundPlane);
 
       // Use content pipeline to load a model.
-      var bowlModelNode = ContentManager.Load<ModelNode>("Bowl");
+      var bowlModelNode = AssetManager.LoadDRModel(GraphicsService, "Bowl.drmdl");
 
       // Get mesh of the imported model.
       var meshNode = bowlModelNode.GetDescendants().OfType<MeshNode>().First();

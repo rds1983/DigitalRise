@@ -84,13 +84,13 @@ data before you retarget it to a 3D model.",
     {
       var contentManager = Services.GetInstance<ContentManager>();
 
-      var dudeModelNode = contentManager.Load<ModelNode>("Dude/Dude");
+      var dudeModelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNodeA = dudeModelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNodeA.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNodeA);
       GraphicsScreen.Scene.Children.Add(_meshNodeA);
 
-      var marineModelNode = contentManager.Load<ModelNode>("Marine/PlayerMarine");
+      var marineModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       _meshNodeB = marineModelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNodeB.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNodeB);

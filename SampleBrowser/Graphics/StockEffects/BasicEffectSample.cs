@@ -60,8 +60,8 @@ tank model are animated.",
       // Each model itself is a tree of scene nodes. The grid model 
       // contains one mesh node. The tank model contains several mesh nodes (turret, 
       // cannon, hatch, wheels, ...).
-      _grid = AssetManager.LoadGltf(GraphicsService, "Ground/Ground.gltf");
-      _tank = AssetManager.LoadGltf(GraphicsService, "Tank/tank.gltf");
+      _grid = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl");
+      _tank = AssetManager.LoadDRModel(GraphicsService, "Tank/tank.drmdl");
 
       // The XNA ContentManager manages a single instance of each model. We clone 
       // the models, to get a copy that we can modify without changing the original 

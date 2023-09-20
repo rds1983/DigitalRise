@@ -6,6 +6,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
+using AssetManagementBase;
 
 
 namespace Samples.Physics
@@ -41,7 +42,7 @@ namespace Samples.Physics
       Simulation.RigidBodies.Add(groundPlane);
 
       // ----- Load triangle mesh model.
-      var sharedModelNode = ContentManager.Load<ModelNode>("Saucer/saucer");
+      var sharedModelNode = AssetManager.LoadDRModel(GraphicsService, "Saucer/saucer.drmdl");
 
       // Let's create a clone because we do not want to change the shared Saucer 
       // instance stored in the content manager.

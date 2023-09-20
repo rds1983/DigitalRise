@@ -7,6 +7,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -43,7 +44,7 @@ This is typically done by calling SceneHelper.SetLastPose() before setting new p
 
 
       // ----- 2 cubes that will be animated in this class.
-      var cube = ContentManager.Load<ModelNode>("MetalGrateBox/MetalGrateBox");
+      var cube = AssetManager.LoadDRModel(GraphicsService, "MetalGrateBox/MetalGrateBox.drmdl");
       _movingCube = cube.Clone();
       GraphicsScreen.Scene.Children.Add(_movingCube);
       _rotatingCube = cube.Clone();

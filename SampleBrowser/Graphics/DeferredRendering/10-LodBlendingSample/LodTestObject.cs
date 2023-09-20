@@ -11,7 +11,8 @@ using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
@@ -39,11 +40,12 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
+      var assetManager = _services.GetInstance<AssetManager>();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
       
       // A rusty barrel with multiple levels of detail (LODs).
       _rigidBody = new RigidBody(new CylinderShape(0.35f, 1));
-      _modelNode0 = contentManager.Load<ModelNode>("Barrel/Barrel").Clone();
+			_modelNode0 = assetManager.LoadDRModel(graphicsService, "Barrel/Barrel.drmdl").Clone();
       SampleHelper.EnablePerPixelLighting(_modelNode0);
 
       // Mark the LOD nodes with UserFlags = 1.
@@ -56,8 +58,8 @@ namespace Samples
                             node.UserFlags = 1;
                           });
 
-      // Add a second model where each LOD has a different color.
-      _modelNode1 = contentManager.Load<ModelNode>("Barrel/Barrel_Colored").Clone();
+			// Add a second model where each LOD has a different color.
+			_modelNode1 = assetManager.LoadDRModel(graphicsService, "Barrel/Barrel_Colored.drmdl").Clone();
       SampleHelper.EnablePerPixelLighting(_modelNode1);
 
       // Mark the LOD nodes with UserFlags = 2.

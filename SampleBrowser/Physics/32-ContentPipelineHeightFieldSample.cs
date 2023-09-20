@@ -32,7 +32,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Load height field model and add it to the graphics scene.
-      _heightFieldModelNode = ContentManager.Load<ModelNode>("HeightField/TerrainHeights").Clone();
+      _heightFieldModelNode = AssetManager.LoadDRModel(GraphicsService, "HeightField/TerrainHeights.drmdl").Clone();
       GraphicsScreen.Scene.Children.Add(_heightFieldModelNode);
 
       // The UserData contains the collision shape of type HeightField.

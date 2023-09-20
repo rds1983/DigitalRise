@@ -10,8 +10,8 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 using Plane = DigitalRune.Geometry.Shapes.Plane;
-
 
 namespace Samples.Graphics
 {
@@ -161,12 +161,12 @@ See source code for more details.",
       _mainDirectionalLightNode = ((LightNode)_scene.GetSceneNode("KeyLight"));
 
       // Add a ground plane model to the scene graph.
-      var grid = ContentManager.Load<ModelNode>("Ground/Ground").Clone();
+      var grid = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl").Clone();
       grid.ScaleLocal = new Vector3F(0.3f);
       _scene.Children.Add(grid);
 
       // Add a dude model to the scene graph.
-      var dude = ContentManager.Load<ModelNode>("DudeWithProjectedShadow/Dude").Clone();
+      var dude = AssetManager.LoadDRModel(GraphicsService, "DudeWithProjectedShadow/Dude.drmdl").Clone();
       dude.PoseWorld = new Pose(Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(dude);
       _scene.Children.Add(dude);

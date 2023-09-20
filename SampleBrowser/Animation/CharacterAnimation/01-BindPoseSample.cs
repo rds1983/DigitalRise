@@ -3,6 +3,7 @@ using DigitalRune.Geometry;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -32,7 +33,7 @@ bone name, bone indices and bone coordinate systems.",
       // the content pipeline.
       // The *.drmat files define the used effects and effect parameters. The effects 
       // must support mesh skinning.
-      var sharedDudeModelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var sharedDudeModelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
 
       // Clone the dude model because objects returned by the ContentManager
       // are shared instances, and we do not want manipulate or animate this shared instance.
@@ -59,7 +60,7 @@ bone name, bone indices and bone coordinate systems.",
       var skeletonPose = _dudeMeshNode.SkeletonPose;
 
       // Load the marine model:
-      var marineModelNode = ContentManager.Load<ModelNode>("Marine/PlayerMarine").Clone();
+      var marineModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl").Clone();
       _marineMeshNode = marineModelNode.GetSubtree().OfType<MeshNode>().First();
       _marineMeshNode.PoseLocal = new Pose(new Vector3F(1f, 0, 0));
 

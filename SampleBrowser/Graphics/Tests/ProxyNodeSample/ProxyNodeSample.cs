@@ -10,6 +10,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -52,7 +53,7 @@ namespace Samples.Graphics
       EffectBinding.KeepOpaqueData = true;
 
       // Original model in scene graph.
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude").Clone();
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       modelNode.PoseLocal = new Pose(new Vector3F(-2, 0, 0));
       var meshNode = modelNode.GetSubtree().OfType<MeshNode>().First();
       _scene.Children.Add(modelNode);

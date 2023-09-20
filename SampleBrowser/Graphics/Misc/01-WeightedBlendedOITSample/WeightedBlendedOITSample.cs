@@ -4,6 +4,7 @@ using DigitalRune.Linq;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -60,12 +61,12 @@ namespace Samples.Graphics
 
       // Load two instances of the "Tank" model:
       // The first instance is rendered opaque (for reference).
-      var model = ContentManager.Load<ModelNode>("WeightedBlendedOIT/tank").Clone();
+      var model = AssetManager.LoadDRModel(GraphicsService, "WeightedBlendedOIT/tank.drmdl").Clone();
       model.PoseWorld = new Pose(new Vector3F(-4, 0, 0));
       _graphicsScreen.Scene.Children.Add(model);
 
       // The second instance is rendered transparent.
-      model = ContentManager.Load<ModelNode>("WeightedBlendedOIT/tank").Clone();
+      model = AssetManager.LoadDRModel(GraphicsService, "WeightedBlendedOIT/tank.drmdl").Clone();
       model.PoseWorld = new Pose(new Vector3F(4, 0, 0));
       // Set flag to indicate that this instance should be rendered transparent.
       model.GetSubtree().ForEach(node => node.UserFlags = (short)WboitFlags.Transparent);

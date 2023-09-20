@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="../Dude/Dude.fbx" 
+<Model File="../Dude/Dude.gltf" 
        AabbMinimum="-1,-0.2,-1"
        AabbMaximum="1,2,1"
        GenerateTangentFrames="False"

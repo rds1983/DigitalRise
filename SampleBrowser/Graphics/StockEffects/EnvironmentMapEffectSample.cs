@@ -5,6 +5,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -29,7 +30,7 @@ namespace Samples.Graphics
       // which define the materials of the model. These material description files are 
       // automatically processed by the DigitalRune Model Processor. Please browse 
       // to the content folder and have a look at the *.drmdl and *.drmat files.
-      var model = ContentManager.Load<ModelNode>("EnvironmentMapped/saucer");
+      var model = AssetManager.LoadDRModel(GraphicsService, "EnvironmentMapped/saucer.drmdl");
 
       // The XNA ContentManager manages a single instance of each model. We clone 
       // the models, to get a copy that we can modify without changing the original 

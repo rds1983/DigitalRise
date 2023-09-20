@@ -15,7 +15,7 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
-
+using AssetManagementBase;
 
 namespace Samples.Physics.Specialized
 {
@@ -73,10 +73,12 @@ namespace Samples.Physics.Specialized
       _simulation = services.GetInstance<Simulation>();
 
       // Load models for rendering.
-      var contentManager = services.GetInstance<ContentManager>();
-      _vehicleModelNode = contentManager.Load<ModelNode>("Car/Car").Clone();
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+
+			_vehicleModelNode = assetManager.LoadDRModel(graphicsService, "Car/Car.drmdl").Clone();
       _wheelModelNodes = new ModelNode[4];
-      _wheelModelNodes[0] = contentManager.Load<ModelNode>("Car/Wheel").Clone();
+      _wheelModelNodes[0] = assetManager.LoadDRModel(graphicsService, "Car/Wheel.drmdl").Clone();
       _wheelModelNodes[1] = _wheelModelNodes[0].Clone();
       _wheelModelNodes[2] = _wheelModelNodes[0].Clone();
       _wheelModelNodes[3] = _wheelModelNodes[0].Clone();

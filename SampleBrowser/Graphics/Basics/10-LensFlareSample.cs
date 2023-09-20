@@ -7,6 +7,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -46,10 +47,10 @@ and search the sky!",
       _scene.Children.Add(_cameraObject.CameraNode);
 
       // Add a few models to the scene.
-      var ground = ContentManager.Load<ModelNode>("Ground/Ground").Clone();
+      var ground = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl").Clone();
       _scene.Children.Add(ground);
 
-      var box = ContentManager.Load<ModelNode>("MetalGrateBox/MetalGrateBox").Clone();
+      var box = AssetManager.LoadDRModel(GraphicsService, "MetalGrateBox/MetalGrateBox.drmdl").Clone();
       box.PoseLocal = new Pose(new Vector3F(0.5f, 0.5f, 0.5f), Matrix33F.CreateRotationY(0.1f));
       _scene.Children.Add(box);
 

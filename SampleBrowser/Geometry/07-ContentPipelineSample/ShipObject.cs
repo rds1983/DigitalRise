@@ -8,11 +8,12 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
-  // Represents the "Ship" model.
+	// Represents the "Ship" model.
   public class ShipObject : GameObject
   {
     private readonly IServiceLocator _services;
@@ -50,9 +51,12 @@ namespace Samples
     {
       var contentManager = _services.GetInstance<ContentManager>();
 
-      // ----- Graphics
-      // Load a graphics model and add it to the scene for rendering.
-      _modelNode = contentManager.Load<ModelNode>("Ship/Ship").Clone();
+			// ----- Graphics
+			// Load a graphics model and add it to the scene for rendering.
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+
+			_modelNode = assetManager.LoadDRModel(graphicsService, "Ship/Ship.drmdl").Clone();
       _modelNode.PoseWorld = new Pose(Vector3F.Zero, Matrix33F.CreateRotationY(-ConstantsF.PiOver2));
 
       var scene = _services.GetInstance<IScene>();

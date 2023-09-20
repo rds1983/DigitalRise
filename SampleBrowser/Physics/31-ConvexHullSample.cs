@@ -5,6 +5,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
+using AssetManagementBase;
 
 
 namespace Samples.Physics
@@ -39,7 +40,7 @@ namespace Samples.Physics
       Simulation.RigidBodies.Add(groundPlane);
 
       // Load model and add it to the graphics scene.
-      _saucerModelNode = ContentManager.Load<ModelNode>("Saucer2/saucer").Clone();
+      _saucerModelNode = AssetManager.LoadDRModel(GraphicsService, "Saucer2/saucer.drmdl").Clone();
       GraphicsScreen.Scene.Children.Add(_saucerModelNode);
 
       // Create rigid body for this model.

@@ -6,6 +6,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -57,7 +58,7 @@ namespace Samples.Graphics
       _scene.Children.Add(_cameraObject.CameraNode);
 
       // Add a few models to the scene.
-      var sandbox = ContentManager.Load<ModelNode>("Sandbox/Sandbox").Clone();
+      var sandbox = AssetManager.LoadDRModel(GraphicsService, "Sandbox/Sandbox.drmdl").Clone();
       _scene.Children.Add(sandbox);
 
       // Add some lights to the scene which have the same properties as the lights 

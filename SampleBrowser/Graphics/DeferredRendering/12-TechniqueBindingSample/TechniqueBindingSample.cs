@@ -10,6 +10,7 @@ using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -76,7 +77,7 @@ The fur is not animated in this sample.",
       GraphicsService.EffectBinders.Insert(0, _repeatTechniqueBinder);
 
       // Load model.
-      _modelNode = ContentManager.Load<ModelNode>("Fur2/FurBall").Clone();
+      _modelNode = AssetManager.LoadDRModel(GraphicsService, "Fur2/FurBall.drmdl").Clone();
       _rigidBody = new RigidBody(new SphereShape(0.5f));
 
       // Set a random pose.

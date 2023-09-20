@@ -6,6 +6,7 @@ using DigitalRune.Animation.Character;
 using DigitalRune.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -32,7 +33,7 @@ namespace Samples.Animation
     public CharacterCrossFadeSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var modelNode = ContentManager.Load<ModelNode>("Marine/PlayerMarine");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);

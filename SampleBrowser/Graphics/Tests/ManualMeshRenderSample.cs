@@ -7,6 +7,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -46,7 +47,7 @@ MeshRenderer class.",
       // effect bindings.
       EffectBinding.KeepOpaqueData = true;
 
-      _model = ContentManager.Load<ModelNode>("Dude/Dude").Clone();
+      _model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       var meshNode = _model.GetSubtree().OfType<MeshNode>().First();
       meshNode.ScaleLocal = new Vector3F(1, 2, 1);
       var mesh = meshNode.Mesh;

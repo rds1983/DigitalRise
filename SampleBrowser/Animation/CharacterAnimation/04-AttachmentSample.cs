@@ -5,6 +5,7 @@ using DigitalRune.Animation.Character;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -24,7 +25,7 @@ namespace Samples.Animation
     public AttachmentSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var modelNode = ContentManager.Load<ModelNode>("Marine/PlayerMarine");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);
@@ -42,7 +43,7 @@ namespace Samples.Animation
       animationController.AutoRecycle();
 
       // Add weapon model to the scene graph under the node of the marine mesh.
-      _weaponModelNode = ContentManager.Load<ModelNode>("Marine/Weapon/WeaponMachineGun").Clone();
+      _weaponModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/Weapon/WeaponMachineGun.drmdl").Clone();
       _meshNode.Children = new SceneNodeCollection();
       _meshNode.Children.Add(_weaponModelNode);
     }

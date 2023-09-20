@@ -7,6 +7,7 @@ using DigitalRune.Physics.Constraints;
 using DigitalRune.Physics.Specialized;
 using Microsoft.Xna.Framework;
 using Samples.Animation;
+using AssetManagementBase;
 
 
 namespace Samples.Physics.Specialized
@@ -44,7 +45,7 @@ button) to grab the bodies and move them.",
       GameObjectService.Objects.Add(_grabObject);
 
       // Add Dude model.
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNode);

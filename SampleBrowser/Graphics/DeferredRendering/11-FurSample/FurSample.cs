@@ -12,6 +12,7 @@ using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -89,7 +90,7 @@ parameter is automatically set each frame using an effect parameter binding.",
 
       // Load model. (When the model and its effects are loaded, the engine will
       // check for the FurDisplacement parameter and create the appropriate parameter binding.)
-      _meshNode = (MeshNode)ContentManager.Load<ModelNode>("Fur/FurBall").Children[0].Clone();
+      _meshNode = (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Fur/FurBall.drmdl").Children[0].Clone();
       _rigidBody = new RigidBody(new SphereShape(0.5f));
 
       // Store a reference to the rigid body in SceneNode.UserData.

@@ -4,12 +4,12 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
-  // Loads a ground plane model and creates a static rigid body for the ground plane.
+	// Loads a ground plane model and creates a static rigid body for the ground plane.
   public class GroundObject : GameObject
   {
     private readonly IServiceLocator _services;
@@ -27,10 +27,11 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      // Load model.
-      var contentManager = _services.GetInstance<ContentManager>();
-      _modelNode = contentManager.Load<ModelNode>("Ground/Ground").Clone();
-      _modelNode.ScaleLocal = new Vector3F(0.5f);
+			// Load model.
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+      _modelNode = assetManager.LoadDRModel(graphicsService, "Ground/Ground.drmdl").Clone();
+			_modelNode.ScaleLocal = new Vector3F(0.5f);
 
       foreach (var node in _modelNode.GetSubtree())
       {

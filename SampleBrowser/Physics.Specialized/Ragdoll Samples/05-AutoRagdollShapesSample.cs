@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
 using Samples.Animation;
+using AssetManagementBase;
 
 
 namespace Samples.Physics.Specialized
@@ -44,7 +45,7 @@ usually faster than convex hulls. Etc.",
     public AutoRagdollShapesSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_meshNode);

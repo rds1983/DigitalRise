@@ -11,17 +11,16 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples
 {
-  // Creates and controls a dynamic object (model + rigid body). 
-  // Please note, the shining sphere, which drops when <4> is pressed, casts an 
-  // omnidirectional shadow. Dropping multiple spheres can quickly reduce performance
-  // due to the amount of shadow maps that need to be rendered. Shadows can start to 
-  // flicker, if more than 8 shadow-casting light sources overlap on screen.
+	// Creates and controls a dynamic object (model + rigid body). 
+	// Please note, the shining sphere, which drops when <4> is pressed, casts an 
+	// omnidirectional shadow. Dropping multiple spheres can quickly reduce performance
+	// due to the amount of shadow maps that need to be rendered. Shadows can start to 
+	// flicker, if more than 8 shadow-casting light sources overlap on screen.
   public class DynamicObject : GameObject
   {
     private readonly IServiceLocator _services;
@@ -45,25 +44,26 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
-      
-      if (_type == 1)
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+
+			if (_type == 1)
       {
         // A simple cube.
         RigidBody = new RigidBody(new BoxShape(1, 1, 1));
-        ModelNode = contentManager.Load<ModelNode>("RustyCube/RustyCube").Clone();
+        ModelNode = assetManager.LoadDRModel(graphicsService, "RustyCube/RustyCube.drmdl").Clone();
       }
       else if (_type == 2)
       {
         // Another simple cube.
         RigidBody = new RigidBody(new BoxShape(1, 1, 1));
-        ModelNode = contentManager.Load<ModelNode>("MetalGrateBox/MetalGrateBox").Clone();
+        ModelNode = assetManager.LoadDRModel(graphicsService, "MetalGrateBox/MetalGrateBox.drmdl").Clone();
       }
       else if (_type == 3)
       {
         // A TV-like box.
         RigidBody = new RigidBody(new BoxShape(1, 0.6f, 0.8f)) { UserData = "TV" };
-        ModelNode = contentManager.Load<ModelNode>("TVBox/TVBox");
+        ModelNode = assetManager.LoadDRModel(graphicsService, "TVBox/TVBox.drmdl");
 
         if (ModelNode.Children.OfType<LightNode>().Count() == 0)
         {
@@ -103,7 +103,7 @@ namespace Samples
       {
         // A "magic" sphere with a colored point light.
         RigidBody = new RigidBody(new SphereShape(0.25f));
-        ModelNode = contentManager.Load<ModelNode>("MagicSphere/MagicSphere");
+        ModelNode = assetManager.LoadDRModel(graphicsService, "MagicSphere/MagicSphere.drmdl");
 
         if (ModelNode.Children.OfType<LightNode>().Count() == 0)
         {
@@ -124,7 +124,7 @@ namespace Samples
             SpecularIntensity = 4,
             Range = 3,
             Attenuation = 1,
-            Texture = contentManager.Load<TextureCube>("MagicSphere/ColorCube"),
+            Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "MagicSphere/ColorCube"),
           };
           var pointLightNode = new LightNode(pointLight)
           {
@@ -144,20 +144,20 @@ namespace Samples
       {
         // A sphere of glass (or "bubble").
         RigidBody = new RigidBody(new SphereShape(0.3f));
-        ModelNode = contentManager.Load<ModelNode>("Bubble/Bubble").Clone();
+        ModelNode = assetManager.LoadDRModel(graphicsService, "Bubble/Bubble.drmdl").Clone();
         ModelNode.GetDescendants().OfType<MeshNode>().First().ScaleLocal = new Vector3F(0.3f);
       }
       else if (_type == 6)
       {
         // A rusty barrel with multiple levels of detail (LODs).
         RigidBody = new RigidBody(new CylinderShape(0.35f, 1));
-        ModelNode = contentManager.Load<ModelNode>("Barrel/Barrel").Clone();
+        ModelNode = assetManager.LoadDRModel(graphicsService, "Barrel/Barrel.drmdl").Clone();
       }
       else
       {
         // A cube consisting of a frame and transparent sides.
         RigidBody = new RigidBody(new BoxShape(1, 1, 1));
-        ModelNode = contentManager.Load<ModelNode>("GlassBox/GlassBox").Clone();
+        ModelNode = assetManager.LoadDRModel(graphicsService, "GlassBox/GlassBox.drmdl").Clone();
       }
 
       SampleHelper.EnablePerPixelLighting(ModelNode);

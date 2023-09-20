@@ -7,6 +7,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 using Plane = DigitalRune.Geometry.Shapes.Plane;
 
 
@@ -66,12 +67,12 @@ turns the mesh into the flat, black shadow.",
       _mainDirectionalLightNode = ((LightNode)_scene.GetSceneNode("KeyLight"));
 
       // Add a ground plane model to the scene graph.
-      var grid = ContentManager.Load<ModelNode>("Ground/Ground").Clone();
+      var grid = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl").Clone();
       grid.ScaleLocal = new Vector3F(0.3f);
       _scene.Children.Add(grid);
 
       // Add a tank model to the scene graph.
-      var tank = ContentManager.Load<ModelNode>("Tank/tank").Clone();
+      var tank = AssetManager.LoadDRModel(GraphicsService, "Tank/tank.drmdl").Clone();
       _scene.Children.Add(tank);
 
       // Remember the mesh nodes of tank node.

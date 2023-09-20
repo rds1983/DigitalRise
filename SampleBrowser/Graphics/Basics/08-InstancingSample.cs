@@ -9,6 +9,7 @@ using DigitalRune.Mathematics.Interpolation;
 using DigitalRune.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -55,7 +56,7 @@ For more information about instancing have a look at the following sample:
       // Add a lot of instances of one model to the scene. This model uses a custom 
       // shader which supports instancing. See the *.drmdl, *.drmat and *.fx files 
       // in the directory of the FBX file.
-      var model = ContentManager.Load<ModelNode>("InstancedModel/InstancedModel");
+      var model = AssetManager.LoadDRModel(GraphicsService, "InstancedModel/InstancedModel.drmdl");
       for (int x = 1; x < 50; x++)
       {
         for (int z = 1; z < 20; z++)

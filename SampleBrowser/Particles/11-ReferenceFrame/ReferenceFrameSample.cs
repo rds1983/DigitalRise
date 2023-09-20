@@ -9,6 +9,7 @@ using DigitalRune.Particles;
 using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
+using AssetManagementBase;
 
 
 namespace Samples.Particles
@@ -46,7 +47,7 @@ The right ball uses ParticleReferenceFrame.Local.",
     private void CreateParticleSystem()
     {
       // Load a sphere model.
-      var modelNode = ContentManager.Load<ModelNode>("Particles/Sphere");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Particles/Sphere.drmdl");
       var meshNode = (MeshNode)modelNode.Children[0];
 
       // Add gravity and damping to the physics simulation.

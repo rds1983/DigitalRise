@@ -8,6 +8,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -53,7 +54,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       _xnaModel = ContentManager.Load<Model>("Saucer3/saucer");
 
       // A DigitalRune model.
-      _modelNode = ContentManager.Load<ModelNode>("Dude/Dude").Clone();
+      _modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       _modelNode.PoseLocal = new Pose(new Vector3F(6, 0, -7));
 
       // Create a geometric object with a height field shape.

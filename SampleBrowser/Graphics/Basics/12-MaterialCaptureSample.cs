@@ -59,7 +59,7 @@
 //      // Add the camera node to the scene.
 //      _scene.Children.Add(_cameraObject.CameraNode);
 
-//      _model = ContentManager.Load<ModelNode>("Dude/Dude").Clone();
+//      _model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
 
 //      // Add the model to the scene.
 //      _scene.Children.Add(_model);

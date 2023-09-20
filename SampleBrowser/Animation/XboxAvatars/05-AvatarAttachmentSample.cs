@@ -64,7 +64,7 @@ namespace Samples.Animation
         Duration = TimeSpan.MaxValue,       // ...forever.
       };
 
-      var baseballBatModelNode = ContentManager.Load<ModelNode>("XboxAvatars/BaseballBat").Clone();
+      var baseballBatModelNode = AssetManager.LoadDRModel(GraphicsService, "XboxAvatars/BaseballBat.drmdl").Clone();
       _baseballBatMeshNode = baseballBatModelNode.GetChildren().OfType<MeshNode>().First();
 
       // If we only render the baseball bat, it appears black. We need to add it to

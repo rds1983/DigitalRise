@@ -2,7 +2,7 @@
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -28,7 +28,7 @@ namespace Samples.Graphics
       // to the content folder and have a look at the *.drmdl and *.drmat files.
       // The model itself is a tree of scene nodes. This model contains several 
       // mesh nodes for the floor plane and the cubes.
-      ModelNode modelNode = ContentManager.Load<ModelNode>("DualTextured/model_lightmap");
+      ModelNode modelNode = AssetManager.LoadDRModel(GraphicsService, "DualTextured/model_lightmap.drmdl");
 
       // The XNA ContentManager manages a single instance of each model. We clone 
       // the models, to get a copy that we can modify without changing the original 

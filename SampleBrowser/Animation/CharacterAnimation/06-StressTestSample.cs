@@ -8,6 +8,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -34,7 +35,7 @@ namespace Samples.Animation
       : base(game)
     {
       // Load model.
-      var modelNode = ContentManager.Load<ModelNode>("Marine/PlayerMarine");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       var meshNode = modelNode.GetSubtree().OfType<MeshNode>().First();
       SampleHelper.EnablePerPixelLighting(meshNode);
 

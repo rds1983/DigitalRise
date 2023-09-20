@@ -8,6 +8,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Animation
@@ -28,7 +29,7 @@ Dude skeleton (left) to the Marine skeleton (right).",
       : base(game)
     {
       // Get dude model and start animation on the dude.
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _dudeMeshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _dudeMeshNode.PoseLocal = new Pose(new Vector3F(-0.5f, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_dudeMeshNode);
@@ -43,7 +44,7 @@ Dude skeleton (left) to the Marine skeleton (right).",
       AnimationService.StartAnimation(loopingAnimation, (IAnimatableProperty)_dudeMeshNode.SkeletonPose);
 
       // Get marine model - do not start any animations on the marine model.
-      modelNode = ContentManager.Load<ModelNode>("Marine/PlayerMarine");
+      modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       _marineMeshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _marineMeshNode.PoseLocal = new Pose(new Vector3F(0.5f, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_marineMeshNode);

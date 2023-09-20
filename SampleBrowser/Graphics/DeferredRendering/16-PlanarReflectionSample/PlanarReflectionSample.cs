@@ -14,6 +14,7 @@ using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -107,7 +108,7 @@ from the player camera to make best use of the texture resolution.",
 
       // Get a ground model which can render a planar reflection. See 
       // GroundReflective/MaterialReflective.fx.
-      var groundModel = ContentManager.Load<ModelNode>("GroundReflective/Ground");
+      var groundModel = AssetManager.LoadDRModel(GraphicsService, "GroundReflective/Ground.drmdl");
 
       // Use the reflective mesh as the ground.
       var groundMesh = groundModel.GetSubtree().OfType<MeshNode>().First().Clone();

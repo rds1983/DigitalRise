@@ -1,6 +1,8 @@
-﻿using DigitalRune.Diagnostics;
+﻿using AssetManagementBase;
+using DigitalRune.Diagnostics;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
+using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Particles;
@@ -30,8 +32,8 @@ namespace Samples.Particles
 
       GameObjectService.Objects.Add(new GrabObject(Services));
 
-      // Load a sphere model.
-      _modelNode = ContentManager.Load<ModelNode>("Particles/Sphere").Clone();
+			// Load a sphere model.
+			_modelNode = AssetManager.LoadDRModel(GraphicsService, "Particles/Sphere.drmdl").Clone();
       GraphicsScreen.Scene.Children.Add(_modelNode);
 
       // Add gravity and damping to the physics simulation.

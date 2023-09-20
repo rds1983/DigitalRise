@@ -7,11 +7,12 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
-  // Loads the "Sandbox" model and creates 5 rigid bodies that represent the walls.
+	// Loads the "Sandbox" model and creates 5 rigid bodies that represent the walls.
   public class SandboxObject : GameObject
   {
     private readonly IServiceLocator _services;
@@ -34,8 +35,10 @@ namespace Samples
     protected override void OnLoad()
     {
       // Load sandbox model.
-      var contentManager = _services.GetInstance<ContentManager>();
-      _modelNode = contentManager.Load<ModelNode>("Sandbox/Sandbox").Clone();
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+
+			_modelNode = assetManager.LoadDRModel(graphicsService, "Sandbox/Sandbox.drmdl").Clone();
 
       foreach (var node in _modelNode.GetSubtree())
       {

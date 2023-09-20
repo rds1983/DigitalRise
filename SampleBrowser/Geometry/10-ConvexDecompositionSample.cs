@@ -43,7 +43,7 @@ At regular intervals, the intermediate decomposition is updated and rendered to 
       SetCamera(new Vector3F(3, 3, 3), 0.8f, -0.6f);
 
       // Load model.
-      _modelNode = ContentManager.Load<ModelNode>("Saucer/Saucer").Clone();
+      _modelNode = AssetManager.LoadDRModel(GraphicsService, "Saucer/Saucer.drmdl").Clone();
 
       // Combine all meshes of the model into a single TriangleMesh.
       TriangleMesh mesh = new TriangleMesh();

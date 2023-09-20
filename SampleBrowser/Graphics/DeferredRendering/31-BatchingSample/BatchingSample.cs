@@ -12,6 +12,7 @@ using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -140,12 +141,12 @@ Debug drawing can be enabled in the Options window (F4) in the Batching tab:
       // Store the mesh nodes in a list.
       MeshNode[] meshNodePrototypes =
       {
-        (MeshNode)ContentManager.Load<ModelNode>("Grass/Grass").Children[0],
-        (MeshNode)ContentManager.Load<ModelNode>("Parviflora/Parviflora").Children[0],
-        (MeshNode)ContentManager.Load<ModelNode>("PalmTree/palm_tree").Children[0],
-        (MeshNode)ContentManager.Load<ModelNode>("Rock/rock_05").Children[0],
-        (MeshNode)ContentManager.Load<ModelNode>("GlassBox/GlassBox").Children[0],
-        (MeshNode)ContentManager.Load<ModelNode>("Building/wall_concrete_1").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Grass/Grass.drmdl").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Parviflora/Parviflora.drmdl").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "PalmTree/palm_tree.drmdl").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Rock/rock_05.drmdl").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "GlassBox/GlassBox.drmdl").Children[0],
+        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Building/wall_concrete_1.drmdl").Children[0],
       };
 
       for (int meshIndex = 0; meshIndex < meshNodePrototypes.Length; meshIndex++)

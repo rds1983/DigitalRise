@@ -11,6 +11,7 @@ using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -76,7 +77,7 @@ on the model.",
       }
 
       // Load the "Bubble" mesh and place it at a fixed position in the scene.
-      var modelNode = ContentManager.Load<ModelNode>("Bubble/Bubble");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Bubble/Bubble.drmdl");
       var meshNode = modelNode.GetDescendants().OfType<MeshNode>().First().Clone();
       meshNode.PoseWorld = new Pose(new Vector3F(0, 1, 0));
       _graphicsScreen.Scene.Children.Add(meshNode);

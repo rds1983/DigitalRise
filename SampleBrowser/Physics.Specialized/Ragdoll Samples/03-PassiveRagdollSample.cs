@@ -10,6 +10,7 @@ using DigitalRune.Physics.Specialized;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Samples.Animation;
+using AssetManagementBase;
 
 
 namespace Samples.Physics.Specialized
@@ -41,7 +42,7 @@ a lot of unwanted jitter.",
       _grabObject = new GrabObject(Services);
       GameObjectService.Objects.Add(_grabObject);
 
-      var modelNode = ContentManager.Load<ModelNode>("Dude/Dude");
+      var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNode);

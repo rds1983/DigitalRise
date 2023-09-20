@@ -7,6 +7,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -59,7 +60,7 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
       // Each model itself is a tree of scene nodes. The grid model contains one mesh 
       // node. The tank model contains several mesh nodes (turret, cannon, hatch, 
       // wheels, ...).
-      _model = ContentManager.Load<ModelNode>("Tank/tank");
+      _model = AssetManager.LoadDRModel(GraphicsService, "Tank/tank.drmdl");
 
       // The XNA ContentManager manages a single instance of each model. We clone 
       // the model, to get a copy that we can modify without changing the original 

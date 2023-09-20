@@ -8,6 +8,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 // We use the DigitalRune classes - not the XNA classes!!!
 using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
@@ -60,7 +61,7 @@ LightNodes, CameraNodes, ...) and how to animate a skinned model.",
       // Load a model. This model uses the DigitalRune Model Processor. Several XML 
       // files (*.drmdl and *.drmat) in the folder of dude.fbx define the materials and other properties. 
       // The DigitalRune Model Processor also imports the animations of the dude model.
-      var model = ContentManager.Load<ModelNode>("Dude/Dude");
+      var model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
 
       // Add two clones of the model to the scene.
       _model0 = model.Clone();

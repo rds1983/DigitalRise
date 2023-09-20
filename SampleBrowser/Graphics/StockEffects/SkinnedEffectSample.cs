@@ -7,6 +7,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -45,7 +46,7 @@ for a sky dome.",
       // which define the materials of the model. These material description files are 
       // automatically processed by the DigitalRune Model Processor. Please browse 
       // to the content folder and have a look at the *.drmdl and *.drmat files.
-      var dudeModel = ContentManager.Load<ModelNode>("Dude/Dude");
+      var dudeModel = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       dudeModel = dudeModel.Clone();
       dudeModel.PoseWorld = new Pose(Matrix33F.CreateRotationY(ConstantsF.Pi));
       GraphicsScreen.Scene.Children.Add(dudeModel);

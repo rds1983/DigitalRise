@@ -8,11 +8,12 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
-  // Represents the "Saucer" model.
+	// Represents the "Saucer" model.
   public class SaucerObject : GameObject
   {
     private readonly IServiceLocator _services;
@@ -48,11 +49,14 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
+			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+
+			var contentManager = _services.GetInstance<ContentManager>();
 
       // ----- Graphics
       // Load graphics model (created using the ModelWithCollisionMeshProcessor).
-      var sharedModelNode = contentManager.Load<ModelNode>("Saucer/saucer");
+      var sharedModelNode = assetManager.LoadDRModel(graphicsService, "Saucer/saucer.drmdl");
 
       // Let's create a clone because we do not want to change the shared Saucer 
       // instance stored in the content manager.
