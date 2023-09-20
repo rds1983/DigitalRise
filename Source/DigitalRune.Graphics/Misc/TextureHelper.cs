@@ -298,7 +298,7 @@ namespace DigitalRune.Graphics
       if (!graphicsService.Data.TryGetValue(key, out normalsFittingTexture)
           || !(normalsFittingTexture is Texture2D))
       {
-        normalsFittingTexture = graphicsService.Content.Load<Texture2D>("DigitalRune/NormalsFittingTexture");
+        normalsFittingTexture = Resources.NormalsFittingTexture(graphicsService.GraphicsDevice);
         graphicsService.Data[key] = normalsFittingTexture;
       }
 

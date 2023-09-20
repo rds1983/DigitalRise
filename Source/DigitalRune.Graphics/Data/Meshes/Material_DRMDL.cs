@@ -126,7 +126,7 @@ namespace DigitalRune.Graphics
 						binding = new SkinnedEffectBinding(graphicsService, opaqueData);
 						break;
 					default:
-						var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, effectName);
+						var effect = Resources.GetDREffect(graphicsService.GraphicsDevice, effectName);
 						binding = new EffectBinding(graphicsService, effect, opaqueData);
 						break;
 				}

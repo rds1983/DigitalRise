@@ -772,6 +772,21 @@ namespace DigitalRune.Graphics.SceneGraph
     #region Methods
     //--------------------------------------------------------------
 
+    public void RecursiveProcess(Action<SceneNode> processor)
+    {
+      processor(this);
+
+      if (Children == null)
+      {
+        return;
+      }
+
+      foreach(var child in Children)
+      {
+        child.RecursiveProcess(processor);
+      }
+    }
+
     internal bool GetFlag(SceneNodeFlags flag)
     {
       return (_flags & flag) == flag;

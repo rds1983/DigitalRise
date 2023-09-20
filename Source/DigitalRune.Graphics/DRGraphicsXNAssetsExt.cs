@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
 
@@ -23,9 +24,33 @@ namespace AssetManagementBase
 			var drmlAssetName = Path.ChangeExtension(assetName, "drmdl");
 			if (manager.Exists(drmlAssetName))
 			{
-				var material = manager.LoadDRMaterial(graphicsService, drmlAssetName);
+				var xml = manager.ReadAsString(drmlAssetName);
+				var modelDescription = ModelDescription.Parse(xml);
 
+				result.RecursiveProcess(node =>
+				{
+					var meshNode = node as MeshNode;
+					if (meshNode == null)
+					{
+						return;
+					}
 
+					var desc = modelDescription.GetMeshDescription(node.Name);
+					if (desc != null)
+					{
+						for(var i = 0; i < Math.Min(meshNode.Mesh.Submeshes.Count, desc.Submeshes.Count); ++i)
+						{
+							var subMeshDesc = desc.Submeshes[i];
+							if (string.IsNullOrEmpty(subMeshDesc.Material))
+							{
+								continue;
+							}
+
+							var material = manager.LoadDRMaterial(graphicsService, subMeshDesc.Material);
+							meshNode.Mesh.Submeshes[i].SetMaterial(material);
+						}
+					}
+				});
 			}
 
 			return result;

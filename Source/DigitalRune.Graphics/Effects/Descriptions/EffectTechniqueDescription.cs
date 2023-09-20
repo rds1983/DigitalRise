@@ -162,7 +162,18 @@ namespace DigitalRune.Graphics.Effects
       var annotation = technique.Annotations["InstancingTechnique"];
       if (annotation != null && annotation.ParameterType == EffectParameterType.String)
       {
-        var techniqueName = annotation.GetValueString();
+        var techniqueName = string.Empty;
+
+        try
+        {
+          // FNA doesnt have that method implemented
+          // Hence we have to absorb the exception
+          techniqueName = annotation.GetValueString();
+        }
+        catch(NotImplementedException)
+        {
+        }
+
         if (!string.IsNullOrEmpty(techniqueName))
         {
           InstancingTechnique = effect.Techniques[techniqueName];
