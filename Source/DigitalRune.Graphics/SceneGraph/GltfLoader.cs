@@ -465,40 +465,37 @@ namespace DigitalRune.Graphics.SceneGraph
 			}
 		}
 
-		private Skeleton LoadSkin(int skinId)
+		private Skeleton CreateSkeleton()
 		{
-			if (_skinCache.TryGetValue(skinId, out Skeleton result))
-			{
-				return result;
-			}
-
-			var gltfSkin = _gltf.Skins[skinId];
-
 			var boneParents = new List<int>();
 			var boneNames = new List<string>();
 			var boneTransforms = new List<SrtTransform>();
+
 			for (var i = 0; i < _nodes.Count; ++i)
 			{
 				var node = _nodes[i];
-				if (node is MeshNode)
-				{
-					continue;
-				}
-
 				var parentIndex = node.Parent != null ? _nodes.IndexOf(node.Parent) : -1;
 
 				boneParents.Add(parentIndex);
 				boneNames.Add(node.Name);
-				boneTransforms.Add(new SrtTransform(node.ScaleLocal, node.PoseLocal.Orientation, node.PoseLocal.Position));
+				boneTransforms.Add(new SrtTransform(node.ScaleWorld, node.PoseLocal.Orientation, node.PoseLocal.Position));
 			}
 
-			result = new Skeleton(boneParents, boneNames, boneTransforms);
-
-			Debug.WriteLine($"Skin {gltfSkin.Name} has {gltfSkin.Joints.Length} joints.");
-
-			_skinCache[skinId] = result;
+			var result = new Skeleton(boneParents, boneNames, boneTransforms);
 
 			return result;
+		}
+
+		private void SetSkin(MeshNode meshNode, int skinId)
+		{
+			var gltfSkin = _gltf.Skins[skinId];
+
+			var pose = SkeletonPose.Create(meshNode.Mesh.Skeleton);
+
+			pose.BoneOrder = gltfSkin.Joints;
+			meshNode.Mesh.Skeleton.BoneOrder = gltfSkin.Joints;
+
+			meshNode.SkeletonPose = pose;
 		}
 
 		private void LoadAllNodes()
@@ -544,7 +541,7 @@ namespace DigitalRune.Graphics.SceneGraph
 				_nodes.Add(node);
 			}
 
-			// Second run - set children and skins
+			// Second run - set children
 			for (var i = 0; i < _gltf.Nodes.Length; ++i)
 			{
 				var gltfNode = _gltf.Nodes[i];
@@ -563,7 +560,8 @@ namespace DigitalRune.Graphics.SceneGraph
 				}
 			}
 
-			// Third run - set skins
+			// Third run - set skeletons and skins
+			Skeleton skeleton = null;
 			for (var i = 0; i < _gltf.Nodes.Length; ++i)
 			{
 				var gltfNode = _gltf.Nodes[i];
@@ -571,7 +569,14 @@ namespace DigitalRune.Graphics.SceneGraph
 
 				if (gltfNode.Skin != null)
 				{
-					((MeshNode)node).Mesh.Skeleton = LoadSkin(gltfNode.Skin.Value);
+					if (skeleton ==null)
+					{
+						skeleton = CreateSkeleton();
+					}
+
+					var meshNode = (MeshNode)node;
+					meshNode.Mesh.Skeleton = skeleton;
+					SetSkin(meshNode, gltfNode.Skin.Value);
 				}
 			}
 		}
@@ -582,7 +587,10 @@ namespace DigitalRune.Graphics.SceneGraph
 			_meshes.Clear();
 			_nodes.Clear();
 			_skinCache.Clear();
-			_model = new ModelNode();
+			_model = new ModelNode
+			{
+				Name = assetName
+			};
 
 			_assetManager = manager;
 			_assetName = assetName;
@@ -661,8 +669,6 @@ namespace DigitalRune.Graphics.SceneGraph
 					meshNode.Mesh.Animations[id] = SkeletonKeyFrameAnimation.FromData(animation);
 				}
 			}
-
-			_model.UpdateAnimations();
 
 			return _model;
 		}

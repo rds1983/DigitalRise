@@ -70,6 +70,7 @@ namespace DigitalRune.Animation.Character
     // One SrtTransform for each bone describing the bind pose relative to model space.
     internal SrtTransform[] BindPosesAbsoluteInverse { get; set; }
 
+    public int[] BoneOrder { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the skeleton.

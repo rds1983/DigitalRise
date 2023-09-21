@@ -68,6 +68,7 @@ namespace DigitalRune.Animation.Character
     private volatile Matrix44F[] _skinningMatrices;
     private volatile Matrix[] _skinningMatricesXna;
     private FastBitArray _isSkinningMatrixDirty;
+    private int[] _boneOrder;
 
     // Object to lock when updating stuff in reads.
     private readonly object _syncRoot = new object();
@@ -77,6 +78,8 @@ namespace DigitalRune.Animation.Character
     //--------------------------------------------------------------
     #region Properties & Events
     //--------------------------------------------------------------
+
+    private int MatricesLength => _skeletonPose.Skeleton.BoneOrder == null?_bonePoseRelative.Length: _skeletonPose.Skeleton.BoneOrder.Length;
 
     // Array must not be modified by user!
     public Matrix44F[] SkinningMatrices
@@ -91,7 +94,8 @@ namespace DigitalRune.Animation.Character
             {
               _isDirty = true;
               _isSkinningMatrixDirty.SetAll(true);
-              _skinningMatrices = new Matrix44F[_bonePoseRelative.Length];
+
+              _skinningMatrices = new Matrix44F[MatricesLength];
             }
           }
         }
@@ -115,13 +119,24 @@ namespace DigitalRune.Animation.Character
             {
               _isDirty = true;
               _isSkinningMatrixDirty.SetAll(true);
-              _skinningMatricesXna = new Matrix[_bonePoseRelative.Length];
+              _skinningMatricesXna = new Matrix[MatricesLength];
             }
           }
         }
 
         Update();
         return _skinningMatricesXna;
+      }
+    }
+
+    public int[] BoneOrder
+    {
+      get => _boneOrder;
+      set
+      {
+        _boneOrder = value;
+        _skinningMatrices = null;
+        _skinningMatricesXna = null;
       }
     }
 
@@ -199,7 +214,7 @@ namespace DigitalRune.Animation.Character
       }
       else
       {
-        Debug.Assert(_bonePoseRelative != null, "SkeletonBoneAccessor is not properly initialized. Array _bonePoseRelative is not set.");
+/*        Debug.Assert(_bonePoseRelative != null, "SkeletonBoneAccessor is not properly initialized. Array _bonePoseRelative is not set.");
         Debug.Assert(_bonePoseAbsolute != null, "SkeletonBoneAccessor is not properly initialized. Array _bonePoseAbsolute is not set.");
         Debug.Assert(_isBonePoseRelativeDirty != null, "SkeletonBoneAccessor is not properly initialized. BitArray _isBonePoseRelativeDirty is not set.");
         Debug.Assert(_isBonePoseAbsoluteDirty != null, "SkeletonBoneAccessor is not properly initialized. BitArray _isBonePoseAbsoluteDirty is not set.");
@@ -208,7 +223,7 @@ namespace DigitalRune.Animation.Character
         Debug.Assert(_bonePoseAbsolute.Length != skeletonPose.Skeleton.NumberOfBones, "SkeletonBoneAccessor is incompatible. Array _bonePoseAbsolute has wrong length.");
         Debug.Assert(_isBonePoseRelativeDirty.Length != skeletonPose.Skeleton.NumberOfBones, "SkeletonBoneAccessor is incompatible. BitArray _isBonePoseRelativeDirty has wrong length.");
         Debug.Assert(_isBonePoseAbsoluteDirty.Length != skeletonPose.Skeleton.NumberOfBones, "SkeletonBoneAccessor is incompatible. BitArray _isBonePoseAbsoluteDirty has wrong length.");
-        Debug.Assert(_isSkinningMatrixDirty.Length != skeletonPose.Skeleton.NumberOfBones, "SkeletonBoneAccessor is incompatible. BitArray _isSkinningMatrixDirty has wrong length.");
+        Debug.Assert(_isSkinningMatrixDirty.Length != skeletonPose.Skeleton.NumberOfBones, "SkeletonBoneAccessor is incompatible. BitArray _isSkinningMatrixDirty has wrong length.");*/
 
         // Set all dirty flags.
         Invalidate();
@@ -336,7 +351,8 @@ namespace DigitalRune.Animation.Character
             for (int i = 0; i < numberOfBones; i++)
             {
               //_bonePoseRelative[i] = bindPosesRelative[i] * boneTransforms[i];
-              SrtTransform.Multiply(ref bindPosesRelative[i], ref boneTransforms[i], out _bonePoseRelative[i]);
+              // SrtTransform.Multiply(ref bindPosesRelative[i], ref boneTransforms[i], out _bonePoseRelative[i]);
+              _bonePoseRelative[i] = boneTransforms[i];
             }
 
             // ----- Update dirty absolute bone poses.
@@ -353,10 +369,15 @@ namespace DigitalRune.Animation.Character
             // ----- Update skinning matrices (either the Matrix44F or the XNA variant).
             if (_skinningMatrices != null)
             {
-              for (int i = 0; i < numberOfBones; i++)
+              for (int i = 0; i < MatricesLength; i++)
               {
                 //_skinningMatrices[i] = _bonePoseAbsolute[i] * skeleton.BindPosesAbsoluteInverse[i];
-                SrtTransform.Multiply(ref _bonePoseAbsolute[i], ref skeleton.BindPosesAbsoluteInverse[i],
+                var idx = i;
+                if (skeleton.BoneOrder != null)
+                {
+                  idx = skeleton.BoneOrder[i];
+                }
+                SrtTransform.Multiply(ref _bonePoseAbsolute[idx], ref skeleton.BindPosesAbsoluteInverse[idx],
                                       out _skinningMatrices[i]);
               }
             }
@@ -365,15 +386,21 @@ namespace DigitalRune.Animation.Character
             {
               if (_skinningMatrices != null)
               {
-                for (int i = 0; i < numberOfBones; i++)
+                for (int i = 0; i < MatricesLength; i++)
                   _skinningMatricesXna[i] = (Matrix)_skinningMatrices[i];
               }
               else
               {
-                for (int i = 0; i < numberOfBones; i++)
+                for (int i = 0; i < MatricesLength; i++)
                 {
-                  //_skinningMatricesXna[i] = _bonePoseAbsolute[i] * skeleton.BindPosesAbsoluteInverse[i];
-                  SrtTransform.Multiply(ref _bonePoseAbsolute[i], ref skeleton.BindPosesAbsoluteInverse[i],
+									//_skinningMatricesXna[i] = _bonePoseAbsolute[i] * skeleton.BindPosesAbsoluteInverse[i];
+									var idx = i;
+									if (skeleton.BoneOrder != null)
+									{
+										idx = skeleton.BoneOrder[i];
+									}
+
+									SrtTransform.Multiply(ref _bonePoseAbsolute[idx], ref skeleton.BindPosesAbsoluteInverse[idx],
                                         out _skinningMatricesXna[i]);
                 }
               }

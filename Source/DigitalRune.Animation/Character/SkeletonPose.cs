@@ -160,6 +160,21 @@ namespace DigitalRune.Animation.Character
     /// <value>The skeleton.</value>
     public Skeleton Skeleton { get; private set; }
 
+    public int[] BoneOrder
+    {
+      get
+      {
+        EnsureBoneAccessor();
+        return _boneAccessor.BoneOrder;
+      }
+
+      set
+      {
+        EnsureBoneAccessor();
+        _boneAccessor.BoneOrder = value;
+      }
+    }
+
 
     /// <summary>
     /// Gets the skinning matrices. 

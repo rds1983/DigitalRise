@@ -592,6 +592,7 @@ namespace DigitalRune.Animation.Character
         var sourceTransforms = source.BoneTransforms;
         var targetTransforms = target.BoneTransforms;
         Array.Copy(sourceTransforms, 0, targetTransforms, 0, targetTransforms.Length);
+        target.BoneOrder = source.BoneOrder;
         target.Invalidate();
       }
     }

@@ -81,36 +81,6 @@ namespace DigitalRune.Graphics.SceneGraph
     //--------------------------------------------------------------
     #endregion
 
-
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
-
-    public void UpdateAnimations()
-    {
-      // Create MeshNode.SkeletonPoses for all mesh.Skeletons. 
-      // (Skeletons can be shared and for each skeleton we create only one SkeletonPose.)
-      Dictionary<Skeleton, SkeletonPose> skeletons = new Dictionary<Skeleton,SkeletonPose>();
-      foreach (var meshNode in this.GetSubtree().OfType<MeshNode>())
-      {
-        var skeleton = meshNode.Mesh.Skeleton;
-        if (skeleton != null)
-        {
-          // Get existing skeleton pose or create a new one.
-          SkeletonPose skeletonPose;
-          if (!skeletons.TryGetValue(skeleton, out skeletonPose))
-          {
-            skeletonPose = SkeletonPose.Create(skeleton);
-            skeletons.Add(skeleton, skeletonPose);
-          }
-
-          meshNode.SkeletonPose = skeletonPose;
-        }
-      }
-    }
-    #endregion
-
-
     //--------------------------------------------------------------
     #region Methods
     //--------------------------------------------------------------

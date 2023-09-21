@@ -859,6 +859,12 @@ namespace DigitalRune.Animation.Character
 
 			time = animationTime.Value;
 
+			// Set all transforms to their default values
+			for(var i = 0; i < result.BoneTransforms.Length; ++i)
+			{
+				result.BoneTransforms[i] = result.Skeleton.BindPosesRelative[i];
+			}
+
 			// Clamp time to allowed range.
 			var startTime = _times[0];
 			var endTime = _totalDuration;
@@ -880,6 +886,7 @@ namespace DigitalRune.Animation.Character
 
 					Debug.Assert(((Array)_keyFrames[channelIndex]).Length > 0, "Each channel must have at least 1 key frame.");
 
+					var defaultTransform = result.Skeleton.BindPosesRelative[boneIndex];
 					float weight = _weights[channelIndex];
 					if (weight == 0 && defaultSource != result)
 					{
@@ -889,12 +896,12 @@ namespace DigitalRune.Animation.Character
 					else if (weight == 1)
 					{
 						// Channel is fully active.
-						result.BoneTransforms[boneIndex] = GetBoneTransform(channelIndex, timeIndex, time);
+						result.BoneTransforms[boneIndex] = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
 					}
 					else
 					{
 						// Mix channel with source.
-						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time);
+						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
 						SrtTransform.Interpolate(ref defaultSource.BoneTransforms[boneIndex], ref boneTransform, weight, ref boneTransform);
 						result.BoneTransforms[boneIndex] = boneTransform;
 					}
@@ -912,6 +919,7 @@ namespace DigitalRune.Animation.Character
 					Debug.Assert(((Array)_keyFrames[channelIndex]).Length > 0, "Each channel must have at least 1 key frame.");
 
 					float weight = _weights[channelIndex];
+					var defaultTransform = result.Skeleton.BindPosesRelative[boneIndex];
 					if (weight == 0 && defaultSource != result)
 					{
 						// Channel is inactive.
@@ -920,12 +928,12 @@ namespace DigitalRune.Animation.Character
 					else if (weight == 1)
 					{
 						// Channel is fully active.
-						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * GetBoneTransform(channelIndex, timeIndex, time);
+						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
 					}
 					else
 					{
 						// Add only a part of this animation value.
-						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time);
+						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
 						SrtTransform identity = SrtTransform.Identity;
 						SrtTransform.Interpolate(ref identity, ref boneTransform, weight, ref boneTransform);
 						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * boneTransform;
@@ -983,8 +991,9 @@ namespace DigitalRune.Animation.Character
 		/// <param name="channelIndex">The index in <see cref="_channels"/>.</param>
 		/// <param name="timeIndex">The index in <see cref="_times"/>.</param>
 		/// <param name="time">The animation time.</param>
+		/// <param name="defaultTransform"></param>
 		/// <returns>The animation value.</returns>
-		private SrtTransform GetBoneTransform(int channelIndex, int timeIndex, TimeSpan time)
+		private SrtTransform GetBoneTransform(int channelIndex, int timeIndex, TimeSpan time, SrtTransform defaultTransform)
 		{
 			// Get index in the key frames list using the _indices lookup table.
 			int keyFrameIndex = _indices[timeIndex * _channels.Length + channelIndex];
@@ -995,7 +1004,9 @@ namespace DigitalRune.Animation.Character
 				// Get the key frame before and after the specified time.
 				TimeSpan previousTime, nextTime;
 				SrtTransform previousTransform, nextTransform;
-				GetBoneKeyFrames(channelIndex, keyFrameIndex, out previousTime, out previousTransform, out nextTime, out nextTransform);
+
+				previousTransform = nextTransform = defaultTransform;
+				GetBoneKeyFrames(channelIndex, keyFrameIndex, out previousTime, ref previousTransform, out nextTime, ref nextTransform);
 
 				float parameter = (float)(time.Ticks - previousTime.Ticks) / (nextTime - previousTime).Ticks;
 				SrtTransform.Interpolate(ref previousTransform, ref nextTransform, parameter, ref previousTransform);
@@ -1063,8 +1074,8 @@ namespace DigitalRune.Animation.Character
 		/// <param name="time1">The time of the second key frame.</param>
 		/// <param name="transform1">The transform of the second key frame.</param>
 		private void GetBoneKeyFrames(int channelIndex, int keyFrameIndex,
-																	out TimeSpan time0, out SrtTransform transform0,
-																	out TimeSpan time1, out SrtTransform transform1)
+																	out TimeSpan time0, ref SrtTransform transform0,
+																	out TimeSpan time1, ref SrtTransform transform1)
 		{
 			Debug.Assert(keyFrameIndex + 1 < ((Array)_keyFrames[channelIndex]).Length, "Call GetBoneKeyFrame() instead of GetBoneKeyFrames()!");
 
@@ -1075,15 +1086,11 @@ namespace DigitalRune.Animation.Character
 
 				var keyFrame = keyFrames[keyFrameIndex];
 				time0 = keyFrame.Time;
-				transform0.Scale = Vector3F.One;
 				transform0.Rotation = keyFrame.Rotation;
-				transform0.Translation = Vector3F.Zero;
 
 				keyFrame = keyFrames[keyFrameIndex + 1];
 				time1 = keyFrame.Time;
-				transform1.Scale = Vector3F.One;
 				transform1.Rotation = keyFrame.Rotation;
-				transform1.Translation = Vector3F.Zero;
 			}
 			else if (boneKeyFrameType == BoneKeyFrameType.RT)
 			{
@@ -1091,13 +1098,11 @@ namespace DigitalRune.Animation.Character
 
 				var keyFrame = keyFrames[keyFrameIndex];
 				time0 = keyFrame.Time;
-				transform0.Scale = Vector3F.One;
 				transform0.Rotation = keyFrame.Rotation;
 				transform0.Translation = keyFrame.Translation;
 
 				keyFrame = keyFrames[keyFrameIndex + 1];
 				time1 = keyFrame.Time;
-				transform1.Scale = Vector3F.One;
 				transform1.Rotation = keyFrame.Rotation;
 				transform1.Translation = keyFrame.Translation;
 			}
@@ -1123,159 +1128,32 @@ namespace DigitalRune.Animation.Character
 				throw new ArgumentNullException(nameof(data));
 			}
 
-			// First run: validate & build times
-			var timesHash = new HashSet<TimeSpan>();
-			var duration = TimeSpan.Zero;
+			var result = new SkeletonKeyFrameAnimation();
 			foreach (var pair in data)
 			{
 				var boneTransforms = pair.Value;
-				if (boneTransforms == null)
-				{
-					throw new ArgumentNullException($"data[{pair.Key}]");
-				}
-
-				if (boneTransforms.Times == null)
-				{
-					throw new ArgumentNullException($"data[{pair.Key}].Times");
-				}
-
-				if (boneTransforms.Translations != null && boneTransforms.Translations.Length != boneTransforms.Times.Length)
-				{
-					throw new ArgumentException($"Number of translations for bone {pair.Key} differ from number of times");
-				}
-
-				if (boneTransforms.Rotations != null && boneTransforms.Rotations.Length != boneTransforms.Times.Length)
-				{
-					throw new ArgumentException($"Number of rotations for bone {pair.Key} differ from number of times");
-				}
-
-				if (boneTransforms.Scales != null && boneTransforms.Scales.Length != boneTransforms.Times.Length)
-				{
-					throw new ArgumentException($"Number of scales for bone {pair.Key} differ from number of times");
-				}
-
-				var numberOfKeyFrames = boneTransforms.Times.Length;
-				for (var i = 0; i < numberOfKeyFrames; ++i)
+				var srtTransforms = new List<BoneKeyFrameSRT>();
+				for (var i = 0; i < pair.Value.Times.Length; ++i)
 				{
 					var ts = TimeSpan.FromSeconds(boneTransforms.Times[i]);
-					timesHash.Add(ts);
+					var r = boneTransforms.Rotations != null ? boneTransforms.Rotations[i] : Quaternion.Identity;
+					var t = boneTransforms.Translations != null ? boneTransforms.Translations[i] : Vector3.Zero;
+					var s = boneTransforms.Scales != null ? boneTransforms.Scales[i] : Vector3.One;
 
-					if (ts > duration)
+					var transform = new SrtTransform
 					{
-						duration = ts;
-					}
+						Scale = new Vector3F(s.X, s.Y, s.Z),
+						Rotation = new QuaternionF(r.W, r.X, r.Y, r.Z),
+						Translation = new Vector3F(t.X, t.Y, t.Z)
+					};
+
+					result.AddKeyFrame(pair.Key, ts, transform);
 				}
+
+				result.SetWeight(pair.Key, 1);
 			}
 
-			// Second run: build actual animation
-			var result = new SkeletonKeyFrameAnimation
-			{
-				_channels = new int[data.Count],
-				_keyFrames = new object[data.Count],
-				_keyFrameTypes = new BoneKeyFrameType[data.Count],
-				_times = (from t in timesHash orderby t select t).ToArray(),
-				_indices = new int[data.Count * timesHash.Count],
-				_totalDuration = duration,
-				_weights = new float[data.Count]
-			};
-
-			var boneIndex = 0;
-			foreach (var pair in data)
-			{
-				result._channels[boneIndex] = pair.Key;
-
-				var boneTransforms = pair.Value;
-				for (var i = 0; i < result._times.Length; ++i)
-				{
-					var transformIndex = 0;
-					for (; transformIndex < boneTransforms.Times.Length; ++transformIndex)
-					{
-						var ts = TimeSpan.FromSeconds(boneTransforms.Times[transformIndex]);
-
-						if (ts > result._times[i])
-						{
-							break;
-						}
-					}
-
-					result._indices[i * data.Count + boneIndex] = transformIndex - 1;
-				}
-
-				var numberOfKeyFrames = boneTransforms.Times.Length;
-				if (boneTransforms.Rotations != null &&
-						boneTransforms.Translations == null &&
-						boneTransforms.Scales == null)
-				{
-					var keyFrames = new BoneKeyFrameR[numberOfKeyFrames];
-					for (var i = 0; i < numberOfKeyFrames; ++i)
-					{
-						var ts = TimeSpan.FromSeconds(boneTransforms.Times[i]);
-						var r = boneTransforms.Rotations[i];
-
-						keyFrames[i] = new BoneKeyFrameR
-						{
-							Time = ts,
-							Rotation = new QuaternionF(r.W, r.X, r.Y, r.Z)
-						};
-					}
-
-					result._keyFrames[boneIndex] = keyFrames;
-					result._keyFrameTypes[boneIndex] = BoneKeyFrameType.R;
-				}
-				else if (boneTransforms.Rotations != null &&
-						boneTransforms.Translations != null &&
-						boneTransforms.Scales == null)
-				{
-					var keyFrames = new BoneKeyFrameRT[numberOfKeyFrames];
-					for (var i = 0; i < numberOfKeyFrames; ++i)
-					{
-						var ts = TimeSpan.FromSeconds(boneTransforms.Times[i]);
-						var r = boneTransforms.Rotations[i];
-						var t = boneTransforms.Translations[i];
-
-						keyFrames[i] = new BoneKeyFrameRT
-						{
-							Time = ts,
-							Rotation = new QuaternionF(r.W, r.X, r.Y, r.Z),
-							Translation = new Vector3F(t.X, t.Y, t.Z)
-						};
-					}
-
-					result._keyFrames[boneIndex] = keyFrames;
-					result._keyFrameTypes[boneIndex] = BoneKeyFrameType.RT;
-				}
-				else
-				{
-					var keyFrames = new BoneKeyFrameSRT[numberOfKeyFrames];
-					for (var i = 0; i < numberOfKeyFrames; ++i)
-					{
-						var ts = TimeSpan.FromSeconds(boneTransforms.Times[i]);
-						var r = boneTransforms.Rotations != null ? boneTransforms.Rotations[i] : Quaternion.Identity;
-						var t = boneTransforms.Translations != null ? boneTransforms.Translations[i] : Vector3.Zero;
-						var s = boneTransforms.Scales != null ? boneTransforms.Scales[i] : Vector3.One;
-
-						var transform = new SrtTransform
-						{
-							Scale = new Vector3F(s.X, s.Y, s.Z),
-							Rotation = new QuaternionF(r.W, r.X, r.Y, r.Z),
-							Translation = new Vector3F(t.X, t.Y, t.Z)
-						};
-
-						keyFrames[i] = new BoneKeyFrameSRT
-						{
-							Time = ts,
-							Transform = transform
-						};
-					}
-
-					result._keyFrames[boneIndex] = keyFrames;
-					result._keyFrameTypes[boneIndex] = BoneKeyFrameType.SRT;
-				}
-
-				result._weights[boneIndex] = 1;
-
-				++boneIndex;
-			}
+			result.Freeze();
 
 			return result;
 		}
