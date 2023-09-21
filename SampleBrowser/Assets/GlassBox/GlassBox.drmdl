@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Model File="GlassBox.fbx">
+<Model File="GlassBox.gltf">
   <Mesh>
     <Submesh Material="Frame.drmat" />
     <Submesh Material="Glass.drmat" />

@@ -15,7 +15,8 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
+using System.Linq;
 
 namespace Samples
 {
@@ -50,8 +51,9 @@ namespace Samples
       _bodyPrototype = new RigidBody(new SphereShape(0.5f));
 
       // Load the graphics model.
-      var content = _services.GetInstance<ContentManager>();
-      _modelPrototype = content.Load<ModelNode>("LavaBall/LavaBall").Clone();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetInstance<AssetManager>();
+      _modelPrototype = assetManager.LoadDRModel(graphicsService, "LavaBall/LavaBall.drmdl").Clone();
 
       // Attach a point light to the model. The light projects the glowing lava 
       // veins (cube map texture) onto the environment.
@@ -62,7 +64,7 @@ namespace Samples
         SpecularIntensity = 2,
         Range = 1.5f,
         Attenuation = 0.5f,
-        Texture = content.Load<TextureCube>("LavaBall/LavaCubeMap"),
+        Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "LavaBall/LavaCubeMap.dds"),
       };
       var pointLightNode = new LightNode(_pointLight);
       _modelPrototype.Children.Add(pointLightNode);
@@ -70,7 +72,7 @@ namespace Samples
       // Get the emissive color binding of the material because the emissive color
       // will be animated.
       // The model contains one mesh node with a single material.
-      var meshNode = (MeshNode)_modelPrototype.Children[0];
+      var meshNode = (MeshNode)_modelPrototype.GetSubtree().OfType<MeshNode>().First();
       var mesh = meshNode.Mesh;
       var material = mesh.Materials[0];
 

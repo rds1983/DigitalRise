@@ -67,7 +67,7 @@ namespace Samples.Graphics
       GameObjectService.Objects.Add(dynamicSkyObject);
 
       // Add an island model.
-      GameObjectService.Objects.Add(new StaticObject(Services, "Island/Island", new Vector3F(30), new Pose(new Vector3F(0, 0.75f, 0)), true, true));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Island/Island.drmdl", new Vector3F(30), new Pose(new Vector3F(0, 0.75f, 0)), true, true));
 
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
       GameObjectService.Objects.Add(new DynamicObject(Services, 2));
@@ -87,7 +87,7 @@ namespace Samples.Graphics
         Vector3F position = new Vector3F(random.NextFloat(-7, 4), 0, random.NextFloat(13, 18));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.8f, 1.2f);
-        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree", scale, new Pose(position, orientation)));
+        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
       }
 
       // Define the appearance of the water.

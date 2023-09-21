@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="Bubble.fbx">
+<Model File="Bubble.gltf">
   <Mesh>
     <Submesh Material="Glass.drmat" />
   </Mesh>

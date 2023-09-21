@@ -10,7 +10,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -51,8 +51,8 @@ namespace Samples
     protected override void OnLoad()
     {
       // Load model.
-      var contentManager = _services.GetInstance<ContentManager>();
-      _modelNode = contentManager.Load<ModelNode>(_assetName).Clone();
+      var assetManager = _services.GetInstance<AssetManager>();
+      _modelNode = assetManager.LoadDRModel(_services.GetInstance<IGraphicsService>(), _assetName).Clone();
 
       // Optional: Create rigid body using the triangle mesh of the model.
       if (_addRigidBody)
