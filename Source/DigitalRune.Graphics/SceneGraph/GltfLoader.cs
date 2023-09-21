@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
+using DigitalRune.Character.Skeleton_Animations;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.Effects;
@@ -266,7 +268,7 @@ namespace DigitalRune.Graphics.SceneGraph
 						else if (pair.Key == "TANGENT")
 						{
 							element.Usage = VertexElementUsage.Tangent;
-						} 
+						}
 						else if (pair.Key.StartsWith("TEXCOORD_"))
 						{
 							element.Usage = VertexElementUsage.TextureCoordinate;
@@ -383,7 +385,7 @@ namespace DigitalRune.Graphics.SceneGraph
 						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataShort, 0, indexData.Count);
 
 						// Flip winding
-						for(var i = 0; i < dataShort.Length / 3; i++)
+						for (var i = 0; i < dataShort.Length / 3; i++)
 						{
 							var temp = dataShort[i * 3];
 							dataShort[i * 3] = dataShort[i * 3 + 2];
@@ -391,7 +393,8 @@ namespace DigitalRune.Graphics.SceneGraph
 						}
 
 						indexBuffer.SetData(dataShort);
-					} else
+					}
+					else
 					{
 						var dataInt = new uint[indexData.Count / 4];
 						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataInt, 0, indexData.Count);
@@ -471,16 +474,25 @@ namespace DigitalRune.Graphics.SceneGraph
 
 			var gltfSkin = _gltf.Skins[skinId];
 
+			var boneParents = new List<int>();
 			var boneNames = new List<string>();
 			var boneTransforms = new List<SrtTransform>();
-			foreach (var jointIndex in gltfSkin.Joints)
+			for (var i = 0; i < _nodes.Count; ++i)
 			{
-				var node = _nodes[jointIndex];
+				var node = _nodes[i];
+				if (node is MeshNode)
+				{
+					continue;
+				}
+
+				var parentIndex = node.Parent != null ? _nodes.IndexOf(node.Parent) : -1;
+
+				boneParents.Add(parentIndex);
 				boneNames.Add(node.Name);
 				boneTransforms.Add(new SrtTransform(node.ScaleLocal, node.PoseLocal.Orientation, node.PoseLocal.Position));
 			}
 
-			result = new Skeleton(gltfSkin.Joints, boneNames, boneTransforms);
+			result = new Skeleton(boneParents, boneNames, boneTransforms);
 
 			Debug.WriteLine($"Skin {gltfSkin.Name} has {gltfSkin.Joints.Length} joints.");
 
@@ -500,12 +512,6 @@ namespace DigitalRune.Graphics.SceneGraph
 				if (gltfNode.Mesh != null)
 				{
 					var meshNode = new MeshNode(_meshes[gltfNode.Mesh.Value]);
-
-					if (gltfNode.Skin != null)
-					{
-						//						meshNode.Mesh.Skeleton = LoadSkin(gltfNode.Skin.Value);
-					}
-
 					node = meshNode;
 				}
 				else
@@ -556,6 +562,18 @@ namespace DigitalRune.Graphics.SceneGraph
 					}
 				}
 			}
+
+			// Third run - set skins
+			for (var i = 0; i < _gltf.Nodes.Length; ++i)
+			{
+				var gltfNode = _gltf.Nodes[i];
+				var node = _nodes[i];
+
+				if (gltfNode.Skin != null)
+				{
+					((MeshNode)node).Mesh.Skeleton = LoadSkin(gltfNode.Skin.Value);
+				}
+			}
 		}
 
 		public ModelNode Load(AssetManager manager, IGraphicsService graphicsService, string assetName)
@@ -576,7 +594,6 @@ namespace DigitalRune.Graphics.SceneGraph
 			LoadMeshes();
 			LoadAllNodes();
 
-
 			var scene = _gltf.Scenes[_gltf.Scene.Value];
 			foreach (var node in scene.Nodes)
 			{
@@ -590,59 +607,62 @@ namespace DigitalRune.Graphics.SceneGraph
 
 			if (_gltf.Animations != null)
 			{
-				/*				foreach (var gltfAnimation in _gltf.Animations)
-								{
-									var animation = new ModelAnimation
-									{
-										Id = gltfAnimation.Name
-									};
+				foreach (var gltfAnimation in _gltf.Animations)
+				{
+					var animation = new Dictionary<int, SkeletonKeyFrameAnimationData>();
 
-									var channelsDict = new Dictionary<int, List<PathInfo>>();
-									foreach (var channel in gltfAnimation.Channels)
-									{
-										if (!channelsDict.TryGetValue(channel.Target.Node.Value, out List<PathInfo> targets))
-										{
-											targets = new List<PathInfo>();
-											channelsDict[channel.Target.Node.Value] = targets;
-										}
+					var channelsDict = new Dictionary<int, List<PathInfo>>();
+					foreach (var channel in gltfAnimation.Channels)
+					{
+						if (!channelsDict.TryGetValue(channel.Target.Node.Value, out List<PathInfo> targets))
+						{
+							targets = new List<PathInfo>();
+							channelsDict[channel.Target.Node.Value] = targets;
+						}
 
-										targets.Add(new PathInfo(channel.Sampler, channel.Target.Path));
-									}
+						targets.Add(new PathInfo(channel.Sampler, channel.Target.Path));
+					}
 
-									foreach (var pair in channelsDict)
-									{
-										var nodeAnimation = new NodeAnimation(pair.Key);
+					foreach (var pair in channelsDict)
+					{
+						var nodeAnimation = new SkeletonKeyFrameAnimationData();
 
-										foreach (var pathInfo in pair.Value)
-										{
-											var sampler = gltfAnimation.Samplers[pathInfo.Sampler];
-											var times = GetAccessorAs<float>(sampler.Input);
+						foreach (var pathInfo in pair.Value)
+						{
+							var sampler = gltfAnimation.Samplers[pathInfo.Sampler];
 
-											switch (pathInfo.Path)
-											{
-												case PathEnum.translation:
-													LoadAnimationTransforms(nodeAnimation.Translations, times, sampler);
-													break;
-												case PathEnum.rotation:
-													LoadAnimationTransforms(nodeAnimation.Rotations, times, sampler);
-													break;
-												case PathEnum.scale:
-													LoadAnimationTransforms(nodeAnimation.Scales, times, sampler);
-													break;
-												case PathEnum.weights:
-													break;
-											}
-										}
+							nodeAnimation.Times = GetAccessorAs<float>(sampler.Input);
+							switch (pathInfo.Path)
+							{
+								case PathEnum.translation:
+									nodeAnimation.Translations = GetAccessorAs<Vector3>(sampler.Output);
+									break;
+								case PathEnum.rotation:
+									nodeAnimation.Rotations = GetAccessorAs<Quaternion>(sampler.Output);
+									break;
+								case PathEnum.scale:
+									nodeAnimation.Scales = GetAccessorAs<Vector3>(sampler.Output);
+									break;
+								case PathEnum.weights:
+									break;
+							}
+						}
 
-										animation.BoneAnimations.Add(nodeAnimation);
-									}
+						animation[pair.Key] = nodeAnimation;
+					}
 
-									animation.UpdateStartEnd();
+					var meshNode = _model.GetSubtree().OfType<MeshNode>().First();
+					if (meshNode.Mesh.Animations == null)
+					{
+						meshNode.Mesh.Animations = new Dictionary<string, SkeletonKeyFrameAnimation>();
+					}
 
-									var id = animation.Id ?? "(default)";
-									_model.Animations[id] = animation;
-								}*/
+					var id = gltfAnimation.Name ?? "(default)";
+					meshNode.Mesh.Animations[id] = SkeletonKeyFrameAnimation.FromData(animation);
+				}
 			}
+
+			_model.UpdateAnimations();
 
 			return _model;
 		}

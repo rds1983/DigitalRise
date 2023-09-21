@@ -19,7 +19,7 @@ namespace Samples.Graphics
   public class UnderwaterPostProcessor : EffectPostProcessor
   {
     public UnderwaterPostProcessor(IGraphicsService graphicsService, AssetManager content)
-      : base(graphicsService, content.LoadEffect(graphicsService.GraphicsDevice, "Water/Underwater"))
+      : base(graphicsService, content.LoadEffect(graphicsService.GraphicsDevice, "FNA/Water/Underwater.efb"))
     {
     }
   }

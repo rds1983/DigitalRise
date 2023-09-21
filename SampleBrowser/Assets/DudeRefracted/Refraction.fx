@@ -15,9 +15,9 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Common.fxh"
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Material.fxh"
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Fog.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Material.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Fog.fxh"
 
 
 //--------------------------------------------------------

@@ -143,8 +143,8 @@ namespace Samples
       AlphaBlendSceneRenderer.Renderers.Add(MeshRenderer);
       AlphaBlendSceneRenderer.Renderers.Add(_billboardRenderer);
       AlphaBlendSceneRenderer.Renderers.Add(new WaterRenderer(GraphicsService));
-      AlphaBlendSceneRenderer.Renderers.Add(new FogSphereRenderer(GraphicsService));
-      AlphaBlendSceneRenderer.Renderers.Add(new VolumetricLightRenderer(GraphicsService));
+      AlphaBlendSceneRenderer.Renderers.Add(new FogSphereRenderer(services));
+      AlphaBlendSceneRenderer.Renderers.Add(new VolumetricLightRenderer(services));
 
 #if !XBOX360
       // Update terrain clipmaps. (Only necessary if TerrainNodes are used.)

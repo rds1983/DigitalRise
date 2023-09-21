@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using AssetManagementBase;
 using DigitalRune.Graphics.Effects;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using XNAssets;
 
 namespace DigitalRune.Graphics
@@ -124,7 +125,20 @@ namespace DigitalRune.Graphics
 						binding = new SkinnedEffectBinding(graphicsService, opaqueData);
 						break;
 					default:
-						var effect = Resources.GetDREffect(graphicsService.GraphicsDevice, effectName);
+						Effect effect;
+						if (effectName.StartsWith("DigitalRune/"))
+						{
+							effect = Resources.GetDREffect(graphicsService.GraphicsDevice, effectName);
+						} else
+						{
+							var effectPath = "FNA";
+							if (!string.IsNullOrEmpty(assetManager.CurrentFolder))
+							{
+								effectPath = "../" + effectPath + assetManager.CurrentFolder + "/";
+							}
+							effectPath += Path.ChangeExtension(effectName, "efb");
+							effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, effectPath);
+						}
 						binding = new EffectBinding(graphicsService, effect, opaqueData);
 						break;
 				}

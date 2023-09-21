@@ -1,6 +1,7 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
+using AssetManagementBase;
+using CommonServiceLocator;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
@@ -181,14 +182,14 @@ namespace Samples.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public VolumetricLightRenderer(IGraphicsService graphicsService)
+    public VolumetricLightRenderer(IServiceLocator services)
     {
-      if (graphicsService == null)
-        throw new ArgumentNullException("graphicsService");
+			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetInstance<AssetManager>();
 
-      // Load effect.
-      var effect = graphicsService.GetStockEffect("VolumetricLight");
-      _parameterViewportSize = effect.Parameters["ViewportSize"];
+			// Load effect.
+			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/VolumetricLight.efb");
+			_parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];
       _parameterColor = effect.Parameters["Color"];
@@ -498,4 +499,3 @@ namespace Samples.Graphics
     #endregion
   }
 }
-#endif

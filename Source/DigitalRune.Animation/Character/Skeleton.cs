@@ -222,6 +222,7 @@ namespace DigitalRune.Animation.Character
       {
         var parentIndex = boneParents[index];
         if (parentIndex >= index)
+          
           throw new ArgumentException("Invalid boneParents list. Parent bones must have a lower index than child bones.");
       }
 

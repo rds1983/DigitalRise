@@ -86,7 +86,7 @@ namespace DigitalRune.Graphics.SceneGraph
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    internal void OnAssetLoaded(object sender, EventArgs eventArgs)
+    public void UpdateAnimations()
     {
       // Create MeshNode.SkeletonPoses for all mesh.Skeletons. 
       // (Skeletons can be shared and for each skeleton we create only one SkeletonPose.)

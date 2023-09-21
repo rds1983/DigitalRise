@@ -75,12 +75,12 @@ for a sky dome.",
       // Start the first animation of the dude and let it loop forever.
       // (We keep the animation controller to be able to stop the animation in 
       // Dispose() below.)
-/*      var timeline = new TimelineClip(mesh.Animations.Values.First())
+      var timeline = new TimelineClip(mesh.Animations.Values.First())
       {
         Duration = TimeSpan.MaxValue,
         LoopBehavior = LoopBehavior.Cycle,
       };
-      _animationController = AnimationService.StartAnimation(timeline, (IAnimatableProperty)dudeMeshNode.SkeletonPose);*/
+      _animationController = AnimationService.StartAnimation(timeline, (IAnimatableProperty)dudeMeshNode.SkeletonPose);
     }
 
 

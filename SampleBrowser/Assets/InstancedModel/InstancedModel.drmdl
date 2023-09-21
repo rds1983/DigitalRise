@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="InstancedModel.fbx">
+<Model File="InstancedModel.gltf">
   <Mesh>
     <Submesh Material="InstancedModel.drmat" />
   </Mesh>

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿#if false
+
+using System.Linq;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
@@ -67,3 +69,5 @@ XNA model (imported using the XNA model processor).",
     }
   }
 }
+
+#endif

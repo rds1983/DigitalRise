@@ -1,6 +1,4 @@
-﻿#if false
-
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRune.Animation;
 using DigitalRune.Geometry;
@@ -200,7 +198,7 @@ See source code for more details.",
     private void StartDudeAnimation(ModelNode dude)
     {
       // The dude model contains a single mesh node.
-      var meshNode = (MeshNode)dude.Children[0];
+      var meshNode = (MeshNode)dude.GetSubtree().OfType<MeshNode>().First();
 
       // The imported animation data (skeleton and animations) is stored with the mesh.
       var animations = meshNode.Mesh.Animations;
@@ -321,5 +319,3 @@ See source code for more details.",
     }
   }
 }
-
-#endif

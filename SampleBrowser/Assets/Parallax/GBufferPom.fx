@@ -9,15 +9,15 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Common.fxh"
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Encoding.fxh"
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Material.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Encoding.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Material.fxh"
 #include "Parallax.fxh"
 
 // CREATE_GBUFFER creates automatically bound shader constants required for
 // encoding data in the G-Buffer.
 #define CREATE_GBUFFER 1
-#include "../../../Source/DigitalRune.Graphics.Content/DigitalRune/Deferred.fxh"
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Deferred.fxh"
 
 
 //-----------------------------------------------------------------------------

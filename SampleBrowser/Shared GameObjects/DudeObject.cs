@@ -9,7 +9,8 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
+using DigitalRune.Graphics;
 
 namespace Samples
 {
@@ -38,7 +39,7 @@ namespace Samples
 
 
     public DudeObject(IServiceLocator services) 
-      : this(services, "Dude/dude")
+      : this(services, "Dude/dude.drmdl")
     {
     }
 
@@ -54,8 +55,10 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
-      _modelNode = contentManager.Load<ModelNode>(_assetName).Clone();
+      var contentManager = _services.GetInstance<AssetManager>();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+
+      _modelNode = contentManager.LoadDRModel(graphicsService, _assetName).Clone();
       _modelNode.PoseWorld = _defaultPose;
       SampleHelper.EnablePerPixelLighting(_modelNode);
 
@@ -63,7 +66,7 @@ namespace Samples
       scene.Children.Add(_modelNode);
 
       // Create looping animation.
-      var meshNode = (MeshNode)_modelNode.Children[0];   // The dude model has a single mesh node as its child.
+      var meshNode = _modelNode.GetSubtree().OfType<MeshNode>().First();   // The dude model has a single mesh node as its child.
       var animations = meshNode.Mesh.Animations;
       var animationClip = new AnimationClip<SkeletonPose>(animations.Values.First())
       {

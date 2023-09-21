@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8 && !XBOX
-using System.Linq;
+﻿using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics;
@@ -13,7 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Samples.Physics.Specialized;
 using CurveLoopType = DigitalRune.Mathematics.Interpolation.CurveLoopType;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -121,10 +120,10 @@ This sample also uses the vehicle of one of the vehicle samples.",
       {
         DiffuseColor = new Vector3F(0.5f),
         SpecularColor = new Vector3F(1),
-        DiffuseTexture = ContentManager.Load<Texture2D>("Terrain/Road-Asphalt-Diffuse"),
-        NormalTexture = ContentManager.Load<Texture2D>("Terrain/Road-Asphalt-Normal"),
-        SpecularTexture = ContentManager.Load<Texture2D>("Terrain/Road-Asphalt-Specular"),
-        HeightTexture = ContentManager.Load<Texture2D>("Terrain/Road-Asphalt-Height"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Diffuse.png"),
+        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Normal.png"),
+        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Specular.png"),
+        HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Height.png"),
 
         // The size of the tileable detail textures in world space units.
         TileSize = 5,
@@ -294,4 +293,3 @@ This sample also uses the vehicle of one of the vehicle samples.",
     }
   }
 }
-#endif

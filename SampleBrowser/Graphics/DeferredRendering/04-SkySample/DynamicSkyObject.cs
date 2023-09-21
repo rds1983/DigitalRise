@@ -21,7 +21,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -291,7 +291,7 @@ namespace Samples
       _inputService = _services.GetInstance<IInputService>();
       _graphicsService = _services.GetInstance<IGraphicsService>();
       _scene = _services.GetInstance<IScene>();
-      var content = _services.GetInstance<ContentManager>();
+      var content = _services.GetInstance<AssetManager>();
       var gameObjectService = _services.GetInstance<IGameObjectService>();
 
       // Get camera game object.
@@ -435,7 +435,7 @@ namespace Samples
     }
 
 
-    private void InitializeSky(ContentManager content)
+    private void InitializeSky(AssetManager content)
     {
       // This scene node is used as the parent of all sky nodes created here.
       _skyGroupNode = new SceneNode
@@ -449,7 +449,7 @@ namespace Samples
         _scene.Children.Add(_skyGroupNode);
 
       // Add a skybox with milky way cube map.
-      _milkyWayNode = new SkyboxNode(content.Load<TextureCube>("Sky/MilkyWay"))
+      _milkyWayNode = new SkyboxNode(content.LoadTextureCube(_services.GetInstance<IGraphicsService>().GraphicsDevice, "Sky/MilkyWay.dds"))
       {
         Color = new Vector3F(MilkyWayLightScale),
       };
@@ -469,7 +469,7 @@ namespace Samples
       // Add a node which draws a moon texture including moon phase.
       _moonNode = new SkyObjectNode
       {
-        Texture = new PackedTexture(content.Load<Texture2D>("Sky/Moon")),
+        Texture = new PackedTexture(content.LoadTexture2D(_services.GetInstance<IGraphicsService>().GraphicsDevice, "Sky/Moon.png")),
         LightWrap = 0.1f,
         LightSmoothness = 1,
         AngularDiameter = new Vector2F(MathHelper.ToRadians(5)),
@@ -516,8 +516,9 @@ namespace Samples
       // Load star positions and luminance from file with 9110 predefined stars.
       const int numberOfStars = 9110;
       var stars = new Star[numberOfStars];
-      var storage = _services.GetInstance<IStorage>();
-      using (var reader = new BinaryReader(storage.OpenFile("Sky/Stars.bin")))
+      var storage = _services.GetInstance<AssetManager>();
+
+      using (var reader = new BinaryReader(storage.Open("Sky/Stars.bin")))
       {
         for (int i = 0; i < numberOfStars; i++)
         {

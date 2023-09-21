@@ -1,4 +1,4 @@
-﻿using DigitalRune.Mathematics.Algebra;
+﻿using Microsoft.Xna.Framework;
 
 namespace DigitalRune.Character.Skeleton_Animations
 {
@@ -8,8 +8,8 @@ namespace DigitalRune.Character.Skeleton_Animations
 	public class SkeletonKeyFrameAnimationData
 	{
 		public float[] Times;
-		public Vector3F[] Translations;
-		public QuaternionF[] Rotations;
-		public Vector3F[] Scales;
+		public Vector3[] Translations;
+		public Quaternion[] Rotations;
+		public Vector3[] Scales;
 	}
 }

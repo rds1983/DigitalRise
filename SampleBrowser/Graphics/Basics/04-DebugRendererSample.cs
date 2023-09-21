@@ -22,7 +22,6 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
   {
     private readonly CameraObject _cameraObject;
     private readonly DebugRenderer _debugRenderer;
-    private readonly Model _xnaModel;
     private readonly ModelNode _modelNode;
     private readonly GeometricObject _geometricObject;
 
@@ -49,9 +48,6 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       {
         DefaultColor = Color.White,
       };
-
-      // A normal XNA model.
-      _xnaModel = ContentManager.Load<Model>("Saucer3/saucer");
 
       // A DigitalRune model.
       _modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
@@ -167,10 +163,6 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       // The debug renderer can draw any IGeometricObjects, like SceneNodes, RigidBodies, etc.
       _debugRenderer.DrawObject(_geometricObject, Color.Brown, false, false);
       _debugRenderer.DrawObject(_geometricObject, Color.Yellow, true, true);
-
-      // The debug renderer can also an XNA model (without materials).
-      _debugRenderer.DrawModel(_xnaModel, new Pose(new Vector3F(0, 2, -2), orientation), new Vector3F(1, 2, 1), new Color(128, 255, 64, 100), false, false);
-      _debugRenderer.DrawModel(_xnaModel, new Pose(new Vector3F(0, 2, -2), orientation), new Vector3F(1, 2, 1), Color.LightCyan, true, false);
 
       // Draw a DigitalRune model.
       _debugRenderer.DrawModel(_modelNode, Color.Peru, true, false);

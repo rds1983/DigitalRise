@@ -1,6 +1,4 @@
-﻿#if false
-
-using System.Linq;
+﻿using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Effects;
@@ -154,5 +152,3 @@ For more information about instancing have a look at the following sample:
     }
   }
 }
-
-#endif
