@@ -265,9 +265,13 @@ namespace DigitalRune.Graphics.SceneGraph
 						{
 							element.Usage = VertexElementUsage.Normal;
 						}
-						else if (pair.Key == "TANGENT")
+						else if (pair.Key == "_TANGENT")
 						{
 							element.Usage = VertexElementUsage.Tangent;
+						}
+						else if (pair.Key == "_BINORMAL")
+						{
+							element.Usage = VertexElementUsage.Binormal;
 						}
 						else if (pair.Key.StartsWith("TEXCOORD_"))
 						{

@@ -65,8 +65,8 @@ namespace Samples.Graphics
       GameObjectService.Objects.Add(new ObjectCreatorObject(Services));
       GameObjectService.Objects.Add(new LavaBallsObject(Services));
       GameObjectService.Objects.Add(new FogObject(Services));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier", 0.9f, new Pose(new Vector3F(0, 0, -2))));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder", 0.9f, new Pose(new Vector3F(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 0.9f, new Pose(new Vector3F(0, 0, -2))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3F(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
       GameObjectService.Objects.Add(new StaticSkyObject(Services));
 
       // Add a few palm trees.
@@ -76,7 +76,7 @@ namespace Samples.Graphics
         Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
-        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree", scale, new Pose(position, orientation)));
+        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
       }
     }
 

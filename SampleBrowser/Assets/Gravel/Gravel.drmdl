@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="Gravel.fbx" GenerateTangentFrames="True">
+<Model File="Gravel.glb" GenerateTangentFrames="True">
   <Mesh Name="Gravel">
     <Submesh Material="Gravel.drmat" />
   </Mesh>

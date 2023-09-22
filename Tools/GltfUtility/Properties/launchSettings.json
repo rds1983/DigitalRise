@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GltfUtility": {
+      "commandName": "Project",
+      "commandLineArgs": "-f \"D:\\Projects\\DigitalRune\\SampleBrowser\\Assets\\Dude\\Dude.gltf\"\r\n -t"
+    }
+  }
+}

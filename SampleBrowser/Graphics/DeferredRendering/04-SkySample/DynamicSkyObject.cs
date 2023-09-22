@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -1046,4 +1045,3 @@ namespace Samples
     #endregion
   }
 }
-#endif

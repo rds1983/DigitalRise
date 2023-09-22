@@ -58,8 +58,8 @@ update the new effect parameters used by Cloud.fx.",
       GameObjectService.Objects.Add(new ObjectCreatorObject(Services));
       GameObjectService.Objects.Add(new LavaBallsObject(Services));
       GameObjectService.Objects.Add(new FogObject(Services));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier", 0.9f, new Pose(new Vector3F(0, 0, -2))));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder", 0.9f, new Pose(new Vector3F(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 0.9f, new Pose(new Vector3F(0, 0, -2))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3F(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
 
       // The DynamicSkyObject creates the dynamic sky and lights but no clouds.
       var dynamicSkyObject = new DynamicSkyObject(Services, false, false, false);
@@ -72,7 +72,7 @@ update the new effect parameters used by Cloud.fx.",
         Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
-        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree", scale, new Pose(position, orientation)));
+        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
       }
 
       // The model CloudQuad.fbx consists of a textured quad with a custom effect 

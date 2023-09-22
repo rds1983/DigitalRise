@@ -206,7 +206,7 @@ Some things you can test using the available Options:
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         Pose pose = _globalRotation * new Pose(position, orientation);
-        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree", scale, pose));
+        GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, pose));
       }
 
       // Add a vertical concrete wall.

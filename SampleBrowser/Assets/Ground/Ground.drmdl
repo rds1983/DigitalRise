@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="Ground.gltf" GenerateTangentFrames="True">
+<Model File="Ground.glb" GenerateTangentFrames="True">
   <Mesh>
     <Submesh Material="Checker.drmat" />
   </Mesh>

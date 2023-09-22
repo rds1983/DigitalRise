@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="RustyCube.gltf" GenerateTangentFrames="True">
+<Model File="RustyCube.glb" GenerateTangentFrames="True">
   <Mesh Name="Cube">
     <Submesh Material="RustyMetal01.drmat" />
   </Mesh>

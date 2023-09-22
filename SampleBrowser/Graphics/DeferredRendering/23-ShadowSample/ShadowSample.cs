@@ -209,7 +209,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
         Vector3F position = new Vector3F(random.NextFloat(-80, 80), 0, random.NextFloat(-100, 100));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
-        gameObjectService.Objects.Add(new StaticObject(services, "PalmTree/palm_tree", scale, new Pose(position, orientation)));
+        gameObjectService.Objects.Add(new StaticObject(services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
       }
 
       // Rocks

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="Cylinder.fbx" 
+<Model File="Cylinder.glb" 
        GenerateTangentFrames="True"
        Scale="0.01">
   <Mesh>

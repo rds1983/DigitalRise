@@ -51,8 +51,8 @@ namespace Samples.Graphics
       Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics Simulation.
-      Simulation.ForceEffects.Add(new Gravity());
-      Simulation.ForceEffects.Add(new Damping());
+/*      Simulation.ForceEffects.Add(new Gravity());
+      Simulation.ForceEffects.Add(new Damping());*/
 
       // Add a custom game object which controls the camera.
       var cameraGameObject = new CameraObject(Services);
@@ -131,7 +131,7 @@ namespace Samples.Graphics
         // ExtraHeight must be set to a value greater than the max. wave height. 
         ExtraHeight = 2,
       };
-      _graphicsScreen.Scene.Children.Add(_waterNode);
+      // _graphicsScreen.Scene.Children.Add(_waterNode);
 
       // OceanWaves can be set to displace water surface using a displacement map.
       // The displacement map is computed by the WaterWaveRenderer (see DeferredGraphicsScreen)
