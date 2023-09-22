@@ -12,7 +12,7 @@ using DigitalRune.Particles.Effectors;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -74,8 +74,8 @@ namespace Samples
       };
 
       // Add fire particles.
-      var contentManager = _services.GetInstance<ContentManager>();
-      var particleSystem = CreateFire(contentManager);
+      var assetManager = _services.GetInstance<AssetManager>();
+      var particleSystem = CreateFire();
       particleSystemService.ParticleSystems.Add(particleSystem);
       _fireParticles = new ParticleSystemNode(particleSystem)
       {
@@ -86,7 +86,7 @@ namespace Samples
       _campfire.Children.Add(_fireParticles);
 
       // Add smoke particles.
-      particleSystem = CreateSmoke(contentManager);
+      particleSystem = CreateSmoke();
       particleSystemService.ParticleSystems.Add(particleSystem);
       _smokeParticles = new ParticleSystemNode(particleSystem)
       {
@@ -147,8 +147,11 @@ namespace Samples
     // to learn more about DigitalRune Particles. Also, make sure to read the class 
     // documentation of the ParticleSystemNode. The documentation describes all particle 
     // parameters that are supported by DigitalRune Graphics!
-    private static ParticleSystem CreateFire(ContentManager content)
+    private ParticleSystem CreateFire()
     {
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetInstance<AssetManager>();
+
       ParticleSystem ps = new ParticleSystem
       {
         Name = "Campfire",
@@ -249,7 +252,7 @@ namespace Samples
       // PackedTexture. The texture "FireParticles.tga" is a tile set, which can be 
       // described using a PackedTexture.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
-        new PackedTexture("FireParticles", content.Load<Texture2D>("Campfire/FireParticles"), Vector2F.Zero, Vector2F.One, 4, 1);
+        new PackedTexture("FireParticles", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.tga"), Vector2F.Zero, Vector2F.One, 4, 1);
 
       // Each particle chooses a random image of the tile set when it is created.
       // The "AnimationTime" parameter selects an image:
@@ -276,9 +279,12 @@ namespace Samples
     }
 
 
-    private static ParticleSystem CreateSmoke(ContentManager content)
+    private ParticleSystem CreateSmoke()
     {
-      ParticleSystem ps = new ParticleSystem
+			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetInstance<AssetManager>();
+
+			ParticleSystem ps = new ParticleSystem
       {
         Name = "CampfireSmoke",
         MaxNumberOfParticles = 24,
@@ -422,7 +428,7 @@ namespace Samples
       // PackedTexture. The texture "Smoke2.png" contains a tile set, which can be 
       // described using the PackedTexture class.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
-        new PackedTexture("Smoke", content.Load<Texture2D>("Campfire/Smoke2"), Vector2F.Zero, Vector2F.One, 2, 1);
+        new PackedTexture("Smoke", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/Smoke2.png"), Vector2F.Zero, Vector2F.One, 2, 1);
 
       // Each particle chooses a random image of the tile set when it is created.
       // The "AnimationTime" parameter selects an image:

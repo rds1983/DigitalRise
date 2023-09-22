@@ -1,4 +1,5 @@
 ﻿#if !WP7
+using AssetManagementBase;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
@@ -21,10 +22,10 @@ namespace Samples.Graphics
     public float Strength { get; set; }
 
 
-    public NegativeFilter(IGraphicsService graphicsService, ContentManager content)
+    public NegativeFilter(IGraphicsService graphicsService, AssetManager assetManager)
       : base(graphicsService)
     {
-      _effect = content.Load<Effect>("PostProcessing/NegativeFilter");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/PostProcessing/NegativeFilter.efb");
       _strengthParameter = _effect.Parameters["Strength"];
       _textureParameter = _effect.Parameters["SourceTexture"];
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];

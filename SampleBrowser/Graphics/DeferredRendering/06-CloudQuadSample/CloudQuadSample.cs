@@ -118,7 +118,7 @@ update the new effect parameters used by Cloud.fx.",
           RandomHelper.Random.NextFloat(-500, 500));
 
         var orientation = Matrix33F.CreateRotationY(RandomHelper.Random.NextFloat(0, ConstantsF.TwoPi));
-        GameObjectService.Objects.Add(new StaticObject(Services, "CloudQuad/CloudQuad", scale, new Pose(position, orientation), false, false));
+        GameObjectService.Objects.Add(new StaticObject(Services, "CloudQuad/CloudQuad.drmdl", scale, new Pose(position, orientation), false, false));
       }
     }
 

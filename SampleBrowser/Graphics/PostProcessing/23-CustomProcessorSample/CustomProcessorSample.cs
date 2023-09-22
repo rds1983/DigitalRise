@@ -20,7 +20,7 @@ need to implement a custom PostProcessor class.",
     public CustomProcessorSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      _negativeFilter = new NegativeFilter(GraphicsService, ContentManager);
+      _negativeFilter = new NegativeFilter(GraphicsService, AssetManager);
       GraphicsScreen.PostProcessors.Add(_negativeFilter);
     }
 

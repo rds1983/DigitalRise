@@ -19,7 +19,14 @@ namespace AssetManagementBase
 		{
 			var xml = manager.ReadAsString(assetName);
 
-			return Material.FromXml(manager, (IGraphicsService)tag, xml);
+			var result = Material.FromXml(manager, (IGraphicsService)tag, xml);
+
+			if (string.IsNullOrEmpty(result.Name))
+			{
+				result.Name = Path.GetFileNameWithoutExtension(assetName);
+			}
+
+			return result;
 		};
 
 		private readonly static AssetLoader<ModelNode> _drModelLoader = (manager, assetName, settings, tag) =>

@@ -1,4 +1,4 @@
-﻿float4x4 WorldView : WORLDVIEW;
+float4x4 WorldView : WORLDVIEW;
 float4x4 Projection : PROJECTION;
 float CameraFar : CAMERAFAR;
 float2 ViewportSize : VIEWPORTSIZE;

@@ -1,11 +1,10 @@
-﻿#if !WP7 && !WP8
-using DigitalRune.Game.Input;
+﻿using DigitalRune.Game.Input;
+using DigitalRune.Graphics;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -25,7 +24,7 @@ bindings, so you do not have to derive a new PostProcessor class.",
       : base(game)
     {
       // Load effect.
-      var effect = ContentManager.Load<Effect>("PostProcessing/NegativeFilter");
+      var effect = AssetManager.LoadEffect(Services.GetInstance<IGraphicsService>().GraphicsDevice, "FNA/PostProcessing/NegativeFilter.efb");
 
       // Create an EffectPostProcessor that uses the effect and controls the effect parameters
       // using automatically generated effect parameter bindings.
@@ -66,4 +65,3 @@ bindings, so you do not have to derive a new PostProcessor class.",
     }
   }
 }
-#endif

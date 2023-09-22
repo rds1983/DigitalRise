@@ -1,11 +1,10 @@
-﻿#if !WP7 && !WP8
-using DigitalRune.Game.Input;
+﻿using DigitalRune.Game.Input;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -22,7 +21,7 @@ namespace Samples.Graphics
     public VignetteSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var effect = ContentManager.Load<Effect>("PostProcessing/Vignette");
+      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/PostProcessing/Vignette.efb");
 
       var postProcessor = new EffectPostProcessor(GraphicsService, effect);
       GraphicsScreen.PostProcessors.Add(postProcessor);
@@ -73,4 +72,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

@@ -71,7 +71,7 @@ namespace Samples
 
           // Add a projector light to the model that projects the TV screen. The
           // TV screen is the emissive part of the TV mesh.
-          var meshNode = ModelNode.Children.OfType<MeshNode>().First();
+          var meshNode = ModelNode.GetSubtree().OfType<MeshNode>().First();
           var material = meshNode.Mesh.Materials.First(m => m.Name == "TestCard");
 
           // Get texture from material.
@@ -110,7 +110,7 @@ namespace Samples
           // This is the first time the "MagicSphere" is loaded.
 
           // Change the size of the sphere.
-          var meshNode = ModelNode.Children.OfType<MeshNode>().First();
+          var meshNode = ModelNode.GetSubtree().OfType<MeshNode>().First();
           meshNode.ScaleLocal = new Vector3F(0.5f);
 
           // Disable shadows. (The sphere acts as a light source.)
@@ -124,7 +124,7 @@ namespace Samples
             SpecularIntensity = 4,
             Range = 3,
             Attenuation = 1,
-            Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "MagicSphere/ColorCube"),
+            Texture = assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "MagicSphere/ColorCube.dds"),
           };
           var pointLightNode = new LightNode(pointLight)
           {
