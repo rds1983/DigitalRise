@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
@@ -35,9 +34,7 @@ namespace Samples
     private readonly SceneRenderer _opaqueMeshSceneRenderer;
     private readonly DecalRenderer _decalRenderer;
     private readonly BillboardRenderer _billboardRenderer;
-#if !XBOX360
     private readonly TerrainClipmapRenderer _terrainClipmapRenderer;
-#endif
     private readonly CloudMapRenderer _cloudMapRenderer;
     private readonly PlanarReflectionRenderer _planarReflectionRenderer;
     private readonly WaterWavesRenderer _waterWavesRenderer;
@@ -59,9 +56,7 @@ namespace Samples
     public bool IsDisposed { get; private set; }
 
     public SceneCaptureRenderer SceneCaptureRenderer { get; private set; }
-#if !XBOX360
     public TerrainRenderer TerrainRenderer { get; private set; }
-#endif
     public MeshRenderer MeshRenderer { get; private set; }
     public ShadowMapRenderer ShadowMapRenderer { get; private set; }
     public ShadowMaskRenderer ShadowMaskRenderer { get; private set; }
@@ -114,17 +109,13 @@ namespace Samples
       SpriteBatch = GraphicsService.GetSpriteBatch();
 
       // Let's create the necessary scene node renderers:
-#if !XBOX360
       TerrainRenderer = new TerrainRenderer(GraphicsService);
-#endif
       MeshRenderer = new MeshRenderer();
 
       // The _opaqueMeshSceneRenderer combines all renderers for opaque
       // (= not alpha blended) meshes.
       _opaqueMeshSceneRenderer = new SceneRenderer();
-#if !XBOX360
       _opaqueMeshSceneRenderer.Renderers.Add(TerrainRenderer);
-#endif
       _opaqueMeshSceneRenderer.Renderers.Add(MeshRenderer);
 
       _decalRenderer = new DecalRenderer(GraphicsService);
@@ -146,10 +137,8 @@ namespace Samples
       AlphaBlendSceneRenderer.Renderers.Add(new FogSphereRenderer(services));
       AlphaBlendSceneRenderer.Renderers.Add(new VolumetricLightRenderer(services));
 
-#if !XBOX360
       // Update terrain clipmaps. (Only necessary if TerrainNodes are used.)
       _terrainClipmapRenderer = new TerrainClipmapRenderer(GraphicsService);
-#endif
 
       // Renderer for cloud maps. (Only necessary if LayeredCloudMaps are used.)
       _cloudMapRenderer = new CloudMapRenderer(GraphicsService);
@@ -287,15 +276,11 @@ namespace Samples
         if (disposing)
         {
           // Dispose managed resources.
-#if !XBOX360
           TerrainRenderer.Dispose();
-#endif
           MeshRenderer.Dispose();
           _decalRenderer.Dispose();
           AlphaBlendSceneRenderer.Dispose();
-#if !XBOX360
           _terrainClipmapRenderer.Dispose();
-#endif
           _cloudMapRenderer.Dispose();
           _waterWavesRenderer.Dispose();
           SceneCaptureRenderer.Dispose();
@@ -357,10 +342,8 @@ namespace Samples
       // by the camera frustum:
       var preprocessingQuery = Scene.Query<PreprocessingSceneQuery>(context.CameraNode, context);
 
-#if !XBOX360
       // TODO:
       _terrainClipmapRenderer.Render(preprocessingQuery.TerrainNodes, context);
-#endif
 
       // Generate cloud maps.
       // Only necessary if LayeredCloudMaps are used. If the cloud maps are static 
@@ -636,4 +619,3 @@ namespace Samples
     #endregion
   }
 }
-#endif

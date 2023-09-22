@@ -450,7 +450,7 @@ namespace DigitalRune.Game.UI.Controls
 #if ANDROID || IOS
       _isTouchDevice = true;
 #else
-      _isTouchDevice = true;
+      _isTouchDevice = false;
 #endif
 
       TouchPanel.EnabledGestures |= GestureType.Flick;

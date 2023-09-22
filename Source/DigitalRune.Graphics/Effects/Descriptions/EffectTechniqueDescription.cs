@@ -158,34 +158,32 @@ namespace DigitalRune.Graphics.Effects
       Technique = technique;
       Index = GetIndex(effect, technique);
 
-      // Check if there is an associated technique for hardware instancing.
-      var annotation = technique.Annotations["InstancingTechnique"];
-      if (annotation != null && annotation.ParameterType == EffectParameterType.String)
-      {
-        var techniqueName = string.Empty;
+			// Workaround: MonoGame does not support effect semantics and annotations.
+			if (technique.Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) == -1)
+			{
+				if (effect.Techniques.Count == 2
+						&& effect.Techniques[1].Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) >= 0)
+				{
+					InstancingTechnique = effect.Techniques[1];
+				}
 
-        try
-        {
-          // FNA doesnt have that method implemented
-          // Hence we have to absorb the exception
-          techniqueName = annotation.GetValueString();
-        }
-        catch(NotImplementedException)
-        {
-        }
+				if (InstancingTechnique == null)
+				{
+					foreach (var otherTechnique in effect.Techniques)
+					{
+						if (technique == otherTechnique)
+							continue;
 
-        if (!string.IsNullOrEmpty(techniqueName))
-        {
-          InstancingTechnique = effect.Techniques[techniqueName];
-
-          if (InstancingTechnique == null)
-          {
-            string message = string.Format(CultureInfo.InvariantCulture, "Could not find instancing technique \"{0}\" in the effect \"{1}\".", techniqueName, effect.Name);
-            throw new GraphicsException(message);
-          }
-        }
-      }
-    }
+						if (otherTechnique.Name.IndexOf(technique.Name, StringComparison.OrdinalIgnoreCase) >= 0
+								&& otherTechnique.Name.IndexOf("INSTANCING", StringComparison.OrdinalIgnoreCase) >= 0)
+						{
+							InstancingTechnique = otherTechnique;
+							break;
+						}
+					}
+				}
+			}
+		}
     #endregion
 
 

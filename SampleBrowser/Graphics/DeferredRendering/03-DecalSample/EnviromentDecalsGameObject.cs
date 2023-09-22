@@ -9,7 +9,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -43,15 +43,16 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<ContentManager>();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetInstance<AssetManager>();
       var scene = _services.GetInstance<IScene>();
       _debugRenderer = _services.GetInstance<DebugRenderer>();
 
       // Load materials (*.drmat files) which define the used shaders and material 
       // properties (e.g. textures, colors, etc.).
-      var bloodMaterial = contentManager.Load<Material>("Decals/Decal");        // Original: "Decals/Blood"
-      var crackMaterial = contentManager.Load<Material>("Decals/Decal");        // Original: "Decals/Crack"
-      var bulletHoleMaterial = contentManager.Load<Material>("Decals/Decal");   // Original: "Decals/BulletHole"
+      var bloodMaterial = assetManager.LoadDRMaterial(graphicsService, "Decals/Decal.drmat");        // Original: "Decals/Blood"
+      var crackMaterial = assetManager.LoadDRMaterial(graphicsService, "Decals/Decal.drmat");        // Original: "Decals/Crack"
+      var bulletHoleMaterial = assetManager.LoadDRMaterial(graphicsService, "Decals/Decal.drmat");   // Original: "Decals/BulletHole"
 
       // Decal materials (like materials of meshes) usually have several render passes
       // (such as "GBuffer", "Material"). Decal materials without a "Material" pass can

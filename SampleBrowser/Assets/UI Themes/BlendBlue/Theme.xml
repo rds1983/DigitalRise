@@ -17,8 +17,8 @@
 
 
   <Fonts>
-    <Font Name="Default" File="/Fonts/DroidSans.ttf" Size="32" IsDefault="True"/>
-    <Font Name="Console" File="/Fonts/DroidSans.ttf" Size="32"/>
+    <Font Name="Default" File="/Fonts/DroidSans.ttf" Size="14" IsDefault="True"/>
+    <Font Name="Console" File="/Fonts/DroidSans.ttf" Size="14"/>
   </Fonts>
 
 
