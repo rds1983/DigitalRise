@@ -3,28 +3,54 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
 namespace DigitalRune.Graphics.PostProcessing
 {
-  /// <summary>
-  /// Changes the <see cref="ColorEncoding"/> of a texture.
-  /// </summary>
-  public class ColorEncoder : PostProcessor
+	/// <summary>
+	/// Changes the <see cref="ColorEncoding"/> of a texture.
+	/// </summary>
+	public class ColorEncoder : PostProcessor
   {
+		private enum ColorEncodingType
+		{
+			RGB,
+			SRGB,
+			RGBM,
+			RGBE,
+			LOGLUV
+		}
+
+		private class EffectData
+    {
+      public readonly Effect Effect;
+			public readonly EffectParameter ViewportSizeParameter;
+			public readonly EffectParameter SourceTextureParameter;
+			public readonly EffectParameter SourceParamParameter;
+			public readonly EffectParameter TargetParamParameter;
+
+      public EffectData(Effect effect, 
+				EffectParameter viewportSizeParameter, EffectParameter sourceTextureParameter,
+				EffectParameter sourceParamParameter, EffectParameter targetParamParameter)
+      {
+				Effect = effect;
+				ViewportSizeParameter = viewportSizeParameter;
+				SourceTextureParameter = sourceTextureParameter;
+				SourceParamParameter = sourceParamParameter;
+				TargetParamParameter = targetParamParameter;
+			}
+		}
+
     //--------------------------------------------------------------
     #region Fields
-    //--------------------------------------------------------------
+    private static readonly EffectData[] _effects = new EffectData[25];
+		private readonly EffectData _effect;
 
-    private readonly Effect _effect;
-    private readonly EffectParameter _viewportSizeParameter;
-    private readonly EffectParameter _sourceTextureParameter;
-    private readonly EffectParameter _sourceTypeParameter;
-		private readonly EffectParameter _sourceParamParameter;
-		private readonly EffectParameter _targetTypeParameter;
-		private readonly EffectParameter _targetParamParameter;
+		//--------------------------------------------------------------
 		#endregion
 
 
@@ -37,111 +63,99 @@ namespace DigitalRune.Graphics.PostProcessing
 		/// </summary>
 		/// <value>
 		/// The <see cref="ColorEncoding"/> of the source texture. The default encoding is 
-		/// <see cref="ColorEncoding.Rgb"/>.
+		/// <see cref="ColorEncodingType.RGB"/>.
 		/// </value>
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="value"/> is <see langword="null"/>.
 		/// </exception>
-		public ColorEncoding SourceEncoding
-    {
-      get { return _sourceEncoding; }
-      set
-      {
-        if (value == null)
-          throw new ArgumentNullException("value");
+		public readonly ColorEncoding SourceEncoding;
 
-        VerifyEncoding(value);
-        _sourceEncoding = value;
-      }
-    }
-
-    private ColorEncoding _sourceEncoding;
-
-
-    /// <summary>
-    /// Gets or sets the <see cref="ColorEncoding"/> of the render target.
-    /// </summary>
-    /// <value>
-    /// The <see cref="ColorEncoding"/> of the render target. The default encoding is 
-    /// <see cref="ColorEncoding.Rgb"/>.
-    /// </value>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="value"/> is <see langword="null"/>.
-    /// </exception>
-    public ColorEncoding TargetEncoding
-    {
-      get { return _targetEncoding; }
-      set
-      {
-        if (value == null)
-          throw new ArgumentNullException("value");
-
-        VerifyEncoding(value);
-        _targetEncoding = value;
-      }
-    }
-
-    private ColorEncoding _targetEncoding;
+		/// <summary>
+		/// Gets or sets the <see cref="ColorEncoding"/> of the render target.
+		/// </summary>
+		/// <value>
+		/// The <see cref="ColorEncoding"/> of the render target. The default encoding is 
+		/// <see cref="ColorEncodingType.RGB"/>.
+		/// </value>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="value"/> is <see langword="null"/>.
+		/// </exception>
+		public readonly ColorEncoding TargetEncoding;
+		
     #endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ColorEncoder"/> class.
-    /// </summary>
-    /// <param name="graphicsService">The graphics service.</param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="graphicsService"/> is <see langword="null"/>.
-    /// </exception>
-    public ColorEncoder(IGraphicsService graphicsService)
-      : base(graphicsService)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ColorEncoder"/> class.
+		/// </summary>
+		/// <param name="graphicsService">The graphics service.</param>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="graphicsService"/> is <see langword="null"/>.
+		/// </exception>
+		public ColorEncoder(IGraphicsService graphicsService, ColorEncoding source, ColorEncoding target):
+			base(graphicsService)
     {
-      _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/ColorEncoder");
-      _viewportSizeParameter = _effect.Parameters["ViewportSize"];
-      _sourceTextureParameter = _effect.Parameters["SourceTexture"];
-      _sourceTypeParameter = _effect.Parameters["SourceEncodingType"];
-			_sourceParamParameter = _effect.Parameters["SourceEncodingParam"];
-			_targetTypeParameter = _effect.Parameters["TargetEncodingType"];
-			_targetParamParameter = _effect.Parameters["TargetEncodingParam"];
+			SourceEncoding = source ?? throw new ArgumentNullException(nameof(source));
+			TargetEncoding = target ?? throw new ArgumentNullException(nameof(target));
+			_effect = GetEffect(GraphicsService, ToType(SourceEncoding), ToType(TargetEncoding));
+		}
 
-			_sourceEncoding = ColorEncoding.Rgb;
-      _targetEncoding = ColorEncoding.Rgb;
-    }
-    #endregion
+		#endregion
 
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		private static ColorEncodingType ToType(ColorEncoding enc)
+		{
+			switch(enc)
+			{
+				case RgbEncoding _:
+					return ColorEncodingType.RGB;
+				case SRgbEncoding _:
+					return ColorEncodingType.SRGB;
+				case RgbmEncoding _:
+					return ColorEncodingType.RGBM;
+				case RgbeEncoding _:
+					return ColorEncodingType.RGBE;
+				case LogLuvEncoding _:
+					return ColorEncodingType.LOGLUV;
+			}
 
-    /// <summary>
-    /// Throws exception if the encoding is not supported.
-    /// </summary>
-    /// <param name="encoding">The encoding.</param>
-    /// <exception cref="NotSupportedException">
-    /// The given color encoding is not supported by the <see cref="ColorEncoder"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    private static void VerifyEncoding(ColorEncoding encoding)
+			throw new NotSupportedException("The given color encoding is not supported by the ColorEncoder.");
+		}
+
+		private static EffectData GetEffect(IGraphicsService service, ColorEncodingType source, ColorEncodingType target)
     {
-      if (encoding is RgbEncoding
-          || encoding is SRgbEncoding
-          || encoding is RgbmEncoding
-          || encoding is RgbeEncoding
-          || encoding is LogLuvEncoding)
-      {
-        return;
-      }
+			var key = ((int)source) * 5 + (int)target;
 
-      throw new NotSupportedException("The given color encoding is not supported by the ColorEncoder.");
-    }
+			if (_effects[key] != null)
+			{
+				return _effects[key];
+			}
 
+			var defs = new Dictionary<string, string>
+				{
+					{ "SOURCE_" + source.ToString(), "1" },
+					{ "TARGET_" + target.ToString(), "1" }
+				};
 
-    /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+			var effect = service.GetStockEffect("PostProcessing/ColorEncoder", defs);
+
+			var result = new EffectData(effect,
+						effect.Parameters["ViewportSize"], effect.Parameters["SourceTexture"],
+						effect.Parameters["SourceEncodingParam"], effect.Parameters["TargetEncodingParam"]);
+
+			_effects[key] = result;
+			return result;
+		}
+
+		/// <inheritdoc/>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
     protected override void OnProcess(RenderContext context)
     {
       var graphicsDevice = GraphicsService.GraphicsDevice;
@@ -154,50 +168,28 @@ namespace DigitalRune.Graphics.PostProcessing
       graphicsDevice.SetRenderTarget(context.RenderTarget);
       graphicsDevice.Viewport = context.Viewport;
 
-      _viewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
-      _sourceTextureParameter.SetValue(context.SourceTexture);
+      _effect.ViewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
+      _effect.SourceTextureParameter.SetValue(context.SourceTexture);
 
-      SetEncoding(_sourceTypeParameter, _sourceParamParameter, SourceEncoding);
-      SetEncoding(_targetTypeParameter, _targetParamParameter, TargetEncoding);
+			var asRgbm = SourceEncoding as RgbmEncoding;
+			if (asRgbm != null)
+			{
+				float max = GraphicsHelper.ToGamma(asRgbm.Max);
+				_effect.SourceParamParameter.SetValue(max);
+			}
 
-      _effect.CurrentTechnique.Passes[0].Apply();
+			asRgbm = TargetEncoding as RgbmEncoding;
+			if (asRgbm != null)
+			{
+				float max = GraphicsHelper.ToGamma(asRgbm.Max);
+				_effect.TargetParamParameter.SetValue(max);
+			}
+
+
+			_effect.Effect.CurrentTechnique.Passes[0].Apply();
       graphicsDevice.DrawFullScreenQuad();
 
-      _sourceTextureParameter.SetValue((Texture2D)null);
-    }
-
-
-    private static void SetEncoding(EffectParameter parameterType, EffectParameter parameterParam, ColorEncoding encoding)
-    {
-      // Constants need to be kept in sync with ColorEncoder.fx.
-      const int rgbEncoding = 0;
-      const int sRgbEncoding = 1;
-      const int rgbmEncoding = 2;
-      const int rgbeEncoding = 3;
-      const int logLuvEncoding = 4;
-
-      if (encoding is RgbEncoding)
-      {
-        parameterType.SetValue(rgbEncoding);
-      }
-      else if (encoding is SRgbEncoding)
-      {
-        parameterType.SetValue(sRgbEncoding);
-      }
-      else if (encoding is RgbmEncoding)
-      {
-        float max = GraphicsHelper.ToGamma(((RgbmEncoding)encoding).Max);
-        parameterType.SetValue(rgbmEncoding);
-        parameterParam.SetValue(max);
-      }
-      else if (encoding is RgbeEncoding)
-      {
-        parameterType.SetValue(rgbeEncoding);
-      }
-      else if (encoding is LogLuvEncoding)
-      {
-        parameterType.SetValue(logLuvEncoding);
-      }
+			_effect.SourceTextureParameter.SetValue((Texture2D)null);
     }
   }
   #endregion

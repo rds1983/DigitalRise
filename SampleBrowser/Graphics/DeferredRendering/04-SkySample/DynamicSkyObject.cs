@@ -942,11 +942,7 @@ namespace Samples
         _skyRenderer = new SkyRenderer(_graphicsService);
 
         // We use a ColorEncoder to encode a HDR image in a normal Color texture.
-        _colorEncoder = new ColorEncoder(_graphicsService)
-        {
-          SourceEncoding = ColorEncoding.Rgb,
-          TargetEncoding = SkyboxNode.Encoding,
-        };
+        _colorEncoder = new ColorEncoder(_graphicsService, ColorEncoding.Rgb, SkyboxNode.Encoding);
 
         // The SceneCaptureRenderer handles SceneCaptureNodes. We need to specify
         // a render callback which is called in SceneCaptureNode.Render().

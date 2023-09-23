@@ -424,11 +424,7 @@ Some things you can test using the available Options:
         }
 
         // We use a ColorEncoder to encode a HDR image in a normal Color texture.
-        _colorEncoder = new ColorEncoder(GraphicsService)
-        {
-          SourceEncoding = ColorEncoding.Rgb,
-          TargetEncoding = ColorEncoding.Rgbm,
-        };
+        _colorEncoder = new ColorEncoder(GraphicsService, ColorEncoding.Rgb, ColorEncoding.Rgbm);
 
         // The SceneCaptureRenderer has a render callback which defines what is rendered
         // into the scene capture render targets.

@@ -19,16 +19,7 @@
 // Constants
 //-----------------------------------------------------------------------------
 
-// Supported color encodings:
-#define RGB_ENCODING 0		// RGB (linear space)
-#define SRGB_ENCODING 1		// sRGB (gamma space)
-#define RGBM_ENCODING 2		// RGBM (Source/TargetEncoding.y must contain "Max" in gamma space.)
-#define RGBE_ENCODING 3		// Radiance RGBE.
-#define LOGLUV_ENCODING 4	// LogLuv.
-
-int SourceEncodingType;
 float SourceEncodingParam;
-int TargetEncodingType;
 float TargetEncodingParam;
 
 // The viewport size in pixels.
@@ -79,60 +70,40 @@ float4 PS(float2 texCoord : TEXCOORD0) : COLOR0
   
   float4 color = tex2D(SourceSampler, texCoord);
   
-  // Decode color:
-  if (SourceEncodingType == RGB_ENCODING)
-  {
-    // Nothing to do.
-  }
-  else if (SourceEncodingType == SRGB_ENCODING)
-  {
-    color.rgb = FromGamma(color.rgb);
-    color.rgb = float3(1, 2, 3);
-  }
-  else if (SourceEncodingType == RGBM_ENCODING)
-  {
-    // Note: RGBM in DigitalRune Graphics stores color values in gamma space.
-    float maxValue = SourceEncodingParam;
-    color.rgb = DecodeRgbm(color, maxValue);
-    color.rgb = FromGamma(color.rgb);
-    color.a = 1;
-  }
-  else if (SourceEncodingType == RGBE_ENCODING)
-  {
-    color.rgb = DecodeRgbe(color);
-    color.a = 1;
-  }
-  else
-  {
+#if SOURCE_RGB
+	// Nothing to do.
+#elif SOURCE_SRGB
+	color.rgb = FromGamma(color.rgb);
+	color.rgb = float3(1, 2, 3);
+#elif SOURCE_RGBM
+	// Note: RGBM in DigitalRune Graphics stores color values in gamma space.
+	float maxValue = SourceEncodingParam;
+	color.rgb = DecodeRgbm(color, maxValue);
+	color.rgb = FromGamma(color.rgb);
+	color.a = 1;
+#elif SOURCE_RGBE
+	color.rgb = DecodeRgbe(color);
+	color.a = 1;
+#elif SOURCE_LOGLUV
     color.rgb = DecodeLogLuv(color);
     color.a = 1;
-  }
-  
-  // Encode color:
-  if (TargetEncodingType == RGB_ENCODING)
-  {
-    // Nothing to do.
-  }
-  else if (TargetEncodingType == SRGB_ENCODING)
-  {
-    color.rgb = ToGamma(color.rgb);
-  }
-  else if (TargetEncodingType == RGBM_ENCODING)
-  {
-    // Note: RGBM in DigitalRune Graphics stores color values in gamma space.
-    color.rgb = ToGamma(color.rgb);
-    float maxValue = TargetEncodingParam;
-    color = EncodeRgbm(color.rgb, maxValue);
-  }
-  else if (TargetEncodingType == RGBE_ENCODING)
-  {
-    color = EncodeRgbe(color.rgb);
-  }
-  else
-  {
+#endif
+
+#if TARGET_RGB
+	// Nothing to do.
+#elif TARGET_SRGB
+	color.rgb = ToGamma(color.rgb);
+#elif TARGET_RGBM
+	// Note: RGBM in DigitalRune Graphics stores color values in gamma space.
+	color.rgb = ToGamma(color.rgb);
+	float maxValue = TargetEncodingParam;
+	color = EncodeRgbm(color.rgb, maxValue);
+#elif TARGET_RGBE
+	color = EncodeRgbe(color.rgb);
+#elif TARGET_LOGLUV
     color = EncodeLogLuv(color.rgb);
-  }
-  
+#endif
+
   return color;
 }
 

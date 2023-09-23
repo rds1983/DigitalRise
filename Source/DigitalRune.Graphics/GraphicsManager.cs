@@ -790,9 +790,9 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-		public Effect GetStockEffect(string path)
+		public Effect GetStockEffect(string path, Dictionary<string, string> defs = null)
 		{
-      return Resources.GetDREffect(GraphicsDevice, path);
+      return Resources.GetDREffect(GraphicsDevice, path, defs);
 		}
 
 

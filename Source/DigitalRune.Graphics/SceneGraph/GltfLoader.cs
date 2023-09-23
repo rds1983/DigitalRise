@@ -382,37 +382,7 @@ namespace DigitalRune.Graphics.SceneGraph
 						indexAccessor.ComponentType == Accessor.ComponentTypeEnum.UNSIGNED_SHORT) ?
 						IndexElementSize.SixteenBits : IndexElementSize.ThirtyTwoBits;
 					var indexBuffer = new IndexBuffer(_graphicsService.GraphicsDevice, elementSize, indexAccessor.Count, BufferUsage.None);
-
-					if (elementSize == IndexElementSize.SixteenBits)
-					{
-						var dataShort = new ushort[indexData.Count / 2];
-						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataShort, 0, indexData.Count);
-
-						// Flip winding
-						for (var i = 0; i < dataShort.Length / 3; i++)
-						{
-							var temp = dataShort[i * 3];
-							dataShort[i * 3] = dataShort[i * 3 + 2];
-							dataShort[i * 3 + 2] = temp;
-						}
-
-						indexBuffer.SetData(dataShort);
-					}
-					else
-					{
-						var dataInt = new uint[indexData.Count / 4];
-						Buffer.BlockCopy(indexData.Array, indexData.Offset, dataInt, 0, indexData.Count);
-
-						// Flip winding
-						for (var i = 0; i < dataInt.Length / 3; i++)
-						{
-							var temp = dataInt[i * 3];
-							dataInt[i * 3] = dataInt[i * 3 + 2];
-							dataInt[i * 3 + 2] = temp;
-						}
-
-						indexBuffer.SetData(dataInt);
-					}
+					indexBuffer.SetData(0, indexData.Array, indexData.Offset, indexData.Count);
 
 					var subMesh = new Submesh
 					{
@@ -461,9 +431,9 @@ namespace DigitalRune.Graphics.SceneGraph
 					}
 				}
 
-				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
+/*				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
 				boundingBox.Max.Y - boundingBox.Min.Y,
-				boundingBox.Max.Z - boundingBox.Min.Z);
+				boundingBox.Max.Z - boundingBox.Min.Z);*/
 
 				_meshes.Add(mesh);
 			}

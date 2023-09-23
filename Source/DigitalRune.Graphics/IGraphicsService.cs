@@ -231,6 +231,6 @@ namespace DigitalRune.Graphics
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    Effect GetStockEffect(string path);
+    Effect GetStockEffect(string path, Dictionary<string, string> defs = null);
   }
 }

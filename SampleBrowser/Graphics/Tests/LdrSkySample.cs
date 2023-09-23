@@ -216,11 +216,7 @@ namespace Samples.Graphics
         AdaptionSpeed = 100,
       };
 
-      _colorEncoder = new ColorEncoder(GraphicsService)
-      {
-        SourceEncoding = ColorEncoding.Rgb,
-        TargetEncoding = _skybox.Encoding,
-      };
+      _colorEncoder = new ColorEncoder(GraphicsService, ColorEncoding.Rgb, _skybox.Encoding);
     }
 
 
