@@ -83,7 +83,7 @@ rendering the objects.",
       {
         Vector3F position = new Vector3F(random.NextFloat(-4, 4), 0, random.NextFloat(2, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
-        var dudeObject = new DudeObject(Services, "DudeRefracted/Dude")
+        var dudeObject = new DudeObject(Services, "DudeRefracted/Dude.drmdl")
         {
           Pose = new Pose(position, orientation)
         };

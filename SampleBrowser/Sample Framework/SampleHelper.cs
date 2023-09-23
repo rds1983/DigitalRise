@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AssetManagementBase;
 using DigitalRune.Game.UI;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Geometry;
@@ -41,13 +42,13 @@ namespace Samples
     /// Creates a graphics mesh with the triangle mesh data of the given shape and a default 
     /// material.
     /// </summary>
-    /// <param name="contentManager">The contentManager manager.</param>
+    /// <param name="assetManager">The contentManager manager.</param>
     /// <param name="graphicsService">The graphics service.</param>
     /// <param name="shape">The shape.</param>
     /// <returns>The graphics mesh.</returns>
-    public static Mesh CreateMesh(ContentManager contentManager, IGraphicsService graphicsService, Shape shape)
+    public static Mesh CreateMesh(IGraphicsService graphicsService, Shape shape)
     {
-      return CreateMesh(contentManager, graphicsService, shape, new Vector3F(1), new Vector3F(1),  100);
+      return CreateMesh(graphicsService, shape, new Vector3F(1), new Vector3F(1),  100);
     }
 
 
@@ -55,14 +56,14 @@ namespace Samples
     /// Creates a graphics mesh with the triangle mesh data of the given shape and the given
     /// diffuse and specular material properties.
     /// </summary>
-    /// <param name="contentManager">The contentManager manager.</param>
+    /// <param name="assetManager">The contentManager manager.</param>
     /// <param name="graphicsService">The graphics service.</param>
     /// <param name="shape">The shape.</param>
     /// <param name="diffuse">The diffuse material color.</param>
     /// <param name="specular">The specular material color.</param>
     /// <param name="specularPower">The specular power of the material.</param>
     /// <returns>The graphics mesh.</returns>
-    public static Mesh CreateMesh(ContentManager contentManager, IGraphicsService graphicsService, Shape shape,
+    public static Mesh CreateMesh(IGraphicsService graphicsService, Shape shape,
       Vector3F diffuse, Vector3F specular, float specularPower)
     {
       // Create a DigitalRune.Geometry.Meshes.TriangleMesh from the shape and 
@@ -74,7 +75,7 @@ namespace Samples
         triangleMesh,
         MathHelper.ToRadians(70));
 
-      var mesh = CreateMesh(contentManager, graphicsService, submesh, diffuse, specular, specularPower);
+      var mesh = CreateMesh(graphicsService, submesh, diffuse, specular, specularPower);
 
       // Set bounding shape to a box that is equal to the AABB of the shape.
       var aabb = shape.GetAabb(Pose.Identity);
@@ -93,7 +94,7 @@ namespace Samples
     /// Creates a graphics mesh with the triangle mesh data of the given shape and the given
     /// diffuse and specular material properties.
     /// </summary>
-    /// <param name="contentManager">The contentManager manager.</param>
+    /// <param name="assetManager">The contentManager manager.</param>
     /// <param name="graphicsService">The graphics service.</param>
     /// <param name="submesh">The submesh.</param>
     /// <param name="diffuse">The diffuse material color.</param>
@@ -104,7 +105,7 @@ namespace Samples
     /// This method does not set the bounding shape of the mesh. (The default is an infinite shape
     /// which is not optimal for performance.)
     /// </remarks>
-    public static Mesh CreateMesh(ContentManager contentManager, IGraphicsService graphicsService, Submesh submesh,
+    public static Mesh CreateMesh(IGraphicsService graphicsService, Submesh submesh,
       Vector3F diffuse, Vector3F specular, float specularPower)
     {
       Mesh mesh = new Mesh();
@@ -140,7 +141,7 @@ namespace Samples
       // the EffectParameterHint Material.
       EffectBinding shadowMapEffectBinding = new EffectBinding(
         graphicsService,
-        contentManager.Load<Effect>("DigitalRune\\Materials\\ShadowMap"),
+        graphicsService.GetStockEffect("DigitalRune\\Materials\\ShadowMap"),
         null,
         EffectParameterHint.Material);
       material.Add("ShadowMap", shadowMapEffectBinding);
@@ -148,7 +149,7 @@ namespace Samples
       // EffectBinding for the "GBuffer" pass.
       EffectBinding gBufferEffectBinding = new EffectBinding(
         graphicsService,
-        contentManager.Load<Effect>("DigitalRune\\Materials\\GBuffer"),
+        graphicsService.GetStockEffect("DigitalRune\\Materials\\GBuffer"),
         null,
         EffectParameterHint.Material);
       gBufferEffectBinding.Set("SpecularPower", specularPower);
@@ -157,7 +158,7 @@ namespace Samples
       // EffectBinding for the "Material" pass.
       EffectBinding materialEffectBinding = new EffectBinding(
         graphicsService,
-        contentManager.Load<Effect>("DigitalRune\\Materials\\Material"),
+        graphicsService.GetStockEffect("DigitalRune\\Materials\\Material"),
         null,
         EffectParameterHint.Material);
       materialEffectBinding.Set("DiffuseTexture", graphicsService.GetDefaultTexture2DWhite());

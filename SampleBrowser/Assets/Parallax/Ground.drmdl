@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="../Ground/Ground.x" GenerateTangentFrames="True">
+<Model File="../Ground/Ground.glb" GenerateTangentFrames="True">
   <Mesh>
     <Submesh Material="Normal.drmat" />
   </Mesh>

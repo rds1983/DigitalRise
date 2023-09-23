@@ -64,7 +64,7 @@ Press <F4> to open the Options window where you can change shadow settings.",
       GameObjectService.Objects.Add(new GrabObject(Services));
 
       // Create test scene.
-      ShadowSample.CreateScene(Services, ContentManager, _graphicsScreen);
+      ShadowSample.CreateScene(Services, AssetManager, _graphicsScreen);
 
       // Get directional light created by the DynamicSkyObject and replace the default 
       // shadow with our custom VSM shadow.

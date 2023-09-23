@@ -1,6 +1,7 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Collections.Generic;
+using AssetManagementBase;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
@@ -50,12 +51,12 @@ namespace Samples.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public EnvironmentLightRenderer(IGraphicsService graphicsService)
+    public EnvironmentLightRenderer(AssetManager assetManager, IGraphicsService graphicsService)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.GetStockEffect("EnvironmentLight");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/EnvironmentLight.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["DiffuseColor"];

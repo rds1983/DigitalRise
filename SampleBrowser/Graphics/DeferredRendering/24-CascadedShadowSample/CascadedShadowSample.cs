@@ -61,7 +61,7 @@ updates over several frames and to update distant cascades less often.",
 
       GameObjectService.Objects.Add(new GrabObject(Services));
 
-      ShadowSample.CreateScene(Services, ContentManager, _graphicsScreen);
+      ShadowSample.CreateScene(Services, AssetManager, _graphicsScreen);
 
       // Get the cascaded shadow of the sunlight (which was created by the DynamicSkyObject).
       _cascadedShadow = (CascadedShadow)((LightNode)_graphicsScreen.Scene.GetSceneNode("Sunlight")).Shadow;

@@ -90,7 +90,6 @@ namespace DigitalRune
 		{
 			foreach (var gltfMesh in _gltf.Meshes)
 			{
-
 				foreach (var primitive in gltfMesh.Primitives)
 				{
 					var hasNormals = primitive.HasAttribute("NORMAL");
@@ -102,7 +101,7 @@ namespace DigitalRune
 						var positions = GetAccessorAs<Vector3>(primitive.FindAttribute("POSITION"));
 						var normals = GetAccessorAs<Vector3>(primitive.FindAttribute("NORMAL"));
 						var texCoords = GetAccessorAs<Vector2>(primitive.FindAttribute("TEXCOORD_"));
-						
+
 						var indexAccessor = _gltf.Accessors[primitive.Indices.Value];
 						if (indexAccessor.Type != TypeEnum.SCALAR)
 						{
@@ -120,18 +119,20 @@ namespace DigitalRune
 						if (indexAccessor.ComponentType == ComponentTypeEnum.SHORT)
 						{
 							var data = GetAccessorAs<short>(primitive.Indices.Value);
-							for(var i = 0; i < data.Length; ++i)
+							for (var i = 0; i < data.Length; ++i)
 							{
 								indices.Add(data[i]);
 							}
-						} else if(indexAccessor.ComponentType == ComponentTypeEnum.UNSIGNED_SHORT)
+						}
+						else if (indexAccessor.ComponentType == ComponentTypeEnum.UNSIGNED_SHORT)
 						{
 							var data = GetAccessorAs<ushort>(primitive.Indices.Value);
 							for (var i = 0; i < data.Length; ++i)
 							{
 								indices.Add(data[i]);
 							}
-						} else
+						}
+						else
 						{
 							var data = GetAccessorAs<uint>(primitive.Indices.Value);
 							for (var i = 0; i < data.Length; ++i)
@@ -148,7 +149,7 @@ namespace DigitalRune
 						using (var ms = new MemoryStream())
 						{
 							ms.Write(GetBuffer(0));
-							
+
 							if (!hasTangents)
 							{
 								primitive.Attributes["_TANGENT"] = ms.WriteData(bufferViews, accessors, tangents);
@@ -170,10 +171,85 @@ namespace DigitalRune
 			}
 		}
 
-		public void Process(string file, string output, bool genTangentFrames)
+		private void UnwindIndices()
+		{
+			foreach (var gltfMesh in _gltf.Meshes)
+			{
+				foreach (var primitive in gltfMesh.Primitives)
+				{
+					if (primitive.Indices == null)
+					{
+						throw new NotSupportedException("Meshes without indices arent supported");
+					}
+
+					var indexAccessor = _gltf.Accessors[primitive.Indices.Value];
+					if (indexAccessor.Type != Accessor.TypeEnum.SCALAR)
+					{
+						throw new NotSupportedException("Only scalar index buffer are supported");
+					}
+
+					if (indexAccessor.ComponentType != Accessor.ComponentTypeEnum.SHORT &&
+						indexAccessor.ComponentType != Accessor.ComponentTypeEnum.UNSIGNED_SHORT &&
+						indexAccessor.ComponentType != Accessor.ComponentTypeEnum.UNSIGNED_INT)
+					{
+						throw new NotSupportedException($"Index of type {indexAccessor.ComponentType} isn't supported");
+					}
+
+					var indexData = GetAccessorData(primitive.Indices.Value);
+					if (indexAccessor.ComponentType == ComponentTypeEnum.UNSIGNED_SHORT)
+					{
+						var data = new ushort[indexData.Count / 2];
+            System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
+
+						// Flip winding
+						for (var i = 0; i < data.Length / 3; i++)
+						{
+							var temp = data[i * 3];
+							data[i * 3] = data[i * 3 + 2];
+							data[i * 3 + 2] = temp;
+						}
+
+						System.Buffer.BlockCopy(data, 0, indexData.Array, indexData.Offset, indexData.Count);
+					}
+					else if(indexAccessor.ComponentType == ComponentTypeEnum.SHORT)
+					{
+						var data = new short[indexData.Count / 2];
+						System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
+
+						// Flip winding
+						for (var i = 0; i < data.Length / 3; i++)
+						{
+							var temp = data[i * 3];
+							data[i * 3] = data[i * 3 + 2];
+							data[i * 3 + 2] = temp;
+						}
+
+						System.Buffer.BlockCopy(data, 0, indexData.Array, indexData.Offset, indexData.Count);
+					}
+					else
+					{
+						var data = new uint[indexData.Count / 4];
+						System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
+
+						// Flip winding
+						for (var i = 0; i < data.Length / 3; i++)
+						{
+							var temp = data[i * 3];
+							data[i * 3] = data[i * 3 + 2];
+							data[i * 3 + 2] = temp;
+						}
+
+						System.Buffer.BlockCopy(data, 0, indexData.Array, indexData.Offset, indexData.Count);
+					}
+				}
+			}
+		}
+		
+		public void Process(string file, string output, bool genTangentFrames,
+			bool unwindIndices, float? scale)
 		{
 			_input = file;
-			
+
 			if (string.IsNullOrEmpty(output))
 			{
 				output = file;
@@ -189,8 +265,27 @@ namespace DigitalRune
 				GenerateTangentFrames();
 			}
 
+			if (unwindIndices)
+			{
+				UnwindIndices();
+			}
+
+			if (scale != null)
+			{
+				foreach(var node in _gltf.Nodes)
+				{
+					if (node.Mesh != null)
+					{
+						for (var i = 0; i < node.Scale.Length; ++i)
+						{
+							node.Scale[i] *= scale.Value;
+						}
+					}
+				}
+			}
+
 			_gltf.Buffers[0].Uri = null;
-			Interface.SaveBinaryModel(_gltf, _bufferCache[0], Path.ChangeExtension(file, "glb"));
+			Interface.SaveBinaryModel(_gltf, GetBuffer(0), Path.ChangeExtension(file, "glb"));
 		}
 	}
 }

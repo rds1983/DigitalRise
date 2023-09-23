@@ -1,6 +1,7 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
+using AssetManagementBase;
 using DigitalRune.Game;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
@@ -63,7 +64,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
 
       GameObjectService.Objects.Add(new GrabObject(Services));
 
-      CreateScene(Services, ContentManager, _graphicsScreen);
+      CreateScene(Services, AssetManager, _graphicsScreen);
 
       // Disable existing lights.
       foreach (var lightNode in _graphicsScreen.Scene.GetDescendants().OfType<LightNode>())
@@ -110,7 +111,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
 
 
     // Creates a test scene with a lot of randomly placed objects.
-    internal static void CreateScene(ServiceContainer services, ContentManager content, DeferredGraphicsScreen graphicsScreen)
+    internal static void CreateScene(ServiceContainer services, AssetManager assetManager, DeferredGraphicsScreen graphicsScreen)
     {
       var gameObjectService = services.GetInstance<IGameObjectService>();
       var graphicsService = services.GetInstance<IGraphicsService>();
@@ -134,7 +135,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
       var random = new Random();
 
       // Spheres
-      var sphereMesh = SampleHelper.CreateMesh(content, graphicsService, new SphereShape(1));
+      var sphereMesh = SampleHelper.CreateMesh(graphicsService, new SphereShape(1));
       for (int i = 0; i < 100; i++)
       {
         Vector3F position = new Vector3F(random.NextFloat(-100, 100), random.NextFloat(0, 3), random.NextFloat(-100, 100));
@@ -149,7 +150,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
       }
 
       // Boxes
-      var boxMesh = SampleHelper.CreateMesh(content, graphicsService, new BoxShape(1, 1, 1));
+      var boxMesh = SampleHelper.CreateMesh(graphicsService, new BoxShape(1, 1, 1));
       for (int i = 0; i < 100; i++)
       {
         Vector3F position = new Vector3F(random.NextFloat(-100, 100), random.NextFloat(0, 3), random.NextFloat(-100, 100));
@@ -186,7 +187,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
         }
       }
       var heightField = new HeightField(0, 0, 20, 20, samples, numberOfSamplesX, numberOfSamplesZ);
-      var heightFieldMesh = SampleHelper.CreateMesh(content, graphicsService, heightField);
+      var heightFieldMesh = SampleHelper.CreateMesh(graphicsService, heightField);
       var heightFieldMeshNode = new MeshNode(heightFieldMesh)
       {
         PoseLocal = new Pose(new Vector3F(20, 0, -20)),

@@ -20,14 +20,16 @@
 //-----------------------------------------------------------------------------
 
 // Supported color encodings:
-const static int RgbEncoding = 0;     // RGB (linear space)
-const static int SRgbEncoding = 1;    // sRGB (gamma space)
-const static int RgbmEncoding = 2;    // RGBM (Source/TargetEncoding.y must contain "Max" in gamma space.)
-const static int RgbeEncoding = 3;    // Radiance RGBE.
-const static int LogLuvEncoding = 4;  // LogLuv.
+#define RGB_ENCODING 0		// RGB (linear space)
+#define SRGB_ENCODING 1		// sRGB (gamma space)
+#define RGBM_ENCODING 2		// RGBM (Source/TargetEncoding.y must contain "Max" in gamma space.)
+#define RGBE_ENCODING 3		// Radiance RGBE.
+#define LOGLUV_ENCODING 4	// LogLuv.
 
-float4 SourceEncoding;  // x = source encoding, yzw = encoding-specific parameters
-float4 TargetEncoding;  // x = target encoding, yzw = encoding-specific parameters
+int SourceEncodingType;
+float SourceEncodingParam;
+int TargetEncodingType;
+float TargetEncodingParam;
 
 // The viewport size in pixels.
 float2 ViewportSize;
@@ -78,55 +80,55 @@ float4 PS(float2 texCoord : TEXCOORD0) : COLOR0
   float4 color = tex2D(SourceSampler, texCoord);
   
   // Decode color:
-  if (SourceEncoding.x <= RgbEncoding)
+  if (SourceEncodingType == RGB_ENCODING)
   {
     // Nothing to do.
   }
-  else if (SourceEncoding.x <= SRgbEncoding)
+  else if (SourceEncodingType == SRGB_ENCODING)
   {
     color.rgb = FromGamma(color.rgb);
     color.rgb = float3(1, 2, 3);
   }
-  else if (SourceEncoding.x <= RgbmEncoding)
+  else if (SourceEncodingType == RGBM_ENCODING)
   {
     // Note: RGBM in DigitalRune Graphics stores color values in gamma space.
-    float maxValue = SourceEncoding.y;
+    float maxValue = SourceEncodingParam;
     color.rgb = DecodeRgbm(color, maxValue);
     color.rgb = FromGamma(color.rgb);
     color.a = 1;
   }
-  else if (SourceEncoding.x <= RgbeEncoding)
+  else if (SourceEncodingType == RGBE_ENCODING)
   {
     color.rgb = DecodeRgbe(color);
     color.a = 1;
   }
-  else if (SourceEncoding.x <= LogLuvEncoding)
+  else
   {
     color.rgb = DecodeLogLuv(color);
     color.a = 1;
   }
   
   // Encode color:
-  if (TargetEncoding.x <= RgbEncoding)
+  if (TargetEncodingType == RGB_ENCODING)
   {
     // Nothing to do.
   }
-  else if (TargetEncoding.x <= SRgbEncoding)
+  else if (TargetEncodingType == SRGB_ENCODING)
   {
     color.rgb = ToGamma(color.rgb);
   }
-  else if (TargetEncoding.x <= RgbmEncoding)
+  else if (TargetEncodingType == RGBM_ENCODING)
   {
     // Note: RGBM in DigitalRune Graphics stores color values in gamma space.
     color.rgb = ToGamma(color.rgb);
-    float maxValue = TargetEncoding.y;
+    float maxValue = TargetEncodingParam;
     color = EncodeRgbm(color.rgb, maxValue);
   }
-  else if (TargetEncoding.x <= RgbeEncoding)
+  else if (TargetEncodingType == RGBE_ENCODING)
   {
     color = EncodeRgbe(color.rgb);
   }
-  else if (TargetEncoding.x <= LogLuvEncoding)
+  else
   {
     color = EncodeLogLuv(color.rgb);
   }

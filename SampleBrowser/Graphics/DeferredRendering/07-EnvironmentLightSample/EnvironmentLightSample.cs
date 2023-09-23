@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics.Rendering;
@@ -9,8 +8,8 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -93,7 +92,7 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
         Color = new Vector3F(0.1f),
         DiffuseIntensity = 0,
         SpecularIntensity = 1,
-        EnvironmentMap = ContentManager.Load<TextureCube>("Sky2"),
+        EnvironmentMap = AssetManager.LoadTextureCube(GraphicsService.GraphicsDevice, "Sky2.dds"),
       };
       var environmentLightNode = new LightNode(environmentLight)
       {
@@ -103,7 +102,7 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
 
       // The EnvironmentLight is a new light type. We have to register a light renderer
       // for this light in the LightRenderer of the DeferredGraphicsScreen.
-      _graphicsScreen.LightBufferRenderer.LightRenderer.Renderers.Add(new EnvironmentLightRenderer(GraphicsService));
+      _graphicsScreen.LightBufferRenderer.LightRenderer.Renderers.Add(new EnvironmentLightRenderer(AssetManager, GraphicsService));
 
       // EnvironmentLight.fx uses the specular power of the materials to determine
       // which mip map level of the cube is reflected. 
@@ -208,4 +207,3 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
     }
   }
 }
-#endif

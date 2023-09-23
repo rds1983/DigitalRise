@@ -69,7 +69,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
       GameObjectService.Objects.Add(new GrabObject(Services));
 
       // Create test scene.
-      ShadowSample.CreateScene(Services, ContentManager, _graphicsScreen);
+      ShadowSample.CreateScene(Services, AssetManager, _graphicsScreen);
 
       // Create 3 different shadows:
       // The VarianceShadow covers the whole level.

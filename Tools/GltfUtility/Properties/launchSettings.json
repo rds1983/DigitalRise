@@ -2,7 +2,7 @@
   "profiles": {
     "GltfUtility": {
       "commandName": "Project",
-      "commandLineArgs": "-f \"D:\\Projects\\DigitalRune\\SampleBrowser\\Assets\\Dude\\Dude.gltf\"\r\n -t"
+      "commandLineArgs": "-f \"D:\\Projects\\DigitalRune\\SampleBrowser\\Assets\\Dude\\Dude.glb\" -s 2.0"
     }
   }
 }

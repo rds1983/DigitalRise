@@ -102,9 +102,9 @@ For more info, have a look at the material and effect files of the loaded ground
       Debug.Assert(_meshNode.Mesh.Materials.Count == 1, "Mesh should have only one material.");
 
       // Load materials with normal mapping, parallax mapping and parallax occlusion mapping.
-      _normalMaterial = ContentManager.Load<Material>("Parallax/Normal").Clone();
-      _parallaxMappingMaterial = ContentManager.Load<Material>("Parallax/PM").Clone();
-      _parallaxOcclusionMappingMaterial = ContentManager.Load<Material>("Parallax/POM").Clone();
+      _normalMaterial = AssetManager.LoadDRMaterial(GraphicsService, "Parallax/Normal.drmat").Clone();
+      _parallaxMappingMaterial = AssetManager.LoadDRMaterial(GraphicsService, "Parallax/PM.drmat").Clone();
+      _parallaxOcclusionMappingMaterial = AssetManager.LoadDRMaterial(GraphicsService, "Parallax/POM.drmat").Clone();
 
       // Get default values from materials.
       var parameterBindings = _parallaxOcclusionMappingMaterial["Material"].ParameterBindings;

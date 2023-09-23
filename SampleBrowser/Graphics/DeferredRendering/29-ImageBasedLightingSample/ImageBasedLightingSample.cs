@@ -148,7 +148,6 @@ Some things you can test using the available Options:
     {
       // Create sphere mesh with high specular exponent.
       var mesh = SampleHelper.CreateMesh(
-        ContentManager,
         GraphicsService,
         new SphereShape(0.1f),
         new Vector3F(0, 0, 0),
@@ -174,7 +173,6 @@ Some things you can test using the available Options:
       for (int x = 0; x < NumX; x++)
       {
         var mesh = SampleHelper.CreateMesh(
-          ContentManager,
           GraphicsService,
           new SphereShape(0.2f),
           new Vector3F(1 - (float)x / (NumX - 1)),  // Diffuse goes from 1 to 0.

@@ -21,26 +21,28 @@ namespace DigitalRune.Graphics.PostProcessing
     private readonly Effect _effect;
     private readonly EffectParameter _viewportSizeParameter;
     private readonly EffectParameter _sourceTextureParameter;
-    private readonly EffectParameter _sourceEncodingParameter;
-    private readonly EffectParameter _targetEncodingParameter;
-    #endregion
+    private readonly EffectParameter _sourceTypeParameter;
+		private readonly EffectParameter _sourceParamParameter;
+		private readonly EffectParameter _targetTypeParameter;
+		private readonly EffectParameter _targetParamParameter;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Gets or sets the <see cref="ColorEncoding"/> of the source texture.
-    /// </summary>
-    /// <value>
-    /// The <see cref="ColorEncoding"/> of the source texture. The default encoding is 
-    /// <see cref="ColorEncoding.Rgb"/>.
-    /// </value>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="value"/> is <see langword="null"/>.
-    /// </exception>
-    public ColorEncoding SourceEncoding
+		/// <summary>
+		/// Gets or sets the <see cref="ColorEncoding"/> of the source texture.
+		/// </summary>
+		/// <value>
+		/// The <see cref="ColorEncoding"/> of the source texture. The default encoding is 
+		/// <see cref="ColorEncoding.Rgb"/>.
+		/// </value>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="value"/> is <see langword="null"/>.
+		/// </exception>
+		public ColorEncoding SourceEncoding
     {
       get { return _sourceEncoding; }
       set
@@ -100,10 +102,12 @@ namespace DigitalRune.Graphics.PostProcessing
       _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/ColorEncoder");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
-      _sourceEncodingParameter = _effect.Parameters["SourceEncoding"];
-      _targetEncodingParameter = _effect.Parameters["TargetEncoding"];
+      _sourceTypeParameter = _effect.Parameters["SourceEncodingType"];
+			_sourceParamParameter = _effect.Parameters["SourceEncodingParam"];
+			_targetTypeParameter = _effect.Parameters["TargetEncodingType"];
+			_targetParamParameter = _effect.Parameters["TargetEncodingParam"];
 
-      _sourceEncoding = ColorEncoding.Rgb;
+			_sourceEncoding = ColorEncoding.Rgb;
       _targetEncoding = ColorEncoding.Rgb;
     }
     #endregion
@@ -153,8 +157,8 @@ namespace DigitalRune.Graphics.PostProcessing
       _viewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
       _sourceTextureParameter.SetValue(context.SourceTexture);
 
-      SetEncoding(_sourceEncodingParameter, SourceEncoding);
-      SetEncoding(_targetEncodingParameter, TargetEncoding);
+      SetEncoding(_sourceTypeParameter, _sourceParamParameter, SourceEncoding);
+      SetEncoding(_targetTypeParameter, _targetParamParameter, TargetEncoding);
 
       _effect.CurrentTechnique.Passes[0].Apply();
       graphicsDevice.DrawFullScreenQuad();
@@ -163,36 +167,36 @@ namespace DigitalRune.Graphics.PostProcessing
     }
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Chosen to reduce nesting.")]
-    private static void SetEncoding(EffectParameter parameter, ColorEncoding encoding)
+    private static void SetEncoding(EffectParameter parameterType, EffectParameter parameterParam, ColorEncoding encoding)
     {
       // Constants need to be kept in sync with ColorEncoder.fx.
-      const float rgbEncoding = 0;
-      const float sRgbEncoding = 1;
-      const float rgbmEncoding = 2;
-      const float rgbeEncoding = 3;
-      const float logLuvEncoding = 4;
+      const int rgbEncoding = 0;
+      const int sRgbEncoding = 1;
+      const int rgbmEncoding = 2;
+      const int rgbeEncoding = 3;
+      const int logLuvEncoding = 4;
 
       if (encoding is RgbEncoding)
       {
-        parameter.SetValue(new Vector4(rgbEncoding, 0, 0, 0));
+        parameterType.SetValue(rgbEncoding);
       }
       else if (encoding is SRgbEncoding)
       {
-        parameter.SetValue(new Vector4(sRgbEncoding, 0, 0, 0));
+        parameterType.SetValue(sRgbEncoding);
       }
       else if (encoding is RgbmEncoding)
       {
         float max = GraphicsHelper.ToGamma(((RgbmEncoding)encoding).Max);
-        parameter.SetValue(new Vector4(rgbmEncoding, max, 0, 0));
+        parameterType.SetValue(rgbmEncoding);
+        parameterParam.SetValue(max);
       }
       else if (encoding is RgbeEncoding)
       {
-        parameter.SetValue(new Vector4(rgbeEncoding, 0, 0, 0));
+        parameterType.SetValue(rgbeEncoding);
       }
       else if (encoding is LogLuvEncoding)
       {
-        parameter.SetValue(new Vector4(logLuvEncoding, 0, 0, 0));
+        parameterType.SetValue(logLuvEncoding);
       }
     }
   }

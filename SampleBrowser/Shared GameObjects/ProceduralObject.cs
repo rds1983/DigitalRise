@@ -9,8 +9,7 @@ using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Mathematics.Statistics;
 using DigitalRune.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -34,7 +33,7 @@ namespace Samples
     {
       var graphicsService = _services.GetInstance<IGraphicsService>();
       var gameObjectService = _services.GetInstance<IGameObjectService>();
-      var content = _services.GetInstance<ContentManager>();
+      var assetManager = _services.GetInstance<AssetManager>();
 
       // Check if the game object manager has another ProceduralObject instance.
       var otherProceduralObject = gameObjectService.Objects
@@ -57,7 +56,7 @@ namespace Samples
         _rigidBody = new RigidBody(shape);
 
         // Create a new mesh. See SampleHelper.CreateMesh for more details.
-        mesh = SampleHelper.CreateMesh(content, graphicsService, _rigidBody.Shape);
+        mesh = SampleHelper.CreateMesh(graphicsService, _rigidBody.Shape);
         mesh.Name = "ProceduralObject";
       }
 

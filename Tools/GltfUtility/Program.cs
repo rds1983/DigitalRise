@@ -15,6 +15,8 @@ namespace EffectFarm
 		static SwitchValueArgument<string> _fileArgument;
 		static SwitchValueArgument<string> _outputArgument;
 		static SwitchArgument _tangentArgument;
+		static SwitchArgument _unwindArgument;
+		static SwitchValueArgument<float> _scaleArgument;
 		static SwitchArgument _helpArgument;
 
 		public static string Version
@@ -78,6 +80,27 @@ namespace EffectFarm
 			};
 			parser.Arguments.Add(_tangentArgument);
 
+			_unwindArgument = new SwitchArgument("unwind",
+				"Unwind indices.",
+				null,
+				new[] { 'u' })
+			{
+				Category = categoryOptional,
+				IsOptional = true
+			};
+			parser.Arguments.Add(_unwindArgument);
+
+			_scaleArgument = new SwitchValueArgument<float>("scale",
+					new ValueArgument<float>("scale", "Scale size."),
+					"Defines the scale that should be applied to the model",
+					null,
+					new[] { 's' })
+			{
+				Category = categoryOptional,
+				IsOptional = true
+			};
+			parser.Arguments.Add(_scaleArgument);
+
 			// --help, -h, -?
 			_helpArgument = new SwitchArgument(
 					"help",
@@ -127,9 +150,14 @@ namespace EffectFarm
 			var file = ((ArgumentResult<string>)parseResult.ParsedArguments[_fileArgument]).Values[0];
 			var output = ((ArgumentResult<string>)parseResult.ParsedArguments[_outputArgument])?.Values[0];
 			var genTangentFrames = parseResult.ParsedArguments[_tangentArgument] != null;
+			var unwindIndices = parseResult.ParsedArguments[_unwindArgument] != null;
+			float? scale = null;
+			if (parseResult.ParsedArguments[_scaleArgument] != null)
+			{
+				scale = ((ArgumentResult<float>)parseResult.ParsedArguments[_scaleArgument]).Values[0];
+			}
 
-
-			processor.Process(file, output, genTangentFrames);
+			processor.Process(file, output, genTangentFrames, unwindIndices, scale);
 
 			return ERROR_SUCCESS;
 		}
