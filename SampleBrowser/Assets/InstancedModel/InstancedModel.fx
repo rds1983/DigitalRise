@@ -47,11 +47,7 @@ struct PixelShaderInput
 {
   float4 Color : COLOR0;
   float2 TextureCoordinate : TEXCOORD0;
-#if SM4
-  float4 VPos : SV_Position;
-#else
-  float2 VPos : VPOS;
-#endif
+  float4 VPos : PIXELPOS;
 };
 
 

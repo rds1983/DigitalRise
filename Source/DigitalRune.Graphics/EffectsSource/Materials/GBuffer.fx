@@ -147,11 +147,7 @@ struct PSInput
 #endif
   float4 InstanceColorAndAlpha : TEXCOORD5;
 #if TRANSPARENT
-#if SM4
-  float4 VPos : SV_Position;
-#else
-  float2 VPos : VPOS;
-#endif
+  float4 VPos : PIXELPOS;
 #endif
 #if ALPHA_TEST
   float Face : VFACE;

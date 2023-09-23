@@ -115,11 +115,7 @@ struct PSInput
   float4 PositionProj : TEXCOORD1;
 #if TRANSPARENT
   float4 InstanceColorAndAlpha : TEXCOORD2;
-#if SM4
-  float4 VPos : SV_Position;
-#else
-  float2 VPos : VPOS;
-#endif
+  float4 VPos : PIXELPOS;
 #endif
 };
 

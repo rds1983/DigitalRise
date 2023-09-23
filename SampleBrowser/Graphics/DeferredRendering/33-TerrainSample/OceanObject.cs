@@ -7,7 +7,7 @@ using DigitalRune.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples
 {
@@ -30,7 +30,8 @@ namespace Samples
     protected override void OnLoad()
     {
       var scene = (Scene)_services.GetInstance<IScene>();
-      var content = _services.GetInstance<ContentManager>();
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetInstance<AssetManager>();
 
       // Define the appearance of the water.
       var waterOcean = new Water
@@ -56,7 +57,7 @@ namespace Samples
 
         // Foam is automatically rendered where the water intersects geometry and
         // where wave are high.
-        FoamMap = content.Load<Texture2D>("Water/Foam"),
+        FoamMap = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Water/Foam.png"),
         FoamMapScale = 5,
         FoamColor = new Vector3F(1),
         FoamCrestMin = 0.3f,

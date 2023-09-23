@@ -120,7 +120,7 @@ float3 ToGamma(float3 colorLinear)
 /// \return The position in projection space.
 float2 ScreenToProjection(float2 position, float2 viewportSize)
 {
-#if !SM4
+#if FIX_HALF_PIXEL
   // Subtract a half pixel so that the edge of the primitive is between screen pixels.
   // Thus, the first texel lies exactly on the first pixel.
   // See also http://drilian.com/2008/11/25/understanding-half-pixel-and-half-texel-offsets/

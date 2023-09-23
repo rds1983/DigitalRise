@@ -82,11 +82,7 @@ struct PSInput
   float Depth : TEXCOORD1;
   float3 Normal : TEXCOORD2;
   float Alpha : TEXCOORD5;
-#if SM4
-  float4 VPos : SV_Position;
-#else
-  float2 VPos : VPOS;
-#endif
+  float4 VPos : PIXELPOS;
   float Face : VFACE;
 };
 

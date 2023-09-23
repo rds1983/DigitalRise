@@ -587,7 +587,7 @@ VSOutputQuery VSQuery(VSInputQuery input)
   // Convert pixel position to clip space.
   float2 position = input.Pixel;
   
-#if SM4
+#if !FIX_HALF_PIXEL
   // DirectX 10+: Add half-pixel offset.
   position += float2(0.5, 0.5);
 #endif

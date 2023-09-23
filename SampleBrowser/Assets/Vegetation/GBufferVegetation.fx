@@ -100,11 +100,7 @@ struct PSInput
   float3 Binormal : TEXCOORD4;
 #endif
   float Alpha : TEXCOORD5;
-#if SM4
-  float4 VPos : SV_Position;
-#else
-  float2 VPos : VPOS;
-#endif
+  float4 VPos : PIXELPOS;
   float Face : VFACE;
 };
 

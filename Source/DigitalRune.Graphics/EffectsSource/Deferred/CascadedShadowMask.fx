@@ -18,12 +18,6 @@
 #define CLAMP_TEXCOORDS_TO_SHADOW_MAP_BOUNDS 1
 #include "../ShadowMap.fxh"
 
-#if SM4
-#define PIXELPOS SV_Position
-#else
-#define PIXELPOS VPOS
-#endif
-
 // Warning: gradient-based operations must be moved out of flow control...
 // Is caused by DeriveNormal, which is called before flow control!?
 #pragma warning(disable : 4121)
