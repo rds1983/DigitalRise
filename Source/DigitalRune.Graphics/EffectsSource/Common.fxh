@@ -12,6 +12,11 @@
 #ifndef DIGITALRUNE_COMMON_FXH
 #define DIGITALRUNE_COMMON_FXH
 
+#if SM4
+#define PIXELPOS SV_Position
+#else
+#define PIXELPOS VPOS
+#endif
 
 //-----------------------------------------------------------------------------
 // Defines

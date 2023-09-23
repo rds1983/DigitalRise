@@ -244,7 +244,7 @@ VSFrustumRayOutput VSFrustumRay(VSFrustumRayInput input,
   // Instead of subtracting the 0.5 pixel offset from the position, we add
   // it to the texture coordinates - because frustumRay is associated with
   // the position output.
-#if !SM4
+#if FIX_HALF_PIXEL
   texCoord.xy += 0.5f / viewportSize;
 #endif
   
