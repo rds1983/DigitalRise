@@ -106,8 +106,8 @@ the water and then the alpha-blended objects above the water surface.",
         SpecularColor = new Vector3F(10f),
 
         // Small water ripples/waves are created using scrolling normal maps.
-        NormalMap0 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave0.png"),
-        NormalMap1 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave1.png"),
+        NormalMap0 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave0.dds"),
+        NormalMap1 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave1.dds"),
         NormalMap0Scale = 1.8f,
         NormalMap1Scale = 2.2f,
         NormalMap0Velocity = new Vector3F(-0.02f, 0, 0.03f),

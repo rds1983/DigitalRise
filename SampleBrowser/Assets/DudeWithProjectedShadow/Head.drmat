@@ -5,7 +5,7 @@
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
     <Parameter Name="SpecularPower" Value="100" />
-    <Texture Name="Texture" File="../Dude/head.tga" />
+    <Texture Name="Texture" File="../Dude/head.dds" />
   </Pass>
   <Pass Name="ProjectedShadow" Effect="ProjectedShadowSkinned.fx" Profile="Any" />
 </Material>

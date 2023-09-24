@@ -9,17 +9,17 @@
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
     <Parameter Name="SpecularPower" Value="100" />
-    <Texture Name="Texture" File="head.tga" />
+    <Texture Name="Texture" File="head.dds" />
   </Pass>
   <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMapSkinned" Profile="HiDef" />
   <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormalSkinned" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="10" />
-    <Texture Name="NormalTexture" Format="Normal" File="headN.tga" />
+    <Texture Name="NormalTexture" Format="Normal" File="headN.dds" />
   </Pass>
   <Pass Name="Material" Effect="DigitalRune/Materials/MaterialSkinned" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
-    <Texture Name="DiffuseTexture" File="head.tga" />
-    <Texture Name="SpecularTexture" File="headS.tga" />
+    <Texture Name="DiffuseTexture" File="head.dds" />
+    <Texture Name="SpecularTexture" File="headS.dds" />
   </Pass>
 </Material>

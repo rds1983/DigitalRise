@@ -10,7 +10,7 @@
     <Parameter Name="SpecularColor" Value="0,0,0" />
     <Parameter Name="SpecularPower" Value="16" />
     <Parameter Name="VertexColorEnabled" Value="False" />
-    <Texture Name="Texture" File="Sandbox.png" />
+    <Texture Name="Texture" File="Sandbox.dds" />
   </Pass>
 
 <!--  Add other application-dependent passes here, for example: 

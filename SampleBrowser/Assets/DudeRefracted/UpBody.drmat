@@ -12,6 +12,6 @@
     <Parameter Name="FresnelParameters" Value="0,1,3" />
     <Parameter Name="Alpha" Value="1" />
     <Parameter Name="BlendMode" Value="1" />>
-    <Texture Name="NormalTexture" Format="Normal" File="../Dude/upBodyN.tga" />
+    <Texture Name="NormalTexture" Format="Normal" File="../Dude/upBodyN.dds" />
   </Pass>
 </Material>

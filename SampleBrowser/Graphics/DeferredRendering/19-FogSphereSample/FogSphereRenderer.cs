@@ -70,7 +70,7 @@ namespace Samples.Graphics
       var assetManager = services.GetInstance<AssetManager>();
 
       // Load effect.
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/FogSphere.efb");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/FogSphere.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterWorld = _effect.Parameters["World"];
       _parameterWorldInverse = _effect.Parameters["WorldInverse"];

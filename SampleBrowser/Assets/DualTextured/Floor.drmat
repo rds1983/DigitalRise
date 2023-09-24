@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Material>
   <Pass Name="Default" Effect="DualTextureEffect">
-    <Texture Name="Texture" File="grass1.png" />
-    <Texture Name="Texture2" File="lightmap.tga" />
+    <Texture Name="Texture" File="grass1.dds" />
+    <Texture Name="Texture2" File="lightmap.dds" />
   </Pass>
 </Material>

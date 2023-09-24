@@ -47,3 +47,5 @@ _ReSharper*/
 # Office Temp Files
 ~$*
 
+# Compiled effects
+SampleBrowser/Assets/FNA/

@@ -15,6 +15,7 @@ using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRune.Mathematics.MathHelper;
+using AssetManagementBase;
 
 
 namespace Samples.Graphics
@@ -86,14 +87,14 @@ than 5 morph targets are active, the morph targets with the largest weights are 
       hdrFilter.MaxExposure = 6;
 
       // Load the customized "Sintel" model (original: Durian Open Movie Project - http://www.sintel.org/).
-      var model = ContentManager.Load<ModelNode>("Sintel/Sintel-Head").Clone();
+      var model = AssetManager.LoadDRModel(GraphicsService, "Sintel/Sintel-Head.drmdl").Clone();
       model.PoseWorld = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(MathHelper.ToRadians(10)) * Matrix33F.CreateRotationX(-MathHelper.ToRadians(90)));
       _graphicsScreen.Scene.Children.Add(model);
 
       // The model consists of a root node and a mesh node.
       //  ModelNode "Sintel-Head"
       //    MeshNode "Sintel"
-      _sintel = (MeshNode)model.Children[0];
+      _sintel = model.GetSubtree().OfType<MeshNode>().First();
 
       // The model contains two skeletal animations:
       // - "MOUTH-open" is just a single frame.
@@ -103,7 +104,7 @@ than 5 morph targets are active, the morph targets with the largest weights are 
       // Slider.Value = 0 ... mouth closed (default)
       _mouthClosedPose = SkeletonPose.Create(_sintel.Mesh.Skeleton);
       // Slider.Value = 1 ... mouth open (copied from the "MOUTH-open" animation)
-      SkeletonKeyFrameAnimation mouthOpen = _sintel.Mesh.Animations["MOUTH-open"];
+      SkeletonKeyFrameAnimation mouthOpen = _sintel.Mesh.Animations["Test"];
       _mouthOpenPose = SkeletonPose.Create(_sintel.Mesh.Skeleton);
       mouthOpen.GetValue(TimeSpan.Zero, ref _mouthOpenPose, ref _mouthOpenPose, ref _mouthOpenPose);
 

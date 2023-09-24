@@ -5,7 +5,7 @@
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0,0,0" />
     <Parameter Name="SpecularPower" Value="16" />
-    <Texture Name="Texture" File="Fur.png" />
+    <Texture Name="Texture" File="Fur.dds" />
   </Pass>
   <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
   <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBuffer" Profile="HiDef">
@@ -14,7 +14,7 @@
   <Pass Name="Material" Effect="DigitalRune/Materials/Material" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0,0,0" />
-    <Texture Name="DiffuseTexture" File="Fur.png" />
+    <Texture Name="DiffuseTexture" File="Fur.dds" />
   </Pass>
   <Pass Name="AlphaBlend" Effect="Fur.fx" Profile="HiDef">
     <Parameter Name="MaxFurLength" Value="0.05" />
@@ -23,7 +23,7 @@
     <Parameter Name="JitterMapScale" Value="0.02" />
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0,0,0" />
-    <Texture Name="DiffuseTexture" File="Fur.png" />
+    <Texture Name="DiffuseTexture" File="Fur.dds" />
     <Parameter Name="Alpha" Value="0.5" />
   </Pass>
 </Material>

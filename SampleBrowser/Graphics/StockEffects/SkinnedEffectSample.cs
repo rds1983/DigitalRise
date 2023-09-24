@@ -35,7 +35,7 @@ for a sky dome.",
       SetCamera(new Vector3F(1, 1, 3), 0.2f, 0);
 
       // Create a sky mesh and add an instance of this mesh to the scene.
-      var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "sky.bmp"));
+      var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "sky.png"));
       _sky = new MeshNode(skyMesh);
       _sky.Name = "Sky"; // Always set a name - very useful for debugging!
       GraphicsScreen.Scene.Children.Add(_sky);

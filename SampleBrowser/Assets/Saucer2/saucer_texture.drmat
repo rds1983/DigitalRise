@@ -8,6 +8,6 @@
     <Parameter Name="SpecularColor" Value="0.627,0.4583304,0.107217" />
     <Parameter Name="SpecularPower" Value="29.54" />
     <Parameter Name="VertexColorEnabled" Value="False" />
-    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.tga" />
+    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.dds" />
   </Pass>
 </Material>

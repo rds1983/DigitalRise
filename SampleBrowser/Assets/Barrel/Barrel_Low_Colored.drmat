@@ -8,6 +8,6 @@
   <Pass Name="Material" Effect="DigitalRune/Materials/MaterialTransparent" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="0.7,0,0" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
-    <Texture Name="SpecularTexture" File="specular.png" />
+    <Texture Name="SpecularTexture" File="specular.dds" />
   </Pass>
 </Material>

@@ -6,16 +6,16 @@
     <Parameter Name="EmissiveColor" Value="0,0,0" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Parameter Name="SpecularPower" Value="1000" />
-    <Texture Name="Texture" File="diffus.png" />
+    <Texture Name="Texture" File="diffus.dds" />
   </Pass>
   <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
   <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormalTransparent" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="1000" />
-    <Texture Name="NormalTexture" Format="Normal" File="normal.png"/>
+    <Texture Name="NormalTexture" Format="Normal" File="normal.dds"/>
   </Pass>
   <Pass Name="Material" Effect="DigitalRune/Materials/MaterialTransparent" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="0,0.25,0" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
-    <Texture Name="SpecularTexture" File="specular.png" />
+    <Texture Name="SpecularTexture" File="specular.dds" />
   </Pass>
 </Material>

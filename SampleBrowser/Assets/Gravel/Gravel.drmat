@@ -4,17 +4,17 @@
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
     <Parameter Name="SpecularPower" Value="10" />
-    <Texture Name="Texture" File="Gravel_01_diffuse.png" />
+    <Texture Name="Texture" File="Gravel_01_diffuse.dds" />
   </Pass>
   <Pass Name="Occluder" Effect="DigitalRune/Materials/Occluder" Profile="HiDef"/>
   <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormal" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="10" />
-    <Texture Name="NormalTexture" Format="NormalInvertY" File="Gravel_01_normal.png"/>
+    <Texture Name="NormalTexture" Format="NormalInvertY" File="Gravel_01_normal.dds"/>
   </Pass>
   <Pass Name="Material" Effect="DigitalRune/Materials/Material" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
-    <Texture Name="DiffuseTexture" File="Gravel_01_diffuse.png" />
-    <Texture Name="SpecularTexture" File="Gravel_01_specular.png" />
+    <Texture Name="DiffuseTexture" File="Gravel_01_diffuse.dds" />
+    <Texture Name="SpecularTexture" File="Gravel_01_specular.dds" />
   </Pass>
 </Material>

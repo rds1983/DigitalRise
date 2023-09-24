@@ -131,7 +131,7 @@ namespace DigitalRune.Graphics
 							effect = Resources.GetDREffect(graphicsService.GraphicsDevice, effectName);
 						} else
 						{
-							var effectPath = "FNA";
+							var effectPath = "FNA/bin";
 							if (!string.IsNullOrEmpty(assetManager.CurrentFolder))
 							{
 								effectPath = "../" + effectPath + assetManager.CurrentFolder + "/";

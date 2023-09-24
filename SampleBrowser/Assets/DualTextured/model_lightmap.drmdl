@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Model File="model_lightmap.gltf" >  
+<Model File="model_lightmap.glb" >  
   <Mesh Name="pPlane1"><Submesh Material="Floor.drmat" /></Mesh>
   <Mesh Name="pCube15"><Submesh Material="Cube.drmat" /></Mesh>
   <Mesh Name="pCube16"><Submesh Material="Cube.drmat" /></Mesh>

@@ -56,7 +56,7 @@ namespace Samples.Graphics
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/EnvironmentLight.efb");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/EnvironmentLight.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["DiffuseColor"];

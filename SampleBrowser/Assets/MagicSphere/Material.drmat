@@ -6,7 +6,7 @@
     <Parameter Name="EmmissiveColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Parameter Name="SpecularPower" Value="100" />
-    <Texture Name="Texture" File="Color.png" />
+    <Texture Name="Texture" File="Color.dds" />
   </Pass>
 
   <!-- The sphere is emissive and does not cast a shadow.
@@ -20,6 +20,6 @@
     <Parameter Name="DiffuseColor" Value="0.1,0.1,0.1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Parameter Name="Exposure" Value="2" />
-    <Texture Name="EmissiveTexture" File="Color.png" />
+    <Texture Name="EmissiveTexture" File="Color.dds" />
   </Pass>
 </Material>

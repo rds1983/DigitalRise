@@ -3,14 +3,14 @@
 <Material>
   <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMapAlphaTest" Profile="HiDef">
     <Parameter Name="ReferenceAlpha" Value="0.95" />
-    <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.png" />
+    <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.dds" />
   </Pass>
   <Pass Name="AlphaBlend" Effect="DigitalRune/Materials/Forward" Profile="HiDef" >
     <Parameter Name="Alpha" Value="1.0" />
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Parameter Name="SpecularPower" Value="1000" />
-    <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.png" />
-    <Texture Name="SpecularTexture" File="specular.png" />
+    <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.dds" />
+    <Texture Name="SpecularTexture" File="specular.dds" />
   </Pass>
 </Material>

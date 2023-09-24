@@ -5,6 +5,6 @@
     <Parameter Name="EmissiveColor" Value="0,0,0" />
     <Parameter Name="SpecularColor" Value="0.2,0.2,0.2" />
     <Parameter Name="SpecularPower" Value="6.4" />
-    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.tga" />
+    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.dds" />
   </Pass>
 </Material>

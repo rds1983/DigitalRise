@@ -188,7 +188,7 @@ namespace Samples.Graphics
 			var assetManager = services.GetInstance<AssetManager>();
 
 			// Load effect.
-			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/VolumetricLight.efb");
+			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/VolumetricLight.efb");
 			_parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];

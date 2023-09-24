@@ -7,9 +7,9 @@
     <Parameter Name="Alpha" Value="1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Parameter Name="SpecularPower" Value="20" />
-    <Texture Name="DiffuseTexture" File="Gravel-Diffuse.png" />
-    <Texture Name="SpecularTexture" File="Gravel-Specular.png" />
-    <Texture Name="NormalTexture" Format="NormalInvertY" File="Gravel-Normal.png"/>
+    <Texture Name="DiffuseTexture" File="Gravel-Diffuse.dds" />
+    <Texture Name="SpecularTexture" File="Gravel-Specular.dds" />
+    <Texture Name="NormalTexture" Format="NormalInvertY" File="Gravel-Normal.dds"/>
     <Parameter Name="Origin" Value="-512,-512" />
     <Parameter Name="Size" Value="1024,1024" />
     <Parameter Name="TileSize" Value="2.56" />

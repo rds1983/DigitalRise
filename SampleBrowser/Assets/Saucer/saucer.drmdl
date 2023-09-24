@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- This file was generated automatically by the DigitalRune Model Content Processor. -->
 
-<Model File="saucer.gltf"
+<Model File="saucer.glb"
        GenerateTangentFrames="False"
        PremultiplyVertexColors="True"
        RotationX="0" RotationY="0" RotationZ="0"

@@ -6,7 +6,7 @@
     <Parameter Name="EnvironmentMapSpecular" Value="0.1,0.1,0.1" />
     <Parameter Name="EnvironmentMapAmount" Value="0.4" />
     <Parameter Name="FresnelFactor" Value="0.7" />
-    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.tga" />
+    <Texture Name="Texture" PremultiplyAlpha="False" File="../Saucer/saucer_texture.dds" />
     <Texture Name="EnvironmentMap" File="Skybox.dds" />
   </Pass>
 </Material>

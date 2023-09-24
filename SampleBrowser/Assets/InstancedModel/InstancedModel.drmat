@@ -2,6 +2,6 @@
 
 <Material>
   <Pass Name="Default" Effect="InstancedModel.fx">
-    <Texture Name="Texture" File="InstancedModel.png" />
+    <Texture Name="Texture" File="InstancedModel.dds" />
   </Pass>
 </Material>
