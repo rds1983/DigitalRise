@@ -47,7 +47,7 @@ namespace DigitalRune.Graphics.PostProcessing
 
     //--------------------------------------------------------------
     #region Fields
-    private static readonly EffectData[] _effects = new EffectData[25];
+    private static readonly EffectData[] _effectsCache = new EffectData[25];
 		private readonly EffectData _effect;
 
 		//--------------------------------------------------------------
@@ -133,9 +133,9 @@ namespace DigitalRune.Graphics.PostProcessing
     {
 			var key = ((int)source) * 5 + (int)target;
 
-			if (_effects[key] != null)
+			if (_effectsCache[key] != null)
 			{
-				return _effects[key];
+				return _effectsCache[key];
 			}
 
 			var defs = new Dictionary<string, string>
@@ -150,7 +150,7 @@ namespace DigitalRune.Graphics.PostProcessing
 						effect.Parameters["ViewportSize"], effect.Parameters["SourceTexture"],
 						effect.Parameters["SourceEncodingParam"], effect.Parameters["TargetEncodingParam"]);
 
-			_effects[key] = result;
+			_effectsCache[key] = result;
 			return result;
 		}
 

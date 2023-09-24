@@ -291,7 +291,6 @@ float4 CameraMisc;
 #define CameraClearStart CameraMisc.z
 #define CameraClearEnd CameraMisc.w
 
-
 //-----------------------------------------------------------------------------
 // Structures
 //-----------------------------------------------------------------------------
@@ -307,18 +306,7 @@ struct VSOutput
   float4 Position : SV_Position;
 };
 
-
-struct PSInput
-{
-  float2 TexCoord0 : TEXCOORD0;
-  float2 TexCoord1 : TEXCOORD1;
-  float3 PositionWorld: TEXCOORD2;
-  float3 NormalOrWaveMapInfo : TEXCOORD3;
-  float4 PositionProj: TEXCOORD4;
-  float Depth: TEXCOORD5;
-  float Face : VFACE;
-};
-
+#if UNDERWATER
 
 struct VSUnderwaterOutput
 {
@@ -337,6 +325,7 @@ struct PSUnderwaterInput
   float Face : VFACE;
 };
 
+#endif
 
 //-----------------------------------------------------------------------------
 // Functions
@@ -344,20 +333,18 @@ struct PSUnderwaterInput
 
 VSOutput VS(float4 position : POSITION,
             float3 normal : NORMAL,
-            float2 texCoord : TEXCOORD,
-            uniform bool enableProjectedGrid,
-            uniform bool enableDisplacement)
+            float2 texCoord : TEXCOORD)
 {
   VSOutput output = (VSOutput)0;
   
   // ----- Compute PositionWorld and Normal
-  if (!enableProjectedGrid)
+#if !PROJECTED_GRID
   {
     // No projected grid.
     output.PositionWorld = mul(position, World).xyz;
     output.NormalOrWaveMapInfo = mul(normal, (float3x3)World);
   }
-  else
+#else
   {
     // Projected grid
     // To compute view direction, we know the 4 corners of the grid and use the
@@ -382,11 +369,10 @@ VSOutput VS(float4 position : POSITION,
     output.PositionWorld = PushedBackCameraPosition + viewDirection * (PushedBackCameraPosition.y - SurfaceLevel) / -viewDirection.y;
     output.NormalOrWaveMapInfo = float3(0, 1, 0);
   }
+#endif
   
   // ----- Apply displacement map.
-#if !OPENGL
-  if (enableDisplacement)
-  {
+#if DISPLACEMENT
     // Wave map texture coordinates.
     output.NormalOrWaveMapInfo.xy = output.PositionWorld.xz * WaveMapScale + WaveMapOffset;
     
@@ -432,7 +418,6 @@ VSOutput VS(float4 position : POSITION,
     // Clamp height to limits.
     float clampedHeight = clamp(output.PositionWorld.y, CameraClearLowerLimit, CameraClearUpperLimit);
     output.PositionWorld.y = lerp(clampedHeight, output.PositionWorld.y, cameraClearArea);
-  }
 #endif
   
   float4 positionView = mul(float4(output.PositionWorld, 1), View);
@@ -446,20 +431,6 @@ VSOutput VS(float4 position : POSITION,
   
   return output;
 }
-
-VSOutput VSMesh(float4 position : POSITION, float3 normal : NORMAL)
-{
-  return VS(position, normal, (float2)0, false, false);
-}
-VSOutput VSMeshDisplaced(float4 position : POSITION, float3 normal : NORMAL)
-{
-  return VS(position, normal, (float2)0, false, true);
-}
-VSOutput VSProjectedGrid(float2 texCoord : TEXCOORD0)
-{
-  return VS((float4)0, (float3)0, texCoord, true, true);
-}
-
 
 float3 ComputeCaustics(float3 position, float3 lightIntensity)
 {
@@ -519,15 +490,9 @@ float3 ComputeCaustics(float3 position, float3 lightIntensity)
   return caustics;
 }
 
-
-float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlow, uniform bool enableFoam, uniform bool enableCaustics) : COLOR
+float4 PS(VSOutput input) : COLOR
 {
   float epsilon = 0.00001; // To avoid division by zero.
-  
-  // Check if camera is underwater.
-  //   Face = -1 ... backside of surface
-  //   Face = +1 ... frontside of surface
-  bool isUnderwater = input.Face < 0;
   
   // Get view distance and direction.
   float3 cameraToPosition = input.PositionWorld - CameraPosition;
@@ -552,18 +517,19 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
   // Note: Others use intersectionSoftness = 1 - 1 / (1 + k * d)
   
   // Get geometric surface normal.
-  if (enableDisplacement)
+#if DISPLACEMENT
   {
     float distanceAttenuation = saturate(1 - (cameraDistance - DistanceAttenuationStart) / (DistanceAttenuationEnd - DistanceAttenuationStart));
     input.NormalOrWaveMapInfo = tex2D(WaveNormalSampler, input.NormalOrWaveMapInfo.xy).xzy * 2 - 1;
     input.NormalOrWaveMapInfo.xz *= distanceAttenuation;
   }
+#endif
   float3 surfaceNormal = normalize(input.NormalOrWaveMapInfo);
   
   // ----- Normal Map
   // Get bump map normal (unnormalized).
   float3 normal;
-  if (!enableFlow)
+#if !FLOW
   {
     // Combine two normal maps.
     float3 normal0 = GetNormalDxt5nm(NormalSampler0, input.TexCoord0);
@@ -573,7 +539,7 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
     
     normal = normal0 + normal1;
   }
-  else
+#else
   {
     // Speed from inclined surfaces.
     float2 slopeDirection = surfaceNormal.xz;
@@ -633,22 +599,19 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
     // Scale down normals to MinStrength at MaxSpeed.
     normal.xy = lerp(normal.xy, normal.xy * MinStrength, flowSpeed / MaxSpeed);
   }
+#endif
   
   // Convert bump map normal from texture space to world space.
   float3x3 cotangentFrame = CotangentFrame(surfaceNormal, input.PositionWorld, input.TexCoord0);
   normal = normalize(mul(normal, cotangentFrame));
   
-  // ----- Fresnel Factor
-  float fresnel = saturate(FresnelBias + FresnelScale * pow(abs(1.0 - max(dot(normal, -viewDirection), 0)), FresnelPower));
-  
-  // Less reflection near intersection.
-  fresnel *= intersectionSoftness;
-  
   // ----- Specular Highlight
   //float nDotL = saturate(dot(normal, -LightDirection));
   // Blinn-Phong specular
   float3 v = viewDirection;
-  v.y *= input.Face;  // Change y view direction for underwater specular.
+#if UNDERWATER
+  v.y *= -1;  // Change y view direction for underwater specular.
+#endif
   float3 h = -normalize(DirectionalLightDirection + v);
   float3 nDotH = saturate(dot(normal, h));
   
@@ -668,11 +631,9 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
   
   // ----- Reflection
   float3 reflection = ReflectionColor;
-  if (!isUnderwater && ReflectionType >= 0)
+#if !UNDERWATER  
+#if REFLECTION_PLANAR
   {
-    [branch]
-    if (ReflectionType == 0)
-    {
       // Planar Reflection.
       float3 normalInPlane = normal - surfaceNormal * dot(normal, surfaceNormal);
       float4 offset = float4(normalInPlane * ReflectionDistortion * intersectionSoftness, 0);
@@ -680,15 +641,16 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
       float4 reflectionTexCoord = mul(lookupPosition, ReflectionMatrix);
       //reflection *= tex2Dproj(PlanarReflectionSampler, reflectionTexCoord);
       reflection *= SampleLinearLod(PlanarReflectionSampler, float4(reflectionTexCoord.xy / reflectionTexCoord.w, 0, 0), ReflectionTextureSize).rgb;
-    }
-    else
-    {
+  }
+#elif REFLECTION_CUBE
+  {
       // Cube map reflection
       float3 reflectionNormal;
-      if (enableDisplacement)
+#if DISPLACEMENT
         reflectionNormal = lerp(float3(0, 1, 0), normal, ReflectionDistortion);
-      else
+#else
         reflectionNormal = lerp(surfaceNormal, normal, ReflectionDistortion);
+#endif
       
       float3 viewDirectionReflected = reflect(viewDirection, reflectionNormal);
       
@@ -698,8 +660,9 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
       
       viewDirectionReflected = mul((float3x3)ReflectionMatrix, viewDirectionReflected);
       reflection *= FromGamma(DecodeRgbm(texCUBElod(CubeReflectionSampler, float4(viewDirectionReflected, 0)).rgba, RgbmMaxValue).rgb);
-    }
   }
+#endif
+#endif
   
   // ----- Refraction
   float refractionStrength = RefractionDistortion * intersectionSoftness;
@@ -751,8 +714,8 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
   // Sample foam map.
   float3 foam = 0;
   float foamIntensity = 0;
-  [branch]
-  if (enableFoam)
+
+#if FOAM
   {
     foam = FoamColor * tex2D(FoamSampler, (input.PositionWorld.xz - normal.xz * FoamDistortion) * FoamMapScale).rgb;
     
@@ -771,11 +734,13 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
     // Apply light to foam,
     foam *= AmbientLight + nDotL * DirectionalLightIntensity;
   }
+#endif
   
   // ----- Subsurface scattering
   // Fake subsurface scattering of waves.
   float scatter = 0;
-  if (enableDisplacement)
+  
+#if DISPLACEMENT
   {
     scatter = 1;
     // More scattering when we look towards the light.
@@ -788,13 +753,19 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
     scatter *= max(0, input.PositionWorld.y - SurfaceLevel);
     //scatter *= saturate(1 + DirectionalLightDirection.y);
   }
+#endif
   
   lightColor *= (WaterColor + scatter * ScatterColor);
   
   // ----- Underwater Fog (see also comments in Underwater pass below).
   // Ray in the water.
-  float3 o = isUnderwater ? CameraPosition : input.PositionWorld;
-  float3 p = (isUnderwater && (refractionPosition.y > surfaceLevel)) ? input.PositionWorld : refractionPosition;
+#if UNDERWATER
+  float3 o = CameraPosition;
+  float3 p = (refractionPosition.y > surfaceLevel) ? input.PositionWorld : refractionPosition;
+#else
+  float3 o = input.PositionWorld;
+  float3 p = refractionPosition;
+#endif
   
   float3 d = p - o;
   float l = length(d);
@@ -846,56 +817,61 @@ float4 PS(PSInput input, uniform bool enableDisplacement, uniform bool enableFlo
   // Underwater the specular highlight is part of the refraction.
   // Foam hides the refraction.
   // Fog is applied only to the refraction.
-  if (isUnderwater)
+#if UNDERWATER  
   {
     refraction += sunLight;
     refraction = lerp(refraction, foam, foamIntensity);
     refraction = lerp(refraction, fogColor.rgb, fogIntensity);
   }
+#endif
   
   // Caustics
   float3 caustics = 0;
-  if (enableCaustics && !isUnderwater)
-    caustics = ComputeCaustics(refractionPosition, nDotL * DirectionalLightIntensity);
+  
+#if CAUSTICS && !UNDERWATER
+  caustics = ComputeCaustics(refractionPosition, nDotL * DirectionalLightIntensity);
+#endif
   
   // Apply underwater fog to refraction
-  float3 refractionColor = isUnderwater ? 1 : (RefractionColor + caustics);
-  float3 underwaterColor = refraction * refractionColor * attenuation + inscatter * lightColor;
+#if UNDERWATER
+  float3 refractionColor = 1;
+#else
+  float3 refractionColor = RefractionColor + caustics;
+#endif  
   
+  float3 underwaterColor = refraction * refractionColor * attenuation + inscatter * lightColor;
+
+#if !UNDERWATER  
+  // ----- Fresnel Factor
+  float fresnel = saturate(FresnelBias + FresnelScale * pow(abs(1.0 - max(dot(normal, -viewDirection), 0)), FresnelPower));
+  
+  // Less reflection near intersection.
+  fresnel *= intersectionSoftness;
+#else 
   // No reflection underwater.
-  if (isUnderwater)
-  {
-    fresnel = 0;
-  }
+  float fresnel = 0;
+#endif
   
   // Apply Fresnel.
   float3 color = lerp(underwaterColor, reflection, fresnel);
   
   // Above water, the specular highlight is added to reflection/refraction result.
   // Foam replaces the normal water color.
-  if (!isUnderwater)
-  {
-    color += sunLight;
-    color = lerp(color, foam, foamIntensity);
-    color = lerp(color, fogColor.rgb, fogIntensity);
-  }
+#if !UNDERWATER  
+  color += sunLight;
+  color = lerp(color, foam, foamIntensity);
+  color = lerp(color, fogColor.rgb, fogIntensity);
+#endif
   
   // Soft intersection. (No depth-based fade out when we are under water.)
-  if (!isUnderwater)
-    color = lerp(refraction, color, saturate(refractionDepthDelta * CameraFar / IntersectionSoftness));
-  
+#if !UNDERWATER  
+  color = lerp(refraction, color, saturate(refractionDepthDelta * CameraFar / IntersectionSoftness));
+#endif
+
   return float4(color, 1);
 }
 
-float4 PSBasic(PSInput input) : COLOR { return PS(input, false, false, false, false); }
-float4 PSFoam(PSInput input) : COLOR { return PS(input, false, false, true, false); }
-float4 PSFlow(PSInput input) : COLOR { return PS(input, false, true, false, false); }
-float4 PSFoamFlow(PSInput input) : COLOR { return PS(input, false, true, true, false); }
-float4 PSDisplaced(PSInput input) : COLOR { return PS(input, true, false, false, false); }
-float4 PSDisplacedFoam(PSInput input) : COLOR { return PS(input, true, false, true, false); }
-float4 PSDisplacedFoamCaustics(PSInput input) : COLOR { return PS(input, true, false, true, true); }
-
-
+#if UNDERWATER
 
 VSUnderwaterOutput VSUnderwater(float4 position : POSITION)
 {
@@ -908,8 +884,7 @@ VSUnderwaterOutput VSUnderwater(float4 position : POSITION)
   return output;
 }
 
-
-float4 PSUnderwater(PSUnderwaterInput input, uniform bool enableCaustics) : COLOR
+float4 PSUnderwater(PSUnderwaterInput input) : COLOR
 {
   // Get view distance and direction.
   float3 cameraToPosition = input.PositionWorld - CameraPosition;
@@ -964,15 +939,15 @@ float4 PSUnderwater(PSUnderwaterInput input, uniform bool enableCaustics) : COLO
   
   // Caustics
   float3 caustics = 0;
-  if (enableCaustics)
-    caustics = ComputeCaustics(scenePosition, nDotL * DirectionalLightIntensity);
+#if CAUSTICS
+  caustics = ComputeCaustics(scenePosition, nDotL * DirectionalLightIntensity);
+ #endif
   
   float3 color = sceneColor * (RefractionColor + caustics) * attenuation + inscatter * lightColor;
   return float4(color, 1);
 }
-float4 PSUnderwaterBasic(PSUnderwaterInput input) : COLOR { return PSUnderwater(input, false); }
-float4 PSUnderwaterCaustics(PSUnderwaterInput input) : COLOR { return PSUnderwater(input, true); }
 
+#endif
 
 //-----------------------------------------------------------------------------
 // Techniques
@@ -999,25 +974,18 @@ float4 PSUnderwaterCaustics(PSUnderwaterInput input) : COLOR { return PSUnderwat
 #endif
 
 
-technique
+technique Default
 {
-  // ----- Surface Mesh without Displacement
-  PASS(Mesh, VSMesh, PSBasic)
-  PASS(MeshFoam, VSMesh, PSFoam)
-  PASS(MeshFlow, VSMesh, PSFlow)
-  PASS(MeshFoamFlow, VSMesh, PSFoamFlow)
-    
-  // ----- Surface Mesh with Displacement
-  PASS(MeshDisplaced, VSMeshDisplaced, PSDisplaced)
-  PASS(MeshDisplacedFoam, VSMeshDisplaced, PSDisplacedFoam)
-  PASS(MeshDisplacedFoamCaustics, VSMeshDisplaced, PSDisplacedFoamCaustics)
-    
-  // ----- Projected Grid with Displacement
-  PASS(ProjectedGrid, VSProjectedGrid, PSDisplaced)
-  PASS(ProjectedGridFoam, VSProjectedGrid, PSDisplacedFoam)
-  PASS(ProjectedGridFoamCaustics, VSProjectedGrid, PSDisplacedFoamCaustics)
-    
-  // ----- Underwater effect
-  PASS(Underwater, VSUnderwater, PSUnderwaterBasic)
-  PASS(UnderwaterCaustics, VSUnderwater, PSUnderwaterCaustics)
+  pass
+  {
+    VertexShader = compile vs_3_0 VS();
+    PixelShader = compile ps_3_0 PS();
+  }
+#if UNDERWATER
+  pass
+  {
+    VertexShader = compile vs_3_0 VSUnderwater();
+    PixelShader = compile ps_3_0 PSUnderwater();
+  }
+#endif  
 }

@@ -48,6 +48,179 @@ namespace DigitalRune.Graphics.Rendering
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
   public class WaterRenderer : SceneNodeRenderer
   {
+    private enum ShaderType
+    {
+      Simple,
+      Foam,
+      Flow,
+      FoamFlow,
+      Displacement,
+      DisplacementFoam,
+      DisplacementFoamCaustics,
+      ProjectedGrid,
+      ProjectedGridFoam,
+      ProjectedGridFoamCaustics
+    }
+
+    private enum ReflectionType
+    {
+      None,
+      Planar,
+      Cube
+    }
+
+    private const int EffectsCount = 60;
+
+    private static EffectData[] _effectCache = new EffectData[EffectsCount];
+
+    private class EffectData
+    {
+      public readonly Effect _effect;
+			public readonly EffectParameter _parameterView;
+			public readonly EffectParameter _parameterProjection;
+			public readonly EffectParameter _parameterCameraParameters;
+			public readonly EffectParameter _parameterViewportSize;
+			public readonly EffectParameter _parameterTime;
+
+			public readonly EffectParameter _parameterAmbientLight;
+			public readonly EffectParameter _parameterDirectionalLightDirection;
+			public readonly EffectParameter _parameterDirectionalLightIntensity;
+
+			public readonly EffectParameter _parameterGBuffer0;
+			public readonly EffectParameter _parameterRefractionTexture;
+
+			public readonly EffectParameter _parameterPushedBackCameraPosition;
+			public readonly EffectParameter _parameterNearCorners;
+			public readonly EffectParameter _parameterProjectedGridParameters;
+
+			public readonly EffectParameter _parameterWorld;
+			public readonly EffectParameter _parameterSurfaceLevel;
+
+			public readonly EffectParameter _parameterReflectionTypeParameters;
+			public readonly EffectParameter _parameterReflectionMatrix;
+
+			public readonly EffectParameter _parameterReflectionTextureSize;
+			public readonly EffectParameter _parameterPlanarReflectionMap;
+			public readonly EffectParameter _parameterCubeReflectionMap;
+
+			public readonly EffectParameter _parameterNormalMap0;
+			public readonly EffectParameter _parameterNormalMap1;
+			public readonly EffectParameter _parameterNormalMap0Parameters;
+			public readonly EffectParameter _parameterNormalMap1Parameters;
+			public readonly EffectParameter _parameterSpecularParameters;
+			public readonly EffectParameter _parameterReflectionParameters;
+			public readonly EffectParameter _parameterRefractionParameters;
+			public readonly EffectParameter _parameterUnderwaterFogParameters;
+			public readonly EffectParameter _parameterFresnelParameters;
+			public readonly EffectParameter _parameterIntersectionSoftness;
+			public readonly EffectParameter _parameterWaterColor;
+			public readonly EffectParameter _parameterScatterColor;
+			public readonly EffectParameter _parameterFoamMap;
+			public readonly EffectParameter _parameterFoamParameters0;
+			public readonly EffectParameter _parameterFoamParameters1;
+			public readonly EffectParameter _parameterCausticsSampleCount;
+			public readonly EffectParameter _parameterCausticsParameters;
+
+			public readonly EffectParameter _parameterWaveMapParameters;
+			public readonly EffectParameter _parameterWaveMapSize;
+			public readonly EffectParameter _parameterDisplacementTexture;
+			public readonly EffectParameter _parameterWaveNormalMap;
+
+			public readonly EffectParameter _parameterFlowParameters0;
+			public readonly EffectParameter _parameterFlowParameters1;
+			public readonly EffectParameter _parameterFlowMapTextureMatrix;
+			public readonly EffectParameter _parameterFlowMapWorldMatrix;
+			public readonly EffectParameter _parameterFlowMap;
+			public readonly EffectParameter _parameterNoiseMap;
+
+			public readonly EffectParameter _parameterFogColor0;
+			public readonly EffectParameter _parameterFogColor1;
+			public readonly EffectParameter _parameterFogHeights;
+			public readonly EffectParameter _parameterFogParameters;
+			public readonly EffectParameter _parameterFogScatteringSymmetry;
+
+			public readonly EffectParameter _parameterCameraMisc;
+
+      public EffectData(Effect effect)
+      {
+        _effect = effect;
+
+				_parameterView = _effect.Parameters["View"];
+				_parameterProjection = _effect.Parameters["Projection"];
+				_parameterCameraParameters = _effect.Parameters["CameraParameters"];
+				_parameterViewportSize = _effect.Parameters["ViewportSize"];
+				_parameterTime = _effect.Parameters["Time"];
+
+				_parameterAmbientLight = _effect.Parameters["AmbientLight"];
+				_parameterDirectionalLightDirection = _effect.Parameters["DirectionalLightDirection"];
+				_parameterDirectionalLightIntensity = _effect.Parameters["DirectionalLightIntensity"];
+
+				_parameterGBuffer0 = _effect.Parameters["GBuffer0"];
+				_parameterRefractionTexture = _effect.Parameters["RefractionTexture"];
+
+				_parameterPushedBackCameraPosition = _effect.Parameters["PushedBackCameraPosition"];
+				_parameterNearCorners = _effect.Parameters["NearCorners"];
+
+				_parameterWorld = _effect.Parameters["World"];
+				_parameterSurfaceLevel = _effect.Parameters["SurfaceLevel"];
+				_parameterProjectedGridParameters = _effect.Parameters["ProjectedGridParameters"];
+
+				_parameterReflectionTypeParameters = _effect.Parameters["ReflectionTypeParameters"];
+				_parameterReflectionMatrix = _effect.Parameters["ReflectionMatrix"];
+				_parameterReflectionTextureSize = _effect.Parameters["ReflectionTextureSize"];
+				_parameterPlanarReflectionMap = _effect.Parameters["PlanarReflectionMap"];
+				_parameterCubeReflectionMap = _effect.Parameters["CubeReflectionMap"];
+
+				_parameterNormalMap0 = _effect.Parameters["NormalMap0"];
+				_parameterNormalMap1 = _effect.Parameters["NormalMap1"];
+				_parameterNormalMap0Parameters = _effect.Parameters["NormalMap0Parameters"];
+				_parameterNormalMap1Parameters = _effect.Parameters["NormalMap1Parameters"];
+				_parameterSpecularParameters = _effect.Parameters["SpecularParameters"];
+				_parameterReflectionParameters = _effect.Parameters["ReflectionParameters"];
+				_parameterRefractionParameters = _effect.Parameters["RefractionParameters"];
+				_parameterUnderwaterFogParameters = _effect.Parameters["UnderwaterFogParameters"];
+				_parameterFresnelParameters = _effect.Parameters["FresnelParameters"];
+				_parameterIntersectionSoftness = _effect.Parameters["IntersectionSoftness"];
+				_parameterWaterColor = _effect.Parameters["WaterColor"];
+				_parameterScatterColor = _effect.Parameters["ScatterColor"];
+				_parameterFoamMap = _effect.Parameters["FoamMap"];
+				_parameterFoamParameters0 = _effect.Parameters["FoamParameters0"];
+				_parameterFoamParameters1 = _effect.Parameters["FoamParameters1"];
+				_parameterCausticsSampleCount = _effect.Parameters["CausticsSampleCount"];
+				_parameterCausticsParameters = _effect.Parameters["CausticsParameters"];
+
+				_parameterWaveMapParameters = _effect.Parameters["WaveMapParameters"];
+				_parameterWaveMapSize = _effect.Parameters["WaveMapSize"];
+				_parameterDisplacementTexture = _effect.Parameters["DisplacementTexture"];
+				_parameterWaveNormalMap = _effect.Parameters["WaveNormalMap"];
+				_parameterFlowParameters0 = _effect.Parameters["FlowParameters0"];
+				_parameterFlowParameters1 = _effect.Parameters["FlowParameters1"];
+				_parameterFlowMapTextureMatrix = _effect.Parameters["FlowMapTextureMatrix"];
+				_parameterFlowMapWorldMatrix = _effect.Parameters["FlowMapWorldMatrix"];
+				_parameterFlowMap = _effect.Parameters["FlowMap"];
+				_parameterNoiseMap = _effect.Parameters["NoiseMap"];
+
+				_parameterFogColor0 = _effect.Parameters["FogColor0"];
+				_parameterFogColor1 = _effect.Parameters["FogColor1"];
+				_parameterFogHeights = _effect.Parameters["FogHeights"];
+				_parameterFogParameters = _effect.Parameters["FogParameters"];
+				_parameterFogScatteringSymmetry = _effect.Parameters["FogScatteringSymmetry"];
+
+				_parameterCameraMisc = _effect.Parameters["CameraMisc"];
+			}
+
+      public void Apply(bool underwater = false)
+      {
+        if (underwater)
+        {
+          _effect.CurrentTechnique.Passes[1].Apply();
+        } else
+        {
+					_effect.CurrentTechnique.Passes[0].Apply();
+				}
+			}
+		}
+
     // TODO:
     // To remove pulsing problem:
     // - Try to scale normals down when 1 normal map is fully visible. (When both
@@ -60,87 +233,6 @@ namespace DigitalRune.Graphics.Rendering
     //--------------------------------------------------------------
 
     private readonly IGraphicsService _graphicsService;
-
-    private readonly Effect _effect;
-
-    private readonly EffectParameter _parameterView;
-    private readonly EffectParameter _parameterProjection;
-    private readonly EffectParameter _parameterCameraParameters;
-    private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterTime;
-
-    private readonly EffectParameter _parameterAmbientLight;
-    private readonly EffectParameter _parameterDirectionalLightDirection;
-    private readonly EffectParameter _parameterDirectionalLightIntensity;
-
-    private readonly EffectParameter _parameterGBuffer0;
-    private readonly EffectParameter _parameterRefractionTexture;
-
-    private readonly EffectParameter _parameterPushedBackCameraPosition;
-    private readonly EffectParameter _parameterNearCorners;
-    private readonly EffectParameter _parameterProjectedGridParameters;
-
-    private readonly EffectParameter _parameterWorld;
-    private readonly EffectParameter _parameterSurfaceLevel;
-
-    private readonly EffectParameter _parameterReflectionTypeParameters;
-    private readonly EffectParameter _parameterReflectionMatrix;
-
-    private readonly EffectParameter _parameterReflectionTextureSize;
-    private readonly EffectParameter _parameterPlanarReflectionMap;
-    private readonly EffectParameter _parameterCubeReflectionMap;
-
-    private readonly EffectParameter _parameterNormalMap0;
-    private readonly EffectParameter _parameterNormalMap1;
-    private readonly EffectParameter _parameterNormalMap0Parameters;
-    private readonly EffectParameter _parameterNormalMap1Parameters;
-    private readonly EffectParameter _parameterSpecularParameters;
-    private readonly EffectParameter _parameterReflectionParameters;
-    private readonly EffectParameter _parameterRefractionParameters;
-    private readonly EffectParameter _parameterUnderwaterFogParameters;
-    private readonly EffectParameter _parameterFresnelParameters;
-    private readonly EffectParameter _parameterIntersectionSoftness;
-    private readonly EffectParameter _parameterWaterColor;
-    private readonly EffectParameter _parameterScatterColor;
-    private readonly EffectParameter _parameterFoamMap;
-    private readonly EffectParameter _parameterFoamParameters0;
-    private readonly EffectParameter _parameterFoamParameters1;
-    private readonly EffectParameter _parameterCausticsSampleCount;
-    private readonly EffectParameter _parameterCausticsParameters;
-
-    private readonly EffectParameter _parameterWaveMapParameters;
-    private readonly EffectParameter _parameterWaveMapSize;
-    private readonly EffectParameter _parameterDisplacementTexture;
-    private readonly EffectParameter _parameterWaveNormalMap;
-
-    private readonly EffectParameter _parameterFlowParameters0;
-    private readonly EffectParameter _parameterFlowParameters1;
-    private readonly EffectParameter _parameterFlowMapTextureMatrix;
-    private readonly EffectParameter _parameterFlowMapWorldMatrix;
-    private readonly EffectParameter _parameterFlowMap;
-    private readonly EffectParameter _parameterNoiseMap;
-
-    private readonly EffectParameter _parameterFogColor0;
-    private readonly EffectParameter _parameterFogColor1;
-    private readonly EffectParameter _parameterFogHeights;
-    private readonly EffectParameter _parameterFogParameters;
-    private readonly EffectParameter _parameterFogScatteringSymmetry;
-
-    private readonly EffectParameter _parameterCameraMisc;
-
-    private readonly EffectPass _passMesh;
-    private readonly EffectPass _passMeshFoam;
-    private readonly EffectPass _passMeshFlow;
-    private readonly EffectPass _passMeshFoamFlow;
-    private readonly EffectPass _passMeshDisplaced;
-    private readonly EffectPass _passMeshDisplacedFoam;
-    private readonly EffectPass _passMeshDisplacedFoamCaustics;
-    private readonly EffectPass _passProjectedGrid;
-    private readonly EffectPass _passProjectedGridFoam;
-    private readonly EffectPass _passProjectedGridFoamCaustics;
-    private readonly EffectPass _passUnderwater;
-    private readonly EffectPass _passUnderwaterCaustics;
-
     private RebuildZBufferRenderer _defaultRebuildZBufferRenderer;
 
     // For rendering if WaterNode.Volume is null.
@@ -152,6 +244,7 @@ namespace DigitalRune.Graphics.Rendering
 
     // Noise texture for flow.
     private readonly Texture2D _noiseMap;
+    private readonly List<int> _usedEffectsMap = new List<int>();
     #endregion
 
 
@@ -191,85 +284,6 @@ namespace DigitalRune.Graphics.Rendering
         throw new NotSupportedException("The WaterRenderer does not support the Reach profile.");
 
       _graphicsService = graphicsService;
-
-      _effect = graphicsService.GetStockEffect("DigitalRune/Water/Water");
-
-      _parameterView = _effect.Parameters["View"];
-      _parameterProjection = _effect.Parameters["Projection"];
-      _parameterCameraParameters = _effect.Parameters["CameraParameters"];
-      _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterTime = _effect.Parameters["Time"];
-
-      _parameterAmbientLight = _effect.Parameters["AmbientLight"];
-      _parameterDirectionalLightDirection = _effect.Parameters["DirectionalLightDirection"];
-      _parameterDirectionalLightIntensity = _effect.Parameters["DirectionalLightIntensity"];
-
-      _parameterGBuffer0 = _effect.Parameters["GBuffer0"];
-      _parameterRefractionTexture = _effect.Parameters["RefractionTexture"];
-
-      _parameterPushedBackCameraPosition = _effect.Parameters["PushedBackCameraPosition"];
-      _parameterNearCorners = _effect.Parameters["NearCorners"];
-
-      _parameterWorld = _effect.Parameters["World"];
-      _parameterSurfaceLevel = _effect.Parameters["SurfaceLevel"];
-      _parameterProjectedGridParameters = _effect.Parameters["ProjectedGridParameters"];
-
-      _parameterReflectionTypeParameters = _effect.Parameters["ReflectionTypeParameters"];
-      _parameterReflectionMatrix = _effect.Parameters["ReflectionMatrix"];
-      _parameterReflectionTextureSize = _effect.Parameters["ReflectionTextureSize"];
-      _parameterPlanarReflectionMap = _effect.Parameters["PlanarReflectionMap"];
-      _parameterCubeReflectionMap = _effect.Parameters["CubeReflectionMap"];
-
-      _parameterNormalMap0 = _effect.Parameters["NormalMap0"];
-      _parameterNormalMap1 = _effect.Parameters["NormalMap1"];
-      _parameterNormalMap0Parameters = _effect.Parameters["NormalMap0Parameters"];
-      _parameterNormalMap1Parameters = _effect.Parameters["NormalMap1Parameters"];
-      _parameterSpecularParameters = _effect.Parameters["SpecularParameters"];
-      _parameterReflectionParameters = _effect.Parameters["ReflectionParameters"];
-      _parameterRefractionParameters = _effect.Parameters["RefractionParameters"];
-      _parameterUnderwaterFogParameters = _effect.Parameters["UnderwaterFogParameters"];
-      _parameterFresnelParameters = _effect.Parameters["FresnelParameters"];
-      _parameterIntersectionSoftness = _effect.Parameters["IntersectionSoftness"];
-      _parameterWaterColor = _effect.Parameters["WaterColor"];
-      _parameterScatterColor = _effect.Parameters["ScatterColor"];
-      _parameterFoamMap = _effect.Parameters["FoamMap"];
-      _parameterFoamParameters0 = _effect.Parameters["FoamParameters0"];
-      _parameterFoamParameters1 = _effect.Parameters["FoamParameters1"];
-      _parameterCausticsSampleCount = _effect.Parameters["CausticsSampleCount"];
-      _parameterCausticsParameters = _effect.Parameters["CausticsParameters"];
-
-      _parameterWaveMapParameters = _effect.Parameters["WaveMapParameters"];
-      _parameterWaveMapSize = _effect.Parameters["WaveMapSize"];
-      _parameterDisplacementTexture = _effect.Parameters["DisplacementTexture"];
-      _parameterWaveNormalMap = _effect.Parameters["WaveNormalMap"];
-      _parameterFlowParameters0 = _effect.Parameters["FlowParameters0"];
-      _parameterFlowParameters1 = _effect.Parameters["FlowParameters1"];
-      _parameterFlowMapTextureMatrix = _effect.Parameters["FlowMapTextureMatrix"];
-      _parameterFlowMapWorldMatrix = _effect.Parameters["FlowMapWorldMatrix"];
-      _parameterFlowMap = _effect.Parameters["FlowMap"];
-      _parameterNoiseMap = _effect.Parameters["NoiseMap"];
-
-      _parameterFogColor0 = _effect.Parameters["FogColor0"];
-      _parameterFogColor1 = _effect.Parameters["FogColor1"];
-      _parameterFogHeights = _effect.Parameters["FogHeights"];
-      _parameterFogParameters = _effect.Parameters["FogParameters"];
-      _parameterFogScatteringSymmetry = _effect.Parameters["FogScatteringSymmetry"];
-
-      _parameterCameraMisc = _effect.Parameters["CameraMisc"];
-
-      _passMesh = _effect.Techniques[0].Passes["Mesh"];
-      _passMeshFoam = _effect.Techniques[0].Passes["MeshFoam"];
-      _passMeshFlow = _effect.Techniques[0].Passes["MeshFlow"];
-      _passMeshFoamFlow = _effect.Techniques[0].Passes["MeshFoamFlow"];
-      _passMeshDisplaced = _effect.Techniques[0].Passes["MeshDisplaced"];
-      _passMeshDisplacedFoam = _effect.Techniques[0].Passes["MeshDisplacedFoam"];
-      _passMeshDisplacedFoamCaustics = _effect.Techniques[0].Passes["MeshDisplacedFoamCaustics"];
-      _passProjectedGrid = _effect.Techniques[0].Passes["ProjectedGrid"];
-      _passProjectedGridFoam = _effect.Techniques[0].Passes["ProjectedGridFoam"];
-      _passProjectedGridFoamCaustics = _effect.Techniques[0].Passes["ProjectedGridFoamCaustics"];
-      _passUnderwater = _effect.Techniques[0].Passes["Underwater"];
-      _passUnderwaterCaustics = _effect.Techniques[0].Passes["UnderwaterCaustics"];
-
       _noiseMap = NoiseHelper.GetNoiseTexture(graphicsService, 64, 5);
 
       ProjectedGridParameters = new ProjectedGridParameters(graphicsService.GraphicsDevice);
@@ -304,8 +318,86 @@ namespace DigitalRune.Graphics.Rendering
     #region Methods
     //--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    public override bool CanRender(SceneNode node, RenderContext context)
+    private static int GetEffectKey(ShaderType shaderType, ReflectionType reflectionType, bool underwater)
+    {
+      return (int)shaderType * 6 + (int)reflectionType * 2 + (underwater ? 1 : 0);
+    }
+
+    private static EffectData GetEffect(IGraphicsService service, 
+      ShaderType shaderType, ReflectionType reflectionType, bool underwater)
+    {
+      var key = GetEffectKey(shaderType, reflectionType, underwater);
+      if (_effectCache[key] != null)
+      {
+        return _effectCache[key];
+      }
+
+      var dict = new Dictionary<string, string>();
+
+			switch (shaderType)
+			{
+				case ShaderType.Simple:
+					break;
+				case ShaderType.Foam:
+					dict["FOAM"] = "1";
+					break;
+				case ShaderType.Flow:
+					dict["FLOW"] = "1";
+					break;
+				case ShaderType.FoamFlow:
+					dict["FOAM"] = "1";
+					dict["FLOW"] = "1";
+					break;
+				case ShaderType.Displacement:
+					dict["DISPLACEMENT"] = "1";
+					break;
+				case ShaderType.DisplacementFoam:
+					dict["DISPLACEMENT"] = "1";
+					dict["FOAM"] = "1";
+					break;
+				case ShaderType.DisplacementFoamCaustics:
+					dict["DISPLACEMENT"] = "1";
+					dict["FOAM"] = "1";
+					dict["CAUSTICS"] = "1";
+					break;
+				case ShaderType.ProjectedGrid:
+					dict["PROJECTED_GRID"] = "1";
+					dict["DISPLACEMENT"] = "1";
+					break;
+				case ShaderType.ProjectedGridFoam:
+					dict["PROJECTED_GRID"] = "1";
+					dict["DISPLACEMENT"] = "1";
+					dict["FOAM"] = "1";
+					break;
+				case ShaderType.ProjectedGridFoamCaustics:
+					dict["PROJECTED_GRID"] = "1";
+					dict["DISPLACEMENT"] = "1";
+					dict["FOAM"] = "1";
+					dict["CAUSTICS"] = "1";
+					break;
+			}
+
+			if (reflectionType == ReflectionType.Planar)
+      {
+				dict["REFLECTION_PLANAR"] = "1";
+			}
+			else if (reflectionType == ReflectionType.Cube)
+      {
+				dict["REFLECTION_CUBE"] = "1";
+			}
+
+      if (underwater)
+      {
+        dict["UNDERWATER"] = "1";
+      }
+
+      var effect = service.GetStockEffect("Water/Water", dict);
+      _effectCache[key] = new EffectData(effect);
+      return _effectCache[key];
+		}
+
+		/// <inheritdoc/>
+		public override bool CanRender(SceneNode node, RenderContext context)
     {
       return node is WaterNode;
     }
@@ -326,7 +418,6 @@ namespace DigitalRune.Graphics.Rendering
       if (numberOfNodes == 0)
         return;
 
-      context.Validate(_effect);
       context.ThrowIfCameraMissing();
 
       float deltaTime = (float)context.DeltaTime.TotalSeconds;
@@ -360,66 +451,122 @@ namespace DigitalRune.Graphics.Rendering
 
       #region ----- Common Effect Parameters -----
 
-      _parameterView.SetValue(view);
-      _parameterProjection.SetValue(projection);
-      _parameterCameraParameters.SetValue(new Vector4(
-        (Vector3)cameraNode.PoseWorld.Position,
-        cameraNode.Camera.Projection.Far));
-
-      var viewport = graphicsDevice.Viewport;
-      _parameterViewportSize.SetValue(new Vector2(viewport.Width, viewport.Height));
-
-      _parameterTime.SetValue((float)context.Time.TotalSeconds);
-
-      // Query ambient and directional lights.
-      var lightQuery = context.Scene.Query<GlobalLightQuery>(cameraNode, context);
-      Vector3F ambientLight = Vector3F.Zero;
-      if (lightQuery.AmbientLights.Count > 0)
-      {
-        var light = (AmbientLight)lightQuery.AmbientLights[0].Light;
-        ambientLight = light.Color * light.Intensity * light.HdrScale;
-      }
-
-      _parameterAmbientLight.SetValue((Vector3)ambientLight);
-
-      Vector3F directionalLightDirection = new Vector3F(0, -1, 0);
-      Vector3F directionalLightIntensity = Vector3F.Zero;
-      if (lightQuery.DirectionalLights.Count > 0)
-      {
-        var lightNode = lightQuery.DirectionalLights[0];
-        var light = (DirectionalLight)lightNode.Light;
-        directionalLightDirection = -lightNode.PoseWorld.Orientation.GetColumn(2);
-        directionalLightIntensity = light.Color * light.SpecularIntensity * light.HdrScale;
-      }
-
-      _parameterDirectionalLightDirection.SetValue((Vector3)directionalLightDirection);
-      _parameterDirectionalLightIntensity.SetValue((Vector3)directionalLightIntensity);
-
-      _parameterGBuffer0.SetValue(context.GBuffer0);
-
-      if (_parameterNoiseMap != null)
-        _parameterNoiseMap.SetValue(_noiseMap);
-      #endregion
-
-      #region ----- Fog Parameters -----
-
-      var fogNodes = context.Scene.Query<FogQuery>(cameraNode, context).FogNodes;
-      SetFogParameters(fogNodes, cameraNode, directionalLightDirection);
-      #endregion
-
-      _parameterProjectedGridParameters.SetValue(new Vector3(
-          ProjectedGridParameters.EdgeAttenuation,
-          ProjectedGridParameters.DistanceAttenuationStart,
-          ProjectedGridParameters.DistanceAttenuationEnd));
-
       for (int i = 0; i < numberOfNodes; i++)
       {
         var node = nodes[i] as WaterNode;
         if (node == null)
           continue;
 
-        // Node is visible in current frame.
-        node.LastFrame = frame;
+				bool isCameraUnderwater = node.EnableUnderwaterEffect && node.IsUnderwater(cameraNode.PoseWorld.Position);
+				// Waves should not cut the near plane. --> Bend waves up or down if necessary.
+
+				// Limits
+				float upperLimit; // Waves must not move above this value.
+				float lowerLimit; // Waves must not move below this value.
+
+				if (!isCameraUnderwater)
+				{
+					// Bend waves down below the camera.
+					upperLimit = cameraNode.PoseWorld.Position.Y - nearPlaneRadius;
+					lowerLimit = -1e20f;
+
+					if (node.EnableUnderwaterEffect)
+					{
+						if (node.Waves == null || node.Waves.DisplacementMap == null)
+						{
+							// No displacement. The wave bending stuff does not work because the surface
+							// is usually not tessellated. We have to render the underwater geometry when
+							// camera near plane might cut the water surface.
+							if (node.Volume == null)
+							{
+								// Test water plane.
+								isCameraUnderwater = (cameraNode.PoseWorld.Position.Y - nearPlaneRadius) < node.PoseWorld.Position.Y;
+							}
+							else
+							{
+								// Test water AABB.
+								var aabb = node.Aabb;
+								aabb.Minimum -= new Vector3F(nearPlaneRadius);
+								aabb.Maximum += new Vector3F(nearPlaneRadius);
+								isCameraUnderwater = GeometryHelper.HaveContact(aabb, cameraNode.PoseWorld.Position);
+							}
+						}
+					}
+				}
+				else
+				{
+					// Camera is underwater, bend triangles up above camera.
+					upperLimit = 1e20f;
+					lowerLimit = cameraNode.PoseWorld.Position.Y + nearPlaneRadius;
+				}
+
+        var useProjectedGrid = true;
+        if (node.Volume != null)
+        {
+          useProjectedGrid = false;
+        }
+        else if (node.Waves == null || node.Waves.DisplacementMap == null)
+        {
+					useProjectedGrid = false;
+				}
+
+				var effectData = GetEffectData(node, useProjectedGrid, isCameraUnderwater);
+				context.Validate(effectData._effect);
+
+				effectData._parameterView.SetValue(view);
+				effectData._parameterProjection.SetValue(projection);
+				effectData._parameterCameraParameters.SetValue(new Vector4(
+					(Vector3)cameraNode.PoseWorld.Position,
+					cameraNode.Camera.Projection.Far));
+
+				var viewport = graphicsDevice.Viewport;
+				effectData._parameterViewportSize.SetValue(new Vector2(viewport.Width, viewport.Height));
+
+				effectData._parameterTime.SetValue((float)context.Time.TotalSeconds);
+
+				// Query ambient and directional lights.
+				var lightQuery = context.Scene.Query<GlobalLightQuery>(cameraNode, context);
+				Vector3F ambientLight = Vector3F.Zero;
+				if (lightQuery.AmbientLights.Count > 0)
+				{
+					var light = (AmbientLight)lightQuery.AmbientLights[0].Light;
+					ambientLight = light.Color * light.Intensity * light.HdrScale;
+				}
+
+				effectData._parameterAmbientLight.SetValue((Vector3)ambientLight);
+
+				Vector3F directionalLightDirection = new Vector3F(0, -1, 0);
+				Vector3F directionalLightIntensity = Vector3F.Zero;
+				if (lightQuery.DirectionalLights.Count > 0)
+				{
+					var lightNode = lightQuery.DirectionalLights[0];
+					var light = (DirectionalLight)lightNode.Light;
+					directionalLightDirection = -lightNode.PoseWorld.Orientation.GetColumn(2);
+					directionalLightIntensity = light.Color * light.SpecularIntensity * light.HdrScale;
+				}
+
+				effectData._parameterDirectionalLightDirection.SetValue((Vector3)directionalLightDirection);
+				effectData._parameterDirectionalLightIntensity.SetValue((Vector3)directionalLightIntensity);
+
+				effectData._parameterGBuffer0.SetValue(context.GBuffer0);
+
+				if (effectData._parameterNoiseMap != null)
+					effectData._parameterNoiseMap.SetValue(_noiseMap);
+				#endregion
+
+				#region ----- Fog Parameters -----
+
+				var fogNodes = context.Scene.Query<FogQuery>(cameraNode, context).FogNodes;
+				SetFogParameters(effectData, fogNodes, cameraNode, directionalLightDirection);
+				#endregion
+
+				effectData._parameterProjectedGridParameters.SetValue(new Vector3(
+						ProjectedGridParameters.EdgeAttenuation,
+						ProjectedGridParameters.DistanceAttenuationStart,
+						ProjectedGridParameters.DistanceAttenuationEnd));
+
+				// Node is visible in current frame.
+				node.LastFrame = frame;
 
         var data = node.RenderData as WaterRenderData;
         if (data == null)
@@ -429,15 +576,8 @@ namespace DigitalRune.Graphics.Rendering
         }
 
         var water = node.Water;
-        bool isCameraUnderwater = node.EnableUnderwaterEffect && node.IsUnderwater(cameraNode.PoseWorld.Position);
 
         #region ----- Wave bending -----
-
-        // Waves should not cut the near plane. --> Bend waves up or down if necessary.
-
-        // Limits
-        float upperLimit; // Waves must not move above this value.
-        float lowerLimit; // Waves must not move below this value.
 
         // Bending fades in over interval [bendStart, bendEnd]:
         //   distance ≤ bendStart ............. Wave is bent up or down.
@@ -446,43 +586,7 @@ namespace DigitalRune.Graphics.Rendering
         float bendStart = 1 * nearPlaneRadius;
         float bendEnd = 10 * nearPlaneRadius;
 
-        if (!isCameraUnderwater)
-        {
-          // Bend waves down below the camera.
-          upperLimit = cameraNode.PoseWorld.Position.Y - nearPlaneRadius;
-          lowerLimit = -1e20f;
-
-          if (node.EnableUnderwaterEffect)
-          {
-            if (node.Waves == null || node.Waves.DisplacementMap == null)
-            {
-              // No displacement. The wave bending stuff does not work because the surface
-              // is usually not tessellated. We have to render the underwater geometry when
-              // camera near plane might cut the water surface.
-              if (node.Volume == null)
-              {
-                // Test water plane.
-                isCameraUnderwater = (cameraNode.PoseWorld.Position.Y - nearPlaneRadius) < node.PoseWorld.Position.Y;
-              }
-              else
-              {
-                // Test water AABB.
-                var aabb = node.Aabb;
-                aabb.Minimum -= new Vector3F(nearPlaneRadius);
-                aabb.Maximum += new Vector3F(nearPlaneRadius);
-                isCameraUnderwater = GeometryHelper.HaveContact(aabb, cameraNode.PoseWorld.Position);
-              }
-            }
-          }
-        }
-        else
-        {
-          // Camera is underwater, bend triangles up above camera.
-          upperLimit = 1e20f;
-          lowerLimit = cameraNode.PoseWorld.Position.Y + nearPlaneRadius;
-        }
-
-        _parameterCameraMisc.SetValue(new Vector4(upperLimit, lowerLimit, bendStart, bendEnd));
+				effectData._parameterCameraMisc.SetValue(new Vector4(upperLimit, lowerLimit, bendStart, bendEnd));
         #endregion
 
         // Update the submesh for the given water volume.
@@ -514,63 +618,69 @@ namespace DigitalRune.Graphics.Rendering
           data.NormalMapOffset1.X = MathHelper.Frac(data.NormalMapOffset1.X);
           data.NormalMapOffset1.Y = MathHelper.Frac(data.NormalMapOffset1.Y);
         }
-        #endregion
+				#endregion
 
-        _parameterSurfaceLevel.SetValue(node.PoseWorld.Position.Y);
+				effectData._parameterSurfaceLevel.SetValue(node.PoseWorld.Position.Y);
 
         #region ----- Reflection Parameters -----
 
-        if (node.PlanarReflection != null
-            && node.PlanarReflection.ActualIsEnabled
-            && node.PlanarReflection.RenderToTexture.Texture is Texture2D)
-        {
-          // Planar reflection.
-          var renderToTexture = node.PlanarReflection.RenderToTexture;
-          var texture = (Texture2D)renderToTexture.Texture;
+        var reflectionType = GetReflectionType(node);
+				switch (reflectionType)
+				{
+          case ReflectionType.None:
+            {
+							// No reflection texture. The reflection shows only the ReflectionColor.
+							effectData._parameterReflectionTypeParameters.SetValue(new Vector2(-1, 1));
+							effectData._parameterReflectionParameters.SetValue(new Vector4(
+								(Vector3)water.ReflectionColor,
+								water.ReflectionDistortion));
+						}
+            break;
+					case ReflectionType.Planar:
+            {
+							// Planar reflection.
+							var renderToTexture = node.PlanarReflection.RenderToTexture;
+							var texture = (Texture2D)renderToTexture.Texture;
 
-          _parameterReflectionTypeParameters.SetValue(new Vector2(0, 1));
-          _parameterReflectionMatrix.SetValue((Matrix)renderToTexture.TextureMatrix);
-          _parameterReflectionTextureSize.SetValue(new Vector2(texture.Width, texture.Height));
-          if (_parameterPlanarReflectionMap != null)
-            _parameterPlanarReflectionMap.SetValue(texture);
+							effectData._parameterReflectionTypeParameters.SetValue(new Vector2(0, 1));
+							effectData._parameterReflectionMatrix.SetValue((Matrix)renderToTexture.TextureMatrix);
+							effectData._parameterReflectionTextureSize.SetValue(new Vector2(texture.Width, texture.Height));
+							if (effectData._parameterPlanarReflectionMap != null)
+								effectData._parameterPlanarReflectionMap.SetValue(texture);
 
-          _parameterReflectionParameters.SetValue(new Vector4(
-            (Vector3)water.ReflectionColor,
-            water.ReflectionDistortion));
-        }
-        else if (node.SkyboxReflection != null)
-        {
-          // Cube map reflection.
-          var rgbmEncoding = node.SkyboxReflection.Encoding as RgbmEncoding;
-          float rgbmMax = 1;
-          if (rgbmEncoding != null)
-            rgbmMax = GraphicsHelper.ToGamma(rgbmEncoding.Max);
-          else if (!(node.SkyboxReflection.Encoding is SRgbEncoding))
-            throw new NotImplementedException("The reflected skybox must be encoded using sRGB or RGBM.");
+							effectData._parameterReflectionParameters.SetValue(new Vector4(
+								(Vector3)water.ReflectionColor,
+								water.ReflectionDistortion));
+						}
+						break;
+					case ReflectionType.Cube:
+            {
+							// Cube map reflection.
+							var rgbmEncoding = node.SkyboxReflection.Encoding as RgbmEncoding;
+							float rgbmMax = 1;
+							if (rgbmEncoding != null)
+								rgbmMax = GraphicsHelper.ToGamma(rgbmEncoding.Max);
+							else if (!(node.SkyboxReflection.Encoding is SRgbEncoding))
+								throw new NotImplementedException("The reflected skybox must be encoded using sRGB or RGBM.");
 
-          _parameterReflectionTypeParameters.SetValue(new Vector2(1, rgbmMax));
+							effectData._parameterReflectionTypeParameters.SetValue(new Vector2(1, rgbmMax));
 
-          // Cube maps are left handed --> Sample with inverted z. (Otherwise, the 
-          // cube map and objects or texts in it are mirrored.)
-          var mirrorZ = Matrix44F.CreateScale(1, 1, -1);
-          Matrix33F orientation = node.SkyboxReflection.PoseWorld.Orientation;
-          _parameterReflectionMatrix.SetValue((Matrix)(new Matrix44F(orientation, Vector3F.Zero) * mirrorZ));
+							// Cube maps are left handed --> Sample with inverted z. (Otherwise, the 
+							// cube map and objects or texts in it are mirrored.)
+							var mirrorZ = Matrix44F.CreateScale(1, 1, -1);
+							Matrix33F orientation = node.SkyboxReflection.PoseWorld.Orientation;
+							effectData._parameterReflectionMatrix.SetValue((Matrix)(new Matrix44F(orientation, Vector3F.Zero) * mirrorZ));
 
-          if (_parameterCubeReflectionMap != null)
-            _parameterCubeReflectionMap.SetValue(node.SkyboxReflection.Texture);
+							if (effectData._parameterCubeReflectionMap != null)
+								effectData._parameterCubeReflectionMap.SetValue(node.SkyboxReflection.Texture);
 
-          _parameterReflectionParameters.SetValue(new Vector4(
-            (Vector3)(water.ReflectionColor * node.SkyboxReflection.Color),
-            water.ReflectionDistortion));
-        }
-        else
-        {
-          // No reflection texture. The reflection shows only the ReflectionColor.
-          _parameterReflectionTypeParameters.SetValue(new Vector2(-1, 1));
-          _parameterReflectionParameters.SetValue(new Vector4(
-            (Vector3)water.ReflectionColor,
-            water.ReflectionDistortion));
-        }
+							effectData._parameterReflectionParameters.SetValue(new Vector4(
+								(Vector3)(water.ReflectionColor * node.SkyboxReflection.Color),
+								water.ReflectionDistortion));
+						}
+						break;
+				}
+
         #endregion
 
         #region ----- Refraction Parameters -----
@@ -601,8 +711,8 @@ namespace DigitalRune.Graphics.Rendering
           rebuildZBufferRenderer.Render(context, context.SourceTexture);
         }
 
-        _parameterRefractionTexture.SetValue(context.SourceTexture);
-        _parameterRefractionParameters.SetValue(new Vector4(
+				effectData._parameterRefractionTexture.SetValue(context.SourceTexture);
+				effectData._parameterRefractionParameters.SetValue(new Vector4(
           ((Vector3)water.RefractionColor),
           water.RefractionDistortion));
         #endregion
@@ -611,10 +721,10 @@ namespace DigitalRune.Graphics.Rendering
 
         if (water.NormalMap0 != null)
         {
-          if (_parameterNormalMap0 != null)
-            _parameterNormalMap0.SetValue(water.NormalMap0);
+          if (effectData._parameterNormalMap0 != null)
+						effectData._parameterNormalMap0.SetValue(water.NormalMap0);
 
-          _parameterNormalMap0Parameters.SetValue(new Vector4(
+					effectData._parameterNormalMap0Parameters.SetValue(new Vector4(
             1 / water.NormalMap0Scale,
             data.NormalMapOffset0.X,
             data.NormalMapOffset0.Y,
@@ -622,17 +732,17 @@ namespace DigitalRune.Graphics.Rendering
         }
         else
         {
-          if (_parameterNormalMap0 != null)
-            _parameterNormalMap0.SetValue(_graphicsService.GetDefaultNormalTexture());
-          _parameterNormalMap0Parameters.SetValue(new Vector4(1, 0, 0, 0));
+          if (effectData._parameterNormalMap0 != null)
+						effectData._parameterNormalMap0.SetValue(_graphicsService.GetDefaultNormalTexture());
+					effectData._parameterNormalMap0Parameters.SetValue(new Vector4(1, 0, 0, 0));
         }
 
         if (water.NormalMap1 != null)
         {
-          if (_parameterNormalMap1 != null)
-            _parameterNormalMap1.SetValue(water.NormalMap1);
+          if (effectData._parameterNormalMap1 != null)
+						effectData._parameterNormalMap1.SetValue(water.NormalMap1);
 
-          _parameterNormalMap1Parameters.SetValue(new Vector4(
+					effectData._parameterNormalMap1Parameters.SetValue(new Vector4(
             1 / water.NormalMap1Scale,
             data.NormalMapOffset1.X,
             data.NormalMapOffset1.Y,
@@ -640,29 +750,29 @@ namespace DigitalRune.Graphics.Rendering
         }
         else
         {
-          if (_parameterNormalMap1 != null)
-            _parameterNormalMap1.SetValue(_graphicsService.GetDefaultNormalTexture());
-          _parameterNormalMap1Parameters.SetValue(new Vector4(1, 0, 0, 0));
+          if (effectData._parameterNormalMap1 != null)
+						effectData._parameterNormalMap1.SetValue(_graphicsService.GetDefaultNormalTexture());
+					effectData._parameterNormalMap1Parameters.SetValue(new Vector4(1, 0, 0, 0));
         }
 
-        _parameterSpecularParameters.SetValue(new Vector4((Vector3)water.SpecularColor, water.SpecularPower));
-        _parameterUnderwaterFogParameters.SetValue((Vector3)water.UnderwaterFogDensity);
-        _parameterFresnelParameters.SetValue(new Vector3(water.FresnelBias, water.FresnelScale, water.FresnelPower));
-        _parameterIntersectionSoftness.SetValue(water.IntersectionSoftness);
+				effectData._parameterSpecularParameters.SetValue(new Vector4((Vector3)water.SpecularColor, water.SpecularPower));
+				effectData._parameterUnderwaterFogParameters.SetValue((Vector3)water.UnderwaterFogDensity);
+				effectData._parameterFresnelParameters.SetValue(new Vector3(water.FresnelBias, water.FresnelScale, water.FresnelPower));
+				effectData._parameterIntersectionSoftness.SetValue(water.IntersectionSoftness);
 
-        // We apply some arbitrary scale factors to the water and scatter colors to
-        // move the values into a similar range from the user's perspective.
-        _parameterWaterColor.SetValue((Vector3)water.WaterColor / 10);
-        _parameterScatterColor.SetValue((Vector3)water.ScatterColor);
+				// We apply some arbitrary scale factors to the water and scatter colors to
+				// move the values into a similar range from the user's perspective.
+				effectData._parameterWaterColor.SetValue((Vector3)water.WaterColor / 10);
+				effectData._parameterScatterColor.SetValue((Vector3)water.ScatterColor);
 
-        if (_parameterFoamMap != null)
+        if (effectData._parameterFoamMap != null)
         {
-          _parameterFoamMap.SetValue(water.FoamMap);
-          _parameterFoamParameters0.SetValue(new Vector4(
+					effectData._parameterFoamMap.SetValue(water.FoamMap);
+					effectData._parameterFoamParameters0.SetValue(new Vector4(
             (Vector3)water.FoamColor,
             1 / water.FoamMapScale));
 
-          _parameterFoamParameters1.SetValue(new Vector4(
+					effectData._parameterFoamParameters1.SetValue(new Vector4(
             water.FoamDistortion,
             water.FoamShoreIntersection,
             // Enable crest foam only if we have waves.
@@ -670,8 +780,8 @@ namespace DigitalRune.Graphics.Rendering
             water.FoamCrestMax));
         }
 
-        _parameterCausticsSampleCount.SetValue(water.CausticsSampleCount);
-        _parameterCausticsParameters.SetValue(new Vector4(
+				effectData._parameterCausticsSampleCount.SetValue(water.CausticsSampleCount);
+				effectData._parameterCausticsParameters.SetValue(new Vector4(
           water.CausticsSampleOffset,
           water.CausticsDistortion,
           water.CausticsPower,
@@ -692,29 +802,29 @@ namespace DigitalRune.Graphics.Rendering
           else
             waveType = 1;
 
-          _parameterWaveMapParameters.SetValue(new Vector4(
+					effectData._parameterWaveMapParameters.SetValue(new Vector4(
             1.0f / waves.TileSize,                          // Scale
             0.5f - waves.TileCenter.X / waves.TileSize,     // Offset X
             0.5f - waves.TileCenter.Z / waves.TileSize,     // Offset Y
             waveType));
 
-          if (_parameterDisplacementTexture != null)
+          if (effectData._parameterDisplacementTexture != null)
           {
             if (waves.DisplacementMap != null)
-              _parameterDisplacementTexture.SetValue(waves.DisplacementMap);
+							effectData._parameterDisplacementTexture.SetValue(waves.DisplacementMap);
             else
-              _parameterDisplacementTexture.SetValue(graphicsService.GetDefaultTexture2DBlack4F());
+							effectData._parameterDisplacementTexture.SetValue(graphicsService.GetDefaultTexture2DBlack4F());
           }
 
-          _parameterWaveMapSize.SetValue(new Vector2(
+					effectData._parameterWaveMapSize.SetValue(new Vector2(
             waves.NormalMap.Width,
             waves.NormalMap.Height));
-          if (_parameterWaveNormalMap != null)
-            _parameterWaveNormalMap.SetValue(waves.NormalMap);
+          if (effectData._parameterWaveNormalMap != null)
+						effectData._parameterWaveNormalMap.SetValue(waves.NormalMap);
         }
         else
         {
-          _parameterWaveMapParameters.SetValue(new Vector4(0, 0, 0, 0));
+					effectData._parameterWaveMapParameters.SetValue(new Vector4(0, 0, 0, 0));
         }
         #endregion
 
@@ -724,11 +834,11 @@ namespace DigitalRune.Graphics.Rendering
         {
           var flow = node.Flow;
           float flowMapSpeed = (flow.FlowMap != null) ? flow.FlowMapSpeed : 0;
-          _parameterFlowParameters0.SetValue(new Vector4(flow.SurfaceSlopeSpeed, flowMapSpeed, flow.CycleDuration, flow.MaxSpeed));
-          _parameterFlowParameters1.SetValue(new Vector3(flow.MinStrength, 1 / flow.NoiseMapScale, flow.NoiseMapStrength));
+					effectData._parameterFlowParameters0.SetValue(new Vector4(flow.SurfaceSlopeSpeed, flowMapSpeed, flow.CycleDuration, flow.MaxSpeed));
+					effectData._parameterFlowParameters1.SetValue(new Vector3(flow.MinStrength, 1 / flow.NoiseMapScale, flow.NoiseMapStrength));
 
-          if (_parameterFlowMap != null)
-            _parameterFlowMap.SetValue(flow.FlowMap);
+          if (effectData._parameterFlowMap != null)
+						effectData._parameterFlowMap.SetValue(flow.FlowMap);
 
           // Get world space (x, z) to texture space matrix.
           Aabb aabb = node.Shape.GetAabb();
@@ -738,8 +848,8 @@ namespace DigitalRune.Graphics.Rendering
                         * Matrix44F.CreateScale(1 / node.ScaleLocal.X, 1, 1 / node.ScaleLocal.Z)
                         * node.PoseWorld.Inverse;
 
-          // We use a 3x3 2d scale/rotation/translation matrix, ignoring the y component.
-          _parameterFlowMapTextureMatrix.SetValue(new Matrix(m.M00, m.M20, 0, 0,
+					// We use a 3x3 2d scale/rotation/translation matrix, ignoring the y component.
+					effectData._parameterFlowMapTextureMatrix.SetValue(new Matrix(m.M00, m.M20, 0, 0,
                                                              m.M02, m.M22, 0, 0,
                                                              m.M03, m.M23, 1, 0,
                                                              0, 0, 0, 0));
@@ -747,56 +857,63 @@ namespace DigitalRune.Graphics.Rendering
           // Get local flow direction to world flow direction matrix.
           // We use a 2x2 2d rotation matrix, ignoring the y component.
           var r = node.PoseWorld.Orientation;
-          _parameterFlowMapWorldMatrix.SetValue(new Matrix(r.M00, r.M20, 0, 0,
+					effectData._parameterFlowMapWorldMatrix.SetValue(new Matrix(r.M00, r.M20, 0, 0,
                                                            r.M02, r.M22, 0, 0,
                                                            0, 0, 0, 0,
                                                            0, 0, 0, 0));
         }
         else
         {
-          _parameterFlowParameters0.SetValue(new Vector4(0, 0, 0, 0));
-          _parameterFlowParameters1.SetValue(new Vector3(0, 0, 0));
+					effectData._parameterFlowParameters0.SetValue(new Vector4(0, 0, 0, 0));
+					effectData._parameterFlowParameters1.SetValue(new Vector3(0, 0, 0));
         }
         #endregion
 
         if (isCameraUnderwater)
-          RenderUnderwaterGeometry(node, cameraNode);
+          RenderUnderwaterGeometry(effectData, node, cameraNode);
 
-        RenderSurface(node, cameraNode, isCameraUnderwater);
+        RenderSurface(effectData, node, cameraNode, isCameraUnderwater);
+			}
+
+      foreach (var effectKey in _usedEffectsMap)
+      {
+        var effectData = _effectCache[effectKey];
+        
+        // Reset texture effect parameters.
+        effectData._parameterGBuffer0.SetValue((Texture2D)null);
+        effectData._parameterRefractionTexture.SetValue((Texture2D)null);
+
+        if (effectData._parameterPlanarReflectionMap != null)
+          effectData._parameterPlanarReflectionMap.SetValue((Texture2D)null);
+
+        if (effectData._parameterCubeReflectionMap != null)
+          effectData._parameterCubeReflectionMap.SetValue((TextureCube)null);
+
+        if (effectData._parameterNormalMap0 != null)
+          effectData._parameterNormalMap0.SetValue((Texture2D)null);
+
+        if (effectData._parameterNormalMap1 != null)
+          effectData._parameterNormalMap1.SetValue((Texture2D)null);
+
+        if (effectData._parameterDisplacementTexture != null)
+          effectData._parameterDisplacementTexture.SetValue((Texture2D)null);
+
+        if (effectData._parameterNoiseMap != null)
+          effectData._parameterNoiseMap.SetValue((Texture2D)null);
+
+        if (effectData._parameterWaveNormalMap != null)
+          effectData._parameterWaveNormalMap.SetValue((Texture2D)null);
+
+        if (effectData._parameterFlowMap != null)
+          effectData._parameterFlowMap.SetValue((Texture2D)null);
       }
 
-      // Reset texture effect parameters.
-      _parameterGBuffer0.SetValue((Texture2D)null);
-      _parameterRefractionTexture.SetValue((Texture2D)null);
-
-      if (_parameterPlanarReflectionMap != null)
-        _parameterPlanarReflectionMap.SetValue((Texture2D)null);
-
-      if (_parameterCubeReflectionMap != null)
-        _parameterCubeReflectionMap.SetValue((TextureCube)null);
-
-      if (_parameterNormalMap0 != null)
-        _parameterNormalMap0.SetValue((Texture2D)null);
-
-      if (_parameterNormalMap1 != null)
-        _parameterNormalMap1.SetValue((Texture2D)null);
-
-      if (_parameterDisplacementTexture != null)
-        _parameterDisplacementTexture.SetValue((Texture2D)null);
-
-      if (_parameterNoiseMap != null)
-        _parameterNoiseMap.SetValue((Texture2D)null);
-
-      if (_parameterWaveNormalMap != null)
-        _parameterWaveNormalMap.SetValue((Texture2D)null);
-
-      if (_parameterFlowMap != null)
-        _parameterFlowMap.SetValue((Texture2D)null);
+      _usedEffectsMap.Clear();
 
       // This seems to be necessary because the Displacement Texture (vertex texture!)
       // is not automatically removed from the texture stage, and the WaterWavesRenderer
       // cannot write into it. XNA Bug!?
-      _passProjectedGrid.Apply();
+//      _passProjectedGrid.Apply();
 
       savedRenderState.Restore();
 
@@ -810,10 +927,10 @@ namespace DigitalRune.Graphics.Rendering
       }
 
       context.SourceTexture = originalSourceTexture;
-    }
+		}
 
 
-    private void RenderUnderwaterGeometry(WaterNode node, CameraNode cameraNode)
+		private void RenderUnderwaterGeometry(EffectData effectData, WaterNode node, CameraNode cameraNode)
     {
       var graphicsDevice = _graphicsService.GraphicsDevice;
       graphicsDevice.RasterizerState = RasterizerState.CullNone;
@@ -825,7 +942,7 @@ namespace DigitalRune.Graphics.Rendering
       if (submesh != null)
       {
         // User-defined volume
-        _parameterWorld.SetValue((Matrix)(
+        effectData._parameterWorld.SetValue((Matrix)(
           node.PoseWorld
           * Matrix44F.CreateScale(node.ScaleWorld)
           * data.SubmeshMatrix));
@@ -852,22 +969,19 @@ namespace DigitalRune.Graphics.Rendering
           position.Y = node.PoseWorld.Position.Y - size / 4.0f;
 
         var world = Matrix44F.CreateTranslation(position) * Matrix44F.CreateScale(size, size / 2.0f, size);
-        _parameterWorld.SetValue((Matrix)world);
+				effectData._parameterWorld.SetValue((Matrix)world);
 
         submesh = _boxSubmesh;
       }
 
-      if (node.Water.CausticsSampleOffset <= 0 || node.Water.CausticsIntensity <= Numeric.EpsilonF)
-        _passUnderwater.Apply();
-      else
-        _passUnderwaterCaustics.Apply();
-
+      // Underwater pass
+      effectData.Apply(true);
       submesh.Draw();
     }
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
-    private void RenderSurface(WaterNode node, CameraNode cameraNode, bool isCameraUnderwater)
+    private void RenderSurface(EffectData effectData, WaterNode node, CameraNode cameraNode, bool isCameraUnderwater)
     {
       var graphicsDevice = _graphicsService.GraphicsDevice;
       var projection = cameraNode.Camera.Projection;
@@ -888,11 +1002,11 @@ namespace DigitalRune.Graphics.Rendering
         // ----- Render with user-defined water volume.
         var data = ((WaterRenderData)node.RenderData);
 
-        _parameterWorld.SetValue((Matrix)(
-          node.PoseWorld
-          * Matrix44F.CreateScale(node.ScaleWorld)
-          * data.SubmeshMatrix));
-        ApplySurfacePass(node, false);
+        effectData._parameterWorld.SetValue(
+          (Matrix)(node.PoseWorld
+            * Matrix44F.CreateScale(node.ScaleWorld)
+            * data.SubmeshMatrix));
+        effectData.Apply();
         data.Submesh.Draw();
       }
       else if (node.Waves == null || node.Waves.DisplacementMap == null)
@@ -926,63 +1040,105 @@ namespace DigitalRune.Graphics.Rendering
         float size = 2 * farPlaneRadius;
 
         Matrix44F world = Matrix44F.CreateTranslation(position) * Matrix44F.CreateScale(size, 1, size);
-        _parameterWorld.SetValue((Matrix)world);
+        effectData._parameterWorld.SetValue((Matrix)world);
 
-        ApplySurfacePass(node, false);
+        effectData.Apply();
         _quadSubmesh.Draw();
       }
       else
       {
         // ----- Use Projected Grid.
-        if (SetProjectedGridParameters(node, cameraNode, isCameraUnderwater))
+        if (SetProjectedGridParameters(effectData, node, cameraNode, isCameraUnderwater))
         {
-          ApplySurfacePass(node, true);
-          ProjectedGridParameters.Submesh.Draw();
+					effectData.Apply();
+					ProjectedGridParameters.Submesh.Draw();
         }
       }
     }
 
-
-    private void ApplySurfacePass(WaterNode node, bool useProjectedGrid)
+    private static ReflectionType GetReflectionType(WaterNode node)
     {
-      if (!useProjectedGrid)
+			if (node.PlanarReflection != null
+					&& node.PlanarReflection.ActualIsEnabled
+					&& node.PlanarReflection.RenderToTexture.Texture is Texture2D)
+			{
+        return ReflectionType.Planar;
+			}
+			else if (node.SkyboxReflection != null)
+			{
+        return ReflectionType.Cube;
+			}
+
+      return ReflectionType.None;
+		}
+
+
+    private EffectData GetEffectData(WaterNode node, bool useProjectedGrid, bool underwater)
+    {
+      var reflectionType = GetReflectionType(node);
+
+      var shaderType = ShaderType.Simple;
+			if (!useProjectedGrid)
       {
         // Displacement mapping active if we have at least a wave normal map.
         if (node.Waves != null && node.Waves.NormalMap != null)
         {
           if (node.Water.CausticsIntensity > 0)
-            _passMeshDisplacedFoamCaustics.Apply();
+          {
+            shaderType = ShaderType.DisplacementFoamCaustics;
+           }
           else if (node.Water.FoamMap != null)
-            _passMeshDisplacedFoam.Apply();
-          else
-            _passMeshDisplaced.Apply();
+          {
+						shaderType = ShaderType.DisplacementFoam;
+          } else
+          {
+            shaderType = ShaderType.Displacement;
+          }
         }
         else
         {
           if (node.Water.FoamMap != null && node.Flow != null)
-            _passMeshFoamFlow.Apply();
-          else if (node.Water.FoamMap != null)
-            _passMeshFoam.Apply();
-          else if (node.Flow != null)
-            _passMeshFlow.Apply();
-          else
-            _passMesh.Apply();
-        }
+          {
+						shaderType = ShaderType.FoamFlow;
+					}
+					else if (node.Water.FoamMap != null)
+          {
+						shaderType = ShaderType.Foam;
+					}
+					else if (node.Flow != null)
+          {
+						shaderType = ShaderType.Flow;
+					}
+				}
       }
       else
       {
         if (node.Water.CausticsIntensity > 0)
-          _passProjectedGridFoamCaustics.Apply();
+        {
+					shaderType = ShaderType.ProjectedGridFoamCaustics;
+        }
         else if (node.Water.FoamMap != null)
-          _passProjectedGridFoam.Apply();
-        else
-          _passProjectedGrid.Apply();
+        {
+					shaderType = ShaderType.ProjectedGridFoam;
+				} else
+        {
+          shaderType = ShaderType.ProjectedGrid;
+        }
+			}
+
+      var key = GetEffectKey(shaderType, reflectionType, underwater);
+      var result = GetEffect(_graphicsService, shaderType, reflectionType, underwater);
+
+      if (!_usedEffectsMap.Contains(key))
+      {
+        _usedEffectsMap.Add(key);
       }
+
+      return result;
     }
 
-
     // Returns false if the water is not visible.
-    private bool SetProjectedGridParameters(WaterNode node, CameraNode cameraNode, bool isCameraUnderwater)
+    private bool SetProjectedGridParameters(EffectData effectData, WaterNode node, CameraNode cameraNode, bool isCameraUnderwater)
     {
       var projection = cameraNode.Camera.Projection;
 
@@ -1177,16 +1333,16 @@ namespace DigitalRune.Graphics.Rendering
       _projectedGridNearCorners[2] = (Vector3)rightBottomDirection;
       _projectedGridNearCorners[3] = (Vector3)leftBottomDirection;
 
-      _parameterPushedBackCameraPosition.SetValue((Vector3)pushedBackCameraPosition);
-      _parameterNearCorners.SetValue(_projectedGridNearCorners);
-      _parameterWorld.SetValue(node.PoseWorld);
+      effectData._parameterPushedBackCameraPosition.SetValue((Vector3)pushedBackCameraPosition);
+			effectData._parameterNearCorners.SetValue(_projectedGridNearCorners);
+			effectData._parameterWorld.SetValue(node.PoseWorld);
       return true;
     }
 
 
     // Following code was taken from the FogRenderer and modified.
     // We have to keep this in sync with the FogRenderer.
-    private void SetFogParameters(IList<FogNode> fogNodes, CameraNode cameraNode, Vector3F lightDirection)
+    private void SetFogParameters(EffectData effectData, IList<FogNode> fogNodes, CameraNode cameraNode, Vector3F lightDirection)
     {
       FogNode fogNode = null;
       Fog fog = null;
@@ -1198,19 +1354,19 @@ namespace DigitalRune.Graphics.Rendering
 
       if (fogNode == null || fog.Density <= Numeric.EpsilonF)
       {
-        _parameterFogParameters.SetValue(new Vector4());
-        _parameterFogHeights.SetValue(new Vector3());
-        _parameterFogColor0.SetValue(new Vector4());
-        _parameterFogColor1.SetValue(new Vector4());
+        effectData._parameterFogParameters.SetValue(new Vector4());
+				effectData._parameterFogHeights.SetValue(new Vector3());
+				effectData._parameterFogColor0.SetValue(new Vector4());
+				effectData._parameterFogColor1.SetValue(new Vector4());
         return;
       }
 
       // Compute actual density and falloff.
       float fogDensity = fog.Density;
       float heightFalloff = fog.HeightFalloff;
-      _parameterFogParameters.SetValue(new Vector4(fog.Start, fog.End, fogDensity, heightFalloff));
-      _parameterFogColor0.SetValue((Vector4)fog.Color0);
-      _parameterFogColor1.SetValue((Vector4)fog.Color1);
+			effectData._parameterFogParameters.SetValue(new Vector4(fog.Start, fog.End, fogDensity, heightFalloff));
+			effectData._parameterFogColor0.SetValue((Vector4)fog.Color0);
+			effectData._parameterFogColor1.SetValue((Vector4)fog.Color1);
 
       // Compute world space reference heights. 
       var heightRef = cameraNode.PoseWorld.Position.Y - fogNode.PoseWorld.Position.Y;
@@ -1220,8 +1376,8 @@ namespace DigitalRune.Graphics.Rendering
       if (Numeric.AreEqual(height0, height1))
         height1 = height0 + 0.0001f;
 
-      // !!! This parameter is different from the code in FogRenderer.cs. !!!
-      _parameterFogHeights.SetValue(new Vector3(heightRef, height0, height1));
+			// !!! This parameter is different from the code in FogRenderer.cs. !!!
+			effectData._parameterFogHeights.SetValue(new Vector3(heightRef, height0, height1));
 
       var scatteringSymmetry = fog.ScatteringSymmetry;
 
@@ -1236,10 +1392,10 @@ namespace DigitalRune.Graphics.Rendering
       else
         scatteringSymmetryStrength = 1 - lightDirection.Y / limit;
 
-      // Use phase function.
-      // Set parameters for phase function.
-      _parameterFogScatteringSymmetry.SetValue((Vector3)scatteringSymmetry * scatteringSymmetryStrength);
+			// Use phase function.
+			// Set parameters for phase function.
+			effectData._parameterFogScatteringSymmetry.SetValue((Vector3)scatteringSymmetry * scatteringSymmetryStrength);
     }
-    #endregion
-  }
+		#endregion
+	}
 }
