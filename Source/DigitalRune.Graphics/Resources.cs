@@ -27,14 +27,11 @@ namespace DigitalRune
 			return _assetManagerEffects.LoadEffect(graphicsDevice, path, defs);
 		}
 
-		public static Game game;
-
 		public static Texture2D NormalsFittingTexture(GraphicsDevice graphicsDevice)
 		{
 			if (_normalsFittingTexture == null)
 			{
-				// _normalsFittingTexture = _assetManagerResources.LoadTexture2D(graphicsDevice, "NormalsFittingTexture.dds");
-				_normalsFittingTexture = game.Content.Load<Texture2D>(@"D:\Projects\DigitalRune2\Source\DigitalRune.Graphics.Content\bin\Windows\DigitalRune\NormalsFittingTexture.xnb");
+				_normalsFittingTexture = _assetManagerResources.LoadTexture2D(graphicsDevice, "NormalsFittingTexture.png");
 			}
 
 			return _normalsFittingTexture;

@@ -1,4 +1,5 @@
-﻿#if !WP7 && !WP8
+﻿#if false
+
 using System;
 using System.Linq;
 using DigitalRune.Animation;
@@ -301,4 +302,5 @@ than 5 morph targets are active, the morph targets with the largest weights are 
     }
   }
 }
+
 #endif
