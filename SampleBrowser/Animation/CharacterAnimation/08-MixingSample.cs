@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if false
+
+using System;
 using System.Linq;
 using DigitalRune.Animation;
 using DigitalRune.Animation.Character;
@@ -123,3 +125,5 @@ namespace Samples.Animation
     }
   }
 }
+
+#endif

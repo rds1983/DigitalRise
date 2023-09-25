@@ -115,7 +115,7 @@ usually faster than convex hulls. Etc.",
 
         // Get the bone indices.
         var boneIndexElement = vertexElements.First(e => e.VertexElementUsage == VertexElementUsage.BlendIndices);
-        if (boneIndexElement.VertexElementFormat != VertexElementFormat.Byte4)
+        if (boneIndexElement.VertexElementFormat != VertexElementFormat.Short4)
           throw new NotSupportedException();
         var boneIndicesArray = new Byte4[submesh.VertexCount];
         submesh.VertexBuffer.GetData(

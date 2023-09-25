@@ -5,6 +5,7 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using AssetManagementBase;
 
 
 namespace Samples.Particles
@@ -35,7 +36,7 @@ The explosion is triggered periodically.",
       _particleSystemNode = new ParticleSystemNode(_explosion);
       GraphicsScreen.Scene.Children.Add(_particleSystemNode);
 
-      _explosionSound = ContentManager.Load<SoundEffect>("Particles/Explo1");
+      _explosionSound = AssetManager.LoadSoundEffect("Particles/Explo1.wav");
     }
 
 

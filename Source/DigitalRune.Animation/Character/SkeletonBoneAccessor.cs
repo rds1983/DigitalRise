@@ -424,7 +424,6 @@ namespace DigitalRune.Animation.Character
         {
           if (_isBonePoseRelativeDirty[boneIndex])
           {
-            // _bonePoseRelative[boneIndex] = _skeletonPose.Skeleton.BindPosesRelative[boneIndex] * _skeletonPose.BoneTransforms[boneIndex];
             SrtTransform.Multiply(ref _skeletonPose.Skeleton.BindPosesRelative[boneIndex],
                                   ref _skeletonPose.BoneTransforms[boneIndex], out _bonePoseRelative[boneIndex]);
 
@@ -463,7 +462,6 @@ namespace DigitalRune.Animation.Character
               // Make sure parent is up-to-date. (Recursively update ancestors.)
               UpdateBonePoseAbsolute(parentIndex);
 
-              //_bonePoseAbsolute[boneIndex] = _bonePoseAbsolute[parentIndex] * _bonePoseRelative[boneIndex];
               SrtTransform.Multiply(ref _bonePoseAbsolute[parentIndex], ref _bonePoseRelative[boneIndex],
                                     out _bonePoseAbsolute[boneIndex]);
             }

@@ -7,6 +7,7 @@ using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using AssetManagementBase;
 
 
 namespace Samples.Physics
@@ -165,7 +166,7 @@ namespace Samples.Physics
       SoundEffect.DistanceScale = 10;
 
       // ----- Load sounds, create instances and emitters.
-      _hitSound = ContentManager.Load<SoundEffect>("Audio/Hit");
+      _hitSound = AssetManager.LoadSoundEffect("Audio/Hit.wav");
       for (int i = 0; i < _hitSoundInstances.Length; i++)
       {
         _hitSoundInstances[i] = _hitSound.CreateInstance();
@@ -174,11 +175,11 @@ namespace Samples.Physics
         _hitEmitters[i] = new AudioEmitter();
       }
 
-      _scratchSound = ContentManager.Load<SoundEffect>("Audio/Scratch");
+      _scratchSound = AssetManager.LoadSoundEffect("Audio/Scratch.wav");
       _scratchSoundInstance = _scratchSound.CreateInstance();
       _scratchEmitter = new AudioEmitter();
 
-      _rollSound = ContentManager.Load<SoundEffect>("Audio/Roll");
+      _rollSound = AssetManager.LoadSoundEffect("Audio/Roll.wav");
       _rollSoundInstance = _rollSound.CreateInstance();
       _rollEmitter = new AudioEmitter();
 

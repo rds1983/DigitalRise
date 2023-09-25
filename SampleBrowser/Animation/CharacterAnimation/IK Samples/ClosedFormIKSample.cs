@@ -40,10 +40,10 @@ namespace Samples.Animation
         SkeletonPose = _meshNode.SkeletonPose,
 
         // The chain starts at the upper arm.
-        RootBoneIndex = 13,
+        RootBoneIndex = 14,
 
         // The chain ends at the hand bone.
-        TipBoneIndex = 15,
+        TipBoneIndex = 16,
 
         // The offset from the hand center to the hand origin.
         TipOffset = new Vector3F(0.1f, 0, 0),

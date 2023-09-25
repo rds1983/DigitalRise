@@ -104,7 +104,7 @@ namespace Samples.Particles
       });
 
       Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion.dds");
 
       Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 

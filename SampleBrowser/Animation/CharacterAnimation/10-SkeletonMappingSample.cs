@@ -90,7 +90,7 @@ Dude skeleton (left) to the Marine skeleton (right).",
       // instance should only be used for a specific mapping direction.
 
       _skeletonMapper.BoneMappers.Add(
-        new DirectBoneMapper(1, 1)
+        new DirectBoneMapper(2, 2)
         {
           MapAbsoluteTransforms = false,
           MapTranslations = true,
@@ -99,35 +99,35 @@ Dude skeleton (left) to the Marine skeleton (right).",
 
 
       // Spine:
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(3, 6, 2, 3));
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(4, 7, 3, 4));
 
       // Clavicle
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(12, 6) { MapAbsoluteTransforms = false, MapTranslations = false, });
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(31, 12) { MapAbsoluteTransforms = false, MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(13, 8) { MapAbsoluteTransforms = false, MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(32, 14) { MapAbsoluteTransforms = false, MapTranslations = false, });
 
       // Left Leg
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(50, 51, 16, 17));
       _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(51, 52, 17, 18));
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(52, 18) { MapAbsoluteTransforms = false, MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(52, 53, 18, 19));
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(53, 19) { MapAbsoluteTransforms = false, MapTranslations = false, });
 
       // Right Leg
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(54, 55, 21, 22));
       _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(55, 56, 22, 23));
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(56, 23) { MapAbsoluteTransforms = false, MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(56, 57, 23, 24));
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(57, 24) { MapAbsoluteTransforms = false, MapTranslations = false, });
 
       // Left Arm
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(13, 14, 7, 8));
       _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(14, 15, 8, 9));
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(15, 9) { MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(15, 16, 9, 10));
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(16, 10) { MapTranslations = false, });
 
       // Right Arm
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(32, 33, 12, 13));
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(33, 34, 13, 14));
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(34, 14) { MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(33, 34, 13, 15));
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(34, 35, 14, 16));
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(35, 15) { MapTranslations = false, });
 
       // Neck, Head
-      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(6, 7, 3, 4));
-      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(7, 4) { MapAbsoluteTransforms = true, MapTranslations = false, });
+      _skeletonMapper.BoneMappers.Add(new ChainBoneMapper(7, 8, 4, 5));
+      _skeletonMapper.BoneMappers.Add(new DirectBoneMapper(8, 5) { MapAbsoluteTransforms = true, MapTranslations = false, });
     }
 
 
