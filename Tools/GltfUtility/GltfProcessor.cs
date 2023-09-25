@@ -221,13 +221,13 @@ namespace DigitalRune
 						throw new NotSupportedException($"Index of type {indexAccessor.ComponentType} isn't supported");
 					}
 
+					// Flip winding
 					var indexData = GetAccessorData(primitive.Indices.Value);
 					if (indexAccessor.ComponentType == ComponentTypeEnum.UNSIGNED_SHORT)
 					{
 						var data = new ushort[indexData.Count / 2];
             System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
 
-						// Flip winding
 						for (var i = 0; i < data.Length / 3; i++)
 						{
 							var temp = data[i * 3];
@@ -242,7 +242,6 @@ namespace DigitalRune
 						var data = new short[indexData.Count / 2];
 						System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
 
-						// Flip winding
 						for (var i = 0; i < data.Length / 3; i++)
 						{
 							var temp = data[i * 3];
@@ -257,7 +256,6 @@ namespace DigitalRune
 						var data = new uint[indexData.Count / 4];
 						System.Buffer.BlockCopy(indexData.Array, indexData.Offset, data, 0, indexData.Count);
 
-						// Flip winding
 						for (var i = 0; i < data.Length / 3; i++)
 						{
 							var temp = data[i * 3];
@@ -304,6 +302,13 @@ namespace DigitalRune
 				_gltf = Interface.LoadModel(stream);
 			}
 
+			// Load all buffers and erase their uris(required for SaveBinaryModel to work)
+			for(var i = 0; i < _gltf.Buffers.Length; ++i)
+			{
+				GetBuffer(i);
+				_gltf.Buffers[i].Uri = null;
+			}
+
 			if (genTangentFrames)
 			{
 				GenerateTangentFrames();
@@ -333,7 +338,6 @@ namespace DigitalRune
 				}
 			}
 
-			_gltf.Buffers[0].Uri = null;
 			Interface.SaveBinaryModel(_gltf, GetBuffer(0), output);
 
 			return _gltf;

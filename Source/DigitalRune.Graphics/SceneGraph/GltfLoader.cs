@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
@@ -398,13 +399,6 @@ namespace DigitalRune.Graphics.SceneGraph
 						var gltfMaterial = _gltf.Materials[primitive.Material.Value];
 						if (gltfMaterial.PbrMetallicRoughness != null)
 						{
-							var opaqueData = new Dictionary<string, object>
-							{
-								["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
-								["SpecularColor"] = new Vector3(0.1f),
-								["SpecularPower"] = 10.0f
-							};
-
 							if (gltfMaterial.PbrMetallicRoughness.BaseColorTexture != null)
 							{
 								var gltfTexture = _gltf.Textures[gltfMaterial.PbrMetallicRoughness.BaseColorTexture.Index];
@@ -415,29 +409,41 @@ namespace DigitalRune.Graphics.SceneGraph
 									if (image.BufferView.HasValue)
 									{
 										throw new Exception("Embedded images arent supported.");
-									} else if (image.Uri.StartsWith("data:image/"))
+									}
+									else if (image.Uri.StartsWith("data:image/"))
 									{
 										throw new Exception("Embedded images with uri arent supported.");
-									} else
+									}
+									else
 									{
-										opaqueData["Texture"] = _assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, image.Uri);
+										// Create default material
+										var material = new Material
+										{
+											Name = image.Uri
+										};
+
+										var opaqueData = new Dictionary<string, object>
+										{
+											["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
+											["SpecularColor"] = new Vector3(0.1f),
+											["SpecularPower"] = 10.0f,
+											["Texture"] = _assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, image.Uri)
+										};
+										var binding = new BasicEffectBinding(_graphicsService, opaqueData);
+										material["Default"] = binding;
+
+										subMesh.SetMaterial(material);
 									}
 								}
 							}
 
-							var binding = new BasicEffectBinding(_graphicsService, opaqueData);
-							var material = new Material
-							{
-								{ "Default", binding }
-							};
-							subMesh.SetMaterial(material);
 						}
 					}
 				}
 
-/*				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
-				boundingBox.Max.Y - boundingBox.Min.Y,
-				boundingBox.Max.Z - boundingBox.Min.Z);*/
+				/*				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
+								boundingBox.Max.Y - boundingBox.Min.Y,
+								boundingBox.Max.Z - boundingBox.Min.Z);*/
 
 				_meshes.Add(mesh);
 			}
@@ -545,7 +551,7 @@ namespace DigitalRune.Graphics.SceneGraph
 
 				if (gltfNode.Skin != null)
 				{
-					if (skeleton ==null)
+					if (skeleton == null)
 					{
 						skeleton = CreateSkeleton();
 					}
@@ -635,7 +641,7 @@ namespace DigitalRune.Graphics.SceneGraph
 						var node = _nodes[pair.Key];
 
 						// Make transforms relative to the default
-						for(var i = 0; i < nodeAnimation.Times.Length; i++)
+						for (var i = 0; i < nodeAnimation.Times.Length; i++)
 						{
 							if (nodeAnimation.Translations != null)
 							{

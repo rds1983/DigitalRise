@@ -56,6 +56,25 @@ namespace AssetManagementBase
 						var material = manager.LoadDRMaterial(graphicsService, subMeshDesc.Material);
 						meshNode.Mesh.Submeshes[i].SetMaterial(material);
 					}
+				} else
+				{
+					// If material isn't set explicitly, determine it from the texture file name
+					for (var i = 0; i < meshNode.Mesh.Submeshes.Count; ++i)
+					{
+						var subMesh = meshNode.Mesh.Submeshes[i];
+						var defaultMaterial = subMesh.GetMaterial();
+						if (defaultMaterial == null || string.IsNullOrEmpty(defaultMaterial.Name))
+						{
+							continue;
+						}
+
+						var materialName = Path.ChangeExtension(defaultMaterial.Name, "drmat");
+						if (manager.Exists(materialName))
+						{
+							var material = manager.LoadDRMaterial(graphicsService, materialName);
+							subMesh.SetMaterial(material);
+						}
+					}
 				}
 
 				if (modelDescription.Scale != 1.0f)
