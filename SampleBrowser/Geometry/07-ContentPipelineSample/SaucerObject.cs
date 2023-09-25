@@ -52,8 +52,6 @@ namespace Samples
 			var assetManager = _services.GetInstance<AssetManager>();
 			var graphicsService = _services.GetInstance<IGraphicsService>();
 
-			var contentManager = _services.GetInstance<ContentManager>();
-
       // ----- Graphics
       // Load graphics model (created using the ModelWithCollisionMeshProcessor).
       var sharedModelNode = assetManager.LoadDRModel(graphicsService, "Saucer/saucer.drmdl");

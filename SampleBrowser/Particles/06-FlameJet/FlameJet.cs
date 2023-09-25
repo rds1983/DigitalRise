@@ -131,7 +131,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Flames",
-          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flames.png"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flames.dds"),
           Vector2F.Zero, Vector2F.One,
           4, 1);
 

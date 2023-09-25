@@ -109,7 +109,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "FireParticles",
-          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.png"),
+          assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.dds"),
           Vector2F.Zero, Vector2F.One,
           4, 1);
 

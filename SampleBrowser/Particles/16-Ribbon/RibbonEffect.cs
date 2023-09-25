@@ -65,7 +65,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Ribbon.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Ribbon.dds");
 
       // The parameter "TextureTiling" defines how the texture spreads across the ribbon.
       // 0 ... no tiling, 

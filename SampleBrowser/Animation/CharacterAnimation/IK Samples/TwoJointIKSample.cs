@@ -42,13 +42,13 @@ namespace Samples.Animation
         SkeletonPose = _meshNode.SkeletonPose,
 
         // The chain starts at the upper leg.
-        RootBoneIndex = 54,
+        RootBoneIndex = 55,
 
         // The second bone modified bone is the lower leg.
-        HingeBoneIndex = 55,
+        HingeBoneIndex = 56,
 
         // The chain ends at the foot bone.
-        TipBoneIndex = 56,
+        TipBoneIndex = 57,
 
         // The direction of the hinge axis (in bone space).
         HingeAxis = -Vector3F.UnitZ,

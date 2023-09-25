@@ -859,12 +859,6 @@ namespace DigitalRune.Animation.Character
 
 			time = animationTime.Value;
 
-			// Set all transforms to their default values
-			for(var i = 0; i < result.BoneTransforms.Length; ++i)
-			{
-				result.BoneTransforms[i] = result.Skeleton.BindPosesRelative[i];
-			}
-
 			// Clamp time to allowed range.
 			var startTime = _times[0];
 			var endTime = _totalDuration;
@@ -886,7 +880,6 @@ namespace DigitalRune.Animation.Character
 
 					Debug.Assert(((Array)_keyFrames[channelIndex]).Length > 0, "Each channel must have at least 1 key frame.");
 
-					var defaultTransform = result.Skeleton.BindPosesRelative[boneIndex];
 					float weight = _weights[channelIndex];
 					if (weight == 0 && defaultSource != result)
 					{
@@ -896,12 +889,12 @@ namespace DigitalRune.Animation.Character
 					else if (weight == 1)
 					{
 						// Channel is fully active.
-						result.BoneTransforms[boneIndex] = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
+						result.BoneTransforms[boneIndex] = GetBoneTransform(channelIndex, timeIndex, time);
 					}
 					else
 					{
 						// Mix channel with source.
-						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
+						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time);
 						SrtTransform.Interpolate(ref defaultSource.BoneTransforms[boneIndex], ref boneTransform, weight, ref boneTransform);
 						result.BoneTransforms[boneIndex] = boneTransform;
 					}
@@ -919,7 +912,6 @@ namespace DigitalRune.Animation.Character
 					Debug.Assert(((Array)_keyFrames[channelIndex]).Length > 0, "Each channel must have at least 1 key frame.");
 
 					float weight = _weights[channelIndex];
-					var defaultTransform = result.Skeleton.BindPosesRelative[boneIndex];
 					if (weight == 0 && defaultSource != result)
 					{
 						// Channel is inactive.
@@ -928,12 +920,12 @@ namespace DigitalRune.Animation.Character
 					else if (weight == 1)
 					{
 						// Channel is fully active.
-						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
+						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * GetBoneTransform(channelIndex, timeIndex, time);
 					}
 					else
 					{
 						// Add only a part of this animation value.
-						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time, defaultTransform);
+						SrtTransform boneTransform = GetBoneTransform(channelIndex, timeIndex, time);
 						SrtTransform identity = SrtTransform.Identity;
 						SrtTransform.Interpolate(ref identity, ref boneTransform, weight, ref boneTransform);
 						result.BoneTransforms[boneIndex] = defaultSource.BoneTransforms[boneIndex] * boneTransform;
@@ -991,9 +983,8 @@ namespace DigitalRune.Animation.Character
 		/// <param name="channelIndex">The index in <see cref="_channels"/>.</param>
 		/// <param name="timeIndex">The index in <see cref="_times"/>.</param>
 		/// <param name="time">The animation time.</param>
-		/// <param name="defaultTransform"></param>
 		/// <returns>The animation value.</returns>
-		private SrtTransform GetBoneTransform(int channelIndex, int timeIndex, TimeSpan time, SrtTransform defaultTransform)
+		private SrtTransform GetBoneTransform(int channelIndex, int timeIndex, TimeSpan time)
 		{
 			// Get index in the key frames list using the _indices lookup table.
 			int keyFrameIndex = _indices[timeIndex * _channels.Length + channelIndex];
@@ -1004,9 +995,7 @@ namespace DigitalRune.Animation.Character
 				// Get the key frame before and after the specified time.
 				TimeSpan previousTime, nextTime;
 				SrtTransform previousTransform, nextTransform;
-
-				previousTransform = nextTransform = defaultTransform;
-				GetBoneKeyFrames(channelIndex, keyFrameIndex, out previousTime, ref previousTransform, out nextTime, ref nextTransform);
+				GetBoneKeyFrames(channelIndex, keyFrameIndex, out previousTime, out previousTransform, out nextTime, out nextTransform);
 
 				float parameter = (float)(time.Ticks - previousTime.Ticks) / (nextTime - previousTime).Ticks;
 				SrtTransform.Interpolate(ref previousTransform, ref nextTransform, parameter, ref previousTransform);
@@ -1074,8 +1063,8 @@ namespace DigitalRune.Animation.Character
 		/// <param name="time1">The time of the second key frame.</param>
 		/// <param name="transform1">The transform of the second key frame.</param>
 		private void GetBoneKeyFrames(int channelIndex, int keyFrameIndex,
-																	out TimeSpan time0, ref SrtTransform transform0,
-																	out TimeSpan time1, ref SrtTransform transform1)
+																	out TimeSpan time0, out SrtTransform transform0,
+																	out TimeSpan time1, out SrtTransform transform1)
 		{
 			Debug.Assert(keyFrameIndex + 1 < ((Array)_keyFrames[channelIndex]).Length, "Call GetBoneKeyFrame() instead of GetBoneKeyFrames()!");
 
@@ -1086,11 +1075,15 @@ namespace DigitalRune.Animation.Character
 
 				var keyFrame = keyFrames[keyFrameIndex];
 				time0 = keyFrame.Time;
+				transform0.Scale = Vector3F.One;
 				transform0.Rotation = keyFrame.Rotation;
+				transform0.Translation = Vector3F.Zero;
 
 				keyFrame = keyFrames[keyFrameIndex + 1];
 				time1 = keyFrame.Time;
+				transform1.Scale = Vector3F.One;
 				transform1.Rotation = keyFrame.Rotation;
+				transform1.Translation = Vector3F.Zero;
 			}
 			else if (boneKeyFrameType == BoneKeyFrameType.RT)
 			{
@@ -1098,11 +1091,13 @@ namespace DigitalRune.Animation.Character
 
 				var keyFrame = keyFrames[keyFrameIndex];
 				time0 = keyFrame.Time;
+				transform0.Scale = Vector3F.One;
 				transform0.Rotation = keyFrame.Rotation;
 				transform0.Translation = keyFrame.Translation;
 
 				keyFrame = keyFrames[keyFrameIndex + 1];
 				time1 = keyFrame.Time;
+				transform1.Scale = Vector3F.One;
 				transform1.Rotation = keyFrame.Rotation;
 				transform1.Translation = keyFrame.Translation;
 			}

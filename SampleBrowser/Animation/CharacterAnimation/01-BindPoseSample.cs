@@ -41,7 +41,7 @@ bone name, bone indices and bone coordinate systems.",
 
       // The loaded dude model is a scene graph which consists of a ModelNode
       // which has a single MeshNode as its child.
-      _dudeMeshNode = (MeshNode)dudeModelNode.Children[0];
+      _dudeMeshNode = (MeshNode)dudeModelNode.FindFirstMeshNode();
       // We could also get the MeshNode by name:
       _dudeMeshNode = (MeshNode)dudeModelNode.GetSceneNode("him");
       // Or using a more general LINQ query:

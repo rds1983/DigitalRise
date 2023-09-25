@@ -145,7 +145,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spark.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spark.dds");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0.0f;
       

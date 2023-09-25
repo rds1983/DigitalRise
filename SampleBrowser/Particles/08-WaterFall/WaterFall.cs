@@ -130,7 +130,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spray.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Spray.dds");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 1;
 
@@ -232,7 +232,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Water.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Water.dds");
 
       return ps;
     }

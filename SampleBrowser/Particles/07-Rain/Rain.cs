@@ -67,7 +67,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Alpha).DefaultValue = 0.5f;
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/RainDrop.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/RainDrop.dds");
 
       // DigitalRune Graphics can render particles with different billboard orientations. 
       // The rain drops should use axial billboards in the up direction (a.k.a. cylindrical 

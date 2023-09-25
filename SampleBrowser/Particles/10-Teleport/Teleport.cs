@@ -175,7 +175,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/LensFlare.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/LensFlare.dds");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 
@@ -234,7 +234,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Beam.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Beam.dds");
 
       // Use cylindrical billboards.
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =
@@ -303,7 +303,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/BeamBlurred.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/BeamBlurred.dds");
 
       // Use cylindrical billboards.
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =

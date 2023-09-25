@@ -345,14 +345,11 @@ namespace DigitalRune.Animation.Character
 
             // ----- Update dirty relative bone poses.
             var boneTransforms = _skeletonPose.BoneTransforms;
-
             var bindPosesRelative = skeleton.BindPosesRelative;
 
             for (int i = 0; i < numberOfBones; i++)
             {
-              //_bonePoseRelative[i] = bindPosesRelative[i] * boneTransforms[i];
-              // SrtTransform.Multiply(ref bindPosesRelative[i], ref boneTransforms[i], out _bonePoseRelative[i]);
-              _bonePoseRelative[i] = boneTransforms[i];
+              SrtTransform.Multiply(ref bindPosesRelative[i], ref boneTransforms[i], out _bonePoseRelative[i]);
             }
 
             // ----- Update dirty absolute bone poses.
@@ -361,7 +358,6 @@ namespace DigitalRune.Animation.Character
             {
               int parentIndex = skeleton.GetParent(i);
 
-              //_bonePoseAbsolute[i] = _bonePoseAbsolute[parentIndex] * _bonePoseRelative[i];
               SrtTransform.Multiply(ref _bonePoseAbsolute[parentIndex], ref _bonePoseRelative[i],
                                     out _bonePoseAbsolute[i]);
             }
@@ -371,7 +367,6 @@ namespace DigitalRune.Animation.Character
             {
               for (int i = 0; i < MatricesLength; i++)
               {
-                //_skinningMatrices[i] = _bonePoseAbsolute[i] * skeleton.BindPosesAbsoluteInverse[i];
                 var idx = i;
                 if (skeleton.BoneOrder != null)
                 {
@@ -393,7 +388,6 @@ namespace DigitalRune.Animation.Character
               {
                 for (int i = 0; i < MatricesLength; i++)
                 {
-									//_skinningMatricesXna[i] = _bonePoseAbsolute[i] * skeleton.BindPosesAbsoluteInverse[i];
 									var idx = i;
 									if (skeleton.BoneOrder != null)
 									{

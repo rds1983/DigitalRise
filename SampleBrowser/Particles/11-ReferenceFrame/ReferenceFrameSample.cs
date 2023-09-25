@@ -48,7 +48,7 @@ The right ball uses ParticleReferenceFrame.Local.",
     {
       // Load a sphere model.
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Particles/Sphere.drmdl");
-      var meshNode = (MeshNode)modelNode.Children[0];
+      var meshNode = modelNode.FindFirstMeshNode();
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());

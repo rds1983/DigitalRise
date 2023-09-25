@@ -54,7 +54,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/BulletHole.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/BulletHole.dds");
 
       // Particle billboards use a custom billboard orientation:
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue =

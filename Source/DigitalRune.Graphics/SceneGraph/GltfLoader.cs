@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRune.Animation.Character;
 using DigitalRune.Character.Skeleton_Animations;
 using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics.Effects;
 using DigitalRune.Mathematics.Algebra;
 using glTFLoader;
@@ -16,9 +12,7 @@ using glTFLoader.Schema;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
-using StbImageSharp;
 using static glTFLoader.Schema.AnimationChannelTarget;
-using Buffer = System.Buffer;
 
 namespace DigitalRune.Graphics.SceneGraph
 {
@@ -635,6 +629,30 @@ namespace DigitalRune.Graphics.SceneGraph
 									break;
 								case PathEnum.weights:
 									break;
+							}
+						}
+
+						var node = _nodes[pair.Key];
+
+						// Make transforms relative to the default
+						for(var i = 0; i < nodeAnimation.Times.Length; i++)
+						{
+							if (nodeAnimation.Translations != null)
+							{
+								nodeAnimation.Translations[i] -= node.PoseLocal.Position.ToXna();
+							}
+
+							if (nodeAnimation.Rotations != null)
+							{
+								var defaultRotation = QuaternionF.CreateRotation(node.PoseLocal.Orientation);
+								defaultRotation.Conjugate();
+								var b = new QuaternionF(nodeAnimation.Rotations[i].W, nodeAnimation.Rotations[i].X, nodeAnimation.Rotations[i].Y, nodeAnimation.Rotations[i].Z);
+								nodeAnimation.Rotations[i] = (defaultRotation * b).ToXna();
+							}
+
+							if (nodeAnimation.Scales != null)
+							{
+								nodeAnimation.Scales[i] /= node.ScaleLocal.ToXna();
 							}
 						}
 

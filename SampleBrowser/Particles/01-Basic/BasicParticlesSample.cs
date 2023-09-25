@@ -95,7 +95,7 @@ namespace Samples.Particles
       // Next, we choose a texture for the particles. All particles use the same texture 
       // parameter, which means the parameter is "uniform".
       var textureParameter = _particleSystem.Parameters.AddUniform<Texture2D>("Texture");
-      textureParameter.DefaultValue = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/LensFlare.png");
+      textureParameter.DefaultValue = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/LensFlare.dds");
 
       // The blend mode is a value between 0 and 1, where 0 means additive blending
       // 1 means alpha blending. Values between 0 and 1 are allowed. The particles in

@@ -95,7 +95,7 @@ namespace Samples.Particles
         new Vector3F(1, 1, 216.0f / 255.0f);
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flash.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Flash.dds");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 
@@ -210,7 +210,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion2.png");
+      assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Explosion2.dds");
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0;
 

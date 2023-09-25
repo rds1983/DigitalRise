@@ -88,7 +88,7 @@ namespace Samples.Particles
       });
 
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
-        assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Fire.png");
+        assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Fire.dds");
 
       // Fire needs additive blending.
       ps.Parameters.AddUniform<float>(ParticleParameterNames.BlendMode).DefaultValue = 0.0f; 
