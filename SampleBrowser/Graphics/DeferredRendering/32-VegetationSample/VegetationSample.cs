@@ -1,4 +1,5 @@
-﻿#if !WP7 && !WP8
+﻿#if false
+
 using System.Collections.Generic;
 using DigitalRune.Graphics.Effects;
 using DigitalRune;
@@ -132,7 +133,7 @@ window.",
       // Load three different plant models.
       // The palm tree consists of a single mesh. It uses the *Vegetation.fx effects.
       ModelNode palmModelNode = AssetManager.LoadDRModel(GraphicsService, "Vegetation/PalmTree/palm_tree.drmdl");
-      Mesh palmMesh = ((MeshNode)palmModelNode.Children[0]).Mesh;
+      Mesh palmMesh = palmModelNode.FindFirstMeshNode().Mesh;
 
       // The bird's nest plant consists of 2 LODs. It uses the *Vegetation.fx effects.
       ModelNode plantModelNode = AssetManager.LoadDRModel(GraphicsService, "Vegetation/BirdnestPlant/BirdnestPlant.drmdl");

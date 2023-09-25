@@ -134,7 +134,13 @@ namespace DigitalRune.Graphics
 							var effectPath = "FNA/bin";
 							if (!string.IsNullOrEmpty(assetManager.CurrentFolder))
 							{
-								effectPath = "../" + effectPath + assetManager.CurrentFolder + "/";
+								var folderPartsCount = (from p in assetManager.CurrentFolder.Split('/') where !string.IsNullOrEmpty(p) select p).Count();
+
+								for(var i = 0; i < folderPartsCount; i++)
+								{
+									effectPath = "../" + effectPath;
+								}
+								effectPath += assetManager.CurrentFolder + "/";
 							}
 							effectPath += Path.ChangeExtension(effectName, "efb");
 							effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, effectPath);

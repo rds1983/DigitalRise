@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
@@ -415,13 +416,17 @@ namespace DigitalRune.Graphics.SceneGraph
 								var gltfTexture = _gltf.Textures[gltfMaterial.PbrMetallicRoughness.BaseColorTexture.Index];
 								if (gltfTexture.Source != null)
 								{
-									using (var stream = _gltf.OpenImageFile(gltfTexture.Source.Value, path => FileResolver(path)))
-									{
-										var imageResult = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
-										var texture = new Texture2D(_graphicsService.GraphicsDevice, imageResult.Width, imageResult.Height);
-										texture.SetData(imageResult.Data);
+									var image = _gltf.Images[gltfTexture.Source.Value];
 
-										opaqueData["Texture"] = texture;
+									if (image.BufferView.HasValue)
+									{
+										throw new Exception("Embedded images arent supported.");
+									} else if (image.Uri.StartsWith("data:image/"))
+									{
+										throw new Exception("Embedded images with uri arent supported.");
+									} else
+									{
+										opaqueData["Texture"] = _assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, image.Uri);
 									}
 								}
 							}
@@ -471,9 +476,7 @@ namespace DigitalRune.Graphics.SceneGraph
 
 			var pose = SkeletonPose.Create(meshNode.Mesh.Skeleton);
 
-			pose.BoneOrder = gltfSkin.Joints;
 			meshNode.Mesh.Skeleton.BoneOrder = gltfSkin.Joints;
-
 			meshNode.SkeletonPose = pose;
 		}
 

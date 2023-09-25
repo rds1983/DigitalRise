@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using DigitalRune.Game.Input;
+﻿using DigitalRune.Game.Input;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Physics.ForceEffects;
@@ -62,4 +61,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

@@ -6,6 +6,8 @@
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
 
+#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
+
 
 // Camera settings.
 float4x4 World;
