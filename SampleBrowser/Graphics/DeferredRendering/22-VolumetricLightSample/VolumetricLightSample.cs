@@ -71,7 +71,7 @@ light AABB). Noise is used to hide banding artifacts.",
       //GameObjectService.Objects.Add(new GroundObject(Services));
       // Add a ground plane with some detail to see the water refractions.
       Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3F(0, 1, 0), 0)));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel", 1, new Pose(new Vector3F(0, 0.001f, 0))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0.001f, 0))));
 
       GameObjectService.Objects.Add(new DudeObject(Services));
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));

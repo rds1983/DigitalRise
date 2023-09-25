@@ -1,4 +1,5 @@
 ﻿#if !WP7 && !WP8
+using AssetManagementBase;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
 using DigitalRune.Graphics.Rendering;
@@ -43,7 +44,7 @@ namespace Samples.Graphics
     public float Strength { get; set; }
 
 
-    public DistortionFilter(IGraphicsService graphicsService, ContentManager content)
+    public DistortionFilter(IGraphicsService graphicsService, AssetManager assetManager)
       : base(graphicsService)
     {
       _billboardRenderer = new BillboardRenderer(GraphicsService, 512)
@@ -51,7 +52,7 @@ namespace Samples.Graphics
         EnableSoftParticles = true,
       };
 
-      _effect = content.Load<Effect>("PostProcessing/DistortionFilter");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/PostProcessing/DistortionFilter.efb");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
       _strengthParameter = _effect.Parameters["Strength"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];

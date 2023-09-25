@@ -170,7 +170,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
 
       // Register the custom renderers for the VarianceShadow.
       _graphicsScreen.ShadowMapRenderer.Renderers.Add(new VarianceShadowMapRenderer(_graphicsScreen.ShadowMapRenderer.RenderCallback));
-      _graphicsScreen.ShadowMaskRenderer.Renderers.Add(new VarianceShadowMaskRenderer(GraphicsService));
+      _graphicsScreen.ShadowMaskRenderer.Renderers.Add(new VarianceShadowMaskRenderer(GraphicsService, AssetManager));
 
       CreateGuiControls();
     }

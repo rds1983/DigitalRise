@@ -83,7 +83,7 @@ Press <F4> to open the Options window where you can change shadow settings.",
 
       // Register our custom shadow map and shadow mask renderers.
       _graphicsScreen.ShadowMapRenderer.Renderers.Add(new VarianceShadowMapRenderer(_graphicsScreen.ShadowMapRenderer.RenderCallback));
-      _graphicsScreen.ShadowMaskRenderer.Renderers.Add(new VarianceShadowMaskRenderer(GraphicsService));
+      _graphicsScreen.ShadowMaskRenderer.Renderers.Add(new VarianceShadowMaskRenderer(GraphicsService, AssetManager));
 
       CreateGuiControls();
     }

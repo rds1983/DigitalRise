@@ -128,8 +128,8 @@ Some things you can test using the available Options:
       _lightNodes[2].PoseLocal = _globalRotation * new Pose(new Vector3F(0, 2, -4));
 
       // Increase specular power of ground to create sharper reflections.
-      var groundModelNode = (ModelNode)_graphicsScreen.Scene.GetSceneNode("Ground");
-      var groundMaterial = ((MeshNode)groundModelNode.Children[0]).Mesh.Materials[0];
+      var groundModelNode = (ModelNode)_graphicsScreen.Scene.GetSubtree().Where(m => m.Name != null && m.Name.Contains("Ground")).First();
+      var groundMaterial = groundModelNode.FindFirstMeshNode().Mesh.Materials[0];
       groundMaterial["GBuffer"].Set("SpecularPower", 1000000.0f);
 
       // Add more test objects to the scenes.
@@ -211,7 +211,7 @@ Some things you can test using the available Options:
       GameObjectService.Objects.Add(
         new StaticObject(
           Services,
-          "Building/concrete_small_window_1",
+          "Building/concrete_small_window_1.drmdl",
 #if XNA
           new Vector3F(1.0f, 1.6f, 1.8f),
           _globalRotation * new Pose(new Vector3F(3.5f, 1.8f, -4f), Matrix33F.CreateRotationY(0)),
@@ -226,7 +226,7 @@ Some things you can test using the available Options:
       GameObjectService.Objects.Add(
         new StaticObject(
           Services,
-          "Building/wall_brick_1",
+          "Building/wall_brick_1.drmdl",
           new Vector3F(1.8f, 1.6f, 1),
           _globalRotation * new Pose(new Vector3F(-3f, 1.8f, -4f), Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
           true,
@@ -236,7 +236,7 @@ Some things you can test using the available Options:
       GameObjectService.Objects.Add(
         new StaticObject(
           Services,
-          "Building/wall_brick_1",
+          "Building/wall_brick_1.drmdl",
           new Vector3F(1.8f, 2.8f, 1),
           _globalRotation * new Pose(new Vector3F(0.3f, 4, -4), Matrix33F.CreateRotationZ(ConstantsF.PiOver2) * Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
           true,

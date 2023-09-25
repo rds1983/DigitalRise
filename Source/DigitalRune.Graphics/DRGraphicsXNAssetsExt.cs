@@ -36,17 +36,13 @@ namespace AssetManagementBase
 			var modelDescription = ModelDescription.Parse(xml);
 
 			var graphicsService = (IGraphicsService)tag;
-			var result = manager.LoadGltf(graphicsService, modelDescription.FileName);
 
-			result.RecursiveProcess(node =>
+			var source = manager.LoadGltf(graphicsService, modelDescription.FileName);
+			var result = source.Clone();
+
+			foreach(var meshNode in result.MeshNodes())
 			{
-				var meshNode = node as MeshNode;
-				if (meshNode == null)
-				{
-					return;
-				}
-
-				var desc = modelDescription.GetMeshDescription(node.Name);
+				var desc = modelDescription.GetMeshDescription(meshNode.Name);
 				if (desc != null)
 				{
 					for (var i = 0; i < Math.Min(meshNode.Mesh.Submeshes.Count, desc.Submeshes.Count); ++i)
@@ -66,8 +62,7 @@ namespace AssetManagementBase
 				{
 					meshNode.ScaleLocal *= modelDescription.Scale;
 				}
-
-			});
+			};
 
 			return result;
 		};

@@ -288,6 +288,11 @@ namespace DigitalRune.Graphics.SceneGraph
 							element.Usage = VertexElementUsage.BlendWeight;
 							element.UsageIndex = int.Parse(pair.Key.Substring(8));
 						}
+						else if (pair.Key.StartsWith("COLOR_"))
+						{
+							element.Usage = VertexElementUsage.Color;
+							element.UsageIndex = int.Parse(pair.Key.Substring(6));
+						}
 						else
 						{
 							throw new Exception($"Attribute of type '{pair.Key}' isn't supported.");
@@ -633,7 +638,7 @@ namespace DigitalRune.Graphics.SceneGraph
 						animation[pair.Key] = nodeAnimation;
 					}
 
-					var meshNode = _model.GetSubtree().OfType<MeshNode>().First();
+					var meshNode = _model.FindFirstMeshNode();
 					if (meshNode.Mesh.Animations == null)
 					{
 						meshNode.Mesh.Animations = new Dictionary<string, SkeletonKeyFrameAnimation>();

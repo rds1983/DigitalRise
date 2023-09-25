@@ -287,7 +287,7 @@ namespace DigitalRune.Graphics.SceneGraph
 
       // Clone MeshNode properties.
       var sourceTyped = (MeshNode)source;
-      _mesh = sourceTyped.Mesh;
+      Mesh = sourceTyped.Mesh;
       _materialInstances = new MaterialInstanceCollection(sourceTyped.MaterialInstances);
 
       if (sourceTyped.MorphWeights != null)

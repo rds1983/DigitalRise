@@ -1,4 +1,5 @@
-﻿#if !WP7 && !WP8
+﻿#if false
+
 using System.Text;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics.Rendering;

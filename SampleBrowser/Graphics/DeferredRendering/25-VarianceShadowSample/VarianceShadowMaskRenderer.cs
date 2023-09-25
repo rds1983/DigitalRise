@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using AssetManagementBase;
 using DigitalRune.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -59,12 +60,12 @@ namespace DigitalRune.Graphics.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public VarianceShadowMaskRenderer(IGraphicsService graphicsService)
+    public VarianceShadowMaskRenderer(IGraphicsService graphicsService, AssetManager assetManager)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = graphicsService.GetStockEffect("VarianceShadowMask");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, ("FNA/bin/VarianceShadowMask.efb"));
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];

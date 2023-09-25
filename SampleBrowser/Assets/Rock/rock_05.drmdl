@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="rock_05.fbx" 
+<Model File="rock_05.glb" 
        GenerateTangentFrames="True"
        Scale="0.02">
   <Mesh>

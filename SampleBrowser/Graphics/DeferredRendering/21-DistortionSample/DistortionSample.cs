@@ -75,7 +75,7 @@ Press <K> to trigger nova effect.")]
       //GameObjectService.Objects.Add(new GroundObject(Services));
       // Add a ground plane with some detail to see the water refractions.
       Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3F(0, 1, 0), 0)));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel", 1, new Pose(new Vector3F(0, 0.001f, 0))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0.001f, 0))));
 
       GameObjectService.Objects.Add(new DudeObject(Services));
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
@@ -100,7 +100,7 @@ Press <K> to trigger nova effect.")]
       }
 
       // Add DistortionFilter to post-processors.
-      _distortionFilter = new DistortionFilter(GraphicsService, ContentManager);
+      _distortionFilter = new DistortionFilter(GraphicsService, AssetManager);
       _graphicsScreen.PostProcessors.Add(_distortionFilter);
 
       // Add 3 particle systems. 

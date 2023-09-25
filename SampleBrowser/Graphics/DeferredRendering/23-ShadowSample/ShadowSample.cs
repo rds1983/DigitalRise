@@ -219,7 +219,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
         Vector3F position = new Vector3F(random.NextFloat(-80, 80), 1, random.NextFloat(-100, 100));
         QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
         float scale = random.NextFloat(0.5f, 1.2f);
-        gameObjectService.Objects.Add(new StaticObject(services, "Rock/rock_05", scale, new Pose(position, orientation)));
+        gameObjectService.Objects.Add(new StaticObject(services, "Rock/rock_05.drmdl", scale, new Pose(position, orientation)));
       }
 
       // Grass
@@ -228,7 +228,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
         Vector3F position = new Vector3F(random.NextFloat(-20, 20), 0, random.NextFloat(-20, 20));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
-        gameObjectService.Objects.Add(new StaticObject(services, "Grass/Grass", scale, new Pose(position, orientation)));
+        gameObjectService.Objects.Add(new StaticObject(services, "Grass/Grass.drmdl", scale, new Pose(position, orientation)));
       }
 
       // More plants
@@ -237,7 +237,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
         Vector3F position = new Vector3F(random.NextFloat(-20, 20), 0, random.NextFloat(-20, 20));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
-        gameObjectService.Objects.Add(new StaticObject(services, "Parviflora/Parviflora", scale, new Pose(position, orientation)));
+        gameObjectService.Objects.Add(new StaticObject(services, "Parviflora/Parviflora.drmdl", scale, new Pose(position, orientation)));
       }
 
       // "Skyscrapers"

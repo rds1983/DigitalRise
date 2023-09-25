@@ -145,7 +145,7 @@ namespace Samples
         // A sphere of glass (or "bubble").
         RigidBody = new RigidBody(new SphereShape(0.3f));
         ModelNode = assetManager.LoadDRModel(graphicsService, "Bubble/Bubble.drmdl").Clone();
-        ModelNode.FindFirstMeshNode().ScaleLocal = new Vector3F(0.3f);
+        ModelNode.FindFirstMeshNode().ScaleLocal *= new Vector3F(0.5f);
       }
       else if (_type == 6)
       {

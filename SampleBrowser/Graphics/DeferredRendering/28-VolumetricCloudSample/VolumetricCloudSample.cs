@@ -1,4 +1,5 @@
 ﻿#if !WP7 && !WP8
+using AssetManagementBase;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics;
@@ -58,21 +59,21 @@ namespace Samples.Graphics
       GameObjectService.Objects.Add(new ObjectCreatorObject(Services));
       GameObjectService.Objects.Add(new LavaBallsObject(Services));
 
-      _particleCloud0 = new ParticleSystemNode(CreateParticleCloud(ContentManager))
+      _particleCloud0 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
         PoseLocal = new Pose(new Vector3F(-0, 100, -400)),
       };
       ParticleSystemService.ParticleSystems.Add(_particleCloud0.ParticleSystem);
       _graphicsScreen.Scene.Children.Add(_particleCloud0);
 
-      _particleCloud1 = new ParticleSystemNode(CreateParticleCloud(ContentManager))
+      _particleCloud1 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
         PoseLocal = new Pose(new Vector3F(-200, 100, -200)),
       };
       ParticleSystemService.ParticleSystems.Add(_particleCloud1.ParticleSystem);
       _graphicsScreen.Scene.Children.Add(_particleCloud1);
 
-      _particleCloud2 = new ParticleSystemNode(CreateParticleCloud(ContentManager))
+      _particleCloud2 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
         PoseLocal = new Pose(new Vector3F(400, 400, -400)),
       };
@@ -82,7 +83,7 @@ namespace Samples.Graphics
 
 
 
-    private ParticleSystem CreateParticleCloud(ContentManager content)
+    private ParticleSystem CreateParticleCloud(AssetManager assetManager)
     {
       var ps = new ParticleSystem
       {
@@ -136,7 +137,7 @@ namespace Samples.Graphics
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
         new PackedTexture(
           "Clouds",
-          content.Load<Texture2D>("Particles/Clouds"),
+          assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/Clouds.png"),
           Vector2F.Zero, Vector2F.One,
           2, 1);
 

@@ -122,8 +122,8 @@ looking away from all TV models, the texture is not updated!",
       var tvModel = _graphicsScreen.Scene
                                   .GetDescendants()
                                   .OfType<ModelNode>()
-                                  .First(n => n.Name == "TVBox");
-      var tvMesh = (MeshNode)tvModel.Children[0];
+                                  .First(n => n.Name.Contains("TVBox"));
+      var tvMesh = tvModel.FindFirstMeshNode();
       var tvScreenMaterial = tvMesh.Mesh
                                    .Materials
                                    .First(m => m.Name == "TestCard");

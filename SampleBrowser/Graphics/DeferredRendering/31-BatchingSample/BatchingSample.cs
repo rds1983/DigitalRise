@@ -141,12 +141,12 @@ Debug drawing can be enabled in the Options window (F4) in the Batching tab:
       // Store the mesh nodes in a list.
       MeshNode[] meshNodePrototypes =
       {
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Grass/Grass.drmdl").Children[0],
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Parviflora/Parviflora.drmdl").Children[0],
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "PalmTree/palm_tree.drmdl").Children[0],
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Rock/rock_05.drmdl").Children[0],
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "GlassBox/GlassBox.drmdl").Children[0],
-        (MeshNode)AssetManager.LoadDRModel(GraphicsService, "Building/wall_concrete_1.drmdl").Children[0],
+        AssetManager.LoadDRModel(GraphicsService, "Grass/Grass.drmdl").FindFirstMeshNode(),
+        AssetManager.LoadDRModel(GraphicsService, "Parviflora/Parviflora.drmdl").FindFirstMeshNode(),
+        AssetManager.LoadDRModel(GraphicsService, "PalmTree/palm_tree.drmdl").FindFirstMeshNode(),
+        AssetManager.LoadDRModel(GraphicsService, "Rock/rock_05.drmdl").FindFirstMeshNode(),
+        AssetManager.LoadDRModel(GraphicsService, "GlassBox/GlassBox.drmdl").FindFirstMeshNode(),
+        AssetManager.LoadDRModel(GraphicsService, "Building/wall_concrete_1.drmdl").FindFirstMeshNode(),
       };
 
       for (int meshIndex = 0; meshIndex < meshNodePrototypes.Length; meshIndex++)
