@@ -270,9 +270,26 @@ namespace DigitalRune
 				}
 			}
 		}
-		
+
+		private void PremultiplyVertexColors()
+		{
+			foreach (var gltfMesh in _gltf.Meshes)
+			{
+				foreach (var primitive in gltfMesh.Primitives)
+				{
+					var hasColors = primitive.HasAttribute("COLOR");
+					if (!hasColors)
+					{
+						continue;
+					}
+
+					var k = 5;
+				}
+			}
+		}
+
 		public Gltf Process(string file, string output, bool genTangentFrames,
-			bool unwindIndices, float? scale)
+			bool unwindIndices, bool premultiply, float? scale)
 		{
 			_bufferCache.Clear();
 			_input = file;
@@ -295,6 +312,11 @@ namespace DigitalRune
 			if (unwindIndices)
 			{
 				UnwindIndices();
+			}
+
+			if (premultiply)
+			{
+				PremultiplyVertexColors();
 			}
 
 			if (scale != null)

@@ -120,10 +120,10 @@ This sample also uses the vehicle of one of the vehicle samples.",
       {
         DiffuseColor = new Vector3F(0.5f),
         SpecularColor = new Vector3F(1),
-        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Diffuse.png"),
-        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Normal.png"),
-        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Specular.png"),
-        HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Height.png"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Diffuse.dds"),
+        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Normal.dds"),
+        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Specular.dds"),
+        HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Road-Asphalt-Height.dds"),
 
         // The size of the tileable detail textures in world space units.
         TileSize = 5,

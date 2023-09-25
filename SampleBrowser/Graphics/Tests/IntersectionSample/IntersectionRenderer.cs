@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AssetManagementBase;
 using DigitalRune;
 using DigitalRune.Collections;
 using DigitalRune.Graphics;
@@ -207,17 +208,17 @@ namespace Samples.Graphics
     /// Initializes a new instance of the <see cref="IntersectionRenderer"/> class.
     /// </summary>
     /// <param name="graphicsService">The graphics service.</param>
-    /// <param name="content">The content manager.</param>
-    public IntersectionRenderer(IGraphicsService graphicsService, ContentManager content)
+    /// <param name="assetManager">The content manager.</param>
+    public IntersectionRenderer(IGraphicsService graphicsService, AssetManager assetManager)
     {
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
-      if (content == null)
+      if (assetManager == null)
         throw new ArgumentNullException("content");
 
       _graphicsService = graphicsService;
 
-      Effect effect = content.Load<Effect>("Intersection");
+      Effect effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/Intersection.efb");
       _parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterCameraParameters = effect.Parameters["CameraParameters"];
       _parameterWorld = effect.Parameters["World"];

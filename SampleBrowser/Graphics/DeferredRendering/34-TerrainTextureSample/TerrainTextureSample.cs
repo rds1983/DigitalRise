@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8 && !XBOX
-using System.Linq;
+﻿using System.Linq;
 using DigitalRune.Geometry.Shapes;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Effects;
@@ -10,7 +9,7 @@ using DigitalRune.Physics;
 using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using AssetManagementBase;
 
 namespace Samples.Graphics
 {
@@ -77,9 +76,9 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
         ref heightTexture);
       _terrainTile.HeightTexture = heightTexture;
       
-      var shadowMapEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainShadowMap");
-      var gBufferEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainGBuffer");
-      var materialEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainMaterial");
+      var shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
+      var gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
+      var materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
       var material = new Material
       {
         { "ShadowMap", new EffectBinding(GraphicsService, shadowMapEffect, null, EffectParameterHint.Material) },
@@ -101,9 +100,9 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
       float detailCellSize = terrainNode.DetailClipmap.CellSizes[0];
       var materialGravel = new TerrainMaterialLayer(GraphicsService)
       {
-        DiffuseTexture = ContentManager.Load<Texture2D>("Terrain/Gravel-Diffuse"),
-        NormalTexture = ContentManager.Load<Texture2D>("Terrain/Gravel-Normal"),
-        SpecularTexture = ContentManager.Load<Texture2D>("Terrain/Gravel-Specular"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.dds"),
+        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Gravel-Normal.dds"),
+        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Gravel-Specular.dds"),
         TileSize = detailCellSize * 512,
         BlendRange = 0.1f,
       };
@@ -113,10 +112,10 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
 
       var materialRock = new TerrainMaterialLayer(GraphicsService)
       {
-        DiffuseTexture = ContentManager.Load<Texture2D>("Terrain/Rock-02-Diffuse"),
-        NormalTexture = ContentManager.Load<Texture2D>("Terrain/Rock-02-Normal"),
-        SpecularTexture = ContentManager.Load<Texture2D>("Terrain/Rock-02-Specular"),
-        HeightTexture = ContentManager.Load<Texture2D>("Terrain/Rock-02-Height"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.dds"),
+        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.dds"),
+        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
+        HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
         TileSize = detailCellSize * 1024,
         DiffuseColor = new Vector3F(1 / 0.702f),
         BlendTexture = noiseTexture,
@@ -128,9 +127,9 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
 
       var materialSnow = new TerrainMaterialLayer(GraphicsService)
       {
-        DiffuseTexture = ContentManager.Load<Texture2D>("Terrain/Snow-Diffuse"),
-        NormalTexture = ContentManager.Load<Texture2D>("Terrain/Snow-Normal"),
-        SpecularTexture = ContentManager.Load<Texture2D>("Terrain/Snow-Specular"),
+        DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Snow-Diffuse.dds"),
+        NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Snow-Normal.dds"),
+        SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Snow-Specular.dds"),
         TileSize = detailCellSize * 512,
         BlendTexture = noiseTexture,
         BlendTextureChannel = 1,
@@ -216,4 +215,3 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
     }
   }
 }
-#endif

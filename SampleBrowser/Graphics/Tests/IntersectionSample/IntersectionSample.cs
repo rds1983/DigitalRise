@@ -60,7 +60,7 @@ namespace Samples.Graphics
       _meshRenderer = new MeshRenderer();
       _debugRenderer = new DebugRenderer(GraphicsService, null);
 
-      _intersectionRenderer = new IntersectionRenderer(GraphicsService, ContentManager)
+      _intersectionRenderer = new IntersectionRenderer(GraphicsService, AssetManager)
       {
         DownsampleFactor = 1,
       };

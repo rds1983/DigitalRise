@@ -16,6 +16,7 @@ namespace EffectFarm
 		static SwitchValueArgument<string> _outputArgument;
 		static SwitchArgument _tangentArgument;
 		static SwitchArgument _unwindArgument;
+		static SwitchArgument _premultiplyArgument;
 		static SwitchValueArgument<float> _scaleArgument;
 		static SwitchArgument _helpArgument;
 
@@ -90,6 +91,16 @@ namespace EffectFarm
 			};
 			parser.Arguments.Add(_unwindArgument);
 
+			_premultiplyArgument = new SwitchArgument("premultiply",
+				"Premultiply vertex colors.",
+				null,
+				new[] { 'p' })
+			{
+				Category = categoryOptional,
+				IsOptional = true
+			};
+			parser.Arguments.Add(_premultiplyArgument);
+
 			_scaleArgument = new SwitchValueArgument<float>("scale",
 					new ValueArgument<float>("scale", "Scale size."),
 					"Defines the scale that should be applied to the model",
@@ -151,13 +162,14 @@ namespace EffectFarm
 			var output = ((ArgumentResult<string>)parseResult.ParsedArguments[_outputArgument])?.Values[0];
 			var genTangentFrames = parseResult.ParsedArguments[_tangentArgument] != null;
 			var unwindIndices = parseResult.ParsedArguments[_unwindArgument] != null;
+			var premultiply = parseResult.ParsedArguments[_premultiplyArgument] != null;
 			float? scale = null;
 			if (parseResult.ParsedArguments[_scaleArgument] != null)
 			{
 				scale = ((ArgumentResult<float>)parseResult.ParsedArguments[_scaleArgument]).Values[0];
 			}
 
-			processor.Process(file, output, genTangentFrames, unwindIndices, scale);
+			processor.Process(file, output, genTangentFrames, unwindIndices, premultiply, scale);
 
 			return ERROR_SUCCESS;
 		}

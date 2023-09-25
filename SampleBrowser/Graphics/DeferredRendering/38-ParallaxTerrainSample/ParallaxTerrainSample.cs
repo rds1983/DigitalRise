@@ -69,12 +69,12 @@ namespace Samples.Graphics
             DiffuseColor = new Vector3F(1),
             SpecularColor = new Vector3F(5),
             SpecularPower = 20,
-            DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_diffuse.png"),
-            NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_normal.png"),
-            SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_specular.png"),
-            HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_height.png"),
+            DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_diffuse.dds"),
+            NormalTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_normal.dds"),
+            SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_specular.dds"),
+            HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Parallax/AgedPavement_height.dds"),
             TileSize = 0.005f * 512,
-            BlendTexture = ContentManager.Load<Texture2D>("Terrain/Terrain001-Blend-Grass" + tilePostfix),
+            BlendTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Terrain001-Blend-Grass" + tilePostfix + ".png"),
             BlendTextureChannel = 0,
             BlendHeightInfluence = 0.5f,
             BlendThreshold = 0.5f,
@@ -97,15 +97,15 @@ namespace Samples.Graphics
       Effect shadowMapEffect, gBufferEffect, materialEffect;
       if (!enableParallaxOcclusionMapping)
       {
-        shadowMapEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainShadowMap");
-        gBufferEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainGBuffer");
-        materialEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainMaterial");
+        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
+        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
+        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
       }
       else
       {
-        shadowMapEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainShadowMapHoles");
-        gBufferEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainGBufferHolesPom");
-        materialEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainMaterialHolesPom");
+        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMapHoles");
+        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBufferHolesPom");
+        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterialHolesPom");
       }
 
       _terrainObject.TerrainNode.Material = new Material

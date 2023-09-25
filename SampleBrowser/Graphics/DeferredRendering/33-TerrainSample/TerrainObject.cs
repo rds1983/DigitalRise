@@ -362,9 +362,9 @@ namespace Samples.Graphics
           var materialGravel = new TerrainMaterialLayer(_graphicsService)
           {
             // The tiling detail material textures.
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.dds"),
 
             // The size of one tile in world space units.
             TileSize = DetailCellSize * 512,
@@ -396,9 +396,9 @@ namespace Samples.Graphics
           float blendRange = 0.6f;
           var materialGrass = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Specular.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Specular.dds"),
             TileSize = DetailCellSize * 1024,
             TintTexture = tintTexture,
             TintStrength = 1,
@@ -425,9 +425,9 @@ namespace Samples.Graphics
           {
             var materialSand = new TerrainMaterialLayer(_graphicsService)
             {
-              DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Diffuse.png"),
-              NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Normal.png"),
-              SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Specular.png"),
+              DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Diffuse.dds"),
+              NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Normal.dds"),
+              SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Sand-Specular.dds"),
               TileSize = DetailCellSize * 512,
               TintTexture = tintTexture,
               TintStrength = 1f,
@@ -449,10 +449,10 @@ namespace Samples.Graphics
           // Then we also mix-in the gravel texture to add more detail near the camera.
           var materialDirt = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.png"),
-            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
+            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
             TileSize = DetailCellSize * 1024 * 10,
             TintTexture = tintTexture,
             TintStrength = 1f,
@@ -466,9 +466,9 @@ namespace Samples.Graphics
           terrainTile.Layers.Add(materialDirt);
           var materialDirtDetail = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.dds"),
             TileSize = DetailCellSize * 512,
             TintTexture = tintTexture,
             TintStrength = 1f,
@@ -490,10 +490,10 @@ namespace Samples.Graphics
           // The gray rocks use two layered rock textures.
           var materialRock = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.png"),
-            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
+            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
             TileSize = DetailCellSize * 1024 * 20,
             TintTexture = tintTexture,
             TintStrength = 1f,
@@ -507,10 +507,10 @@ namespace Samples.Graphics
           terrainTile.Layers.Add(materialRock);
           var materialRockDetail = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.png"),
-            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
+            HeightTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
             TileSize = DetailCellSize * 1024,
             TintTexture = tintTexture,
             TintStrength = 1f,
@@ -529,9 +529,9 @@ namespace Samples.Graphics
           // Add some gravel from hydraulic erosion over the rocks.
           var materialFlow = new TerrainMaterialLayer(_graphicsService)
           {
-            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.png"),
-            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.png"),
-            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.png"),
+            DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.dds"),
+            NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.dds"),
+            SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.dds"),
             TileSize = DetailCellSize * 512,
             TintTexture = tintTexture,
             TintStrength = 1f,
@@ -551,9 +551,9 @@ namespace Samples.Graphics
           {
             var materialSnow = new TerrainMaterialLayer(_graphicsService)
             {
-              DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Diffuse.png"),
-              NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Normal.png"),
-              SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Specular.png"),
+              DiffuseTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Diffuse.dds"),
+              NormalTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Normal.dds"),
+              SpecularTexture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Terrain/Snow-Specular.dds"),
               TileSize = DetailCellSize * 512,
               TintTexture = tintTexture,
               TintStrength = 0.0f,
