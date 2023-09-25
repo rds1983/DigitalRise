@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="wall_concrete_2.fbx" GenerateTangentFrames="True">
+<Model File="wall_concrete_2.glb" GenerateTangentFrames="True">
   <Mesh Name="wall_concrete_2">
     <Submesh Material="Building.drmat" />
   </Mesh>

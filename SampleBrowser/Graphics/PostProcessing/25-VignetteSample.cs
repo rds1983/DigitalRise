@@ -21,7 +21,7 @@ namespace Samples.Graphics
     public VignetteSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/PostProcessing/Vignette.efb");
+      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/bin/PostProcessing/Vignette.efb");
 
       var postProcessor = new EffectPostProcessor(GraphicsService, effect);
       GraphicsScreen.PostProcessors.Add(postProcessor);

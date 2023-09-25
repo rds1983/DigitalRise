@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- This file was generated automatically by the DigitalRune Model Content Processor. -->
 
-<Model File="PlayerMarine.fbx"
+<Model File="PlayerMarine.glb"
        GenerateTangentFrames="False"
        PremultiplyVertexColors="True"
        RotationX="0" RotationY="0" RotationZ="0"
@@ -18,7 +18,7 @@
   </Mesh> 
 -->
                                                                                      
-  <Animations MergeFiles="Run.fbx;Aim.fbx;Shoot.fbx" />
+  <Animations MergeFiles="Run.glb;Aim.glb;Shoot.glb" />
 
 <!-- See the DigitalRune Graphics documentation for a full list of model processing options. -->
    

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Model File="../Saucer/saucer.fbx"
+<Model File="../Saucer/saucer.glb"
        GenerateTangentFrames="False"
        PremultiplyVertexColors="True"
        RotationX="0" RotationY="0" RotationZ="0"

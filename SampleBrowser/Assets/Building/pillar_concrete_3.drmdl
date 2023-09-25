@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="pillar_concrete_3.fbx" GenerateTangentFrames="True">
+<Model File="pillar_concrete_3.glb" GenerateTangentFrames="True">
   <Mesh Name="pillar_concrete_3">
     <Submesh Material="Building.drmat" />
   </Mesh>

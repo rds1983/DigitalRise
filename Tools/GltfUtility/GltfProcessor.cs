@@ -16,6 +16,7 @@ namespace DigitalRune
 		private Gltf _gltf;
 		private readonly Dictionary<int, byte[]> _bufferCache = new Dictionary<int, byte[]>();
 
+		private static void Log(string message) => Console.WriteLine(message);
 		private byte[] FileResolver(string path)
 		{
 			if (string.IsNullOrEmpty(path))
@@ -90,14 +91,39 @@ namespace DigitalRune
 		{
 			foreach (var gltfMesh in _gltf.Meshes)
 			{
-				foreach (var primitive in gltfMesh.Primitives)
+				var meshName = gltfMesh.Name ?? "null";
+
+				for(var primitiveIndex = 0; primitiveIndex < gltfMesh.Primitives.Length; primitiveIndex++)
 				{
+					var primitive = gltfMesh.Primitives[primitiveIndex];
 					var hasNormals = primitive.HasAttribute("NORMAL");
 					var hasTangents = primitive.HasAttribute("_TANGENT");
 					var hasBinormals = primitive.HasAttribute("_BINORMAL");
 
 					if (!hasTangents || !hasBinormals)
 					{
+						var hasPositions = primitive.HasAttribute("POSITION");
+						var hasTexCoords = primitive.HasAttribute("TEXCOORD_");
+
+						if (!hasPositions)
+						{
+							Log($"Warning: can't generate the tangent frames, since {primitive}'s primitive of Mesh {meshName} lacks positions.");
+							return;
+						}
+
+						if (!hasNormals)
+						{
+							Log($"Warning: can't generate the tangent frames, since {primitive}'s primitive of Mesh {meshName} lacks normals.");
+							return;
+						}
+
+						if (!hasTexCoords)
+						{
+							Log($"Warning: can't generate the tangent frames, since {primitive}'s primitive of Mesh {meshName} lacks texCoords.");
+							return;
+						}
+
+
 						var positions = GetAccessorAs<Vector3>(primitive.FindAttribute("POSITION"));
 						var normals = GetAccessorAs<Vector3>(primitive.FindAttribute("NORMAL"));
 						var texCoords = GetAccessorAs<Vector2>(primitive.FindAttribute("TEXCOORD_"));
@@ -245,14 +271,15 @@ namespace DigitalRune
 			}
 		}
 		
-		public void Process(string file, string output, bool genTangentFrames,
+		public Gltf Process(string file, string output, bool genTangentFrames,
 			bool unwindIndices, float? scale)
 		{
+			_bufferCache.Clear();
 			_input = file;
 
 			if (string.IsNullOrEmpty(output))
 			{
-				output = file;
+				output = Path.ChangeExtension(file, "glb");
 			}
 
 			using (var stream = File.OpenRead(file))
@@ -285,7 +312,9 @@ namespace DigitalRune
 			}
 
 			_gltf.Buffers[0].Uri = null;
-			Interface.SaveBinaryModel(_gltf, GetBuffer(0), Path.ChangeExtension(file, "glb"));
+			Interface.SaveBinaryModel(_gltf, GetBuffer(0), output);
+
+			return _gltf;
 		}
 	}
 }

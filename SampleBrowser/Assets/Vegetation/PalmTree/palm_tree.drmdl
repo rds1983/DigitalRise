@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="palm_tree.fbx" 
+<Model File="palm_tree.glb" 
        AabbMinimum="-1,-0,-1"
        AabbMaximum="1,4.5,1"
        GenerateTangentFrames="True"

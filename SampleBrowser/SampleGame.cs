@@ -10,6 +10,7 @@ using DigitalRune.Game.UI;
 using DigitalRune.Geometry.Collisions;
 using DigitalRune.Geometry.Partitioning;
 using DigitalRune.Graphics;
+using DigitalRune.Graphics.Rendering;
 using DigitalRune.Particles;
 using DigitalRune.Physics;
 using DigitalRune.ServiceLocation;
@@ -62,11 +63,12 @@ namespace Samples
 
     // The size of the current time step.
     private TimeSpan _deltaTime;
+		private SpriteBatch _spriteBatch;
 
 
-    // Enables/Disables the multi-threaded game loop. If enabled, certain game 
-    // services will be updated in parallel.
-    public bool EnableParallelGameLoop { get; set; }
+		// Enables/Disables the multi-threaded game loop. If enabled, certain game 
+		// services will be updated in parallel.
+		public bool EnableParallelGameLoop { get; set; }
 
 
     public SampleGame()
@@ -261,7 +263,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(Graphics.SkySample);
+			var initialSample = typeof(Graphics.InterlaceSample);
 			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);
@@ -272,6 +274,8 @@ namespace Samples
       _services.Register(typeof(SampleFramework), null, _sampleFramework);
 
       IsMouseVisible = true;
+
+      _spriteBatch = new SpriteBatch(GraphicsDevice);
 
       base.Initialize();
     }
@@ -474,6 +478,58 @@ namespace Samples
       _profiler.Stop();
 
       _profiler.Stop();
-    }
-  }
+
+/*			_spriteBatch.Begin(SpriteSortMode.Deferred, blendState: BlendState.Opaque);
+
+			DebugDraw(WaterRenderer.GBuffer0, 0, 0);
+			DebugDraw(WaterRenderer.NormalMap0, 1, 0);
+			DebugDraw(WaterRenderer.NormalMap1, 2, 0);
+			DebugDraw(WaterRenderer.RefractionTexture, 3, 0);
+
+			DebugDraw(WaterRenderer.FoamMap, 0, 1);
+			DebugDraw(WaterRenderer.NoiseMap, 1, 1);
+			DebugDraw(WaterRenderer.WaveNormalMap, 2, 1);
+			DebugDraw(WaterRenderer.DisplacementTexture, 3, 1);
+
+			DebugDraw(WaterRenderer.CubeReflectionMap, 2);
+
+			_spriteBatch.End();*/
+		}
+
+		private void DebugDraw(Texture2D texture, int gridX, int gridY)
+		{
+			if (texture == null || texture.IsDisposed)
+			{
+				return;
+			}
+
+			_spriteBatch.Draw(texture, new Rectangle(gridX * 200, gridY * 200, 200, 200), Color.White);
+		}
+
+    private Texture2D _tempTexture;
+    private Color[] _tempData;
+
+		private void DebugDraw(TextureCube cube, int gridY)
+		{
+			if (cube == null || cube.IsDisposed)
+			{
+				return;
+			}
+
+      var sz = cube.Size * cube.Size;
+      if (_tempData == null || _tempData.Length != sz)
+      {
+        _tempData = new Color[sz];
+				_tempTexture = new Texture2D(GraphicsDevice, cube.Size, cube.Size);
+			}
+
+			for (var i = 0; i < 6; ++i)
+			{
+				cube.GetData((CubeMapFace)i, _tempData);
+				_tempTexture.SetData(_tempData);
+
+				DebugDraw(_tempTexture, i, gridY);
+			}
+		}
+	}
 }

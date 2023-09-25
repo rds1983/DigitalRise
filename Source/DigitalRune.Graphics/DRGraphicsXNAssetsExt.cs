@@ -61,6 +61,12 @@ namespace AssetManagementBase
 						meshNode.Mesh.Submeshes[i].SetMaterial(material);
 					}
 				}
+
+				if (modelDescription.Scale != 1.0f)
+				{
+					meshNode.ScaleLocal *= modelDescription.Scale;
+				}
+
 			});
 
 			return result;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="cooling.fbx" GenerateTangentFrames="True">
+<Model File="cooling.glb" GenerateTangentFrames="True">
   <Mesh Name="cooling">
     <Submesh Material="Building.drmat" />
   </Mesh>

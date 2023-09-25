@@ -37,9 +37,9 @@ namespace DigitalRune
 		public static int GetComponentCount(this TypeEnum type) => ComponentsCount[(int)type];
 		public static int GetComponentSize(this ComponentTypeEnum type) => ComponentSizes[(int)type - 5120];
 
-		public static bool HasAttribute(this MeshPrimitive primitive, string attributeName)
+		public static bool HasAttribute(this MeshPrimitive primitive, string prefix)
 		{
-			return (from p in primitive.Attributes.Keys where p == attributeName select p).FirstOrDefault() != null;
+			return (from p in primitive.Attributes.Keys where p.StartsWith(prefix) select p).FirstOrDefault() != null;
 		}
 
 		public static int FindAttribute(this MeshPrimitive primitive, string prefix)

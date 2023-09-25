@@ -24,7 +24,7 @@ bindings, so you do not have to derive a new PostProcessor class.",
       : base(game)
     {
       // Load effect.
-      var effect = AssetManager.LoadEffect(Services.GetInstance<IGraphicsService>().GraphicsDevice, "FNA/PostProcessing/NegativeFilter.efb");
+      var effect = AssetManager.LoadEffect(Services.GetInstance<IGraphicsService>().GraphicsDevice, "FNA/bin/PostProcessing/NegativeFilter.efb");
 
       // Create an EffectPostProcessor that uses the effect and controls the effect parameters
       // using automatically generated effect parameter bindings.

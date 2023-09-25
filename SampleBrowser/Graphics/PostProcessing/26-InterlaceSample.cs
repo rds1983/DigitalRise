@@ -20,7 +20,7 @@ namespace Samples.Graphics
     public InterlaceSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/PostProcessing/Interlace.efb");
+      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/bin/PostProcessing/Interlace.efb");
 
       var postProcessor = new EffectPostProcessor(GraphicsService, effect);
       GraphicsScreen.PostProcessors.Add(postProcessor);

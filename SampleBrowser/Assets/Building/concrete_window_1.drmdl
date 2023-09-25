@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="concrete_window_1.fbx" GenerateTangentFrames="True">
+<Model File="concrete_window_1.glb" GenerateTangentFrames="True">
   <Mesh Name="concrete_window_1">
     <Submesh Material="Building.drmat" />
     <Submesh Material="Glass.drmat" />

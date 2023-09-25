@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Model File="Barrel_Colored.fbx"
+<Model File="Barrel_Colored.glb"
        PremultiplyVertexColors="True"
        RotationX="-90" RotationY="0" RotationZ="0"
        Scale="1"

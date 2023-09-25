@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="grass.FBX"
+<Model File="grass.glb"
        AabbMinimum="-0.7,0,-0.7"
        AabbMaximum="0.7,1,0.7"
        GenerateTangentFrames="True"
