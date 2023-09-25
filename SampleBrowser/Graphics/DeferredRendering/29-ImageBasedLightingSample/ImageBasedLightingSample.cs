@@ -322,7 +322,7 @@ Some things you can test using the available Options:
         // We have modified the material of a mesh. These changes should not
         // affect other samples. Therefore, we unload the assets. The next sample
         // will reload them with default values.)
-        ContentManager.Unload();
+        AssetManager.Unload();
 
         for (int i = 0; i < _sceneCaptureNodes.Length; i++)
         {

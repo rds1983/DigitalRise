@@ -8,6 +8,11 @@
        Scale="1"
        SwapWindingOrder="False">
 
+  <Mesh>
+    <Submesh Material="../Sandbox/Sandbox.drmat" />
+  </Mesh>
+
+
 <!-- Optional: Assign materials to submeshes.
      Without this info, the content processor assumes that the material definitions
      (XML files) have the same name as the used textures.

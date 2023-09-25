@@ -129,7 +129,7 @@ namespace Samples.Graphics
       // Create a mesh (which is collection of submeshes and materials).
       Mesh mesh = new Mesh
       {
-        Name = "Sky",
+        Name = "Sky.png",
         BoundingShape = new CylinderShape(CylinderSize, 2 * CylinderSize),
       };
       mesh.Submeshes.Add(submesh);
@@ -150,10 +150,10 @@ namespace Samples.Graphics
 
       // Create a material, which is a collection of effect bindings - one effect 
       // binding for each "render pass". The sky mesh should be rendered in the 
-      // "Sky" render pass. This render pass name is an arbitrary string that is 
+      // "Sky.png" render pass. This render pass name is an arbitrary string that is 
       // used in SampleGraphicsScreen.cs.
       Material material = new Material();
-      material.Add("Sky", effectBinding);
+      material.Add("Sky.png", effectBinding);
 
       // Assign the material to the submesh.
       submesh.SetMaterial(material);

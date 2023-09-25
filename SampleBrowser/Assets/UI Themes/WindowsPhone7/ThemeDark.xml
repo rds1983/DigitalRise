@@ -3,14 +3,13 @@
 <Theme>
 
   <Fonts>
-    <Font Name="Segoe15" File="Segoe15.spritefont" IsDefault="True"/>
-    <Font Name="Segoe17" File="Segoe17.spritefont"/>
-    <Font Name="Segoe19" File="Segoe19.spritefont"/>
-    <Font Name="Segoe24" File="Segoe24.spritefont"/>
-    <Font Name="Segoe32" File="Segoe32.spritefont"/>
-    <Font Name="Segoe54" File="Segoe54.spritefont"/>
+    <Font Name="Segoe15" File="/Fonts/DroidSans.ttf" Size="15" IsDefault="True"/>
+    <Font Name="Segoe17" File="/Fonts/DroidSans.ttf" Size="17" IsDefault="True"/>
+    <Font Name="Segoe19" File="/Fonts/DroidSans.ttf" Size="19" IsDefault="True"/>
+    <Font Name="Segoe24" File="/Fonts/DroidSans.ttf" Size="24" IsDefault="True"/>
+    <Font Name="Segoe32" File="/Fonts/DroidSans.ttf" Size="32" IsDefault="True"/>
+    <Font Name="Segoe54" File="/Fonts/DroidSans.ttf" Size="54" IsDefault="True"/>
   </Fonts>
-
 
   <Textures>
     <Texture Name="UITextureDark" File="UITextureDark.png" IsDefault="True"/>

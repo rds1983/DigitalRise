@@ -193,7 +193,7 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
         // (We have changed the properties of some loaded materials. Other samples
         // should use the default values. When we unload them now, the next sample
         // will reload them with default values.)
-        ContentManager.Unload();
+        AssetManager.Unload();
       }
 
       base.Dispose(disposing);

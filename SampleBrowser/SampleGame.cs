@@ -1,7 +1,9 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using AssetManagementBase;
 using CommonServiceLocator;
+using DigitalRune;
 using DigitalRune.Animation;
 using DigitalRune.Diagnostics;
 using DigitalRune.Game;
@@ -21,6 +23,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Samples.Base;
 using Samples.Game.UI;
+using Samples.Geometry;
+using Samples.Graphics;
+using Samples.Particles;
 
 namespace Samples
 {
@@ -263,8 +268,8 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(Graphics.VolumetricCloudSample);
-			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
+			var initialSample = typeof(OceanSample);
+			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../Assets"));
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);
 

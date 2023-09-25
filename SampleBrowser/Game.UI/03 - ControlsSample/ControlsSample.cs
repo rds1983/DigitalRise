@@ -4,7 +4,7 @@ using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-
+using AssetManagementBase;
 
 namespace Samples.Game.UI
 {
@@ -67,11 +67,11 @@ namespace Samples.Game.UI
       // Load a UI theme, which defines the appearance and default values of UI controls.
       string themeName;
       if (_themeNumber == 0)
-        themeName = "UI Themes/BlendBlue/Theme";
+        themeName = "UI Themes/BlendBlue/Theme.xml";
       else
-        themeName = "UI Themes/Aero/Theme";
+        themeName = "UI Themes/Aero/Theme.xml";
 
-      Theme theme = ContentManager.Load<Theme>(themeName);
+      Theme theme = AssetManager.LoadTheme(themeName, GraphicsService.GraphicsDevice);
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);
@@ -106,7 +106,7 @@ namespace Samples.Game.UI
       };
       button0.Click += (s, e) =>
       {
-        var allControlsWindow = new AllControlsWindow(ContentManager, renderer);
+        var allControlsWindow = new AllControlsWindow(AssetManager, renderer);
         allControlsWindow.Show(_uiScreen);
       };
 
@@ -119,7 +119,7 @@ namespace Samples.Game.UI
       };
       button1.Click += (s, e) =>
       {
-        var resizableWindow = new ResizableWindow(ContentManager);
+        var resizableWindow = new ResizableWindow(AssetManager, GraphicsService.GraphicsDevice);
         resizableWindow.Show(_uiScreen);
       };
 

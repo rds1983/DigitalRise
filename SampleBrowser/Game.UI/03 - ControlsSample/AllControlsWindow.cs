@@ -1,8 +1,8 @@
-﻿using DigitalRune.Game.UI;
+﻿using AssetManagementBase;
+using DigitalRune.Game.UI;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Mathematics.Algebra;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Console = DigitalRune.Game.UI.Controls.Console;
 
@@ -12,7 +12,7 @@ namespace Samples.Game.UI
   // Displays the available UI controls.
   public class AllControlsWindow : Window
   {
-    public AllControlsWindow(ContentManager content, IUIRenderer renderer)
+    public AllControlsWindow(AssetManager assetManager, IUIRenderer renderer)
     {
       Title = "All Controls (This window has a context menu!)";
       CanResize = false;
@@ -35,7 +35,7 @@ namespace Samples.Game.UI
       {
         Width = 16,
         Height = 16,
-        Texture = content.Load<Texture2D>("Icon")
+        Texture = assetManager.LoadTexture2D(renderer.GraphicsDevice, "Icon.png")
       });
 
       buttonContentPanel.Children.Add(new TextBlock
@@ -201,7 +201,7 @@ namespace Samples.Game.UI
       // ----- Scroll viewer showing an image
       var image = new Image
       {
-        Texture = content.Load<Texture2D>("Sky"),
+        Texture = assetManager.LoadTexture2D(renderer.GraphicsDevice, "Sky.png"),
       };
 
       var scrollViewer = new ScrollViewer

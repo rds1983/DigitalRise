@@ -37,7 +37,7 @@ for a sky dome.",
       // Create a sky mesh and add an instance of this mesh to the scene.
       var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "sky.png"));
       _sky = new MeshNode(skyMesh);
-      _sky.Name = "Sky"; // Always set a name - very useful for debugging!
+      _sky.Name = "Sky.png"; // Always set a name - very useful for debugging!
       GraphicsScreen.Scene.Children.Add(_sky);
 
       // Load the skinned model. This model is processed using the DigitalRune Model 

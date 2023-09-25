@@ -2,7 +2,7 @@
 
 <Theme>
   <Fonts>
-    <Font Name="Default" File="Default.spritefont" IsDefault="true"/>
+    <Font Name="Default" File="/Fonts/DroidSans.ttf" Size="14" IsDefault="True"/>
   </Fonts>
 
   <Textures>

@@ -180,7 +180,7 @@
 //        // We have modified the material of the a mesh. These changes should not
 //        // affect other samples. Therefore, we unload the assets. The next sample
 //        // will reload them with default values.)
-//        ContentManager.Unload();
+//        AssetManager.Unload();
 //      }
 
 //      base.Dispose(disposing);

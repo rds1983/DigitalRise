@@ -1,6 +1,7 @@
 ﻿using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
+using AssetManagementBase;
 
 
 namespace Samples.Game.UI
@@ -35,7 +36,7 @@ Open the file Content/UI Themes/TilingSample/Theme.xml to see how the styles are
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/TilingSample/Theme");
+      Theme theme = AssetManager.LoadTheme("UI Themes/TilingSample/Theme.xml", GraphicsService.GraphicsDevice);
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);

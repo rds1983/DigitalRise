@@ -2,7 +2,7 @@
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using Microsoft.Xna.Framework;
-
+using AssetManagementBase;
 
 namespace Samples.Game.UI
 {
@@ -27,7 +27,7 @@ namespace Samples.Game.UI
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/WindowsPhone7/ThemeDark");
+      Theme theme = AssetManager.LoadTheme("UI Themes/WindowsPhone7/ThemeDark.xml", GraphicsService.GraphicsDevice);
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);

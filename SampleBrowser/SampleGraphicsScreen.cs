@@ -170,11 +170,11 @@ namespace Samples
         context.RenderPass = null;
 
         // ----- For SkinnedEffectSample:
-        // Render meshes with "Sky" material pass. The SkinnedEffectSample uses a
-        // ProceduralSkyDome as the background. The material has a special "Sky"
+        // Render meshes with "Sky.png" material pass. The SkinnedEffectSample uses a
+        // ProceduralSkyDome as the background. The material has a special "Sky.png"
         // pass. Depth writes need to be disabled.
         graphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
-        context.RenderPass = "Sky";
+        context.RenderPass = "Sky.png";
         _meshRenderer.Render(query.SceneNodes, context);
         context.RenderPass = null;
         // -----

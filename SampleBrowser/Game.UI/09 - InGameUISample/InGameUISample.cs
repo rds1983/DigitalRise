@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using DigitalRune.Game.Input;
+﻿using DigitalRune.Game.Input;
 using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
@@ -9,7 +8,7 @@ using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using AssetManagementBase;
 
 namespace Samples.Game.UI
 {
@@ -86,7 +85,7 @@ When the user presses <Esc>, the mouse is released.",
         GameObjectService.Objects.Add(new DynamicObject(Services, 3));
 
       // Create the UIScreen which is rendered into the back buffer.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/Aero/Theme");
+      Theme theme = AssetManager.LoadTheme("UI Themes/Aero/Theme.xml", GraphicsService.GraphicsDevice);
       UIRenderer renderer = new UIRenderer(Game, theme);
       _normalUIScreen = new NormalUIScreen(renderer);
       UIService.Screens.Add(_normalUIScreen);
@@ -158,7 +157,7 @@ When the user presses <Esc>, the mouse is released.",
         // We have modified the material of the TV mesh. These changes should not
         // affect other samples. Therefore, we unload the assets. The next sample
         // will reload them with default values.)
-        ContentManager.Unload();
+        AssetManager.Unload();
       }
 
       base.Dispose(disposing);
@@ -234,4 +233,3 @@ When the user presses <Esc>, the mouse is released.",
     }
   }
 }
-#endif

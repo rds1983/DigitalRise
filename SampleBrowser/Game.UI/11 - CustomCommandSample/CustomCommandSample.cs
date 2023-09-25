@@ -44,11 +44,12 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
       // Load a few SpriteFonts for rendering.
       _textFont = DefaultAssets.Segoe15;
 
-      // TODO:
-      // _buttonFont = ContentManager.Load<SpriteFont>("ButtonImages/xboxControllerSpriteFont");
+			// TODO:
+			_buttonFont = DefaultAssets.Segoe15;
+			// _buttonFont = ContentManager.Load<SpriteFont>("ButtonImages/xboxControllerSpriteFont");
 
-      // Add custom commands to input service.
-      _buttonHoldCommand = new ButtonHoldCommand(Buttons.A, 1.0f) { Name = "Hold A" };
+			// Add custom commands to input service.
+			_buttonHoldCommand = new ButtonHoldCommand(Buttons.A, 1.0f) { Name = "Hold A" };
       _buttonTapCommand = new ButtonTapCommand(Buttons.A, 0.2f, 1.0f) { Name = "Tap A" };
       _buttonSequenceCommand = new ButtonSequenceCommand(new [] { Buttons.A, Buttons.B, Buttons.A, Buttons.B }, 2.0f) { Name = "A-B-A-B" };
       InputService.Commands.Add(_buttonHoldCommand);

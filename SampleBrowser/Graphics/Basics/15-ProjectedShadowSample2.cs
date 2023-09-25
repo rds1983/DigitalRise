@@ -303,7 +303,7 @@ See source code for more details.",
         // mesh, material and effect bindings. Since this class is being removed, the callbacks are
         // now invalid and we must make sure that the next time a DudeWithProjectedShadow model is 
         // loaded, a new instance with new effect parameter bindings is created.)
-        ContentManager.Unload();
+        AssetManager.Unload();
 
         _animationController.Stop();
         _animationController.Recycle();

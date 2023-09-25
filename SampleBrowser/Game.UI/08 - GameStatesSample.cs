@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DigitalRune.Animation;
 using DigitalRune.Animation.Easing;
@@ -11,9 +10,9 @@ using DigitalRune.Game.UI.Controls;
 using DigitalRune.Game.UI.Rendering;
 using DigitalRune.Graphics;
 using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using AssetManagementBase;
 
 
 namespace Samples.Game.UI
@@ -57,7 +56,7 @@ GameComponent with a StateMachine.",
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = ContentManager.Load<Theme>("UI Themes/GameStatesSample/Theme");
+      Theme theme = AssetManager.LoadTheme("UI Themes/GameStatesSample/Theme.xml", GraphicsService.GraphicsDevice);
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(Game, theme);

@@ -85,15 +85,15 @@ collision detection resolution is never 'per-pixel'.",
       Effect shadowMapEffect, gBufferEffect, materialEffect;
       if (!enablePerPixelHoles)
       {
-        shadowMapEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainShadowMap");
-        gBufferEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainGBuffer");
-        materialEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainMaterial");
+        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
+        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
+        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
       }
       else
       {
-        shadowMapEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainShadowMapHoles");
-        gBufferEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainGBufferHoles");
-        materialEffect = ContentManager.Load<Effect>("DigitalRune/Terrain/TerrainMaterialHoles");
+        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMapHoles");
+        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBufferHoles");
+        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterialHoles");
       }
 
       _terrainObject.TerrainNode.Material = new Material

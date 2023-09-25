@@ -119,14 +119,22 @@ namespace DigitalRune
 
 						if (!hasTexCoords)
 						{
-							Log($"Warning: can't generate the tangent frames, since {primitive}'s primitive of Mesh {meshName} lacks texCoords.");
-							return;
+							Log($"Warning: {primitive}'s primitive of Mesh {meshName} lacks texCoords. Using default zero to generate the tangent frames");
 						}
 
 
 						var positions = GetAccessorAs<Vector3>(primitive.FindAttribute("POSITION"));
 						var normals = GetAccessorAs<Vector3>(primitive.FindAttribute("NORMAL"));
-						var texCoords = GetAccessorAs<Vector2>(primitive.FindAttribute("TEXCOORD_"));
+
+						Vector2[] texCoords;
+
+						if (hasTexCoords)
+						{
+							texCoords = GetAccessorAs<Vector2>(primitive.FindAttribute("TEXCOORD_"));
+						} else
+						{
+							texCoords = new Vector2[positions.Length];
+						}
 
 						var indexAccessor = _gltf.Accessors[primitive.Indices.Value];
 						if (indexAccessor.Type != TypeEnum.SCALAR)
@@ -175,6 +183,11 @@ namespace DigitalRune
 						using (var ms = new MemoryStream())
 						{
 							ms.Write(GetBuffer(0));
+
+							if (!hasTexCoords)
+							{
+								primitive.Attributes["TEXCOORD_0"] = ms.WriteData(bufferViews, accessors, texCoords);
+							}
 
 							if (!hasTangents)
 							{

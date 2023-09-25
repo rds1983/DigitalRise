@@ -1,4 +1,4 @@
-﻿#if !WP7 && !WP8
+﻿#if false
 using System;
 using System.Linq;
 using DigitalRune.Game.UI.Rendering;

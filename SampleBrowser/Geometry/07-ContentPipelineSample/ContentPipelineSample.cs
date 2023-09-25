@@ -1,4 +1,6 @@
-﻿using DigitalRune.Geometry;
+﻿#if false
+
+using DigitalRune.Geometry;
 using DigitalRune.Geometry.Collisions;
 using DigitalRune.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
@@ -121,3 +123,5 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
     }
   }
 }
+
+#endif
