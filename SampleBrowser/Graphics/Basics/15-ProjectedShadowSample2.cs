@@ -198,7 +198,7 @@ See source code for more details.",
     private void StartDudeAnimation(ModelNode dude)
     {
       // The dude model contains a single mesh node.
-      var meshNode = (MeshNode)dude.GetSubtree().OfType<MeshNode>().First();
+      var meshNode = (MeshNode)dude.FindFirstMeshNode();
 
       // The imported animation data (skeleton and animations) is stored with the mesh.
       var animations = meshNode.Mesh.Animations;

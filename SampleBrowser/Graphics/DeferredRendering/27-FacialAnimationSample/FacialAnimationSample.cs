@@ -95,7 +95,7 @@ than 5 morph targets are active, the morph targets with the largest weights are 
       // The model consists of a root node and a mesh node.
       //  ModelNode "Sintel-Head"
       //    MeshNode "Sintel"
-      _sintel = model.GetSubtree().OfType<MeshNode>().First();
+      _sintel = model.FindFirstMeshNode();
 
       // The model contains two skeletal animations:
       // - "MOUTH-open" is just a single frame.

@@ -72,7 +72,7 @@ namespace Samples
       // Get the emissive color binding of the material because the emissive color
       // will be animated.
       // The model contains one mesh node with a single material.
-      var meshNode = (MeshNode)_modelPrototype.GetSubtree().OfType<MeshNode>().First();
+      var meshNode = (MeshNode)_modelPrototype.FindFirstMeshNode();
       var mesh = meshNode.Mesh;
       var material = mesh.Materials[0];
 

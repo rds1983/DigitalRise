@@ -78,7 +78,7 @@ on the model.",
 
       // Load the "Bubble" mesh and place it at a fixed position in the scene.
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Bubble/Bubble.drmdl");
-      var meshNode = modelNode.GetDescendants().OfType<MeshNode>().First().Clone();
+      var meshNode = modelNode.FindFirstMeshNode().Clone();
       meshNode.PoseWorld = new Pose(new Vector3F(0, 1, 0));
       _graphicsScreen.Scene.Children.Add(meshNode);
 

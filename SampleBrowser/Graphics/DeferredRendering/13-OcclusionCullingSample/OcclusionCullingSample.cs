@@ -59,7 +59,7 @@ should be merged to drastically reduce the number of scene nodes.)",
 
       // Load environment.
       GameObjectService.Objects.Add(new StaticSkyObject(Services)); // (includes light nodes)
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel", 1, new Pose(new Vector3F(0, 0, 0))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0, 0))));
 
       // Set main directional light to enable shadow caster culling.
       _graphicsScreen.LightNode = ((LightNode)_graphicsScreen.Scene.GetSceneNode("Sunlight"));

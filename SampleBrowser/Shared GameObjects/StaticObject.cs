@@ -81,7 +81,7 @@ namespace Samples
     {
       var triangleMesh = new TriangleMesh();
 
-      foreach (var meshNode in _modelNode.GetSubtree().OfType<MeshNode>())
+      foreach (var meshNode in _modelNode.MeshNodes())
       {
         // Extract the triangle mesh from the DigitalRune Graphics Mesh instance. 
         var subTriangleMesh = new TriangleMesh();

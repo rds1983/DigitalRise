@@ -95,7 +95,7 @@ tank model are animated.",
       /*
         // If you want to change the material properties of the tank, you can do this:
         // Loop through all mesh nodes of the tank.
-        foreach (var meshNode in _tank.GetSubtree().OfType<MeshNode>())
+        foreach (var meshNode in _tank.MeshNodes())
         {
           // Loop through all materials of this mesh (each mesh can consist of several 
           // submeshes with different materials).

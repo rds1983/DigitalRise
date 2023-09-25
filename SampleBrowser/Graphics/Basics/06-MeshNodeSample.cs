@@ -75,7 +75,7 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
       _model.PoseWorld = new Pose(new Vector3F(0, 0, -2), Matrix33F.CreateRotationY(-0.3f));
 
       // Let's loop through the mesh nodes of the model:
-      foreach (var meshNode in _model.GetSubtree().OfType<MeshNode>())
+      foreach (var meshNode in _model.MeshNodes())
       {
         // Each MeshNode references a Mesh.
         Mesh mesh = meshNode.Mesh;
@@ -135,7 +135,7 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
       // We have to select a render pass. This info is needed by the MeshRenderer
       // to decide which shaders must be used.
       context.RenderPass = "Default";
-      foreach (var meshNode in _model.GetSubtree().OfType<MeshNode>())
+      foreach (var meshNode in _model.MeshNodes())
         _meshRenderer.Render(meshNode, context);
 
       _debugRenderer.Render(context);

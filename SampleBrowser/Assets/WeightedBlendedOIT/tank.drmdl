@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Model File="..\Tank\tank.fbx" Scale="0.01">
+<Model File="..\Tank\tank.glb" Scale="0.01">
   <Mesh Name="tank_geo">
     <Submesh Material="turret_alt_diff_tex.drmat" />
   </Mesh>

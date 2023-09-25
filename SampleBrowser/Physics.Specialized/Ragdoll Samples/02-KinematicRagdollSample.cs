@@ -44,7 +44,7 @@ target positions. Ragdoll joints and limits are not used.",
       GameObjectService.Objects.Add(_grabObject);
 
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
-      _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
+      _meshNode = modelNode.FindFirstMeshNode().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);

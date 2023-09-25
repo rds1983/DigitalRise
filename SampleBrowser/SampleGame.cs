@@ -263,7 +263,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(Graphics.InterlaceSample);
+			var initialSample = typeof(Graphics.BasicEffectSample);
 			var assetManager = AssetManager.CreateFileAssetManager("../../../../Assets");
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);

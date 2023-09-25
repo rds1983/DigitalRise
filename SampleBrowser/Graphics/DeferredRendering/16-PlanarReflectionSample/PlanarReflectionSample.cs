@@ -111,7 +111,7 @@ from the player camera to make best use of the texture resolution.",
       var groundModel = AssetManager.LoadDRModel(GraphicsService, "GroundReflective/Ground.drmdl");
 
       // Use the reflective mesh as the ground.
-      var groundMesh = groundModel.GetSubtree().OfType<MeshNode>().First().Clone();
+      var groundMesh = groundModel.FindFirstMeshNode().Clone();
       groundMesh.PoseWorld = new Pose(new Vector3F(0, 0.01f, 0));  // Small y offset to draw above the default ground model from GroundObject.
       _graphicsScreen.Scene.Children.Add(groundMesh);
 

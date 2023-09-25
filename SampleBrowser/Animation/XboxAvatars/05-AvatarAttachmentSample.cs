@@ -65,7 +65,7 @@ namespace Samples.Animation
       };
 
       var baseballBatModelNode = AssetManager.LoadDRModel(GraphicsService, "XboxAvatars/BaseballBat.drmdl").Clone();
-      _baseballBatMeshNode = baseballBatModelNode.GetChildren().OfType<MeshNode>().First();
+      _baseballBatMeshNode = baseballBatModelNode.FindFirstMeshNode();
 
       // If we only render the baseball bat, it appears black. We need to add it to
       // a scene with some lights. (The lights do not affect the avatar.)

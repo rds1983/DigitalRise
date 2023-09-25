@@ -43,7 +43,7 @@ a lot of unwanted jitter.",
       GameObjectService.Objects.Add(_grabObject);
 
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
-      _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
+      _meshNode = modelNode.FindFirstMeshNode().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);

@@ -66,7 +66,7 @@ namespace Samples
       scene.Children.Add(_modelNode);
 
       // Create looping animation.
-      var meshNode = _modelNode.GetSubtree().OfType<MeshNode>().First();   // The dude model has a single mesh node as its child.
+      var meshNode = _modelNode.FindFirstMeshNode();   // The dude model has a single mesh node as its child.
       var animations = meshNode.Mesh.Animations;
       var animationClip = new AnimationClip<SkeletonPose>(animations.Values.First())
       {

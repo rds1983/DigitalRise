@@ -45,7 +45,7 @@ bone name, bone indices and bone coordinate systems.",
       // We could also get the MeshNode by name:
       _dudeMeshNode = (MeshNode)dudeModelNode.GetSceneNode("him");
       // Or using a more general LINQ query:
-      _dudeMeshNode = dudeModelNode.GetSubtree().OfType<MeshNode>().First();
+      _dudeMeshNode = dudeModelNode.FindFirstMeshNode();
 
       // Set the world space position and orientation of the dude.
       _dudeMeshNode.PoseLocal = new Pose(new Vector3F(-1f, 0, 0));
@@ -61,7 +61,7 @@ bone name, bone indices and bone coordinate systems.",
 
       // Load the marine model:
       var marineModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl").Clone();
-      _marineMeshNode = marineModelNode.GetSubtree().OfType<MeshNode>().First();
+      _marineMeshNode = marineModelNode.FindFirstMeshNode();
       _marineMeshNode.PoseLocal = new Pose(new Vector3F(1f, 0, 0));
 
       // Enable per-pixel lighting.

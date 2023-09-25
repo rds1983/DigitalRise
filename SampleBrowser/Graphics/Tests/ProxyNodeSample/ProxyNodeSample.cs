@@ -55,12 +55,12 @@ namespace Samples.Graphics
       // Original model in scene graph.
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       modelNode.PoseLocal = new Pose(new Vector3F(-2, 0, 0));
-      var meshNode = modelNode.GetSubtree().OfType<MeshNode>().First();
+      var meshNode = modelNode.FindFirstMeshNode();
       _scene.Children.Add(modelNode);
 
       // Clone referenced by proxy node.
       var modelNode2 = modelNode.Clone();
-      var meshNode2 = modelNode2.GetSubtree().OfType<MeshNode>().First();
+      var meshNode2 = modelNode2.FindFirstMeshNode();
       meshNode2.SkeletonPose = meshNode.SkeletonPose;
       _proxyNode = new ProxyNode(null)
       {

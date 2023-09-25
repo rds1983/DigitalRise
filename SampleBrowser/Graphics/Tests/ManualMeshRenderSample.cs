@@ -48,7 +48,7 @@ MeshRenderer class.",
       EffectBinding.KeepOpaqueData = true;
 
       _model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
-      var meshNode = _model.GetSubtree().OfType<MeshNode>().First();
+      var meshNode = _model.FindFirstMeshNode();
       meshNode.ScaleLocal = new Vector3F(1, 2, 1);
       var mesh = meshNode.Mesh;
       var timeline = new TimelineClip(mesh.Animations.Values.First())
@@ -76,7 +76,7 @@ MeshRenderer class.",
       device.BlendState = BlendState.Opaque;
 
       context.RenderPass = "Default";
-      foreach (var meshNode in _model.GetSubtree().OfType<MeshNode>())
+      foreach (var meshNode in _model.MeshNodes())
       {
         context.SceneNode = meshNode;
 

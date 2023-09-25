@@ -20,7 +20,7 @@
                                                                                      
 <!-- Optional: Define how animations in this model are processed. 
 
-  <Animations MergeFiles="idle.fbx;run.fbx;jump.fbx"
+  <Animations MergeFiles="idle.glb;run.glb;jump.glb"
               ScaleCompression="0.01" 
               RotationCompression="1" 
               TranslationCompression="0.01">

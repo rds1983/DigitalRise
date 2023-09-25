@@ -258,8 +258,7 @@ namespace Samples
     /// <param name="node">The scene node.</param>
     public static void EnablePerPixelLighting(SceneNode node)
     {
-      var effectBindings = node.GetSubtree()
-                               .OfType<MeshNode>()
+      var effectBindings = node.MeshNodes()
                                .SelectMany(meshNode => meshNode.Mesh.Materials)
                                .SelectMany(material => material.EffectBindings);
 

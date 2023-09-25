@@ -40,7 +40,7 @@ mesh as a collision shape.",
       var bowlModelNode = AssetManager.LoadDRModel(GraphicsService, "Bowl.drmdl");
 
       // Get mesh of the imported model.
-      var meshNode = bowlModelNode.GetDescendants().OfType<MeshNode>().First();
+      var meshNode = bowlModelNode.FindFirstMeshNode();
 
       // Extract the triangle mesh from the DigitalRune Graphics Mesh instance. 
       // Note: XNA graphics use clockwise winding for triangle front sides and DigitalRune Physics uses

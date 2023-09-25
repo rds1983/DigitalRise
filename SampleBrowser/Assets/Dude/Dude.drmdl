@@ -2,7 +2,7 @@
 
 <!-- 
   This XML file assigns materials to the 'Dude' model.
-  Dude.drmdl needs to be located in the same folder as Dude.fbx. The content processor
+  Dude.drmdl needs to be located in the same folder as Dude.glb. The content processor
   will automatically look for a file with the same name and the extension ".drmdl".
 -->
 <Model File="Dude.glb" 

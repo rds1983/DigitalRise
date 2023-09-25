@@ -100,7 +100,7 @@ We could also add more constraints to stabilize the ragdoll.",
       // Load Dude model.
       var contentManager = Services.GetInstance<ContentManager>();
       var dudeModelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
-      _meshNode = dudeModelNode.GetSubtree().OfType<MeshNode>().First().Clone();
+      _meshNode = dudeModelNode.FindFirstMeshNode().Clone();
       _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);

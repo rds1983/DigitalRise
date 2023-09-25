@@ -37,7 +37,7 @@ visually compare the compression results.",
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       SampleHelper.EnablePerPixelLighting(modelNode);
 
-      _meshNodeUncompressed = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
+      _meshNodeUncompressed = modelNode.FindFirstMeshNode().Clone();
       _meshNodeUncompressed.PoseLocal = new Pose(new Vector3F(-0.5f, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       GraphicsScreen.Scene.Children.Add(_meshNodeUncompressed);
 

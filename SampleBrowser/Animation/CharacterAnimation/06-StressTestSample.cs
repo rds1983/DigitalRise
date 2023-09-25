@@ -36,7 +36,7 @@ namespace Samples.Animation
     {
       // Load model.
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
-      var meshNode = modelNode.GetSubtree().OfType<MeshNode>().First();
+      var meshNode = modelNode.FindFirstMeshNode();
       SampleHelper.EnablePerPixelLighting(meshNode);
 
       // Create looping animations for all imported animations.

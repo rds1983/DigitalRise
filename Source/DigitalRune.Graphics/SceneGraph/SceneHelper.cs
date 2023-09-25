@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Collisions;
 using DigitalRune.Geometry.Shapes;
@@ -49,16 +50,19 @@ namespace DigitalRune.Graphics.SceneGraph
     private static readonly Func<SceneNode, SceneNode> GetParentCallback = node => node.Parent;
     private static readonly Func<SceneNode, IEnumerable<SceneNode>> GetChildrenCallback = GetChildren;
 
+		public static MeshNode FindFirstMeshNode(this SceneNode node) => node.MeshNodes().First();
 
-    /// <summary>
-    /// Gets the children of the given scene node.
-    /// </summary>
-    /// <param name="node">The node.</param>
-    /// <returns>
-    /// The children of the given node or an empty <see cref="IEnumerable{T}"/> if 
-    /// <paramref name="node"/> or <see cref="SceneNode.Children"/> is <see langword="null"/>.
-    /// </returns>
-    public static IEnumerable<SceneNode> GetChildren(this SceneNode node)
+    public static IEnumerable<MeshNode> MeshNodes(this SceneNode node) => node.GetSubtree().OfType<MeshNode>();
+
+		/// <summary>
+		/// Gets the children of the given scene node.
+		/// </summary>
+		/// <param name="node">The node.</param>
+		/// <returns>
+		/// The children of the given node or an empty <see cref="IEnumerable{T}"/> if 
+		/// <paramref name="node"/> or <see cref="SceneNode.Children"/> is <see langword="null"/>.
+		/// </returns>
+		public static IEnumerable<SceneNode> GetChildren(this SceneNode node)
     {
       if (node == null || node.Children == null)
         return LinqHelper.Empty<SceneNode>();

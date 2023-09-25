@@ -138,7 +138,7 @@ namespace Samples
       _decals.Add(bulletHole6);
 
       // Get the first dynamic mesh (the rusty cube) and add a decal as a child.
-      MeshNode meshNode = ((Scene)scene).GetSubtree().OfType<MeshNode>().First(n => !n.IsStatic);
+      MeshNode meshNode = ((Scene)scene).MeshNodes().First(n => !n.IsStatic);
       var bulletHole7 = bulletHole0.Clone();
       bulletHole7.LookAt(new Vector3F(0, 0, -0.6f), new Vector3F(0, 0, 0), new Vector3F(0, 1, 0));
       bulletHole7.Depth = 0.2f;

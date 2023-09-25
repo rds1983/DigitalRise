@@ -52,7 +52,7 @@ for a sky dome.",
       GraphicsScreen.Scene.Children.Add(dudeModel);
 
       // The dude model consists of a single mesh.
-      var dudeMeshNode = dudeModel.GetSubtree().OfType<MeshNode>().First();
+      var dudeMeshNode = dudeModel.FindFirstMeshNode();
       var mesh = dudeMeshNode.Mesh;
 
       /*

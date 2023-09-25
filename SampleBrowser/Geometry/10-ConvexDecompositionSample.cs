@@ -48,7 +48,7 @@ At regular intervals, the intermediate decomposition is updated and rendered to 
 
       // Combine all meshes of the model into a single TriangleMesh.
       TriangleMesh mesh = new TriangleMesh();
-      foreach (var meshNode in _modelNode.GetChildren().OfType<MeshNode>())
+      foreach (var meshNode in _modelNode.MeshNodes())
       {
         var childMesh = MeshHelper.ToTriangleMesh(meshNode.Mesh);
         childMesh.Transform(meshNode.PoseWorld * Matrix44F.CreateScale(meshNode.ScaleWorld));

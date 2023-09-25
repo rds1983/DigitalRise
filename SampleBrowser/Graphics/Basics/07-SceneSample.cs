@@ -193,7 +193,7 @@ LightNodes, CameraNodes, ...) and how to animate a skinned model.",
       // versions we will automatically compute suitable bounding shapes for 
       // animated models.
       _debugRenderer.Clear();
-      foreach (var sceneNode in _scene.GetSubtree().OfType<MeshNode>())
+      foreach (var sceneNode in _scene.MeshNodes())
         _debugRenderer.DrawObject(sceneNode, Color.Orange, true, false);
 
       // Draw a coordinate cross at the world space origin.

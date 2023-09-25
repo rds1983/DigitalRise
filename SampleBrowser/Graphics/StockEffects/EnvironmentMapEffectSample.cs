@@ -45,7 +45,7 @@ namespace Samples.Graphics
       //// Here is another example showing how you can change material properties 
       //// of the model: 
       //// Get the mesh (the saucer model contains only a single mesh node).
-      //MeshNode meshNode = _model.GetDescendants().OfType<MeshNode>().First();
+      //MeshNode meshNode = _model.FindFirstMeshNode();
       //Mesh mesh = meshNode.Mesh;
       //// Get the second material (which is the material of the cockpit).
       //Material material = mesh.Materials[1];

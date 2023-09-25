@@ -33,7 +33,7 @@ namespace Samples.Animation
       : base(game)
     {
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
-      _meshNode = modelNode.GetSubtree().OfType<MeshNode>().First().Clone();
+      _meshNode = modelNode.FindFirstMeshNode().Clone();
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);
 

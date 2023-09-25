@@ -71,7 +71,7 @@ namespace Samples
 
           // Add a projector light to the model that projects the TV screen. The
           // TV screen is the emissive part of the TV mesh.
-          var meshNode = ModelNode.GetSubtree().OfType<MeshNode>().First();
+          var meshNode = ModelNode.FindFirstMeshNode();
           var material = meshNode.Mesh.Materials.First(m => m.Name == "TestCard");
 
           // Get texture from material.
@@ -110,7 +110,7 @@ namespace Samples
           // This is the first time the "MagicSphere" is loaded.
 
           // Change the size of the sphere.
-          var meshNode = ModelNode.GetSubtree().OfType<MeshNode>().First();
+          var meshNode = ModelNode.FindFirstMeshNode();
           meshNode.ScaleLocal = new Vector3F(0.5f);
 
           // Disable shadows. (The sphere acts as a light source.)
@@ -145,7 +145,7 @@ namespace Samples
         // A sphere of glass (or "bubble").
         RigidBody = new RigidBody(new SphereShape(0.3f));
         ModelNode = assetManager.LoadDRModel(graphicsService, "Bubble/Bubble.drmdl").Clone();
-        ModelNode.GetDescendants().OfType<MeshNode>().First().ScaleLocal = new Vector3F(0.3f);
+        ModelNode.FindFirstMeshNode().ScaleLocal = new Vector3F(0.3f);
       }
       else if (_type == 6)
       {
