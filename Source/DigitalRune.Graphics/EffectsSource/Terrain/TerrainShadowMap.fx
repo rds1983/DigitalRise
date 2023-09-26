@@ -73,7 +73,10 @@ float TerrainBaseClipmapNumberOfColumns = 4;
 float TerrainBaseClipmapLevelBias = 0.1;
 float TerrainHoleThreshold = 0.3;
 float2 TerrainBaseClipmapOrigins[9];
+
+#if VERTEX_HOLES
 float NaN;
+#endif
 
 #if PIXEL_HOLES
 float TerrainMipmapBias;
@@ -134,10 +137,10 @@ struct PSInput
 
 VSOutput VS(VSInput input, int depthType, float near)
 {
-#if PIXEL_HOLES
-  float holeThreshold = -1;
+#if VERTEX_HOLES
+  float3 holePosition = float3(NaN, NaN, NaN);
 #else
-  float holeThreshold = TerrainHoleThreshold;
+  float3 holePosition = float3(0, 0, 0);
 #endif
   
   float3 position = input.Position.xyz;
@@ -147,8 +150,8 @@ VSOutput VS(VSInput input, int depthType, float near)
     TerrainBaseClipmapSampler0, TerrainBaseClipmapOrigins,
     TerrainBaseClipmapCellSize, TerrainBaseClipmapCellsPerLevel,
     TerrainBaseClipmapNumberOfLevels, TerrainBaseClipmapNumberOfColumns,
-    TerrainBaseClipmapLevelBias, holeThreshold,
-    LodCameraPosition, float3(NaN, NaN, NaN),
+    TerrainBaseClipmapLevelBias, TerrainHoleThreshold,
+    LodCameraPosition, holePosition,
     position, normal, clod);
   
   float4 positionView = mul(float4(position, 1), View);

@@ -1,4 +1,5 @@
 ﻿#if !WP7 && !WP8 && !XBOX
+using System.Collections.Generic;
 using System.Linq;
 using DigitalRune;
 using DigitalRune.Geometry.Shapes;
@@ -72,6 +73,8 @@ collision detection resolution is never 'per-pixel'.",
 
       // Create terrain.
       _terrainObject = new TerrainObject(Services);
+      UpdateTerrainMaterial(false);
+
       GameObjectService.Objects.Add(_terrainObject);
 
       UpdateHoleTexture();
@@ -82,28 +85,8 @@ collision detection resolution is never 'per-pixel'.",
 
     private void UpdateTerrainMaterial(bool enablePerPixelHoles)
     {
-      Effect shadowMapEffect, gBufferEffect, materialEffect;
-      if (!enablePerPixelHoles)
-      {
-        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
-        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
-        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
-      }
-      else
-      {
-        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMapHoles");
-        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBufferHoles");
-        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterialHoles");
-      }
-
-      _terrainObject.TerrainNode.Material = new Material
-      {
-        { "ShadowMap", new EffectBinding(GraphicsService, shadowMapEffect, null, EffectParameterHint.Material) },
-        { "GBuffer", new EffectBinding(GraphicsService, gBufferEffect, null, EffectParameterHint.Material) },
-        { "Material", new EffectBinding(GraphicsService, materialEffect, null, EffectParameterHint.Material) }
-      };
+      _terrainObject.UpdateMaterial(enablePerPixelHoles?HolesType.Pixel:HolesType.Vertex, MappingType.Simple);
     }
-
 
     private void UpdateHoleTexture()
     {

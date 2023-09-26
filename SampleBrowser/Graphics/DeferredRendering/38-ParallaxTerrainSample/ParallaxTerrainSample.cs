@@ -7,6 +7,7 @@ using DigitalRune.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
+using System.Collections.Generic;
 
 namespace Samples.Graphics
 {
@@ -94,26 +95,7 @@ namespace Samples.Graphics
 
     private void UpdateTerrainMaterial(bool enableParallaxOcclusionMapping)
     {
-      Effect shadowMapEffect, gBufferEffect, materialEffect;
-      if (!enableParallaxOcclusionMapping)
-      {
-        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
-        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
-        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
-      }
-      else
-      {
-        shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMapHoles");
-        gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBufferHolesPom");
-        materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterialHolesPom");
-      }
-
-      _terrainObject.TerrainNode.Material = new Material
-      {
-        { "ShadowMap", new EffectBinding(GraphicsService, shadowMapEffect, null, EffectParameterHint.Material) },
-        { "GBuffer", new EffectBinding(GraphicsService, gBufferEffect, null, EffectParameterHint.Material) },
-        { "Material", new EffectBinding(GraphicsService, materialEffect, null, EffectParameterHint.Material) }
-      };
+      _terrainObject.UpdateMaterial(HolesType.None, enableParallaxOcclusionMapping ? MappingType.Parallax : MappingType.Simple);
     }
 
 

@@ -112,7 +112,6 @@ float4 SampleBaseClipmap(sampler baseClipmapSampler, float2 origins[9], float ce
   return sample;
 }
 
-
 // Main method for use in vertex shader.
 void ComputeTerrainGeometry(sampler baseClipmapSampler, float2 origins[9], float cellSizeLevel0,
                             int cellsPerLevel, int numberOfLevels, int numberOfColumns, float levelBias,
@@ -182,6 +181,7 @@ void ComputeTerrainGeometry(sampler baseClipmapSampler, float2 origins[9], float
   
   //normal = normalize(normal); // Normalization is done in pixel shader.
   
+#if VERTEX_HOLES
   // Holes are created by setting the vertex to a special invalid position.
   bool isHole = sample.w < holeThreshold;
   
@@ -190,6 +190,7 @@ void ComputeTerrainGeometry(sampler baseClipmapSampler, float2 origins[9], float
   [branch]
   if (isHole)
     position = holePosition;
+#endif
 }
 
 

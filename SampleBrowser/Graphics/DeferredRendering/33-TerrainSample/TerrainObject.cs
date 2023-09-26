@@ -11,16 +11,28 @@ using DigitalRune.Graphics.SceneGraph;
 using DigitalRune.Mathematics;
 using DigitalRune.Mathematics.Algebra;
 using DigitalRune.Physics;
-using DigitalRune.Threading;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
 using AssetManagementBase;
+using System.Data;
 
 namespace Samples.Graphics
 {
+  public enum HolesType
+  {
+    None,
+    Vertex,
+    Pixel
+  }
+
+  public enum MappingType
+  {
+    Simple,
+    Parallax
+  }
+
   // Creates a large terrain based on height maps.
   public class TerrainObject : GameObject
   {
@@ -81,6 +93,8 @@ namespace Samples.Graphics
     private bool _updateGeometryTexture;
     private bool _updateDetailClipmapCellSizes;
     private float _previousCameraFar;
+    private HolesType _holesTypes;
+    private MappingType _mappingType;
     #endregion
 
 
@@ -90,6 +104,9 @@ namespace Samples.Graphics
 
     // The scene node which represents the whole terrain.
     public TerrainNode TerrainNode { get; private set; }
+
+    public HolesType HolesType => _holesTypes;
+    public MappingType MappingType => _mappingType;
     #endregion
 
 
@@ -97,12 +114,14 @@ namespace Samples.Graphics
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public TerrainObject(IServiceLocator services)
+    public TerrainObject(IServiceLocator services, HolesType holesType = HolesType.None, MappingType mappingType = MappingType.Simple)
     {
       if (services == null)
         throw new ArgumentNullException("services");
 
       _services = services;
+      _holesTypes = holesType;
+      _mappingType = mappingType;
     }
     #endregion
 
@@ -110,6 +129,63 @@ namespace Samples.Graphics
     //--------------------------------------------------------------
     #region Methods
     //--------------------------------------------------------------
+
+    private Material CreateMaterial()
+    {
+      Effect shadowMapEffect, gBufferEffect, materialEffect;
+
+      Dictionary<string, string> defs = null;
+      if (_holesTypes != HolesType.None)
+      {
+        defs = new Dictionary<string, string>();
+        if (_holesTypes == HolesType.Vertex)
+        {
+          defs["VERTEX_HOLES"] = "1";
+        }
+        else
+        {
+          defs["PIXEL_HOLES"] = "1";
+        }
+      }
+
+      if (_mappingType != MappingType.Simple)
+      {
+        if (defs == null)
+        {
+          defs = new Dictionary<string, string>();
+        }
+
+        defs["PARALLAX_MAPPING"] = "1";
+      }
+
+      var graphicsService = _services.GetInstance<IGraphicsService>();
+      shadowMapEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap", defs);
+      gBufferEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer", defs);
+      materialEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial", defs);
+
+      return new Material
+        {
+          { "ShadowMap", new EffectBinding(_graphicsService, shadowMapEffect, null, EffectParameterHint.Material) },
+          { "GBuffer", new EffectBinding(_graphicsService, gBufferEffect, null, EffectParameterHint.Material) },
+          { "Material", new EffectBinding(_graphicsService, materialEffect, null, EffectParameterHint.Material) }
+        };
+    }
+
+    public void UpdateMaterial(HolesType holesType, MappingType mappingType)
+    {
+      if (_holesTypes == holesType && _mappingType == mappingType)
+      {
+        return;
+      }
+
+      _holesTypes = holesType;
+      _mappingType = mappingType;
+
+      if (TerrainNode != null)
+      {
+        TerrainNode.Material = CreateMaterial();
+      }
+    }
 
     protected override void OnLoad()
     {
@@ -175,17 +251,7 @@ namespace Samples.Graphics
       // change the effects to change how the material is rendered.
       // We can create the material by loading a .drmat file. Or we can create the material in
       // code like this:
-      var graphicsService = _services.GetInstance<IGraphicsService>();
-      var shadowMapEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
-      var gBufferEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
-      var materialEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
-      var material = new Material
-      {
-        { "ShadowMap", new EffectBinding(_graphicsService, shadowMapEffect, null, EffectParameterHint.Material) },
-        { "GBuffer", new EffectBinding(_graphicsService, gBufferEffect, null, EffectParameterHint.Material) },
-        { "Material", new EffectBinding(_graphicsService, materialEffect, null, EffectParameterHint.Material) }
-      };
-      TerrainNode = new TerrainNode(terrain, material)
+      TerrainNode = new TerrainNode(terrain, CreateMaterial())
       {
         // The terrain rendering uses clipmaps.
         // The clipmaps are updated by the TerrainClipmapRenderer (see DeferredGraphicsScreen)

@@ -1,0 +1,4 @@
+<Root>
+	<MultiCompile>_;VERTEX_HOLES;PIXEL_HOLES</MultiCompile>
+	<MultiCompile>_;PARALLAX_MAPPING</MultiCompile>
+</Root>
