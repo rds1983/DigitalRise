@@ -131,7 +131,14 @@ namespace DigitalRune.Graphics
 							effect = Resources.GetDREffect(graphicsService.GraphicsDevice, effectName);
 						} else
 						{
+#if FNA
 							var effectPath = "FNA/bin";
+#elif OPENGL
+							var effectPath = "MonoGameOGL/bin";
+#else
+							var effectPath = "MonoGameDX11/bin";
+#endif
+
 							if (!string.IsNullOrEmpty(assetManager.CurrentFolder))
 							{
 								var folderPartsCount = (from p in assetManager.CurrentFolder.Split('/') where !string.IsNullOrEmpty(p) select p).Count();

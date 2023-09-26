@@ -218,7 +218,7 @@ namespace Samples.Graphics
 
       _graphicsService = graphicsService;
 
-      Effect effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/Intersection.efb");
+      Effect effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "Intersection.efb");
       _parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterCameraParameters = effect.Parameters["CameraParameters"];
       _parameterWorld = effect.Parameters["World"];

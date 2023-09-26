@@ -1,5 +1,5 @@
-﻿#if !WP7 && !WP8
-using AssetManagementBase;
+﻿using AssetManagementBase;
+using DigitalRune;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework.Content;
@@ -19,9 +19,8 @@ namespace Samples.Graphics
   public class UnderwaterPostProcessor : EffectPostProcessor
   {
     public UnderwaterPostProcessor(IGraphicsService graphicsService, AssetManager content)
-      : base(graphicsService, content.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/Water/Underwater.efb"))
+      : base(graphicsService, content.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "Water/Underwater.efb"))
     {
     }
   }
 }
-#endif

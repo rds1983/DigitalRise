@@ -651,11 +651,15 @@ namespace DigitalRune.Graphics
       Rectangle sourceRectangle = new Rectangle(0, 0, width, height);
       try
       {
+#if !MONOGAME
         GraphicsDevice.Present(sourceRectangle, null, presentationTarget.Handle);
         return true;
-      }
-      // ReSharper disable EmptyGeneralCatchClause
-      catch
+#else
+				throw new NotImplementedException("MonoGame builds support only D3DImagePresentationTargets.");
+#endif
+			}
+			// ReSharper disable EmptyGeneralCatchClause
+			catch
       {
         // Do nothing. This happens when the layout of the window changes during rendering.
         // For example, when the user docks windows an OutOfVideoMemoryException might occur.

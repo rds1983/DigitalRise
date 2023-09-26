@@ -6,6 +6,12 @@ namespace DigitalRune
 {
 	internal static class Utility
 	{
+#if FNA
+		public const string EffectsPrefix = "FNA/bin/";
+#elif DIRECTX
+		public const string EffectsPrefix = "MonoGameDX11/bin/";
+#endif
+
 		public static string ExecutingAssemblyDirectory
 		{
 			get

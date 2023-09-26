@@ -4,7 +4,7 @@ using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;
-
+using DigitalRune;
 
 namespace Samples.Graphics
 {
@@ -23,7 +23,7 @@ namespace Samples.Graphics
     public LensDistortionSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      var effect = AssetManager.LoadEffect(game.GraphicsDevice, "FNA/bin/PostProcessing/LensDistortion.efb");
+      var effect = AssetManager.LoadEffect(game.GraphicsDevice, Utility.EffectsPrefix + "PostProcessing/LensDistortion.efb");
 
       var postProcessor = new EffectPostProcessor(GraphicsService, effect);
       GraphicsScreen.PostProcessors.Add(postProcessor);

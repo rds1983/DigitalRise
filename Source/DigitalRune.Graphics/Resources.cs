@@ -7,8 +7,16 @@ namespace DigitalRune
 {
 	public static class Resources
 	{
+#if FNA
+		private const string StockEffectsPrefix = "EffectsSource.FNA.bin";
+#elif OPENGL
+		private const string StockEffectsPrefix = "EffectsSource.MonoGameOGL.bin";
+#else
+		private const string StockEffectsPrefix = "EffectsSource.MonoGameDX11.bin";
+#endif
+
 		private static Texture2D _normalsFittingTexture;
-		private static AssetManager _assetManagerEffects = AssetManager.CreateResourceAssetManager(typeof(Resources).Assembly, "EffectsSource.FNA.bin");
+		private static AssetManager _assetManagerEffects = AssetManager.CreateResourceAssetManager(typeof(Resources).Assembly, StockEffectsPrefix);
 		private static AssetManager _assetManagerResources = AssetManager.CreateResourceAssetManager(typeof(Resources).Assembly, "Resources");
 
 		public static Effect GetDREffect(GraphicsDevice graphicsDevice, string path, Dictionary<string, string> defs = null)

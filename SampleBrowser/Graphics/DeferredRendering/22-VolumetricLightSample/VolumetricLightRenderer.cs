@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AssetManagementBase;
 using CommonServiceLocator;
+using DigitalRune;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.PostProcessing;
@@ -188,7 +189,7 @@ namespace Samples.Graphics
 			var assetManager = services.GetInstance<AssetManager>();
 
 			// Load effect.
-			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/VolumetricLight.efb");
+			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "VolumetricLight.efb");
 			_parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];

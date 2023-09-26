@@ -119,9 +119,11 @@ namespace DigitalRune.Graphics.Effects
       EffectTechniqueDescription description = null;
 
       // First, try to get description from annotation string.
+#if !MONOGAME
       var annotation = technique.Annotations["Semantic"];
       if (annotation != null && annotation.ParameterType == EffectParameterType.String)
         description = GetDescriptionFromString(technique, annotation.GetValueString());
+#endif
 
       // Second, try to get description from technique name.
       if (description == null)
@@ -151,9 +153,11 @@ namespace DigitalRune.Graphics.Effects
       EffectParameterDescription description = null;
 
       // First, try to get usage from annotation string.
+#if !MONOGAME
       var annotation = parameter.Annotations["Semantic"];
       if (annotation != null && annotation.ParameterType == EffectParameterType.String)
         description = GetDescriptionFromString(parameter, annotation.GetValueString());
+#endif 
 
       if (description == null)
       {

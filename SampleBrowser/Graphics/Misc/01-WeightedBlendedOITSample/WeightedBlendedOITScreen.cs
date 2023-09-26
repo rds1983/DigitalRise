@@ -6,6 +6,7 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
+using DigitalRune;
 
 namespace Samples.Graphics
 {
@@ -80,7 +81,7 @@ namespace Samples.Graphics
       _meshRenderer = new MeshRenderer();
 
       var content = services.GetInstance<AssetManager>();
-      _wboitEffect = content.LoadEffect(services.GetInstance<IGraphicsService>().GraphicsDevice, "FNA/bin/WeightedBlendedOIT/WeightedBlendedOIT.efb");
+      _wboitEffect = content.LoadEffect(services.GetInstance<IGraphicsService>().GraphicsDevice, Utility.EffectsPrefix + "WeightedBlendedOIT/WeightedBlendedOIT.efb");
       _parameterViewportSize = _wboitEffect.Parameters["ViewportSize"];
       _parameterTextureA = _wboitEffect.Parameters["TextureA"];
       _parameterTextureB = _wboitEffect.Parameters["TextureB"];

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using AssetManagementBase;
 using CommonServiceLocator;
+using DigitalRune;
 using DigitalRune.Geometry;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
@@ -70,7 +71,7 @@ namespace Samples.Graphics
       var assetManager = services.GetInstance<AssetManager>();
 
       // Load effect.
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/FogSphere.efb");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "FogSphere.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterWorld = _effect.Parameters["World"];
       _parameterWorldInverse = _effect.Parameters["WorldInverse"];

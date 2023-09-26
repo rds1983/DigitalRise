@@ -107,13 +107,7 @@ namespace Samples
         PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8,
         PreferMultiSampling = false,
         SynchronizeWithVerticalRetrace = true,
-#if !WINDOWS && !WINDOWS_UWP && !XBOX
-        // The DigitalRune builds for Windows, Universal Windows Apps and Xbox 360 support
-        // HiDef effects. The other platforms support currently only Reach.
-        GraphicsProfile = GraphicsProfile.Reach,
-#else
         GraphicsProfile = GraphicsProfile.HiDef
-#endif
       };
 
       IsMouseVisible = false;
@@ -268,7 +262,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(OceanSample);
+			var initialSample = typeof(CameraMotionBlurSample);
 			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../Assets"));
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(32);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);

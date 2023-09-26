@@ -1,7 +1,7 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
 using AssetManagementBase;
+using DigitalRune;
 using DigitalRune.Graphics;
 using DigitalRune.Graphics.Rendering;
 using DigitalRune.Graphics.SceneGraph;
@@ -56,7 +56,7 @@ namespace Samples.Graphics
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, "FNA/bin/EnvironmentLight.efb");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "EnvironmentLight.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["DiffuseColor"];
@@ -152,4 +152,3 @@ namespace Samples.Graphics
     #endregion
   }
 }
-#endif

@@ -65,7 +65,7 @@ namespace DigitalRune.Graphics.Rendering
       if (graphicsService == null)
         throw new ArgumentNullException("graphicsService");
 
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, ("FNA/bin/VarianceShadowMask.efb"));
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, (Utility.EffectsPrefix + "VarianceShadowMask.efb"));
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];

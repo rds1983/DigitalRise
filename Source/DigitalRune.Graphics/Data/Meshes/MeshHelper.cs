@@ -193,7 +193,13 @@ namespace DigitalRune.Graphics
       else
       {
         graphicsDevice.Indices = indexBuffer;
-
+#if MONOGAME
+        graphicsDevice.DrawIndexedPrimitives(
+          submesh.PrimitiveType,
+          submesh.StartVertex,
+          submesh.StartIndex,
+          submesh.PrimitiveCount);
+#else
         graphicsDevice.DrawIndexedPrimitives(
           submesh.PrimitiveType,
           submesh.StartVertex,
@@ -201,6 +207,7 @@ namespace DigitalRune.Graphics
           submesh.VertexCount,
           submesh.StartIndex,
           submesh.PrimitiveCount);
+#endif
       }
     }
 
@@ -391,8 +398,10 @@ namespace DigitalRune.Graphics
     {
       switch (primitiveType)
       {
+#if !MONOGAME
         case PrimitiveType.PointListEXT:
           return primitiveCount;
+#endif
         case PrimitiveType.LineList:
           return primitiveCount * 2;
         case PrimitiveType.LineStrip:

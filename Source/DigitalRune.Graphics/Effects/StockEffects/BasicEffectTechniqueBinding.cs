@@ -19,7 +19,9 @@ namespace DigitalRune.Graphics.Effects
   {
     private EffectParameter _parameterDiffuse;
     private EffectParameter _parameterEmissive;
+#if !MONOGAME
     private EffectParameter _parameterShaderIndex;
+#endif
     private Vector4 _effectiveDiffuse;
     private Vector3 _effectiveEmissive;
 
@@ -177,14 +179,20 @@ namespace DigitalRune.Graphics.Effects
       {
         _parameterDiffuse = effect.Parameters["DiffuseColor"];
         _parameterEmissive = effect.Parameters["EmissiveColor"];
+#if !MONOGAME
         _parameterShaderIndex = effect.Parameters["ShaderIndex"];
+#endif
       }
 
       _parameterDiffuse.SetValue(_effectiveDiffuse);
       _parameterEmissive.SetValue(_effectiveEmissive);
 
+#if !MONOGAME
       _parameterShaderIndex.SetValue(Id);
       return effect.Techniques[0];
+#else
+      return effect.Techniques[Id];
+#endif
     }
   }
 }
