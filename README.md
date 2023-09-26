@@ -17,7 +17,7 @@ Right now, the fork is in proof-of-concept stage. Absolute majority of the sampl
    https://github.com/rds1983/XNAssets|Library for loading assets|
    https://github.com/rds1983/DigitalRune|This repo|
 
-   All above repos must reside in the same folder. So the folder structure looks like this:
+   All above repos should reside in the same folder. So the folder structure should look like this:
    ![image](https://github.com/rds1983/DigitalRune/assets/1057289/dc0cf4fb-654f-4e14-9e51-a22edf52b9e0)
 2. Make sure the Direct3D compiler tool(fxc.exe) is within your PATH environment variable.
 3. Install [efscriptgen](https://github.com/rds1983/efscriptgen) using following command: `dotnet tool install --global efscriptgen`
