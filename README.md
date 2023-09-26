@@ -1,4 +1,22 @@
-# DigitalRune Engine
+# Overview
+Fork of https://github.com/rds1983/DigitalRune for the modern day Monogame/FNA
+
+It has major differences with the original:
+1. The fork doesnt use Content Pipeline. It loads assets in raw form using [XNAssets](https://github.com/rds1983/XNAssets). Particularly 3d models are loaded from gltf/glb(version 2).
+2. The fork uses [FontStashSharp](https://github.com/FontStashSharp/FontStashSharp) for the text rendering.
+
+Right now, the fork is in proof-of-concept stage. Absolute majority of the samples work.
+
+# Building for FNA
+First of all, you need to clone following repos:
+
+Url|Description|Additional
+---|-----------|----------
+https://github.com/FNA-XNA/FNA|FNA|Clone submodules too(`git submodule update --init --recursive`)
+https://github.com/rds1983/DdsKtxXna|Library for loading DDS texture|Clone submodules too(`git submodule update --init --recursive`)
+https://github.com/FontStashSharp/FontStashSharp|Text rendering library|
+https://github.com/rds1983/XNAssets|Library for loading assets|
+https://github.com/rds1983/DigitalRune
 
 Copyright (C) DigitalRune GmbH. 
 Authors: Helmut Garstenauer, Martin Garstenauer
