@@ -1,5 +1,5 @@
 ## Overview
-Fork of https://github.com/rds1983/DigitalRune for the modern day Monogame/FNA
+Fork of https://github.com/rds1983/DigitalRune for the modern day Monogame/FNA.
 
 It has major differences with the original:
 1. The fork doesnt use Content Pipeline. It loads assets in raw form using [XNAssets](https://github.com/rds1983/XNAssets). Particularly 3d models are loaded from gltf/glb(version 2).
