@@ -8,6 +8,7 @@ It has major differences with the original:
 Right now, the fork is in proof-of-concept stage. Absolute majority of the samples work.
 
 ## Building for FNA
+This instruction works only for Windows.
 1. Clone following repos:
    Url|Description|Additional
    ---|-----------|----------
