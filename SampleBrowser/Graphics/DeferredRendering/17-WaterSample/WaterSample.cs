@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !MONOGAME
+
+using System;
 using System.Linq;
 using DigitalRune.Geometry;
 using DigitalRune.Geometry.Meshes;
@@ -306,3 +308,5 @@ the water and then the alpha-blended objects above the water surface.",
     }
   }
 }
+
+#endif
