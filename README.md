@@ -12,11 +12,12 @@ This instruction works only for Windows.
 1. Clone this repo.
 2. Make sure [mgfxc] is installed.
 3. Install [efscriptgen](https://github.com/rds1983/efscriptgen) using following command: `dotnet tool install --global efscriptgen`
-   *That is utility for generating batch scripts for the effects' compilation.*
-4. Go to folder `DigitalRune\Source\DigitalRune.Graphics\EffectsSource` and execute command `efscriptgen .`
-5. A new subfolder `MonoGameDX11` would appear. Go there and execute `compile_all.bat`
-6. Repeat steps 4 and 5 for the folder `DigitalRune\SampleBrowser\Assets`
-7. Open `DigitalRune.MonoGame.DirectX.sln` from the IDE and run the project `SampleBrowser.MonoGame.DirectX`. Use PgUp/PgDown to switch between samples.
+
+   *That is utility for generating batch scripts for the effects' compilation.*  
+5. Go to folder `DigitalRune\Source\DigitalRune.Graphics\EffectsSource` and execute command `efscriptgen .`
+6. A new subfolder `MonoGameDX11` would appear. Go there and execute `compile_all.bat`
+7. Repeat steps 4 and 5 for the folder `DigitalRune\SampleBrowser\Assets`
+8. Open `DigitalRune.MonoGame.DirectX.sln` from the IDE and run the project `SampleBrowser.MonoGame.DirectX`. Use PgUp/PgDown to switch between samples.
 
 ## Building for FNA
 This instruction works only for Windows.
