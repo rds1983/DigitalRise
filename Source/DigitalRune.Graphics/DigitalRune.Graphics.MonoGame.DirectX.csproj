@@ -21,12 +21,12 @@
 
   <ItemGroup>
     <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsDX.csproj" />
     <ProjectReference Include="..\DigitalRune.Animation\DigitalRune.Animation.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRune.Geometry\DigitalRune.Geometry.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRune.Particles\DigitalRune.Particles.MonoGame.csproj" />

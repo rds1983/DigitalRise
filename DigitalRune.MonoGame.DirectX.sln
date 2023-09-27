@@ -33,13 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Physics.MonoGam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Physics.Specialized.MonoGame", "Source\DigitalRune.Physics.Specialized\DigitalRune.Physics.Specialized.MonoGame.csproj", "{0383AE2C-07AA-4640-8C67-5084818E57A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Framework.DesktopGL", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj", "{471A2687-4109-4FB4-9E93-A143E178E5B9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Graphics.MonoGame.DirectX", "Source\DigitalRune.Graphics\DigitalRune.Graphics.MonoGame.DirectX.csproj", "{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.MonoGame.DirectX", "SampleBrowser\SampleBrowser.MonoGame.DirectX.csproj", "{AC428334-931A-49CE-B099-BDE5B7A7B130}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Framework.WindowsDX", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsDX.csproj", "{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,14 +149,6 @@ Global
 		{0383AE2C-07AA-4640-8C67-5084818E57A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0383AE2C-07AA-4640-8C67-5084818E57A2}.Release|x64.ActiveCfg = Release|Any CPU
 		{0383AE2C-07AA-4640-8C67-5084818E57A2}.Release|x64.Build.0 = Release|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Debug|x64.Build.0 = Debug|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Release|x64.ActiveCfg = Release|Any CPU
-		{471A2687-4109-4FB4-9E93-A143E178E5B9}.Release|x64.Build.0 = Release|Any CPU
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -177,14 +165,6 @@ Global
 		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|x64.ActiveCfg = Release|Any CPU
 		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|x64.Build.0 = Release|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Debug|x64.Build.0 = Debug|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Release|x64.ActiveCfg = Release|Any CPU
-		{5565A9A9-5ECB-44A3-A397-9FC25D2B64AB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

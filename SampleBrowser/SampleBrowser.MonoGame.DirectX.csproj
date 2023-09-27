@@ -6,7 +6,6 @@
     <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsDX.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.Game.Input\DigitalRune.Game.Input.MonoGame.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.Game.UI\DigitalRune.Game.UI.MonoGame.csproj" />
     <ProjectReference Include="..\Source\DigitalRune.Game\DigitalRune.Game.csproj" />
