@@ -10,7 +10,7 @@ Right now, the fork is in proof-of-concept stage. Absolute majority of the sampl
 ## Building for MonoGame
 This instruction works only for Windows.
 1. Clone this repo.
-2. Make sure [mgfxc] is installed.
+2. Make sure [mgfxc](https://docs.monogame.net/articles/tools/mgfxc.html) is installed.
 3. Install [efscriptgen](https://github.com/rds1983/efscriptgen) using following command: `dotnet tool install --global efscriptgen`
 
    *That is utility for generating batch scripts for the effects' compilation.*  
