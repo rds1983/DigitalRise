@@ -954,38 +954,25 @@ float4 PSUnderwater(PSUnderwaterInput input) : COLOR
 //-----------------------------------------------------------------------------
 
 #if !SM4
-
-#define PASS(NAME, VS, PS) \
-  pass NAME\
-  {\
-    VertexShader = compile vs_3_0 VS(); \
-    PixelShader = compile ps_3_0 PS(); \
-  }
-  
+#define VSTARGET vs_3_0
+#define PSTARGET ps_3_0
 #else
-
-#define PASS(NAME, VS, PS) \
-  pass NAME\
-  {\
-    VertexShader = compile vs_4_0 VS(); \
-    PixelShader = compile ps_4_0 PS(); \
-  }
-  
+#define VSTARGET vs_4_0
+#define PSTARGET ps_4_0
 #endif
-
 
 technique Default
 {
   pass
   {
-    VertexShader = compile vs_3_0 VS();
-    PixelShader = compile ps_3_0 PS();
+    VertexShader = compile VSTARGET VS();
+    PixelShader = compile PSTARGET PS();
   }
 #if UNDERWATER
   pass
   {
-    VertexShader = compile vs_3_0 VSUnderwater();
-    PixelShader = compile ps_3_0 PSUnderwater();
+    VertexShader = compile VSTARGET VSUnderwater();
+    PixelShader = compile PSTARGET PSUnderwater();
   }
 #endif  
 }
