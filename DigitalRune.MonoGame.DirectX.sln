@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Physics.Special
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Graphics.MonoGame.DirectX", "Source\DigitalRune.Graphics\DigitalRune.Graphics.MonoGame.DirectX.csproj", "{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.MonoGame.DirectX", "SampleBrowser\SampleBrowser.MonoGame.DirectX.csproj", "{AC428334-931A-49CE-B099-BDE5B7A7B130}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{4E3892B6-8A51-42F9-A3F3-8BADC5D000AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.MonoGame.DirectX", "Samples\SampleBrowser\SampleBrowser.MonoGame.DirectX.csproj", "{FE97CDC2-943D-4107-8462-7543068817E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,14 +159,14 @@ Global
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Release|x64.ActiveCfg = Release|Any CPU
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A}.Release|x64.Build.0 = Release|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Debug|x64.Build.0 = Debug|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|x64.ActiveCfg = Release|Any CPU
-		{AC428334-931A-49CE-B099-BDE5B7A7B130}.Release|x64.Build.0 = Release|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE97CDC2-943D-4107-8462-7543068817E5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,6 +186,7 @@ Global
 		{12CD3E2C-A063-42A6-A7B4-D14956478C52} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{0383AE2C-07AA-4640-8C67-5084818E57A2} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{178AC2B0-15A6-44AA-91D7-C9FB23EF4E4A} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
+		{FE97CDC2-943D-4107-8462-7543068817E5} = {4E3892B6-8A51-42F9-A3F3-8BADC5D000AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ACDF4E-2CE2-46B1-A19F-35DC131069A1}
