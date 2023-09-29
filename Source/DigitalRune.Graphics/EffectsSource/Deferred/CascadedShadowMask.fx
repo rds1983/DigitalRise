@@ -28,7 +28,6 @@
 //-----------------------------------------------------------------------------
 
 float4x4 ViewInverse : VIEWINVERSE;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 
 float2 Parameters0;
@@ -65,7 +64,7 @@ float3 Samples[MAX_NUMBER_OF_PCF_SAMPLES];
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  VSFrustumRayOutput output = VSFrustumRay(input, ViewportSize, FrustumCorners);
+  VSFrustumRayOutput output = VSFrustumRay(input, ViewportSize);
   
   // Fix for half-resolution shadow mask:
   // One half-res texel covers 4 full-res texels. We need to ensure that the

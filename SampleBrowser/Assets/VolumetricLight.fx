@@ -38,7 +38,6 @@ static const int TextureTypeAlpha = 2;    // Alpha-only texture
 //-----------------------------------------------------------------------------
 
 float2 ViewportSize;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);  // In world space.
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 
 // Volumetric light parameters
@@ -158,7 +157,7 @@ float3 GetProjectorLightIntensity(float3 cameraToPosition, int textureType)
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

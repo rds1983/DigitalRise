@@ -39,7 +39,6 @@ namespace DigitalRune.Graphics.Rendering
 
     private readonly Effect _effect;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterFogParameters;
     private readonly EffectParameter _parameterColor0;
     private readonly EffectParameter _parameterColor1;
@@ -81,7 +80,6 @@ namespace DigitalRune.Graphics.Rendering
       Order = 3;
       _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/Fog");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterFogParameters = _effect.Parameters["FogParameters"];
       _parameterColor0 = _effect.Parameters["Color0"];
       _parameterColor1 = _effect.Parameters["Color1"];
@@ -171,7 +169,6 @@ namespace DigitalRune.Graphics.Rendering
       for (int i = 0; i < _cameraFrustumFarCorners.Length; i++)
         _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[i]);
 
-      _parameterFrustumCorners.SetValue(_cameraFrustumFarCorners);
       _parameterGBuffer0.SetValue(context.GBuffer0);
 
       // Update SceneNode.LastFrame for all visible nodes.
@@ -272,7 +269,7 @@ namespace DigitalRune.Graphics.Rendering
             _passFogWithHeightFalloffWithPhase.Apply();
         }
 
-        graphicsDevice.DrawFullScreenQuad();
+        graphicsDevice.DrawFullScreenQuadFrustumRay(_cameraFrustumFarCorners);
       }
 
       if (_fogNodes != null)

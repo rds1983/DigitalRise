@@ -1,6 +1,4 @@
-﻿#if !MONOGAME
-
-using System;
+﻿using System;
 using DigitalRune.Game.Input;
 using DigitalRune.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
@@ -56,5 +54,3 @@ namespace Samples.Graphics
     }
   }
 }
-
-#endif

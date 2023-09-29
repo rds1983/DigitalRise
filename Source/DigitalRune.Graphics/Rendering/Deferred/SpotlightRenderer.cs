@@ -28,7 +28,6 @@ namespace DigitalRune.Graphics.Rendering
     private readonly Effect _effect;
     private readonly EffectParameter _parameterWorldViewProjection;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterDiffuseColor;
     private readonly EffectParameter _parameterSpecularColor;
     private readonly EffectParameter _parameterLightDirection;
@@ -78,7 +77,6 @@ namespace DigitalRune.Graphics.Rendering
       _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/Spotlight");
       _parameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["SpotlightDiffuse"];
       _parameterSpecularColor = _effect.Parameters["SpotlightSpecular"];
       _parameterLightDirection = _effect.Parameters["SpotlightDirection"];
@@ -212,7 +210,6 @@ namespace DigitalRune.Graphics.Rendering
         // Convert frustum far corners from view space to world space.
         for (int j = 0; j < _frustumFarCorners.Length; j++)
           _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
-        _parameterFrustumCorners.SetValue(_frustumFarCorners);
 
         if (lightNode.Clip != null)
         {
@@ -271,7 +268,7 @@ namespace DigitalRune.Graphics.Rendering
           }
         }
 
-        graphicsDevice.DrawQuad(rectangle);
+        graphicsDevice.DrawQuadFrustumRay(rectangle, _frustumFarCorners);
       }
 
       savedRenderState.Restore();

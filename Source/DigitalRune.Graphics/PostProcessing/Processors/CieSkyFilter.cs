@@ -41,7 +41,6 @@ namespace DigitalRune.Graphics.PostProcessing
 
     private readonly Effect _effect;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterSunDirection;
     private readonly EffectParameter _parameterExposure;
     private readonly EffectParameter _parameterAbcd;
@@ -112,7 +111,6 @@ namespace DigitalRune.Graphics.PostProcessing
     {
       _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/CieSkyFilter");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterSunDirection = _effect.Parameters["SunDirection"];
       _parameterExposure = _effect.Parameters["Exposure"];
       _parameterAbcd = _effect.Parameters["Abcd"];
@@ -166,7 +164,6 @@ namespace DigitalRune.Graphics.PostProcessing
       for (int i = 0; i < _cameraFrustumFarCorners.Length; i++)
         _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[i]);
 
-      _parameterFrustumCorners.SetValue(_cameraFrustumFarCorners);
 
       // The CIE model does not work if the sun is below the horizon. We simply project it back up
       // to the horizon. Since the sun light will be small or gone at night, the actual luminance
@@ -185,7 +182,7 @@ namespace DigitalRune.Graphics.PostProcessing
       _parameterSourceTexture.SetValue(context.SourceTexture);
       _effect.CurrentTechnique.Passes[0].Apply();
 
-      graphicsDevice.DrawFullScreenQuad();
+      graphicsDevice.DrawFullScreenQuadFrustumRay(_cameraFrustumFarCorners);
     }
     #endregion
   }

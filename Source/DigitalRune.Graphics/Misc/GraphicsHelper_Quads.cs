@@ -24,52 +24,60 @@ namespace DigitalRune.Graphics
       new VertexPositionTexture(new Vector3(0, 0, 0), new Vector2(1, 0)),
       new VertexPositionTexture(new Vector3(0, 0, 0), new Vector2(1, 1)),
     };
-    #endregion
+
+		private static readonly VertexPositionFrustumRayTexture[] QuadVerticesFrustumRays =
+{
+			new VertexPositionFrustumRayTexture(Vector3.Zero, Vector3.Zero, new Vector2(0, 0)),
+			new VertexPositionFrustumRayTexture(Vector3.Zero, Vector3.Zero, new Vector2(0, 1)),
+			new VertexPositionFrustumRayTexture(Vector3.Zero, Vector3.Zero, new Vector2(1, 0)),
+			new VertexPositionFrustumRayTexture(Vector3.Zero, Vector3.Zero, new Vector2(1, 1)),
+		};
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
-    #endregion
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
-    #endregion
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-    /// <overloads>
-    /// <summary>
-    /// Draws a screen-aligned quad.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Draws a screen-aligned quad.
-    /// </summary>
-    /// <param name="graphicsDevice">The graphics device.</param>
-    /// <param name="rectangle">
-    /// The rectangle describing vertex positions of the quad. (This can be in pixels or in another
-    /// unit depending on the current vertex shader.)
-    /// </param>
-    /// <remarks>
-    /// <para>
-    /// The quad vertices use the vertex type <see cref="VertexPositionTexture"/>.
-    /// </para>
-    /// <para>
-    /// The upper left corner of the quad uses the texture coordinate (0, 0), the lower right corner
-    /// of the quad uses the texture coordinate (0, 1).
-    /// </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="graphicsDevice"/> is <see langword="null"/>.
-    /// </exception>
-    public static void DrawQuad(this GraphicsDevice graphicsDevice, Rectangle rectangle)
+		/// <overloads>
+		/// <summary>
+		/// Draws a screen-aligned quad.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Draws a screen-aligned quad.
+		/// </summary>
+		/// <param name="graphicsDevice">The graphics device.</param>
+		/// <param name="rectangle">
+		/// The rectangle describing vertex positions of the quad. (This can be in pixels or in another
+		/// unit depending on the current vertex shader.)
+		/// </param>
+		/// <remarks>
+		/// <para>
+		/// The quad vertices use the vertex type <see cref="VertexPositionTexture"/>.
+		/// </para>
+		/// <para>
+		/// The upper left corner of the quad uses the texture coordinate (0, 0), the lower right corner
+		/// of the quad uses the texture coordinate (0, 1).
+		/// </para>
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="graphicsDevice"/> is <see langword="null"/>.
+		/// </exception>
+		public static void DrawQuad(this GraphicsDevice graphicsDevice, Rectangle rectangle)
     {
       DrawQuad(graphicsDevice, rectangle, new Vector2F(0, 0), new Vector2F(1, 1));
     }
@@ -218,33 +226,174 @@ namespace DigitalRune.Graphics
       DrawQuad(graphicsDevice, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
     }
 
+		/// <overloads>
+		/// <summary>
+		/// Draws a screen-aligned quad.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Draws a screen-aligned quad.
+		/// </summary>
+		/// <param name="graphicsDevice">The graphics device.</param>
+		/// <param name="rectangle">
+		/// The rectangle describing vertex positions of the quad. (This can be in pixels or in another
+		/// unit depending on the current vertex shader.)
+		/// </param>
+		/// <remarks>
+		/// <para>
+		/// The quad vertices use the vertex type <see cref="VertexPositionTexture"/>.
+		/// </para>
+		/// <para>
+		/// The upper left corner of the quad uses the texture coordinate (0, 0), the lower right corner
+		/// of the quad uses the texture coordinate (0, 1).
+		/// </para>
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="graphicsDevice"/> is <see langword="null"/>.
+		/// </exception>
+		public static void DrawQuadFrustumRay(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector3[] frustumFarCorners)
+		{
+			DrawQuadFrustumRay(graphicsDevice, rectangle, new Vector2F(0, 0), new Vector2F(1, 1), frustumFarCorners);
+		}
 
-    /// <overloads>
-    /// <summary>
-    /// Gets the view space positions of the 4 far corners of the viewing frustum.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Gets the view space positions of the 4 far corners of the viewing frustum.
-    /// </summary>
-    /// <param name="projection">The projection.</param>
-    /// <param name="frustumFarCorners">
-    /// A 4 element array that will be initialized with the frustum far corners.
-    /// </param>
-    /// <remarks>
-    /// <paramref name="frustumFarCorners"/> will be initialized with the 4 corner positions (in 
-    /// view space) of the far plane of the projection frustum. The order of the corners is: 
-    /// top-left, top-right, bottom-left, bottom-right.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="projection"/> or <paramref name="frustumFarCorners"/> is 
-    /// <see langword="null"/>.
-    /// </exception>
-    /// <exception cref="ArgumentException">
-    /// <paramref name="frustumFarCorners"/> has wrong length. Expected length: 4.
-    /// </exception>
-    public static void GetFrustumFarCorners(Projection projection, Vector3[] frustumFarCorners)
+
+		/// <summary>
+		/// Draws a screen-aligned quad.
+		/// </summary>
+		/// <param name="graphicsDevice">The graphics device.</param>
+		/// <param name="rectangle">
+		/// The rectangle describing vertex positions of the quad. (This can be in pixels or in another
+		/// unit depending on the current vertex shader.)
+		/// </param>
+		/// <param name="texCoordTopLeft">
+		/// The texture coordinates of the top left vertex of the quad.
+		/// </param>
+		/// <param name="texCoordBottomRight">
+		/// The texture coordinates of the bottom right vertex of the quad.</param>
+		/// <remarks>
+		/// <para>
+		/// The quad vertices use the vertex type <see cref="VertexPositionTexture"/>.
+		/// </para>
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="graphicsDevice"/> is <see langword="null"/>.
+		/// </exception>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+		public static void DrawQuadFrustumRay(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F texCoordTopLeft, Vector2F texCoordBottomRight, Vector3[] frustumFarCorners)
+		{
+			if (graphicsDevice == null)
+				throw new ArgumentNullException("graphicsDevice");
+
+			int left = rectangle.Left;
+			int top = rectangle.Top;
+			int bottom = rectangle.Bottom;
+			int right = rectangle.Right;
+
+			for (var i = 0; i < 4; ++i)
+			{
+				QuadVerticesFrustumRays[i].FrustumRay = frustumFarCorners[i];
+			}
+
+			QuadVerticesFrustumRays[0].Position.X = left;
+			QuadVerticesFrustumRays[0].Position.Y = top;
+			QuadVerticesFrustumRays[0].Position.Z = 0;
+			QuadVerticesFrustumRays[0].TextureCoordinate = new Vector2(texCoordTopLeft.X, texCoordTopLeft.Y);
+
+			QuadVerticesFrustumRays[1].Position.X = right;
+			QuadVerticesFrustumRays[1].Position.Y = top;
+			QuadVerticesFrustumRays[1].Position.Z = 0;
+			QuadVerticesFrustumRays[1].TextureCoordinate = new Vector2(texCoordBottomRight.X, texCoordTopLeft.Y);
+
+			QuadVerticesFrustumRays[2].Position.X = left;
+			QuadVerticesFrustumRays[2].Position.Y = bottom;
+			QuadVerticesFrustumRays[2].Position.Z = 0;
+			QuadVerticesFrustumRays[2].TextureCoordinate = new Vector2(texCoordTopLeft.X, texCoordBottomRight.Y);
+
+			QuadVerticesFrustumRays[3].Position.X = right;
+			QuadVerticesFrustumRays[3].Position.Y = bottom;
+			QuadVerticesFrustumRays[3].Position.Z = 0;
+			QuadVerticesFrustumRays[3].TextureCoordinate = new Vector2(texCoordBottomRight.X, texCoordBottomRight.Y);
+
+			graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, QuadVerticesFrustumRays, 0, 2);
+		}
+
+
+		/// <summary>
+		/// Draws a full-screen quad.
+		/// </summary>
+		/// <param name="graphicsDevice">The graphics device.</param>
+		/// <remarks>
+		/// <para>
+		/// The quad will fill the current viewport. The vertex positions are in pixels. (The vertex
+		/// shader must work like VSScreenSpaceDraw() in "PostProcessing.fxh".)
+		/// </para>
+		/// <para>
+		/// The quad vertices use the vertex type <see cref="VertexPositionTexture"/>.
+		/// </para>
+		/// <para>
+		/// The upper left corner of the quad uses the texture coordinate (0, 0), the lower right corner
+		/// of the quad uses the texture coordinate (0, 1).
+		/// </para>
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="graphicsDevice"/> is <see langword="null"/>.
+		/// </exception>
+		public static void DrawFullScreenQuadFrustumRay(this GraphicsDevice graphicsDevice, Vector3[] frustumFarCorners)
+		{
+			if (graphicsDevice == null)
+				throw new ArgumentNullException("graphicsDevice");
+
+			// This code is not needed anymore if we use the current viewport dimensions:
+
+			//RenderTargetBinding[] targets = graphicsDevice.GetRenderTargets();   // Note: GetRenderTargets returns a RenderTargetBinding[0] array if the render target is the back-buffer.
+			//Texture2D target = null; 
+			//if (targets != null && targets.Length > 0)
+			//  target = targets[0].RenderTarget as Texture2D;
+
+			//// Get width and height of current render target.
+			//int width, height;
+			//if (target == null)
+			//{
+			//  width = graphicsDevice.PresentationParameters.BackBufferWidth;
+			//  height = graphicsDevice.PresentationParameters.BackBufferHeight;
+			//}
+			//else
+			//{
+			//  width = target.Width;
+			//  height = target.Height;
+			//}
+
+			DrawQuadFrustumRay(graphicsDevice, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), frustumFarCorners);
+		}
+
+
+		/// <overloads>
+		/// <summary>
+		/// Gets the view space positions of the 4 far corners of the viewing frustum.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Gets the view space positions of the 4 far corners of the viewing frustum.
+		/// </summary>
+		/// <param name="projection">The projection.</param>
+		/// <param name="frustumFarCorners">
+		/// A 4 element array that will be initialized with the frustum far corners.
+		/// </param>
+		/// <remarks>
+		/// <paramref name="frustumFarCorners"/> will be initialized with the 4 corner positions (in 
+		/// view space) of the far plane of the projection frustum. The order of the corners is: 
+		/// top-left, top-right, bottom-left, bottom-right.
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="projection"/> or <paramref name="frustumFarCorners"/> is 
+		/// <see langword="null"/>.
+		/// </exception>
+		/// <exception cref="ArgumentException">
+		/// <paramref name="frustumFarCorners"/> has wrong length. Expected length: 4.
+		/// </exception>
+		public static void GetFrustumFarCorners(Projection projection, Vector3[] frustumFarCorners)
     {
       if (projection == null)
         throw new ArgumentNullException("projection");

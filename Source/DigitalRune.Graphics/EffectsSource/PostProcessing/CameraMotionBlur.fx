@@ -23,8 +23,6 @@
 // The viewport size in pixels.
 float2 ViewportSize;
 
-float3 FrustumCorners[4];
-
 // The inverse view matrix.
 float4x4 ViewInverse;
 
@@ -63,7 +61,7 @@ sampler GBuffer0Sampler = sampler_state
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

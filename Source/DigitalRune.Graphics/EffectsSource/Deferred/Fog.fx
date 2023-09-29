@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 
 float2 ViewportSize : VIEWPORTSIZE;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);  // The usual frustum ray but in world space!
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 
 // Color of fog (RGBA).
@@ -53,7 +52,7 @@ float3 ScatteringSymmetry; // The scattering symmetry constant g for the phase f
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

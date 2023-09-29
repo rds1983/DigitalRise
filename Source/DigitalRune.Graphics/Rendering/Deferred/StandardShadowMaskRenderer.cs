@@ -71,7 +71,6 @@ namespace DigitalRune.Graphics.Rendering
 
     private readonly Effect _effect;
     private readonly EffectParameter _parameterViewInverse;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterGBuffer0;
     private readonly EffectParameter _parameterParameters0;
     private readonly EffectParameter _parameterParameters1;
@@ -115,7 +114,6 @@ namespace DigitalRune.Graphics.Rendering
       _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/StandardShadowMask");
 
       _parameterViewInverse = _effect.Parameters["ViewInverse"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];
       _parameterParameters0 = _effect.Parameters["Parameters0"];
       _parameterParameters1 = _effect.Parameters["Parameters1"];
@@ -232,7 +230,6 @@ namespace DigitalRune.Graphics.Rendering
         Vector2F texCoordTopLeft = new Vector2F(rectangle.Left / (float)viewport.Width, rectangle.Top / (float)viewport.Height);
         Vector2F texCoordBottomRight = new Vector2F(rectangle.Right / (float)viewport.Width, rectangle.Bottom / (float)viewport.Height);
         GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, texCoordTopLeft, texCoordBottomRight, _frustumFarCorners);
-        _parameterFrustumCorners.SetValue(_frustumFarCorners);
 
         var pass = GetPass(numberOfSamples);
 
@@ -267,7 +264,7 @@ namespace DigitalRune.Graphics.Rendering
 
         pass.Apply();
 
-        graphicsDevice.DrawQuad(rectangle);
+        graphicsDevice.DrawQuadFrustumRay(rectangle, _frustumFarCorners);
       }
 
       _parameterGBuffer0.SetValue((Texture2D)null);

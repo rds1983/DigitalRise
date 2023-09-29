@@ -28,7 +28,6 @@ static const int TextureAlpha = 2;   // Alpha-only texture.
 
 float4x4 WorldViewProjection : WORLDVIEWPROJECTION;  // (Only for clip geometry.)
 float2 ViewportSize : VIEWPORTSIZE;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 DECLARE_UNIFORM_GBUFFER(GBuffer1, 1);
 
@@ -61,7 +60,7 @@ float4 PSClip() : COLOR0
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

@@ -30,15 +30,6 @@ DECLARE_UNIFORM_NORMALSFITTINGTEXTURE
 #endif
 
 
-/// Declares the uniform const for the view frustum far corners in view space.
-/// \param[in] name   The name of the constant.
-/// \remarks
-/// Order of the corners: (top left, top right, bottom left, bottom right)
-/// Usually you will call
-///   DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
-#define DECLARE_UNIFORM_FRUSTUMCORNERS(name) float3 name[4]
-
-
 /// Declares the uniform const for the view frustum info for reconstructing the
 /// view space position from texture coordinates.
 /// \param[in] name   The name of the constant.
@@ -196,26 +187,11 @@ float3 GetLightBufferSpecular(float4 lightBuffer0, float4 lightBuffer1)
   return lightBuffer1.xyz;
 }
 
-
-/// Gets the index of the given texture corner.
-/// \param[in] texCoord The texture coordinate of one of the texture corners.
-///                     Allowed values are (0, 0), (1, 0), (0, 1), and (1, 1).
-/// \return The index of the texture corner.
-/// \retval 0   left, top
-/// \retval 1   right, top
-/// \retval 2   left, bottom
-/// \retval 3   right, bottom
-float GetCornerIndex(in float2 texCoord)
-{
-  return texCoord.x + (texCoord.y * 2);
-}
-
-
 struct VSFrustumRayInput
 {
   float4 Position : POSITION0;
-  float2 TexCoord : TEXCOORD0;    // The texture coordinate of one of the texture corners.
-                                  // Allowed values are (0, 0), (1, 0), (0, 1), and (1, 1).
+  float3 FrustumRay : POSITION1;
+  float2 TexCoord : TEXCOORD0;
 };
 
 struct VSFrustumRayOutput
@@ -231,15 +207,12 @@ struct VSFrustumRayOutput
 /// \param[in] viewportSize     The viewport size in pixels.
 /// \param[in] frustumCorners   See constant FrustumCorners above.
 VSFrustumRayOutput VSFrustumRay(VSFrustumRayInput input,
-                                uniform const float2 viewportSize,
-                                uniform const float3 frustumCorners[4])
+                                uniform const float2 viewportSize)
 {
   float4 position = input.Position;
-  float2 texCoord = input.TexCoord;
-  
   position.xy /= viewportSize;
   
-  texCoord.xy = position.xy;
+  float2 texCoord = position.xy;
   
   // Instead of subtracting the 0.5 pixel offset from the position, we add
   // it to the texture coordinates - because frustumRay is associated with
@@ -253,7 +226,7 @@ VSFrustumRayOutput VSFrustumRay(VSFrustumRayInput input,
   VSFrustumRayOutput output = (VSFrustumRayOutput)0;
   output.Position = position;
   output.TexCoord = texCoord;
-  output.FrustumRay = frustumCorners[GetCornerIndex(input.TexCoord)];
+  output.FrustumRay = input.FrustumRay;
   
   return output;
 }

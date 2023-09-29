@@ -21,7 +21,6 @@
 //-----------------------------------------------------------------------------
 
 float2 ViewportSize : VIEWPORTSIZE;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 
 float4x4 ShadowMatrix;
@@ -56,7 +55,7 @@ float4 Parameters1;
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

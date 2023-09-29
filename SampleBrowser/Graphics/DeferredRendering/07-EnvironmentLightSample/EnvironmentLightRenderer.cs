@@ -23,7 +23,6 @@ namespace Samples.Graphics
 
     private readonly Effect _effect;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterDiffuseColor;
     private readonly EffectParameter _parameterSpecularColor;
     private readonly EffectParameter _parameterTextureSize;
@@ -58,7 +57,6 @@ namespace Samples.Graphics
 
       _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "EnvironmentLight.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["DiffuseColor"];
       _parameterSpecularColor = _effect.Parameters["SpecularColor"];
       _parameterTextureSize = _effect.Parameters["TextureSize"];
@@ -118,7 +116,6 @@ namespace Samples.Graphics
       // Convert frustum far corners from view space to world space.
       for (int j = 0; j < _cameraFrustumFarCorners.Length; j++)
         _cameraFrustumFarCorners[j] = (Vector3)cameraNode.PoseWorld.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[j]);
-      _parameterFrustumCorners.SetValue(_cameraFrustumFarCorners);
 
       // The current render pipeline is a HDR pipeline if the light buffer is HdrBlendable.
       // (This will practically always be the case.)
@@ -146,7 +143,7 @@ namespace Samples.Graphics
 
         _effect.CurrentTechnique.Passes[0].Apply();
 
-        graphicsDevice.DrawFullScreenQuad();
+        graphicsDevice.DrawFullScreenQuadFrustumRay(_cameraFrustumFarCorners);
       }
     }
     #endregion

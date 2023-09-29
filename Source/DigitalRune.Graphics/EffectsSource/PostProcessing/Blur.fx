@@ -67,7 +67,6 @@ sampler SourceSampler = sampler_state
 
 // For bilateral and anisotropic and filtering.
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
 
 float4 BlurParameters0;
 #define CameraFar BlurParameters0.x
@@ -193,7 +192,7 @@ float4 PSLogFilter(float2 texCoord : TEXCOORD0, uniform int numberOfSamples) : C
 
 VSFrustumRayOutput VSAnisotropicFilter(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

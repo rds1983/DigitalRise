@@ -32,7 +32,6 @@ namespace DigitalRune.Graphics.PostProcessing
 
     private readonly Effect _effect;
     private readonly EffectParameter _viewportSizeParameter;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _sourceTextureParameter;
     private readonly EffectParameter _gBuffer0Parameter;
     private readonly EffectParameter _viewInverseParameter;
@@ -77,7 +76,6 @@ namespace DigitalRune.Graphics.PostProcessing
     {
       _effect = GraphicsService.GetStockEffect("DigitalRune/PostProcessing/CameraMotionBlur");
       _viewportSizeParameter = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _sourceTextureParameter = _effect.Parameters["SourceTexture"];
       _gBuffer0Parameter = _effect.Parameters["GBuffer0"];
       _viewInverseParameter = _effect.Parameters["ViewInverse"];
@@ -127,7 +125,6 @@ namespace DigitalRune.Graphics.PostProcessing
       _viewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
 
       GraphicsHelper.GetFrustumFarCorners(projection, _cameraFrustumFarCorners);
-      _parameterFrustumCorners.SetValue(_cameraFrustumFarCorners);
 
       _sourceTextureParameter.SetValue(context.SourceTexture);
       _gBuffer0Parameter.SetValue(context.GBuffer0);
@@ -136,7 +133,7 @@ namespace DigitalRune.Graphics.PostProcessing
       _numberOfSamplesParameter.SetValue((int)NumberOfSamples);
       _strengthParameter.SetValue(Strength);
       _effect.CurrentTechnique.Passes[0].Apply();
-      graphicsDevice.DrawFullScreenQuad();
+      graphicsDevice.DrawFullScreenQuadFrustumRay(_cameraFrustumFarCorners);
 
       _sourceTextureParameter.SetValue((Texture2D)null);
       _gBuffer0Parameter.SetValue((Texture2D)null);

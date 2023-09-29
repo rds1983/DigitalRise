@@ -1,5 +1,4 @@
-﻿#if !WP7
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AssetManagementBase;
@@ -34,7 +33,6 @@ namespace DigitalRune.Graphics.Rendering
 
     private readonly Effect _effect;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterGBuffer0;
     private readonly EffectParameter _parameterShadowMatrix;
     private readonly EffectParameter _parameterShadowMap;
@@ -67,7 +65,6 @@ namespace DigitalRune.Graphics.Rendering
 
       _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, (Utility.EffectsPrefix + "VarianceShadowMask.efb"));
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];
       _parameterShadowMatrix = _effect.Parameters["ShadowMatrix"];
       _parameterShadowMap = _effect.Parameters["ShadowMap"];
@@ -122,7 +119,6 @@ namespace DigitalRune.Graphics.Rendering
       _parameterViewportSize.SetValue(new Vector2(viewport.Width, viewport.Height));
 
       GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, _frustumFarCorners);
-      _parameterFrustumCorners.SetValue(_frustumFarCorners);
 
       _parameterGBuffer0.SetValue(context.GBuffer0);
 
@@ -176,7 +172,7 @@ namespace DigitalRune.Graphics.Rendering
 
         _effect.CurrentTechnique.Passes[0].Apply();
 
-        graphicsDevice.DrawFullScreenQuad();
+        graphicsDevice.DrawFullScreenQuadFrustumRay(_frustumFarCorners);
       }
 
       graphicsDevice.BlendState = originalBlendState;
@@ -186,4 +182,3 @@ namespace DigitalRune.Graphics.Rendering
     #endregion
   }
 }
-#endif

@@ -81,7 +81,6 @@ namespace DigitalRune.Graphics.Rendering
     private readonly Effect _effect;
     private readonly EffectParameter _parameterTransform;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterGBuffer0;
     private readonly EffectParameter _parameterGBuffer1;
     private readonly EffectParameter _parameterParameters0;
@@ -125,7 +124,6 @@ namespace DigitalRune.Graphics.Rendering
       _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/ImageBasedLight");
       _parameterTransform = _effect.Parameters["Transform"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];
       _parameterGBuffer1 = _effect.Parameters["GBuffer1"];
       _parameterParameters0 = _effect.Parameters["Parameters0"];
@@ -346,8 +344,6 @@ namespace DigitalRune.Graphics.Rendering
         for (int j = 0; j < _frustumFarCorners.Length; j++)
           _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
 
-        _parameterFrustumCorners.SetValue(_frustumFarCorners);
-
         EffectPass passLight = null;
         if (enableDiffuse &&  enableSpecular)
         {
@@ -377,7 +373,7 @@ namespace DigitalRune.Graphics.Rendering
           _parameterTransform.SetValue(pose.Inverse);
 
           passLight.Apply();
-          graphicsDevice.DrawFullScreenQuad();
+          graphicsDevice.DrawFullScreenQuadFrustumRay(_frustumFarCorners);
           continue;
         }
 
@@ -434,7 +430,7 @@ namespace DigitalRune.Graphics.Rendering
 
         // ----- Render full screen quad.
         passLight.Apply();
-        graphicsDevice.DrawQuad(rectangle);
+        graphicsDevice.DrawQuadFrustumRay(rectangle, _frustumFarCorners);
       }
 
       savedRenderState.Restore();

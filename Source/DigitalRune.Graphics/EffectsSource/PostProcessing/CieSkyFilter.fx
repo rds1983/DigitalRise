@@ -21,9 +21,6 @@
 
 float2 ViewportSize;
 
-// The frustum corners in WORLD SPACE!!!
-float3 FrustumCorners[4];
-
 // The direction to the sun.
 float3 SunDirection;
 float Exposure;
@@ -51,7 +48,7 @@ sampler SourceSampler = sampler_state
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

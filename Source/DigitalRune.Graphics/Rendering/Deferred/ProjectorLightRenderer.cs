@@ -28,7 +28,6 @@ namespace DigitalRune.Graphics.Rendering
     private readonly Effect _effect;
     private readonly EffectParameter _parameterWorldViewProjection;
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterDiffuseColor;
     private readonly EffectParameter _parameterSpecularColor;
     private readonly EffectParameter _parameterPosition;
@@ -73,7 +72,6 @@ namespace DigitalRune.Graphics.Rendering
       _effect = graphicsService.GetStockEffect("DigitalRune/Deferred/ProjectorLight");
       _parameterWorldViewProjection = _effect.Parameters["WorldViewProjection"];
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterDiffuseColor = _effect.Parameters["ProjectorLightDiffuse"];
       _parameterSpecularColor = _effect.Parameters["ProjectorLightSpecular"];
       _parameterPosition = _effect.Parameters["ProjectorLightPosition"];
@@ -176,8 +174,6 @@ namespace DigitalRune.Graphics.Rendering
         for (int j = 0; j < _frustumFarCorners.Length; j++)
           _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
         
-        _parameterFrustumCorners.SetValue(_frustumFarCorners);
-
         bool hasShadow = (lightNode.Shadow != null && lightNode.Shadow.ShadowMask != null);
         if (hasShadow)
         {
@@ -235,7 +231,7 @@ namespace DigitalRune.Graphics.Rendering
             _passDefaultRgb.Apply();
         }
 
-        graphicsDevice.DrawQuad(rectangle);
+        graphicsDevice.DrawQuadFrustumRay(rectangle, _frustumFarCorners);
       }
 
       savedRenderState.Restore();

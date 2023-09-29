@@ -74,7 +74,6 @@ namespace Samples.Graphics
     private readonly Vector3[] _frustumFarCorners = new Vector3[4];
 
     private readonly EffectParameter _parameterViewportSize;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterGBuffer0;
     private readonly EffectParameter _parameterColor;
     private readonly EffectParameter _parameterNumberOfSamples;
@@ -191,7 +190,6 @@ namespace Samples.Graphics
 			// Load effect.
 			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "VolumetricLight.efb");
 			_parameterViewportSize = effect.Parameters["ViewportSize"];
-      _parameterFrustumCorners = effect.Parameters["FrustumCorners"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];
       _parameterColor = effect.Parameters["Color"];
       _parameterNumberOfSamples = effect.Parameters["NumberOfSamples"];
@@ -355,7 +353,6 @@ namespace Samples.Graphics
         for (int j = 0; j < _frustumFarCorners.Length; j++)
           _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
 
-        _parameterFrustumCorners.SetValue(_frustumFarCorners);
 
         Vector2 randomSeed = AnimateNoise ? new Vector2((float)MathHelper.Frac(context.Time.TotalSeconds))
                                           : new Vector2(0);
@@ -453,7 +450,7 @@ namespace Samples.Graphics
         }
 
         // Draw a screen space quad covering the light.
-        graphicsDevice.DrawQuad(rectangle);
+        graphicsDevice.DrawQuadFrustumRay(rectangle, _frustumFarCorners);
       }
 
       _parameterGBuffer0.SetValue((Texture)null);

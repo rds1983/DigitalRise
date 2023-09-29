@@ -19,7 +19,6 @@
 //-----------------------------------------------------------------------------
 
 float2 ViewportSize : VIEWPORTSIZE;
-DECLARE_UNIFORM_FRUSTUMCORNERS(FrustumCorners);
 DECLARE_UNIFORM_GBUFFER(GBuffer0, 0);
 DECLARE_UNIFORM_GBUFFER(GBuffer1, 1);
 
@@ -46,7 +45,7 @@ samplerCUBE EnvironmentSampler = sampler_state
 
 VSFrustumRayOutput VS(VSFrustumRayInput input)
 {
-  return VSFrustumRay(input, ViewportSize, FrustumCorners);
+  return VSFrustumRay(input, ViewportSize);
 }
 
 

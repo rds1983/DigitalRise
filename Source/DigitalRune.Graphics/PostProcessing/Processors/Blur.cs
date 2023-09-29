@@ -88,7 +88,6 @@ namespace DigitalRune.Graphics.PostProcessing
     private readonly EffectParameter _parameterOffsets;
 
     private readonly EffectParameter _parameterGBuffer0;
-    private readonly EffectParameter _parameterFrustumCorners;
     private readonly EffectParameter _parameterBlurParameters0;
 
     // Arrays for internal use.
@@ -367,7 +366,6 @@ namespace DigitalRune.Graphics.PostProcessing
       _parameterOffsets = _effect.Parameters["Offsets"];
 
       _parameterGBuffer0 = _effect.Parameters["GBuffer0"];
-      _parameterFrustumCorners = _effect.Parameters["FrustumCorners"];
       _parameterBlurParameters0 = _effect.Parameters["BlurParameters0"];
 
       _horizontalOffsets = new Vector2[MaxNumberOfSamples];
@@ -850,7 +848,6 @@ namespace DigitalRune.Graphics.PostProcessing
           float far = projection.Far;
 
           GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, _frustumFarCorners);
-          _parameterFrustumCorners.SetValue(_frustumFarCorners);
 
           _parameterBlurParameters0.SetValue(new Vector4(
             far,
@@ -931,7 +928,7 @@ namespace DigitalRune.Graphics.PostProcessing
           passIndex = i % 2;
 
         _effect.CurrentTechnique.Passes[passIndex].Apply();
-        graphicsDevice.DrawFullScreenQuad();
+        graphicsDevice.DrawFullScreenQuadFrustumRay(_frustumFarCorners);
       }
 
       _parameterSourceTexture.SetValue((Texture2D)null);
