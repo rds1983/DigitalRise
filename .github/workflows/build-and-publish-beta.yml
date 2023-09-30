@@ -23,4 +23,4 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Build DigitalRune.MonoGame
-      run: dotnet build build\DigitalRune.MonoGame.DirectX.sln --configuration Release
+      run: dotnet build DigitalRune.MonoGame.DirectX.sln --configuration Release
