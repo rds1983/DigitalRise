@@ -3,6 +3,8 @@
     <AssemblyName>DigitalRune.Game</AssemblyName>
     <PackageId>DigitalRune.Game</PackageId>
     <TargetFramework>net6.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />

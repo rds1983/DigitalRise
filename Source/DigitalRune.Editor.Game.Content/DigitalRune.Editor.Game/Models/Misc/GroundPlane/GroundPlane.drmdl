@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<Model File="Ground.x" GenerateTangentFrames="True">
-  <Mesh>
-    <Submesh Material="Checkerboard-Gray.drmat" />
-  </Mesh>
-</Model>

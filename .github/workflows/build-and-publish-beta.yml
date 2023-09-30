@@ -1,0 +1,26 @@
+name: Build & Publish Beta
+
+on:
+    push:
+        paths:
+            - 'Samples/**'
+            - 'Source/**'
+            - 'Tests/**'
+            - 'ThirdPary/**'
+            - 'Tools/**'
+    workflow_dispatch:
+
+jobs:
+  BuildAndPublish:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    - name: Build DigitalRune.MonoGame
+      run: dotnet build build\DigitalRune.MonoGame.DirectX.sln --configuration Release
