@@ -1,4 +1,4 @@
-The DigitalRune Engine is licensed under the terms of the BSD 3-Clause License.
+The DigitalRise Engine is licensed under the terms of the BSD 3-Clause License.
 Portions of the code are based on third-party projects which are licensed under
 their respective licenses (see below).
 
@@ -6,7 +6,7 @@ their respective licenses (see below).
 BSD 3-Clause License
 ====================
 
-Copyright (c) 2007-2016, DigitalRune GmbH
+Copyright (c) 2007-2016, DigitalRise GmbH
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

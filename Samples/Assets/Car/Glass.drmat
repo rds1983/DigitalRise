@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- This file was generated automatically by the DigitalRune Model Content Processor. -->
+<!-- This file was generated automatically by the DigitalRise Model Content Processor. -->
 
 <Material>
   <Pass Name="Default" Effect="BasicEffect" Profile="Any">
@@ -11,7 +11,7 @@
     <Parameter Name="SpecularPower" Value="16" />
     <Parameter Name="VertexColorEnabled" Value="False" />
   </Pass>
-  <Pass Name="AlphaBlend" Effect="DigitalRune/Materials/Forward" Profile="HiDef">
+  <Pass Name="AlphaBlend" Effect="DigitalRise/Materials/Forward" Profile="HiDef">
     <Parameter Name="Alpha" Value="0.8" />
     <Parameter Name="DiffuseColor" Value="0.05,0.05,0.05" />
     <Parameter Name="EmissiveColor" Value="0,0,0" />

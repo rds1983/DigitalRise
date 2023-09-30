@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

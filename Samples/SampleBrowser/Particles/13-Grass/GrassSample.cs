@@ -1,6 +1,6 @@
-﻿using DigitalRune.Diagnostics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Particles;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Particles;
 using Microsoft.Xna.Framework;
 
 
@@ -8,7 +8,7 @@ namespace Samples.Particles
 {
   [Sample(SampleCategory.Particles,
     @"This sample uses a particle system to draw grass.",
-    @"(Note: This sample demonstrates capabilities of DigitalRune Particles. But in a real game, 
+    @"(Note: This sample demonstrates capabilities of DigitalRise Particles. But in a real game, 
 grass is not created using generic particle systems. Specialized GPU-based grass effects are 
 much faster.)",
     13)]

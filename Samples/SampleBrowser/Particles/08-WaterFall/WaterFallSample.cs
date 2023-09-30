@@ -1,9 +1,9 @@
-﻿using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
 using Microsoft.Xna.Framework;
 
 

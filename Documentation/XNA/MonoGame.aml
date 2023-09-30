@@ -41,7 +41,7 @@
                 </para>
                 <alert class="note">
                     <para>
-                        When the DigitalRune Engine user documentation or class library reference refers to
+                        When the DigitalRise Engine user documentation or class library reference refers to
                         "XNA", it usually refers to both XNA and MonoGame. Many parts of the documentation were
                         written before MonoGame support was added - or before MonoGame even existed.
                     </para>
@@ -49,10 +49,10 @@
             </content>
             <sections>
                 <section address="Repository">
-                    <title>DigitalRune MonoGame repository</title>
+                    <title>DigitalRise MonoGame repository</title>
                     <content>
                         <para>
-                            DigitalRune libraries are built against a forked version of MonoGame. The source
+                            DigitalRise libraries are built against a forked version of MonoGame. The source
                             code repository is publicly available here: <token>DRMGRepository</token>
                         </para>
                     </content>

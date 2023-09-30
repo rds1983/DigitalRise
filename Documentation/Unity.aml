@@ -16,7 +16,7 @@
                         <linkUri>http://unity3d.com/</linkUri>
                     </externalLink>
                     is a game development system which supports Mono (with limitations).
-                    Special builds of the DigitalRune assemblies for use with Unity are available.
+                    Special builds of the DigitalRise assemblies for use with Unity are available.
                 </para>
             </content>
         </section>
@@ -26,23 +26,23 @@
             <title>Limitations</title>
             <content>
                 <para>
-                    The DigitalRune Engine for Unity has the following limitations:
+                    The DigitalRise Engine for Unity has the following limitations:
                 </para>
                 <list class="bullet">
                     <listItem>
                         The XNA-dependent libraries are not available for Unity. These are:
                         <list class="bullet">
                             <listItem>
-                                DigitalRune Game UI (<localUri>DigitalRune.Game.Input.dll</localUri>
-                                and <localUri>DigitalRune.Game.UI.dll</localUri>) and
+                                DigitalRise Game UI (<localUri>DigitalRise.Game.Input.dll</localUri>
+                                and <localUri>DigitalRise.Game.UI.dll</localUri>) and
                             </listItem>
                             <listItem>
-                                DigitalRune Graphics (<localUri>DigitalRune.Graphics.dll</localUri>).
+                                DigitalRise Graphics (<localUri>DigitalRise.Graphics.dll</localUri>).
                             </listItem>
                         </list>
                     </listItem>
                     <listItem>
-                        The assembly <localUri>DigitalRune.ServiceLocation.dll</localUri> is not available.
+                        The assembly <localUri>DigitalRise.ServiceLocation.dll</localUri> is not available.
                         If you need a Unity build of this DLL, let us know.
                     </listItem>
                     <listItem>
@@ -86,7 +86,7 @@
                     </listItem>
                 </list>
                 <para>
-                    Apart from the above mentioned limitations, the Unity build of the DigitalRune Engine is a
+                    Apart from the above mentioned limitations, the Unity build of the DigitalRise Engine is a
                     normal .NET 3.5 build which can be used in .NET/Mono applications. For example, you can
                     use the same assembly in your Unity game client and in a .NET/Mono game server.
                 </para>

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

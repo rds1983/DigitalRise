@@ -1,12 +1,12 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.Tests
+namespace DigitalRise.Graphics.Tests
 {
   [TestFixture]
   public class PerspectiveProjectionTest

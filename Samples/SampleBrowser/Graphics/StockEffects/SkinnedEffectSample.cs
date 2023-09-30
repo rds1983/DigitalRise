@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -40,11 +40,11 @@ for a sky dome.",
       _sky.Name = "Sky.png"; // Always set a name - very useful for debugging!
       GraphicsScreen.Scene.Children.Add(_sky);
 
-      // Load the skinned model. This model is processed using the DigitalRune Model 
+      // Load the skinned model. This model is processed using the DigitalRise Model 
       // Processor - not the default XNA model processor!
       // In the folder that contains dude.fbx, there are several XML files (*.drmdl and *.drmat) 
       // which define the materials of the model. These material description files are 
-      // automatically processed by the DigitalRune Model Processor. Please browse 
+      // automatically processed by the DigitalRise Model Processor. Please browse 
       // to the content folder and have a look at the *.drmdl and *.drmat files.
       var dudeModel = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       dudeModel = dudeModel.Clone();
@@ -71,7 +71,7 @@ for a sky dome.",
         }
       */
 
-      // The DigitalRune Model Processor also loads animations.
+      // The DigitalRise Model Processor also loads animations.
       // Start the first animation of the dude and let it loop forever.
       // (We keep the animation controller to be able to stop the animation in 
       // Dispose() below.)

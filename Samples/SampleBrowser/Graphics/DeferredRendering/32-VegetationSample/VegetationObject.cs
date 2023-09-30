@@ -1,12 +1,12 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Game;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Game;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;

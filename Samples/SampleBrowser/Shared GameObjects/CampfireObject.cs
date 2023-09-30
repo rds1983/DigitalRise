@@ -1,14 +1,14 @@
 ﻿using System;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -143,10 +143,10 @@ namespace Samples
     }
 
 
-    // Check out the ParticleSample ("Samples/DigitalRune.Particles/ParticleSample")
-    // to learn more about DigitalRune Particles. Also, make sure to read the class 
+    // Check out the ParticleSample ("Samples/DigitalRise.Particles/ParticleSample")
+    // to learn more about DigitalRise Particles. Also, make sure to read the class 
     // documentation of the ParticleSystemNode. The documentation describes all particle 
-    // parameters that are supported by DigitalRune Graphics!
+    // parameters that are supported by DigitalRise Graphics!
     private ParticleSystem CreateFire()
     {
 			var graphicsService = _services.GetInstance<IGraphicsService>();
@@ -248,7 +248,7 @@ namespace Samples
 
       ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Color).DefaultValue = new Vector3F(5, 5, 5);
 
-      // DigitalRune Graphics supports a "Texture" parameter of type Texture2D or 
+      // DigitalRise Graphics supports a "Texture" parameter of type Texture2D or 
       // PackedTexture. The texture "FireParticles.tga" is a tile set, which can be 
       // described using a PackedTexture.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
@@ -424,7 +424,7 @@ namespace Samples
         FadeOutEnd = 1.0f,
       });
 
-      // DigitalRune Graphics supports a "Texture" parameter of type Texture2D or 
+      // DigitalRise Graphics supports a "Texture" parameter of type Texture2D or 
       // PackedTexture. The texture "Smoke2.png" contains a tile set, which can be 
       // described using the PackedTexture class.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =

@@ -1,11 +1,11 @@
 using System;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Collisions.Tests
+namespace DigitalRise.Geometry.Collisions.Tests
 {
   [TestFixture]
   public class CollisionDetectionBroadPhaseTest

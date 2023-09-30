@@ -1,8 +1,8 @@
 ﻿#if false
 
 using System.Linq;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +12,7 @@ namespace Samples.Graphics
   [Sample(SampleCategory.Graphics,
     @"This sample shows that you can still use the XNA features, like the XNA model class, to do 
 the rendering.",
-    @"This sample uses the DigitalRune CameraNode controlled by the Player component to view an 
+    @"This sample uses the DigitalRise CameraNode controlled by the Player component to view an 
 XNA model (imported using the XNA model processor).",
     3)]
   public class XnaModelSample : Sample
@@ -60,7 +60,7 @@ XNA model (imported using the XNA model processor).",
       graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
 
       // Draw XNA model (as usual in XNA) with the view and projection matrix of 
-      // the DigitalRune CameraNode.
+      // the DigitalRise CameraNode.
       var world = Matrix.CreateFromYawPitchRoll(0.5f, 0.3f, 0) * Matrix.CreateTranslation(0, 1.5f, 0);
       CameraNode cameraNode = _cameraObject.CameraNode;
       Matrix view = (Matrix)cameraNode.View;

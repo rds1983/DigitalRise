@@ -9,9 +9,9 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
-#include "../../Source/DigitalRune.Graphics/EffectsSource/Encoding.fxh"
-#include "../../Source/DigitalRune.Graphics/EffectsSource/Deferred.fxh"
+#include "../../Source/DigitalRise.Graphics/EffectsSource/Common.fxh"
+#include "../../Source/DigitalRise.Graphics/EffectsSource/Encoding.fxh"
+#include "../../Source/DigitalRise.Graphics/EffectsSource/Deferred.fxh"
 
 
 //-----------------------------------------------------------------------------

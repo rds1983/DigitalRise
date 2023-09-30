@@ -16,7 +16,7 @@
                     <title>Terrain rendering</title>
                     <content>
                         <para>
-                            DigitalRune Graphics now includes support for large-scale, tile-based terrains
+                            DigitalRise Graphics now includes support for large-scale, tile-based terrains
                             using height fields. The terrain system is designed to cover anything from
                             small game worlds up to large terrain databases.
                         </para>
@@ -91,9 +91,9 @@
                     <content>
                         <para>
                             The license requirements for the Unity game engine have been relaxed: Previously, a
-                            DigitalRune Engine Professional license was required to use the DigitalRune libraries
+                            DigitalRise Engine Professional license was required to use the DigitalRise libraries
                             in Unity. From now on Indie and Professional licenses work with Unity. (If you own
-                            a DigitalRune Indie license: You can use your existing DigitalRune license key in
+                            a DigitalRise Indie license: You can use your existing DigitalRise license key in
                             the Unity project.)
                         </para>
                     </content>
@@ -103,7 +103,7 @@
                     <title>Importing DRMDL files</title>
                     <content>
                         <para>
-                            When importing a model for use in the DigitalRune Engine, two files are required:
+                            When importing a model for use in the DigitalRise Engine, two files are required:
                             The model (e.g. the FBX file) and the model description (the DRMDL file). The model
                             description is an XML file that contains preprocessing settings and references the
                             material to be used.
@@ -143,41 +143,41 @@
                                 NEW: Microsoft.Practices.ServiceLocation.dll updated from version 1.2 to 1.3.
                             </listItem>
                             <listItem>
-                                NEW: DigitalRune libraries built for Unity game engine can now be used with Indie licenses. (Previously a Professional license was required.)
+                                NEW: DigitalRise libraries built for Unity game engine can now be used with Indie licenses. (Previously a Professional license was required.)
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Base">
-                    <title>DigitalRune Base 1.18</title>
+                    <title>DigitalRise Base 1.18</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Collections.NamedObjectCollection`1</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Collections.NamedObjectCollection`1</codeEntityReference>
                                 now raises
-                                <codeEntityReference qualifyHint="false">E:DigitalRune.Collections.NamedObjectCollection`1.CollectionChanged</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">E:DigitalRise.Collections.NamedObjectCollection`1.CollectionChanged</codeEntityReference>
                                 events.
                             </listItem>
                             <listItem>
                                 NEW: Methods
-                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Collections.NamedObjectCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})</codeEntityReference>
+                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Collections.NamedObjectCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})</codeEntityReference>
                                 and
-                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Collections.NamedObjectCollection`1.RemoveRange(System.Int32,System.Int32)</codeEntityReference>
+                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Collections.NamedObjectCollection`1.RemoveRange(System.Int32,System.Int32)</codeEntityReference>
                                 added to
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Collections.NamedObjectCollection`1</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Collections.NamedObjectCollection`1</codeEntityReference>
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Collections.NotifyingCollection`1.RemoveItem(System.Int32)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Collections.NotifyingCollection`1.RemoveItem(System.Int32)</codeEntityReference>
                                 is not called when calling
-                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Collections.NotifyingCollection`1.RemoveRange(System.Int32,System.Int32)</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Collections.NotifyingCollection`1.RemoveRange(System.Int32,System.Int32)</codeEntityReference>.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Mathematics">
-                    <title>DigitalRune Mathematics 1.13.1</title>
+                    <title>DigitalRise Mathematics 1.13.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -187,55 +187,55 @@
                     </content>
                 </section>
                 <section address="Geometry">
-                    <title>DigitalRune Geometry 1.18</title>
+                    <title>DigitalRise Geometry 1.18</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 <para>
                                     NEW:
-                                    <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.HeightField</codeEntityReference>
+                                    <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.HeightField</codeEntityReference>
                                     now uses a 1-dimensional array. See new height field properties:
-                                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.Samples</codeEntityReference>,
-                                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.NumberOfSamplesX</codeEntityReference>,
-                                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.NumberOfSamplesZ</codeEntityReference>.
+                                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.Samples</codeEntityReference>,
+                                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.NumberOfSamplesX</codeEntityReference>,
+                                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.NumberOfSamplesZ</codeEntityReference>.
                                 </para>
                                 <para>
-                                    <codeEntityReference qualifyHint="true">P:DigitalRune.Geometry.Shapes.HeightField.Array</codeEntityReference>
+                                    <codeEntityReference qualifyHint="true">P:DigitalRise.Geometry.Shapes.HeightField.Array</codeEntityReference>
                                     (<codeInline>float[,]</codeInline>) is obsolete. Instead, the height field data should
                                     be set using a 1-dimensional array.
                                     Please note: The property
-                                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.Array</codeEntityReference>
+                                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.Array</codeEntityReference>
                                     can still be used - but don't forget to call
-                                    <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Geometry.Shapes.HeightField.Invalidate</codeEntityReference>
+                                    <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Geometry.Shapes.HeightField.Invalidate</codeEntityReference>
                                     if the data in
-                                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.Array</codeEntityReference>
+                                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.Array</codeEntityReference>
                                     is changed after the
-                                    <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.HeightField</codeEntityReference>
+                                    <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.HeightField</codeEntityReference>
                                     was created.
                                 </para>
                             </listItem>
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.HeightField</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.HeightField</codeEntityReference>
                                 can have a local origin (see
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.OriginX</codeEntityReference>,
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.HeightField.OriginZ</codeEntityReference>).
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.OriginX</codeEntityReference>,
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.HeightField.OriginZ</codeEntityReference>).
                             </listItem>
                             <listItem>
                                 NEW: Support for holes in height fields (using NaN values in the height array).
                             </listItem>
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Geometry.GeometryHelper.MergeDuplicatePositions(System.Collections.Generic.IList{DigitalRune.Mathematics.Algebra.Vector3F},System.Single)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Geometry.GeometryHelper.MergeDuplicatePositions(System.Collections.Generic.IList{DigitalRise.Mathematics.Algebra.Vector3F},System.Single)</codeEntityReference>
                                 added.
                             </listItem>
                             <listItem>
                                 FIX: Cloned
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.ConeShape</codeEntityReference>s
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.ConeShape</codeEntityReference>s
                                 had correct
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.ConeShape.Radius</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.ConeShape.Radius</codeEntityReference>
                                 and
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Shapes.ConeShape.Height</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Shapes.ConeShape.Height</codeEntityReference>
                                 but derived properties (e.g. AABB) were incorrect.
                             </listItem>
                             <listItem>
@@ -245,19 +245,19 @@
                     </content>
                 </section>
                 <section address="Particles">
-                    <title>DigitalRune Particles 1.4.1</title>
+                    <title>DigitalRise Particles 1.4.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 FIX: Particle systems with reference frame
-                                <codeEntityReference qualifyHint="false">F:DigitalRune.Particles.ParticleReferenceFrame.World</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">F:DigitalRise.Particles.ParticleReferenceFrame.World</codeEntityReference>
                                 should not be scaled when the particle system node has a scale.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Graphics">
-                    <title>DigitalRune Graphics 1.0</title>
+                    <title>DigitalRise Graphics 1.0</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -265,7 +265,7 @@
                             </listItem>
                             <listItem>
                                 NEW: Method overload
-                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Graphics.SceneGraph.ScatteringSkyNode.GetFogColor(System.Int32,System.Single)</codeEntityReference>
+                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Graphics.SceneGraph.ScatteringSkyNode.GetFogColor(System.Int32,System.Single)</codeEntityReference>
                                 with elevation angle parameter added.
                             </listItem>
                             <listItem>
@@ -276,39 +276,39 @@
                                 NEW: Added support for adding .drmdl files directly to content project.
                             </listItem>
                             <listItem>
-                                NEW: The DigitalRune model processor now runs vertex cache optimizations on the meshes - a feature previously missing in MonoGame.
+                                NEW: The DigitalRise model processor now runs vertex cache optimizations on the meshes - a feature previously missing in MonoGame.
                             </listItem>
                             <listItem>
-                                NEW: DigitalRune texture processor supports new surface formats, which have been added to
+                                NEW: DigitalRise texture processor supports new surface formats, which have been added to
                                 the MonoGame content pipeline: PVRTC1 2bpp/4bpp for iOS, ETC1 for Android
                             </listItem>
                             <listItem>
                                 NEW: Property
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.RenderContext.Object</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.RenderContext.Object</codeEntityReference>
                                 added. (Stores current data object during rendering.)
                             </listItem>
                             <listItem>
-                                NEW: Effect parameter semantics <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.Effects.DefaultEffectParameterSemantics.NaN</codeEntityReference>
-                                and <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.LodCameraPosition</codeEntityReference>
+                                NEW: Effect parameter semantics <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.Effects.DefaultEffectParameterSemantics.NaN</codeEntityReference>
+                                and <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.LodCameraPosition</codeEntityReference>
                                 added.
                             </listItem>
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.GraphicsHelper.RasterizerStateCullClockwise</codeEntityReference>,
-                                <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.GraphicsHelper.RasterizerStateCullCounterClockwise</codeEntityReference>,
-                                <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.GraphicsHelper.RasterizerStateCullNone</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.GraphicsHelper.RasterizerStateCullClockwise</codeEntityReference>,
+                                <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.GraphicsHelper.RasterizerStateCullCounterClockwise</codeEntityReference>,
+                                <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.GraphicsHelper.RasterizerStateCullNone</codeEntityReference>
                                 added. Identical to built-in rasterizer states in XNA, except that
                                 <legacyBold>MultiSampleAntiAliasing</legacyBold>
                                 is set to false, which improves line rendering when MSAA is disabled.
-                                <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.GraphicsHelper.RasterizerStateWireFrame</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.GraphicsHelper.RasterizerStateWireFrame</codeEntityReference>
                                 now also sets
                                 <legacyBold>MultiSampleAntiAliasing</legacyBold> = false.
                                 The
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.DebugRenderer</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.DebugRenderer</codeEntityReference>
                                 uses the new rasterizer states to produce cleaner lines.
                             </listItem>
                             <listItem>
-                                NEW: Method <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.NoiseHelper.GetNoiseTexture(DigitalRune.Graphics.IGraphicsService,System.Int32,System.Int32)</codeEntityReference>
+                                NEW: Method <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.NoiseHelper.GetNoiseTexture(DigitalRise.Graphics.IGraphicsService,System.Int32,System.Int32)</codeEntityReference>
                                 added.
                             </listItem>
                             <listItem>
@@ -320,14 +320,14 @@
                             <listItem>
                                 CHANGE: Improved height fog rendering. If height fog was combined with distance fog and camera was
                                 in a low position, the skybox could get fogged ignoring the fog distance values
-                                (<codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Fog.Start</codeEntityReference>,
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Fog.End</codeEntityReference>).
+                                (<codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Fog.Start</codeEntityReference>,
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Fog.End</codeEntityReference>).
                             </listItem>
                             <listItem>
                                 CHANGE: Improved normal and tangent frame calculations.
                             </listItem>
                             <listItem>
-                                CHANGE: DigitalRune texture processor automatically resizes textures to power-of-two or
+                                CHANGE: DigitalRise texture processor automatically resizes textures to power-of-two or
                                 multiple-of-four, if required by the output format.
                             </listItem>
                             <listItem>
@@ -336,9 +336,9 @@
                             </listItem>
                             <listItem>
                                 REMOVE:
-                                <codeEntityReference qualifyHint="true">F:DigitalRune.Graphics.RenderContextKeys.Shadow</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">F:DigitalRise.Graphics.RenderContextKeys.Shadow</codeEntityReference>
                                 is now marked as obsolete. The current shadow map can be found in
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.RenderContext.Object</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.RenderContext.Object</codeEntityReference>
                                 when the shadow map is being rendered.
                             </listItem>
                             <listItem>
@@ -348,7 +348,7 @@
                                 FIX: Bounding shape of
                                 ParticleSystemNode
                                 needs to ignore scale if the reference frame is
-                                <codeEntityReference qualifyHint="false">F:DigitalRune.Particles.ParticleReferenceFrame.World</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">F:DigitalRise.Particles.ParticleReferenceFrame.World</codeEntityReference>.
                             </listItem>
                             <listItem>
                                 FIX: AMD DX9 graphics driver crash on Win8.1 caused by cloud layer.
@@ -362,9 +362,9 @@
                             </listItem>
                             <listItem>
                                 FIX: No
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.OceanWaves</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.OceanWaves</codeEntityReference>
                                 were rendered if
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.OceanWaves.EnableCpuQueries</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.OceanWaves.EnableCpuQueries</codeEntityReference>
                                 was false.
                             </listItem>
                             <listItem>
@@ -374,21 +374,21 @@
                     </content>
                 </section>
                 <section address="Game">
-                    <title>DigitalRune Game 1.3</title>
+                    <title>DigitalRise Game 1.3</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Game.GameObjectCollection</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Game.GameObjectCollection</codeEntityReference>
                                 now raises
-                                <codeEntityReference qualifyHint="false">E:DigitalRune.Collections.NamedObjectCollection`1.CollectionChanged</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">E:DigitalRise.Collections.NamedObjectCollection`1.CollectionChanged</codeEntityReference>
                                 events.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="GameUI">
-                    <title>DigitalRune Game UI 1.6.1</title>
+                    <title>DigitalRise Game UI 1.6.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -427,7 +427,7 @@
                             </listItem>
                             <listItem>
                                 CHANGE: Removed use of obsolete property
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Geometry.Shapes.HeightField.Array</codeEntityReference>.
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Geometry.Shapes.HeightField.Array</codeEntityReference>.
                             </listItem>
                             <listItem>
                                 FIX: Minor fixes in parallax occlusion mapping sample.

@@ -1,12 +1,12 @@
 using System;
 using System.Diagnostics;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Shapes.Tests
+namespace DigitalRise.Geometry.Shapes.Tests
 {
   [TestFixture]
   public class TriangleMeshShapeTest

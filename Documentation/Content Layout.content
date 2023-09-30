@@ -19,7 +19,7 @@
     </Topic>
     <Topic id="972bde71-5d0c-46be-8a81-ad0d2cea770a" visible="True" title="Files, Folders and Dependencies" />
     <Topic id="4d7ccf95-54e8-4b4c-950f-9420947b4e24" visible="True">
-      <Topic id="6ce9b230-eed2-419d-92df-3e3e4a03d27e" visible="True" title="Tutorial 01: Adding DigitalRune Engine to an XNA Game">
+      <Topic id="6ce9b230-eed2-419d-92df-3e3e4a03d27e" visible="True" title="Tutorial 01: Adding DigitalRise Engine to an XNA Game">
         <Topic id="8befb151-f7b6-4884-936b-530458b13860" visible="True" title="Step 1: Setup" />
         <Topic id="25418622-e634-4741-8d17-efc9fb44fba7" visible="True" title="Step 2: Empty game" />
         <Topic id="0c04e065-a5fb-4045-bc09-7cce47c63d4e" visible="True" title="Step 3: Input service" />
@@ -34,7 +34,7 @@
         <Topic id="aa0a6f8f-d355-4188-9d4a-7041160411d1" visible="True" title="Step 12: Particles" />
         <Topic id="c060be3d-f85f-4551-838c-6969ab45b0b4" visible="True" title="Step 13: Sky box" />
         <Topic id="68c9f201-aa9c-4b7f-bf96-a57893faddfe" visible="True" title="Step 14: Post-processing" />
-        <Topic id="b035aaae-87fb-48c6-86de-e30024ec9a89" visible="True" title="Step 15: Add DigitalRune Graphics content" />
+        <Topic id="b035aaae-87fb-48c6-86de-e30024ec9a89" visible="True" title="Step 15: Add DigitalRise Graphics content" />
         <Topic id="77f82858-2022-41f9-9325-9a4d97b5450d" visible="True" title="Step 16: GUI" />
         <Topic id="7f0f5338-019d-4ef1-a579-3d99df4e1aa2" visible="True" title="Step 17: Deferred lighting" />
       </Topic>
@@ -44,7 +44,7 @@
     <Topic id="0628de0a-7540-4ada-afe1-b1b2e58a9992" visible="True" title="Miscellaneous" linkText="Miscellaneous" />
     <Topic id="a84f32c0-ea2c-473e-9b5c-4afa4fcecb58" visible="True" title="Additional Documentation and Support" />
   </Topic>
-  <Topic id="dc44c3a5-8545-4253-9da1-62258a00607c" visible="True" title="DigitalRune Base Library">
+  <Topic id="dc44c3a5-8545-4253-9da1-62258a00607c" visible="True" title="DigitalRise Base Library">
     <Topic id="09d39ddf-c826-4943-aac8-2ef9e16e5a12" visible="True" title="Parallel Tasks (Multithreading)" />
     <Topic id="9e2a4144-69e9-4bf2-8cea-79713eb91490" visible="True" title="Resource Pooling" />
     <Topic id="ce7bca46-717a-4dfb-a154-acb6ee1e8ad9" visible="True" title="Service Location and Inversion of Control" />
@@ -54,28 +54,28 @@
     </Topic>
     <Topic id="120bed13-f23b-4774-bae7-d64d410d2122" visible="True" title="Storage and Virtual File Systems" />
     <Topic id="3b7ea45b-f13c-49b3-961b-42899323a477" visible="True" title="&quot;How To&quot; Articles">
-      <Topic id="8710717f-74c1-449a-aae7-c7c22c53b159" visible="True" title="How To: Add DigitalRune Helper Library to a Project" />
+      <Topic id="8710717f-74c1-449a-aae7-c7c22c53b159" visible="True" title="How To: Add DigitalRise Helper Library to a Project" />
       <Topic id="ea2eddc5-2628-4671-83cd-33fe38daaf4e" visible="True" title="How To: Enable Resource Pooling for an Object" />
     </Topic>
-    <Topic id="dba0bb78-681c-4dd0-b84b-91ce08eeea36" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRune Base Library">
-      <Topic id="07dbfc7c-92ba-46f1-8d9a-ac49c9c329ae" visible="True" title="DigitalRune" linkText="Class Diagram of Namespace DigitalRune" />
-      <Topic id="45989b47-1f4f-4d0b-84f7-a5d83c77c3bf" visible="True" title="DigitalRune.Animation" linkText="Class Diagram of Namespace DigitalRune.Animation" />
-      <Topic id="afee9bdd-f755-42d4-a503-7bc334a673be" visible="True" title="DigitalRune.Collections" linkText="Class Diagram of Namespace DigitalRune.Collections" />
-      <Topic id="772410ac-99fa-4ded-8ace-21cb02fc22d1" visible="True" title="DigitalRune.Diagnostics" linkText="Class Diagram of Namespace DigitalRune.Diagnostics" />
-      <Topic id="cc9d26bc-94b7-4aa7-b237-b71ec0455dcf" visible="True" title="DigitalRune.Linq" linkText="Class Diagram of Namespace DigitalRune.Linq" />
-      <Topic id="85b7befd-e321-485d-ad0e-a17885155313" visible="True" title="DigitalRune.Mathematics" linkText="Class Diagram of Namespace DigitalRune.Mathematics" />
-      <Topic id="85fc7850-fc3d-4999-8ba5-142e67b13319" visible="True" title="DigitalRune.Storages" linkText="Class Diagram of Namespace DigitalRune.Storages" />
-      <Topic id="7a6f821d-f0b7-4d61-9716-a8ad6832d402" visible="True" title="DigitalRune.Text" linkText="Class Diagram of Namespace DigitalRune.Text" />
-      <Topic id="0b0d990a-31c0-43d5-8408-5abdebbea073" visible="True" title="DigitalRune.Threading" linkText="Class Diagram of Namespace DigitalRune.Threading" />
-      <Topic id="edfc1164-d7a6-4b77-9ffa-5e5f43ac0163" visible="True" title="DigitalRune.Undo" linkText="Class Diagram of Namespace DigitalRune.Undo" />
+    <Topic id="dba0bb78-681c-4dd0-b84b-91ce08eeea36" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRise Base Library">
+      <Topic id="07dbfc7c-92ba-46f1-8d9a-ac49c9c329ae" visible="True" title="DigitalRise" linkText="Class Diagram of Namespace DigitalRise" />
+      <Topic id="45989b47-1f4f-4d0b-84f7-a5d83c77c3bf" visible="True" title="DigitalRise.Animation" linkText="Class Diagram of Namespace DigitalRise.Animation" />
+      <Topic id="afee9bdd-f755-42d4-a503-7bc334a673be" visible="True" title="DigitalRise.Collections" linkText="Class Diagram of Namespace DigitalRise.Collections" />
+      <Topic id="772410ac-99fa-4ded-8ace-21cb02fc22d1" visible="True" title="DigitalRise.Diagnostics" linkText="Class Diagram of Namespace DigitalRise.Diagnostics" />
+      <Topic id="cc9d26bc-94b7-4aa7-b237-b71ec0455dcf" visible="True" title="DigitalRise.Linq" linkText="Class Diagram of Namespace DigitalRise.Linq" />
+      <Topic id="85b7befd-e321-485d-ad0e-a17885155313" visible="True" title="DigitalRise.Mathematics" linkText="Class Diagram of Namespace DigitalRise.Mathematics" />
+      <Topic id="85fc7850-fc3d-4999-8ba5-142e67b13319" visible="True" title="DigitalRise.Storages" linkText="Class Diagram of Namespace DigitalRise.Storages" />
+      <Topic id="7a6f821d-f0b7-4d61-9716-a8ad6832d402" visible="True" title="DigitalRise.Text" linkText="Class Diagram of Namespace DigitalRise.Text" />
+      <Topic id="0b0d990a-31c0-43d5-8408-5abdebbea073" visible="True" title="DigitalRise.Threading" linkText="Class Diagram of Namespace DigitalRise.Threading" />
+      <Topic id="edfc1164-d7a6-4b77-9ffa-5e5f43ac0163" visible="True" title="DigitalRise.Undo" linkText="Class Diagram of Namespace DigitalRise.Undo" />
     </Topic>
   </Topic>
-  <Topic id="2ac58586-0d4f-4625-bf4c-fc32591a5304" visible="True" title="DigitalRune Mathematics">
+  <Topic id="2ac58586-0d4f-4625-bf4c-fc32591a5304" visible="True" title="DigitalRise Mathematics">
     <Topic id="384f6645-8a25-488c-9a08-47662266a552" visible="True" title="Definitions and Conventions" />
     <Topic id="8c6f4ed6-3d35-4c23-9f64-aa823200e78b" visible="True" title="Statistics and Distributions" />
     <Topic id="9310f251-0432-4588-bf95-8d9c854c99ee" visible="True" title="XNA Framework Support" />
     <Topic id="1f324567-e502-496a-a1ca-bdc232611133" visible="True" title="Articles">
-      <Topic id="dcccdb1a-a354-46e0-a792-6d866b751a77" visible="True" title="How To: Add DigitalRune Mathematics to a Project" />
+      <Topic id="dcccdb1a-a354-46e0-a792-6d866b751a77" visible="True" title="How To: Add DigitalRise Mathematics to a Project" />
       <Topic id="492d3089-3c0f-43a5-b068-417fcd8f91e3" visible="True" title="How To: Compare Floating-Point Numbers" />
       <Topic id="e3ea796c-f78d-4a57-8cb4-cb065513c928" visible="True" title="How To: Use Vectors, Matrices and Quaternions" />
       <Topic id="f2ee69ec-0e54-4acd-a9e7-bd645644a05d" visible="True" title="How To: Solve a Non-Linear Equation" />
@@ -83,17 +83,17 @@
       <Topic id="81cd4f27-5ce5-4439-9a6c-121f2942f175" visible="True" title="Exponential Smoothing Filter" />
       <Topic id="69aba1e3-d818-4c9d-9696-a5978ea88f84" visible="True" title="Scattered Interpolation" />
     </Topic>
-    <Topic id="ae58c8d2-5792-4560-9c28-93e8db73f059" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune.Mathematics">
-      <Topic id="df437fa4-7a6c-48d1-b83d-4d8585f39873" visible="True" title="DigitalRune.Mathematics" linkText="Class Diagram of Namespace DigitalRune.Mathematics" />
-      <Topic id="2d4a16e1-70ab-4323-9c0b-9a8fc8862841" visible="True" title="DigitalRune.Mathematics.Algebra" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Algebra" />
-      <Topic id="9b01e8f7-0f4a-4d7d-b1c0-aaf1e8fff434" visible="True" title="DigitalRune.Mathematics.Algebra.Design" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Algebra.Design" />
-      <Topic id="fa0b1c3c-595d-436c-b914-dc1fc4bf0fa1" visible="True" title="DigitalRune.Mathematics.Analysis" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Analysis" />
-      <Topic id="d7286918-1e78-49af-a7c0-0fd25cd37c25" visible="True" title="DigitalRune.Mathematics.Content" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Content" />
-      <Topic id="fea00d10-ec4a-4db9-a981-df4c680bf542" visible="True" title="DigitalRune.Mathematics.Interpolation" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Interpolation" />
-      <Topic id="e865e15d-ac62-49e9-b67c-1f64d45c76d5" visible="True" title="DigitalRune.Mathematics.Statistics" linkText="Class Diagram of Namespace DigitalRune.Mathematics.Statistics" />
+    <Topic id="ae58c8d2-5792-4560-9c28-93e8db73f059" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise.Mathematics">
+      <Topic id="df437fa4-7a6c-48d1-b83d-4d8585f39873" visible="True" title="DigitalRise.Mathematics" linkText="Class Diagram of Namespace DigitalRise.Mathematics" />
+      <Topic id="2d4a16e1-70ab-4323-9c0b-9a8fc8862841" visible="True" title="DigitalRise.Mathematics.Algebra" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Algebra" />
+      <Topic id="9b01e8f7-0f4a-4d7d-b1c0-aaf1e8fff434" visible="True" title="DigitalRise.Mathematics.Algebra.Design" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Algebra.Design" />
+      <Topic id="fa0b1c3c-595d-436c-b914-dc1fc4bf0fa1" visible="True" title="DigitalRise.Mathematics.Analysis" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Analysis" />
+      <Topic id="d7286918-1e78-49af-a7c0-0fd25cd37c25" visible="True" title="DigitalRise.Mathematics.Content" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Content" />
+      <Topic id="fea00d10-ec4a-4db9-a981-df4c680bf542" visible="True" title="DigitalRise.Mathematics.Interpolation" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Interpolation" />
+      <Topic id="e865e15d-ac62-49e9-b67c-1f64d45c76d5" visible="True" title="DigitalRise.Mathematics.Statistics" linkText="Class Diagram of Namespace DigitalRise.Mathematics.Statistics" />
     </Topic>
   </Topic>
-  <Topic id="335dc86a-c68d-4d7b-8641-81dd80de5e76" visible="True" title="DigitalRune Geometry">
+  <Topic id="335dc86a-c68d-4d7b-8641-81dd80de5e76" visible="True" title="DigitalRise Geometry">
     <Topic id="1510119e-5c7c-4ebc-851d-684976c1fb29" visible="True" />
     <Topic id="7945ac67-dffc-4197-9fbf-58a9b68c0ea1" visible="True" title="Definitions and Conventions" />
     <Topic id="d995ee69-0650-4993-babd-1cdb1fd8fd7a" visible="True" title="Pose (Position and Orientation)" />
@@ -106,7 +106,7 @@
     <Topic id="4a3324b2-fc11-41bf-bb16-1e8ab644f1c4" visible="True" title="Resource Pooling" />
     <Topic id="7af0a749-83f9-437b-88fc-56f70c0c6dd2" visible="True" title="XNA Framework Support" />
     <Topic id="76e11a96-42a4-495c-b8f8-6164a67d05d5" visible="True" title="Articles">
-      <Topic id="833445f6-4042-40e7-a489-0b6ed790428c" visible="True" title="How To: Add DigitalRune Geometry to a Project" />
+      <Topic id="833445f6-4042-40e7-a489-0b6ed790428c" visible="True" title="How To: Add DigitalRise Geometry to a Project" />
       <Topic id="9a927200-8841-4c76-94bc-29c5633c5d38" visible="True" title="How To: Compute World and View Matrix using Pose" />
       <Topic id="23a00744-a02d-4830-9104-5b978cf74882" visible="True" title="How To: Compute the Minimal Distance of Objects" />
       <Topic id="20035425-d861-43db-91c2-a4b4d30cbc16" visible="True" title="How To: Compute Contacts between Objects" />
@@ -116,16 +116,16 @@
       <Topic id="ab8276b7-a27e-43f3-8c23-4b7be065ff91" visible="True" title="External Articles" />
     </Topic>
     <Topic id="e32cab3b-cc7c-42ee-8ec9-23dd4467edd0" visible="True" />
-    <Topic id="3cbb67a9-77ff-44cd-be2a-618e0a2d89df" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune.Geometry">
-      <Topic id="d22b1398-60bd-43a8-ac6e-b74375b11433" visible="True" title="DigitalRune.Geometry" linkText="Class Diagram of Namespace DigitalRune.Geometry" />
-      <Topic id="1320df22-cb15-41ba-8c20-0c1d914d6d73" visible="True" title="DigitalRune.Geometry.Collisions" linkText="Class Diagram of Namespace DigitalRune.Geometry.Collisions" />
-      <Topic id="cbb42b9f-0524-4b69-b402-eaa0beb0f0a9" visible="True" title="DigitalRune.Geometry.Collisions.Algorithms" linkText="Class Diagram of Namespace DigitalRune.Geometry.Collisions.Algorithms" />
-      <Topic id="bf39588d-53d8-4800-803b-a356b5a93447" visible="True" title="DigitalRune.Geometry.Meshes" linkText="Class Diagram of Namespace DigitalRune.Geometry.Meshes" />
-      <Topic id="032d766d-8446-472f-9547-06463dfb59d6" visible="True" title="DigitalRune.Geometry.Partitioning" linkText="Class Diagram of Namespace DigitalRune.Geometry.Partitioning" />
-      <Topic id="639ca389-0db9-4ab0-86ee-676062d26b9a" visible="True" title="DigitalRune.Geometry.Shapes" linkText="Class Diagram of Namespace DigitalRune.Geometry.Shapes" />
+    <Topic id="3cbb67a9-77ff-44cd-be2a-618e0a2d89df" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise.Geometry">
+      <Topic id="d22b1398-60bd-43a8-ac6e-b74375b11433" visible="True" title="DigitalRise.Geometry" linkText="Class Diagram of Namespace DigitalRise.Geometry" />
+      <Topic id="1320df22-cb15-41ba-8c20-0c1d914d6d73" visible="True" title="DigitalRise.Geometry.Collisions" linkText="Class Diagram of Namespace DigitalRise.Geometry.Collisions" />
+      <Topic id="cbb42b9f-0524-4b69-b402-eaa0beb0f0a9" visible="True" title="DigitalRise.Geometry.Collisions.Algorithms" linkText="Class Diagram of Namespace DigitalRise.Geometry.Collisions.Algorithms" />
+      <Topic id="bf39588d-53d8-4800-803b-a356b5a93447" visible="True" title="DigitalRise.Geometry.Meshes" linkText="Class Diagram of Namespace DigitalRise.Geometry.Meshes" />
+      <Topic id="032d766d-8446-472f-9547-06463dfb59d6" visible="True" title="DigitalRise.Geometry.Partitioning" linkText="Class Diagram of Namespace DigitalRise.Geometry.Partitioning" />
+      <Topic id="639ca389-0db9-4ab0-86ee-676062d26b9a" visible="True" title="DigitalRise.Geometry.Shapes" linkText="Class Diagram of Namespace DigitalRise.Geometry.Shapes" />
     </Topic>
   </Topic>
-  <Topic id="79a8677d-9460-4118-b27b-cef353dfbd92" visible="True" title="DigitalRune Physics">
+  <Topic id="79a8677d-9460-4118-b27b-cef353dfbd92" visible="True" title="DigitalRise Physics">
     <Topic id="6e0b9a08-b1d8-41a3-9ab4-ebf6235abe19" visible="True" title="Definitions and Conventions" />
     <Topic id="258f6a2c-e513-40c6-ab5b-848d130dc3b0" visible="True" title="Rigid Bodies" />
     <Topic id="bc000d5a-cac9-49f1-9a18-a26b17faa8e9" visible="True" title="The Simulation" />
@@ -152,7 +152,7 @@
       <Topic id="bf6f855b-d3b3-49c0-a341-a31f922bb4da" visible="True" title="Units and Scale" />
     </Topic>
     <Topic id="61ea0a18-fef3-4e46-be80-e146b5e00d80" visible="True" title="Articles">
-      <Topic id="3862d6f1-13c0-4ad9-8e4a-5edfa265bf8a" visible="True" title="How To: Add DigitalRune Physics to a Project" />
+      <Topic id="3862d6f1-13c0-4ad9-8e4a-5edfa265bf8a" visible="True" title="How To: Add DigitalRise Physics to a Project" />
       <Topic id="4473ac4f-06c0-4ebb-8eb5-fd6891df21b6" visible="True" title="How To: Setup and Run a Simulation" />
       <Topic id="920ac165-5f26-4bf1-a1b7-d0ecb308b14c" visible="True" title="How To: Create a Composite Rigid Body" />
       <Topic id="660bd2ec-5313-4d7b-8431-388e3ae6fc9d" visible="True" title="How To: Visualize Ragdoll Joints" />
@@ -161,21 +161,21 @@
       <Topic id="5406f8ea-ffac-480c-9e98-ee3fa8eb741b" visible="True" title="External Articles" />
     </Topic>
     <Topic id="c12eca22-95ea-48f4-95ee-91239af553fc" visible="True" title="FAQ" linkText="FAQ" />
-    <Topic id="3734bae3-9f7f-4154-b120-4adfa4fc53e5" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune.Physics">
-      <Topic id="ce636fc5-0315-407e-b329-9df7b5ae9709" visible="True" title="DigitalRune.Physics" linkText="Class Diagram of Namespace DigitalRune.Physics" />
-      <Topic id="f154d656-3ad3-4a96-b013-546a85c73e0c" visible="True" title="DigitalRune.Physics.Constraints" linkText="Class Diagram of Namespace DigitalRune.Physics.Constraints" />
-      <Topic id="949c8038-6118-4a54-9767-1011c281f439" visible="True" title="DigitalRune.Physics.ForceEffects" linkText="Class Diagram of Namespace DigitalRune.Physics.ForceEffects" />
-      <Topic id="3c3e93d4-349e-44ac-8c3d-179f3fbe3c42" visible="True" title="DigitalRune.Physics.Materials" linkText="Class Diagram of Namespace DigitalRune.Physics.Material" />
-      <Topic id="370297cf-88c8-4214-ba8a-471fa3533e7b" visible="True" title="DigitalRune.Physics.Settings" linkText="Class Diagram of Namespace DigitalRune.Physics.Settings" />
-      <Topic id="b62fc619-45aa-42fe-b838-05650d8813a2" visible="True" title="DigitalRune.Physics.Specialized" linkText="Class Diagram of Namespace DigitalRune.Physics.Specialized" />
+    <Topic id="3734bae3-9f7f-4154-b120-4adfa4fc53e5" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise.Physics">
+      <Topic id="ce636fc5-0315-407e-b329-9df7b5ae9709" visible="True" title="DigitalRise.Physics" linkText="Class Diagram of Namespace DigitalRise.Physics" />
+      <Topic id="f154d656-3ad3-4a96-b013-546a85c73e0c" visible="True" title="DigitalRise.Physics.Constraints" linkText="Class Diagram of Namespace DigitalRise.Physics.Constraints" />
+      <Topic id="949c8038-6118-4a54-9767-1011c281f439" visible="True" title="DigitalRise.Physics.ForceEffects" linkText="Class Diagram of Namespace DigitalRise.Physics.ForceEffects" />
+      <Topic id="3c3e93d4-349e-44ac-8c3d-179f3fbe3c42" visible="True" title="DigitalRise.Physics.Materials" linkText="Class Diagram of Namespace DigitalRise.Physics.Material" />
+      <Topic id="370297cf-88c8-4214-ba8a-471fa3533e7b" visible="True" title="DigitalRise.Physics.Settings" linkText="Class Diagram of Namespace DigitalRise.Physics.Settings" />
+      <Topic id="b62fc619-45aa-42fe-b838-05650d8813a2" visible="True" title="DigitalRise.Physics.Specialized" linkText="Class Diagram of Namespace DigitalRise.Physics.Specialized" />
     </Topic>
   </Topic>
-  <Topic id="5044112e-c86d-4d85-87d0-b567a0361c21" visible="True" title="DigitalRune Particles">
+  <Topic id="5044112e-c86d-4d85-87d0-b567a0361c21" visible="True" title="DigitalRise Particles">
     <Topic id="6f2fd7a2-0d47-4a6d-a833-14b1fe62e0a9" visible="True" title="Design Notes" />
     <Topic id="7fffe522-a53c-4944-979f-8646dc41ac9a" visible="True" title="Particle Systems, Parameters and Effectors" />
     <Topic id="678bfb4e-070d-4322-80d6-3367d6fdec68" visible="True" />
     <Topic id="25e7a7a0-265e-4c12-9e41-be23852b39cf" visible="True" title="&quot;How To&quot; Articles">
-      <Topic id="60bdbd87-fecb-42e2-bdf3-3966602bb9a5" visible="True" title="How To: Add DigitalRune Particles to a Project" />
+      <Topic id="60bdbd87-fecb-42e2-bdf3-3966602bb9a5" visible="True" title="How To: Add DigitalRise Particles to a Project" />
       <Topic id="2deefa98-6d2a-4ada-a51d-95a2625849df" visible="True" title="How To: Create a Simple Particle Effect" />
       <Topic id="2e27afb1-6482-4f56-9497-ca903aef3c9f" visible="True" title="How To: Create a Particle Effector" />
       <Topic id="5b005b7b-e103-4da2-8d18-cddce0a5bea7" visible="True" title="How To: Create a Particle Emitter" />
@@ -183,12 +183,12 @@
       <Topic id="f9e9b1f3-4850-437f-aa2b-a6b4c236f196" visible="True" title="How To: Clamp a Particle Parameter" />
     </Topic>
     <Topic id="b113ef19-247b-4731-b704-1f4855dccfc0" visible="True" />
-    <Topic id="ab3315a0-7863-4311-abb5-b0ae31198a06" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune.Particles">
-      <Topic id="268c44a8-5e73-42a2-9da6-5c438143b7bf" visible="True" title="DigitalRune.Particles" linkText="Class Diagram of Namespace DigitalRune.Particles" />
-      <Topic id="df1a2ce9-b95b-427f-8d2c-69d9ddba1757" visible="True" title="DigitalRune.Particles.Effectors" linkText="Class Diagram of Namespace DigitalRune.Particles.Effectors" />
+    <Topic id="ab3315a0-7863-4311-abb5-b0ae31198a06" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise.Particles">
+      <Topic id="268c44a8-5e73-42a2-9da6-5c438143b7bf" visible="True" title="DigitalRise.Particles" linkText="Class Diagram of Namespace DigitalRise.Particles" />
+      <Topic id="df1a2ce9-b95b-427f-8d2c-69d9ddba1757" visible="True" title="DigitalRise.Particles.Effectors" linkText="Class Diagram of Namespace DigitalRise.Particles.Effectors" />
     </Topic>
   </Topic>
-  <Topic id="c2892dfd-491e-4e78-83d1-737e38f1acc9" visible="True" title="DigitalRune Animation">
+  <Topic id="c2892dfd-491e-4e78-83d1-737e38f1acc9" visible="True" title="DigitalRise Animation">
     <Topic id="4c3588bf-0b84-4a29-8261-1dec48594c66" visible="True" title="Animation Manager" />
     <Topic id="126b4c8b-7f0a-4530-9e6b-081703fb74dd" visible="True" title="Animatable Objects and Properties" />
     <Topic id="aa0975de-0777-4a65-bee0-1bfed7d87b3e" visible="True" title="Animating Objects and Properties" />
@@ -205,22 +205,22 @@
       <Topic id="70b9ddd0-4356-45ac-8915-1af42a62ee08" visible="True" title="Xbox LIVE Avatars" />
     </Topic>
     <Topic id="751c362c-34c2-497e-a36e-75af009f37ef" visible="True" title="Articles">
-      <Topic id="ad0977be-89c4-4233-b570-8d7e97f9fe87" visible="True" title="How To: Add DigitalRune Animation to a Project" />
+      <Topic id="ad0977be-89c4-4233-b570-8d7e97f9fe87" visible="True" title="How To: Add DigitalRise Animation to a Project" />
       <Topic id="ecded02d-1df8-43e5-9987-e840bbd4ae00" visible="True" title="How To: Play a Cyclic Animation" />
       <Topic id="53f0e8b9-91cc-4d19-ad2d-3413341c27a0" visible="True" title="How To: Immediately Apply an Animation Value" />
       <Topic id="9d913b4f-ba42-4d64-bb24-c96b97878829" visible="True" title="How To: Blend Between Walk and Run Animation" />
       <Topic id="b3b57add-09d0-4033-b5b8-35831ca22f73" visible="True" title="External Articles" />
     </Topic>
     <Topic id="5bfb585d-77b4-4faa-b04c-1b626e09cddf" visible="True" />
-    <Topic id="e3af2ccd-53d2-4eb6-bbf9-648449e0666f" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRune Animation Library">
-      <Topic id="3ed63a78-8de3-41a6-a405-d113f1ebd308" visible="True" title="DigitalRune.Animation" linkText="Class Diagrams of Namespace DigitalRune.Animation" />
-      <Topic id="3fe7d23e-dade-4c27-96ad-0c917f6ad8a4" visible="True" title="DigitalRune.Animation.Character" linkText="Class Diagrams of Namespace DigitalRune.Animation.Character" />
-      <Topic id="91b2a789-dd56-476c-8a1b-4cb82192f9ba" visible="True" title="DigitalRune.Animation.Easing" linkText="Class Diagrams of Namespace DigitalRune.Animation.Easing" />
-      <Topic id="7df54f44-5600-4b4d-8d87-225b9b663f53" visible="True" title="DigitalRune.Animation.Traits" linkText="Class Diagrams of Namespace DigitalRune.Animation.Traits" />
-      <Topic id="86c6a779-4366-4219-b4ae-f0c963095d35" visible="True" title="DigitalRune.Animation.Transitions" linkText="Class Diagrams of Namespace DigitalRune.Animation.Transitions" />
+    <Topic id="e3af2ccd-53d2-4eb6-bbf9-648449e0666f" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRise Animation Library">
+      <Topic id="3ed63a78-8de3-41a6-a405-d113f1ebd308" visible="True" title="DigitalRise.Animation" linkText="Class Diagrams of Namespace DigitalRise.Animation" />
+      <Topic id="3fe7d23e-dade-4c27-96ad-0c917f6ad8a4" visible="True" title="DigitalRise.Animation.Character" linkText="Class Diagrams of Namespace DigitalRise.Animation.Character" />
+      <Topic id="91b2a789-dd56-476c-8a1b-4cb82192f9ba" visible="True" title="DigitalRise.Animation.Easing" linkText="Class Diagrams of Namespace DigitalRise.Animation.Easing" />
+      <Topic id="7df54f44-5600-4b4d-8d87-225b9b663f53" visible="True" title="DigitalRise.Animation.Traits" linkText="Class Diagrams of Namespace DigitalRise.Animation.Traits" />
+      <Topic id="86c6a779-4366-4219-b4ae-f0c963095d35" visible="True" title="DigitalRise.Animation.Transitions" linkText="Class Diagrams of Namespace DigitalRise.Animation.Transitions" />
     </Topic>
   </Topic>
-  <Topic id="0a8eb9ca-74ae-4746-9289-93d909b07e22" visible="True" isExpanded="true" title="DigitalRune Graphics">
+  <Topic id="0a8eb9ca-74ae-4746-9289-93d909b07e22" visible="True" isExpanded="true" title="DigitalRise Graphics">
     <Topic id="9604b781-8adb-4ec6-87bd-85b805e9c036" visible="True" isExpanded="true" title="Asset Creation">
       <Topic id="92ee2e92-0fc3-4928-b144-460b8e6d4fb7" visible="True" title="Building Content" />
       <Topic id="2631164b-0b8b-47b2-9cda-f7923d7518f4" visible="True" title="Pre-Built Content" />
@@ -292,7 +292,7 @@
       <Topic id="4e6f5dc1-8897-466f-88f2-b5c56d43a3c5" visible="True" title="Miscellaneous" />
     </Topic>
     <Topic id="a7a376fe-d747-4c66-ad76-2bc95232af85" visible="True" title="Articles">
-      <Topic id="a089a32a-ee98-4490-8a3c-9df6beb0b1c1" visible="True" title="How To: Add DigitalRune Graphics to a Project" />
+      <Topic id="a089a32a-ee98-4490-8a3c-9df6beb0b1c1" visible="True" title="How To: Add DigitalRise Graphics to a Project" />
       <Topic id="578746ac-7e3c-42b5-b9c9-6900714c966e" visible="True" title="How To: Add a Custom Scene Node" />
       <Topic id="66ba3eee-84a2-4ff2-935f-77b0afa44a89" visible="True" title="How To: Change Effect Parameter Bindings" />
       <Topic id="c2b20686-df99-4d21-b5b6-fd7d58a5f407" visible="True" title="How To: Add Support for New Effect Parameters" />
@@ -304,17 +304,17 @@
       <Topic id="fa431d48-b457-4c70-a590-d44b0840ab1e" visible="True" title="Screen-Door Transparency" />
     </Topic>
     <Topic id="014ef916-0699-4c01-942a-1093db3ef311" visible="True" />
-    <Topic id="4c81587d-2692-4e4c-a5f7-bd08f83ba2af" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune.Graphics">
-      <Topic id="f5db3c7a-bb2b-4a33-9298-b6c516aac66f" visible="True" title="DigitalRune.Graphics" linkText="Class Diagrams of Namespace DigitalRune.Graphics" />
-      <Topic id="f94b5aa8-bf99-4014-8b91-44cf506ccc74" visible="True" title="DigitalRune.Graphics.Effects" linkText="Class Diagrams of Namespace DigitalRune.Graphics.Effects" />
-      <Topic id="dbb7a3df-70ec-4156-90f6-1251fca6d59d" visible="True" title="DigitalRune.Graphics.Interop" linkText="Class Diagrams of Namespace DigitalRune.Graphics.Interop" />
-      <Topic id="85b5f396-3872-4d0a-a1a8-21af22637f1d" visible="True" title="DigitalRune.Graphics.PostProcessing" linkText="Class Diagrams of Namespace DigitalRune.Graphics.PostProcessing" />
-      <Topic id="5c90e44e-c552-41f4-ac42-78900020ac8b" visible="True" title="DigitalRune.Graphics.Rendering" linkText="Class Diagrams of Namespace DigitalRune.Graphics.Rendering" />
-      <Topic id="f12018b9-8c92-40f7-b5b6-d26fd754e83b" visible="True" title="DigitalRune.Graphics.SceneGraph" linkText="Class Diagrams of Namespace DigitalRune.Graphics.SceneGraph" />
-      <Topic id="c76cf808-cef8-4d1c-a6bb-2956984ac567" visible="True" title="DigitalRune.Storages" linkText="Class Diagrams of Namespace DigitalRune.Storages" />
+    <Topic id="4c81587d-2692-4e4c-a5f7-bd08f83ba2af" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise.Graphics">
+      <Topic id="f5db3c7a-bb2b-4a33-9298-b6c516aac66f" visible="True" title="DigitalRise.Graphics" linkText="Class Diagrams of Namespace DigitalRise.Graphics" />
+      <Topic id="f94b5aa8-bf99-4014-8b91-44cf506ccc74" visible="True" title="DigitalRise.Graphics.Effects" linkText="Class Diagrams of Namespace DigitalRise.Graphics.Effects" />
+      <Topic id="dbb7a3df-70ec-4156-90f6-1251fca6d59d" visible="True" title="DigitalRise.Graphics.Interop" linkText="Class Diagrams of Namespace DigitalRise.Graphics.Interop" />
+      <Topic id="85b5f396-3872-4d0a-a1a8-21af22637f1d" visible="True" title="DigitalRise.Graphics.PostProcessing" linkText="Class Diagrams of Namespace DigitalRise.Graphics.PostProcessing" />
+      <Topic id="5c90e44e-c552-41f4-ac42-78900020ac8b" visible="True" title="DigitalRise.Graphics.Rendering" linkText="Class Diagrams of Namespace DigitalRise.Graphics.Rendering" />
+      <Topic id="f12018b9-8c92-40f7-b5b6-d26fd754e83b" visible="True" title="DigitalRise.Graphics.SceneGraph" linkText="Class Diagrams of Namespace DigitalRise.Graphics.SceneGraph" />
+      <Topic id="c76cf808-cef8-4d1c-a6bb-2956984ac567" visible="True" title="DigitalRise.Storages" linkText="Class Diagrams of Namespace DigitalRise.Storages" />
     </Topic>
   </Topic>
-  <Topic id="fe8ccefb-7bce-4290-be56-81bd38ba86fe" visible="True" title="DigitalRune Game">
+  <Topic id="fe8ccefb-7bce-4290-be56-81bd38ba86fe" visible="True" title="DigitalRise Game">
     <Topic id="309293e8-f2d6-4308-8c85-3f4726f92244" visible="True">
       <Topic id="fda7b77e-2d84-46d6-a082-175b4308a1af" visible="True" />
       <Topic id="bae21eb9-66c2-422c-95ce-992e873a4774" visible="True" />
@@ -322,13 +322,13 @@
       <Topic id="9d38663a-2ce9-48c5-b9a8-0a07326e0290" visible="True" />
       <Topic id="be9dad32-1e3f-4361-9cbe-9874e2225049" visible="True" />
     </Topic>
-    <Topic id="a1e205ef-5707-4481-bf29-6824e12b2930" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRune Game">
-      <Topic id="bfb9e518-a032-4ca3-ae46-840ba2cc11d5" visible="True" title="DigitalRune.Game" linkText="Class Diagrams of Namespace DigitalRune.Game" />
-      <Topic id="3e1175e9-3760-417e-9ca7-3157619d2a04" visible="True" title="DigitalRune.Game.States" linkText="Class Diagrams of Namespace DigitalRune.Game.States" />
-      <Topic id="e8f058a1-48bc-4934-9ff5-9efa430a1ff6" visible="True" title="DigitalRune.Game.Timing" linkText="Class Diagrams of Namespace DigitalRune.Game.Timing" />
+    <Topic id="a1e205ef-5707-4481-bf29-6824e12b2930" visible="True" title="Class Diagrams" linkText="Class Diagrams for the DigitalRise Game">
+      <Topic id="bfb9e518-a032-4ca3-ae46-840ba2cc11d5" visible="True" title="DigitalRise.Game" linkText="Class Diagrams of Namespace DigitalRise.Game" />
+      <Topic id="3e1175e9-3760-417e-9ca7-3157619d2a04" visible="True" title="DigitalRise.Game.States" linkText="Class Diagrams of Namespace DigitalRise.Game.States" />
+      <Topic id="e8f058a1-48bc-4934-9ff5-9efa430a1ff6" visible="True" title="DigitalRise.Game.Timing" linkText="Class Diagrams of Namespace DigitalRise.Game.Timing" />
     </Topic>
   </Topic>
-  <Topic id="a5a463da-de2e-432f-bf7d-07206aaca634" visible="True" title="DigitalRune Game UI">
+  <Topic id="a5a463da-de2e-432f-bf7d-07206aaca634" visible="True" title="DigitalRise Game UI">
     <Topic id="450784f4-d741-4447-809a-527f5c902c98" visible="True" title="Input Handling" />
     <Topic id="5bf85e1f-8f25-4778-b4b1-9d29faf15cc9" visible="True" title="UI Controls">
       <Topic id="2c10bf58-571a-4d67-b763-0f6b584c9bce" visible="True" title="Control Properties and Events" />
@@ -341,12 +341,12 @@
       <Topic id="c60c8f53-9e87-4c8d-9c7f-534f3ecf6ec5" visible="False" title="External Articles" />
     </Topic>
     <Topic id="6643e7a7-230b-43a8-ab8e-ec47a1613cbd" visible="True" />
-    <Topic id="6be1c3d5-e842-4dec-81d8-5fce19a76345" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRune Game UI">
-      <Topic id="726991b1-4bbc-4d45-a9c7-e422a5e4f65d" visible="True" title="DigitalRune.Game.Input" linkText="Class Diagrams of Namespace DigitalRune.Game.Input" />
-      <Topic id="c057e126-2e19-47c7-80c4-d3fcc8855e03" visible="True" title="DigitalRune.Game.UI" linkText="Class Diagrams of Namespace DigitalRune.Game.UI" />
-      <Topic id="8b4ee9e1-45ed-45c9-ad19-a71a64b97ec4" visible="True" title="DigitalRune.Game.UI.Consoles" linkText="Class Diagrams of Namespace DigitalRune.Game.UI.Consoles" />
-      <Topic id="d76398b8-1d16-4762-9441-3ae2c25ef911" visible="True" title="DigitalRune.Game.UI.Controls" linkText="Class Diagrams of Namespace DigitalRune.Game.UI.Controls" />
-      <Topic id="47436b5e-30f9-45e3-9a1e-2b6a842ca45f" visible="True" title="DigitalRune.Game.UI.Rendering" linkText="Class Diagrams of Namespace DigitalRune.Game.UI.Rendering" />
+    <Topic id="6be1c3d5-e842-4dec-81d8-5fce19a76345" visible="True" title="Class Diagrams" linkText="Class Diagrams for DigitalRise Game UI">
+      <Topic id="726991b1-4bbc-4d45-a9c7-e422a5e4f65d" visible="True" title="DigitalRise.Game.Input" linkText="Class Diagrams of Namespace DigitalRise.Game.Input" />
+      <Topic id="c057e126-2e19-47c7-80c4-d3fcc8855e03" visible="True" title="DigitalRise.Game.UI" linkText="Class Diagrams of Namespace DigitalRise.Game.UI" />
+      <Topic id="8b4ee9e1-45ed-45c9-ad19-a71a64b97ec4" visible="True" title="DigitalRise.Game.UI.Consoles" linkText="Class Diagrams of Namespace DigitalRise.Game.UI.Consoles" />
+      <Topic id="d76398b8-1d16-4762-9441-3ae2c25ef911" visible="True" title="DigitalRise.Game.UI.Controls" linkText="Class Diagrams of Namespace DigitalRise.Game.UI.Controls" />
+      <Topic id="47436b5e-30f9-45e3-9a1e-2b6a842ca45f" visible="True" title="DigitalRise.Game.UI.Rendering" linkText="Class Diagrams of Namespace DigitalRise.Game.UI.Rendering" />
     </Topic>
   </Topic>
   <Topic id="4c75f4b9-0771-4cff-b95b-dbb2f8b49619" visible="True" title="XNA and MonoGame">
@@ -361,7 +361,7 @@
   </Topic>
   <Topic id="d82e6561-0857-4f31-bd2a-6678c311dca4" visible="True">
     <Topic id="38879706-9d39-4f03-838f-26b7f14b9878" visible="True" title="3D Math Conventions" />
-    <Topic id="a1ed955a-5ac6-411c-a098-14f34845b1bf" visible="True" title="Multithreading in the DigitalRune Engine" />
+    <Topic id="a1ed955a-5ac6-411c-a098-14f34845b1bf" visible="True" title="Multithreading in the DigitalRise Engine" />
     <Topic id="2a9138d6-d003-4df7-9793-1c3a018aa652" visible="True" title="Service Provider Pattern">
       <Topic id="619b1341-c6a1-4c59-b33d-cc1f799402dc" visible="True" title="The Service Provider Pattern for Games" />
       <Topic id="9b4a54b5-1c1a-481b-961b-492e9ee6b5fa" visible="True" title="Service Provider Implementation" />

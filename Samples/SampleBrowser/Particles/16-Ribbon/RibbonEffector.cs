@@ -1,6 +1,6 @@
 ﻿using System;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
 
 
 namespace Samples.Particles

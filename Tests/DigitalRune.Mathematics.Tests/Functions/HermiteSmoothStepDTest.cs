@@ -1,8 +1,8 @@
-﻿using DigitalRune.Mathematics.Interpolation;
+﻿using DigitalRise.Mathematics.Interpolation;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Functions.Tests
+namespace DigitalRise.Mathematics.Functions.Tests
 {
   [TestFixture]
   public class HermiteSmoothStepDTest

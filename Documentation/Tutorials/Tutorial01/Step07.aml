@@ -74,10 +74,10 @@
 
 
         <section address="ContentPipeline">
-            <title>Add DigitalRune content pipeline assemblies</title>
+            <title>Add DigitalRise content pipeline assemblies</title>
             <content>
                 <para>
-                    DigitalRune provides several content pipeline assemblies which contain new content
+                    DigitalRise provides several content pipeline assemblies which contain new content
                     processors. We have to add these to the the content project:
                 </para>
                 <list class="ordered">
@@ -90,7 +90,7 @@
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\References\XNA\Windows]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\References\XNA\Windows]]>
                                 </localUri>
                             </listItem>
                         </list>
@@ -112,7 +112,7 @@
                 <list class="nobullet">
                     <listItem>
                         <localUri>
-                            <![CDATA[<DigitalRune Engine Folder>\References\XNA\Windows]]>
+                            <![CDATA[<DigitalRise Engine Folder>\References\XNA\Windows]]>
                         </localUri>
                     </listItem>
                 </list>
@@ -125,7 +125,7 @@
                 <list class="nobullet">
                     <listItem>
                         <localUri>
-                            <![CDATA[<DigitalRune Engine Folder>\References\XNA\Xbox]]>
+                            <![CDATA[<DigitalRise Engine Folder>\References\XNA\Xbox]]>
                         </localUri>
                     </listItem>
                 </list>
@@ -138,7 +138,7 @@
             <content>
                 <para>
                     Per default, all content of the content project uses the XNA content processors.
-                    However, DigitalRune Graphics uses a more advanced model processor:
+                    However, DigitalRise Graphics uses a more advanced model processor:
                 </para>
                 <list class="ordered">
                     <listItem>
@@ -146,7 +146,7 @@
                         the <ui>Properties</ui> window.
                     </listItem>
                     <listItem>
-                        Set the content processor to <localUri>Model - DigitalRune Graphics</localUri>.
+                        Set the content processor to <localUri>Model - DigitalRise Graphics</localUri>.
                         (If you cannot find this content processor, build the solution in its current state and try again.)
                         <mediaLink>
                             <image xlink:href="Tutorial-01-13"/>

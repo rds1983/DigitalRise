@@ -1,6 +1,6 @@
-﻿using DigitalRune.Diagnostics;
-using DigitalRune.Game.Input;
-using DigitalRune.Graphics.SceneGraph;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.Game.Input;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -38,7 +38,7 @@ and this does not look good.",
       _brownOut.IsDepthSorted = !(InputService.IsDown(MouseButtons.Left) || InputService.IsDown(Buttons.RightTrigger, LogicalPlayerIndex.One));
       if (wasDepthSorted != _brownOut.IsDepthSorted)
       {
-        // DigitalRune Graphics caches states like IsDepthSorted. To delete the cached data,
+        // DigitalRise Graphics caches states like IsDepthSorted. To delete the cached data,
         // we can delete the current ParticleSystem.RenderData.
         _brownOut.RenderData = null;
         foreach (var child in _brownOut.Children)

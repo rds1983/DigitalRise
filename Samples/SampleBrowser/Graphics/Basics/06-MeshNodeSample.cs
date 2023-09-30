@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -15,7 +15,7 @@ namespace Samples.Graphics
   [Sample(SampleCategory.Graphics,
     @"This sample introduces Meshes, Materials, MeshNodes and Models.",
     @"A model is a tree of SceneNodes. Models are usually processed by the content pipeline (using 
-the DigitalRune Model Processor) and loaded using XNA's ContentManager. Models can contain 
+the DigitalRise Model Processor) and loaded using XNA's ContentManager. Models can contain 
 various types of scene nodes - but in most cases they contain mesh nodes. A MeshNode is used 
 to assign position, orientation and scale to the Mesh. A Mesh is a collection of Submeshes 
 and Materials. A Mesh itself does not have a position - it only defines the vertex/index 
@@ -25,7 +25,7 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
   {
     private readonly CameraObject _cameraObject;
 
-    // A DigitalRune model.
+    // A DigitalRise model.
     private readonly ModelNode _model;
 
     // A renderer which can render meshes (MeshNodes).
@@ -52,11 +52,11 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
       // effect bindings.
       //EffectBinding.KeepOpaqueData = true;
 
-      // Load a model. The model is processed using the DigitalRune Model Processor - not 
+      // Load a model. The model is processed using the DigitalRise Model Processor - not 
       // the default XNA model processor!
       // In the folder that contains tank.fbx, there is an XML file tank.drmdl which defines 
       // properties of the model. These XML files are automatically processed by the 
-      // DigitalRune Model Processor. 
+      // DigitalRise Model Processor. 
       // Each model itself is a tree of scene nodes. The grid model contains one mesh 
       // node. The tank model contains several mesh nodes (turret, cannon, hatch, 
       // wheels, ...).

@@ -1,5 +1,5 @@
 ﻿#if !ANDROID && !IOS   // Cannot read from vertex buffer in MonoGame/OpenGLES.
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Physics.ForceEffects;
 
 
 namespace Samples.Physics.Specialized

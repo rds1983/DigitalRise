@@ -1,15 +1,15 @@
 #if !WP7 && !WP8
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
-using DigitalRune.ServiceLocation;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
+using DigitalRise.ServiceLocation;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

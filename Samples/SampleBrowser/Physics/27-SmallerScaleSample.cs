@@ -1,9 +1,9 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 
 
 namespace Samples.Physics
@@ -22,7 +22,7 @@ different scale.",
       // These default settings are useful for standard game objects: crates, barrels, furniture, 
       // humans, rocks, etc. 
       // The simulation settings should be adapted if the average game object is more than 10 times
-      // bigger or smaller. (Note: Future versions of DigitalRune.Physics will automatically 
+      // bigger or smaller. (Note: Future versions of DigitalRise.Physics will automatically 
       // adapt the simulation settings.)
       // If you are unsure which settings are relevant for your game scenario, just ask in our
       // support forums: http://www.digitalrune.com/Support/Forum.aspx

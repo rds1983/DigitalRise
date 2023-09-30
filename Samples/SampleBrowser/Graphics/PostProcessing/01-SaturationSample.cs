@@ -1,6 +1,6 @@
 ﻿using System;
-using DigitalRune.Game.Input;
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise.Game.Input;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

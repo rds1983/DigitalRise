@@ -1,11 +1,11 @@
 ﻿using System;
-using DigitalRune.Animation.Character;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Traits.Tests
+namespace DigitalRise.Animation.Traits.Tests
 {
   [TestFixture]
   public class SrtTransformTraitsTest

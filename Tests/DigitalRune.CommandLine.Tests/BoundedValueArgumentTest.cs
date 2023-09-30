@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 
 
-namespace DigitalRune.CommandLine.Tests
+namespace DigitalRise.CommandLine.Tests
 {
     [TestFixture]
     public class BoundedValueArgumentTest

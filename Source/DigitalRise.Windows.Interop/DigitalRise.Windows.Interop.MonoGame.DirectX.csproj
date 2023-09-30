@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <PackageId>DigitalRise.Windows.Interop.MonoGame.DirectX</PackageId>
+    <AssemblyName>DigitalRise.Windows.Interop</AssemblyName>
+    <RootNamespace>DigitalRise.Windows.Interop</RootNamespace>
+    <Description>DigitalRise.Windows.Interop for MonoGame.DirectX</Description>
+    <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
+    <OutputPath>bin\MonoGame.DirectX\$(Configuration)</OutputPath>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>	
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Graphics\DigitalRise.Graphics.MonoGame.DirectX.csproj" />
+  </ItemGroup>
+</Project>

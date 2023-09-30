@@ -1,14 +1,14 @@
 ﻿#if XBOX
 using System;
-using DigitalRune;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Character;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Character;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Input;
@@ -17,7 +17,7 @@ namespace Samples.Animation
 {
   [Sample(SampleCategory.Animation,
     @"This sample shows how to wrap the XNA AvatarAnimation class to use the animations with
-the DigitalRune Animation system.",
+the DigitalRise Animation system.",
     @"",
     102)]
   [Controls(@"Sample

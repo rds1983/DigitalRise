@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune.Animation.Character;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class AnimationHelperTest

@@ -4,7 +4,7 @@
 //using NUnit.Framework;
 
 
-//namespace DigitalRune.ServiceLocation.Tests
+//namespace DigitalRise.ServiceLocation.Tests
 //{
 //  // These unit tests do not make much sense. They are only here to get a test coverage of 100% in NCover.
 //  [TestFixture]

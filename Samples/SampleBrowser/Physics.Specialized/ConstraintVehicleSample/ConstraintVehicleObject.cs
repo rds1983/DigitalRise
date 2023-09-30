@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.Materials;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.Materials;
+using DigitalRise.Physics.Specialized;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
 
 namespace Samples.Physics.Specialized
@@ -115,7 +115,7 @@ namespace Samples.Physics.Specialized
       var chassisShape = new ConvexPolyhedron(convexHull.Vertices.Select(v => v.Position));
 
       // (Note: Building convex hulls and convex polyhedra are time-consuming. To save loading time 
-      // we should build the shape in the XNA content pipeline. See other DigitalRune Physics 
+      // we should build the shape in the XNA content pipeline. See other DigitalRise Physics 
       // Samples.)
 
       // The mass properties of the car. We use a mass of 800 kg.

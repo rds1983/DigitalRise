@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Plane = DigitalRune.Geometry.Shapes.Plane;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 
 namespace Samples.Graphics
@@ -256,7 +256,7 @@ namespace Samples.Graphics
       float lz = lightPosition.Z;
       float lw = lightPosition.W;
 
-      // Note: XNA matrix layout, not DigitalRune layout.
+      // Note: XNA matrix layout, not DigitalRise layout.
       Matrix shadowMatrix = new Matrix(
         b * ly + c * lz + d * lw, -a * ly, -a * lz, -a * lw,
         -b * lx, a * lx + c * lz + d * lw, -b * lz, -b * lw,

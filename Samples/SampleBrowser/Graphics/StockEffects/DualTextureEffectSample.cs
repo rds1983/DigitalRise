@@ -1,6 +1,6 @@
-﻿using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
@@ -20,11 +20,11 @@ namespace Samples.Graphics
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
       SetCamera(new Vector3F(8, 6, 8), ConstantsF.PiOver4, -0.4f);
 
-      // Load the dual-textured model. This model is processed using the DigitalRune 
+      // Load the dual-textured model. This model is processed using the DigitalRise 
       // Model Processor - not the default XNA model processor!
       // In the folder that contains model_lightmap.fbx, there are several XML files (*.drmdl and *.drmat) 
       // which define the materials of the model. These material description files are 
-      // automatically processed by the DigitalRune Model Processor. Please browse 
+      // automatically processed by the DigitalRise Model Processor. Please browse 
       // to the content folder and have a look at the *.drmdl and *.drmat files.
       // The model itself is a tree of scene nodes. This model contains several 
       // mesh nodes for the floor plane and the cubes.

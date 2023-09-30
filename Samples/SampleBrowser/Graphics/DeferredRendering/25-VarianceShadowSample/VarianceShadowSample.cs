@@ -1,13 +1,13 @@
-﻿using DigitalRune;
+﻿using DigitalRise;
 #if !WP7 && !WP8
 using System.Linq;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

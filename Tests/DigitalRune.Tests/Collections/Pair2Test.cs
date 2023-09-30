@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 #endif
 
 
-namespace DigitalRune.Collections.Tests
+namespace DigitalRise.Collections.Tests
 {
   [TestFixture]
   public class Pair2Test

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Meshes.Tests
+namespace DigitalRise.Geometry.Meshes.Tests
 {
   [TestFixture]
   public class SupportMappingSamplerTest

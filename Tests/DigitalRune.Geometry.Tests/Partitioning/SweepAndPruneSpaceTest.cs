@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using DigitalRune.Collections;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Collections;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Partitioning.Tests
+namespace DigitalRise.Geometry.Partitioning.Tests
 {
   [TestFixture]
   public class SweepAndPruneSpaceTest

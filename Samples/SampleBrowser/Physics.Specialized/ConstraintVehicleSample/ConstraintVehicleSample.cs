@@ -1,12 +1,12 @@
 ﻿#if !ANDROID && !IOS   // Cannot read from vertex buffer in MonoGame/OpenGLES.
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Physics.ForceEffects;
 
 
 namespace Samples.Physics.Specialized
 {
   [Sample(SampleCategory.PhysicsSpecialized,
     @"This sample shows how to implement vehicle physics using an alternative vehicle implementation.",
-    @"This sample contains an alternative implementation to the DigitalRune.Physics.Specialized.Vehicle
+    @"This sample contains an alternative implementation to the DigitalRise.Physics.Specialized.Vehicle
 class. This implementation uses constraints which make the car more stable - but the code is
 probably more difficult to understand and modify.",
     51)]

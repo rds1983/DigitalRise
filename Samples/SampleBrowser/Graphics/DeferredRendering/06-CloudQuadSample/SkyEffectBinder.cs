@@ -1,6 +1,6 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
 using Microsoft.Xna.Framework;
 
 

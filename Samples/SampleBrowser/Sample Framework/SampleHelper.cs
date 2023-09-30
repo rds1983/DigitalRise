@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AssetManagementBase;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.Specialized;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples
@@ -66,8 +66,8 @@ namespace Samples
     public static Mesh CreateMesh(IGraphicsService graphicsService, Shape shape,
       Vector3F diffuse, Vector3F specular, float specularPower)
     {
-      // Create a DigitalRune.Geometry.Meshes.TriangleMesh from the shape and 
-      // convert this to a DigitalRune.Graphics.Mesh.
+      // Create a DigitalRise.Geometry.Meshes.TriangleMesh from the shape and 
+      // convert this to a DigitalRise.Graphics.Mesh.
       TriangleMesh triangleMesh = shape.GetMesh(0.01f, 4);
 
       Submesh submesh = CreateSubmeshWithTexCoords(
@@ -141,7 +141,7 @@ namespace Samples
       // the EffectParameterHint Material.
       EffectBinding shadowMapEffectBinding = new EffectBinding(
         graphicsService,
-        graphicsService.GetStockEffect("DigitalRune\\Materials\\ShadowMap"),
+        graphicsService.GetStockEffect("DigitalRise\\Materials\\ShadowMap"),
         null,
         EffectParameterHint.Material);
       material.Add("ShadowMap", shadowMapEffectBinding);
@@ -149,7 +149,7 @@ namespace Samples
       // EffectBinding for the "GBuffer" pass.
       EffectBinding gBufferEffectBinding = new EffectBinding(
         graphicsService,
-        graphicsService.GetStockEffect("DigitalRune\\Materials\\GBuffer"),
+        graphicsService.GetStockEffect("DigitalRise\\Materials\\GBuffer"),
         null,
         EffectParameterHint.Material);
       gBufferEffectBinding.Set("SpecularPower", specularPower);
@@ -158,7 +158,7 @@ namespace Samples
       // EffectBinding for the "Material" pass.
       EffectBinding materialEffectBinding = new EffectBinding(
         graphicsService,
-        graphicsService.GetStockEffect("DigitalRune\\Materials\\Material"),
+        graphicsService.GetStockEffect("DigitalRise\\Materials\\Material"),
         null,
         EffectParameterHint.Material);
       materialEffectBinding.Set("DiffuseTexture", graphicsService.GetDefaultTexture2DWhite());
@@ -232,7 +232,7 @@ namespace Samples
         }
 
         // Add new vertex data.
-        // DigitalRune.Geometry uses counter-clockwise front faces. XNA uses
+        // DigitalRise.Geometry uses counter-clockwise front faces. XNA uses
         // clockwise front faces (CullMode.CullCounterClockwiseFace) per default. 
         // Therefore we change the vertex orientation of the triangles. 
         vertices[i * 3 + 0] = new VertexPositionNormalTexture((Vector3)v0, (Vector3)n0, new Vector2());

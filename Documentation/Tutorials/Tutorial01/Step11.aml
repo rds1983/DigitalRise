@@ -20,7 +20,7 @@
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Physics;                                                              // NEW
+using DigitalRise.Physics;                                                              // NEW
 …
 
 namespace MyGame
@@ -91,8 +91,8 @@ namespace MyGame
                 <code language="c#" title="GroundObject.cs">
                     <![CDATA[
 …
-using DigitalRune.Geometry.Shapes;                                              // NEW
-using DigitalRune.Physics;                                                      // NEW
+using DigitalRise.Geometry.Shapes;                                              // NEW
+using DigitalRise.Physics;                                                      // NEW
 …
 
 namespace MyGame
@@ -155,13 +155,13 @@ namespace MyGame
                 <code language="c#" title="CrateObject.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 

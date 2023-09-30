@@ -1,16 +1,16 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 

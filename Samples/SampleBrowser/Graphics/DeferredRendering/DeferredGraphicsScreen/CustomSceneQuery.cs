@@ -1,8 +1,8 @@
 ﻿#if !WP7 && !WP8
 using System.Collections.Generic;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
 
 namespace Samples
 {

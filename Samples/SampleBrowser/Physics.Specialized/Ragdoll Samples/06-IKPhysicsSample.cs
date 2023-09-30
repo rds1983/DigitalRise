@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.Specialized;
 using Microsoft.Xna.Framework;
 using Samples.Animation;
 using AssetManagementBase;

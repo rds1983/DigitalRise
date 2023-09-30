@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
 
-namespace DigitalRune.Linq.Tests
+namespace DigitalRise.Linq.Tests
 {
   [TestFixture]
   public class RxTest

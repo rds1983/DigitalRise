@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Game.Tests.GameObjects
+namespace DigitalRise.Game.Tests.GameObjects
 {
   [TestFixture]
   public class GameObjectTest

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 using static glTFLoader.Schema.Accessor;
 
-namespace DigitalRune
+namespace DigitalRise
 {
 	internal class GltfProcessor
 	{

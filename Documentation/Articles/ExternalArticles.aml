@@ -5,7 +5,7 @@
       xmlns:xlink="http://www.w3.org/1999/xlink">
 
         <introduction>
-            <para>Here is a collection of external articles about the DigitalRune Engine</para>
+            <para>Here is a collection of external articles about the DigitalRise Engine</para>
         </introduction>
 
         <!-- IMPORTANT: Keep this section in sync between the Articles parent page and the External Articles child page! -->
@@ -19,7 +19,7 @@
                         <para>
                             <externalLink>
                                 <linkText>
-                                    A basic 3ds level loader for the DigitalRune Engine (DigitalRune Forum)
+                                    A basic 3ds level loader for the DigitalRise Engine (DigitalRise Forum)
                                 </linkText>
                                 <linkUri>
                                     http://www.digitalrune.com/Forum/forumid/20/threadid/3261/scope/posts
@@ -40,7 +40,7 @@
                             <markup>
                                 <br/>
                             </markup>
-                            An article about using C# + XNA + DigitalRune to teach game development.
+                            An article about using C# + XNA + DigitalRise to teach game development.
                         </para>
                     </listItem>
                 </list>

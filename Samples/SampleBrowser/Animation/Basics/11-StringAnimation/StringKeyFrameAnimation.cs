@@ -1,5 +1,5 @@
-﻿using DigitalRune.Animation;
-using DigitalRune.Animation.Traits;
+﻿using DigitalRise.Animation;
+using DigitalRise.Animation.Traits;
 
 
 namespace Samples.Animation

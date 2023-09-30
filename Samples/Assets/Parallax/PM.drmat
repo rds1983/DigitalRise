@@ -8,7 +8,7 @@
     <Parameter Name="SpecularPower" Value="100" />
     <Texture Name="Texture" File="AgedPavement_diffuse.dds" />
   </Pass>
-  <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
+  <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
   <Pass Name="GBuffer" Effect="GBufferPm.fx" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="100" />
     <Texture Name="NormalTexture" Format="NormalInvertY" File="AgedPavement_normal.dds"/>

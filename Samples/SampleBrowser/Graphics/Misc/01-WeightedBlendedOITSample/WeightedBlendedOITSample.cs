@@ -1,7 +1,7 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Linq;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Linq;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;

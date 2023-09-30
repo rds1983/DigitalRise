@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using CurveLoopType = DigitalRune.Mathematics.Interpolation.CurveLoopType;
+using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
 
 
 namespace Samples.Physics
@@ -72,7 +72,7 @@ namespace Samples.Physics
 
     private void CreatePath()
     {
-      // Create a cyclic path. (More information on paths can be found in the DigitalRune
+      // Create a cyclic path. (More information on paths can be found in the DigitalRise
       // Mathematics documentation and related samples.)
       _path = new Path3F
       {

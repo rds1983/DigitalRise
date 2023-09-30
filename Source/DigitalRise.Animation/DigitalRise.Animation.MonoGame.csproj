@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DigitalRise.Animation.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Animation</AssemblyName>
+    <Description>DigitalRise.Animation for MonoGame</Description>
+    <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Geometry\DigitalRise.Geometry.MonoGame.csproj" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
+  </ItemGroup>
+</Project>

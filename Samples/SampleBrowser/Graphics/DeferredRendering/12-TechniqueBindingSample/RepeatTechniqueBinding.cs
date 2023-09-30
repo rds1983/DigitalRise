@@ -2,8 +2,8 @@
 // TODO: Add annotation support to MonoGame.
 
 using System;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
 using Microsoft.Xna.Framework.Graphics;
 
 

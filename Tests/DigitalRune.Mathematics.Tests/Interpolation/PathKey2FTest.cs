@@ -1,11 +1,11 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Interpolation.Tests
+namespace DigitalRise.Mathematics.Interpolation.Tests
 {
   [TestFixture]
   public class PathKey2FTest

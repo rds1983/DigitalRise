@@ -1,18 +1,18 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Linq;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Linq;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 
 namespace Samples
 {

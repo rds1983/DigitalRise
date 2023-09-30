@@ -1,16 +1,16 @@
 #if !WP7 && !WP8
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Consoles;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Consoles;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using Console = DigitalRune.Game.UI.Controls.Console;
+using Console = DigitalRise.Game.UI.Controls.Console;
 
 
 namespace Samples.Game.UI

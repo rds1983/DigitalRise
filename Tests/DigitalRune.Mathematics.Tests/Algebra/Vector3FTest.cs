@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Algebra.Tests
+namespace DigitalRise.Mathematics.Algebra.Tests
 {
   [TestFixture]
   public class Vector3FTest
@@ -643,22 +643,22 @@ namespace DigitalRune.Mathematics.Algebra.Tests
     [Test]
     public void DotProduct()
     {
-      // 0°
+      // 0ï¿½
       Assert.AreEqual(1.0, Vector3F.Dot(Vector3F.UnitX, Vector3F.UnitX));
       Assert.AreEqual(1.0, Vector3F.Dot(Vector3F.UnitY, Vector3F.UnitY));
       Assert.AreEqual(1.0, Vector3F.Dot(Vector3F.UnitZ, Vector3F.UnitZ));
 
-      // 180°
+      // 180ï¿½
       Assert.AreEqual(-1.0, Vector3F.Dot(Vector3F.UnitX, -Vector3F.UnitX));
       Assert.AreEqual(-1.0, Vector3F.Dot(Vector3F.UnitY, -Vector3F.UnitY));
       Assert.AreEqual(-1.0, Vector3F.Dot(Vector3F.UnitZ, -Vector3F.UnitZ));
 
-      // 90°
+      // 90ï¿½
       Assert.AreEqual(0.0, Vector3F.Dot(Vector3F.UnitX, Vector3F.UnitY));
       Assert.AreEqual(0.0, Vector3F.Dot(Vector3F.UnitY, Vector3F.UnitZ));
       Assert.AreEqual(0.0, Vector3F.Dot(Vector3F.UnitX, Vector3F.UnitZ));
 
-      // 45°
+      // 45ï¿½
       float angle = (float)Math.Acos(Vector3F.Dot(new Vector3F(1f, 1f, 0f).Normalized, Vector3F.UnitX));
       Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
       angle = (float)Math.Acos(Vector3F.Dot(new Vector3F(0f, 1f, 1f).Normalized, Vector3F.UnitY));
@@ -689,10 +689,10 @@ namespace DigitalRune.Mathematics.Algebra.Tests
       Vector3F y = Vector3F.UnitY;
       Vector3F halfvector = x + y;
 
-      // 90°
+      // 90ï¿½
       Assert.IsTrue(Numeric.AreEqual((float)Math.PI / 4f, Vector3F.GetAngle(x, halfvector)));
 
-      // 45°
+      // 45ï¿½
       Assert.IsTrue(Numeric.AreEqual((float)Math.PI / 2f, Vector3F.GetAngle(x, y)));
     }
 

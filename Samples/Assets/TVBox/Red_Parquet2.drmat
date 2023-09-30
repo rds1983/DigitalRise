@@ -7,12 +7,12 @@
     <Parameter Name="SpecularPower" Value="100" />
     <Texture Name="Texture" File="Red_Parquet2_diffuse.dds" />
   </Pass>
-  <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
-  <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBuffer" Profile="HiDef">
+  <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
+  <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBuffer" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="100" />
     <Texture Name="NormalTexture" Format="Normal" File="Red_Parquet2_normal.dds"/>
   </Pass>
-  <Pass Name="Material" Effect="DigitalRune/Materials/Material" Profile="HiDef">
+  <Pass Name="Material" Effect="DigitalRise/Materials/Material" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Texture Name="DiffuseTexture" File="Red_Parquet2_diffuse.dds" />

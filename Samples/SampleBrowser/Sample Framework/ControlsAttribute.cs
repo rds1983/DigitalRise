@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DigitalRune.Game;
+using DigitalRise.Game;
 using Microsoft.Xna.Framework;
 
 
@@ -10,7 +10,7 @@ namespace Samples
 {
   /// <summary>
   /// Describes the controls (e.g. keyboard keys) used by an XNA <see cref="GameComponent"/> or a
-  /// DigitalRune <see cref="GameObject"/>.
+  /// DigitalRise <see cref="GameObject"/>.
   /// </summary>
   /// <remarks>
   /// The description will be printed in the Help window.

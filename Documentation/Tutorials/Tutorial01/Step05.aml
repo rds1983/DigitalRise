@@ -44,8 +44,8 @@
                 <code language="c#" title="MyGraphicsScreen.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;                                                   // NEW
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;                                                   // NEW
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;                                                 // NEW
 
@@ -116,7 +116,7 @@ public class MyGameComponent : Microsoft.Xna.Framework.GameComponent
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
 …
-using DigitalRune.Geometry;                                                     // NEW
+using DigitalRise.Geometry;                                                     // NEW
 …
 
 namespace MyGame
@@ -147,12 +147,12 @@ namespace MyGame
                 <code language="c#" title="MyGraphicsScreen.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;                                                  // NEW
-using DigitalRune.Mathematics;                                                          // NEW
-using DigitalRune.Mathematics.Algebra;                                                  // NEW
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;                                                  // NEW
+using DigitalRise.Mathematics;                                                          // NEW
+using DigitalRise.Mathematics.Algebra;                                                  // NEW
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -199,7 +199,7 @@ namespace MyGame
                 </code>
                 <para>
                     The camera is positioned at (0, 1, 5). Per default it looks forward (which is
-                    the -z direction in XNA and DigitalRune). To let the renderer know which camera
+                    the -z direction in XNA and DigitalRise). To let the renderer know which camera
                     it should use, we have to set this information in the
                     <legacyBold>RenderContext</legacyBold> in <legacyBold>MyGraphicsScreen.OnRender</legacyBold>.
                 </para>

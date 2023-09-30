@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Easing;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Easing;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
@@ -49,13 +49,13 @@ tank model are animated.",
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
       SetCamera(new Vector3F(8, 6, 8), ConstantsF.PiOver4, -0.4f);
 
-      // Load the models. The models are processed using the DigitalRune Model 
+      // Load the models. The models are processed using the DigitalRise Model 
       // Processor - not the default XNA model processor!
       // In the folder that contains tank.fbx, there is an XML file tank.drmdl which defines 
       // properties of the model. These XML files are automatically processed by 
-      // the DigitalRune Model Processor. Please browse to the content folder and 
+      // the DigitalRise Model Processor. Please browse to the content folder and 
       // have a look at the *.drmdl file. For the grid model there is no such file but
-      // the DigitalRune model content processor will create one automatically with the default
+      // the DigitalRise model content processor will create one automatically with the default
       // materials found in the model. 
       // Each model itself is a tree of scene nodes. The grid model 
       // contains one mesh node. The tank model contains several mesh nodes (turret, 
@@ -75,7 +75,7 @@ tank model are animated.",
       _grid.ScaleLocal = new Vector3F(0.3f);
 
       // No need to scale the tank model - the tank was already scaled by the 
-      // DigitalRune Model Processor because a scale factor is defined in the 
+      // DigitalRise Model Processor because a scale factor is defined in the 
       // Tank.drmdl file.
 
       // Add the models to the scene.
@@ -150,8 +150,8 @@ tank model are animated.",
       _cannon = _tank.GetSceneNode("canon_geo");
       _cannonRestPose = _cannon.PoseLocal;
 
-      // Create and start some animations. For general information about the DigitalRune Animation
-      // system, please check out the user documentation and the DigitalRune Animation samples.
+      // Create and start some animations. For general information about the DigitalRise Animation
+      // system, please check out the user documentation and the DigitalRise Animation samples.
 
       // The front wheel should rotate left/right; oscillating endlessly.
       var frontWheelSteeringAnimation = new AnimationClip<float>(

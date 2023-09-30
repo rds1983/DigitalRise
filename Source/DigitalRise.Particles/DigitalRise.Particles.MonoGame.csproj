@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DigitalRise.Particles.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Particles</AssemblyName>
+    <Description>DigitalRise.Particles for MonoGame</Description>
+    <DefineConstants>$(DefineConstants);MonoGame</DefineConstants>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Geometry\DigitalRise.Geometry.MonoGame.csproj" />
+  </ItemGroup>
+</Project>

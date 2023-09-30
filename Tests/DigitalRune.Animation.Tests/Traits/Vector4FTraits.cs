@@ -1,8 +1,8 @@
-﻿using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Traits.Tests
+namespace DigitalRise.Animation.Traits.Tests
 {
   [TestFixture]
   public class Vector4FTraitsTest

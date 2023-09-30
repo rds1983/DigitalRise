@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Meshes.Tests
+namespace DigitalRise.Geometry.Meshes.Tests
 {
   [TestFixture]
   public class VertexAdjacencyTest

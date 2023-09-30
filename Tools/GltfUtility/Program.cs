@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using DigitalRune;
-using DigitalRune.CommandLine;
+using DigitalRise;
+using DigitalRise.CommandLine;
 
 namespace EffectFarm
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This file was generated automatically by the DigitalRune Model Content Processor. -->
+<!-- This file was generated automatically by the DigitalRise Model Content Processor. -->
 
 <Model File="WeaponMachineGun.glb"
        GenerateTangentFrames="False"
@@ -27,6 +27,6 @@
   </Animations> 
 -->
 
-<!-- See the DigitalRune Graphics documentation for a full list of model processing options. -->
+<!-- See the DigitalRise Graphics documentation for a full list of model processing options. -->
    
 </Model>

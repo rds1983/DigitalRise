@@ -3,12 +3,12 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRune.Physics.Specialized
+namespace DigitalRise.Physics.Specialized
 {
   partial class ConstraintWheel
   {

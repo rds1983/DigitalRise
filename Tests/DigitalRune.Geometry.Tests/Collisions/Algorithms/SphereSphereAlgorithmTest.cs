@@ -1,11 +1,11 @@
 using System;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
-using DigitalRune.Mathematics;
-using DigitalRune.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Geometry.Shapes;
 
 
-namespace DigitalRune.Geometry.Collisions.Algorithms.Tests
+namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
   [TestFixture]
   public class SphereSphereAlgorithmTest

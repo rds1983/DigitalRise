@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 
-// We use the DigitalRune classes - not the XNA classes!!!
-using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
+// We use the DigitalRise classes - not the XNA classes!!!
+using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 
 
 namespace Samples.Graphics
@@ -58,9 +58,9 @@ LightNodes, CameraNodes, ...) and how to animate a skinned model.",
       // Add the camera node to the scene.
       _scene.Children.Add(_cameraObject.CameraNode);
 
-      // Load a model. This model uses the DigitalRune Model Processor. Several XML 
+      // Load a model. This model uses the DigitalRise Model Processor. Several XML 
       // files (*.drmdl and *.drmat) in the folder of dude.fbx define the materials and other properties. 
-      // The DigitalRune Model Processor also imports the animations of the dude model.
+      // The DigitalRise Model Processor also imports the animations of the dude model.
       var model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
 
       // Add two clones of the model to the scene.
@@ -189,7 +189,7 @@ LightNodes, CameraNodes, ...) and how to animate a skinned model.",
       // The model description file (dude.drmdl) specifies a custom bounding shape 
       // (see the attributes AabbMinimum and AabbMaximum in this file). For 
       // skinned models this bounding shape must be chosen manually. It must be big 
-      // enough to contain all poses of the model. - In future DigitalRune Graphics 
+      // enough to contain all poses of the model. - In future DigitalRise Graphics 
       // versions we will automatically compute suitable bounding shapes for 
       // animated models.
       _debugRenderer.Clear();

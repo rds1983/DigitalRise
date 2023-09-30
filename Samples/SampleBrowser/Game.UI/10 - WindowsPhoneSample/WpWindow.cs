@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 
@@ -19,7 +19,7 @@ namespace Samples.Game.UI
       HorizontalAlignment = HorizontalAlignment.Stretch;
       VerticalAlignment = VerticalAlignment.Stretch;
 
-      Title = "DigitalRune Game UI Sample";
+      Title = "DigitalRise Game UI Sample";
 
       // We handle the Closed event.
       Closed += OnClosed;

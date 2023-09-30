@@ -12,7 +12,7 @@
             <content></content>
             <sections>
                 <section address="Graphics">
-                    <title>DigitalRune Graphics and MonoGame</title>
+                    <title>DigitalRise Graphics and MonoGame</title>
                     <content>
                         <para>
                             A significant effort went into improving MonoGame and implementing
@@ -24,21 +24,21 @@
                             are now supported in MonoGame apps.
                         </para>
                         <para>
-                            (Note: The change log below only lists changes made by the DigitalRune
+                            (Note: The change log below only lists changes made by the DigitalRise
                             team. All changes made in the official MonoGame repository have
-                            also been merged into the DigitalRune repository. For a complete
+                            also been merged into the DigitalRise repository. For a complete
                             list of changes, please check the official MonoGame project.)
                         </para>
                     </content>
                 </section>
                 <section address="UWP">
-                    <title>DigitalRune Graphics and UWP</title>
+                    <title>DigitalRise Graphics and UWP</title>
                     <content>
                         <para>
                             Apps for Universal Windows Platform (UWP) may now run in HiDef
                             profile and make use of advanced graphics. The ID
-                            <codeEntityReference qualifyHint="false">F:DigitalRune.PlatformID.WindowsUniversal</codeEntityReference>
-                            has been added to the <codeEntityReference qualifyHint="false">T:DigitalRune.PlatformID</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">F:DigitalRise.PlatformID.WindowsUniversal</codeEntityReference>
+                            has been added to the <codeEntityReference qualifyHint="false">T:DigitalRise.PlatformID</codeEntityReference>
                             enumeration.
                         </para>
                     </content>
@@ -49,7 +49,7 @@
                         <para>
                             Microsoft released the WPF DirectX Extensions [1][2] to host DirectX 10
                             and 11 content in WPF applications. Users may wonder how this relates
-                            to the WPF interop provided by DigitalRune Graphics.
+                            to the WPF interop provided by DigitalRise Graphics.
                         </para>
                         <para>
                             WPF uses Direct3D 9Ex for rendering. Using the built-in D3DImage [3] source
@@ -68,35 +68,35 @@
                             form of the WPF DirectX Extensions.
                         </para>
                         <para>
-                            DigitalRune Graphics does not use the WPF DirectX Extensions for interop.
+                            DigitalRise Graphics does not use the WPF DirectX Extensions for interop.
                             The WPF DirectX Extensions (Microsoft.Wpf.Interop.DirectX.dll) provide a
                             native (C++) and, in our opinion, over-engineered solution. Further, the
                             synchronization in the WPF DirectX Extensions is achieved by blocking the
                             CPU. This greatly reduces performance.
                         </para>
                         <para>
-                            DigitalRune Graphics uses a lightweight, fully managed (SharpDX) implementation.
+                            DigitalRise Graphics uses a lightweight, fully managed (SharpDX) implementation.
                             The synchronization is part of the
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>.
-                            The <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>.
+                            The <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
                             allows different modes of synchronization. By default, it tries to
                             block the CPU as little as possible to maintain optimal performance.
                         </para>
                         <para>
-                            For further information, see: <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
+                            For further information, see: <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
                         </para>
                         <para>
                             (Note that by settings <codeInline>D3DImagePresentationTarget.IsSynchronized = true</codeInline>,
-                            the <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
+                            the <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
                             behaves the same as the WPF DirectX Extensions.)
                         </para>
                         <para>
                             New in this release is the flag
-                            <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.D3DImagePresentationTarget.IsFrameReady</codeEntityReference>.
+                            <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.D3DImagePresentationTarget.IsFrameReady</codeEntityReference>.
                             This flag can be polled to check whether Direct3D 11 has finished rendering the content.
                         </para>
                         <para>
-                            Furthermore, the <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
+                            Furthermore, the <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>
                             now adapts to the Windows DPI settings. When running with high-DPI settings,
                             the D3DImagePresentationTarget will render the Direct3D 11 content
                             in the native resolution for optimal quality.
@@ -202,16 +202,16 @@
                     <content>
                         <para>
                             The setters for
-                            <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>,
-                            <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.ElementPresentationTarget.GraphicsService</codeEntityReference>,
+                            <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>,
+                            <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.ElementPresentationTarget.GraphicsService</codeEntityReference>,
                             and
-                            <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.D3DImagePresentationTarget.GraphicsService</codeEntityReference>
+                            <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.D3DImagePresentationTarget.GraphicsService</codeEntityReference>
                             have been made private. This was an oversight in the original API - the properties were never meant to be set by the user.
                         </para>
                         <para>
                             This change may cause an error in Windows Forms projects. The Windows
                             Forms designer may try to set the property
-                            <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>
                             in the code behind file. If you run into this error, please modify
                             the code behind file and remove the line which sets the property.
                         </para>
@@ -227,41 +227,41 @@
             </content>
             <sections>
                 <section address="Base">
-                    <title>DigitalRune Base 1.19</title>
+                    <title>DigitalRise Base 1.19</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 NEW: New Platform ID for the Universal Windows Platform (UWP) added.
-                                See <codeEntityReference qualifyHint="true">F:DigitalRune.PlatformID.WindowsUniversal</codeEntityReference>.
+                                See <codeEntityReference qualifyHint="true">F:DigitalRise.PlatformID.WindowsUniversal</codeEntityReference>.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Mathematics">
-                    <title>DigitalRune Mathematics 1.14</title>
+                    <title>DigitalRise Mathematics 1.14</title>
                     <content>
                         <list class="bullet">
                             <listItem>
-                                NEW: Property setter for <codeEntityReference qualifyHint="true">P:DigitalRune.Mathematics.Algebra.Vector4F.XYZ</codeEntityReference>
-                                and <codeEntityReference qualifyHint="true">P:DigitalRune.Mathematics.Algebra.Vector4D.XYZ</codeEntityReference>
+                                NEW: Property setter for <codeEntityReference qualifyHint="true">P:DigitalRise.Mathematics.Algebra.Vector4F.XYZ</codeEntityReference>
+                                and <codeEntityReference qualifyHint="true">P:DigitalRise.Mathematics.Algebra.Vector4D.XYZ</codeEntityReference>
                                 added.
                             </listItem>
                             <listItem>
                                 FIX: Result of
-                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Mathematics.Algebra.Vector2D.GetAngle(DigitalRune.Mathematics.Algebra.Vector2D,DigitalRune.Mathematics.Algebra.Vector2D)</codeEntityReference>
+                                <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Mathematics.Algebra.Vector2D.GetAngle(DigitalRise.Mathematics.Algebra.Vector2D,DigitalRise.Mathematics.Algebra.Vector2D)</codeEntityReference>
                                 is NaN. Problem fixed for
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector2F</codeEntityReference>,
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector3F</codeEntityReference>,
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector2D</codeEntityReference>,
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector3D</codeEntityReference>,
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.QuaternionF</codeEntityReference>, and
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.QuaternionD</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector2F</codeEntityReference>,
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector3F</codeEntityReference>,
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector2D</codeEntityReference>,
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector3D</codeEntityReference>,
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.QuaternionF</codeEntityReference>, and
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.QuaternionD</codeEntityReference>.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Geometry">
-                    <title>DigitalRune Geometry 1.18.1</title>
+                    <title>DigitalRise Geometry 1.18.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -271,20 +271,20 @@
                     </content>
                 </section>
                 <section address="Animation">
-                    <title>DigitalRune Animation 1.4.1</title>
+                    <title>DigitalRise Animation 1.4.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 CHANGE:
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Animation.AnimationHelper.Compress(DigitalRune.Animation.SrtKeyFrameAnimation,System.Single,System.Single,System.Single)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Animation.AnimationHelper.Compress(DigitalRise.Animation.SrtKeyFrameAnimation,System.Single,System.Single,System.Single)</codeEntityReference>
                                 improved. Method now uses same implementation as
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Animation.Character.SkeletonKeyFrameAnimation.Compress(System.Single,System.Single,System.Single)</codeEntityReference>.
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Animation.Character.SkeletonKeyFrameAnimation.Compress(System.Single,System.Single,System.Single)</codeEntityReference>.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Graphics">
-                    <title>DigitalRune Graphics 1.1</title>
+                    <title>DigitalRise Graphics 1.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -298,13 +298,13 @@
                             </listItem>
                             <listItem>
                                 NEW: Support for Windows DPI scaling in
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.D3DImagePresentationTarget</codeEntityReference>.
                                 The render target now automatically uses the native size in pixels
                                 for optimal resolution.
                             </listItem>
                             <listItem>
                                 NEW: Property
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.D3DImagePresentationTarget.IsFrameReady</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.D3DImagePresentationTarget.IsFrameReady</codeEntityReference>
                                 added, which can be polled after a new frame was rendered. The flag
                                 indicates whether Direct3D 11 has finished rendering the frame into
                                 the back buffer of the
@@ -312,7 +312,7 @@
                             </listItem>
                             <listItem>
                                 NEW: The
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRune.Graphics.SceneGraph.SceneNode})</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRise.Graphics.SceneGraph.SceneNode})</codeEntityReference>
                                 methods now supported on all platforms.
                             </listItem>
                             <listItem>
@@ -321,9 +321,9 @@
                             </listItem>
                             <listItem>
                                 CHANGE: Hide setter of the following properties:
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>,
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.ElementPresentationTarget.GraphicsService</codeEntityReference>,
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Interop.D3DImagePresentationTarget.GraphicsService</codeEntityReference>.
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.FormsPresentationTarget.GraphicsService</codeEntityReference>,
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.ElementPresentationTarget.GraphicsService</codeEntityReference>,
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Interop.D3DImagePresentationTarget.GraphicsService</codeEntityReference>.
                                 These setters are not meant to be called by the user.
                             </listItem>
                             <listItem>
@@ -341,30 +341,30 @@
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.SkyRenderer</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.SkyRenderer</codeEntityReference>
                                 could perform unnecessary sun occlusion test. Sun occlusion queries are
                                 not started when a previous query is still in progress.
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.SceneGraph.CloudLayerNode.SunOcclusion</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.SceneGraph.CloudLayerNode.SunOcclusion</codeEntityReference>
                                 is now independent of player camera and only depends on clouds. Previously
                                 the sun occlusion was 1 (fully occluded) when the camera was not looking
                                 at the sun.
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.CloudLayerNode</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.CloudLayerNode</codeEntityReference>
                                 also tries to read occlusion query (in case the renderer is only called
                                 once and the sky is cached).
                             </listItem>
                             <listItem>
-                                FIX: <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRune.Graphics.SceneGraph.SceneNode})</codeEntityReference>
+                                FIX: <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRise.Graphics.SceneGraph.SceneNode})</codeEntityReference>
                                 could create garbage when meshes with 32-bit indices were combined into
                                 one mesh which only needs 16-bit indices.
                             </listItem>
                             <listItem>
-                                FIX: <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.TerrainHelper.SmoothTexture(System.Single[],System.Int32,System.Int32,System.Single)</codeEntityReference>
+                                FIX: <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.TerrainHelper.SmoothTexture(System.Single[],System.Int32,System.Int32,System.Single)</codeEntityReference>
                                 must not change border samples. (Before this fix the border samples were
                                 changed and terrain tiles did not match anymore. This caused a problem in
                                 the collision detection, but not for graphics.)
@@ -376,17 +376,17 @@
                     </content>
                 </section>
                 <section address="GameUI">
-                    <title>DigitalRune Game UI 1.6.2</title>
+                    <title>DigitalRise Game UI 1.6.2</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 CHANGE: In MonoGame the
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Game.Input.IInputService.MaxNumberOfPlayers</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Game.Input.IInputService.MaxNumberOfPlayers</codeEntityReference>
                                 now depends on the platform. Previously the property always returned 4.
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Game.UI.LayoutSerializer</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Game.UI.LayoutSerializer</codeEntityReference>
                                 did not deserialize certain properties on iOS and UWP.
                             </listItem>
                         </list>
@@ -405,7 +405,7 @@
                             </listItem>
                             <listItem>
                                 NEW: <localUri>HealthBarSample</localUri> shows how to position a
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Game.UI.Controls.UIControl</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Game.UI.Controls.UIControl</codeEntityReference>
                                 relative to a 3D object to display a 2D health bar.
                             </listItem>
                             <listItem>

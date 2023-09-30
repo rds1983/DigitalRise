@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 

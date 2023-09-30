@@ -19,7 +19,7 @@
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
 using System.Linq;                                                                  // NEW
-using DigitalRune.Physics;                                                          // NEW
+using DigitalRise.Physics;                                                          // NEW
 …
 
 namespace MyGame

@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class Path3FAnimationTest

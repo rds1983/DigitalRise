@@ -1,5 +1,5 @@
 ﻿using AssetManagementBase;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 

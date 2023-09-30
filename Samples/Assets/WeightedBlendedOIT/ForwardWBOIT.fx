@@ -19,21 +19,21 @@
 #define DIRECTIONAL_LIGHT_COUNT 3   // Max number of directional lights.
 
 
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Lighting.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Material.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Fog.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Lighting.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Material.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Fog.fxh"
 
 #define CLAMP_TEXCOORDS_TO_SHADOW_MAP_BOUNDS 1
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Noise.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/ShadowMap.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Noise.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/ShadowMap.fxh"
 
 #if DEPTH_TEST || ENVIRONMENT_TEXTURE
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Encoding.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Encoding.fxh"
 #endif
 
 #if DEPTH_TEST
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Deferred.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Deferred.fxh"
 #endif
 
 

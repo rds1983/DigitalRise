@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

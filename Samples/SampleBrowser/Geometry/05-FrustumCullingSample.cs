@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-// Both XNA and DigitalRune have a class called MathHelper. To avoid compiler errors
+// Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
-// DigitalRune has a Plane structure which we use instead of the XNA Plane structure.
-using Plane = DigitalRune.Geometry.Shapes.Plane;
+// DigitalRise has a Plane structure which we use instead of the XNA Plane structure.
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 
 namespace Samples.Geometry
 {
   [Sample(SampleCategory.Geometry,
-    @"This sample shows how to use DigitalRune Geometry for frustum culling in a graphics engine.",
+    @"This sample shows how to use DigitalRise Geometry for frustum culling in a graphics engine.",
     @"A camera frustum is moved randomly. Collision detection is used to avoid rendering objects 
 that are outside the camera frustum.
 The scene can be viewed from the viewpoint of the moving camera and from bird's eye view to 

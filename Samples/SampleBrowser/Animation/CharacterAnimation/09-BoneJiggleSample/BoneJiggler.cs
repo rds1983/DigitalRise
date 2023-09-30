@@ -1,6 +1,6 @@
 ﻿using System;
-using DigitalRune.Animation.Character;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Animation

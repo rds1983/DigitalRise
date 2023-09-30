@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -76,9 +76,9 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
         ref heightTexture);
       _terrainTile.HeightTexture = heightTexture;
       
-      var shadowMapEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
-      var gBufferEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
-      var materialEffect = GraphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
+      var shadowMapEffect = GraphicsService.GetStockEffect("DigitalRise/Terrain/TerrainShadowMap");
+      var gBufferEffect = GraphicsService.GetStockEffect("DigitalRise/Terrain/TerrainGBuffer");
+      var materialEffect = GraphicsService.GetStockEffect("DigitalRise/Terrain/TerrainMaterial");
       var material = new Material
       {
         { "ShadowMap", new EffectBinding(GraphicsService, shadowMapEffect, null, EffectParameterHint.Material) },

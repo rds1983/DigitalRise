@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Physics.Tests
+namespace DigitalRise.Physics.Tests
 {
   [TestFixture]
   public class PhysicsExceptionTest

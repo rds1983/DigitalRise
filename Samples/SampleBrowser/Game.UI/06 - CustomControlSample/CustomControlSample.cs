@@ -1,9 +1,9 @@
-﻿using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using MouseButtons = DigitalRune.Game.Input.MouseButtons;
+using MouseButtons = DigitalRise.Game.Input.MouseButtons;
 
 
 namespace Samples.Game.UI
@@ -12,7 +12,7 @@ namespace Samples.Game.UI
     @"This sample shows how to create a TreeView control.",
     @"When double-click on a tree view item is detected, a message box is shown.
 
-The DigitalRune Blog contains a detailed description for this project; see section
+The DigitalRise Blog contains a detailed description for this project; see section
 'Creating a Tree View Control'.",
     6)]
   public class CustomControlSample : Sample

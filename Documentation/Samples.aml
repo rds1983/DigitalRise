@@ -4,7 +4,7 @@
 
         <introduction>
             <para>
-                Several example applications are distributed with the DigitalRune Engine.
+                Several example applications are distributed with the DigitalRise Engine.
                 All samples are included with source code and detailed comments.
             </para>
             <autoOutline/>
@@ -15,7 +15,7 @@
             <title>Where can I find the samples?</title>
             <content>
                 <para>
-                    The samples are included in the DigitalRune Engine download package. Have a look at
+                    The samples are included in the DigitalRise Engine download package. Have a look at
                     <link xlink:href="972bde71-5d0c-46be-8a81-ad0d2cea770a" /> to learn where the example
                     projects are located.
                 </para>
@@ -179,7 +179,7 @@
                     <image xlink:href="ParticlesSampleRibbon"/>
                 </mediaLink>
                 <mediaLink>
-                    <caption placement="after">Basic Animations using DigitalRune Animation</caption>
+                    <caption placement="after">Basic Animations using DigitalRise Animation</caption>
                     <image xlink:href="AnimationSample"/>
                 </mediaLink>
                 <mediaLink>
@@ -255,7 +255,7 @@
                     <image xlink:href="WindowsPhoneSample"/>
                 </mediaLink>
                 <mediaLink>
-                    <caption placement="after">Animated GUI using DigitalRune Game UI and Animation</caption>
+                    <caption placement="after">Animated GUI using DigitalRise Game UI and Animation</caption>
                     <image xlink:href="UIAnimationSample"/>
                 </mediaLink>
                 <mediaLink>

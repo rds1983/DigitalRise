@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -337,7 +337,7 @@ namespace Samples.Graphics
       _scene.Children.Add(billboardNode);
 
       // ----- Animated billboards
-      // DigitalRune Graphics supports "texture atlases". I.e. textures can be packed 
+      // DigitalRise Graphics supports "texture atlases". I.e. textures can be packed 
       // together into a single, larger texture file. A PackedTexture can describe a 
       // single texture packed into a texture atlas or a tile set packed into a 
       // texture atlas. In this example the "beeWingFlap" is a set of three tiles.

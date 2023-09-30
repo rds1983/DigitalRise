@@ -1,6 +1,6 @@
-﻿using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Consoles;
-using DigitalRune.Game.UI.Controls;
+﻿using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Consoles;
+using DigitalRise.Game.UI.Controls;
 
 
 namespace Samples.Game.UI

@@ -3,13 +3,13 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Tests
+namespace DigitalRise.Geometry.Tests
 {
 
   [TestFixture]

@@ -8,7 +8,7 @@ using static glTFLoader.Schema.Accessor;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace DigitalRune
+namespace DigitalRise
 {
 	internal static class Utility
 	{

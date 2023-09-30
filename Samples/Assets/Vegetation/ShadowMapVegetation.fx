@@ -12,10 +12,10 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Material.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Noise.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/ShadowMap.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Material.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Noise.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/ShadowMap.fxh"
 #include "Vegetation.fxh"
 
 

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune;
-using DigitalRune.Game;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
+using DigitalRise;
+using DigitalRise.Game;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -159,9 +159,9 @@ namespace Samples.Graphics
       }
 
       var graphicsService = _services.GetInstance<IGraphicsService>();
-      shadowMapEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap", defs);
-      gBufferEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer", defs);
-      materialEffect = graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial", defs);
+      shadowMapEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainShadowMap", defs);
+      gBufferEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainGBuffer", defs);
+      materialEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainMaterial", defs);
 
       return new Material
         {
@@ -247,7 +247,7 @@ namespace Samples.Graphics
       // The material used to render the terrain is customizable.  The material must specify 
       // the effects for the different render passes which we use in the DeferredGraphicsScreen 
       // ("ShadowMap", "GBuffer", "Material").
-      // The prebuilt DigitalRune content contains standard terrain effects. However, you could
+      // The prebuilt DigitalRise content contains standard terrain effects. However, you could
       // change the effects to change how the material is rendered.
       // We can create the material by loading a .drmat file. Or we can create the material in
       // code like this:

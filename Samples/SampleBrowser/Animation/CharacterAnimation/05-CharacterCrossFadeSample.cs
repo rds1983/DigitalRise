@@ -3,9 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Character;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Character;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;

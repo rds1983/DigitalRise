@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
 
-namespace DigitalRune.Mathematics.Interpolation.Tests
+namespace DigitalRise.Mathematics.Interpolation.Tests
 {
   [TestFixture]
   public class InterpolationHelperTest

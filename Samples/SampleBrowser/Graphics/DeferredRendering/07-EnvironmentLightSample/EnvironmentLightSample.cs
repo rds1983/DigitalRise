@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using AssetManagementBase;
@@ -23,7 +23,7 @@ It additively blends all environment lights into the light buffer. This way all 
 objects will be affected and reflect the environment map. 
 The EnvironmentLightRenderer uses a custom effect 'EnvironmentLight.fx'.
 
-Note: The EnvironmentLight is a simple version of the new ImageBasedLight of DigitalRune Graphics. 
+Note: The EnvironmentLight is a simple version of the new ImageBasedLight of DigitalRise Graphics. 
 The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBasedLighting"".",
     107)]
   public class EnvironmentLightSample : Sample

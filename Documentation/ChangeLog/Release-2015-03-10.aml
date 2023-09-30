@@ -36,7 +36,7 @@
                         </para>
                         <para>
                             The new class
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference>
                             can be used to define global or local environment maps for a scene. Material shaders
                             are mostly unchanged:
                         </para>
@@ -44,12 +44,12 @@
                             <listItem>
                                 Forward rendered materials can use the standard environment map semantics. The
                                 effect binding system will automatically select the closest
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference>
                                 and set the environment map as the effect parameter.
                             </listItem>
                             <listItem>
                                 Deferred materials automatically reflect the environment map. In this case the
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference>
                                 is simply another type of light source, which is rendered into the light buffers.
                                 The material's diffuse and specular coefficients define the amount of light that
                                 is reflected. The specular power determines the glossiness of reflection. You do
@@ -58,7 +58,7 @@
                         </list>
                         <para>
                             The
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference>
                             currently uses standard cube maps. Cube maps can be loaded via the content pipeline
                             or generated dynamically at runtime.
                         </para>
@@ -104,23 +104,23 @@
                         <para>
                             One option is to merge several mesh nodes into one to reduce the per-object overhead.
                             The
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.MeshHelper</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.MeshHelper</codeEntityReference>
                             now provides functions to merge meshes at runtime.
                         </para>
                         <para>
-                            Another option is to use hardware instancing. The DigitalRune
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.MeshRenderer</codeEntityReference>
+                            Another option is to use hardware instancing. The DigitalRise
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.MeshRenderer</codeEntityReference>
                             already supports hardware instancing: When mesh nodes are rendered, it gathers all
                             instances of one mesh and sends them to the GPU using a single draw call to reduce overhead.
                         </para>
                         <para>
                             However, if you add many individual mesh nodes to a scene, there is still a
                             significant overhead per-object. This release includes a new class
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>
                             which is derived from
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.MeshNode</codeEntityReference>.
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.MeshNode</codeEntityReference>.
                             It allows to group lots of instances into one scene node. Rendering a
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>
                             is extremely fast because the instance-data buffers need to be created only once and
                             not per frame.
                         </para>
@@ -199,7 +199,7 @@
                     </content>
                 </section>
                 <section address="Base">
-                    <title>DigitalRune Base 1.17</title>
+                    <title>DigitalRise Base 1.17</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -209,7 +209,7 @@
                     </content>
                 </section>
                 <section address="Animation">
-                    <title>DigitalRune Animation 1.4</title>
+                    <title>DigitalRise Animation 1.4</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -219,7 +219,7 @@
                     </content>
                 </section>
                 <section address="Graphics">
-                    <title>DigitalRune Graphics 1.0beta</title>
+                    <title>DigitalRise Graphics 1.0beta</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -227,15 +227,15 @@
                                 <list class="bullet">
                                     <listItem>
                                         NEW: Static batching support using
-                                        <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRune.Graphics.SceneGraph.SceneNode})</codeEntityReference>.
+                                        <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.MeshHelper.Merge(System.Collections.Generic.IEnumerable{DigitalRise.Graphics.SceneGraph.SceneNode})</codeEntityReference>.
                                     </listItem>
                                     <listItem>
                                         NEW: Static hardware instancing support using the new
-                                        <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>.
+                                        <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.MeshInstancingNode`1</codeEntityReference>.
                                     </listItem>
                                     <listItem>
                                         NEW: Vertex struct
-                                        <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.InstanceData</codeEntityReference> added.
+                                        <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.InstanceData</codeEntityReference> added.
                                     </listItem>
                                     <listItem>
                                         NEW: <legacyItalic>Forward.fx</legacyItalic> supports hardware instancing.
@@ -266,82 +266,82 @@
                                 <list class="bullet">
                                     <listItem>
                                         NEW: Class
-                                        <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference> added.
+                                        <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference> added.
                                     </listItem>
                                     <listItem>
                                         NEW: Property
-                                        <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.SceneGraph.LightQuery.ImageBasedLights</codeEntityReference> added.
+                                        <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.SceneGraph.LightQuery.ImageBasedLights</codeEntityReference> added.
                                     </listItem>
                                     <listItem>
                                         NEW: Added effect parameter semantics for environment maps:
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMap</codeEntityReference>,
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapSize</codeEntityReference>,
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapDiffuse</codeEntityReference>,
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapSpecular</codeEntityReference>,
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapMatrix</codeEntityReference>,
-                                        <codeEntityReference qualifyHint="false">F:DigitalRune.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapRgbmMax</codeEntityReference>.
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMap</codeEntityReference>,
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapSize</codeEntityReference>,
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapDiffuse</codeEntityReference>,
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapSpecular</codeEntityReference>,
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapMatrix</codeEntityReference>,
+                                        <codeEntityReference qualifyHint="false">F:DigitalRise.Graphics.Effects.SceneEffectParameterSemantics.EnvironmentMapRgbmMax</codeEntityReference>.
                                     </listItem>
                                     <listItem>
                                         NEW:
                                         <legacyItalic>ForwardEnv.fx</legacyItalic> supports forward rendering with an
                                         environment map with RGBM encoding specified by the new
-                                        <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.ImageBasedLight</codeEntityReference>
+                                        <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.ImageBasedLight</codeEntityReference>
                                         class.
                                     </listItem>
                                 </list>
                             </listItem>
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.SceneCaptureNode</codeEntityReference>s
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.SceneCaptureNode</codeEntityReference>s
                                 can now be rotated to capture cube maps which are not aligned with the world axes.
                                 <markup>
                                     <br/>
                                 </markup>
                                 Previously cube maps were aligned with the world axes. Now it is possible to specify
                                 a rotated camera to capture a rotated cube map. The
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.SceneCaptureRenderer</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.SceneCaptureRenderer</codeEntityReference>
                                 uses the orientation of
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.SceneGraph.SceneCaptureNode.CameraNode</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.SceneGraph.SceneCaptureNode.CameraNode</codeEntityReference>
                                 when capturing cube maps.
                             </listItem>
                             <listItem>
                                 NEW: Vertex struct
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.VertexPositionNormalColorTexture</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.VertexPositionNormalColorTexture</codeEntityReference>
                                 added.
                             </listItem>
                             <listItem>
-                                NEW: DigitalRune Model Processor logs warning if a mesh name in a DRMDL is invalid.
+                                NEW: DigitalRise Model Processor logs warning if a mesh name in a DRMDL is invalid.
                             </listItem>
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Effects.EffectPassBinding</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Effects.EffectPassBinding</codeEntityReference>
                                 implements IEquatable.
                             </listItem>
                             <listItem>
-                                CHANGE: [iOS] DigitalRune Texture Processor automatically falls back to
+                                CHANGE: [iOS] DigitalRise Texture Processor automatically falls back to
                                 <legacyBold>Color</legacyBold> format if size is not supported by PVRTC compressor.
                             </listItem>
                             <listItem>
                                 CHANGE: Type of first parameter in
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.Rendering.DebugRenderer.DrawTriangles(DigitalRune.Geometry.Meshes.ITriangleMesh,DigitalRune.Geometry.Pose,DigitalRune.Mathematics.Algebra.Vector3F,Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.Rendering.DebugRenderer.DrawTriangles(DigitalRise.Geometry.Meshes.ITriangleMesh,DigitalRise.Geometry.Pose,DigitalRise.Mathematics.Algebra.Vector3F,Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean)</codeEntityReference>
                                 changed from
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Meshes.TriangleMesh</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Meshes.TriangleMesh</codeEntityReference>
                                 to
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Meshes.ITriangleMesh</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Meshes.ITriangleMesh</codeEntityReference>.
                             </listItem>
                             <listItem>
                                 FIX: Possible
                                 <codeEntityReference qualifyHint="false">T:System.NullReferenceException</codeEntityReference>
                                 in
-                                <codeEntityReference qualifyHint="true" autoUpgrade="false">M:DigitalRune.Graphics.GraphicsManager.Render(DigitalRune.Graphics.Interop.IPresentationTarget,System.Collections.Generic.IList{DigitalRune.Graphics.GraphicsScreen})</codeEntityReference>.
+                                <codeEntityReference qualifyHint="true" autoUpgrade="false">M:DigitalRise.Graphics.GraphicsManager.Render(DigitalRise.Graphics.Interop.IPresentationTarget,System.Collections.Generic.IList{DigitalRise.Graphics.GraphicsScreen})</codeEntityReference>.
                             </listItem>
                             <listItem>
                                 FIX: Possible
                                 <codeEntityReference qualifyHint="false">T:System.NullReferenceException</codeEntityReference>
                                 in
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.DebugRenderer</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.DebugRenderer</codeEntityReference>
                                 if
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.TriangleMeshShape</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.TriangleMeshShape</codeEntityReference>
                                 is rendered and then invalidated.
                             </listItem>
                             <listItem>
@@ -353,7 +353,7 @@
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.PostProcessing.LuminanceFilter</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.PostProcessing.LuminanceFilter</codeEntityReference>
                                 filters bad color values of the source image.
                                 <markup>
                                     <br/>
@@ -365,19 +365,19 @@
                                 FIX: Possible
                                 <legacyBold>NullReferenceException</legacyBold>
                                 when a
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.MeshNode</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.MeshNode</codeEntityReference>
                                 uses an effect with skinning but
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.SceneGraph.MeshNode.SkeletonPose</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.SceneGraph.MeshNode.SkeletonPose</codeEntityReference>
                                 is not set.
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.LodGroupNode</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.LodGroupNode</codeEntityReference>
                                 did not compute correct bounding shape if its pose or scale was not identity.
                             </listItem>
                             <listItem>
                                 FIX:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.SceneGraph.LodGroupNode</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.SceneGraph.LodGroupNode</codeEntityReference>
                                 did not compute correct bounding shape for some cases where a level had an infinite bounding shape.
                             </listItem>
                             <listItem>
@@ -391,12 +391,12 @@
                     </content>
                 </section>
                 <section address="GameUI">
-                    <title>DigitalRune Game UI 1.6</title>
+                    <title>DigitalRise Game UI 1.6</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 NEW:
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Game.UI.Controls.TextBox</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Game.UI.Controls.TextBox</codeEntityReference>
                                 uses the new MonoGame <legacyBold>KeyboardInput</legacyBold> class on phones and Windows Store apps.
                             </listItem>
                         </list>
@@ -445,7 +445,7 @@
                     <content>
                         <list class="bullet">
                             <listItem>
-                                CHANGE: MonoGame.Framework.Net.dll is not required anymore by DigitalRune libraries and
+                                CHANGE: MonoGame.Framework.Net.dll is not required anymore by DigitalRise libraries and
                                 samples.
                             </listItem>
                             <listItem>

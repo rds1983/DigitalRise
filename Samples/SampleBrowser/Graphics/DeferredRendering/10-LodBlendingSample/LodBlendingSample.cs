@@ -1,7 +1,7 @@
-﻿using DigitalRune.Game.Input;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Physics.ForceEffects;
+﻿using DigitalRise.Game.Input;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

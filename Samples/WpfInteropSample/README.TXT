@@ -25,12 +25,12 @@ This project is a WPF application which displays 3D graphics.
 
 Folder "Content":
 This folder contains links to packaged graphics assets. Some of these assets are
-pre-built assets of DigitalRune Graphics. Other assets are created by the content
+pre-built assets of DigitalRise Graphics. Other assets are created by the content
 build script (see BUILD INSTRUCTIONS).
 The "Build action" of these items is set to "Content". "Copy to output directory"
 is set to "Copy if newer".
 Regular assets (XNB files) can be loaded in code using the XNA/MonoGame
-ContentManager. Packaged assets (ZIP files) can be loaded using the DigitalRune
+ContentManager. Packaged assets (ZIP files) can be loaded using the DigitalRise
 StorageContentManager.
 
 Folder "Game":

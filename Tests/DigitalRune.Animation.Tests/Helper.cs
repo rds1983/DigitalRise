@@ -1,8 +1,8 @@
 ﻿using System;
-using DigitalRune.Animation.Traits;
+using DigitalRise.Animation.Traits;
 
 
-namespace DigitalRune.Animation
+namespace DigitalRise.Animation
 {
   // The animation system has been refactored several times. The Helper class provides 
   // extension methods that ensure that the unit tests don't break.

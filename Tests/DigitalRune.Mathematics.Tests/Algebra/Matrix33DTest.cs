@@ -7,11 +7,11 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Algebra.Tests
+namespace DigitalRise.Mathematics.Algebra.Tests
 {
   [TestFixture]
   public class Matrix33DTest

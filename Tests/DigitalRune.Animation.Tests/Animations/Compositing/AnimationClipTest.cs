@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune.Animation.Traits;
-using DigitalRune.Mathematics;
+using DigitalRise.Animation.Traits;
+using DigitalRise.Mathematics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class AnimationClipTest

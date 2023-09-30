@@ -1,9 +1,9 @@
 ﻿using System;
-using DigitalRune.Mathematics;
+using DigitalRise.Mathematics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Easing.Tests
+namespace DigitalRise.Animation.Easing.Tests
 {
   [TestFixture]
   public class LogarithmicEaseTest : BaseEasingFunctionTest<LogarithmicEase>

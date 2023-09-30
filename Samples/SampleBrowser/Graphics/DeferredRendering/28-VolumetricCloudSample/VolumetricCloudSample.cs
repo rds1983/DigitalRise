@@ -1,15 +1,15 @@
 ﻿#if !WP7 && !WP8
 using AssetManagementBase;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -131,7 +131,7 @@ namespace Samples.Graphics
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Alpha).DefaultValue = 0.5f;
 
-      // DigitalRune Graphics supports "texture atlases": The class PackedTexture 
+      // DigitalRise Graphics supports "texture atlases": The class PackedTexture 
       // describes a single texture or tile set packed into a texture atlas. The 
       // clouds texture in this example consists of 2 tiles.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =

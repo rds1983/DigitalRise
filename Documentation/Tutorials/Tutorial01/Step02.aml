@@ -94,25 +94,25 @@ namespace MyGame
                     ]]>
                 </code>
                 <para>
-                    We have an empty XNA game. Next, we start to add DigitalRune Engine features to this project.
+                    We have an empty XNA game. Next, we start to add DigitalRise Engine features to this project.
                 </para>
             </content>
         </section>
 
 
         <section address="References">
-            <title>Add references to DigitalRune assemblies</title>
+            <title>Add references to DigitalRise assemblies</title>
             <content>
                 <list class="ordered">
                     <listItem>
                         In the VS <ui>Solution Explorer</ui>, right-click the <ui>References</ui> folder and select <ui>Add Reference…</ui>
                     </listItem>
                     <listItem>
-                        Browse to folder which contains the DigitalRune assemblies for XNA/Windows:
+                        Browse to folder which contains the DigitalRise assemblies for XNA/Windows:
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\References\XNA\Windows]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\References\XNA\Windows]]>
                                 </localUri>
                             </listItem>
                         </list>

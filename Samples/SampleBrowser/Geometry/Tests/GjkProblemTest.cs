@@ -1,12 +1,12 @@
 ﻿#if WINDOWS
 using System;
 using System.Collections.Generic;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

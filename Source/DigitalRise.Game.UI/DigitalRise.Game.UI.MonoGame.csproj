@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DigitalRise.Game.UI.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Game.UI</AssemblyName>
+    <Description>DigitalRise.Game.UI for MonoGame</Description>
+    <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
+    <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Game.Input\DigitalRise.Game.Input.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise.Game\DigitalRise.Game.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise.Mathematics\DigitalRise.Mathematics.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
+  </ItemGroup>
+</Project>

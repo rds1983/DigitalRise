@@ -1,7 +1,7 @@
-﻿using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Game.UI

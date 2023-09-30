@@ -1,7 +1,7 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Graphics

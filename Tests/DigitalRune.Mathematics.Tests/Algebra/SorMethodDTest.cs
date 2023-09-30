@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Algebra.Tests
+namespace DigitalRise.Mathematics.Algebra.Tests
 {
   [TestFixture]
   public class SorMethodDTest

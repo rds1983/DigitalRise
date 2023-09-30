@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRune.Graphics.Rendering
+namespace DigitalRise.Graphics.Rendering
 {
   /// <summary>
   /// Creates the shadow map of a <see cref="VarianceShadow"/>.
@@ -141,7 +141,7 @@ namespace DigitalRune.Graphics.Rendering
       context.CameraNode = _orthographicCameraNode;
 
       // The shadow map is rendered using the technique "DirectionalVsm".
-      // See ShadowMap.fx in the DigitalRune source code folder.
+      // See ShadowMap.fx in the DigitalRise source code folder.
       context.Technique = "DirectionalVsm";
 
       var graphicsService = context.GraphicsService;

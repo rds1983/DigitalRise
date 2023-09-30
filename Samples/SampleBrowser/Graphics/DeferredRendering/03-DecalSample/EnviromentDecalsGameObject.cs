@@ -1,12 +1,12 @@
 ﻿#if !WP7 && !WP8
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;

@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
+using DigitalRise;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -16,8 +16,8 @@ namespace Samples
   /// Renders the user interface.
   /// </summary>
   /// <remarks>
-  /// This class implements a <see cref="GraphicsScreen"/> (DigitalRune Graphics), which renders a
-  /// user interface using a <see cref="UIScreen"/> (DigitalRune Game UI).
+  /// This class implements a <see cref="GraphicsScreen"/> (DigitalRise Graphics), which renders a
+  /// user interface using a <see cref="UIScreen"/> (DigitalRise Game UI).
   /// </remarks>
   public sealed class GuiGraphicsScreen : GraphicsScreen, IDisposable
   {
@@ -61,7 +61,7 @@ namespace Samples
       var assetManager = services.GetInstance<AssetManager>();
 
       // Load a UI theme and create the UI renderer and the UI screen. See the
-      // DigitalRune Game UI documentation and samples for more details.
+      // DigitalRise Game UI documentation and samples for more details.
       var theme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsService.GraphicsDevice);
       var renderer = new UIRenderer(GraphicsService.GraphicsDevice, theme);
       UIScreen = new UIScreen("Default", renderer)

@@ -1,13 +1,13 @@
 ﻿#if !WP7 && !WP8
 using System;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.PostProcessing;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.PostProcessing;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 
@@ -122,7 +122,7 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
       c. Select the model in the content project.
       d. Right-click the model and select Properties to open the Properties window.
       e. In the Properties window search for the property Content Processor and select Model - 
-         DigitalRune Graphics from the combo box.
+         DigitalRise Graphics from the combo box.
     Now, build the project. This automatically creates .drmdl and .drmat files, in case they do not 
     yet exist. (Or you can simply copy and rename .drmdl and .drmat files from an existing model.) 
     In the Windows Explorer go to the folder containing the model. It is time to edit the .drmdl and 
@@ -145,12 +145,12 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
           <Parameter Name="SpecularPower" Value="100" />
           <Texture Name="Texture" File="Metal_Grate_diffuse.png" />
         </Pass>
-        <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
-        <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormal" Profile="HiDef">
+        <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
+        <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBufferNormal" Profile="HiDef">
           <Parameter Name="SpecularPower" Value="100" />
           <Texture Name="NormalTexture" Format="NormalInvertY" File="Metal_Grate_normal.png"/>
         </Pass>
-        <Pass Name="Material" Effect="DigitalRune/Materials/Material" Profile="HiDef">
+        <Pass Name="Material" Effect="DigitalRise/Materials/Material" Profile="HiDef">
           <Parameter Name="DiffuseColor" Value="1,1,1" />
           <Parameter Name="SpecularColor" Value="1,1,1" />
           <Texture Name="DiffuseTexture" File="Metal_Grate_diffuse.png" />
@@ -160,8 +160,8 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
 
     The rendering is defined in DeferredGraphicsScreen.cs. The sample uses the following passes: 
     "ShadowMap", "GBuffer", "Material". If one of these passes is missing in the .drmat file, it 
-    won't be rendered properly. A list of all effects can be find in the DigitalRune Documentation
-    (User Documentation | DigitalRune Graphics | Effects and Materials | Predefined Effects).
+    won't be rendered properly. A list of all effects can be find in the DigitalRise Documentation
+    (User Documentation | DigitalRise Graphics | Effects and Materials | Predefined Effects).
     Next, load the model and add it to the scene. You can add it directly
       ModelNode myModel = game.Content.Load<ModelNode>("MyModel").Clone();
       scene.Children.Add(myModel);

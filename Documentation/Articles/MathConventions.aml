@@ -14,7 +14,7 @@
 
 
         <section address="Conventions">
-            <title>DigitalRune conventions</title>
+            <title>DigitalRise conventions</title>
             <content>
                 <para>
                     The conventions we use in our game libraries are documented in our user documentation:
@@ -22,17 +22,17 @@
                 <list class="bullet">
                     <listItem>
                         <link xlink:href="384f6645-8a25-488c-9a08-47662266a552">
-                            DigitalRune Mathematics - Definitions and Conventions
+                            DigitalRise Mathematics - Definitions and Conventions
                         </link>
                     </listItem>
                     <listItem>
                         <link xlink:href="7945ac67-dffc-4197-9fbf-58a9b68c0ea1">
-                            DigitalRune Geometry - Definitions and Conventions
+                            DigitalRise Geometry - Definitions and Conventions
                         </link>
                     </listItem>
                     <listItem>
                         <link xlink:href="6e0b9a08-b1d8-41a3-9ab4-ebf6235abe19">
-                            DigitalRune Physics - Definitions and Conventions
+                            DigitalRise Physics - Definitions and Conventions
                         </link>
                     </listItem>
                 </list>

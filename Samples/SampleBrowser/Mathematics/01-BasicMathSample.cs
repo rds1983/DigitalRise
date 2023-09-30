@@ -1,17 +1,17 @@
 ﻿using System;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Analysis;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Analysis;
 
-// Both XNA and DigitalRune have a class called MathHelper. To avoid compiler errors
+// Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Mathematics
 {
   [Sample(SampleCategory.Mathematics,
-    @"A few examples that demonstrate the use of DigitalRune Mathematics.",
+    @"A few examples that demonstrate the use of DigitalRise Mathematics.",
     @"This samples shows:
 - How to use Numeric to compare floating-point numbers.
 - How to compare vectors.

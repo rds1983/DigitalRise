@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DigitalRise.Physics.Specialized.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Physics.Specialized</AssemblyName>
+    <Description>DigitalRise.Physics.Specialized for MonoGame</Description>
+    <DefineConstants>$(DefineConstants);MonoGame</DefineConstants>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Animation\DigitalRise.Animation.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise.Physics\DigitalRise.Physics.MonoGame.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,11 +1,11 @@
-﻿using DigitalRune.Collections;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
+﻿using DigitalRise.Collections;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Physics.Constraints.Tests
+namespace DigitalRise.Physics.Constraints.Tests
 {
   [TestFixture]
   public class ConstraintTest

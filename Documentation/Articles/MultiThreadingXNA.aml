@@ -9,10 +9,10 @@
                     <token>Blog</token>:
                     <externalLink>
                         <linkText>Multithreading in XNA (2011-03-23)</linkText>
-                        <linkUri>http://www.digitalrune.com/Support/Blog/tabid/719/EntryId/89/DigitalRune-Helper-Library-Multithreading-in-XNA.aspx</linkUri>
+                        <linkUri>http://www.digitalrune.com/Support/Blog/tabid/719/EntryId/89/DigitalRise-Helper-Library-Multithreading-in-XNA.aspx</linkUri>
                     </externalLink>.
                     It contains background information for users who want to
-                    know more about the history and internals of the DigitalRune Engine.
+                    know more about the history and internals of the DigitalRise Engine.
                     Please note, that some of this information could be outdated.
                 </para>
             </alert>
@@ -62,7 +62,7 @@
                 who has done a great job!
             </para>
             <para>
-                The library is open source (Ms-PL) and we have integrated the library into the DigitalRune
+                The library is open source (Ms-PL) and we have integrated the library into the DigitalRise
                 Base Library. We have made a few changes and improvements: We fixed some issues with
                 contention in the task scheduler and made a few optimizations for PC and Xbox 360. These
                 changes have been contributed back to the original ParallelTasks project.
@@ -76,15 +76,15 @@
 
 
         <section address="Geometry">
-            <title>Multithreading in DigitalRune Geometry</title>
+            <title>Multithreading in DigitalRise Geometry</title>
             <content>
                 <para>
                     A
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Collisions.CollisionDomain</codeEntityReference>
-                    in DigitalRune Geometry manages a set of collision objects. In
-                    <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Geometry.Collisions.CollisionDomain.Update(System.TimeSpan)</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Collisions.CollisionDomain</codeEntityReference>
+                    in DigitalRise Geometry manages a set of collision objects. In
+                    <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Geometry.Collisions.CollisionDomain.Update(System.TimeSpan)</codeEntityReference>
                     the
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Collisions.CollisionDomain</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Collisions.CollisionDomain</codeEntityReference>
                     determines all collisions between those objects. The method consists of two parts: The
                     "broad phase" and the "narrow phase". The broad phase yields pairs of objects. It returns
                     all pairs of objects where the axis-aligned bounding boxes overlap. This is necessary to
@@ -154,14 +154,14 @@ private void NarrowPhase(float deltaTime)
                     We split the foreach loop in two parts: A parallel loop that computes the collisions and
                     a sequential loop that adds the results to a collection. The sequential loop is necessary
                     because the
-                    <codeEntityReference qualifyHint="false">P:DigitalRune.Geometry.Collisions.CollisionDomain.ContactSets</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">P:DigitalRise.Geometry.Collisions.CollisionDomain.ContactSets</codeEntityReference>
                     collection is not thread-safe.
                 </para>
                 <para>
-                    To be honest, the actual code in DigitalRune Geometry is more complex - we have greatly
+                    To be honest, the actual code in DigitalRise Geometry is more complex - we have greatly
                     simplified the code. But the required steps to parallelize the code are the same. This
                     examples shows how easy it is to execute code in parallel using the
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Threading.Parallel</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Threading.Parallel</codeEntityReference>
                     class. As a developer you no longer have to manage threads or jobs directly.
                 </para>
                 <para>
@@ -189,14 +189,14 @@ private void NarrowPhase(float deltaTime)
 
 
         <section address="Physics">
-            <title>Multithreading in DigitalRune Physics</title>
+            <title>Multithreading in DigitalRise Physics</title>
             <content>
                 <para>
-                    The central object in DigitalRune Physics is the
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Physics.Simulation</codeEntityReference>.
+                    The central object in DigitalRise Physics is the
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Physics.Simulation</codeEntityReference>.
                     It manages all simulated bodies, forces, constraints, etc. The simulation needs to be
                     updated by calling
-                    <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRune.Physics.Simulation.Update(System.TimeSpan)</codeEntityReference>.
+                    <codeEntityReference qualifyHint="false" autoUpgrade="true">M:DigitalRise.Physics.Simulation.Update(System.TimeSpan)</codeEntityReference>.
                     The method checks how much time has passed and progresses the simulation by a number of
                     fixed sized steps. One such step is called a <legacyItalic>sub time step</legacyItalic>.
                 </para>
@@ -239,7 +239,7 @@ private void SubTimeStep(float fixedTimeStep)
                 <para>
                     The first method updates the internal collision domain which runs on multiple threads as
                     shown above. Then there are several for-loops that we have parallelized using
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Threading.Parallel</codeEntityReference>.
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Threading.Parallel</codeEntityReference>.
                     The methods called in the for-loops (e.g.
                     <legacyBold>UpdateVelocity</legacyBold>) are simple delegates of type
                     <legacyBold>Action&lt;int&gt;</legacyBold>. The method receives the loop index and
@@ -247,10 +247,10 @@ private void SubTimeStep(float fixedTimeStep)
                 </para>
                 <para>
                     Again, we have omitted some minor details. But in this case the actual code in
-                    DigitalRune Physics looks pretty much as the code above. Pretty simple, right? There is
+                    DigitalRise Physics looks pretty much as the code above. Pretty simple, right? There is
                     no hidden magic here. (Well, there is quite a lot of magic involved, but it is all neatly
                     wrapped in the
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Threading.Parallel</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Threading.Parallel</codeEntityReference>
                     class.)
                 </para>
             </content>
@@ -266,7 +266,7 @@ private void SubTimeStep(float fixedTimeStep)
                     .NET/XNA can be relatively easy using the right tools. In our case "task-based multithreading"
                     was a perfect fit. By the way, it is also quite simple to run the physics code as a task
                     parallel to other game services, like graphics, AI, input, networking, etc. - so that all
-                    your CPU cores get their share of the work. This is demonstrated in the DigitalRune
+                    your CPU cores get their share of the work. This is demonstrated in the DigitalRise
                     <link xlink:href="dde51686-4f07-4c54-95d4-756ec929cb57" />.
                 </para>
             </content>

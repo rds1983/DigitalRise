@@ -2,20 +2,20 @@
 
 using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Character;
-using DigitalRune.Animation.Traits;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Character;
+using DigitalRise.Animation.Traits;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
 
 

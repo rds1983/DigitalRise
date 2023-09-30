@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Linq.Tests
+namespace DigitalRise.Linq.Tests
 {
   internal class TreeNode
   {

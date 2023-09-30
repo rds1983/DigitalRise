@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles.Effectors;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles.Effectors;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Particles.Tests.Effectors
+namespace DigitalRise.Particles.Tests.Effectors
 {
   [TestFixture]
   public class AngularVelocityEffectorTest

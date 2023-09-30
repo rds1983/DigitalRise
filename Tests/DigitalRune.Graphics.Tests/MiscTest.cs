@@ -1,8 +1,8 @@
-﻿using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.Tests
+namespace DigitalRise.Graphics.Tests
 {
   [TestFixture]
   public class MiscTest

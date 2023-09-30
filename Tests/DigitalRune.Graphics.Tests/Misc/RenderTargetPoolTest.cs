@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.Tests
+namespace DigitalRise.Graphics.Tests
 {
   [TestFixture]
   public class RenderTargetPoolTest

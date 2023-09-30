@@ -4,7 +4,7 @@
 
         <introduction>
             <para>
-                In this article we show how to implement a service provider, how the DigitalRune libraries
+                In this article we show how to implement a service provider, how the DigitalRise libraries
                 support this pattern, and how to use it in an XNA game.
             </para>
             <autoOutline />
@@ -89,11 +89,11 @@ public class ServiceProvider : IServiceProvider {
         </section>
 
 
-        <section address="DigitalRune">
-            <title>Using the DigitalRune Engine</title>
+        <section address="DigitalRise">
+            <title>Using the DigitalRise Engine</title>
             <content>
                 <para>
-                    The DigitalRune Base library contains an advanced service provider implementation. See
+                    The DigitalRise Base library contains an advanced service provider implementation. See
                     <link xlink:href="ce7bca46-717a-4dfb-a154-acb6ee1e8ad9" />
                 </para>
             </content>

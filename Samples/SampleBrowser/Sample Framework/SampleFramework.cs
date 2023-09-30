@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using DigitalRune;
-using DigitalRune.Diagnostics;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.ServiceLocation;
-using DigitalRune.Text;
+using DigitalRise;
+using DigitalRise.Diagnostics;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.ServiceLocation;
+using DigitalRise.Text;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -58,7 +58,7 @@ namespace Samples
   /// <para>
   /// <strong>Profiler Window:</strong><br/>
   /// F3 opens the profiler window, which contains the profiling data. <strong>
-  /// IMPORTANT:</strong> DigitalRune Base profiling classes are only active if the
+  /// IMPORTANT:</strong> DigitalRise Base profiling classes are only active if the
   /// conditional compilation symbol DIGITALRUNE_PROFILE is defined.
   /// (See: Project Properties | Build | Conditional compilation symbols)
   /// </para>

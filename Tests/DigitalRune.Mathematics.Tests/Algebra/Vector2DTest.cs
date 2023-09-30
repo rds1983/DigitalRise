@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Algebra.Tests
+namespace DigitalRise.Mathematics.Algebra.Tests
 {
   [TestFixture]
   public class Vector2DTest
@@ -608,18 +608,18 @@ namespace DigitalRune.Mathematics.Algebra.Tests
     [Test]
     public void DotProduct()
     {
-      // 0°
+      // 0ï¿½
       Assert.AreEqual(1.0, Vector2D.Dot(Vector2D.UnitX, Vector2D.UnitX));
       Assert.AreEqual(1.0, Vector2D.Dot(Vector2D.UnitY, Vector2D.UnitY));
 
-      // 180°
+      // 180ï¿½
       Assert.AreEqual(-1.0, Vector2D.Dot(Vector2D.UnitX, -Vector2D.UnitX));
       Assert.AreEqual(-1.0, Vector2D.Dot(Vector2D.UnitY, -Vector2D.UnitY));
 
-      // 90°
+      // 90ï¿½
       Assert.AreEqual(0.0, Vector2D.Dot(Vector2D.UnitX, Vector2D.UnitY));
 
-      // 45°
+      // 45ï¿½
       double angle = Math.Acos(Vector2D.Dot(new Vector2D(1, 1).Normalized, Vector2D.UnitX));
       Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45.0), angle));
       angle = Math.Acos(Vector2D.Dot(new Vector2D(1, 1).Normalized, Vector2D.UnitY));
@@ -634,10 +634,10 @@ namespace DigitalRune.Mathematics.Algebra.Tests
       Vector2D y = Vector2D.UnitY;
       Vector2D halfvector = x + y;
 
-      // 90°
+      // 90ï¿½
       Assert.IsTrue(Numeric.AreEqual((double)Math.PI / 4, Vector2D.GetAngle(x, halfvector)));
 
-      // 45°
+      // 45ï¿½
       Assert.IsTrue(Numeric.AreEqual((double)Math.PI / 2, Vector2D.GetAngle(x, y)));
     }
 

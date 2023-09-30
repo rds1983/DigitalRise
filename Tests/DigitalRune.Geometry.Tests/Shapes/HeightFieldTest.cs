@@ -1,10 +1,10 @@
 using System;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Shapes.Tests
+namespace DigitalRise.Geometry.Shapes.Tests
 {
   [TestFixture]
   public class HeightFieldTest

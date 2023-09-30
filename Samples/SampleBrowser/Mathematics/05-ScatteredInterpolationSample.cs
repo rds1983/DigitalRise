@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using DigitalRune.Collections;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Collections;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 
-// Both XNA and DigitalRune have a class called MathHelper. To avoid compiler errors
+// Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Mathematics

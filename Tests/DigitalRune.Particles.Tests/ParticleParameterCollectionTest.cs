@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Particles.Tests
+namespace DigitalRise.Particles.Tests
 {
   [TestFixture]
   public class ParticleParameterCollectionTest

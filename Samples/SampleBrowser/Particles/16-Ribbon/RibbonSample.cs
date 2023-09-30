@@ -1,13 +1,13 @@
 ﻿using AssetManagementBase;
-using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

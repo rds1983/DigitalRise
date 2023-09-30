@@ -7,7 +7,7 @@
                 <para>
                     This article discusses how you can use the Service Provider pattern to create a simple, clean
                     Game class in XNA. Please note, the example code uses an obsolete service provider
-                    implementation. Have a look a the DigitalRune <link xlink:href="dde51686-4f07-4c54-95d4-756ec929cb57" /> to see
+                    implementation. Have a look a the DigitalRise <link xlink:href="dde51686-4f07-4c54-95d4-756ec929cb57" /> to see
                     the most recent implementation.
                 </para>
             </alert>

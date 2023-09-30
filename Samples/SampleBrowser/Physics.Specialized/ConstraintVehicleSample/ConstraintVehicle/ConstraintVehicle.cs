@@ -3,17 +3,17 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRune.Collections;
+using DigitalRise.Collections;
 
 
-namespace DigitalRune.Physics.Specialized
+namespace DigitalRise.Physics.Specialized
 {
   /// <summary>
   /// Represents a simulated vehicle.
   /// </summary>
   /// <remarks>
   /// <para>
-  /// This class is very similar to <see cref="DigitalRune.Physics.Specialized.Vehicle"/>, but
+  /// This class is very similar to <see cref="DigitalRise.Physics.Specialized.Vehicle"/>, but
   /// it uses constraints instead of simple force effects, which makes the car more stable.
   /// </para>
   /// <para>

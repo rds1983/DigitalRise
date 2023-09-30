@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DigitalRune.Geometry;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using DigitalRune.Animation.Character;
+using DigitalRise.Animation.Character;
 
 
-namespace DigitalRune.Animation.Character.Tests
+namespace DigitalRise.Animation.Character.Tests
 {
   [TestFixture]
   public class SrtTransformTest

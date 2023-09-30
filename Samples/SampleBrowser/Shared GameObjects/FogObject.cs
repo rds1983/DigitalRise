@@ -1,6 +1,6 @@
-﻿using DigitalRune.Game;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
+﻿using DigitalRise.Game;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
 using CommonServiceLocator;
 
 

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
@@ -26,9 +26,9 @@ bone name, bone indices and bone coordinate systems.",
       : base(game)
     {
       // Load dude model node.
-      // This model uses the DigitalRune Model Processor. Several XML files (*.drmdl 
+      // This model uses the DigitalRise Model Processor. Several XML files (*.drmdl 
       // and *.drmat) in the folder of dude.fbx define the materials and other properties. 
-      // The DigitalRune Model Processor also imports the animations of the dude model
+      // The DigitalRise Model Processor also imports the animations of the dude model
       // and the *.drmdl can be used to specify how animations should be processed in 
       // the content pipeline.
       // The *.drmat files define the used effects and effect parameters. The effects 
@@ -86,7 +86,7 @@ bone name, bone indices and bone coordinate systems.",
     {
       base.Update(gameTime);
 
-      // Visualize bones for debugging using the DigitalRune Graphics DebugRenderer.
+      // Visualize bones for debugging using the DigitalRise Graphics DebugRenderer.
       var debugRenderer = GraphicsScreen.DebugRenderer;
       debugRenderer.Clear();
       debugRenderer.DrawSkeleton(_dudeMeshNode, 0.1f, Color.Orange, true);

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DigitalRise.Tests</RootNamespace>
+    <AssemblyName>DigitalRise.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
+    <PackageReference Include="System.Reactive" Version="$(ReactiveVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise\DigitalRise.csproj" />
+    <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
+  </ItemGroup>  
+</Project>

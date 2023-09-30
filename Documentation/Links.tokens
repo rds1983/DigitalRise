@@ -5,7 +5,7 @@
     <ddue:linkUri></ddue:linkUri>
 </ddue:externalLink></item>
   <item id="Blog"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
-    <ddue:linkText>DigitalRune Blog</ddue:linkText>
+    <ddue:linkText>DigitalRise Blog</ddue:linkText>
     <ddue:linkUri>http://www.digitalrune.com/Blog.aspx</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="DirectXTex"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
@@ -13,8 +13,8 @@
     <ddue:linkUri>https://directxtex.codeplex.com/</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="DRMGRepository"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
-    <ddue:linkText>https://github.com/DigitalRune/MonoGame</ddue:linkText>
-    <ddue:linkUri>https://github.com/DigitalRune/MonoGame</ddue:linkUri>
+    <ddue:linkText>https://github.com/DigitalRise/MonoGame</ddue:linkText>
+    <ddue:linkUri>https://github.com/DigitalRise/MonoGame</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="Email"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
     <ddue:linkText>office@digitalrune.com</ddue:linkText>
@@ -25,7 +25,7 @@
     <ddue:linkUri>http://www.digitalrune.com/Forum.aspx</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="KB"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
-    <ddue:linkText>DigitalRune Knowledge Base (OneNote file, http://www.digitalrune.com/KB)</ddue:linkText>
+    <ddue:linkText>DigitalRise Knowledge Base (OneNote file, http://www.digitalrune.com/KB)</ddue:linkText>
     <ddue:linkUri>http://www.digitalrune.com/KB</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="MGDoc"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
@@ -49,7 +49,7 @@
     <ddue:linkUri>http://sharpdx.org/</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="Website"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
-    <ddue:linkText>DigitalRune Website</ddue:linkText>
+    <ddue:linkText>DigitalRise Website</ddue:linkText>
     <ddue:linkUri>http://www.digitalrune.com/</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="Xamarin"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
@@ -57,7 +57,7 @@
     <ddue:linkUri>http://xamarin.com/</ddue:linkUri>
 </ddue:externalLink></item>
   <item id="Download"><ddue:externalLink xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5">
-    <ddue:linkText>Download the DigitalRune Engine</ddue:linkText>
+    <ddue:linkText>Download the DigitalRise Engine</ddue:linkText>
     <ddue:linkUri>http://www.digitalrune.com/Engine/Download</ddue:linkUri>
 </ddue:externalLink></item>
 </content>

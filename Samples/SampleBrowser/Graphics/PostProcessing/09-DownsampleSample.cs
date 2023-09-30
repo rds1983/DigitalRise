@@ -1,8 +1,8 @@
 ﻿#if !WP7 && !WP8
 using System;
-using DigitalRune.Game.Input;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise.Game.Input;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class KeyFrameCollectionTest

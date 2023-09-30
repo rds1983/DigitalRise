@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Game.Timing.Tests
+namespace DigitalRise.Game.Timing.Tests
 {
   [TestFixture]
   public class VariableStepTimerTest

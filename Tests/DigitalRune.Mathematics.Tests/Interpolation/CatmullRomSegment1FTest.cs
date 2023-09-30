@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Interpolation.Tests
+namespace DigitalRise.Mathematics.Interpolation.Tests
 {
   [TestFixture]
   public class CatmullRomSegment1FTest

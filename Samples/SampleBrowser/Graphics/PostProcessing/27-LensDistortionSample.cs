@@ -1,10 +1,10 @@
-﻿using DigitalRune.Game.Input;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.PostProcessing;
+﻿using DigitalRise.Game.Input;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;
-using DigitalRune;
+using DigitalRise;
 
 namespace Samples.Graphics
 {

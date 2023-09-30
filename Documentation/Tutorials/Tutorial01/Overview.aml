@@ -6,10 +6,10 @@
 
         <introduction>
             <para>
-                This section shows how to add DigitalRune Engine features to an XNA game project.
+                This section shows how to add DigitalRise Engine features to an XNA game project.
                 This is a step-by-step tutorial – not a checklist. This article describes in detail
                 the journey from the XNA game project template to a small game project. Along the
-                way we will touch many parts of the DigitalRune Engine. We will try to highlight and
+                way we will touch many parts of the DigitalRise Engine. We will try to highlight and
                 explain several concepts and design decisions which are used in the engine and in
                 other samples.
             </para>
@@ -34,7 +34,7 @@
             <content>
                 <para>
                     Following ZIP file contains the final project (including the necessary
-                    DigitalRune DLLs and XNBs):
+                    DigitalRise DLLs and XNBs):
                 </para>
                 <list class="nobullet">
                     <listItem>
@@ -114,9 +114,9 @@
             <title>Conclusion</title>
             <content>
                 <para>
-                    This tutorial starts with the basics and covers a wide range of DigitalRune 
+                    This tutorial starts with the basics and covers a wide range of DigitalRise 
                     features. We hope it covers the information that is necessary to understand the 
-                    rest of the DigitalRune documentation and samples.
+                    rest of the DigitalRise documentation and samples.
                 </para>
                 <para>
                     If any step of this tutorial is unclear or some information is missing, please 

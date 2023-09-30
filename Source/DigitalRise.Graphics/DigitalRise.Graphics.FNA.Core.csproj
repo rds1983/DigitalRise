@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DigitalRise.Graphics.FNA</PackageId>
+    <AssemblyName>DigitalRise.Graphics</AssemblyName>
+    <RootNamespace>DigitalRise.Graphics</RootNamespace>
+    <Description>DigitalRise.Graphics for FNA.Core</Description>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.*" />
+    <EmbeddedResource Include="EffectsSource\FNA\bin\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\ThirdParty\glTFLoader\**\*.cs" LinkBase="glTFLoader" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRise.Animation\DigitalRise.Animation.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRise.Geometry\DigitalRise.Geometry.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRise.Particles\DigitalRise.Particles.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

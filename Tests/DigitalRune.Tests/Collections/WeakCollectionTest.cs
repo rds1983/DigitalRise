@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Collections.Tests
+namespace DigitalRise.Collections.Tests
 {
   internal class TestObject
   {

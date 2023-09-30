@@ -1,7 +1,7 @@
 ﻿using AssetManagementBase;
-using DigitalRune;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Samples.Graphics
 {
   // This post-processor adds a simple distortion effect. See Water/Underwater.fx.
-  // Underwater.fx uses only effect parameters for which the DigitalRune Engine already
+  // Underwater.fx uses only effect parameters for which the DigitalRise Engine already
   // provides effect parameter bindings:
   //   DefaultEffectParameterSemantics.ViewportSize
   //   DefaultEffectParameterSemantics.Time

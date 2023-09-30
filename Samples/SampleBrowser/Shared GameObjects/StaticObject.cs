@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
@@ -83,7 +83,7 @@ namespace Samples
 
       foreach (var meshNode in _modelNode.MeshNodes())
       {
-        // Extract the triangle mesh from the DigitalRune Graphics Mesh instance. 
+        // Extract the triangle mesh from the DigitalRise Graphics Mesh instance. 
         var subTriangleMesh = new TriangleMesh();
         foreach (var submesh in meshNode.Mesh.Submeshes)
         {

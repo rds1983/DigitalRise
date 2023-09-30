@@ -1,7 +1,7 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Samples.Geometry
 {
   [Sample(SampleCategory.Geometry,
-    @"This sample shows how to use DigitalRune Geometry for collision detection.",
+    @"This sample shows how to use DigitalRise Geometry for collision detection.",
     @"This sample draws 3 shapes.
 The closest-point pairs of the objects and the minimal distances are visualized.
 If an object is in contact with another object, it is drawn yellow.",

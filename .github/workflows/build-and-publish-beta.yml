@@ -22,5 +22,5 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
-    - name: Build DigitalRune.MonoGame
-      run: dotnet build DigitalRune.MonoGame.DirectX.sln --configuration Release
+    - name: Build DigitalRise.MonoGame
+      run: dotnet build DigitalRise.MonoGame.DirectX.sln --configuration Release

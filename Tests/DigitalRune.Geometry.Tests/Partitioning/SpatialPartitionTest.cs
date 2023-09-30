@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune.Collections;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Collections;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Partitioning.Tests
+namespace DigitalRise.Geometry.Partitioning.Tests
 {
   [TestFixture]
   public class SpatialPartitionTest

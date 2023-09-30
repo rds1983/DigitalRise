@@ -4,7 +4,7 @@ using System.Threading;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Game.Timing.Tests
+namespace DigitalRise.Game.Timing.Tests
 {
 // These tests do not run on the CruiseControl server - Thread.Sleep is to inaccurate to be useful :-(
   [TestFixture]

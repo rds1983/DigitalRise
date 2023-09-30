@@ -1,11 +1,11 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Collections.Generic;
-using DigitalRune;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

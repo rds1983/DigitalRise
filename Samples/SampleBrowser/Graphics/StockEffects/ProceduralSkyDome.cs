@@ -6,10 +6,10 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Mathematics;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

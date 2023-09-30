@@ -3,7 +3,7 @@
     <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 
         <introduction>
-            <para>Here is an overview of platforms supported by the DigitalRune Engine.</para>
+            <para>Here is an overview of platforms supported by the DigitalRise Engine.</para>
             <autoOutline />
         </introduction>
 
@@ -12,7 +12,7 @@
             <title>Overview</title>
             <content>
                 <para>
-                    The DigitalRune Engine can be used on most platforms which support .NET or Mono.
+                    The DigitalRise Engine can be used on most platforms which support .NET or Mono.
                 </para>
                 <para>
                     At the moment there might be some limitations on the newer platforms. However, we are
@@ -594,7 +594,7 @@
             <title>Limitations</title>
             <content>
                 <para>
-                    The original versions of the DigitalRune Engine used XNA. The XNA builds are the most
+                    The original versions of the DigitalRise Engine used XNA. The XNA builds are the most
                     mature builds. Here are some important limitations on other platforms:
                 </para>
                 <list class="bullet">
@@ -614,7 +614,7 @@
                         <legacyBold>[iOS] [Android]</legacyBold>
                         OpenGL/ES does not support wireframe rendering. Wireframe rendering is
                         not available in the
-                        <codeEntityReference qualifyHint="true">T:DigitalRune.Graphics.Rendering.DebugRenderer</codeEntityReference>.
+                        <codeEntityReference qualifyHint="true">T:DigitalRise.Graphics.Rendering.DebugRenderer</codeEntityReference>.
                     </listItem>
                     <listItem>
                         <legacyBold>[iOS] [Android]</legacyBold>

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Meshes.Tests
+namespace DigitalRise.Geometry.Meshes.Tests
 {
   [TestFixture]
   public class ConvexHullTest

@@ -1,9 +1,9 @@
 using System;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Analysis.Tests
+namespace DigitalRise.Mathematics.Analysis.Tests
 {
   [TestFixture]
   public class ExplicitEulerIntegratorFTest

@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Encoding.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Deferred.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Material.fxh"
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Noise.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Encoding.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Deferred.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Material.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Noise.fxh"
 #include "Vegetation.fxh"
 
 

@@ -1,7 +1,7 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.Tests
+namespace DigitalRise.Graphics.Tests
 {
   [TestFixture]
   public class GraphicsExceptionTest

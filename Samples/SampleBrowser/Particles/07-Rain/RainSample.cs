@@ -1,7 +1,7 @@
-﻿using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Particles;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Particles;
 using Microsoft.Xna.Framework;
 
 

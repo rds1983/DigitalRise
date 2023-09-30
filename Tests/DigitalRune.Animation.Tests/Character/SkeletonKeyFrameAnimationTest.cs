@@ -1,9 +1,9 @@
 ﻿using System;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Character.Tests
+namespace DigitalRise.Animation.Character.Tests
 {
   [TestFixture]
   public class SkeletonKeyFrameAnimationTest

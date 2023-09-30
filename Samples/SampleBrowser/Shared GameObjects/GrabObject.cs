@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.Constraints;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.Constraints;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 

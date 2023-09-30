@@ -1,7 +1,7 @@
-﻿using DigitalRune;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+﻿using DigitalRise;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 

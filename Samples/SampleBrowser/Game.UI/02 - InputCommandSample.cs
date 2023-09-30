@@ -1,7 +1,7 @@
-﻿using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+﻿using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

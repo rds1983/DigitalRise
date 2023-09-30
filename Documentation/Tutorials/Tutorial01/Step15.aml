@@ -13,7 +13,7 @@
             <list class="nobullet">
                 <listItem>
                     <localUri>
-                        <![CDATA[<DigitalRune Engine Folder>\Content\]]>
+                        <![CDATA[<DigitalRise Engine Folder>\Content\]]>
                     </localUri>
                 </listItem>
             </list>
@@ -21,7 +21,7 @@
 
 
         <section address="Include">
-            <title>Add DigitalRune Graphics content</title>
+            <title>Add DigitalRise Graphics content</title>
             <content>
                 <list class="ordered">
                     <listItem>
@@ -35,13 +35,13 @@
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\Content\XNA\Windows]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\Content\XNA\Windows]]>
                                 </localUri>
                             </listItem>
                         </list>
                     </listItem>
                     <listItem>
-                        Select <localUri>DigitalRune.Graphics (Windows).contentproj</localUri> and click
+                        Select <localUri>DigitalRise.Graphics (Windows).contentproj</localUri> and click
                         <ui>Open</ui>.
                     </listItem>
                     <listItem>
@@ -51,7 +51,7 @@
                         Select <ui>Add Content Reference…</ui>
                     </listItem>
                     <listItem>
-                        Select DigitalRune.Graphics (Windows).contentproj and click OK.
+                        Select DigitalRise.Graphics (Windows).contentproj and click OK.
                     </listItem>
                 </list>
                 <para>

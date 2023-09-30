@@ -1,8 +1,8 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Traits;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Traits;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Animation

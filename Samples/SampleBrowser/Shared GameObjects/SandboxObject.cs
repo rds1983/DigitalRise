@@ -1,14 +1,14 @@
-﻿using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
+﻿using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 
 namespace Samples
 {

@@ -1,10 +1,10 @@
 ﻿using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -69,7 +69,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =
       assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/RainDrop.dds");
 
-      // DigitalRune Graphics can render particles with different billboard orientations. 
+      // DigitalRise Graphics can render particles with different billboard orientations. 
       // The rain drops should use axial billboards in the up direction (a.k.a. cylindrical 
       // billboards).
       ps.Parameters.AddUniform<BillboardOrientation>(ParticleParameterNames.BillboardOrientation).DefaultValue = BillboardOrientation.AxialViewPlaneAligned;

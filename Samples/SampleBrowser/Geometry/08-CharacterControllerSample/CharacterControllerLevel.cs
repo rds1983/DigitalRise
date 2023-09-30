@@ -1,12 +1,12 @@
 ﻿using System;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 
 
 namespace Samples.Geometry
@@ -125,7 +125,7 @@ namespace Samples.Geometry
 
       // Create a mesh object to test walking on triangle meshes.
       // Normally, the mesh would be loaded from a file. Here, we make a composite shape and 
-      // let DigitalRune Geometry compute a mesh for it. Then we throw away the composite
+      // let DigitalRise Geometry compute a mesh for it. Then we throw away the composite
       // shape and use only the mesh. - We do this to test triangle meshes. Using the composite
       // shape instead of the triangle mesh would be a lot faster.
       CompositeShape compositeShape = new CompositeShape();

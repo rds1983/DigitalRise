@@ -10,10 +10,10 @@
   </Pass>
 
   <!-- The sphere is emissive and does not cast a shadow.
-    <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
+    <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
   -->
   
-  <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBuffer" Profile="HiDef">
+  <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBuffer" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="100" />
   </Pass>
   <Pass Name="Material" Effect="..\TVBox\EmissiveMaterial.fx" Profile="HiDef">

@@ -1,10 +1,10 @@
-﻿using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.PostProcessing;
+﻿using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRune.Graphics
+namespace DigitalRise.Graphics
 {
   /// <summary>
   /// Creates a shadow using Variance Shadow Mapping (VSM). This shadow can be used for

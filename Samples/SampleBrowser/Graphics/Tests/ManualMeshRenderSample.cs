@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -21,7 +21,7 @@ MeshRenderer class.",
   {
     private readonly CameraObject _cameraObject;
 
-    // A DigitalRune model.
+    // A DigitalRise model.
     private readonly ModelNode _model;
     private Scene _scene; 
 

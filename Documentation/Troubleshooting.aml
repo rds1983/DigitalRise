@@ -76,7 +76,7 @@
                 </section>
 
                 <section address="Unblock">
-                    <title>Error loading pipeline assembly "..\References\XNA\Windows\x86\DigitalRune.xyz.dll".</title>
+                    <title>Error loading pipeline assembly "..\References\XNA\Windows\x86\DigitalRise.xyz.dll".</title>
                     <content>
                         <para>
                             When .NET libraries are downloaded from the web, they are treated as assemblies from a network
@@ -240,7 +240,7 @@
                     <title>How to enable/disable multithreading</title>
                     <content>
                         <para>
-                            Most DigitalRune services support multithreading to exploit all available
+                            Most DigitalRise services support multithreading to exploit all available
                             CPU cores. By default, multithreading is enabled if the system has more
                             than one CPU cores.
                         </para>
@@ -250,28 +250,28 @@
                         </para>
                         <list class="bullet">
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Animation.AnimationManager.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Animation.AnimationManager.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Geometry.Collisions.CollisionDomain.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Geometry.Collisions.CollisionDomain.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Geometry.Meshes.ConvexDecomposition.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Geometry.Meshes.ConvexDecomposition.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.Rendering.OcclusionBuffer.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.Rendering.OcclusionBuffer.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Particles.ParticleSystem.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Particles.ParticleSystem.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Particles.ParticleSystemManager.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Particles.ParticleSystemManager.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Graphics.SceneGraph.Scene.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Graphics.SceneGraph.Scene.EnableMultithreading</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true">P:DigitalRune.Physics.Settings.SimulationSettings.EnableMultithreading</codeEntityReference>
+                                <codeEntityReference qualifyHint="true">P:DigitalRise.Physics.Settings.SimulationSettings.EnableMultithreading</codeEntityReference>
                             </listItem>
                         </list>
                         <para>
@@ -291,10 +291,10 @@
                             Problem: A <codeEntityReference qualifyHint="false">T:System.Math</codeEntityReference> method
                             unexpectedly throws an <codeEntityReference qualifyHint="false">T:System.ArithmeticException</codeEntityReference>
                             ("Overflow or underflow in the arithmetic operation."). This exception may
-                            originate in user code or in one of the DigitalRune libraries.
+                            originate in user code or in one of the DigitalRise libraries.
                         </para>
                         <para>
-                            Solution: The problem is usually not caused by the DigitalRune libraries.
+                            Solution: The problem is usually not caused by the DigitalRise libraries.
                             The problem is most likely caused by a native third-party library, which
                             has set the C floating-point math package into a state that is incompatible
                             with .NET. To resolve the problem call <codeInline>_fpreset</codeInline> as described here:
@@ -310,17 +310,17 @@
                     <title>Why is feature X slow / not optimized?</title>
                     <content>
                         <para>
-                            If you are using a feature of the DigitalRune Engine and it is not fast enough, let
+                            If you are using a feature of the DigitalRise Engine and it is not fast enough, let
                             us know. Many problems can be improved using some simple performance tips.
                             Also, if you tell us how the engine is used and which parts can be bottlenecks, we can
                             try to optimize these parts in future releases.
                         </para>
                         <para>
-                            Please note that we spend a lot of time profiling and optimizing the DigitalRune
+                            Please note that we spend a lot of time profiling and optimizing the DigitalRise
                             Engine.
                             However, our libraries are <legacyItalic>general purpose</legacyItalic>
                             libraries, which means, they are sometimes not as efficient as a simple highly
-                            optimized library which has only a single purpose. For example: The DigitalRune
+                            optimized library which has only a single purpose. For example: The DigitalRise
                             Geometry library supports collision detection with closest-point queries, mirrored
                             objects, many different shape types, and many other edge cases. These features make the
                             engine powerful and simple to use - but it can add a performance overhead.

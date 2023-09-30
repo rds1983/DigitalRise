@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Mathematics.Algebra;
 #if MONOGAME
-using DigitalRune.Storages;
+using DigitalRise.Storages;
 using CommonServiceLocator;
 #endif
 

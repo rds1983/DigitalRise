@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DigitalRise.Game.Input.FNA</PackageId>
+    <AssemblyName>DigitalRise.Game.Input</AssemblyName>
+    <Description>DigitalRise.Game.Input for FNA.Core</Description>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.Mathematics\DigitalRise.Mathematics.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

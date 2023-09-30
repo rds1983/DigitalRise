@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Windows;
 using CommonServiceLocator;
-using DigitalRune.Graphics;
-using DigitalRune.Windows.Interop;
+using DigitalRise.Graphics;
+using DigitalRise.Windows.Interop;
 
 namespace WpfInteropSample2
 {
@@ -13,7 +13,7 @@ namespace WpfInteropSample2
   /// <para>
   /// The <see cref="MyGamePresentationTarget"/> is a WPF element that shows the 3D scene. When a 
   /// <see cref="MyGamePresentationTarget"/> is loaded it is automatically registered in the
-  /// DigitalRune graphics service. 
+  /// DigitalRise graphics service. 
   /// </para>
   /// <para>
   /// The <see cref="MyGamePresentationTarget"/> updates the field-of-view of the cameras when its 

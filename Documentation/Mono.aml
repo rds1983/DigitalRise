@@ -4,7 +4,7 @@
 
     <introduction>
       <para>
-        This section contains information about Mono, MonoGame and how you can use the DigitalRune
+        This section contains information about Mono, MonoGame and how you can use the DigitalRise
         libraries in cross-platform  applications.
       </para>
       <autoOutline/>
@@ -22,7 +22,7 @@
           available under Linux and Mac OS X.
         </para>
         <para>
-          DigitalRune libraries, which do not require the Microsoft XNA Framework
+          DigitalRise libraries, which do not require the Microsoft XNA Framework
           can be used with Mono. The DLLs for Mono are the same as the DLLs for the .NET Framework. 
           See <link xlink:href="972bde71-5d0c-46be-8a81-ad0d2cea770a"/> for more information.
         </para>
@@ -43,7 +43,7 @@
               under a commercial license.
             </para>
             <para>
-              Currently, the DigitalRune libraries cannot be used with Xamarin.Android or
+              Currently, the DigitalRise libraries cannot be used with Xamarin.Android or
               Xamarin.iOS, but we plan to support Android and iOS in the future.
             </para>
           </content>
@@ -67,21 +67,21 @@
         </para>
         <para>
           We plan to support MonoGame to allow for cross-platform game development.
-          MonoGame applications require special builds of the DigitalRune libraries.
+          MonoGame applications require special builds of the DigitalRise libraries.
           Check out <link xlink:href="972bde71-5d0c-46be-8a81-ad0d2cea770a" />
           to see which MonoGame builds are currently available.
         </para>
       </content>
       <sections>
         <section address="Fork">
-          <title>DigitalRune MonoGame Fork</title>
+          <title>DigitalRise MonoGame Fork</title>
           <content>
             <para>
-              DigitalRune libraries are built against a forked version of MonoGame. The source 
+              DigitalRise libraries are built against a forked version of MonoGame. The source 
               code repository is publicly available here:
               <externalLink>
-                <linkText>https://github.com/DigitalRune/MonoGame</linkText>
-                <linkUri>https://github.com/DigitalRune/MonoGame</linkUri>
+                <linkText>https://github.com/DigitalRise/MonoGame</linkText>
+                <linkUri>https://github.com/DigitalRise/MonoGame</linkUri>
               </externalLink>.
             </para>
             <para>
@@ -103,10 +103,10 @@
             <linkUri>http://unity3d.com/</linkUri>
           </externalLink>
           is a game development system which supports Mono (with some limitations).
-          Special builds of the DigitalRune assemblies for use with Unity are available.
+          Special builds of the DigitalRise assemblies for use with Unity are available.
           See <link xlink:href="972bde71-5d0c-46be-8a81-ad0d2cea770a"/> for more information.
           Please note, XNA/MonoGame-specific functionality and 
-          <localUri>DigitalRune.ServiceLocation.dll</localUri> is not available in Unity.
+          <localUri>DigitalRise.ServiceLocation.dll</localUri> is not available in Unity.
       </para>
       </content>
     </section>

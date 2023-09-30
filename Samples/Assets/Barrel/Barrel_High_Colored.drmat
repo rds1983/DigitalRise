@@ -8,12 +8,12 @@
     <Parameter Name="SpecularPower" Value="1000" />
     <Texture Name="Texture" File="diffus.dds" />
   </Pass>
-  <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
-  <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormalTransparent" Profile="HiDef">
+  <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
+  <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBufferNormalTransparent" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="1000" />
     <Texture Name="NormalTexture" Format="Normal" File="normal.dds"/>
   </Pass>
-  <Pass Name="Material" Effect="DigitalRune/Materials/MaterialTransparent" Profile="HiDef">
+  <Pass Name="Material" Effect="DigitalRise/Materials/MaterialTransparent" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="0,0.25,0" />
     <Parameter Name="SpecularColor" Value="1,1,1" />
     <Texture Name="SpecularTexture" File="specular.dds" />

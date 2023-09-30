@@ -1,11 +1,11 @@
 ﻿using System;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -49,7 +49,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
         DefaultColor = Color.White,
       };
 
-      // A DigitalRune model.
+      // A DigitalRise model.
       _modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       _modelNode.PoseLocal = new Pose(new Vector3F(6, 0, -7));
 
@@ -164,7 +164,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       _debugRenderer.DrawObject(_geometricObject, Color.Brown, false, false);
       _debugRenderer.DrawObject(_geometricObject, Color.Yellow, true, true);
 
-      // Draw a DigitalRune model.
+      // Draw a DigitalRise model.
       _debugRenderer.DrawModel(_modelNode, Color.Peru, true, false);
 
       // Draw the bounding shapes of the meshes in this model.

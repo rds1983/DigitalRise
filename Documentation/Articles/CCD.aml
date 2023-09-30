@@ -5,7 +5,7 @@
         <introduction>
             <alert class="note">
                 <para>
-                    DigitalRune Geometry supports
+                    DigitalRise Geometry supports
                     <legacyItalic>Continuous Collision Detection (CCD)</legacyItalic>. See
                     <link xlink:href="cd2fc090-d3fd-4a0f-a7d3-1759241c8545" />.
                     This article contains background info about CCD.
@@ -300,7 +300,7 @@
                 <para>
                     How do we integrate this into our game physics library? This article explains how to use
                     CCD in game physics; especially a technique called motion clamping (at least we call it
-                    like this) that is used in DigitalRune Physics and possible pitfalls you could come across
+                    like this) that is used in DigitalRise Physics and possible pitfalls you could come across
                     when you use game physics with CCD.
                 </para>
             </content>
@@ -338,9 +338,9 @@
                             missed collisions (tunneling).
                         </para>
                         <para>
-                            Our collision detection library (DigitalRune Geometry) can compute CCD and we have to
+                            Our collision detection library (DigitalRise Geometry) can compute CCD and we have to
                             fit this into the time step scheme above. A very simple method is
-                            <legacyItalic>motion clamping</legacyItalic>. This method is used in DigitalRune Physics.
+                            <legacyItalic>motion clamping</legacyItalic>. This method is used in DigitalRise Physics.
                             The time step is modified like this:
                         </para>
                         <list class="ordered">
@@ -376,13 +376,13 @@
                         </para>
                         <para>
                             In practice most body positions are already finalized in step 5 as usual, and CCD is
-                            only performed for selected, game critical bodies. In DigitalRune Physics each
-                            <codeEntityReference qualifyHint="false">T:DigitalRune.Physics.RigidBody</codeEntityReference>
+                            only performed for selected, game critical bodies. In DigitalRise Physics each
+                            <codeEntityReference qualifyHint="false">T:DigitalRise.Physics.RigidBody</codeEntityReference>
                             has a
-                            <codeEntityReference qualifyHint="false">P:DigitalRune.Physics.RigidBody.CcdEnabled</codeEntityReference>
+                            <codeEntityReference qualifyHint="false">P:DigitalRise.Physics.RigidBody.CcdEnabled</codeEntityReference>
                             flag where CCD can be turned on or off for this body. Further, CCD is only performed
                             for fast bodies (see
-                            <codeEntityReference qualifyHint="true">P:DigitalRune.Physics.Settings.MotionSettings.CcdVelocityThreshold</codeEntityReference>).
+                            <codeEntityReference qualifyHint="true">P:DigitalRise.Physics.Settings.MotionSettings.CcdVelocityThreshold</codeEntityReference>).
                         </para>
                     </content>
                 </section>
@@ -432,7 +432,7 @@
                     <title>First time of impact solvers</title>
                     <content>
                         <para>
-                            For future version of DigitalRune Physics a more fine-grained control of CCD and motion
+                            For future version of DigitalRise Physics a more fine-grained control of CCD and motion
                             clamping is planned to avoid these problems. We might even implement a real
                             <legacyItalic>first time of impact solver</legacyItalic>.
                         </para>

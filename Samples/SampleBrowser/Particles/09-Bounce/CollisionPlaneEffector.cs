@@ -1,8 +1,8 @@
 ﻿using System;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
 
 
 namespace Samples.Particles
@@ -18,7 +18,7 @@ namespace Samples.Particles
   // and the LinearSpeed is reduced (depending on the restitution).
   // 
   // This class is not optimized for performance. More information on creating particle effectors
-  // can be found in the user documentation of DigitalRune Particles.
+  // can be found in the user documentation of DigitalRise Particles.
   public class CollisionPlaneEffector : ParticleEffector
   {
     //--------------------------------------------------------------

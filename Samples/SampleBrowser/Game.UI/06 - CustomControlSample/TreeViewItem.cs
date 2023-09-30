@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using DigitalRune.Collections;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Collections;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Game.UI

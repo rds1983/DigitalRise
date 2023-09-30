@@ -4,21 +4,21 @@
 
 using System;
 using System.Linq;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
+using DigitalRise.Physics.Specialized;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Physics.Specialized

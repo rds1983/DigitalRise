@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Statistics.Tests
+namespace DigitalRise.Mathematics.Statistics.Tests
 {
   [TestFixture]
   public class StatisticsHelperTest

@@ -1,9 +1,9 @@
 ﻿using System;
-using DigitalRune.Geometry;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
+using DigitalRise.Geometry;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
 
 
 namespace Samples.Particles

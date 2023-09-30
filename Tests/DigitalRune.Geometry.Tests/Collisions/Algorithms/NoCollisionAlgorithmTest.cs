@@ -1,8 +1,8 @@
-using DigitalRune.Geometry.Shapes;
+using DigitalRise.Geometry.Shapes;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Collisions.Algorithms.Tests
+namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
   [TestFixture]
   public class NoCollisionAlgorithmTest

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
-using Plane = DigitalRune.Geometry.Shapes.Plane;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Graphics
 {
@@ -44,7 +44,7 @@ For example, here is the material file for the dude's pants: Pants.drmat
 
 This material tells the renderer to use the SkinnedEffect in the 'Default' render pass and the new
 'ProjectedShadowSkinned' effect in the 'ProjectedShadow' pass. (Please note, the names of the render
-passes can be chosen by the application and have no predefined meaning in DigitalRune Graphics.)
+passes can be chosen by the application and have no predefined meaning in DigitalRise Graphics.)
 
 To render the projected shadows the existing MeshRenderer is used (no custom renderer needed):
 
@@ -67,7 +67,7 @@ ConstParameterBindings supply a constant value for a parameter, e.g. the 'Diffus
 render pass is a constant value which is defined in the drmat file. DelegateParameterBindings use
 a callback to compute the correct value before the mesh is rendered, e.g. the 'World' parameter is
 automatically set to the current pose and scale of the mesh node in each frame.
-DigitalRune Graphics knows common effect parameters, like 'DiffuseColor', 'World', 'Bones', etc. It
+DigitalRise Graphics knows common effect parameters, like 'DiffuseColor', 'World', 'Bones', etc. It
 automatically creates effect parameter bindings for these parameters. (For unknown parameters it will
 check the drmat file for a constant parameter value.)
 We want to set 'ShadowMatrix' and 'ShadowColor' using callbacks. Therefore, this sample tells the

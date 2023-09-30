@@ -1,14 +1,14 @@
 ﻿using System;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Collisions.Algorithms;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Collisions.Algorithms;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework.Input;
 
 

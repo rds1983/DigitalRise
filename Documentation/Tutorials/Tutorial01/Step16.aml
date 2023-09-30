@@ -20,7 +20,7 @@
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\Samples\Content\UI Themes\]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\Samples\Content\UI Themes\]]>
                                 </localUri>
                             </listItem>
                         </list>
@@ -72,7 +72,7 @@
                     </listItem>
                     <listItem>
                         Set the <ui>Content Importer</ui> and the <ui>Content Processor</ui> to
-                        <ui>UI Theme - DigitalRune</ui>.
+                        <ui>UI Theme - DigitalRise</ui>.
                         <mediaLink>
                             <image xlink:href="Tutorial-01-29"/>
                         </mediaLink>
@@ -86,12 +86,12 @@
             <title>Add game UI service</title>
             <content>
                 <para>
-                    The GUI is handled by the <legacyBold>DigitalRune.Game.UI.UIManager</legacyBold>:
+                    The GUI is handled by the <legacyBold>DigitalRise.Game.UI.UIManager</legacyBold>:
                 </para>
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Game.UI;                                                  // NEW
+using DigitalRise.Game.UI;                                                  // NEW
 …
 
 namespace MyGame
@@ -152,7 +152,7 @@ namespace MyGame
                     handle user input. <legacyBold>UIManager.Update</legacyBold> does not draw anything.
                 </para>
                 <para>
-                    The update logic is similar to other game logic tasks. In the DigitalRune Engine the
+                    The update logic is similar to other game logic tasks. In the DigitalRise Engine the
                     UI controls are just another form of game objects, i.e. the class
                     <legacyBold>UIControl</legacyBold> derives from <legacyBold>GameObject</legacyBold>.
                     Since the GUI is usually visible "above" the 3D scene, the UI controls are updated
@@ -175,13 +175,13 @@ namespace MyGame
                 <code language="c#" title="GuiGraphicsScreen.cs">
                     <![CDATA[
 using System;
-using DigitalRune;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Graphics;
+using DigitalRise;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Graphics;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
-using DigitalRune.Game.UI.Rendering;
+using DigitalRise.Game.UI.Rendering;
 
 namespace MyGame
 {
@@ -283,8 +283,8 @@ namespace MyGame
                 </para>
                 <code language="c#" title="MenuWindow.cs">
                     <![CDATA[
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 

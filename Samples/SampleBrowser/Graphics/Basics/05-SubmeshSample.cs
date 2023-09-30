@@ -1,4 +1,4 @@
-﻿using DigitalRune.Graphics;
+﻿using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 
 
 namespace Samples.Geometry
 {
   [Sample(SampleCategory.Geometry,
-    @"This sample shows how to use DigitalRune Geometry to compute a convex hull and a 
+    @"This sample shows how to use DigitalRise Geometry to compute a convex hull and a 
 tight-fitting oriented bounding box for any random point set.",
     @"",
     3)]

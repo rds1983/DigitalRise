@@ -14,11 +14,11 @@
 
 using System;
 using System.Threading.Tasks;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Threading;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Threading;
 
 
 namespace Samples.Graphics

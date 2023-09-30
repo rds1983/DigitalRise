@@ -1,7 +1,7 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Easing;
-using DigitalRune.Graphics;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Easing;
+using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

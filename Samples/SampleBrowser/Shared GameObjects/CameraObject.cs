@@ -1,17 +1,17 @@
 ﻿using System;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 #if MONOGAME || WINDOWS_PHONE
 using Microsoft.Xna.Framework.Input.Touch;
 #endif
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples

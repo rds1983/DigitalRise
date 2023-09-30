@@ -1,5 +1,5 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise.Graphics.PostProcessing;
 
 
 namespace Samples.Graphics

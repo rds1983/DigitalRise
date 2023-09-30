@@ -1,7 +1,7 @@
-﻿using DigitalRune.Geometry.Collisions;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+﻿using DigitalRise.Geometry.Collisions;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

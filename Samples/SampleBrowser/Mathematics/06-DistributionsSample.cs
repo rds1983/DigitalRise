@@ -1,12 +1,12 @@
 ﻿using System;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-// Both XNA and DigitalRune have a class called MathHelper. To avoid compiler errors
+// Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Mathematics

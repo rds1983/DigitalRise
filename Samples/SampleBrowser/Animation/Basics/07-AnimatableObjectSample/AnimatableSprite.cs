@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DigitalRune.Animation;
+using DigitalRise.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

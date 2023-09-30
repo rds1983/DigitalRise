@@ -9,7 +9,7 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "../../../Source/DigitalRune.Graphics/EffectsSource/Common.fxh"
+#include "../../../Source/DigitalRise.Graphics/EffectsSource/Common.fxh"
 
 
 //--------------------------------------------------------

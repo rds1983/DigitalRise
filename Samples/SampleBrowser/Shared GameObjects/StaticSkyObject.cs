@@ -1,13 +1,13 @@
-﻿using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
+using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
 
 namespace Samples

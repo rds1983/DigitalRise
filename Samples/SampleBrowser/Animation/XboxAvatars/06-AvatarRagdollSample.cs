@@ -1,15 +1,15 @@
 ﻿#if XBOX
 using Microsoft.Xna.Framework.Graphics;
-using DigitalRune.Animation.Character;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Animation.Character;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
+using DigitalRise.Physics.Specialized;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 

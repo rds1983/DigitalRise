@@ -1,11 +1,11 @@
 ﻿#if false
 
 using System.Text;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Text;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

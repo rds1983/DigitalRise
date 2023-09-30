@@ -4,7 +4,7 @@
 
         <introduction>
             <para>
-                The DigitalRune Engine uses XNA and MonoGame. This section gathers helpful information about
+                The DigitalRise Engine uses XNA and MonoGame. This section gathers helpful information about
                 XNA and MonoGame.
             </para>
             <!--<autoOutline />-->
@@ -34,26 +34,26 @@
                     (MonoGame.net)
                 </para>
                 <para>
-                    The DigitalRune Engine supports XNA and MonoGame in several ways:
+                    The DigitalRise Engine supports XNA and MonoGame in several ways:
                 </para>
                 <list class="bullet">
                     <listItem>
-                        DigitalRune Mathematics contains helper methods to convert types from/to XNA
-                        types (e.g. DigitalRune <legacyBold>Vector3F</legacyBold> to XNA <legacyBold>Vector3</legacyBold>).
+                        DigitalRise Mathematics contains helper methods to convert types from/to XNA
+                        types (e.g. DigitalRise <legacyBold>Vector3F</legacyBold> to XNA <legacyBold>Vector3</legacyBold>).
                     </listItem>
                     <listItem>
-                        Several DigitalRune libraries provide special DLLs for the XNA content pipeline.
+                        Several DigitalRise libraries provide special DLLs for the XNA content pipeline.
                     </listItem>
                 </list>
                 <para>
-                    Some DigitalRune libraries require XNA or MonoGame:
+                    Some DigitalRise libraries require XNA or MonoGame:
                 </para>
                 <list class="bullet">
                     <listItem>
-                        DigitalRune Graphics requires XNA/MonoGame to render 2D and 3D graphics.
+                        DigitalRise Graphics requires XNA/MonoGame to render 2D and 3D graphics.
                     </listItem>
                     <listItem>
-                        DigitalRune Game UI requires XNA/MonoGame to read input devices and to render
+                        DigitalRise Game UI requires XNA/MonoGame to read input devices and to render
                         2D graphics.
                     </listItem>
                 </list>

@@ -1,9 +1,9 @@
 #if !WP7 && !WP8
 using System.Linq;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Graphics;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Graphics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 

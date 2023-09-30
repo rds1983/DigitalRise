@@ -1,4 +1,4 @@
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Physics

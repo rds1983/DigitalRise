@@ -1,7 +1,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Statistics.Tests
+namespace DigitalRise.Mathematics.Statistics.Tests
 {
   [TestFixture]
   public class ConstValueDistributionTest

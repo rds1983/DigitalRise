@@ -12,12 +12,12 @@
             <title>Add the input service</title>
             <content>
                 <para>
-                    Let's add the DigitalRune input service to the game and use it to exit the game when ESC is pressed.
+                    Let's add the DigitalRise input service to the game and use it to exit the game when ESC is pressed.
                 </para>
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Game.Input;                                   // NEW
+using DigitalRise.Game.Input;                                   // NEW
 …
 
 namespace MyGame
@@ -51,7 +51,7 @@ namespace MyGame
                     Here you can see a common pattern: A service/manager is created in
                     <legacyBold>Game.Initialize</legacyBold>.
                     It is updated in <legacyBold>Game.Update</legacyBold>. Most services/managers
-                    in the DigitalRune Engine are used like this.
+                    in the DigitalRise Engine are used like this.
                 </para>
                 <para>
                     If you run the game, you should be able to exit by pressing ESC on the keyboard.
@@ -152,7 +152,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
             <content>
                 <para>
                     Let's use the service provider pattern in our game using the
-                    <codeEntityReference qualifyHint="true">T:DigitalRune.ServiceLocation.ServiceContainer</codeEntityReference>
+                    <codeEntityReference qualifyHint="true">T:DigitalRise.ServiceLocation.ServiceContainer</codeEntityReference>
                     class.
                 </para>
                 <para>
@@ -161,7 +161,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.ServiceLocation;                                                  // NEW
+using DigitalRise.ServiceLocation;                                                  // NEW
 using Microsoft.Practices.ServiceLocation;                                          // NEW
 …
 
@@ -207,7 +207,7 @@ namespace MyGame
                 </para>
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
-using DigitalRune.Game.Input;                                                     // NEW
+using DigitalRise.Game.Input;                                                     // NEW
 using Microsoft.Practices.ServiceLocation;                                        // NEW
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -237,7 +237,7 @@ namespace MyGame
 ]]>
                 </code>
                 <para>
-                    Another pattern that is used througout the DigitalRune libraries: The manager
+                    Another pattern that is used througout the DigitalRise libraries: The manager
                     class, e.g. <legacyBold>InputManager</legacyBold>, implements an interface, e.g.
                     <legacyBold>IInputService</legacyBold>. The <legacyBold>Game</legacyBold> class
                     creates and uses the manager instances. Only the interfaces are registered in the
@@ -247,7 +247,7 @@ namespace MyGame
                 </para>
                 <para>
                     The service provider pattern is very helpful – however, it is completely optional.
-                    You do not need to use it. All DigitalRune libraries will work fine without a
+                    You do not need to use it. All DigitalRise libraries will work fine without a
                     service provider.
                 </para>
             </content>

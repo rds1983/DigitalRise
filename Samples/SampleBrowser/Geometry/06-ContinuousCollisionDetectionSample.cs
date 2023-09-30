@@ -1,7 +1,7 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Samples.Geometry
 {
   [Sample(SampleCategory.Geometry,
-    @"This sample shows how to use DigitalRune Geometry for Continuous Collision Detection (CCD).",
+    @"This sample shows how to use DigitalRise Geometry for Continuous Collision Detection (CCD).",
     @"This sample draws 2 geometric objects. One object moves from left to right. The other
 object moves from top to bottom. The objects are drawn in their start and end position.
 With Continuous Collision Detection it is possible to find the time of impact of the

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRune.Tests
+namespace DigitalRise.Tests
 {
   [TestFixture]
   public class SingletonTest

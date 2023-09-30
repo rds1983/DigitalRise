@@ -12,7 +12,7 @@
             <title>Add the graphics service</title>
             <content>
                 <para>
-                    Let's create an instance of the DigitalRune
+                    Let's create an instance of the DigitalRise
                     <legacyBold>GraphicsManager</legacyBold> and register it in the service container.
                     In the <legacyBold>Game1.Draw</legacyBold> method, we remove the
                     <legacyBold>GraphicsDevice.Clear</legacyBold> call, update the graphics service
@@ -21,7 +21,7 @@
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Graphics;                                                                   // NEW
+using DigitalRise.Graphics;                                                                   // NEW
 …
 
 namespace MyGame
@@ -75,7 +75,7 @@ namespace MyGame
                     Please note that <legacyBold>IGraphicsDeviceService</legacyBold> and
                     <legacyBold>GraphicsDeviceManager</legacyBold> are XNA types.
                     <legacyBold>IGraphicsService</legacyBold> and <legacyBold>GraphicsManager</legacyBold>
-                    are DigitalRune types.
+                    are DigitalRise types.
                 </para>
                 <para>
                     We also create a new default content manager for the game:
@@ -115,7 +115,7 @@ Content = new ContentManager(_services, "Content");
                 <code language="c#" title="MyGraphicsScreen.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 
 namespace MyGame
@@ -146,8 +146,8 @@ namespace MyGame
                 </para>
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
-using DigitalRune.Game.Input;
-using DigitalRune.Graphics;                                                             // NEW
+using DigitalRise.Game.Input;
+using DigitalRise.Graphics;                                                             // NEW
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -182,7 +182,7 @@ namespace MyGame
                     ]]>
                 </code>
                 <para>
-                    The rendering is now handled by the DigitalRune graphics service. The graphics
+                    The rendering is now handled by the DigitalRise graphics service. The graphics
                     screen defines the render operations. Currently it only clears the screen. That
                     means, the game will look like this again:
                 </para>

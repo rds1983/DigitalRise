@@ -1,15 +1,15 @@
 ﻿using System;
-using DigitalRune;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+using DigitalRise;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 
 namespace Samples.Particles
 {

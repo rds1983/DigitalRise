@@ -1,13 +1,13 @@
 ﻿#if WP7
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
@@ -529,7 +529,7 @@ namespace Samples.Physics
       var gravity = (2 * accelerometerVector) * (2 * accelerometerVector) * (2 * accelerometerVector);
 
       // Clamp negative y force - the "shake" should not increase the gravity in the "down" direction.
-      gravity.Y = DigitalRune.Mathematics.MathHelper.Clamp(gravity.Y, -1, float.PositiveInfinity);
+      gravity.Y = DigitalRise.Mathematics.MathHelper.Clamp(gravity.Y, -1, float.PositiveInfinity);
       _gravity.Acceleration = gravity * GravityAcceleration;
 
       // ----- Draw rigid bodies using the DebugRenderer of the graphics screen.

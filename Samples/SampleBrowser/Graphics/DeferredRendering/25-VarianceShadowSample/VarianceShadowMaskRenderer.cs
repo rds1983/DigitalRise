@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using AssetManagementBase;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRune.Graphics.Rendering
+namespace DigitalRise.Graphics.Rendering
 {
   /// <summary>
   /// Creates the shadow mask from the shadow map of a light node with a

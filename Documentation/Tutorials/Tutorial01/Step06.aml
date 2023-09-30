@@ -22,7 +22,7 @@
                     but it is better to put it into a separate class. It is good to separate game logic
                     into separate classes to keep the code clean and to allow reusing the code in other
                     projects.
-                    The DigitalRune Engine provides the base class <legacyBold>DigitalRune.Game.GameObject</legacyBold>.
+                    The DigitalRise Engine provides the base class <legacyBold>DigitalRise.Game.GameObject</legacyBold>.
                     This is the ideal place for game logic.
                 </para>
                 <para>
@@ -57,17 +57,17 @@ public MyGraphicsScreen(IGraphicsService graphicsService)
                 <code language="c#" title="CameraObject.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace MyGame
 {
@@ -220,7 +220,7 @@ _inputService.EnableMouseCentering = _game.IsActive;
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Game;                                                                 // NEW
+using DigitalRise.Game;                                                                 // NEW
 …
 
 namespace MyGame
@@ -276,7 +276,7 @@ namespace MyGame
                     XNA game components before the game objects.
                 </para>
                 <para>
-                    However, this update order is not set in stone. The DigitalRune Engine is modular
+                    However, this update order is not set in stone. The DigitalRise Engine is modular
                     and gives you full control over the update order.
                 </para>
                 <para>
@@ -285,7 +285,7 @@ namespace MyGame
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
 …
-using DigitalRune.Game;                                                                         // NEW
+using DigitalRise.Game;                                                                         // NEW
 …
 
 namespace MyGame

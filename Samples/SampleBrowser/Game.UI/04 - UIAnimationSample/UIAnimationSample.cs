@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Easing;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Easing;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 
@@ -15,8 +15,8 @@ namespace Samples.Game.UI
 {
   [Sample(SampleCategory.GameUI,
     @"This sample shows how to create an animated GUI.",
-    @"This sample uses the DigitalRune Game UI library to create a GUI.
-The DigitalRune Animation library is used to animate the GUI controls.",
+    @"This sample uses the DigitalRise Game UI library to create a GUI.
+The DigitalRise Animation library is used to animate the GUI controls.",
     4)]
   public class UIAnimationSample : Sample
   {

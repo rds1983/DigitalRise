@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRune.Collections.Tests
+namespace DigitalRise.Collections.Tests
 {
   [TestFixture]
   public class ChildCollectionTest

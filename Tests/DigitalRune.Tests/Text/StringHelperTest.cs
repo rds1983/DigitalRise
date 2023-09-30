@@ -1,9 +1,9 @@
 using System;
-using DigitalRune.Text;
+using DigitalRise.Text;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Tests
+namespace DigitalRise.Tests
 {
   [TestFixture]
   public class StringHelperTest

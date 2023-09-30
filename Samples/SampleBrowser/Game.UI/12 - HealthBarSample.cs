@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Collections;
-using DigitalRune.Game;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Collections;
+using DigitalRise.Game;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

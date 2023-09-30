@@ -1,9 +1,9 @@
 ﻿using System;
-using DigitalRune.Geometry.Shapes;
+using DigitalRise.Geometry.Shapes;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Collisions.Tests
+namespace DigitalRise.Geometry.Collisions.Tests
 {
   [TestFixture]
   public class CollisionAlgorithmMatrixTest

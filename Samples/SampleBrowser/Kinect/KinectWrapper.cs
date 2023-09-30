@@ -1,8 +1,8 @@
 #if KINECT
 using System;
 using System.Linq;
-using DigitalRune.Animation.Character;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Kinect;
 using Microsoft.Xna.Framework;
 

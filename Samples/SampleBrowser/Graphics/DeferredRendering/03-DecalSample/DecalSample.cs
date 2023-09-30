@@ -1,9 +1,9 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
 

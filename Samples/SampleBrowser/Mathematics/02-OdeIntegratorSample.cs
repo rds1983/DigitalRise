@@ -1,5 +1,5 @@
-﻿using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Analysis;
+﻿using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Analysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

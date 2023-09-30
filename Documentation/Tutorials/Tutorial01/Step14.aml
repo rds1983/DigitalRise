@@ -45,7 +45,7 @@
                 <code language="c#" title="MyGraphicsScreen.cs">
                     <![CDATA[
 …
-using DigitalRune.Graphics.PostProcessing;                                              // NEW
+using DigitalRise.Graphics.PostProcessing;                                              // NEW
 …
 
 namespace MyGame
@@ -203,7 +203,7 @@ namespace MyGame
                 <para>
                     What happens if we run the game? We get a <legacyBold>ContentLoadException</legacyBold>:
                     <legacyItalic>
-                        Error loading "DigitalRune\XXX". File not found.
+                        Error loading "DigitalRise\XXX". File not found.
                     </legacyItalic>
                 </para>
                 <mediaLink>

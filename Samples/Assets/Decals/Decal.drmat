@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Material>
-  <Pass Name="GBuffer" Effect="DigitalRune/Decals/GBufferNormal" Profile="HiDef">
+  <Pass Name="GBuffer" Effect="DigitalRise/Decals/GBufferNormal" Profile="HiDef">
     <Texture Name="DiffuseTexture" ScaleAlphaToCoverage="True" File="Decal_diffuse_mask.dds" />
     <Parameter Name="SpecularPower" Value="100" />
     <!--<Texture Name="NormalTexture" Format="Normal" File="Decal_normal.dds" />-->
   </Pass>
-  <Pass Name="Material" Effect="DigitalRune/Decals/Material" Profile="HiDef">
+  <Pass Name="Material" Effect="DigitalRise/Decals/Material" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1.0,1.0,1.0" />
     <Parameter Name="SpecularColor" Value="0.5,0.5,0.5" />
     <Texture Name="DiffuseTexture" ScaleAlphaToCoverage="True" File="Decal_diffuse_mask.dds" />

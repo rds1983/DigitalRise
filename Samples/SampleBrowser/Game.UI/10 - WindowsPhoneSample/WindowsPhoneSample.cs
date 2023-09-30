@@ -1,13 +1,13 @@
-﻿using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
+﻿using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
 namespace Samples.Game.UI
 {
   [Sample(SampleCategory.GameUI,
-    "This sample shows how to use the DigitalRune Game UI on the Windows Phone 7.",
+    "This sample shows how to use the DigitalRise Game UI on the Windows Phone 7.",
     "Note: This sample was created before we could mix Silverlight and XNA on WP7.",
     10)]
   public class WindowsPhoneSample : Sample

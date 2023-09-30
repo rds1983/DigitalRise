@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Easing.Tests
+namespace DigitalRise.Animation.Easing.Tests
 {
   [TestFixture]
   public class EasingFunctionTest

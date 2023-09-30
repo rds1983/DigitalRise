@@ -3,7 +3,7 @@ using System.ComponentModel;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Tests
+namespace DigitalRise.Tests
 {
   public class PropertyChangedListener
   {

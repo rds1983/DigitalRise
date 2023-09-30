@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
 
 
 namespace Samples.Graphics

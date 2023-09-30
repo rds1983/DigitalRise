@@ -1,10 +1,10 @@
 ﻿#if KINECT
 using System;
 using System.Linq;
-using DigitalRune.Animation.Character;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation.Character;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
@@ -19,7 +19,7 @@ models in real-time.",
 (Dude and Marine). 
 The difficulty is that the bone hierarchy of a Kinect body, the Dude skeleton, and the
 Marine skeleton are different. (The bone names and even the number of bones are different!)
-The SkeletonMapper class (from DigitalRune Animation) is used to transfer a Kinect SkeletonPose
+The SkeletonMapper class (from DigitalRise Animation) is used to transfer a Kinect SkeletonPose
 to model's SkeletonPose. Translations of the root bones will be transferred. For all other
 bones, only bone rotations are transferred. A model is only visible when a player is detected.
 

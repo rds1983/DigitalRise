@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRune.Game.States.Tests
+namespace DigitalRise.Game.States.Tests
 {
   [TestFixture]
   public class StateMachineTest

@@ -3,11 +3,11 @@ using System.IO;
 using System.Windows.Media;
 using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune;
-using DigitalRune.Game.Timing;
-using DigitalRune.Graphics;
-using DigitalRune.ServiceLocation;
-using DigitalRune.Storages;
+using DigitalRise;
+using DigitalRise.Game.Timing;
+using DigitalRise.Graphics;
+using DigitalRise.ServiceLocation;
+using DigitalRise.Storages;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

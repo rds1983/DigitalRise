@@ -3,20 +3,20 @@ using System.IO;
 using System.Threading.Tasks;
 using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune;
-using DigitalRune.Animation;
-using DigitalRune.Diagnostics;
-using DigitalRune.Game;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.UI;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Particles;
-using DigitalRune.Physics;
-using DigitalRune.ServiceLocation;
-using DigitalRune.Storages;
+using DigitalRise;
+using DigitalRise.Animation;
+using DigitalRise.Diagnostics;
+using DigitalRise.Game;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.UI;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Particles;
+using DigitalRise.Physics;
+using DigitalRise.ServiceLocation;
+using DigitalRise.Storages;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -122,21 +122,21 @@ namespace Samples
       if (GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
       {
         throw new NotSupportedException(
-          "The DigitalRune Samples and Content for Windows, Universal Windows Apps and Xbox 360 are " +
+          "The DigitalRise Samples and Content for Windows, Universal Windows Apps and Xbox 360 are " +
           "designed for the HiDef graphics profile. A graphics cards supporting DirectX 10.0 or better " +
           "is required.");
       }
 #endif
 
       // ----- Service Container
-      // The DigitalRune ServiceContainer is an "inversion of control" container.
+      // The DigitalRise ServiceContainer is an "inversion of control" container.
       // All game services (such as input, graphics, physics, etc.) are registered
       // in this container. Other game components can access these services via lookup
       // in the service container.
-      // The DigitalRune ServiceContainer replaces the XNA GameServiceContainer (see 
+      // The DigitalRise ServiceContainer replaces the XNA GameServiceContainer (see 
       // property Game.Services).
 
-      // Note: The DigitalRune libraries do not require the use of the ServiceContainer
+      // Note: The DigitalRise libraries do not require the use of the ServiceContainer
       // or any other IoC container. The ServiceContainer is only used in the sample
       // for convenience - but it is not mandatory.
       _services = new ServiceContainer();
@@ -152,20 +152,20 @@ namespace Samples
       //
       //   <gameLocation>/
       //     Content/
-      //       DigitalRune/
-      //         ... DigitalRune assets ...
+      //       DigitalRise/
+      //         ... DigitalRise assets ...
       //       ... other assets ...
       //
       // For MonoGame the assets (*.xnb files) are stored in ZIP packages. The
-      // sample assets are stored in "Content/Content.zip" and the DigitalRune
-      // assets are stored in "Content/DigitalRune.zip".
+      // sample assets are stored in "Content/Content.zip" and the DigitalRise
+      // assets are stored in "Content/DigitalRise.zip".
       //
       //   <gameLocation>/
       //     Content/
       //       Content.zip
-      //       DigitalRune.zip
+      //       DigitalRise.zip
       //
-      // DigitalRune introduces the concept of "storages". Storages can be used
+      // DigitalRise introduces the concept of "storages". Storages can be used
       // to access files on disk or files stored in packages (e.g. ZIP archives).
       // These storages can be mapped into a "virtual file system", which makes
       // it easier to write portable code. (The game logic can read the files
@@ -175,8 +175,8 @@ namespace Samples
       // The virtual files system should look like this:
       //
       //   /                                     <-- root of virtual file system
-      //       DigitalRune/
-      //           ... DigitalRune assets ...
+      //       DigitalRise/
+      //           ... DigitalRise assets ...
       //       ... other assets ...
 
       // The VfsStorage creates a virtual file system.
@@ -422,7 +422,7 @@ namespace Samples
       _uiManager.Update(_deltaTime);
       _profiler.Stop();
 
-      // Update DigitalRune GameObjects.
+      // Update DigitalRise GameObjects.
       _profiler.Start("GameObjectManager.Update        ");
       _gameObjectManager.Update(_deltaTime);
       _profiler.Stop();

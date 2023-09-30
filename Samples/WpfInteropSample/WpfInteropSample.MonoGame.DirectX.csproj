@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\DigitalRune.Game\DigitalRune.Game.MonoGame.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRune.ServiceLocation\DigitalRune.ServiceLocation.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRune.Windows.Interop\DigitalRune.Windows.Interop.MonoGame.DirectX.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Game\DigitalRise.Game.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Windows.Interop\DigitalRise.Windows.Interop.MonoGame.DirectX.csproj" />
   </ItemGroup>
 
 </Project>

@@ -20,7 +20,7 @@
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Animation;                                                          // NEW
+using DigitalRise.Animation;                                                          // NEW
 …
 
 namespace MyGame
@@ -82,10 +82,10 @@ namespace MyGame
                     <![CDATA[
 using System;
 using System.Linq;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Character;
-using DigitalRune.Game;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Character;
+using DigitalRise.Game;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 
@@ -176,7 +176,7 @@ namespace MyGame
                 </para>
                 <para>
                     (For some models these files are not created automatically. In this case you have
-                    to create them manually. Copy an existing *.drmdl and *.drmat file from the DigitalRune
+                    to create them manually. Copy an existing *.drmdl and *.drmat file from the DigitalRise
                     samples and use them as a starting point.)
                 </para>
                 <para>

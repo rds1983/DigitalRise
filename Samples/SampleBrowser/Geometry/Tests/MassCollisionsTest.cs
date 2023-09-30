@@ -3,18 +3,18 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Geometry
@@ -75,7 +75,7 @@ namespace Samples.Geometry
     // Creates 6 planes that form a box. Objects can move inside the box.
     private void CreateBoundaryPlanes()
     {
-      // Planes (class DigitalRune.Geometry.Shapes.PlaneShape) are infinite planes that 
+      // Planes (class DigitalRise.Geometry.Shapes.PlaneShape) are infinite planes that 
       // divide the world into two half-spaces. The space into which the plane normal
       // is pointing is "empty" and the other space is considered "solid".
 

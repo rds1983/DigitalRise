@@ -1,10 +1,10 @@
 <Project>
   <PropertyGroup>
-    <Authors>DigitalRuneTeam</Authors>
-    <Product>DigitalRune</Product>
+    <Authors>DigitalRiseTeam</Authors>
+    <Product>DigitalRise</Product>
     <PackageLicenseExpression>BSD2</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/rds1983/DigitalRune</PackageProjectUrl>
-    <RootNamespace>DigitalRune</RootNamespace>
+    <PackageProjectUrl>https://github.com/rds1983/DigitalRise</PackageProjectUrl>
+    <RootNamespace>DigitalRise</RootNamespace>
     <Version>1.2.8</Version>
     <StbImageSharpVersion>2.27.13</StbImageSharpVersion>
     <MonoGameVersion>3.8.1.303</MonoGameVersion>

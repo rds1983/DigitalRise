@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRune.Mathematics.Statistics.Tests
+namespace DigitalRise.Mathematics.Statistics.Tests
 {
   [TestFixture]
   public class RandomHelperTest

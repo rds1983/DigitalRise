@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 
 
 namespace Samples.Physics
@@ -101,7 +101,7 @@ namespace Samples.Physics
       // ----- Add a triangle mesh. 
       // A triangle mesh could be loaded from a file or built from an XNA model. 
       // Here we first create a composite shape and convert the shape into a triangle 
-      // mesh. (Any Shape in DigitalRune.Geometry can be converted to a triangle mesh.)
+      // mesh. (Any Shape in DigitalRise.Geometry can be converted to a triangle mesh.)
       CompositeShape dumbbell = new CompositeShape();
       dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3F(0.6f, 0.0f, 0.0f))));
       dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3F(-0.6f, 0.0f, 0.0f))));

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Easing;
-using DigitalRune.Game.Input;
-using DigitalRune.Game.States;
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Easing;
+using DigitalRise.Game.Input;
+using DigitalRise.Game.States;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;
@@ -21,8 +21,8 @@ namespace Samples.Game.UI
     @"This sample shows to how create a simple game menu with a custom UI theme, a state machine 
 and animations.",
     @"The primary purpose of this sample is to demonstrate the use of the StateMachine provided 
-by DigitalRune Game. The user interface is created using DigitalRune Game UI. Transitions 
-between screens are implemented using DigitalRune Animation.
+by DigitalRise Game. The user interface is created using DigitalRise Game UI. Transitions 
+between screens are implemented using DigitalRise Animation.
 
 The StateMachine is used to manage several game screens:
 - Initially, when the game starts, a 'Loading' screen is shown.

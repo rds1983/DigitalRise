@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -17,7 +17,7 @@ namespace Samples.Graphics
   [Sample(SampleCategory.Graphics,
     @"This sample shows how to use hardware instancing and a custom shader",
     @"The custom shader (see Samples/Content/InstancedModel/InstancedModel.fx) renders each 
-instance with a random color and a random alpha (using screen-door transparency). The DigitalRune 
+instance with a random color and a random alpha (using screen-door transparency). The DigitalRise 
 MeshRenderer renders the meshes and will automatically use hardware instancing if the shader 
 contains an ""instancing technique"" (see shader code). Please note: The only per-instance 
 parameter that are currently supported in hardware instancing are:

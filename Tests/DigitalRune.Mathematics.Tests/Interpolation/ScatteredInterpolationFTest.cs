@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune.Collections;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Collections;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Interpolation.Tests
+namespace DigitalRise.Mathematics.Interpolation.Tests
 {
   [TestFixture]
   public class ScatteredInterpolationFTest

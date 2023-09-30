@@ -1,8 +1,8 @@
 ﻿using System;
-using DigitalRune.Collections;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Physics;
+using DigitalRise.Collections;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Physics;
 
 
 namespace Samples.Physics

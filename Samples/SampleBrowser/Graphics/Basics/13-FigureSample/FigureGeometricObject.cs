@@ -1,5 +1,5 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
 
 
 namespace Samples.Graphics

@@ -109,7 +109,7 @@ namespace MyGame
             <content>
                 <para>
                     Let's drop a new graphics screen into the project. This graphics screen was taken
-                    from the DigitalRune samples and I have made only minor modifications. I have added
+                    from the DigitalRise samples and I have made only minor modifications. I have added
                     following files to the project:
                 </para>
                 <mediaLink>
@@ -231,11 +231,11 @@ MeshRenderer.Render(sceneQuery.RenderableNodes, context);
     <Pass Name="Default" Effect="BasicEffect" Profile="Any">
         …
     </Pass>
-    <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
-    <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBuffer" Profile="HiDef">
+    <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
+    <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBuffer" Profile="HiDef">
         <Parameter Name="SpecularPower" Value="10" />
     </Pass>
-    <Pass Name="Material" Effect="DigitalRune/Materials/Material" Profile="HiDef">
+    <Pass Name="Material" Effect="DigitalRise/Materials/Material" Profile="HiDef">
         <Parameter Name="DiffuseColor" Value="1,1,1" />
         <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
         <Texture Name="DiffuseTexture" File="ground.png" />
@@ -244,7 +244,7 @@ MeshRenderer.Render(sceneQuery.RenderableNodes, context);
                     ]]>
                 </code>
                 <para>
-                    The referenced effects are pre-built effects of DigitalRune Graphics – however,
+                    The referenced effects are pre-built effects of DigitalRise Graphics – however,
                     you could also use your own effects.
                 </para>
                 <para>
@@ -261,11 +261,11 @@ MeshRenderer.Render(sceneQuery.RenderableNodes, context);
     <Pass Name="Default" Effect="SkinnedEffect" Profile="Any">
         …
     </Pass>
-    <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMapSkinned" Profile="HiDef" />
-    <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormalSkinned" Profile="HiDef">
+    <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMapSkinned" Profile="HiDef" />
+    <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBufferNormalSkinned" Profile="HiDef">
         …
     </Pass>
-    <Pass Name="Material" Effect="DigitalRune/Materials/MaterialSkinned" Profile="HiDef">
+    <Pass Name="Material" Effect="DigitalRise/Materials/MaterialSkinned" Profile="HiDef">
         …
     </Pass>
 </Material>
@@ -279,7 +279,7 @@ MeshRenderer.Render(sceneQuery.RenderableNodes, context);
                 </mediaLink>
                 <para>
                     For more information, about the deferred rendering please check out the source
-                    code of the DigitalRune samples.
+                    code of the DigitalRise samples.
                 </para>
             </content>
         </section>

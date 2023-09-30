@@ -1,11 +1,11 @@
 ﻿using System;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Traits.Tests
+namespace DigitalRise.Animation.Traits.Tests
 {
   [TestFixture]
   public class QuaternionFTraitsTest

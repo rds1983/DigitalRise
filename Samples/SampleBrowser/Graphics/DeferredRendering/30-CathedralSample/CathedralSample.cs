@@ -3,19 +3,19 @@
 //#if !WP7 && !WP8
 //using System;
 //using System.Linq;
-//using DigitalRune.Geometry;
-//using DigitalRune.Geometry.Shapes;
-//using DigitalRune.Graphics;
-//using DigitalRune.Graphics.PostProcessing;
-//using DigitalRune.Graphics.Rendering;
-//using DigitalRune.Graphics.SceneGraph;
-//using DigitalRune.Mathematics;
-//using DigitalRune.Mathematics.Algebra;
-//using DigitalRune.Physics.ForceEffects;
+//using DigitalRise.Geometry;
+//using DigitalRise.Geometry.Shapes;
+//using DigitalRise.Graphics;
+//using DigitalRise.Graphics.PostProcessing;
+//using DigitalRise.Graphics.Rendering;
+//using DigitalRise.Graphics.SceneGraph;
+//using DigitalRise.Mathematics;
+//using DigitalRise.Mathematics.Algebra;
+//using DigitalRise.Physics.ForceEffects;
 //using Microsoft.Xna.Framework;
 //using Microsoft.Xna.Framework.Graphics;
-//using DirectionalLight = DigitalRune.Graphics.DirectionalLight;
-//using MathHelper = DigitalRune.Mathematics.MathHelper;
+//using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
+//using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 //namespace Samples.Graphics

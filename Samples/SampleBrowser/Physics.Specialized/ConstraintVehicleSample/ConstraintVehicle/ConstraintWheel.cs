@@ -3,13 +3,13 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRune.Physics.Specialized
+namespace DigitalRise.Physics.Specialized
 {
   /// <summary>
   /// Represents a single wheel of a <see cref="ConstraintVehicle"/>.

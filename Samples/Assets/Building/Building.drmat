@@ -7,17 +7,17 @@
     <Parameter Name="SpecularPower" Value="48" />
     <Texture Name="Texture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.dds" />
   </Pass>
-  <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMapAlphaTest" Profile="HiDef">
+  <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMapAlphaTest" Profile="HiDef">
     <Parameter Name="ReferenceAlpha" Value="0.95" />
     <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.dds" />
   </Pass>
-  <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferAlphaTestNormal" Profile="HiDef">
+  <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBufferAlphaTestNormal" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="48" />
     <Parameter Name="ReferenceAlpha" Value="0.95" />
     <Texture Name="DiffuseTexture" ReferenceAlpha="0.95" ScaleAlphaToCoverage="True" File="diffuse.dds" />
     <Texture Name="NormalTexture" Format="Normal" File="normal.dds"/>
   </Pass>
-  <Pass Name="Material" Effect="DigitalRune/Materials/MaterialAlphaTest" Profile="HiDef">
+  <Pass Name="Material" Effect="DigitalRise/Materials/MaterialAlphaTest" Profile="HiDef">
     <Parameter Name="DiffuseColor" Value="1,1,1" />
     <Parameter Name="SpecularColor" Value="0.1,0.1,0.1" />
     <Parameter Name="ReferenceAlpha" Value="0.95" />

@@ -1,7 +1,7 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 
 

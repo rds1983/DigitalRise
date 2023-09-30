@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using DigitalRune.Diagnostics;
-using DigitalRune.Game.Input;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Particles;
+using DigitalRise.Diagnostics;
+using DigitalRise.Game.Input;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,7 +16,7 @@ namespace Samples.Particles
   [Sample(SampleCategory.Particles,
     @"This sample uses a particle sample to draw decals. It also shows how to manually initialize
 particles.",
-    @"Note: This sample demonstrates capabilities of DigitalRune Particles. But in a real game, 
+    @"Note: This sample demonstrates capabilities of DigitalRise Particles. But in a real game, 
 decals are not created using generic particle systems",
     14)]
   [Controls(@"Sample

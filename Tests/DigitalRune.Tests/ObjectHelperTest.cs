@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using DigitalRune.Mathematics;
+using DigitalRise.Mathematics;
 using NUnit.Framework;
 
 #if !NETFX_CORE && !SILVERLIGHT
@@ -9,7 +9,7 @@ using System.Drawing;
 #endif
 
 
-namespace DigitalRune.Tests
+namespace DigitalRise.Tests
 {
   public struct VectorA
   {

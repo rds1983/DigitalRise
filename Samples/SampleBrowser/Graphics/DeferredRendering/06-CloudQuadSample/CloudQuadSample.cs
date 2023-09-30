@@ -1,13 +1,13 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 

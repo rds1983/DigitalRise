@@ -1,8 +1,8 @@
-﻿using DigitalRune.Animation.Traits;
+﻿using DigitalRise.Animation.Traits;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class Vector3KeyFrameAnimationTest

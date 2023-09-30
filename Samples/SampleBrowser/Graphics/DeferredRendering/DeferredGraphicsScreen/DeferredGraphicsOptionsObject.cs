@@ -1,11 +1,11 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
-using DigitalRune;
-using DigitalRune.Game;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise;
+using DigitalRise.Game;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
 using CommonServiceLocator;
 
 

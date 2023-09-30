@@ -1,10 +1,10 @@
 ﻿using System;
-using DigitalRune.Animation.Traits;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Animation.Traits;
+using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class Vector4FAnimationTest

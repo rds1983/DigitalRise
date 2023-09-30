@@ -30,17 +30,17 @@
                             These methods pinned the data arrays and thereby prevented these objects from being garbage collected.
                         </para>
                         <para>
-                            The following DigitalRune methods were affected by this bug:
+                            The following DigitalRise methods were affected by this bug:
                         </para>
                         <list class="bullet">
                             <listItem>
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Geometry.Meshes.TriangleMesh.FromModel(Microsoft.Xna.Framework.Graphics.Model)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Geometry.Meshes.TriangleMesh.FromModel(Microsoft.Xna.Framework.Graphics.Model)</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.MeshHelper.Merge(DigitalRune.Graphics.Mesh,System.Collections.Generic.IList{DigitalRune.Mathematics.Algebra.Vector3F},System.Collections.Generic.IList{DigitalRune.Geometry.Pose})</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.MeshHelper.Merge(DigitalRise.Graphics.Mesh,System.Collections.Generic.IList{DigitalRise.Mathematics.Algebra.Vector3F},System.Collections.Generic.IList{DigitalRise.Geometry.Pose})</codeEntityReference>
                             </listItem>
                             <listItem>
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.MeshHelper.ToTriangleMesh(DigitalRune.Graphics.Mesh)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.MeshHelper.ToTriangleMesh(DigitalRise.Graphics.Mesh)</codeEntityReference>
                             </listItem>
                         </list>
                     </content>
@@ -108,19 +108,19 @@
                     </content>
                 </section>
                 <section address="Geometry">
-                    <title>DigitalRune Geometry 1.17.1</title>
+                    <title>DigitalRise Geometry 1.17.1</title>
                     <content>
                         <list class="bullet">
                             <listItem>
                                 CHANGE:
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Geometry.Meshes.TriangleMesh.FromModel(Microsoft.Xna.Framework.Graphics.Model)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Geometry.Meshes.TriangleMesh.FromModel(Microsoft.Xna.Framework.Graphics.Model)</codeEntityReference>
                                 now supports models with 32 bit indices.
                             </listItem>
                         </list>
                     </content>
                 </section>
                 <section address="Graphics">
-                    <title>DigitalRune Graphics 1.0beta2</title>
+                    <title>DigitalRise Graphics 1.0beta2</title>
                     <content>
                         <list class="bullet">
                             <listItem>
@@ -308,23 +308,23 @@
                             </listItem>
                             <listItem>
                                 NEW: Properties
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.Effects.EffectBindingException.EffectName</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.Effects.EffectBindingException.EffectName</codeEntityReference>
                                 and
-                                <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.Effects.EffectBindingException.EffectParameterName</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.Effects.EffectBindingException.EffectParameterName</codeEntityReference>
                                 added to
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Effects.EffectBindingException</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Effects.EffectBindingException</codeEntityReference>
                                 to provide additional information when a binding fails.
                             </listItem>
                             <listItem>
-                                NEW: <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Interop.FormsPresentationTarget</codeEntityReference>
+                                NEW: <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Interop.FormsPresentationTarget</codeEntityReference>
                                 is now also available in MonoGame.
                             </listItem>
                             <listItem>
                                 CHANGE: Presentation targets refactored. It is now possible to implement
                                 custom presentation targets. (Methods
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.Interop.IPresentationTarget.BeginRender(DigitalRune.Graphics.RenderContext)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.Interop.IPresentationTarget.BeginRender(DigitalRise.Graphics.RenderContext)</codeEntityReference>
                                 and
-                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRune.Graphics.Interop.IPresentationTarget.EndRender(DigitalRune.Graphics.RenderContext)</codeEntityReference>
+                                <codeEntityReference qualifyHint="true" autoUpgrade="true">M:DigitalRise.Graphics.Interop.IPresentationTarget.EndRender(DigitalRise.Graphics.RenderContext)</codeEntityReference>
                                 added.
                                 <legacyBold>IPresentationTarget.Handle</legacyBold> is no longer needed and has been marked as obsolete.)
                             </listItem>
@@ -336,12 +336,12 @@
                             </listItem>
                             <listItem>
                               CHANGE: Clamp large (infinite) AABBs to camera/light AABB in
-                              <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.OcclusionBuffer</codeEntityReference>.
+                              <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.OcclusionBuffer</codeEntityReference>.
                               Automatically handle infinite objects. Improve performance for large objects.
                             </listItem>
                             <listItem>
                                 CHANGE: Calculate exact view-normalized distance in
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.OcclusionBuffer</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.OcclusionBuffer</codeEntityReference>.
                                 (Currently shader computes position from AABB instead of scene node origin.)
                             </listItem>
                             <listItem>
@@ -353,7 +353,7 @@
                             </listItem>
                             <listItem>
                                 FIX: <codeEntityReference qualifyHint="false">T:System.ArgumentNullException</codeEntityReference>
-                                in DigitalRune Model Processor if skinned model is exported without any materials. (XNA only.)
+                                in DigitalRise Model Processor if skinned model is exported without any materials. (XNA only.)
                             </listItem>
                             <listItem>
                                 FIX: When a skinned model without textures and without material definition (.drmat file)
@@ -369,33 +369,33 @@
                                 matching file.)
                             </listItem>
                             <listItem>
-                                FIX: The DigitalRune Texture processor may throw an exception ("Surface format is not supported.")
+                                FIX: The DigitalRise Texture processor may throw an exception ("Surface format is not supported.")
                                 even if no processing is required.
                             </listItem>
                             <listItem>
                                 FIX: Minor floating-point rounding issues in
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.SpriteRenderer</codeEntityReference>.
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.SpriteRenderer</codeEntityReference>.
                             </listItem>
                             <listItem>
                                 FIX: Effect parameter bindings for XNA stock effects (AlphaTestEffect, BasicEffect, etc.)
                                 fail when using
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector3F</codeEntityReference>/<codeEntityReference qualifyHint="false">T:DigitalRune.Mathematics.Algebra.Vector4F</codeEntityReference>
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector3F</codeEntityReference>/<codeEntityReference qualifyHint="false">T:DigitalRise.Mathematics.Algebra.Vector4F</codeEntityReference>
                                 instead of
                                 <codeEntityReference qualifyHint="false">T:Microsoft.Xna.Framework.Vector3</codeEntityReference>/<codeEntityReference qualifyHint="false">T:Microsoft.Xna.Framework.Vector4</codeEntityReference>.
                             </listItem>
                             <listItem>
-                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
+                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
                                 does not handle partially infinite shapes (e.g. ocean's
-                                <codeEntityReference qualifyHint="false">T:DigitalRune.Geometry.Shapes.PlaneShape</codeEntityReference>)
+                                <codeEntityReference qualifyHint="false">T:DigitalRise.Geometry.Shapes.PlaneShape</codeEntityReference>)
                                 correctly.
                             </listItem>
                             <listItem>
-                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
+                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
                                 did not cull shadow casters that were occluded from the light's point of view when "progressive shadow caster culling" is enabled.
                             </listItem>
                             <listItem>
-                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRune.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
-                                may uses wrong <codeEntityReference qualifyHint="false">P:DigitalRune.Graphics.SceneGraph.SceneNode.MaxDistance</codeEntityReference>
+                                FIX: <codeEntityReference qualifyHint="false">T:DigitalRise.Graphics.Rendering.OcclusionBuffer</codeEntityReference>
+                                may uses wrong <codeEntityReference qualifyHint="false">P:DigitalRise.Graphics.SceneGraph.SceneNode.MaxDistance</codeEntityReference>
                                 when culling shadow casters.
                             </listItem>
                             <listItem>

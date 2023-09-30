@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace DigitalRune
+namespace DigitalRise
 {
 	internal static class Utility
 	{

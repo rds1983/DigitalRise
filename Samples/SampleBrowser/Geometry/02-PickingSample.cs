@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -51,7 +51,7 @@ pick object using the mouse cursor.",
       {
         // Optional: Change the broad phase type. The default type is the SweepAndPruneSpace, 
         // which is very fast for physics simulation. The DualPartition is better for ray casts.
-        // See also http://digitalrune.github.io/DigitalRune-Documentation/html/e32cab3b-cc7c-42ee-8ec9-23dd4467edd0.htm#WhichPartition
+        // See also http://digitalrune.github.io/DigitalRise-Documentation/html/e32cab3b-cc7c-42ee-8ec9-23dd4467edd0.htm#WhichPartition
         BroadPhase = new DualPartition<CollisionObject>(),
       };
 

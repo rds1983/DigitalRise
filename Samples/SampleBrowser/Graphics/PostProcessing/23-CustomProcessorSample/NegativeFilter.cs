@@ -1,8 +1,8 @@
 ﻿#if !WP7
 using AssetManagementBase;
-using DigitalRune;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.PostProcessing;
+using DigitalRise;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

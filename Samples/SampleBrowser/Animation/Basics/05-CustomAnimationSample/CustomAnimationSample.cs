@@ -1,6 +1,6 @@
-﻿using DigitalRune.Animation;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Animation;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 

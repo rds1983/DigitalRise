@@ -1,5 +1,5 @@
-﻿using DigitalRune.Diagnostics;
-using DigitalRune.Graphics.SceneGraph;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 
 

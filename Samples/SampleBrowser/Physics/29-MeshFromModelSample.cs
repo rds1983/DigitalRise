@@ -1,14 +1,14 @@
 ﻿#if !ANDROID && !IOS   // Cannot read from vertex buffer in MonoGame/OpenGLES.
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 using AssetManagementBase;
 
 
@@ -42,8 +42,8 @@ mesh as a collision shape.",
       // Get mesh of the imported model.
       var meshNode = bowlModelNode.FindFirstMeshNode();
 
-      // Extract the triangle mesh from the DigitalRune Graphics Mesh instance. 
-      // Note: XNA graphics use clockwise winding for triangle front sides and DigitalRune Physics uses
+      // Extract the triangle mesh from the DigitalRise Graphics Mesh instance. 
+      // Note: XNA graphics use clockwise winding for triangle front sides and DigitalRise Physics uses
       // counter-clockwise winding for front sides. FromModel() automatically flips the 
       // winding order. 
       TriangleMesh mesh = MeshHelper.ToTriangleMesh(meshNode.Mesh);

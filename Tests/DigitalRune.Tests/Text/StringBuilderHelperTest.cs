@@ -4,7 +4,7 @@ using System.Threading;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Text.Tests
+namespace DigitalRise.Text.Tests
 {
   [TestFixture]
   public class StringBuilderHelperTest

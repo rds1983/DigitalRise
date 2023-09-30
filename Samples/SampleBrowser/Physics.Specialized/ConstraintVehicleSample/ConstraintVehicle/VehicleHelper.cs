@@ -3,10 +3,10 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRune.Mathematics;
+using DigitalRise.Mathematics;
 
 
-namespace DigitalRune.Physics.Specialized
+namespace DigitalRise.Physics.Specialized
 {
   /// <summary>
   /// Provides helper methods for vehicle simulation.

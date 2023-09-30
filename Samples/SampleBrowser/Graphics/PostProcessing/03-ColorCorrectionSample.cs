@@ -1,9 +1,9 @@
-﻿using DigitalRune.Game.Input;
-using DigitalRune.Graphics.PostProcessing;
+﻿using DigitalRise.Game.Input;
+using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
 
 namespace Samples.Graphics

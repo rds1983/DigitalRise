@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Geometry
 {
   //----------------------------------------------------------------------------
   // Important: 
-  // This character controller is an educational example. The DigitalRune.Physics
+  // This character controller is an educational example. The DigitalRise.Physics
   // library contains a more advanced, faster and more stable character controller
   // implementation.
   //----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿using System;
-using DigitalRune.Graphics;
+using DigitalRise.Graphics;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -4,7 +4,7 @@
 
         <introduction>
             <para>
-                The DigitalRune Engine is game engine which empowers professional .NET developers,
+                The DigitalRise Engine is game engine which empowers professional .NET developers,
                 indie developers, and hobbyists to create 3D games and simulations. The complete game
                 engine is written in managed code and supports the Microsoft XNA Game Studio and MonoGame.
             </para>
@@ -15,7 +15,7 @@
             <title>Libraries</title>
             <content>
                 <para>
-                    The DigitalRune Engine consists of several independent libraries:
+                    The DigitalRise Engine consists of several independent libraries:
                 </para>
                 <para>
                     <mediaLinkInline>
@@ -37,7 +37,7 @@
                     <row>
                         <entry>
                             <para>
-                                <link xlink:href="dc44c3a5-8545-4253-9da1-62258a00607c">DigitalRune Base Library</link>
+                                <link xlink:href="dc44c3a5-8545-4253-9da1-62258a00607c">DigitalRise Base Library</link>
                             </para>
                         </entry>
                         <entry>
@@ -47,7 +47,7 @@
                     <row>
                         <entry>
                             <para>
-                                <link xlink:href="2ac58586-0d4f-4625-bf4c-fc32591a5304">DigitalRune Mathematics</link>
+                                <link xlink:href="2ac58586-0d4f-4625-bf4c-fc32591a5304">DigitalRise Mathematics</link>
                             </para>
                         </entry>
                         <entry>
@@ -107,7 +107,7 @@
                     <row>
                         <entry>
                             <para>
-                                <link xlink:href="fe8ccefb-7bce-4290-be56-81bd38ba86fe">DigitalRune Game</link>
+                                <link xlink:href="fe8ccefb-7bce-4290-be56-81bd38ba86fe">DigitalRise Game</link>
                             </para>
                         </entry>
                         <entry>
@@ -127,8 +127,8 @@
                     <!--<row>
             <entry><link xlink:href="56104e89-47c3-436f-9ed0-b66f646a57a2"/></entry>
             <entry>
-              Documentation of the DigitalRune Windows helper library (<localUri>DigitalRune.Windows.dll</localUri>).
-              This library is included in the DigitalRune libraries for WPF.
+              Documentation of the DigitalRise Windows helper library (<localUri>DigitalRise.Windows.dll</localUri>).
+              This library is included in the DigitalRise libraries for WPF.
             </entry>
           </row>-->
                 </table>
@@ -147,7 +147,7 @@
                 </row>
               </tableHeader>
               <row>
-                <entry><link xlink:href="c829d353-ff2c-48ba-847d-5a78b8f5a403">DigitalRune Docking Windows</link></entry>
+                <entry><link xlink:href="c829d353-ff2c-48ba-847d-5a78b8f5a403">DigitalRise Docking Windows</link></entry>
                 <entry>A WPF docking window library.</entry>
                 <entry><para>.NET Framework 4.0</para></entry>
               </row>
@@ -161,7 +161,7 @@
             <title>Supported platforms and requirements</title>
             <content>
                 <para>
-                    The DigitalRune Engine is a set of .NET libraries. The libraries
+                    The DigitalRise Engine is a set of .NET libraries. The libraries
                     can be used on the following platforms:
                     <legacyItalic>
                         Portable Class Library (PCL), Windows (desktop), Windows Store, Windows Phone, Universal Windows Platform, Xbox 360,
@@ -173,9 +173,9 @@
                     .NET/Mono implementation depending on the target platform.
                 </para>
                 <para>
-                    The libraries DigitalRune.Game.UI and DigitalRune.Graphics require the Microsoft XNA
+                    The libraries DigitalRise.Game.UI and DigitalRise.Graphics require the Microsoft XNA
                     Framework 4.0 or <link xlink:href="73ecd962-4ff5-4988-bb0c-bffa66f933b9"/>.
-                    For all other libraries (DigitalRune Mathematics, Geometry, Physics, etc.), XNA/MonoGame
+                    For all other libraries (DigitalRise Mathematics, Geometry, Physics, etc.), XNA/MonoGame
                     is supported but not required.
                 </para>
                 <para>
@@ -202,7 +202,7 @@
                     <title>Required knowledge</title>
                     <content>
                         <para>
-                            Before using the DigitalRune Engine you should be familiar with .NET development and
+                            Before using the DigitalRise Engine you should be familiar with .NET development and
                             C#. If you are new to .NET, have a look at the
                             <externalLink>
                                 <linkText>MSDN Library</linkText>
@@ -237,7 +237,7 @@
                     <content>
                         <para>
                             The <link xlink:href="4d7ccf95-54e8-4b4c-950f-9420947b4e24" /> provide a hands-on
-                            introduction to the DigitalRune Engine and selected features.
+                            introduction to the DigitalRise Engine and selected features.
                         </para>
                     </content>
                 </section>
@@ -254,16 +254,16 @@
                     </content>
                 </section>
                 <section address="Learn">
-                    <title>Learning how to use the DigitalRune Engine</title>
+                    <title>Learning how to use the DigitalRise Engine</title>
                     <content>
-                        <para>Please check out following sources to learn how to use the DigitalRune Engine:</para>
+                        <para>Please check out following sources to learn how to use the DigitalRise Engine:</para>
                         <list class="bullet">
                             <listItem>
                                 Read this documentation, which is included in the download as .chm file and
                                 also available online:
                                 <externalLink>
-                                    <linkText>http://digitalrune.github.io/DigitalRune-Documentation/</linkText>
-                                    <linkUri>http://digitalrune.github.io/DigitalRune-Documentation/</linkUri>
+                                    <linkText>http://digitalrune.github.io/DigitalRise-Documentation/</linkText>
+                                    <linkUri>http://digitalrune.github.io/DigitalRise-Documentation/</linkUri>
                                 </externalLink>
                             </listItem>
                             <listItem>
@@ -302,21 +302,21 @@
                     <title>Staying up-to-date</title>
                     <content>
                         <para>
-                            To get news about the DigitalRune Engine:
+                            To get news about the DigitalRise Engine:
                         </para>
                         <list class="bullet">
                             <listItem>
                                 Follow us on Twitter:
                                 <externalLink>
-                                    <linkText>@DigitalRune</linkText>
-                                    <linkUri>https://twitter.com/DigitalRune</linkUri>
+                                    <linkText>@DigitalRise</linkText>
+                                    <linkUri>https://twitter.com/DigitalRise</linkUri>
                                 </externalLink>
                             </listItem>
                             <listItem>
                                 To watch the latest videos, subscribe to our
                                 <externalLink>
                                     <linkText>YouTube channel</linkText>
-                                    <linkUri>http://www.youtube.com/DigitalRuneSoftware</linkUri>
+                                    <linkUri>http://www.youtube.com/DigitalRiseSoftware</linkUri>
                                 </externalLink>.
                             </listItem>
                         </list>
@@ -385,8 +385,8 @@
                         </entry>
                         <entry>
                             <para>
-                                Summary of the files that are distributed with the DigitalRune libraries
-                                and dependencies between DigitalRune Assemblies and third-party assemblies.
+                                Summary of the files that are distributed with the DigitalRise libraries
+                                and dependencies between DigitalRise Assemblies and third-party assemblies.
                             </para>
                         </entry>
                     </row>
@@ -398,7 +398,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Tutorials that show how to use the DigitalRune Engine.
+                                Tutorials that show how to use the DigitalRise Engine.
                             </para>
                         </entry>
                     </row>
@@ -434,7 +434,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Miscellaneous information concerning the whole DigitalRune Engine.
+                                Miscellaneous information concerning the whole DigitalRise Engine.
                             </para>
                         </entry>
                     </row>

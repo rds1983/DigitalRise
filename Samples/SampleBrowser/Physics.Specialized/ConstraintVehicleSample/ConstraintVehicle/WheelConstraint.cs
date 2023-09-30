@@ -4,14 +4,14 @@
 
 using System;
 using System.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.Settings;
+using DigitalRise.Geometry;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.Settings;
 
 
-namespace DigitalRune.Physics.Specialized
+namespace DigitalRise.Physics.Specialized
 {
   /// <summary>
   /// Defines a complex constraints which models a wheel including suspension spring, a hard 

@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Collisions.Tests
+namespace DigitalRise.Geometry.Collisions.Tests
 {
   [TestFixture]
   public class ContactSetCollectionTest

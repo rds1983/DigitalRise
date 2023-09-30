@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using DigitalRune;
-using DigitalRune.Game;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
+using DigitalRise;
+using DigitalRise.Game;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -106,9 +106,9 @@ namespace Samples.Graphics
       };
       terrain.Tiles.Add(_terrainTile);
 
-      var shadowMapEffect = _graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainShadowMap");
-      var gBufferEffect = _graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainGBuffer");
-      var materialEffect = _graphicsService.GetStockEffect("DigitalRune/Terrain/TerrainMaterial");
+      var shadowMapEffect = _graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainShadowMap");
+      var gBufferEffect = _graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainGBuffer");
+      var materialEffect = _graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainMaterial");
       var material = new Material
       {
         { "ShadowMap", new EffectBinding(_graphicsService, shadowMapEffect, null, EffectParameterHint.Material) },

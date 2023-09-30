@@ -1,10 +1,10 @@
-﻿using DigitalRune.Game;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+﻿using DigitalRise.Game;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;

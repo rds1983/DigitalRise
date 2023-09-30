@@ -2,21 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.ForceEffects;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.ForceEffects;
 using Microsoft.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using Camera = DigitalRune.Graphics.Camera;
+using Camera = DigitalRise.Graphics.Camera;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
 
@@ -490,11 +490,11 @@ collision is detected.",
     /// <param name="deltaTime">The elapsed time since the last call of <see cref="Update"/>.</param>
     private void TiltCamera(TimeSpan deltaTime)
     {
-      // (Note: We use DigitalRune Mathematics instead of the XNA math types - mainly because 
-      // DigitalRune Mathematics provides a 3x3 matrix to describe rotations and the QuaternionF 
+      // (Note: We use DigitalRise Mathematics instead of the XNA math types - mainly because 
+      // DigitalRise Mathematics provides a 3x3 matrix to describe rotations and the QuaternionF 
       // provides a nice helper function to create a rotation from two given vectors.
       // 
-      // Please note that DigitalRune Mathematics uses column vectors whereas XNA uses row vectors.
+      // Please note that DigitalRise Mathematics uses column vectors whereas XNA uses row vectors.
       // When using Vector3F and Matrix33F we need to multiple them in this order: v' = M * v.
       // When using Vector3 and Matrix we need to multiple them in this order: v' = v * M.)
 

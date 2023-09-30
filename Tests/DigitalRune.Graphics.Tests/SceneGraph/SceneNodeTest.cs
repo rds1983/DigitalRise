@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.SceneGraph.Tests
+namespace DigitalRise.Graphics.SceneGraph.Tests
 {
   [TestFixture]
   public class SceneNodeTest

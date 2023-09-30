@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Interpolation.Tests
+namespace DigitalRise.Mathematics.Interpolation.Tests
 {
   internal static class MathAssert
   {

@@ -1,11 +1,11 @@
 ﻿#if WINDOWS
 using System.ComponentModel;
 using System.Linq;
-using DigitalRune.Geometry.Meshes;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry.Meshes;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 

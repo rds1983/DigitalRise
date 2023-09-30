@@ -1,9 +1,9 @@
-﻿using DigitalRune.Collections;
-using DigitalRune.Particles.Effectors;
+﻿using DigitalRise.Collections;
+using DigitalRise.Particles.Effectors;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Particles.Tests
+namespace DigitalRise.Particles.Tests
 {
   [TestFixture]
   public class ParticleHelperTest

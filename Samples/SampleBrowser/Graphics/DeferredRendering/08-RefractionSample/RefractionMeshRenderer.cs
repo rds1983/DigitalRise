@@ -1,10 +1,10 @@
 ﻿#if !WP7 && !WP8
 using System.Collections.Generic;
 using System.Diagnostics;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Effects;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Effects;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
 
 namespace Samples.Graphics
 {
@@ -62,7 +62,7 @@ namespace Samples.Graphics
         if (RequiresSourceTexture(node, context))
         {
           // The effect of the node wants to sample from the "SourceTexture". 
-          // Per default, DigitalRune Graphics uses a delegate effect parameter 
+          // Per default, DigitalRise Graphics uses a delegate effect parameter 
           // binding to set the "SourceTexture" parameters to the 
           // RenderContext.SourceTexture value. However, this property is usually 
           // null. We need to manually set RenderContext.SourceTexture to the 

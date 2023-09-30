@@ -2,7 +2,7 @@
 
 <!-- HiDef uses Parallax Occlusion Mapping -->
 <Material>
-  <Pass Name="Detail" Effect="DigitalRune/Terrain/TerrainMaterialLayer" Profile="Any">
+  <Pass Name="Detail" Effect="DigitalRise/Terrain/TerrainMaterialLayer" Profile="Any">
     <Parameter Name="DiffuseColor" Value="0.5,0.5,0.5" />
     <Parameter Name="Alpha" Value="1" />
     <Parameter Name="SpecularColor" Value="1,1,1" />

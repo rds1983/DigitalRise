@@ -4,7 +4,7 @@
 
     <introduction>
       <para>
-        The DigitalRune libraries include third-party software.
+        The DigitalRise libraries include third-party software.
       </para>
       <autoOutline/>
     </introduction>
@@ -42,7 +42,7 @@
 
 
     <section address="Base">
-      <title>DigitalRune Base</title>
+      <title>DigitalRise Base</title>
       <content>
         <para></para>
         <list class="bullet">
@@ -138,7 +138,7 @@
           </listItem>
           <listItem>
             <para>
-              The table of prime numbers in the <codeEntityReference qualifyHint="false">T:DigitalRune.PrimeHelper</codeEntityReference>
+              The table of prime numbers in the <codeEntityReference qualifyHint="false">T:DigitalRise.PrimeHelper</codeEntityReference>
               is copied from the
               <externalLink>
                 <linkText>cern.colt</linkText>
@@ -162,7 +162,7 @@
           <listItem>
             <para>
               Class
-              <codeEntityReference qualifyHint="false">T:DigitalRune.Text.StringBuilderExtensions</codeEntityReference>
+              <codeEntityReference qualifyHint="false">T:DigitalRise.Text.StringBuilderExtensions</codeEntityReference>
               is based on the
               <externalLink>
                 <linkText>Performance Measuring Sample</linkText>
@@ -336,7 +336,7 @@
 
 
     <section address="Windows">
-      <title>DigitalRune Windows Base</title>
+      <title>DigitalRise Windows Base</title>
       <content>
 
         <list class="bullet">
@@ -401,7 +401,7 @@
 
 
     <section address="Framework">
-      <title>DigitalRune Windows Framework</title>
+      <title>DigitalRise Windows Framework</title>
       <content>
         <list class="bullet">
           <listItem>

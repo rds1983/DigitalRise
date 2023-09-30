@@ -1,9 +1,9 @@
-﻿using DigitalRune.Animation;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
+﻿using DigitalRise.Animation;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
 using Microsoft.Xna.Framework;
-using CurveLoopType = DigitalRune.Mathematics.Interpolation.CurveLoopType;
+using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
 
 
 namespace Samples.Animation

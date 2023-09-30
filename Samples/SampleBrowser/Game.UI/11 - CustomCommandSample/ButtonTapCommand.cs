@@ -1,5 +1,5 @@
 ﻿using System;
-using DigitalRune.Game.Input;
+using DigitalRise.Game.Input;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -103,7 +103,7 @@ namespace Samples.Game.UI
     /// </summary>
     /// <value>
     /// The index of the logical player. The default value is 
-    /// <see cref="DigitalRune.Game.Input.LogicalPlayerIndex.One"/>.
+    /// <see cref="DigitalRise.Game.Input.LogicalPlayerIndex.One"/>.
     /// </value>
     public LogicalPlayerIndex LogicalPlayerIndex { get; set; }
 

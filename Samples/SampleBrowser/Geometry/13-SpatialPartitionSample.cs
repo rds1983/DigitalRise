@@ -1,11 +1,11 @@
 ﻿using System;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
-using Ray = DigitalRune.Geometry.Shapes.Ray;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 
 namespace Samples.Geometry
@@ -33,8 +33,8 @@ be faster in certain cases.",
       GraphicsScreen.DrawReticle = true;
       SetCamera(new Vector3F(0, 1, 10), 0, 0);
 
-      // Create a spatial partition. DigitalRune Geometry supports several types, see also
-      // http://digitalrune.github.io/DigitalRune-Documentation/html/e32cab3b-cc7c-42ee-8ec9-23dd4467edd0.htm#WhichPartition
+      // Create a spatial partition. DigitalRise Geometry supports several types, see also
+      // http://digitalrune.github.io/DigitalRise-Documentation/html/e32cab3b-cc7c-42ee-8ec9-23dd4467edd0.htm#WhichPartition
       // An AabbTree is useful for static objects. A DynamicAabbTree is good for moving objects.
       // The spatial partition can manage different types of items. In this case it manages
       // GeometricObjects. A delegate has to inform the spatial partition how to get the AABB

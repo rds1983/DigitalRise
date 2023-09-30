@@ -1,15 +1,15 @@
 ﻿#if XBOX
 using System;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Character;
-using DigitalRune.Animation.Traits;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Character;
+using DigitalRise.Animation.Traits;
 using Microsoft.Xna.Framework.GamerServices;
 
 
 namespace Samples.Animation
 {
   // An animation that wraps an XNA AvatarAnimation to make it compatible with the
-  // DigitalRune Animation system.
+  // DigitalRise Animation system.
   public class WrappedAvatarSkeletonAnimation : Animation<SkeletonPose>
   {
     private readonly AvatarAnimation _avatarAnimation;

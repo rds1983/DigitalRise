@@ -4,7 +4,7 @@ using System;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
   public class InvalidAnimationExceptionTest

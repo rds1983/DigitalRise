@@ -1,7 +1,7 @@
 #if !WP7 && !WP8
-using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Mathematics.Algebra;
 
 
 namespace Samples.Game.UI

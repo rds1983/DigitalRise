@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Tests
+namespace DigitalRise.Mathematics.Tests
 {
   [TestFixture]
   public class ConstantsFTest

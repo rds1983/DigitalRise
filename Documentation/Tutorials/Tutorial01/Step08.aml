@@ -107,9 +107,9 @@ namespace MyGame
                 <code language="c#" title="GroundObject.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Game;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 
@@ -174,8 +174,8 @@ namespace MyGame
                 <code language="c#" title="MyGameComponent.cs">
                     <![CDATA[
 …
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.ServiceLocation;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.ServiceLocation;
 …
 
 namespace MyGame
@@ -237,11 +237,11 @@ namespace MyGame
                 <code language="c#" title="LightObject.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Practices.ServiceLocation;
 
 namespace MyGame

@@ -1,11 +1,11 @@
 ﻿using AssetManagementBase;
 using CommonServiceLocator;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -125,7 +125,7 @@ namespace Samples.Particles
         FadeOutEnd = 1.0f,
       });
 
-      // DigitalRune Graphics supports "texture atlases": The class PackedTexture 
+      // DigitalRise Graphics supports "texture atlases": The class PackedTexture 
       // describes a single texture or tile set packed into a texture atlas. The 
       // fire texture in this example consists of 4 textures.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =

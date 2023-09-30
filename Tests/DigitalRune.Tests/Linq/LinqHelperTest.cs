@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRune.Collections;
+using DigitalRise.Collections;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Linq.Tests
+namespace DigitalRise.Linq.Tests
 {
   [TestFixture]
   public class LinqHelperTest

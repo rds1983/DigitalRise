@@ -1,8 +1,8 @@
 ﻿#if !WP7 && !WP8
 using System;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Graphics;
 
 

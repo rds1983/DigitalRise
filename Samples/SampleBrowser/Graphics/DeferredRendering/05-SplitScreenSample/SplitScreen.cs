@@ -1,6 +1,6 @@
 ﻿#if !WP7 && !WP8
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

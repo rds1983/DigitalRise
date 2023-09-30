@@ -6,8 +6,8 @@
     <Parameter Name="SpecularPower" Value="1000" />
     <Texture Name="Texture" File="Marble_Diffuse.dds" />
   </Pass>
-  <Pass Name="ShadowMap" Effect="DigitalRune/Materials/ShadowMap" Profile="HiDef" />
-  <Pass Name="GBuffer" Effect="DigitalRune/Materials/GBufferNormal" Profile="HiDef">
+  <Pass Name="ShadowMap" Effect="DigitalRise/Materials/ShadowMap" Profile="HiDef" />
+  <Pass Name="GBuffer" Effect="DigitalRise/Materials/GBufferNormal" Profile="HiDef">
     <Parameter Name="SpecularPower" Value="1000" />
     <Texture Name="NormalTexture" Format="Normal" File="Marble_Normal.dds"/>
   </Pass>

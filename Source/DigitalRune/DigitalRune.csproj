@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>DigitalRune</AssemblyName>
-    <PackageId>DigitalRune</PackageId>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-</Project>

@@ -1,7 +1,7 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Animation.Easing;
-using DigitalRune.Graphics;
+using DigitalRise.Animation;
+using DigitalRise.Animation.Easing;
+using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 
 
@@ -9,7 +9,7 @@ namespace Samples.Animation
 {
   [Sample(SampleCategory.Animation,
     @"This sample animates a double value.",
-    @"DigitalRune Animation does not directly support double animations. To add double animations
+    @"DigitalRise Animation does not directly support double animations. To add double animations
 you need to create a DoubleTraits class (see DoubleTraits.cs) that tells the animation service
 how double values are created/recycled/added/interpolated/blended/etc. This DoubleTraits class
 can be used in a custom animation (see DoubleFromToByAnimation.cs).",

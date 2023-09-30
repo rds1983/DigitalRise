@@ -23,11 +23,11 @@
                         Select <ui>Add | Existing Item…</ui>
                     </listItem>
                     <listItem>
-                        Browse to this folder of the DigitalRune Engine:
+                        Browse to this folder of the DigitalRise Engine:
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\Samples\Content\Particles]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\Samples\Content\Particles]]>
                                 </localUri>
                             </listItem>
                         </list>
@@ -56,7 +56,7 @@
                 <code language="c#" title="Game1.cs">
                     <![CDATA[
 …
-using DigitalRune.Particles;                                                                  // NEW
+using DigitalRise.Particles;                                                                  // NEW
 …
 
 namespace MyGame
@@ -116,15 +116,15 @@ namespace MyGame
                 <code language="c#" title="SmokeObject.cs">
                     <![CDATA[
 using System;
-using DigitalRune.Game;
-using DigitalRune.Geometry;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Particles;
-using DigitalRune.Particles.Effectors;
+using DigitalRise.Game;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Particles;
+using DigitalRise.Particles.Effectors;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -249,7 +249,7 @@ namespace MyGame
                     This game object creates a new <legacyBold>ParticleSystem</legacyBold> and sets a
                     lot of particle system parameters and effectors, which define the appearance and
                     dynamics of the effect. For a more detailed introduction to particle system parameters
-                    and effector, please have a look at the DigitalRune documentation and samples.
+                    and effector, please have a look at the DigitalRise documentation and samples.
                 </para>
                 <para>
                     At the end of <legacyBold>OnLoad</legacyBold>, a <legacyBold>ParticleSystemNode</legacyBold>

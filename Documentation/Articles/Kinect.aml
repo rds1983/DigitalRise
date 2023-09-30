@@ -4,7 +4,7 @@
 
         <introduction>
             <para>
-                This article discusses how the DigitalRune Engine can help to use the
+                This article discusses how the DigitalRise Engine can help to use the
                 Microsoft Kinect for Windows sensor for real-time motion capture.
             </para>
             <autoOutline>1</autoOutline>
@@ -44,8 +44,8 @@
                     to animate the XNA Dude model and a Space Marine model. There are three different skeletons
                     involved: The Kinect player skeleton, the Dude skeleton and the Space Marine skeleton.
                     All three skeletons are different, i.e. have different bone names and a different number of
-                    bones. DigitalRune Animation contains a
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Animation.Character.SkeletonMapper</codeEntityReference>
+                    bones. DigitalRise Animation contains a
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Animation.Character.SkeletonMapper</codeEntityReference>
                     which can be used to transfer an animation from one skeleton to another skeleton with a different
                     structure.
                 </para>
@@ -86,7 +86,7 @@ _skeletonMapperA.BoneMappers.Add(new ChainBoneMapper(ks.GetIndex("ShoulderCenter
                 </para>
                 <para>
                     In each frame the
-                    <codeEntityReference qualifyHint="false">T:DigitalRune.Animation.Character.SkeletonMapper</codeEntityReference>
+                    <codeEntityReference qualifyHint="false">T:DigitalRise.Animation.Character.SkeletonMapper</codeEntityReference>
                     is called to transfer the current pose of the Kinect player skeleton to the skeleton of the 3D model:
                 </para>
                 <code language="cs">

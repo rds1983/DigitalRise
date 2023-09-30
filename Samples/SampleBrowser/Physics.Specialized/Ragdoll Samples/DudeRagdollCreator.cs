@@ -1,14 +1,14 @@
 ﻿using System.Linq;
-using DigitalRune.Animation.Character;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Physics;
-using DigitalRune.Physics.Constraints;
-using DigitalRune.Physics.Materials;
-using DigitalRune.Physics.Specialized;
+using DigitalRise.Animation.Character;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Physics;
+using DigitalRise.Physics.Constraints;
+using DigitalRise.Physics.Materials;
+using DigitalRise.Physics.Specialized;
 
 
 namespace Samples.Animation

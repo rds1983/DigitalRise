@@ -1,15 +1,15 @@
-﻿using DigitalRune.Game.UI;
-using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Game.UI;
+using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
 namespace Samples.Game.UI
 {
   [Sample(SampleCategory.GameUI,
-    @"This sample shows how to use the DigitalRune Game UI controls.",
+    @"This sample shows how to use the DigitalRise Game UI controls.",
     @"This sample shows:
 - All controls provided by the UI library.
 - How to create a resizable window with scrollable content.

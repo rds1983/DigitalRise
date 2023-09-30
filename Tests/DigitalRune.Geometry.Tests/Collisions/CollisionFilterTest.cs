@@ -1,9 +1,9 @@
 ﻿using System;
-using DigitalRune.Collections;
+using DigitalRise.Collections;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Geometry.Collisions.Tests
+namespace DigitalRise.Geometry.Collisions.Tests
 {
   [TestFixture]
   public class CollisionFilterTest

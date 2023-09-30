@@ -1,9 +1,9 @@
 ﻿#if !ANDROID && !LINUX && !MACOS && !IOS    // saucer model uses .dds cube map which is not supported in OpenGL.
-using DigitalRune.Geometry;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Geometry;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
@@ -24,11 +24,11 @@ namespace Samples.Graphics
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
       SetCamera(new Vector3F(8, 6, 8), ConstantsF.PiOver4, -0.4f);
 
-      // Load the saucer model. This model is processed using the DigitalRune Model 
+      // Load the saucer model. This model is processed using the DigitalRise Model 
       // Processor - not the default XNA model processor!
       // In the folder that contains saucer.fbx, there are several XML files (*.drmdl and *.drmat) 
       // which define the materials of the model. These material description files are 
-      // automatically processed by the DigitalRune Model Processor. Please browse 
+      // automatically processed by the DigitalRise Model Processor. Please browse 
       // to the content folder and have a look at the *.drmdl and *.drmat files.
       var model = AssetManager.LoadDRModel(GraphicsService, "EnvironmentMapped/saucer.drmdl");
 

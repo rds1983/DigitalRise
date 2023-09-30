@@ -1,9 +1,9 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Statistics;
-using DigitalRune.Physics;
-using DigitalRune.Physics.ForceEffects;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Statistics;
+using DigitalRise.Physics;
+using DigitalRise.Physics.ForceEffects;
 
 
 namespace Samples.Physics
@@ -27,8 +27,8 @@ a custom filter class.",
       // response. If you can disable collision detection too, use 
       //   Simulation.CollisionDomain.CollisionDetection.CollisionFilter 
       // instead - this is more efficient!
-      // (In this sample, a custom filter implementation is used. DigitalRune.Physics provides
-      // a standard filter implementation: DigitalRune.Physics.CollisionResponseFilter.)
+      // (In this sample, a custom filter implementation is used. DigitalRise.Physics provides
+      // a standard filter implementation: DigitalRise.Physics.CollisionResponseFilter.)
       Simulation.ResponseFilter = new MyCollisionResponseFilter();
 
       // Add a ground plane.

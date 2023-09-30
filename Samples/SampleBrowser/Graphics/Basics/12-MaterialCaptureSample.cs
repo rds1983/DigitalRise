@@ -1,9 +1,9 @@
 ﻿// The matcap textures Samples/Content/Matcap/mc*.jpg are not included in this release.
 //#if !WP7 && !WP8
-//using DigitalRune.Graphics;
-//using DigitalRune.Graphics.Effects;
-//using DigitalRune.Graphics.Rendering;
-//using DigitalRune.Graphics.SceneGraph;
+//using DigitalRise.Graphics;
+//using DigitalRise.Graphics.Effects;
+//using DigitalRise.Graphics.Rendering;
+//using DigitalRise.Graphics.SceneGraph;
 //using Microsoft.Xna.Framework;
 //using Microsoft.Xna.Framework.Graphics;
 //using Microsoft.Xna.Framework.Input;

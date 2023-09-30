@@ -1,6 +1,6 @@
 ﻿using System;
-using DigitalRune.Animation;
-using DigitalRune.Graphics;
+using DigitalRise.Animation;
+using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using FontStashSharp;
@@ -9,7 +9,7 @@ namespace Samples.Animation
 {
   [Sample(SampleCategory.Animation,
     @"This sample animates a string value.",
-    @"DigitalRune Animation does not directly support string animations. To add string animations
+    @"DigitalRise Animation does not directly support string animations. To add string animations
 you need to create a StringTraits class (see StringTraits.cs) that tells the animation service
 how strings are created/recycled/added/interpolated/blended/etc. This StringTraits class can be
 used in a custom animation (see StringKeyFrameAnimation.cs).",

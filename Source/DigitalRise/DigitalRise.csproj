@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DigitalRise</AssemblyName>
+    <PackageId>DigitalRise</PackageId>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>

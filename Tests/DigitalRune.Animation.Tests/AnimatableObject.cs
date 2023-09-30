@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace DigitalRune.Animation.Tests
+namespace DigitalRise.Animation.Tests
 {
   internal class AnimatableObject : IAnimatableObject
   {

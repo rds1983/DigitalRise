@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Graphics.Tests
+namespace DigitalRise.Graphics.Tests
 {
   internal class MyGraphicsScreen : GraphicsScreen
   {

@@ -1,6 +1,6 @@
-﻿using DigitalRune.Game.UI.Controls;
-using DigitalRune.Game.UI.Rendering;
-using DigitalRune.Graphics;
+﻿using DigitalRise.Game.UI.Controls;
+using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Graphics;
 using AssetManagementBase;
 
 
@@ -8,7 +8,7 @@ namespace Samples.Game.UI
 {
   [Sample(SampleCategory.GameUI,
     @"This sample shows how to create UI controls using image tiling.",
-    @"Image tiling is new feature supported by DigitalRune Game UI: UI controls are usually 
+    @"Image tiling is new feature supported by DigitalRise Game UI: UI controls are usually 
 rendered using images from a texture atlas. The images can be automatically repeated to 
 fill up the required space.
 

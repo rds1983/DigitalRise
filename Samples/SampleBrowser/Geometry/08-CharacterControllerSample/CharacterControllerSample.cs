@@ -1,23 +1,23 @@
-﻿using DigitalRune.Geometry;
-using DigitalRune.Geometry.Collisions;
-using DigitalRune.Geometry.Partitioning;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics;
-using DigitalRune.Mathematics.Algebra;
+﻿using DigitalRise.Geometry;
+using DigitalRise.Geometry.Collisions;
+using DigitalRise.Geometry.Partitioning;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-// Both XNA and DigitalRune have a class called MathHelper. To avoid compiler errors
+// Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples.Geometry
 {
   [Sample(SampleCategory.Geometry,
-    @"This sample demonstrates how a character controller can be implemented with DigitalRune Geometry.",
+    @"This sample demonstrates how a character controller can be implemented with DigitalRise Geometry.",
     @"A small level with interesting obstacles is created. The character controller uses a capsule
 to represent the character.
 The level also contains a trigger volume that changes color if the character touches the volume.
@@ -30,7 +30,7 @@ The implementation of the character controller covers basic functionality:
 The character controller is already pretty capable but far from perfect.
 
 Important:
-This character controller is an educational example. The DigitalRune.Physics library contains
+This character controller is an educational example. The DigitalRise.Physics library contains
 a more advanced, faster and more stable character controller implementation.",
     8)]
   [Controls(@"Sample

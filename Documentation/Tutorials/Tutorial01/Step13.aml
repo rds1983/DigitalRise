@@ -23,11 +23,11 @@
                         Select <ui>Add | Existing Item…</ui>
                     </listItem>
                     <listItem>
-                        Browse to this folder of the DigitalRune Engine:
+                        Browse to this folder of the DigitalRise Engine:
                         <list class="nobullet">
                             <listItem>
                                 <localUri>
-                                    <![CDATA[<DigitalRune Engine Folder>\Samples\Content\]]>
+                                    <![CDATA[<DigitalRise Engine Folder>\Samples\Content\]]>
                                 </localUri>
                             </listItem>
                         </list>
@@ -53,8 +53,8 @@
                 </para>
                 <code language="c#" title="SkyObject.cs">
                     <![CDATA[
-using DigitalRune.Game;
-using DigitalRune.Graphics.SceneGraph;
+using DigitalRise.Game;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

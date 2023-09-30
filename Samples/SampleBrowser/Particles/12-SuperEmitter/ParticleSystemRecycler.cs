@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace DigitalRune.Particles.Effectors
+namespace DigitalRise.Particles.Effectors
 {
   /// <summary>
   /// Recycles the particle system after a certain time or when the particle system does not have 

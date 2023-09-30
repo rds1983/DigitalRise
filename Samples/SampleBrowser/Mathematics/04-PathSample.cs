@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using DigitalRune.Mathematics.Algebra;
-using DigitalRune.Mathematics.Interpolation;
-using DigitalRune.Mathematics.Statistics;
+using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics.Interpolation;
+using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 
-// Both XNA and DigitalRune also have a type called CurveLoopType. To avoid compiler 
+// Both XNA and DigitalRise also have a type called CurveLoopType. To avoid compiler 
 // errors we need to define which CurveLoopType we want to use.
-using CurveLoopType = DigitalRune.Mathematics.Interpolation.CurveLoopType;
+using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
 
 
 namespace Samples.Mathematics

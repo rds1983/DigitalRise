@@ -5,7 +5,7 @@ using CommonServiceLocator;
 using NUnit.Framework;
 
 
-namespace DigitalRune.ServiceLocation.Tests
+namespace DigitalRise.ServiceLocation.Tests
 {
   [TestFixture]
   public class ServiceContainerTest

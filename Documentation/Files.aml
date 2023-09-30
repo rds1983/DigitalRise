@@ -11,7 +11,7 @@
                 </para>
             </alert>
             
-            <para>Here is an overview of files that are distributed with the DigitalRune products.</para>
+            <para>Here is an overview of files that are distributed with the DigitalRise products.</para>
             <autoOutline/>
         </introduction>
 
@@ -20,10 +20,10 @@
             <title>General</title>
             <content>
                 <para>
-                    This page gives an overview of the files and folders distributed with the DigitalRune libraries.
+                    This page gives an overview of the files and folders distributed with the DigitalRise libraries.
                 </para>
                 <para>
-                    Most DigitalRune libraries include multiple builds to support different
+                    Most DigitalRise libraries include multiple builds to support different
                     versions of the Microsoft .NET Framework, Silverlight and the XNA Framework.
                 </para>
             </content>
@@ -34,7 +34,7 @@
             <title>Folders</title>
             <content>
                 <para>
-                    When you download one of the DigitalRune libraries you will receive a
+                    When you download one of the DigitalRise libraries you will receive a
                     package with the following folders:
                 </para>
 
@@ -58,7 +58,7 @@
                         <entry>
                             <para>
                                 Contains XNA content projects and pre-built assets (e.g. shaders, textures)
-                                used by DigitalRune libraries.
+                                used by DigitalRise libraries.
                             </para>
                         </entry>
                     </row>
@@ -94,7 +94,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains example applications that demonstrate how to use the DigitalRune libraries.
+                                Contains example applications that demonstrate how to use the DigitalRise libraries.
                             </para>
                         </entry>
                     </row>
@@ -106,12 +106,12 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains the source code of the DigitalRune libraries.
+                                Contains the source code of the DigitalRise libraries.
                                 (The source code of selected libraries may be available for free.
                                 The full source code is only available if you have bought a source code license.
                                 See
                                 <externalLink>
-                                    <linkText>DigitalRune Website</linkText>
+                                    <linkText>DigitalRise Website</linkText>
                                     <linkUri>http://www.digitalrune.com/</linkUri>
                                 </externalLink>
                                 for more information.)
@@ -139,7 +139,7 @@
             <title>Builds and platforms</title>
             <content>
                 <para>
-                    Different builds of the DigitalRune libraries are included to support
+                    Different builds of the DigitalRise libraries are included to support
                     various platforms and .NET Framework versions. The pre-built binaries
                     (DLLs) are sorted into the following folders:
                 </para>
@@ -200,7 +200,7 @@
                                 <codeEntityReference qualifyHint="false">T:System.NotImplementedException</codeEntityReference>s.
                             </para>
                             <para>
-                                Use these builds if you need to reference the DigitalRune assemblies from a portable class library.
+                                Use these builds if you need to reference the DigitalRise assemblies from a portable class library.
                                 (See also
                                 <externalLink>
                                     <linkText>Advanced PCL / Bait and Switch PCL</linkText>
@@ -243,7 +243,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for Windows desktop using
+                                Contains MonoGame and the DigitalRise libraries built for Windows desktop using
                                 DirectX11 (SharpDX).
                             </para>
                         </entry>
@@ -256,7 +256,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for Windows Phone 8.1 apps.
+                                Contains MonoGame and the DigitalRise libraries built for Windows Phone 8.1 apps.
                             </para>
                         </entry>
                     </row>
@@ -268,7 +268,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for the Windows Store 8.1 apps (WinRT).
+                                Contains MonoGame and the DigitalRise libraries built for the Windows Store 8.1 apps (WinRT).
                             </para>
                         </entry>
                     </row>
@@ -280,7 +280,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for the Universal Windows
+                                Contains MonoGame and the DigitalRise libraries built for the Universal Windows
                                 Platform (UWP).
                             </para>
                         </entry>
@@ -293,7 +293,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for Linux.
+                                Contains MonoGame and the DigitalRise libraries built for Linux.
                             </para>
                         </entry>
                     </row>
@@ -305,7 +305,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for Mac OS X.
+                                Contains MonoGame and the DigitalRise libraries built for Mac OS X.
                             </para>
                         </entry>
                     </row>
@@ -317,7 +317,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for Android.
+                                Contains MonoGame and the DigitalRise libraries built for Android.
                             </para>
                         </entry>
                     </row>
@@ -329,7 +329,7 @@
                         </entry>
                         <entry>
                             <para>
-                                Contains MonoGame and the DigitalRune libraries built for iOS.
+                                Contains MonoGame and the DigitalRise libraries built for iOS.
                             </para>
                         </entry>
                     </row>
@@ -365,7 +365,7 @@
                                 The Unity assemblies were built for the .NET Framework 3.5.
                             </para>
                             <para>
-                                <localUri>DigitalRune.ServiceLocation.dll</localUri> is not available in Unity.
+                                <localUri>DigitalRise.ServiceLocation.dll</localUri> is not available in Unity.
                             </para>
                         </entry>
                     </row>
@@ -414,7 +414,7 @@
             <title>Dependencies</title>
             <content>
                 <para>
-                    The following graph illustrates the dependencies between the DigitalRune assemblies and
+                    The following graph illustrates the dependencies between the DigitalRise assemblies and
                     third-party assemblies.
                 </para>
                 <para>
@@ -434,17 +434,17 @@
             <title>XNA and MonoGame</title>
             <content>
                 <para>
-                    As you can see from this graph, the assemblies <localUri>DigitalRune.Game.Input.dll</localUri>,
-                    <localUri>DigitalRune.Game.UI.dll</localUri> and <localUri>DigitalRune.Graphics.dll</localUri>
+                    As you can see from this graph, the assemblies <localUri>DigitalRise.Game.Input.dll</localUri>,
+                    <localUri>DigitalRise.Game.UI.dll</localUri> and <localUri>DigitalRise.Graphics.dll</localUri>
                     require XNA or MonoGame. The other assemblies can be used without XNA or MonoGame.
                 </para>
                 <para>
-                    The assemblies <localUri>DigitalRune.Mathematics.dll</localUri>, <localUri>DigitalRune.Geometry.dll</localUri>,
-                    <localUri>DigitalRune.Animation.dll</localUri>, <localUri>DigitalRune.Particles.dll</localUri>,
-                    <localUri>DigitalRune.Physics.dll</localUri> and <localUri>DigitalRune.Physics.Specialize.dll</localUri>
+                    The assemblies <localUri>DigitalRise.Mathematics.dll</localUri>, <localUri>DigitalRise.Geometry.dll</localUri>,
+                    <localUri>DigitalRise.Animation.dll</localUri>, <localUri>DigitalRise.Particles.dll</localUri>,
+                    <localUri>DigitalRise.Physics.dll</localUri> and <localUri>DigitalRise.Physics.Specialize.dll</localUri>
                     optionally support XNA/MonoGame: For example, conversion between DigitialRune and XNA data types,
                     XNA content serialization, XNA avatar ragdolls, etc. These additional features are optional, i.e.
-                    these DigitalRune assemblies can also be used without XNA or MonoGame.
+                    these DigitalRise assemblies can also be used without XNA or MonoGame.
                 </para>
             </content>
             <sections>
@@ -486,357 +486,357 @@
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.dll</localUri>
+                                <localUri>DigitalRise.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The DigitalRune Base library, required by most DigitalRune libraries.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.xml</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The XML documentation file for <localUri>DigitalRune.dll</localUri>.
+                                The DigitalRise Base library, required by most DigitalRise libraries.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Animation.dll</localUri>
+                                <localUri>DigitalRise.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The DigitalRune Animation library.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Animation.xml</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The XML documentation file for <localUri>DigitalRune.Animation.dll</localUri>.
+                                The XML documentation file for <localUri>DigitalRise.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Animation.Content.Pipeline.dll</localUri>
+                                <localUri>DigitalRise.Animation.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The DigitalRise Animation library.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Animation.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Animation.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Animation.Content.Pipeline.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
                                 An XNA Content Pipeline project that contains the content importers,
-                                processors and type writers for DigitalRune Animation.
+                                processors and type writers for DigitalRise Animation.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Game.dll</localUri>
+                                <localUri>DigitalRise.Game.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The DigitalRune Game library, required by DigitalRune Game UI.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Game.xml</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The XML documentation file for <localUri>DigitalRune.Game.dll</localUri>.
+                                The DigitalRise Game library, required by DigitalRise Game UI.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Game.Input.dll</localUri>
+                                <localUri>DigitalRise.Game.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The input processing of the DigitalRune Game UI library.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Game.Input.xml</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The XML documentation file for <localUri>DigitalRune.Game.Input.dll</localUri>.
+                                The XML documentation file for <localUri>DigitalRise.Game.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Game.UI.dll</localUri>
+                                <localUri>DigitalRise.Game.Input.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The GUI classes of the DigitalRune Game UI library.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Game.UI.xml</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The XML documentation file for <localUri>DigitalRune.Game.UI.dll</localUri>.
+                                The input processing of the DigitalRise Game UI library.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Game.UI.Content.Pipeline.dll</localUri>
+                                <localUri>DigitalRise.Game.Input.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Game.Input.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Game.UI.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The GUI classes of the DigitalRise Game UI library.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Game.UI.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Game.UI.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Game.UI.Content.Pipeline.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
                                 An XNA Content Pipeline project that contains the content importers,
-                                processors and type writers for DigitalRune Game UI.
+                                processors and type writers for DigitalRise Game UI.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Game.UI.Content.Pipeline.xml</localUri>
+                                <localUri>DigitalRise.Game.UI.Content.Pipeline.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Game.UI.Content.Pipeline.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Geometry.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The DigitalRune Geometry library.
+                                The XML documentation file for <localUri>DigitalRise.Game.UI.Content.Pipeline.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Geometry.xml</localUri>
+                                <localUri>DigitalRise.Geometry.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Geometry.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Geometry.Content.Pipeline.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                An XNA Content Pipeline project that contains the content type writers for DigitalRune.Geometry.
+                                The DigitalRise Geometry library.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Geometry.Content.Pipeline.xml</localUri>
+                                <localUri>DigitalRise.Geometry.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Geometry.Content.Pipeline.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Graphics.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The DigitalRune Graphics library.
+                                The XML documentation file for <localUri>DigitalRise.Geometry.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Graphics.xml</localUri>
+                                <localUri>DigitalRise.Geometry.Content.Pipeline.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Geometry.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Graphics.Content.Pipeline.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                An XNA Content Pipeline project that contains the content type writers for DigitalRune.Graphics.
+                                An XNA Content Pipeline project that contains the content type writers for DigitalRise.Geometry.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Graphics.Content.Pipeline.xml</localUri>
+                                <localUri>DigitalRise.Geometry.Content.Pipeline.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Graphics.Content.Pipeline.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Mathematics.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The DigitalRune Mathematics library.
+                                The XML documentation file for <localUri>DigitalRise.Geometry.Content.Pipeline.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Mathematics.xml</localUri>
+                                <localUri>DigitalRise.Graphics.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Mathematics.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Mathematics.Content.Pipeline.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                An XNA Content Pipeline project that contains the content type writers for DigitalRune.Mathematics.
+                                The DigitalRise Graphics library.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Mathematics.Content.Pipeline.xml</localUri>
+                                <localUri>DigitalRise.Graphics.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Mathematics.Content.Pipeline.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Particles.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The DigitalRune Particles library.
+                                The XML documentation file for <localUri>DigitalRise.Geometry.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Particles.xml</localUri>
+                                <localUri>DigitalRise.Graphics.Content.Pipeline.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Particles.dll</localUri>.
-                            </para>
-                        </entry>
-                    </row>
-                    <row>
-                        <entry>
-                            <para>
-                                <localUri>DigitalRune.Physics.dll</localUri>
-                            </para>
-                        </entry>
-                        <entry>
-                            <para>
-                                The DigitalRune Physics library.
+                                An XNA Content Pipeline project that contains the content type writers for DigitalRise.Graphics.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Physics.xml</localUri>
+                                <localUri>DigitalRise.Graphics.Content.Pipeline.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Physics.dll</localUri>.
+                                The XML documentation file for <localUri>DigitalRise.Graphics.Content.Pipeline.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Physics.Specialized.dll</localUri>
+                                <localUri>DigitalRise.Mathematics.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The DigitalRise Mathematics library.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Mathematics.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Mathematics.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Mathematics.Content.Pipeline.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                An XNA Content Pipeline project that contains the content type writers for DigitalRise.Mathematics.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Mathematics.Content.Pipeline.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Mathematics.Content.Pipeline.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Particles.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The DigitalRise Particles library.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Particles.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Particles.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Physics.dll</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The DigitalRise Physics library.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Physics.xml</localUri>
+                            </para>
+                        </entry>
+                        <entry>
+                            <para>
+                                The XML documentation file for <localUri>DigitalRise.Physics.dll</localUri>.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <localUri>DigitalRise.Physics.Specialized.dll</localUri>
                             </para>
                         </entry>
                         <entry>
@@ -849,24 +849,24 @@
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.Physics.Specialized.xml</localUri>
+                                <localUri>DigitalRise.Physics.Specialized.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.Physics.Specialized.dll</localUri>.
+                                The XML documentation file for <localUri>DigitalRise.Physics.Specialized.dll</localUri>.
                             </para>
                         </entry>
                     </row>
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.ServiceLocation.dll</localUri>
+                                <localUri>DigitalRise.ServiceLocation.dll</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                An optional library that comes with the DigitalRune Base library. Contains an Inversion of
+                                An optional library that comes with the DigitalRise Base library. Contains an Inversion of
                                 Control (IoC) container.
                             </para>
                         </entry>
@@ -874,12 +874,12 @@
                     <row>
                         <entry>
                             <para>
-                                <localUri>DigitalRune.ServiceLocation.xml</localUri>
+                                <localUri>DigitalRise.ServiceLocation.xml</localUri>
                             </para>
                         </entry>
                         <entry>
                             <para>
-                                The XML documentation file for <localUri>DigitalRune.ServiceLocation.dll</localUri>.
+                                The XML documentation file for <localUri>DigitalRise.ServiceLocation.dll</localUri>.
                             </para>
                         </entry>
                     </row>
@@ -902,7 +902,7 @@
                                     <linkUri>http://msdn.microsoft.com/en-us/practices</linkUri>
                                 </externalLink>.
                                 This library is required by
-                                <localUri>DigitalRune.ServiceLocation.dll</localUri>.
+                                <localUri>DigitalRise.ServiceLocation.dll</localUri>.
                             </para>
                         </entry>
                     </row>
@@ -932,34 +932,34 @@
                     </row>
                     <!--<row>
             <entry>
-              <localUri>DigitalRune.Windows.dll</localUri>
+              <localUri>DigitalRise.Windows.dll</localUri>
             </entry>
             <entry>
-              The DigitalRune Windows helper library, required by most DigitalRune WPF libraries.
-            </entry>
-          </row>
-          <row>
-            <entry>
-              <localUri>DigitalRune.Windows.xml</localUri>
-            </entry>
-            <entry>
-              The XML documentation file for <localUri>DigitalRune.Windows.dll</localUri>.
+              The DigitalRise Windows helper library, required by most DigitalRise WPF libraries.
             </entry>
           </row>
           <row>
             <entry>
-              <localUri>DigitalRune.Windows.Docking.dll</localUri>
+              <localUri>DigitalRise.Windows.xml</localUri>
             </entry>
             <entry>
-              The DigitalRune Docking Windows library.
+              The XML documentation file for <localUri>DigitalRise.Windows.dll</localUri>.
             </entry>
           </row>
           <row>
             <entry>
-              <localUri>DigitalRune.Windows.Docking.xml</localUri>
+              <localUri>DigitalRise.Windows.Docking.dll</localUri>
             </entry>
             <entry>
-              The XML documentation file for <localUri>DigitalRune.Windows.Docking.dll</localUri>.
+              The DigitalRise Docking Windows library.
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <localUri>DigitalRise.Windows.Docking.xml</localUri>
+            </entry>
+            <entry>
+              The XML documentation file for <localUri>DigitalRise.Windows.Docking.dll</localUri>.
             </entry>
           </row>-->
                 </table>

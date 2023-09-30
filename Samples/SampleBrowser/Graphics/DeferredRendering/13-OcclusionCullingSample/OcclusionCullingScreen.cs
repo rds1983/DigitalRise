@@ -1,16 +1,16 @@
 ﻿#if !WP7 && !WP8
 using System.Collections.Generic;
-using DigitalRune.Diagnostics;
-using DigitalRune.Geometry;
-using DigitalRune.Geometry.Shapes;
-using DigitalRune.Graphics;
-using DigitalRune.Graphics.Rendering;
-using DigitalRune.Graphics.SceneGraph;
-using DigitalRune.Mathematics.Algebra;
+using DigitalRise.Diagnostics;
+using DigitalRise.Geometry;
+using DigitalRise.Geometry.Shapes;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathHelper = DigitalRune.Mathematics.MathHelper;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace Samples
@@ -75,7 +75,7 @@ namespace Samples
       _sceneQuery = new CustomSceneQuery();
       _debugRenderer = new DebugRenderer(GraphicsService, null);
 
-      // The DigitalRune Profiler is used to measure execution times.
+      // The DigitalRise Profiler is used to measure execution times.
       Profiler.SetFormat("Occlusion.Render", 1e3f, "[ms]");
       Profiler.SetFormat("Occlusion.Query", 1e3f, "[ms]");
     }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 
 
-namespace DigitalRune.Mathematics.Tests
+namespace DigitalRise.Mathematics.Tests
 {
   // These unit tests do not make much sense. They are only here to get a test coverage of 100% in NCover.
   [TestFixture]
