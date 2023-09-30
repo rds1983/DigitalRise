@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalRune.Game.Input\DigitalRune.Game.Input.MonoGame.csproj" />
-    <ProjectReference Include="..\DigitalRune.Game\DigitalRune.Game.csproj" />
+    <ProjectReference Include="..\DigitalRune.Game\DigitalRune.Game.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
   </ItemGroup>

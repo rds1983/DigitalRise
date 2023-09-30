@@ -9,8 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
   </ItemGroup>
 </Project>

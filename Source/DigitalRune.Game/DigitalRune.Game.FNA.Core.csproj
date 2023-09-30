@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DigitalRune.Game</AssemblyName>
+    <PackageId>DigitalRune.Game</PackageId>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
+    <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

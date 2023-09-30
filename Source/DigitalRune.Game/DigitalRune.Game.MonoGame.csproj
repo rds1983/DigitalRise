@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DigitalRune.Game</AssemblyName>
+    <PackageId>DigitalRune.Game</PackageId>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
+    <PackageReference Include="MonoGame.Framework.Portable" PrivateAssets="All" Version="3.7.1.189" />
+    <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
+  </ItemGroup>
+</Project>

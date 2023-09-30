@@ -48,9 +48,9 @@ _ReSharper*/
 ~$*
 
 # Compiled effects
-Samples/SampleBrowser/Assets/FNA/
-Samples/SampleBrowser/Assets/MonoGameDX11/
-Samples/SampleBrowser/Assets/MonoGameOGL/
+Samples/Assets/FNA/
+Samples/Assets/MonoGameDX11/
+Samples/Assets/MonoGameOGL/
 Source/DigitalRune.Graphics/EffectsSource/FNA/
 Source/DigitalRune.Graphics/EffectsSource/MonoGameDX11/
 Source/DigitalRune.Graphics/EffectsSource/MonoGameOGL/
