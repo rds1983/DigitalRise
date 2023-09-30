@@ -59,6 +59,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Particles.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRune.Tests", "Source\DigitalRune.Tests\DigitalRune.Tests.csproj", "{A7AF9270-69D8-4C19-B62C-671D316739DF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfInteropSample.MonoGame.DirectX", "Samples\WpfInteropSample\WpfInteropSample.MonoGame.DirectX.csproj", "{A17D5334-7174-4B1F-BE9E-374F655E7F77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{A7AF9270-69D8-4C19-B62C-671D316739DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7AF9270-69D8-4C19-B62C-671D316739DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7AF9270-69D8-4C19-B62C-671D316739DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17D5334-7174-4B1F-BE9E-374F655E7F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17D5334-7174-4B1F-BE9E-374F655E7F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17D5334-7174-4B1F-BE9E-374F655E7F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17D5334-7174-4B1F-BE9E-374F655E7F77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +201,7 @@ Global
 		{CD4C290E-9642-45C6-A0A6-FD6E5252FBAE} = {9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}
 		{E2FCAF70-E446-4705-AD9D-197C94CBB733} = {9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}
 		{A7AF9270-69D8-4C19-B62C-671D316739DF} = {9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}
+		{A17D5334-7174-4B1F-BE9E-374F655E7F77} = {4E3892B6-8A51-42F9-A3F3-8BADC5D000AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ACDF4E-2CE2-46B1-A19F-35DC131069A1}

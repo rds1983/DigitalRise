@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\SampleBrowser\Utility.cs" Link="Utility.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRune.Game\DigitalRune.Game.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRune.ServiceLocation\DigitalRune.ServiceLocation.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRune.Windows.Interop\DigitalRune.Windows.Interop.MonoGame.DirectX.csproj" />
+  </ItemGroup>
+
+</Project>
