@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRune.Mathematics.MonoGame</PackageId>
     <AssemblyName>DigitalRune.Mathematics</AssemblyName>
     <Description>DigitalRune.Mathematics for MonoGame</Description>
@@ -10,6 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalRune\DigitalRune.csproj" />
-    <PackageReference Include="MonoGame.Framework.Portable" PrivateAssets="All" Version="3.7.1.189" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="3.8.1.303" />
   </ItemGroup>
 </Project>

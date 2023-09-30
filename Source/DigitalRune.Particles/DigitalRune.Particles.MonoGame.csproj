@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRune.Particles.MonoGame</PackageId>
     <AssemblyName>DigitalRune.Particles</AssemblyName>
     <Description>DigitalRune.Particles for MonoGame</Description>

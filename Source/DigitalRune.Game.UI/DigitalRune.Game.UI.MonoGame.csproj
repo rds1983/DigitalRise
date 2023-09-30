@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRune.Game.UI.MonoGame</PackageId>
     <AssemblyName>DigitalRune.Game.UI</AssemblyName>
     <Description>DigitalRune.Game.UI for MonoGame</Description>
@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
-    <PackageReference Include="MonoGame.Framework.Portable" PrivateAssets="All" Version="3.7.1.189" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="3.8.1.303" />
     <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
   </ItemGroup>
 

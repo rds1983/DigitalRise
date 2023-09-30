@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRune.Physics.Specialized.MonoGame</PackageId>
     <AssemblyName>DigitalRune.Physics.Specialized</AssemblyName>
     <Description>DigitalRune.Physics.Specialized for MonoGame</Description>
