@@ -2,12 +2,12 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>DigitalRune.Graphics.Tests</RootNamespace>
-    <AssemblyName>DigitalRune.Graphics.Tests</AssemblyName>
+    <RootNamespace>DigitalRune.Mathematics.Tests</RootNamespace>
+    <AssemblyName>DigitalRune.Mathematics.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="$(MonoGameVersion)" />
     <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
     <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRune.Graphics\DigitalRune.Graphics.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.MonoGame.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>
 </Project>

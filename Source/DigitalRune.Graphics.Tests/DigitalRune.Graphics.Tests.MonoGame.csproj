@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>DigitalRune.Particles.Tests</RootNamespace>
-    <AssemblyName>DigitalRune.Particles.Tests</AssemblyName>
+    <RootNamespace>DigitalRune.Graphics.Tests</RootNamespace>
+    <AssemblyName>DigitalRune.Graphics.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.69" />
     <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
     <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
@@ -14,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRune.Particles\DigitalRune.Particles.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRune.Graphics\DigitalRune.Graphics.MonoGame.DirectX.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>
 </Project>

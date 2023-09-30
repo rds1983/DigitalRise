@@ -2,11 +2,12 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>DigitalRune.Game.Tests</RootNamespace>
-    <AssemblyName>DigitalRune.Game.Tests</AssemblyName>
+    <RootNamespace>DigitalRune.Game.UI.Tests</RootNamespace>
+    <AssemblyName>DigitalRune.Game.UI.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="$(MonoGameVersion)" />
     <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
     <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
@@ -14,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRune.Game\DigitalRune.Game.csproj" />
+    <ProjectReference Include="..\DigitalRune.Game.UI\DigitalRune.Game.UI.MonoGame.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>
 </Project>

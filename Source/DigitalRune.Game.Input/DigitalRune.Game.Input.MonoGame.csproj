@@ -8,7 +8,7 @@
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DigitalRune.Mathematics\DigitalRune.Mathematics.MonoGame.csproj" />
