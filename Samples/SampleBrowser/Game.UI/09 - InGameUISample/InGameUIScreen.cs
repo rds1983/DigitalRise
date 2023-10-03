@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using DigitalRise.Game;
-using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.GameBase;
+using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;

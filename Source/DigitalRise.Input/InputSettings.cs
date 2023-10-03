@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Defines settings for the input service.

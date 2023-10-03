@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game.UI.Rendering;
+﻿using DigitalRise.UI.Rendering;
 using FontStashSharp;
 
 namespace Samples

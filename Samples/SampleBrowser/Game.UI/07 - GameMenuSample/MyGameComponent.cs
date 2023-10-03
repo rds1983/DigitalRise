@@ -1,8 +1,8 @@
 #if !WP7 && !WP8
-using DigitalRise.Game;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
+using DigitalRise.UI;
+using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;

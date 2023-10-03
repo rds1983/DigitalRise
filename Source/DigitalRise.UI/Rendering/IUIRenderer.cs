@@ -4,12 +4,13 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.GameBase;
+using DigitalRise.UI.Controls;
 using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Manages and renders the visual appearance of a UI.

@@ -9,7 +9,7 @@ using System.Linq;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.UI.Consoles
+namespace DigitalRise.UI.Consoles
 {
   /// <summary>
   /// Handles game console commands.

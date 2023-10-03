@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Manages a collection of <see cref="GameObject"/>s.

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using DigitalRise.Diagnostics;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;

@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Defines a command that is activated by user input.

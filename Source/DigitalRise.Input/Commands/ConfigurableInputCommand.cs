@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Mathematics;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Represents an input command that supports a flexible input mapping.

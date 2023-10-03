@@ -4,11 +4,12 @@
 
 using System;
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Implements the basic functionality common to button controls.

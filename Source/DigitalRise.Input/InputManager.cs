@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Manages user input from several devices. See <see cref="IInputService"/>.

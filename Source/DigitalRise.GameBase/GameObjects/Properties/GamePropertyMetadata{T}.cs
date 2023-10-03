@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   // Factory method for use in the GamePropertyCollection.
   internal interface IGamePropertyFactory

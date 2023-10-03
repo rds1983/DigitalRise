@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Defines a set of standard categories for game object properties and events.

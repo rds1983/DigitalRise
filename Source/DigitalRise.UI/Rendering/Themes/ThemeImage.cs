@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents an image of the UI theme.

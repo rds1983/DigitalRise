@@ -1,10 +1,11 @@
 ﻿// DigitalRune Engine - Copyright (C) DigitalRune GmbH
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
+using DigitalRise.GameBase;
 using System.ComponentModel;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a control that creates a container that has a border and a header for other user 

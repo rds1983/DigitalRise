@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game;
+﻿using DigitalRise.GameBase;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Interpolation;

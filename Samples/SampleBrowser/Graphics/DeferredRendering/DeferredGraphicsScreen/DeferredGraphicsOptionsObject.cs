@@ -2,8 +2,8 @@
 using System;
 using System.Linq;
 using DigitalRise;
-using DigitalRise.Game;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.GameBase;
+using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
 using CommonServiceLocator;

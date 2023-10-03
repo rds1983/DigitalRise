@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
+using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
@@ -14,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides a lightweight control for displaying small amounts of text, supporting text 

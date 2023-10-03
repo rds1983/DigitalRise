@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   public partial class GameObject 
   {

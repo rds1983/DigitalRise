@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Describes how a child element is vertically positioned or stretched within a parent's layout

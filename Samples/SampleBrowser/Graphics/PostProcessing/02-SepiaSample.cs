@@ -1,5 +1,5 @@
 ﻿#if !WP7 && !WP8
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

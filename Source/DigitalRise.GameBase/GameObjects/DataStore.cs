@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Stores data that can be accessed using an ID or index.

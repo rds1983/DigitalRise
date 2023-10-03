@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Defines a transition between two states.

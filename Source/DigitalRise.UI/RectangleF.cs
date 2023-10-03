@@ -8,7 +8,7 @@ using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Represents a 2-dimensional rectangle (single precision).

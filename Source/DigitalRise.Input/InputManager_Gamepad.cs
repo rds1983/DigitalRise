@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   partial class InputManager
   {

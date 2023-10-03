@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Represents a state machine.

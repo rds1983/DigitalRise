@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   public partial class GameObject 
   {

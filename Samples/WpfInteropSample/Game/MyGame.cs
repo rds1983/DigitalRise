@@ -4,7 +4,7 @@ using System.Windows.Media;
 using AssetManagementBase;
 using CommonServiceLocator;
 using DigitalRise;
-using DigitalRise.Game.Timing;
+using DigitalRise.GameBase.Timing;
 using DigitalRise.Graphics;
 using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework.Graphics;

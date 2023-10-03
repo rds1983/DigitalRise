@@ -4,13 +4,13 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.Input;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Controls which UI control has the focus.

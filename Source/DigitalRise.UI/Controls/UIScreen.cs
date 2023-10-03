@@ -6,13 +6,13 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using DigitalRise.Collections;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Manages and draws <see cref="UIControl"/>s and <see cref="Window"/>s.

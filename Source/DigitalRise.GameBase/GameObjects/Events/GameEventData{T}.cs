@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Stores the event handlers of a game event.

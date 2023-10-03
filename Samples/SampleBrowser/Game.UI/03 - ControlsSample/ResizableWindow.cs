@@ -1,6 +1,6 @@
 ﻿using AssetManagementBase;
-using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI;
+using DigitalRise.UI.Controls;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 

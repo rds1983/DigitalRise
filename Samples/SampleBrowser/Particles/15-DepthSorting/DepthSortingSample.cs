@@ -1,5 +1,5 @@
 ﻿using DigitalRise.Diagnostics;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

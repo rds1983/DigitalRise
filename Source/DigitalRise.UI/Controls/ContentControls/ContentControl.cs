@@ -4,11 +4,12 @@
 
 using System;
 using System.ComponentModel;
+using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a control with another <see cref="UIControl"/> as content.

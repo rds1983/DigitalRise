@@ -1,5 +1,5 @@
 ﻿using System;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 
 
 namespace Samples.Game.UI

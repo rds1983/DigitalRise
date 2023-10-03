@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game;
+﻿using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using CommonServiceLocator;

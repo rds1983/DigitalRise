@@ -3,11 +3,12 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a button control. 

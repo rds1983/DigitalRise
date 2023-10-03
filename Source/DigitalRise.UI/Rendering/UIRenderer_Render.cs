@@ -5,16 +5,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ProgressBar = DigitalRise.Game.UI.Controls.ProgressBar;
-using TextBox = DigitalRise.Game.UI.Controls.TextBox;
+using ProgressBar = DigitalRise.UI.Controls.ProgressBar;
+using TextBox = DigitalRise.UI.Controls.TextBox;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   public partial class UIRenderer
   {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;

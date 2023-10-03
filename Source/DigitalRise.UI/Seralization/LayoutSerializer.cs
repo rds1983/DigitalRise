@@ -14,7 +14,7 @@ using System.Xml;
 using System.Xml.Linq;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Loads/saves objects from/to a XML file. (Currently, only loading objects is implemented!)

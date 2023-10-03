@@ -6,7 +6,7 @@ using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents a font of the UI theme.

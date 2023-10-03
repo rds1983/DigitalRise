@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Defines how the property influences layout and rendering.

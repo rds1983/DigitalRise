@@ -4,18 +4,18 @@
 
 using System;
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a scrollable area that can contain other visible controls. 

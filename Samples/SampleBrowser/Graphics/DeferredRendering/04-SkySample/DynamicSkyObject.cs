@@ -2,8 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using DigitalRise.Game;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
@@ -14,12 +13,12 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using AssetManagementBase;
+using DigitalRise.GameBase;
 
 namespace Samples
 {

@@ -1,7 +1,7 @@
 ﻿#if !WP7 && !WP8
 using System;
 using System.Linq;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;

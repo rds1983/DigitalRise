@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 
-namespace DigitalRise.Game.Timing
+namespace DigitalRise.GameBase.Timing
 {
   /// <summary>
   /// Accurately measures the time by using the system's performance counter.

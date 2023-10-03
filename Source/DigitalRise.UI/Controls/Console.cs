@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Consoles;
+using DigitalRise.Input;
+using DigitalRise.UI.Consoles;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides an interactive console for debugging.

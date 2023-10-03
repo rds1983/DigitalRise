@@ -1,6 +1,6 @@
-﻿using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+﻿using DigitalRise.UI;
+using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;

@@ -5,7 +5,7 @@
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides a base class for all <see cref="Panel"/> controls. Use panels to position and 

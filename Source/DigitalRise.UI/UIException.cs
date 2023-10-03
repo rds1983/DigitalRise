@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Occurs when an exception in the game UI occurs.

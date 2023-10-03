@@ -1,7 +1,7 @@
 ﻿using System;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 

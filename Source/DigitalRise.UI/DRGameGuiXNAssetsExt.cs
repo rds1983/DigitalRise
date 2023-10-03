@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System;
 using System.Xml.Linq;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.UI.Rendering;
 using System.Xml;
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;

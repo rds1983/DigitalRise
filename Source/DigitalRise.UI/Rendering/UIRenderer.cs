@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Manages and renders the visual appearance of a UI. (Default implementation.)

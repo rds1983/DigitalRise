@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.UI.Consoles
+namespace DigitalRise.UI.Consoles
 {
   /// <summary>
   /// Represents an interactive console for debugging.

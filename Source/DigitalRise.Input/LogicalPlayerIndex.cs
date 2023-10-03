@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Identifies a player.

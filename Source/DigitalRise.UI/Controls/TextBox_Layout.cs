@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.Text;
 using FontStashSharp;
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   partial class TextBox
   {

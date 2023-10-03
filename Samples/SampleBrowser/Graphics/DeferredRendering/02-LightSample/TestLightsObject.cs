@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;

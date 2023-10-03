@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   // Interface for all GamePropertyData<T> classes.
   internal interface IGamePropertyData

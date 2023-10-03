@@ -9,7 +9,7 @@ using System.Threading;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Defines a state in a state machine.

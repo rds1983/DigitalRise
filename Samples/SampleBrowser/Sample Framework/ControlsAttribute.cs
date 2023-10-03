@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using Microsoft.Xna.Framework;
 
 

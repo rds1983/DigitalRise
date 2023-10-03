@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game.Input;
+﻿using DigitalRise.Input;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.PostProcessing;

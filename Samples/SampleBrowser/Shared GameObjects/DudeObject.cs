@@ -2,7 +2,7 @@
 using System.Linq;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Character;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;

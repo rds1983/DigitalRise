@@ -10,11 +10,11 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Maps XNA <see cref="Keys"/> (key codes) to characters (keyboard layout).

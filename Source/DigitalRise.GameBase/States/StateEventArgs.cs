@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Provides arguments for the <see cref="State.Enter"/>, <see cref="State.Update"/> and

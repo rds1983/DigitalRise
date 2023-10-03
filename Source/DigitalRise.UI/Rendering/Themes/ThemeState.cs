@@ -3,11 +3,11 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Collections.Generic;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using Microsoft.Xna.Framework;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents a visual state of a UI control.

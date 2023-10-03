@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using CommonServiceLocator;
 using DigitalRise.Animation;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 

@@ -2,11 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
+using DigitalRise.GameBase;
 using System;
 using System.ComponentModel;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Base class for controls that can switch states, such as <see cref="CheckBox"/> or 

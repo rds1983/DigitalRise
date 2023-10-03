@@ -1,7 +1,7 @@
 ﻿#if false
 using System;
 using System.Linq;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;

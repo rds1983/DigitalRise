@@ -6,9 +6,8 @@ using CommonServiceLocator;
 using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Diagnostics;
-using DigitalRise.Game;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI;
+using DigitalRise.Input;
+using DigitalRise.UI;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Graphics;
@@ -16,11 +15,10 @@ using DigitalRise.Particles;
 using DigitalRise.Physics;
 using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Samples.Game.UI;
-using Samples.Graphics;
+using DigitalRise.GameBase;
 
 namespace Samples
 {

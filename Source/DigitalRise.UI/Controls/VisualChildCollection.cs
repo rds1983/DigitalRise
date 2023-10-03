@@ -6,7 +6,7 @@ using System.Diagnostics;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Manages a collection of child <see cref="UIControl"/>s for a parent <see cref="UIControl"/>.

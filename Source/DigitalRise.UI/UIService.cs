@@ -3,12 +3,12 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.Input;
+using DigitalRise.UI.Controls;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Provides the ability to configure and control the graphical user interface.

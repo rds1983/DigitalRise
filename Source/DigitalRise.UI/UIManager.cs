@@ -6,11 +6,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DigitalRise;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.Input;
+using DigitalRise.UI.Controls;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Manages the game user interface.

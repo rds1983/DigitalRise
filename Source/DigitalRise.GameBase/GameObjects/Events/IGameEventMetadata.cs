@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Identifies and describes a game object event.

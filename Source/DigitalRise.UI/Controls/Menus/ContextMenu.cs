@@ -5,13 +5,14 @@
 using System;
 using System.ComponentModel;
 using DigitalRise.Collections;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a popup menu that enables a control to expose functionality that is specific to 

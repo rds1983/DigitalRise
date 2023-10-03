@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics.Algebra;

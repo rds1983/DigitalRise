@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Provides the <see cref="EventHandler{TEventArgs}"/> that connects a game property with

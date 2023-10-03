@@ -4,11 +4,12 @@
 
 using System;
 using System.ComponentModel;
+using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Arranges child elements into a single line that can be oriented horizontally or vertically. 

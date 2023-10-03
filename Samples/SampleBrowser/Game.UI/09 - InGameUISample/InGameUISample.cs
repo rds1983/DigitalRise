@@ -1,6 +1,6 @@
-﻿using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+﻿using DigitalRise.Input;
+using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;

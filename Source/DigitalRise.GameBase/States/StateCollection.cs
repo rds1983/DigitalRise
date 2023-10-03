@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Manages a collection of <see cref="State"/>s.

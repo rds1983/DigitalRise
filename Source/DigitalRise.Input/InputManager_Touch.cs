@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input.Touch;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   partial class InputManager
   {

@@ -1,6 +1,6 @@
 ﻿using DigitalRise;
 #if !WP7 && !WP8
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;

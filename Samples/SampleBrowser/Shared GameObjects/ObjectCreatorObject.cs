@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using DigitalRise.Game;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 

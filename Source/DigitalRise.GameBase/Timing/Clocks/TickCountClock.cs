@@ -6,7 +6,7 @@
 
 using System;
 
-namespace DigitalRise.Game.Timing
+namespace DigitalRise.GameBase.Timing
 {
   /// <summary>
   /// Measures the real time (wall clock time) by polling the computer's system 

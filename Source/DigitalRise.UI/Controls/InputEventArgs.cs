@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides arguments for <see cref="UIControl.InputProcessing"/> and

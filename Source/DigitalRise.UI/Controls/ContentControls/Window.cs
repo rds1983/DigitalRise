@@ -3,14 +3,15 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 using System;
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides the ability to create, configure, show, and manage the lifetime of windows and 

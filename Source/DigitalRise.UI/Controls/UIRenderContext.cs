@@ -4,10 +4,10 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.UI.Rendering;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Provides information during rendering of UI controls.

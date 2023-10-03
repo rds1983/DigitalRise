@@ -5,10 +5,11 @@
 using System;
 using System.ComponentModel;
 using DigitalRise.Collections;
+using DigitalRise.GameBase;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a control that contains multiple items that share the same space on the screen. 

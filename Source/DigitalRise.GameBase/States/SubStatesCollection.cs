@@ -5,7 +5,7 @@
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.States
+namespace DigitalRise.GameBase.States
 {
   /// <summary>
   /// Manages the parallel sub-states of a <see cref="State"/>.

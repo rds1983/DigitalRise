@@ -1,5 +1,5 @@
 ﻿#if !WP7 && !WP8
-using DigitalRise.Game.UI;
+using DigitalRise.UI;
 using Microsoft.Xna.Framework;
 
 

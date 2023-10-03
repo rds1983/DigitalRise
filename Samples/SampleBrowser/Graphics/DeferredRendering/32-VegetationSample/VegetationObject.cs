@@ -1,5 +1,5 @@
 ﻿#if !WP7 && !WP8
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;

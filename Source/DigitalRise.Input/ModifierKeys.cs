@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Describes the pressed modifier keys.

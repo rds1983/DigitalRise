@@ -4,10 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.GameBase;
+using DigitalRise.UI.Rendering;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   public partial class UIControl
   {

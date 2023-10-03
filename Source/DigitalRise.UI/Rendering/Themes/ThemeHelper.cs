@@ -8,7 +8,7 @@ using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Provides methods that help to load and parse a UI theme.

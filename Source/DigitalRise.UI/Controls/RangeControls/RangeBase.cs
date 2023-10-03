@@ -3,10 +3,11 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.ComponentModel;
+using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents an element that has a value within a specific range, such as the 

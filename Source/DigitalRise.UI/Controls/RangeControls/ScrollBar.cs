@@ -4,12 +4,13 @@
 
 using System;
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a control that provides a scroll bar that has a sliding <see cref="Thumb"/> whose

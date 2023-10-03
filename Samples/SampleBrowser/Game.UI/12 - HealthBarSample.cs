@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DigitalRise.Collections;
-using DigitalRise.Game;
-using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.GameBase;
+using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;

@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game.Input;
+﻿using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;

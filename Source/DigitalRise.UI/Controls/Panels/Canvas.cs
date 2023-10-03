@@ -7,7 +7,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Defines an area within which you can explicitly position child elements by using coordinates 

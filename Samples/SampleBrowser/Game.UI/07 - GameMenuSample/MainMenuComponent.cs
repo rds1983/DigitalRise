@@ -1,8 +1,8 @@
 #if !WP7 && !WP8
 using System.Linq;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.Input;
+using DigitalRise.UI;
+using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;

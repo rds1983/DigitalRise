@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using DigitalRise.Animation;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Represents a property of a <see cref="GameObject"/>

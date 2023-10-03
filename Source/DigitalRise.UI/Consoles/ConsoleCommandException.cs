@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 #endif
 
 
-namespace DigitalRise.Game.UI.Consoles
+namespace DigitalRise.UI.Consoles
 {
   /// <summary>
   /// Is raised when a console command needs to report errors.

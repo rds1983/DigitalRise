@@ -3,10 +3,11 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a selectable item inside a <see cref="TabControl"/>. 

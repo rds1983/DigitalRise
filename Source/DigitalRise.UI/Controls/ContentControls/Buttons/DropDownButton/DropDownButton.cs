@@ -5,9 +5,9 @@
 using System;
 using System.ComponentModel;
 using DigitalRise.Collections;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a drop down button. 

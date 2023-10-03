@@ -5,7 +5,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents a texture of the UI theme.

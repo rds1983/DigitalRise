@@ -1,9 +1,9 @@
-﻿using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+﻿using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using MouseButtons = DigitalRise.Game.Input.MouseButtons;
+using MouseButtons = DigitalRise.Input.MouseButtons;
 
 
 namespace Samples.Game.UI

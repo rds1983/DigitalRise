@@ -8,7 +8,7 @@ using System.Diagnostics;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game.Input
+namespace DigitalRise.Input
 {
   /// <summary>
   /// Manages a collection of <see cref="IInputCommand"/>s.

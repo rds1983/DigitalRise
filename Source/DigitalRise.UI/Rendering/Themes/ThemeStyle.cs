@@ -3,10 +3,10 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Collections;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents a visual style of a UI control.

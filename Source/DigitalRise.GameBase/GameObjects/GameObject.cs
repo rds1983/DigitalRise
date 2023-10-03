@@ -11,7 +11,7 @@ using System.Threading;
 using DigitalRise.Animation;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Represents an object of a game.

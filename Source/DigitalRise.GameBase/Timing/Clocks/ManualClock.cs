@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DigitalRise.Game.Timing
+namespace DigitalRise.GameBase.Timing
 {
   /// <summary>
   /// A simple game clock that needs to be updated manually.

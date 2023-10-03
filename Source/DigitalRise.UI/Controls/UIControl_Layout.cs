@@ -4,12 +4,12 @@
 
 using System;
 using System.Diagnostics;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   public partial class UIControl
   {

@@ -6,7 +6,7 @@ using DigitalRise.Collections;
 using Microsoft.Xna.Framework.Content;
 
 
-namespace DigitalRise.Game.UI.Rendering
+namespace DigitalRise.UI.Rendering
 {
   /// <summary>
   /// Represents a UI theme that defines the properties and visual appearance of UI controls.

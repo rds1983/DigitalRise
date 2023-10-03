@@ -1,5 +1,5 @@
-﻿using DigitalRise.Game.UI.Controls;
-using DigitalRise.Game.UI.Rendering;
+﻿using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using Microsoft.Xna.Framework;
 
 

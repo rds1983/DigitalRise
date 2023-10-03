@@ -5,16 +5,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
-using MouseButtons = DigitalRise.Game.Input.MouseButtons;
+using MouseButtons = DigitalRise.Input.MouseButtons;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a control that can be used to display or edit unformatted text.

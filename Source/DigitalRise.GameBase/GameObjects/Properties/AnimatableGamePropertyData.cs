@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Animation;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Wraps a <see cref="GameProperty{T}"/> and makes it animatable.

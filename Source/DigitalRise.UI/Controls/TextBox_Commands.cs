@@ -4,11 +4,11 @@
 
 using System;
 using System.Diagnostics;
-using DigitalRise.Game.Input;
+using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   public partial class TextBox
   {

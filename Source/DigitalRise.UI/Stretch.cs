@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
-//namespace DigitalRise.Game.UI
+//namespace DigitalRise.UI
 //{
 //  /// <summary>
 //  /// Describes how content is resized to fill its allocated space. 

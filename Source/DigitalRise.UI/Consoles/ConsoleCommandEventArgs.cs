@@ -5,7 +5,7 @@
 using System;
 
 
-namespace DigitalRise.Game.UI.Consoles
+namespace DigitalRise.UI.Consoles
 {
   /// <summary>
   /// Provides arguments for a <see cref="IConsole.CommandEntered"/> event.

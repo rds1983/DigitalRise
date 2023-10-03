@@ -6,7 +6,7 @@ using System;
 using DigitalRise.Collections;
 
 
-namespace DigitalRise.Game
+namespace DigitalRise.GameBase
 {
   /// <summary>
   /// Manages a collection of game objects.

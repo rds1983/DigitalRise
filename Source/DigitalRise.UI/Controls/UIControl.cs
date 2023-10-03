@@ -6,16 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI.Rendering;
+using DigitalRise.Input;
+using DigitalRise.UI.Rendering;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using MouseButtons = DigitalRise.Game.Input.MouseButtons;
+using MouseButtons = DigitalRise.Input.MouseButtons;
+using DigitalRise.GameBase;
 
-
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents the base class for user interface (UI) controls.

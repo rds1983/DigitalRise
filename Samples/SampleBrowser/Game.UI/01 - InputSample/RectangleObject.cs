@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using CommonServiceLocator;
-using DigitalRise.Game;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Mathematics.Algebra;

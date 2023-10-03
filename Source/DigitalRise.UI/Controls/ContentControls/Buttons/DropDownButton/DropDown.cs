@@ -4,12 +4,13 @@
 
 using System;
 using System.ComponentModel;
-using DigitalRise.Game.Input;
+using DigitalRise.GameBase;
+using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace DigitalRise.Game.UI.Controls
+namespace DigitalRise.UI.Controls
 {
   /// <summary>
   /// Represents a popup that displays the <see cref="DropDownItem"/>s of a 

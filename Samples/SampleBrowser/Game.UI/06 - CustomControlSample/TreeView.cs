@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using DigitalRise.Collections;
-using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI;
+using DigitalRise.UI.Controls;
 
 
 namespace Samples.Game.UI

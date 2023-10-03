@@ -1,7 +1,7 @@
 ﻿#if !WP7 && !WP8
 using System.Collections.Generic;
 using System.Linq;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;

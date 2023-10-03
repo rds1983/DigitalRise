@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using DigitalRise;
-using DigitalRise.Game;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;

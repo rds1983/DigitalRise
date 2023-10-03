@@ -1,4 +1,4 @@
-﻿using DigitalRise.Game;
+﻿using DigitalRise.GameBase;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;

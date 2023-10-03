@@ -5,10 +5,10 @@
 using System;
 using System.Diagnostics;
 using DigitalRise.Collections;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Represents a collection of <see cref="UIScreen"/>.

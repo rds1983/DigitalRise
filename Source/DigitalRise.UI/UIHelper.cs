@@ -4,11 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.UI.Controls;
 using DigitalRise.Linq;
 
 
-namespace DigitalRise.Game.UI
+namespace DigitalRise.UI
 {
   /// <summary>
   /// Provides helper methods for working with <see cref="UIControl"/>s.

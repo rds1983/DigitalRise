@@ -1,9 +1,9 @@
 ﻿using System;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
-using DigitalRise.Game.Input;
-using DigitalRise.Game.UI;
-using DigitalRise.Game.UI.Controls;
+using DigitalRise.Input;
+using DigitalRise.UI;
+using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 
