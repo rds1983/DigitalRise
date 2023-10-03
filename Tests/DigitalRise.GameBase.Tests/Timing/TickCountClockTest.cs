@@ -3,7 +3,7 @@
 //using System;
 //using NUnit.Framework;
 
-//namespace DigitalRise.Game.Timing.Tests
+//namespace DigitalRise.GameBase.Timing.Tests
 //{
 //  [TestFixture]
 //  public class TickCountClockTest

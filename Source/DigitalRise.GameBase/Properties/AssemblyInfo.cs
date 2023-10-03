@@ -1,3 +1,3 @@
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("DigitalRise.Game.Tests")]
+[assembly: InternalsVisibleTo("DigitalRise.GameBase.Tests")]

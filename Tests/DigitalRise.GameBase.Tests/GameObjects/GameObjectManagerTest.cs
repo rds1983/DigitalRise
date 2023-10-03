@@ -2,7 +2,7 @@
 using NUnit.Framework;
 
 
-namespace DigitalRise.Game.Tests.GameObjects
+namespace DigitalRise.GameBase.Tests.GameObjects
 {
   [TestFixture]
   public class GameObjectManagerTest
