@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>DigitalRise.Game.Input.MonoGame</PackageId>
-    <AssemblyName>DigitalRise.Game.Input</AssemblyName>
-    <Description>DigitalRise.Game.Input for MonoGame</Description>
+    <PackageId>DigitalRise.Input.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Input</AssemblyName>
+    <Description>DigitalRise.Input for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>

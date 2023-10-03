@@ -6,10 +6,9 @@
     <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\DigitalRise.Game.Input\DigitalRise.Game.Input.MonoGame.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRise.Game.UI\DigitalRise.Game.UI.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.MonoGame.DirectX.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.MonoGame.csproj" />
   </ItemGroup>
 </Project>

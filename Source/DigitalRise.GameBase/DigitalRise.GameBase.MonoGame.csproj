@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>DigitalRise.Game</AssemblyName>
-    <PackageId>DigitalRise.Game</PackageId>
+    <AssemblyName>DigitalRise.GameBase</AssemblyName>
+    <PackageId>DigitalRise.GameBase</PackageId>
     <TargetFramework>net6.0</TargetFramework>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>

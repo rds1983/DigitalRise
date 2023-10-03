@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>DigitalRise.Game.Tests</RootNamespace>
-    <AssemblyName>DigitalRise.Game.Tests</AssemblyName>
+    <RootNamespace>DigitalRise.UI.Tests</RootNamespace>
+    <AssemblyName>DigitalRise.UI.Tests</AssemblyName>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\DigitalRise.Game\DigitalRise.Game.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.MonoGame.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>
 </Project>

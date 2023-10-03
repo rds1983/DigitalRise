@@ -31,15 +31,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Particles.FNA.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Graphics.FNA.Core", "Source\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj", "{CDAF8E4A-5443-4166-977A-E02864923A0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Game.Input.FNA.Core", "Source\DigitalRise.Game.Input\DigitalRise.Game.Input.FNA.Core.csproj", "{6623E8E3-2DFA-4169-B386-4961148FB4F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Input.FNA.Core", "Source\DigitalRise.Input\DigitalRise.Input.FNA.Core.csproj", "{6623E8E3-2DFA-4169-B386-4961148FB4F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Game.UI.FNA.Core", "Source\DigitalRise.Game.UI\DigitalRise.Game.UI.FNA.Core.csproj", "{341232F7-1FC2-41E5-9BA6-113E2143CEB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.UI.FNA.Core", "Source\DigitalRise.UI\DigitalRise.UI.FNA.Core.csproj", "{341232F7-1FC2-41E5-9BA6-113E2143CEB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Physics.FNA.Core", "Source\DigitalRise.Physics\DigitalRise.Physics.FNA.Core.csproj", "{534775EE-85C2-4272-B7F3-45AF495B6789}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Physics.Specialized.FNA.Core", "Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj", "{CC1E0CBA-353B-46DC-996F-9DC9DA0D25ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Game.FNA.Core", "Source\DigitalRise.Game\DigitalRise.Game.FNA.Core.csproj", "{36C2D024-7DAC-47B3-AD28-5B37FCD3BA1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.GameBase.FNA.Core", "Source\DigitalRise.GameBase\DigitalRise.GameBase.FNA.Core.csproj", "{36C2D024-7DAC-47B3-AD28-5B37FCD3BA1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{56281A5D-B334-49CF-B649-A0DEB9598D07}"
 EndProject

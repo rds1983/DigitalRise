@@ -7,8 +7,6 @@ using DigitalRise;
 using DigitalRise.Game.Timing;
 using DigitalRise.Graphics;
 using DigitalRise.ServiceLocation;
-using DigitalRise.Storages;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 

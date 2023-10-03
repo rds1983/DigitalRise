@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>DigitalRise.Game.UI.MonoGame</PackageId>
-    <AssemblyName>DigitalRise.Game.UI</AssemblyName>
-    <Description>DigitalRise.Game.UI for MonoGame</Description>
+    <PackageId>DigitalRise.UI.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.UI</AssemblyName>
+    <Description>DigitalRise.UI for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRise.Game.Input\DigitalRise.Game.Input.MonoGame.csproj" />
-    <ProjectReference Include="..\DigitalRise.Game\DigitalRise.Game.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />
+    <ProjectReference Include="..\DigitalRise.Input\DigitalRise.Input.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRise.Mathematics\DigitalRise.Mathematics.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
   </ItemGroup>
