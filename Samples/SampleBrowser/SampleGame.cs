@@ -12,20 +12,15 @@ using DigitalRise.Game.UI;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Graphics;
-using DigitalRise.Graphics.Rendering;
 using DigitalRise.Particles;
 using DigitalRise.Physics;
 using DigitalRise.ServiceLocation;
-using DigitalRise.Storages;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Samples.Base;
 using Samples.Game.UI;
-using Samples.Geometry;
 using Samples.Graphics;
-using Samples.Particles;
 
 namespace Samples
 {
@@ -179,32 +174,11 @@ namespace Samples
       //           ... DigitalRise assets ...
       //       ... other assets ...
 
-      // The VfsStorage creates a virtual file system.
-      var vfsStorage = new VfsStorage();
-
-      // The TitleStorage reads files from the game's default storage location.
-      // --> Create a TitleStorage that reads files from "<gameLocation>/Content".
-      var titleStorage = new TitleStorage("Content");
-
-      // Finally, map the TitleStorage to the root of the virtual file system.
-      // (The TitleStorage is added as the last mount point. The ZIP archives
-      // have priority.)
-      vfsStorage.MountInfos.Add(new VfsMountInfo(titleStorage, null));
-
-      // Register the virtual file system as a service.
-      _services.Register(typeof(IStorage), null, vfsStorage);
-
       // ----- Content Managers
       // The GraphicsDeviceManager needs to be registered in the service container.
       // (This is required by the XNA content managers.)
       _services.Register(typeof(IGraphicsDeviceService), null, _graphicsDeviceManager);
       _services.Register(typeof(GraphicsDeviceManager), null, _graphicsDeviceManager);
-
-      // Register a default, shared content manager.
-      // The new StorageContentManager can be used to read assets from the virtual
-      // file system. (Replaces the content manager stored in Game.Content.)
-      Content = new StorageContentManager(_services, vfsStorage);
-      _services.Register(typeof(ContentManager), null, Content);
 
       // ----- Initialize Services
       // Register the game class.
@@ -262,7 +236,7 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(OceanSample);
+			var initialSample = typeof(ControlsSample);
 			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
 			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);

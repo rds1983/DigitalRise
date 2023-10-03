@@ -4,10 +4,8 @@ using System.Xml.Linq;
 using DigitalRise.Game.UI;
 using DigitalRise.Game.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
-#if MONOGAME
-using DigitalRise.Storages;
+using AssetManagementBase;
 using CommonServiceLocator;
-#endif
 
 
 namespace Samples.Game.UI
@@ -97,12 +95,8 @@ namespace Samples.Game.UI
     {
       // ----- Load a dialog from an XML file.
       // Load the XML file that contains a layout that the LayoutSerializer can read.
-#if MONOGAME
-      var storage = ServiceLocator.Current.GetInstance<IStorage>();
-      var xDocument = XDocument.Load(storage.OpenFile("Layout.xml"));
-#else
-      var xDocument = XDocument.Load("Content/Layout.xml");
-#endif
+      var storage = ServiceLocator.Current.GetInstance<AssetManager>();
+      var xDocument = XDocument.Parse(storage.ReadAsString("Layout.xml"));
 
       // Deserialize the objects in the XML document.
       var serializer = new LayoutSerializer();
