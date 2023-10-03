@@ -254,13 +254,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
           if (swapped)
           {
             // Swap all variables.
-            MathHelper.Swap(ref collisionObjectA, ref collisionObjectB);
-            MathHelper.Swap(ref geometricObjectA, ref geometricObjectB);
-            MathHelper.Swap(ref aabbOfA, ref aabbOfB);
-            MathHelper.Swap(ref largestExtentA, ref largestExtentB);
-            MathHelper.Swap(ref triangleMeshShapeA, ref triangleMeshShapeB);
-            MathHelper.Swap(ref poseA, ref poseB);
-            MathHelper.Swap(ref scaleA, ref scaleB);
+            Mathematics.MathHelper.Swap(ref collisionObjectA, ref collisionObjectB);
+            Mathematics.MathHelper.Swap(ref geometricObjectA, ref geometricObjectB);
+            Mathematics.MathHelper.Swap(ref aabbOfA, ref aabbOfB);
+            Mathematics.MathHelper.Swap(ref largestExtentA, ref largestExtentB);
+            Mathematics.MathHelper.Swap(ref triangleMeshShapeA, ref triangleMeshShapeB);
+            Mathematics.MathHelper.Swap(ref poseA, ref poseB);
+            Mathematics.MathHelper.Swap(ref scaleA, ref scaleB);
           }
 
           if (triangleMeshShapeB == null
@@ -718,8 +718,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Object A should be the triangle mesh, swap objects if necessary.
       if (!(objectA.GeometricObject.Shape is TriangleMeshShape))
       {
-        MathHelper.Swap(ref objectA, ref objectB);
-        MathHelper.Swap(ref targetPoseA, ref targetPoseB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref targetPoseA, ref targetPoseB);
       }
 
       IGeometricObject geometricObjectA = objectA.GeometricObject;

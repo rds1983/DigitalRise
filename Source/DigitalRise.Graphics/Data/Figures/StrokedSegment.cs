@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -17,7 +17,7 @@ namespace DigitalRise.Graphics
   /// The type of the curve parameter (usually <see cref="float"/> or <see cref="double"/>).
   /// </typeparam>
   /// <typeparam name="TPoint">
-  /// The type of the curve points (such as <see cref="Vector2F"/>, <see cref="Vector3F"/>, etc.).
+  /// The type of the curve points (such as <see cref="Vector2"/>, <see cref="Vector3F"/>, etc.).
   /// </typeparam>
   /// <remarks>
   /// Curve segments within a <see cref="PathFigure2F"/> are stroked by default. The 
@@ -35,10 +35,10 @@ namespace DigitalRise.Graphics
   /// {
   ///   Segments =
   ///   {
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(0, 1) },
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 1), Point2 = new Vector2F(1, 1) },
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 1), Point2 = new Vector2F(1, 0) },
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0, 0) }
+  ///     new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(0, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(0, 1), Point2 = new Vector2(1, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(1, 1), Point2 = new Vector2(1, 0) },
+  ///     new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0, 0) }
   ///   }
   /// };
   /// var figureNode1 = new FigureNode(boxFigure1)
@@ -54,13 +54,13 @@ namespace DigitalRise.Graphics
   ///   Segments =
   ///   {
   ///     new StrokedSegment2F(
-  ///       new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(0, 1) }, 
+  ///       new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(0, 1) }, 
   ///       false),
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 1), Point2 = new Vector2F(1, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(0, 1), Point2 = new Vector2(1, 1) },
   ///     new StrokedSegment2F(
-  ///       new LineSegment2F { Point1 = new Vector2F(1, 1), Point2 = new Vector2F(1, 0) }, 
+  ///       new LineSegment2F { Point1 = new Vector2(1, 1), Point2 = new Vector2(1, 0) }, 
   ///       false),
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0, 0) }
+  ///     new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0, 0) }
   ///   }
   /// };
   /// var figureNode2 = new FigureNode(boxFigure2)
@@ -200,7 +200,7 @@ namespace DigitalRise.Graphics
   /// Wraps a 2D curve segment (single-precision) and determines whether it is stroked or not.
   /// </summary>
   /// <inheritdoc/>
-  public class StrokedSegment2F : StrokedSegment<float, Vector2F>
+  public class StrokedSegment2F : StrokedSegment<float, Vector2>
   {
     /// <overloads>
     /// <summary>
@@ -216,7 +216,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="curve"/> is <see langword="null"/>.
     /// </exception>
-    public StrokedSegment2F(ICurve<float, Vector2F> curve)
+    public StrokedSegment2F(ICurve<float, Vector2> curve)
       : base(curve)
     {
     }
@@ -232,7 +232,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="curve"/> is <see langword="null"/>.
     /// </exception>
-    public StrokedSegment2F(ICurve<float, Vector2F> curve, bool isStroked)
+    public StrokedSegment2F(ICurve<float, Vector2> curve, bool isStroked)
       : base(curve, isStroked)
     {
     }

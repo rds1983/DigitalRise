@@ -727,7 +727,7 @@ namespace DigitalRise.Geometry.Shapes
 
             // Sort indices.
             if (index0 > index1)
-              MathHelper.Swap(ref index0, ref index1);
+              Mathematics.MathHelper.Swap(ref index0, ref index1);
 
             EdgeEntry edge;
             if (hashTable.TryGetValue(new Pair<int, int>(index0, index1), out edge))
@@ -775,7 +775,7 @@ namespace DigitalRise.Geometry.Shapes
 
             // Sort vertices.
             //if (ShouldSwap(vertex0, vertex1))
-            //  MathHelper.Swap(ref vertex0, ref vertex1);
+            //  Mathematics.MathHelper.Swap(ref vertex0, ref vertex1);
 
             EdgeEntry edge;
             if (hashTable.TryGetValue(new Pair<Vector3F>(vertex0, vertex1), out edge))

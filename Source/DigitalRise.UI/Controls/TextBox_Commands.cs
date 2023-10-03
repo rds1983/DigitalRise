@@ -5,8 +5,7 @@
 using System;
 using System.Diagnostics;
 using DigitalRise.Input;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -180,7 +179,7 @@ namespace DigitalRise.UI.Controls
       var screen = Screen;
       var font = screen.Renderer.GetFont(Font);
       int lineHeight = font.LineHeight;
-      CaretIndex = GetIndex(VisualCaret - new Vector2F(0, lineHeight), screen);
+      CaretIndex = GetIndex(VisualCaret - new Vector2(0, lineHeight), screen);
     }
 
 
@@ -195,7 +194,7 @@ namespace DigitalRise.UI.Controls
       var screen = Screen;
       var font = screen.Renderer.GetFont(Font);
       int lineHeight = font.LineHeight;
-      CaretIndex = GetIndex(VisualCaret + new Vector2F(0, lineHeight), screen);
+      CaretIndex = GetIndex(VisualCaret + new Vector2(0, lineHeight), screen);
     }
 
 
@@ -246,7 +245,7 @@ namespace DigitalRise.UI.Controls
       StartSelection(modifierKeys);
 
       if (IsMultiline)
-        CaretIndex = GetIndex(VisualCaret - new Vector2F(0, VisualClip.Height), Screen);
+        CaretIndex = GetIndex(VisualCaret - new Vector2(0, VisualClip.Height), Screen);
     }
 
 
@@ -259,7 +258,7 @@ namespace DigitalRise.UI.Controls
       StartSelection(modifierKeys);
 
       if (IsMultiline)
-        CaretIndex = GetIndex(VisualCaret + new Vector2F(0, VisualClip.Height), Screen);
+        CaretIndex = GetIndex(VisualCaret + new Vector2(0, VisualClip.Height), Screen);
     }
 
     /// <summary>

@@ -120,11 +120,11 @@ namespace DigitalRise.Geometry.Shapes
 
         // Component-wise check minimum and maximum because scaling could be negative!
         if (minimum.X > maximum.X)
-          MathHelper.Swap(ref minimum.X, ref maximum.X);
+          Mathematics.MathHelper.Swap(ref minimum.X, ref maximum.X);
         if (minimum.Y > maximum.Y)
-          MathHelper.Swap(ref minimum.Y, ref maximum.Y);
+          Mathematics.MathHelper.Swap(ref minimum.Y, ref maximum.Y);
         if (minimum.Z > maximum.Z)
-          MathHelper.Swap(ref minimum.Z, ref maximum.Z);
+          Mathematics.MathHelper.Swap(ref minimum.Z, ref maximum.Z);
 
         Debug.Assert(minimum <= maximum);
 

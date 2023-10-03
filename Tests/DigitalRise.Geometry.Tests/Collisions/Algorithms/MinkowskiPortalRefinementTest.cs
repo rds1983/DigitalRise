@@ -170,7 +170,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           var t0 = tA;
           var t1 = tB;
           if (j == 1)
-            MathHelper.Swap(ref t0, ref t1);
+            Mathematics.MathHelper.Swap(ref t0, ref t1);
           
           for (int k = 0; k < 3 && haveContact == false; k++)
           {

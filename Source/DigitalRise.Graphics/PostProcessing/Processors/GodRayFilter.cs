@@ -284,7 +284,7 @@ namespace DigitalRise.Graphics.PostProcessing
       var viewport = context.Viewport;
 
       // Get temporary render targets.
-      var sourceSize = new Vector2F(source.Width, source.Height);
+      var sourceSize = new Vector2(source.Width, source.Height);
       var isFloatingPointFormat = TextureHelper.IsFloatingPointFormat(source.Format);
 
       var sceneFormat = new RenderTargetFormat(source.Width, source.Height, false, source.Format, DepthFormat.None);
@@ -354,7 +354,7 @@ namespace DigitalRise.Graphics.PostProcessing
         graphicsDevice.DrawFullScreenQuad();
 
         // Put the current result in variable rayImage0.
-        MathHelper.Swap(ref rayImage0, ref rayImage1);
+        Mathematics.MathHelper.Swap(ref rayImage0, ref rayImage1);
       }
 
       // Combine light shaft image with scene.

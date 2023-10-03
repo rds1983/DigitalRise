@@ -179,7 +179,7 @@ namespace DigitalRise.Geometry
           tempMesh.Add(new Triangle(v20, v12, triangle.Vertex2));
         }
 
-        MathHelper.Swap(ref mesh, ref tempMesh);
+        Mathematics.MathHelper.Swap(ref mesh, ref tempMesh);
         tempMesh.Vertices.Clear();
         tempMesh.Indices.Clear();
 
@@ -199,7 +199,7 @@ namespace DigitalRise.Geometry
             tempMesh.Add(triangle);
           }
 
-          MathHelper.Swap(ref mesh, ref tempMesh);
+          Mathematics.MathHelper.Swap(ref mesh, ref tempMesh);
           tempMesh.Vertices.Clear();
           tempMesh.Indices.Clear();
         }

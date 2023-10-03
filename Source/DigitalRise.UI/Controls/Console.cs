@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using DigitalRise.Input;
 using DigitalRise.UI.Consoles;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
 using DigitalRise.GameBase;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -476,7 +476,7 @@ namespace DigitalRise.UI.Controls
     {
       // Make sure LineOffset is in the allowed range.
       int maxLineOffset = Math.Max(0, _wrappedLines.Count - _numberOfLines);
-      eventArgs.CoercedValue = MathHelper.Clamp(eventArgs.CoercedValue, 0, maxLineOffset);
+      eventArgs.CoercedValue = Mathematics.MathHelper.Clamp(eventArgs.CoercedValue, 0, maxLineOffset);
     }
 
 
@@ -869,7 +869,7 @@ namespace DigitalRise.UI.Controls
 
     /// <inheritdoc/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters")]
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       var screen = Screen;
       if (screen != null)

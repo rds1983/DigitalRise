@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -36,16 +35,16 @@ namespace DigitalRise.Graphics
     /// Gets or sets the size of the billboard in world space.
     /// </summary>
     /// <value>The size of the billboard in world space. The default value is (1, 1).</value>
-    public Vector2F Size
+    public Vector2 Size
     {
       get { return _size; }
       set
       {
         _size = value;
-        Shape.Radius = value.Length / 2;
+        Shape.Radius = value.Length() / 2;
       }
     }
-    private Vector2F _size;
+    private Vector2 _size;
 
 
     /// <summary>
@@ -175,7 +174,7 @@ namespace DigitalRise.Graphics
     public ImageBillboard(PackedTexture texture)
     {
       Texture = texture;
-      Size = new Vector2F(1, 1);
+      Size = new Vector2(1, 1);
       _alphaTest = 0;
       _blendMode = 1;
     }

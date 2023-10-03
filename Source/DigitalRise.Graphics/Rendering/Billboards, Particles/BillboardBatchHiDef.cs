@@ -4,6 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -66,7 +67,7 @@ namespace DigitalRise.Graphics.Rendering
       v.Axis = b.Axis;
       v.Color3F = b.Color;
       v.Alpha = b.Alpha;
-      v.TextureCoordinate = new Vector2F(0, 1);
+      v.TextureCoordinate = new Vector2(0, 1);
       v.Orientation = b.Orientation;
       v.Angle = b.Angle;
       v.Size = b.Size;
@@ -109,8 +110,8 @@ namespace DigitalRise.Graphics.Rendering
       v.Axis = p0.Axis;
       v.Color3F = p0.Color;
       v.Alpha = p0.Alpha;
-      v.TextureCoordinate = new Vector2F(p0.TextureCoordinateU, 1);
-      v.Size = new Vector2F(p0.Size);
+      v.TextureCoordinate = new Vector2(p0.TextureCoordinateU, 1);
+      v.Size = new Vector2(p0.Size);
       v.Softness = p0.Softness;
       v.ReferenceAlpha = p0.ReferenceAlpha;
       v.AnimationTime = p0.AnimationTime;
@@ -129,8 +130,8 @@ namespace DigitalRise.Graphics.Rendering
       v.Axis = p1.Axis;
       v.Color3F = p1.Color;
       v.Alpha = p1.Alpha;
-      v.TextureCoordinate = new Vector2F(p1.TextureCoordinateU, 0);
-      v.Size = new Vector2F(p1.Size);
+      v.TextureCoordinate = new Vector2(p1.TextureCoordinateU, 0);
+      v.Size = new Vector2(p1.Size);
       v.Softness = p1.Softness;
       v.ReferenceAlpha = p1.ReferenceAlpha;
       v.AnimationTime = p1.AnimationTime;

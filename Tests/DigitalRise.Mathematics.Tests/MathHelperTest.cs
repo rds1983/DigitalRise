@@ -12,13 +12,13 @@ namespace DigitalRise.Mathematics.Tests
     {
       double x = 10.0;
       double y = -12.0;
-      MathHelper.Swap(ref x, ref y);
+      Mathematics.MathHelper.Swap(ref x, ref y);
       Assert.AreEqual(-12.0, x);
       Assert.AreEqual(10.0, y);
 
       string a = "A";
       string b = "B";
-      MathHelper.Swap(ref a, ref b);
+      Mathematics.MathHelper.Swap(ref a, ref b);
       Assert.AreEqual("B", a);
       Assert.AreEqual("A", b);
     }

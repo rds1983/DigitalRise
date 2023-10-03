@@ -107,7 +107,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       }
 
       // Text without a specified position is drawn at a default position.
-      _debugRenderer.DefaultTextPosition = new Vector2F(10, 100);
+      _debugRenderer.DefaultTextPosition = new Vector2(10, 100);
       _debugRenderer.DrawText("White objects are positioned in screen space.");
       _debugRenderer.DrawText("Yellow objects are positioned in world space. Depth test disabled.");
       _debugRenderer.DrawText("Other objects are positioned in world space. Depth test enabled.");
@@ -115,8 +115,8 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       // Text can also be drawn in world space coordinates or in screen space coordinates.
       _debugRenderer.DrawText("WorldSpacePosition (0, 0, 0)", new Vector3F(0, 0, 0), Color.Green, false);
       _debugRenderer.DrawText("WorldSpacePosition (0, 0, -1)", new Vector3F(0, 0, -1), Color.Yellow, true);
-      _debugRenderer.DrawText("ScreenPosition (600, 40)", new Vector2F(600, 40), Color.White);
-      _debugRenderer.DrawText("ScreenPosition (640, 360)", new Vector2F(640, 360), Color.White);
+      _debugRenderer.DrawText("ScreenPosition (600, 40)", new Vector2(600, 40), Color.White);
+      _debugRenderer.DrawText("ScreenPosition (640, 360)", new Vector2(640, 360), Color.White);
 
       // It is often useful to copy textures to the screen for debugging.
       _debugRenderer.DrawTexture(NoiseHelper.GetGrainTexture(GraphicsService, 128), new Rectangle(1000, 10, 128, 128));

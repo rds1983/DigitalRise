@@ -5,7 +5,7 @@
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -142,9 +142,9 @@ namespace DigitalRise.Physics.Constraints
     /// constraint anchor x-axis. The second element is the minimum angle about the constraint
     /// anchor z-axis. The default is (-π / 4, -∞).
     /// </value>
-    public Vector2F Minimum
+    public Vector2 Minimum
     {
-      get { return new Vector2F(_angularLimit.Minimum.X, _angularLimit.Minimum.Z); }
+      get { return new Vector2(_angularLimit.Minimum.X, _angularLimit.Minimum.Z); }
       set
       {
         if (value != Minimum)
@@ -164,9 +164,9 @@ namespace DigitalRise.Physics.Constraints
     /// constraint anchor x-axis. The second element is the maximum angle about the constraint
     /// anchor z-axis. The default is (+π / 4, +∞).
     /// </value>
-    public Vector2F Maximum
+    public Vector2 Maximum
     {
-      get { return new Vector2F(_angularLimit.Maximum.X, _angularLimit.Maximum.Z); }
+      get { return new Vector2(_angularLimit.Maximum.X, _angularLimit.Maximum.Z); }
       set
       {
         if (value != Maximum)

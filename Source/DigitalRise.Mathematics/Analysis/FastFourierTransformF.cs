@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Mathematics.Algebra;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Analysis
 {
@@ -22,11 +22,11 @@ namespace DigitalRise.Mathematics.Analysis
   /// notations.)
   /// </para>
   /// <para>
-  /// 1D FFT can be performed using <see cref="Transform1D(Vector2F[],bool)"/>. This method is
+  /// 1D FFT can be performed using <see cref="Transform1D(Vector2[],bool)"/>. This method is
   /// static and you do not need to create an instance of this class. 
   /// </para>
   /// <para>
-  /// 2D FFT can be performed using <see cref="Transform2D(Vector2F[,],bool)"/>. This method is not
+  /// 2D FFT can be performed using <see cref="Transform2D(Vector2[,],bool)"/>. This method is not
   /// static because it requires an internal buffer, which is allocated only once for each
   /// <see cref="FastFourierTransformF"/> instance. The size of the buffer is determine by
   /// <see cref="Capacity"/>.
@@ -38,7 +38,7 @@ namespace DigitalRise.Mathematics.Analysis
     // - http://paulbourke.net/miscellaneous/dft/
     // - Numerical Recipes in C.
 
-    private Vector2F[] _buffer;
+    private Vector2[] _buffer;
 
 
     /// <summary>
@@ -60,7 +60,7 @@ namespace DigitalRise.Mathematics.Analysis
         if (value <= 0)
           throw new ArgumentOutOfRangeException("value", "Capacity must be greater than 0.");
 
-        _buffer = new Vector2F[value];
+        _buffer = new Vector2[value];
       }
     }
 
@@ -78,7 +78,7 @@ namespace DigitalRise.Mathematics.Analysis
       if (capacity <= 0)
         throw new ArgumentOutOfRangeException("capacity", "Capacity must be 0 or greater than 0.");
       
-      _buffer = new Vector2F[capacity];
+      _buffer = new Vector2[capacity];
     }
 
 
@@ -106,7 +106,7 @@ namespace DigitalRise.Mathematics.Analysis
     /// <exception cref="ArgumentException">
     /// The length of <paramref name="values"/> is not a power of two.
     /// </exception>
-    public static void Transform1D(Vector2F[] values, bool forward)
+    public static void Transform1D(Vector2[] values, bool forward)
     {
       if (values == null)
         throw new ArgumentNullException("values");
@@ -137,7 +137,7 @@ namespace DigitalRise.Mathematics.Analysis
     /// <exception cref="ArgumentException">
     /// <paramref name="numberOfValues"/> is not a power of two.
     /// </exception>
-    public static void Transform1D(Vector2F[] values, int numberOfValues, bool forward)
+    public static void Transform1D(Vector2[] values, int numberOfValues, bool forward)
     {
       if (values == null)
         throw new ArgumentNullException("values");
@@ -153,7 +153,7 @@ namespace DigitalRise.Mathematics.Analysis
     }
 
 
-    private static void Transform1D(Vector2F[] values, int n, int m, bool forward)
+    private static void Transform1D(Vector2[] values, int n, int m, bool forward)
     {
       int i, i1, j, k, i2, l, l1, l2;
       float c1, c2, tx, ty, t1, t2, u1, u2, z;
@@ -250,7 +250,7 @@ namespace DigitalRise.Mathematics.Analysis
     /// The width or height of the array exceeds the internal buffer or is not a power of two.
     /// </exception>
     [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
-    public void Transform2D(Vector2F[,] values, bool forward)
+    public void Transform2D(Vector2[,] values, bool forward)
     {
       if (values == null)
         throw new ArgumentNullException("values");
@@ -307,7 +307,7 @@ namespace DigitalRise.Mathematics.Analysis
 
 
     // For reference: Slow Discrete Fourier Transform.
-    internal static void DFT(Vector2F[] values, bool forward)
+    internal static void DFT(Vector2[] values, bool forward)
     {
       int m = values.Length;
 

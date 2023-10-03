@@ -3,9 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Animation.Traits;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation
 {
@@ -13,12 +12,12 @@ namespace DigitalRise.Animation
   /// Animates a point in 2D space that follows a predefined path.
   /// </summary>
   /// <inheritdoc/>
-  public class Path2FAnimation : PathAnimation<Vector2F, PathKey2F, Path2F>
+  public class Path2FAnimation : PathAnimation<Vector2, PathKey2F, Path2F>
   {
     /// <inheritdoc/>
-    public override IAnimationValueTraits<Vector2F> Traits
+    public override IAnimationValueTraits<Vector2> Traits
     {
-      get { return Vector2FTraits.Instance; }
+      get { return Vector2Traits.Instance; }
     }
 
 

@@ -51,7 +51,7 @@ namespace DigitalRise.Input
 
     private class LastMouseButtonInfo<T> : LastButtonInfo<T>
     {
-      public Vector2F MouseClickPosition;
+      public Vector2 MouseClickPosition;
     }
     #endregion
 

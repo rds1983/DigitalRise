@@ -349,17 +349,17 @@ namespace DigitalRise.Graphics.Rendering
 
       var terrain = node.Terrain;
       var terrainAabb = terrain.Aabb;
-      Vector2F terrainAabbMin = new Vector2F(terrainAabb.Minimum.X, terrainAabb.Minimum.Z);
-      Vector2F terrainAabbMax = new Vector2F(terrainAabb.Maximum.X, terrainAabb.Maximum.Z);
+      Vector2 terrainAabbMin = new Vector2(terrainAabb.Minimum.X, terrainAabb.Minimum.Z);
+      Vector2 terrainAabbMax = new Vector2(terrainAabb.Maximum.X, terrainAabb.Maximum.Z);
 
       for (int level = clipmap.NumberOfLevels - 1; level >= 0; level--)
       {
         // Compute new origins.
         int texelsPerLevel = clipmap.CellsPerLevel - 2 * border;
         Vector3F referencePosition3D = lodCameraNode.PoseWorld.Position;
-        Vector2F referencePosition2D = new Vector2F(referencePosition3D.X, referencePosition3D.Z);
+        Vector2 referencePosition2D = new Vector2(referencePosition3D.X, referencePosition3D.Z);
         clipmap.LevelSizes[level] = clipmap.ActualCellSizes[level] * texelsPerLevel;
-        Vector2F levelOrigin = new Vector2F(
+        Vector2 levelOrigin = new Vector2(
           referencePosition2D.X - clipmap.LevelSizes[level] / 2,
           referencePosition2D.Y - clipmap.LevelSizes[level] / 2);
 
@@ -406,7 +406,7 @@ namespace DigitalRise.Graphics.Rendering
           // draw it - but we ignore this here:
           // Set to invalid origin, to make the shader ignore this level. (The value is still used
           // in the shader, so we must not set it to a totally extreme value.)
-          clipmap.Origins[level] = referencePosition2D - new Vector2F(10000);
+          clipmap.Origins[level] = referencePosition2D - new Vector2(10000);
           clipmap.OldOrigins[level] = clipmap.Origins[level];
           continue;
         }
@@ -423,14 +423,14 @@ namespace DigitalRise.Graphics.Rendering
 
           // Base clipmaps are usually super small (< 256²) and are updated infrequently.
           // Therefore we do not make a toroidal update for the base clipmap.
-          clipmap.Offsets[level] = new Vector2F(0, 0);
+          clipmap.Offsets[level] = new Vector2(0, 0);
         }
         else
         {
           clipmap.Origins[level] = levelOrigin;
 
-          Vector2F levelSize = new Vector2F(clipmap.LevelSizes[level]);
-          Vector2F newOffset = clipmap.OldOffsets[level] + (levelOrigin - clipmap.OldOrigins[level]) / levelSize;
+          Vector2 levelSize = new Vector2(clipmap.LevelSizes[level]);
+          Vector2 newOffset = clipmap.OldOffsets[level] + (levelOrigin - clipmap.OldOrigins[level]) / levelSize;
 
           float cellsPerLevelWithoutBorder = clipmap.CellsPerLevel - 2 * border;
           //Debug.Assert(
@@ -485,7 +485,7 @@ namespace DigitalRise.Graphics.Rendering
 
         // Compute AABB of whole level.
         float borderWorld = border * clipmap.ActualCellSizes[level];
-        Vector2F newOrigin = clipmap.Origins[level];
+        Vector2 newOrigin = clipmap.Origins[level];
         var aabb = new Aabb
         {
           Minimum =
@@ -521,7 +521,7 @@ namespace DigitalRise.Graphics.Rendering
           // The clipmap contains info from the last frame and the layers where not changed.
           // We can use a toroidal update.
 
-          Vector2F oldOrigin = clipmap.OldOrigins[level];
+          Vector2 oldOrigin = clipmap.OldOrigins[level];
           float levelSize = clipmap.LevelSizes[level];
           if (oldOrigin != newOrigin)
           {
@@ -536,7 +536,7 @@ namespace DigitalRise.Graphics.Rendering
               // We moved a lot and we cannot reuse anything from the last frame.
               clipmap.InvalidRegions[level].Clear();
               clipmap.InvalidRegions[level].Add(aabb);
-              clipmap.Offsets[level] = new Vector2F(0);
+              clipmap.Offsets[level] = new Vector2(0);
             }
             else
             {
@@ -802,8 +802,8 @@ namespace DigitalRise.Graphics.Rendering
       int border = isBaseClipmap ? 0 : Border;
 
       // Region covered by the layer.
-      Vector2F layerStart = new Vector2F(layerAabb.Minimum.X, layerAabb.Minimum.Z);
-      Vector2F layerEnd = new Vector2F(layerAabb.Maximum.X, layerAabb.Maximum.Z);
+      Vector2 layerStart = new Vector2(layerAabb.Minimum.X, layerAabb.Minimum.Z);
+      Vector2 layerEnd = new Vector2(layerAabb.Maximum.X, layerAabb.Maximum.Z);
 
       // Clamp to tile AABB
       layerStart.X = Math.Max(layerStart.X, tileAabb.Minimum.X);
@@ -824,9 +824,9 @@ namespace DigitalRise.Graphics.Rendering
         if (!HaveContactXZ(ref layerAabb, ref clipmap.CombinedInvalidRegionsAabbs[level]))
           continue;
 
-        Vector2F levelOrigin = clipmap.Origins[level];
-        Vector2F levelSize = new Vector2F(clipmap.LevelSizes[level]); // without border!
-        Vector2F levelEnd = levelOrigin + levelSize;
+        Vector2 levelOrigin = clipmap.Origins[level];
+        Vector2 levelSize = new Vector2(clipmap.LevelSizes[level]); // without border!
+        Vector2 levelEnd = levelOrigin + levelSize;
 
         float cellsPerLevelWithoutBorder = clipmap.CellsPerLevel - 2 * border;
         float cellSize = clipmap.ActualCellSizes[level];
@@ -848,7 +848,7 @@ namespace DigitalRise.Graphics.Rendering
         for (int i = 0; i < 4; i++)
         {
           Rectangle quadrantRect;
-          Vector2F offsetPosition;
+          Vector2 offsetPosition;
           switch (i)
           {
             case 0:
@@ -904,7 +904,7 @@ namespace DigitalRise.Graphics.Rendering
             foreach (var aabb in clipmap.InvalidRegions[level])
             {
               // Intersect layer AABB with invalid region AABB.
-              Vector2F clippedLayerStart, clippedLayerEnd;
+              Vector2 clippedLayerStart, clippedLayerEnd;
               clippedLayerStart.X = Math.Max(layerStart.X, aabb.Minimum.X);
               clippedLayerStart.Y = Math.Max(layerStart.Y, aabb.Minimum.Z);
               clippedLayerEnd.X = Math.Min(layerEnd.X, aabb.Maximum.X);
@@ -933,7 +933,7 @@ namespace DigitalRise.Graphics.Rendering
               graphicsDevice.ScissorRectangle = scissorRect;
 
               // Compute world space position of scissor rectangle corners.
-              Vector2F start, end;
+              Vector2 start, end;
               start.X = offsetPosition.X + (scissorRect.X - offsetX) * cellSize;
               start.Y = offsetPosition.Y + (scissorRect.Y - offsetY) * cellSize;
               end.X = offsetPosition.X + (scissorRect.Right - offsetX) * cellSize;
@@ -961,7 +961,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private static Rectangle GetScissorRectangle(Vector2F topLeft, Vector2F size, float texelsPerUnit)
+    private static Rectangle GetScissorRectangle(Vector2 topLeft, Vector2 size, float texelsPerUnit)
     {
       // Snap invalid regions to grid.
       // We could round the start values down and the end values up, but this could

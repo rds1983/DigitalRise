@@ -11,7 +11,7 @@ namespace DigitalRise.Animation.Tests
     public void GetDefaultDurationTest()
     {
       var timelineGroup = new TimelineGroup();
-      var animation = new Vector2FAnimation();
+      var animation = new Vector2Animation();
       var animation2 = new AnimationClip<float>
       {
         Animation = new SingleFromToByAnimation(),

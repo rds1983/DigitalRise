@@ -33,7 +33,7 @@ namespace Samples.Geometry
       if (!InputService.IsMouseOrTouchHandled && InputService.IsPressed(MouseButtons.Left, false))
       {
         // Add vertex. 
-        Vector2F position = InputService.MousePosition;
+        Vector2 position = InputService.MousePosition;
         _mesh.Vertices.Add(new Vector3F(position.X, position.Y, 0));
 
         // Use GeometryHelper to compute indices of triangulated polygon.

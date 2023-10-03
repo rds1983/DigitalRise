@@ -7,7 +7,7 @@ using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -96,7 +96,7 @@ namespace DigitalRise.UI.Controls
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // Similar to UIControl.OnMeasure, but we sum up the desired sizes in the stack panel 
       // orientation. In the other direction we take the maximum of the children - unless a 
@@ -121,9 +121,9 @@ namespace DigitalRise.UI.Controls
         child.Measure(availableSize);
 
       if (hasWidth && hasHeight)
-        return new Vector2F(width, height);
+        return new Vector2(width, height);
 
-      Vector2F desiredSize = new Vector2F(width, height);
+      Vector2 desiredSize = new Vector2(width, height);
 
       float maxWidth = 0;
       float sumWidth = 0;
@@ -164,7 +164,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       Vector4F padding = Padding;
       position.X += padding.X;
@@ -187,7 +187,7 @@ namespace DigitalRise.UI.Controls
           float availableSize = Math.Max(0.0f, right - left);
           float sizeX = Math.Min(availableSize, child.DesiredWidth);
           float sizeY = size.Y;
-          Arrange(child, new Vector2F(left, top), new Vector2F(sizeX, sizeY));
+          Arrange(child, new Vector2(left, top), new Vector2(sizeX, sizeY));
           left += sizeX;
         }
       }
@@ -200,7 +200,7 @@ namespace DigitalRise.UI.Controls
           float sizeX = size.X;
           float availableSize = Math.Max(0.0f, bottom - top);
           float sizeY = Math.Min(availableSize, child.DesiredHeight);
-          Arrange(child, new Vector2F(left, top), new Vector2F(sizeX, sizeY));
+          Arrange(child, new Vector2(left, top), new Vector2(sizeX, sizeY));
           top += sizeY;
         }
       }

@@ -404,7 +404,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    internal override void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    internal override void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       if (Submesh != null)
         Submesh.Draw();

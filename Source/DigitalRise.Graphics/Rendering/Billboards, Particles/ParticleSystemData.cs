@@ -9,6 +9,7 @@ using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -229,8 +230,8 @@ namespace DigitalRise.Graphics.Rendering
       {
         var texture = Texture.TextureAtlas;
         float textureAspectRatio = (float)texture.Width / texture.Height;
-        Vector2F texCoordTopLeft = Texture.Offset;
-        Vector2F texCoordBottomRight = Texture.Offset + (Texture.Scale / new Vector2F(Texture.NumberOfColumns, Texture.NumberOfRows));
+        Vector2 texCoordTopLeft = Texture.Offset;
+        Vector2 texCoordBottomRight = Texture.Offset + (Texture.Scale / new Vector2(Texture.NumberOfColumns, Texture.NumberOfRows));
         aspectRatio = textureAspectRatio * (texCoordBottomRight.X - texCoordTopLeft.X) / (texCoordBottomRight.Y - texCoordTopLeft.Y);
       }
 
@@ -267,9 +268,9 @@ namespace DigitalRise.Graphics.Rendering
 
       // Determine default size of particles. If one dimension is missing, calculate the
       // missing value using the aspect ratio of the texture.
-      Vector2F size = Vector2F.One;
+      Vector2 size = Vector2.One;
       if (SizeParameter != null)
-        size = new Vector2F(SizeParameter.DefaultValue);
+        size = new Vector2(SizeParameter.DefaultValue);
       if (SizeXParameter != null)
         size.X = SizeXParameter.DefaultValue;
       if (SizeYParameter != null)
@@ -364,10 +365,10 @@ namespace DigitalRise.Graphics.Rendering
       {
         var sourceArray = SizeParameter.Values;
         for (int sourceIndex = startIndex, targetIndex = 0; sourceIndex < endIndex0; sourceIndex++, targetIndex++)
-          targetArray[targetIndex].Size = new Vector2F(sourceArray[sourceIndex]);
+          targetArray[targetIndex].Size = new Vector2(sourceArray[sourceIndex]);
 
         for (int sourceIndex = 0, targetIndex = count0; sourceIndex < endIndex1; sourceIndex++, targetIndex++)
-          targetArray[targetIndex].Size = new Vector2F(sourceArray[sourceIndex]);
+          targetArray[targetIndex].Size = new Vector2(sourceArray[sourceIndex]);
       }
       if (SizeXParameter != null && !SizeXParameter.IsUniform)
       {

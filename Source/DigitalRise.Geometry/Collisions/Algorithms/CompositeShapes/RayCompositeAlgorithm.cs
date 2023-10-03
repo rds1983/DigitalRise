@@ -62,7 +62,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Object A should be the composite, swap objects if necessary.
       bool swapped = (compositeObject.Shape is RayShape);
       if (swapped)
-        MathHelper.Swap(ref rayObject, ref compositeObject);
+        Mathematics.MathHelper.Swap(ref rayObject, ref compositeObject);
 
       RayShape rayShape = rayObject.Shape as RayShape;
       CompositeShape compositeShape = compositeObject.Shape as CompositeShape;

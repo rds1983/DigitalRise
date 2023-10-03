@@ -153,21 +153,21 @@ namespace DigitalRise.UI.Rendering
 
     /// <summary>
     /// Converts the specified string representation of a 2-dimensional vector to its 
-    /// <see cref="Vector2F"/> equivalent, or throws an exception if the string cannot be
-    /// converted to a <see cref="Vector2F"/>.
+    /// <see cref="Vector2"/> equivalent, or throws an exception if the string cannot be
+    /// converted to a <see cref="Vector2"/>.
     /// </summary>
     /// <param name="value">
     /// The value. If this value is <see langword="null"/> or an empty string, 
-    /// <see cref="Vector2F.Zero"/> is returned as the default value.
+    /// <see cref="Vector2.Zero"/> is returned as the default value.
     /// </param>
-    /// <returns>The <see cref="Vector2F"/>.</returns>
+    /// <returns>The <see cref="Vector2"/>.</returns>
     /// <exception cref="FormatException">
-    /// Cannot convert <paramref name="value"/> to <see cref="Vector2F"/>.
+    /// Cannot convert <paramref name="value"/> to <see cref="Vector2"/>.
     /// </exception>
-    public static Vector2F ParseVector2F(string value)
+    public static Vector2 ParseVector2(string value)
     {
       if (string.IsNullOrEmpty(value))
-        return Vector2F.Zero;
+        return Vector2.Zero;
 
       var values = value.Split(ListSeparators, StringSplitOptions.RemoveEmptyEntries);
       if (values.Length != 2)
@@ -176,7 +176,7 @@ namespace DigitalRise.UI.Rendering
         throw new FormatException(message);
       }
 
-      Vector2F result;
+      Vector2 result;
       result.X = float.Parse(values[0], CultureInfo.InvariantCulture);
       result.Y = float.Parse(values[1], CultureInfo.InvariantCulture);
       return result;

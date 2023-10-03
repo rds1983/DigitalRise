@@ -5,7 +5,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -81,8 +81,8 @@ namespace Samples.Physics
         XAxisALocal = Vector3F.UnitX,
         YAxisALocal = Vector3F.UnitZ,
         // Limits for the x axis and y axis movement:
-        Minimum = new Vector2F(-1, -3),
-        Maximum = new Vector2F(1, 3),
+        Minimum = new Vector2(-1, -3),
+        Maximum = new Vector2(1, 3),
         CollisionEnabled = false,
       };
       Simulation.Constraints.Add(pointOnPlaneConstraint);

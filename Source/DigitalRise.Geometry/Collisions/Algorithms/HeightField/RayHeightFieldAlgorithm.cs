@@ -56,7 +56,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Object A should be the height field, swap objects if necessary.
       bool swapped = (heightFieldObject.Shape is RayShape);
       if (swapped)
-        MathHelper.Swap(ref rayObject, ref heightFieldObject);
+        Mathematics.MathHelper.Swap(ref rayObject, ref heightFieldObject);
 
       RayShape rayShape = rayObject.Shape as RayShape;
       HeightField heightField = heightFieldObject.Shape as HeightField;

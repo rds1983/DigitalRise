@@ -160,7 +160,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The 2D origin of the sprite relative to the scene node. (0, 0) is the upper-left corner of 
     /// the sprite and (1, 1) is the lower-right corner of the sprite. The default value is (0, 0).
     /// </value>
-    public Vector2F Origin { get; set; }
+    public Vector2 Origin { get; set; }
 
 
     /// <summary>
@@ -179,9 +179,9 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <value>
     /// The 2D scale of the sprite. The default value is (1, 1).
     /// </value>
-    public Vector2F Scale
+    public Vector2 Scale
     {
-      get { return new Vector2F(ScaleLocal.X, ScaleLocal.Y); }
+      get { return new Vector2(ScaleLocal.X, ScaleLocal.Y); }
       set { ScaleLocal = new Vector3F(value.X, value.Y, 1); }
     }
 

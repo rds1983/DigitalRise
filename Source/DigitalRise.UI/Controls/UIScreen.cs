@@ -453,7 +453,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // The desired size is either set by the user or the whole viewport.
       float desiredWidth = Width;
@@ -465,9 +465,9 @@ namespace DigitalRise.UI.Controls
         desiredHeight = Renderer.GraphicsDevice.Viewport.Height;
 
       foreach (var child in VisualChildren)
-        child.Measure(new Vector2F(desiredWidth, desiredHeight));
+        child.Measure(new Vector2(desiredWidth, desiredHeight));
 
-      return new Vector2F(desiredWidth, desiredHeight);
+      return new Vector2(desiredWidth, desiredHeight);
     }
 
 

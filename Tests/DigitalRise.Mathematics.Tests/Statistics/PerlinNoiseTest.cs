@@ -63,7 +63,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       var random = new Random(15485863);
       for (int i = 0; i < 10000000; i++)
       {
-        var v = random.NextVector2F(0, 255);
+        var v = random.NextVector2(0, 255);
         var n = PerlinNoise.Compute(v.X, v.Y);
         min = Math.Min(min, n);
         max = Math.Max(max, n);

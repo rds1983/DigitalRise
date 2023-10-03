@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -13,23 +13,23 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       HermiteSegment2F s = new HermiteSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        Tangent1 = (new Vector2F(10, 3) - new Vector2F(1, 2)) * 3,
-        Tangent2 = (new Vector2F(10, 2) - new Vector2F(7, 8)) * 3,
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        Tangent1 = (new Vector2(10, 3) - new Vector2(1, 2)) * 3,
+        Tangent2 = (new Vector2(10, 2) - new Vector2(7, 8)) * 3,
+        Point2 = new Vector2(10, 2),
       };
 
       BezierSegment2F b = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        ControlPoint1 = new Vector2F(10, 3),
-        ControlPoint2 = new Vector2F(7, 8),
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        ControlPoint1 = new Vector2(10, 3),
+        ControlPoint2 = new Vector2(7, 8),
+        Point2 = new Vector2(10, 2),
       };
 
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(s.Point1, s.GetPoint(0)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(s.Point2, s.GetPoint(1)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(b.GetPoint(0.33f), s.GetPoint(0.33f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Point1, s.GetPoint(0)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Point2, s.GetPoint(1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.GetPoint(0.33f), s.GetPoint(0.33f)));
     }
 
 
@@ -38,23 +38,23 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       HermiteSegment2F s = new HermiteSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        Tangent1 = (new Vector2F(10, 3) - new Vector2F(1, 2)) * 3,
-        Tangent2 = (new Vector2F(10, 2) - new Vector2F(7, 8)) * 3,
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        Tangent1 = (new Vector2(10, 3) - new Vector2(1, 2)) * 3,
+        Tangent2 = (new Vector2(10, 2) - new Vector2(7, 8)) * 3,
+        Point2 = new Vector2(10, 2),
       };
 
       BezierSegment2F b = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        ControlPoint1 = new Vector2F(10, 3),
-        ControlPoint2 = new Vector2F(7, 8),
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        ControlPoint1 = new Vector2(10, 3),
+        ControlPoint2 = new Vector2(7, 8),
+        Point2 = new Vector2(10, 2),
       };
 
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(s.Tangent1, s.GetTangent(0)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(s.Tangent2, s.GetTangent(1)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(b.GetTangent(0.7f), s.GetTangent(0.7f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Tangent1, s.GetTangent(0)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Tangent2, s.GetTangent(1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.GetTangent(0.7f), s.GetTangent(0.7f)));
     }
 
 
@@ -63,18 +63,18 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       HermiteSegment2F s = new HermiteSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        Tangent1 = (new Vector2F(10, 3) - new Vector2F(1, 2)) * 3,
-        Tangent2 = (new Vector2F(10, 2) - new Vector2F(7, 8)) * 3,
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        Tangent1 = (new Vector2(10, 3) - new Vector2(1, 2)) * 3,
+        Tangent2 = (new Vector2(10, 2) - new Vector2(7, 8)) * 3,
+        Point2 = new Vector2(10, 2),
       };
 
       BezierSegment2F b = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        ControlPoint1 = new Vector2F(10, 3),
-        ControlPoint2 = new Vector2F(7, 8),
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        ControlPoint1 = new Vector2(10, 3),
+        ControlPoint2 = new Vector2(7, 8),
+        Point2 = new Vector2(10, 2),
       };
 
       float length1 = s.GetLength(0, 1, 20, Numeric.EpsilonF);
@@ -84,7 +84,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       float approxLength = 0;
       const float step = 0.0001f;
       for (float u = 0; u <= 1.0f; u += step)
-        approxLength += (s.GetPoint(u) - s.GetPoint(u + step)).Length;
+        approxLength += (s.GetPoint(u) - s.GetPoint(u + step)).Length();
 
       Assert.IsTrue(Numeric.AreEqual(approxLength, length1, 0.01f));
       Assert.IsTrue(Numeric.AreEqual(s.GetLength(0, 1, 100, Numeric.EpsilonF), s.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + s.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
@@ -97,12 +97,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var s = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 2),
-        ControlPoint1 = new Vector2F(4, 5),
-        ControlPoint2 = new Vector2F(7, 8),
-        Point2 = new Vector2F(10, 2),
+        Point1 = new Vector2(1, 2),
+        ControlPoint1 = new Vector2(4, 5),
+        ControlPoint2 = new Vector2(7, 8),
+        Point2 = new Vector2(10, 2),
       };
-      var points = new List<Vector2F>();
+      var points = new List<Vector2>();
       var tolerance = 0.01f;
       s.Flatten(points, 10, tolerance);
       Assert.IsTrue(points.Contains(s.Point1));

@@ -9,8 +9,6 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using DigitalRise.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using DigitalRise.GameBase;
@@ -106,12 +104,12 @@ namespace DigitalRise.UI.Controls
     private const float ScrollBarFadeVelocity = 1;
     private bool _isDragging;
     private bool _scrollToleranceExceeded;
-    private Vector2F _scrollStartPosition;
-    private Vector2F _scrollStartOffset;
-    private Vector2F _scrollVelocity;
+    private Vector2 _scrollStartPosition;
+    private Vector2 _scrollStartOffset;
+    private Vector2 _scrollVelocity;
 
     // On phone/tablet the user can drag the content beyond the limit.
-    private Vector2F _virtualOffset;  // The virtual offset, which can be beyond the limits.
+    private Vector2 _virtualOffset;  // The virtual offset, which can be beyond the limits.
 
     #endregion
 
@@ -560,7 +558,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       float width = Width;
       float height = Height;
@@ -587,7 +585,7 @@ namespace DigitalRise.UI.Controls
       {
         // Pass 1: Assume that scroll bars are invisible and that the viewport takes
         // up all available space.
-        Vector2F viewportSize = new Vector2F(availableSize.X - padding.X - padding.Z, availableSize.Y - padding.Y - padding.W);
+        Vector2 viewportSize = new Vector2(availableSize.X - padding.X - padding.Z, availableSize.Y - padding.Y - padding.W);
         var horizontalScrollBarVisibility = HorizontalScrollBarVisibility;
         var verticalScrollBarVisibility = VerticalScrollBarVisibility;
         bool horizontalScrollBarVisible, verticalScrollBarVisible;
@@ -595,7 +593,7 @@ namespace DigitalRise.UI.Controls
 
         // When a scroll bar is not "disabled" then the content can use all desired
         // space in the according direction.
-        Vector2F contentSize = viewportSize;
+        Vector2 contentSize = viewportSize;
         if (horizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
           contentSize.X = float.PositiveInfinity;
         if (verticalScrollBarVisibility != ScrollBarVisibility.Disabled)
@@ -621,7 +619,7 @@ namespace DigitalRise.UI.Controls
 
       // The desired size is determined by the VisualChildren - except the Content.
       // The Content is only relevant if the scroll bars are disabled.
-      Vector2F desiredSize = new Vector2F(padding.X + padding.Z, padding.Y + padding.W);
+      Vector2 desiredSize = new Vector2(padding.X + padding.Z, padding.Y + padding.W);
       if (hasWidth)
       {
         desiredSize.X = width;
@@ -658,7 +656,7 @@ namespace DigitalRise.UI.Controls
 
     /// <inheritdoc/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       // This method handles only the content and the scroll bars. Other visual children are
       // ignored.
@@ -670,7 +668,7 @@ namespace DigitalRise.UI.Controls
       // Determine visibility of scroll bars and size of viewport.
       // Pass 1: Assume that scroll bars are invisible and that the viewport takes
       // up all available space.
-      Vector2F viewportSize = new Vector2F(size.X - padding.X - padding.Z, size.Y - padding.Y - padding.W);
+      Vector2 viewportSize = new Vector2(size.X - padding.X - padding.Z, size.Y - padding.Y - padding.W);
       bool horizontalScrollBarVisible, verticalScrollBarVisible;
       CalculateViewport(size, padding, horizontalScrollBarVisibility, verticalScrollBarVisibility, out horizontalScrollBarVisible, out verticalScrollBarVisible, ref viewportSize);
 
@@ -679,7 +677,7 @@ namespace DigitalRise.UI.Controls
       CalculateViewport(size, padding, horizontalScrollBarVisibility, verticalScrollBarVisibility, out horizontalScrollBarVisible, out verticalScrollBarVisible, ref viewportSize);
 
       // Now, we know if the bars are visible and the exact viewport size.
-      Vector2F contentPosition = new Vector2F(
+      Vector2 contentPosition = new Vector2(
         position.X + padding.X,
         position.Y + padding.Y);
 
@@ -702,8 +700,8 @@ namespace DigitalRise.UI.Controls
         _horizontalScrollBar.Maximum = Math.Max(0, ExtentWidth - viewportSize.X);
         _horizontalScrollBar.ViewportSize = Math.Min(1, viewportSize.X / ExtentWidth);
         _horizontalScrollBar.Arrange(
-          new Vector2F(contentPosition.X, position.Y + size.Y - padding.W - _horizontalScrollBar.DesiredHeight),
-          new Vector2F(viewportSize.X - horizontalOverlap, _horizontalScrollBar.DesiredHeight));
+          new Vector2(contentPosition.X, position.Y + size.Y - padding.W - _horizontalScrollBar.DesiredHeight),
+          new Vector2(viewportSize.X - horizontalOverlap, _horizontalScrollBar.DesiredHeight));
       }
 
       if (verticalScrollBarVisible)
@@ -712,8 +710,8 @@ namespace DigitalRise.UI.Controls
         _verticalScrollBar.Maximum = Math.Max(0, ExtentHeight - viewportSize.Y);
         _verticalScrollBar.ViewportSize = Math.Min(1, viewportSize.Y / ExtentHeight);
         _verticalScrollBar.Arrange(
-          new Vector2F(position.X + size.X - padding.Z - _verticalScrollBar.DesiredWidth, contentPosition.Y),
-          new Vector2F(_verticalScrollBar.DesiredWidth, viewportSize.Y - verticalOverlap));
+          new Vector2(position.X + size.X - padding.Z - _verticalScrollBar.DesiredWidth, contentPosition.Y),
+          new Vector2(_verticalScrollBar.DesiredWidth, viewportSize.Y - verticalOverlap));
       }
 
       // Store content bounds for clipping.
@@ -726,7 +724,7 @@ namespace DigitalRise.UI.Controls
         return;
 
       // Get content position and content size. Consider disabled bars and the scrolling offsets.
-      Vector2F contentSize = new Vector2F(content.DesiredWidth, content.DesiredHeight);
+      Vector2 contentSize = new Vector2(content.DesiredWidth, content.DesiredHeight);
 
       if (horizontalScrollBarVisibility == ScrollBarVisibility.Disabled)
         contentSize.X = viewportSize.X;
@@ -748,8 +746,8 @@ namespace DigitalRise.UI.Controls
     }
 
 
-    private void CalculateViewport(Vector2F size, Vector4F padding, ScrollBarVisibility horizontalScrollBarVisibility, ScrollBarVisibility verticalScrollBarVisibility,
-                                   out bool horizontalScrollBarVisible, out bool verticalScrollBarVisible, ref Vector2F viewportSize)
+    private void CalculateViewport(Vector2 size, Vector4F padding, ScrollBarVisibility horizontalScrollBarVisibility, ScrollBarVisibility verticalScrollBarVisibility,
+                                   out bool horizontalScrollBarVisible, out bool verticalScrollBarVisible, ref Vector2 viewportSize)
     {
       // Determine whether scroll bars are visible.
       horizontalScrollBarVisible = false;
@@ -806,7 +804,7 @@ namespace DigitalRise.UI.Controls
         // Scrolling on phone/tablet has priority over the actions of the visual children.
         // Therefore base.OnHandleInput() is called after this code section.
 
-        Vector2F mousePosition = inputService.MousePosition;
+        Vector2 mousePosition = inputService.MousePosition;
         float t = (float)context.DeltaTime.TotalSeconds;
         if (_isDragging)
         {
@@ -822,8 +820,8 @@ namespace DigitalRise.UI.Controls
               {
                 // Flick detected.
                 // --> Set a scroll velocity proportional to the flick delta.
-                _scrollVelocity = (Vector2F)(-gesture.Delta * FlickScrollVelocityFactor / t);
-                _scrollVelocity = Vector2F.Clamp(_scrollVelocity, -MaxScrollVelocity, MaxScrollVelocity);
+                _scrollVelocity = -gesture.Delta * FlickScrollVelocityFactor / t;
+                _scrollVelocity = Mathematics.MathHelper.Clamp(_scrollVelocity, -MaxScrollVelocity, MaxScrollVelocity);
 
                 inputService.IsMouseOrTouchHandled = true;
                 break;
@@ -855,12 +853,12 @@ namespace DigitalRise.UI.Controls
               {
                 inputService.IsMouseOrTouchHandled = true;
 
-                Vector2F minOffset = new Vector2F(0, 0);
-                Vector2F maxOffset = new Vector2F(Math.Max(ExtentWidth - ViewportWidth, 0),
+                Vector2 minOffset = new Vector2(0, 0);
+                Vector2 maxOffset = new Vector2(Math.Max(ExtentWidth - ViewportWidth, 0),
                   Math.Max(ExtentHeight - ViewportHeight, 0));
-                Vector2F minVirtualOffset = minOffset - new Vector2F(SpringLength);
-                Vector2F maxVirtualOffset = maxOffset + new Vector2F(SpringLength);
-                Vector2F newOffset = _scrollStartOffset + _scrollStartPosition - mousePosition;
+                Vector2 minVirtualOffset = minOffset - new Vector2(SpringLength);
+                Vector2 maxVirtualOffset = maxOffset + new Vector2(SpringLength);
+                Vector2 newOffset = _scrollStartOffset + _scrollStartPosition - mousePosition;
 
                 if (canScrollHorizontally)
                 {
@@ -875,7 +873,7 @@ namespace DigitalRise.UI.Controls
                 }
 
                 _scrollVelocity = -inputService.MousePositionDelta / t;
-                _scrollVelocity = Vector2F.Clamp(_scrollVelocity, -MaxScrollVelocity, MaxScrollVelocity);
+                _scrollVelocity = Mathematics.MathHelper.Clamp(_scrollVelocity, -MaxScrollVelocity, MaxScrollVelocity);
               }
             }
           }
@@ -897,7 +895,7 @@ namespace DigitalRise.UI.Controls
         }
 
         if (!inputService.IsMouseOrTouchHandled && inputService.IsDown(MouseButtons.Left))
-          _scrollVelocity = Vector2F.Zero;
+          _scrollVelocity = Vector2.Zero;
       }
 
       base.OnHandleInput(context);
@@ -986,10 +984,10 @@ namespace DigitalRise.UI.Controls
       bool canScrollHorizontally = (ExtentWidth > ViewportWidth);
       bool canScrollVertically = (ExtentHeight > ViewportHeight);
 
-      Vector2F minOffset = new Vector2F(0, 0);
-      Vector2F maxOffset = new Vector2F(Math.Max(ExtentWidth - ViewportWidth, 0), Math.Max(ExtentHeight - ViewportHeight, 0));
-      Vector2F minVirtualOffset = minOffset - new Vector2F(SpringLength);
-      Vector2F maxVirtualOffset = maxOffset + new Vector2F(SpringLength);
+      Vector2 minOffset = new Vector2(0, 0);
+      Vector2 maxOffset = new Vector2(Math.Max(ExtentWidth - ViewportWidth, 0), Math.Max(ExtentHeight - ViewportHeight, 0));
+      Vector2 minVirtualOffset = minOffset - new Vector2(SpringLength);
+      Vector2 maxVirtualOffset = maxOffset + new Vector2(SpringLength);
 
       if (!_isDragging)
       {
@@ -998,7 +996,7 @@ namespace DigitalRise.UI.Controls
 
         // ----- Spring
         // Apply spring force if user has dragged content beyond the limit.
-        Vector2F springLength = new Vector2F();
+        Vector2 springLength = new Vector2();
         if (_virtualOffset.X < minOffset.X)
           springLength.X = minOffset.X - _virtualOffset.X;
         else if (_virtualOffset.X > maxOffset.X)
@@ -1016,14 +1014,14 @@ namespace DigitalRise.UI.Controls
         // http://www.digitalrune.com/Support/Blog/tabid/719/EntryId/78/Damping-in-Computer-Games.aspx
 
         // Use a stronger damping if the spring is active.
-        Vector2F damping = new Vector2F(springLength.X != 0 ? SpringDamping : ScrollDamping,
+        Vector2 damping = new Vector2(springLength.X != 0 ? SpringDamping : ScrollDamping,
                                         springLength.Y != 0 ? SpringDamping : ScrollDamping);
 
-        _scrollVelocity = (Vector2F.One - Vector2F.Min(damping * t, Vector2F.One)) * _scrollVelocity;
+        _scrollVelocity = (Vector2.One - Vector2.Min(damping * t, Vector2.One)) * _scrollVelocity;
 
         // ----- Position Update
         // Compute new scroll offset.
-        Vector2F newOffset = _virtualOffset + _scrollVelocity * t;
+        Vector2 newOffset = _virtualOffset + _scrollVelocity * t;
 
         // ----- Limits
         // Stop scroll velocity when we hit the max spring length.
@@ -1058,8 +1056,8 @@ namespace DigitalRise.UI.Controls
         // ----- Velocity Clamping
         // When the velocity reaches a min limit, clamp it to zero. Otherwise, the content 
         // never really stops.
-        if (_scrollVelocity.LengthSquared < MinScrollVelocity * MinScrollVelocity)
-          _scrollVelocity = Vector2F.Zero;
+        if (_scrollVelocity.LengthSquared() < MinScrollVelocity * MinScrollVelocity)
+          _scrollVelocity = Vector2.Zero;
 
         // ----- Update HorizontalOffset and VerticalOffset.
         if (canScrollHorizontally)
@@ -1079,8 +1077,8 @@ namespace DigitalRise.UI.Controls
       if (Content != null)
       {
         // Apply scale transform to content if it is pushed beyond the limit.
-        Vector2F scale = Vector2F.One;
-        Vector2F transformOrigin = new Vector2F(0.5f);
+        Vector2 scale = Vector2.One;
+        Vector2 transformOrigin = new Vector2(0.5f);
 
         // Scale content horizontally.
         if (_virtualOffset.X < minOffset.X)
@@ -1118,7 +1116,7 @@ namespace DigitalRise.UI.Controls
       if (_isTouchDevice)
       {
         // Animate opacity of horizontal and vertical scroll bars.
-        if (!_isDragging && _scrollVelocity.LengthSquared < 1)
+        if (!_isDragging && _scrollVelocity.LengthSquared() < 1)
         {
           // Fade out.
           if (_horizontalScrollBar != null
@@ -1135,7 +1133,7 @@ namespace DigitalRise.UI.Controls
             _verticalScrollBar.Opacity = MathHelper.Clamp(_verticalScrollBar.Opacity - ScrollBarFadeVelocity * t, 0, 1);
           }
         }
-        else if (_scrollVelocity.LengthSquared >= 1)
+        else if (_scrollVelocity.LengthSquared() >= 1)
         {
           // Fade in.
           if (_horizontalScrollBar != null

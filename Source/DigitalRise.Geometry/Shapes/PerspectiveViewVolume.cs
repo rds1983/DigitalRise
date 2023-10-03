@@ -461,13 +461,13 @@ namespace DigitalRise.Geometry.Shapes
       float left = Left;
       float right = Right;
       if (left > right)
-        MathHelper.Swap(ref left, ref right);
+        Mathematics.MathHelper.Swap(ref left, ref right);
 
       // Sort bottom and top.
       float bottom = Bottom;
       float top = Top;
       if (bottom > top)
-        MathHelper.Swap(ref bottom, ref top);
+        Mathematics.MathHelper.Swap(ref bottom, ref top);
 
       // Sort near and far.
       float near = Near;
@@ -477,7 +477,7 @@ namespace DigitalRise.Geometry.Shapes
       if (far <= 0)
         throw new ArgumentOutOfRangeException("far", "The far plane distance of a perspective view volume needs to be greater than 0.");
       if (near > far)
-        MathHelper.Swap(ref near, ref far);
+        Mathematics.MathHelper.Swap(ref near, ref far);
 
       // Update near view rectangle.
       _nearBottomLeftVertex = new Vector3F(left, bottom, -near);

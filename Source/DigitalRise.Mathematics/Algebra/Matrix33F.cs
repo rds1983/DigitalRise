@@ -1470,9 +1470,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// </summary>
     public void Transpose()
     {
-      MathHelper.Swap(ref M01, ref M10);
-      MathHelper.Swap(ref M02, ref M20);
-      MathHelper.Swap(ref M12, ref M21);
+      Mathematics.MathHelper.Swap(ref M01, ref M10);
+      Mathematics.MathHelper.Swap(ref M02, ref M20);
+      Mathematics.MathHelper.Swap(ref M12, ref M21);
     }
     #endregion
 

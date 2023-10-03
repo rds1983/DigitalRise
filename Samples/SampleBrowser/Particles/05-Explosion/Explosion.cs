@@ -6,6 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -334,7 +335,7 @@ namespace Samples.Particles
         new PackedTexture(
           "Clouds",
           assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/Clouds.png"),
-          Vector2F.Zero, Vector2F.One,
+          Vector2.Zero, Vector2.One,
           2, 1);
 
       // The particle parameter "AnimationTime" determines which tile is used,

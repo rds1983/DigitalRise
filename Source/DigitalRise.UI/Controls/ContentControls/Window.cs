@@ -83,7 +83,7 @@ namespace DigitalRise.UI.Controls
   ///   // The window is now part of the visual tree of controls and can be measured. (The 
   ///   // window does not have a fixed size. Window.Width and Window.Height are NaN. The 
   ///   // size is calculated automatically depending on its content.)
-  ///   window.Measure(new Vector2F(float.PositiveInfinity));
+  ///   window.Measure(new Vector2(float.PositiveInfinity));
   ///   
   ///   // Measure() computes DesiredWidth and DesiredHeight. With this info we can center the 
   ///   // window on the screen.
@@ -134,13 +134,13 @@ namespace DigitalRise.UI.Controls
     private bool _isDragging;
 
     // For resizing and dragging:
-    private Vector2F _mouseStartPosition;
+    private Vector2 _mouseStartPosition;
     private float _originalX;
     private float _originalY;
     private float _originalWidth;
     private float _originalHeight;
-    private Vector2F _startPosition;
-    private Vector2F _startSize;
+    private Vector2 _startPosition;
+    private Vector2 _startSize;
     #endregion
 
 
@@ -990,7 +990,7 @@ namespace DigitalRise.UI.Controls
           && canResize)                         // Window allows resizing.
       {
         // Position relative to window:
-        Vector2F mousePosition = context.MousePosition - new Vector2F(ActualX, ActualY);
+        Vector2 mousePosition = context.MousePosition - new Vector2(ActualX, ActualY);
 
         // Find resize direction.
         if (IsMouseDirectlyOver)
@@ -1026,8 +1026,8 @@ namespace DigitalRise.UI.Controls
           _isResizing = true;
           inputService.IsMouseOrTouchHandled = true;
           _mouseStartPosition = context.ScreenMousePosition;
-          _startPosition = new Vector2F(ActualX, ActualY);
-          _startSize = new Vector2F(ActualWidth, ActualHeight);
+          _startPosition = new Vector2(ActualX, ActualY);
+          _startSize = new Vector2(ActualWidth, ActualHeight);
           BackupBounds();
           return;
         }
@@ -1046,7 +1046,7 @@ namespace DigitalRise.UI.Controls
           _isDragging = true;
           inputService.IsMouseOrTouchHandled = true;
           _mouseStartPosition = context.ScreenMousePosition;
-          _startPosition = new Vector2F(ActualX, ActualY);
+          _startPosition = new Vector2(ActualX, ActualY);
           BackupBounds();
           return;
         }
@@ -1087,7 +1087,7 @@ namespace DigitalRise.UI.Controls
       }
 
       // Clamp mouse position to screen. (Only relevant if game runs in windowed-mode.)
-      Vector2F screenMousePosition = context.ScreenMousePosition;
+      Vector2 screenMousePosition = context.ScreenMousePosition;
       float left = screen.ActualX;
       float right = left + screen.ActualWidth;
       float top = screen.ActualY;
@@ -1095,13 +1095,13 @@ namespace DigitalRise.UI.Controls
       screenMousePosition.X = MathHelper.Clamp(screenMousePosition.X, left, right);
       screenMousePosition.Y = MathHelper.Clamp(screenMousePosition.Y, top, bottom);
 
-      Vector2F delta = screenMousePosition - _mouseStartPosition;
+      Vector2 delta = screenMousePosition - _mouseStartPosition;
 
       // Undo render transform of screen.
       if (screen.HasRenderTransform)
         delta = screen.RenderTransform.FromRenderDirection(delta);
 
-      if (delta != Vector2F.Zero)
+      if (delta != Vector2.Zero)
       {
         // ----- Handle ongoing resizing operation.
         if (_isResizing)
@@ -1152,8 +1152,8 @@ namespace DigitalRise.UI.Controls
             delta.Y = 0;
           }
 
-          Vector2F topLeft = _startPosition;
-          Vector2F bottomRight = _startPosition + _startSize;
+          Vector2 topLeft = _startPosition;
+          Vector2 bottomRight = _startPosition + _startSize;
 
           switch (_resizeDirection)
           {

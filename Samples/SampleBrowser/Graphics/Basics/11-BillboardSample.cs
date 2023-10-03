@@ -345,7 +345,7 @@ namespace Samples.Graphics
       // Update().)
       pose0.Position.X += 2;
       pose1 = pose0;
-      texture = new PackedTexture("Bee", AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/beeWingFlap.png"), Vector2F.Zero, Vector2F.One, 3, 1);
+      texture = new PackedTexture("Bee", AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/beeWingFlap.png"), Vector2.Zero, Vector2.One, 3, 1);
       _animatedBillboard = new ImageBillboard(texture);
       billboardNode = new BillboardNode(_animatedBillboard);
       billboardNode.Name = "Animated billboards";
@@ -364,7 +364,7 @@ namespace Samples.Graphics
 
       // Use DebugRenderer to draw node names above billboard nodes.
       foreach (var node in _scene.GetDescendants().OfType<BillboardNode>())
-        _debugRenderer.DrawText(node.Name, node.PoseWorld.Position + new Vector3F(0, 1, 0), new Vector2F(0.5f), Color.Yellow, false);
+        _debugRenderer.DrawText(node.Name, node.PoseWorld.Position + new Vector3F(0, 1, 0), new Vector2(0.5f), Color.Yellow, false);
     }
 
 

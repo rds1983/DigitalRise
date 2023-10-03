@@ -54,7 +54,7 @@ namespace DigitalRise.Graphics
     /// The origin relative to the image, where (0, 0) is the upper-left corner of the image and
     /// (1, 1) is the lower-right corner of the image. The default value is (0.5, 0.5).
     /// </value>
-    public Vector2F Origin { get; set; }
+    public Vector2 Origin { get; set; }
 
 
     /// <summary>
@@ -75,7 +75,7 @@ namespace DigitalRise.Graphics
     /// The scale of the element relative to <see cref="LensFlare.Size"/>. The default value is 
     /// (1, 1).
     /// </value>
-    public Vector2F Scale { get; set; }
+    public Vector2 Scale { get; set; }
 
 
     /// <summary>
@@ -95,9 +95,9 @@ namespace DigitalRise.Graphics
     /// </summary>
     public LensFlareElement()
     {
-      Scale = Vector2F.One;
+      Scale = Vector2.One;
       Color = Color.White;
-      Origin = new Vector2F(0.5f, 0.5f);
+      Origin = new Vector2(0.5f, 0.5f);
     }
 
 
@@ -122,8 +122,8 @@ namespace DigitalRise.Graphics
     /// (1, 1) is the lower-right corner of the image.
     /// </param>
     /// <param name="texture">The texture containing the image.</param>
-    public LensFlareElement(float distance, float scale, float rotation, Color color, Vector2F origin, PackedTexture texture)
-      : this(distance, new Vector2F(scale), rotation, color, origin, texture)
+    public LensFlareElement(float distance, float scale, float rotation, Color color, Vector2 origin, PackedTexture texture)
+      : this(distance, new Vector2(scale), rotation, color, origin, texture)
     {
     }
 
@@ -149,7 +149,7 @@ namespace DigitalRise.Graphics
     /// (1, 1) is the lower-right corner of the image.
     /// </param>
     /// <param name="texture">The texture containing the image.</param>
-    public LensFlareElement(float distance, Vector2F scale, float rotation, Color color, Vector2F origin, PackedTexture texture)
+    public LensFlareElement(float distance, Vector2 scale, float rotation, Color color, Vector2 origin, PackedTexture texture)
     {
       Distance = distance;
       Scale = scale;

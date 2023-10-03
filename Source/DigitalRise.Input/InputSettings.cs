@@ -5,7 +5,7 @@
 using System;
 using Microsoft.Xna.Framework.Input;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Input
 {
@@ -35,7 +35,7 @@ namespace DigitalRise.Input
     /// a double-click. The default value is (100, 100) on phones and (4, 4) 
     /// on other platforms.
     /// </value>
-    public Vector2F DoubleClickSize { get; set; }
+    public Vector2 DoubleClickSize { get; set; }
 
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace DigitalRise.Input
     /// service will reset the mouse position to <see cref="MouseCenter"/> in each frame. This is 
     /// necessary, for example, for first-person shooters that need only relative mouse input.
     /// </remarks>
-    public Vector2F MouseCenter { get; set; }
+    public Vector2 MouseCenter { get; set; }
 
 
     /// <summary>
@@ -116,12 +116,12 @@ namespace DigitalRise.Input
 #if ANDROID || IOS
       // No mouse on phone. Mouse is always used for touch input.
       // Use 100 pixels for big fingers.
-      DoubleClickSize = new Vector2F(100);
+      DoubleClickSize = new Vector2(100);
 #else
-      DoubleClickSize = new Vector2F(4);
+      DoubleClickSize = new Vector2(4);
 #endif
 
-      MouseCenter = new Vector2F(300, 300);
+      MouseCenter = new Vector2(300, 300);
       RepetitionDelay = new TimeSpan(0, 0, 0, 0, 500);    // 500 ms
       RepetitionInterval = new TimeSpan(0, 0, 0, 0, 100); // 100 ms
       ThumbstickThreshold = 0.5f;

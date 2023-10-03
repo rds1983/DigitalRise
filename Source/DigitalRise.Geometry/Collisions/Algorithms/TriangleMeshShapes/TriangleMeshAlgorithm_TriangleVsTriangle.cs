@@ -59,9 +59,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         // Make sure the scaled triangles have the correct normal.
         // (A negative scale changes the normal/winding order. See unit test in TriangleTest.cs.)
         if (scaleA.X * scaleA.Y * scaleA.Z < 0)
-          MathHelper.Swap(ref transformedTriangleA.Vertex0, ref transformedTriangleA.Vertex1);
+          Mathematics.MathHelper.Swap(ref transformedTriangleA.Vertex0, ref transformedTriangleA.Vertex1);
         if (scaleB.X * scaleB.Y * scaleB.Z < 0)
-          MathHelper.Swap(ref transformedTriangleB.Vertex0, ref transformedTriangleB.Vertex1);
+          Mathematics.MathHelper.Swap(ref transformedTriangleB.Vertex0, ref transformedTriangleB.Vertex1);
 
         // Compute contact.
         Vector3F position, normal;

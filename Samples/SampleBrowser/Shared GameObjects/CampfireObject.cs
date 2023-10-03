@@ -13,6 +13,7 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -252,7 +253,7 @@ namespace Samples
       // PackedTexture. The texture "FireParticles.tga" is a tile set, which can be 
       // described using a PackedTexture.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
-        new PackedTexture("FireParticles", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.dds"), Vector2F.Zero, Vector2F.One, 4, 1);
+        new PackedTexture("FireParticles", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.dds"), Vector2.Zero, Vector2.One, 4, 1);
 
       // Each particle chooses a random image of the tile set when it is created.
       // The "AnimationTime" parameter selects an image:
@@ -428,7 +429,7 @@ namespace Samples
       // PackedTexture. The texture "Smoke2.png" contains a tile set, which can be 
       // described using the PackedTexture class.
       ps.Parameters.AddUniform<PackedTexture>(ParticleParameterNames.Texture).DefaultValue =
-        new PackedTexture("Smoke", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/Smoke2.dds"), Vector2F.Zero, Vector2F.One, 2, 1);
+        new PackedTexture("Smoke", assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/Smoke2.dds"), Vector2.Zero, Vector2.One, 2, 1);
 
       // Each particle chooses a random image of the tile set when it is created.
       // The "AnimationTime" parameter selects an image:

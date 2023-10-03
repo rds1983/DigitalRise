@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -1324,42 +1325,42 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ExplicitCastToVector2F()
+    public void ExplicitCastToVector2()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f });
-      Vector2F u = (Vector2F)v;
+      Vector2 u = (Vector2)v;
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
+      Assert.AreEqual(1.1f, u.X);
+      Assert.AreEqual(2.2f, u.Y);
     }
 
 
     [Test]
-    public void ToVector2F()
+    public void ToVector2()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f });
-      Vector2F u = v.ToVector2F();
+      Vector2 u = v.ToVector2();
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
+      Assert.AreEqual(1.1f, u.X);
+      Assert.AreEqual(2.2f, u.Y);
     }
 
 
     [Test]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void ExplicitCastToVector2FException1()
+    public void ExplicitCastToVector2Exception1()
     {
       VectorF v = null;
-      Vector2F u = (Vector2F)v;
+      Vector2 u = (Vector2)v;
     }
 
 
     [Test]
     [ExpectedException(typeof(InvalidCastException))]
-    public void ExplicitCastToVector2FException2()
+    public void ExplicitCastToVector2Exception2()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f, 4.4f, 5.5f });
-      Vector2F u = (Vector2F)v;
+      Vector2 u = (Vector2)v;
     }
 
 

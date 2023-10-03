@@ -8,9 +8,8 @@ using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using DigitalRise.Mathematics.Algebra;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -38,14 +37,14 @@ namespace DigitalRise.Mathematics.Interpolation
   /// </remarks>
   [Serializable]
   [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-  public class Path2F : PiecewiseCurveF<Vector2F, PathKey2F>, IXmlSerializable
+  public class Path2F : PiecewiseCurveF<Vector2, PathKey2F>, IXmlSerializable
   {
     /// <inheritdoc/>
-    public override Vector2F GetPoint(float parameter)
+    public override Vector2 GetPoint(float parameter)
     {
       int numberOfKeys = Count;
       if (numberOfKeys == 0)
-        return new Vector2F(float.NaN);
+        return new Vector2(float.NaN);
 
       // Correct parameter.
       float loopedParameter = LoopParameter(parameter);
@@ -119,7 +118,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <see cref="CurveLoopType.CycleOffset"/> or if the <paramref name="parameter"/> is on the
     /// curve. 
     /// </remarks>
-    private Vector2F GetCycleOffset(float parameter)
+    private Vector2 GetCycleOffset(float parameter)
     {
       Debug.Assert(Items.Count > 0);
 
@@ -130,7 +129,7 @@ namespace DigitalRise.Mathematics.Interpolation
       float curveLength = curveEnd - curveStart;
 
       // Handle cycle offset.
-      var cycleOffset = new Vector2F();
+      var cycleOffset = new Vector2();
       if (!Numeric.IsZero(curveLength))
       {
         var endDifference = lastKey.Point - firstKey.Point;
@@ -152,11 +151,11 @@ namespace DigitalRise.Mathematics.Interpolation
 
     /// <inheritdoc/>
     [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    public override Vector2F GetTangent(float parameter)
+    public override Vector2 GetTangent(float parameter)
     {
       int numberOfKeys = Count;
       if (numberOfKeys == 0)
-        return new Vector2F();
+        return new Vector2();
 
       var firstKey = Items[0];
       var lastKey = Items[numberOfKeys - 1];
@@ -166,7 +165,7 @@ namespace DigitalRise.Mathematics.Interpolation
       if (PreLoop == CurveLoopType.Constant && parameter < curveStart
           || PostLoop == CurveLoopType.Constant && parameter > curveEnd)
       {
-        return new Vector2F();
+        return new Vector2();
       }
 
       float loopedParameter = LoopParameter(parameter);
@@ -181,7 +180,7 @@ namespace DigitalRise.Mathematics.Interpolation
       {
         Debug.Assert(PreLoop == CurveLoopType.Linear);
 
-        Vector2F tangent;
+        Vector2 tangent;
         switch (firstKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -199,7 +198,7 @@ namespace DigitalRise.Mathematics.Interpolation
             }
             else
             {
-              tangent = new Vector2F();
+              tangent = new Vector2();
             }
             break;
         }
@@ -211,7 +210,7 @@ namespace DigitalRise.Mathematics.Interpolation
       {
         Debug.Assert(PostLoop == CurveLoopType.Linear);
 
-        Vector2F tangent;
+        Vector2 tangent;
         switch (lastKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -229,7 +228,7 @@ namespace DigitalRise.Mathematics.Interpolation
             }
             else
             {
-              tangent = new Vector2F();
+              tangent = new Vector2();
             }
             break;
         }
@@ -264,7 +263,7 @@ namespace DigitalRise.Mathematics.Interpolation
               return p.TangentIn;
           }
 
-          return new Vector2F();
+          return new Vector2();
         }
 
         int index = GetKeyIndex(loopedParameter);
@@ -309,7 +308,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public override void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public override void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       // Flatten each spline separately. The tolerance is simply divided into equal parts.
       for (int i = 0; i < Count - 1; i++)
@@ -372,7 +371,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// The spline or <see langword="null"/> if the interpolation is none of the implemented spline 
     /// classes.
     /// </returns>
-    private ICurve<float, Vector2F> GetSpline(int index)
+    private ICurve<float, Vector2> GetSpline(int index)
     {
       int numberOfKeys = Count;
       Debug.Assert(index >= 0 && index < numberOfKeys);
@@ -432,8 +431,8 @@ namespace DigitalRise.Mathematics.Interpolation
         return spline;
       }
 
-      Vector2F p1;
-      Vector2F p4;
+      Vector2 p1;
+      Vector2 p4;
       #region ----- Find CatmullRom/BSpline neigbor points p1 and p4 -----
       if (index > 0)
         p1 = Items[index - 1].Point;
@@ -548,13 +547,13 @@ namespace DigitalRise.Mathematics.Interpolation
       if (length < curveStart && PreLoop == CurveLoopType.Linear)
       {
         var tangent = GetTangent(curveStart);
-        return curveStart - (curveStart - length) / tangent.Length;
+        return curveStart - (curveStart - length) / tangent.Length();
       }
 
       if (length > curveEnd && PostLoop == CurveLoopType.Linear)
       {
         var tangent = GetTangent(curveEnd);
-        return curveEnd + (length - curveEnd) / tangent.Length;
+        return curveEnd + (length - curveEnd) / tangent.Length();
       }
 
       if (Numeric.IsZero(curveLength))

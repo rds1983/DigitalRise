@@ -37,7 +37,7 @@ namespace DigitalRise.Graphics.Rendering
     //}
 
 
-    private static Vector2F RoundToGrid(Vector2F position, float cellSize)
+    private static Vector2 RoundToGrid(Vector2 position, float cellSize)
     {
       position.X = RoundToGrid(position.X, cellSize);
       position.Y = RoundToGrid(position.Y, cellSize);
@@ -45,7 +45,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    //private static Vector2F RoundDownToGrid(Vector2F position, float cellSize)
+    //private static Vector2 RoundDownToGrid(Vector2 position, float cellSize)
     //{
     //  position.X = RoundDownToGrid(position.X, cellSize);
     //  position.Y = RoundDownToGrid(position.Y, cellSize);
@@ -53,7 +53,7 @@ namespace DigitalRise.Graphics.Rendering
     //}
 
 
-    //private static Vector2F RoundUpToGrid(Vector2F position, float cellSize)
+    //private static Vector2 RoundUpToGrid(Vector2 position, float cellSize)
     //{
     //  position.X = RoundUpToGrid(position.X, cellSize);
     //  position.Y = RoundUpToGrid(position.Y, cellSize);
@@ -71,13 +71,13 @@ namespace DigitalRise.Graphics.Rendering
     ///// <returns>
     ///// The texture coordinates.
     ///// </returns>
-    //private static Vector2F ConvertPositionToTexCoord(Vector2F position, Vector2F levelOrigin, float levelSize)
+    //private static Vector2 ConvertPositionToTexCoord(Vector2 position, Vector2 levelOrigin, float levelSize)
     //{
     //  return (position - levelOrigin) / levelSize;
     //}
 
 
-    //private static Vector2F ConvertTexCoordToClipmapTextureAtlas(Vector2F texCoord, int level, int numberOfLevels, int numberOfColumns)
+    //private static Vector2 ConvertTexCoordToClipmapTextureAtlas(Vector2 texCoord, int level, int numberOfLevels, int numberOfColumns)
     //{
     //  // The clipmaps are stored in a texture atlas. 
 
@@ -95,7 +95,7 @@ namespace DigitalRise.Graphics.Rendering
     //}
 
 
-    //private static Rectangle GetScreenSpaceRectangle(TerrainClipmap clipmap, int level, float levelSize, Vector2F startPosition, Vector2F endPosition, Viewport viewport)
+    //private static Rectangle GetScreenSpaceRectangle(TerrainClipmap clipmap, int level, float levelSize, Vector2 startPosition, Vector2 endPosition, Viewport viewport)
     //{
     //  int numberOfLevels = clipmap.NumberOfLevels;
     //  int numberOfColumns = clipmap.NumberOfTextureAtlasColumns;

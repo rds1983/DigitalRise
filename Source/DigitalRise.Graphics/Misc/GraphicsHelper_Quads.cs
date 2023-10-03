@@ -79,7 +79,7 @@ namespace DigitalRise.Graphics
 		/// </exception>
 		public static void DrawQuad(this GraphicsDevice graphicsDevice, Rectangle rectangle)
     {
-      DrawQuad(graphicsDevice, rectangle, new Vector2F(0, 0), new Vector2F(1, 1));
+      DrawQuad(graphicsDevice, rectangle, new Vector2(0, 0), new Vector2(1, 1));
     }
 
 
@@ -105,7 +105,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="graphicsDevice"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static void DrawQuad(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F texCoordTopLeft, Vector2F texCoordBottomRight)
+    public static void DrawQuad(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 texCoordTopLeft, Vector2 texCoordBottomRight)
     {
       if (graphicsDevice == null)
         throw new ArgumentNullException("graphicsDevice");
@@ -254,7 +254,7 @@ namespace DigitalRise.Graphics
 		/// </exception>
 		public static void DrawQuadFrustumRay(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector3[] frustumFarCorners)
 		{
-			DrawQuadFrustumRay(graphicsDevice, rectangle, new Vector2F(0, 0), new Vector2F(1, 1), frustumFarCorners);
+			DrawQuadFrustumRay(graphicsDevice, rectangle, new Vector2(0, 0), new Vector2(1, 1), frustumFarCorners);
 		}
 
 
@@ -280,7 +280,7 @@ namespace DigitalRise.Graphics
 		/// <paramref name="graphicsDevice"/> is <see langword="null"/>.
 		/// </exception>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-		public static void DrawQuadFrustumRay(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F texCoordTopLeft, Vector2F texCoordBottomRight, Vector3[] frustumFarCorners)
+		public static void DrawQuadFrustumRay(this GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 texCoordTopLeft, Vector2 texCoordBottomRight, Vector3[] frustumFarCorners)
 		{
 			if (graphicsDevice == null)
 				throw new ArgumentNullException("graphicsDevice");
@@ -437,7 +437,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="frustumFarCorners"/> has wrong length. Expected length: 4.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static void GetFrustumFarCorners(Projection projection, Vector2F topLeftTexCoord, Vector2F bottomRightTexCoord, Vector3[] frustumFarCorners)
+    public static void GetFrustumFarCorners(Projection projection, Vector2 topLeftTexCoord, Vector2 bottomRightTexCoord, Vector3[] frustumFarCorners)
     {
       GetFrustumFarCorners(projection, frustumFarCorners);
       float dX = frustumFarCorners[1].X - frustumFarCorners[0].X;

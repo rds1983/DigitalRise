@@ -3,9 +3,8 @@ using System.ComponentModel;
 using CommonServiceLocator;
 using DigitalRise.Animation;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -43,7 +42,7 @@ namespace Samples.Game.UI
       base.OnLoad();
 
       // Call Measure to update DesiredWith and DesiredHeight.
-      Measure(new Vector2F(float.PositiveInfinity));
+      Measure(new Vector2(float.PositiveInfinity));
 
       // Set a random position on the screen where the whole window is visible and to the right
       // of the MainScreenComponent buttons.

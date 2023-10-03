@@ -1370,11 +1370,11 @@ namespace DigitalRise.Graphics.Rendering
     /// </summary>
     /// <param name="index">The index of the query.</param>
     /// <returns>The pixel address (x, y).</returns>
-    private static Vector2F ToPixelAddress(int index)
+    private static Vector2 ToPixelAddress(int index)
     {
       int x, y;
       ToPixelAddress(index, out x, out y);
-      return new Vector2F(x, y);
+      return new Vector2(x, y);
     }
 
 

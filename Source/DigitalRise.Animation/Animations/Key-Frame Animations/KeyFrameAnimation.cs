@@ -24,14 +24,14 @@ namespace DigitalRise.Animation
   /// defines whether interpolation between key frames is enabled. When the property is set
   /// (default) the values between two key frames are interpolated. Each key frame animation class
   /// decides which type of a interpolation is most appropriate. For example, linear interpolation
-  /// (LERP) is used for <see langword="Single"/>, <see cref="Vector2F"/>, <see cref="Vector3F"/>, 
+  /// (LERP) is used for <see langword="Single"/>, <see cref="Vector2"/>, <see cref="Vector3F"/>, 
   /// etc. LERP is also used for <see cref="QuaternionF"/> (Spherical linear interpolation (SLERP)
   /// is not used for performance reasons). When 
   /// interpolation is disabled, the animation returns the value of the previous key frame. 
   /// </para>
   /// <para>
   /// Please note that key frame animations (such as <see cref="SingleKeyFrameAnimation"/>, 
-  /// <see cref="Vector2FKeyFrameAnimation"/>, <see cref="Vector3FKeyFrameAnimation"/>, etc.) 
+  /// <see cref="Vector2KeyFrameAnimation"/>, <see cref="Vector3FKeyFrameAnimation"/>, etc.) 
   /// provide only limited control over interpolation between key frames. Curve-based animations 
   /// (such as <see cref="Curve2FAnimation"/>, <see cref="Path2FAnimation"/>, 
   /// <see cref="Path3FAnimation"/>, etc.) offer more advanced control: Curve-based animations allow

@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI
 {
@@ -182,7 +182,7 @@ namespace DigitalRise.UI
       }
 
       var context = eventArgs.Context;
-      if (context.MousePositionDelta == Vector2F.Zero)
+      if (context.MousePositionDelta == Vector2.Zero)
       {
         // ----- No mouse movement --> Increase counter.
         _noMouseMoveDuration += context.DeltaTime;
@@ -226,7 +226,7 @@ namespace DigitalRise.UI
     /// </summary>
     /// <param name="toolTip">The tool tip.</param>
     /// <param name="mousePosition">The mouse position.</param>
-    public void ShowToolTip(object toolTip, Vector2F mousePosition)
+    public void ShowToolTip(object toolTip, Vector2 mousePosition)
     {
       if (toolTip == null)
         return;
@@ -255,7 +255,7 @@ namespace DigitalRise.UI
         Screen.BringToFront(ToolTipControl);
 
       // Determine position next to mouse. Position it so that it fits onto the screen.
-      ToolTipControl.Measure(new Vector2F(float.PositiveInfinity));
+      ToolTipControl.Measure(new Vector2(float.PositiveInfinity));
       float x = mousePosition.X;
       if (x + ToolTipControl.DesiredWidth > Screen.ActualWidth)
       {

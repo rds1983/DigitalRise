@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
 
@@ -72,7 +73,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the size of the object using its angular diameter.
     /// </summary>
     /// <value>The angular diameter of the object in x and y (specified in radians).</value>
-    public Vector2F AngularDiameter { get; set; }
+    public Vector2 AngularDiameter { get; set; }
 
 
     /// <summary>
@@ -214,7 +215,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </summary>
     public SkyObjectNode()
     {
-      AngularDiameter = new Vector2F(MathHelper.ToRadians(5));
+      AngularDiameter = new Vector2(MathHelper.ToRadians(5));
       Alpha = 1;
       SunDirection = new Vector3F(1, 1, 1);
       SunLight = new Vector3F(1, 1, 1);

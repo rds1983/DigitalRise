@@ -14,7 +14,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Algebra
 {
@@ -1224,7 +1224,7 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector2F"/>.
+    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector2"/>.
     /// </summary>
     /// <param name="vector">The vector.</param>
     /// <returns>The result of the conversion.</returns>
@@ -1234,27 +1234,27 @@ namespace DigitalRise.Mathematics.Algebra
     /// <exception cref="InvalidCastException">
     /// This vector has more than 2 elements.
     /// </exception>
-    public static explicit operator Vector2F(VectorF vector)
+    public static explicit operator Vector2(VectorF vector)
     {
       if (vector == null)
         throw new ArgumentNullException("vector");
       if (vector.NumberOfElements != 2)
         throw new InvalidCastException("The number of elements does not match.");
 
-      return new Vector2F(vector[0], vector[1]);
+      return new Vector2(vector[0], vector[1]);
     }
 
 
     /// <summary>
-    /// Converts this <see cref="VectorF"/> to <see cref="Vector2F"/>.
+    /// Converts this <see cref="VectorF"/> to <see cref="Vector2"/>.
     /// </summary>
     /// <returns>The result of the conversion.</returns>
     /// <exception cref="InvalidCastException">
     /// This vector has more than 2 elements.
     /// </exception>
-    public Vector2F ToVector2F()
+    public Vector2 ToVector2()
     {
-      return (Vector2F) this;
+      return (Vector2) this;
     }
 
 

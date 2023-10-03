@@ -8,7 +8,7 @@ using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -378,7 +378,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       // Update X or Y of the thumb to slide it to the correct position.
       if (_thumb != null)
@@ -401,7 +401,7 @@ namespace DigitalRise.UI.Controls
             thumbWidth = _thumb.MaxWidth;
 
           _thumb.Width = thumbWidth;
-          _thumb.Measure(new Vector2F(float.PositiveInfinity));
+          _thumb.Measure(new Vector2(float.PositiveInfinity));
 
           // Compute movement range of thumb center.
           contentWidth = ActualWidth - padding.X - padding.Z - thumbWidth;
@@ -423,7 +423,7 @@ namespace DigitalRise.UI.Controls
             thumbHeight = _thumb.MaxHeight;
 
           _thumb.Height = thumbHeight;
-          _thumb.Measure(new Vector2F(float.PositiveInfinity));
+          _thumb.Measure(new Vector2(float.PositiveInfinity));
 
           contentHeight = ActualHeight - padding.Y - padding.W - thumbHeight;
 

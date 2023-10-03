@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -21,9 +21,9 @@ namespace DigitalRise.UI.Controls
     private bool _isArrangeInProgress;
 
     // The results of the last layout process.
-    private Vector2F _lastMeasureConstraintSize = new Vector2F(float.NaN);
-    private Vector2F _lastArrangePosition = new Vector2F(float.NaN);
-    private Vector2F _lastArrangeSize = new Vector2F(float.NaN);
+    private Vector2 _lastMeasureConstraintSize = new Vector2(float.NaN);
+    private Vector2 _lastArrangePosition = new Vector2(float.NaN);
+    private Vector2 _lastArrangeSize = new Vector2(float.NaN);
     #endregion
 
 
@@ -63,7 +63,7 @@ namespace DigitalRise.UI.Controls
 
     /// <summary>
     /// Gets the actual X position of the top left corner of the control's bounds in screen 
-    /// coordinates (computed in <see cref="Arrange(Vector2F, Vector2F)"/>).
+    /// coordinates (computed in <see cref="Arrange(Vector2, Vector2)"/>).
     /// </summary>
     /// <value>The actual X position of the top left corner in screen coordinates.</value>
     public float ActualX { get; private set; }
@@ -71,7 +71,7 @@ namespace DigitalRise.UI.Controls
 
     /// <summary>
     /// Gets the actual Y position of the top left corner of the control's bounds in screen 
-    /// coordinates (computed in <see cref="Arrange(Vector2F, Vector2F)"/>).
+    /// coordinates (computed in <see cref="Arrange(Vector2, Vector2)"/>).
     /// </summary>
     /// <value>The actual Y position of the top left corner in screen coordinates.</value>
     public float ActualY { get; private set; }
@@ -79,7 +79,7 @@ namespace DigitalRise.UI.Controls
 
     /// <summary>
     /// Gets the actual width of the control (computed in 
-    /// <see cref="Arrange(Vector2F, Vector2F)"/>).
+    /// <see cref="Arrange(Vector2, Vector2)"/>).
     /// </summary>
     /// <value>The actual width of the control.</value>
     public float ActualWidth { get; private set; }
@@ -87,7 +87,7 @@ namespace DigitalRise.UI.Controls
 
     /// <summary>
     /// Gets the actual height of the control (computed in 
-    /// <see cref="Arrange(Vector2F, Vector2F)"/>).
+    /// <see cref="Arrange(Vector2, Vector2)"/>).
     /// </summary>
     /// <value>The actual height of the control.</value>
     public float ActualHeight { get; private set; }
@@ -105,11 +105,11 @@ namespace DigitalRise.UI.Controls
 
 
     /// <summary>
-    /// Gets a value indicating whether the <see cref="Arrange(Vector2F, Vector2F)"/> results are 
+    /// Gets a value indicating whether the <see cref="Arrange(Vector2, Vector2)"/> results are 
     /// up-to-date.
     /// </summary>
     /// <value>
-    /// <see langword="true"/> if the <see cref="Arrange(Vector2F, Vector2F)"/> results are 
+    /// <see langword="true"/> if the <see cref="Arrange(Vector2, Vector2)"/> results are 
     /// up-to-date; otherwise, <see langword="false"/>.
     /// </value>
     /// <remarks>
@@ -235,8 +235,8 @@ namespace DigitalRise.UI.Controls
         else
         {
           // This is the root. Starts update process.
-          Measure(new Vector2F(float.PositiveInfinity));
-          Arrange(Vector2F.Zero, new Vector2F(DesiredWidth, DesiredHeight));
+          Measure(new Vector2(float.PositiveInfinity));
+          Arrange(Vector2.Zero, new Vector2(DesiredWidth, DesiredHeight));
         }
       }
     }
@@ -249,7 +249,7 @@ namespace DigitalRise.UI.Controls
     /// The available space that the parent can allocate to this control. The control can ignore
     /// this parameter and request a larger size.
     /// </param>
-    public void Measure(Vector2F availableSize)
+    public void Measure(Vector2 availableSize)
     {
       // Check removed: Measure can be called manually before control is added to screen for
       // manual layouting.
@@ -291,7 +291,7 @@ namespace DigitalRise.UI.Controls
       if (availableSize.Y > maxHeight)
         availableSize.Y = maxHeight;
 
-      Vector2F desiredSize = OnMeasure(availableSize);
+      Vector2 desiredSize = OnMeasure(availableSize);
 
       // Ensure MinWidth, MinHeight, MaxWidth, and MaxHeight.
       float minWidth = MinWidth;
@@ -332,7 +332,7 @@ namespace DigitalRise.UI.Controls
     /// properties, it only returns the desired size as the result of the method. This method must
     /// call <see cref="Measure"/> of the visual children.
     /// </remarks>
-    protected virtual Vector2F OnMeasure(Vector2F availableSize)
+    protected virtual Vector2 OnMeasure(Vector2 availableSize)
     {
       // If Width/Height are set, they further restrict the allowed area.
       if (Numeric.IsPositiveFinite(Width) && Width < availableSize.X)
@@ -346,7 +346,7 @@ namespace DigitalRise.UI.Controls
 
       // The desired size is either Width/Height if they are set, or the max of the child 
       // desired sizes.
-      Vector2F desiredSize = Vector2F.Zero;
+      Vector2 desiredSize = Vector2.Zero;
       if (Numeric.IsPositiveFinite(Width))
       {
         desiredSize.X = Width;
@@ -380,7 +380,7 @@ namespace DigitalRise.UI.Controls
     /// <param name="size">
     /// The actual size of this control as determined by the parent.
     /// </param>
-    public void Arrange(Vector2F position, Vector2F size)
+    public void Arrange(Vector2 position, Vector2 size)
     {
       // Check removed: Arrange can be called manually before control is added to screen for 
       // manual layouting.
@@ -415,7 +415,7 @@ namespace DigitalRise.UI.Controls
       bool hasHeight = Numeric.IsPositiveFinite(height);
       ActualHeight = hasHeight ? height : Math.Max(0, size.Y - margin.Y - margin.W);
 
-      OnArrange(new Vector2F(ActualX, ActualY), new Vector2F(ActualWidth, ActualHeight));
+      OnArrange(new Vector2(ActualX, ActualY), new Vector2(ActualWidth, ActualHeight));
 
       IsArrangeValid = true;
       _isArrangeInProgress = false;
@@ -423,7 +423,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <summary>
-    /// Called by <see cref="Arrange(Vector2F, Vector2F)"/> to arrange the visual children.
+    /// Called by <see cref="Arrange(Vector2, Vector2)"/> to arrange the visual children.
     /// </summary>
     /// <param name="position">The actual position of this control.</param>
     /// <param name="size">The actual size of this control.</param>
@@ -431,7 +431,7 @@ namespace DigitalRise.UI.Controls
     /// When this method is called, <see cref="ActualX"/>, <see cref="ActualY"/>, 
     /// <see cref="ActualWidth"/> and <see cref="ActualHeight"/> are already up-to-date.
     /// </remarks>
-    protected virtual void OnArrange(Vector2F position, Vector2F size)
+    protected virtual void OnArrange(Vector2 position, Vector2 size)
     {
       foreach (var child in VisualChildren)
         Arrange(child, position, size);
@@ -445,13 +445,13 @@ namespace DigitalRise.UI.Controls
     /// <param name="control">The control.</param>
     /// <param name="position">The position.</param>
     /// <param name="constraintSize">The constraint size.</param>
-    internal static void Arrange(UIControl control, Vector2F position, Vector2F constraintSize)
+    internal static void Arrange(UIControl control, Vector2 position, Vector2 constraintSize)
     {
       if (control == null)
         return;
 
-      Vector2F childPosition = position;
-      Vector2F childSize = constraintSize;
+      Vector2 childPosition = position;
+      Vector2 childSize = constraintSize;
       switch (control.HorizontalAlignment)
       {
         case HorizontalAlignment.Left:

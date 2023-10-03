@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -110,7 +110,7 @@ namespace Samples.Particles
         new PackedTexture(
           "FireParticles",
           assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Campfire/FireParticles.dds"),
-          Vector2F.Zero, Vector2F.One,
+          Vector2.Zero, Vector2.One,
           4, 1);
 
       // The particle parameter "AnimationTime" determines which tile is used,

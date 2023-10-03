@@ -8,9 +8,8 @@ using System.Diagnostics;
 using System.Text;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using Microsoft.Xna.Framework.Graphics;
-using DigitalRise.Text;
 using FontStashSharp;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -49,7 +48,7 @@ namespace DigitalRise.UI.Controls
     /// Gets the position of the top left corner of the caret rectangle/line.
     /// </summary>
     /// <value>The position of the top left corner of the caret rectangle/line.</value>
-    public Vector2F VisualCaret { get; private set; }
+    public Vector2 VisualCaret { get; private set; }
 
 
     /// <summary>
@@ -77,7 +76,7 @@ namespace DigitalRise.UI.Controls
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // This control can only measure itself if it is in a screen because it needs 
       // a font.
@@ -106,7 +105,7 @@ namespace DigitalRise.UI.Controls
 
       // Remove padding from constraint size.
       Vector4F padding = Padding;
-      Vector2F contentSize = availableSize; // Text area size
+      Vector2 contentSize = availableSize; // Text area size
       if (Numeric.IsPositiveFinite(availableSize.X))
         contentSize.X -= padding.X + padding.Z;
       if (Numeric.IsPositiveFinite(availableSize.Y))
@@ -139,7 +138,7 @@ namespace DigitalRise.UI.Controls
         UpdateVisualText(text, contentSize.X, font);
 
       // Determine desired size of text box.
-      Vector2F desiredSize = contentSize;
+      Vector2 desiredSize = contentSize;
       if (!hasWidth)
       {
         // Automatic width.
@@ -172,7 +171,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       // This method updates/arranges the scroll bar and computes the VisualText, 
       // VisualClip, etc. It does not arrange any other visual children!
@@ -243,14 +242,14 @@ namespace DigitalRise.UI.Controls
       float maximum = Math.Max(0, textHeight - contentBounds.Height);
       if (IsMultiline)
       {
-        VisualOffset = MathHelper.Clamp(VisualOffset, 0, maximum);
+        VisualOffset = Mathematics.MathHelper.Clamp(VisualOffset, 0, maximum);
       }
       else
       {
         if (VisualOffset > 0)
         {
           float textWidth = font.MeasureString(VisualText).X;
-          VisualOffset = MathHelper.Clamp(VisualOffset, 0, textWidth - contentBounds.Width + 4);
+          VisualOffset = Mathematics.MathHelper.Clamp(VisualOffset, 0, textWidth - contentBounds.Width + 4);
         }
       }
 
@@ -270,8 +269,8 @@ namespace DigitalRise.UI.Controls
         _verticalScrollBar.LargeChange = contentBounds.Height;
         _verticalScrollBar.Value = VisualOffset;
         _verticalScrollBar.Arrange(
-          new Vector2F(controlBounds.Right - scrollBarWidth, controlBounds.Top),
-          new Vector2F(scrollBarWidth, controlBounds.Height));
+          new Vector2(controlBounds.Right - scrollBarWidth, controlBounds.Top),
+          new Vector2(scrollBarWidth, controlBounds.Height));
       }
 
       VisualClip = contentBounds;
@@ -288,7 +287,7 @@ namespace DigitalRise.UI.Controls
     /// <see langword="true"/> if the <see cref="VisualText"/> has been updated; otherwise,
     /// <see langword="false"/> when the <see cref="VisualText"/> still needs to be updated.
     /// </returns>
-    private bool UpdateScrollBarVisibility(string text, Vector2F contentSize, SpriteFontBase font)
+    private bool UpdateScrollBarVisibility(string text, Vector2 contentSize, SpriteFontBase font)
     {
       bool visualTextUpdated = false;
       if (_verticalScrollBar != null)
@@ -477,12 +476,12 @@ namespace DigitalRise.UI.Controls
       if (IsReadOnly)
       {
         // Read-only: Hide caret.
-        VisualCaret = new Vector2F(float.NaN);
+        VisualCaret = new Vector2(float.NaN);
         return;
       }
 
       // Get visual caret position from CaretIndex.
-      Vector2F caret = GetPosition(CaretIndex, text, textBounds, font);
+      Vector2 caret = GetPosition(CaretIndex, text, textBounds, font);
       if (_bringCaretIntoView)
       {
         _bringCaretIntoView = false;
@@ -556,8 +555,8 @@ namespace DigitalRise.UI.Controls
 
       // Determine the screen position of the selection. 
       // (Upper, left corner of start and end index.)
-      Vector2F selectionStartPosition = GetPosition(startIndex, startLine, text, textBounds, font);
-      Vector2F selectionEndPosition = GetPosition(endIndex, endLine, text, textBounds, font);
+      Vector2 selectionStartPosition = GetPosition(startIndex, startLine, text, textBounds, font);
+      Vector2 selectionEndPosition = GetPosition(endIndex, endLine, text, textBounds, font);
 
       // The selection bounds contain one RectangleF per line.
       if (startLine == endLine)
@@ -569,7 +568,7 @@ namespace DigitalRise.UI.Controls
       {
         // ----- Multi-line selection.
         int lineStartIndex, lineEndIndex;
-        Vector2F lineStartPosition, lineEndPosition;
+        Vector2 lineStartPosition, lineEndPosition;
 
         // First line.
         lineEndIndex = Math.Abs(_lineStarts[startLine + 1]) - 1;
@@ -600,7 +599,7 @@ namespace DigitalRise.UI.Controls
     /// <param name="position">The absolute screen position.</param>
     /// <param name="screen">The screen.</param>
     /// <returns>The index of the caret.</returns>
-    private int GetIndex(Vector2F position, UIScreen screen)
+    private int GetIndex(Vector2 position, UIScreen screen)
     {
       string text = Text ?? string.Empty;
       var buffer = new StringBuilder();
@@ -693,7 +692,7 @@ namespace DigitalRise.UI.Controls
     /// <param name="textBounds">The text bounds.</param>
     /// <param name="font">The font.</param>
     /// <returns>The upper, left corner of the character</returns>
-    private Vector2F GetPosition(int index, string text, RectangleF textBounds, SpriteFontBase font)
+    private Vector2 GetPosition(int index, string text, RectangleF textBounds, SpriteFontBase font)
     {
       // Find line number using _lineStarts.
       int line = GetLine(index);
@@ -704,7 +703,7 @@ namespace DigitalRise.UI.Controls
 
     // Same as GetPosition() above except that line number is already known. 
     // (Avoids recomputation of line number.)
-    private Vector2F GetPosition(int index, int line, string text, RectangleF textBounds, SpriteFontBase font)
+    private Vector2 GetPosition(int index, int line, string text, RectangleF textBounds, SpriteFontBase font)
     {
       Debug.Assert(line == GetLine(index), "The line does not contain the given character index.");
 
@@ -721,7 +720,7 @@ namespace DigitalRise.UI.Controls
       else
         x -= VisualOffset;
 
-      return new Vector2F(x, y);
+      return new Vector2(x, y);
     }
     #endregion
   }

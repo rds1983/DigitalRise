@@ -104,7 +104,7 @@ namespace DigitalRise.Graphics
     /// where (0, 0) is the upper-left corner and (1, 1) is the lower-right corner of the texture 
     /// atlas.
     /// </value>
-    public Vector2F Offset { get; set; }
+    public Vector2 Offset { get; set; }
 
 
     /// <summary>
@@ -115,7 +115,7 @@ namespace DigitalRise.Graphics
     /// atlas. Example: a value of (0.5, 0.5) indicates that the packed texture is half the width 
     /// and height of the texture atlas.
     /// </value>
-    public Vector2F Scale { get; set; }
+    public Vector2 Scale { get; set; }
 
 
     #region ----- Tile Set -----
@@ -176,7 +176,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <param name="texture">The texture atlas that contains the packed texture.</param>
     public PackedTexture(Texture2D texture)
-      : this((texture != null) ? texture.Name : null, texture, new Vector2F(0, 0), new Vector2F(1, 1), 1, 1)
+      : this((texture != null) ? texture.Name : null, texture, new Vector2(0, 0), new Vector2(1, 1), 1, 1)
     {
     }
 
@@ -193,7 +193,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="texture"/> is <see langword="null"/>.
     /// </exception>
-    public PackedTexture(string name, Texture2D texture, Vector2F offset, Vector2F scale)
+    public PackedTexture(string name, Texture2D texture, Vector2 offset, Vector2 scale)
       : this(name, texture, offset, scale, 1, 1)
     {
     }
@@ -216,7 +216,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="numberOfColumns"/> or <paramref name="numberOfRows"/> is out of range.
     /// </exception>
-    public PackedTexture(string name, Texture2D texture, Vector2F offset, Vector2F scale, int numberOfColumns, int numberOfRows)
+    public PackedTexture(string name, Texture2D texture, Vector2 offset, Vector2 scale, int numberOfColumns, int numberOfRows)
     {
       if (texture == null)
         throw new ArgumentNullException("texture");
@@ -249,7 +249,7 @@ namespace DigitalRise.Graphics
     /// </param>
     /// <returns>The texture coordinate in the texture atlas.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public Vector2F GetTextureCoordinates(Vector2F texCoord, float animationTime)
+    public Vector2 GetTextureCoordinates(Vector2 texCoord, float animationTime)
     {
       // Same function as used in Billboard.fx.
       float tx = _numberOfColumns;
@@ -258,7 +258,7 @@ namespace DigitalRise.Graphics
       float ity = 1 / ty;
 
       // Texture coordinates relative to first tile:
-      texCoord = new Vector2F(texCoord.X * itx, texCoord.Y * ity);
+      texCoord = new Vector2(texCoord.X * itx, texCoord.Y * ity);
 
       // Calculate and apply offset of current tile.
       //
@@ -289,7 +289,7 @@ namespace DigitalRise.Graphics
       // Or, when tile sheet is packed from bottom to top.
       // float offsetY = 1 - ity - floor(time * ty) * ity;
 
-      texCoord += new Vector2F(offsetX, offsetY);
+      texCoord += new Vector2(offsetX, offsetY);
       return texCoord * Scale + Offset;
     }
 

@@ -7,7 +7,7 @@ using System.ComponentModel;
 using DigitalRise.Collections;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
@@ -326,7 +326,7 @@ namespace DigitalRise.UI.Controls
     /// <exception cref="ArgumentException">
     /// <paramref name="owner"/> is not loaded. The owner needs to be a visible control.
     /// </exception>
-    public void Open(UIControl owner, Vector2F position)
+    public void Open(UIControl owner, Vector2 position)
     {
       if (owner == null)
         throw new ArgumentNullException("owner");
@@ -349,7 +349,7 @@ namespace DigitalRise.UI.Controls
 
       // Choose position near the given position. 
       // The context menu is positioned so that it fits onto the screen.
-      Measure(new Vector2F(float.PositiveInfinity));
+      Measure(new Vector2(float.PositiveInfinity));
       float x = position.X;
       if (x + DesiredWidth > screen.ActualWidth)
       {

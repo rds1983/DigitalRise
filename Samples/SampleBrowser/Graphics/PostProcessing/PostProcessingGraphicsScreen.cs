@@ -87,7 +87,7 @@ namespace Samples
       DebugRenderer = new DebugRenderer(GraphicsService, spriteFont)
       {
         DefaultColor = new Color(0, 0, 0),
-        DefaultTextPosition = new Vector2F(10),
+        DefaultTextPosition = new Vector2(10),
       };
     }
 

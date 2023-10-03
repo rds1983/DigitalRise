@@ -51,7 +51,7 @@ contacts. This works only for a contact set of two triangle mesh shapes!",
 
       GraphicsScreen.DebugRenderer2D.DrawText(
         "Contact set dumped into the file: " + Filename, 
-        new Vector2F(300, 300), 
+        new Vector2(300, 300), 
         Color.Black);
     }
 

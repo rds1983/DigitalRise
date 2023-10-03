@@ -84,7 +84,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// quality settings, the shader samples ambient occlusion at two radii to catch details
     /// and soft occlusion shadows.
     /// </remarks>
-    public Vector2F Radii { get; set; }
+    public Vector2 Radii { get; set; }
 
 
     /// <summary>
@@ -101,7 +101,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// offsets are not scaled. If <see cref="Scale"/> is (0.5, 2), then the random offsets
     /// are scaled with random values between 0.5 and 2.
     /// </remarks>
-    public Vector2F Scale { get; set; }
+    public Vector2 Scale { get; set; }
 
 
     /// <summary>
@@ -125,7 +125,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// scene uses a different scale.
     /// </para>
     /// </remarks>
-    public Vector2F MaxDistances { get; set; }
+    public Vector2 MaxDistances { get; set; }
 
 
     /// <summary>
@@ -253,13 +253,13 @@ namespace DigitalRise.Graphics.PostProcessing
       _combinePass = _effect.CurrentTechnique.Passes["Combine"];
       _copyPass = _effect.CurrentTechnique.Passes["Copy"];
 
-      Radii = new Vector2F(0.01f, 0.02f);
-      MaxDistances = new Vector2F(0.5f, 1.0f);
+      Radii = new Vector2(0.01f, 0.02f);
+      MaxDistances = new Vector2(0.5f, 1.0f);
       Strength = 1f;
       NumberOfBlurPasses = 1;
       DownsampleFactor = 2;
       Quality = 2;
-      Scale = new Vector2F(0.5f, 2f);
+      Scale = new Vector2(0.5f, 2f);
       CombineWithSource = true;
 
       _blur = new Blur(graphicsService);
@@ -284,7 +284,7 @@ namespace DigitalRise.Graphics.PostProcessing
 
       // Permute randomVectors.
       for (int i = 0; i < vectors.Length; i++)
-        MathHelper.Swap(ref vectors[i], ref vectors[random.Next(i, vectors.Length - 1)]);
+        Mathematics.MathHelper.Swap(ref vectors[i], ref vectors[random.Next(i, vectors.Length - 1)]);
 
       // Scale random vectors.
       for (int i = 0; i < vectors.Length; i++)

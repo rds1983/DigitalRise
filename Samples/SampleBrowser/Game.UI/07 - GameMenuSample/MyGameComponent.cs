@@ -155,7 +155,7 @@ namespace Samples.Game.UI
       _deferredGraphicsScreen.DebugRenderer.DrawText(
         "\n\n\n\nThis is the game.\nPress <Back> or <Start> to pause the game." +
         "\nPress <Tab> or <ChatPadGreen> to display debug console.",
-        new Vector2F(300, 100),
+        new Vector2(300, 100),
         Color.Black);
 
       base.Update(gameTime);

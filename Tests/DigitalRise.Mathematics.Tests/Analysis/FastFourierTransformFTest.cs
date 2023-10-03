@@ -1,6 +1,6 @@
 ﻿using System;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -23,14 +23,14 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       Assert.Throws<ArgumentNullException>(() => FastFourierTransformF.Transform1D(null, true));
       Assert.Throws<ArgumentNullException>(() => FastFourierTransformF.Transform1D(null, 2, true));
 
-      Assert.Throws<ArgumentException>(() => FastFourierTransformF.Transform1D(new Vector2F[0], true));
-      Assert.Throws<ArgumentException>(() => FastFourierTransformF.Transform1D(new Vector2F[13], true));
+      Assert.Throws<ArgumentException>(() => FastFourierTransformF.Transform1D(new Vector2[0], true));
+      Assert.Throws<ArgumentException>(() => FastFourierTransformF.Transform1D(new Vector2[13], true));
 
-      FastFourierTransformF.Transform1D(new Vector2F[1], true);
+      FastFourierTransformF.Transform1D(new Vector2[1], true);
 
       // This is ok.
-      FastFourierTransformF.Transform1D(new Vector2F[2], true);
-      FastFourierTransformF.Transform1D(new Vector2F[16], false);
+      FastFourierTransformF.Transform1D(new Vector2[2], true);
+      FastFourierTransformF.Transform1D(new Vector2[16], false);
     }
 
 
@@ -40,11 +40,11 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       // Transform forward and inverse and compare with initial values.
       var random = new Random(1234567);
 
-      var s = new Vector2F[16];
-      var t = new Vector2F[16];
+      var s = new Vector2[16];
+      var t = new Vector2[16];
       for (int i = 0; i < s.Length; i++)
       {
-        s[i] = random.NextVector2F(-10, 10);
+        s[i] = random.NextVector2(-10, 10);
         t[i] = s[i];
       }
 
@@ -52,7 +52,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       FastFourierTransformF.Transform1D(t, false);
 
       for (int i = 0; i < s.Length; i++)
-        Assert.IsTrue(Vector2F.AreNumericallyEqual(s[i], t[i]));
+        Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i], t[i]));
     }
 
 
@@ -62,11 +62,11 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       // Transform forward and inverse and compare with initial values.
       var random = new Random(1234567);
 
-      var s = new Vector2F[16];
-      var t = new Vector2F[16];
+      var s = new Vector2[16];
+      var t = new Vector2[16];
       for (int i = 0; i < s.Length; i++)
       {
-        s[i] = random.NextVector2F(-10, 10);
+        s[i] = random.NextVector2(-10, 10);
         t[i] = s[i];
       }
 
@@ -74,7 +74,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       FastFourierTransformF.Transform1D(t, true);
 
       for (int i = 0; i < s.Length; i++)
-        Assert.IsTrue(Vector2F.AreNumericallyEqual(s[i], t[i]));
+        Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i], t[i]));
     }
 
 
@@ -86,20 +86,20 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       Assert.Throws<ArgumentNullException>(() => fft.Transform2D(null, true));
 
       // Senseless.
-      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2F[0, 0], true));
+      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2[0, 0], true));
 
       // Not POT.
-      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2F[13, 2], true));
-      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2F[2, 6], true));
+      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2[13, 2], true));
+      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2[2, 6], true));
 
       // Too large for capacity.
-      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2F[32, 6], true));
+      Assert.Throws<ArgumentException>(() => fft.Transform2D(new Vector2[32, 6], true));
 
-      fft.Transform2D(new Vector2F[1, 1], true);
+      fft.Transform2D(new Vector2[1, 1], true);
 
       // This is ok.
-      fft.Transform2D(new Vector2F[2, 4], true);
-      fft.Transform2D(new Vector2F[16, 1], false);
+      fft.Transform2D(new Vector2[2, 4], true);
+      fft.Transform2D(new Vector2[16, 1], false);
     }
 
 
@@ -111,12 +111,12 @@ namespace DigitalRise.Mathematics.Analysis.Tests
 
       var random = new Random(1234567);
 
-      var s1D = new Vector2F[16];
-      var s2D = new Vector2F[16, 1];
+      var s1D = new Vector2[16];
+      var s2D = new Vector2[16, 1];
 
       for (int i = 0; i < s1D.Length; i++)
       {
-        s1D[i] = random.NextVector2F(-10, 10);
+        s1D[i] = random.NextVector2(-10, 10);
         s2D[i, 0] = s1D[i];
       }
 
@@ -136,12 +136,12 @@ namespace DigitalRise.Mathematics.Analysis.Tests
 
       var random = new Random(1234567);
 
-      var s1D = new Vector2F[8];
-      var s2D = new Vector2F[1, 8];
+      var s1D = new Vector2[8];
+      var s2D = new Vector2[1, 8];
 
       for (int i = 0; i < s1D.Length; i++)
       {
-        s1D[i] = random.NextVector2F(-10, 10);
+        s1D[i] = random.NextVector2(-10, 10);
         s2D[0, i] = s1D[i];
       }
 
@@ -159,13 +159,13 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       // Transform forward and inverse and compare with initial values.
       var random = new Random(1234567);
 
-      var s = new Vector2F[16, 8];
-      var t = new Vector2F[16, 8];
+      var s = new Vector2[16, 8];
+      var t = new Vector2[16, 8];
       for (int i = 0; i < s.GetLength(0); i++)
       {
         for (int j = 0; j < s.GetLength(1); j++)
         {
-          s[i, j] = random.NextVector2F(-10, 10);
+          s[i, j] = random.NextVector2(-10, 10);
           t[i, j] = s[i, j];
         }
       }
@@ -173,13 +173,13 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       var fft = new FastFourierTransformF(16);
       fft.Transform2D(t, true);
 
-      Assert.IsFalse(Vector2F.AreNumericallyEqual(s[0, 0], t[0, 0]));
+      Assert.IsFalse(MathHelper.AreNumericallyEqual(s[0, 0], t[0, 0]));
 
       fft.Transform2D(t, false);
 
       for (int i = 0; i < s.GetLength(0); i++)
         for (int j = 0; j < s.GetLength(1); j++)
-          Assert.IsTrue(Vector2F.AreNumericallyEqual(s[i, j], t[i, j]));
+          Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i, j], t[i, j]));
     }
   }
 }

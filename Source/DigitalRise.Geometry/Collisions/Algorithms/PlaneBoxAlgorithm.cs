@@ -44,7 +44,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = (boxObject.Shape is PlaneShape);
       if (swapped)
-        MathHelper.Swap(ref planeObject, ref boxObject);
+        Mathematics.MathHelper.Swap(ref planeObject, ref boxObject);
 
       PlaneShape planeShape = planeObject.Shape as PlaneShape;
       BoxShape boxShape = boxObject.Shape as BoxShape;

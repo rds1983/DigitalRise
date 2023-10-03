@@ -1,8 +1,6 @@
 ﻿using System;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -64,20 +62,20 @@ namespace Samples.Game.UI
         // ----- Animation
         // We want the button to rotate around its center, therefore we set the render 
         // transform origin to the center of the control.
-        _button.RenderTransformOrigin = new Vector2F(0.5f, 0.5f);
+        _button.RenderTransformOrigin = new Vector2(0.5f, 0.5f);
 
         // Scale the button.
-        _button.RenderScale = new Vector2F(2, 2);
+        _button.RenderScale = new Vector2(2, 2);
 
         // Rotate the button by 1° per frame.
         _rotation = (_rotation + 1) % 360;
-        _button.RenderRotation = MathHelper.ToRadians(_rotation);
+        _button.RenderRotation = DigitalRise.Mathematics.MathHelper.ToRadians(_rotation);
       }
       else
       {
         // ----- No animation
         // Undo scale and rotation.
-        _button.RenderScale = new Vector2F(1, 1);
+        _button.RenderScale = new Vector2(1, 1);
         _button.RenderRotation = 0;
       }
     }

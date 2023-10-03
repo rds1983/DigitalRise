@@ -277,7 +277,7 @@ namespace Samples
 
       // Set the mouse centering position to center of the game window.
       var presentationParameters = _game.GraphicsDevice.PresentationParameters;
-      _inputService.Settings.MouseCenter = new Vector2F(
+      _inputService.Settings.MouseCenter = new Vector2(
         presentationParameters.BackBufferWidth / 2.0f,
         presentationParameters.BackBufferHeight / 2.0f);
     }

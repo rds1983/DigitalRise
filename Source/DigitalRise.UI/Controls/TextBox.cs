@@ -8,7 +8,6 @@ using System.Text;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
@@ -87,7 +86,7 @@ namespace DigitalRise.UI.Controls
 
     // Mouse interactions.
     private const float MinDragDistanceSquared = 4;
-    private Vector2F _mouseDownPosition;
+    private Vector2 _mouseDownPosition;
     private bool _isDraggingSelection;
     private bool _isPressed;
     
@@ -563,8 +562,8 @@ namespace DigitalRise.UI.Controls
       if (isMouseOver && !inputService.IsMouseOrTouchHandled)
       {
         if (inputService.IsDoubleClick(MouseButtons.Left)
-            && !_mouseDownPosition.IsNaN
-            && (_mouseDownPosition - context.MousePosition).LengthSquared < MinDragDistanceSquared)
+            && !_mouseDownPosition.IsNaN()
+            && (_mouseDownPosition - context.MousePosition).LengthSquared() < MinDragDistanceSquared)
         {
           // Double-click with left mouse button --> Select word or white-space.
           inputService.IsMouseOrTouchHandled = true;
@@ -662,7 +661,7 @@ namespace DigitalRise.UI.Controls
           // Only update the caret position if the mouse has moved.
           // (This check is necessary because we don't want to clear a selection
           // created by a double-click.)
-          if ((_mouseDownPosition - context.MousePosition).LengthSquared > MinDragDistanceSquared)
+          if ((_mouseDownPosition - context.MousePosition).LengthSquared() > MinDragDistanceSquared)
           {
             // Update the caret index (= end of selection).
             CaretIndex = GetIndex(context.MousePosition, screen);

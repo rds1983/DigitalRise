@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -13,7 +12,7 @@ namespace DigitalRise.Mathematics.Interpolation
   /// </summary>
   /// <inheritdoc cref="Curve2F"/>
   [Serializable]
-  public class CurveKey2F : CurveKey<float, Vector2F>
+  public class CurveKey2F : CurveKey<float, Vector2>
   {
     /// <summary>
     /// Gets the parameter.
@@ -31,7 +30,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <param name="value">The parameter</param>
     protected override void SetParameter(float value)
     {
-      Point = new Vector2F(value, Point.Y);
+      Point = new Vector2(value, Point.Y);
     }
   }
 }

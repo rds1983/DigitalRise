@@ -1213,7 +1213,7 @@ namespace DigitalRise.Graphics.Rendering
         if (seaLevel > pushedBackCameraPosition.Y)
         {
           // Camera is under water.
-          MathHelper.Swap(ref topPlane, ref bottomPlane);
+          Mathematics.MathHelper.Swap(ref topPlane, ref bottomPlane);
         }
 
         Debug.Assert(bottomPlane.DistanceFromOrigin < topPlane.DistanceFromOrigin);
@@ -1304,16 +1304,16 @@ namespace DigitalRise.Graphics.Rendering
         {
           if (rightTopDirection.Y < rightBottomDirection.Y)
           {
-            MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
-            MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
+            Mathematics.MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
+            Mathematics.MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
           }
         }
         else
         {
           if (rightTopDirection.Y > rightBottomDirection.Y)
           {
-            MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
-            MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
+            Mathematics.MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
+            Mathematics.MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
           }
         }
       }
@@ -1323,8 +1323,8 @@ namespace DigitalRise.Graphics.Rendering
         if (pushedBackCameraPosition.Y < seaLevel)
         {
           // Underwater looking up. We have to swap top and bottom.
-          MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
-          MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
+          Mathematics.MathHelper.Swap(ref rightTopDirection, ref rightBottomDirection);
+          Mathematics.MathHelper.Swap(ref leftTopDirection, ref leftBottomDirection);
         }
       }
 

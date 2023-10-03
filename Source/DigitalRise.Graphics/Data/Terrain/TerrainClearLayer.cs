@@ -71,7 +71,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    public void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    public void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       graphicsDevice.DrawQuad(rectangle, topLeftPosition, bottomRightPosition);
     }

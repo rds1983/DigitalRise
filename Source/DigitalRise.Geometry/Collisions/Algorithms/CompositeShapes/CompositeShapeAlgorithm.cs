@@ -90,9 +90,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       if (swapped)
       {
-        MathHelper.Swap(ref collisionObjectA, ref collisionObjectB);
-        MathHelper.Swap(ref geometricObjectA, ref geometricObjectB);
-        MathHelper.Swap(ref compositeShapeA, ref compositeShapeB);
+        Mathematics.MathHelper.Swap(ref collisionObjectA, ref collisionObjectB);
+        Mathematics.MathHelper.Swap(ref geometricObjectA, ref geometricObjectB);
+        Mathematics.MathHelper.Swap(ref compositeShapeA, ref compositeShapeB);
       }
 
       // Check if collision objects shapes are correct.
@@ -578,8 +578,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // B should be the composite, swap objects if necessary.
       if (!(objectB.GeometricObject.Shape is CompositeShape))
       {
-        MathHelper.Swap(ref objectA, ref objectB);
-        MathHelper.Swap(ref targetPoseA, ref targetPoseB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref targetPoseA, ref targetPoseB);
       }
 
       CompositeShape compositeShapeB = objectB.GeometricObject.Shape as CompositeShape;

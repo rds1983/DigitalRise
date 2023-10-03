@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -208,9 +208,9 @@ namespace DigitalRise.Physics.Constraints
     /// plane x-axis direction. The second element is the minimum in the plane y-axis direction. The
     /// default is (-∞, -∞), which means that there is no minimum limit.
     /// </value>
-    public Vector2F Minimum
+    public Vector2 Minimum
     {
-      get { return new Vector2F(_linearLimit.Minimum.X, _linearLimit.Minimum.Y); }
+      get { return new Vector2(_linearLimit.Minimum.X, _linearLimit.Minimum.Y); }
       set
       {
         var oldMin = _linearLimit.Minimum;
@@ -231,9 +231,9 @@ namespace DigitalRise.Physics.Constraints
     /// plane x-axis direction. The second element is the maximum in the plane y-axis direction. The
     /// default is (+∞, +∞), which means that there is no maximum limit.
     /// </value>
-    public Vector2F Maximum
+    public Vector2 Maximum
     {
-      get { return new Vector2F(_linearLimit.Maximum.X, _linearLimit.Maximum.Y); }
+      get { return new Vector2(_linearLimit.Maximum.X, _linearLimit.Maximum.Y); }
       set
       {
         var oldMax = _linearLimit.Maximum;
@@ -318,12 +318,12 @@ namespace DigitalRise.Physics.Constraints
     /// The position on the plane axes relative to <see cref="AnchorPositionALocal"/>: 
     /// (relativePositionX, relativePositionY).
     /// </value>
-    public Vector2F RelativePosition
+    public Vector2 RelativePosition
     {
       get
       {
         Vector3F relativePosition = _linearLimit.RelativePosition;
-        return new Vector2F(relativePosition.X, relativePosition.Y);
+        return new Vector2(relativePosition.X, relativePosition.Y);
       }
     }
     #endregion

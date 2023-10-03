@@ -7,8 +7,7 @@ using System.Globalization;
 using System.Xml.Serialization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics.Algebra;
-
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -39,9 +38,9 @@ namespace DigitalRise.Geometry.Shapes
     /// A component of <paramref name="value"/> is negative.
     /// </exception>
     [XmlIgnore]
-    public Vector2F Extent
+    public Vector2 Extent
     {
-      get { return new Vector2F(_widthX, _widthY); }
+      get { return new Vector2(_widthX, _widthY); }
       set
       {
         if (value.X < 0 || value.Y < 0)
@@ -146,7 +145,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Initializes a new instance of the <see cref="RectangleShape"/> class with the given extent.
     /// </summary>
     /// <param name="extent">The extent vector.</param>
-    public RectangleShape(Vector2F extent) : this(extent.X, extent.Y)
+    public RectangleShape(Vector2 extent) : this(extent.X, extent.Y)
     {
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -42,12 +43,12 @@ namespace DigitalRise.Animation.Tests
       var animation = new Curve2FAnimation();
       animation.Curve = new Curve2F
       {
-        new CurveKey2F { Point = new Vector2F(2.0f, 22.0f) },
-        new CurveKey2F { Point = new Vector2F(3.0f, 33.0f) },
-        new CurveKey2F { Point = new Vector2F(4.0f, 44.0f) },
+        new CurveKey2F { Point = new Vector2(2.0f, 22.0f) },
+        new CurveKey2F { Point = new Vector2(3.0f, 33.0f) },
+        new CurveKey2F { Point = new Vector2(4.0f, 44.0f) },
       };
-      animation.Curve.PreLoop = CurveLoopType.Linear;
-      animation.Curve.PostLoop = CurveLoopType.Cycle;
+      animation.Curve.PreLoop = Mathematics.Interpolation.CurveLoopType.Linear;
+      animation.Curve.PostLoop = Mathematics.Interpolation.CurveLoopType.Cycle;
       animation.EndParameter = float.NaN;
 
       Assert.AreEqual(TimeSpan.FromSeconds(4.0), animation.GetTotalDuration());
@@ -63,12 +64,12 @@ namespace DigitalRise.Animation.Tests
       var animation = new Curve2FAnimation();
       animation.Curve = new Curve2F
       {
-        new CurveKey2F { Point = new Vector2F(2.0f, 22.0f) },
-        new CurveKey2F { Point = new Vector2F(3.0f, 33.0f) },
-        new CurveKey2F { Point = new Vector2F(4.0f, 44.0f) },
+        new CurveKey2F { Point = new Vector2(2.0f, 22.0f) },
+        new CurveKey2F { Point = new Vector2(3.0f, 33.0f) },
+        new CurveKey2F { Point = new Vector2(4.0f, 44.0f) },
       };
-      animation.Curve.PreLoop = CurveLoopType.Linear;
-      animation.Curve.PostLoop = CurveLoopType.Cycle;
+      animation.Curve.PreLoop = Mathematics.Interpolation.CurveLoopType.Linear;
+      animation.Curve.PostLoop = Mathematics.Interpolation.CurveLoopType.Cycle;
       animation.EndParameter = float.PositiveInfinity;
 
       float defaultSource = -100.0f;
@@ -93,12 +94,12 @@ namespace DigitalRise.Animation.Tests
       var animation = new Curve2FAnimation();
       animation.Curve = new Curve2F
       {
-        new CurveKey2F { Point = new Vector2F(2.0f, 22.0f) },
-        new CurveKey2F { Point = new Vector2F(3.0f, 33.0f) },
-        new CurveKey2F { Point = new Vector2F(4.0f, 44.0f) },
+        new CurveKey2F { Point = new Vector2(2.0f, 22.0f) },
+        new CurveKey2F { Point = new Vector2(3.0f, 33.0f) },
+        new CurveKey2F { Point = new Vector2(4.0f, 44.0f) },
       };
-      animation.Curve.PreLoop = CurveLoopType.Linear;
-      animation.Curve.PostLoop = CurveLoopType.Cycle;
+      animation.Curve.PreLoop = Mathematics.Interpolation.CurveLoopType.Linear;
+      animation.Curve.PostLoop = Mathematics.Interpolation.CurveLoopType.Cycle;
       animation.EndParameter = float.PositiveInfinity;
       animation.IsAdditive = true;
 

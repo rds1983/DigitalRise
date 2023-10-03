@@ -508,10 +508,10 @@ namespace DigitalRise.Graphics
         return new Vector4F(0, 0, 1, 1);
 
       // Project the AABB far face to the near plane.
-      Vector2F min;
+      Vector2 min;
       min.X = aabb.Minimum.X / -aabb.Minimum.Z * near;
       min.Y = aabb.Minimum.Y / -aabb.Minimum.Z * near;
-      Vector2F max;
+      Vector2 max;
       max.X = aabb.Maximum.X / -aabb.Minimum.Z * near;
       max.Y = aabb.Maximum.Y / -aabb.Minimum.Z * near;
 
@@ -570,7 +570,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="cameraNode"/> or <paramref name="geometricObject"/> is 
     /// <see langword="null"/>.
     /// </exception>
-    internal static Vector2F GetScreenSize(CameraNode cameraNode, Viewport viewport, IGeometricObject geometricObject)
+    internal static Vector2 GetScreenSize(CameraNode cameraNode, Viewport viewport, IGeometricObject geometricObject)
     {
       // This implementation is just for reference. (It is preferable to optimize 
       // and inline the code when needed.)
@@ -601,7 +601,7 @@ namespace DigitalRise.Graphics
       float yScale = Math.Abs(proj.M11);
 
       // Screen size [px].
-      Vector2F screenSize;
+      Vector2 screenSize;
 
       if (isOrthographic)
       {

@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -16,51 +17,51 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(10, 1),
+        Point = new Vector2(10, 1),
         Interpolation = SplineInterpolation.Linear,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(15, 3),
+        Point = new Vector2(15, 3),
         Interpolation = SplineInterpolation.StepLeft,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(22, 5),
+        Point = new Vector2(22, 5),
         Interpolation = SplineInterpolation.StepCentered,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(25, 4),
+        Point = new Vector2(25, 4),
         Interpolation = SplineInterpolation.StepRight,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(30, 7),
+        Point = new Vector2(30, 7),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(32, 5),
-        TangentOut = new Vector2F(33, 10),
+        TangentIn = new Vector2(32, 5),
+        TangentOut = new Vector2(33, 10),
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(34, 10),
+        Point = new Vector2(34, 10),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(40, 3),
+        Point = new Vector2(40, 3),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(1, 0),
-        TangentOut = new Vector2F(1, 1),
+        TangentIn = new Vector2(1, 0),
+        TangentOut = new Vector2(1, 1),
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(45, 10),
+        Point = new Vector2(45, 10),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(48, 5),
+        Point = new Vector2(48, 5),
         Interpolation = SplineInterpolation.CatmullRom,
       });
 
@@ -75,7 +76,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F empty = new Curve2F();
       empty.Sort();
 
-      Vector2F p = empty.GetPoint(-0.5f);
+      Vector2 p = empty.GetPoint(-0.5f);
       Assert.IsNaN(p.X);
       Assert.IsNaN(p.Y);
 
@@ -99,18 +100,18 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = CreateCurve();
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(-10, 1), curve.GetPoint(-10)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(11, 1 + 2f/5f), curve.GetPoint(11)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(19, 5), curve.GetPoint(19)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(23, 5), curve.GetPoint(23)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(24, 4), curve.GetPoint(24)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(29, 4), curve.GetPoint(29)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(30, 7), curve.GetPoint(30)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(33.9999f, 10), curve.GetPoint(33.9999f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(40, 3), curve.GetPoint(40)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(45, 10), curve.GetPoint(45)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(48, 5), curve.GetPoint(48)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(49, curve.GetPoint(47).Y), curve.GetPoint(49)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, 1), curve.GetPoint(-10)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(11, 1 + 2f/5f), curve.GetPoint(11)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(19, 5), curve.GetPoint(19)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(23, 5), curve.GetPoint(23)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(24, 4), curve.GetPoint(24)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(29, 4), curve.GetPoint(29)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(30, 7), curve.GetPoint(30)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(33.9999f, 10), curve.GetPoint(33.9999f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(40, 3), curve.GetPoint(40)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(45, 10), curve.GetPoint(45)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(48, 5), curve.GetPoint(48)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(49, curve.GetPoint(47).Y), curve.GetPoint(49)));
 
       // Tested with internal assert in Debug Build.
       curve.GetPoint(31);
@@ -141,17 +142,17 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       //};
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(-10, -7), curve.GetPoint(-10)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(49, 1 + 2f/5f), curve.GetPoint(49)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, -7), curve.GetPoint(-10)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(49, 1 + 2f/5f), curve.GetPoint(49)));
 
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(4, curve.GetPoint(42).Y), curve.GetPoint(4)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(50, 5 + 4f/5f), curve.GetPoint(50)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y), curve.GetPoint(4)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(50, 5 + 4f/5f), curve.GetPoint(50)));
 
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(4, curve.GetPoint(42).Y - 4), curve.GetPoint(4f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y - 4), curve.GetPoint(4f)));
       CatmullRomSegment3F catmull = new CatmullRomSegment3F 
       { 
         Point1 = new Vector3F(40, 3, 0),
@@ -160,8 +161,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point4 = new Vector3F(48, 5, 0),
       };
       Vector3F endTangent = catmull.GetTangent(1);
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(55f, 5 + (55-48) * endTangent.Y / endTangent.X), curve.GetPoint(55f)));
-      //Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector3F(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(55f, 5 + (55-48) * endTangent.Y / endTangent.X), curve.GetPoint(55f)));
+      //Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3F(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f)));
 
       // Test more linear pre- and post-behavior.
       curve = new Curve2F();
@@ -169,40 +170,40 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       curve.PostLoop = CurveLoopType.Linear;
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(0, 0),
+        Point = new Vector2(0, 0),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(-10, 10),
-        TangentOut = new Vector2F(5, 4),
+        TangentIn = new Vector2(-10, 10),
+        TangentOut = new Vector2(5, 4),
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(10, 3),
+        Point = new Vector2(10, 3),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(8, 2),
-        TangentOut = new Vector2F(15, 4),
+        TangentIn = new Vector2(8, 2),
+        TangentOut = new Vector2(15, 4),
       });
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(-10, 10), curve.GetPoint(-10f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(15, 4), curve.GetPoint(15f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, 10), curve.GetPoint(-10f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(15, 4), curve.GetPoint(15f)));
 
       curve = new Curve2F();
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(0, 0),
+        Point = new Vector2(0, 0),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(1, 2),
-        TangentOut = new Vector2F(5, 4),
+        TangentIn = new Vector2(1, 2),
+        TangentOut = new Vector2(5, 4),
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(10, 3),
+        Point = new Vector2(10, 3),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(8, 2),
-        TangentOut = new Vector2F(2, -1),
+        TangentIn = new Vector2(8, 2),
+        TangentOut = new Vector2(2, -1),
       });
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(-10, -20), curve.GetPoint(-10f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(15, 3 - 0.5f * 5), curve.GetPoint(15f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, -20), curve.GetPoint(-10f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(15, 3 - 0.5f * 5), curve.GetPoint(15f)));
     }
 
 
@@ -213,325 +214,325 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Linear,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2) , curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2) , curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.StepLeft,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(2, -2),
-        TangentOut = new Vector2F(2, 2),
+        TangentIn = new Vector2(2, -2),
+        TangentOut = new Vector2(2, 2),
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(2, -2), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(2, -2), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(2, -2), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(2, -2), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(2, -2), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(2, -2), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(1, 2) - new Vector2F(2, -2) / 3.0f,
-        TangentOut = new Vector2F(1, 2) + new Vector2F(2, 2) / 3.0f,
+        TangentIn = new Vector2(1, 2) - new Vector2(2, -2) / 3.0f,
+        TangentOut = new Vector2(1, 2) + new Vector2(2, 2) / 3.0f,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, 2), curve.GetTangent(1)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, 2), curve.GetTangent(2)));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2)));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, -2), curve.GetTangent(0)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, -2), curve.GetTangent(1)));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(1)));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, -2), curve.GetTangent(0)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, 2), curve.GetTangent(1)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, 2), curve.GetTangent(2)));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2)));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(0));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(1));
-      Assert.AreEqual(new Vector2F(1, 0), curve.GetTangent(2));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(1));
+      Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
     }
 
 
@@ -541,282 +542,282 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Linear,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.Linear,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
 
       // Test curves with 1 point
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.StepRight,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.StepRight,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 2), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 2), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(0, 0), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 0), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 2), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 2), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 2), curve.GetPoint(4));
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.AreEqual(new Vector2F(0, 1), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 5), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 1), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 5), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.AreEqual(new Vector2F(0, 3), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(2, 3), curve.GetPoint(2));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(2, 0),
-        TangentOut = new Vector2F(2, -1.2f),
+        TangentIn = new Vector2(2, 0),
+        TangentOut = new Vector2(2, -1.2f),
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector2F(2, 0),
-        TangentOut = new Vector2F(2, -2),
+        TangentIn = new Vector2(2, 0),
+        TangentOut = new Vector2(2, -2),
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
       Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(1, 2) + new Vector2F(2, 0) / 3,
-        TangentOut = new Vector2F(1, 2) + new Vector2F(2, -1.2f) / 3,
+        TangentIn = new Vector2(1, 2) + new Vector2(2, 0) / 3,
+        TangentOut = new Vector2(1, 2) + new Vector2(2, -1.2f) / 3,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(3, 4),
+        Point = new Vector2(3, 4),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector2F(3, 4) + new Vector2F(2, 0) / 3,
-        TangentOut = new Vector2F(3, 4) + new Vector2F(2, -2) / 3,
+        TangentIn = new Vector2(3, 4) + new Vector2(2, 0) / 3,
+        TangentOut = new Vector2(3, 4) + new Vector2(2, -2) / 3,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 3), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 3), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
       Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y));
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
     }
 
@@ -827,49 +828,49 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = new Curve2F();
       curve.Add(new CurveKey2F()
                   {
-                    Point = new Vector2F(1, 2),
+                    Point = new Vector2(1, 2),
                     Interpolation = SplineInterpolation.CatmullRom,
                   });
       curve.Add(new CurveKey2F()
                   {
-                    Point = new Vector2F(1, 4),
+                    Point = new Vector2(1, 4),
                     Interpolation = SplineInterpolation.CatmullRom,
                   });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.IsTrue(new Vector2F(0, 2) == curve.GetPoint(0) || new Vector2F(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(1, 2) == curve.GetPoint(0) || new Vector2F(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(2, 2) == curve.GetPoint(0) || new Vector2F(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.IsTrue(new Vector2(0, 2) == curve.GetPoint(0) || new Vector2(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(1, 2) == curve.GetPoint(0) || new Vector2(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(2, 2) == curve.GetPoint(0) || new Vector2(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.AreEqual(new Vector2F(0, 2), curve.GetPoint(0));
-      Assert.IsTrue(new Vector2F(1, 2) == curve.GetPoint(0) || new Vector2F(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(2, 2) == curve.GetPoint(0) || new Vector2F(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
+      Assert.IsTrue(new Vector2(1, 2) == curve.GetPoint(0) || new Vector2(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(2, 2) == curve.GetPoint(0) || new Vector2(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.IsTrue(new Vector2F(0, 2) == curve.GetPoint(0) || new Vector2F(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(1, 2) == curve.GetPoint(0) || new Vector2F(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(2, 2) == curve.GetPoint(0) || new Vector2F(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.IsTrue(new Vector2(0, 2) == curve.GetPoint(0) || new Vector2(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(1, 2) == curve.GetPoint(0) || new Vector2(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(2, 2) == curve.GetPoint(0) || new Vector2(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.IsTrue(new Vector2F(0, 2) == curve.GetPoint(0) || new Vector2F(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(1, 2) == curve.GetPoint(0) || new Vector2F(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(2, 2) == curve.GetPoint(0) || new Vector2F(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.IsTrue(new Vector2(0, 2) == curve.GetPoint(0) || new Vector2(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(1, 2) == curve.GetPoint(0) || new Vector2(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(2, 2) == curve.GetPoint(0) || new Vector2(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.IsTrue(new Vector2F(0, 2) == curve.GetPoint(0) || new Vector2F(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(1, 2) == curve.GetPoint(0) || new Vector2F(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
-      Assert.IsTrue(new Vector2F(2, 2) == curve.GetPoint(0) || new Vector2F(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
-      Assert.AreEqual(new Vector2F(3, 4), curve.GetPoint(3));
-      Assert.AreEqual(new Vector2F(4, 4), curve.GetPoint(4));
+      Assert.IsTrue(new Vector2(0, 2) == curve.GetPoint(0) || new Vector2(0, 4) == curve.GetPoint(0)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(1, 2) == curve.GetPoint(0) || new Vector2(1, 4) == curve.GetPoint(1)); // Degenerate case. Any useful result is ok.
+      Assert.IsTrue(new Vector2(2, 2) == curve.GetPoint(0) || new Vector2(2, 4) == curve.GetPoint(2)); // Degenerate case. Any useful result is ok.
+      Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
+      Assert.AreEqual(new Vector2(4, 4), curve.GetPoint(4));
       Assert.AreEqual(false, curve.IsInMirroredOscillation(0));
     }
 
@@ -898,54 +899,54 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = new Curve2F();
       curve.Add(new CurveKey2F()
                   {
-                    Point = new Vector2F(1, 2),
+                    Point = new Vector2(1, 2),
                     Interpolation = SplineInterpolation.BSpline,
                   });
       curve.Add(new CurveKey2F()
                   {
-                    Point = new Vector2F(2, 4),
+                    Point = new Vector2(2, 4),
                     Interpolation = SplineInterpolation.BSpline,
                   });
       curve.Add(new CurveKey2F()
                   {
-                    Point = new Vector2F(10, 20),
+                    Point = new Vector2(10, 20),
                     Interpolation = SplineInterpolation.BSpline,
                   });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(1.1f, 2.2f), curve.GetPoint(1.1f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(1.9f, 3.8f), curve.GetPoint(1.9f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2, 4), curve.GetPoint(2)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(2.1f, 4.2f), curve.GetPoint(2.1f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(9.9f, 19.8f), curve.GetPoint(9.9f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(10, 20), curve.GetPoint(10)));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.9f, 3.8f), curve.GetPoint(1.9f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 4), curve.GetPoint(2)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2.1f, 4.2f), curve.GetPoint(2.1f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10)));
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(1, 2),
+        Point = new Vector2(1, 2),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(9, 18),
+        Point = new Vector2(9, 18),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.Add(new CurveKey2F()
       {
-        Point = new Vector2F(10, 20),
+        Point = new Vector2(10, 20),
         Interpolation = SplineInterpolation.BSpline,
       });
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
-      Assert.AreEqual(new Vector2F(1, 2), curve.GetPoint(1));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(1.1f, 2.2f), curve.GetPoint(1.1f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(8.9f, 17.8f), curve.GetPoint(8.9f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(9, 18), curve.GetPoint(9)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(9.1f, 18.2f), curve.GetPoint(9.1f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(9.9f, 19.8f), curve.GetPoint(9.9f)));
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F(10, 20), curve.GetPoint(10)));
+      Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(8.9f, 17.8f), curve.GetPoint(8.9f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9, 18), curve.GetPoint(9)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.1f, 18.2f), curve.GetPoint(9.1f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10)));
     }
 
 
@@ -955,16 +956,16 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       CurveKey2F curveKey1 = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Bezier,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
       CurveKey2F curveKey2 = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Hermite,
-        Point = new Vector2F(2.2f, 4.4f),
-        TangentIn = new Vector2F(1.7f, 3.6f),
-        TangentOut = new Vector2F(2.9f, 4.3f)
+        Point = new Vector2(2.2f, 4.4f),
+        TangentIn = new Vector2(1.7f, 3.6f),
+        TangentOut = new Vector2(2.9f, 4.3f)
       };
       Curve2F curve = new Curve2F { curveKey1, curveKey2 };
       curve.PreLoop = CurveLoopType.Cycle;
@@ -1000,16 +1001,16 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       CurveKey2F curveKey1 = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Bezier,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
       CurveKey2F curveKey2 = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Hermite,
-        Point = new Vector2F(2.2f, 4.4f),
-        TangentIn = new Vector2F(1.7f, 3.6f),
-        TangentOut = new Vector2F(2.9f, 4.3f)
+        Point = new Vector2(2.2f, 4.4f),
+        TangentIn = new Vector2(1.7f, 3.6f),
+        TangentOut = new Vector2(2.9f, 4.3f)
       };
       Curve2F curve = new Curve2F { curveKey1, curveKey2 };
       curve.PreLoop = CurveLoopType.Cycle;

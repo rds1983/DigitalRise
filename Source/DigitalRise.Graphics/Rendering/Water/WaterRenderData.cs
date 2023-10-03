@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -14,8 +14,8 @@ namespace DigitalRise.Graphics.Rendering
     // Cached normal map offsets. These are not strictly necessary if we simply sample the water
     // using tex2D(..., texCoord + time * velocity). But if we cache the normal offsets, then we
     // can smoothly change the velocity without visible "jumps".
-    public Vector2F NormalMapOffset0;
-    public Vector2F NormalMapOffset1;
+    public Vector2 NormalMapOffset0;
+    public Vector2 NormalMapOffset1;
     public int LastNormalUpdateFrame = -1;
 
     // A cached submesh for water rendering. Created and used by the WaterRenderer.

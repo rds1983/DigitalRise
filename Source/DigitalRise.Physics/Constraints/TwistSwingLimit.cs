@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -51,8 +51,8 @@ namespace DigitalRise.Physics.Constraints
     //--------------------------------------------------------------
 
     private readonly LimitState[] _limitStates = new LimitState[2];
-    private Vector2F _minImpulseLimits;
-    private Vector2F _maxImpulseLimits;
+    private Vector2 _minImpulseLimits;
+    private Vector2 _maxImpulseLimits;
     private readonly Constraint1D[] _constraints =
     {
       new Constraint1D(), 
@@ -238,7 +238,7 @@ namespace DigitalRise.Physics.Constraints
     /// <see cref="Maximum"/>), the bodies will bounce back. If this property is 0, there will be no
     /// bounce. If this property is 1, the whole velocity is reflected.
     /// </remarks>
-    public Vector2F Restitution
+    public Vector2 Restitution
     {
       get { return _restitution; }
       set
@@ -250,7 +250,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector2F _restitution;
+    private Vector2 _restitution;
 
 
     /// <summary>
@@ -263,7 +263,7 @@ namespace DigitalRise.Physics.Constraints
     /// <remarks>
     /// This property defines the maximal force that can be apply to keep the constraint satisfied. 
     /// </remarks>
-    public Vector2F MaxForce
+    public Vector2 MaxForce
     {
       get { return _maxForce; }
       set
@@ -275,7 +275,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector2F _maxForce = new Vector2F(float.PositiveInfinity);
+    private Vector2 _maxForce = new Vector2(float.PositiveInfinity);
 
 
     /// <inheritdoc/>
@@ -505,10 +505,10 @@ namespace DigitalRise.Physics.Constraints
 
       float targetVelocity = deviation * ErrorReduction / deltaTime;
       float maxErrorCorrectionVelocity = simulation.Settings.Constraints.MaxErrorCorrectionVelocity;
-      targetVelocity = MathHelper.Clamp(targetVelocity, -maxErrorCorrectionVelocity, maxErrorCorrectionVelocity);
+      targetVelocity = Mathematics.MathHelper.Clamp(targetVelocity, -maxErrorCorrectionVelocity, maxErrorCorrectionVelocity);
 
       // ----- Restitution
-      float restitution = Restitution[index];
+      float restitution = Restitution.GetComponentByIndex(index);
       if (restitution > simulation.Settings.Constraints.RestitutionThreshold)
       {
         float velocity = constraint.GetRelativeVelocity(BodyA, BodyB);
@@ -526,21 +526,21 @@ namespace DigitalRise.Physics.Constraints
       constraint.TargetRelativeVelocity = targetVelocity;
 
       // ----- Impulse limits
-      float impulseLimit = MaxForce[index] * deltaTime;
+      float impulseLimit = MaxForce.GetComponentByIndex(index) * deltaTime;
       if (_limitStates[index] == LimitState.Min)
       {
-        _minImpulseLimits[index] = 0;
-        _maxImpulseLimits[index] = impulseLimit;
+        _minImpulseLimits.SetComponentByIndex(index, 0);
+        _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
       }
       else if (_limitStates[index] == LimitState.Max)
       {
-        _minImpulseLimits[index] = -impulseLimit;
-        _maxImpulseLimits[index] = 0;
+        _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+        _maxImpulseLimits.SetComponentByIndex(index, 0);
       }
       else //if (_limitStates[index] == LimitState.Locked)
       {
-        _minImpulseLimits[index] = -impulseLimit;
-        _maxImpulseLimits[index] = impulseLimit;
+        _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+        _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
       }
 
       // Note: Softness must be set before!
@@ -583,8 +583,8 @@ namespace DigitalRise.Physics.Constraints
           BodyA,
           BodyB,
           relativeVelocity,
-          _minImpulseLimits[index],
-          _maxImpulseLimits[index]);
+          _minImpulseLimits.GetComponentByIndex(index),
+          _maxImpulseLimits.GetComponentByIndex(index));
 
         return impulse;
       }

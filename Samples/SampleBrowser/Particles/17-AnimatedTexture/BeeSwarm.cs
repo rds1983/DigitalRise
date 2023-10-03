@@ -6,6 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -73,7 +74,7 @@ namespace Samples.Particles
         new PackedTexture(
           "Bee",
           assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "Particles/beeWingFlap.png"),
-          Vector2F.Zero, Vector2F.One,
+          Vector2.Zero, Vector2.One,
           3, 1);
 
       // The Frame particle parameter stores the index of the animation frame and the

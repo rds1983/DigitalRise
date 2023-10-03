@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
 using DigitalRise.GameBase;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI
 {
@@ -372,7 +372,7 @@ namespace DigitalRise.UI
       {
         RectangleF candidateBounds = new RectangleF(candidate.ActualX, candidate.ActualY, candidate.ActualWidth, candidate.ActualHeight);
 
-        Vector2F distance = GetDistance(focusedControlBounds, candidateBounds);
+        Vector2 distance = GetDistance(focusedControlBounds, candidateBounds);
         float manhattanDistance = Math.Abs(distance.X) + Math.Abs(distance.Y);
 
         if (moveLeft)
@@ -450,7 +450,7 @@ namespace DigitalRise.UI
     /// <paramref name="rectangle0"/> to <paramref name="rectangle1"/>. The vector is (0, 0) if the 
     /// rectangles are intersecting.
     /// </returns>
-    private static Vector2F GetDistance(RectangleF rectangle0, RectangleF rectangle1)
+    private static Vector2 GetDistance(RectangleF rectangle0, RectangleF rectangle1)
     {
       RectangleF a = rectangle0;
       RectangleF b = rectangle1;
@@ -463,17 +463,17 @@ namespace DigitalRise.UI
         if (a.Left > b.Right)
         {
           // B is on top and left.
-          return new Vector2F(b.Right - a.Left, b.Bottom - a.Top);
+          return new Vector2(b.Right - a.Left, b.Bottom - a.Top);
         }
 
         if (a.Right < b.Left)
         {
           // B is on top and right.
-          return new Vector2F(b.Left - a.Right, b.Bottom - a.Top);
+          return new Vector2(b.Left - a.Right, b.Bottom - a.Top);
         }
 
         // B is on top.
-        return new Vector2F(0, b.Bottom - a.Top);
+        return new Vector2(0, b.Bottom - a.Top);
       }
 
       if (a.Bottom < b.Top)
@@ -483,33 +483,33 @@ namespace DigitalRise.UI
         if (a.Left > b.Right)
         {
           // B is on below and left.
-          return new Vector2F(b.Right - a.Left, b.Top - a.Bottom);
+          return new Vector2(b.Right - a.Left, b.Top - a.Bottom);
         }
         
         if (a.Right < b.Left)
         {
           // B is on below and right.
-          return new Vector2F(b.Left - a.Right, b.Top - a.Bottom);
+          return new Vector2(b.Left - a.Right, b.Top - a.Bottom);
         }
 
         // B is on below.
-        return new Vector2F(0, b.Top - a.Bottom);
+        return new Vector2(0, b.Top - a.Bottom);
       }
 
       if (a.Left > b.Right)
       {
         // B is left.
-        return new Vector2F(b.Right - a.Left, 0);
+        return new Vector2(b.Right - a.Left, 0);
       }
       
       if (a.Right < b.Left)
       {
         // B is right.
-        return new Vector2F(b.Left - a.Right, 0);
+        return new Vector2(b.Left - a.Right, 0);
       }
 
       // A and B are intersecting.
-      return new Vector2F();
+      return new Vector2();
     }
     #endregion
   }

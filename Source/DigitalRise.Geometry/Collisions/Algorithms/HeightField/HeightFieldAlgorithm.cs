@@ -82,7 +82,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = !(heightFieldCollisionObject.GeometricObject.Shape is HeightField);
       if (swapped)
-        MathHelper.Swap(ref heightFieldCollisionObject, ref otherCollisionObject);
+        Mathematics.MathHelper.Swap(ref heightFieldCollisionObject, ref otherCollisionObject);
 
       IGeometricObject heightFieldGeometricObject = heightFieldCollisionObject.GeometricObject;
       IGeometricObject otherGeometricObject = otherCollisionObject.GeometricObject;
@@ -576,7 +576,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Swap if necessary.
       if (swapped)
-        MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
 
       HeightField heightFieldA = (HeightField)objectA.Shape;
       Shape shapeB = objectB.Shape;
@@ -677,8 +677,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Object A should be the height field, swap objects if necessary.
       if (!(objectA.GeometricObject.Shape is HeightField))
       {
-        MathHelper.Swap(ref objectA, ref objectB);
-        MathHelper.Swap(ref targetPoseA, ref targetPoseB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref targetPoseA, ref targetPoseB);
       }
 
       IGeometricObject geometricObjectA = objectA.GeometricObject;

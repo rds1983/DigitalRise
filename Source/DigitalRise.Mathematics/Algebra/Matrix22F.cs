@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Algebra
 {
@@ -731,9 +731,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="matrix">The matrix.</param>
     /// <param name="vector">The column vector.</param>
     /// <returns>The resulting column vector.</returns>
-    public static Vector2F operator *(Matrix22F matrix, Vector2F vector)
+    public static Vector2 operator *(Matrix22F matrix, Vector2 vector)
     {
-      Vector2F result;
+      Vector2 result;
       result.X = matrix.M00 * vector.X + matrix.M01 * vector.Y;
       result.Y = matrix.M10 * vector.X + matrix.M11 * vector.Y;
       return result;
@@ -746,9 +746,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="matrix">The matrix.</param>
     /// <param name="vector">The column vector.</param>
     /// <returns>The resulting column vector.</returns>
-    public static Vector2F Multiply(Matrix22F matrix, Vector2F vector)
+    public static Vector2 Multiply(Matrix22F matrix, Vector2 vector)
     {
-      Vector2F result;
+      Vector2 result;
       result.X = matrix.M00 * vector.X + matrix.M01 * vector.Y;
       result.Y = matrix.M10 * vector.X + matrix.M11 * vector.Y;
       return result;
@@ -974,16 +974,16 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Gets a column as <see cref="Vector2F"/>.
+    /// Gets a column as <see cref="Vector2"/>.
     /// </summary>
     /// <param name="index">The index of the column.</param>
     /// <returns>The column vector.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public Vector2F GetColumn(int index)
+    public Vector2 GetColumn(int index)
     {
-      Vector2F column;
+      Vector2 column;
       switch (index)
       {
         case 0:
@@ -1002,14 +1002,14 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Sets a column from a <see cref="Vector2F"/>.
+    /// Sets a column from a <see cref="Vector2"/>.
     /// </summary>
     /// <param name="index">The index of the column.</param>
     /// <param name="columnVector">The column vector.</param>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public void SetColumn(int index, Vector2F columnVector)
+    public void SetColumn(int index, Vector2 columnVector)
     {
       switch (index)
       {
@@ -1028,16 +1028,16 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Gets a row as <see cref="Vector2F"/>.
+    /// Gets a row as <see cref="Vector2"/>.
     /// </summary>
     /// <param name="index">The index of the row.</param>
     /// <returns>The row vector.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public Vector2F GetRow(int index)
+    public Vector2 GetRow(int index)
     {
-      Vector2F row;
+      Vector2 row;
       switch (index)
       {
         case 0:
@@ -1056,14 +1056,14 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Sets a row from a <see cref="Vector2F"/>.
+    /// Sets a row from a <see cref="Vector2"/>.
     /// </summary>
     /// <param name="index">The index of the row (0, 1, or 2).</param>
     /// <param name="rowVector">The row vector.</param>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public void SetRow(int index, Vector2F rowVector)
+    public void SetRow(int index, Vector2 rowVector)
     {
       switch (index)
       {
@@ -1187,7 +1187,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </summary>
     public void Transpose()
     {
-      MathHelper.Swap(ref M01, ref M10);
+      Mathematics.MathHelper.Swap(ref M01, ref M10);
     }
     #endregion
 
@@ -1349,7 +1349,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </summary>
     /// <param name="scale">Amounts to scale by the x, and y-axis.</param>
     /// <returns>The created scaling matrix.</returns>
-    public static Matrix22F CreateScale(Vector2F scale)
+    public static Matrix22F CreateScale(Vector2 scale)
     {
       Matrix22F result = new Matrix22F 
       {

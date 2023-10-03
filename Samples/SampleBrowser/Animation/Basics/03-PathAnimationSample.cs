@@ -14,7 +14,7 @@ namespace Samples.Animation
     3)]
   public class PathAnimationSample : AnimationSample
   {
-    private readonly AnimatableProperty<Vector2F> _animatablePosition = new AnimatableProperty<Vector2F>();
+    private readonly AnimatableProperty<Vector2> _animatablePosition = new AnimatableProperty<Vector2>();
 
 
     public PathAnimationSample(Microsoft.Xna.Framework.Game game)
@@ -40,56 +40,56 @@ namespace Samples.Animation
       path.Add(new PathKey2F
       {
         Parameter = 0,
-        Point = new Vector2F(bounds.Center.X, bounds.Center.Y),
+        Point = new Vector2(bounds.Center.X, bounds.Center.Y),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 0.5f,
-        Point = new Vector2F(bounds.Center.X / 2.0f, 2.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(bounds.Center.X / 2.0f, 2.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 1.0f,
-        Point = new Vector2F(bounds.Center.X, 1.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(bounds.Center.X, 1.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 1.5f,
-        Point = new Vector2F(3.0f * bounds.Center.X / 2.0f, 2.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(3.0f * bounds.Center.X / 2.0f, 2.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 2.0f,
-        Point = new Vector2F(bounds.Center.X, bounds.Center.Y),
+        Point = new Vector2(bounds.Center.X, bounds.Center.Y),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 2.5f,
-        Point = new Vector2F(bounds.Center.X / 2.0f, 4.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(bounds.Center.X / 2.0f, 4.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
 
       path.Add(new PathKey2F
       {
         Parameter = 3.0f,
-        Point = new Vector2F(bounds.Center.X, 5.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(bounds.Center.X, 5.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 3.5f,
-        Point = new Vector2F(3.0f * bounds.Center.X / 2.0f, 4.0f * bounds.Center.Y / 3.0f),
+        Point = new Vector2(3.0f * bounds.Center.X / 2.0f, 4.0f * bounds.Center.Y / 3.0f),
         Interpolation = splineInterpolation,
       });
       path.Add(new PathKey2F
       {
         Parameter = 4.0f,
-        Point = new Vector2F(bounds.Center.X, bounds.Center.Y),
+        Point = new Vector2(bounds.Center.X, bounds.Center.Y),
         Interpolation = splineInterpolation,
       });
 

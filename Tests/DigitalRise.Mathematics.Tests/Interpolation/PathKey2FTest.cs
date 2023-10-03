@@ -1,7 +1,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -17,9 +17,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       {
         Interpolation = SplineInterpolation.Bezier,
         Parameter = 56.7f,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
       PathKey2F pathKey2;
 
@@ -48,9 +48,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       {
         Interpolation = SplineInterpolation.Bezier,
         Parameter = 56.7f,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
       PathKey2F pathKey2;
 

@@ -7,7 +7,7 @@ using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -183,7 +183,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override bool HitTest(UIControl control, Vector2F position)
+    protected override bool HitTest(UIControl control, Vector2 position)
     {
       // If control is the child and ClipContent is enabled, then the mouse must be within the
       // ContentBounds. (The child part that is outside the ContentBounds is invisible and cannot
@@ -198,7 +198,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // Similar to UIControl.OnMeasure, but for the content the Padding is applied.
 
@@ -226,7 +226,7 @@ namespace DigitalRise.UI.Controls
         Content.Measure(availableSize);
       }
 
-      Vector2F desiredSize = Vector2F.Zero;
+      Vector2 desiredSize = Vector2.Zero;
       if (hasWidth)
       {
         desiredSize.X = width;
@@ -255,7 +255,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       // Similar to UIControl.OnArrange, but for the content the Padding is applied.
       foreach (var child in VisualChildren)

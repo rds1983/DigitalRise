@@ -15,11 +15,9 @@
 using System;
 using System.Threading.Tasks;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
-using DigitalRise.Threading;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Graphics
 {
@@ -39,7 +37,7 @@ namespace Samples.Graphics
     private readonly int[] _permutations;
 
     // A table with B 2D gradients (normalized).
-    private readonly Vector2F[] _gradients;
+    private readonly Vector2[] _gradients;
 
     // A table with exponentially decreasing magnitudes.
     private readonly float[] _magnitudes;
@@ -60,7 +58,7 @@ namespace Samples.Graphics
     /// </param>
     public ProceduralTerrainCreator(int seed, int permutationTableSize, float mu)
     {
-      if (!MathHelper.IsPowerOf2(permutationTableSize))
+      if (!DigitalRise.Mathematics.MathHelper.IsPowerOf2(permutationTableSize))
         throw new ArgumentException("The permutation table size must be a power of 2 (e.g. 256).");
 
       _maskB = permutationTableSize - 1;
@@ -68,12 +66,12 @@ namespace Samples.Graphics
       var random = new Random(seed);
 
       // Create table of random gradient vectors (normalized).
-      _gradients = new Vector2F[permutationTableSize];
+      _gradients = new Vector2[permutationTableSize];
       for (int i = 0; i < _gradients.Length; i++)
       {
-        var direction = random.NextVector2F(-1, 1);
+        var direction = random.NextVector2(-1, 1);
         if (!direction.TryNormalize())
-          direction = new Vector2F(1, 0);
+          direction = new Vector2(1, 0);
 
         _gradients[i] = direction;
       }
@@ -83,7 +81,7 @@ namespace Samples.Graphics
       for (int i = 0; i < _permutations.Length; i++)
         _permutations[i] = i;
       for (int i = _permutations.Length - 1; i > 0; i--)
-        MathHelper.Swap(ref _permutations[i], ref _permutations[random.NextInteger(0, i)]);
+				DigitalRise.Mathematics.MathHelper.Swap(ref _permutations[i], ref _permutations[random.NextInteger(0, i)]);
 
       // Create table with gradient magnitudes.
       _magnitudes = new float[permutationTableSize];
@@ -102,7 +100,7 @@ namespace Samples.Graphics
     }
 
 
-    private float ComputeNoise(Vector2F position)
+    private float ComputeNoise(Vector2 position)
     {
       float t0 = position.X + N;
       int bx0 = ((int)t0) & _maskB;
@@ -123,12 +121,12 @@ namespace Samples.Graphics
 
       float sx = ComputeCubicSpline(rx0);
 
-      float u = _magnitudes[b00] * Vector2F.Dot(_gradients[b00], new Vector2F(rx0, ry0));
-      float v = _magnitudes[b10] * Vector2F.Dot(_gradients[b10], new Vector2F(rx1, ry0));
+      float u = _magnitudes[b00] * Vector2.Dot(_gradients[b00], new Vector2(rx0, ry0));
+      float v = _magnitudes[b10] * Vector2.Dot(_gradients[b10], new Vector2(rx1, ry0));
       float a = InterpolationHelper.Lerp(u, v, sx);
 
-      u = _magnitudes[b01] * Vector2F.Dot(_gradients[b01], new Vector2F(rx0, ry1));
-      v = _magnitudes[b11] * Vector2F.Dot(_gradients[b11], new Vector2F(rx1, ry1));
+      u = _magnitudes[b01] * Vector2.Dot(_gradients[b01], new Vector2(rx0, ry1));
+      v = _magnitudes[b11] * Vector2.Dot(_gradients[b11], new Vector2(rx1, ry1));
       float b = InterpolationHelper.Lerp(u, v, sx);
 
       float sy = ComputeCubicSpline(ry0);
@@ -136,10 +134,10 @@ namespace Samples.Graphics
     }
 
 
-    private float ComputeTurbulence(Vector2F position, int numberOfOctaves)
+    private float ComputeTurbulence(Vector2 position, int numberOfOctaves)
     {
       float sum = 0.0f;
-      Vector2F p = position;
+      Vector2 p = position;
       float scale = 1.0f;
 
       for (int i = 0; i < numberOfOctaves; i++)
@@ -151,8 +149,7 @@ namespace Samples.Graphics
         sum += ComputeNoise(p) * scale;
 
         // Apply lacunarity.
-        p[0] *= 2.0f;
-        p[1] *= 2.0f;
+        p *= 2.0f;
       }
 
       return Sqrt2 * sum / (1.0f - scale);
@@ -191,7 +188,7 @@ namespace Samples.Graphics
       {
         for (int x = 0; x < numberOfSamplesX; x++)
         {
-          Vector2F position = new Vector2F(noiseOriginX + x * stepX, noiseOriginZ + z * stepZ);
+          Vector2 position = new Vector2(noiseOriginX + x * stepX, noiseOriginZ + z * stepZ);
           float noise = ComputeTurbulence(position, numberOfOctaves);
           heights[z * numberOfSamplesX + x] = averageHeight + heightScale * noise;
         }

@@ -4,7 +4,7 @@ using DigitalRise.Animation.Easing;
 using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -27,7 +27,7 @@ namespace Samples.Game.UI
       };
 
       // Set the center of the scale and rotation transformations to the center of the window. 
-      RenderTransformOrigin = new Vector2F(0.5f, 0.5f);
+      RenderTransformOrigin = new Vector2(0.5f, 0.5f);
 
       // The loading animation is a timeline group of two animations. 
       // One animations animates the RenderScale from (0, 0) to its current value.
@@ -36,10 +36,10 @@ namespace Samples.Game.UI
       // when the window is loaded.
       LoadingAnimation = new TimelineGroup
       {
-        new Vector2FFromToByAnimation
+        new Vector2FromToByAnimation
         {
           TargetProperty = "RenderScale",
-          From = new Vector2F(0, 0),
+          From = new Vector2(0, 0),
           Duration = TimeSpan.FromSeconds(0.8),
           EasingFunction = new HermiteEase { Mode = EasingMode.EaseOut },
         },
@@ -59,10 +59,10 @@ namespace Samples.Game.UI
       // the window is loaded.
       ClosingAnimation = new TimelineGroup
       {
-        new Vector2FFromToByAnimation
+        new Vector2FromToByAnimation
         {
           TargetProperty = "RenderScale",
-          To = new Vector2F(0, 0),
+          To = new Vector2(0, 0),
           Duration = TimeSpan.FromSeconds(0.8),
           EasingFunction = new HermiteEase { Mode = EasingMode.EaseIn },
         },

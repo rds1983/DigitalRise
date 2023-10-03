@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -152,7 +152,7 @@ namespace DigitalRise.Graphics
   /// <summary>
   /// Manages a collection of 2D path segments.
   /// </summary>
-  public class PathSegment2FCollection : FigureDataCollection<ICurve<float, Vector2F>>
+  public class PathSegment2FCollection : FigureDataCollection<ICurve<float, Vector2>>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="PathSegment2FCollection"/> class.

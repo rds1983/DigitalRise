@@ -705,9 +705,9 @@ namespace DigitalRise.Graphics
       float minZ = Min(vertexA.Z, vertexB.Z, vertexC.Z);
       float maxZ = Max(vertexA.Z, vertexB.Z, vertexC.Z);
 
-      Vector2F a = new Vector2F(vertexA.X, vertexA.Z);
-      Vector2F b = new Vector2F(vertexB.X, vertexB.Z);
-      Vector2F c = new Vector2F(vertexC.X, vertexC.Z);
+      Vector2 a = new Vector2(vertexA.X, vertexA.Z);
+      Vector2 b = new Vector2(vertexB.X, vertexB.Z);
+      Vector2 c = new Vector2(vertexC.X, vertexC.Z);
 
       // Get min and max indices (inclusive).
       int indexXMin = Math.Max(0, (int)Math.Floor((minX - originX) / cellSizeX));
@@ -716,8 +716,8 @@ namespace DigitalRise.Graphics
       int indexZMax = Math.Min(numberOfSamplesZ - 1, (int)Math.Ceiling((maxZ - originZ) / cellSizeZ));
 
       // Values for the barycentric computation:
-      Vector2F v0 = b - a;
-      Vector2F v1 = c - a;
+      Vector2 v0 = b - a;
+      Vector2 v1 = c - a;
       float den = v0.X * v1.Y - v1.X * v0.Y;
 
       Parallel.For(indexZMin, indexZMax + 1, indexZ =>
@@ -725,10 +725,10 @@ namespace DigitalRise.Graphics
       {
         for (int indexX = indexXMin; indexX <= indexXMax; indexX++)
         {
-          Vector2F p = new Vector2F(originX + cellSizeX * indexX, originZ + cellSizeZ * indexZ);
+          Vector2 p = new Vector2(originX + cellSizeX * indexX, originZ + cellSizeZ * indexZ);
 
           // Get barycentric coordinates.
-          Vector2F v2 = p - a;
+          Vector2 v2 = p - a;
           float v = (v2.X * v1.Y - v1.X * v2.Y) / den;
           float w = (v0.X * v2.Y - v2.X * v0.Y) / den;
           float u = 1.0f - v - w;

@@ -1287,7 +1287,7 @@ namespace DigitalRise.Particles
       Initialize();
 
       // Clamp the number of actually created particles to the valid range.
-      int numberOfCreatedParticles = MathHelper.Clamp(numberOfNewParticles, 0, numberOfAvailableParticles);
+      int numberOfCreatedParticles = Mathematics.MathHelper.Clamp(numberOfNewParticles, 0, numberOfAvailableParticles);
 
       // The first free slot:
       int startIndex = ParticleStartIndex + NumberOfActiveParticles;

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -24,7 +24,7 @@ namespace DigitalRise.Mathematics.Interpolation
   /// <see cref="Point1"/> and <see cref="Point2"/> lie on the positive x-axis of the ellipse.
   /// </para>
   /// </remarks>
-  public class ArcSegment2F : ICurve<float, Vector2F>, IRecyclable
+  public class ArcSegment2F : ICurve<float, Vector2>, IRecyclable
   {
     // Notes:
     // http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes describes how 
@@ -38,7 +38,7 @@ namespace DigitalRise.Mathematics.Interpolation
     private bool _isDirty = true;
     private float _sinTheta;       // sin(RotationAngle)
     private float _cosTheta;       // cos(RotationAngle)
-    private Vector2F _center;      // The center of the ellipse.
+    private Vector2 _center;      // The center of the ellipse.
     private float _rX;             // Radius.X with out-of-range corrections.
     private float _rY;             // Radius.Y with out-of-range corrections.
     private float _angle1;         // The angle of Point1.
@@ -54,7 +54,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// Gets or sets the start point.
     /// </summary>
     /// <value>The start point. The default value is (1, 0).</value>
-    public Vector2F Point1
+    public Vector2 Point1
     {
       get { return _point1; }
       set
@@ -66,14 +66,14 @@ namespace DigitalRise.Mathematics.Interpolation
         _isDirty = true;
       }
     }
-    private Vector2F _point1;
+    private Vector2 _point1;
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
     /// <value>The end point. The default value is (0, 1).</value>
-    public Vector2F Point2
+    public Vector2 Point2
     {
       get { return _point2; }
       set
@@ -85,7 +85,7 @@ namespace DigitalRise.Mathematics.Interpolation
         _isDirty = true;
       }
     }
-    private Vector2F _point2;
+    private Vector2 _point2;
 
 
 
@@ -119,7 +119,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <exception cref="ArgumentException">
     /// A radius is 0 or negative.
     /// </exception>
-    public Vector2F Radius
+    public Vector2 Radius
     {
       get { return _radius; }
       set
@@ -133,7 +133,7 @@ namespace DigitalRise.Mathematics.Interpolation
         _isDirty = true;
       }
     }
-    private Vector2F _radius;
+    private Vector2 _radius;
 
 
     /// <summary>
@@ -191,9 +191,9 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     public ArcSegment2F()
     {
-      _radius = new Vector2F(1);
-      _point1 = new Vector2F(1, 0);
-      _point2 = new Vector2F(0, 1);
+      _radius = new Vector2(1);
+      _point1 = new Vector2(1, 0);
+      _point2 = new Vector2(0, 1);
     }
     #endregion
 
@@ -217,7 +217,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
       // Handle the case where Point1 == Point2. --> Draw nothing or 
       // a full circle. (Note: SVG or WPF do not draw a full circle.)
-      if (Vector2F.AreNumericallyEqual(Point1, Point2))
+      if (Mathematics.MathHelper.AreNumericallyEqual(Point1, Point2))
       {
         _center.X = Point1.X - _rX * _cosTheta;
         _center.Y = Point1.Y - _rX * _sinTheta;
@@ -240,7 +240,7 @@ namespace DigitalRise.Mathematics.Interpolation
       // Step 1: Compute (x1′, y1′)
       var p = new Matrix22F(_cosTheta, _sinTheta,
                            -_sinTheta, _cosTheta)
-              * new Vector2F((Point1.X - Point2.X) / 2,
+              * new Vector2((Point1.X - Point2.X) / 2,
                              (Point1.Y - Point2.Y) / 2);
 
       // Ensure radii are large enough.
@@ -259,17 +259,17 @@ namespace DigitalRise.Mathematics.Interpolation
       var rX2 = _rX * _rX;
       var rY2 = _rY * _rY;
       var c = signC * (float)Math.Sqrt(Math.Max((rX2 * rY2 - rX2 * pY2 - rY2 * pX2) / (rX2 * pY2 + rY2 * pX2), 0))
-              * new Vector2F(_rX * p.Y / _rY, -_rY * p.X / _rX);
+              * new Vector2(_rX * p.Y / _rY, -_rY * p.X / _rX);
 
       // Step 3: Compute (cx, cy) from (cx′, cy′)
       _center = new Matrix22F(_cosTheta, -_sinTheta,
                               _sinTheta, _cosTheta)
-                * c + new Vector2F((Point1.X + Point2.X) / 2, (Point1.Y + Point2.Y) / 2);
+                * c + new Vector2((Point1.X + Point2.X) / 2, (Point1.Y + Point2.Y) / 2);
 
       // Step 4: Compute θ1 and Δθ
-      _angle1 = GetAngle(new Vector2F(1, 0), new Vector2F((p.X - c.X) / _rX, (p.Y - c.Y) / _rY));
-      _angleDelta = GetAngle(new Vector2F((p.X - c.X) / _rX, (p.Y - c.Y) / _rY),
-                              new Vector2F((-p.X - c.X) / _rX, (-p.Y - c.Y) / _rY)) % ConstantsF.TwoPi;
+      _angle1 = GetAngle(new Vector2(1, 0), new Vector2((p.X - c.X) / _rX, (p.Y - c.Y) / _rY));
+      _angleDelta = GetAngle(new Vector2((p.X - c.X) / _rX, (p.Y - c.Y) / _rY),
+                              new Vector2((-p.X - c.X) / _rX, (-p.Y - c.Y) / _rY)) % ConstantsF.TwoPi;
 
       if (SweepClockwise && _angle1 > 0)
         _angle1 -= ConstantsF.TwoPi;
@@ -298,13 +298,13 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    private static float GetAngle(Vector2F u, Vector2F v)
+    private static float GetAngle(Vector2 u, Vector2 v)
     {
       var sign = Math.Sign(u.X * v.Y - u.Y * v.X);
       if (sign == 0)
         sign = -1;
 
-      return sign * (float)Math.Acos(MathHelper.Clamp(Vector2F.Dot(u, v) / (u.Length * v.Length), -1, 1));
+      return sign * (float)Math.Acos(MathHelper.Clamp(Vector2.Dot(u, v) / (u.Length() * v.Length()), -1, 1));
     }
 
 
@@ -313,7 +313,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector2F GetPoint(float parameter)
+    public Vector2 GetPoint(float parameter)
     {
       if (Numeric.IsZero(parameter))
         return Point1;
@@ -326,14 +326,14 @@ namespace DigitalRise.Mathematics.Interpolation
       float cosAngle = (float)Math.Cos(angle);
       float sinAngle = (float)Math.Sin(angle);
 
-      return new Vector2F(
+      return new Vector2(
         _center.X + _rX * cosAngle * _cosTheta - _rY * sinAngle * _sinTheta,
         _center.Y + _rX * cosAngle * _sinTheta + _rY * sinAngle * _cosTheta);
     }
 
 
     /// <inheritdoc/>
-    public Vector2F GetTangent(float parameter)
+    public Vector2 GetTangent(float parameter)
     {
       ComputeParameters();
 
@@ -341,7 +341,7 @@ namespace DigitalRise.Mathematics.Interpolation
       float cosAngle = (float)Math.Cos(angle);
       float sinAngle = (float)Math.Sin(angle);
 
-      return new Vector2F(
+      return new Vector2(
         _angleDelta * (_rX * -sinAngle * _cosTheta - _rY * cosAngle * _sinTheta),
         _angleDelta * (_rX * -sinAngle * _sinTheta + _rY * cosAngle * _cosTheta));
     }
@@ -355,7 +355,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       CurveHelper.Flatten(this, points, maxNumberOfIterations, tolerance);
     }
@@ -415,8 +415,8 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector2F();
-      Point2 = new Vector2F();
+      Point1 = new Vector2();
+      Point2 = new Vector2();
 
       _pool.Recycle(this);
     }

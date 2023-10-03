@@ -532,7 +532,7 @@ namespace DigitalRise.Graphics.Rendering
       // The flares are positioned on a line from the origin through the center of 
       // the screen.
       var viewport = graphicsDevice.Viewport;
-      Vector2F screenCenter = new Vector2F(viewport.Width / 2.0f, viewport.Height / 2.0f);
+      Vector2 screenCenter = new Vector2(viewport.Width / 2.0f, viewport.Height / 2.0f);
 
       if (_transformParameter != null)
       {
@@ -600,7 +600,7 @@ namespace DigitalRise.Graphics.Rendering
         node.LastFrame = frame;
 
         // Project position to screen space.
-        Vector2F screenPosition;
+        Vector2 screenPosition;
         if (lensFlare.IsDirectional)
         {
           // ----- Directional lights
@@ -616,7 +616,7 @@ namespace DigitalRise.Graphics.Rendering
           }
 
           Vector3F position = viewport.ProjectToViewport(-lightDirectionView, projection);
-          screenPosition = new Vector2F(position.X, position.Y);
+          screenPosition = new Vector2(position.X, position.Y);
         }
         else
         {
@@ -637,10 +637,10 @@ namespace DigitalRise.Graphics.Rendering
           }
 
           position = viewport.ProjectToViewport(position, projection * view);
-          screenPosition = new Vector2F(position.X, position.Y);
+          screenPosition = new Vector2(position.X, position.Y);
         }
 
-        Vector2F flareVector = screenCenter - screenPosition;
+        Vector2 flareVector = screenCenter - screenPosition;
         foreach (var flare in lensFlare.Elements)
         {
           if (flare == null)
@@ -652,7 +652,7 @@ namespace DigitalRise.Graphics.Rendering
 
           // Position the flare on a line from the lens flare origin through the 
           // screen center.
-          Vector2F position = screenPosition + flareVector * flare.Distance;
+          Vector2 position = screenPosition + flareVector * flare.Distance;
 
           // The intensity controls the alpha value.
           Vector4 color = flare.Color.ToVector4();
@@ -660,16 +660,16 @@ namespace DigitalRise.Graphics.Rendering
 
           // Get texture.
           Texture2D textureAtlas = packedTexture.TextureAtlas;
-          Vector2F textureAtlasSize = new Vector2F(textureAtlas.Width, textureAtlas.Height);
-          Vector2F textureOffset = packedTexture.Offset * textureAtlasSize;
-          Vector2F textureSize = packedTexture.Scale * textureAtlasSize;
+          Vector2 textureAtlasSize = new Vector2(textureAtlas.Width, textureAtlas.Height);
+          Vector2 textureOffset = packedTexture.Offset * textureAtlasSize;
+          Vector2 textureSize = packedTexture.Scale * textureAtlasSize;
           Rectangle sourceRectangle = new Rectangle((int)textureOffset.X, (int)textureOffset.Y, (int)textureSize.X, (int)textureSize.Y);
 
           // The image rotates around its origin (= reference point) - usually the
           // center of the image.
-          Vector2F origin = textureSize * flare.Origin;
+          Vector2 origin = textureSize * flare.Origin;
           float rotation = flare.Rotation;
-          Vector2F direction = flareVector;
+          Vector2 direction = flareVector;
           if (Numeric.IsNaN(rotation) && direction.TryNormalize())
           {
             // NaN = automatic rotation:
@@ -681,7 +681,7 @@ namespace DigitalRise.Graphics.Rendering
             rotation = (float)Math.Atan2(direction.Y, direction.X) - ConstantsF.PiOver2;
           }
 
-          Vector2F scale = size * viewport.Height * flare.Scale / textureSize.Y;
+          Vector2 scale = size * viewport.Height * flare.Scale / textureSize.Y;
 
           // Render flare using additive blending.
           _spriteBatch.Draw(textureAtlas, (Vector2)position, sourceRectangle, new Color(color),

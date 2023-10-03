@@ -11,4 +11,7 @@
     <ProjectReference Include="..\DigitalRise.Animation\DigitalRise.Animation.MonoGame.csproj" />
     <ProjectReference Include="..\DigitalRise.Physics\DigitalRise.Physics.MonoGame.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
+  </ItemGroup>  
 </Project>

@@ -61,7 +61,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Object A should be the mesh, swap objects if necessary.
       bool swapped = (meshObject.Shape is RayShape);
       if (swapped)
-        MathHelper.Swap(ref rayObject, ref meshObject);
+        Mathematics.MathHelper.Swap(ref rayObject, ref meshObject);
 
       RayShape rayShape = rayObject.Shape as RayShape;
       TriangleMeshShape meshShape = meshObject.Shape as TriangleMeshShape;

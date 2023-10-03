@@ -71,7 +71,7 @@ namespace DigitalRise.Mathematics.Analysis
       {
         xLow = x1;
         xHigh = x0;
-        MathHelper.Swap(ref yLow, ref yHigh);
+        Mathematics.MathHelper.Swap(ref yLow, ref yHigh);
       }
 
       for (int i = 0; i < MaxNumberOfIterations; i++)

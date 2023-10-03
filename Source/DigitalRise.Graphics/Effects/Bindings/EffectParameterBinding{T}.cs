@@ -31,7 +31,6 @@ namespace DigitalRise.Graphics.Effects
   /// <see cref="Vector2"/>, 
   /// <see cref="Vector3"/>, 
   /// <see cref="Vector4"/>, 
-  /// <see cref="Vector2F"/>, 
   /// <see cref="Vector3F"/>, 
   /// <see cref="Vector4F"/>.
   /// </typeparam>

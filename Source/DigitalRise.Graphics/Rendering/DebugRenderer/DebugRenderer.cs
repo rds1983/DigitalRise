@@ -476,12 +476,12 @@ namespace DigitalRise.Graphics.Rendering
     /// The default text position. The default value is (NaN, NaN) - in which case the default text 
     /// position is the upper left corner of the title-safe area.
     /// </value>
-    public Vector2F DefaultTextPosition
+    public Vector2 DefaultTextPosition
     {
       get { return _defaultTextPosition; }
       set { _defaultTextPosition = value; }
     }
-    private Vector2F _defaultTextPosition = new Vector2F(float.NaN);
+    private Vector2 _defaultTextPosition = new Vector2(float.NaN);
 
 
     /// <summary>
@@ -1241,9 +1241,9 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="text">The text.</param>
     /// <param name="position">The position in screen space (measured in pixels).</param>
     /// <param name="color">The color.</param>
-    public void DrawText(string text, Vector2F position, Color color)
+    public void DrawText(string text, Vector2 position, Color color)
     {
-      DrawText(text, position, Vector2F.Zero, color);
+      DrawText(text, position, Vector2.Zero, color);
     }
 
 
@@ -1253,9 +1253,9 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="text">The text.</param>
     /// <param name="position">The position in screen space (measured in pixels).</param>
     /// <param name="color">The color.</param>
-    public void DrawText(StringBuilder text, Vector2F position, Color color)
+    public void DrawText(StringBuilder text, Vector2 position, Color color)
     {
-      DrawText(text, position, Vector2F.Zero, color);
+      DrawText(text, position, Vector2.Zero, color);
     }
 
 
@@ -1270,7 +1270,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void DrawText(string text, Vector2F position, Vector2F relativeOrigin, Color color)
+    public void DrawText(string text, Vector2 position, Vector2 relativeOrigin, Color color)
     {
       if (!Enabled || string.IsNullOrEmpty(text))
         return;
@@ -1290,7 +1290,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void DrawText(StringBuilder text, Vector2F position, Vector2F relativeOrigin, Color color)
+    public void DrawText(StringBuilder text, Vector2 position, Vector2 relativeOrigin, Color color)
     {
       if (!Enabled || text == null || text.Length == 0)
         return;
@@ -1311,7 +1311,7 @@ namespace DigitalRise.Graphics.Rendering
     /// </param>
     public void DrawText(string text, Vector3F position, Color color, bool drawOverScene)
     {
-      DrawText(text, position, Vector2F.Zero, color, drawOverScene);
+      DrawText(text, position, Vector2.Zero, color, drawOverScene);
     }
 
 
@@ -1327,7 +1327,7 @@ namespace DigitalRise.Graphics.Rendering
     /// </param>
     public void DrawText(StringBuilder text, Vector3F position, Color color, bool drawOverScene)
     {
-      DrawText(text, position, Vector2F.Zero, color, drawOverScene);
+      DrawText(text, position, Vector2.Zero, color, drawOverScene);
     }
 
 
@@ -1346,7 +1346,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(string text, Vector3F position, Vector2F relativeOrigin, Color color, bool drawOverScene)
+    public void DrawText(string text, Vector3F position, Vector2 relativeOrigin, Color color, bool drawOverScene)
     {
       if (!Enabled || string.IsNullOrEmpty(text))
         return;
@@ -1371,7 +1371,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(StringBuilder text, Vector3F position, Vector2F relativeOrigin, Color color, bool drawOverScene)
+    public void DrawText(StringBuilder text, Vector3F position, Vector2 relativeOrigin, Color color, bool drawOverScene)
     {
       if (!Enabled || text == null || text.Length == 0)
         return;
@@ -2403,7 +2403,7 @@ namespace DigitalRise.Graphics.Rendering
         textBatch.Add(
           string.Format(CultureInfo.InvariantCulture, "{0} {1}", name, i),
           world.TransformPosition(translation + rotation.GetColumn(0) * axisLength * 0.5f),
-          new Vector2F(0, 1),
+          new Vector2(0, 1),
           color);
       }
     }

@@ -6,7 +6,7 @@ using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
 using AssetManagementBase;
 using CommonServiceLocator;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -82,7 +82,7 @@ namespace Samples.Game.UI
       // The window is now part of the visual tree of controls and can be measured. (The 
       // window does not have a fixed size. Window.Width and Window.Height are NaN. The 
       // size is calculated automatically depending on its content.)
-      window.Measure(new Vector2F(float.PositiveInfinity));
+      window.Measure(new Vector2(float.PositiveInfinity));
 
       // Measure computes DesiredWidth and DesiredHeight. With this info we can center the 
       // window on the screen.
@@ -116,7 +116,7 @@ namespace Samples.Game.UI
       // The window is now part of the visual tree of controls and can be measured. (The 
       // window does not have a fixed size. Window.Width and Window.Height are NaN. The 
       // size is calculated automatically depending on its content.)
-      window.Measure(new Vector2F(float.PositiveInfinity));
+      window.Measure(new Vector2(float.PositiveInfinity));
 
       // Measure computes DesiredWidth and DesiredHeight. With this info we can center the 
       // window on the screen.

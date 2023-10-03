@@ -1,5 +1,6 @@
 using System;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -31,22 +32,22 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       Assert.AreEqual(0, d.InnerRadius);
       Assert.AreEqual(1, d.OuterRadius);
-      Assert.AreEqual(Vector2F.One, d.Scale);
+      Assert.AreEqual(Vector2.One, d.Scale);
 
       d.InnerRadius = 2;
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(1, d.OuterRadius);
-      Assert.AreEqual(Vector2F.One, d.Scale);
+      Assert.AreEqual(Vector2.One, d.Scale);
 
       d.OuterRadius = 3;
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(3, d.OuterRadius);
-      Assert.AreEqual(Vector2F.One, d.Scale);
+      Assert.AreEqual(Vector2.One, d.Scale);
 
-      d.Scale = new Vector2F(0.5f, 2);
+      d.Scale = new Vector2(0.5f, 2);
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(3, d.OuterRadius);
-      Assert.AreEqual(new Vector2F(0.5f, 2), d.Scale);
+      Assert.AreEqual(new Vector2(0.5f, 2), d.Scale);
     }
 
 

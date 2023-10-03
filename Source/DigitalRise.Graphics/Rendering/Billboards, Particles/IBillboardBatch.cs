@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -16,7 +16,7 @@ namespace DigitalRise.Graphics.Rendering
     public Vector3F Axis;
     public BillboardOrientation Orientation;
     public float Angle;
-    public Vector2F Size;
+    public Vector2 Size;
     public float Softness;
     public Vector3F Color;
     public float Alpha;

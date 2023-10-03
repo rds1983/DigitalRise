@@ -4,8 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -30,11 +29,11 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // Measure children. 
       foreach (var child in VisualChildren)
-        child.Measure(new Vector2F(float.PositiveInfinity));
+        child.Measure(new Vector2(float.PositiveInfinity));
 
       float width = Width;
       float height = Height;
@@ -43,7 +42,7 @@ namespace DigitalRise.UI.Controls
 
       // When computing the desired size.
       // (The Canvas checks UIControl.X/Y. Other controls do not do this.)
-      Vector2F desiredSize = Vector2F.Zero;
+      Vector2 desiredSize = Vector2.Zero;
       if (hasWidth)
       {
         desiredSize.X = width;

@@ -55,7 +55,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = (sphereObject.Shape is BoxShape);
       if (swapped)
-        MathHelper.Swap(ref boxObject, ref sphereObject);
+        Mathematics.MathHelper.Swap(ref boxObject, ref sphereObject);
 
       BoxShape boxShape = boxObject.Shape as BoxShape;
       SphereShape sphereShape = sphereObject.Shape as SphereShape;

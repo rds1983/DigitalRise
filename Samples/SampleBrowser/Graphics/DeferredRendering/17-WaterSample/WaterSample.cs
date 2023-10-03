@@ -225,9 +225,9 @@ the water and then the alpha-blended objects above the water surface.",
       {
         for (int x = 0; x < size; x++)
         {
-          Vector2F flowDirection;
+          Vector2 flowDirection;
           float flowSpeed;
-          GetFlow(new Vector2F(x / (float)size, y / (float)size), out flowDirection, out flowSpeed);
+          GetFlow(new Vector2(x / (float)size, y / (float)size), out flowDirection, out flowSpeed);
 
           // Encode in color. The flow map stores the normalized 2D direction in r and g.
           // The speed (magnitude of the flow vector) is stored in b, where 0 represents
@@ -252,15 +252,15 @@ the water and then the alpha-blended objects above the water surface.",
 
     // Returns the flow vector for a given position.
     // x and y are in the range [0, 1].
-    private static void GetFlow(Vector2F position, out Vector2F direction, out float speed)
+    private static void GetFlow(Vector2 position, out Vector2 direction, out float speed)
     {
       // Create a circular movement around (0.5, 0.5).
 
       // Vector from center to position is:
-      var radius = position - new Vector2F(0.5f, 0.5f);
+      var radius = position - new Vector2(0.5f, 0.5f);
 
       // The flow direction is orthogonal to the radius vector.
-      direction = new Vector2F(radius.Y, -radius.X);
+      direction = new Vector2(radius.Y, -radius.X);
       direction.TryNormalize();
 
       // The speed is max in the center and is 0 at the texture border.

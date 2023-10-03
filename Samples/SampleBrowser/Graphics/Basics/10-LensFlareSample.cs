@@ -76,32 +76,32 @@ and search the sky!",
       // See file Media/LensFlare/LensFlares.png.
       // (Credits: The sun lens flare was copied from the XNA racing game - http://exdream.com/XnaRacingGame/.)
       var lensFlareTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "LensFlare/LensFlares.png");
-      var circleTexture = new PackedTexture("Circle", lensFlareTexture, new Vector2F(0, 0), new Vector2F(0.25f, 0.5f));
-      var glowTexture = new PackedTexture("Glow", lensFlareTexture, new Vector2F(0.25f, 0), new Vector2F(0.25f, 0.5f));
-      var ringTexture = new PackedTexture("Ring", lensFlareTexture, new Vector2F(0.5f, 0), new Vector2F(0.25f, 0.5f));
-      var haloTexture = new PackedTexture("Halo", lensFlareTexture, new Vector2F(0.75f, 0), new Vector2F(0.25f, 0.5f));
-      var sunTexture = new PackedTexture("Sun", lensFlareTexture, new Vector2F(0, 0.5f), new Vector2F(0.25f, 0.5f));
-      var streaksTexture = new PackedTexture("Streaks", lensFlareTexture, new Vector2F(0.25f, 0.5f), new Vector2F(0.25f, 0.5f));
-      var flareTexture = new PackedTexture("Flare", lensFlareTexture, new Vector2F(0.5f, 0.5f), new Vector2F(0.25f, 0.5f));
+      var circleTexture = new PackedTexture("Circle", lensFlareTexture, new Vector2(0, 0), new Vector2(0.25f, 0.5f));
+      var glowTexture = new PackedTexture("Glow", lensFlareTexture, new Vector2(0.25f, 0), new Vector2(0.25f, 0.5f));
+      var ringTexture = new PackedTexture("Ring", lensFlareTexture, new Vector2(0.5f, 0), new Vector2(0.25f, 0.5f));
+      var haloTexture = new PackedTexture("Halo", lensFlareTexture, new Vector2(0.75f, 0), new Vector2(0.25f, 0.5f));
+      var sunTexture = new PackedTexture("Sun", lensFlareTexture, new Vector2(0, 0.5f), new Vector2(0.25f, 0.5f));
+      var streaksTexture = new PackedTexture("Streaks", lensFlareTexture, new Vector2(0.25f, 0.5f), new Vector2(0.25f, 0.5f));
+      var flareTexture = new PackedTexture("Flare", lensFlareTexture, new Vector2(0.5f, 0.5f), new Vector2(0.25f, 0.5f));
 
       // Add a few elements (circles, glow, rings, halos, streaks, ...) to the lens flare. 
-      lensFlare.Elements.Add(new LensFlareElement(-0.2f, 0.55f, 0.0f, new Color(175, 175, 255, 20), new Vector2F(0.5f, 0.5f), circleTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.0f, 0.9f, 0.0f, new Color(255, 255, 255, 255), new Vector2F(0.5f, 0.5f), sunTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.0f, 1.8f, 0.0f, new Color(255, 255, 255, 128), new Vector2F(0.5f, 0.5f), streaksTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.0f, 2.6f, 0.0f, new Color(255, 255, 200, 64), new Vector2F(0.5f, 0.5f), glowTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.5f, 0.12f, 0.0f, new Color(60, 60, 180, 35), new Vector2F(0.5f, 0.5f), circleTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.55f, 0.46f, 0.0f, new Color(100, 100, 200, 60), new Vector2F(0.5f, 0.5f), circleTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.6f, 0.17f, 0.0f, new Color(120, 120, 220, 40), new Vector2F(0.5f, 0.5f), circleTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.85f, 0.2f, 0.0f, new Color(60, 60, 255, 100), new Vector2F(0.5f, 0.5f), ringTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.5f, 0.2f, 0.0f, new Color(255, 60, 60, 130), new Vector2F(0.5f, 0.5f), flareTexture));
-      lensFlare.Elements.Add(new LensFlareElement(0.15f, 0.15f, 0.0f, new Color(255, 60, 60, 90), new Vector2F(0.5f, 0.5f), flareTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.3f, 0.6f, 0.0f, new Color(60, 60, 255, 180), new Vector2F(0.5f, 0.5f), haloTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.4f, 0.2f, 0.0f, new Color(220, 80, 80, 98), new Vector2F(0.5f, 0.5f), haloTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.5f, 0.1f, 0.0f, new Color(220, 80, 80, 85), new Vector2F(0.5f, 0.5f), circleTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.6f, 0.5f, 0.0f, new Color(60, 60, 255, 80), new Vector2F(0.5f, 0.5f), haloTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.8f, 0.3f, 0.0f, new Color(90, 60, 255, 110), new Vector2F(0.5f, 0.5f), ringTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.95f, 0.5f, 0.0f, new Color(60, 60, 255, 120), new Vector2F(0.5f, 0.5f), haloTexture));
-      lensFlare.Elements.Add(new LensFlareElement(2.0f, 0.15f, 0.0f, new Color(60, 60, 255, 85), new Vector2F(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(-0.2f, 0.55f, 0.0f, new Color(175, 175, 255, 20), new Vector2(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.0f, 0.9f, 0.0f, new Color(255, 255, 255, 255), new Vector2(0.5f, 0.5f), sunTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.0f, 1.8f, 0.0f, new Color(255, 255, 255, 128), new Vector2(0.5f, 0.5f), streaksTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.0f, 2.6f, 0.0f, new Color(255, 255, 200, 64), new Vector2(0.5f, 0.5f), glowTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.5f, 0.12f, 0.0f, new Color(60, 60, 180, 35), new Vector2(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.55f, 0.46f, 0.0f, new Color(100, 100, 200, 60), new Vector2(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.6f, 0.17f, 0.0f, new Color(120, 120, 220, 40), new Vector2(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.85f, 0.2f, 0.0f, new Color(60, 60, 255, 100), new Vector2(0.5f, 0.5f), ringTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.5f, 0.2f, 0.0f, new Color(255, 60, 60, 130), new Vector2(0.5f, 0.5f), flareTexture));
+      lensFlare.Elements.Add(new LensFlareElement(0.15f, 0.15f, 0.0f, new Color(255, 60, 60, 90), new Vector2(0.5f, 0.5f), flareTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.3f, 0.6f, 0.0f, new Color(60, 60, 255, 180), new Vector2(0.5f, 0.5f), haloTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.4f, 0.2f, 0.0f, new Color(220, 80, 80, 98), new Vector2(0.5f, 0.5f), haloTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.5f, 0.1f, 0.0f, new Color(220, 80, 80, 85), new Vector2(0.5f, 0.5f), circleTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.6f, 0.5f, 0.0f, new Color(60, 60, 255, 80), new Vector2(0.5f, 0.5f), haloTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.8f, 0.3f, 0.0f, new Color(90, 60, 255, 110), new Vector2(0.5f, 0.5f), ringTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.95f, 0.5f, 0.0f, new Color(60, 60, 255, 120), new Vector2(0.5f, 0.5f), haloTexture));
+      lensFlare.Elements.Add(new LensFlareElement(2.0f, 0.15f, 0.0f, new Color(60, 60, 255, 85), new Vector2(0.5f, 0.5f), circleTexture));
 
       // The scene node "KeyLight" (defined in SceneSample.InitializeDefaultXnaLights())
       // is the main directional light source. 
@@ -129,13 +129,13 @@ and search the sky!",
 
       // Add some elements (glow, horizontal streaks, ...) to the lens flare effect.
       var anamorphicFlareTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "LensFlare/AnamorphicFlare.png");
-      flareTexture = new PackedTexture("AnamorphicFlare", anamorphicFlareTexture, new Vector2F(0, 0), new Vector2F(1.0f, 87f / 256f));
-      var flare1Texture = new PackedTexture("Flare0", anamorphicFlareTexture, new Vector2F(227f / 512f, 88f / 256f), new Vector2F(285f / 512f, 15f / 256f));
-      var flare2Texture = new PackedTexture("Flare1", anamorphicFlareTexture, new Vector2F(0, 87f / 256f), new Vector2F(226f / 512f, 168f / 256f));
-      lensFlare.Elements.Add(new LensFlareElement(0.0f, 0.8f, 0.0f, new Color(255, 255, 255, 255), new Vector2F(0.5f, 0.5f), flareTexture));
-      lensFlare.Elements.Add(new LensFlareElement(1.0f, new Vector2F(0.6f, 0.5f), 0.0f, new Color(172, 172, 255, 32), new Vector2F(0.5f, 0.5f), flare1Texture));
-      lensFlare.Elements.Add(new LensFlareElement(1.5f, 1.2f, float.NaN, new Color(200, 200, 255, 24), new Vector2F(0.5f, 0.2f), flare2Texture));
-      lensFlare.Elements.Add(new LensFlareElement(2.0f, 2.0f, float.NaN, new Color(172, 172, 255, 48), new Vector2F(0.5f, 0.2f), flare2Texture));
+      flareTexture = new PackedTexture("AnamorphicFlare", anamorphicFlareTexture, new Vector2(0, 0), new Vector2(1.0f, 87f / 256f));
+      var flare1Texture = new PackedTexture("Flare0", anamorphicFlareTexture, new Vector2(227f / 512f, 88f / 256f), new Vector2(285f / 512f, 15f / 256f));
+      var flare2Texture = new PackedTexture("Flare1", anamorphicFlareTexture, new Vector2(0, 87f / 256f), new Vector2(226f / 512f, 168f / 256f));
+      lensFlare.Elements.Add(new LensFlareElement(0.0f, 0.8f, 0.0f, new Color(255, 255, 255, 255), new Vector2(0.5f, 0.5f), flareTexture));
+      lensFlare.Elements.Add(new LensFlareElement(1.0f, new Vector2(0.6f, 0.5f), 0.0f, new Color(172, 172, 255, 32), new Vector2(0.5f, 0.5f), flare1Texture));
+      lensFlare.Elements.Add(new LensFlareElement(1.5f, 1.2f, float.NaN, new Color(200, 200, 255, 24), new Vector2(0.5f, 0.2f), flare2Texture));
+      lensFlare.Elements.Add(new LensFlareElement(2.0f, 2.0f, float.NaN, new Color(172, 172, 255, 48), new Vector2(0.5f, 0.2f), flare2Texture));
 
       // Position the lens flare near the origin.
       lensFlareNode = new LensFlareNode(lensFlare);

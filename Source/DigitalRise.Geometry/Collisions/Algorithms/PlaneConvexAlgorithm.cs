@@ -55,7 +55,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = (convexObject.Shape is PlaneShape);
       if (swapped)
-        MathHelper.Swap(ref planeObject, ref convexObject);
+        Mathematics.MathHelper.Swap(ref planeObject, ref convexObject);
 
       PlaneShape planeShape = planeObject.Shape as PlaneShape;
       ConvexShape convexShape = convexObject.Shape as ConvexShape;

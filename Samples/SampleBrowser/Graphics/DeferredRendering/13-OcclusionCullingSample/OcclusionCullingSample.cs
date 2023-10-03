@@ -255,7 +255,7 @@ should be merged to drastically reduce the number of scene nodes.)",
       _stringBuilder.AppendLine();
 
       _graphicsScreen.DebugRenderer.Clear();
-      _graphicsScreen.DebugRenderer.DrawText(_stringBuilder, new Vector2F(10, 40), new Color(0, 255, 0));
+      _graphicsScreen.DebugRenderer.DrawText(_stringBuilder, new Vector2(10, 40), new Color(0, 255, 0));
     }
   }
 }

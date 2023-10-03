@@ -239,8 +239,8 @@ namespace DigitalRise.Graphics.Rendering
         _parameterShadowMap.SetValue(shadow.ShadowMap);
 
         var rectangle = GraphicsHelper.GetViewportRectangle(cameraNode, viewport, lightNode);
-        Vector2F texCoordTopLeft = new Vector2F(rectangle.Left / (float)viewport.Width, rectangle.Top / (float)viewport.Height);
-        Vector2F texCoordBottomRight = new Vector2F(rectangle.Right / (float)viewport.Width, rectangle.Bottom / (float)viewport.Height);
+        Vector2 texCoordTopLeft = new Vector2(rectangle.Left / (float)viewport.Width, rectangle.Top / (float)viewport.Height);
+        Vector2 texCoordBottomRight = new Vector2(rectangle.Right / (float)viewport.Width, rectangle.Bottom / (float)viewport.Height);
         GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, texCoordTopLeft, texCoordBottomRight, _frustumFarCorners);
 
         var pass = GetPass(numberOfSamples, shadow.CascadeSelection, shadow.VisualizeCascades);

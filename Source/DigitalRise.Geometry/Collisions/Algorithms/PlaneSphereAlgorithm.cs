@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // A should be the plane, swap objects if necessary.
       bool swapped = (sphereObject.Shape is PlaneShape);
       if (swapped)
-        MathHelper.Swap(ref planeObject, ref sphereObject);
+        Mathematics.MathHelper.Swap(ref planeObject, ref sphereObject);
 
       PlaneShape planeShape = planeObject.Shape as PlaneShape;
       SphereShape sphereShape = sphereObject.Shape as SphereShape;

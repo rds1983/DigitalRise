@@ -138,7 +138,7 @@ namespace Samples.Graphics
         new PackedTexture(
           "Clouds",
           assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Particles/Clouds.png"),
-          Vector2F.Zero, Vector2F.One,
+          Vector2.Zero, Vector2.One,
           2, 1);
 
       // The particle parameter "AnimationTime" determines which tile is used,

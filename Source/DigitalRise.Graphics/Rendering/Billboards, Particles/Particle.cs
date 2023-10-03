@@ -2,11 +2,10 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-using System;
 using System.Runtime.InteropServices;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -22,7 +21,7 @@ namespace DigitalRise.Graphics.Rendering
     public Vector3F Position;
     public Vector3F Normal;
     public Vector3F Axis;
-    public Vector2F Size;
+    public Vector2 Size;
     public float Angle;
     public Vector3F Color;
     public float Alpha;

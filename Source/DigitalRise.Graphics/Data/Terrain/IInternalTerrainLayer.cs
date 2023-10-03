@@ -35,7 +35,7 @@ namespace DigitalRise.Graphics
     /// <inheritdoc cref="TerrainLayer.MaterialInstance"/>
     MaterialInstance MaterialInstance { get; }
 
-    /// <inheritdoc cref="TerrainLayer.OnDraw(GraphicsDevice,Rectangle,Vector2F,Vector2F)"/>
-    void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition);
+    /// <inheritdoc cref="TerrainLayer.OnDraw(GraphicsDevice,Rectangle,Vector2,Vector2)"/>
+    void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition);
   }
 }

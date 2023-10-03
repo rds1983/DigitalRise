@@ -365,7 +365,7 @@ namespace DigitalRise.Input
     /// modified accordingly.
     /// </para>
     /// </remarks>
-    Vector2F MousePositionRaw { get; }
+    Vector2 MousePositionRaw { get; }
 
 
     /// <summary>
@@ -373,7 +373,7 @@ namespace DigitalRise.Input
     /// </summary>
     /// <value>The raw mouse position change.</value>
     /// <inheritdoc cref="MousePositionRaw"/>
-    Vector2F MousePositionDeltaRaw { get; }
+    Vector2 MousePositionDeltaRaw { get; }
 
 
     /// <summary>
@@ -381,7 +381,7 @@ namespace DigitalRise.Input
     /// </summary>
     /// <value>The mouse position.</value>
     /// <inheritdoc cref="MousePositionRaw"/>
-    Vector2F MousePosition { get; set; }
+    Vector2 MousePosition { get; set; }
 
 
     /// <summary>
@@ -389,7 +389,7 @@ namespace DigitalRise.Input
     /// </summary>
     /// <value>The mouse position change.</value>
     /// <inheritdoc cref="MousePositionRaw"/>
-    Vector2F MousePositionDelta { get; set; }
+    Vector2 MousePositionDelta { get; set; }
 
 
     /// <summary>

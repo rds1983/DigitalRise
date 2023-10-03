@@ -344,8 +344,8 @@ namespace Samples.Graphics
 
         // Get a rectangle that covers the light in screen space.
         var rectangle = GraphicsHelper.GetScissorRectangle(cameraNode, new Viewport(0, 0, width, height), lightNode);
-        var texCoordTopLeft = new Vector2F(rectangle.Left / (float)width, rectangle.Top / (float)height);
-        var texCoordBottomRight = new Vector2F(rectangle.Right / (float)width, rectangle.Bottom / (float)height);
+        var texCoordTopLeft = new Vector2(rectangle.Left / (float)width, rectangle.Top / (float)height);
+        var texCoordBottomRight = new Vector2(rectangle.Right / (float)width, rectangle.Bottom / (float)height);
 
         GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, texCoordTopLeft, texCoordBottomRight, _frustumFarCorners);
 

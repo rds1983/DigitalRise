@@ -38,7 +38,7 @@ namespace DigitalRise.Graphics.Effects
   {
     ///// <para>
     ///// <strong>Notes for users of DigitalRise Mathematics:</strong><br/> 
-    ///// The DigitalRise vector types (see <see cref="Vector2F"/>, <see cref="Vector3F"/>, 
+    ///// The DigitalRise vector types (see <see cref="Vector2"/>, <see cref="Vector3F"/>, 
     ///// <see cref="Vector4F"/>) are column-vectors, whereas vectors in DirectX and XNA are 
     ///// row-vectors. When the DigitalRise vector types are set using an 
     ///// <see cref="EffectParameterBinding{T}"/> they are automatically converted to the corresponding 

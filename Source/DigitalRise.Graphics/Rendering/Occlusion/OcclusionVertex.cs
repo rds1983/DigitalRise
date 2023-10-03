@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -37,7 +38,7 @@ namespace DigitalRise.Graphics.Rendering
       };
 
     // See OcclusionCulling.fx for description.
-    public Vector2F Pixel;
+    public Vector2 Pixel;
     public Vector3F Minimum;
     public Vector3F Maximum;
 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -289,7 +290,7 @@ namespace DigitalRise.UI.Controls
 
 
     /// <inheritdoc/>
-    protected override void OnArrange(Vector2F position, Vector2F size)
+    protected override void OnArrange(Vector2 position, Vector2 size)
     {
       // Compute new thumb position.
       if (_thumb != null)

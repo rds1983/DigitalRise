@@ -1,11 +1,10 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -80,8 +79,8 @@ rope or a chain.",
             Softness = 0.0001f,
 
             // We allow a +/- 60° rotation around the first and the second constraint axis.
-            Minimum = -new Vector2F(MathHelper.ToRadians(60), MathHelper.ToRadians(60)),
-            Maximum = new Vector2F(MathHelper.ToRadians(60), MathHelper.ToRadians(60))
+            Minimum = -new Vector2(DigitalRise.Mathematics.MathHelper.ToRadians(60), DigitalRise.Mathematics.MathHelper.ToRadians(60)),
+            Maximum = new Vector2(DigitalRise.Mathematics.MathHelper.ToRadians(60), DigitalRise.Mathematics.MathHelper.ToRadians(60))
           };
           Simulation.Constraints.Add(ballJoint);
         }

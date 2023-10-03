@@ -258,40 +258,40 @@ namespace DigitalRise.Graphics.Effects
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as <see cref="Vector2F"/>. 
+    ///// Gets the value of the effect parameter as <see cref="Vector2"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <returns>
-    ///// The value of the effect parameter as <see cref="Vector2F"/>.
+    ///// The value of the effect parameter as <see cref="Vector2"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector2F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector2"/>.
     ///// </exception>
-    //public static Vector2F GetValueVector2F(this EffectParameter parameter)
+    //public static Vector2 GetValueVector2(this EffectParameter parameter)
     //{
-    //  return (Vector2F)parameter.GetValueVector2();
+    //  return (Vector2)parameter.GetValueVector2();
     //}
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as an array of <see cref="Vector2F"/>. 
+    ///// Gets the value of the effect parameter as an array of <see cref="Vector2"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="count">The number of elements in the array.</param>
     ///// <returns>
-    ///// The value of the effect parameter as an array of <see cref="Vector2F"/>.
+    ///// The value of the effect parameter as an array of <see cref="Vector2"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector2F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector2"/>.
     ///// </exception>
-    //public static Vector2F[] GetValueVector2FArray(this EffectParameter parameter, int count)
+    //public static Vector2[] GetValueVector2Array(this EffectParameter parameter, int count)
     //{
     //  Vector2[] value = parameter.GetValueVector2Array(count);
 
     //  var arrayLength = value.Length;
-    //  Vector2F[] convertedValue = new Vector2F[arrayLength];
+    //  Vector2[] convertedValue = new Vector2[arrayLength];
     //  for (int i = 0; i < arrayLength; i++)
-    //    convertedValue[i] = (Vector2F)value[i];
+    //    convertedValue[i] = (Vector2)value[i];
 
     //  return convertedValue;
     //}
@@ -511,9 +511,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector2F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector2"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, Vector2F value)
+    //public static void SetValue(this EffectParameter parameter, Vector2 value)
     //{
     //  parameter.SetValue((Vector2)value);
     //}
@@ -525,9 +525,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector2F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector2"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, Vector2F[] value)
+    //public static void SetValue(this EffectParameter parameter, Vector2[] value)
     //{
     //  if (value != null)
     //  {

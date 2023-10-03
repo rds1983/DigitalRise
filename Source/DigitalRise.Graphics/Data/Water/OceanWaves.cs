@@ -10,6 +10,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Analysis;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -64,7 +65,7 @@ namespace DigitalRise.Graphics
     // h0[N, N] stores the entry for h0(N/2, N/2)
     // Use GetIndex().
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
-    private Vector2F[,] _h0;
+    private Vector2[,] _h0;
 
     // N x N grid with precalculated valus of 1 / |k|
     // [0, 0] stores the info for k(-N/2, -N/2).
@@ -85,13 +86,13 @@ namespace DigitalRise.Graphics
     // [N/2, N/2] contains (-N/2, -N/2).
     // [N-1, N-1] contains (-1, -1)
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
-    private Vector2F[,] _h;
+    private Vector2[,] _h;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
-    private Vector2F[,] _N;
+    private Vector2[,] _N;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional")]
-    private Vector2F[,] _D;
+    private Vector2[,] _D;
 
     private FastFourierTransformF _fft;
     #endregion
@@ -469,7 +470,7 @@ namespace DigitalRise.Graphics
       // See also comments in InitializeCpuFft().
 
       var n = TextureSize;
-      var h0 = new Vector2F[(n + 1) * (n + 1)];
+      var h0 = new Vector2[(n + 1) * (n + 1)];
       var random = new Random(Seed);
       var distribution = new FastGaussianDistributionF(0, 1);
 
@@ -487,8 +488,8 @@ namespace DigitalRise.Graphics
               continue;
             }
 
-            Vector2F xi = new Vector2F(distribution.Next(random), distribution.Next(random));
-            Vector2F k = new Vector2F(GetKx(x), GetKy(y));
+            Vector2 xi = new Vector2(distribution.Next(random), distribution.Next(random));
+            Vector2 k = new Vector2(GetKx(x), GetKy(y));
 
             //h0[GetIndex(x, n), GetIndex(y, n)] =
             h0[GetIndex(x, n) + (n + 1) * GetIndex(y, n)] =
@@ -509,7 +510,7 @@ namespace DigitalRise.Graphics
       var n = CpuSize;
 
       if (_h0 == null || _h0.GetLength(0) != n + 1)
-        _h0 = new Vector2F[n + 1, n + 1];
+        _h0 = new Vector2[n + 1, n + 1];
 
       var random = new Random(Seed);
       var distribution = new FastGaussianDistributionF(0, 1);
@@ -533,8 +534,8 @@ namespace DigitalRise.Graphics
               continue;
             }
 
-            Vector2F xi = new Vector2F(distribution.Next(random), distribution.Next(random));
-            Vector2F k = new Vector2F(GetKx(x), GetKy(y));
+            Vector2 xi = new Vector2(distribution.Next(random), distribution.Next(random));
+            Vector2 k = new Vector2(GetKx(x), GetKy(y));
 
             _h0[GetIndex(x, n), GetIndex(y, n)] =
               xi * (oneOverSqrt2 * (float)Math.Sqrt(GetPhillipsSpectrum(k)));
@@ -546,9 +547,9 @@ namespace DigitalRise.Graphics
       {
         _oneOverKLength = new float[n, n];
         _omega = new float[n, n];
-        _h = new Vector2F[n, n];
-        _N = new Vector2F[n, n];
-        _D = new Vector2F[n, n];
+        _h = new Vector2[n, n];
+        _N = new Vector2[n, n];
+        _D = new Vector2[n, n];
       }
 
       // Create _oneOverKLength and _omega
@@ -556,7 +557,7 @@ namespace DigitalRise.Graphics
       {
         for (int y = -n / 2; y < n / 2; y++)
         {
-          float length = new Vector2F(GetKx(x), GetKy(y)).Length;
+          float length = new Vector2(GetKx(x), GetKy(y)).Length();
 
           _omega[GetIndex(x, n), GetIndex(y, n)] = GetOmega(length);
 
@@ -585,7 +586,7 @@ namespace DigitalRise.Graphics
           var fftIndexX = x & (n - 1);
           var fftIndexY = y & (n - 1);
 
-          var k = new Vector2F(GetKx(x), GetKy(y));
+          var k = new Vector2(GetKx(x), GetKy(y));
 
           //float omega = GetOmega(water, k.Length);
           float omega = _omega[indexX, indexY];
@@ -602,7 +603,7 @@ namespace DigitalRise.Graphics
           //     h.Im = h0(x, y).Re * sin + h0(x, y).Im * cos  - h0(-x, -y).Re * sin - h0(-x, -y).Im * cos
           var h0XY = _h0[indexX, indexY] * HeightScale;
           var h0NegXNegY = _h0[GetIndex(-x, n), GetIndex(-y, n)] * HeightScale;
-          var h = new Vector2F((h0XY.X + h0NegXNegY.X) * cos - (h0XY.Y + h0NegXNegY.Y) * sin,
+          var h = new Vector2((h0XY.X + h0NegXNegY.X) * cos - (h0XY.Y + h0NegXNegY.Y) * sin,
                                (h0XY.X - h0NegXNegY.X) * sin + (h0XY.Y - h0NegXNegY.Y) * cos);
           _h[fftIndexX, fftIndexY] = h;
 
@@ -617,7 +618,7 @@ namespace DigitalRise.Graphics
           // Nx + i * Ny = InverseFFT(SpectrumNx + i * SpectrumNy)
           // SpectrumNx = i * k.X * h = i * (k.X * h.Re + i * k.X * h.Im) = -k.X * h.Im + i * k.X * h.Re
           // i * SpectrumNy = i * i * k.Y * h = -1 * (k.Y * h.Re + i * k.Y * h.Im)
-          _N[fftIndexX, fftIndexY] = new Vector2F(-k.X * h.Y - k.Y * h.X,
+          _N[fftIndexX, fftIndexY] = new Vector2(-k.X * h.Y - k.Y * h.X,
                                                   k.X * h.X - k.Y * h.Y);
 
           // Horizontal displacements for choppy waves:
@@ -625,7 +626,7 @@ namespace DigitalRise.Graphics
           // D.x = InverseFFT(-i * k.x / kLength * h).Re
           // D.y = InverseFFT(-i * k.y / kLength * h).Re
           k *= _oneOverKLength[indexX, indexY];
-          _D[fftIndexX, fftIndexY] = new Vector2F(k.X * h.Y + k.Y * h.X,
+          _D[fftIndexX, fftIndexY] = new Vector2(k.X * h.Y + k.Y * h.X,
                                                   -k.X * h.X + k.Y * h.Y);
         }
       }
@@ -678,15 +679,15 @@ namespace DigitalRise.Graphics
     }
 
 
-    private float GetPhillipsSpectrum(Vector2F k)
+    private float GetPhillipsSpectrum(Vector2 k)
     {
-      float kLength = k.Length;
+      float kLength = k.Length();
 
       // Avoid division by zero.
       if (kLength < 1e-8f)
         kLength = 1e-8f;
 
-      Vector2F kDirection = k / kLength;
+      Vector2 kDirection = k / kLength;
 
       // Largest possible wave L = V² / g
       float windSpeedSquared = Wind.LengthSquared;
@@ -698,7 +699,7 @@ namespace DigitalRise.Graphics
 
       float l = L * SmallWaveSuppression;
 
-      Vector2F windDirection;
+      Vector2 windDirection;
       windDirection.X = Wind.X / windSpeed;
       windDirection.Y = Wind.Z / windSpeed;
 
@@ -708,14 +709,14 @@ namespace DigitalRise.Graphics
       //   HeightScale = 0.0000075  with N = 128 gives beautiful, very calm seas
       //   HeightScale = 0.000005   with N = 64, m_fWindVelocity = 9
       // AMD to filter out waves against the wind direction:
-      // if (Vector2F.Dot(kDirection, windDirection) < 0) phillips *= 0.25
+      // if (Vector2.Dot(kDirection, windDirection) < 0) phillips *= 0.25
 
       // 2 * _directionality is always 2 in Tessendorf's paper. But we can use any multiple of 2.
 
       return (float)(/*Height * */  // We apply height scale each frame!
                      Math.Exp(-1 / Math.Pow(kLength * L, 2) - Math.Pow(kLength * l, 2))
                      / Math.Pow(kLength, 4)
-                     * Math.Pow(Vector2F.Dot(kDirection, windDirection), 2 * _directionality));
+                     * Math.Pow(Vector2.Dot(kDirection, windDirection), 2 * _directionality));
     }
 
 
@@ -756,8 +757,8 @@ namespace DigitalRise.Graphics
       int yIndex = Wrap((int)(texCoordY * CpuSize));
 
       float h = _h[xIndex, yIndex].X;
-      Vector2F d = _D[xIndex, yIndex];
-      Vector2F n = _N[xIndex, yIndex];
+      Vector2 d = _D[xIndex, yIndex];
+      Vector2 n = _N[xIndex, yIndex];
 #else
       // Sample 4 values. The upper left index is (without wrapping):
       float xIndex = texCoordX * CpuSize - 0.5f;
@@ -777,11 +778,11 @@ namespace DigitalRise.Graphics
                                          InterpolationHelper.Lerp(_h[x0, y1].X, _h[x1, y1].X, px),
                                          py);
 
-      Vector2F d = InterpolationHelper.Lerp(InterpolationHelper.Lerp(_D[x0, y0], _D[x1, y0], px),
+      Vector2 d = InterpolationHelper.Lerp(InterpolationHelper.Lerp(_D[x0, y0], _D[x1, y0], px),
                                             InterpolationHelper.Lerp(_D[x0, y1], _D[x1, y1], px),
                                             py);
 
-      Vector2F n = InterpolationHelper.Lerp(InterpolationHelper.Lerp(_N[x0, y0], _N[x1, y0], px),
+      Vector2 n = InterpolationHelper.Lerp(InterpolationHelper.Lerp(_N[x0, y0], _N[x1, y0], px),
                                             InterpolationHelper.Lerp(_N[x0, y1], _N[x1, y1], px),
                                             py);
 #endif

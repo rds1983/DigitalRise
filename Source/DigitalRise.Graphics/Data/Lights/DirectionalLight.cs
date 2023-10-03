@@ -6,6 +6,7 @@ using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -177,14 +178,14 @@ namespace DigitalRise.Graphics
     /// Gets or sets the texture offset.
     /// </summary>
     /// <value>The texture offset. The default value is (0, 0).</value>
-    public Vector2F TextureOffset { get; set; }
+    public Vector2 TextureOffset { get; set; }
 
 
     /// <summary>
     /// Gets or sets the texture scale.
     /// </summary>
     /// <value>The texture scale. The default value is (1, 1).</value>
-    public Vector2F TextureScale { get; set; }
+    public Vector2 TextureScale { get; set; }
     #endregion
 
 
@@ -201,7 +202,7 @@ namespace DigitalRise.Graphics
       DiffuseIntensity = 1;
       SpecularIntensity = 1;
       HdrScale = 1;
-      TextureScale = Vector2F.One;
+      TextureScale = Vector2.One;
     }
     #endregion
 

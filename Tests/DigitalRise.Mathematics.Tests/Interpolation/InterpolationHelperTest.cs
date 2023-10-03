@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -26,19 +27,19 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVector2F()
+    public void LerpVector2()
     {
-      Vector2F v = new Vector2F(1.0f, 10.0f);
-      Vector2F w = new Vector2F(2.0f, 20.0f);
-      Vector2F lerp0 = InterpolationHelper.Lerp(v, w, 0.0f);
-      Vector2F lerp1 = InterpolationHelper.Lerp(v, w, 1.0f);
-      Vector2F lerp05 = InterpolationHelper.Lerp(v, w, 0.5f);
-      Vector2F lerp025 = InterpolationHelper.Lerp(v, w, 0.25f);
+      Vector2 v = new Vector2(1.0f, 10.0f);
+      Vector2 w = new Vector2(2.0f, 20.0f);
+      Vector2 lerp0 = InterpolationHelper.Lerp(v, w, 0.0f);
+      Vector2 lerp1 = InterpolationHelper.Lerp(v, w, 1.0f);
+      Vector2 lerp05 = InterpolationHelper.Lerp(v, w, 0.5f);
+      Vector2 lerp025 = InterpolationHelper.Lerp(v, w, 0.25f);
 
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector2F(1.5f, 15.0f), lerp05);
-      Assert.AreEqual(new Vector2F(1.25f, 12.5f), lerp025);
+      Assert.AreEqual(new Vector2(1.5f, 15.0f), lerp05);
+      Assert.AreEqual(new Vector2(1.25f, 12.5f), lerp025);
     }
 
 
@@ -205,42 +206,42 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //[Test]
     //public void Hermite()
     //{
-    //  Vector2F v1 = new Vector2F(1.0f, 2.0f);
-    //  Vector2F v2 = new Vector2F(-1.0f, 2.1f);
-    //  Vector2F t1 = new Vector2F(2.0f, 1.0f); t1.Normalize();
-    //  Vector2F t2 = new Vector2F(0.0f, 2.0f); t2.Normalize();
+    //  Vector2 v1 = new Vector2(1.0f, 2.0f);
+    //  Vector2 v2 = new Vector2(-1.0f, 2.1f);
+    //  Vector2 t1 = new Vector2(2.0f, 1.0f); t1.Normalize();
+    //  Vector2 t2 = new Vector2(0.0f, 2.0f); t2.Normalize();
 
-    //  Vector2F hermite = Vector2F.Hermite(v1, t1, v2, t2, 0.0f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(v1, hermite));
+    //  Vector2 hermite = Vector2.Hermite(v1, t1, v2, t2, 0.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v1, hermite));
 
-    //  hermite = Vector2F.Hermite(v1, t1, v2, t2, 1.0f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(v2, hermite));
+    //  hermite = Vector2.Hermite(v1, t1, v2, t2, 1.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, hermite));
     //}
 
 
     //[Test]
     //public void CatmullRom()
     //{
-    //  Vector2F v1 = new Vector2F(1.0f, 2.0f);
-    //  Vector2F v2 = new Vector2F(-1.0f, 2.1f);
-    //  Vector2F v3 = new Vector2F(2.0f, 1.0f);
-    //  Vector2F v4 = new Vector2F(0.0f, 2.0f);
+    //  Vector2 v1 = new Vector2(1.0f, 2.0f);
+    //  Vector2 v2 = new Vector2(-1.0f, 2.1f);
+    //  Vector2 v3 = new Vector2(2.0f, 1.0f);
+    //  Vector2 v4 = new Vector2(0.0f, 2.0f);
 
-    //  Vector2F catmullRom = Vector2F.CatmullRom(v1, v2, v3, v4, 0.0f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(v2, catmullRom));
+    //  Vector2 catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, catmullRom));
 
-    //  catmullRom = Vector2F.CatmullRom(v1, v2, v3, v4, 1.0f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(v3, catmullRom));
+    //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 1.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v3, catmullRom));
 
-    //  Vector2F t2 = (v3 - v1) / 2.0f;
-    //  Vector2F t3 = (v4 - v2) / 2.0f;
-    //  Vector2F hermite = Vector2F.Hermite(v2, t2, v3, t3, 0.3f);
-    //  catmullRom = Vector2F.CatmullRom(v1, v2, v3, v4, 0.3f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(hermite, catmullRom));
+    //  Vector2 t2 = (v3 - v1) / 2.0f;
+    //  Vector2 t3 = (v4 - v2) / 2.0f;
+    //  Vector2 hermite = Vector2.Hermite(v2, t2, v3, t3, 0.3f);
+    //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.3f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
 
-    //  hermite = Vector2F.Hermite(v2, t2, v3, t3, 0.6f);
-    //  catmullRom = Vector2F.CatmullRom(v1, v2, v3, v4, 0.6f);
-    //  Assert.IsTrue(Vector2F.AreNumericallyEqual(hermite, catmullRom));
+    //  hermite = Vector2.Hermite(v2, t2, v3, t3, 0.6f);
+    //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.6f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
     //}
 
 
@@ -351,17 +352,17 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void CosineInterpolationVector2F()
+    public void CosineInterpolationVector2()
     {
-      Vector2F v = new Vector2F(1.0f, 10.0f);
-      Vector2F w = new Vector2F(2.0f, 20.0f);
-      Vector2F lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0f);
-      Vector2F lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0f);
-      Vector2F lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5f);
+      Vector2 v = new Vector2(1.0f, 10.0f);
+      Vector2 w = new Vector2(2.0f, 20.0f);
+      Vector2 lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0f);
+      Vector2 lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0f);
+      Vector2 lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5f);
 
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector2F(1.5f, 15.0f), lerp05);
+      Assert.AreEqual(new Vector2(1.5f, 15.0f), lerp05);
     }
 
 
@@ -455,7 +456,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void PolynomialInterpolationSinglePrecisionException2()
     {
-      InterpolationHelper.PolynomialInterpolation(new List<Vector2F>(), 0);
+      InterpolationHelper.PolynomialInterpolation(new List<Vector2>(), 0);
     }
 
 
@@ -464,7 +465,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     public void PolynomialInterpolationSinglePrecisionException3()
     {
       // Error: 2 identical x values.
-      var points = new[] { new Vector2F(0, 1), new Vector2F(0, 4), new Vector2F(5, -1) };
+      var points = new[] { new Vector2(0, 1), new Vector2(0, 4), new Vector2(5, -1) };
       InterpolationHelper.PolynomialInterpolation(points, 0);
     }
 
@@ -472,7 +473,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void PolynomialInterpolationSinglePrecision()
     {
-      var points = new[] { new Vector2F(0, 1), new Vector2F(3, 4), new Vector2F(5, -1) };
+      var points = new[] { new Vector2(0, 1), new Vector2(3, 4), new Vector2(5, -1) };
 
       Assert.IsTrue(Numeric.AreEqual(points[0].Y, InterpolationHelper.PolynomialInterpolation(points, points[0].X)));
       Assert.IsTrue(Numeric.AreEqual(points[1].Y, InterpolationHelper.PolynomialInterpolation(points, points[1].X)));

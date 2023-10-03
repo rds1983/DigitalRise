@@ -48,7 +48,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = (rayObject.Shape is PlaneShape);
       if (swapped)
-        MathHelper.Swap(ref planeObject, ref rayObject);
+        Mathematics.MathHelper.Swap(ref planeObject, ref rayObject);
 
       PlaneShape planeShape = planeObject.Shape as PlaneShape;
       RayShape rayShape = rayObject.Shape as RayShape;

@@ -2,8 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
+using Microsoft.Xna.Framework;
 using System;
-using DigitalRise.Mathematics.Algebra;
 
 
 namespace DigitalRise.Mathematics.Interpolation
@@ -13,7 +13,7 @@ namespace DigitalRise.Mathematics.Interpolation
   /// </summary>
   /// <inheritdoc cref="Path2F"/>
   [Serializable]
-  public class PathKey2F : CurveKey<float, Vector2F>
+  public class PathKey2F : CurveKey<float, Vector2>
   {
     private float _parameter;
 

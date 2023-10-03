@@ -7,6 +7,7 @@ using System.Globalization;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -137,7 +138,7 @@ namespace DigitalRise.Graphics
 
         _querySize = value;
         if (!IsDirectional)
-          ((SphereShape)Shape).Radius = new Vector2F(_querySize).Length / 2;
+          ((SphereShape)Shape).Radius = new Vector2(_querySize).Length() / 2;
       }
     }
     private float _querySize;

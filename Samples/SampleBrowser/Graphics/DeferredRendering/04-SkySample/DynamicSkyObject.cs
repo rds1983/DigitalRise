@@ -469,7 +469,7 @@ namespace Samples
         Texture = new PackedTexture(content.LoadTexture2D(_services.GetInstance<IGraphicsService>().GraphicsDevice, "Sky/Moon.png")),
         LightWrap = 0.1f,
         LightSmoothness = 1,
-        AngularDiameter = new Vector2F(MathHelper.ToRadians(5)),
+        AngularDiameter = new Vector2(MathHelper.ToRadians(5)),
 
         // Disable glow.
         GlowColor0 = new Vector3F(0),
@@ -898,7 +898,7 @@ namespace Samples
         _sunlightNode.LookAt(cameraPosition + SunDirection, cameraPosition, upVector);
 
         // Choose a scale for the cloud shadows.
-        directionalLight.TextureScale = new Vector2F(-1000);
+        directionalLight.TextureScale = new Vector2(-1000);
 
         // Get the scaled texture offset for the sun direction.
         directionalLight.TextureOffset = _cloudLayerNode0.GetTextureCoordinates(SunDirection) *

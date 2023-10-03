@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -53,12 +53,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var s = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 1),
-        ControlPoint1 = new Vector2F(1, 1),
-        ControlPoint2 = new Vector2F(1, 1),
-        Point2 = new Vector2F(1, 1),
+        Point1 = new Vector2(1, 1),
+        ControlPoint1 = new Vector2(1, 1),
+        ControlPoint2 = new Vector2(1, 1),
+        Point2 = new Vector2(1, 1),
       };
-      var points = new List<Vector2F>();
+      var points = new List<Vector2>();
       s.Flatten(points, 1, 1);
       Assert.AreEqual(0, points.Count);
     }
@@ -85,12 +85,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var s = new BezierSegment2F
       {
-        Point1 = new Vector2F(1, 1),
-        ControlPoint1 = new Vector2F(2, 2),
-        ControlPoint2 = new Vector2F(3, 3),
-        Point2 = new Vector2F(4, 4),
+        Point1 = new Vector2(1, 1),
+        ControlPoint1 = new Vector2(2, 2),
+        ControlPoint2 = new Vector2(3, 3),
+        Point2 = new Vector2(4, 4),
       };
-      var points = new List<Vector2F>();
+      var points = new List<Vector2>();
       s.Flatten(points, 1, 10);
       Assert.AreEqual(2, points.Count);
       Assert.IsTrue(points.Contains(s.Point1));
@@ -121,15 +121,15 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var points = new[]
       {
-        new Vector2F(1, 2), new Vector2F(12, 13),
-        new Vector2F(1231, 2.2f), new Vector2F(5, 122),
-        new Vector2F(-11, 2), new Vector2F(-1, 123),
-        new Vector2F(-123.123f, 122), new Vector2F(-2312, -123),
+        new Vector2(1, 2), new Vector2(12, 13),
+        new Vector2(1231, 2.2f), new Vector2(5, 122),
+        new Vector2(-11, 2), new Vector2(-1, 123),
+        new Vector2(-123.123f, 122), new Vector2(-2312, -123),
       };
-      var length = (points[1] - points[0]).Length
-                   + (points[3] - points[2]).Length
-                   + (points[5] - points[4]).Length
-                   + (points[7] - points[6]).Length;
+      var length = (points[1] - points[0]).Length()
+                   + (points[3] - points[2]).Length()
+									 + (points[5] - points[4]).Length()
+									 + (points[7] - points[6]).Length();
       Assert.AreEqual(length, CurveHelper.GetLength(points.ToList()));
     }
 

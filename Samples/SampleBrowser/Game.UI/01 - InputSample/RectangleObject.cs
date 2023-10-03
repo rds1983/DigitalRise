@@ -32,7 +32,7 @@ namespace Samples.Game.UI
 
     // Data for dragging the object with the mouse.
     private bool _isDragging;
-    private Vector2F _lastMousePosition;
+    private Vector2 _lastMousePosition;
 
 
     public RectangleObject(IServiceLocator services)
@@ -154,7 +154,7 @@ namespace Samples.Game.UI
 
 
     // Returns true if coordinates are within rectangle.
-    private bool IsInside(Vector2F position)
+    private bool IsInside(Vector2 position)
     {
       return _left < position.X && position.X < _left + Size
              && _top < position.Y && position.Y < _top + Size;

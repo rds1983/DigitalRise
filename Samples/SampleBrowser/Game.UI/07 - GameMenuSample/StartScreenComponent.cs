@@ -93,15 +93,15 @@ namespace Samples.Game.UI
     {
       var debugRenderer = _graphicsScreen.DebugRenderer2D;
       debugRenderer.Clear();
-      debugRenderer.DrawText("MY GAME", new Vector2F(575, 100), Color.Black);
+      debugRenderer.DrawText("MY GAME", new Vector2(575, 100), Color.Black);
       debugRenderer.DrawText(
         "This is the start screen.\n\nThis sample shows how to create menus for Xbox games.\nIt must be controlled with a gamepad.",
-        new Vector2F(375, 200),
+        new Vector2(375, 200),
         Color.Black);
 
       if (!_loadStuffTask.IsCompleted)
       {
-        debugRenderer.DrawText("Loading...", new Vector2F(575, 400), Color.Black);
+        debugRenderer.DrawText("Loading...", new Vector2(575, 400), Color.Black);
       }
       else
       {
@@ -112,7 +112,7 @@ namespace Samples.Game.UI
           _uiService.Screens.Add(_uiScreen);
         }
 
-        debugRenderer.DrawText("Press START to continue...", new Vector2F(475, 400), Color.Black);
+        debugRenderer.DrawText("Press START to continue...", new Vector2(475, 400), Color.Black);
 
         // Check if the user presses START on any connected gamepad.
         for (var controller = PlayerIndex.One; controller <= PlayerIndex.Four; controller++)

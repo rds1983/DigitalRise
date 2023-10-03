@@ -66,7 +66,7 @@ interpolation type can be changed.",
 
           _curve.Add(new CurveKey2F
           {
-            Point = new Vector2F(x, y),
+            Point = new Vector2(x, y),
 
             // We use the same interpolation type (spline type) for all curve keys. But 
             // it is possible to use a different interpolation type for each curve key.
@@ -135,14 +135,14 @@ interpolation type can be changed.",
         debugRenderer.DrawLine(new Vector3F(100, 300, 0), new Vector3F(1000, 300, 0), Color.Black, true);
         debugRenderer.DrawLine(new Vector3F(300, 100, 0), new Vector3F(300, 320, 0), Color.Black, true);
 
-        Vector2F scale = new Vector2F(400, 200);
-        Vector2F offset = new Vector2F(300, 100);
+        Vector2 scale = new Vector2(400, 200);
+        Vector2 offset = new Vector2(300, 100);
 
         // Draw a small cross for all curve key points.
         for (int index = 0; index < _curve.Count; index++)
         {
           CurveKey2F key = _curve[index];
-          Vector2F point = scale * key.Point + offset;
+          Vector2 point = scale * key.Point + offset;
           debugRenderer.DrawLine(new Vector3F(point.X - 5, point.Y - 5, 0), new Vector3F(point.X + 5, point.Y + 5, 0), Color.Black, true);
           debugRenderer.DrawLine(new Vector3F(point.X + 5, point.Y - 5, 0), new Vector3F(point.X - 5, point.Y + 5, 0), Color.Black, true);
         }
@@ -151,8 +151,8 @@ interpolation type can be changed.",
         const float stepSize = 0.02f;
         for (float x = -0.5f; x < 1.7f; x += stepSize)
         {
-          Vector2F point0 = scale * _curve.GetPoint(x) + offset;
-          Vector2F point1 = scale * _curve.GetPoint(x + stepSize) + offset;
+          Vector2 point0 = scale * _curve.GetPoint(x) + offset;
+          Vector2 point1 = scale * _curve.GetPoint(x + stepSize) + offset;
           debugRenderer.DrawLine(new Vector3F(point0.X, point0.Y, 0), new Vector3F(point1.X, point1.Y, 0), Color.Black, true);
         }
       }

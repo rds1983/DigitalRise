@@ -5,8 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Input;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -26,14 +25,14 @@ namespace DigitalRise.UI.Controls
     /// Gets or sets the absolute mouse position in screen coordinates.
     /// </summary>
     /// <value>The absolute mouse position in screen coordinates.</value>
-    public Vector2F ScreenMousePosition { get; set; }
+    public Vector2 ScreenMousePosition { get; set; }
 
 
     /// <summary>
     /// Gets or sets the mouse position change since the last frame in screen coordinates.
     /// </summary>
     /// <value>The mouse position change since the last frame in screen coordinates.</value>
-    public Vector2F ScreenMousePositionDelta { get; set; }
+    public Vector2 ScreenMousePositionDelta { get; set; }
 
 
     /// <summary>
@@ -44,7 +43,7 @@ namespace DigitalRise.UI.Controls
     /// The mouse position in local coordinates (after the <see cref="UIControl.RenderTransform"/> 
     /// was undone).
     /// </value>
-    public Vector2F MousePosition { get; set; }
+    public Vector2 MousePosition { get; set; }
 
 
     /// <summary>
@@ -55,7 +54,7 @@ namespace DigitalRise.UI.Controls
     /// The mouse position change since the last frame in local coordinates (after the 
     /// <see cref="UIControl.RenderTransform"/> was undone).
     /// </value>
-    public Vector2F MousePositionDelta { get; set; }
+    public Vector2 MousePositionDelta { get; set; }
 
 
     /// <summary>

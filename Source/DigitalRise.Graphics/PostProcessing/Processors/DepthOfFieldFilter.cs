@@ -44,7 +44,7 @@ namespace DigitalRise.Graphics.PostProcessing
     // Blur processor used to blur CoC and depth.
     private readonly Blur _cocBlur;
 
-    private Vector2F _lastViewportSize;
+    private Vector2 _lastViewportSize;
     private Vector2[] _horizontalOffsets;
     private Vector2[] _verticalOffsets;
     private float[] _weights;
@@ -126,7 +126,7 @@ namespace DigitalRise.Graphics.PostProcessing
         _blurStrength = value;
 
         // Invalidate _lastViewport to force an update of the blur samples.
-        _lastViewportSize = new Vector2F(-1, -1);
+        _lastViewportSize = new Vector2(-1, -1);
       }
     }
     private float _blurStrength;
@@ -200,7 +200,7 @@ namespace DigitalRise.Graphics.PostProcessing
       var target = context.RenderTarget;
       var viewport = context.Viewport;
 
-      var sourceSize = new Vector2F(source.Width, source.Height);
+      var sourceSize = new Vector2(source.Width, source.Height);
       int width = (int)sourceSize.X;
       int height = (int)sourceSize.Y;
       int downsampledWidth = Math.Max(1, width / DownsampleFactor);
@@ -209,12 +209,12 @@ namespace DigitalRise.Graphics.PostProcessing
       if (TextureHelper.IsFloatingPointFormat(source.Format))
       {
         graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-        InitializeGaussianBlur(new Vector2F(downsampledWidth, downsampledHeight), false);
+        InitializeGaussianBlur(new Vector2(downsampledWidth, downsampledHeight), false);
       }
       else
       {
         graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
-        InitializeGaussianBlur(new Vector2F(downsampledWidth, downsampledHeight), true);
+        InitializeGaussianBlur(new Vector2(downsampledWidth, downsampledHeight), true);
       }
 
       // Get temporary render targets.
@@ -325,7 +325,7 @@ namespace DigitalRise.Graphics.PostProcessing
     }
 
 
-    private void InitializeGaussianBlur(Vector2F viewportSize, bool useHardwareFiltering)
+    private void InitializeGaussianBlur(Vector2 viewportSize, bool useHardwareFiltering)
     {
       if (_horizontalOffsets != null && _lastViewportSize == viewportSize)
         return;

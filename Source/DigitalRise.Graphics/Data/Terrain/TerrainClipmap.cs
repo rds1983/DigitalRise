@@ -9,7 +9,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -290,11 +290,11 @@ namespace DigitalRise.Graphics
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-    public Vector2F[] Origins { get; private set; }
+    public Vector2[] Origins { get; private set; }
 
 
     // Origins of the last frame.
-    internal Vector2F[] OldOrigins = new Vector2F[MaxNumberOfLevels];
+    internal Vector2[] OldOrigins = new Vector2[MaxNumberOfLevels];
 
 
     internal int NumberOfTextureAtlasColumns
@@ -310,10 +310,10 @@ namespace DigitalRise.Graphics
 
     // The offsets in texture coordinates ([0, 1]) for toroidal wrapping.
     // (Computes as if filter border is 0!)
-    internal Vector2F[] Offsets { get; private set; }
+    internal Vector2[] Offsets { get; private set; }
 
     // Offsets of the last frame.
-    internal Vector2F[] OldOffsets = new Vector2F[MaxNumberOfLevels];
+    internal Vector2[] OldOffsets = new Vector2[MaxNumberOfLevels];
 
     // The level sizes in world space units without a pixel border for texture filtering.
     internal float[] LevelSizes = new float[MaxNumberOfLevels];
@@ -354,10 +354,10 @@ namespace DigitalRise.Graphics
       CellsPerLevel = 64;
       NumberOfLevels = 6;
       EnableAnisotropicFiltering = true;
-      Origins = new Vector2F[MaxNumberOfLevels];
+      Origins = new Vector2[MaxNumberOfLevels];
       Textures = new Texture2D[numberOfTextures];
       Format = format;
-      Offsets = new Vector2F[MaxNumberOfLevels];
+      Offsets = new Vector2[MaxNumberOfLevels];
 
       Invalidate();
     }

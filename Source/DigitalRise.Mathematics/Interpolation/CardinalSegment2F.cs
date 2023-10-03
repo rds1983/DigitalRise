@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -41,30 +41,30 @@ namespace DigitalRise.Mathematics.Interpolation
   /// returns the end point <see cref="Point3"/>.
   /// </para>
   /// </remarks>
-  public class CardinalSegment2F : ICurve<float, Vector2F>, IRecyclable
+  public class CardinalSegment2F : ICurve<float, Vector2>, IRecyclable
   {
     /// <summary>
     /// Gets or sets the previous point.
     /// </summary>
-    public Vector2F Point1 { get; set; }
+    public Vector2 Point1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the start point.
     /// </summary>
-    public Vector2F Point2 { get; set; }
+    public Vector2 Point2 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
-    public Vector2F Point3 { get; set; }
+    public Vector2 Point3 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the subsequent point.
     /// </summary>
-    public Vector2F Point4 { get; set; }
+    public Vector2 Point4 { get; set; }
 
 
     /// <summary>
@@ -78,7 +78,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector2F GetPoint(float parameter)
+    public Vector2 GetPoint(float parameter)
     {
       float k = 1f / 2f * (1f - Tension);
 
@@ -93,7 +93,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public Vector2F GetTangent(float parameter)
+    public Vector2 GetTangent(float parameter)
     {
       float k = 1f / 2f * (1f - Tension);
 
@@ -114,7 +114,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       CurveHelper.Flatten(this, points, maxNumberOfIterations, tolerance);
     }
@@ -158,10 +158,10 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector2F();
-      Point2 = new Vector2F();
-      Point3 = new Vector2F();
-      Point4 = new Vector2F();
+      Point1 = new Vector2();
+      Point2 = new Vector2();
+      Point3 = new Vector2();
+      Point4 = new Vector2();
       Tension = 0;
 
       Pool.Recycle(this);

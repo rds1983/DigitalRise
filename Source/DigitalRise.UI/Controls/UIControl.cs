@@ -104,8 +104,8 @@ namespace DigitalRise.UI.Controls
   /// computed by the control. It is also possible to call <see cref="Measure"/> manually. 
   /// </para>
   /// <para>
-  /// After that, <see cref="Arrange(Vector2F, Vector2F)"/> is called for all controls in the visual
-  /// tree. <see cref="Arrange(Vector2F, Vector2F)"/> computes the <see cref="ActualX"/>, 
+  /// After that, <see cref="Arrange(Vector2, Vector2)"/> is called for all controls in the visual
+  /// tree. <see cref="Arrange(Vector2, Vector2)"/> computes the <see cref="ActualX"/>, 
   /// <see cref="ActualY"/>, <see cref="ActualWidth"/> and <see cref="ActualHeight"/> of a control 
   /// in screen coordinates. The actual bounds are determined by the properties <see cref="X"/>, 
   /// <see cref="Y"/>, <see cref="Margin"/>, <see cref="HorizontalAlignment"/> and 
@@ -378,7 +378,7 @@ namespace DigitalRise.UI.Controls
       get
       {
         if (!_hasRenderTransform.HasValue)
-          _hasRenderTransform = (RenderScale != Vector2F.One || RenderRotation != 0 || RenderTranslation != Vector2F.Zero);
+          _hasRenderTransform = (RenderScale != Vector2.One || RenderRotation != 0 || RenderTranslation != Vector2.Zero);
 
         return _hasRenderTransform.Value;
       }
@@ -430,7 +430,7 @@ namespace DigitalRise.UI.Controls
       get
       {
         return new RenderTransform(
-          new Vector2F(ActualX, ActualY),
+          new Vector2(ActualX, ActualY),
           ActualWidth,
           ActualHeight,
           RenderTransformOrigin,
@@ -733,7 +733,7 @@ namespace DigitalRise.UI.Controls
     [Browsable(false)]
     public static readonly int RenderTransformOriginPropertyId = CreateProperty(
       typeof(UIControl), "RenderTransformOrigin", GamePropertyCategories.Appearance, null,
-      Vector2F.Zero, UIPropertyOptions.AffectsRender);
+      Vector2.Zero, UIPropertyOptions.AffectsRender);
 
     /// <summary>
     /// Gets or sets the relative origin of the <see cref="RenderTransform"/>. 
@@ -744,9 +744,9 @@ namespace DigitalRise.UI.Controls
     /// and (1, 1) represents the lower right corner of the element.
     /// </value>
     /// <seealso cref="RenderTransform"/>
-    public Vector2F RenderTransformOrigin
+    public Vector2 RenderTransformOrigin
     {
-      get { return GetValue<Vector2F>(RenderTransformOriginPropertyId); }
+      get { return GetValue<Vector2>(RenderTransformOriginPropertyId); }
       set { SetValue(RenderTransformOriginPropertyId, value); }
     }
 
@@ -756,7 +756,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int RenderScalePropertyId = CreateProperty(
-      typeof(UIControl), "RenderScale", GamePropertyCategories.Appearance, null, Vector2F.One,
+      typeof(UIControl), "RenderScale", GamePropertyCategories.Appearance, null, Vector2.One,
       UIPropertyOptions.AffectsRender);
 
     /// <summary>
@@ -765,9 +765,9 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     /// <value>The scale factor.</value>
     /// <seealso cref="RenderTransform"/>
-    public Vector2F RenderScale
+    public Vector2 RenderScale
     {
-      get { return GetValue<Vector2F>(RenderScalePropertyId); }
+      get { return GetValue<Vector2>(RenderScalePropertyId); }
       set { SetValue(RenderScalePropertyId, value); }
     }
 
@@ -799,7 +799,7 @@ namespace DigitalRise.UI.Controls
     [Browsable(false)]
     public static readonly int RenderTranslationPropertyId = CreateProperty(
       typeof(UIControl), "RenderTranslation", GamePropertyCategories.Appearance, null,
-      Vector2F.Zero, UIPropertyOptions.AffectsRender);
+      Vector2.Zero, UIPropertyOptions.AffectsRender);
 
     /// <summary>
     /// Gets or sets the translation of the <see cref="RenderTransform"/>. 
@@ -807,9 +807,9 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     /// <value>The translation vector.</value>
     /// <seealso cref="RenderTransform"/>
-    public Vector2F RenderTranslation
+    public Vector2 RenderTranslation
     {
-      get { return GetValue<Vector2F>(RenderTranslationPropertyId); }
+      get { return GetValue<Vector2>(RenderTranslationPropertyId); }
       set { SetValue(RenderTranslationPropertyId, value); }
     }
 
@@ -1381,8 +1381,8 @@ namespace DigitalRise.UI.Controls
       // AllowedPlayer, MousePosition(Delta) of the input context are updated and restored 
       // at the end.
       LogicalPlayerIndex originalAllowedPlayer = context.AllowedPlayer;
-      Vector2F originalMousePosition = context.MousePosition;
-      Vector2F originalMousePositionDelta = context.MousePositionDelta;
+      Vector2 originalMousePosition = context.MousePosition;
+      Vector2 originalMousePositionDelta = context.MousePositionDelta;
 
       // If the AllowedPlayer of this control is set to a specific player, then we use this
       // value. Otherwise, we use the player of the input context (which is probably more 
@@ -1595,7 +1595,7 @@ namespace DigitalRise.UI.Controls
     /// the viewport. The child itself does not know that part of it is invisible.
     /// </para>
     /// </remarks>
-    protected virtual bool HitTest(UIControl control, Vector2F position)
+    protected virtual bool HitTest(UIControl control, Vector2 position)
     {
       if (control == this || control == null)
         return ActualBounds.Contains(position);

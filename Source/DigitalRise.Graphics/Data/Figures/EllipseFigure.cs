@@ -4,7 +4,7 @@
 
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -19,7 +19,7 @@ namespace DigitalRise.Graphics
 
     private readonly ArcSegment2F _arcSegment = new ArcSegment2F
     {
-      Radius = new Vector2F(0.5f)
+      Radius = new Vector2(0.5f)
     };
     #endregion
 
@@ -64,7 +64,7 @@ namespace DigitalRise.Graphics
         if (_arcSegment.Radius.X == value)
           return;
 
-        _arcSegment.Radius = new Vector2F(value, _arcSegment.Radius.Y);
+        _arcSegment.Radius = new Vector2(value, _arcSegment.Radius.Y);
         Invalidate();
       }
     }
@@ -84,7 +84,7 @@ namespace DigitalRise.Graphics
         if (_arcSegment.Radius.Y == value)
           return;
 
-        _arcSegment.Radius = new Vector2F(_arcSegment.Radius.X, value);
+        _arcSegment.Radius = new Vector2(_arcSegment.Radius.X, value);
         Invalidate();
       }
     }
@@ -109,13 +109,13 @@ namespace DigitalRise.Graphics
     internal override void Flatten(Collections.ArrayList<Vector3F> vertices, Collections.ArrayList<int> strokeIndices, Collections.ArrayList<int> fillIndices)
     {
       _arcSegment.IsLargeArc = true;
-      _arcSegment.Point1 = new Vector2F(RadiusX, 0);
+      _arcSegment.Point1 = new Vector2(RadiusX, 0);
       _arcSegment.Point2 = _arcSegment.Point1;
-      _arcSegment.Radius = new Vector2F(RadiusX, RadiusY);
+      _arcSegment.Radius = new Vector2(RadiusX, RadiusY);
       _arcSegment.RotationAngle = 0;
       _arcSegment.SweepClockwise = false;
 
-      var tempVertices = ResourcePools<Vector2F>.Lists.Obtain();
+      var tempVertices = ResourcePools<Vector2>.Lists.Obtain();
       _arcSegment.Flatten(tempVertices, MaxNumberOfIterations, Tolerance);
 
       int numberOfVertices = tempVertices.Count;
@@ -155,7 +155,7 @@ namespace DigitalRise.Graphics
         fillIndices.Add(centerIndex - 1);
       }
 
-      ResourcePools<Vector2F>.Lists.Recycle(tempVertices);
+      ResourcePools<Vector2>.Lists.Recycle(tempVertices);
     }
     #endregion
   }

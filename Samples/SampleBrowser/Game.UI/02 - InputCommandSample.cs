@@ -18,7 +18,7 @@ also be changed.",
   Press <A> on gamepad or <Space> on keyboard to change color.")]
   public class InputCommandSample : BasicSample
   {
-    private Vector2F _position;
+    private Vector2 _position;
     private Color _color;
 
     private readonly IInputCommand _commandChangeColor;
@@ -31,7 +31,7 @@ also be changed.",
     {
       GraphicsScreen.ClearBackground = true;
 
-      _position = new Vector2F(600, 300);
+      _position = new Vector2(600, 300);
       _color = new Color((Vector3)RandomHelper.Random.NextVector3F(0, 1));
 
       // Create a command which detect presses of gamepad <A> or keyboard <Space>.

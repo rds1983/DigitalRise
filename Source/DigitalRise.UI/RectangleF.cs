@@ -109,9 +109,9 @@ namespace DigitalRise.UI
     /// Gets or sets the position of the upper, left corner of the rectangle.
     /// </summary>
     /// <value>The position of the upper, left corner of the rectangle.</value>
-    public Vector2F Location
+    public Vector2 Location
     {
-      get { return new Vector2F(X, Y); }
+      get { return new Vector2(X, Y); }
       set
       {
         X = value.X;
@@ -124,9 +124,9 @@ namespace DigitalRise.UI
     /// Gets or sets the size (width, height) of the rectangle.
     /// </summary>
     /// <value>The size (width, height) of the rectangle.</value>
-    public Vector2F Size
+    public Vector2 Size
     {
-      get { return new Vector2F(Width, Height);}
+      get { return new Vector2(Width, Height);}
       set 
       { 
         Width = value.X;
@@ -282,7 +282,7 @@ namespace DigitalRise.UI
     /// <see langword="true"/> if the rectangle contains the point; otherwise, 
     /// <see langword="false"/>.
     /// </returns>
-    public bool Contains(Vector2F point)
+    public bool Contains(Vector2 point)
     {
       return X <= point.X && point.X <= Right
              && Y <= point.Y && point.Y <= Bottom;

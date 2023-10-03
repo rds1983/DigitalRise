@@ -4,9 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -25,18 +24,18 @@ namespace DigitalRise.Mathematics.Interpolation
   /// returns the end point <see cref="Point2"/>.
   /// </para>
   /// </remarks>
-  public class LineSegment2F : ICurve<float, Vector2F>, IRecyclable
+  public class LineSegment2F : ICurve<float, Vector2>, IRecyclable
   {
     /// <summary>
     /// Gets or sets the start point.
     /// </summary>
-    public Vector2F Point1 { get; set; }
+    public Vector2 Point1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
-    public Vector2F Point2 { get; set; }
+    public Vector2 Point2 { get; set; }
 
 
     /// <summary>
@@ -44,14 +43,14 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector2F GetPoint(float parameter)
+    public Vector2 GetPoint(float parameter)
     {
       return InterpolationHelper.Lerp(Point1, Point2, parameter);
     }
 
 
     /// <inheritdoc/>
-    public Vector2F GetTangent(float parameter)
+    public Vector2 GetTangent(float parameter)
     {
       return Point2 - Point1;
     }
@@ -60,13 +59,13 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public float GetLength(float start, float end, int maxNumberOfIterations, float tolerance)
     {
-      return (Point2 - Point1).Length * Math.Abs(end - start);
+      return (Point2 - Point1).Length() * Math.Abs(end - start);
     }
 
 
     /// <inheritdoc/>
     [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    public void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       points.Add(Point1);
       points.Add(Point2);
@@ -111,8 +110,8 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector2F();
-      Point2 = new Vector2F();
+      Point1 = new Vector2();
+      Point2 = new Vector2();
 
       Pool.Recycle(this);
     }

@@ -61,7 +61,7 @@ With increasing time step Explicit Euler integration is the first to become unst
     private void PlotGraph(OdeIntegratorF integrator, float yOffset, string text)
     {
       var debugRenderer = GraphicsScreen.DebugRenderer2D;
-      debugRenderer.DrawText(text, new Vector2F(400, yOffset - 90), Color.Black);
+      debugRenderer.DrawText(text, new Vector2(400, yOffset - 90), Color.Black);
       debugRenderer.DrawLine(
         new Vector3F(90, yOffset, 0),
         new Vector3F(700, yOffset, 0),

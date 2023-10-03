@@ -488,7 +488,7 @@ GameComponent with a StateMachine.",
       startButton.Focus();
 
       // Slide the buttons in from the left (off screen) to make things more dynamic.
-      AnimateFrom(stackPanel.Children, 0, new Vector2F(-300, 0));
+      AnimateFrom(stackPanel.Children, 0, new Vector2(-300, 0));
 
       // The first time initialization of the GUI can take a short time. If we reset the elapsed 
       // time of the XNA game timer, the animation will start a lot smoother. 
@@ -504,7 +504,7 @@ GameComponent with a StateMachine.",
     {
       // Animate all buttons within the StackPanel to opacity 0 and offset (-300, 0).
       var stackPanel = (StackPanel)_menuWindow.Content;
-      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2F(-300, 0));
+      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2(-300, 0));
 
       // When the last animation finishes, trigger the "MenuToGame" transition.
       _menuExitAnimationController.Completed +=
@@ -523,7 +523,7 @@ GameComponent with a StateMachine.",
     {
       // Animate all buttons within the StackPanel to opacity 0 and offset (-300, 0).
       var stackPanel = (StackPanel)_menuWindow.Content;
-      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2F(-300, 0));
+      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2(-300, 0));
 
       // When the last animation finishes, trigger the "MenuToSubMenu" transition.
       _menuExitAnimationController.Completed +=
@@ -539,7 +539,7 @@ GameComponent with a StateMachine.",
     {
       // Animate all buttons within the StackPanel to opacity 0 and offset (-300, 0).
       var stackPanel = (StackPanel)_menuWindow.Content;
-      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2F(-300, 0));
+      _menuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2(-300, 0));
 
       // When the last animation finishes, exit the game.
       _menuExitAnimationController.Completed += (s, e) =>
@@ -642,7 +642,7 @@ GameComponent with a StateMachine.",
       button1.Focus();
 
       // Fade-in the buttons from the right.
-      AnimateFrom(stackPanel.Children, 0, new Vector2F(300, 0));
+      AnimateFrom(stackPanel.Children, 0, new Vector2(300, 0));
     }
 
 
@@ -676,7 +676,7 @@ GameComponent with a StateMachine.",
     {
       // Animate all buttons within the StackPanel to opacity 0 and offset (300, 0).
       var stackPanel = (StackPanel)_subMenuWindow.Content;
-      _subMenuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2F(300, 0));
+      _subMenuExitAnimationController = AnimateTo(stackPanel.Children, 0, new Vector2(300, 0));
 
       // When the last animation finishes, trigger the "MenuToSubMenu" transition.
       _subMenuExitAnimationController.Completed +=
@@ -785,7 +785,7 @@ GameComponent with a StateMachine.",
     /// <param name="controls">The UI controls to be animated.</param>
     /// <param name="opacity">The initial opacity.</param>
     /// <param name="offset">The initial offset.</param>
-    private void AnimateFrom(IList<UIControl> controls, float opacity, Vector2F offset)
+    private void AnimateFrom(IList<UIControl> controls, float opacity, Vector2 offset)
     {
       TimeSpan duration = TimeSpan.FromSeconds(0.8);
 
@@ -801,7 +801,7 @@ GameComponent with a StateMachine.",
 
       // Animate the "RenderTranslation" property from the specified offset to its
       // its current value, which is usually (0, 0).
-      var offsetAnimation = new Vector2FFromToByAnimation
+      var offsetAnimation = new Vector2FromToByAnimation
       {
         TargetProperty = "RenderTranslation",
         From = offset,
@@ -842,7 +842,7 @@ GameComponent with a StateMachine.",
     /// <param name="controls">The UI controls to be animated.</param>
     /// <param name="opacity">The opacity.</param>
     /// <param name="offset">The offset.</param>
-    private AnimationController AnimateTo(IList<UIControl> controls, float opacity, Vector2F offset)
+    private AnimationController AnimateTo(IList<UIControl> controls, float opacity, Vector2 offset)
     {
       TimeSpan duration = TimeSpan.FromSeconds(0.6f);
 
@@ -858,7 +858,7 @@ GameComponent with a StateMachine.",
 
       // Animate the "RenderTranslation" property from its current value, which is 
       // usually (0, 0), to the specified value.
-      var offsetAnimation = new Vector2FFromToByAnimation
+      var offsetAnimation = new Vector2FromToByAnimation
       {
         TargetProperty = "RenderTranslation",
         To = offset,

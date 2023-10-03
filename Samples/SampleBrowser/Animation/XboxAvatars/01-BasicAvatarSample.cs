@@ -41,7 +41,7 @@ and bone names.",
       _debugRenderer = new DebugRenderer(GraphicsService, SpriteFont)
       {
         DefaultColor = Color.Black,
-        DefaultTextPosition = new Vector2F(10),
+        DefaultTextPosition = new Vector2(10),
       };
 
       // Add a custom game object which controls the camera.

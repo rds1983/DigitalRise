@@ -7,7 +7,7 @@ using DigitalRise.Collections;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -20,7 +20,7 @@ namespace DigitalRise.Graphics
   /// curves. The figure is 2D and lies in the xy plane where x-axis points to the right and y-axis
   /// points upwards. The curve segments need to be added to the <see cref="Segments"/> collection. 
   /// A curve segment is any object that implements 
-  /// <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector2F&gt;</see>. Examples: 
+  /// <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector2&gt;</see>. Examples: 
   /// <see cref="LineSegment2F"/>, <see cref="BezierSegment2F"/>, <see cref="Path2F"/>, ...
   /// </para>
   /// <para>
@@ -51,10 +51,10 @@ namespace DigitalRise.Graphics
   /// {
   ///   Segments =
   ///   {
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(0, 1) },
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 1), Point2 = new Vector2F(1, 1) },
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 1), Point2 = new Vector2F(1, 0) },
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0, 0) }
+  ///     new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(0, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(0, 1), Point2 = new Vector2(1, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(1, 1), Point2 = new Vector2(1, 0) },
+  ///     new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0, 0) }
   ///   }
   /// };
   /// var figureNode1 = new FigureNode(boxFigure1)
@@ -70,13 +70,13 @@ namespace DigitalRise.Graphics
   ///   Segments =
   ///   {
   ///     new StrokedSegment2F(
-  ///       new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(0, 1) }, 
+  ///       new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(0, 1) }, 
   ///       false),
-  ///     new LineSegment2F { Point1 = new Vector2F(0, 1), Point2 = new Vector2F(1, 1) },
+  ///     new LineSegment2F { Point1 = new Vector2(0, 1), Point2 = new Vector2(1, 1) },
   ///     new StrokedSegment2F(
-  ///       new LineSegment2F { Point1 = new Vector2F(1, 1), Point2 = new Vector2F(1, 0) }, 
+  ///       new LineSegment2F { Point1 = new Vector2(1, 1), Point2 = new Vector2(1, 0) }, 
   ///       false),
-  ///     new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0, 0) }
+  ///     new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0, 0) }
   ///   }
   /// };
   /// var figureNode2 = new FigureNode(boxFigure2)
@@ -132,7 +132,7 @@ namespace DigitalRise.Graphics
     /// <value>The curve segments.</value>
     /// <remarks>
     /// Curve segments need to be added to the <see cref="Segments"/> collection. A curve segment is 
-    /// any object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector2F&gt;</see>. 
+    /// any object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector2&gt;</see>. 
     /// Examples: <see cref="LineSegment2F"/>, <see cref="BezierSegment2F"/>, <see cref="Path2F"/>, 
     /// etc. 
     /// </remarks>
@@ -163,10 +163,10 @@ namespace DigitalRise.Graphics
     internal override void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
     {
       Triangulator triangulator = null;
-      var segmentVertices = ResourcePools<Vector2F>.Lists.Obtain();
+      var segmentVertices = ResourcePools<Vector2>.Lists.Obtain();
       var segmentStartIndices = ResourcePools<int>.Lists.Obtain();
 
-      Vector2F previousVertex = new Vector2F(float.NaN);
+      Vector2 previousVertex = new Vector2(float.NaN);
       foreach (var curve in Segments)
       {
         segmentVertices.Clear();
@@ -181,7 +181,7 @@ namespace DigitalRise.Graphics
         if (vertexCount < 2)
           continue;
 
-        Vector2F segmentStartVertex = segmentVertices[0];
+        Vector2 segmentStartVertex = segmentVertices[0];
         bool isNewShape;
         int segmentStartIndex;  // Start of current segment in 'vertices'.
         if (segmentStartVertex == previousVertex)
@@ -199,7 +199,7 @@ namespace DigitalRise.Graphics
         }
 
         // Check for closed shapes.
-        Vector2F segmentEndVertex = segmentVertices[segmentVertices.Count - 1];
+        Vector2 segmentEndVertex = segmentVertices[segmentVertices.Count - 1];
         bool isClosedShape = false;
         int shapeStartIndex = -1;
 
@@ -254,19 +254,19 @@ namespace DigitalRise.Graphics
         previousVertex.Y = segmentEndVertex.Y;
       }
 
-      ResourcePools<Vector2F>.Lists.Recycle(segmentVertices);
+      ResourcePools<Vector2>.Lists.Recycle(segmentVertices);
       ResourcePools<int>.Lists.Recycle(segmentStartIndices);
       if (triangulator != null)
         triangulator.Recycle();
     }
 
 
-    private static void CommitVertices(List<Vector2F> segmentVertices, bool isNewShape, bool isClosedShape, ArrayList<Vector3F> vertices)
+    private static void CommitVertices(List<Vector2> segmentVertices, bool isNewShape, bool isClosedShape, ArrayList<Vector3F> vertices)
     {
       if (isNewShape)
       {
         // Add start vertex.
-        Vector2F v = segmentVertices[0];
+        Vector2 v = segmentVertices[0];
         vertices.Add(new Vector3F(v.X, v.Y, 0));
       }
 
@@ -280,13 +280,13 @@ namespace DigitalRise.Graphics
       // Add end vertices.
       for (int i = 1; i < numberOfVertices; i += 2)
       {
-        Vector2F v = segmentVertices[i];
+        Vector2 v = segmentVertices[i];
         vertices.Add(new Vector3F(v.X, v.Y, 0));
       }
     }
 
 
-    private static bool IsStroked(ICurve<float, Vector2F> segment)
+    private static bool IsStroked(ICurve<float, Vector2> segment)
     {
       var strokedSegment = segment as StrokedSegment2F;
       return strokedSegment == null || strokedSegment.IsStroked;

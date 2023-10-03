@@ -217,7 +217,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
           // Change the winding order, so that we get the same result.
           if (s.X * s.Y * s.Z < 0)
-            MathHelper.Swap(ref tA.Vertex0, ref tA.Vertex1);
+            Mathematics.MathHelper.Swap(ref tA.Vertex0, ref tA.Vertex1);
 
           bool areEqual = Vector3F.AreNumericallyEqual(n, tA.Normal, 0.001f);
           if (!areEqual)

@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -24,18 +24,18 @@ namespace DigitalRise.Mathematics.Interpolation
   /// The tangents and the length of this special kind of curve are zero.
   /// </para>
   /// </remarks>
-  public class StepSegment2F : ICurve<float, Vector2F>, IRecyclable
+  public class StepSegment2F : ICurve<float, Vector2>, IRecyclable
   {
     /// <summary>
     /// Gets or sets the start point.
     /// </summary>
-    public Vector2F Point1 { get; set; }
+    public Vector2 Point1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
-    public Vector2F Point2 { get; set; }
+    public Vector2 Point2 { get; set; }
 
 
     /// <summary>
@@ -49,16 +49,16 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector2F GetPoint(float parameter)
+    public Vector2 GetPoint(float parameter)
     {
       return InterpolationHelper.Step(Point1, Point2, parameter, StepType);
     }
 
 
     /// <inheritdoc/>
-    public Vector2F GetTangent(float parameter)
+    public Vector2 GetTangent(float parameter)
     {
-      return Vector2F.Zero;
+      return Vector2.Zero;
     }
 
 
@@ -70,7 +70,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
     }
 
@@ -113,8 +113,8 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector2F();
-      Point2 = new Vector2F();
+      Point1 = new Vector2();
+      Point2 = new Vector2();
       StepType = StepInterpolation.Left;
 
       Pool.Recycle(this);

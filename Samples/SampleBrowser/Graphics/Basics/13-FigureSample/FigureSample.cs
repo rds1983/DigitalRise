@@ -54,7 +54,7 @@ can be observed between the big grid and the smaller transparent figures.",
       _debugRenderer = new DebugRenderer(GraphicsService, spriteFont)
       {
         DefaultColor = Color.Black,
-        DefaultTextPosition = new Vector2F(20, 40)
+        DefaultTextPosition = new Vector2(20, 40)
       };
 
       _scene = new Scene();
@@ -505,9 +505,9 @@ can be observed between the big grid and the smaller transparent figures.",
 
       // Red arrow
       var arrow = new PathFigure2F();
-      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(1, 0) });
-      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0.9f, 0.02f) });
-      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2F(1, 0), Point2 = new Vector2F(0.9f, -0.02f) });
+      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(1, 0) });
+      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0.9f, 0.02f) });
+      arrow.Segments.Add(new LineSegment2F { Point1 = new Vector2(1, 0), Point2 = new Vector2(0.9f, -0.02f) });
       var figureNode = new FigureNode(arrow)
       {
         Name = "Gizmo X",
@@ -549,18 +549,18 @@ can be observed between the big grid and the smaller transparent figures.",
       var arc = new PathFigure2F();
       arc.Segments.Add(
         new StrokedSegment2F(
-          new LineSegment2F { Point1 = new Vector2F(0, 0), Point2 = new Vector2F(1, 0), },
+          new LineSegment2F { Point1 = new Vector2(0, 0), Point2 = new Vector2(1, 0), },
           false));
       arc.Segments.Add(
         new ArcSegment2F
         {
-          Point1 = new Vector2F(1, 0),
-          Point2 = new Vector2F(0, 1),
-          Radius = new Vector2F(1, 1)
+          Point1 = new Vector2(1, 0),
+          Point2 = new Vector2(0, 1),
+          Radius = new Vector2(1, 1)
         });
       arc.Segments.Add(
         new StrokedSegment2F(
-        new LineSegment2F { Point1 = new Vector2F(0, 1), Point2 = new Vector2F(0, 0), },
+        new LineSegment2F { Point1 = new Vector2(0, 1), Point2 = new Vector2(0, 0), },
         false));
       var transformedArc = new TransformedFigure(arc)
       {
@@ -615,21 +615,21 @@ can be observed between the big grid and the smaller transparent figures.",
       var spriteNode = new SpriteNode(new TextSprite("X", spriteFont))
       {
         Color = new Vector3F(1, 0, 0),
-        Origin = new Vector2F(0, 1),
+        Origin = new Vector2(0, 1),
         PoseLocal = new Pose(new Vector3F(1, 0, 0))
       };
       gizmoNode.Children.Add(spriteNode);
       spriteNode = new SpriteNode(new TextSprite("Y", spriteFont))
       {
         Color = new Vector3F(0, 1, 0),
-        Origin = new Vector2F(0, 1),
+        Origin = new Vector2(0, 1),
         PoseLocal = new Pose(new Vector3F(0, 1, 0))
       };
       gizmoNode.Children.Add(spriteNode);
       spriteNode = new SpriteNode(new TextSprite("Z", spriteFont))
       {
         Color = new Vector3F(0, 0, 1),
-        Origin = new Vector2F(0, 1),
+        Origin = new Vector2(0, 1),
         PoseLocal = new Pose(new Vector3F(0, 0, 1))
       };
       gizmoNode.Children.Add(spriteNode);
@@ -648,25 +648,25 @@ can be observed between the big grid and the smaller transparent figures.",
         {
           Parameter = 0,
           Interpolation = SplineInterpolation.Bezier,
-          Point = new Vector2F(0, 0),
-          TangentIn = new Vector2F(0, 0),
-          TangentOut = new Vector2F(-0.2f, 0.2f)
+          Point = new Vector2(0, 0),
+          TangentIn = new Vector2(0, 0),
+          TangentOut = new Vector2(-0.2f, 0.2f)
         },
         new PathKey2F
         {
           Parameter = 1,
           Interpolation = SplineInterpolation.Bezier,
-          Point = new Vector2F(0, 1),
-          TangentIn = new Vector2F(-0.3f, 1.1f),
-          TangentOut = new Vector2F(0.3f, 1.1f)
+          Point = new Vector2(0, 1),
+          TangentIn = new Vector2(-0.3f, 1.1f),
+          TangentOut = new Vector2(0.3f, 1.1f)
         },
         new PathKey2F
         {
           Parameter = 2,
           Interpolation = SplineInterpolation.Bezier,
-          Point = new Vector2F(0, 0),
-          TangentIn = new Vector2F(0.2f, 0.2f),
-          TangentOut = new Vector2F(0, 0)
+          Point = new Vector2(0, 0),
+          TangentIn = new Vector2(0.2f, 0.2f),
+          TangentOut = new Vector2(0, 0)
         }
       };
 

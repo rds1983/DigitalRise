@@ -369,9 +369,9 @@ namespace DigitalRise.UI.Rendering
     {
       result = default(T);
 
-      if (result is Vector2F)
+      if (result is Vector2)
       {
-        result = (T)(object)ThemeHelper.ParseVector2F(attribute.Value);
+        result = (T)(object)ThemeHelper.ParseVector2(attribute.Value);
       }
       else if (result is Vector3F)
       {

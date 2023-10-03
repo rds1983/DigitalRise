@@ -176,10 +176,10 @@ The DigitalRise Animation library is used to animate the GUI controls.",
     private void PlayStartAnimation()
     {
       // Create an animation that animates the RenderTranslation of a UIControl:
-      Vector2FFromToByAnimation animation = new Vector2FFromToByAnimation
+      Vector2FromToByAnimation animation = new Vector2FromToByAnimation
       {
         TargetProperty = "RenderTranslation",   // Animate the property UIControl.RenderTranslation
-        From = new Vector2F(-400, 0),           // from (-400, 0) to its default value
+        From = new Vector2(-400, 0),           // from (-400, 0) to its default value
         Duration = TimeSpan.FromSeconds(0.8),   // over a duration of 0.8 seconds.
         EasingFunction = new HermiteEase { Mode = EasingMode.EaseInOut },
       };
@@ -221,10 +221,10 @@ The DigitalRise Animation library is used to animate the GUI controls.",
     public void PlayExitAnimation()
     {
       // An animation that animates the RenderTranslation of a UIControl:
-      Vector2FFromToByAnimation animation = new Vector2FFromToByAnimation
+      Vector2FromToByAnimation animation = new Vector2FromToByAnimation
       {
         TargetProperty = "RenderTranslation",
-        To = new Vector2F(-400, 0),
+        To = new Vector2(-400, 0),
         Duration = TimeSpan.FromSeconds(0.8),
         EasingFunction = new HermiteEase { Mode = EasingMode.EaseInOut },
       };

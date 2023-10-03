@@ -374,9 +374,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // n must point into the origin direction and not away...
       if (Vector3F.Dot(n, v0) > 0)
       {
-        MathHelper.Swap(ref v1, ref v2);
-        MathHelper.Swap(ref v1A, ref v2A);
-        MathHelper.Swap(ref v1B, ref v2B);
+        Mathematics.MathHelper.Swap(ref v1, ref v2);
+        Mathematics.MathHelper.Swap(ref v1A, ref v2A);
+        Mathematics.MathHelper.Swap(ref v1B, ref v2B);
         n = -n;
       }
 

@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -44,7 +45,7 @@ namespace DigitalRise.Graphics.Rendering
     public Vector3F Normal;   // If (0, 0, 0) => vertex belongs to ribbon.
     public Vector3F Axis;
     public Vector4F Color;
-    public Vector2F TextureCoordinate;
+    public Vector2 TextureCoordinate;
     public Vector4F Args0;
     public Vector4F Args1;
     public Vector4F Args2;
@@ -105,7 +106,7 @@ namespace DigitalRise.Graphics.Rendering
 
 
     // The billboard size (width, height).
-    public Vector2F Size
+    public Vector2 Size
     {
       set 
       {
@@ -134,11 +135,11 @@ namespace DigitalRise.Graphics.Rendering
     {
       set
       {
-        Vector2F textureScale = value.Scale;
+        Vector2 textureScale = value.Scale;
         Args2.X = textureScale.X;
         Args2.Y = textureScale.Y;
 
-        Vector2F textureOffset = value.Offset;
+        Vector2 textureOffset = value.Offset;
         Args2.Z = textureOffset.X;
         Args2.W = textureOffset.Y;
 

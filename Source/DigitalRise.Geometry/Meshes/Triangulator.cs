@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -245,7 +245,7 @@ namespace DigitalRise.Geometry.Meshes
           int b = _indices[v] + startIndex;
           int c = _indices[w] + startIndex;
           if (flipped)
-            MathHelper.Swap(ref a, ref c);
+            Mathematics.MathHelper.Swap(ref a, ref c);
 
           triangleIndices.Add(a);
           triangleIndices.Add(b);
@@ -381,13 +381,13 @@ namespace DigitalRise.Geometry.Meshes
     // for which no other vertices of the polygon are inside the triangle.)
     private static bool IsEar(Vector3F[] vertices, int[] indices, int u, int v, int w, int numberOfVertices)
     {
-      Vector2F A = new Vector2F(vertices[indices[u]].X, vertices[indices[u]].Y);
-      Vector2F B = new Vector2F(vertices[indices[v]].X, vertices[indices[v]].Y);
-      Vector2F C = new Vector2F(vertices[indices[w]].X, vertices[indices[w]].Y);
+      Vector2 A = new Vector2(vertices[indices[u]].X, vertices[indices[u]].Y);
+      Vector2 B = new Vector2(vertices[indices[v]].X, vertices[indices[v]].Y);
+      Vector2 C = new Vector2(vertices[indices[w]].X, vertices[indices[w]].Y);
 
       // Check whether triangle (A, B, C) is clockwise or collinear.
-      Vector2F a = B - A;
-      Vector2F b = C - A;
+      Vector2 a = B - A;
+      Vector2 b = C - A;
       float aXb = a.X * b.Y - a.Y * b.X;  // Cross product = signed area of parallelogram
       if (aXb < Numeric.EpsilonFSquared)
         return false;
@@ -398,7 +398,7 @@ namespace DigitalRise.Geometry.Meshes
         if (p == u || p == v || p == w)
           continue;
 
-        Vector2F P = new Vector2F(vertices[indices[p]].X, vertices[indices[p]].Y);
+        Vector2 P = new Vector2(vertices[indices[p]].X, vertices[indices[p]].Y);
         if (IsInside(A, B, C, P))
           return false;
       }
@@ -408,14 +408,14 @@ namespace DigitalRise.Geometry.Meshes
 
 
     // Tests if a point P is inside the given counterclockwise triangle (A, B, C).
-    private static bool IsInside(Vector2F A, Vector2F B, Vector2F C, Vector2F P)
+    private static bool IsInside(Vector2 A, Vector2 B, Vector2 C, Vector2 P)
     {
-      Vector2F a = C - B;   // Triangle edge opposite A.
-      Vector2F b = A - C;   // Triangle edge opposite B.
-      Vector2F c = B - A;   // Triangle edge opposite C.
-      Vector2F ap = P - A;
-      Vector2F bp = P - B;
-      Vector2F cp = P - C;
+      Vector2 a = C - B;   // Triangle edge opposite A.
+      Vector2 b = A - C;   // Triangle edge opposite B.
+      Vector2 c = B - A;   // Triangle edge opposite C.
+      Vector2 ap = P - A;
+      Vector2 bp = P - B;
+      Vector2 cp = P - C;
 
       // Build cross products:
       var aXbp = a.X * bp.Y - a.Y * bp.X;   // a x bp

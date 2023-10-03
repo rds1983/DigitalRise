@@ -4,9 +4,8 @@
 
 using System;
 using DigitalRise.Animation.Traits;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation
 {
@@ -14,7 +13,7 @@ namespace DigitalRise.Animation
   /// Animates a <see cref="Single"/> value using a predefined animation curve.
   /// </summary>
   /// <inheritdoc/>
-  public class Curve2FAnimation : AnimationCurve<float, Vector2F, CurveKey2F, Curve2F>
+  public class Curve2FAnimation : AnimationCurve<float, Vector2, CurveKey2F, Curve2F>
   {
     /// <inheritdoc/>
     public override IAnimationValueTraits<float> Traits
@@ -48,7 +47,7 @@ namespace DigitalRise.Animation
 
 
     /// <inheritdoc/>
-    protected override float GetValueFromPoint(Vector2F point)
+    protected override float GetValueFromPoint(Vector2 point)
     {
       return point.Y;
     }

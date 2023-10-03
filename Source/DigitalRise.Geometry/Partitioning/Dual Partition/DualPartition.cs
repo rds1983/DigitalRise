@@ -358,7 +358,7 @@ namespace DigitalRise.Geometry.Partitioning
       }
 
       // Swap current and previous stage.
-      MathHelper.Swap(ref _currentStage, ref _previousStage);
+      Mathematics.MathHelper.Swap(ref _currentStage, ref _previousStage);
 
       // Update static and dynamic partition.
       // TODO: Update partitions in parallel!

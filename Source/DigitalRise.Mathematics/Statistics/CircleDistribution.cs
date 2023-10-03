@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -94,12 +94,12 @@ namespace DigitalRise.Mathematics.Statistics
     /// Gets or sets the scale factors that are multiplied to the random position.
     /// </summary>
     /// <value>The scale factors in x and y direction. The default value is (1, 1).</value>
-    public Vector2F Scale
+    public Vector2 Scale
     {
       get { return _scale; }
       set { _scale = value; }
     }
-    private Vector2F _scale = new Vector2F(1, 1);
+    private Vector2 _scale = new Vector2(1, 1);
 
 
     /// <inheritdoc/>

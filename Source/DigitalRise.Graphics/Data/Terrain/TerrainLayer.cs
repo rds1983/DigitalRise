@@ -391,7 +391,7 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    void IInternalTerrainLayer.OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    void IInternalTerrainLayer.OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       OnDraw(graphicsDevice, rectangle, topLeftPosition, bottomRightPosition);
     }
@@ -417,7 +417,7 @@ namespace DigitalRise.Graphics
     /// "POSITION0" vertex attribute and the world space position in the "TEXCOORD0" vertex
     /// attribute.
     /// </remarks>
-    internal virtual void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    internal virtual void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       graphicsDevice.DrawQuad(rectangle, topLeftPosition, bottomRightPosition);
     }

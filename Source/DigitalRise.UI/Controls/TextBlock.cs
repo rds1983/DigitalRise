@@ -11,9 +11,7 @@ using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
-using Microsoft.Xna.Framework.Graphics;
-
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -173,7 +171,7 @@ namespace DigitalRise.UI.Controls
 
     /// <inheritdoc/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // This control can only measure itself if it is in a screen because it needs a font.
       var screen = Screen;
@@ -193,7 +191,7 @@ namespace DigitalRise.UI.Controls
       if (string.IsNullOrEmpty(text))
       {
         // No text --> Abort.
-        return new Vector2F(
+        return new Vector2(
           hasWidth ? width : 0,
           hasHeight ? height : 0);
       }
@@ -206,7 +204,7 @@ namespace DigitalRise.UI.Controls
 
       // Remove padding from constraint size.
       Vector4F padding = Padding;
-      Vector2F contentSize = availableSize;
+      Vector2 contentSize = availableSize;
       if (Numeric.IsPositiveFinite(availableSize.X))
         contentSize.X -= padding.X + padding.Z;
       if (Numeric.IsPositiveFinite(availableSize.Y))
@@ -214,12 +212,12 @@ namespace DigitalRise.UI.Controls
 
       // Measure text size.
       var font = screen.Renderer.GetFont(Font);
-      Vector2F size = (Vector2F)font.MeasureString(text);
-      if (size < contentSize)
+      Vector2 size = (Vector2)font.MeasureString(text);
+      if (size.IsLessThen(contentSize))
       {
         // All text is visible. (VisualText is equal to Text.)
         VisualText.Append(text);
-        return new Vector2F(
+        return new Vector2(
           hasWidth ? width : size.X + padding.X + padding.Z,
           hasHeight ? height : size.Y + padding.Y + padding.W);
       }
@@ -235,7 +233,7 @@ namespace DigitalRise.UI.Controls
         // Not enough space for a single line height. --> Keep all text and use clipping.
         VisualText.Append(text);
         VisualClip = true;
-        return new Vector2F(
+        return new Vector2(
           hasWidth ? width : size.X + padding.X + padding.Z,
           hasHeight ? height : size.Y + padding.Y + padding.W);
       }
@@ -245,7 +243,7 @@ namespace DigitalRise.UI.Controls
         // Not using word wrapping.
 
         // Compute desired size.
-        Vector2F desiredSize = new Vector2F(
+        Vector2 desiredSize = new Vector2(
           hasWidth ? width : availableSize.X,
           hasHeight ? height : availableSize.Y);
 
@@ -368,8 +366,8 @@ namespace DigitalRise.UI.Controls
       // Add last line.
       VisualText.Append(line);
 
-      size = (Vector2F)font.MeasureString(VisualText);
-      return new Vector2F(
+      size = (Vector2)font.MeasureString(VisualText);
+      return new Vector2(
         hasWidth ? width : size.X + padding.X + padding.Z,
         hasHeight ? height : size.Y + padding.Y + padding.W);
     }

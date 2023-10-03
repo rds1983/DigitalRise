@@ -1,4 +1,6 @@
-﻿using DigitalRise.Mathematics.Algebra;
+﻿using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -56,14 +58,14 @@ namespace DigitalRise.Graphics.Tests
 
     private static void GetEllipseCoefficients_Optimized(Vector3F normalView, out Vector3F axisMajor, out Vector3F axisMinor, out float radiusMajor, out float radiusMinor)
     {
-      Vector2F axisMinor2D;
+      Vector2 axisMinor2D;
       if (normalView.X != 0)
       {
-        axisMinor2D = new Vector2F(normalView.X, normalView.Y).Normalized;
+        axisMinor2D = new Vector2(normalView.X, normalView.Y).Normalized();
       }
       else
       {
-        axisMinor2D = new Vector2F(0, 1);
+        axisMinor2D = new Vector2(0, 1);
       }
 
       axisMinor.X = axisMinor2D.X;

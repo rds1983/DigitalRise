@@ -12,7 +12,7 @@ namespace Samples.Animation
     5)]
   public class CustomAnimationSample : AnimationSample
   {
-    private readonly AnimatableProperty<Vector2F> _animatablePosition = new AnimatableProperty<Vector2F>();
+    private readonly AnimatableProperty<Vector2> _animatablePosition = new AnimatableProperty<Vector2>();
 
 
     public CustomAnimationSample(Microsoft.Xna.Framework.Game game)

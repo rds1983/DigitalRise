@@ -7,6 +7,7 @@ using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -317,7 +318,7 @@ namespace DigitalRise.UI.Controls
       // Measure height.
       _scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
       Height = float.NaN;
-      Measure(new Vector2F(float.PositiveInfinity));
+      Measure(new Vector2(float.PositiveInfinity));
       float height = Math.Min(DesiredHeight, Owner.MaxDropDownHeight);
       _scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
@@ -342,7 +343,7 @@ namespace DigitalRise.UI.Controls
         control = control.VisualParent;
       }
 
-      Vector2F renderPosition = transform.ToRenderPosition(new Vector2F(x, y));
+      Vector2 renderPosition = transform.ToRenderPosition(new Vector2(x, y));
       X = renderPosition.X;
       Y = renderPosition.Y;
       Width = width;

@@ -33,7 +33,7 @@ namespace DigitalRise.UI.Rendering
     private const float CaretBlinkTime = 0.4f;
     private const string StateId = "State";
     private readonly System.Diagnostics.Stopwatch _caretTimer = System.Diagnostics.Stopwatch.StartNew();
-    private Vector2F _lastCaretPosition;
+    private Vector2 _lastCaretPosition;
     private Action<UIControl, UIRenderContext> _renderUIControl;
     #endregion
 
@@ -389,7 +389,7 @@ namespace DigitalRise.UI.Rendering
         }
 
         // Render text.
-        Vector2F position = new Vector2F(contentBounds.X, contentBounds.Y);
+        Vector2 position = new Vector2(contentBounds.X, contentBounds.Y);
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
         context.RenderTransform.DrawString(SpriteBatch, GetFont(textBlock.Font), textBlock.VisualText, position, foreground);
 
@@ -552,7 +552,7 @@ namespace DigitalRise.UI.Rendering
               SpriteBatch,
               font,
               console.VisualLines[i],
-              new Vector2F(contentBounds.X, contentBounds.Y + i * font.LineHeight),
+              new Vector2(contentBounds.X, contentBounds.Y + i * font.LineHeight),
               foreground);
         }
 
@@ -560,7 +560,7 @@ namespace DigitalRise.UI.Rendering
         if (console.VisualCaretX >= 0
             && console.VisualCaretY >= 0
             && console.IsFocused
-            && IsCaretVisible(new Vector2F(console.VisualCaretX, console.VisualCaretY)))
+            && IsCaretVisible(new Vector2(console.VisualCaretX, console.VisualCaretY)))
         {
           float charWidth = font.MeasureString("A").X;
           Vector4F padding = console.Padding;
@@ -625,7 +625,7 @@ namespace DigitalRise.UI.Rendering
         }
 
         // Render text.
-        Vector2F position = new Vector2F(contentBounds.X, contentBounds.Y);
+        Vector2 position = new Vector2(contentBounds.X, contentBounds.Y);
         if (!textBox.IsMultiline)
           position.X -= textBox.VisualOffset;
         else
@@ -637,7 +637,7 @@ namespace DigitalRise.UI.Rendering
 
         if (!hasSelection
             && hasFocus
-            && !textBox.VisualCaret.IsNaN
+            && !textBox.VisualCaret.IsNaN()
             && IsCaretVisible(textBox.VisualCaret))
         {
           // Render caret.
@@ -659,7 +659,7 @@ namespace DigitalRise.UI.Rendering
     }
 
 
-    private bool IsCaretVisible(Vector2F caretPosition)
+    private bool IsCaretVisible(Vector2 caretPosition)
     {
       // For blinking caret. A custom stopwatch timer is used to determine blinking times.
 
@@ -831,12 +831,12 @@ namespace DigitalRise.UI.Rendering
       //   | 7 |      8      | 9 |
       //   -----------------------
 
-      Vector2F destinationPosition;
+      Vector2 destinationPosition;
       RectangleF destinationRectangle;
       Rectangle sourceRectangle;
 
       // Cell #1 (no stretching)
-      destinationPosition = new Vector2F(area.X, area.Y);
+      destinationPosition = new Vector2(area.X, area.Y);
       sourceRectangle = new Rectangle(source.X, source.Y, left, top);
       transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
 
@@ -846,7 +846,7 @@ namespace DigitalRise.UI.Rendering
       transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #3 (no stretching)
-      destinationPosition = new Vector2F(area.X + area.Width - right, area.Y);
+      destinationPosition = new Vector2(area.X + area.Width - right, area.Y);
       sourceRectangle = new Rectangle(source.X + source.Width - right, source.Y, right, top);
       transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
 
@@ -866,7 +866,7 @@ namespace DigitalRise.UI.Rendering
       transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #7 (no stretching)
-      destinationPosition = new Vector2F(area.X, area.Y + area.Height - bottom);
+      destinationPosition = new Vector2(area.X, area.Y + area.Height - bottom);
       sourceRectangle = new Rectangle(source.X, source.Y + source.Height - bottom, left, bottom);
       transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
 
@@ -876,7 +876,7 @@ namespace DigitalRise.UI.Rendering
       transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #9 (no stretching)
-      destinationPosition = new Vector2F(area.X + area.Width - right, area.Y + area.Height - bottom);
+      destinationPosition = new Vector2(area.X + area.Width - right, area.Y + area.Height - bottom);
       sourceRectangle = new Rectangle(source.X + source.Width - right, source.Y + source.Height - bottom, right, bottom);
       transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
     }

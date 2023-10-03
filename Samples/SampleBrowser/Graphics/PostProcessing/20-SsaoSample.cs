@@ -83,7 +83,7 @@ namespace Samples.Graphics
         bool isShiftDown = (InputService.ModifierKeys & ModifierKeys.Shift) != 0;
         float factor = isShiftDown ? 1.01f : 1.0f / 1.01f;
         float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        Vector2F radii = _ssaoFilter.Radii;
+        Vector2 radii = _ssaoFilter.Radii;
         radii.X *= (float)Math.Pow(factor, time * 60);
         _ssaoFilter.Radii = radii;
       }
@@ -95,7 +95,7 @@ namespace Samples.Graphics
         bool isShiftDown = (InputService.ModifierKeys & ModifierKeys.Shift) != 0;
         float factor = isShiftDown ? 1.01f : 1.0f / 1.01f;
         float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        Vector2F radii = _ssaoFilter.Radii;
+        Vector2 radii = _ssaoFilter.Radii;
         radii.Y *= (float)Math.Pow(factor, time * 60);
         _ssaoFilter.Radii = radii;
       }

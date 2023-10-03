@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics.Tests
 {
@@ -94,18 +94,18 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomVector2F()
+    public void RandomVector2()
     {
-      Vector2F vector = RandomHelper.Random.NextVector2F(-20.0f, -10.0f);
+      Vector2 vector = RandomHelper.Random.NextVector2(-20.0f, -10.0f);
       Assert.IsTrue(-20.0f <= vector.X && vector.X <= -10.0f);
       Assert.IsTrue(-20.0f <= vector.Y && vector.Y <= -10.0f);
 
-      vector = RandomHelper.Random.NextVector2F(1.0f, 1.0f);
+      vector = RandomHelper.Random.NextVector2(1.0f, 1.0f);
       Assert.AreEqual(1.0f, vector.X);
       Assert.AreEqual(1.0f, vector.Y);
 
       // Must not throw exception.
-      RandomHelper.NextVector2F(null, 1, 3);
+      RandomHelper.NextVector2(null, 1, 3);
     }
 
 

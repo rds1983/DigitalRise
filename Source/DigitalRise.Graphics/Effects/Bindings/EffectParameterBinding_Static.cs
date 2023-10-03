@@ -44,7 +44,6 @@ namespace DigitalRise.Graphics.Effects
       { typeof(Vector2),      ValidateVector2     },
       { typeof(Vector3),      ValidateVector3     },
       { typeof(Vector4),      ValidateVector4     },
-      { typeof(Vector2F),     ValidateVector2     },
       { typeof(Vector3F),     ValidateVector3     },
       { typeof(Vector4F),     ValidateVector4     },
     };
@@ -75,7 +74,6 @@ namespace DigitalRise.Graphics.Effects
       { typeof(Vector2),     (Action<EffectParameter, Vector2>)    ((parameter, value) => parameter.SetValue(value))             },
       { typeof(Vector3),     (Action<EffectParameter, Vector3>)    ((parameter, value) => parameter.SetValue(value))             },
       { typeof(Vector4),     (Action<EffectParameter, Vector4>)    ((parameter, value) => parameter.SetValue(value))             },
-      { typeof(Vector2F),    (Action<EffectParameter, Vector2F>)   ((parameter, value) => parameter.SetValue((Vector2)value))    },
       { typeof(Vector3F),    (Action<EffectParameter, Vector3F>)   ((parameter, value) => parameter.SetValue((Vector3)value))    },
       { typeof(Vector4F),    (Action<EffectParameter, Vector4F>)   ((parameter, value) => parameter.SetValue((Vector4)value))    },
     };
@@ -101,7 +99,6 @@ namespace DigitalRise.Graphics.Effects
       { typeof(Vector2),     (Action<EffectParameter, Vector2[]>)    ((parameter, value) => parameter.SetValue(value)) },
       { typeof(Vector3),     (Action<EffectParameter, Vector3[]>)    ((parameter, value) => parameter.SetValue(value)) },
       { typeof(Vector4),     (Action<EffectParameter, Vector4[]>)    ((parameter, value) => parameter.SetValue(value)) },
-      //{ typeof(Vector2F),    (Action<EffectParameter, Vector2F[]>)   ((parameter, value) => parameter.SetValue(value)) },
       //{ typeof(Vector3F),    (Action<EffectParameter, Vector3F[]>)   ((parameter, value) => parameter.SetValue(value)) },
       //{ typeof(Vector4F),    (Action<EffectParameter, Vector4F[]>)   ((parameter, value) => parameter.SetValue(value)) },
 
@@ -223,7 +220,7 @@ namespace DigitalRise.Graphics.Effects
               return "float";
             case EffectParameterClass.Vector:
               if (parameter.ColumnCount == 2 && parameter.RowCount == 1)
-                return "Vector2, Vector2F";
+                return "Vector2";
               if (parameter.ColumnCount == 3 && parameter.RowCount == 1)
                 return "Vector3, Vector3F";
               if (parameter.ColumnCount == 4 && parameter.RowCount == 1)

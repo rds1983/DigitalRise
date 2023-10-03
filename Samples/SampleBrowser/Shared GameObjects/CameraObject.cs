@@ -8,6 +8,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 #if MONOGAME || WINDOWS_PHONE
 using Microsoft.Xna.Framework.Input.Touch;
 #endif
@@ -184,25 +185,25 @@ namespace Samples
       float deltaTimeF = (float)deltaTime.TotalSeconds;
 
       // Compute new orientation from mouse movement, gamepad and touch.
-      Vector2F mousePositionDelta = _inputService.MousePositionDelta;
+      Vector2 mousePositionDelta = _inputService.MousePositionDelta;
       GamePadState gamePadState = _inputService.GetGamePadState(LogicalPlayerIndex.One);
-      Vector2F touchDelta = Vector2F.Zero;
+      Vector2 touchDelta = Vector2.Zero;
 #if MONOGAME || WINDOWS_PHONE
       foreach (var gesture in _inputService.Gestures)
       {
         if (gesture.GestureType == GestureType.FreeDrag)
         {
-          touchDelta += (Vector2F)gesture.Delta;
+          touchDelta += (Vector2)gesture.Delta;
           
           // If we have touch input, we ignore the mouse movement
-          mousePositionDelta = Vector2F.Zero;
+          mousePositionDelta = Vector2.Zero;
         }
       }
 #endif
 
 #if WINDOWS_PHONE || IOS
       // On Windows Phone touch input also sets the mouse input. --> Ignore mouse data.
-      mousePositionDelta = Vector2F.Zero;
+      mousePositionDelta = Vector2.Zero;
 #endif
 
       float deltaYaw = -mousePositionDelta.X - touchDelta.X - gamePadState.ThumbSticks.Right.X * ThumbStickFactor;

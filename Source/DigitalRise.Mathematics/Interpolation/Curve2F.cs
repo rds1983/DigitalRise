@@ -10,7 +10,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics.Algebra;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -64,16 +64,16 @@ namespace DigitalRise.Mathematics.Interpolation
   /// </remarks>
   [Serializable]
   [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-  public class Curve2F : PiecewiseCurveF<Vector2F, CurveKey2F>, IXmlSerializable
+  public class Curve2F : PiecewiseCurveF<Vector2, CurveKey2F>, IXmlSerializable
   {
     /// <inheritdoc/>
     [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-    public override Vector2F GetPoint(float parameter)
+    public override Vector2 GetPoint(float parameter)
     {
       int numberOfKeys = Count;
       if (numberOfKeys == 0)
-        return new Vector2F(float.NaN, float.NaN);
+        return new Vector2(float.NaN, float.NaN);
       
       float interpolatedX = parameter; // The x result must be equal to the parameter.
 
@@ -94,7 +94,7 @@ namespace DigitalRise.Mathematics.Interpolation
         Debug.Assert(PreLoop == CurveLoopType.Linear);
 
         // Get tangent.
-        Vector2F tangent;
+        Vector2 tangent;
         switch (firstKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -106,10 +106,10 @@ namespace DigitalRise.Mathematics.Interpolation
           default:
             {
               if (numberOfKeys == 1)
-                return new Vector2F(parameter, firstKey.Point.Y);
+                return new Vector2(parameter, firstKey.Point.Y);
 
               GetSplines(0, out xSpline, out ySpline);
-              tangent = new Vector2F(xSpline.GetTangent(0), ySpline.GetTangent(0));
+              tangent = new Vector2(xSpline.GetTangent(0), ySpline.GetTangent(0));
               ((IRecyclable)xSpline).Recycle();
               ((IRecyclable)ySpline).Recycle();
               break;
@@ -120,14 +120,14 @@ namespace DigitalRise.Mathematics.Interpolation
         if (Numeric.IsZero(tangent.X) == false)
           k = tangent.Y / tangent.X;
 
-        return new Vector2F(interpolatedX, firstKey.Point.Y + k * (loopedParameter - curveStart));
+        return new Vector2(interpolatedX, firstKey.Point.Y + k * (loopedParameter - curveStart));
       }
       else if (loopedParameter > curveEnd)
       {
         Debug.Assert(PostLoop == CurveLoopType.Linear);
 
         // Get tangent.
-        Vector2F tangent;
+        Vector2 tangent;
         switch (lastKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -139,10 +139,10 @@ namespace DigitalRise.Mathematics.Interpolation
           default:
             {
               if (numberOfKeys == 1)
-                return new Vector2F(parameter, firstKey.Point.Y);
+                return new Vector2(parameter, firstKey.Point.Y);
 
               GetSplines(numberOfKeys - 2, out xSpline, out ySpline);
-              tangent = new Vector2F(xSpline.GetTangent(1), ySpline.GetTangent(1));
+              tangent = new Vector2(xSpline.GetTangent(1), ySpline.GetTangent(1));
               ((IRecyclable)xSpline).Recycle();
               ((IRecyclable)ySpline).Recycle();
               break;
@@ -153,13 +153,13 @@ namespace DigitalRise.Mathematics.Interpolation
         if (Numeric.IsZero(tangent.X) == false)
           k = tangent.Y / tangent.X;
 
-        return new Vector2F(interpolatedX, lastKey.Point.Y + k * (loopedParameter - curveEnd));
+        return new Vector2(interpolatedX, lastKey.Point.Y + k * (loopedParameter - curveEnd));
       }
       #endregion
 
       // Special case: Only 1 point.
       if (numberOfKeys == 1)
-        return new Vector2F(parameter, firstKey.Point.Y);
+        return new Vector2(parameter, firstKey.Point.Y);
 
       float cycleOffset = GetCycleOffset(parameter);
 
@@ -167,7 +167,7 @@ namespace DigitalRise.Mathematics.Interpolation
       if (loopedParameter == lastKey.Parameter
           && Items[numberOfKeys - 2].Interpolation != SplineInterpolation.BSpline)  // BSplines need special handling because they do not go through key points.
       {
-        return new Vector2F(parameter, lastKey.Point.Y + cycleOffset);
+        return new Vector2(parameter, lastKey.Point.Y + cycleOffset);
       }
 
       // Get near keys.
@@ -237,7 +237,7 @@ namespace DigitalRise.Mathematics.Interpolation
       ((IRecyclable)xSpline).Recycle();
       ((IRecyclable)ySpline).Recycle();
 
-      return new Vector2F(interpolatedX, interpolatedY + cycleOffset);
+      return new Vector2(interpolatedX, interpolatedY + cycleOffset);
     }
 
 
@@ -294,7 +294,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// parameter.
     /// <code lang="csharp">
     /// <![CDATA[
-    /// Vector2F tangent = curve.GetTangent(0.5f); // Get the tangent at x = 0.5.
+    /// Vector2 tangent = curve.GetTangent(0.5f); // Get the tangent at x = 0.5.
     /// float k = tangent.Y / tangent.X;           // Compute the slope at x = 0.5.
     /// ]]>
     /// </code>
@@ -305,11 +305,11 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </remarks>
     [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
     [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-    public override Vector2F GetTangent(float parameter)
+    public override Vector2 GetTangent(float parameter)
     {
       int numberOfKeys = Count;
       if (numberOfKeys == 0)
-        return new Vector2F();
+        return new Vector2();
 
       CurveKey2F firstKey = Items[0];
       CurveKey2F lastKey = Items[numberOfKeys - 1];
@@ -319,7 +319,7 @@ namespace DigitalRise.Mathematics.Interpolation
       if (PreLoop == CurveLoopType.Constant && parameter < curveStart
           || PostLoop == CurveLoopType.Constant && parameter > curveEnd)
       {
-        return Vector2F.UnitX;
+        return Vector2.UnitX;
       }
 
       // Correct parameter.
@@ -336,7 +336,7 @@ namespace DigitalRise.Mathematics.Interpolation
       {
         Debug.Assert(PreLoop == CurveLoopType.Linear);
 
-        Vector2F tangent;
+        Vector2 tangent;
         switch (firstKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -348,19 +348,19 @@ namespace DigitalRise.Mathematics.Interpolation
           case SplineInterpolation.StepLeft:
           case SplineInterpolation.StepCentered:
           case SplineInterpolation.StepRight:
-            tangent = Vector2F.UnitX;
+            tangent = Vector2.UnitX;
             break;
           default:
             if (numberOfKeys > 1)
             {
               GetSplines(0, out xSpline, out ySpline);
-              tangent = new Vector2F(xSpline.GetTangent(0), ySpline.GetTangent(0));
+              tangent = new Vector2(xSpline.GetTangent(0), ySpline.GetTangent(0));
               ((IRecyclable)xSpline).Recycle();
               ((IRecyclable)ySpline).Recycle();
             }
             else
             {
-              tangent = Vector2F.UnitX;
+              tangent = Vector2.UnitX;
             }
             break;
         }
@@ -372,7 +372,7 @@ namespace DigitalRise.Mathematics.Interpolation
       {
         Debug.Assert(PostLoop == CurveLoopType.Linear);
 
-        Vector2F tangent;
+        Vector2 tangent;
         switch (lastKey.Interpolation)
         {
           case SplineInterpolation.Bezier:
@@ -384,19 +384,19 @@ namespace DigitalRise.Mathematics.Interpolation
           case SplineInterpolation.StepLeft:
           case SplineInterpolation.StepCentered:
           case SplineInterpolation.StepRight:
-            tangent = Vector2F.UnitX;
+            tangent = Vector2.UnitX;
             break;
           default:
             if (numberOfKeys > 1)
             {
               GetSplines(numberOfKeys - 2, out xSpline, out ySpline);
-              tangent = new Vector2F(xSpline.GetTangent(1), ySpline.GetTangent(1));
+              tangent = new Vector2(xSpline.GetTangent(1), ySpline.GetTangent(1));
               ((IRecyclable)xSpline).Recycle();
               ((IRecyclable)ySpline).Recycle();
             }
             else
             {
-              tangent = Vector2F.UnitX;
+              tangent = Vector2.UnitX;
             }
             break;
         }
@@ -431,7 +431,7 @@ namespace DigitalRise.Mathematics.Interpolation
               return p.TangentIn;
           }
 
-          return Vector2F.UnitX;
+          return Vector2.UnitX;
         }
 
         int index = GetKeyIndex(loopedParameter);
@@ -447,7 +447,7 @@ namespace DigitalRise.Mathematics.Interpolation
             || p2.Interpolation == SplineInterpolation.StepCentered
             || p2.Interpolation == SplineInterpolation.StepRight)
         {
-          return Vector2F.UnitX;
+          return Vector2.UnitX;
         }
 
         float splineStart = p2.Parameter;
@@ -512,7 +512,7 @@ namespace DigitalRise.Mathematics.Interpolation
         ((IRecyclable)xSpline).Recycle();
         ((IRecyclable)ySpline).Recycle();
 
-        return new Vector2F(tangentX, tangentY) / splineLength;
+        return new Vector2(tangentX, tangentY) / splineLength;
       }
     }
 
@@ -549,7 +549,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <exception cref="NotSupportedException">
     /// This operation is not supported. A <see cref="Curve2F"/> cannot be flattened.
     /// </exception>
-    public override void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public override void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       throw new NotSupportedException();
     }
@@ -656,8 +656,8 @@ namespace DigitalRise.Mathematics.Interpolation
       }
       else
       {
-        Vector2F p1; 
-        Vector2F p4; 
+        Vector2 p1; 
+        Vector2 p4; 
         #region ----- Find CatmullRom/BSpline neigbor points p1 and p4 -----
         if (index > 0)
           p1 = Items[index - 1].Point;
@@ -666,7 +666,7 @@ namespace DigitalRise.Mathematics.Interpolation
           // Mirror point 1 through point 0 for x component.
           // Set a constant y.
           // This does not work for BSplines because they would not run through the last point.
-          p1 = new Vector2F(Items[0].Point.X - (Items[1].Point.X - Items[0].Point.X),
+          p1 = new Vector2(Items[0].Point.X - (Items[1].Point.X - Items[0].Point.X),
                             p2.Point.Y);
         }
         else if (SmoothEnds && PreLoop == CurveLoopType.Cycle)
@@ -685,7 +685,7 @@ namespace DigitalRise.Mathematics.Interpolation
         {
           // Mirror point 1 through point 0 for x component.
           // Y should be the same as p3.
-          p1 = new Vector2F(Items[0].Point.X - (Items[1].Point.X - Items[0].Point.X),
+          p1 = new Vector2(Items[0].Point.X - (Items[1].Point.X - Items[0].Point.X),
                             p3.Point.Y);
         }
         else
@@ -702,7 +702,7 @@ namespace DigitalRise.Mathematics.Interpolation
           // This does not work for BSplines because they would not run through the last point.
           // Mirror point Count-2 through last point for x component.
           // Set a constant y.
-          p4 = new Vector2F(Items[Count - 1].Point.X + (Items[Count - 1].Point.X - Items[Count - 2].Point.X),
+          p4 = new Vector2(Items[Count - 1].Point.X + (Items[Count - 1].Point.X - Items[Count - 2].Point.X),
                             p3.Point.Y);
         }
         else if (SmoothEnds && PostLoop == CurveLoopType.Cycle)
@@ -721,7 +721,7 @@ namespace DigitalRise.Mathematics.Interpolation
         {
           // Mirror point Count-2 through last point for x component.
           // y should be the same as p2.Y.
-          p4 = new Vector2F(Items[Count - 1].Point.X + (Items[Count - 1].Point.X - Items[Count - 2].Point.X),
+          p4 = new Vector2(Items[Count - 1].Point.X + (Items[Count - 1].Point.X - Items[Count - 2].Point.X),
                             p2.Point.Y);
         }
         else

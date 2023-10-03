@@ -23,7 +23,7 @@ namespace Samples.Game.UI
   {
     private readonly Simulation _simulation;
     private readonly CameraObject _cameraObject;
-    private Vector2F _lastMousePosition;
+    private Vector2 _lastMousePosition;
 
 
     public InGameUIScreen(IServiceLocator services, IUIRenderer renderer)
@@ -107,7 +107,7 @@ namespace Samples.Game.UI
 
             // The texture coordinate is in the range [0, 0] to [1, 1]. If we multiply it with the
             // screen extent to the position in pixels.
-            var inGameScreenMousePosition = normalizedPosition * new Vector2F(ActualWidth, ActualHeight);
+            var inGameScreenMousePosition = normalizedPosition * new Vector2(ActualWidth, ActualHeight);
             var inGameScreenMousePositionDelta = inGameScreenMousePosition - _lastMousePosition;
 
             // Finally, we can set the mouse positions that are relative to the InGame screen. Hurray!
@@ -134,7 +134,7 @@ namespace Samples.Game.UI
 
 
     // Returns the texture coordinates for a given point on the TV screen.
-    public Vector2F GetTextureCoordinate(Vector3F pointLocal)
+    public Vector2 GetTextureCoordinate(Vector3F pointLocal)
     {
       // We assume that the TV screen texture is mapped flat onto on side of the
       // box and is centered. - This is not exact since the screen is actually
@@ -142,7 +142,7 @@ namespace Samples.Game.UI
       // works for this sample.
       const float screenWidth = 0.74f;   // Width of the screen part of the TV model.
       const float screenHeight = 0.54f;  // Height of the screen part of the TV model.
-      return new Vector2F(
+      return new Vector2(
         pointLocal.X / screenWidth + 0.5f,
         -pointLocal.Z / screenHeight + 0.5f);
     }

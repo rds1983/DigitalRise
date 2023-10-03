@@ -529,7 +529,7 @@ namespace DigitalRise.Geometry.Partitioning
         {
           // Merge smaller set into larger set.
           if (invalidItems.Count < removedItems.Count)
-            MathHelper.Swap(ref invalidItems, ref removedItems);
+            Mathematics.MathHelper.Swap(ref invalidItems, ref removedItems);
 
           foreach (var item in removedItems)
             invalidItems.Add(item);

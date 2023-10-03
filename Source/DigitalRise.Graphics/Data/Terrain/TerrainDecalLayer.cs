@@ -417,7 +417,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    internal override void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    internal override void OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       // The decal is rendered as rotated quad. A proper scissor rectangle is already set, so we
       // can draw outside the given rectangle.

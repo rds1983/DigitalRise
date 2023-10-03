@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -159,7 +159,7 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Gets a random <see cref="Vector2F"/>.
+    /// Gets a random <see cref="Vector2"/>.
     /// </summary>
     /// <param name="random">
     /// The random number generator. If this parameter is <see langword="null"/>, the global random
@@ -167,13 +167,13 @@ namespace DigitalRise.Mathematics.Statistics
     /// </param>
     /// <param name="min">The minimal allowed value for a vector element.</param>
     /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="Vector2F"/>.</returns>
-    public static Vector2F NextVector2F(this Random random, float min, float max)
+    /// <returns>A random <see cref="Vector2"/>.</returns>
+    public static Vector2 NextVector2(this Random random, float min, float max)
     {
       if (random == null)
         random = Random;
 
-      return new Vector2F(NextFloat(random, min, max),
+      return new Vector2(NextFloat(random, min, max),
                           NextFloat(random, min, max));
     }
 

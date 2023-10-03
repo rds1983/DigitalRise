@@ -103,7 +103,7 @@ namespace DigitalRise.Graphics.Tests
       // Empty sphere at camera position.
       shape.Radius = 0;
       geometricObject.Pose = cameraNode.PoseWorld;
-      Vector2F screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
+      Vector2 screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
       Assert.AreEqual(0, screenSize.X);
       Assert.AreEqual(0, screenSize.Y);
 
@@ -159,7 +159,7 @@ namespace DigitalRise.Graphics.Tests
       // Empty sphere at camera position.
       shape.Radius = 0;
       geometricObject.Pose = cameraNode.PoseWorld;
-      Vector2F screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
+      Vector2 screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
       Assert.AreEqual(0, screenSize.X);
       Assert.AreEqual(0, screenSize.Y);
 

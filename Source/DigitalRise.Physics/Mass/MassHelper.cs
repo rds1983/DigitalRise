@@ -57,7 +57,7 @@ namespace DigitalRise.Physics
       {
         // V is orthogonal but not necessarily a rotation. If it is no rotation
         // we have to swap two columns.
-        MathHelper.Swap(ref inertiaDiagonal.Y, ref inertiaDiagonal.Z);
+        Mathematics.MathHelper.Swap(ref inertiaDiagonal.Y, ref inertiaDiagonal.Z);
 
         Vector3F dummy = rotation.GetColumn(1);
         rotation.SetColumn(1, rotation.GetColumn(2));

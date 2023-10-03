@@ -166,8 +166,8 @@ namespace DigitalRise.Graphics.Rendering
         _parameterTextureMatrix.SetValue((Matrix)(GraphicsHelper.ProjectorBiasMatrix * light.Projection * (lightPose.Inverse * new Pose(cameraPose.Position))));
 
         var rectangle = GraphicsHelper.GetViewportRectangle(cameraNode, viewport, lightNode);
-        var texCoordTopLeft = new Vector2F(rectangle.Left / (float)viewport.Width, rectangle.Top / (float)viewport.Height);
-        var texCoordBottomRight = new Vector2F(rectangle.Right / (float)viewport.Width, rectangle.Bottom / (float)viewport.Height);
+        var texCoordTopLeft = new Vector2(rectangle.Left / (float)viewport.Width, rectangle.Top / (float)viewport.Height);
+        var texCoordBottomRight = new Vector2(rectangle.Right / (float)viewport.Width, rectangle.Bottom / (float)viewport.Height);
         GraphicsHelper.GetFrustumFarCorners(cameraNode.Camera.Projection, texCoordTopLeft, texCoordBottomRight, _frustumFarCorners);
         
         // Convert frustum far corners from view space to world space.

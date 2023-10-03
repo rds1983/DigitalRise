@@ -14,7 +14,7 @@ namespace DigitalRise.Animation
   /// Animates a point that follows a predefined path. (Base implementation.)
   /// </summary>
   /// <typeparam name="TPoint">
-  /// The type of the path points, such as <see cref="Vector2F"/>, <see cref="Vector3F"/>, etc.
+  /// The type of the path points, such as <see cref="Vector2"/>, <see cref="Vector3F"/>, etc.
   /// </typeparam>
   /// <typeparam name="TPathKey">
   /// The type of the path key. (A type derived from <see cref="CurveKey{TParam,TPoint}"/>.)

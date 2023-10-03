@@ -7,8 +7,8 @@ using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 
 namespace Samples.Physics
 {
@@ -126,8 +126,8 @@ namespace Samples.Physics
                                                   0, 0, 1,
                                                   0, -1, 0)),
         CollisionEnabled = false,
-        Minimum = new Vector2F(-0.7f, float.NegativeInfinity),
-        Maximum = new Vector2F(0.7f, float.PositiveInfinity),
+        Minimum = new Vector2(-0.7f, float.NegativeInfinity),
+        Maximum = new Vector2(0.7f, float.PositiveInfinity),
       };
       Simulation.Constraints.Add(_frontLeftHinge);
 
@@ -143,8 +143,8 @@ namespace Samples.Physics
                                                   0, 0, 1,
                                                   0, -1, 0)),
         CollisionEnabled = false,
-        Minimum = new Vector2F(-0.7f, float.NegativeInfinity),
-        Maximum = new Vector2F(0.7f, float.PositiveInfinity),
+        Minimum = new Vector2(-0.7f, float.NegativeInfinity),
+        Maximum = new Vector2(0.7f, float.PositiveInfinity),
       };
       Simulation.Constraints.Add(_frontRightHinge);
 
@@ -235,10 +235,10 @@ namespace Samples.Physics
         _steeringAngle = 0;
 
       // Lock the steering angles of the front wheels.
-      _frontLeftHinge.Minimum = new Vector2F(_steeringAngle, float.NegativeInfinity);
-      _frontLeftHinge.Maximum = new Vector2F(_steeringAngle, float.PositiveInfinity);
-      _frontRightHinge.Minimum = new Vector2F(_steeringAngle, float.NegativeInfinity);
-      _frontRightHinge.Maximum = new Vector2F(_steeringAngle, float.PositiveInfinity);
+      _frontLeftHinge.Minimum = new Vector2(_steeringAngle, float.NegativeInfinity);
+      _frontLeftHinge.Maximum = new Vector2(_steeringAngle, float.PositiveInfinity);
+      _frontRightHinge.Minimum = new Vector2(_steeringAngle, float.NegativeInfinity);
+      _frontRightHinge.Maximum = new Vector2(_steeringAngle, float.PositiveInfinity);
 
       // Get velocity from arrow keys.
       float wheelVelocity = 0;

@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -359,9 +360,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix22F.Identity, Matrix22F.Identity.Inverse);
 
       Matrix22F m = new Matrix22F(1, 2, 3, 4);
-      Vector2F v = Vector2F.One;
-      Vector2F w = m * v;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector2 v = Vector2.One;
+      Vector2 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix22F.AreNumericallyEqual(Matrix22F.Identity, m * m.Inverse));
     }
 
@@ -371,9 +372,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Matrix22F m = new Matrix22F(0.0001f, 0,
                                   0, 0.0001f);
-      Vector2F v = Vector2F.One;
-      Vector2F w = m * v;
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector2 v = Vector2.One;
+      Vector2 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix22F.AreNumericallyEqual(Matrix22F.Identity, m * m.Inverse));
     }
 
@@ -401,11 +402,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix22F.Identity, Matrix22F.Identity.Inverse);
 
       Matrix22F m = new Matrix22F(1, 2, 3, 4);
-      Vector2F v = Vector2F.One;
-      Vector2F w = m * v;
+      Vector2 v = Vector2.One;
+      Vector2 w = m * v;
       Matrix22F im = m;
       im.Invert();
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(v, im * w));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
       Assert.IsTrue(Matrix22F.AreNumericallyEqual(Matrix22F.Identity, m * im));
     }
 
@@ -431,8 +432,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetColumn()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      Assert.AreEqual(new Vector2F(1.0f, 3.0f), m.GetColumn(0));
-      Assert.AreEqual(new Vector2F(2.0f, 4.0f), m.GetColumn(1));
+      Assert.AreEqual(new Vector2(1.0f, 3.0f), m.GetColumn(0));
+      Assert.AreEqual(new Vector2(2.0f, 4.0f), m.GetColumn(1));
     }
 
 
@@ -458,13 +459,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumn()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(0, new Vector2F(0.1f, 0.2f));
-      Assert.AreEqual(new Vector2F(0.1f, 0.2f), m.GetColumn(0));
-      Assert.AreEqual(new Vector2F(2.0f, 4.0f), m.GetColumn(1));
+      m.SetColumn(0, new Vector2(0.1f, 0.2f));
+      Assert.AreEqual(new Vector2(0.1f, 0.2f), m.GetColumn(0));
+      Assert.AreEqual(new Vector2(2.0f, 4.0f), m.GetColumn(1));
 
-      m.SetColumn(1, new Vector2F(0.4f, 0.5f));
-      Assert.AreEqual(new Vector2F(0.1f, 0.2f), m.GetColumn(0));
-      Assert.AreEqual(new Vector2F(0.4f, 0.5f), m.GetColumn(1));
+      m.SetColumn(1, new Vector2(0.4f, 0.5f));
+      Assert.AreEqual(new Vector2(0.1f, 0.2f), m.GetColumn(0));
+      Assert.AreEqual(new Vector2(0.4f, 0.5f), m.GetColumn(1));
     }
 
 
@@ -473,7 +474,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException1()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(-1, Vector2F.One);
+      m.SetColumn(-1, Vector2.One);
     }
 
 
@@ -482,7 +483,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException2()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(2, Vector2F.One);
+      m.SetColumn(2, Vector2.One);
     }
 
 
@@ -490,8 +491,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetRow()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      Assert.AreEqual(new Vector2F(1.0f, 2.0f), m.GetRow(0));
-      Assert.AreEqual(new Vector2F(3.0f, 4.0f), m.GetRow(1));
+      Assert.AreEqual(new Vector2(1.0f, 2.0f), m.GetRow(0));
+      Assert.AreEqual(new Vector2(3.0f, 4.0f), m.GetRow(1));
     }
 
 
@@ -517,13 +518,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRow()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(0, new Vector2F(0.1f, 0.2f));
-      Assert.AreEqual(new Vector2F(0.1f, 0.2f), m.GetRow(0));
-      Assert.AreEqual(new Vector2F(3.0f, 4.0f), m.GetRow(1));
+      m.SetRow(0, new Vector2(0.1f, 0.2f));
+      Assert.AreEqual(new Vector2(0.1f, 0.2f), m.GetRow(0));
+      Assert.AreEqual(new Vector2(3.0f, 4.0f), m.GetRow(1));
 
-      m.SetRow(1, new Vector2F(0.4f, 0.5f));
-      Assert.AreEqual(new Vector2F(0.1f, 0.2f), m.GetRow(0));
-      Assert.AreEqual(new Vector2F(0.4f, 0.5f), m.GetRow(1));
+      m.SetRow(1, new Vector2(0.4f, 0.5f));
+      Assert.AreEqual(new Vector2(0.1f, 0.2f), m.GetRow(0));
+      Assert.AreEqual(new Vector2(0.4f, 0.5f), m.GetRow(1));
     }
 
 
@@ -532,7 +533,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException1()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(-1, Vector2F.One);
+      m.SetRow(-1, Vector2.One);
     }
 
 
@@ -541,7 +542,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException2()
     {
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(2, Vector2F.One);
+      m.SetRow(2, Vector2.One);
     }
 
 
@@ -587,16 +588,16 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix22F i = Matrix22F.CreateScale(1.0f);
       Assert.AreEqual(Matrix22F.Identity, i);
 
-      Vector2F v = Vector2F.One;
+      Vector2 v = Vector2.One;
       Matrix22F m = Matrix22F.CreateScale(2.0f);
       Assert.AreEqual(2 * v, m * v);
 
       m = Matrix22F.CreateScale(-1.0f, 1.5f);
-      Assert.AreEqual(new Vector2F(-1.0f, 1.5f), m * v);
+      Assert.AreEqual(new Vector2(-1.0f, 1.5f), m * v);
 
-      Vector2F scale = new Vector2F(-2.0f, -3.0f);
+      Vector2 scale = new Vector2(-2.0f, -3.0f);
       m = Matrix22F.CreateScale(scale);
-      v = new Vector2F(1.0f, 2.0f);
+      v = new Vector2(1.0f, 2.0f);
       Assert.AreEqual(v * scale, m * v);
     }
 
@@ -608,7 +609,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix22F.Identity, m);
 
       m = Matrix22F.CreateRotation((float) Math.PI / 2);
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(Vector2F.UnitY, m * Vector2F.UnitX));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector2.UnitY, m * Vector2.UnitX));
     }
 
 
@@ -617,7 +618,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float) MathHelper.ToRadians(30);
       Matrix22F m = Matrix22F.CreateRotation(angle);
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(new Vector2F((float) Math.Cos(angle), (float) Math.Sin(angle)), m * Vector2F.UnitX));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2((float) Math.Cos(angle), (float) Math.Sin(angle)), m * Vector2.UnitX));
     }
 
 
@@ -799,7 +800,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix22F result = m1 * m2;
       for (int column = 0; column < 2; column++)
         for (int row = 0; row < 2; row++)
-          Assert.AreEqual(Vector2F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector2.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
@@ -819,37 +820,37 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix22F result = Matrix22F.Multiply(m1, m2);
       for (int column = 0; column < 2; column++)
         for (int row = 0; row < 2; row++)
-          Assert.AreEqual(Vector2F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector2.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
     [Test]
     public void MultiplyVectorOperator()
     {
-      Vector2F v = new Vector2F(2.34f, 3.45f);
+      Vector2 v = new Vector2(2.34f, 3.45f);
       Assert.AreEqual(v, Matrix22F.Identity * v);
-      Assert.AreEqual(Vector2F.Zero, Matrix22F.Zero * v);
+      Assert.AreEqual(Vector2.Zero, Matrix22F.Zero * v);
 
       Matrix22F m = new Matrix22F(12, 23, 45, 67);
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(v, m * m.Inverse * v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m * m.Inverse * v));
 
       for (int i = 0; i < 2; i++)
-        Assert.AreEqual(Vector2F.Dot(m.GetRow(i), v), (m * v)[i]);
+        Assert.AreEqual(Vector2.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
     }
 
 
     [Test]
     public void MultiplyVector()
     {
-      Vector2F v = new Vector2F(2.34f, 3.45f);
+      Vector2 v = new Vector2(2.34f, 3.45f);
       Assert.AreEqual(v, Matrix22F.Multiply(Matrix22F.Identity, v));
-      Assert.AreEqual(Vector2F.Zero, Matrix22F.Multiply(Matrix22F.Zero, v));
+      Assert.AreEqual(Vector2.Zero, Matrix22F.Multiply(Matrix22F.Zero, v));
 
       Matrix22F m = new Matrix22F(12, 23, 45, 67);
-      Assert.IsTrue(Vector2F.AreNumericallyEqual(v, Matrix22F.Multiply(m * m.Inverse, v)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, Matrix22F.Multiply(m * m.Inverse, v)));
 
       for (int i = 0; i < 2; i++)
-        Assert.AreEqual(Vector2F.Dot(m.GetRow(i), v), Matrix22F.Multiply(m, v)[i]);
+        Assert.AreEqual(Vector2.Dot(m.GetRow(i), v), Matrix22F.Multiply(m, v).GetComponentByIndex(i));
     }
 
 

@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -25,8 +26,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(10, new RectangleShape(10, 11).WidthX);
       Assert.AreEqual(11, new RectangleShape(10, 11).WidthY);
 
-      Assert.AreEqual(10, new RectangleShape(new Vector2F(10, 11)).WidthX);
-      Assert.AreEqual(11, new RectangleShape(new Vector2F(10, 11)).WidthY);
+      Assert.AreEqual(10, new RectangleShape(new Vector2(10, 11)).WidthX);
+      Assert.AreEqual(11, new RectangleShape(new Vector2(10, 11)).WidthY);
     }
 
 
@@ -93,7 +94,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       RectangleShape r = new RectangleShape();
 
-      r.Extent = new Vector2F(1, 2);
+      r.Extent = new Vector2(1, 2);
       Assert.AreEqual(1, r.WidthX);
       Assert.AreEqual(2, r.WidthY);
     }
@@ -103,7 +104,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void ExtentXException()
     {
       RectangleShape r = new RectangleShape();
-      r.Extent = new Vector2F(-1, 1);
+      r.Extent = new Vector2(-1, 1);
     }
 
 
@@ -112,7 +113,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void ExtentYException()
     {
       RectangleShape r = new RectangleShape();
-      r.Extent = new Vector2F(1, -1);
+      r.Extent = new Vector2(1, -1);
     }
 
 

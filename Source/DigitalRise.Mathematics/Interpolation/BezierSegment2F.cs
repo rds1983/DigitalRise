@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -42,30 +41,30 @@ namespace DigitalRise.Mathematics.Interpolation
   /// <i>cp</i> are the control points.
   /// </para>
   /// </remarks>
-  public class BezierSegment2F : ICurve<float, Vector2F>, IRecyclable
+  public class BezierSegment2F : ICurve<float, Vector2>, IRecyclable
   {
     /// <summary>
     /// Gets or sets the start point.
     /// </summary>
-    public Vector2F Point1 { get; set; }
+    public Vector2 Point1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
-    public Vector2F Point2 { get; set; }
+    public Vector2 Point2 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the first control point.
     /// </summary>
-    public Vector2F ControlPoint1 { get; set; }
+    public Vector2 ControlPoint1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the second control point.
     /// </summary>
-    public Vector2F ControlPoint2 { get; set; }
+    public Vector2 ControlPoint2 { get; set; }
 
 
     /// <summary>
@@ -73,7 +72,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector2F GetPoint(float parameter)
+    public Vector2 GetPoint(float parameter)
     {
       // Polynomial form:
       float u = parameter;
@@ -82,17 +81,17 @@ namespace DigitalRise.Mathematics.Interpolation
       float uNeg = (1 - u);
       float uNeg2 = uNeg * uNeg;
       float uNeg3 = uNeg2 * uNeg;
-      Vector2F result = uNeg3 * Point1 + 3 * u * uNeg2 * ControlPoint1 + 3 * u2 * uNeg * ControlPoint2 + u3 * Point2;
+      Vector2 result = uNeg3 * Point1 + 3 * u * uNeg2 * ControlPoint1 + 3 * u2 * uNeg * ControlPoint2 + u3 * Point2;
       return result;
     }
 
 
     /// <inheritdoc/>
-    public Vector2F GetTangent(float parameter)
+    public Vector2 GetTangent(float parameter)
     {
       float u = parameter;
       float u2 = u * u;
-      Vector2F result = (-3 + 6 * u - 3 * u2) * Point1 + (3 - 12 * u + 9 * u2) * ControlPoint1 + (6 * u - 9 * u2) * ControlPoint2 + 3 * u2 * Point2;
+      Vector2 result = (-3 + 6 * u - 3 * u2) * Point1 + (3 - 12 * u + 9 * u2) * ControlPoint1 + (6 * u - 9 * u2) * ControlPoint2 + 3 * u2 * Point2;
       return result;
     }
 
@@ -100,7 +99,7 @@ namespace DigitalRise.Mathematics.Interpolation
     // Get length using recursive de Casteljau subdivision. - not faster than numerical integration
     internal float GetLengthWithDeCasteljau(int maxNumberOfIterations, float tolerance)
     {
-      float length = (Point2 - ControlPoint2).Length + (ControlPoint2 - ControlPoint1).Length + (ControlPoint1 - Point1).Length;
+      float length = (Point2 - ControlPoint2).Length() + (ControlPoint2 - ControlPoint1).Length() + (ControlPoint1 - Point1).Length();
 
       return GetDeCasteljauLength(Point1, ControlPoint1, ControlPoint2, Point2, length, 0, maxNumberOfIterations, tolerance);
     }
@@ -108,20 +107,20 @@ namespace DigitalRise.Mathematics.Interpolation
 
     // length contains the approximated length for this spline. We subdivide and compare the length.
     // If there is room for improvement, we subdivide further.
-    private static float GetDeCasteljauLength(Vector2F point1, Vector2F controlPoint1, Vector2F controlPoint2, Vector2F point2, float length, int iteration, int maxNumberOfIterations, float tolerance)
+    private static float GetDeCasteljauLength(Vector2 point1, Vector2 controlPoint1, Vector2 controlPoint2, Vector2 point2, float length, int iteration, int maxNumberOfIterations, float tolerance)
     {
       iteration++;
 
       // Compute more precise length by subdividing spline into two splines and comparing with length.
-      Vector2F a = (point1 + controlPoint1) / 2;
-      Vector2F b = (controlPoint1 + controlPoint2) / 2;
-      Vector2F c = (controlPoint2 + point2) / 2;
-      Vector2F d = (a + b) / 2;
-      Vector2F e = (b + c) / 2;
-      Vector2F f = (d + e) / 2;
+      Vector2 a = (point1 + controlPoint1) / 2;
+      Vector2 b = (controlPoint1 + controlPoint2) / 2;
+      Vector2 c = (controlPoint2 + point2) / 2;
+      Vector2 d = (a + b) / 2;
+      Vector2 e = (b + c) / 2;
+      Vector2 f = (d + e) / 2;
 
-      float length1 = (point1 - a).Length + (a - d).Length + (d - f).Length;
-      float length2 = (f - e).Length + (e - c).Length + (c - point2).Length;
+      float length1 = (point1 - a).Length() + (a - d).Length() + (d - f).Length();
+      float length2 = (f - e).Length() + (e - c).Length() + (c - point2).Length();
       float sum = length1 + length2;
       if (iteration >= maxNumberOfIterations || Numeric.AreEqual(sum, length, tolerance))
         return sum; // Max iterations reached or length is precise enough.
@@ -141,7 +140,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public void Flatten(ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       CurveHelper.Flatten(this, points, maxNumberOfIterations, tolerance);
     }
@@ -185,10 +184,10 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector2F();
-      Point2 = new Vector2F();
-      ControlPoint1 = new Vector2F();
-      ControlPoint2 = new Vector2F();
+      Point1 = new Vector2();
+      Point2 = new Vector2();
+      ControlPoint1 = new Vector2();
+      ControlPoint2 = new Vector2();
 
       Pool.Recycle(this);
     }

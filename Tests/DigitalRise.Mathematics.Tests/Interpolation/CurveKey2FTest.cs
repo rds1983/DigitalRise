@@ -1,7 +1,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -16,9 +16,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       CurveKey2F curveKey = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Bezier,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
 
       Assert.AreEqual(1.2f, curveKey.Parameter);
@@ -26,7 +26,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       curveKey.Parameter = 0.2f;
       Assert.AreEqual(0.2f, curveKey.Point.X);
 
-      curveKey.Point = new Vector2F(1, 2);
+      curveKey.Point = new Vector2(1, 2);
       Assert.AreEqual(1, curveKey.Parameter);
       Assert.AreEqual(1, curveKey.Point.X);
       Assert.AreEqual(2, curveKey.Point.Y);
@@ -39,9 +39,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       CurveKey2F curveKey1 = new CurveKey2F
       {
        Interpolation = SplineInterpolation.Bezier,
-       Point = new Vector2F(1.2f, 3.4f),
-       TangentIn = new Vector2F(0.7f, 2.6f),
-       TangentOut = new Vector2F(1.9f, 3.3f)
+       Point = new Vector2(1.2f, 3.4f),
+       TangentIn = new Vector2(0.7f, 2.6f),
+       TangentOut = new Vector2(1.9f, 3.3f)
       };
       CurveKey2F curveKey2;
 
@@ -69,9 +69,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       CurveKey2F curveKey1 = new CurveKey2F
       {
         Interpolation = SplineInterpolation.Bezier,
-        Point = new Vector2F(1.2f, 3.4f),
-        TangentIn = new Vector2F(0.7f, 2.6f),
-        TangentOut = new Vector2F(1.9f, 3.3f)
+        Point = new Vector2(1.2f, 3.4f),
+        TangentIn = new Vector2(0.7f, 2.6f),
+        TangentOut = new Vector2(1.9f, 3.3f)
       };
       CurveKey2F curveKey2;
 

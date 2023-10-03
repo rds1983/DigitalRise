@@ -627,7 +627,7 @@ namespace DigitalRise.Animation
         Animation.GetValue(clipEnd, ref defaultSource, ref defaultTarget, ref endValue);
         
         if (IsClipReversed)
-          MathHelper.Swap(ref startValue, ref endValue);
+          Mathematics.MathHelper.Swap(ref startValue, ref endValue);
 
         AnimationHelper.GetCycleOffset(time, clipStart, clipEnd, ref startValue, ref endValue, traits, LoopBehavior, ref cycleOffset);
         traits.Add(ref value, ref cycleOffset, ref result);

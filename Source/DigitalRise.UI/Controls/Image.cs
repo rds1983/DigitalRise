@@ -158,12 +158,12 @@ namespace DigitalRise.UI.Controls
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    protected override Vector2F OnMeasure(Vector2F availableSize)
+    protected override Vector2 OnMeasure(Vector2 availableSize)
     {
       // If nothing else is set, the desired size is determined by the SourceRectangle or 
       // the whole texture.
 
-      Vector2F result = base.OnMeasure(availableSize);
+      Vector2 result = base.OnMeasure(availableSize);
 
       if (Texture == null)
         return result;
@@ -171,7 +171,7 @@ namespace DigitalRise.UI.Controls
       float width = Width;
       float height = Height;
       Vector4F padding = Padding;
-      Vector2F desiredSize = Vector2F.Zero;
+      Vector2 desiredSize = Vector2.Zero;
 
       if (Numeric.IsPositiveFinite(width))
       {

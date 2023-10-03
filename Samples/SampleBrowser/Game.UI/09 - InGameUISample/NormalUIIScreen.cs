@@ -1,8 +1,7 @@
 ﻿using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -47,7 +46,7 @@ namespace Samples.Game.UI
 
       // The window is resizable. Limit the max size.
       // Measure() computes the DesiredWidth and DesiredHeight.
-      _window.Measure(new Vector2F(float.PositiveInfinity));
+      _window.Measure(new Vector2(float.PositiveInfinity));
       _window.MaxWidth = _window.DesiredWidth;
       _window.MaxHeight = _window.DesiredHeight;
     }

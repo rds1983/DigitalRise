@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Swap objects if necessary.
       bool swapped = !(objectB.GeometricObject.Shape is TransformedShape);
       if (swapped)
-        MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
 
       IGeometricObject geometricObjectB = objectB.GeometricObject;
       TransformedShape transformedShape = geometricObjectB.Shape as TransformedShape;
@@ -184,8 +184,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       bool swapped = !(objectB.GeometricObject.Shape is TransformedShape);
       if (swapped)
       {
-        MathHelper.Swap(ref objectA, ref objectB);
-        MathHelper.Swap(ref targetPoseA, ref targetPoseB);
+        Mathematics.MathHelper.Swap(ref objectA, ref objectB);
+        Mathematics.MathHelper.Swap(ref targetPoseA, ref targetPoseB);
       }
 
       IGeometricObject geometricObjectB = objectB.GeometricObject;

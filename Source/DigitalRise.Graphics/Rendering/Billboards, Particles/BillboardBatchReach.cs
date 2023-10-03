@@ -203,19 +203,19 @@ namespace DigitalRise.Graphics.Rendering
 
       #region ----- Handle texture information and size -----
 
-      Vector2F texCoordTopLeft = texture.GetTextureCoordinates(Vector2F.Zero, b.AnimationTime);
-      Vector2F texCoordBottomRight = texture.GetTextureCoordinates(Vector2F.One, b.AnimationTime);
+      Vector2 texCoordTopLeft = texture.GetTextureCoordinates(Vector2.Zero, b.AnimationTime);
+      Vector2 texCoordBottomRight = texture.GetTextureCoordinates(Vector2.One, b.AnimationTime);
 
       // Handle mirroring.
       if (b.Size.X < 0)
       {
         b.Size.X = -b.Size.X;
-        MathHelper.Swap(ref texCoordTopLeft.X, ref texCoordBottomRight.X);
+        Mathematics.MathHelper.Swap(ref texCoordTopLeft.X, ref texCoordBottomRight.X);
       }
       if (b.Size.Y < 0)
       {
         b.Size.Y = -b.Size.Y;
-        MathHelper.Swap(ref texCoordTopLeft.Y, ref texCoordBottomRight.Y);
+        Mathematics.MathHelper.Swap(ref texCoordTopLeft.Y, ref texCoordBottomRight.Y);
       }
 
       b.Size.X /= 2.0f;
@@ -302,8 +302,8 @@ namespace DigitalRise.Graphics.Rendering
       #region ----- Handle texture information and size -----
 
       float animationTime = p0.AnimationTime;
-      Vector2F texCoordTopLeft = texture.GetTextureCoordinates(new Vector2F(p0.TextureCoordinateU, 0), animationTime);
-      Vector2F texCoordBottomRight = texture.GetTextureCoordinates(new Vector2F(p1.TextureCoordinateU, 1), animationTime);
+      Vector2 texCoordTopLeft = texture.GetTextureCoordinates(new Vector2(p0.TextureCoordinateU, 0), animationTime);
+      Vector2 texCoordBottomRight = texture.GetTextureCoordinates(new Vector2(p1.TextureCoordinateU, 1), animationTime);
 
       // Negative sizes (mirroring) is not supported because this conflicts with the
       // texture tiling on ribbons.

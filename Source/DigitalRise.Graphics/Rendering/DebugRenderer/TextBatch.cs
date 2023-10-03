@@ -40,14 +40,14 @@ namespace DigitalRise.Graphics.Rendering
       public object Text;
 
       /// <summary>The position in screen space.</summary>
-      public Vector2F Position;
+      public Vector2 Position;
 
       /// <summary>
       /// The relative origin of the text. (0, 0) means that the upper-left corner of the text is at
       /// <see cref="Position"/>; (1, 1) means that the lower-right corner of the text is at 
       /// <see cref="Position"/>. Use (0.5, 0.5) to center the text.
       /// </summary>
-      public Vector2F RelativeOrigin;
+      public Vector2 RelativeOrigin;
 
       /// <summary>The color.</summary>
       public Color Color;
@@ -75,7 +75,7 @@ namespace DigitalRise.Graphics.Rendering
       /// <see cref="Position"/>; (1, 1) means that the lower-right corner of the text is at 
       /// <see cref="Position"/>. Use (0.5, 0.5) to center the text.
       /// </summary>
-      public Vector2F RelativeOrigin;
+      public Vector2 RelativeOrigin;
 
       /// <summary>The color.</summary>
       public Color Color;
@@ -180,7 +180,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(string text, Vector2F position, Vector2F relativeOrigin, Color color)
+    public void Add(string text, Vector2 position, Vector2 relativeOrigin, Color color)
     {
       if (string.IsNullOrEmpty(text))
         return;
@@ -188,7 +188,7 @@ namespace DigitalRise.Graphics.Rendering
       _texts2D.Add(new TextInfo2D
       {
         Text = text,
-        Position = new Vector2F(position.X, position.Y),
+        Position = new Vector2(position.X, position.Y),
         RelativeOrigin = relativeOrigin,
         Color = color
       });
@@ -206,7 +206,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(StringBuilder text, Vector2F position, Vector2F relativeOrigin, Color color)
+    public void Add(StringBuilder text, Vector2 position, Vector2 relativeOrigin, Color color)
     {
       if (text == null)
         return;
@@ -214,7 +214,7 @@ namespace DigitalRise.Graphics.Rendering
       _texts2D.Add(new TextInfo2D
       {
         Text = text,
-        Position = new Vector2F(position.X, position.Y),
+        Position = new Vector2(position.X, position.Y),
         RelativeOrigin = relativeOrigin,
         Color = color
       });
@@ -232,7 +232,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(string text, Vector3F position, Vector2F relativeOrigin, Color color)
+    public void Add(string text, Vector3F position, Vector2 relativeOrigin, Color color)
     {
       if (string.IsNullOrEmpty(text))
         return;
@@ -258,7 +258,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(StringBuilder text, Vector3F position, Vector2F relativeOrigin, Color color)
+    public void Add(StringBuilder text, Vector3F position, Vector2 relativeOrigin, Color color)
     {
       if (text == null)
         return;
@@ -376,9 +376,9 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private Vector2 GetOrigin(string text, Vector2F relativeOrigin)
+    private Vector2 GetOrigin(string text, Vector2 relativeOrigin)
     {
-      if (relativeOrigin == Vector2F.Zero)
+      if (relativeOrigin == Vector2.Zero)
         return new Vector2();
 
       Vector2 origin = SpriteFont.MeasureString(text);
@@ -393,9 +393,9 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private Vector2 GetOrigin(StringBuilder text, Vector2F relativeOrigin)
+    private Vector2 GetOrigin(StringBuilder text, Vector2 relativeOrigin)
     {
-      if (relativeOrigin == Vector2F.Zero)
+      if (relativeOrigin == Vector2.Zero)
         return new Vector2();
 
       Vector2 origin = SpriteFont.MeasureString(text);

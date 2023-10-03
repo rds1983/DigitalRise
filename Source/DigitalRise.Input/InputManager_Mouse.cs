@@ -5,7 +5,8 @@
 using System;
 using Microsoft.Xna.Framework.Input;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using DigitalRise.Mathematics;
 
 namespace DigitalRise.Input
 {
@@ -66,34 +67,34 @@ namespace DigitalRise.Input
 
 
     /// <inheritdoc/>
-    public Vector2F MousePositionRaw
+    public Vector2 MousePositionRaw
     {
       get
       {
-        return new Vector2F(_newMouseState.X, _newMouseState.Y);
+        return new Vector2(_newMouseState.X, _newMouseState.Y);
       }
     }
 
 
     /// <inheritdoc/>
-    public Vector2F MousePositionDeltaRaw
+    public Vector2 MousePositionDeltaRaw
     {
       get
       {
         if (!EnableMouseCentering)
-          return new Vector2F(_newMouseState.X - _previousMouseState.X, _newMouseState.Y - _previousMouseState.Y);
+          return new Vector2(_newMouseState.X - _previousMouseState.X, _newMouseState.Y - _previousMouseState.Y);
 
-        return new Vector2F(_newMouseState.X - Settings.MouseCenter.X, _newMouseState.Y - Settings.MouseCenter.Y);
+        return new Vector2(_newMouseState.X - Settings.MouseCenter.X, _newMouseState.Y - Settings.MouseCenter.Y);
       }
     }
 
 
     /// <inheritdoc/>
-    public Vector2F MousePosition { get; set; }
+    public Vector2 MousePosition { get; set; }
 
 
     /// <inheritdoc/>
-    public Vector2F MousePositionDelta { get; set; }
+    public Vector2 MousePositionDelta { get; set; }
 
 
     /// <inheritdoc/>
@@ -167,7 +168,7 @@ namespace DigitalRise.Input
         // Check for double-click.
         if (pressedMouseButton == _lastMouseButton.Button
             && _lastMouseButton.TimeSinceLastClick < Settings.DoubleClickTime - deltaTime
-            && Vector2F.Absolute(_lastMouseButton.MouseClickPosition - MousePosition) < Settings.DoubleClickSize)
+            && Mathematics.MathHelper.Absolute(_lastMouseButton.MouseClickPosition - MousePosition).IsLessThen(Settings.DoubleClickSize))
         {
           // Double-click detected.
           _lastMouseButton.IsDoubleClick = true;

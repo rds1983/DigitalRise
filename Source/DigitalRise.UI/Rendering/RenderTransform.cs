@@ -51,7 +51,7 @@ namespace DigitalRise.UI.Rendering
     /// <summary>
     /// The identity transform.
     /// </summary>
-    public static readonly RenderTransform Identity = new RenderTransform(Vector2F.Zero, Vector2F.One, 0, Vector2F.Zero);
+    public static readonly RenderTransform Identity = new RenderTransform(Vector2.Zero, Vector2.One, 0, Vector2.Zero);
     #endregion
 
 
@@ -63,7 +63,7 @@ namespace DigitalRise.UI.Rendering
     /// The origin of the render transformations in screen coordinates.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector2F Origin;
+    public Vector2 Origin;
 
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace DigitalRise.UI.Rendering
     /// class description of <see cref="RenderTransform"/>.)
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector2F Scale;
+    public Vector2 Scale;
 
 
     /// <summary>
@@ -88,7 +88,7 @@ namespace DigitalRise.UI.Rendering
     /// The translation.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector2F Translation;
+    public Vector2 Translation;
     #endregion
 
 
@@ -115,7 +115,7 @@ namespace DigitalRise.UI.Rendering
     /// <param name="scale">The scale factors.</param>
     /// <param name="rotation">The rotation angle in radians.</param>
     /// <param name="translation">The translation vector.</param>
-    public RenderTransform(Vector2F origin, Vector2F scale, float rotation, Vector2F translation)
+    public RenderTransform(Vector2 origin, Vector2 scale, float rotation, Vector2 translation)
     {
       Origin = origin;
       Scale = scale;
@@ -139,7 +139,7 @@ namespace DigitalRise.UI.Rendering
     /// <param name="scale">The scale factors.</param>
     /// <param name="rotation">The rotation angle in radians.</param>
     /// <param name="translation">The translation vector.</param>
-    public RenderTransform(Vector2F position, float width, float height, Vector2F relativeOrigin, Vector2F scale, float rotation, Vector2F translation)
+    public RenderTransform(Vector2 position, float width, float height, Vector2 relativeOrigin, Vector2 scale, float rotation, Vector2 translation)
     {
       Origin.X = position.X + width * relativeOrigin.X;
       Origin.Y = position.Y + height * relativeOrigin.Y;
@@ -247,7 +247,7 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     /// <param name="position">The position in screen coordinates.</param>
     /// <returns>The transformed position in screen coordinates.</returns>
-    public Vector2F ToRenderPosition(Vector2F position)
+    public Vector2 ToRenderPosition(Vector2 position)
     {
       // Given: 
       //   p .... point in screen space
@@ -270,7 +270,7 @@ namespace DigitalRise.UI.Rendering
       // ----- Alternatively, using a 3x3 matrix:
       //Vector3F p = new Vector3F(point.X, point.Y, 1);
       //p = ToMatrix33F() * p;
-      //return new Vector2F(p.X, p.Y);
+      //return new Vector2(p.X, p.Y);
     }
 
 
@@ -279,14 +279,14 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     /// <param name="position">The transformed position in screen coordinates.</param>
     /// <returns>The position in screen coordinates.</returns>
-    public Vector2F FromRenderPosition(Vector2F position)
+    public Vector2 FromRenderPosition(Vector2 position)
     {
       if (Numeric.IsZero(Scale.X) || Numeric.IsZero(Scale.Y))
-        return new Vector2F(float.NaN);
+        return new Vector2(float.NaN);
 
       Vector3F p = new Vector3F(position.X, position.Y, 1);
       p = ToMatrix33F().Inverse * p;
-      return new Vector2F(p.X, p.Y);
+      return new Vector2(p.X, p.Y);
     }
 
 
@@ -295,7 +295,7 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     /// <param name="direction">The direction.</param>
     /// <returns>The transformed direction.</returns>
-    public Vector2F ToRenderDirection(Vector2F direction)
+    public Vector2 ToRenderDirection(Vector2 direction)
     {
       direction *= Scale;
       direction = Matrix22F.CreateRotation(Rotation) * direction;
@@ -308,10 +308,10 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     /// <param name="direction">The transformed direction.</param>
     /// <returns>The direction.</returns>
-    public Vector2F FromRenderDirection(Vector2F direction)
+    public Vector2 FromRenderDirection(Vector2 direction)
     {
       if (Numeric.IsZero(Scale.X) || Numeric.IsZero(Scale.Y))
-        return new Vector2F(float.NaN);
+        return new Vector2(float.NaN);
 
       return ToMatrix22F().Inverse * direction;
     }
@@ -324,8 +324,8 @@ namespace DigitalRise.UI.Rendering
     /// <returns>The transformed rectangle.</returns>
     public RectangleF Transform(RectangleF rectangle)
     {
-      Vector2F location = rectangle.Location;
-      Vector2F size = rectangle.Size;
+      Vector2 location = rectangle.Location;
+      Vector2 size = rectangle.Size;
       location = ToRenderPosition(location);
       size = ToRenderDirection(size);
       return new RectangleF(location.X, location.Y, size.X, size.Y + 0.5f);
@@ -496,9 +496,9 @@ namespace DigitalRise.UI.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="spriteBatch"/> or <paramref name="texture"/> is <see langword="null"/>.
     /// </exception>
-    public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2F position, Color color)
+    public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2 position, Color color)
     {
-      InternalDraw(spriteBatch, texture, position, Vector2F.One, null, color);
+      InternalDraw(spriteBatch, texture, position, Vector2.One, null, color);
     }
 
 
@@ -519,9 +519,9 @@ namespace DigitalRise.UI.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="spriteBatch"/> or <paramref name="texture"/> is <see langword="null"/>.
     /// </exception>
-    public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2F position, Rectangle? sourceRectangle, Color color)
+    public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2 position, Rectangle? sourceRectangle, Color color)
     {
-      InternalDraw(spriteBatch, texture, position, Vector2F.One, sourceRectangle, color);
+      InternalDraw(spriteBatch, texture, position, Vector2.One, sourceRectangle, color);
     }
 
 
@@ -554,14 +554,14 @@ namespace DigitalRise.UI.Rendering
 
       Rectangle sourceRect = sourceRectangle ?? new Rectangle(0, 0, texture.Width, texture.Height);
 
-      Vector2F scale = new Vector2F(destinationRectangle.Width / sourceRect.Width,
+      Vector2 scale = new Vector2(destinationRectangle.Width / sourceRect.Width,
                                     destinationRectangle.Height / sourceRect.Height);
 
       InternalDraw(spriteBatch, texture, destinationRectangle.Location, scale, sourceRectangle, color);
     }
 
 
-    private void InternalDraw(SpriteBatch spriteBatch, Texture2D texture, Vector2F position, Vector2F scale, Rectangle? sourceRectangle, Color color)
+    private void InternalDraw(SpriteBatch spriteBatch, Texture2D texture, Vector2 position, Vector2 scale, Rectangle? sourceRectangle, Color color)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -569,9 +569,9 @@ namespace DigitalRise.UI.Rendering
         throw new ArgumentNullException("texture");
 
       // The size of the sprite in texels.
-      Vector2F spriteExtent = sourceRectangle.HasValue
-                         ? new Vector2F(sourceRectangle.Value.Width, sourceRectangle.Value.Height)
-                         : new Vector2F(texture.Width, texture.Height);
+      Vector2 spriteExtent = sourceRectangle.HasValue
+                         ? new Vector2(sourceRectangle.Value.Width, sourceRectangle.Value.Height)
+                         : new Vector2(texture.Width, texture.Height);
 
       if (Numeric.IsZero(spriteExtent.X) || Numeric.IsZero(spriteExtent.Y) || Numeric.IsZero(Scale.X) || Numeric.IsZero(Scale.Y))
         return;
@@ -581,18 +581,18 @@ namespace DigitalRise.UI.Rendering
       // the SpriteBatch the origin needs to be given in the local space of the sprite.
 
       // The final size of the sprite when drawn on screen (without render transform).
-      Vector2F screenExtent = spriteExtent * scale;
+      Vector2 screenExtent = spriteExtent * scale;
 
       // The vector that points from the upper, left corner to the transform origin in screen 
       // coordinates (without render transform).
-      Vector2F relativeOrigin = Origin - position;
+      Vector2 relativeOrigin = Origin - position;
 
       // Normalize this vector such that (0,0) is the upper, left corner and (1,1) the 
       // lower, right corner of the sprite.
-      Vector2F normalizedOrigin = relativeOrigin / screenExtent;
+      Vector2 normalizedOrigin = relativeOrigin / screenExtent;
 
       // Now we can compute the transform origin in the local space of the sprite.
-      Vector2F spriteOrigin = normalizedOrigin * spriteExtent;
+      Vector2 spriteOrigin = normalizedOrigin * spriteExtent;
 
       // ----- Adjust sprite batch parameters.
       // Now we need to prepare the parameters for the SpriteBatch.Draw-call and apply the 
@@ -642,7 +642,7 @@ namespace DigitalRise.UI.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="spriteBatch"/> or <paramref name="spriteFont"/> is <see langword="null"/>.
     /// </exception>
-    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, string text, Vector2F position, Color color)
+    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, string text, Vector2 position, Color color)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -651,7 +651,7 @@ namespace DigitalRise.UI.Rendering
         return;
 
       // Adjust parameters for sprite batch.
-      Vector2F origin = Origin - position;
+      Vector2 origin = Origin - position;
       position = position + origin + Translation;
 
       if (this == Identity)
@@ -678,7 +678,7 @@ namespace DigitalRise.UI.Rendering
     /// The color to tint a sprite. Use white for full color with no tinting.
     /// </param>
     public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, StringBuilder text,
-                           Vector2F position, Color color)
+                           Vector2 position, Color color)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -687,7 +687,7 @@ namespace DigitalRise.UI.Rendering
         return;
 
       // Adjust parameters for sprite batch.
-      Vector2F origin = Origin - position;
+      Vector2 origin = Origin - position;
       position = position + origin + Translation;
 
       if (this == Identity)

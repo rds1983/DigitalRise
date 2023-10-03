@@ -7,6 +7,7 @@ using DigitalRise.Graphics.Rendering;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -392,7 +393,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The texture coordinates of the cloud texture. (The result is undefined if 
     /// <paramref name="direction"/> does not point towards the sky.)
     /// </returns>
-    public Vector2F GetTextureCoordinates(Vector3F direction)
+    public Vector2 GetTextureCoordinates(Vector3F direction)
     {
       float x = direction.X;
       float y = direction.Y + HorizonBias;
@@ -402,14 +403,14 @@ namespace DigitalRise.Graphics.SceneGraph
       // fPlane(x) = x / y creates texture coordinates for a plane (= a lot of foreshortening).
       // fSphere(x) = x / (2 + 2 * y) creates texture coordinates for a paraboloid mapping (= almost no foreshortening). 
       // fPlane(x) = x / (4 * y) is similar to fSphere(x) = x / (2 + 2 * y) for y near 1.
-      Vector2F texCoord = InterpolationHelper.Lerp(
-        new Vector2F(x / (4 * y), z / (4 * y)),
-        new Vector2F(x / (2 + 2 * y), z / (2 + 2 * y)),
+      Vector2 texCoord = InterpolationHelper.Lerp(
+        new Vector2(x / (4 * y), z / (4 * y)),
+        new Vector2(x / (2 + 2 * y), z / (2 + 2 * y)),
         SkyCurvature);
 
       Vector3F texCoord3F = new Vector3F(texCoord.X, texCoord.Y, 1);
       texCoord3F = TextureMatrix * texCoord3F;
-      return new Vector2F(texCoord3F.X + 0.5f, texCoord3F.Y + 0.5f);
+      return new Vector2(texCoord3F.X + 0.5f, texCoord3F.Y + 0.5f);
     }
 
 
@@ -421,7 +422,7 @@ namespace DigitalRise.Graphics.SceneGraph
       if (OcclusionQuery != null && OcclusionQuery.IsComplete)
       {
         IsQueryPending = false;
-        SunOcclusion = 1 - MathHelper.Clamp(OcclusionQuery.PixelCount / QuerySize, 0, 1);
+        SunOcclusion = 1 - Mathematics.MathHelper.Clamp(OcclusionQuery.PixelCount / QuerySize, 0, 1);
       }
     }
     #endregion

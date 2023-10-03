@@ -106,13 +106,13 @@ namespace Samples
       {
         SpriteFont = _defaultFont,
         DefaultColor = new Color(0, 0, 0),
-        DefaultTextPosition = new Vector2F(10)
+        DefaultTextPosition = new Vector2(10)
       };
       DebugRenderer = new DebugRenderer(GraphicsService, _defaultFont)
       {
         SpriteFont = _defaultFont,
         DefaultColor = new Color(0, 0, 0),
-        DefaultTextPosition = new Vector2F(10)
+        DefaultTextPosition = new Vector2(10)
       };
 
       Scene = new Scene();

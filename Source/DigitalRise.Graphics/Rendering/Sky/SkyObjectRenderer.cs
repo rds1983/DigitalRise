@@ -180,8 +180,8 @@ namespace DigitalRise.Graphics.Rendering
           float halfWidthY = (float)Math.Tan(node.AngularDiameter.Y / 2);
 
           // Texture coordinates of packed texture.
-          Vector2F texCoordLeftTop = texture.GetTextureCoordinates(new Vector2F(0, 0), 0);
-          Vector2F texCoordRightBottom = texture.GetTextureCoordinates(new Vector2F(1, 1), 0);
+          Vector2 texCoordLeftTop = texture.GetTextureCoordinates(new Vector2(0, 0), 0);
+          Vector2 texCoordRightBottom = texture.GetTextureCoordinates(new Vector2(1, 1), 0);
           float texCoordLeft = texCoordLeftTop.X;
           float texCoordTop = texCoordLeftTop.Y;
           float texCoordRight = texCoordRightBottom.X;
@@ -225,13 +225,13 @@ namespace DigitalRise.Graphics.Rendering
           float halfWidth = Math.Max(halfWidth0, halfWidth1);
 
           _vertices[0].Position = (Vector3)(forward - right * halfWidth - up * halfWidth);
-          _vertices[0].TextureCoordinate = (Vector2)new Vector2F(0, 1);
+          _vertices[0].TextureCoordinate = (Vector2)new Vector2(0, 1);
           _vertices[1].Position = (Vector3)(forward - right * halfWidth + up * halfWidth);
-          _vertices[1].TextureCoordinate = (Vector2)new Vector2F(0, 0);
+          _vertices[1].TextureCoordinate = (Vector2)new Vector2(0, 0);
           _vertices[2].Position = (Vector3)(forward + right * halfWidth - up * halfWidth);
-          _vertices[2].TextureCoordinate = (Vector2)new Vector2F(1, 1);
+          _vertices[2].TextureCoordinate = (Vector2)new Vector2(1, 1);
           _vertices[3].Position = (Vector3)(forward + right * halfWidth + up * halfWidth);
-          _vertices[3].TextureCoordinate = (Vector2)new Vector2F(1, 0);
+          _vertices[3].TextureCoordinate = (Vector2)new Vector2(1, 0);
 
           if (context.IsHdrEnabled())
             _effectPassGlowLinear.Apply();

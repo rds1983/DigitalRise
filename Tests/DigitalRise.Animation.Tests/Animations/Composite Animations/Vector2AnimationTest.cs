@@ -1,19 +1,19 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
 namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
-  public class Vector2FAnimationTest
+  public class Vector2AnimationTest
   {
     [Test]
     public void TraitsTest()
     {
-      var animationEx = new Vector2FAnimation();
-      Assert.AreEqual(Vector2FTraits.Instance, animationEx.Traits);
+      var animationEx = new Vector2Animation();
+      Assert.AreEqual(Vector2Traits.Instance, animationEx.Traits);
     }
 
 
@@ -46,23 +46,23 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new Vector2FAnimation();
+      var animationEx = new Vector2Animation();
       Assert.AreEqual(TimeSpan.FromSeconds(0.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector2FAnimation();
+      animationEx = new Vector2Animation();
       animationEx.X = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector2FAnimation();
+      animationEx = new Vector2Animation();
       animationEx.Y = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector2FAnimation();
+      animationEx = new Vector2Animation();
       animationEx.X = animation;
       animationEx.Y = animation2;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector2FAnimation();
+      animationEx = new Vector2Animation();
       animationEx.X = animation2;
       animationEx.Y = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
@@ -98,15 +98,15 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new Vector2FAnimation
+      var animationEx = new Vector2Animation
       {
         X = animation,
         Y = animation2,
       };
 
 
-      var defaultSource = new Vector2F(1, 2);
-      var defaultTarget = new Vector2F(5, 6);
+      var defaultSource = new Vector2(1, 2);
+      var defaultTarget = new Vector2(5, 6);
 
       var result = animationEx.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget);
       Assert.AreEqual(defaultSource.X, result.X); // animation has not started.

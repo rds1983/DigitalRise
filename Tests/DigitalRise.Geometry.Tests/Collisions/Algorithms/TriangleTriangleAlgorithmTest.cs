@@ -935,7 +935,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           tA[2] = oldA[0];
         }
 
-        MathHelper.Swap(ref tA, ref tB);
+        Mathematics.MathHelper.Swap(ref tA, ref tB);
       }
     }
     #endregion
@@ -977,7 +977,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           tA[2] = oldA[0];
         }
 
-        MathHelper.Swap(ref tA, ref tB);
+        Mathematics.MathHelper.Swap(ref tA, ref tB);
       }
     }
 
@@ -1018,7 +1018,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           tA[2] = oldA[0];
         }
 
-        MathHelper.Swap(ref tA, ref tB);
+        Mathematics.MathHelper.Swap(ref tA, ref tB);
       }
     }
 
@@ -1065,15 +1065,15 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
               tA[2] = oldA[0];
             }
 
-            MathHelper.Swap(ref tA, ref tB);
+            Mathematics.MathHelper.Swap(ref tA, ref tB);
           }
 
           // Change winding order.
-          MathHelper.Swap(ref tB.Vertex0, ref tB.Vertex1);
+          Mathematics.MathHelper.Swap(ref tB.Vertex0, ref tB.Vertex1);
         }
 
         // Change winding order.
-        MathHelper.Swap(ref tA.Vertex0, ref tA.Vertex1);
+        Mathematics.MathHelper.Swap(ref tA.Vertex0, ref tA.Vertex1);
       }
 
       
@@ -1112,7 +1112,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           tA[2] = oldA[0];
         }
 
-        MathHelper.Swap(ref tA, ref tB);
+        Mathematics.MathHelper.Swap(ref tA, ref tB);
       }
     }
     #endregion

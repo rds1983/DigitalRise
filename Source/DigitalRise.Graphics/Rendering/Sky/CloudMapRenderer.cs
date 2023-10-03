@@ -207,8 +207,8 @@ namespace DigitalRise.Graphics.Rendering
           if (sources[i] == null)
           {
             // Each octave is 128 x 128 (= 1 / 4 of the 512 * 512 noise texture).
-            sources[i] = new PackedTexture(null, _noiseTexture, cloudMap.Random.NextVector2F(0, 1), new Vector2F(0.25f));
-            targets[i] = new PackedTexture(null, _noiseTexture, cloudMap.Random.NextVector2F(0, 1), new Vector2F(0.25f));
+            sources[i] = new PackedTexture(null, _noiseTexture, cloudMap.Random.NextVector2(0, 1), new Vector2(0.25f));
+            targets[i] = new PackedTexture(null, _noiseTexture, cloudMap.Random.NextVector2(0, 1), new Vector2(0.25f));
             renderTargets[i] = new RenderTarget2D(graphicsDevice, 128, 128, false, SurfaceFormat.Alpha8, DepthFormat.None);
           }
 
@@ -222,10 +222,10 @@ namespace DigitalRise.Graphics.Rendering
             animationTimes[i] = animationTimes[i] % 1;
 
             // Swap source and target.
-            MathHelper.Swap(ref sources[i], ref targets[i]);
+            Mathematics.MathHelper.Swap(ref sources[i], ref targets[i]);
 
             // Set target to a new random part of the noise texture.
-            targets[i].Offset = cloudMap.Random.NextVector2F(0, 1);
+            targets[i].Offset = cloudMap.Random.NextVector2(0, 1);
           }
 
           // Lerp source and target together to get the final noise texture.

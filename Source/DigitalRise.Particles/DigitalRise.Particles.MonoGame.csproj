@@ -10,4 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DigitalRise.Geometry\DigitalRise.Geometry.MonoGame.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
+  </ItemGroup>  
 </Project>

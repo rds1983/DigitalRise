@@ -51,14 +51,14 @@ namespace DigitalRise.Graphics.PostProcessing
     /// Gets or sets the offset that is applied to texture lookups in the <see cref="NormalMap"/>.
     /// </summary>
     /// <value>The offset for normal map lookups.</value>
-    public Vector2F Offset { get; set; }
+    public Vector2 Offset { get; set; }
 
 
     /// <summary>
     /// Gets or sets the scale applied to the <see cref="NormalMap"/>.
     /// </summary>
     /// <value>The scale. The default value is (1,1).</value>
-    public Vector2F Scale { get; set; }
+    public Vector2 Scale { get; set; }
 
 
     /// <summary>
@@ -114,7 +114,7 @@ namespace DigitalRise.Graphics.PostProcessing
       _basicPass = _effect.CurrentTechnique.Passes["Basic"];
       _blur4Pass = _effect.CurrentTechnique.Passes["Blur4"];
 
-      Scale = new Vector2F(1);
+      Scale = new Vector2(1);
       Strength = 10;
     }
     #endregion

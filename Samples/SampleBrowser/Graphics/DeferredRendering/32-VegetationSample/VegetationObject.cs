@@ -172,7 +172,7 @@ namespace Samples.Graphics
       // mesh instances can be placed on the cell boundary and when they are animated
       // tree branches can sway outside the cell bounds.
       var meshAabb = _mesh.BoundingShape.GetAabb();
-      float meshWidth = new Vector2F(meshAabb.Extent.X, meshAabb.Extent.Z).Length * 1.5f;
+      float meshWidth = new Vector2(meshAabb.Extent.X, meshAabb.Extent.Z).Length() * 1.5f;
       float meshHeight = meshAabb.Extent.Y * 1.7f;
       var boxShape = new BoxShape(_cellSize + meshWidth, meshHeight, _cellSize + meshWidth);
 

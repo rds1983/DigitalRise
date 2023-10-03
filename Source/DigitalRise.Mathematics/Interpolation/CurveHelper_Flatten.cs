@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -24,7 +24,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <remarks>
     /// This method cannot be used for curves that contain gaps!
     /// </remarks>
-    internal static void Flatten(ICurve<float, Vector2F> curve, ICollection<Vector2F> points, int maxNumberOfIterations, float tolerance)
+    internal static void Flatten(ICurve<float, Vector2> curve, ICollection<Vector2> points, int maxNumberOfIterations, float tolerance)
     {
       if (tolerance <= 0)
         throw new ArgumentOutOfRangeException("tolerance", "The tolerance must be greater than zero.");
@@ -43,14 +43,14 @@ namespace DigitalRise.Mathematics.Interpolation
         return;
       }
 
-      var list = ResourcePools<Vector2F>.Lists.Obtain();
+      var list = ResourcePools<Vector2>.Lists.Obtain();
       
       Flatten(curve, list, 0, 1, curve.GetPoint(0), curve.GetPoint(1),  0, totalLength, 1, maxNumberOfIterations, tolerance);
 
       foreach (var point in list)
         points.Add(point);
 
-      ResourcePools<Vector2F>.Lists.Recycle(list);
+      ResourcePools<Vector2>.Lists.Recycle(list);
     }
 
 
@@ -90,10 +90,10 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    private static void Flatten(ICurve<float, Vector2F> curve, List<Vector2F> points, float p0, float p1, Vector2F point0, Vector2F point1, float length0, float length1, int iteration, int maxNumberOfIterations, float tolerance)
+    private static void Flatten(ICurve<float, Vector2> curve, List<Vector2> points, float p0, float p1, Vector2 point0, Vector2 point1, float length0, float length1, int iteration, int maxNumberOfIterations, float tolerance)
     {
       if (iteration >= maxNumberOfIterations 
-          || Math.Abs((length1 - length0) - (point1 - point0).Length) < tolerance)
+          || Math.Abs((length1 - length0) - (point1 - point0).Length()) < tolerance)
       {
         points.Add(point0);
         points.Add(point1);
@@ -131,12 +131,12 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <summary>
     /// Computes the length of a list of 2D line segments.
     /// </summary>
-    internal static float GetLength(List<Vector2F> lineSegments)
+    internal static float GetLength(List<Vector2> lineSegments)
     {
       int numberOfSegments = lineSegments.Count / 2;
       float length = 0;
       for (int i = 0; i < numberOfSegments; i++)
-        length += (lineSegments[2 * i + 0] - lineSegments[2 * i + 1]).Length;
+        length += (lineSegments[2 * i + 0] - lineSegments[2 * i + 1]).Length();
 
       return length;
     }

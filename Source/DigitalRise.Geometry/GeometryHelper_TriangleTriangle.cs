@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -122,8 +122,8 @@ namespace DigitalRise.Geometry
       // Projection of the triangles in 3D onto 2D such that the area of the projection is maximized. 
       // Then perform 2D test.
 
-      Vector2F P1, Q1, R1;
-      Vector2F P2, Q2, R2;
+      Vector2 P1, Q1, R1;
+      Vector2 P2, Q2, R2;
 
       float n_x, n_y, n_z;
       n_x = ((normal_1.X < 0) ? -normal_1.X : normal_1.X);
@@ -668,14 +668,14 @@ namespace DigitalRise.Geometry
     #region 2D Overlap Tests
     //--------------------------------------------------------------
 
-    private static float ORIENT_2D(ref Vector2F a, ref Vector2F b, ref Vector2F c)
+    private static float ORIENT_2D(ref Vector2 a, ref Vector2 b, ref Vector2 c)
     {
       return ((a.X - c.X) * (b.Y - c.Y) - (a.Y - c.Y) * (b.X - c.X));
     }
 
 
-    private static bool INTERSECTION_TEST_VERTEX(ref Vector2F P1, ref Vector2F Q1, ref Vector2F R1,
-                                                 ref Vector2F P2, ref Vector2F Q2, ref Vector2F R2)
+    private static bool INTERSECTION_TEST_VERTEX(ref Vector2 P1, ref Vector2 Q1, ref Vector2 R1,
+                                                 ref Vector2 P2, ref Vector2 Q2, ref Vector2 R2)
     {
       if (ORIENT_2D(ref R2, ref P2, ref Q1) >= 0.0f)
       {
@@ -747,8 +747,8 @@ namespace DigitalRise.Geometry
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "Q2")]
-    private static bool INTERSECTION_TEST_EDGE(ref Vector2F P1, ref Vector2F Q1, ref Vector2F R1,
-                                               ref Vector2F P2, ref Vector2F Q2, ref Vector2F R2)
+    private static bool INTERSECTION_TEST_EDGE(ref Vector2 P1, ref Vector2 Q1, ref Vector2 R1,
+                                               ref Vector2 P2, ref Vector2 Q2, ref Vector2 R2)
     {
       if (ORIENT_2D(ref R2, ref P2, ref Q1) >= 0.0f)
       {
@@ -805,8 +805,8 @@ namespace DigitalRise.Geometry
     }
 
 
-    private static bool ccw_tri_tri_intersection_2d(ref Vector2F p1, ref Vector2F q1, ref Vector2F r1,
-                                                    ref Vector2F p2, ref Vector2F q2, ref Vector2F r2)
+    private static bool ccw_tri_tri_intersection_2d(ref Vector2 p1, ref Vector2 q1, ref Vector2 r1,
+                                                    ref Vector2 p2, ref Vector2 q2, ref Vector2 r2)
     {
       if (ORIENT_2D(ref p2, ref q2, ref p1) >= 0.0f)
       {
@@ -840,8 +840,8 @@ namespace DigitalRise.Geometry
     }
 
 
-    private static bool tri_tri_overlap_test_2d(ref Vector2F p1, ref Vector2F q1, ref Vector2F r1,
-                                                ref Vector2F p2, ref Vector2F q2, ref Vector2F r2)
+    private static bool tri_tri_overlap_test_2d(ref Vector2 p1, ref Vector2 q1, ref Vector2 r1,
+                                                ref Vector2 p2, ref Vector2 q2, ref Vector2 r2)
     {
       if (ORIENT_2D(ref p1, ref q1, ref r1) < 0.0f)
         if (ORIENT_2D(ref p2, ref q2, ref r2) < 0.0f)

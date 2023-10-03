@@ -513,7 +513,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    void IInternalTerrainLayer.OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2F topLeftPosition, Vector2F bottomRightPosition)
+    void IInternalTerrainLayer.OnDraw(GraphicsDevice graphicsDevice, Rectangle rectangle, Vector2 topLeftPosition, Vector2 bottomRightPosition)
     {
       graphicsDevice.DrawQuad(rectangle, topLeftPosition, bottomRightPosition);
     }

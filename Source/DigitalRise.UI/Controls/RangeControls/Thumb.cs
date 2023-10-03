@@ -5,8 +5,7 @@
 using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
@@ -25,7 +24,7 @@ namespace DigitalRise.UI.Controls
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector2F _offset;
+    private Vector2 _offset;
     #endregion
 
 
@@ -88,7 +87,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int DragDeltaPropertyId = CreateProperty(
-      typeof(Thumb), "DragDelta", GamePropertyCategories.Default, null, Vector2F.Zero,
+      typeof(Thumb), "DragDelta", GamePropertyCategories.Default, null, Vector2.Zero,
       UIPropertyOptions.AffectsRender);
 
     /// <summary>
@@ -96,9 +95,9 @@ namespace DigitalRise.UI.Controls
     /// This is a game object property.
     /// </summary>
     /// <value>The dragging distance relative to the start position of the drag operation.</value>
-    public Vector2F DragDelta
+    public Vector2 DragDelta
     {
-      get { return GetValue<Vector2F>(DragDeltaPropertyId); }
+      get { return GetValue<Vector2>(DragDeltaPropertyId); }
       private set { SetValue(DragDeltaPropertyId, value); }
     }
     #endregion
@@ -138,13 +137,13 @@ namespace DigitalRise.UI.Controls
         if (inputService.IsMouseOrTouchHandled || inputService.IsUp(MouseButtons.Left))
         {
           // Dragging ends.
-          DragDelta = Vector2F.Zero;
+          DragDelta = Vector2.Zero;
           IsDragging = false;
         }
         else
         {
           // Dragging continues.
-          Vector2F newOffset = context.MousePosition - new Vector2F(ActualX + ActualWidth / 2, ActualY + ActualHeight / 2);
+          Vector2 newOffset = context.MousePosition - new Vector2(ActualX + ActualWidth / 2, ActualY + ActualHeight / 2);
           DragDelta = newOffset - _offset;
         }
 
@@ -159,10 +158,10 @@ namespace DigitalRise.UI.Controls
 
           // Dragging starts.
           IsDragging = true;
-          DragDelta = Vector2F.Zero;
+          DragDelta = Vector2.Zero;
 
           // Store the mouse position offset relative to the control center.
-          _offset = context.MousePosition - new Vector2F(ActualX + ActualWidth / 2, ActualY + ActualHeight / 2);
+          _offset = context.MousePosition - new Vector2(ActualX + ActualWidth / 2, ActualY + ActualHeight / 2);
         }
       }
     }

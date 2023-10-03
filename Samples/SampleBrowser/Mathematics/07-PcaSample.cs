@@ -55,9 +55,9 @@ points are computed.",
       }
 
       // Compute the average of the points.
-      var average = new Vector2F();
+      var average = new Vector2();
       foreach (var point in points)
-        average += (Vector2F)point;
+        average += (Vector2)point;
 
       average /= points.Count;
 
@@ -68,10 +68,10 @@ points are computed.",
       // pca.V is a matrix where each column represents a principal component.
       // The first column represents the first principal component, which can be loosely 
       // interpreted as the "direction of the widest spread".
-      Vector2F pc0 = (Vector2F)pca.V.GetColumn(0);
+      Vector2 pc0 = (Vector2)pca.V.GetColumn(0);
       // The second column represents the second principal component, which is a vector
       // orthogonal to the first.
-      Vector2F pc1 = (Vector2F)pca.V.GetColumn(1);
+      Vector2 pc1 = (Vector2)pca.V.GetColumn(1);
 
       // pca.Variances contains the variances of the data points along the principal components.
       // The square root of the variance is the standard deviation.
