@@ -846,25 +846,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitVector3DCast()
+    public void ImplicitVector3FCast()
     {
       float x = 23.5f;
       float y = 0.0f;
       float z = -11.0f;
-      Vector3D vector3D = new Vector3F(x, y, z);
-      Assert.AreEqual(x, vector3D[0]);
-      Assert.AreEqual(y, vector3D[1]);
-      Assert.AreEqual(z, vector3D[2]);
-    }
-
-
-    [Test]
-    public void ToVector3D()
-    {
-      float x = 23.5f;
-      float y = 0.0f;
-      float z = -11.0f;
-      Vector3D vector3D = new Vector3F(x, y, z).ToVector3D();
+      Vector3F vector3D = new Vector3F(x, y, z);
       Assert.AreEqual(x, vector3D[0]);
       Assert.AreEqual(y, vector3D[1]);
       Assert.AreEqual(z, vector3D[2]);

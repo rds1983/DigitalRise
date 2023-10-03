@@ -330,17 +330,6 @@ namespace DigitalRise.Geometry.Tests
 
 
     [Test]
-    public void ToPoseD()
-    {
-      Pose pose = new Pose(new Vector3F(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));
-      PoseD poseD = new PoseD(new Vector3D(1, 2, 3), new Matrix33D(4, 5, 6, 7, 8, 9, 10, 11, 12));
-
-      Assert.AreEqual(poseD, (PoseD)pose);
-      Assert.AreEqual(poseD, pose.ToPoseD());
-    }
-
-
-    [Test]
     public void SerializationXml()
     {
       Pose pose1 = new Pose(new Vector3F(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));

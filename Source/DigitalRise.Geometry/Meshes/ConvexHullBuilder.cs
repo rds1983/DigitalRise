@@ -162,8 +162,8 @@ namespace DigitalRise.Geometry.Meshes
         Reset();
       }
 
-      Matrix44D toUnitCube;
-      Matrix44D fromUnitCube;
+      Matrix44F toUnitCube;
+      Matrix44F fromUnitCube;
       #region ----- Convert to Unit Cube -----
       {
         // Get AABB of existing and new points.
@@ -185,8 +185,8 @@ namespace DigitalRise.Geometry.Meshes
         if (Numeric.IsZero(extent.Z))
           extent.Z = 1;
 
-        toUnitCube = Matrix44D.CreateScale(2 / extent.X, 2 / extent.Y, 2 / extent.Z) * Matrix44D.CreateTranslation(-aabb.Center);
-        fromUnitCube = Matrix44D.CreateTranslation(aabb.Center) * Matrix44D.CreateScale(extent / 2);
+        toUnitCube = Matrix44F.CreateScale(2 / extent.X, 2 / extent.Y, 2 / extent.Z) * Matrix44F.CreateTranslation(-aabb.Center);
+        fromUnitCube = Matrix44F.CreateTranslation(aabb.Center) * Matrix44F.CreateScale(extent / 2);
 
         foreach (var v in _mesh.Vertices)
           v.Position = (Vector3F)toUnitCube.TransformPosition(v.Position);
@@ -319,7 +319,7 @@ namespace DigitalRise.Geometry.Meshes
         // ----- Apply Vertex Limit and/or Skin Width 
 
         // Skin width must be converted to unit cube.
-        var skinWidthScale = (Vector3F)toUnitCube.TransformDirection(new Vector3D(skinWidth));
+        var skinWidthScale = (Vector3F)toUnitCube.TransformDirection(new Vector3F(skinWidth));
 
         // The assert after the cutting may fail for very low skin widths. But not when
         // the debugger is attached :-(. 

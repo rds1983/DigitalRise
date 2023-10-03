@@ -115,7 +115,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       Random random = new Random(1234567);
       for (int i = 0; i < 100; i++)
       {
-        var v = random.NextVector4D(-1000, 1000);
+        var v = random.NextVector4F(-1000, 1000);
 
         Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X - 256)));
         Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X + 256)));
@@ -138,9 +138,9 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       Random random = new Random(1234567);
       for (int i = 0; i < 100; i++)
       {
-        var v = random.NextVector4D(-1000, 1000);
+        var v = random.NextVector4F(-1000, 1000);
 
-        var randomPeriod = random.NextVector4D(2, 444);
+        var randomPeriod = random.NextVector4F(2, 444);
         var px = (int)randomPeriod.X;
         var py = (int)randomPeriod.Y;
         var pz = (int)randomPeriod.Z;

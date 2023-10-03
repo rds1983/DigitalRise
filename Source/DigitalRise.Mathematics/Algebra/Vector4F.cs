@@ -1023,33 +1023,6 @@ namespace DigitalRise.Mathematics.Algebra
     }
 
 
-    /// <overloads>
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Vector4F"/> to another data type.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Vector4F"/> to <see cref="Vector4D"/>.
-    /// </summary>
-    /// <param name="vector">The DigitalRise <see cref="Vector4F"/>.</param>
-    /// <returns>The result of the conversion.</returns>
-    public static implicit operator Vector4D(Vector4F vector)
-    {
-      return new Vector4D(vector.X, vector.Y, vector.Z, vector.W);
-    }
-
-
-    /// <summary>
-    /// Converts this <see cref="Vector4F"/> to <see cref="Vector4D"/>.
-    /// </summary>
-    /// <returns>The result of the conversion.</returns>
-    public Vector4D ToVector4D()
-    {
-      return new Vector4D(X, Y, Z, W);
-    }
-
-
     /// <summary>
     /// Performs an implicit conversion from <see cref="Vector4F"/> to <see cref="VectorF"/>.
     /// </summary>

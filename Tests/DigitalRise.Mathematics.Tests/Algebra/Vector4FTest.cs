@@ -881,36 +881,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitVector4DCast()
-    {
-      float x = 23.5f;
-      float y = 0.0f;
-      float z = -11.0f;
-      float w = 0.3f;
-      Vector4D vector4D = new Vector4F(x, y, z, w);
-      Assert.IsTrue(Numeric.AreEqual(x, (float)vector4D[0]));
-      Assert.IsTrue(Numeric.AreEqual(y, (float)vector4D[1]));
-      Assert.IsTrue(Numeric.AreEqual(z, (float)vector4D[2]));
-      Assert.IsTrue(Numeric.AreEqual(w, (float)vector4D[3]));
-    }
-
-
-    [Test]
-    public void ToVector4D()
-    {
-      float x = 23.5f;
-      float y = 0.0f;
-      float z = -11.0f;
-      float w = 0.3f;
-      Vector4D vector4D = new Vector4F(x, y, z, w).ToVector4D();
-      Assert.IsTrue(Numeric.AreEqual(x, (float)vector4D[0]));
-      Assert.IsTrue(Numeric.AreEqual(y, (float)vector4D[1]));
-      Assert.IsTrue(Numeric.AreEqual(z, (float)vector4D[2]));
-      Assert.IsTrue(Numeric.AreEqual(w, (float)vector4D[3]));
-    }   
-
-
-    [Test]
     public void ProjectTo()
     {
       // Project (1, 1, 1) to axes

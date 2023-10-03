@@ -372,16 +372,6 @@ namespace DigitalRise.Geometry
 
 
     /// <summary>
-    /// Converts this single-precision pose to a double-precision pose.
-    /// </summary>
-    /// <returns>The pose (double-precision).</returns>
-    public PoseD ToPoseD()
-    {
-      return this;
-    }
-
-
-    /// <summary>
     /// Converts this pose to a 4x4 transformation matrix.
     /// </summary>
     /// <returns>
@@ -796,17 +786,6 @@ namespace DigitalRise.Geometry
     public static bool operator !=(Pose pose1, Pose pose2)
     {
       return !(pose1 == pose2);
-    }
-
-
-    /// <summary>
-    /// Converts a single-precision pose to a double-precision pose.
-    /// </summary>
-    /// <param name="pose">The pose (single-precision).</param>
-    /// <returns>The pose (double-precision).</returns>
-    public static implicit operator PoseD(Pose pose)
-    {
-      return new PoseD(pose.Position, pose.Orientation);
     }
 
 

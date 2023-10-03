@@ -767,28 +767,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitVector2DCast()
-    {
-      float x = 23.5f;
-      float y = 0.0f;
-      Vector2D vector2D = new Vector2F(x, y);
-      Assert.AreEqual(x, vector2D[0]);
-      Assert.AreEqual(y, vector2D[1]);
-    }
-
-
-    [Test]
-    public void ToVector2D()
-    {
-      float x = 23.5f;
-      float y = 0.0f;
-      Vector2D vector2D = new Vector2F(x, y).ToVector2D();
-      Assert.AreEqual(x, vector2D[0]);
-      Assert.AreEqual(y, vector2D[1]);
-    }
-
-
-    [Test]
     public void ProjectTo()
     {
       // Project (1, 1) to axes

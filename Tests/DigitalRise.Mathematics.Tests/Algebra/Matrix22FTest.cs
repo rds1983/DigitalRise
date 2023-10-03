@@ -854,32 +854,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitMatrix22DCast()
-    {
-      float m00 = 23.5f; float m01 = 0.0f;
-      float m10 = 33.5f; float m11 = 1.1f;
-      Matrix22D matrix22D = new Matrix22F(m00, m01, m10, m11);
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix22D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix22D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix22D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix22D[1, 1]));
-    }
-
-
-    [Test]
-    public void ToMatrix22D()
-    {
-      float m00 = 23.5f; float m01 = 0.0f;
-      float m10 = 33.5f; float m11 = 1.1f;
-      Matrix22D matrix22D = new Matrix22F(m00, m01, m10, m11).ToMatrix22D();
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix22D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix22D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix22D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix22D[1, 1]));
-    }
-
-
-    [Test]
     public void SerializationXml()
     {
       Matrix22F m1 = new Matrix22F(12, 23, 45, 67);

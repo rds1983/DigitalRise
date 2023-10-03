@@ -123,19 +123,19 @@ namespace DigitalRise.Graphics
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void GetSunlight(float altitude, float turbidity, Vector3D sunDirection,
+    public static void GetSunlight(float altitude, float turbidity, Vector3F sunDirection,
                                    out Vector3F directSunlight, out Vector3F scatteredSunlight)
     {
       _spectrum.SetSolarSpectrum();
 
       sunDirection.TryNormalize();
-      double cosZenith = sunDirection.Y;
+      float cosZenith = sunDirection.Y;
 
       Vector3F direct, indirect;
       if (cosZenith > 0)
       {
         // Daylight - Sun is above horizon.
-        double zenithAngle = Math.Acos(cosZenith);
+        float zenithAngle = MathF.Acos(cosZenith);
         _spectrum.ApplyAtmosphericTransmittance(zenithAngle, turbidity, altitude, _spectrumDirect, _spectrumIndirect);
         direct = _spectrumDirect.ToXYZ();
         indirect = _spectrumIndirect.ToXYZ();
@@ -146,11 +146,11 @@ namespace DigitalRise.Graphics
         // We lookup luminance based on experimental results on cloudless nights.
 
         // Get sun angle in degrees for table lookup.
-        float solarAltitude = (float)MathHelper.ToDegrees(Math.Asin(sunDirection.Y));
+        float solarAltitude = (float)MathHelper.ToDegrees(MathF.Asin(sunDirection.Y));
 
         // Get luminance from table (linearly interpolating the next two table entries).
-        int lower = (int)Math.Floor(solarAltitude);
-        int higher = (int)Math.Ceiling(solarAltitude);
+        int lower = (int)MathF.Floor(solarAltitude);
+        int higher = (int)MathF.Ceiling(solarAltitude);
         float a, b;
         TwilightLuminance.TryGetValue(lower, out a);
         TwilightLuminance.TryGetValue(higher, out b);
@@ -166,7 +166,7 @@ namespace DigitalRise.Graphics
 
         // Get sunlight from slightly above the horizon.
         const float epsilon = 0.001f;
-        const double zenithAngle = ConstantsD.PiOver2 - epsilon;
+        const float zenithAngle = ConstantsF.PiOver2 - epsilon;
         _spectrum.ApplyAtmosphericTransmittance(zenithAngle, turbidity, altitude, _spectrumDirect, _spectrumIndirect);
         direct = _spectrumDirect.ToXYZ();
         indirect = _spectrumIndirect.ToXYZ();
@@ -206,12 +206,12 @@ namespace DigitalRise.Graphics
     /// </param>
     /// <inheritdoc cref="GetSunlight"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void GetMoonlight(float altitude, float turbidity, Vector3D moonPosition, float phaseAngle,
+    public static void GetMoonlight(float altitude, float turbidity, Vector3F moonPosition, float phaseAngle,
                                     out Vector3F directMoonlight, out Vector3F scatteredMoonlight)
     {
-      Vector3D moonDirection = moonPosition.Normalized;
-      double cosZenith = moonDirection.Y;
-      double zenith = Math.Acos(cosZenith);
+      Vector3F moonDirection = moonPosition.Normalized;
+      float cosZenith = moonDirection.Y;
+      float zenith = MathF.Acos(cosZenith);
 
       float moonLuminance = (float)GetMoonLuminance(moonPosition, moonDirection, phaseAngle);
       _spectrum.SetLunarSpectrum(moonLuminance);
@@ -224,34 +224,34 @@ namespace DigitalRise.Graphics
 
 
     // Computes the luminance of the moon based on the simulated phase and distance from earth.
-    private static double GetMoonLuminance(Vector3D moonPosition, Vector3D moonDirection, float phaseAngle)
+    private static float GetMoonLuminance(Vector3F moonPosition, Vector3F moonDirection, float phaseAngle)
     {
-      double moonAngle = MathHelper.ToDegrees(Math.Asin(moonDirection.Y));
+      float moonAngle = MathHelper.ToDegrees(MathF.Asin(moonDirection.Y));
 
-      const double Esm = 1905.0;          // W/m2
-      const double C = 0.072;
-      const double Rm = 1738.1 * 1000.0;  // m
-      double d = moonPosition.Length;     // Moon distance.
+      const float Esm = 1905.0f;          // W/m2
+      const float C = 0.072f;
+      const float Rm = 1738.1f * 1000.0f;  // m
+      float d = moonPosition.Length;     // Moon distance.
 
-      double mPhase = phaseAngle;
+      float mPhase = phaseAngle;
 
-      double ePhase = ConstantsD.Pi - mPhase;
+      float ePhase = ConstantsF.Pi - mPhase;
       while (ePhase < 0)
-        ePhase += 2.0 * ConstantsD.Pi;
+        ePhase += 2.0f * ConstantsF.Pi;
 
       // Earthshine
-      double Eem = 0.19 * 0.5 * (1.0 - Math.Sin(ePhase / 2.0) * Math.Tan(ePhase / 2.0) * Math.Log(1.0 / Math.Tan(ePhase / 4.0)));
+      float Eem = 0.19f * 0.5f * (1.0f - MathF.Sin(ePhase / 2.0f) * MathF.Tan(ePhase / 2.0f) * MathF.Log(1.0f / MathF.Tan(ePhase / 4.0f)));
 
       // Total moonlight
-      double Em = ((2.0 * C * Rm * Rm) / (3.0 * d * d)) 
-                  * (Eem + Esm * (1.0 - Math.Sin(mPhase / 2.0) * Math.Tan(mPhase / 2.0) * Math.Log(1.0 / Math.Tan(mPhase / 4.0))));
+      float Em = ((2.0f * C * Rm * Rm) / (3.0f * d * d)) 
+                  * (Eem + Esm * (1.0f - MathF.Sin(mPhase / 2.0f) * MathF.Tan(mPhase / 2.0f) * MathF.Log(1.0f / MathF.Tan(mPhase / 4.0f))));
 
       // Convert irradiance [W/m²] to illuminance [lux] and illuminance to luminance [cd/m²].
-      double luminance = Em * 683.0 / 3.14;
+      float luminance = Em * 683.0f / 3.14f;
 
       // Handle twilight effects from moon.
       if (moonAngle < 0)
-        luminance = luminance * Math.Exp(1.1247 * moonAngle);
+        luminance = luminance * MathF.Exp(1.1247f * moonAngle);
 
       return luminance;
     }
@@ -270,13 +270,13 @@ namespace DigitalRise.Graphics
     //  // Ratio of small to large particle sizes. (0:4, usually 1.3)
     //  const float alpha = 1.3f;
 
-    //  //float cosineTheta = Math.Min(1, 0.2f + Vector3F.Dot(Vector3F.UnitY, -lightDirection));
+    //  //float cosineTheta = MathF.Min(1, 0.2f + Vector3F.Dot(Vector3F.UnitY, -lightDirection));
     //  float cosineTheta = -lightDirection.Y;
 
     //  Vector3F lightColor = new Vector3F();
     //  if (!(cosineTheta < 0))
     //  {
-    //    float theta = (float)Math.Acos(cosineTheta);
+    //    float theta = (float)MathF.Acos(cosineTheta);
 
     //    // Amount of aerosols (water + dust)
     //    float beta = 0.04608365822050f * turbidity - 0.04586025928522f;
@@ -287,7 +287,7 @@ namespace DigitalRise.Graphics
     //    float tauA;
 
     //    float[] tau = new float[3];
-    //    float m = (float)(1.0f / (cosineTheta + 0.15f * Math.Pow(93.885f - theta / ConstantsF.Pi * 180.0f, -1.253f)));
+    //    float m = (float)(1.0f / (cosineTheta + 0.15f * MathF.Pow(93.885f - theta / ConstantsF.Pi * 180.0f, -1.253f)));
     //    // Relative Optical Mass
 
     //    // Wavelengths in µm
@@ -296,8 +296,8 @@ namespace DigitalRise.Graphics
     //    for (int i = 0; i < 3; ++i)
     //    {
     //      // Rayleigh Scattering        
-    //      tauR = (float)Math.Exp(-m * 0.008735f * Math.Pow(lambda[i], -4.08f));
-    //      tauA = (float)Math.Exp(-m * beta * Math.Pow(lambda[i], -alpha));
+    //      tauR = (float)MathF.Exp(-m * 0.008735f * MathF.Pow(lambda[i], -4.08f));
+    //      tauA = (float)MathF.Exp(-m * beta * MathF.Pow(lambda[i], -alpha));
     //      tau[i] = tauR * tauA;
 
     //      // TODO: if m < 0 tau[i] == 0?

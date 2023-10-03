@@ -813,7 +813,7 @@ namespace Samples
 
       // Update direction of moon.
       var moonDirection = (Vector3F)_ephemeris.MoonPosition.Normalized;
-      var moonUp = (Vector3F)_ephemeris.EquatorialToWorld.TransformDirection(Vector3D.Up);
+      var moonUp = (Vector3F)_ephemeris.EquatorialToWorld.TransformDirection(Vector3F.Up);
       _moonNode.LookAt(moonDirection, moonUp);
 
       // The moon needs to know the sun position and brightness to compute the moon phase.

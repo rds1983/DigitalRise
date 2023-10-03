@@ -913,27 +913,6 @@ namespace DigitalRise.Mathematics.Algebra
       return this;
     }
 
-
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Matrix22F"/> to <see cref="Matrix22D"/>.
-    /// </summary>
-    /// <param name="matrix">The matrix.</param>
-    /// <returns>The result of the conversion.</returns>
-    public static implicit operator Matrix22D(Matrix22F matrix)
-    {
-      return new Matrix22D(matrix.M00, matrix.M01,
-                           matrix.M10, matrix.M11);
-    }
-
-
-    /// <summary>
-    /// Converts this <see cref="Matrix22F"/> to <see cref="Matrix22D"/>.
-    /// </summary>
-    /// <returns>The result of the conversion.</returns>
-    public Matrix22D ToMatrix22D()
-    {
-      return this;
-    }
     #endregion
 
 

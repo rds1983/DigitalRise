@@ -238,7 +238,7 @@ namespace DigitalRise.Physics.Specialized
       }
     }
     private float _slopeLimit = ConstantsF.PiOver4; // = 45°;
-    private float _cosSlopeLimit = (float)Math.Cos(ConstantsD.PiOver4);
+    private float _cosSlopeLimit = (float)MathF.Cos(ConstantsF.PiOver4);
 
 
     /// <summary>

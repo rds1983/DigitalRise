@@ -25,12 +25,12 @@ namespace DigitalRise.Graphics
     /// <summary>
     /// Clamps an angle to the interval [0, 2π].
     /// </summary>
-    private static double InRange(double x)
+    private static float InRange(float x)
     {
-      while (x > ConstantsD.TwoPi)
-        x -= ConstantsD.TwoPi;
+      while (x > ConstantsF.TwoPi)
+        x -= ConstantsF.TwoPi;
       while (x < 0)
-        x += ConstantsD.TwoPi;
+        x += ConstantsF.TwoPi;
       return x;
     }
 
@@ -46,14 +46,14 @@ namespace DigitalRise.Graphics
     /// The Cartesian coordinate system is right handed; y points east; z points up.
     /// In other words: Latitude and longitude are relative to +x; z increases with latitude. 
     /// </remarks>
-    private static Vector3D ToCartesian(double radius, double latitude, double longitude)
+    private static Vector3F ToCartesian(float radius, float latitude, float longitude)
     {
-      double sinLat = Math.Sin(latitude);
-      double cosLat = Math.Cos(latitude);
-      double sinLong = Math.Sin(longitude);
-      double cosLong = Math.Cos(longitude);
+      float sinLat = MathF.Sin(latitude);
+      float cosLat = MathF.Cos(latitude);
+      float sinLong = MathF.Sin(longitude);
+      float cosLong = MathF.Cos(longitude);
 
-      Vector3D v;
+      Vector3F v;
       v.X = radius * cosLong * cosLat;
       v.Y = radius * sinLong * cosLat;  // East
       v.Z = radius * sinLat;            // Up
@@ -76,19 +76,19 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// Julian Dates are used for astronomical calculations (such as our own ephemeris model) and 
     /// represent days and fractions since noon Universal Time on January 1, 4713 BCE on the Julian 
-    /// calendar. Note that due to precision limitations of 64-bit doubles, the resolution of the 
+    /// calendar. Note that due to precision limitations of 64-bit floats, the resolution of the 
     /// date returned may be as low as within 8 hours.
     /// </remarks>
-    private static double ToJulianDate(DateTimeOffset dateTimeOffset, bool terrestrialTime)
+    private static float ToJulianDate(DateTimeOffset dateTimeOffset, bool terrestrialTime)
     {
       // See http://de.wikipedia.org/wiki/Julianisches_Datum.
 
       // Convert to GMT/UTC.
       var dateTime = dateTimeOffset.UtcDateTime;
-      double h = dateTime.Hour + (dateTime.Minute + dateTime.Second / 60.0 + dateTime.Millisecond / 60.0 / 1000.0) / 60.0;
-      double d = dateTime.Day + (h / 24.0);
+      float h = dateTime.Hour + (dateTime.Minute + dateTime.Second / 60.0f + dateTime.Millisecond / 60.0f / 1000.0f) / 60.0f;
+      float d = dateTime.Day + (h / 24.0f);
 
-      double y, m;
+      float y, m;
       if (dateTime.Month < 3)
       {
         y = dateTime.Year - 1;
@@ -100,15 +100,15 @@ namespace DigitalRise.Graphics
         m = dateTime.Month;
       }
 
-      double result = 1720996.5 - Math.Floor(y / 100.0) + Math.Floor(y / 400.0) + Math.Floor(365.25 * y)
-                      + Math.Floor(30.6001 * (m + 1)) + d;
+      float result = 1720996.5f - MathF.Floor(y / 100.0f) + MathF.Floor(y / 400.0f) + MathF.Floor(365.25f * y)
+                      + MathF.Floor(30.6001f * (m + 1)) + d;
 
       // UTC is an approximation (within 0.9 seconds) for UT1. 
       // Terrestrial time (http://en.wikipedia.org/wiki/Terrestrial_Time) is ahead of UT1 by 
       // deltaT (http://en.wikipedia.org/wiki/DeltaT) which is a number which depends on date, 
       // earth mass, melting ice, etc. deltaT = 65 s is accurate enough for us.
       if (terrestrialTime)
-        result += 65.0 / 60.0 / 60.0 / 24.0;
+        result += 65.0f / 60.0f / 60.0f / 24.0f;
 
       return result;
     }
@@ -130,10 +130,10 @@ namespace DigitalRise.Graphics
     /// internal astronomical calculations. Since this number is smaller than that returned by
     /// <see cref="ToJulianDate"/>, it is of higher precision.
     /// </remarks>
-    private static double ToEpoch2000Centuries(DateTimeOffset dateTimeOffset, bool terrestrialTime)
+    private static float ToEpoch2000Centuries(DateTimeOffset dateTimeOffset, bool terrestrialTime)
     {
-      double julianDate = ToJulianDate(dateTimeOffset, terrestrialTime);
-      return (julianDate - 2451545.0) / 36525.0;  // A Julian year is 365.25 days.
+      float julianDate = ToJulianDate(dateTimeOffset, terrestrialTime);
+      return (julianDate - 2451545.0f) / 36525.0f;  // A Julian year is 365.25 days.
     }
 
 
@@ -153,10 +153,10 @@ namespace DigitalRise.Graphics
     /// Used for internal astronomical calculations. Since this number is smaller than that returned 
     /// by <see cref="ToJulianDate"/>, it is of higher precision.
     /// </remarks>
-    private static double ToEpoch1990Days(DateTimeOffset dateTimeOffset, bool terrestrialTime)
+    private static float ToEpoch1990Days(DateTimeOffset dateTimeOffset, bool terrestrialTime)
     {
-      double julianDate = ToJulianDate(dateTimeOffset, terrestrialTime);
-      return julianDate - 2447891.5;
+      float julianDate = ToJulianDate(dateTimeOffset, terrestrialTime);
+      return julianDate - 2447891.5f;
     }
 
 
@@ -170,41 +170,41 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// This method does not model variations in atmosphere pressure and temperature.
     /// </remarks>
-    private static double Refract(double elevation)
+    private static float Refract(float elevation)
     {
       // See Zimmerman, John C. 1981. Sun-pointing programs and their accuracy.
       // SAND81-0761, Experimental Systems Operation Division 4721, Sandia National Laboratories, Albuquerque, NM.
 
       //float prestemp;     // temporary pressure/temperature correction
-      double refcor;        // temporary refraction correction 
-      double tanelev;       // tangent of the solar elevation angle
+      float refcor;        // temporary refraction correction 
+      float tanelev;       // tangent of the solar elevation angle
 
-      if (elevation > MathHelper.ToRadians(85.0))
+      if (elevation > MathHelper.ToRadians(85.0f))
       {
         // No refraction near zenith. (Algorithm does not work there.)
-        refcor = 0.0;
+        refcor = 0.0f;
       }
       else
       {
         // Refract.
-        tanelev = Math.Tan(elevation);
-        if (elevation >= MathHelper.ToRadians(5.0))
+        tanelev = MathF.Tan(elevation);
+        if (elevation >= MathHelper.ToRadians(5.0f))
         {
-          refcor = 58.1 / tanelev - 0.07 / (Math.Pow(tanelev, 3)) + 0.000086 / (Math.Pow(tanelev, 5));
+          refcor = 58.1f / tanelev - 0.07f / (MathF.Pow(tanelev, 3)) + 0.000086f / (MathF.Pow(tanelev, 5f));
         }
-        else if (elevation >= MathHelper.ToRadians(-0.575))
+        else if (elevation >= MathHelper.ToRadians(-0.575f))
         {
-          double degElev = MathHelper.ToDegrees(elevation);
-          refcor = 1735.0 + degElev * (-518.2 + degElev * (103.4 + degElev * (-12.79 + degElev * 0.711)));
+          float degElev = MathHelper.ToDegrees(elevation);
+          refcor = 1735.0f + degElev * (-518.2f + degElev * (103.4f + degElev * (-12.79f + degElev * 0.711f)));
         }
         else
         {
-          refcor = -20.774 / tanelev;
+          refcor = -20.774f / tanelev;
         }
 
         //prestemp = (pdat->press * 283.0) / (1013.0 * (273.0 + pdat->temp));
         //refcor *= prestemp / 3600.0;
-        refcor /= 3600.0;
+        refcor /= 3600.0f;
       }
 
       // Refracted solar elevation angle.

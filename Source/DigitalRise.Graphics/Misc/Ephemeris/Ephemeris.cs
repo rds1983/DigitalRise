@@ -104,25 +104,25 @@ namespace DigitalRise.Graphics
 
     // The fractional number of centuries elapsed since January 1, 2000 GMT, terrestrial time
     // (which does not account for leap seconds).
-    private double _epoch2000Centuries;
+    private float _epoch2000Centuries;
 
     // The fractional number of days elapsed since January 1, 1990 GMT.
-    private double _epoch1990Days;
+    private float _epoch1990Days;
 
     // Heliocentric radius of earth.
-    //private double _earthRadius;
+    //private float _earthRadius;
 
     // Longitude of earth in ecliptic coordinates. (Ecliptic lat is always 0.)
-    private double _earthEclipticLongitude;
+    private float _earthEclipticLongitude;
 
     // Longitude of sun in ecliptic coordinates. (Ecliptic lat is always 0.)
-    private double _sunEclipticLongitude;
+    private float _sunEclipticLongitude;
 
     // Obliquity of the ecliptic = tilt between ecliptic and equatorial plane.
-    private double _e;
+    private float _e;
 
     // Conversion from Equatorial to World ignoring precession.
-    private Matrix44D _equatorialToWorldNoPrecession;
+    private Matrix44F _equatorialToWorldNoPrecession;
     #endregion
 
 
@@ -191,7 +191,7 @@ namespace DigitalRise.Graphics
     /// Gets the sun position in world space in meters.
     /// </summary>
     /// <value>The sun position in world space in meters.</value>
-    public Vector3D SunPosition { get; private set; }
+    public Vector3F SunPosition { get; private set; }
 
 
     /// <summary>
@@ -201,14 +201,14 @@ namespace DigitalRise.Graphics
     /// <value>
     /// The direction to the sun as seen from within the atmosphere considering optical refraction.
     /// </value>
-    public Vector3D SunDirectionRefracted { get; private set; }
+    public Vector3F SunDirectionRefracted { get; private set; }
 
 
     /// <summary>
     /// Gets the moon position in world space.
     /// </summary>
     /// <value>The moon position in world space in meters.</value>
-    public Vector3D MoonPosition { get; private set; }
+    public Vector3F MoonPosition { get; private set; }
 
 
     /// <summary>
@@ -218,19 +218,19 @@ namespace DigitalRise.Graphics
     /// The moon phase angle in radians in the range [0, 2π]. A new moon has a phase angle of
     /// 0. A full moon has a phase angle of π. 
     /// </value>
-    public double MoonPhaseAngle { get; set; }
+    public float MoonPhaseAngle { get; set; }
 
 
     /// <summary>
     /// Gets the moon phase as a relative value.
     /// </summary>
     /// <value>The moon phase in the range [0, 1], where 0 is new moon and 1 is full moon.</value>
-    public double MoonPhaseRelative
+    public float MoonPhaseRelative
     {
       get
       {
         // The moon phase in the range [0, 1], where 0 is new moon and 1 is full moon.
-        return 0.5 * (1.0 - Math.Cos(MoonPhaseAngle));
+        return 0.5f * (1.0f - MathF.Cos(MoonPhaseAngle));
       }
     }
 
@@ -243,10 +243,10 @@ namespace DigitalRise.Graphics
     /// The rotation matrix which converts directions from the ecliptic coordinate system to the
     /// equatorial coordinate system.
     /// </value>
-    public Matrix33D EclipticToEquatorial { get; private set; }
+    public Matrix33F EclipticToEquatorial { get; private set; }
 
 
-    //public Matrix44D EclipticToWorld { get; private set; }
+    //public Matrix44F EclipticToWorld { get; private set; }
 
 
     /// <summary>
@@ -257,7 +257,7 @@ namespace DigitalRise.Graphics
     /// The transformation matrix which converts directions from the equatorial coordinate system to
     /// the world space.
     /// </value>
-    public Matrix44D EquatorialToWorld { get; private set; }
+    public Matrix44F EquatorialToWorld { get; private set; }
 
 
     /// <summary>
@@ -268,10 +268,10 @@ namespace DigitalRise.Graphics
     /// The rotation matrix which converts directions from the equatorial coordinate system to the
     /// geographic coordinate system.
     /// </value>
-    public Matrix33D EquatorialToGeographic { get; private set; }
+    public Matrix33F EquatorialToGeographic { get; private set; }
 
 
-    //private Matrix33D WorldToGeographic { get; set; }
+    //private Matrix33F WorldToGeographic { get; set; }
     #endregion
 
 
@@ -311,26 +311,26 @@ namespace DigitalRise.Graphics
       _epoch1990Days = ToEpoch1990Days(Time, false);
 
       // To transform from ecliptic to equatorial, we rotate by the obliquity of the ecliptic.
-      _e = 0.409093 - 0.000227 * _epoch2000Centuries;
-      EclipticToEquatorial = Matrix33D.CreateRotationX(_e);
+      _e = 0.409093f - 0.000227f * _epoch2000Centuries;
+      EclipticToEquatorial = Matrix33F.CreateRotationX(_e);
 
       // GMST = Greenwich mean sidereal time (mittlere Greenwich-Sternzeit) in radians.
-      double gmst = 4.894961 + 230121.675315 * ToEpoch2000Centuries(Time, false);
-      EquatorialToGeographic = Matrix33D.CreateRotationZ(-gmst);
+      float gmst = 4.894961f + 230121.675315f * ToEpoch2000Centuries(Time, false);
+      EquatorialToGeographic = Matrix33F.CreateRotationZ(-gmst);
 
       // The earth axis slowly changes over time (precession). The precession movement repeats
       // itself approx. all 26000 years. When we move from to horizontal or geographics,
       // we need to apply the precession.
 
       // In Game Engine Gems:
-      //var Rx = Matrix33D.CreateRotationX(0.1118 * _epoch2000Centuries);
-      //var Ry = Matrix33D.CreateRotationY(-0.00972 * _epoch2000Centuries);
-      //var Rz = Matrix33D.CreateRotationZ(0.01118 * _epoch2000Centuries);
+      //var Rx = Matrix33F.CreateRotationX(0.1118 * _epoch2000Centuries);
+      //var Ry = Matrix33F.CreateRotationY(-0.00972 * _epoch2000Centuries);
+      //var Rz = Matrix33F.CreateRotationZ(0.01118 * _epoch2000Centuries);
       //var precession = Rz * (Ry * Rx);
 
       // In original article:
-      var Ry = Matrix33D.CreateRotationY(-0.00972 * _epoch2000Centuries);
-      var Rz = Matrix33D.CreateRotationZ(0.01118 * _epoch2000Centuries);
+      var Ry = Matrix33F.CreateRotationY(-0.00972f * _epoch2000Centuries);
+      var Rz = Matrix33F.CreateRotationZ(0.01118f * _epoch2000Centuries);
       var precession = Rz * Ry * Rz;
 
       // In game engine gems precession is applied in EclipticToWorld and in
@@ -339,27 +339,27 @@ namespace DigitalRise.Graphics
       //EclipticToWorld = rLat * rLong * EclipticToEquatorial * precession;
 
       // Latitude rotation
-      var rLat = Matrix33D.CreateRotationY(MathHelper.ToRadians(Latitude) - ConstantsD.PiOver2);
+      var rLat = Matrix33F.CreateRotationY(MathHelper.ToRadians(Latitude) - ConstantsF.PiOver2);
 
       // Longitude rotation
       // LMST = Local mean sidereal time (mittlere Ortssternzeit) in radians.
-      double lmst = gmst + MathHelper.ToRadians(Longitude);
-      var rLong = Matrix33D.CreateRotationZ(-lmst);
+      float lmst = gmst + MathHelper.ToRadians(Longitude);
+      var rLong = Matrix33F.CreateRotationZ(-lmst);
 
       // Earth radius at the equator. (We assume a perfect sphere. We do not support geodetic 
       // systems with imperfect earth spheres.)
-      const double earthRadius = 6378.137 * 1000;
-      var equatorialToHorizontalTranslation = new Vector3D(0, -earthRadius - Altitude, 0);
+      const float earthRadius = 6378.137f * 1000;
+      var equatorialToHorizontalTranslation = new Vector3F(0, -earthRadius - Altitude, 0);
 
       // Switching of the coordinate axes between Equatorial (z up) and Horizontal (y up).
-      var axisSwitch = new Matrix33D(0, 1, 0,
+      var axisSwitch = new Matrix33F(0, 1, 0,
                                      0, 0, 1,
                                      1, 0, 0);
 
-      EquatorialToWorld = new Matrix44D(axisSwitch * rLat * rLong * precession,
+      EquatorialToWorld = new Matrix44F(axisSwitch * rLat * rLong * precession,
                                         equatorialToHorizontalTranslation);
 
-      _equatorialToWorldNoPrecession = new Matrix44D(axisSwitch * rLat * rLong,
+      _equatorialToWorldNoPrecession = new Matrix44F(axisSwitch * rLat * rLong,
                                                      equatorialToHorizontalTranslation);
 
       //WorldToGeographic = EquatorialToGeographic * EquatorialToWorld.Minor.Transposed;
@@ -382,32 +382,32 @@ namespace DigitalRise.Graphics
       // See http://en.wikipedia.org/wiki/Position_of_the_Sun. (But these formulas seem to be a bit
       // more precise.)
 
-      double meanAnomaly = 6.24 + 628.302 * _epoch2000Centuries;
+      float meanAnomaly = 6.24f + 628.302f * _epoch2000Centuries;
 
       // Ecliptic longitude.
-      _sunEclipticLongitude = 4.895048 + 628.331951 * _epoch2000Centuries + (0.033417 - 0.000084 * _epoch2000Centuries) * Math.Sin(meanAnomaly)
-                            + 0.000351 * Math.Sin(2.0 * meanAnomaly);
+      _sunEclipticLongitude = 4.895048f + 628.331951f * _epoch2000Centuries + (0.033417f - 0.000084f * _epoch2000Centuries) * MathF.Sin(meanAnomaly)
+                            + 0.000351f * MathF.Sin(2.0f * meanAnomaly);
 
       // Distance from earth in astronomical units.
-      double geocentricDistance = 1.000140 - (0.016708 - 0.000042 * _epoch2000Centuries) * Math.Cos(meanAnomaly)
-                                  - 0.000141 * Math.Cos(2.0 * meanAnomaly);
+      float geocentricDistance = 1.000140f - (0.016708f - 0.000042f * _epoch2000Centuries) * MathF.Cos(meanAnomaly)
+                                  - 0.000141f * MathF.Cos(2.0f * meanAnomaly);
 
       // Sun position.
-      Vector3D sunPositionEcliptic = ToCartesian(geocentricDistance, 0, _sunEclipticLongitude);
-      Vector3D sunPositionEquatorial = EclipticToEquatorial * sunPositionEcliptic;
+      Vector3F sunPositionEcliptic = ToCartesian(geocentricDistance, 0, _sunEclipticLongitude);
+      Vector3F sunPositionEquatorial = EclipticToEquatorial * sunPositionEcliptic;
 
       // Note: The sun formula is already corrected by precession.
       SunPosition = _equatorialToWorldNoPrecession.TransformDirection(sunPositionEquatorial);
-      Vector3D sunDirection = SunPosition.Normalized;
+      Vector3F sunDirection = SunPosition.Normalized;
 
       // Convert from astronomical units to meters.
-      const double au = 149597870700; // 1 au = 149,597,870,700 m
+      const float au = 149597870700f; // 1 au = 149,597,870,700 m
       SunPosition *= au;
 
       // Account for atmospheric refraction.
-      double elevation = Math.Asin(sunDirection.Y);
+      float elevation = MathF.Asin(sunDirection.Y);
       elevation = Refract(elevation);
-      sunDirection.Y = Math.Sin(elevation);
+      sunDirection.Y = MathF.Sin(elevation);
       sunDirection.Normalize();
       SunDirectionRefracted = sunDirection;
     }
@@ -415,80 +415,80 @@ namespace DigitalRise.Graphics
 
     private void ComputeEarthPosition()
     {
-      double Np = ((2.0 * ConstantsD.Pi) / 365.242191) * (_epoch1990Days / _planetElements[(int)VisiblePlanets.Earth].Period);
+      float Np = ((2.0f * ConstantsF.Pi) / 365.242191f) * (_epoch1990Days / _planetElements[(int)VisiblePlanets.Earth].Period);
       Np = InRange(Np);
 
-      double Mp = Np + _planetElements[(int)VisiblePlanets.Earth].EpochLongitude - _planetElements[(int)VisiblePlanets.Earth].PerihelionLongitude;
+      float Mp = Np + _planetElements[(int)VisiblePlanets.Earth].EpochLongitude - _planetElements[(int)VisiblePlanets.Earth].PerihelionLongitude;
 
-      _earthEclipticLongitude = Np + 2.0 * _planetElements[(int)VisiblePlanets.Earth].Eccentricity * Math.Sin(Mp)
+      _earthEclipticLongitude = Np + 2.0f * _planetElements[(int)VisiblePlanets.Earth].Eccentricity * MathF.Sin(Mp)
                                 + _planetElements[(int)VisiblePlanets.Earth].EpochLongitude;
 
       _earthEclipticLongitude = InRange(_earthEclipticLongitude);
 
-      //double vp = _earthEclipticLongitude - planetElements[(int)VisiblePlanets.Earth].PerihelionLongitude;
+      //float vp = _earthEclipticLongitude - planetElements[(int)VisiblePlanets.Earth].PerihelionLongitude;
       //_earthRadius = (planetElements[(int)VisiblePlanets.Earth].SemiMajorAxis 
       //                 * (1.0 - planetElements[(int)VisiblePlanets.Earth].Eccentricity * planetElements[(int)VisiblePlanets.Earth].Eccentricity)) 
-      //               / (1.0 + planetElements[(int)VisiblePlanets.Earth].Eccentricity * Math.Cos(vp));
+      //               / (1.0 + planetElements[(int)VisiblePlanets.Earth].Eccentricity * MathF.Cos(vp));
     }
 
 
     private void ComputeMoonPosition()
     {
-      double lp = 3.8104 + 8399.7091 * _epoch2000Centuries;
-      double m = 6.2300 + 628.3019 * _epoch2000Centuries;
-      double f = 1.6280 + 8433.4663 * _epoch2000Centuries;
-      double mp = 2.3554 + 8328.6911 * _epoch2000Centuries;
-      double d = 5.1985 + 7771.3772 * _epoch2000Centuries;
+      float lp = 3.8104f + 8399.7091f * _epoch2000Centuries;
+      float m = 6.2300f + 628.3019f * _epoch2000Centuries;
+      float f = 1.6280f + 8433.4663f * _epoch2000Centuries;
+      float mp = 2.3554f + 8328.6911f * _epoch2000Centuries;
+      float d = 5.1985f + 7771.3772f * _epoch2000Centuries;
 
-      double longitude =
+      float longitude =
           lp
-          + 0.1098 * Math.Sin(mp)
-          + 0.0222 * Math.Sin(2 * d - mp)
-          + 0.0115 * Math.Sin(2 * d)
-          + 0.0037 * Math.Sin(2 * mp)
-          - 0.0032 * Math.Sin(m)
-          - 0.0020 * Math.Sin(2 * f)
-          + 0.0010 * Math.Sin(2 * d - 2 * mp)
-          + 0.0010 * Math.Sin(2 * d - m - mp)
-          + 0.0009 * Math.Sin(2 * d + mp)
-          + 0.0008 * Math.Sin(2 * d - m)
-          + 0.0007 * Math.Sin(mp - m)
-          - 0.0006 * Math.Sin(d)
-          - 0.0005 * Math.Sin(m + mp);
+          + 0.1098f * MathF.Sin(mp)
+          + 0.0222f * MathF.Sin(2 * d - mp)
+          + 0.0115f * MathF.Sin(2 * d)
+          + 0.0037f * MathF.Sin(2 * mp)
+          - 0.0032f * MathF.Sin(m)
+          - 0.0020f * MathF.Sin(2 * f)
+          + 0.0010f * MathF.Sin(2 * d - 2 * mp)
+          + 0.0010f * MathF.Sin(2 * d - m - mp)
+          + 0.0009f * MathF.Sin(2 * d + mp)
+          + 0.0008f * MathF.Sin(2 * d - m)
+          + 0.0007f * MathF.Sin(mp - m)
+          - 0.0006f * MathF.Sin(d)
+          - 0.0005f * MathF.Sin(m + mp);
 
-      double latitude =
-          +0.0895 * Math.Sin(f)
-          + 0.0049 * Math.Sin(mp + f)
-          + 0.0048 * Math.Sin(mp - f)
-          + 0.0030 * Math.Sin(2 * d - f)
-          + 0.0010 * Math.Sin(2 * d + f - mp)
-          + 0.0008 * Math.Sin(2 * d - f - mp)
-          + 0.0006 * Math.Sin(2 * d + f);
+      float latitude =
+          +0.0895f * MathF.Sin(f)
+          + 0.0049f * MathF.Sin(mp + f)
+          + 0.0048f * MathF.Sin(mp - f)
+          + 0.0030f * MathF.Sin(2 * d - f)
+          + 0.0010f * MathF.Sin(2 * d + f - mp)
+          + 0.0008f * MathF.Sin(2 * d - f - mp)
+          + 0.0006f * MathF.Sin(2 * d + f);
 
       longitude = InRange(longitude);
       _sunEclipticLongitude = InRange(_sunEclipticLongitude);
-      MoonPhaseAngle = Math.Abs(longitude - _sunEclipticLongitude);
+      MoonPhaseAngle = MathF.Abs(longitude - _sunEclipticLongitude);
       MoonPhaseAngle = InRange(MoonPhaseAngle);
 
-      double pip =
-          +0.016593
-          + 0.000904 * Math.Cos(mp)
-          + 0.000166 * Math.Cos(2 * d - mp)
-          + 0.000137 * Math.Cos(2 * d)
-          + 0.000049 * Math.Cos(2 * mp)
-          + 0.000015 * Math.Cos(2 * d + mp)
-          + 0.000009 * Math.Cos(2 * d - m);
+      float pip =
+          +0.016593f
+          + 0.000904f * MathF.Cos(mp)
+          + 0.000166f * MathF.Cos(2 * d - mp)
+          + 0.000137f * MathF.Cos(2 * d)
+          + 0.000049f * MathF.Cos(2 * mp)
+          + 0.000015f * MathF.Cos(2 * d + mp)
+          + 0.000009f * MathF.Cos(2 * d - m);
 
-      double dMoon = 1.0 / pip; // Earth radii
+      float dMoon = 1.0f / pip; // Earth radii
 
       // Moon position in Cartesian coordinates of the ecliptic coordinates system.
-      Vector3D moonPositionEcliptic = ToCartesian(dMoon, latitude, longitude);
+      Vector3F moonPositionEcliptic = ToCartesian(dMoon, latitude, longitude);
 
       // Moon position in Cartesian coordinates of the equatorial coordinates system.
-      Vector3D moonPositionEquatorial = EclipticToEquatorial * moonPositionEcliptic;
+      Vector3F moonPositionEquatorial = EclipticToEquatorial * moonPositionEcliptic;
 
       // To [m].
-      moonPositionEquatorial *= 6378.137 * 1000;
+      moonPositionEquatorial *= 6378.137f * 1000;
 
       // Note: The moon formula is already corrected by precession.
       MoonPosition = _equatorialToWorldNoPrecession.TransformPosition(moonPositionEquatorial);

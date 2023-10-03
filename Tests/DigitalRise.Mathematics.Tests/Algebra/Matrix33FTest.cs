@@ -1075,44 +1075,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitMatrix33DCast()
-    {
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f;
-      Matrix33D matrix33D = new Matrix33F(m00, m01, m02, m10, m11, m12, m20, m21, m22);
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix33D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix33D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrix33D[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix33D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix33D[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrix33D[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrix33D[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrix33D[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrix33D[2, 2]));
-    }
-
-
-    [Test]
-    public void ToMatrix33D()
-    {
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f;
-      Matrix33D matrix33D = new Matrix33F(m00, m01, m02, m10, m11, m12, m20, m21, m22).ToMatrix33D();
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix33D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix33D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrix33D[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix33D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix33D[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrix33D[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrix33D[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrix33D[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrix33D[2, 2]));
-    }
-
-
-    [Test]
     public void SerializationXml()
     {
       Matrix33F m1 = new Matrix33F(12, 23, 45,

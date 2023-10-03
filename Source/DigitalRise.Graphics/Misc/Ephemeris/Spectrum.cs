@@ -210,7 +210,7 @@ namespace DigitalRise.Graphics
     /// compute twilight.
     /// </para>
     /// </remarks>
-    public void ApplyAtmosphericTransmittance(double zenithAngle, double turbidity, double altitude,
+    public void ApplyAtmosphericTransmittance(float zenithAngle, double turbidity, double altitude,
                                               Spectrum directIrradiance, Spectrum scatteredIrradiance)
     {
       //  For more info, see the reference in the notes of this class.

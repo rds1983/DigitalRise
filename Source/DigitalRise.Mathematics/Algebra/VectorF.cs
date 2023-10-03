@@ -1329,34 +1329,6 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Performs an implicit conversion from <see cref="VectorF"/> to <see cref="VectorD"/>.
-    /// </summary>
-    /// <param name="vector">The vector.</param>
-    /// <returns>The result of the conversion.</returns>
-    public static implicit operator VectorD(VectorF vector)
-    {
-      if (vector == null)
-        return null;
-
-      VectorD result = new VectorD(vector.NumberOfElements);
-      for (int i = 0; i < vector.NumberOfElements; i++)
-        result[i] = vector[i];
-
-      return result;
-    }
-
-
-    /// <summary>
-    /// Converts this <see cref="VectorF"/> to <see cref="VectorD"/>.
-    /// </summary>
-    /// <returns>The result of the conversion.</returns>
-    public VectorD ToVectorD()
-    {
-      return this;
-    }
-
-
-    /// <summary>
     /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="MatrixF"/>.
     /// </summary>
     /// <param name="vector">The vector.</param>

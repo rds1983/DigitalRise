@@ -94,23 +94,6 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Gets a random unit <see cref="QuaternionD"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <returns>A random unit <see cref="QuaternionD"/>;.</returns>
-    public static QuaternionD NextQuaternionD(this Random random)
-    {
-      if (random == null)
-        random = Random;
-
-      return QuaternionD.CreateRotation(NextVector3D(random, -1, 1), NextDouble(random, 0, 2 * Math.PI));
-    }
-
-
-    /// <summary>
     /// Gets a random <see langword="float"/> value that lies in the interval 
     /// [<paramref name="min"/>, <paramref name="max"/>].
     /// </summary>
@@ -195,26 +178,7 @@ namespace DigitalRise.Mathematics.Statistics
     }
 
 
-    /// <summary>
-    /// Gets a random <see cref="Vector2D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a vector element.</param>
-    /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="Vector2D"/>.</returns>
-    public static Vector2D NextVector2D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Vector2D(NextDouble(random, min, max),
-                          NextDouble(random, min, max));
-    }
-
-    
+   
     /// <summary>
     /// Gets a random <see cref="Vector3F"/>.
     /// </summary>
@@ -233,27 +197,6 @@ namespace DigitalRise.Mathematics.Statistics
       return new Vector3F(NextFloat(random, min, max),
                           NextFloat(random, min, max),
                           NextFloat(random, min, max));
-    }
-
-
-    /// <summary>
-    /// Gets a random <see cref="Vector3D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a vector element.</param>
-    /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="Vector3D"/>.</returns>
-    public static Vector3D NextVector3D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Vector3D(NextDouble(random, min, max),
-                          NextDouble(random, min, max),
-                          NextDouble(random, min, max));
     }
 
 
@@ -280,29 +223,6 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Gets a random <see cref="Vector4D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a vector element.</param>
-    /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="Vector4D"/>.</returns>
-    public static Vector4D NextVector4D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Vector4D(NextDouble(random, min, max),
-                          NextDouble(random, min, max),
-                          NextDouble(random, min, max),
-                          NextDouble(random, min, max));
-    }
-
-
-
-    /// <summary>
     /// Fills a <see cref="VectorF"/> with random values.
     /// </summary>
     /// <param name="random">
@@ -325,27 +245,6 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Fills a <see cref="VectorD"/> with random values.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="vector">The vector that should be filled with random values.</param>
-    /// <param name="min">The minimal allowed value for a vector element.</param>
-    /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="VectorD"/>.</returns>
-    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void NextVectorD(this Random random, VectorD vector, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      for (int i = 0; i < vector.NumberOfElements; i++)
-        vector[i] = NextDouble(random, min, max);
-    }
-
-    /// <summary>
     /// Gets a random <see cref="Matrix22F"/>.
     /// </summary>
     /// <param name="random">
@@ -362,26 +261,6 @@ namespace DigitalRise.Mathematics.Statistics
 
       return new Matrix22F(NextFloat(random, min, max), NextFloat(random, min, max),
                            NextFloat(random, min, max), NextFloat(random, min, max));
-    }
-
-
-    /// <summary>
-    /// Gets a random <see cref="Matrix22D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a matrix element.</param>
-    /// <param name="max">The maximal allowed value for a matrix element.</param>
-    /// <returns>A random <see cref="Matrix22D"/>.</returns>
-    public static Matrix22D NextMatrix22D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Matrix22D(NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max));
     }
 
 
@@ -403,27 +282,6 @@ namespace DigitalRise.Mathematics.Statistics
       return new Matrix33F(NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max),
                            NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max),
                            NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max));
-    }
-
-
-    /// <summary>
-    /// Gets a random <see cref="Matrix33D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a matrix element.</param>
-    /// <param name="max">The maximal allowed value for a matrix element.</param>
-    /// <returns>A random <see cref="Matrix33D"/>.</returns>
-    public static Matrix33D NextMatrix33D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Matrix33D(NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max));
     }
 
 
@@ -450,28 +308,6 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Gets a random <see cref="Matrix44D"/>.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="min">The minimal allowed value for a matrix element.</param>
-    /// <param name="max">The maximal allowed value for a matrix element.</param>
-    /// <returns>A random <see cref="Matrix44D"/>.</returns>
-    public static Matrix44D NextMatrix44D(this Random random, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      return new Matrix44D(NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max),
-                           NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max), NextDouble(random, min, max));
-    }
-
-
-    /// <summary>
     /// Fills a <see cref="MatrixF"/> with random values.
     /// </summary>
     /// <param name="random">
@@ -490,28 +326,6 @@ namespace DigitalRise.Mathematics.Statistics
       for (int r = 0; r < matrix.NumberOfRows; r++)
         for (int c = 0; c < matrix.NumberOfColumns; c++)
           matrix[r, c] = NextFloat(random, min, max);
-    }
-
-
-    /// <summary>
-    /// Fills a <see cref="MatrixD"/> with random values.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="matrix">The matrix that is filled with random values.</param>
-    /// <param name="min">The minimal allowed value for a matrix element.</param>
-    /// <param name="max">The maximal allowed value for a matrix element.</param>
-    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void NextMatrixD(this Random random, MatrixD matrix, double min, double max)
-    {
-      if (random == null)
-        random = Random;
-
-      for (int r = 0; r < matrix.NumberOfRows; r++)
-        for (int c = 0; c < matrix.NumberOfColumns; c++)
-          matrix[r, c] = NextDouble(random, min, max);
     }
 
 

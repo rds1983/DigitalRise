@@ -21,11 +21,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
 
       horizontalFieldOfView = PerspectiveViewVolume.GetFieldOfViewX(MathHelper.ToRadians(60), (float)(4.0 / 3.0));
-      expectedFieldOfView = (float)MathHelper.ToRadians(75.178179);
+      expectedFieldOfView = (float)MathHelper.ToRadians(75.178179f);
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
 
       horizontalFieldOfView = PerspectiveViewVolume.GetFieldOfViewX(MathHelper.ToRadians(45), (float)(16.0 / 9.0));
-      expectedFieldOfView = (float)MathHelper.ToRadians(72.734351);
+      expectedFieldOfView = (float)MathHelper.ToRadians(72.734351f);
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
     }
 
@@ -37,11 +37,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
 
       verticalFieldOfView = PerspectiveViewVolume.GetFieldOfViewY(MathHelper.ToRadians(75), (float)(4.0 / 3.0));
-      expectedFieldOfView = (float)MathHelper.ToRadians(59.840444);
+      expectedFieldOfView = (float)MathHelper.ToRadians(59.840444f);
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
 
       verticalFieldOfView = PerspectiveViewVolume.GetFieldOfViewY(MathHelper.ToRadians(90), (float)(16.0 / 9.0));
-      expectedFieldOfView = (float)MathHelper.ToRadians(58.715507);
+      expectedFieldOfView = (float)MathHelper.ToRadians(58.715507f);
       Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
     }
 

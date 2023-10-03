@@ -110,22 +110,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomVector2D()
-    {
-      Vector2D vector = RandomHelper.Random.NextVector2D(-20.0, -10.0);
-      Assert.IsTrue(-20.0 <= vector.X && vector.X <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.Y && vector.Y <= -10.0);
-
-      vector = RandomHelper.Random.NextVector2D(1.0, 1.0);
-      Assert.AreEqual(1.0, vector.X);
-      Assert.AreEqual(1.0, vector.Y);
-
-      // Must not throw exception.
-      RandomHelper.NextVector2D(null, 1, 3);
-    }
-
-
-    [Test]
     public void RandomVector3F()
     {
       Vector3F vector = RandomHelper.Random.NextVector3F(-20.0f, -10.0f);
@@ -140,24 +124,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextVector3F(null, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomVector3D()
-    {
-      Vector3D vector = RandomHelper.Random.NextVector3D(-20.0, -10.0);
-      Assert.IsTrue(-20.0 <= vector.X && vector.X <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.Y && vector.Y <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.Z && vector.Z <= -10.0);
-
-      vector = RandomHelper.Random.NextVector3D(1.0, 1.0);
-      Assert.AreEqual(1.0, vector.X);
-      Assert.AreEqual(1.0, vector.Y);
-      Assert.AreEqual(1.0, vector.Z);
-
-      // Must not throw exception.
-      RandomHelper.NextVector3D(null, 1, 3);
     }
 
 
@@ -182,26 +148,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomVector4D()
-    {
-      Vector4D vector = RandomHelper.Random.NextVector4D(-20.0, -10.0);
-      Assert.IsTrue(-20.0 <= vector.X && vector.X <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.Y && vector.Y <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.Z && vector.Z <= -10.0);
-      Assert.IsTrue(-20.0 <= vector.W && vector.W <= -10.0);
-
-      vector = RandomHelper.Random.NextVector4D(-1.0, -1.0);
-      Assert.AreEqual(-1.0, vector.X);
-      Assert.AreEqual(-1.0, vector.Y);
-      Assert.AreEqual(-1.0, vector.Z);
-      Assert.AreEqual(-1.0, vector.W);
-
-      // Must not throw exception.
-      RandomHelper.NextVector4D(null, 1, 3);
-    }
-
-
-    [Test]
     public void RandomVectorF()
     {
       var vector = new VectorF(6);
@@ -213,21 +159,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextVectorF(null, vector, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomVectorD()
-    {
-      var vector = new VectorD(6);
-      RandomHelper.Random.NextVectorD(vector, -2.0, 0.5);
-      for (int i = 0; i < 6; i++)
-      {
-        Assert.IsTrue(-2.0 <= vector[i] && vector[i] <= 0.5);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextVectorD(null, vector, 1, 3);
     }
 
     
@@ -246,20 +177,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomQuaternionD()
-    {
-      QuaternionD quaternion1 = RandomHelper.Random.NextQuaternionD();
-      QuaternionD quaternion2 = RandomHelper.Random.NextQuaternionD();
-      Assert.AreNotEqual(quaternion1, quaternion2);
-      Assert.IsTrue(quaternion1.IsNumericallyNormalized);
-      Assert.IsTrue(quaternion2.IsNumericallyNormalized);
-
-      // Must not throw exception.
-      RandomHelper.NextQuaternionD(null);
-    }
-
-
-    [Test]
     public void RandomMatrix22F()
     {
       Matrix22F matrix = RandomHelper.Random.NextMatrix22F(10.0f, 100.0f);
@@ -270,20 +187,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextMatrix22F(null, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomMatrix22D()
-    {
-      Matrix22D matrix = RandomHelper.Random.NextMatrix22D(10.0, 100.0);
-      for (int i = 0; i < 4; i++)
-      {
-        Assert.IsTrue(10.0 <= matrix[i] && matrix[i] <= 100.0);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextMatrix22D(null, 1, 3);
     }
 
 
@@ -302,20 +205,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomMatrix33D()
-    {
-      Matrix33D matrix = RandomHelper.Random.NextMatrix33D(10.0, 100.0);
-      for (int i = 0; i < 9; i++)
-      {
-        Assert.IsTrue(10.0 <= matrix[i] && matrix[i] <= 100.0);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextMatrix33D(null, 1, 3);
-    }
-
-
-    [Test]
     public void RandomMatrix44F()
     {
       Matrix44F matrix = RandomHelper.Random.NextMatrix44F(-2.0f, 0.5f);
@@ -326,20 +215,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextMatrix44F(null, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomMatrix44D()
-    {
-      Matrix44D matrix = RandomHelper.Random.NextMatrix44D(-2.0, 0.5);
-      for (int i = 0; i < 16; i++)
-      {
-        Assert.IsTrue(-2.0 <= matrix[i] && matrix[i] <= 0.5);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextMatrix44D(null, 1, 3);
     }
 
 
@@ -355,21 +230,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextMatrixF(null, matrix, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomMatrixD()
-    {
-      var matrix = new MatrixD(2, 3);
-      RandomHelper.Random.NextMatrixD(matrix, -2.0, 0.5);
-      for (int i = 0; i < 6; i++)
-      {
-        Assert.IsTrue(-2.0 <= matrix[i] && matrix[i] <= 0.5);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextMatrixD(null, matrix, 1, 3);
     }
 
 

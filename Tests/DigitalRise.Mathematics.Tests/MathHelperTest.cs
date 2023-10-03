@@ -68,12 +68,6 @@ namespace DigitalRise.Mathematics.Tests
       Assert.AreEqual(-2f* ConstantsF.Pi, MathHelper.ToRadians(-360f));
       Assert.AreEqual(ConstantsF.Pi, MathHelper.ToRadians(180f));
       Assert.AreEqual(-ConstantsF.Pi, MathHelper.ToRadians(-180f));
-
-      Assert.AreEqual(0.0, MathHelper.ToRadians(0d));
-      Assert.AreEqual(2.0 * Math.PI, MathHelper.ToRadians(360d));
-      Assert.AreEqual(-2.0 * Math.PI, MathHelper.ToRadians(-360d));
-      Assert.AreEqual(Math.PI, MathHelper.ToRadians(180d));
-      Assert.AreEqual(-Math.PI, MathHelper.ToRadians(-180d));
     }
 
     [Test]
@@ -84,12 +78,6 @@ namespace DigitalRise.Mathematics.Tests
       Assert.AreEqual(-360.0f, MathHelper.ToDegrees(-ConstantsF.TwoPi));
       Assert.IsTrue(Numeric.AreEqual(180.0f, MathHelper.ToDegrees(ConstantsF.Pi)));
       Assert.IsTrue(Numeric.AreEqual(-180.0f, MathHelper.ToDegrees(-ConstantsF.Pi)));
-
-      Assert.AreEqual(0.0, MathHelper.ToDegrees(0d));
-      Assert.AreEqual(360.0, MathHelper.ToDegrees(2 * Math.PI));
-      Assert.AreEqual(-360.0, MathHelper.ToDegrees(-2 * Math.PI));
-      Assert.AreEqual(180.0, MathHelper.ToDegrees(Math.PI));
-      Assert.AreEqual(-180.0, MathHelper.ToDegrees(-Math.PI));
     }
 
 

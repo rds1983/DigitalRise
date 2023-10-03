@@ -2180,57 +2180,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitMatrixDCast()
-    {
-      MatrixF nullRef = null;
-      Assert.IsNull((MatrixD)nullRef);
-
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f; float m03 = 0.3f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f; float m13 = 0.4f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f; float m23 = 0.5f;
-      MatrixD matrixD = new MatrixF(3, 4, new [] { m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23 }, MatrixOrder.RowMajor);
-      Assert.AreEqual(3, matrixD.NumberOfRows);
-      Assert.AreEqual(4, matrixD.NumberOfColumns);
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrixD[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrixD[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrixD[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m03, (float)matrixD[0, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrixD[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrixD[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrixD[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m13, (float)matrixD[1, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrixD[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrixD[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrixD[2, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m23, (float)matrixD[2, 3]));
-    }
-
-
-    [Test]
-    public void ToMatrixD()
-    {
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f; float m03 = 0.3f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f; float m13 = 0.4f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f; float m23 = 0.5f;
-      MatrixD matrixD = new MatrixF(3, 4, new[] { m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23 }, MatrixOrder.RowMajor).ToMatrixD();
-      Assert.AreEqual(3, matrixD.NumberOfRows);
-      Assert.AreEqual(4, matrixD.NumberOfColumns);
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrixD[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrixD[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrixD[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m03, (float)matrixD[0, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrixD[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrixD[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrixD[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m13, (float)matrixD[1, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrixD[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrixD[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrixD[2, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m23, (float)matrixD[2, 3]));
-    }
-
-
-    [Test]
     public void SerializationXml()
     {
       MatrixF m1 = new MatrixF(new float[,] {{1.1f, 2, 3, 4},

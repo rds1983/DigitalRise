@@ -514,7 +514,7 @@ namespace DigitalRise.Graphics.SceneGraph
       
       //----- Sun is below horizon.
       // Get angle.
-      float sunAngle = (float)MathHelper.ToDegrees(Math.Asin(SunDirection.Y));
+      float sunAngle = (float)MathHelper.ToDegrees(MathF.Asin(SunDirection.Y));
       if (sunAngle < -5)
         return Vector3F.Zero;
 

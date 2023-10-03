@@ -43,23 +43,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVector2D()
-    {
-      Vector2D v = new Vector2D(1.0, 10.0);
-      Vector2D w = new Vector2D(2.0, 20.0);
-      Vector2D lerp0 = InterpolationHelper.Lerp(v, w, 0.0);
-      Vector2D lerp1 = InterpolationHelper.Lerp(v, w, 1.0);
-      Vector2D lerp05 = InterpolationHelper.Lerp(v, w, 0.5);
-      Vector2D lerp025 = InterpolationHelper.Lerp(v, w, 0.25);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector2D(1.5, 15.0), lerp05);
-      Assert.AreEqual(new Vector2D(1.25, 12.5), lerp025);
-    }
-
-
-    [Test]
     public void LerpVector3F()
     {
       Vector3F v = new Vector3F(1.0f, 10.0f, 100.0f);
@@ -73,23 +56,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(w, lerp1);
       Assert.AreEqual(new Vector3F(1.5f, 15.0f, 150.0f), lerp05);
       Assert.AreEqual(new Vector3F(1.25f, 12.5f, 125.0f), lerp025);
-    }
-
-
-    [Test]
-    public void LerpVector3D()
-    {
-      Vector3D v = new Vector3D(1.0, 10.0, 100.0);
-      Vector3D w = new Vector3D(2.0, 20.0, 200.0);
-      Vector3D lerp0 = InterpolationHelper.Lerp(v, w, 0.0);
-      Vector3D lerp1 = InterpolationHelper.Lerp(v, w, 1.0);
-      Vector3D lerp05 = InterpolationHelper.Lerp(v, w, 0.5);
-      Vector3D lerp025 = InterpolationHelper.Lerp(v, w, 0.25);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector3D(1.5, 15.0, 150.0), lerp05);
-      Assert.AreEqual(new Vector3D(1.25, 12.5, 125.0), lerp025);
     }
 
 
@@ -111,23 +77,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVector4D()
-    {
-      Vector4D v = new Vector4D(1.0, 10.0, 100.0, 1000.0);
-      Vector4D w = new Vector4D(2.0, 20.0, 200.0, 2000.0);
-      Vector4D lerp0 = InterpolationHelper.Lerp(v, w, 0.0);
-      Vector4D lerp1 = InterpolationHelper.Lerp(v, w, 1.0);
-      Vector4D lerp05 = InterpolationHelper.Lerp(v, w, 0.5);
-      Vector4D lerp025 = InterpolationHelper.Lerp(v, w, 0.25);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector4D(1.5, 15.0, 150.0, 1500.0), lerp05);
-      Assert.AreEqual(new Vector4D(1.25, 12.5, 125.0, 1250.0), lerp025);
-    }
-
-
-    [Test]
     public void LerpVectorF()
     {
       VectorF v = new VectorF(new[] { 1.0f, 10.0f, 100.0f, 1000.0f });
@@ -145,35 +94,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVectorD()
-    {
-      VectorD v = new VectorD(new[] { 1.0, 10.0, 100.0, 1000.0 });
-      VectorD w = new VectorD(new[] { 2.0, 20.0, 200.0, 2000.0 });
-      VectorD lerp0 = InterpolationHelper.Lerp(v, w, 0.0);
-      VectorD lerp1 = InterpolationHelper.Lerp(v, w, 1.0);
-      VectorD lerp05 = InterpolationHelper.Lerp(v, w, 0.5);
-      VectorD lerp025 = InterpolationHelper.Lerp(v, w, 0.25);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new VectorD(new[] { 1.5, 15.0, 150.0, 1500.0 }), lerp05);
-      Assert.AreEqual(new VectorD(new[] { 1.25, 12.5, 125.0, 1250.0 }), lerp025);
-    }
-
-
-    [Test]
     [ExpectedException(typeof(ArgumentNullException))]
     public void LerpVectorFException()
     {
       InterpolationHelper.Lerp(null, new VectorF(), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void LerpVectorDException()
-    {
-      InterpolationHelper.Lerp(null, new VectorD(), 0);
     }
 
 
@@ -186,26 +110,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void LerpVectorDException2()
-    {
-      InterpolationHelper.Lerp(new VectorD(), null, 0);
-    }
-
-
-    [Test]
     [ExpectedException(typeof(ArgumentException))]
     public void LerpVectorFException3()
     {
       InterpolationHelper.Lerp(new VectorF(3), new VectorF(4), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void LerpVectorDException3()
-    {
-      InterpolationHelper.Lerp(new VectorD(3), new VectorD(4), 0);
     }
 
 
@@ -251,51 +159,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       v = lerp.Rotate(Vector3F.UnitX);
       result = new Vector3F(1.0f, 1.0f, 0.0f).Normalized;
       Assert.IsTrue(Vector3F.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
-    public void LerpQuaternionD()
-    {
-      // Warning: The not all results are not verified
-      QuaternionD q1 = new QuaternionD(1.0, 2.0, 3.0, 4.0).Normalized;
-      QuaternionD q2 = new QuaternionD(2.0, 4.0, 6.0, 8.0).Normalized;
-      QuaternionD lerp = InterpolationHelper.Lerp(q1, q2, 0.75);
-      Assert.IsTrue(lerp.IsNumericallyNormalized);
-
-      lerp = InterpolationHelper.Lerp(q1, q2, 0);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q1, lerp));
-
-      lerp = InterpolationHelper.Lerp(q1, q2, 1);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q2, lerp));
-
-      q1 = QuaternionD.Identity;
-      q2 = QuaternionD.CreateRotation(Vector3D.UnitZ, Math.PI / 2);
-      lerp = InterpolationHelper.Lerp(q1, q2, 0.5);
-      Vector3D v = lerp.Rotate(Vector3D.UnitX);
-      Vector3D result = new Vector3D(1.0, 1.0, 0.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-
-      q1 = QuaternionD.Identity;
-      q2 = QuaternionD.CreateRotation(Vector3D.UnitY, Math.PI / 2);
-      lerp = InterpolationHelper.Lerp(q1, q2, 0.5);
-      v = lerp.Rotate(Vector3D.UnitZ);
-      result = new Vector3D(1.0, 0.0, 1.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-
-      q1 = QuaternionD.Identity;
-      q2 = QuaternionD.CreateRotation(Vector3D.UnitX, Math.PI / 2);
-      lerp = InterpolationHelper.Lerp(q1, q2, 0.5);
-      v = lerp.Rotate(Vector3D.UnitY);
-      result = new Vector3D(0.0, 1.0, 1.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-
-      q1 = new QuaternionD(-1.0, 0.0, 0.0, 0.0);
-      q2 = QuaternionD.CreateRotation(-Vector3D.UnitZ, -Math.PI / 2);
-      lerp = InterpolationHelper.Lerp(q1, q2, 0.5);
-      v = lerp.Rotate(Vector3D.UnitX);
-      result = new Vector3D(1.0, 1.0, 0.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
     }
 
 
@@ -503,21 +366,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void CosineInterpolationVector2D()
-    {
-      Vector2D v = new Vector2D(1.0, 10.0);
-      Vector2D w = new Vector2D(2.0, 20.0);
-      Vector2D lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0);
-      Vector2D lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0);
-      Vector2D lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.IsTrue(Vector2D.AreNumericallyEqual(new Vector2D(1.5, 15.0), lerp05));
-    }
-
-
-    [Test]
     public void CosineInterpolationVector3F()
     {
       Vector3F v = new Vector3F(1.0f, 10.0f, 100.0f);
@@ -529,21 +377,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
       Assert.AreEqual(new Vector3F(1.5f, 15.0f, 150.0f), lerp05);
-    }
-
-
-    [Test]
-    public void CosineInterpolationVector3D()
-    {
-      Vector3D v = new Vector3D(1.0, 10.0, 100.0);
-      Vector3D w = new Vector3D(2.0, 20.0, 200.0);
-      Vector3D lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0);
-      Vector3D lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0);
-      Vector3D lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(new Vector3D(1.5, 15.0, 150.0), lerp05));
     }
 
 
@@ -563,21 +396,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void CosineInterpolationVector4D()
-    {
-      Vector4D v = new Vector4D(1.0, 10.0, 100.0, 1000.0);
-      Vector4D w = new Vector4D(2.0, 20.0, 200.0, 2000.0);
-      Vector4D lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0);
-      Vector4D lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0);
-      Vector4D lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.IsTrue(Vector4D.AreNumericallyEqual(new Vector4D(1.5, 15.0, 150.0, 1500.0), lerp05));
-    }
-
-
-    [Test]
     public void CosineInterpolationVectorF()
     {
       VectorF v = new VectorF(new[] { 1.0f, 10.0f, 100.0f, 1000.0f });
@@ -593,33 +411,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void CosineInterpolationVectorD()
-    {
-      VectorD v = new VectorD(new[] { 1.0, 10.0, 100.0, 1000.0 });
-      VectorD w = new VectorD(new[] { 2.0, 20.0, 200.0, 2000.0 });
-      VectorD lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0);
-      VectorD lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0);
-      VectorD lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.IsTrue(VectorD.AreNumericallyEqual(new VectorD(new[] { 1.5, 15.0, 150.0, 1500.0 }), lerp05));
-    }
-
-
-    [Test]
     [ExpectedException(typeof(ArgumentNullException))]
     public void CosineInterpolationVectorFException()
     {
       InterpolationHelper.CosineInterpolation(null, new VectorF(), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CosineInterpolationVectorDException()
-    {
-      InterpolationHelper.CosineInterpolation(null, new VectorD(), 0);
     }
 
 
@@ -632,26 +427,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CosineInterpolationVectorDException2()
-    {
-      InterpolationHelper.CosineInterpolation(new VectorD(), null, 0);
-    }
-
-
-    [Test]
     [ExpectedException(typeof(ArgumentException))]
     public void CosineInterpolationVectorFException3()
     {
       InterpolationHelper.CosineInterpolation(new VectorF(3), new VectorF(4), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void CosineInterpolationVectorDException3()
-    {
-      InterpolationHelper.CosineInterpolation(new VectorD(3), new VectorD(4), 0);
     }
 
 
@@ -681,14 +460,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void PolynomialInterpolationDoublePrecisionException2()
-    {
-      InterpolationHelper.PolynomialInterpolation(new List<Vector2D>(), 0);
-    }
-
-
-    [Test]
     [ExpectedException(typeof(MathematicsException))]
     public void PolynomialInterpolationSinglePrecisionException3()
     {
@@ -699,30 +470,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void PolynomialInterpolationDoublePrecisionException3()
-    {
-      // Error: 2 identical x values.
-      var points = new[] { new Vector2D(0, 1), new Vector2D(0, 4), new Vector2D(5, -1) };
-      InterpolationHelper.PolynomialInterpolation(points, 0);
-    }
-
-
-    [Test]
     public void PolynomialInterpolationSinglePrecision()
     {
       var points = new[] { new Vector2F(0, 1), new Vector2F(3, 4), new Vector2F(5, -1) };
-
-      Assert.IsTrue(Numeric.AreEqual(points[0].Y, InterpolationHelper.PolynomialInterpolation(points, points[0].X)));
-      Assert.IsTrue(Numeric.AreEqual(points[1].Y, InterpolationHelper.PolynomialInterpolation(points, points[1].X)));
-      Assert.IsTrue(Numeric.AreEqual(points[2].Y, InterpolationHelper.PolynomialInterpolation(points, points[2].X)));
-    }
-
-
-    [Test]
-    public void PolynomialInterpolationDoublePrecision()
-    {
-      var points = new[] { new Vector2D(0, 1), new Vector2D(3, 4), new Vector2D(5, -1) };
 
       Assert.IsTrue(Numeric.AreEqual(points[0].Y, InterpolationHelper.PolynomialInterpolation(points, points[0].X)));
       Assert.IsTrue(Numeric.AreEqual(points[1].Y, InterpolationHelper.PolynomialInterpolation(points, points[1].X)));
@@ -750,26 +500,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void SlerpDoublePrecision()
-    {
-      // Warning: The not all results are not verified
-      QuaternionD q1 = new QuaternionD(1.0, 2.0, 3.0, 4.0).Normalized;
-      QuaternionD q2 = new QuaternionD(2.0, 4.0, 6.0, 8.0).Normalized;
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.75);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-
-      slerp = InterpolationHelper.Slerp(q1, q2, 0);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q1, slerp));
-
-      slerp = InterpolationHelper.Slerp(q1, q2, 1);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q2, slerp));
-    }
-
-
-
-    [Test]
     public void SlerpZSinglePrecision()
     {
       QuaternionF q1 = QuaternionF.Identity;
@@ -779,19 +509,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Vector3F v = slerp.Rotate(Vector3F.UnitX);
       Vector3F result = new Vector3F(1.0f, 1.0f, 0.0f).Normalized;
       Assert.IsTrue(Vector3F.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
-    public void SlerpZDoublePrecision()
-    {
-      QuaternionD q1 = QuaternionD.Identity;
-      QuaternionD q2 = QuaternionD.CreateRotation(Vector3F.UnitZ, Math.PI / 2);
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Vector3D v = slerp.Rotate(Vector3D.UnitX);
-      Vector3D result = new Vector3D(1.0, 1.0, 0.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
     }
 
 
@@ -809,19 +526,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void SlerpYDoublePrecision()
-    {
-      QuaternionD q1 = QuaternionD.Identity;
-      QuaternionD q2 = QuaternionD.CreateRotation(Vector3F.UnitY, Math.PI / 2);
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Vector3D v = slerp.Rotate(Vector3D.UnitZ);
-      Vector3D result = new Vector3D(1.0, 0.0, 1.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
     public void SlerpXSinglePrecision()
     {
       QuaternionF q1 = QuaternionF.Identity;
@@ -835,19 +539,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void SlerpXDoublePrecision()
-    {
-      QuaternionD q1 = QuaternionD.Identity;
-      QuaternionD q2 = QuaternionD.CreateRotation(Vector3F.UnitX, Math.PI / 2);
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Vector3D v = slerp.Rotate(Vector3F.UnitY);
-      Vector3D result = new Vector3D(0.0, 1.0, 1.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
     public void SlerpNegatedSinglePrecision()
     {
       QuaternionF q1 = new QuaternionF(-1.0f, 0.0f, 0.0f, 0.0f);
@@ -857,19 +548,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Vector3F v = slerp.Rotate(Vector3F.UnitX);
       Vector3F result = new Vector3F(1.0f, 1.0f, 0.0f).Normalized;
       Assert.IsTrue(Vector3F.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
-    public void SlerpNegatedDoublePrecision()
-    {
-      QuaternionD q1 = new QuaternionD(-1.0, 0.0, 0.0, 0.0);
-      QuaternionD q2 = QuaternionD.CreateRotation(-Vector3F.UnitZ, -Math.PI / 2);
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Vector3D v = slerp.Rotate(Vector3D.UnitX);
-      Vector3D result = new Vector3D(1.0, 1.0, 0.0).Normalized;
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
     }
 
 
@@ -891,27 +569,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       v = slerp.Rotate(Vector3F.UnitX);
       result = new Vector3F(1.0f / 3.0f, 2.0f / 3.0f, 2.0f / 3.0f);  // I hope this is correct.
       Assert.IsTrue(Vector3F.AreNumericallyEqual(result, v));
-    }
-
-
-    [Test]
-    public void SlerpGeneralDoublePrecision()
-    {
-      QuaternionD q1 = QuaternionD.CreateRotation(-Vector3D.UnitY, Math.PI / 2);
-      QuaternionD q2 = QuaternionD.CreateRotation(Vector3D.UnitZ, Math.PI / 2);
-      QuaternionD slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Vector3D v = slerp.Rotate(Vector3D.UnitX);
-      Vector3D result = new Vector3D(1.0 / 3.0, 2.0 / 3.0, 2.0 / 3.0);  // I hope this is correct.
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
-
-      q1 = QuaternionD.CreateRotation(-Vector3D.UnitY, Math.PI / 2);
-      q2 = QuaternionD.CreateRotation(-Vector3D.UnitZ, -Math.PI / 2);
-      slerp = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      v = slerp.Rotate(Vector3D.UnitX);
-      result = new Vector3D(1.0 / 3.0, 2.0 / 3.0, 2.0 / 3.0);  // I hope this is correct.
-      Assert.IsTrue(Vector3D.AreNumericallyEqual(result, v));
     }
 
 
@@ -953,47 +610,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       result = InterpolationHelper.Squad(q, a, b, p, 0.5f);
       expected = InterpolationHelper.Slerp(q1, q2, 0.5f);
       Assert.IsTrue(QuaternionF.AreNumericallyEqual(expected, result));
-    }
-
-
-    [Test]
-    public void SquadDoublePrecision()
-    {
-      QuaternionD q0 = QuaternionD.CreateRotation(new Vector3D(1, 1, 1), 0.3);
-      QuaternionD q1 = QuaternionD.CreateRotation(new Vector3D(1, 0, 1), 0.4);
-      QuaternionD q2 = QuaternionD.CreateRotation(new Vector3D(1, 0, -1), -0.6);
-      QuaternionD q3 = QuaternionD.CreateRotation(new Vector3D(0, 1, 1), 0.2);
-
-      QuaternionD q, a, b, p;
-      QuaternionD expected;
-
-      InterpolationHelper.SquadSetup(q0, q1, q2, q3, out q, out a, out b, out p);
-
-      // t = 0
-      QuaternionD result = InterpolationHelper.Squad(q, a, b, p, 0.0);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q1, result));
-
-      // t = 1.0f
-      result = InterpolationHelper.Squad(q, a, b, p, 1.0);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(q2, result));
-
-      // Check series (just for debugging)
-      QuaternionD r1, r2, r3, r4, r5, r6, r7, r8, r9;
-      r1 = InterpolationHelper.Squad(q, a, b, p, 0.1);
-      r2 = InterpolationHelper.Squad(q, a, b, p, 0.2);
-      r3 = InterpolationHelper.Squad(q, a, b, p, 0.3);
-      r4 = InterpolationHelper.Squad(q, a, b, p, 0.4);
-      r5 = InterpolationHelper.Squad(q, a, b, p, 0.5);
-      r6 = InterpolationHelper.Squad(q, a, b, p, 0.6);
-      r7 = InterpolationHelper.Squad(q, a, b, p, 0.7);
-      r8 = InterpolationHelper.Squad(q, a, b, p, 0.8);
-      r9 = InterpolationHelper.Squad(q, a, b, p, 0.9);
-
-      // q0 = q1, q2 = q3
-      InterpolationHelper.SquadSetup(q1, q1, q2, q2, out q, out a, out b, out p);
-      result = InterpolationHelper.Squad(q, a, b, p, 0.5);
-      expected = InterpolationHelper.Slerp(q1, q2, 0.5);
-      Assert.IsTrue(QuaternionD.AreNumericallyEqual(expected, result));
     }
 
 

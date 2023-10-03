@@ -1101,28 +1101,6 @@ namespace DigitalRise.Mathematics.Algebra
       return this;
     }
 
-
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Matrix33F"/> to <see cref="Matrix33D"/>.
-    /// </summary>
-    /// <param name="matrix">The matrix.</param>
-    /// <returns>The result of the conversion.</returns>
-    public static implicit operator Matrix33D(Matrix33F matrix)
-    {
-      return new Matrix33D(matrix.M00, matrix.M01, matrix.M02,
-                           matrix.M10, matrix.M11, matrix.M12,
-                           matrix.M20, matrix.M21, matrix.M22);
-    }
-
-
-    /// <summary>
-    /// Converts this <see cref="Matrix33F"/> to <see cref="Matrix33D"/>.
-    /// </summary>
-    /// <returns>The result of the conversion.</returns>
-    public Matrix33D ToMatrix33D()
-    {
-      return this;
-    }
     #endregion
 
 

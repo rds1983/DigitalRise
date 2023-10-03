@@ -1450,42 +1450,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitCastToVectorD()
-    {
-      float x = 23.4f;
-      float y = -11.0f;
-      float z = 0.0f;
-      float w = 0.3f;
-      VectorD vectorD = new VectorF(new[] { x, y, z, w });
-      Assert.AreEqual(4, vectorD.NumberOfElements);
-      Assert.AreEqual((double)x, vectorD[0]);
-      Assert.AreEqual((double)y, vectorD[1]);
-      Assert.AreEqual((double)z, vectorD[2]);
-      Assert.AreEqual((double)w, vectorD[3]);
-
-      VectorF vectorF = null;
-      vectorD = vectorF;
-      Assert.IsNull(vectorD);
-    }
-
-
-    [Test]
-    public void ToVectorD()
-    {
-      float x = 23.4f;
-      float y = -11.0f;
-      float z = 0.0f;
-      float w = 0.3f;
-      VectorD vectorD = new VectorF(new[] { x, y, z, w }).ToVectorD();
-      Assert.AreEqual(4, vectorD.NumberOfElements);
-      Assert.AreEqual((double)x, vectorD[0]);
-      Assert.AreEqual((double)y, vectorD[1]);
-      Assert.AreEqual((double)z, vectorD[2]);
-      Assert.AreEqual((double)w, vectorD[3]);
-    }
-
-
-    [Test]
     public void ExplicitArrayCast()
     {
       float x = 23.4f;

@@ -1137,60 +1137,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ImplicitMatrix44DCast()
-    {
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f; float m03 = 0.3f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f; float m13 = 0.4f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f; float m23 = 0.5f;
-      float m30 = 53.5f; float m31 = 3.3f; float m32 = -14.0f; float m33 = 0.6f;
-      Matrix44D matrix44D = new Matrix44F(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix44D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix44D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrix44D[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m03, (float)matrix44D[0, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix44D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix44D[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrix44D[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m13, (float)matrix44D[1, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrix44D[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrix44D[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrix44D[2, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m23, (float)matrix44D[2, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m30, (float)matrix44D[3, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m31, (float)matrix44D[3, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m32, (float)matrix44D[3, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m33, (float)matrix44D[3, 3]));
-    }
-
-
-    [Test]
-    public void ToMatrix44D()
-    {
-      float m00 = 23.5f; float m01 = 0.0f; float m02 = -11.0f; float m03 = 0.3f;
-      float m10 = 33.5f; float m11 = 1.1f; float m12 = -12.0f; float m13 = 0.4f;
-      float m20 = 43.5f; float m21 = 2.2f; float m22 = -13.0f; float m23 = 0.5f;
-      float m30 = 53.5f; float m31 = 3.3f; float m32 = -14.0f; float m33 = 0.6f;
-      Matrix44D matrix44D = new Matrix44F(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33).ToMatrix44D();
-      Assert.IsTrue(Numeric.AreEqual(m00, (float)matrix44D[0, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m01, (float)matrix44D[0, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m02, (float)matrix44D[0, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m03, (float)matrix44D[0, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m10, (float)matrix44D[1, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m11, (float)matrix44D[1, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m12, (float)matrix44D[1, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m13, (float)matrix44D[1, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m20, (float)matrix44D[2, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m21, (float)matrix44D[2, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m22, (float)matrix44D[2, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m23, (float)matrix44D[2, 3]));
-      Assert.IsTrue(Numeric.AreEqual(m30, (float)matrix44D[3, 0]));
-      Assert.IsTrue(Numeric.AreEqual(m31, (float)matrix44D[3, 1]));
-      Assert.IsTrue(Numeric.AreEqual(m32, (float)matrix44D[3, 2]));
-      Assert.IsTrue(Numeric.AreEqual(m33, (float)matrix44D[3, 3]));
-    }
-
-
-    [Test]
     public void TransformPosition()
     {
       Matrix44F scale = Matrix44F.CreateScale(2.5f);
