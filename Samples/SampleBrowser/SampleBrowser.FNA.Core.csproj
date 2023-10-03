@@ -6,10 +6,9 @@
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\DigitalRise.Game.Input\DigitalRise.Game.Input.FNA.Core.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRise.Game.UI\DigitalRise.Game.UI.FNA.Core.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.FNA.Core.csproj" />
   </ItemGroup>
 </Project>

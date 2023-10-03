@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DigitalRise.GameBase\DigitalRise.GameBase.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRise.Input\DigitalRise.Input.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise\DigitalRise.FNA.Core.csproj" />
     <ProjectReference Include="..\DigitalRise.Mathematics\DigitalRise.Mathematics.FNA.Core.csproj" />
   </ItemGroup>
 </Project>
