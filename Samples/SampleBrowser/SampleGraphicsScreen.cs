@@ -6,7 +6,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using FontStashSharp;
@@ -95,7 +94,7 @@ namespace Samples
       var camera = new Camera(projection);
       _cameraNode2D = new CameraNode(camera)
       {
-        PoseWorld = new Pose(new Vector3F(0, 0, 1000)),
+        PoseWorld = new Pose(new Vector3(0, 0, 1000)),
       };
 
       // Initialize renderers.

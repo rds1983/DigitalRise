@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -42,7 +42,7 @@ namespace DigitalRise.Graphics.SceneGraph
     //--------------------------------------------------------------
 
     private bool _checkShadowCusterCulling;
-    private Vector3F _cameraPosition;
+    private Vector3 _cameraPosition;
     private float _lodBiasOverYScale;
     #endregion
 
@@ -154,9 +154,9 @@ namespace DigitalRise.Graphics.SceneGraph
           "Assuming that all scale factors are positive.");
 
         // Determine view-normalized distance between scene node and camera node.
-        distance = (node.PoseWorld.Position - _cameraPosition).Length;
+        distance = (node.PoseWorld.Position - _cameraPosition).Length();
         distance *= _lodBiasOverYScale;
-        distance /= node.ScaleWorld.LargestComponent;
+        distance /= node.ScaleWorld.LargestComponent();
       }
 
       // Distance Culling: Only handle nodes that are within MaxDistance.

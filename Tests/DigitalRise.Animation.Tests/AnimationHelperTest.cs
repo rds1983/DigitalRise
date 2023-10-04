@@ -5,8 +5,9 @@ using DigitalRise.Animation.Character;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Tests
 {
@@ -245,35 +246,35 @@ namespace DigitalRise.Animation.Tests
     [Test]
     public void ComputeLinearVelocity()
     {
-      var v = new Vector3F(1, 2, 3);
-      var p = new Vector3F(-7, 8, 4);
+      var v = new Vector3(1, 2, 3);
+      var p = new Vector3(-7, 8, 4);
       var dt = 1 / 60f;
 
       var targetPosition = p + v * dt;
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt)));
     }
 
 
     [Test]
     public void ComputeAngularVelocity()
     {
-      var v = new Vector3F(0.1f, 0.2f, 0.3f);
-      var o0 = QuaternionF.CreateRotation(new Vector3F(-7, 8, 0.3f).Normalized, 4.2f);
+      var v = new Vector3(0.1f, 0.2f, 0.3f);
+      var o0 = QuaternionF.CreateRotation(new Vector3(-7, 8, 0.3f).Normalized(), 4.2f);
       var dt = 1 / 60f;
 
-      var o1 = (QuaternionF.CreateRotation(v, v.Length * dt) * o0).Normalized;
+      var o1 = (QuaternionF.CreateRotation(v, v.Length() * dt) * o0).Normalized;
       
       // Negate quaternion. This is still the same rotation, but now we can test if 
       // the rotation around the shortest arc is used.
       o1 = -o1;
 
       // We use a big epsilon. Quaternion multiplication seems to create a large error...?
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0, o1, dt), 0.01f));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0.ToRotationMatrix33(), o1.ToRotationMatrix33(), dt), 0.01f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0, o1, dt), 0.01f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0.ToRotationMatrix33(), o1.ToRotationMatrix33(), dt), 0.01f));
 
       // Zero rotation.
-      Assert.AreEqual(Vector3F.Zero, AnimationHelper.ComputeAngularVelocity(o0, -o0, dt));
+      Assert.AreEqual(Vector3.Zero, AnimationHelper.ComputeAngularVelocity(o0, -o0, dt));
     }
 
 
@@ -366,7 +367,7 @@ namespace DigitalRise.Animation.Tests
       // Animation with 1 keyframe, which is not Identity.
       var srtKeyFrameAnimation = new SrtKeyFrameAnimation();
       var time = TimeSpan.FromTicks(100000);
-      var value = new SrtTransform(random.NextVector3F(-2, 2), random.NextQuaternionF(), random.NextVector3F(-10, 10));
+      var value = new SrtTransform(random.NextVector3(-2, 2), random.NextQuaternionF(), random.NextVector3(-10, 10));
       srtKeyFrameAnimation.KeyFrames.Add(new KeyFrame<SrtTransform>(time, value));
 
       var srtAnimation = AnimationHelper.Compress(srtKeyFrameAnimation, 2, 360, 10);
@@ -427,10 +428,10 @@ namespace DigitalRise.Animation.Tests
       // Animation with 2 keyframe, which are not Identity.
       var srtKeyFrameAnimation = new SrtKeyFrameAnimation();
       var time0 = TimeSpan.FromTicks(100000);
-      var value0 = new SrtTransform(random.NextVector3F(-2, 2), random.NextQuaternionF(), random.NextVector3F(-10, 10));
+      var value0 = new SrtTransform(random.NextVector3(-2, 2), random.NextQuaternionF(), random.NextVector3(-10, 10));
 
       var time1 = TimeSpan.FromTicks(200000);
-      var value1 = new SrtTransform(random.NextVector3F(-2, 2), random.NextQuaternionF(), random.NextVector3F(-10, 10));
+      var value1 = new SrtTransform(random.NextVector3(-2, 2), random.NextQuaternionF(), random.NextVector3(-10, 10));
 
       srtKeyFrameAnimation.KeyFrames.Add(new KeyFrame<SrtTransform>(time0, value0));
       srtKeyFrameAnimation.KeyFrames.Add(new KeyFrame<SrtTransform>(time1, value1));
@@ -464,16 +465,16 @@ namespace DigitalRise.Animation.Tests
 
       // Define a view important keyframes.
       var time0 = TimeSpan.FromTicks(100000);
-      var value0 = new SrtTransform(Vector3F.One, QuaternionF.Identity, Vector3F.Zero);
+      var value0 = new SrtTransform(Vector3.One, QuaternionF.Identity, Vector3.Zero);
 
       var time1 = TimeSpan.FromTicks(200000);
-      var value1 = new SrtTransform(new Vector3F(2, 2, 2), QuaternionF.CreateRotationX(MathHelper.ToRadians(10)), new Vector3F(1, 1, 1));
+      var value1 = new SrtTransform(new Vector3(2, 2, 2), QuaternionF.CreateRotationX(MathHelper.ToRadians(10)), new Vector3(1, 1, 1));
 
       var time2 = TimeSpan.FromTicks(400000);
-      var value2 = new SrtTransform(new Vector3F(-1, -1, -1), QuaternionF.CreateRotationX(MathHelper.ToRadians(80)), new Vector3F(10, 10, 10));
+      var value2 = new SrtTransform(new Vector3(-1, -1, -1), QuaternionF.CreateRotationX(MathHelper.ToRadians(80)), new Vector3(10, 10, 10));
 
       var time3 = TimeSpan.FromTicks(500000);
-      var value3 = new SrtTransform(new Vector3F(3, 3, 3), QuaternionF.CreateRotationX(MathHelper.ToRadians(-10)), new Vector3F(-2, -2, -2));
+      var value3 = new SrtTransform(new Vector3(3, 3, 3), QuaternionF.CreateRotationX(MathHelper.ToRadians(-10)), new Vector3(-2, -2, -2));
 
       srtKeyFrameAnimation.KeyFrames.Add(new KeyFrame<SrtTransform>(time0, value0));
       srtKeyFrameAnimation.KeyFrames.Add(new KeyFrame<SrtTransform>(time1, value1));
@@ -492,9 +493,9 @@ namespace DigitalRise.Animation.Tests
       Assert.AreEqual(srtKeyFrameAnimation.GetTotalDuration(), srtAnimation.GetTotalDuration());
       Assert.IsNotNull(srtAnimation.Scale);
 
-      Assert.AreEqual(4, ((KeyFrameAnimation<Vector3F>)srtAnimation.Scale).KeyFrames.Count);
+      Assert.AreEqual(4, ((KeyFrameAnimation<Vector3>)srtAnimation.Scale).KeyFrames.Count);
       Assert.AreEqual(4, ((KeyFrameAnimation<QuaternionF>)srtAnimation.Rotation).KeyFrames.Count);
-      Assert.AreEqual(4, ((KeyFrameAnimation<Vector3F>)srtAnimation.Translation).KeyFrames.Count);
+      Assert.AreEqual(4, ((KeyFrameAnimation<Vector3>)srtAnimation.Translation).KeyFrames.Count);
 
       var defaultSource = SrtTransform.Identity;
       var defaultTarget = SrtTransform.Identity;
@@ -524,9 +525,9 @@ namespace DigitalRise.Animation.Tests
         var valueNew = new SrtTransform();
         srtAnimation.GetValue(time, ref defaultSource, ref defaultTarget, ref valueNew);
 
-        Assert.IsTrue((valueRef.Scale - valueNew.Scale).Length <= scaleThreshold);
+        Assert.IsTrue((valueRef.Scale - valueNew.Scale).Length() <= scaleThreshold);
         Assert.IsTrue(QuaternionF.GetAngle(valueRef.Rotation, valueNew.Rotation) <= MathHelper.ToRadians(rotationThreshold));
-        Assert.IsTrue((valueRef.Translation - valueNew.Translation).Length <= translationThreshold);
+        Assert.IsTrue((valueRef.Translation - valueNew.Translation).Length() <= translationThreshold);
       }
 
       // ----- Compress animation with zero tolerance. 
@@ -536,9 +537,9 @@ namespace DigitalRise.Animation.Tests
       Assert.AreEqual(srtKeyFrameAnimation.GetTotalDuration(), srtAnimation.GetTotalDuration());
       Assert.IsNotNull(srtAnimation.Scale);
 
-      Assert.AreEqual(srtKeyFrameAnimation.KeyFrames.Count, ((KeyFrameAnimation<Vector3F>)srtAnimation.Scale).KeyFrames.Count);
+      Assert.AreEqual(srtKeyFrameAnimation.KeyFrames.Count, ((KeyFrameAnimation<Vector3>)srtAnimation.Scale).KeyFrames.Count);
       Assert.AreEqual(srtKeyFrameAnimation.KeyFrames.Count, ((KeyFrameAnimation<QuaternionF>)srtAnimation.Rotation).KeyFrames.Count);
-      Assert.AreEqual(srtKeyFrameAnimation.KeyFrames.Count, ((KeyFrameAnimation<Vector3F>)srtAnimation.Translation).KeyFrames.Count);
+      Assert.AreEqual(srtKeyFrameAnimation.KeyFrames.Count, ((KeyFrameAnimation<Vector3>)srtAnimation.Translation).KeyFrames.Count);
 
       // Take a view samples.
       for (int i = 0; i < numberOfSamples; i++)
@@ -587,9 +588,9 @@ namespace DigitalRise.Animation.Tests
         animation.GetValue(time, ref defaultSource, ref defaultTarget, ref value);
 
         // Apply small variation (within thresholds).
-        value.Scale += random.NextVector3F(-1, 1).Normalized * (scaleThreshold / 2);
-        value.Rotation = QuaternionF.CreateRotation(random.NextVector3F(-1, 1), rotationThreshold / 2) * value.Rotation;
-        value.Translation += random.NextVector3F(-1, 1).Normalized * (translationThreshold / 2);
+        value.Scale += random.NextVector3(-1, 1).Normalized() * (scaleThreshold / 2);
+        value.Rotation = QuaternionF.CreateRotation(random.NextVector3(-1, 1), rotationThreshold / 2) * value.Rotation;
+        value.Translation += random.NextVector3(-1, 1).Normalized() * (translationThreshold / 2);
 
         animation.KeyFrames.Insert(insertionIndex, new KeyFrame<SrtTransform>(time, value));
         insertionIndex++;

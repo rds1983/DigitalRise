@@ -7,8 +7,7 @@ using System.Globalization;
 using System.Xml.Serialization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {  
@@ -107,7 +106,7 @@ namespace DigitalRise.Geometry.Shapes
     /// This property returns a random point of the shape. If possible, a point in the center of the 
     /// shape is returned. If not possible, a surface point is returned.
     /// </remarks>
-    public abstract Vector3F InnerPoint { get; }
+    public abstract Vector3 InnerPoint { get; }
 
 
     /// <summary>
@@ -243,7 +242,7 @@ namespace DigitalRise.Geometry.Shapes
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Aabb GetAabb()
     {
-      return GetAabb(Vector3F.One, Pose.Identity);
+      return GetAabb(Vector3.One, Pose.Identity);
     }
 
 
@@ -264,7 +263,7 @@ namespace DigitalRise.Geometry.Shapes
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public Aabb GetAabb(Pose pose)
     {
-      return GetAabb(Vector3F.One, pose);
+      return GetAabb(Vector3.One, pose);
     }
 
 
@@ -285,7 +284,7 @@ namespace DigitalRise.Geometry.Shapes
     /// The AABB is axis-aligned to the axes of the world space (or the parent coordinate space).
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public abstract Aabb GetAabb(Vector3F scale, Pose pose);
+    public abstract Aabb GetAabb(Vector3 scale, Pose pose);
 
 
     /// <summary>
@@ -323,7 +322,7 @@ namespace DigitalRise.Geometry.Shapes
         throw new ArgumentOutOfRangeException("iterationLimit", "The iteration limit must be greater than 0.");
 
       // Compute absolute distance threshold.
-      float maxExtent = GetAabb().Extent.LargestComponent;
+      float maxExtent = GetAabb().Extent.LargestComponent();
       float absoluteThreshold = maxExtent * relativeDistanceThreshold;
 
       return OnGetMesh(absoluteThreshold, iterationLimit);

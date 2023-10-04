@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -15,23 +17,23 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void Constructor()
     {
-      Assert.AreEqual(new Vector3F(0, 1, 0), new PlaneShape().Normal );
+      Assert.AreEqual(new Vector3(0, 1, 0), new PlaneShape().Normal );
       Assert.AreEqual(0, new PlaneShape().DistanceFromOrigin);
 
-      Vector3F normal = new Vector3F(1, 2, 3).Normalized;
+      Vector3 normal = new Vector3(1, 2, 3).Normalized();
       var distanceFromOrigin = 4;
       Assert.AreEqual(normal, new PlaneShape(normal, distanceFromOrigin).Normal);
       Assert.AreEqual(distanceFromOrigin, new PlaneShape(normal, distanceFromOrigin).DistanceFromOrigin);
       Assert.AreEqual(normal, new PlaneShape(new Plane(normal, distanceFromOrigin)).Normal);
       Assert.AreEqual(distanceFromOrigin, new PlaneShape(new Plane(normal, distanceFromOrigin)).DistanceFromOrigin);
 
-      Assert.AreEqual(new Vector3F(-1, 0, 0), new PlaneShape(new Vector3F(-1, 0, 0), new Vector3F(-4, 1, 2)).Normal);
-      Assert.AreEqual(distanceFromOrigin, new PlaneShape(new Vector3F(-1, 0, 0), new Vector3F(-4, 1, 2)).DistanceFromOrigin);
+      Assert.AreEqual(new Vector3(-1, 0, 0), new PlaneShape(new Vector3(-1, 0, 0), new Vector3(-4, 1, 2)).Normal);
+      Assert.AreEqual(distanceFromOrigin, new PlaneShape(new Vector3(-1, 0, 0), new Vector3(-4, 1, 2)).DistanceFromOrigin);
 
-      Vector3F p0 = new Vector3F(1,4,0);
-      Vector3F p1 = new Vector3F(0,4,-1);
-      Vector3F p2 = new Vector3F(-1,4,0);
-      Assert.AreEqual(new Vector3F(0, 1, 0).Normalized, new PlaneShape(p0, p1, p2).Normal);
+      Vector3 p0 = new Vector3(1,4,0);
+      Vector3 p1 = new Vector3(0,4,-1);
+      Vector3 p2 = new Vector3(-1,4,0);
+      Assert.AreEqual(new Vector3(0, 1, 0).Normalized(), new PlaneShape(p0, p1, p2).Normal);
       Assert.AreEqual(4, new PlaneShape(p0, p1, p2).DistanceFromOrigin);
     }
 
@@ -40,7 +42,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException1()
     {
-      new PlaneShape(new Vector3F(), 1);
+      new PlaneShape(new Vector3(), 1);
     }
 
 
@@ -48,14 +50,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException2()
     {
-      new PlaneShape(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(1, 2, 3));
+      new PlaneShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(1, 2, 3));
     }
 
     [Test]
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException3()
     {
-      new PlaneShape(new Vector3F(), new Vector3F(4, 5, 6));
+      new PlaneShape(new Vector3(), new Vector3(4, 5, 6));
     }
 
 
@@ -63,7 +65,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException4()
     {
-      new PlaneShape(new Plane(new Vector3F(0.5f, 0, 0), 1));
+      new PlaneShape(new Plane(new Vector3(0.5f, 0, 0), 1));
     }
 
 
@@ -71,14 +73,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException5()
     {
-      new PlaneShape(new Vector3F(1, 2, 3), new Vector3F(11, 22, 33), new Vector3F(111, 222, 333));
+      new PlaneShape(new Vector3(1, 2, 3), new Vector3(11, 22, 33), new Vector3(111, 222, 333));
     }
 
 
     [Test]
     public void InnerPoint()
     {
-      Assert.AreEqual(new Vector3F(12, 0, 0),  new PlaneShape(new Vector3F(-1, 0, 0), -12).InnerPoint);
+      Assert.AreEqual(new Vector3(12, 0, 0),  new PlaneShape(new Vector3(-1, 0, 0), -12).InnerPoint);
     }
 
 
@@ -86,14 +88,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void Properties()
     {
       PlaneShape p = new PlaneShape();
-      Assert.AreEqual(new Vector3F(0, 1, 0), p.Normal);
+      Assert.AreEqual(new Vector3(0, 1, 0), p.Normal);
       Assert.AreEqual(0, p.DistanceFromOrigin);
 
       p.DistanceFromOrigin = -10;
-      Assert.AreEqual(new Vector3F(0, 1, 0), p.Normal);
+      Assert.AreEqual(new Vector3(0, 1, 0), p.Normal);
       Assert.AreEqual(-10, p.DistanceFromOrigin);
 
-      var normal = new Vector3F(1, 2, 3).Normalized;
+      var normal = new Vector3(1, 2, 3).Normalized();
       p.Normal = normal;
       Assert.AreEqual(normal, p.Normal);
       Assert.AreEqual(-10, p.DistanceFromOrigin);
@@ -105,7 +107,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void DirectionException()
     {
       PlaneShape p = new PlaneShape();
-      p.Normal = new Vector3F();
+      p.Normal = new Vector3();
     }
 
 
@@ -114,22 +116,22 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float nInf = float.NegativeInfinity;
       float pInf = float.PositiveInfinity;
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, nInf, nInf), new Vector3F(pInf, 0, pInf)), new PlaneShape().GetAabb(Pose.Identity));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf), new Vector3F(pInf)),
-                     new PlaneShape().GetAabb(new Pose(new Vector3F(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f))));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, nInf, nInf), new Vector3F(12, pInf, pInf)),
-                      new PlaneShape(new Vector3F(1, 0, 0), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
-      Assert.AreEqual(new Aabb(new Vector3F(8, nInf, nInf), new Vector3F(pInf, pInf, pInf)),
-                      new PlaneShape(new Vector3F(-1, 0, 0), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, nInf, nInf), new Vector3F(pInf, 102, pInf)),
-                      new PlaneShape(new Vector3F(0, 1, 0), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, 98, nInf), new Vector3F(pInf, pInf, pInf)),
-                      new PlaneShape(new Vector3F(0, -1, 0), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, nInf, nInf), new Vector3F(pInf, pInf, 1002)),
-                      new PlaneShape(new Vector3F(0, 0, 1), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, nInf, 998), new Vector3F(pInf, pInf, pInf)),
-                      new PlaneShape(new Vector3F(0, 0, -1), 2).GetAabb(new Pose(new Vector3F(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, nInf, nInf), new Vector3(pInf, 0, pInf)), new PlaneShape().GetAabb(Pose.Identity));
+      Assert.AreEqual(new Aabb(new Vector3(nInf), new Vector3(pInf)),
+                     new PlaneShape().GetAabb(new Pose(new Vector3(10, 100, -13),
+                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, nInf, nInf), new Vector3(12, pInf, pInf)),
+                      new PlaneShape(new Vector3(1, 0, 0), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(8, nInf, nInf), new Vector3(pInf, pInf, pInf)),
+                      new PlaneShape(new Vector3(-1, 0, 0), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, nInf, nInf), new Vector3(pInf, 102, pInf)),
+                      new PlaneShape(new Vector3(0, 1, 0), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, 98, nInf), new Vector3(pInf, pInf, pInf)),
+                      new PlaneShape(new Vector3(0, -1, 0), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, nInf, nInf), new Vector3(pInf, pInf, 1002)),
+                      new PlaneShape(new Vector3(0, 0, 1), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+      Assert.AreEqual(new Aabb(new Vector3(nInf, nInf, 998), new Vector3(pInf, pInf, pInf)),
+                      new PlaneShape(new Vector3(0, 0, -1), 2).GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
       // TODO: Test rotations.
     }
 
@@ -137,7 +139,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetMesh()
     {
-      PlaneShape p = new PlaneShape(new Vector3F(1, 2, 3).Normalized, 10);
+      PlaneShape p = new PlaneShape(new Vector3(1, 2, 3).Normalized(), 10);
 
       var m = p.GetMesh(0, 1);
       Assert.Greater(m.NumberOfTriangles, 0);
@@ -157,24 +159,24 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetIntersection()
     {
-      Plane a = new Plane(new Vector3F(1, 2, 3).Normalized, 10);
-      Plane b = new Plane(new Vector3F(-2, 7, -4).Normalized, -22);
-      Plane c = new Plane(new Vector3F(34, -22, -6).Normalized, 5);
-      Vector3F intersection = GeometryHelper.GetIntersection(a, b, c);
+      Plane a = new Plane(new Vector3(1, 2, 3).Normalized(), 10);
+      Plane b = new Plane(new Vector3(-2, 7, -4).Normalized(), -22);
+      Plane c = new Plane(new Vector3(34, -22, -6).Normalized(), 5);
+      Vector3 intersection = GeometryHelper.GetIntersection(a, b, c);
       Assert.IsTrue(GeometryHelper.GetDistance(a, intersection) < 0.00001f);
       Assert.IsTrue(GeometryHelper.GetDistance(b, intersection) < 0.00001f);
       Assert.IsTrue(GeometryHelper.GetDistance(c, intersection) < 0.00001f);
 
-      a = new Plane(new Vector3F(1, 0, 0), 10);
-      b = new Plane(new Vector3F(-2, 7, -4).Normalized, -22);
+      a = new Plane(new Vector3(1, 0, 0), 10);
+      b = new Plane(new Vector3(-2, 7, -4).Normalized(), -22);
       c = new Plane(a.Normal, 5);
       intersection = GeometryHelper.GetIntersection(a, b, c);
       Assert.IsTrue(float.IsNaN(intersection.X));
       Assert.IsTrue(float.IsNaN(intersection.Y));
       Assert.IsTrue(float.IsNaN(intersection.Z));
 
-      a = new Plane(new Vector3F(1, 0, 0).Normalized, 10);
-      b = new Plane(new Vector3F(-2, 7, -4).Normalized, -22);
+      a = new Plane(new Vector3(1, 0, 0).Normalized(), 10);
+      b = new Plane(new Vector3(-2, 7, -4).Normalized(), -22);
       c = new Plane(a.Normal, a.DistanceFromOrigin);
       intersection = GeometryHelper.GetIntersection(a, b, c);
       Assert.IsTrue(float.IsNaN(intersection.X));
@@ -189,14 +191,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ToStringTest()
     {
-      Assert.AreEqual("PlaneShape { Normal = (0; 0; 1), DistanceFromOrigin = 3 }", new PlaneShape(new Vector3F(0, 0, 1), 3).ToString());
+      Assert.AreEqual("PlaneShape { Normal = (0; 0; 1), DistanceFromOrigin = 3 }", new PlaneShape(new Vector3(0, 0, 1), 3).ToString());
     }
 
 
     [Test]
     public void Clone()
     {
-      PlaneShape plane = new PlaneShape(new Vector3F(1, 2, 3).Normalized, new Vector3F(2, 3, 4));
+      PlaneShape plane = new PlaneShape(new Vector3(1, 2, 3).Normalized(), new Vector3(2, 3, 4));
       PlaneShape clone = plane.Clone() as PlaneShape;
       Assert.IsNotNull(clone);
       Assert.AreEqual(plane.Normal, clone.Normal);
@@ -209,7 +211,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void SerializationXml()
     {
-      var a = new PlaneShape(new Vector3F(1, 2, 3).Normalized, 44);
+      var a = new PlaneShape(new Vector3(1, 2, 3).Normalized(), 44);
 
       // Serialize object.
       var stream = new MemoryStream();
@@ -235,7 +237,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Ignore("Binary serialization not supported in PCL version.")]
     public void SerializationBinary()
     {
-      var a = new PlaneShape(new Vector3F(1, 2, 3).Normalized, 44);
+      var a = new PlaneShape(new Vector3(1, 2, 3).Normalized(), 44);
 
       // Serialize object.
       var stream = new MemoryStream();

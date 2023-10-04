@@ -9,7 +9,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -34,7 +33,6 @@ namespace WpfInteropSample2
     {
       _meshRenderer = new MeshRenderer();
 
-      var contentManager = ServiceLocator.Current.GetInstance<ContentManager>();
       var spriteFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
       _debugRenderer = new DebugRenderer(graphicsService, spriteFont);
 
@@ -50,7 +48,7 @@ namespace WpfInteropSample2
       CameraNode = new CameraNode(new Camera(projection))
       {
         Name = "CameraPerspective",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(10, 5, 10), new Vector3F(0, 1, 0), new Vector3F(0, 1, 0)).Inverse),
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(10, 5, 10), new Vector3(0, 1, 0), new Vector3(0, 1, 0)).Inverse),
       };
       Scene.Children.Add(CameraNode);
     }

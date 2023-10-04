@@ -6,7 +6,7 @@ using System;
 using DigitalRise.Animation.Character;
 using DigitalRise.Animation.Traits;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation
 {
@@ -37,7 +37,7 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Scale"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Scale"/> value.</value>
-    public IAnimation<Vector3F> Scale { get; set; }
+    public IAnimation<Vector3> Scale { get; set; }
 
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Translation"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Translation"/> value.</value>
-    public IAnimation<Vector3F> Translation { get; set; }
+    public IAnimation<Vector3> Translation { get; set; }
     #endregion
 
 
@@ -80,7 +80,7 @@ namespace DigitalRise.Animation
     /// <param name="scale">The animation of the <see cref="SrtTransform.Scale"/> component.</param>
     /// <param name="rotation">The animation of the <see cref="SrtTransform.Rotation"/> component.</param>
     /// <param name="translation">The animation of the <see cref="SrtTransform.Translation"/> component.</param>
-    public SrtAnimation(IAnimation<Vector3F> scale, IAnimation<QuaternionF> rotation, IAnimation<Vector3F> translation)
+    public SrtAnimation(IAnimation<Vector3> scale, IAnimation<QuaternionF> rotation, IAnimation<Vector3> translation)
     {
       Scale = scale;
       Rotation = rotation;

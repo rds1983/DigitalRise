@@ -351,7 +351,7 @@ namespace Samples.Graphics
 
         // Convert frustum far corners from view space to world space.
         for (int j = 0; j < _frustumFarCorners.Length; j++)
-          _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
+          _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3)_frustumFarCorners[j]);
 
 
         Vector2 randomSeed = AnimateNoise ? new Vector2((float)MathHelper.Frac(context.Time.TotalSeconds))
@@ -401,7 +401,7 @@ namespace Samples.Graphics
           _parameterLightPosition.SetValue((Vector3)(lightPose.Position - cameraPose.Position));
           _parameterLightRange.SetValue(light.Range);
           _parameterLightAttenuation.SetValue(light.Attenuation);
-          _parameterLightDirection.SetValue((Vector3)lightPose.ToWorldDirection(Vector3F.Forward));
+          _parameterLightDirection.SetValue((Vector3)lightPose.ToWorldDirection(Vector3.Forward));
           _parameterLightAngles.SetValue(new Vector2(light.FalloffAngle, light.CutoffAngle));
 
           bool hasTexture = (light.Texture != null);

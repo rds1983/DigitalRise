@@ -88,7 +88,7 @@ namespace DigitalRise.Geometry.Meshes
     /// <value>The length.</value>
     internal float Length
     {
-      get { return (Origin.Position - Twin.Origin.Position).Length; }
+      get { return (Origin.Position - Twin.Origin.Position).Length(); }
     }
   }
 }

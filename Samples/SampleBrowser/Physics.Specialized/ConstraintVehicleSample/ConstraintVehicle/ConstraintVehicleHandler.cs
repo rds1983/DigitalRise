@@ -8,7 +8,7 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -130,8 +130,8 @@ namespace DigitalRise.Physics.Specialized
 
         // If the ray is nearly parallel to the ground, then the contact is not
         // useful and we ignore it.
-        Vector3F up = wheel.Vehicle.Chassis.Pose.Orientation.GetColumn(1);
-        float normalDotUp = Vector3F.Dot(wheel.GroundNormal, up);
+        Vector3 up = wheel.Vehicle.Chassis.Pose.Orientation.GetColumn(1);
+        float normalDotUp = Vector3.Dot(wheel.GroundNormal, up);
         if (Numeric.IsGreater(normalDotUp, 0))
         {
           wheel.Tag = 1; // Tag = 1 means that this wheel has a useful ground contact.
@@ -142,8 +142,8 @@ namespace DigitalRise.Physics.Specialized
           wheel.Constraint.BodyB = wheel.TouchedBody ?? wheel.Vehicle.Simulation.World;
           wheel.Constraint.Enabled = true;
 
-          wheel.GroundRight = wheel.Vehicle.Chassis.Pose.ToWorldDirection(Matrix33F.CreateRotationY(wheel.SteeringAngle) * Vector3F.UnitX);
-          wheel.GroundForward = Vector3F.Cross(wheel.GroundNormal, wheel.GroundRight).Normalized;
+          wheel.GroundRight = wheel.Vehicle.Chassis.Pose.ToWorldDirection(Matrix33F.CreateRotationY(wheel.SteeringAngle) * Vector3.UnitX);
+          wheel.GroundForward = Vector3.Cross(wheel.GroundNormal, wheel.GroundRight).Normalized();
         }
       }
       else
@@ -178,9 +178,9 @@ namespace DigitalRise.Physics.Specialized
         if (Numeric.IsZero(wheel.BrakeForce))
         {
           // We set the angular velocity, so that the wheel matches the moving underground.
-          Vector3F relativeContactVelocity = vehicle.Chassis.GetVelocityOfWorldPoint(wheel.GroundPosition)
+          Vector3 relativeContactVelocity = vehicle.Chassis.GetVelocityOfWorldPoint(wheel.GroundPosition)
                                              - wheel.TouchedBody.GetVelocityOfWorldPoint(wheel.GroundPosition);
-          float forwardVelocity = Vector3F.Dot(relativeContactVelocity, wheel.GroundForward);
+          float forwardVelocity = Vector3.Dot(relativeContactVelocity, wheel.GroundForward);
           wheel.AngularVelocity = forwardVelocity / wheel.Radius;
           wheel.RotationAngle += wheel.AngularVelocity * deltaTime;
         }

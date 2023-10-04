@@ -30,7 +30,7 @@ The explosion is triggered periodically.",
     {
       // Create an instance of the Explosion particle system.
       _explosion = new Explosion(Services);
-      _explosion.Pose = new Pose(new Vector3F(0, 5, 0));
+      _explosion.Pose = new Pose(new Vector3(0, 5, 0));
       ParticleSystemService.ParticleSystems.Add(_explosion);
 
       _particleSystemNode = new ParticleSystemNode(_explosion);

@@ -7,7 +7,6 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -42,7 +41,7 @@ namespace Samples.Particles
       });
 
       // Particle positions start on a circular area (in the xy-plane).
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
@@ -50,11 +49,11 @@ namespace Samples.Particles
       });
 
       // Particles move in forward direction with a slight random deviation with a random speed.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = 0.15f, Direction = Vector3F.Forward },
+        Distribution = new DirectionDistribution { Deviation = 0.15f, Direction = Vector3.Forward },
       });
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
       ps.Effectors.Add(new StartValueEffector<float>
@@ -77,7 +76,7 @@ namespace Samples.Particles
       });
 
       // To create a wind effect, we apply an acceleration to all particles.
-      ps.Parameters.AddUniform<Vector3F>("Wind").DefaultValue = new Vector3F(-1, 3, -0.5f);
+      ps.Parameters.AddUniform<Vector3>("Wind").DefaultValue = new Vector3(-1, 3, -0.5f);
       ps.Effectors.Add(new LinearAccelerationEffector { AccelerationParameter = "Wind" });
 
       // Each particle starts with a random rotation angle and a random angular speed.
@@ -126,10 +125,10 @@ namespace Samples.Particles
       });
 
       // The Color slowly changes linearly from light gray to a darker gray.
-      ps.Parameters.AddUniform<Vector3F>("StartColor").DefaultValue = new Vector3F(0.8f, 0.8f, 0.8f);
-      ps.Parameters.AddUniform<Vector3F>("EndColor").DefaultValue = new Vector3F(0.3f, 0.3f, 0.3f);
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new Vector3FLerpEffector
+      ps.Parameters.AddUniform<Vector3>("StartColor").DefaultValue = new Vector3(0.8f, 0.8f, 0.8f);
+      ps.Parameters.AddUniform<Vector3>("EndColor").DefaultValue = new Vector3(0.3f, 0.3f, 0.3f);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new Vector3LerpEffector
       {
         ValueParameter = ParticleParameterNames.Color,
         StartParameter = "StartColor",

@@ -424,7 +424,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
 										var opaqueData = new Dictionary<string, object>
 										{
-											["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3().ToXna(),
+											["DiffuseColor"] = gltfMaterial.PbrMetallicRoughness.BaseColorFactor.ToVector3(),
 											["SpecularColor"] = new Vector3(0.1f),
 											["SpecularPower"] = 10.0f,
 											["Texture"] = _assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, image.Uri)
@@ -500,8 +500,8 @@ namespace DigitalRise.Graphics.SceneGraph
 
 				node.Name = gltfNode.Name;
 
-				var translation = gltfNode.Translation != null ? gltfNode.Translation.ToVector3() : Vector3F.Zero;
-				var scale = gltfNode.Scale != null ? gltfNode.Scale.ToVector3() : Vector3F.One;
+				var translation = gltfNode.Translation != null ? gltfNode.Translation.ToVector3() : Vector3.Zero;
+				var scale = gltfNode.Scale != null ? gltfNode.Scale.ToVector3() : Vector3.One;
 				var rotation = gltfNode.Rotation != null ? gltfNode.Rotation.ToQuaternion() : QuaternionF.Identity;
 
 				node.PoseLocal = new Pose(translation, rotation);
@@ -645,7 +645,7 @@ namespace DigitalRise.Graphics.SceneGraph
 						{
 							if (nodeAnimation.Translations != null)
 							{
-								nodeAnimation.Translations[i] -= node.PoseLocal.Position.ToXna();
+								nodeAnimation.Translations[i] -= node.PoseLocal.Position;
 							}
 
 							if (nodeAnimation.Rotations != null)
@@ -658,7 +658,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
 							if (nodeAnimation.Scales != null)
 							{
-								nodeAnimation.Scales[i] /= node.ScaleLocal.ToXna();
+								nodeAnimation.Scales[i] /= node.ScaleLocal;
 							}
 						}
 

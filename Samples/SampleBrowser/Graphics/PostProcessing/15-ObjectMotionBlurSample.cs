@@ -65,8 +65,8 @@ This is typically done by calling SceneHelper.SetLastPose() before setting new p
       _movingCube.SetLastPose(true);
       _rotatingCube.SetLastPose(true);
 
-      _movingCube.PoseWorld = new Pose(new Vector3F(-6, 1, -3 + (float)Math.Sin(_animationTime) * 2f));
-      _rotatingCube.PoseWorld = new Pose(new Vector3F(-4, 1, -1), Matrix33F.CreateRotationX(_animationTime));
+      _movingCube.PoseWorld = new Pose(new Vector3(-6, 1, -3 + (float)Math.Sin(_animationTime) * 2f));
+      _rotatingCube.PoseWorld = new Pose(new Vector3(-4, 1, -1), Matrix33F.CreateRotationX(_animationTime));
 
       // <1> / <Shift> + <1> --> Change number of samples.
       if (InputService.IsPressed(Keys.D1, true))

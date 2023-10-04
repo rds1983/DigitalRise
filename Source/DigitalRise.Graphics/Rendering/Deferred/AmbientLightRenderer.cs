@@ -136,7 +136,7 @@ namespace DigitalRise.Graphics.Rendering
         _parameterLightColor.SetValue((Vector3)light.Color * light.Intensity * hdrScale);
         _parameterHemisphericAttenuation.SetValue(light.HemisphericAttenuation);
 
-        Vector3F upWorld = lightNode.PoseWorld.ToWorldDirection(Vector3F.Up);
+        Vector3 upWorld = lightNode.PoseWorld.ToWorldDirection(Vector3.Up);
         _parameterUp.SetValue((Vector3)upWorld);
 
         if (lightNode.Clip != null)

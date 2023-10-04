@@ -1134,7 +1134,7 @@ namespace DigitalRise.Graphics
 
           // Instead of the cross product we can compute the normal directly.
           // See derivation in "Fast Heightfield Normal Calculation", Game Programming Gems 3, pp. 344.
-          Vector3F normal = new Vector3F(deltaX, 2 * cellSize, deltaZ);
+          Vector3 normal = new Vector3(deltaX, 2 * cellSize, deltaZ);
 
           normal.TryNormalize();
 

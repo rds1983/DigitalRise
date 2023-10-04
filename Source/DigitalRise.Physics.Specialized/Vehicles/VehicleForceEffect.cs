@@ -8,7 +8,8 @@ using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -63,7 +64,7 @@ namespace DigitalRise.Physics.Specialized
       RigidBody chassis = Vehicle.Chassis;
       Pose chassisPose = chassis.Pose;
       float mass = chassis.MassFrame.Mass;
-      Vector3F up = chassisPose.ToWorldDirection(Vector3F.UnitY);
+      Vector3 up = chassisPose.ToWorldDirection(Vector3.UnitY);
       float deltaTime = Simulation.Settings.Timing.FixedTimeStep;
       int numberOfWheels = Vehicle.Wheels.Count;
 
@@ -75,7 +76,7 @@ namespace DigitalRise.Physics.Specialized
         wheel.PreviousSuspensionLength = wheel.SuspensionLength;
         wheel.UpdateContactInfo();
 
-        float normalDotUp = Vector3F.Dot(wheel.GroundNormal, up);
+        float normalDotUp = Vector3.Dot(wheel.GroundNormal, up);
         if (!wheel.HasGroundContact || Numeric.IsLessOrEqual(normalDotUp, 0))
         {
           // -----  The simple case: The wheel is in the air.          
@@ -129,9 +130,9 @@ namespace DigitalRise.Physics.Specialized
         AddForce(wheel.TouchedBody, -normalForce * up, wheel.GroundPosition);
 
         // ----- Ground tangents
-        Vector3F right = chassisPose.ToWorldDirection(Matrix33F.CreateRotationY(wheel.SteeringAngle) * Vector3F.UnitX);
-        Vector3F groundForward = Vector3F.Cross(wheel.GroundNormal, right).Normalized;
-        Vector3F groundRight = Vector3F.Cross(groundForward, wheel.GroundNormal).Normalized;
+        Vector3 right = chassisPose.ToWorldDirection(Matrix33F.CreateRotationY(wheel.SteeringAngle) * Vector3.UnitX);
+        Vector3 groundForward = Vector3.Cross(wheel.GroundNormal, right).Normalized();
+        Vector3 groundRight = Vector3.Cross(groundForward, wheel.GroundNormal).Normalized();
 
         // ----- Side force
         float sideForce = ComputeStopImpulse(wheel, groundRight) / deltaTime;  // force = impulse / dt
@@ -165,8 +166,8 @@ namespace DigitalRise.Physics.Specialized
         float maxFrictionForce = wheel.Friction * normalForce;
 
         // Compute combined force parallel to ground surface.
-        Vector3F tangentForce = rollingFrictionForce * groundForward + sideForce * groundRight;
-        float tangentForceLength = tangentForce.Length;
+        Vector3 tangentForce = rollingFrictionForce * groundForward + sideForce * groundRight;
+        float tangentForceLength = tangentForce.Length();
         if (tangentForceLength > maxFrictionForce)
         {
           // Not enough traction - that means, we are sliding!
@@ -192,15 +193,15 @@ namespace DigitalRise.Physics.Specialized
         // Apply side friction force
         // If we apply the side force on the ground position, the car starts rolling (tilt) in 
         // tight curves. If we apply the force on a higher position, rolling is reduced.
-        Vector3F sideForcePosition = wheel.GroundPosition + wheel.RollReduction * (wheel.SuspensionLength + wheel.Radius) * up;
+        Vector3 sideForcePosition = wheel.GroundPosition + wheel.RollReduction * (wheel.SuspensionLength + wheel.Radius) * up;
         AddForce(chassis, sideForce * groundRight, sideForcePosition);
         AddForce(wheel.TouchedBody, -sideForce * groundRight, sideForcePosition);
 
         // ----- Update AngularVelocity and Rotation.
         // We set the angular velocity, so that the wheel matches the moving underground.
-        Vector3F relativeContactVelocity = chassis.GetVelocityOfWorldPoint(wheel.GroundPosition)
+        Vector3 relativeContactVelocity = chassis.GetVelocityOfWorldPoint(wheel.GroundPosition)
                                            - wheel.TouchedBody.GetVelocityOfWorldPoint(wheel.GroundPosition);
-        float forwardVelocity = Vector3F.Dot(relativeContactVelocity, groundForward);
+        float forwardVelocity = Vector3.Dot(relativeContactVelocity, groundForward);
         wheel.AngularVelocity = forwardVelocity / wheel.Radius;
         wheel.RotationAngle += wheel.AngularVelocity * deltaTime;
 
@@ -212,7 +213,7 @@ namespace DigitalRise.Physics.Specialized
 
 
     // Computes an impulse that would stop motion in the given direction.
-    private float ComputeStopImpulse(Wheel wheel, Vector3F direction)
+    private float ComputeStopImpulse(Wheel wheel, Vector3 direction)
     {
       // A = chassis, B = ground
       var bodyA = Vehicle.Chassis;
@@ -229,9 +230,9 @@ namespace DigitalRise.Physics.Specialized
 
       // Jacobians.
       var jLinA = -direction;
-      var jAngA = -Vector3F.Cross(rA, direction);
+      var jAngA = -Vector3.Cross(rA, direction);
       var jLinB = direction;
-      var jAngB = Vector3F.Cross(rB, direction);
+      var jAngB = Vector3.Cross(rB, direction);
 
       // M^-1 * J^T
       var WJTLinA = bodyA.MassInverse * jLinA;
@@ -240,15 +241,15 @@ namespace DigitalRise.Physics.Specialized
       var WJTAngB = bodyB.InertiaInverseWorld * jAngB;
 
       // J * M^-1 * J^T
-      float JWJT = Vector3F.Dot(jLinA, WJTLinA) + Vector3F.Dot(jAngA, WJTAngA)
-                   + Vector3F.Dot(jLinB, WJTLinB) + Vector3F.Dot(jAngB, WJTAngB);
+      float JWJT = Vector3.Dot(jLinA, WJTLinA) + Vector3.Dot(jAngA, WJTAngA)
+                   + Vector3.Dot(jLinB, WJTLinB) + Vector3.Dot(jAngB, WJTAngB);
       var JWJTInverse = 1 / JWJT;
 
       // Relative velocity = J * v
-      var relativeVelocity = Vector3F.Dot(jLinA, bodyA.LinearVelocity)
-                             + Vector3F.Dot(jAngA, bodyA.AngularVelocity)
-                             + Vector3F.Dot(jLinB, bodyB.LinearVelocity)
-                             + Vector3F.Dot(jAngB, bodyB.AngularVelocity);
+      var relativeVelocity = Vector3.Dot(jLinA, bodyA.LinearVelocity)
+                             + Vector3.Dot(jAngA, bodyA.AngularVelocity)
+                             + Vector3.Dot(jLinB, bodyB.LinearVelocity)
+                             + Vector3.Dot(jAngB, bodyB.AngularVelocity);
 
       // The impulse (lambda) is (J * M^-1 * J^T)^-1 * (newRelativeVelocity - oldRelativeVelocity).
       return JWJTInverse * relativeVelocity;

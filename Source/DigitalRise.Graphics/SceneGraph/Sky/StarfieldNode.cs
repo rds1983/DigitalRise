@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -45,7 +44,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <remarks>
     /// This color can be used to change the color or the brightness of the stars.
     /// </remarks>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -93,7 +92,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <param name="stars">The stars.</param>
     public StarfieldNode(IList<Star> stars)
     {
-      Color = Vector3F.One;
+      Color = Vector3.One;
       Stars = stars;
     }
     #endregion

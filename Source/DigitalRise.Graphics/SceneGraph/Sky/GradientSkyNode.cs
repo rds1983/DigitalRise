@@ -2,8 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -33,7 +34,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the direction to the sun.
     /// </summary>
     /// <value>The direction to the sun. This vector is automatically normalized.</value>
-    public Vector3F SunDirection
+    public Vector3 SunDirection
     {
       get { return _sunDirection; }
       set
@@ -42,7 +43,7 @@ namespace DigitalRise.Graphics.SceneGraph
         _sunDirection.TryNormalize();
       }
     }
-    private Vector3F _sunDirection;
+    private Vector3 _sunDirection;
 
 
     /// <summary>
@@ -198,7 +199,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </summary>
     public GradientSkyNode()
     {
-      SunDirection = new Vector3F(1, 1, 1);
+      SunDirection = new Vector3(1, 1, 1);
       FrontColor = new Vector4F(0.9f, 0.5f, 0, 1);
       ZenithColor = new Vector4F(0, 0.4f, 0.9f, 1);
       BackColor = new Vector4F(0.4f, 0.6f, 0.9f, 1);

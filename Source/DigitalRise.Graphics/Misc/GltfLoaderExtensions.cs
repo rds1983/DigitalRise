@@ -1,4 +1,5 @@
 ﻿using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using static glTFLoader.Schema.Accessor;
 
 namespace DigitalRise.Graphics
@@ -30,7 +31,7 @@ namespace DigitalRise.Graphics
 		public static int GetComponentCount(this TypeEnum type) => ComponentsCount[(int)type];
 		public static int GetComponentSize(this ComponentTypeEnum type) => ComponentSizes[(int)type - 5120];
 
-		public static Vector3F ToVector3(this float[] array) => new Vector3F(array[0], array[1], array[2]);
+		public static Vector3 ToVector3(this float[] array) => new Vector3(array[0], array[1], array[2]);
 		public static Vector4F ToVector4(this float[] array) => new Vector4F(array[0], array[1], array[2], array[3]);
 		public static QuaternionF ToQuaternion(this float[] array) => new QuaternionF(array[3], array[0], array[1], array[2]);
 		public static Matrix44F ToMatrix(this float[] array) =>

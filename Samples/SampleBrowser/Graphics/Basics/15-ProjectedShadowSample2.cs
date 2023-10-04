@@ -150,7 +150,7 @@ See source code for more details.",
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(-2, 2, 2), -ConstantsF.PiOver4, -0.4f);
+      _cameraObject.ResetPose(new Vector3(-2, 2, 2), -ConstantsF.PiOver4, -0.4f);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Add a default light setup (ambient light + 3 directional lights).
@@ -162,7 +162,7 @@ See source code for more details.",
 
       // Add a ground plane model to the scene graph.
       var grid = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl").Clone();
-      grid.ScaleLocal = new Vector3F(0.3f);
+      grid.ScaleLocal = new Vector3(0.3f);
       _scene.Children.Add(grid);
 
       // Add a dude model to the scene graph.
@@ -220,11 +220,11 @@ See source code for more details.",
       // Move the directional light in a circle.
       float deltaTimeF = (float)gameTime.ElapsedGameTime.TotalSeconds;
       _lightAngle += 0.3f * deltaTimeF;
-      var position = QuaternionF.CreateRotationY(_lightAngle).Rotate(new Vector3F(6, 6, 0));
+      var position = QuaternionF.CreateRotationY(_lightAngle).Rotate(new Vector3(6, 6, 0));
 
       // Make the light look at the world space origin.
-      var lightTarget = Vector3F.Zero;
-      var lookAtMatrix = Matrix44F.CreateLookAt(position, lightTarget, Vector3F.Up);
+      var lightTarget = Vector3.Zero;
+      var lookAtMatrix = Matrix44F.CreateLookAt(position, lightTarget, Vector3.Up);
 
       // A look-at matrix is the inverse of a normal world or pose matrix.
       _mainDirectionalLightNode.PoseWorld =
@@ -233,7 +233,7 @@ See source code for more details.",
       // Compute shadow matrix for the new light direction.
       var lightRayDirection = (lightTarget - position);
       _shadowMatrix = ProjectedShadowRenderer.CreateShadowMatrix(
-        new Plane(new Vector3F(0, 1, 0), 0.01f), new Vector4F(-lightRayDirection, 0));
+        new Plane(new Vector3(0, 1, 0), 0.01f), new Vector4F(-lightRayDirection, 0));
 
       // Update the scene - this must be called once per frame.
       _scene.Update(gameTime.ElapsedGameTime);

@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry
 {  
@@ -22,10 +22,10 @@ namespace DigitalRise.Geometry
     /// </summary>
     private sealed class Sensor
     {
-      public readonly Vector3F Direction;
+      public readonly Vector3 Direction;
       public int IndexOfPoint = -1;
 
-      public Sensor(Vector3F direction)
+      public Sensor(Vector3 direction)
       {
         Direction = direction;
       }
@@ -61,18 +61,18 @@ namespace DigitalRise.Geometry
     /// </summary>
     private sealed class PointCollector
     {
-      public readonly List<Vector3F> Points = new List<Vector3F>();
+      public readonly List<Vector3> Points = new List<Vector3>();
       public float DistanceThreshold;
 
       // The index of a point or -1 if the point is not contained.
-      public int GetIndex(Vector3F point)
+      public int GetIndex(Vector3 point)
       {
         int numberOfPoints = Points.Count;
         for (int i = 0; i < numberOfPoints; i++)
         {
-          Vector3F p = Points[i];
-          if (DistanceThreshold > 0 && Vector3F.AreNumericallyEqual(p, point, DistanceThreshold)
-              || DistanceThreshold == 0 && Vector3F.AreNumericallyEqual(p, point))
+          Vector3 p = Points[i];
+          if (DistanceThreshold > 0 && MathHelper.AreNumericallyEqual(p, point, DistanceThreshold)
+              || DistanceThreshold == 0 && MathHelper.AreNumericallyEqual(p, point))
             return i;
         }
 
@@ -119,7 +119,7 @@ namespace DigitalRise.Geometry
     /// <paramref name="iterationLimit"/> is less than 1.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    internal static IList<Vector3F> SampleConvexShape(ConvexShape shape, float distanceThreshold, int iterationLimit)
+    internal static IList<Vector3> SampleConvexShape(ConvexShape shape, float distanceThreshold, int iterationLimit)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");
@@ -134,12 +134,12 @@ namespace DigitalRise.Geometry
       // Start with 6 sensors and 8 sensor triangles (like a double pyramid).
       List<Sensor> sensors = new List<Sensor>
       {
-        new Sensor(new Vector3F(-1, 0, 0)),
-        new Sensor(new Vector3F(1, 0, 0)),
-        new Sensor(new Vector3F(0, -1, 0)),
-        new Sensor(new Vector3F(0, 1, 0)),
-        new Sensor(new Vector3F(0, 0, -1)),
-        new Sensor(new Vector3F(0, 0, 1))
+        new Sensor(new Vector3(-1, 0, 0)),
+        new Sensor(new Vector3(1, 0, 0)),
+        new Sensor(new Vector3(0, -1, 0)),
+        new Sensor(new Vector3(0, 1, 0)),
+        new Sensor(new Vector3(0, 0, -1)),
+        new Sensor(new Vector3(0, 0, 1))
       };
 
       List<SensorTriangle> triangles = new List<SensorTriangle>
@@ -160,7 +160,7 @@ namespace DigitalRise.Geometry
       {
         Sensor sensor = sensors[i];
 
-        Vector3F sample = shape.GetSupportPoint(sensor.Direction);
+        Vector3 sample = shape.GetSupportPoint(sensor.Direction);
         int index = points.GetIndex(sample);
         if (index == -1)
         {
@@ -205,14 +205,14 @@ namespace DigitalRise.Geometry
             Sensor sensor2 = sensors[indexOfSensor2];
 
             // New sensors.
-            Sensor sensor01 = new Sensor((sensor0.Direction + sensor1.Direction).Normalized);
-            Sensor sensor12 = new Sensor((sensor1.Direction + sensor2.Direction).Normalized);
-            Sensor sensor20 = new Sensor((sensor2.Direction + sensor0.Direction).Normalized);
+            Sensor sensor01 = new Sensor((sensor0.Direction + sensor1.Direction).Normalized());
+            Sensor sensor12 = new Sensor((sensor1.Direction + sensor2.Direction).Normalized());
+            Sensor sensor20 = new Sensor((sensor2.Direction + sensor0.Direction).Normalized());
 
             // New Support Points.
-            Vector3F v01 = shape.GetSupportPoint(sensor01.Direction);
-            Vector3F v12 = shape.GetSupportPoint(sensor12.Direction);
-            Vector3F v20 = shape.GetSupportPoint(sensor20.Direction);
+            Vector3 v01 = shape.GetSupportPoint(sensor01.Direction);
+            Vector3 v12 = shape.GetSupportPoint(sensor12.Direction);
+            Vector3 v20 = shape.GetSupportPoint(sensor20.Direction);
 
             // See if the points are new.
             sensor01.IndexOfPoint = points.GetIndex(v01);

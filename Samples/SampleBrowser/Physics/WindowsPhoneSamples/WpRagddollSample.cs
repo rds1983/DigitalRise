@@ -57,9 +57,9 @@ namespace Samples.Physics
         GraphicsService.GraphicsDevice.Viewport.AspectRatio,
         1f,
         100.0f);
-      Vector3F cameraTarget = new Vector3F(0, 1, 0);
-      Vector3F cameraPosition = new Vector3F(0, 12, 0);
-      Vector3F cameraUpVector = new Vector3F(0, 0, -1);
+      Vector3 cameraTarget = new Vector3(0, 1, 0);
+      Vector3 cameraPosition = new Vector3(0, 12, 0);
+      Vector3 cameraUpVector = new Vector3(0, 0, -1);
       GraphicsScreen.CameraNode = new CameraNode(new Camera(projection))
       {
         View = Matrix44F.CreateLookAt(cameraPosition, cameraTarget, cameraUpVector),
@@ -75,7 +75,7 @@ namespace Samples.Physics
     private void InitializePhysics()
     {
       // Add a gravity force.
-      _gravity = new Gravity { Acceleration = new Vector3F(0, -GravityAcceleration, 0) };
+      _gravity = new Gravity { Acceleration = new Vector3(0, -GravityAcceleration, 0) };
       Simulation.ForceEffects.Add(_gravity);
 
       // Add a damping force.
@@ -84,19 +84,19 @@ namespace Samples.Physics
       // Add a few spheres.
       Simulation.RigidBodies.Add(new RigidBody(new SphereShape(0.3f))
       {
-        Pose = new Pose(new Vector3F(0, 1, 0)),
+        Pose = new Pose(new Vector3(0, 1, 0)),
       });
       Simulation.RigidBodies.Add(new RigidBody(new SphereShape(0.2f))
       {
-        Pose = new Pose(new Vector3F(1, 1, 0)),
+        Pose = new Pose(new Vector3(1, 1, 0)),
       });
       Simulation.RigidBodies.Add(new RigidBody(new SphereShape(0.4f))
       {
-        Pose = new Pose(new Vector3F(0, 1, 2)),
+        Pose = new Pose(new Vector3(0, 1, 2)),
       });
 
       // Add ragdoll.
-      AddRagdoll(1, new Vector3F(0, 2, 0));
+      AddRagdoll(1, new Vector3(0, 2, 0));
 
       // The Simulation performs 2 sub-time-steps per frame because we have set
       // the FixedTimeStep of the simulation to 1/60 s and the TargetElapsedTime of the game
@@ -110,40 +110,40 @@ namespace Samples.Physics
 
       // Add 6 planes that keep the bodies inside the visible area. The exact positions and angles
       // have been determined by experimentation.
-      var groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      var groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(groundPlane);
-      var nearPlane = new RigidBody(new PlaneShape(-Vector3F.UnitY, -8))
+      var nearPlane = new RigidBody(new PlaneShape(-Vector3.UnitY, -8))
       {
         Name = "NearPlane",
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(nearPlane);
-      var leftPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationZ(MathHelper.ToRadians(-22f)) * Vector3F.UnitX, -4.8f))
+      var leftPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationZ(MathHelper.ToRadians(-22f)) * Vector3.UnitX, -4.8f))
       {
         Name = "LeftPlane",
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(leftPlane);
 
-      var rightPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationZ(MathHelper.ToRadians(22f)) * -Vector3F.UnitX, -4.8f))
+      var rightPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationZ(MathHelper.ToRadians(22f)) * -Vector3.UnitX, -4.8f))
       {
         Name = "RightPlane",
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(rightPlane);
 
-      var topPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationX(MathHelper.ToRadians(14f)) * Vector3F.UnitZ, -3f))
+      var topPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationX(MathHelper.ToRadians(14f)) * Vector3.UnitZ, -3f))
       {
         Name = "TopPlane",
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(topPlane);
 
-      var bottomPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationX(MathHelper.ToRadians(-14f)) * -Vector3F.UnitZ, -3f))
+      var bottomPlane = new RigidBody(new PlaneShape(Matrix33F.CreateRotationX(MathHelper.ToRadians(-14f)) * -Vector3.UnitZ, -3f))
       {
         Name = "BottomPlane",
         MotionType = MotionType.Static,
@@ -153,7 +153,7 @@ namespace Samples.Physics
 
 
 
-    public void AddRagdoll(float scale, Vector3F ragdollPosition)
+    public void AddRagdoll(float scale, Vector3 ragdollPosition)
     {
       // Ragdolls are usually used in games to create realistic death animations of 
       // characters. The character is usually rendered using a skinned triangle mesh.
@@ -171,99 +171,99 @@ namespace Samples.Physics
       #region ----- Create rigid bodies for the most relevant body parts -----
 
       BoxShape pelvisShape = new BoxShape(0.3f * scale, 0.22f * scale, 0.20f * scale);
-      MassFrame pelvisMass = MassFrame.FromShapeAndDensity(pelvisShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame pelvisMass = MassFrame.FromShapeAndDensity(pelvisShape, Vector3.One, Density, 0.01f, 3);
       RigidBody pelvis = new RigidBody(pelvisShape, pelvisMass, null)
       {
-        Pose = new Pose(new Vector3F(0f, 0.01f * scale, -0.03f * scale) + ragdollPosition),
+        Pose = new Pose(new Vector3(0f, 0.01f * scale, -0.03f * scale) + ragdollPosition),
       };
       Simulation.RigidBodies.Add(pelvis);
 
       BoxShape torsoShape = new BoxShape(0.35f * scale, 0.22f * scale, 0.44f * scale);
-      MassFrame torsoMass = MassFrame.FromShapeAndDensity(torsoShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame torsoMass = MassFrame.FromShapeAndDensity(torsoShape, Vector3.One, Density, 0.01f, 3);
       RigidBody torso = new RigidBody(torsoShape, torsoMass, null)
       {
-        Pose = new Pose(new Vector3F(0f, 0.01f * scale, -0.4f * scale) + ragdollPosition),
+        Pose = new Pose(new Vector3(0f, 0.01f * scale, -0.4f * scale) + ragdollPosition),
       };
       Simulation.RigidBodies.Add(torso);
 
       SphereShape headShape = new SphereShape(0.13f * scale);
-      MassFrame headMass = MassFrame.FromShapeAndDensity(headShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame headMass = MassFrame.FromShapeAndDensity(headShape, Vector3.One, Density, 0.01f, 3);
       RigidBody head = new RigidBody(headShape, headMass, null)
       {
-        Pose = new Pose(new Vector3F(0f * scale, 0f, -0.776f * scale) + ragdollPosition),
+        Pose = new Pose(new Vector3(0f * scale, 0f, -0.776f * scale) + ragdollPosition),
       };
       Simulation.RigidBodies.Add(head);
 
       CapsuleShape upperArmShape = new CapsuleShape(0.08f * scale, 0.3f * scale);
-      MassFrame upperArmMass = MassFrame.FromShapeAndDensity(upperArmShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame upperArmMass = MassFrame.FromShapeAndDensity(upperArmShape, Vector3.One, Density, 0.01f, 3);
       RigidBody leftUpperArm = new RigidBody(upperArmShape, upperArmMass, null)
       {
-        Pose = new Pose(new Vector3F(-0.32f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(-0.32f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(leftUpperArm);
       RigidBody rightUpperArm = new RigidBody(upperArmShape, upperArmMass, null)
       {
-        Pose = new Pose(new Vector3F(0.32f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0.32f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(rightUpperArm);
 
       CapsuleShape lowerArmShape = new CapsuleShape(0.08f * scale, 0.4f * scale);
-      MassFrame lowerArmMass = MassFrame.FromShapeAndDensity(lowerArmShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame lowerArmMass = MassFrame.FromShapeAndDensity(lowerArmShape, Vector3.One, Density, 0.01f, 3);
       RigidBody leftLowerArm = new RigidBody(lowerArmShape, lowerArmMass, null)
       {
-        Pose = new Pose(new Vector3F(-0.62f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(-0.62f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(leftLowerArm);
       RigidBody rightLowerArm = new RigidBody(lowerArmShape, lowerArmMass, null)
       {
-        Pose = new Pose(new Vector3F(0.62f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0.62f * scale, 0.06f * scale, -0.53f * scale) + ragdollPosition, Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(rightLowerArm);
 
       CapsuleShape upperLegShape = new CapsuleShape(0.09f * scale, 0.5f * scale);
-      MassFrame upperLegMass = MassFrame.FromShapeAndDensity(upperLegShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame upperLegMass = MassFrame.FromShapeAndDensity(upperLegShape, Vector3.One, Density, 0.01f, 3);
       RigidBody leftUpperLeg = new RigidBody(upperLegShape, upperLegMass, null)
       {
-        Pose = new Pose(new Vector3F(-0.10f * scale, 0.01f * scale, 0.233f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(-0.10f * scale, 0.01f * scale, 0.233f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(leftUpperLeg);
 
       RigidBody rightUpperLeg = new RigidBody(upperLegShape, upperLegMass, null)
       {
-        Pose = new Pose(new Vector3F(0.10f * scale, 0.01f * scale, 0.233f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0.10f * scale, 0.01f * scale, 0.233f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(rightUpperLeg);
 
       CapsuleShape lowerLegShape = new CapsuleShape(0.08f * scale, 0.4f * scale);
-      MassFrame lowerLegMass = MassFrame.FromShapeAndDensity(pelvisShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame lowerLegMass = MassFrame.FromShapeAndDensity(pelvisShape, Vector3.One, Density, 0.01f, 3);
       RigidBody leftLowerLeg = new RigidBody(lowerLegShape, lowerLegMass, null)
       {
-        Pose = new Pose(new Vector3F(-0.11f * scale, 0.01f * scale, 0.7f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(-0.11f * scale, 0.01f * scale, 0.7f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(leftLowerLeg);
       RigidBody rightLowerLeg = new RigidBody(lowerLegShape, lowerLegMass, null)
       {
-        Pose = new Pose(new Vector3F(0.11f * scale, 0.01f * scale, 0.7f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0.11f * scale, 0.01f * scale, 0.7f * scale) + ragdollPosition, Matrix33F.CreateRotationX(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(rightLowerLeg);
 
       BoxShape footShape = new BoxShape(0.12f * scale, 0.28f * scale, 0.07f * scale);
-      MassFrame footMass = MassFrame.FromShapeAndDensity(footShape, Vector3F.One, Density, 0.01f, 3);
+      MassFrame footMass = MassFrame.FromShapeAndDensity(footShape, Vector3.One, Density, 0.01f, 3);
       RigidBody leftFoot = new RigidBody(footShape, footMass, null)
       {
-        Pose = new Pose(new Vector3F(-0.11f * scale, -0.06f * scale, 0.94f * scale) + ragdollPosition),
+        Pose = new Pose(new Vector3(-0.11f * scale, -0.06f * scale, 0.94f * scale) + ragdollPosition),
       };
       Simulation.RigidBodies.Add(leftFoot);
       RigidBody rightFoot = new RigidBody(footShape, footMass, null)
       {
-        Pose = new Pose(new Vector3F(0.11f * scale, -0.06f * scale, 0.94f * scale) + ragdollPosition),
+        Pose = new Pose(new Vector3(0.11f * scale, -0.06f * scale, 0.94f * scale) + ragdollPosition),
       };
       Simulation.RigidBodies.Add(rightFoot);
       #endregion
 
       #region ----- Add joints between body parts -----
 
-      Vector3F pelvisJointPosition = new Vector3F(0f, 0.026f * scale, -0.115f * scale) + ragdollPosition;
+      Vector3 pelvisJointPosition = new Vector3(0f, 0.026f * scale, -0.115f * scale) + ragdollPosition;
       HingeJoint pelvisJoint = new HingeJoint
       {
         BodyA = torso,
@@ -279,7 +279,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(pelvisJoint);
 
-      Vector3F neckJointPosition = new Vector3F(0f, 0.026f * scale, -0.690f * scale) + ragdollPosition;
+      Vector3 neckJointPosition = new Vector3(0f, 0.026f * scale, -0.690f * scale) + ragdollPosition;
       HingeJoint neckJoint = new HingeJoint
       {
         BodyA = head,
@@ -295,12 +295,12 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(neckJoint);
 
-      Vector3F leftShoulderJointPosition = new Vector3F(-0.193f * scale, 0.056f * scale, -0.528f * scale) + ragdollPosition;
-      Vector3F leftShoulderJointAxis = new Vector3F(0, -1, -1).Normalized;
+      Vector3 leftShoulderJointPosition = new Vector3(-0.193f * scale, 0.056f * scale, -0.528f * scale) + ragdollPosition;
+      Vector3 leftShoulderJointAxis = new Vector3(0, -1, -1).Normalized();
       Matrix33F leftShoulderJointOrientation = new Matrix33F();
       leftShoulderJointOrientation.SetColumn(0, leftShoulderJointAxis);
-      leftShoulderJointOrientation.SetColumn(1, leftShoulderJointAxis.Orthonormal1);
-      leftShoulderJointOrientation.SetColumn(2, leftShoulderJointAxis.Orthonormal2);
+      leftShoulderJointOrientation.SetColumn(1, leftShoulderJointAxis.Orthonormal1());
+      leftShoulderJointOrientation.SetColumn(2, leftShoulderJointAxis.Orthonormal2());
       BallJoint leftShoulderJoint = new BallJoint
       {
         BodyA = leftUpperArm,
@@ -314,12 +314,12 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(leftShoulderJoint);
 
-      Vector3F rightShoulderJointPosition = new Vector3F(0.193f * scale, 0.056f * scale, -0.528f * scale) + ragdollPosition;
-      Vector3F rightShoulderJointAxis = new Vector3F(0, 1, 1).Normalized;
+      Vector3 rightShoulderJointPosition = new Vector3(0.193f * scale, 0.056f * scale, -0.528f * scale) + ragdollPosition;
+      Vector3 rightShoulderJointAxis = new Vector3(0, 1, 1).Normalized();
       Matrix33F rightShoulderJointOrientation = new Matrix33F();
       rightShoulderJointOrientation.SetColumn(0, rightShoulderJointAxis);
-      rightShoulderJointOrientation.SetColumn(1, rightShoulderJointAxis.Orthonormal1);
-      rightShoulderJointOrientation.SetColumn(2, rightShoulderJointAxis.Orthonormal2);
+      rightShoulderJointOrientation.SetColumn(1, rightShoulderJointAxis.Orthonormal1());
+      rightShoulderJointOrientation.SetColumn(2, rightShoulderJointAxis.Orthonormal2());
       BallJoint rightShoulderJoint = new BallJoint
       {
         BodyA = rightUpperArm,
@@ -333,7 +333,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(rightShoulderJoint);
 
-      Vector3F leftElbowJointPosition = new Vector3F(-0.451f * scale, 0.071f * scale, -0.538f * scale) + ragdollPosition;
+      Vector3 leftElbowJointPosition = new Vector3(-0.451f * scale, 0.071f * scale, -0.538f * scale) + ragdollPosition;
       Matrix33F elbowAxisOrientation = new Matrix33F(0, 0, -1,
         0, 1, 0,
         1, 0, 0);
@@ -352,7 +352,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(leftElbowJoint);
 
-      Vector3F rightElbowJointPosition = new Vector3F(0.451f * scale, 0.071f * scale, -0.538f * scale) + ragdollPosition;
+      Vector3 rightElbowJointPosition = new Vector3(0.451f * scale, 0.071f * scale, -0.538f * scale) + ragdollPosition;
       HingeJoint rightElbowJoint = new HingeJoint
       {
         BodyA = rightLowerArm,
@@ -368,7 +368,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(rightElbowJoint);
 
-      Vector3F leftHipJointPosition = new Vector3F(-0.107f * scale, 0.049f * scale, 0.026f * scale) + ragdollPosition;
+      Vector3 leftHipJointPosition = new Vector3(-0.107f * scale, 0.049f * scale, 0.026f * scale) + ragdollPosition;
       HingeJoint leftHipJoint = new HingeJoint
       {
         BodyA = pelvis,
@@ -384,7 +384,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(leftHipJoint);
 
-      Vector3F rightHipJointPosition = new Vector3F(0.107f * scale, 0.049f * scale, 0.026f * scale) + ragdollPosition;
+      Vector3 rightHipJointPosition = new Vector3(0.107f * scale, 0.049f * scale, 0.026f * scale) + ragdollPosition;
       HingeJoint rightHipJoint = new HingeJoint
       {
         BodyA = pelvis,
@@ -400,7 +400,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(rightHipJoint);
 
-      Vector3F leftKneeJointPosition = new Vector3F(-0.118f * scale, -0.012f * scale, 0.439f * scale) + ragdollPosition;
+      Vector3 leftKneeJointPosition = new Vector3(-0.118f * scale, -0.012f * scale, 0.439f * scale) + ragdollPosition;
       HingeJoint leftKneeJoint = new HingeJoint
       {
         BodyA = leftLowerLeg,
@@ -416,7 +416,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(leftKneeJoint);
 
-      Vector3F rightKneeJointPosition = new Vector3F(0.118f * scale, -0.012f * scale, 0.439f * scale) + ragdollPosition;
+      Vector3 rightKneeJointPosition = new Vector3(0.118f * scale, -0.012f * scale, 0.439f * scale) + ragdollPosition;
       HingeJoint rightKneeJoint = new HingeJoint
       {
         BodyA = rightLowerLeg,
@@ -432,7 +432,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(rightKneeJoint);
 
-      Vector3F leftAnkleJointPosition = new Vector3F(-0.118f * scale, -0.016f * scale, 0.861f * scale) + ragdollPosition;
+      Vector3 leftAnkleJointPosition = new Vector3(-0.118f * scale, -0.016f * scale, 0.861f * scale) + ragdollPosition;
       HingeJoint leftAnkleJoint = new HingeJoint
       {
         BodyA = leftFoot,
@@ -448,7 +448,7 @@ namespace Samples.Physics
       };
       Simulation.Constraints.Add(leftAnkleJoint);
 
-      Vector3F rightAnkleJointPosition = new Vector3F(0.118f * scale, -0.016f * scale, 0.861f * scale) + ragdollPosition;
+      Vector3 rightAnkleJointPosition = new Vector3(0.118f * scale, -0.016f * scale, 0.861f * scale) + ragdollPosition;
       HingeJoint rightAnkleJoint = new HingeJoint
       {
         BodyA = rightFoot,
@@ -520,7 +520,7 @@ namespace Samples.Physics
       //      y = (2 * x) ^ 3
 
       // Get accelerometer value transformed into world space.
-      Vector3F accelerometerVector = new Vector3F(
+      Vector3 accelerometerVector = new Vector3(
         -InputService.AccelerometerValue.Y,
         InputService.AccelerometerValue.Z,
         -InputService.AccelerometerValue.X);

@@ -88,7 +88,7 @@ namespace Samples.Game.UI
       Items.CollectionChanged += (s, e) => OnItemsChanged();
 
       // Uncomment this to add a random background color for debugging.
-      //Vector3F color = RandomHelper.Random.NextVector3F(0, 1);
+      //Vector3 color = RandomHelper.Random.NextVector3(0, 1);
       //Background = new Color(color.X, color.Y, color.Z, 0.4f);
 
       var isExpandedProperty = Properties.Get<bool>(IsExpandedPropertyId);

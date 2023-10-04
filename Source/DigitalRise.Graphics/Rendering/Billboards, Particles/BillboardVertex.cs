@@ -41,9 +41,9 @@ namespace DigitalRise.Graphics.Rendering
       };
 
     // See Billboard.fx for description.
-    public Vector3F Position;
-    public Vector3F Normal;   // If (0, 0, 0) => vertex belongs to ribbon.
-    public Vector3F Axis;
+    public Vector3 Position;
+    public Vector3 Normal;   // If (0, 0, 0) => vertex belongs to ribbon.
+    public Vector3 Axis;
     public Vector4F Color;
     public Vector2 TextureCoordinate;
     public Vector4F Args0;
@@ -68,7 +68,7 @@ namespace DigitalRise.Graphics.Rendering
 
 
     // The (non-premultiplied) tint color.
-    public Vector3F Color3F
+    public Vector3 Color3F
     {
       set 
       { 

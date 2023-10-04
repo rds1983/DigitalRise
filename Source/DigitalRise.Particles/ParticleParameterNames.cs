@@ -29,14 +29,14 @@ namespace DigitalRise.Particles
 
     /// <summary>
     /// The particle position.<br/>
-    /// (Parameter type: varying, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string Position = "Position";
 
 
     /// <summary>
     /// The normalized direction vector that defines the movement direction.<br/>
-    /// (Parameter type: varying, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string Direction = "Direction";
 
@@ -51,7 +51,7 @@ namespace DigitalRise.Particles
     /// <summary>
     /// The acceleration vector that changes the linear velocity (<see cref="Direction"/> and 
     /// <see cref="LinearSpeed"/>).<br/>
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string LinearAcceleration = "LinearAcceleration";
 
@@ -92,7 +92,7 @@ namespace DigitalRise.Particles
 
     /// <summary>
     /// The emitter velocity vector, usually used to modify the start velocity of particles.<br/>
-    /// (Parameter type: uniform, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: uniform, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string EmitterVelocity = "EmitterVelocity";
 
@@ -114,7 +114,7 @@ namespace DigitalRise.Particles
 
     /// <summary>
     /// The particle color.<br/>
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string Color = "Color";
 
@@ -159,14 +159,14 @@ namespace DigitalRise.Particles
 
     /// <summary>
     /// The normal vector of a particle.<br/>
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string Normal = "Normal";
 
 
     /// <summary>
     /// The axis vector of a particle.<br/>
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>)
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>)
     /// </summary>
     public const string Axis = "Axis";
 

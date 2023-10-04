@@ -34,7 +34,7 @@ If an object is in contact with another object, it is drawn yellow.",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // ----- Initialize collision detection and create objects.
 
@@ -42,13 +42,13 @@ If an object is in contact with another object, it is drawn yellow.",
       // Position it on the left with an arbitrary rotation.
       var geometricObjectA = new GeometricObject(
         new BoxShape(1, 2, 3),
-        new Pose(new Vector3F(-2, -1, 0), Matrix33F.CreateRotationZ(0.1f)));
+        new Pose(new Vector3(-2, -1, 0), Matrix33F.CreateRotationZ(0.1f)));
 
       // Create a geometric object with a capsule shape.
       // Position it on the right with an arbitrary rotation.
       var geometricObjectB = new GeometricObject(
         new CapsuleShape(1, 3),
-        new Pose(new Vector3F(2, -1, 0), Matrix33F.CreateRotationZ(-0.2f)));
+        new Pose(new Vector3(2, -1, 0), Matrix33F.CreateRotationZ(-0.2f)));
 
       // Create a geometric object with a complex shape that is the convex hull of
       // a circle and a rectangle. Position it on the top with an arbitrary rotation.
@@ -56,11 +56,11 @@ If an object is in contact with another object, it is drawn yellow.",
       // positions and orientations. The ConvexHullOfShapes combines these shapes
       // into a single shape by building their convex hull.)
       var complexShape = new ConvexHullOfShapes();
-      complexShape.Children.Add(new GeometricObject(new RectangleShape(1, 1), new Pose(new Vector3F(0, 0, 1))));
-      complexShape.Children.Add(new GeometricObject(new CircleShape(1), new Pose(new Vector3F(0, 0, -1))));
+      complexShape.Children.Add(new GeometricObject(new RectangleShape(1, 1), new Pose(new Vector3(0, 0, 1))));
+      complexShape.Children.Add(new GeometricObject(new CircleShape(1), new Pose(new Vector3(0, 0, -1))));
       var geometricObjectC = new GeometricObject(
         complexShape,
-        new Pose(new Vector3F(0, 2, 0), QuaternionF.CreateRotation(Vector3F.UnitZ, new Vector3F(1, 1, 1))));
+        new Pose(new Vector3(0, 2, 0), QuaternionF.CreateRotation(Vector3.UnitZ, new Vector3(1, 1, 1))));
 
       // Create collision objects for the geometric objects.
       // (A collision object is just a wrapper around the geometric object that
@@ -88,7 +88,7 @@ If an object is in contact with another object, it is drawn yellow.",
     {
       // ----- Move object A with arrow keys.
       // Compute displacement.
-      Vector3F displacement = Vector3F.Zero;
+      Vector3 displacement = Vector3.Zero;
       if (InputService.IsDown(Keys.Up))
         displacement.Y += 0.1f;
       if (InputService.IsDown(Keys.Left))

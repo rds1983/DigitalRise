@@ -3,6 +3,7 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
@@ -61,20 +62,20 @@ namespace Samples.Graphics
 
       var p = new PerspectiveProjection();
       p.SetOffCenter(-0.1f, 0.2f, -0.1f, 0.1f, 0.1f, 1);
-      _debugRenderer.DrawViewVolume(p.ViewVolume, new Pose(new Vector3F(0, 2, 0)), Color.Red, true, false);
+      _debugRenderer.DrawViewVolume(p.ViewVolume, new Pose(new Vector3(0, 2, 0)), Color.Red, true, false);
 
-      p.NearClipPlane = new Plane(new Vector3F(-0.1f, +0.1f, 1).Normalized, -0.4f);
+      p.NearClipPlane = new Plane(new Vector3(-0.1f, +0.1f, 1).Normalized(), -0.4f);
 
       PlaneShape.MeshSize = 2;
-      _debugRenderer.DrawShape(new PlaneShape(p.NearClipPlane.Value), new Pose(new Vector3F(0, 2, 0)), Vector3F.One, Color.Green, false, false);
+      _debugRenderer.DrawShape(new PlaneShape(p.NearClipPlane.Value), new Pose(new Vector3(0, 2, 0)), Vector3.One, Color.Green, false, false);
       
       Matrix44F m = p.ToMatrix44F();
 
       for (int i = 0; i < 100000; i++)
       {
         Aabb aabb = p.ViewVolume.GetAabb(Pose.Identity);
-        aabb.Minimum -= new Vector3F(1);
-        aabb.Maximum += new Vector3F(1);
+        aabb.Minimum -= new Vector3(1);
+        aabb.Maximum += new Vector3(1);
         float x = RandomHelper.Random.NextFloat(aabb.Minimum.X, aabb.Maximum.X);
         float y = RandomHelper.Random.NextFloat(aabb.Minimum.Y, aabb.Maximum.Y);
         float z = RandomHelper.Random.NextFloat(aabb.Minimum.Z, aabb.Maximum.Z);
@@ -90,7 +91,7 @@ namespace Samples.Graphics
         if (c.X < -1 || c.X > 1 || c.Y < -1 || c.Y > 1 || c.Z < 0 || c.Z > 1)
           continue;// color = Color.Gray;
 
-        _debugRenderer.DrawPoint(new Vector3F(x, y + 2, z), color, false);
+        _debugRenderer.DrawPoint(new Vector3(x, y + 2, z), color, false);
       }
     }
 

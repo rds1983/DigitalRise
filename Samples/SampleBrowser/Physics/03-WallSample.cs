@@ -1,9 +1,8 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -21,7 +20,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -53,7 +52,7 @@ namespace Samples.Physics
           RigidBody brick = new RigidBody(boxShape)
           {
             Name = "Brick" + i,
-            Pose = new Pose(new Vector3F(x, y, z)),
+            Pose = new Pose(new Vector3(x, y, z)),
           };
           Simulation.RigidBodies.Add(brick);
         }

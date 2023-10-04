@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
@@ -287,7 +288,7 @@ namespace DigitalRise.Animation.Character
       var directionA = tipBoneA.Translation - rootBoneA.Translation;
 
       // Abort if any chain has zero length.
-      if (directionB.IsNumericallyZero || directionA.IsNumericallyZero)
+      if (directionB.IsNumericallyZero() || directionA.IsNumericallyZero())
         return;
 
       // Apply global skeleton rotation offset to rotate all into model B space.
@@ -327,7 +328,7 @@ namespace DigitalRise.Animation.Character
       var directionB = tipBoneB.Translation - rootBoneB.Translation;
       var directionA = tipBoneA.Translation - rootBoneA.Translation;
 
-      if (directionB.IsNumericallyZero || directionA.IsNumericallyZero)
+      if (directionB.IsNumericallyZero() || directionA.IsNumericallyZero())
         return;
 
       directionB = SkeletonMapper.RotationOffset.Conjugated.Rotate(directionB);

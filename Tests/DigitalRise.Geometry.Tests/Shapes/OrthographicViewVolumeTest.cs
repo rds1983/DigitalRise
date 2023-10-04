@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -18,8 +18,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       OrthographicViewVolume viewVolume = new OrthographicViewVolume();
       viewVolume.Set(-1, 1, -1, 1, 2, 5);
       Aabb aabb = viewVolume.GetAabb(Pose.Identity);
-      Assert.AreEqual(new Vector3F(-1, -1, -5), aabb.Minimum);
-      Assert.AreEqual(new Vector3F(1, 1, -2), aabb.Maximum);
+      Assert.AreEqual(new Vector3(-1, -1, -5), aabb.Minimum);
+      Assert.AreEqual(new Vector3(1, 1, -2), aabb.Maximum);
     }
 
 
@@ -154,7 +154,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       OrthographicViewVolume viewVolume = new OrthographicViewVolume();
       viewVolume.SetWidthAndHeight(1, 1, 1, 10);
-      Vector3F innerPoint = viewVolume.InnerPoint;
+      Vector3 innerPoint = viewVolume.InnerPoint;
       Assert.AreEqual(0, innerPoint.X);
       Assert.AreEqual(0, innerPoint.Y);
       Assert.AreEqual(-5.5f, innerPoint.Z);

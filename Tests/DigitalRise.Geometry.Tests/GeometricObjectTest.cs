@@ -1,6 +1,6 @@
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -39,7 +39,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void Clone()
     {
-      var o = new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3F(1, 2, 3)));
+      var o = new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3(1, 2, 3)));
       var clone = o.Clone();
 
       Assert.AreEqual(o.Pose, clone.Pose);
@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void ICloneableClone()
     {
-      var o = new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3F(1, 2, 3)));
+      var o = new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3(1, 2, 3)));
       var clone = (GeometricObject)((IGeometricObject)o).Clone();
 
       Assert.AreEqual(o.Pose, clone.Pose);

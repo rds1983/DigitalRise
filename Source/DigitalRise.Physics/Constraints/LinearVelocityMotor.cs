@@ -4,8 +4,9 @@
 
 using System;
 using DigitalRise.Geometry;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -26,8 +27,8 @@ namespace DigitalRise.Physics.Constraints
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector3F _minImpulseLimits;
-    private Vector3F _maxImpulseLimits;
+    private Vector3 _minImpulseLimits;
+    private Vector3 _maxImpulseLimits;
     private readonly Constraint1D[] _constraints =
     {
       new Constraint1D(), 
@@ -49,7 +50,7 @@ namespace DigitalRise.Physics.Constraints
     /// The constraint anchor position on <see cref="Constraint.BodyA"/> in local space of 
     /// <see cref="Constraint.BodyA"/>.
     /// </value>
-    public Vector3F AnchorPositionALocal
+    public Vector3 AnchorPositionALocal
     {
       get { return _anchorPositionALocal; }
       set
@@ -61,7 +62,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _anchorPositionALocal;
+    private Vector3 _anchorPositionALocal;
 
 
     /// <summary>
@@ -72,7 +73,7 @@ namespace DigitalRise.Physics.Constraints
     /// The constraint anchor position on <see cref="Constraint.BodyB"/> in local space of 
     /// <see cref="Constraint.BodyB"/>.
     /// </value>
-    public Vector3F AnchorPositionBLocal
+    public Vector3 AnchorPositionBLocal
     {
       get { return _anchorPositionBLocal; }
       set
@@ -84,7 +85,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _anchorPositionBLocal;
+    private Vector3 _anchorPositionBLocal;
 
 
     /// <summary>
@@ -104,7 +105,7 @@ namespace DigitalRise.Physics.Constraints
     /// is a zero vector, the motor is enabled and cancels all rotational velocities. 
     /// </para>
     /// </remarks>
-    public Vector3F AxisALocal
+    public Vector3 AxisALocal
     {
       get { return _axisALocal; }
       set
@@ -113,13 +114,13 @@ namespace DigitalRise.Physics.Constraints
         {
           _axisALocal = value;
           if (!_axisALocal.TryNormalize())
-            _axisALocal = Vector3F.Zero;
+            _axisALocal = Vector3.Zero;
 
           OnChanged();
         }
       }
     }
-    private Vector3F _axisALocal = Vector3F.UnitX;
+    private Vector3 _axisALocal = Vector3.UnitX;
 
 
     /// <summary>
@@ -193,7 +194,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -205,11 +206,11 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
@@ -264,13 +265,13 @@ namespace DigitalRise.Physics.Constraints
     protected override void OnSetup()
     {
       Pose anchorPoseA = BodyA.Pose;
-      Vector3F anchorPositionB = BodyB.Pose.ToWorldPosition(AnchorPositionBLocal);
+      Vector3 anchorPositionB = BodyB.Pose.ToWorldPosition(AnchorPositionBLocal);
 
       // The linear constraint axes are the fixed anchor axes of A!
       Matrix33F anchorOrientation = anchorPoseA.Orientation;
 
-      Vector3F rA = anchorPoseA.Position - BodyA.PoseCenterOfMass.Position;
-      Vector3F rB = anchorPositionB - BodyB.PoseCenterOfMass.Position;
+      Vector3 rA = anchorPoseA.Position - BodyA.PoseCenterOfMass.Position;
+      Vector3 rB = anchorPositionB - BodyB.PoseCenterOfMass.Position;
 
       var deltaTime = Simulation.Settings.Timing.FixedTimeStep;
 
@@ -287,11 +288,11 @@ namespace DigitalRise.Physics.Constraints
       else
       {
         // One constraint in direction of the velocity.
-        if (axis.IsNumericallyZero)
+        if (axis.IsNumericallyZero())
         {
           // TODO: We could have a separate Axis property if the motor should be able to constrain to velocity 0 in Single Axis Mode.
           // No velocity axis.
-          _minImpulseLimits[0] = 0;
+          _minImpulseLimits.X = 0;
         }
         else
         {
@@ -306,7 +307,7 @@ namespace DigitalRise.Physics.Constraints
     }
 
 
-    private void SetupConstraint(int index, float targetVelocity, Vector3F axis, Vector3F rA, Vector3F rB, float deltaTime)
+    private void SetupConstraint(int index, float targetVelocity, Vector3 axis, Vector3 rA, Vector3 rB, float deltaTime)
     {
       Constraint1D constraint = _constraints[index];
 
@@ -314,12 +315,12 @@ namespace DigitalRise.Physics.Constraints
 
       // Impulse limits
       float impulseLimit = MaxForce * deltaTime;
-      _minImpulseLimits[index] = -impulseLimit;
-      _maxImpulseLimits[index] = impulseLimit;
+      _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+      _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
 
       // Note: Softness must be set before!
       constraint.Softness = Softness / deltaTime;
-      constraint.Prepare(BodyA, BodyB, -axis, -Vector3F.Cross(rA, axis), axis, Vector3F.Cross(rB, axis));
+      constraint.Prepare(BodyA, BodyB, -axis, -Vector3.Cross(rA, axis), axis, Vector3.Cross(rB, axis));
     }
 
 
@@ -328,12 +329,12 @@ namespace DigitalRise.Physics.Constraints
     {
       if (!UseSingleAxisMode)
       {
-        Vector3F impulse = new Vector3F();
+        Vector3 impulse = new Vector3();
         impulse.X = ApplyImpulse(0);
         impulse.Y = ApplyImpulse(1);
         impulse.Z = ApplyImpulse(2);
 
-        return impulse.LengthSquared > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
+        return impulse.LengthSquared() > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
       }
       else
       {
@@ -345,7 +346,7 @@ namespace DigitalRise.Physics.Constraints
 
     private float ApplyImpulse(int index)
     {
-      if (_minImpulseLimits[index] != 0)
+      if (_minImpulseLimits.GetComponentByIndex(index) != 0)
       {
         Constraint1D constraint = _constraints[index];
         float relativeVelocity = constraint.GetRelativeVelocity(BodyA, BodyB);
@@ -353,8 +354,8 @@ namespace DigitalRise.Physics.Constraints
           BodyA,
           BodyB,
           relativeVelocity,
-          _minImpulseLimits[index],
-          _maxImpulseLimits[index]);
+          _minImpulseLimits.GetComponentByIndex(index),
+          _maxImpulseLimits.GetComponentByIndex(index));
 
         return impulse;
       }

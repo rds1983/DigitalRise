@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -48,7 +47,7 @@ namespace DigitalRise.Geometry.Partitioning
 
 
     /// <inheritdoc/>
-    public IEnumerable<Pair<int>> GetOverlaps(Vector3F scale, Pose pose, ISpatialPartition<int> otherPartition, Vector3F otherScale, Pose otherPose)
+    public IEnumerable<Pair<int>> GetOverlaps(Vector3 scale, Pose pose, ISpatialPartition<int> otherPartition, Vector3 otherScale, Pose otherPose)
     {
       if (otherPartition == null)
         throw new ArgumentNullException("otherPartition");
@@ -62,8 +61,8 @@ namespace DigitalRise.Geometry.Partitioning
       Update(false);
 
       // Compute transformations.
-      Vector3F scaleInverse = Vector3F.One / scale;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 scaleInverse = Vector3.One / scale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
       Pose toLocal = pose.Inverse * otherPose;
       Pose toOther = toLocal.Inverse;
 
@@ -97,7 +96,7 @@ namespace DigitalRise.Geometry.Partitioning
 
     /// <inheritdoc/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-    public void GetClosestPointCandidates(Vector3F scale, Pose pose, ISpatialPartition<int> otherPartition, Vector3F otherScale, Pose otherPose, Func<int, int, float> callback)
+    public void GetClosestPointCandidates(Vector3 scale, Pose pose, ISpatialPartition<int> otherPartition, Vector3 otherScale, Pose otherPose, Func<int, int, float> callback)
     {
       if (otherPartition == null)
         throw new ArgumentNullException("otherPartition");
@@ -130,7 +129,7 @@ namespace DigitalRise.Geometry.Partitioning
     }
 
 
-    private void GetClosestPointCandidatesImpl(Vector3F scale, Pose pose, ISupportClosestPointQueries<int> otherPartition, Vector3F otherScale, Pose otherPose, Func<int, int, float> callback)
+    private void GetClosestPointCandidatesImpl(Vector3 scale, Pose pose, ISupportClosestPointQueries<int> otherPartition, Vector3 otherScale, Pose otherPose, Func<int, int, float> callback)
     {
       // Test leaf nodes against other partition.
 
@@ -141,7 +140,7 @@ namespace DigitalRise.Geometry.Partitioning
 
       // Prepare transformation to transform leaf AABBs into local space of other partition.
       Pose toOther = otherPose.Inverse * pose;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
 
       float closestPointDistanceSquared = float.PositiveInfinity;
       foreach (Node node in _nodes)
@@ -194,11 +193,11 @@ namespace DigitalRise.Geometry.Partitioning
 /*
     // TODO: Use ordered pair Pair<T, T> instead of unordered pair Pair<T>.
     // TODO: See also implementation of AabbTree<T>.
-    public void GetOverlaps(Vector3F scale, Pose pose, CompressedAabbTree otherTree, Vector3F otherScale, Pose otherPose, List<Pair<int>> overlaps)
+    public void GetOverlaps(Vector3 scale, Pose pose, CompressedAabbTree otherTree, Vector3 otherScale, Pose otherPose, List<Pair<int>> overlaps)
     {
       // Compute transformations.
-      Vector3F scaleInverse = Vector3F.One / scale;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 scaleInverse = Vector3.One / scale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
       Pose toLocal = pose.Inverse * otherPose;
       Pose toOther = otherPose.Inverse * pose;
 

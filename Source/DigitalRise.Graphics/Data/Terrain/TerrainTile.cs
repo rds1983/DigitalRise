@@ -475,8 +475,8 @@ namespace DigitalRise.Graphics
     private void UpdateAabb()
     {
       // Update AABB which depends on several properties.
-      Aabb = new Aabb(new Vector3F(OriginX, 0, OriginZ),
-                      new Vector3F(OriginX + WidthX, 0, OriginZ + WidthZ));
+      Aabb = new Aabb(new Vector3(OriginX, 0, OriginZ),
+                      new Vector3(OriginX + WidthX, 0, OriginZ + WidthZ));
     }
 
 

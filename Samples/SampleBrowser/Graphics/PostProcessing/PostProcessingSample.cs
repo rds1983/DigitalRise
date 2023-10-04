@@ -53,7 +53,7 @@ namespace Samples.Graphics
 
       for (int i = 0; i < 10; i++)
       {
-        var randomPosition = new Vector3F(
+        var randomPosition = new Vector3(
           RandomHelper.Random.NextFloat(-5, 5),
           0,
           RandomHelper.Random.NextFloat(-10, 0));

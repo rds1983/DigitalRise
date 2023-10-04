@@ -2,10 +2,10 @@
 using CommonServiceLocator;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -32,7 +32,7 @@ namespace Samples.Particles
       });
 
       // The particles start on random positions on the surface of the given triangle mesh.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartOnMeshEffector
       {
         Parameter = ParticleParameterNames.Position,
@@ -49,14 +49,14 @@ namespace Samples.Particles
         Func = age => 6.7f * age * (1 - age) * (1 - age) * 0.4f,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new StartValueEffector<Vector3F>
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new StartValueEffector<Vector3>
       {
         Parameter = ParticleParameterNames.Color,
         Distribution = new BoxDistribution
         {
-          MinValue = new Vector3F(0.5f, 0.5f, 0.5f),
-          MaxValue = new Vector3F(1, 1, 1)
+          MinValue = new Vector3(0.5f, 0.5f, 0.5f),
+          MaxValue = new Vector3(1, 1, 1)
         }
       });
 

@@ -100,7 +100,7 @@ less stable. Which settings are acceptable depends on the simulation scenario.",
 
       // ----- Force Effects.
       // Using a low gravity is common trick to make the simulation more stable:
-      Simulation.ForceEffects.Add(new Gravity { Acceleration = new Vector3F(0, -5, 0) });
+      Simulation.ForceEffects.Add(new Gravity { Acceleration = new Vector3(0, -5, 0) });
       // Using high damping coefficients helps to make your simulation faster and more stable
       // because objects will come the rest much quicker. - But too high values can create a
       // very unrealistic damped body movement.
@@ -138,7 +138,7 @@ less stable. Which settings are acceptable depends on the simulation scenario.",
       // which can take some time for large meshes.
       RigidBody landscape = new RigidBody(heightField, new MassFrame(), material)
       {
-        Pose = new Pose(new Vector3F(-50, 0, -50f)),
+        Pose = new Pose(new Vector3(-50, 0, -50f)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(landscape);
@@ -156,7 +156,7 @@ less stable. Which settings are acceptable depends on the simulation scenario.",
         // Create a new body. 
         // The new body shares the shape, mass frame and material instances with the prototype.
         RigidBody newBody = new RigidBody(prototype.Shape, prototype.MassFrame, prototype.Material);
-        Vector3F randomPosition = new Vector3F(
+        Vector3 randomPosition = new Vector3(
           RandomHelper.Random.NextInteger(-40, 40),
           10,
           RandomHelper.Random.NextInteger(-40, 40));

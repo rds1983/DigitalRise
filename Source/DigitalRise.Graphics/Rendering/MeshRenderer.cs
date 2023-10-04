@@ -273,8 +273,8 @@ namespace DigitalRise.Graphics.Rendering
       // Get camera properties used to calculate the distance of the scene node to the camera.
       var cameraNode = context.CameraNode;
       Pose cameraPose = cameraNode.PoseWorld;
-      Vector3F cameraPosition = cameraPose.Position;
-      Vector3F lookDirection = -cameraPose.Orientation.GetColumn(2);
+      Vector3 cameraPosition = cameraPose.Position;
+      Vector3 lookDirection = -cameraPose.Orientation.GetColumn(2);
       bool backToFront = (order == RenderOrder.BackToFront);
 
       // Update SceneNode.LastFrame for all visible nodes.
@@ -325,8 +325,8 @@ namespace DigitalRise.Graphics.Rendering
           continue;
 
         // Determine distance to camera.
-        Vector3F cameraToNode = meshNode.PoseWorld.Position - cameraPosition;
-        float distance = Vector3F.Dot(cameraToNode, lookDirection);
+        Vector3 cameraToNode = meshNode.PoseWorld.Position - cameraPosition;
+        float distance = Vector3.Dot(cameraToNode, lookDirection);
         if (backToFront)
           distance = -distance;
 

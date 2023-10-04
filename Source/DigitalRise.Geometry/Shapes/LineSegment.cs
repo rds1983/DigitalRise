@@ -4,8 +4,7 @@
 
 using System;
 using System.Globalization;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -34,14 +33,14 @@ namespace DigitalRise.Geometry.Shapes
     /// The start point.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Start;
+    public Vector3 Start;
 
 
     /// <summary>
     /// The end point.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F End;
+    public Vector3 End;
     #endregion
 
 
@@ -55,18 +54,9 @@ namespace DigitalRise.Geometry.Shapes
     /// <value>The length.</value>
     public float Length
     {
-      get { return (End - Start).Length; }
+      get { return (End - Start).Length(); }
     }
 
-
-    /// <summary>
-    /// Gets the squared length.
-    /// </summary>
-    /// <value>The squared length.</value>
-    public float LengthSquared
-    {
-      get { return (End - Start).LengthSquared; }
-    }
     #endregion
 
 
@@ -85,7 +75,7 @@ namespace DigitalRise.Geometry.Shapes
     /// </summary>
     /// <param name="start">The start point.</param>
     /// <param name="end">The end point.</param>
-    public LineSegment(Vector3F start, Vector3F end)
+    public LineSegment(Vector3 start, Vector3 end)
     {
       Start = start;
       End = end;
@@ -221,6 +211,16 @@ namespace DigitalRise.Geometry.Shapes
     {
       return String.Format(CultureInfo.InvariantCulture, "LineSegment {{ Start = {0}, End = {1} }}", Start, End);
     }
-    #endregion
-  }
+
+		/// <summary>
+		/// Gets the squared length.
+		/// </summary>
+		/// <value>The squared length.</value>
+		public float LengthSquared()
+		{
+			return (End - Start).LengthSquared();
+		}
+
+		#endregion
+	}
 }

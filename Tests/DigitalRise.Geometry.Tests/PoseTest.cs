@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Xml;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Tests
 {
@@ -23,40 +23,40 @@ namespace DigitalRise.Geometry.Tests
 
       Assert.AreEqual(Matrix44F.Identity, p.ToMatrix44F());
       Assert.AreEqual(Matrix33F.Identity, p.Orientation);
-      Assert.AreEqual(Vector3F.Zero, p.Position);
+      Assert.AreEqual(Vector3.Zero, p.Position);
 
-      p.Position = new Vector3F(1, 2, 3);
+      p.Position = new Vector3(1, 2, 3);
 
-      p.Orientation = Matrix33F.CreateRotation(new Vector3F(3, -4, 9), 0.49f);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3F.UnitX), 0), p * new Vector4F(1, 0, 0, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3F.UnitY), 0), p * new Vector4F(0, 1, 0, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3F.UnitZ), 0), p * new Vector4F(0, 0, 1, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3F.UnitX), 1), p * new Vector4F(1, 0, 0, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3F.UnitY), 1), p * new Vector4F(0, 1, 0, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3F.UnitZ), 1), p * new Vector4F(0, 0, 1, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3F.UnitX), 0), p.Inverse * new Vector4F(1, 0, 0, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3F.UnitY), 0), p.Inverse * new Vector4F(0, 1, 0, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3F.UnitZ), 0), p.Inverse * new Vector4F(0, 0, 1, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3F.UnitX), 1), p.Inverse * new Vector4F(1, 0, 0, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3F.UnitY), 1), p.Inverse * new Vector4F(0, 1, 0, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3F.UnitZ), 1), p.Inverse * new Vector4F(0, 0, 1, 1)));
+      p.Orientation = Matrix33F.CreateRotation(new Vector3(3, -4, 9), 0.49f);
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3.UnitX), 0), p * new Vector4F(1, 0, 0, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3.UnitY), 0), p * new Vector4F(0, 1, 0, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldDirection(Vector3.UnitZ), 0), p * new Vector4F(0, 0, 1, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3.UnitX), 1), p * new Vector4F(1, 0, 0, 1)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3.UnitY), 1), p * new Vector4F(0, 1, 0, 1)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToWorldPosition(Vector3.UnitZ), 1), p * new Vector4F(0, 0, 1, 1)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3.UnitX), 0), p.Inverse * new Vector4F(1, 0, 0, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3.UnitY), 0), p.Inverse * new Vector4F(0, 1, 0, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalDirection(Vector3.UnitZ), 0), p.Inverse * new Vector4F(0, 0, 1, 0)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3.UnitX), 1), p.Inverse * new Vector4F(1, 0, 0, 1)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3.UnitY), 1), p.Inverse * new Vector4F(0, 1, 0, 1)));
+      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(p.ToLocalPosition(Vector3.UnitZ), 1), p.Inverse * new Vector4F(0, 0, 1, 1)));
 
-      Pose p2 = Pose.FromMatrix(new Matrix44F(p.Orientation, Vector3F.Zero));
+      Pose p2 = Pose.FromMatrix(new Matrix44F(p.Orientation, Vector3.Zero));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(p.Orientation, p2.Orientation));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(p2.Position, Vector3F.Zero));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2.Position, Vector3.Zero));
 
       Matrix44F m = p2;
       m.SetColumn(3, new Vector4F(p.Position, 1));
       p2 = Pose.FromMatrix(m);
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(p.Orientation, p2.Orientation));
       Assert.AreEqual(p.Position, p2.Position);
-      //Assert.IsTrue(Vector3F.AreNumericallyEqual(p.Position, p2.Position));
+      //Assert.IsTrue(MathHelper.AreNumericallyEqual(p.Position, p2.Position));
 
       // Test other constructors.
-      Assert.AreEqual(Vector3F.Zero, new Pose(QuaternionF.CreateRotationX(0.3f)).Position);
+      Assert.AreEqual(Vector3.Zero, new Pose(QuaternionF.CreateRotationX(0.3f)).Position);
       Assert.AreEqual(Matrix33F.CreateRotationX(0.3f), new Pose(Matrix33F.CreateRotationX(0.3f)).Orientation);
-      Assert.AreEqual(new Vector3F(1, 2, 3), new Pose(new Vector3F(1, 2, 3)).Position);
-      Assert.AreEqual(Matrix33F.Identity, new Pose(new Vector3F(1, 2, 3)).Orientation);
+      Assert.AreEqual(new Vector3(1, 2, 3), new Pose(new Vector3(1, 2, 3)).Position);
+      Assert.AreEqual(Matrix33F.Identity, new Pose(new Vector3(1, 2, 3)).Orientation);
     }
 
 
@@ -93,8 +93,8 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void Equals()
     {
-      Pose p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      Pose p2 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p2 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
 
       Assert.AreEqual(p1, p2);
       Assert.IsTrue(p1.Equals((object)p2));
@@ -106,19 +106,19 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void GetHashCodeTest()
     {
-      Pose p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      Pose p2 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p2 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
 
       Assert.AreEqual(p1.GetHashCode(), p2.GetHashCode());
 
-      p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      p2 = new Pose(new Vector3F(2, 1, 3), QuaternionF.CreateRotationY(0.3f));
+      p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      p2 = new Pose(new Vector3(2, 1, 3), QuaternionF.CreateRotationY(0.3f));
       Assert.AreNotEqual(p1.GetHashCode(), p2.GetHashCode());
 
       // Too bad two rotation matrices that differ only by the sign of the angle
       // (+/- angle with same axis) have the same hashcodes. See KB -> .NET --> GetHashCode
-      //p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      //p2 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(-0.3f));
+      //p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      //p2 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(-0.3f));
       //Assert.AreNotEqual(p1.GetHashCode(), p2.GetHashCode());
     }
 
@@ -126,8 +126,8 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void Multiply()
     {
-      Pose p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      Pose p2 = new Pose(new Vector3F(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
+      Pose p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p2 = new Pose(new Vector3(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
 
       Assert.IsTrue(Vector4F.AreNumericallyEqual(
                       p1.ToMatrix44F() * p2.ToMatrix44F() * new Vector4F(1, 2, 3, 1),
@@ -138,8 +138,8 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void MultiplyOperator()
     {
-      Pose p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      Pose p2 = new Pose(new Vector3F(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
+      Pose p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p2 = new Pose(new Vector3(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
 
       Assert.IsTrue(Vector4F.AreNumericallyEqual(
                       p1.ToMatrix44F() * p2.ToMatrix44F() * new Vector4F(1, 2, 3, 1),
@@ -150,16 +150,16 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void Interpolate()
     {
-      Pose p1 = new Pose(new Vector3F(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
-      Pose p2 = new Pose(new Vector3F(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
+      Pose p1 = new Pose(new Vector3(1, 2, 3), QuaternionF.CreateRotationY(0.3f));
+      Pose p2 = new Pose(new Vector3(-4, 5, -6), QuaternionF.CreateRotationZ(-0.1f));
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(p1.Position, Pose.Interpolate(p1, p2, 0).Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(p1.Position, Pose.Interpolate(p1, p2, 0).Position));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(p1.Orientation, Pose.Interpolate(p1, p2, 0).Orientation));
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(p2.Position, Pose.Interpolate(p1, p2, 1).Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2.Position, Pose.Interpolate(p1, p2, 1).Position));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(p2.Orientation, Pose.Interpolate(p1, p2, 1).Orientation));
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(InterpolationHelper.Lerp(p1.Position, p2.Position, 0.3f), Pose.Interpolate(p1, p2, 0.3f).Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(InterpolationHelper.Lerp(p1.Position, p2.Position, 0.3f), Pose.Interpolate(p1, p2, 0.3f).Position));
       Assert.IsTrue(
         QuaternionF.AreNumericallyEqual(
           InterpolationHelper.Lerp(QuaternionF.CreateRotation(p1.Orientation), QuaternionF.CreateRotation(p2.Orientation), 0.3f),
@@ -170,7 +170,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void ToStringTest()
     {
-      Assert.IsTrue(new Pose(new Vector3F(1, 2, 3), QuaternionF.Identity).ToString()
+      Assert.IsTrue(new Pose(new Vector3(1, 2, 3), QuaternionF.Identity).ToString()
         .StartsWith("Pose { Position = (1; 2; 3), Orientation = (1; 0; "));
     }
 
@@ -178,7 +178,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void AreNumericallyEqual()
     {
-      var a = new Pose(new Vector3F(1, 2, 3), new Matrix33F(1, 2, 3, 4, 5, 6, 7, 8, 9));
+      var a = new Pose(new Vector3(1, 2, 3), new Matrix33F(1, 2, 3, 4, 5, 6, 7, 8, 9));
       var b = a;
 
       Assert.AreEqual(true, Pose.AreNumericallyEqual(a, b));
@@ -332,7 +332,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void SerializationXml()
     {
-      Pose pose1 = new Pose(new Vector3F(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));
+      Pose pose1 = new Pose(new Vector3(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));
       Pose pose2;
 
       string fileName = "SerializationPose.xml";
@@ -356,7 +356,7 @@ namespace DigitalRise.Geometry.Tests
     [Test]
     public void SerializationJson()
     {
-      Pose pose1 = new Pose(new Vector3F(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));
+      Pose pose1 = new Pose(new Vector3(1, 2, 3), new Matrix33F(4, 5, 6, 7, 8, 9, 10, 11, 12));
       Pose pose2;
 
       string fileName = "SerializationPose.json";

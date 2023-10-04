@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -98,7 +98,7 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// This property defines only the color of the light source - not its intensity. 
     /// </remarks>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -189,7 +189,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     public PointLight()
     {
-      Color = Vector3F.One;
+      Color = Vector3.One;
       DiffuseIntensity = 1;
       SpecularIntensity = 1;
       HdrScale = 1;
@@ -235,10 +235,10 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    public override Vector3F GetIntensity(float distance)
+    public override Vector3 GetIntensity(float distance)
     {
       float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, Attenuation);
-      return Vector3F.Max(Color * (DiffuseIntensity * HdrScale * attenuation), 
+      return Vector3.Max(Color * (DiffuseIntensity * HdrScale * attenuation), 
                           Color * (SpecularIntensity * HdrScale * attenuation));
     }
     #endregion

@@ -1,9 +1,11 @@
 ﻿using System;
 using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Traits.Tests
 {
@@ -14,7 +16,7 @@ namespace DigitalRise.Animation.Traits.Tests
 
     private SrtTransform NextRandomValue()
     {
-      return new SrtTransform(new Vector3F(_random.NextFloat(-10, 10)), _random.NextQuaternionF(), _random.NextVector3F(-10, 10));
+      return new SrtTransform(new Vector3(_random.NextFloat(-10, 10)), _random.NextQuaternionF(), _random.NextVector3(-10, 10));
     }
 
 
@@ -125,8 +127,8 @@ namespace DigitalRise.Animation.Traits.Tests
       traits.BlendNext(ref result, ref value2, w2);
       traits.EndBlend(ref result);
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(value0.Scale * w0 + value1.Scale * w1 + value2.Scale * w2, result.Scale));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(value0.Translation * w0 + value1.Translation * w1 + value2.Translation * w2, result.Translation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Scale * w0 + value1.Scale * w1 + value2.Scale * w2, result.Scale));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Translation * w0 + value1.Translation * w1 + value2.Translation * w2, result.Translation));
 
       QuaternionF expected;
       expected = value0.Rotation * w0;

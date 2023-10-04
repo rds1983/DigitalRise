@@ -13,6 +13,8 @@ using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples
 {
@@ -91,7 +93,7 @@ namespace Samples
           var projectorLight = new ProjectorLight(texture, projection);
           projectorLight.Attenuation = 4;
           var projectorLightNode = new LightNode(projectorLight);
-          projectorLightNode.LookAt(new Vector3F(0, 0.2f, 0), Vector3F.Zero, Vector3F.UnitZ);
+          projectorLightNode.LookAt(new Vector3(0, 0.2f, 0), Vector3.Zero, Vector3.UnitZ);
 
           // Attach the projector light to the model.
           ModelNode.Children.Add(projectorLightNode);
@@ -111,7 +113,7 @@ namespace Samples
 
           // Change the size of the sphere.
           var meshNode = ModelNode.FindFirstMeshNode();
-          meshNode.ScaleLocal = new Vector3F(0.5f);
+          meshNode.ScaleLocal = new Vector3(0.5f);
 
           // Disable shadows. (The sphere acts as a light source.)
           meshNode.CastsShadows = false;
@@ -119,7 +121,7 @@ namespace Samples
           // Add a point light.
           var pointLight = new PointLight
           {
-            Color = new Vector3F(1, 1, 1),
+            Color = new Vector3(1, 1, 1),
             DiffuseIntensity = 4,
             SpecularIntensity = 4,
             Range = 3,
@@ -145,7 +147,7 @@ namespace Samples
         // A sphere of glass (or "bubble").
         RigidBody = new RigidBody(new SphereShape(0.3f));
         ModelNode = assetManager.LoadDRModel(graphicsService, "Bubble/Bubble.drmdl").Clone();
-        ModelNode.FindFirstMeshNode().ScaleLocal *= new Vector3F(0.5f);
+        ModelNode.FindFirstMeshNode().ScaleLocal *= new Vector3(0.5f);
       }
       else if (_type == 6)
       {
@@ -163,7 +165,7 @@ namespace Samples
       SampleHelper.EnablePerPixelLighting(ModelNode);
 
       // Set a random pose.
-      var randomPosition = new Vector3F(
+      var randomPosition = new Vector3(
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));

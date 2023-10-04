@@ -4,8 +4,7 @@
 
 using System;
 using System.Diagnostics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles.Effectors
 {
@@ -23,14 +22,14 @@ namespace DigitalRise.Particles.Effectors
   /// <item>
   /// <term><see cref="PositionParameter"/></term>
   /// <description>
-  /// A <see cref="Vector3F"/> parameter that defines the position. This parameter is modified by 
+  /// A <see cref="Vector3"/> parameter that defines the position. This parameter is modified by 
   /// the effector. Per default, the parameter "Position" is used.
   /// </description>
   /// </item>
   /// <item>
   /// <term><see cref="DirectionParameter"/></term>
   /// <description>
-  /// A normalized <see cref="Vector3F"/> parameter that defines the movement direction (direction 
+  /// A normalized <see cref="Vector3"/> parameter that defines the movement direction (direction 
   /// of the linear velocity vector). Per default, the parameter "Direction" is used.
   /// </description>
   /// </item>
@@ -50,8 +49,8 @@ namespace DigitalRise.Particles.Effectors
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _positionParameter;
-    private IParticleParameter<Vector3F> _directionParameter;
+    private IParticleParameter<Vector3> _positionParameter;
+    private IParticleParameter<Vector3> _directionParameter;
     private IParticleParameter<float> _linearSpeedParameter;
     #endregion
 
@@ -62,11 +61,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the position.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the position.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "Position".
     /// </value>
     /// <remarks>
@@ -79,11 +78,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the movement direction.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the movement direction.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "Direction".
     /// </value>
     /// <remarks>
@@ -156,8 +155,8 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override void OnRequeryParameters()
     {
-      _positionParameter = ParticleSystem.Parameters.Get<Vector3F>(PositionParameter);
-      _directionParameter = ParticleSystem.Parameters.Get<Vector3F>(DirectionParameter);
+      _positionParameter = ParticleSystem.Parameters.Get<Vector3>(PositionParameter);
+      _directionParameter = ParticleSystem.Parameters.Get<Vector3>(DirectionParameter);
       _linearSpeedParameter = ParticleSystem.Parameters.Get<float>(SpeedParameter);
     }
 
@@ -181,7 +180,7 @@ namespace DigitalRise.Particles.Effectors
         return;
       }
 
-      Vector3F[] positions = _positionParameter.Values;
+      Vector3[] positions = _positionParameter.Values;
       if (positions == null)
       {
         // Position is a uniform parameter.
@@ -209,7 +208,7 @@ namespace DigitalRise.Particles.Effectors
       }
 
       // Value is a varying parameter.
-      Vector3F[] directions = _directionParameter.Values;
+      Vector3[] directions = _directionParameter.Values;
       float[] speeds = _linearSpeedParameter.Values;
       float dt = (float)deltaTime.TotalSeconds;
 

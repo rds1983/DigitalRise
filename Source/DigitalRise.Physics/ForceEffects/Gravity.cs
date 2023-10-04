@@ -3,8 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.ForceEffects
 {
@@ -26,7 +26,7 @@ namespace DigitalRise.Physics.ForceEffects
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector3F _direction;
+    private Vector3 _direction;
     #endregion
 
 
@@ -38,7 +38,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// Gets or sets the gravity acceleration vector.
     /// </summary>
     /// <value>The acceleration vector. The default value is <c>(0, -9.81, 0)</c>.</value>
-    public Vector3F Acceleration
+    public Vector3 Acceleration
     {
       get { return _acceleration; }
       set
@@ -49,7 +49,7 @@ namespace DigitalRise.Physics.ForceEffects
         _direction.TryNormalize();
       }
     }
-    private Vector3F _acceleration;
+    private Vector3 _acceleration;
     #endregion
 
 
@@ -89,7 +89,7 @@ namespace DigitalRise.Physics.ForceEffects
 
     private void Initialize()
     {
-      Acceleration = new Vector3F(0, -9.81f, 0);
+      Acceleration = new Vector3(0, -9.81f, 0);
     }
     #endregion
 
@@ -120,10 +120,10 @@ namespace DigitalRise.Physics.ForceEffects
         foreach (var contactSet in contactSets)
         {
           // Check if all contact normals point against the gravity direction.
-          Vector3F gravityDirection = (contactSet.ObjectA == body.CollisionObject) ? _direction : -_direction;
+          Vector3 gravityDirection = (contactSet.ObjectA == body.CollisionObject) ? _direction : -_direction;
           foreach (var contact in contactSet)
           {
-            if (Vector3F.Dot(contact.Normal, gravityDirection) <= 0.999f)
+            if (Vector3.Dot(contact.Normal, gravityDirection) <= 0.999f)
             {
               // Wrong normal. No stack.
               isInStack = false;

@@ -9,8 +9,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using DigitalRise.Geometry.Collisions.Algorithms;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions
 {
@@ -247,11 +247,11 @@ namespace DigitalRise.Geometry.Collisions
     /// Gets or sets the preferred normal direction.
     /// </summary>
     /// <value>
-    /// The preferred normal direction. The default value is <see cref="Vector3F.Zero"/>. If the 
-    /// value is a vector other than <see cref="Vector3F.Zero"/> it needs to be normalized.
+    /// The preferred normal direction. The default value is <see cref="Vector3.Zero"/>. If the 
+    /// value is a vector other than <see cref="Vector3.Zero"/> it needs to be normalized.
     /// </value>
     /// <remarks>
-    /// If this value is a vector other than <see cref="Vector3F.Zero"/>, the vector is used as the
+    /// If this value is a vector other than <see cref="Vector3.Zero"/>, the vector is used as the
     /// preferred normal direction. The preferred normal direction is a hint that can be used by 
     /// collision algorithms to return better contact points. Collision algorithms which support 
     /// this feature will try to return a contact point with a normal that is close to 
@@ -262,18 +262,18 @@ namespace DigitalRise.Geometry.Collisions
     /// <paramref name="value"/> is not normalized. The vector needs to be either (0, 0, 0) or a 
     /// normalized vector.
     /// </exception>
-    internal Vector3F PreferredNormal
+    internal Vector3 PreferredNormal
     {
       get { return _preferredNormal; }
       set
       {
-        if (value != Vector3F.Zero && !value.IsNumericallyNormalized)
+        if (value != Vector3.Zero && !value.IsNumericallyNormalized())
           throw new ArgumentException("Preferred normal must be normalized.", "value");
 
         _preferredNormal = value;
       }
     }
-    private Vector3F _preferredNormal;
+    private Vector3 _preferredNormal;
 
 
     /// <summary>
@@ -285,7 +285,7 @@ namespace DigitalRise.Geometry.Collisions
     /// </value>
     internal bool IsPreferredNormalAvailable
     {
-      get { return _preferredNormal != Vector3F.Zero; }
+      get { return _preferredNormal != Vector3.Zero; }
     }
 
 
@@ -447,7 +447,7 @@ namespace DigitalRise.Geometry.Collisions
       ObjectA = objectA;
       ObjectB = objectB;
       IsValid = true;
-      PreferredNormal = Vector3F.Zero;
+      PreferredNormal = Vector3.Zero;
       HaveContact = false;
       IsPerturbationTestAllowed = true;
       CanCollide = -1;

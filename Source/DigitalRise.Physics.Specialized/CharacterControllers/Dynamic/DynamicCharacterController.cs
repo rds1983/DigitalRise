@@ -7,9 +7,8 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Materials;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -77,8 +76,8 @@ namespace DigitalRise.Physics.Specialized
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector3F _gravityVelocity;   // Current velocity from gravity.
-    private Vector3F _jumpVelocity;      // Current velocity from jumping.
+    private Vector3 _gravityVelocity;   // Current velocity from gravity.
+    private Vector3 _jumpVelocity;      // Current velocity from jumping.
 
     // A ray is used to sense for ground under the capsule.
     private readonly CollisionObject _ray;
@@ -214,16 +213,16 @@ namespace DigitalRise.Physics.Specialized
     /// The <see cref="Position"/> is the bottom position (the lowest point of the character's 
     /// body).
     /// </remarks>
-    public Vector3F Position
+    public Vector3 Position
     {
       get
       {
-        return Body.Pose.Position - Height / 2 * Vector3F.UnitY;
+        return Body.Pose.Position - Height / 2 * Vector3.UnitY;
       }
       set
       {
         var pose = Body.Pose;
-        pose.Position = value + Height / 2 * Vector3F.UnitY;
+        pose.Position = value + Height / 2 * Vector3.UnitY;
         Body.Pose = pose;
       }
     }
@@ -313,7 +312,7 @@ namespace DigitalRise.Physics.Specialized
             var normal = swapped ? contact.Normal : -contact.Normal;
 
             // Abort with true when there is an allowed slope the character can stand on.
-            if (Vector3F.Dot(normal, Vector3F.UnitY) >= _cosSlopeLimit)
+            if (Vector3.Dot(normal, Vector3.UnitY) >= _cosSlopeLimit)
             {
               _hasGroundContact = true;
               return true;
@@ -376,13 +375,13 @@ namespace DigitalRise.Physics.Specialized
 
         Name = "CharacterController",
 
-        Pose = new Pose(new Vector3F(0, shape.Height / 2, 0)),
+        Pose = new Pose(new Vector3(0, shape.Height / 2, 0)),
       };
 
 
       // Create a ray that senses the space below the capsule. The ray starts in the capsule
       // center (to detect penetrations) and extends 0.4 units below the capsule bottom.
-      RayShape rayShape = new RayShape(Vector3F.Zero, -Vector3F.UnitY, shape.Height / 2 + 0.4f)
+      RayShape rayShape = new RayShape(Vector3.Zero, -Vector3.UnitY, shape.Height / 2 + 0.4f)
       {
         StopsAtFirstHit = true,
       };
@@ -427,7 +426,7 @@ namespace DigitalRise.Physics.Specialized
     /// If the <paramref name="moveVelocity"/> is a zero vector, only gravity will be applied. 
     /// </para>
     /// </remarks>
-    public void Move(Vector3F moveVelocity, float jumpVelocity, float deltaTime)
+    public void Move(Vector3 moveVelocity, float jumpVelocity, float deltaTime)
     {
       if (!Enabled)
         return;
@@ -438,8 +437,8 @@ namespace DigitalRise.Physics.Specialized
       if (Gravity == 0)
       {
         // ----- Flying
-        _gravityVelocity = Vector3F.Zero;
-        _jumpVelocity = Vector3F.Zero;
+        _gravityVelocity = Vector3.Zero;
+        _jumpVelocity = Vector3.Zero;
         Body.LinearVelocity = moveVelocity;
       }
       else
@@ -456,14 +455,14 @@ namespace DigitalRise.Physics.Specialized
         }
 
         bool isAllowedSlope = false;
-        Vector3F groundNormal = Vector3F.UnitY;
+        Vector3 groundNormal = Vector3.UnitY;
         if (rayContactSet != null && rayContactSet.Count > 0)
         {
           Contact contact = rayContactSet[0];
           var swapped = (rayContactSet.ObjectB == _ray);
           groundNormal = swapped ? contact.Normal : -contact.Normal;
 
-          isAllowedSlope = (Vector3F.Dot(groundNormal, Vector3F.UnitY) >= _cosSlopeLimit);
+          isAllowedSlope = (Vector3.Dot(groundNormal, Vector3.UnitY) >= _cosSlopeLimit);
 
           // Get the downwards direction of the slope (in xz-plane).
           var downDirection = groundNormal;
@@ -473,7 +472,7 @@ namespace DigitalRise.Physics.Specialized
           {
             // Slope is too steep. Character cannot move up the slope. 
             // Block any movement against the slope.
-            float movementAgainstWall = -Vector3F.Dot(moveVelocity, downDirection);
+            float movementAgainstWall = -Vector3.Dot(moveVelocity, downDirection);
             // x > 0 ... up the slope
             // x = 0 ... tangential to slope
             // x < 0 ... down the slope
@@ -490,8 +489,8 @@ namespace DigitalRise.Physics.Specialized
             || (IsClimbing && (_jumpVelocity + _gravityVelocity).Y <= 0)) // Or climbing and any jumping has ended.
         {
           // The character is on ground or in a situation where it has support.
-          _jumpVelocity = Vector3F.Zero;
-          _gravityVelocity = Vector3F.Zero;
+          _jumpVelocity = Vector3.Zero;
+          _gravityVelocity = Vector3.Zero;
         }
         else
         {
@@ -499,31 +498,31 @@ namespace DigitalRise.Physics.Specialized
           if (jumpVelocity > 0)
           {
             // Jump button is still pressed. Do not apply gravity yet.
-            _gravityVelocity = Vector3F.Zero;
+            _gravityVelocity = Vector3.Zero;
           }
           else
           {
             // Increase velocity due to gravity.
-            _gravityVelocity += -Vector3F.UnitY * Gravity * deltaTime;
+            _gravityVelocity += -Vector3.UnitY * Gravity * deltaTime;
           }
         }
 
-        _jumpVelocity = Vector3F.Max(jumpVelocity * Vector3F.UnitY, _jumpVelocity);
+        _jumpVelocity = Vector3.Max(jumpVelocity * Vector3.UnitY, _jumpVelocity);
         Body.LinearVelocity = moveVelocity + _jumpVelocity + _gravityVelocity;
 
         // Down steps: 
         // If the character moves down on an inclined plane, the character should stay in touch
         // with the plane and not step horizontal and lose ground contact.
-        if (_jumpVelocity == Vector3F.Zero                          // Not jumping.
+        if (_jumpVelocity == Vector3.Zero                          // Not jumping.
             && !IsClimbing                                          // Not climbing.
             && isAllowedSlope                                       // On an allowed slope.
-            && Vector3F.Dot(Body.LinearVelocity, groundNormal) > 0) // Moving down the plane.
+            && Vector3.Dot(Body.LinearVelocity, groundNormal) > 0) // Moving down the plane.
         {
           // Make velocity parallel to the ground plane.
-          var tangent = Vector3F.Cross(groundNormal, Body.LinearVelocity);
-          var downForward = -Vector3F.Cross(groundNormal, tangent);
+          var tangent = Vector3.Cross(groundNormal, Body.LinearVelocity);
+          var downForward = -Vector3.Cross(groundNormal, tangent);
           downForward.Normalize();
-          Body.LinearVelocity = downForward * Body.LinearVelocity.Length;
+          Body.LinearVelocity = downForward * Body.LinearVelocity.Length();
         }
 
         // Invalidate cached values.

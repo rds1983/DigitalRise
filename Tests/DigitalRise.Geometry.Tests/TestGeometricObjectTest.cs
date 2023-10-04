@@ -1,6 +1,6 @@
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -18,7 +18,7 @@ namespace DigitalRise.Geometry.Tests
       g.PoseChanged += OnChanged;
       g.ShapeChanged += OnChanged;
 
-      g.Pose = new Pose(new Vector3F(1, 2, 3));
+      g.Pose = new Pose(new Vector3(1, 2, 3));
       g.Shape = new BoxShape(1, 2, 3);
 
       g.PoseChanged -= OnChanged;

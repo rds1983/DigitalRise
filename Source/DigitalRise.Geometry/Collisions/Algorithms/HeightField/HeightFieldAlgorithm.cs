@@ -6,8 +6,8 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -113,8 +113,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       #region ----- Precomputations -----
 
-      Vector3F scaleHeightField = heightFieldGeometricObject.Scale;
-      Vector3F scaleOther = otherGeometricObject.Scale;
+      Vector3 scaleHeightField = heightFieldGeometricObject.Scale;
+      Vector3 scaleOther = otherGeometricObject.Scale;
       Pose heightFieldPose = heightFieldGeometricObject.Pose;
 
       // We do not support negative scaling. It is not clear what should happen when y is
@@ -123,7 +123,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         throw new NotSupportedException("Computing collisions for height fields with a negative scaling is not supported.");
 
       // Get height field and basic info.
-      Vector3F heightFieldUpAxis = heightFieldPose.ToWorldDirection(Vector3F.UnitY);
+      Vector3 heightFieldUpAxis = heightFieldPose.ToWorldDirection(Vector3.UnitY);
       int arrayLengthX = heightField.NumberOfSamplesX;
       int arrayLengthZ = heightField.NumberOfSamplesZ;
       Debug.Assert(arrayLengthX > 1 && arrayLengthZ > 1, "A height field should contain at least 2 x 2 elements (= 1 cell).");
@@ -144,7 +144,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         if (isOverHole)
         {
           // Guesses over holes are useless. --> Check the whole terrain.
-          currentSearchDistance = heightFieldGeometricObject.Aabb.Extent.Length;
+          currentSearchDistance = heightFieldGeometricObject.Aabb.Extent.Length();
         }
         else if (guessedClosestPair.PenetrationDepth < 0)
         {
@@ -205,8 +205,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       triangleGeometricObject.Shape = triangleShape;
 
       var lineSegment = ResourcePools.LineSegmentShapes.Obtain();
-      lineSegment.Start = Vector3F.Zero;
-      lineSegment.End = -heightField.Depth * Vector3F.UnitY;
+      lineSegment.Start = Vector3.Zero;
+      lineSegment.End = -heightField.Depth * Vector3.UnitY;
 
       var lineSegmentGeometricObject = TestGeometricObject.Create();
       lineSegmentGeometricObject.Shape = lineSegment;
@@ -284,7 +284,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                   // the normal with: (M^-1)^T = 1 / scale
                   // Note: We cannot use the scaled vertices because negative scalings change the 
                   // face-order of the vertices.
-                  Vector3F triangleNormal = triangle.Normal / scaleHeightField;
+                  Vector3 triangleNormal = triangle.Normal / scaleHeightField;
                   triangleNormal = heightFieldPose.ToWorldDirection(triangleNormal);
                   triangleNormal.TryNormalize();
 
@@ -293,7 +293,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                   // closest-point result, and testContactSet[1] the better contact query result.)
                   var testContact = testContactSet[testContactSet.Count - 1];
                   var contactNormal = swapped ? -testContact.Normal : testContact.Normal;
-                  if (Vector3F.Dot(contactNormal, triangleNormal) < WeldingLimit)
+                  if (Vector3.Dot(contactNormal, triangleNormal) < WeldingLimit)
                   {
                     // Contact normal deviates by more than the welding limit. --> Check the contact.
 
@@ -303,7 +303,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                     #region ----- Get Neighbor Triangle Normal -----
 
                     // Get barycentric coordinates of contact position.
-                    Vector3F contactPositionOnHeightField = swapped ? testContact.PositionBLocal / scaleHeightField : testContact.PositionALocal / scaleHeightField;
+                    Vector3 contactPositionOnHeightField = swapped ? testContact.PositionBLocal / scaleHeightField : testContact.PositionALocal / scaleHeightField;
                     float u, v, w;
                     // TODO: GetBaryCentricFromPoint computes the triangle normal, which we already know - optimize.
                     GeometryHelper.GetBarycentricFromPoint(triangle, contactPositionOnHeightField, out u, out v, out w);
@@ -328,7 +328,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                           else
                           {
                             // The contact is at the border of the whole height field. Set a normal which disables all bad contact filtering.
-                            neighborNormal = new Vector3F(float.NaN);
+                            neighborNormal = new Vector3(float.NaN);
                           } 
                         }
                         else
@@ -340,7 +340,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                           }
                           else
                           {
-                            neighborNormal = new Vector3F(float.NaN);
+                            neighborNormal = new Vector3(float.NaN);
                           }
                         }
                       }
@@ -355,7 +355,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                           }
                           else
                           {
-                            neighborNormal = new Vector3F(float.NaN);
+                            neighborNormal = new Vector3(float.NaN);
                           }
                         }
                         else if (v < w)
@@ -372,7 +372,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                           }
                           else
                           {
-                            neighborNormal = new Vector3F(float.NaN);
+                            neighborNormal = new Vector3(float.NaN);
                           }
                         }
                       }
@@ -382,7 +382,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                     // Contact normals in the range triangleNormal - neighborNormal are allowed. 
                     // Others, especially vertical contacts in slopes or horizontal normals are not 
                     // allowed.
-                    var cosMinAngle = Vector3F.Dot(neighborNormal, triangleNormal) - CollisionDetection.Epsilon;
+                    var cosMinAngle = Vector3.Dot(neighborNormal, triangleNormal) - CollisionDetection.Epsilon;
                     RemoveBadContacts(swapped, testContactSet, triangleNormal, cosMinAngle);
 
                     // If we have no contact yet, we retry with a preferred normal identical to the up axis.
@@ -393,7 +393,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                     {
                       testContactSet.PreferredNormal = (swapped) ? -heightFieldUpAxis : heightFieldUpAxis;
                       collisionAlgorithm.ComputeCollision(testContactSet, CollisionQueryType.Contacts);
-                      testContactSet.PreferredNormal = Vector3F.Zero;
+                      testContactSet.PreferredNormal = Vector3.Zero;
                       RemoveBadContacts(swapped, testContactSet, triangleNormal, cosMinAngle);
                     }
 
@@ -401,11 +401,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                     // But only if the triangle normal differs significantly from the up axis.
                     if (testContactSet.Count == 0
                         && (contactSet.Count == 0 || type == CollisionQueryType.ClosestPoints)
-                        && Vector3F.Dot(heightFieldUpAxis, triangleNormal) < WeldingLimit)
+                        && Vector3.Dot(heightFieldUpAxis, triangleNormal) < WeldingLimit)
                     {
                       testContactSet.PreferredNormal = (swapped) ? -triangleNormal : triangleNormal;
                       collisionAlgorithm.ComputeCollision(testContactSet, CollisionQueryType.Contacts);
-                      testContactSet.PreferredNormal = Vector3F.Zero;
+                      testContactSet.PreferredNormal = Vector3.Zero;
                       RemoveBadContacts(swapped, testContactSet, triangleNormal, cosMinAngle);
                     }
                   }
@@ -522,14 +522,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
     // Remove all contacts where the angle between the contact normal and the triangle normal
     // is less than the given angle. The limit angle is given as cos(angle) (= dot product).
-    private static void RemoveBadContacts(bool swapped, ContactSet testContactSet, Vector3F triangleNormal, float cosMinAngle)
+    private static void RemoveBadContacts(bool swapped, ContactSet testContactSet, Vector3 triangleNormal, float cosMinAngle)
     {
       // Note: We assume that we have only one contact per set.
       if (testContactSet.Count > 0)
       {
         if (!swapped)
         {
-          if (Vector3F.Dot(testContactSet[0].Normal, triangleNormal) < cosMinAngle)
+          if (Vector3.Dot(testContactSet[0].Normal, triangleNormal) < cosMinAngle)
           {
             foreach (var contact in testContactSet)
               contact.Recycle();
@@ -539,7 +539,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         }
         else
         {
-          if (Vector3F.Dot(-testContactSet[0].Normal, triangleNormal) < cosMinAngle)
+          if (Vector3.Dot(-testContactSet[0].Normal, triangleNormal) < cosMinAngle)
           {
             foreach (var contact in testContactSet)
               contact.Recycle();
@@ -581,16 +581,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       HeightField heightFieldA = (HeightField)objectA.Shape;
       Shape shapeB = objectB.Shape;
 
-      Vector3F scaleA = objectA.Scale;
-      Vector3F scaleB = objectB.Scale;
+      Vector3 scaleA = objectA.Scale;
+      Vector3 scaleB = objectB.Scale;
       Pose poseA = objectA.Pose;
       Pose poseB = objectB.Pose;
 
       // Get the height field up-axis in world space.
-      Vector3F heightFieldUpAxis = poseA.ToWorldDirection(Vector3F.UnitY);
+      Vector3 heightFieldUpAxis = poseA.ToWorldDirection(Vector3.UnitY);
 
       // Get point on other object.
-      Vector3F positionBLocal;
+      Vector3 positionBLocal;
       ConvexShape shapeBAsConvex = shapeB as ConvexShape;
       if (shapeBAsConvex != null)
       {
@@ -604,8 +604,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       }
 
       // Convert point (object B) into height field space (object A).
-      Vector3F positionB = poseB.ToWorldPosition(positionBLocal);
-      Vector3F positionBInA = poseA.ToLocalPosition(positionB);
+      Vector3 positionB = poseB.ToWorldPosition(positionBLocal);
+      Vector3 positionBInA = poseA.ToLocalPosition(positionB);
 
       // Get point on the surface of the height field (object A):
       // Clamp x and z coordinate to height field widths.
@@ -616,7 +616,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       float z = MathHelper.Clamp(positionBInA.Z, originZ * scaleA.Z, (originZ + heightFieldA.WidthZ) * scaleA.Z);
       float y = heightFieldA.GetHeight(x / scaleA.X, z / scaleA.Z) * scaleA.Y;        // Inverse scale applied in GetHeight() parameters.
 
-      Vector3F positionALocal = new Vector3F(x, y, z);
+      Vector3 positionALocal = new Vector3(x, y, z);
 
       // Special handling of holes.
       isOverHole = Numeric.IsNaN(y);
@@ -624,16 +624,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         positionALocal = heightFieldA.InnerPoint * scaleA;
 
       // Convert point on height field to world space.
-      Vector3F positionA = poseA.ToWorldPosition(positionALocal);
+      Vector3 positionA = poseA.ToWorldPosition(positionALocal);
 
       // Use the world positions (positionA, positionB) as our closest-pair/contact guess.
 
       // Compute contact information.
-      Vector3F position = (positionA + positionB) / 2;
-      float penetrationDepth = (positionA - positionB).Length;
+      Vector3 position = (positionA + positionB) / 2;
+      float penetrationDepth = (positionA - positionB).Length();
       bool haveContact = (positionALocal.Y >= positionBInA.Y);
 
-      Vector3F normal = positionA - positionB;
+      Vector3 normal = positionA - positionB;
       if (!normal.TryNormalize())
         normal = heightFieldUpAxis;
 
@@ -696,8 +696,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       Pose startPoseA = geometricObjectA.Pose;
       Pose startPoseB = geometricObjectB.Pose;
-      Vector3F scaleA = geometricObjectA.Scale;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // We do not support negative scaling (see comments in ComputeCollision). 
       if (scaleA.X < 0 || scaleA.Y < 0 || scaleA.Z < 0)
@@ -717,7 +717,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       var testGeometricObject = TestGeometricObject.Create();
       testGeometricObject.Shape = triangleShape;
-      testGeometricObject.Scale = Vector3F.One;
+      testGeometricObject.Scale = Vector3.One;
       testGeometricObject.Pose = startPoseA;
 
       var testCollisionObject = ResourcePools.TestCollisionObjects.Obtain();

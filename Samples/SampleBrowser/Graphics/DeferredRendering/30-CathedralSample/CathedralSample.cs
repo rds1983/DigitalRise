@@ -88,7 +88,7 @@
 //      // Add a god ray post-process filter and a game object which updates the god ray directions.
 //      var godRayFilter = new GodRayFilter(GraphicsService)
 //      {
-//        Intensity = new Vector3F(1.0f, 0.9f, 0.8f),
+//        Intensity = new Vector3(1.0f, 0.9f, 0.8f),
 //        NumberOfSamples = 16,
 //        NumberOfPasses = 2,
 //        Softness = 0,
@@ -107,7 +107,7 @@
 //      });
 
 //      // Load Sibenik cathedral.
-//      GameObjectService.Objects.Add(new StaticObject(Services, "Cathedral/sibenik", 1.0f, _globalRotation * new Pose(new Vector3F(0, 0.1f, 0))));
+//      GameObjectService.Objects.Add(new StaticObject(Services, "Cathedral/sibenik", 1.0f, _globalRotation * new Pose(new Vector3(0, 0.1f, 0))));
 
 //      // Create an image-based light in the hall.
 //      // (No diffuse light, only specular reflections.)
@@ -118,11 +118,11 @@
 //        SpecularIntensity = 1f,
 //        BlendMode = 0.5f, // Mix diffuse light to scene. (0 = add, 1 = replace, 0.5 = mix)
 //        EnableLocalizedReflection = true,
-//        LocalizedReflectionBox = new Aabb(new Vector3F(-15, -4, -8), new Vector3F(16, 4, 8)),
+//        LocalizedReflectionBox = new Aabb(new Vector3(-15, -4, -8), new Vector3(16, 4, 8)),
 //      };
 
 //      _lightNodes[0] = new LightNode(_imageBasedLights[0]);
-//      _lightNodes[0].PoseLocal = _globalRotation * new Pose(new Vector3F(4, 4, 0));
+//      _lightNodes[0].PoseLocal = _globalRotation * new Pose(new Vector3(4, 4, 0));
 //      _graphicsScreen.Scene.Children.Add(_lightNodes[0]);
 
 //      // Add a second image-based light above the altar.
@@ -135,17 +135,17 @@
 //        BlendMode = 0.5f,
 //        FalloffRange = 0.2f,
 //        EnableLocalizedReflection = true,
-//        LocalizedReflectionBox = new Aabb(new Vector3F(-8, -6, -8), new Vector3F(26, 12, 8)),
+//        LocalizedReflectionBox = new Aabb(new Vector3(-8, -6, -8), new Vector3(26, 12, 8)),
 //      };
 
 //      _lightNodes[1] = new LightNode(_imageBasedLights[1]);
-//      _lightNodes[1].PoseLocal = _globalRotation * new Pose(new Vector3F(-12, 8, 0));
+//      _lightNodes[1].PoseLocal = _globalRotation * new Pose(new Vector3(-12, 8, 0));
 //      _graphicsScreen.Scene.Children.Add(_lightNodes[1]);
 
 //      // Add more test objects to the scenes.
 //      AddLightProbes();
-//      AddTestSpheres(new Vector3F(0, 0, 0));
-//      AddTestSpheres(new Vector3F(-10, 2, 0));
+//      AddTestSpheres(new Vector3(0, 0, 0));
+//      AddTestSpheres(new Vector3(-10, 2, 0));
 
 //      CreateGuiControls();
 //    }
@@ -161,8 +161,8 @@
 //        ContentManager,
 //        GraphicsService,
 //        new SphereShape(0.1f),
-//        new Vector3F(0, 0, 0),
-//        new Vector3F(1, 1, 1),
+//        new Vector3(0, 0, 0),
+//        new Vector3(1, 1, 1),
 //        1000000.0f);
 
 //      // Add a sphere under each image-based light node.
@@ -177,15 +177,15 @@
 //    /// <summary>
 //    /// Adds bigger spheres with different diffuse and specular properties.
 //    /// </summary>
-//    private void AddTestSpheres(Vector3F position)
+//    private void AddTestSpheres(Vector3 position)
 //    {
 //      const int NumX = 4;
 //      const int NumZ = 4;
 //      for (int x = 0; x < NumX; x++)
 //      {
-//        Vector3F baseColor = new Vector3F(1.0f, 0.71f, 0.29f);       // Gold
-//        Vector3F diffuse = new Vector3F(1 - (float)(x + 1) / NumX);  // Decrease diffuse coefficient.
-//        Vector3F specular = new Vector3F((float)(x + 1) / NumX);     // Increase specular coefficient.
+//        Vector3 baseColor = new Vector3(1.0f, 0.71f, 0.29f);       // Gold
+//        Vector3 diffuse = new Vector3(1 - (float)(x + 1) / NumX);  // Decrease diffuse coefficient.
+//        Vector3 specular = new Vector3((float)(x + 1) / NumX);     // Increase specular coefficient.
 
 //        for (int z = 0; z < NumZ; z++)
 //        {
@@ -203,7 +203,7 @@
 //          _graphicsScreen.Scene.Children.Add(
 //            new MeshNode(mesh)
 //            {
-//              PoseWorld = _globalRotation * new Pose(position + new Vector3F(x, 1.0f, z - (NumZ - 1) / 2.0f))
+//              PoseWorld = _globalRotation * new Pose(position + new Vector3(x, 1.0f, z - (NumZ - 1) / 2.0f))
 //            });
 //        }
 //      }

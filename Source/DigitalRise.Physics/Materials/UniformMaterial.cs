@@ -4,8 +4,7 @@
 
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Materials
 {
@@ -113,7 +112,7 @@ namespace DigitalRise.Physics.Materials
     /// This material does not support surface motion. (<see cref="SupportsSurfaceMotion"/> is 
     /// <see langword="false"/>.)
     /// </exception>
-    public Vector3F SurfaceMotion
+    public Vector3 SurfaceMotion
     {
       get { return _surfaceMotion; }
       set
@@ -124,7 +123,7 @@ namespace DigitalRise.Physics.Materials
         _surfaceMotion = value;
       }
     }
-    private Vector3F _surfaceMotion;
+    private Vector3 _surfaceMotion;
 
 
     /// <summary>
@@ -189,7 +188,7 @@ namespace DigitalRise.Physics.Materials
       StaticFriction = 0.5f;
       Restitution = 0.1f;
       SupportsSurfaceMotion = supportsSurfaceMotion;
-      _surfaceMotion = Vector3F.Zero;
+      _surfaceMotion = Vector3.Zero;
     }
 
 
@@ -252,7 +251,7 @@ namespace DigitalRise.Physics.Materials
     /// The <see cref="MaterialProperties"/> of the given rigid body at the given position and
     /// child feature.
     /// </returns>
-    public MaterialProperties GetProperties(RigidBody body, Vector3F positionLocal, int featureIndex)
+    public MaterialProperties GetProperties(RigidBody body, Vector3 positionLocal, int featureIndex)
     {
       MaterialProperties parameters = new MaterialProperties(
         StaticFriction,

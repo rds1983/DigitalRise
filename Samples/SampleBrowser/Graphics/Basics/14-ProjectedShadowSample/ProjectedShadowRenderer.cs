@@ -89,12 +89,12 @@ namespace Samples.Graphics
       get
       {
         return new Vector4F(
-          (Vector3F)_effect.DiffuseColor,
+          (Vector3)_effect.DiffuseColor,
           _effect.Alpha);
       }
       set
       {
-        _effect.DiffuseColor = value.XYZ.ToXna();
+        _effect.DiffuseColor = value.XYZ;
         _effect.Alpha = value.W;
       }
     }
@@ -121,7 +121,7 @@ namespace Samples.Graphics
         TextureEnabled = false
       };
 
-      ShadowedPlane = new Plane(new Vector3F(0, 1, 0), 0.01f);
+      ShadowedPlane = new Plane(new Vector3(0, 1, 0), 0.01f);
       LightPosition = new Vector4F(1, 1, 1, 0);
     }
 

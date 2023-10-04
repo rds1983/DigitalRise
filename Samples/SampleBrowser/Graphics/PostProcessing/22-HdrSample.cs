@@ -35,7 +35,7 @@ DeferredLightingSample.",
       // The MadFilter can be used to scale the current color values.
       var madProcessor = new MadFilter(GraphicsService)
       {
-        Scale = new Vector3F(4),
+        Scale = new Vector3(4),
         DefaultTargetFormat = new RenderTargetFormat(width, height, false, SurfaceFormat.HdrBlendable, DepthFormat.None),
       };
       GraphicsScreen.PostProcessors.Add(madProcessor);

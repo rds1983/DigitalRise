@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -183,7 +183,7 @@ namespace DigitalRise.Animation.Character
       // Use parent bone lengths to estimate the scale factor.
       var bindPoseARelative = SkeletonMapper.SkeletonPoseA.Skeleton.GetBindPoseRelative(BoneIndexA);
       var bindPoseBRelative = SkeletonMapper.SkeletonPoseB.Skeleton.GetBindPoseRelative(BoneIndexB);
-      ScaleAToB = bindPoseBRelative.Translation.Length / bindPoseARelative.Translation.Length;
+      ScaleAToB = bindPoseBRelative.Translation.Length() / bindPoseARelative.Translation.Length();
     }
 
 
@@ -334,7 +334,7 @@ namespace DigitalRise.Animation.Character
       var boneTransform = skeletonA.GetBoneTransform(boneIndexA);
 
       // Remove any scaling.
-      boneTransform.Scale = Vector3F.One;
+      boneTransform.Scale = Vector3.One;
 
       // Rotation: Using similarity transformation: (Read from right to left.)
       // Rotate from bone B space to bone A space.
@@ -347,7 +347,7 @@ namespace DigitalRise.Animation.Character
       if (mapTranslations)
         boneTransform.Translation = rotationAToB.Rotate(boneTransform.Translation * scaleAToB);
       else
-        boneTransform.Translation = Vector3F.Zero;
+        boneTransform.Translation = Vector3.Zero;
 
       // Apply new bone transform to B.
       skeletonB.SetBoneTransform(boneIndexB, boneTransform);

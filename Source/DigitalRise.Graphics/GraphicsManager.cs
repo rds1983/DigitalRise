@@ -9,7 +9,6 @@ using DigitalRise.Collections;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.Interop;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics

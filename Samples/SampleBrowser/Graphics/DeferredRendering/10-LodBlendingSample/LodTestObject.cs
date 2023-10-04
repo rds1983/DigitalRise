@@ -10,9 +10,9 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
 using DigitalRise.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -74,7 +74,7 @@ namespace Samples
 
 
       // Set a random pose.
-      var randomPosition = new Vector3F(
+      var randomPosition = new Vector3(
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-10, 0));

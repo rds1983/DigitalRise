@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -75,9 +75,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       contactSet.HaveContact = false;
 
       // Get transformations.
-      Vector3F rayScale = rayObject.Scale;
+      Vector3 rayScale = rayObject.Scale;
       Pose rayPose = rayObject.Pose;
-      Vector3F compositeScale = compositeObject.Scale;
+      Vector3 compositeScale = compositeObject.Scale;
       Pose compositePose = compositeObject.Pose;
 
       // Check if transforms are supported.
@@ -103,7 +103,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       rayWorld.ToWorld(ref rayPose);    // Transform ray to world space.
       Ray ray = rayWorld;
       ray.ToLocal(ref compositePose);   // Transform ray to local space of composite.
-      var inverseCompositeScale = Vector3F.One / compositeScale;
+      var inverseCompositeScale = Vector3.One / compositeScale;
       ray.Scale(ref inverseCompositeScale);
 
       try
@@ -132,12 +132,12 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         {
           #region ----- Composite vs. *-----
 
-          var rayDirectionInverse = new Vector3F(
+          var rayDirectionInverse = new Vector3(
             1 / ray.Direction.X,
             1 / ray.Direction.Y,
             1 / ray.Direction.Z);
 
-          float epsilon = Numeric.EpsilonF * (1 + compositeObject.Aabb.Extent.Length);
+          float epsilon = Numeric.EpsilonF * (1 + compositeObject.Aabb.Extent.Length());
 
           // Go through list of children and find contacts.
           int numberOfChildGeometries = compositeShape.Children.Count;
@@ -193,7 +193,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       CollisionObject collisionObjectB = (swapped) ? contactSet.ObjectA : contactSet.ObjectB;
       IGeometricObject geometricObjectA = collisionObjectA.GeometricObject;
       IGeometricObject geometricObjectB = collisionObjectB.GeometricObject;
-      Vector3F scaleA = geometricObjectA.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
       IGeometricObject childA = ((CompositeShape)geometricObjectA.Shape).Children[childIndex];
 
       // Find collision algorithm. 

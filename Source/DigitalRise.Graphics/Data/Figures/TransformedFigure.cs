@@ -5,8 +5,7 @@
 using System;
 using DigitalRise.Collections;
 using DigitalRise.Geometry;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -77,7 +76,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the scale factor that is applied to the figure.
     /// </summary>
     /// <value>The scale factor that is applied to the figure.</value>
-    public Vector3F Scale
+    public Vector3 Scale
     {
       get { return _scale; }
       set
@@ -89,7 +88,7 @@ namespace DigitalRise.Graphics
         Invalidate();
       }
     }
-    private Vector3F _scale;
+    private Vector3 _scale;
 
 
     /// <inheritdoc/>
@@ -115,7 +114,7 @@ namespace DigitalRise.Graphics
 
       _child = child;
       Pose = Pose.Identity;
-      Scale = new Vector3F(1, 1, 1);
+      Scale = new Vector3(1, 1, 1);
     }
     #endregion
 
@@ -125,7 +124,7 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    internal override void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
+    internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
     {
       int startIndex = vertices.Count;
 

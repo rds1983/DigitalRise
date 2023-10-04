@@ -139,7 +139,7 @@ namespace DigitalRise.Graphics.Rendering
       
       // Convert frustum far corners from view space to world space.
       for (int i = 0; i < _cameraFrustumFarCorners.Length; i++)
-        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[i]);
+        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3)_cameraFrustumFarCorners[i]);
 
       // Update SceneNode.LastFrame for all visible nodes.
       int frame = context.Frame;
@@ -165,7 +165,7 @@ namespace DigitalRise.Graphics.Rendering
         _parameterSpecularColor.SetValue((Vector3)light.Color * light.SpecularIntensity * hdrScale);
 
         Pose lightPose = lightNode.PoseWorld;
-        Vector3F lightDirectionWorld = lightPose.ToWorldDirection(Vector3F.Forward);
+        Vector3 lightDirectionWorld = lightPose.ToWorldDirection(Vector3.Forward);
         _parameterLightDirection.SetValue((Vector3)lightDirectionWorld);
 
         bool hasShadow = (lightNode.Shadow != null && lightNode.Shadow.ShadowMask != null);

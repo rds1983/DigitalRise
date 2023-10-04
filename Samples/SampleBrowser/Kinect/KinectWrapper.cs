@@ -125,11 +125,11 @@ namespace Samples.Kinect
 
 
     // An offset that is applied to the Kinect joint positions.
-    public Vector3F Offset { get; set; }
+    public Vector3 Offset { get; set; }
 
 
     // A scale factor that is applied to the Kinect joint positions.
-    public Vector3F Scale { get; set; }
+    public Vector3 Scale { get; set; }
     #endregion
 
 
@@ -151,8 +151,8 @@ namespace Samples.Kinect
 
       _bodyFrameReader.FrameArrived += OnKinectBodyFrameArrived;
 
-      Offset = new Vector3F(0, 0.3f, 0);
-      Scale = new Vector3F(1, 1, 1);
+      Offset = new Vector3(0, 0.3f, 0);
+      Scale = new Vector3(1, 1, 1);
 
       // Create a skeleton that defines the bone hierarchy and rest pose.
       var skeleton = new Skeleton(
@@ -265,10 +265,10 @@ namespace Samples.Kinect
           // The joint position in "Kinect space".
           var kinectPosition = body.Joints[joint].Position;
 
-          // Convert Kinect joint position to a Vector3F.
+          // Convert Kinect joint position to a Vector3.
           // z is negated because in XNA the camera forward vectors is -z, but the Kinect
           // forward vector is +z. 
-          Vector3F position = new Vector3F(kinectPosition.X, kinectPosition.Y, -kinectPosition.Z);
+          Vector3 position = new Vector3(kinectPosition.X, kinectPosition.Y, -kinectPosition.Z);
 
           // Apply scale and offset.
           position = position * Scale + Offset;

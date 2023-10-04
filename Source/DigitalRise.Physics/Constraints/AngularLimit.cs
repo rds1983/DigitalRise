@@ -6,7 +6,8 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -55,8 +56,8 @@ namespace DigitalRise.Physics.Constraints
     //--------------------------------------------------------------
 
     private readonly LimitState[] _limitStates = new LimitState[3];
-    private Vector3F _minImpulseLimits;
-    private Vector3F _maxImpulseLimits;
+    private Vector3 _minImpulseLimits;
+    private Vector3 _maxImpulseLimits;
     private readonly Constraint1D[] _constraints =
     {
       new Constraint1D(), 
@@ -123,7 +124,7 @@ namespace DigitalRise.Physics.Constraints
     /// The minimum movement limits in radians. One element for each constraint axis.
     /// The default is (-∞, -∞, -∞), which means that there is no minimum limit.
     /// </value>
-    public Vector3F Minimum
+    public Vector3 Minimum
     {
       get { return _minimum; }
       set
@@ -135,7 +136,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _minimum;
+    private Vector3 _minimum;
 
 
     /// <summary>
@@ -145,7 +146,7 @@ namespace DigitalRise.Physics.Constraints
     /// The maximum movement limits in radians. One element for each constraint axis.
     /// The default is (+∞, +∞, +∞), which means that there is no maximum limit.
     /// </value>
-    public Vector3F Maximum
+    public Vector3 Maximum
     {
       get { return _maximum; }
       set
@@ -157,7 +158,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _maximum;
+    private Vector3 _maximum;
 
 
     /// <summary>
@@ -172,7 +173,7 @@ namespace DigitalRise.Physics.Constraints
     /// If the value is 1 the simulation tries to remove the whole constraint error in one time 
     /// step - which is usually unstable. A good value is for example 0.2.
     /// </remarks>
-    public Vector3F ErrorReduction
+    public Vector3 ErrorReduction
     {
       get { return _errorReduction; }
       set
@@ -184,7 +185,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _errorReduction = new Vector3F(0.2f);
+    private Vector3 _errorReduction = new Vector3(0.2f);
 
 
     /// <summary>
@@ -199,7 +200,7 @@ namespace DigitalRise.Physics.Constraints
     /// "hard" and the simulation will try to counter all constraint violations. A small positive
     /// value (e.g. 0.001) can be used to make the constraint soft.
     /// </remarks>
-    public Vector3F Softness
+    public Vector3 Softness
     {
       get { return _softness; }
       set
@@ -211,7 +212,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _softness;
+    private Vector3 _softness;
 
 
     /// <summary>
@@ -229,7 +230,7 @@ namespace DigitalRise.Physics.Constraints
     /// one axis use the same restitution value.
     /// </para>
     /// </remarks>
-    public Vector3F Restitution
+    public Vector3 Restitution
     {
       get { return _restitution; }
       set
@@ -241,7 +242,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _restitution;
+    private Vector3 _restitution;
 
 
     /// <summary>
@@ -254,7 +255,7 @@ namespace DigitalRise.Physics.Constraints
     /// <remarks>
     /// This property defines the maximal force that can be apply to keep the constraint satisfied. 
     /// </remarks>
-    public Vector3F MaxForce
+    public Vector3 MaxForce
     {
       get { return _maxForce; }
       set
@@ -266,21 +267,21 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _maxForce = new Vector3F(float.PositiveInfinity);
+    private Vector3 _maxForce = new Vector3(float.PositiveInfinity);
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
@@ -302,7 +303,7 @@ namespace DigitalRise.Physics.Constraints
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    public Vector3F RelativePosition
+    public Vector3 RelativePosition
     {
       get
       {
@@ -319,7 +320,7 @@ namespace DigitalRise.Physics.Constraints
         Matrix33F relativeOrientation = anchorOrientationA.Transposed * anchorOrientationB;
 
         // The Euler angles.
-        Vector3F angles = ConstraintHelper.GetEulerAngles(relativeOrientation);
+        Vector3 angles = ConstraintHelper.GetEulerAngles(relativeOrientation);
 
         return angles;
       }
@@ -369,14 +370,14 @@ namespace DigitalRise.Physics.Constraints
       // Get anchor orientation of B relative to A.
       Matrix33F relativeOrientation = anchorOrientationA.Transposed * anchorOrientationB;
 
-      Vector3F angles = ConstraintHelper.GetEulerAngles(relativeOrientation);
+      Vector3 angles = ConstraintHelper.GetEulerAngles(relativeOrientation);
 
       // The constraint axes: See OneNote for a detailed derivation of these non-intuitive axes.
       var xA = anchorOrientationA.GetColumn(0);  // Anchor x-axis on A.
       var zB = anchorOrientationB.GetColumn(2);  // Anchor z-axis on B.
-      Vector3F constraintAxisY = Vector3F.Cross(zB, xA);
-      Vector3F constraintAxisX = Vector3F.Cross(constraintAxisY, zB);
-      Vector3F constraintAxisZ = Vector3F.Cross(xA, constraintAxisY);
+      Vector3 constraintAxisY = Vector3.Cross(zB, xA);
+      Vector3 constraintAxisX = Vector3.Cross(constraintAxisY, zB);
+      Vector3 constraintAxisZ = Vector3.Cross(xA, constraintAxisY);
 
       // Remember old states.
       LimitState oldXLimitState = _limitStates[0];
@@ -393,11 +394,11 @@ namespace DigitalRise.Physics.Constraints
     }
 
 
-    private void SetupConstraint(int index, float position, Vector3F axis)
+    private void SetupConstraint(int index, float position, Vector3 axis)
     {
       // Note: Cached constraint impulses are reset in Warmstart() if necessary.
 
-      if (axis.IsNumericallyZero)
+      if (axis.IsNumericallyZero())
       {
         // The constraint is possibly violated so much that we could not compute valid euler angles
         // and constraint axis (The y angle must not be outside +/- π/2!)
@@ -406,8 +407,8 @@ namespace DigitalRise.Physics.Constraints
       }
 
       Constraint1D constraint = _constraints[index];
-      float minimum = Minimum[index];
-      float maximum = Maximum[index];
+      float minimum = Minimum.GetComponentByIndex(index);
+      float maximum = Maximum.GetComponentByIndex(index);
       Simulation simulation = Simulation;
       float deltaTime = simulation.Settings.Timing.FixedTimeStep;
 
@@ -451,12 +452,12 @@ namespace DigitalRise.Physics.Constraints
       else if (position < minimum - allowedDeviation)
         deviation = minimum - position - allowedDeviation;
 
-      float targetVelocity = deviation * ErrorReduction[index] / deltaTime;
+      float targetVelocity = deviation * ErrorReduction.GetComponentByIndex(index) / deltaTime;
       float maxErrorCorrectionVelocity = simulation.Settings.Constraints.MaxErrorCorrectionVelocity;
       targetVelocity = MathHelper.Clamp(targetVelocity, -maxErrorCorrectionVelocity, maxErrorCorrectionVelocity);
 
       // ----- Restitution
-      float restitution = Restitution[index];
+      float restitution = Restitution.GetComponentByIndex(index);
       if (restitution > simulation.Settings.Constraints.RestitutionThreshold)
       {
         float velocity = constraint.GetRelativeVelocity(BodyA, BodyB);
@@ -474,26 +475,26 @@ namespace DigitalRise.Physics.Constraints
       constraint.TargetRelativeVelocity = targetVelocity;
 
       // ----- Impulse limits
-      float impulseLimit = MaxForce[index] * deltaTime;
+      float impulseLimit = MaxForce.GetComponentByIndex(index) * deltaTime;
       if (_limitStates[index] == LimitState.Min)
       {
-        _minImpulseLimits[index] = 0;
-        _maxImpulseLimits[index] = impulseLimit;
+        _minImpulseLimits.SetComponentByIndex(index, 0);
+        _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
       }
       else if (_limitStates[index] == LimitState.Max)
       {
-        _minImpulseLimits[index] = -impulseLimit;
-        _maxImpulseLimits[index] = 0;
+        _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+        _maxImpulseLimits.SetComponentByIndex(index, 0);
       }
       else //if (_limitStates[index] == LimitState.Locked)
       {
-        _minImpulseLimits[index] = -impulseLimit;
-        _maxImpulseLimits[index] = impulseLimit;
+        _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+        _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
       }
 
       // Note: Softness must be set before!
-      constraint.Softness = Softness[index] / deltaTime;
-      constraint.Prepare(BodyA, BodyB, Vector3F.Zero, -axis, Vector3F.Zero, axis);
+      constraint.Softness = Softness.GetComponentByIndex(index) / deltaTime;
+      constraint.Prepare(BodyA, BodyB, Vector3.Zero, -axis, Vector3.Zero, axis);
     }
 
 
@@ -513,12 +514,12 @@ namespace DigitalRise.Physics.Constraints
     /// <inheritdoc/>
     protected override bool OnApplyImpulse()
     {
-      Vector3F impulse = new Vector3F();
+      Vector3 impulse = new Vector3();
       impulse.X = ApplyImpulse(0);
       impulse.Y = ApplyImpulse(1);
       impulse.Z = ApplyImpulse(2);
 
-      return impulse.LengthSquared > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
+      return impulse.LengthSquared() > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
     }
 
 
@@ -532,8 +533,8 @@ namespace DigitalRise.Physics.Constraints
           BodyA,
           BodyB,
           relativeVelocity,
-          _minImpulseLimits[index],
-          _maxImpulseLimits[index]);
+          _minImpulseLimits.GetComponentByIndex(index),
+          _maxImpulseLimits.GetComponentByIndex(index));
 
         return impulse;
       }

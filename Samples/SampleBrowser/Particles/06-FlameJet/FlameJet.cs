@@ -7,7 +7,6 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -34,18 +33,18 @@ namespace Samples.Particles
         Distribution = new UniformDistributionF(0.8f, 1.2f),
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        DefaultValue = Vector3F.Zero,
+        DefaultValue = Vector3.Zero,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = 0.05f, Direction = Vector3F.Forward },
+        Distribution = new DirectionDistribution { Deviation = 0.05f, Direction = Vector3.Forward },
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -69,7 +68,7 @@ namespace Samples.Particles
         DampingParameter = ParticleParameterNames.Damping,
       });
 
-      ps.Parameters.AddUniform<Vector3F>("Buoyancy").DefaultValue = new Vector3F(0, 4, 0);
+      ps.Parameters.AddUniform<Vector3>("Buoyancy").DefaultValue = new Vector3(0, 4, 0);
       ps.Effectors.Add(new LinearAccelerationEffector { AccelerationParameter = "Buoyancy" });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Angle);
@@ -103,10 +102,10 @@ namespace Samples.Particles
         EndParameter = "EndSize",
       });
 
-      ps.Parameters.AddUniform<Vector3F>("StartColor").DefaultValue = new Vector3F(0.25f, 0.25f, 1.0f);
-      ps.Parameters.AddUniform<Vector3F>("EndColor").DefaultValue = new Vector3F(1.0f, 0.9f, 0.8f);
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new Vector3FLerpEffector
+      ps.Parameters.AddUniform<Vector3>("StartColor").DefaultValue = new Vector3(0.25f, 0.25f, 1.0f);
+      ps.Parameters.AddUniform<Vector3>("EndColor").DefaultValue = new Vector3(1.0f, 0.9f, 0.8f);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new Vector3LerpEffector
       {
         ValueParameter = ParticleParameterNames.Color,
         StartParameter = "StartColor",

@@ -10,7 +10,7 @@ using DigitalRise.Mathematics.Algebra;
 
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -59,11 +59,11 @@ namespace DigitalRise.Animation.Character
     /// An SRT transform with no scale, rotation and translation.
     /// </summary>
     /// <remarks>
-    /// The scale is set to <see cref="Vector3F.One"/>, the rotation is set to 
+    /// The scale is set to <see cref="Vector3.One"/>, the rotation is set to 
     /// <see cref="QuaternionF.Identity"/>, and the translation is set to 
-    /// <see cref="Vector3F.Zero"/>.
+    /// <see cref="Vector3.Zero"/>.
     /// </remarks>
-    public static readonly SrtTransform Identity = new SrtTransform(Vector3F.One, QuaternionF.Identity, Vector3F.Zero);
+    public static readonly SrtTransform Identity = new SrtTransform(Vector3.One, QuaternionF.Identity, Vector3.Zero);
     #endregion
 
 
@@ -74,7 +74,7 @@ namespace DigitalRise.Animation.Character
     /// <summary>
     /// The scale.
     /// </summary>
-    public Vector3F Scale;
+    public Vector3 Scale;
 
     
     /// <summary>
@@ -86,7 +86,7 @@ namespace DigitalRise.Animation.Character
     /// <summary>
     /// The translation.
     /// </summary>
-    public Vector3F Translation;
+    public Vector3 Translation;
     #endregion
 
 
@@ -146,7 +146,7 @@ namespace DigitalRise.Animation.Character
     /// </value>
     public bool HasTranslation
     {
-      get { return !Translation.IsNumericallyZero; }
+      get { return !Translation.IsNumericallyZero(); }
     }
 
 
@@ -182,9 +182,9 @@ namespace DigitalRise.Animation.Character
     /// <param name="rotation">The rotation.</param>
     public SrtTransform(QuaternionF rotation)
     {
-      Scale = Vector3F.One;
+      Scale = Vector3.One;
       Rotation = rotation;
-      Translation = Vector3F.Zero;
+      Translation = Vector3.Zero;
     }
 
 
@@ -194,9 +194,9 @@ namespace DigitalRise.Animation.Character
     /// <param name="rotation">The rotation.</param>
     public SrtTransform(Matrix33F rotation)
     {
-      Scale = Vector3F.One;
+      Scale = Vector3.One;
       Rotation = QuaternionF.CreateRotation(rotation);
-      Translation = Vector3F.Zero;
+      Translation = Vector3.Zero;
     }
 
 
@@ -206,9 +206,9 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(QuaternionF rotation, Vector3F translation)
+    public SrtTransform(QuaternionF rotation, Vector3 translation)
     {
-      Scale = Vector3F.One;
+      Scale = Vector3.One;
       Rotation = rotation;
       Translation = translation;
     }
@@ -220,9 +220,9 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(Matrix33F rotation, Vector3F translation)
+    public SrtTransform(Matrix33F rotation, Vector3 translation)
     {
-      Scale = Vector3F.One;
+      Scale = Vector3.One;
       Rotation = QuaternionF.CreateRotation(rotation);
       Translation = translation;
     }    
@@ -235,7 +235,7 @@ namespace DigitalRise.Animation.Character
     /// <param name="scale">The scale.</param>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(Vector3F scale, QuaternionF rotation, Vector3F translation)
+    public SrtTransform(Vector3 scale, QuaternionF rotation, Vector3 translation)
     {
       Scale = scale;
       Rotation = rotation;
@@ -250,7 +250,7 @@ namespace DigitalRise.Animation.Character
     /// <param name="scale">The scale.</param>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(Vector3F scale, Matrix33F rotation, Vector3F translation)
+    public SrtTransform(Vector3 scale, Matrix33F rotation, Vector3 translation)
     {
       Scale = scale;
       Rotation = QuaternionF.CreateRotation(rotation);
@@ -301,7 +301,7 @@ namespace DigitalRise.Animation.Character
     /// This method can be used to transform direction vectors. It applies only the rotation to the 
     /// vector. The scale and translation are ignored. 
     /// </remarks>
-    public Vector3F ToParentDirection(Vector3F localDirection)
+    public Vector3 ToParentDirection(Vector3 localDirection)
     {
       return Rotation.Rotate(localDirection);
     }
@@ -316,7 +316,7 @@ namespace DigitalRise.Animation.Character
     /// This method can be used to transform direction vectors. It applies only the rotation to the 
     /// vector. The scale and translation are ignored. 
     /// </remarks>
-    public Vector3F ToLocalDirection(Vector3F worldDirection)
+    public Vector3 ToLocalDirection(Vector3 worldDirection)
     {
       return Rotation.Conjugated.Rotate(worldDirection);
     }
@@ -327,7 +327,7 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <param name="localPosition">The position in local space.</param>
     /// <returns>The position in parent space.</returns>
-    public Vector3F ToParentPosition(Vector3F localPosition)
+    public Vector3 ToParentPosition(Vector3 localPosition)
     {
       return Translation + Rotation.Rotate(Scale * localPosition);
     }
@@ -338,9 +338,9 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <param name="worldPosition">The position in parent space.</param>
     /// <returns>The position in local space.</returns>
-    public Vector3F ToLocalPosition(Vector3F worldPosition)
+    public Vector3 ToLocalPosition(Vector3 worldPosition)
     {
-      return Rotation.Conjugated.Rotate(worldPosition - Translation) * new Vector3F(1 / Scale.X, 1 / Scale.Y, 1 / Scale.Z);
+      return Rotation.Conjugated.Rotate(worldPosition - Translation) * new Vector3(1 / Scale.X, 1 / Scale.Y, 1 / Scale.Z);
     }
 
 
@@ -426,9 +426,9 @@ namespace DigitalRise.Animation.Character
     /// </remarks>
     public Matrix ToXna()
     {
-      Vector3F s = Scale;
+      Vector3 s = Scale;
       Matrix33F r = Rotation.ToRotationMatrix33();
-      Vector3F t = Translation;
+      Vector3 t = Translation;
       return new Matrix(s.X * r.M00, s.X * r.M10, s.X * r.M20, 0,
                         s.Y * r.M01, s.Y * r.M11, s.Y * r.M21, 0,
                         s.Z * r.M02, s.Z * r.M12, s.Z * r.M22, 0,
@@ -480,8 +480,8 @@ namespace DigitalRise.Animation.Character
     public static bool AreNumericallyEqual(SrtTransform srtA, SrtTransform srtB)
     {
       return QuaternionF.AreNumericallyEqual(srtA.Rotation, srtB.Rotation)
-             && Vector3F.AreNumericallyEqual(srtA.Translation, srtB.Translation)
-             && Vector3F.AreNumericallyEqual(srtA.Scale, srtB.Scale);
+             && MathHelper.AreNumericallyEqual(srtA.Translation, srtB.Translation)
+             && MathHelper.AreNumericallyEqual(srtA.Scale, srtB.Scale);
     }
 
 
@@ -536,11 +536,11 @@ namespace DigitalRise.Animation.Character
       resultRotation.Normalize();
 
       return new SrtTransform(
-        new Vector3F(startTransform.Scale.X + (endTransform.Scale.X - startTransform.Scale.X) * parameter,
+        new Vector3(startTransform.Scale.X + (endTransform.Scale.X - startTransform.Scale.X) * parameter,
                      startTransform.Scale.Y + (endTransform.Scale.Y - startTransform.Scale.Y) * parameter,
                      startTransform.Scale.Z + (endTransform.Scale.Z - startTransform.Scale.Z) * parameter),
         resultRotation,
-        new Vector3F(startTransform.Translation.X + (endTransform.Translation.X - startTransform.Translation.X) * parameter,
+        new Vector3(startTransform.Translation.X + (endTransform.Translation.X - startTransform.Translation.X) * parameter,
                      startTransform.Translation.Y + (endTransform.Translation.Y - startTransform.Translation.Y) * parameter,
                      startTransform.Translation.Z + (endTransform.Translation.Z - startTransform.Translation.Z) * parameter));
     }
@@ -615,7 +615,7 @@ namespace DigitalRise.Animation.Character
     /// </returns>
     public static bool IsValid(Matrix44F matrix)
     {
-      Vector3F s, t;
+      Vector3 s, t;
       Matrix33F r;
       return matrix.Decompose(out s, out r, out t);
     }
@@ -744,7 +744,7 @@ namespace DigitalRise.Animation.Character
       result.Rotation.Z = srt1.Rotation.W * srt2.Rotation.Z + srt1.Rotation.X * srt2.Rotation.Y - srt1.Rotation.Y * srt2.Rotation.X + srt1.Rotation.Z * srt2.Rotation.W;
 
       // Quaternion rotation:
-      Vector3F localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V;
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -813,7 +813,7 @@ namespace DigitalRise.Animation.Character
       //               srt1.Translation + srt1.Scale * srt1.Rotation.Rotate(srt2.Translation));
 
       // Inlined:
-      Vector3F localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V;
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -870,7 +870,7 @@ namespace DigitalRise.Animation.Character
       // Inlined:
       SrtTransform srtResult;
 
-      Vector3F localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V;
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -927,7 +927,7 @@ namespace DigitalRise.Animation.Character
       // Inlined:
       SrtTransform srtResult;
 
-      Vector3F localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V;
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -1033,9 +1033,9 @@ namespace DigitalRise.Animation.Character
     /// </returns>
     public static implicit operator Matrix44F(SrtTransform srt)
     {
-      //Vector3F s = srt.Scale;
+      //Vector3 s = srt.Scale;
       //Matrix33F r = srt.Rotation.ToRotationMatrix33();
-      //Vector3F t = srt.Translation;
+      //Vector3 t = srt.Translation;
       //return new Matrix44F(s.X * r.M00, s.Y * r.M01, s.Z * r.M02, t.X,
       //                     s.X * r.M10, s.Y * r.M11, s.Z * r.M12, t.Y,
       //                     s.X * r.M20, s.Y * r.M21, s.Z * r.M22, t.Z,
@@ -1103,9 +1103,9 @@ namespace DigitalRise.Animation.Character
     /// </remarks>
     public static implicit operator Matrix(SrtTransform srt)
     {
-      //Vector3F s = srt.Scale;
+      //Vector3 s = srt.Scale;
       //Matrix33F r = srt.Rotation.ToRotationMatrix33();
-      //Vector3F t = srt.Translation;
+      //Vector3 t = srt.Translation;
       //return new Matrix(s.X * r.M00, s.X * r.M10, s.X * r.M20, 0,
       //                  s.Y * r.M01, s.Y * r.M11, s.Y * r.M21, 0,
       //                  s.Z * r.M02, s.Z * r.M12, s.Z * r.M22, 0,

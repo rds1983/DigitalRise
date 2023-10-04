@@ -5,7 +5,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -24,7 +24,7 @@ CylindrialJoint, HingeJoint.",
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -39,24 +39,24 @@ CylindrialJoint, HingeJoint.",
       // Create two boxes and connect them with a FixedJoint.      
       RigidBody box0 = new RigidBody(new BoxShape(1, 1, 1))
       {
-        Pose = new Pose(new Vector3F(-5, 3, 0)),
+        Pose = new Pose(new Vector3(-5, 3, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(box0);
       RigidBody box1 = new RigidBody(new BoxShape(1.2f, 1.2f, 1.2f))
       {
-        Pose = new Pose(new Vector3F(-5, 3 - 1.2f, 0))
+        Pose = new Pose(new Vector3(-5, 3 - 1.2f, 0))
       };
       Simulation.RigidBodies.Add(box1);
       FixedJoint fixedJoint = new FixedJoint
       {
         BodyA = box0,
         // The attachment point on the first box is at the bottom of the box.
-        AnchorPoseALocal = new Pose(new Vector3F(0, -0.5f, 0)),
+        AnchorPoseALocal = new Pose(new Vector3(0, -0.5f, 0)),
 
         BodyB = box1,
         // The attachment point on the second box is at the top of the box.
-        AnchorPoseBLocal = new Pose(new Vector3F(0, 0.6f, 0)),
+        AnchorPoseBLocal = new Pose(new Vector3(0, 0.6f, 0)),
 
         // Disable collision between the connected bodies.
         CollisionEnabled = false,
@@ -68,24 +68,24 @@ CylindrialJoint, HingeJoint.",
       // to the first box.
       RigidBody box2 = new RigidBody(new BoxShape(1, 1, 1))
       {
-        Pose = new Pose(new Vector3F(-3, 3, 0)),
+        Pose = new Pose(new Vector3(-3, 3, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(box2);
       RigidBody box3 = new RigidBody(new BoxShape(1.2f, 1.2f, 1.2f))
       {
-        Pose = new Pose(new Vector3F(-3, 3, 0))
+        Pose = new Pose(new Vector3(-3, 3, 0))
       };
       Simulation.RigidBodies.Add(box3);
       BallJoint ballJoint = new BallJoint
       {
         BodyA = box2,
         // The attachment point on the first box is at the box bottom.
-        AnchorPositionALocal = new Vector3F(0, -0.5f, 0),
+        AnchorPositionALocal = new Vector3(0, -0.5f, 0),
 
         BodyB = box3,
         // The attachment point on the second box is a corner of the box.
-        AnchorPositionBLocal = new Vector3F(0.6f, 0.6f, 0.6f),
+        AnchorPositionBLocal = new Vector3(0.6f, 0.6f, 0.6f),
       };
       Simulation.Constraints.Add(ballJoint);
 
@@ -93,12 +93,12 @@ CylindrialJoint, HingeJoint.",
       // A prismatic joint is like a slider (without rotation around the slider axis).
       RigidBody box4 = new RigidBody(new BoxShape(1, 1, 1))
       {
-        Pose = new Pose(new Vector3F(-1, 3, 0)),
+        Pose = new Pose(new Vector3(-1, 3, 0)),
       };
       Simulation.RigidBodies.Add(box4);
       RigidBody box5 = new RigidBody(new BoxShape(0.5f, 1.5f, 0.5f))
       {
-        Pose = new Pose(new Vector3F(-1, 3 - 0.5f, 0))
+        Pose = new Pose(new Vector3(-1, 3 - 0.5f, 0))
       };
       Simulation.RigidBodies.Add(box5);
       PrismaticJoint prismaticJoint = new PrismaticJoint
@@ -110,12 +110,12 @@ CylindrialJoint, HingeJoint.",
         // The columns are the axes. We set the local -y axis in the first column. This is the
         // slider axis. The other two columns are two orthonormal axes.
         // (All three columns are orthonormal and form a valid rotation matrix.)
-        AnchorPoseALocal = new Pose(new Vector3F(0, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseALocal = new Pose(new Vector3(0, 0, 0), new Matrix33F(0, 1, 0,
                                                                         -1, 0, 0,
                                                                          0, 0, 1)),
         BodyB = box5,
         // The attachment point on the second box is at the top of the box.
-        AnchorPoseBLocal = new Pose(new Vector3F(0, 0.75f, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseBLocal = new Pose(new Vector3(0, 0.75f, 0), new Matrix33F(0, 1, 0,
                                                                             -1, 0, 0,
                                                                              0, 0, 1)),
         CollisionEnabled = false,
@@ -131,22 +131,22 @@ CylindrialJoint, HingeJoint.",
       // A cylindrical joint is a slider that allows rotation around the slider axis.
       RigidBody box6 = new RigidBody(new BoxShape(1, 1, 1))
       {
-        Pose = new Pose(new Vector3F(1, 3, 0)),
+        Pose = new Pose(new Vector3(1, 3, 0)),
       };
       Simulation.RigidBodies.Add(box6);
       RigidBody box7 = new RigidBody(new BoxShape(0.5f, 1.5f, 0.5f))
       {
-        Pose = new Pose(new Vector3F(1, 3 - 0.5f, 0))
+        Pose = new Pose(new Vector3(1, 3 - 0.5f, 0))
       };
       Simulation.RigidBodies.Add(box7);
       CylindricalJoint cylindricalJoint = new CylindricalJoint
       {
         BodyA = box6,
-        AnchorPoseALocal = new Pose(new Vector3F(0, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseALocal = new Pose(new Vector3(0, 0, 0), new Matrix33F(0, 1, 0,
                                                                         -1, 0, 0,
                                                                          0, 0, 1)),
         BodyB = box7,
-        AnchorPoseBLocal = new Pose(new Vector3F(0, 0.75f, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseBLocal = new Pose(new Vector3(0, 0.75f, 0), new Matrix33F(0, 1, 0,
                                                                             -1, 0, 0,
                                                                              0, 0, 1)),
         CollisionEnabled = false,
@@ -165,23 +165,23 @@ CylindrialJoint, HingeJoint.",
       // or rotating wheels.
       RigidBody cylinder0 = new RigidBody(new CylinderShape(0.1f, 2f))
       {
-        Pose = new Pose(new Vector3F(3, 1, 0)),
+        Pose = new Pose(new Vector3(3, 1, 0)),
         MotionType = MotionType.Static
       };
       Simulation.RigidBodies.Add(cylinder0);
       RigidBody box8 = new RigidBody(new BoxShape(1f, 1.8f, 0.1f))
       {
-        Pose = new Pose(new Vector3F(3 + 0.5f, 1, 0))
+        Pose = new Pose(new Vector3(3 + 0.5f, 1, 0))
       };
       Simulation.RigidBodies.Add(box8);
       HingeJoint hingeJoint = new HingeJoint
       {
         BodyA = cylinder0,
-        AnchorPoseALocal = new Pose(new Vector3F(0, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseALocal = new Pose(new Vector3(0, 0, 0), new Matrix33F(0, 1, 0,
                                                                         -1, 0, 0,
                                                                          0, 0, 1)),
         BodyB = box8,
-        AnchorPoseBLocal = new Pose(new Vector3F(-0.5f, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseBLocal = new Pose(new Vector3(-0.5f, 0, 0), new Matrix33F(0, 1, 0,
                                                                             -1, 0, 0,
                                                                              0, 0, 1)),
         CollisionEnabled = false,

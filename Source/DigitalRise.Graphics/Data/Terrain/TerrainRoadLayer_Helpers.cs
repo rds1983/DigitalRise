@@ -27,7 +27,7 @@ namespace DigitalRise.Graphics
     //  if (path == null)
     //    throw new ArgumentNullException("path");
 
-    //  //var flattenedPoints = new List<Vector3F>();
+    //  //var flattenedPoints = new List<Vector3>();
     //  //path.Flatten(flattenedPoints, MaxNumberOfIterations, Tolerance);
 
     //  // Compute vertices and indices.
@@ -59,7 +59,7 @@ namespace DigitalRise.Graphics
     //  if (vertices != null && vertices.Length != 0)
     //  {
     //    float yLimit = 1e20f;
-    //    var v0 = new Vector3F(vertices[0].Position.X, 0, vertices[0].Position.Y);
+    //    var v0 = new Vector3(vertices[0].Position.X, 0, vertices[0].Position.Y);
     //    aabb = new Aabb(v0, v0);
     //    for (int i = 1; i < vertices.Length; i++)
     //    {
@@ -73,7 +73,7 @@ namespace DigitalRise.Graphics
     //  }
     //  else
     //  {
-    //    aabb = new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.NegativeInfinity));
+    //    aabb = new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.NegativeInfinity));
     //  }
     //}
 
@@ -135,7 +135,7 @@ namespace DigitalRise.Graphics
         throw new ArgumentNullException("path");
 
       // Compute list of line segments. (2 points per line segment!)
-      var flattenedPoints = new List<Vector3F>();
+      var flattenedPoints = new List<Vector3>();
       path.Flatten(flattenedPoints, maxNumberOfIterations, tolerance);
 
       // Abort if path is empty.
@@ -153,9 +153,9 @@ namespace DigitalRise.Graphics
       accumulatedLengths[0] = 0;
       for (int i = 1; i < flattenedPoints.Count; i += 2)
       {
-        Vector3F previous = flattenedPoints[i - 1];
-        Vector3F current = flattenedPoints[i];
-        float length = (current - previous).Length;
+        Vector3 previous = flattenedPoints[i - 1];
+        Vector3 current = flattenedPoints[i];
+        float length = (current - previous).Length();
 
         accumulatedLengths[i] = accumulatedLengths[i - 1] + length;
         if (i + 1 < flattenedPoints.Count)
@@ -172,13 +172,13 @@ namespace DigitalRise.Graphics
         int index = 0;
         foreach (var key in path)
         {
-          Vector3F position = key.Point;
+          Vector3 position = key.Point;
           var roadKey = key as TerrainRoadPathKey;
           float width = (roadKey != null) ? roadKey.Width : defaultWidth;
 
           for (; index < flattenedPoints.Count; index++)
           {
-            if (Vector3F.AreNumericallyEqual(position, flattenedPoints[index]))
+            if (MathHelper.AreNumericallyEqual(position, flattenedPoints[index]))
             {
               widthKeys.Add(new Pair<float, float>(accumulatedLengths[index], width));
               break;
@@ -218,14 +218,14 @@ namespace DigitalRise.Graphics
       // Compute vertices and indices.
       var vertices = new List<TerrainLayerVertex>(numberOfLineSegments * 2 + 2);
       var indices = new List<int>(numberOfLineSegments * 6);  // Two triangles per line segment.
-      Vector3F lastOrthonormal = Vector3F.UnitX;
+      Vector3 lastOrthonormal = Vector3.UnitX;
       aabb = new Aabb(flattenedPoints[0], flattenedPoints[0]);
-      bool isClosed = Vector3F.AreNumericallyEqual(flattenedPoints[0], flattenedPoints[flattenedPoints.Count - 1]);
+      bool isClosed = MathHelper.AreNumericallyEqual(flattenedPoints[0], flattenedPoints[flattenedPoints.Count - 1]);
       for (int i = 0; i < flattenedPoints.Count; i++)
       {
-        Vector3F start = flattenedPoints[i];
+        Vector3 start = flattenedPoints[i];
 
-        Vector3F previous;
+        Vector3 previous;
         bool isFirstPoint = (i == 0);
         if (!isFirstPoint)
           previous = flattenedPoints[i - 1];
@@ -234,7 +234,7 @@ namespace DigitalRise.Graphics
         else
           previous = start;
 
-        Vector3F next;
+        Vector3 next;
         bool isLastPoint = (i + 1 == flattenedPoints.Count);
         if (!isLastPoint)
           next = flattenedPoints[i + 1];
@@ -243,9 +243,9 @@ namespace DigitalRise.Graphics
         else
           next = start;
 
-        Vector3F tangent = next - previous;
+        Vector3 tangent = next - previous;
 
-        Vector3F orthonormal = new Vector3F(tangent.Z, 0, -tangent.X);
+        Vector3 orthonormal = new Vector3(tangent.Z, 0, -tangent.X);
         if (!orthonormal.TryNormalize())
           orthonormal = lastOrthonormal;
 
@@ -273,8 +273,8 @@ namespace DigitalRise.Graphics
         }
 
         // Add two vertices.
-        Vector3F leftVertex = start - orthonormal * (widths[i] / 2);
-        Vector3F rightVertex = start + orthonormal * (widths[i] / 2);
+        Vector3 leftVertex = start - orthonormal * (widths[i] / 2);
+        Vector3 rightVertex = start + orthonormal * (widths[i] / 2);
         vertices.Add(new TerrainLayerVertex(new Vector2(leftVertex.X, leftVertex.Z), new Vector2(0, accumulatedLengths[i])));
         vertices.Add(new TerrainLayerVertex(new Vector2(rightVertex.X, rightVertex.Z), new Vector2(1, accumulatedLengths[i])));
 
@@ -333,7 +333,7 @@ namespace DigitalRise.Graphics
 
       foreach (var key in road)
       {
-        Vector3F position = key.Point;
+        Vector3 position = key.Point;
         float height = terrain.GetHeight(position.X, position.Z);
         if (!Numeric.IsNaN(height))
         {
@@ -389,7 +389,7 @@ namespace DigitalRise.Graphics
         throw new ArgumentNullException("road");
 
       // Compute list of line segments. (2 points per line segment!)
-      var flattenedPoints = new List<Vector3F>();
+      var flattenedPoints = new List<Vector3>();
       road.Flatten(flattenedPoints, maxNumberOfIterations, tolerance);
 
       // Abort if path is empty.
@@ -402,9 +402,9 @@ namespace DigitalRise.Graphics
       accumulatedLengths[0] = 0;
       for (int i = 1; i < flattenedPoints.Count; i += 2)
       {
-        Vector3F previous = flattenedPoints[i - 1];
-        Vector3F current = flattenedPoints[i];
-        float length = (current - previous).Length;
+        Vector3 previous = flattenedPoints[i - 1];
+        Vector3 current = flattenedPoints[i];
+        float length = (current - previous).Length();
 
         accumulatedLengths[i] = accumulatedLengths[i - 1] + length;
         if (i + 1 < flattenedPoints.Count)
@@ -418,7 +418,7 @@ namespace DigitalRise.Graphics
         int index = 0;
         foreach (var key in road)
         {
-          Vector3F position = key.Point;
+          Vector3 position = key.Point;
           var roadKey = key as TerrainRoadPathKey;
           if (roadKey == null)
           {
@@ -432,7 +432,7 @@ namespace DigitalRise.Graphics
 
           for (; index < flattenedPoints.Count; index++)
           {
-            if (Vector3F.AreNumericallyEqual(position, flattenedPoints[index]))
+            if (MathHelper.AreNumericallyEqual(position, flattenedPoints[index]))
             {
               pathLengthsAndKeys.Add(new Pair<float, TerrainRoadPathKey>(accumulatedLengths[index], roadKey));
               break;
@@ -478,16 +478,16 @@ namespace DigitalRise.Graphics
       // Get AABB of road with the side falloff.
       Aabb aabbWithSideFalloffs;
       {
-        Vector3F p = flattenedPoints[0];
+        Vector3 p = flattenedPoints[0];
         float r = halfWidths[0] + sideFalloffs[0];
-        aabbWithSideFalloffs = new Aabb(new Vector3F(p.X - r, 0, p.Z - r),
-                                        new Vector3F(p.X + r, 0, p.Z + r));
+        aabbWithSideFalloffs = new Aabb(new Vector3(p.X - r, 0, p.Z - r),
+                                        new Vector3(p.X + r, 0, p.Z + r));
         for (int i = 1; i < flattenedPoints.Count; i += 2)
         {
           p = flattenedPoints[i];
           r = halfWidths[i] + sideFalloffs[i];
-          aabbWithSideFalloffs.Grow(new Vector3F(p.X - r, 0, p.Z - r));
-          aabbWithSideFalloffs.Grow(new Vector3F(p.X + r, 0, p.Z + r));
+          aabbWithSideFalloffs.Grow(new Vector3(p.X - r, 0, p.Z - r));
+          aabbWithSideFalloffs.Grow(new Vector3(p.X + r, 0, p.Z + r));
         }
       }
 
@@ -502,19 +502,19 @@ namespace DigitalRise.Graphics
       float cellSizeZ = widthZ / numberOfCellsZ;
       float cellSizeDiagonal = (float)Math.Sqrt(cellSizeX * cellSizeX + cellSizeZ * cellSizeZ);
 
-      bool isClosed = Vector3F.AreNumericallyEqual(flattenedPoints[0], flattenedPoints[flattenedPoints.Count - 1]);
+      bool isClosed = MathHelper.AreNumericallyEqual(flattenedPoints[0], flattenedPoints[flattenedPoints.Count - 1]);
 
       {
         // Get the line segments which of the road border.
         List<Vector4F> segments = new List<Vector4F>();  // 2 points per segment.
-        Vector3F lastOrthonormal = Vector3F.Right;
+        Vector3 lastOrthonormal = Vector3.Right;
         Vector4F previousV1 = Vector4F.Zero;
         Vector4F previousV2 = Vector4F.Zero;
         for (int i = 0; i < flattenedPoints.Count; i++)
         {
-          Vector3F start = flattenedPoints[i];
+          Vector3 start = flattenedPoints[i];
 
-          Vector3F previous;
+          Vector3 previous;
           bool isFirstPoint = (i == 0);
           if (!isFirstPoint)
             previous = flattenedPoints[i - 1];
@@ -523,7 +523,7 @@ namespace DigitalRise.Graphics
           else
             previous = start;
 
-          Vector3F next;
+          Vector3 next;
           bool isLastPoint = (i + 1 == flattenedPoints.Count);
           if (!isLastPoint)
             next = flattenedPoints[i + 1];
@@ -532,9 +532,9 @@ namespace DigitalRise.Graphics
           else
             next = start;
 
-          Vector3F tangent = next - previous;
+          Vector3 tangent = next - previous;
 
-          Vector3F orthonormal = new Vector3F(tangent.Z, 0, -tangent.X);
+          Vector3 orthonormal = new Vector3(tangent.Z, 0, -tangent.X);
           if (!orthonormal.TryNormalize())
             orthonormal = lastOrthonormal;
 
@@ -598,14 +598,14 @@ namespace DigitalRise.Graphics
       // Clamp the terrain heights to the inner part of the road.
       // We create quads for the road mesh and clamp the heights to the quad triangles.
       {
-        Vector3F previousV1 = Vector3F.Zero;
-        Vector3F previousV2 = Vector3F.Zero;
-        Vector3F lastOrthonormal = Vector3F.Right;
+        Vector3 previousV1 = Vector3.Zero;
+        Vector3 previousV2 = Vector3.Zero;
+        Vector3 lastOrthonormal = Vector3.Right;
         for (int i = 0; i < flattenedPoints.Count; i++)
         {
-          Vector3F start = flattenedPoints[i];
+          Vector3 start = flattenedPoints[i];
 
-          Vector3F previous;
+          Vector3 previous;
           bool isFirstPoint = (i == 0);
           if (!isFirstPoint)
             previous = flattenedPoints[i - 1];
@@ -614,7 +614,7 @@ namespace DigitalRise.Graphics
           else
             previous = start;
 
-          Vector3F next;
+          Vector3 next;
           bool isLastPoint = (i + 1 == flattenedPoints.Count);
           if (!isLastPoint)
             next = flattenedPoints[i + 1];
@@ -623,9 +623,9 @@ namespace DigitalRise.Graphics
           else
             next = start;
 
-          Vector3F tangent = next - previous;
+          Vector3 tangent = next - previous;
 
-          Vector3F orthonormal = new Vector3F(tangent.Z, 0, -tangent.X);
+          Vector3 orthonormal = new Vector3(tangent.Z, 0, -tangent.X);
           if (!orthonormal.TryNormalize())
             orthonormal = lastOrthonormal;
 
@@ -640,8 +640,8 @@ namespace DigitalRise.Graphics
           // Then we check all height samples against these triangles.
 
           // Vectors are 4D. Height is y. Influence is w.
-          Vector3F v1 = start - orthonormal * halfWidths[i];
-          Vector3F v2 = start + orthonormal * halfWidths[i];
+          Vector3 v1 = start - orthonormal * halfWidths[i];
+          Vector3 v2 = start + orthonormal * halfWidths[i];
 
           if (i > 0)
             ClampHeightsToQuad(terrain, previousV1, previousV2, v1, v2);
@@ -663,8 +663,8 @@ namespace DigitalRise.Graphics
     }
 
 
-    private static void ClampHeightsToQuad(HeightField terrain, Vector3F pV1, Vector3F pV2,
-                                              Vector3F v1, Vector3F v2)
+    private static void ClampHeightsToQuad(HeightField terrain, Vector3 pV1, Vector3 pV2,
+                                              Vector3 v1, Vector3 v2)
     {
       // Handle 2 triangles:
       //
@@ -682,7 +682,7 @@ namespace DigitalRise.Graphics
     }
 
 
-    private static void ClampHeightsToTriangle(HeightField terrain, Vector3F vertexA, Vector3F vertexB, Vector3F vertexC)
+    private static void ClampHeightsToTriangle(HeightField terrain, Vector3 vertexA, Vector3 vertexB, Vector3 vertexC)
     {
       // This code is a like an unoptimized software rasterizer.
       // TODO: Optimize this (see software rasterizers).
@@ -780,20 +780,20 @@ namespace DigitalRise.Graphics
       {
         for (int indexX = indexXMin; indexX <= indexXMax; indexX++)
         {
-          Vector3F terrainPointFlat = new Vector3F(originX + cellSizeX * indexX, 0, originZ + cellSizeZ * indexZ);
+          Vector3 terrainPointFlat = new Vector3(originX + cellSizeX * indexX, 0, originZ + cellSizeZ * indexZ);
 
           float bestSegmentInfluence = 0;
           float bestSegmentHeight = 0; 
           for (int segmentIndex = 0; segmentIndex < segments.Count / 2; segmentIndex++)
           {
-            var segmentStartFlat = new Vector3F(segments[segmentIndex * 2].X, 0, segments[segmentIndex * 2].Z);
-            var segmentEndFlat = new Vector3F(segments[segmentIndex * 2 + 1].X, 0, segments[segmentIndex * 2 + 1].Z);
+            var segmentStartFlat = new Vector3(segments[segmentIndex * 2].X, 0, segments[segmentIndex * 2].Z);
+            var segmentEndFlat = new Vector3(segments[segmentIndex * 2 + 1].X, 0, segments[segmentIndex * 2 + 1].Z);
             var segment = new LineSegment(segmentStartFlat, segmentEndFlat);
             float parameter;
             GetLineParameter(ref segment, ref terrainPointFlat, out parameter);
             Vector4F closestPoint = segments[segmentIndex * 2] + parameter * (segments[segmentIndex * 2 + 1] - segments[segmentIndex * 2]);
-            Vector3F closestPointFlat = new Vector3F(closestPoint.X, 0, closestPoint.Z);
-            float distance = (closestPointFlat - terrainPointFlat).Length - padding;
+            Vector3 closestPointFlat = new Vector3(closestPoint.X, 0, closestPoint.Z);
+            float distance = (closestPointFlat - terrainPointFlat).Length() - padding;
             float influence = MathHelper.Clamp(1 - distance / (closestPoint.W - padding), 0, 1);
             if (influence > bestSegmentInfluence)
             {
@@ -814,9 +814,9 @@ namespace DigitalRise.Graphics
     }
 
 
-    internal static void GetLineParameter(ref LineSegment lineSegment, ref Vector3F point, out float parameter)
+    internal static void GetLineParameter(ref LineSegment lineSegment, ref Vector3 point, out float parameter)
     {
-      float lengthSquared = lineSegment.LengthSquared;
+      float lengthSquared = lineSegment.LengthSquared();
       if (lengthSquared < Numeric.EpsilonFSquared)
       {
         // Segment has zero length.
@@ -824,10 +824,10 @@ namespace DigitalRise.Graphics
         return;
       }
 
-      Vector3F lineToPoint = point - lineSegment.Start;
+      Vector3 lineToPoint = point - lineSegment.Start;
 
       // Parameter computed from equation 20.
-      parameter = Vector3F.Dot(lineSegment.End - lineSegment.Start, lineToPoint) / lengthSquared;
+      parameter = Vector3.Dot(lineSegment.End - lineSegment.Start, lineToPoint) / lengthSquared;
 
       parameter = Math.Max(0, Math.Min(1, parameter));
     }

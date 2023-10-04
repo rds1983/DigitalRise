@@ -28,7 +28,7 @@ namespace DigitalRise.Graphics.Rendering
 
     // Camera parameters.
     private Pose _cameraPose;
-    private Vector3F _cameraDown;
+    private Vector3 _cameraDown;
     #endregion
 
 
@@ -95,7 +95,7 @@ namespace DigitalRise.Graphics.Rendering
       // Normal
       if (b.Orientation.Normal == BillboardNormal.ViewpointOriented)
       {
-        Vector3F normal = _cameraPose.Position - b.Position;
+        Vector3 normal = _cameraPose.Position - b.Position;
         if (normal.TryNormalize())
           b.Normal = normal;
       }
@@ -104,7 +104,7 @@ namespace DigitalRise.Graphics.Rendering
       if (b.Orientation.IsAxisInViewSpace)
         b.Axis = _cameraPose.ToWorldDirection(b.Axis);
 
-      if (1 - Vector3F.Dot(b.Normal, b.Axis) < Numeric.EpsilonF)
+      if (1 - Vector3.Dot(b.Normal, b.Axis) < Numeric.EpsilonF)
       {
         // Normal and axis are parallel.
         // --> Bend normal by adding a fraction of the camera down vector.
@@ -113,19 +113,19 @@ namespace DigitalRise.Graphics.Rendering
       }
 
       // Compute right.
-      //Vector3F right = Vector3F.Cross(b.Axis, b.Normal);
+      //Vector3 right = Vector3.Cross(b.Axis, b.Normal);
       // Inlined:
-      Vector3F right;
+      Vector3 right;
       right.X = b.Axis.Y * b.Normal.Z - b.Axis.Z * b.Normal.Y;
       right.Y = b.Axis.Z * b.Normal.X - b.Axis.X * b.Normal.Z;
       right.Z = b.Axis.X * b.Normal.Y - b.Axis.Y * b.Normal.X;
       if (!right.TryNormalize())
-        right = b.Normal.Orthonormal1;   // Normal and axis are parallel --> Choose random perpendicular vector.
+        right = b.Normal.Orthonormal1();   // Normal and axis are parallel --> Choose random perpendicular vector.
 
       if (b.Orientation.IsAxisFixed)
       {
         // Make sure normal is perpendicular to right and up.
-        //normal = Vector3F.Cross(right, b.Axis);
+        //normal = Vector3.Cross(right, b.Axis);
         // Inlined:
         b.Normal.X = right.Y * b.Axis.Z - right.Z * b.Axis.Y;
         b.Normal.Y = right.Z * b.Axis.X - right.X * b.Axis.Z;
@@ -136,7 +136,7 @@ namespace DigitalRise.Graphics.Rendering
       else
       {
         // Make sure axis is perpendicular to normal and right.
-        //b.Axis = Vector3F.Cross(b.Normal, right);
+        //b.Axis = Vector3.Cross(b.Normal, right);
         // Inlined:
         b.Axis.X = b.Normal.Y * right.Z - b.Normal.Z * right.Y;
         b.Axis.Y = b.Normal.Z * right.X - b.Normal.X * right.Z;
@@ -148,16 +148,16 @@ namespace DigitalRise.Graphics.Rendering
 
       #region ----- Rotate up and right vectors -----
 
-      Vector3F upRotated;
-      Vector3F rightRotated;
+      Vector3 upRotated;
+      Vector3 rightRotated;
 
       if (b.Angle != 0.0f)
       {
         // Rotate up and right.
         // Here is the readable code.
         //Matrix33F rotation = Matrix33F.CreateRotation(b.Normal, b.Angle);
-        //Vector3F upRotated = rotation * b.Axis;
-        //Vector3F rightRotated = rotation * right;
+        //Vector3 upRotated = rotation * b.Axis;
+        //Vector3 rightRotated = rotation * right;
 
         // Inlined code:
         float x = b.Normal.X;
@@ -222,13 +222,13 @@ namespace DigitalRise.Graphics.Rendering
       b.Size.Y /= 2.0f;
 
       // Offset from billboard center to right edge.
-      Vector3F hOffset;
+      Vector3 hOffset;
       hOffset.X = rightRotated.X * b.Size.X;
       hOffset.Y = rightRotated.Y * b.Size.X;
       hOffset.Z = rightRotated.Z * b.Size.X;
 
       // Offset from reference point to top edge.
-      Vector3F vOffset;
+      Vector3 vOffset;
       vOffset.X = upRotated.X * b.Size.Y;
       vOffset.Y = upRotated.Y * b.Size.Y;
       vOffset.Z = upRotated.Z * b.Size.Y;
@@ -311,12 +311,12 @@ namespace DigitalRise.Graphics.Rendering
       float size1 = Math.Abs(p1.Size) / 2;
 
       // Offset from particle center to upper edge.
-      Vector3F up0;
+      Vector3 up0;
       up0.X = p0.Axis.X * size0;
       up0.Y = p0.Axis.Y * size0;
       up0.Z = p0.Axis.Z * size0;
 
-      Vector3F up1;
+      Vector3 up1;
       up1.X = p1.Axis.X * size1;
       up1.Y = p1.Axis.Y * size1;
       up1.Z = p1.Axis.Z * size1;

@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -15,11 +17,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void Constructor()
     {
-      Assert.AreEqual(new Vector3F(), new LineShape().PointOnLine);
-      Assert.AreEqual(new Vector3F(1, 0, 0), new LineShape().Direction);
+      Assert.AreEqual(new Vector3(), new LineShape().PointOnLine);
+      Assert.AreEqual(new Vector3(1, 0, 0), new LineShape().Direction);
 
-      Vector3F pointOnLine = new Vector3F(1, 2, 3);
-      var direction = new Vector3F(4, 5, 6).Normalized;
+      Vector3 pointOnLine = new Vector3(1, 2, 3);
+      var direction = new Vector3(4, 5, 6).Normalized();
       LineShape line = new LineShape(pointOnLine, direction);
       Assert.AreEqual(pointOnLine, line.PointOnLine);
       Assert.AreEqual(direction, line.Direction);
@@ -34,7 +36,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException()
     {
-      new LineShape(new Vector3F(1, 2, 3), new Vector3F());
+      new LineShape(new Vector3(1, 2, 3), new Vector3());
     }
 
 
@@ -42,15 +44,15 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ConstructorException2()
     {
-      new LineShape(new Line(new Vector3F(1, 2, 3), new Vector3F(0.1f, 0, 0)));
+      new LineShape(new Line(new Vector3(1, 2, 3), new Vector3(0.1f, 0, 0)));
     }
 
 
     [Test]
     public void InnerPoint()
     {
-      Vector3F pointOnLine = new Vector3F(1, 2, 3);
-      var direction = new Vector3F(3, 2, 1).Normalized;
+      Vector3 pointOnLine = new Vector3(1, 2, 3);
+      var direction = new Vector3(3, 2, 1).Normalized();
       LineShape line = new LineShape(pointOnLine, direction);
       Assert.AreEqual(pointOnLine, line.InnerPoint);
     }
@@ -60,15 +62,15 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void TestProperties()
     {
       LineShape l = new LineShape();
-      Assert.AreEqual(new Vector3F(), l.PointOnLine);
-      Assert.AreEqual(new Vector3F(1, 0, 0), l.Direction);
+      Assert.AreEqual(new Vector3(), l.PointOnLine);
+      Assert.AreEqual(new Vector3(1, 0, 0), l.Direction);
 
-      Vector3F pointOnLine = new Vector3F(1, 2, 3);
+      Vector3 pointOnLine = new Vector3(1, 2, 3);
       l.PointOnLine = pointOnLine;
       Assert.AreEqual(pointOnLine, l.PointOnLine);
-      Assert.AreEqual(new Vector3F(1, 0, 0), l.Direction);
+      Assert.AreEqual(new Vector3(1, 0, 0), l.Direction);
 
-      var direction = new Vector3F(4, 5, 6).Normalized;
+      var direction = new Vector3(4, 5, 6).Normalized();
       l.Direction = direction;
       Assert.AreEqual(pointOnLine, l.PointOnLine);
       Assert.AreEqual(direction, l.Direction);
@@ -80,7 +82,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void DirectionException()
     {
       LineShape l = new LineShape();
-      l.Direction = new Vector3F();
+      l.Direction = new Vector3();
     }
 
 
@@ -89,12 +91,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float nInf = float.NegativeInfinity;
       float pInf = float.PositiveInfinity;
-      Assert.AreEqual(new Aabb(new Vector3F(nInf, 0, 0), new Vector3F(pInf, 0, 0)), new LineShape().GetAabb(Pose.Identity));
-      Assert.AreEqual(new Aabb(new Vector3F(nInf), new Vector3F(pInf)),
-                     new LineShape().GetAabb(new Pose(new Vector3F(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f))));
-      Assert.AreEqual(new Aabb(new Vector3F(11, nInf, 1003), new Vector3F(11, pInf, 1003)),
-                     new LineShape(new Vector3F(1, 2, 3), new Vector3F(0, -1, 0)).GetAabb(new Pose(new Vector3F(10, 100, 1000),
+      Assert.AreEqual(new Aabb(new Vector3(nInf, 0, 0), new Vector3(pInf, 0, 0)), new LineShape().GetAabb(Pose.Identity));
+      Assert.AreEqual(new Aabb(new Vector3(nInf), new Vector3(pInf)),
+                     new LineShape().GetAabb(new Pose(new Vector3(10, 100, -13),
+                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+      Assert.AreEqual(new Aabb(new Vector3(11, nInf, 1003), new Vector3(11, pInf, 1003)),
+                     new LineShape(new Vector3(1, 2, 3), new Vector3(0, -1, 0)).GetAabb(new Pose(new Vector3(10, 100, 1000),
                                                                    QuaternionF.Identity)));
       // TODO: Test rotations.
     }
@@ -103,27 +105,27 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetMesh()
     {
-      var l = new LineShape(new Vector3F(1, 2, 3), Vector3F.UnitY);
+      var l = new LineShape(new Vector3(1, 2, 3), Vector3.UnitY);
       LineShape.MeshSize = 10;
       var m = l.GetMesh(0, 1);
       Assert.AreEqual(1, m.NumberOfTriangles);
       Triangle t = m.GetTriangle(0);
-      Assert.IsTrue(l.PointOnLine - LineShape.MeshSize / 2 * Vector3F.UnitY == t.Vertex0);
-      Assert.IsTrue(l.PointOnLine + LineShape.MeshSize / 2 * Vector3F.UnitY == t.Vertex2);
+      Assert.IsTrue(l.PointOnLine - LineShape.MeshSize / 2 * Vector3.UnitY == t.Vertex0);
+      Assert.IsTrue(l.PointOnLine + LineShape.MeshSize / 2 * Vector3.UnitY == t.Vertex2);
     }
 
 
     [Test]
     public void ToStringTest()
     {
-      Assert.AreEqual("LineShape { PointOnLine = (1; 2; 3), Direction = (0; 1; 0) }", new LineShape(new Vector3F(1, 2, 3), new Vector3F(0, 1, 0)).ToString());
+      Assert.AreEqual("LineShape { PointOnLine = (1; 2; 3), Direction = (0; 1; 0) }", new LineShape(new Vector3(1, 2, 3), new Vector3(0, 1, 0)).ToString());
     }
 
 
     [Test]
     public void Clone()
     {
-      LineShape line = new LineShape(new Vector3F(1, 2, 3), new Vector3F(2, 3, 4).Normalized);
+      LineShape line = new LineShape(new Vector3(1, 2, 3), new Vector3(2, 3, 4).Normalized());
       LineShape clone = line.Clone() as LineShape;
       Assert.IsNotNull(clone);
       Assert.AreEqual(line.PointOnLine, clone.PointOnLine);
@@ -136,7 +138,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void SerializationXml()
     {
-      var a = new LineShape(new Vector3F(1, 2, 3), new Vector3F(2, 3, 4).Normalized);
+      var a = new LineShape(new Vector3(1, 2, 3), new Vector3(2, 3, 4).Normalized());
 
       // Serialize object.
       var stream = new MemoryStream();
@@ -162,7 +164,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Ignore("Binary serialization not supported in PCL version.")]
     public void SerializationBinary()
     {
-      var a = new LineShape(new Vector3F(1, 2, 3), new Vector3F(2, 3, 4).Normalized);
+      var a = new LineShape(new Vector3(1, 2, 3), new Vector3(2, 3, 4).Normalized());
 
       // Serialize object.
       var stream = new MemoryStream();

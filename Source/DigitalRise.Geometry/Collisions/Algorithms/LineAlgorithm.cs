@@ -6,8 +6,8 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -68,8 +68,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       Debug.Assert(contactSet.Count <= 1, "Two lines should have at max 1 contact point.");
 
       // Get transformations.
-      Vector3F scaleA = objectA.Scale;
-      Vector3F scaleB = objectB.Scale;
+      Vector3 scaleA = objectA.Scale;
+      Vector3 scaleB = objectB.Scale;
       Pose poseA = objectA.Pose;
       Pose poseB = objectB.Pose;
 
@@ -83,8 +83,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       lineB.ToWorld(ref poseB);
 
       // Get closest points.
-      Vector3F pointA;
-      Vector3F pointB;
+      Vector3 pointA;
+      Vector3 pointB;
       contactSet.HaveContact = GeometryHelper.GetClosestPoints(lineA, lineB, out pointA, out pointB);
 
       if (type == CollisionQueryType.Boolean || (type == CollisionQueryType.Contacts && !contactSet.HaveContact))
@@ -95,15 +95,15 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       }
 
       // Create contact information.
-      Vector3F position = (pointA + pointB) / 2;
-      Vector3F normal = pointB - pointA;
-      float length = normal.Length;
+      Vector3 position = (pointA + pointB) / 2;
+      Vector3 normal = pointB - pointA;
+      float length = normal.Length();
       if (Numeric.IsZero(length))
       {
         // Create normal from cross product of both lines.
-        normal = Vector3F.Cross(lineA.Direction, lineB.Direction);
+        normal = Vector3.Cross(lineA.Direction, lineB.Direction);
         if (!normal.TryNormalize())
-          normal = Vector3F.UnitY;
+          normal = Vector3.UnitY;
       }
       else
       {
@@ -164,17 +164,17 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Apply scaling to line.
       Line line = new Line(lineShape);
-      Vector3F lineScale = lineGeometricObject.Scale;
+      Vector3 lineScale = lineGeometricObject.Scale;
       line.Scale(ref lineScale);
 
       // Step 1: Get any bounding sphere that encloses the other object.
       Aabb aabb = otherGeometricObject.Aabb;
-      Vector3F center = (aabb.Minimum + aabb.Maximum) / 2;
-      float radius = (aabb.Maximum - aabb.Minimum).Length;  // A large safe radius. (Exact size does not matter.)
+      Vector3 center = (aabb.Minimum + aabb.Maximum) / 2;
+      float radius = (aabb.Maximum - aabb.Minimum).Length();  // A large safe radius. (Exact size does not matter.)
 
       // Step 2: Get the closest point of line vs. center. 
       // All computations in local space of the line.
-      Vector3F closestPointOnLine;
+      Vector3 closestPointOnLine;
       Pose linePose = lineGeometricObject.Pose;
       GeometryHelper.GetClosestPoint(line, linePose.ToLocalPosition(center), out closestPointOnLine);
 
@@ -186,7 +186,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // Use temporary test objects.
       var testGeometricObject = TestGeometricObject.Create();
       testGeometricObject.Shape = lineSegment;
-      testGeometricObject.Scale = Vector3F.One;
+      testGeometricObject.Scale = Vector3.One;
       testGeometricObject.Pose = linePose;
 
       var testCollisionObject = ResourcePools.TestCollisionObjects.Obtain();
@@ -205,14 +205,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // in the line direction - this cannot work for infinite lines.
       // Results without a manual MPR ray were ok for normal cases. Problems were only observed
       // for cases where the InnerPoints overlap or for deep interpenetrations.
-      Vector3F v0A = geometricObjectA.Pose.ToWorldPosition(shapeA.InnerPoint * geometricObjectA.Scale);
-      Vector3F v0B = geometricObjectB.Pose.ToWorldPosition(shapeB.InnerPoint * geometricObjectB.Scale);
-      Vector3F n = v0B - v0A; // This is the default MPR ray direction.
+      Vector3 v0A = geometricObjectA.Pose.ToWorldPosition(shapeA.InnerPoint * geometricObjectA.Scale);
+      Vector3 v0B = geometricObjectB.Pose.ToWorldPosition(shapeB.InnerPoint * geometricObjectB.Scale);
+      Vector3 n = v0B - v0A; // This is the default MPR ray direction.
 
       // Make n normal to the line.
-      n = n - Vector3F.ProjectTo(n, linePose.ToWorldDirection(lineShape.Direction));
+      n = n - MathHelper.ProjectTo(n, linePose.ToWorldDirection(lineShape.Direction));
       if (!n.TryNormalize())
-        n = lineShape.Direction.Orthonormal1;
+        n = lineShape.Direction.Orthonormal1();
 
       testContactSet.PreferredNormal = n;
       collisionAlgorithm.ComputeCollision(testContactSet, type);

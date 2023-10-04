@@ -114,9 +114,9 @@ namespace DigitalRise.Physics.ForceEffects
     /// <para>
     /// <strong>Notes to Inheritors:</strong> This method is responsible for applying the forces of
     /// the effect to a rigid body. To apply a force the methods 
-    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3F, Vector3F)"/>,
-    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3F)"/> and/or
-    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3F)"/> of the <see cref="ForceEffect"/>
+    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3, Vector3)"/>,
+    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3)"/> and/or
+    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3)"/> of the <see cref="ForceEffect"/>
     /// base class must be used. Do not use the <strong>AddForce</strong>/<strong>AddTorque</strong>
     /// methods of the <see cref="RigidBody"/> class.
     /// </para>

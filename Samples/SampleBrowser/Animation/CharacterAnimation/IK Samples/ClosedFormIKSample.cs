@@ -20,7 +20,7 @@ namespace Samples.Animation
   {
     private readonly MeshNode _meshNode;
 
-    private Vector3F _targetPosition = new Vector3F(0.3f, 1, 0.3f);
+    private Vector3 _targetPosition = new Vector3(0.3f, 1, 0.3f);
     private readonly ClosedFormIKSolver _ikSolver;
 
 
@@ -29,7 +29,7 @@ namespace Samples.Animation
     {
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.FindFirstMeshNode().Clone();
-      _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0));
+      _meshNode.PoseLocal = new Pose(new Vector3(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);
 
@@ -46,7 +46,7 @@ namespace Samples.Animation
         TipBoneIndex = 16,
 
         // The offset from the hand center to the hand origin.
-        TipOffset = new Vector3F(0.1f, 0, 0),
+        TipOffset = new Vector3(0.1f, 0, 0),
       };
     }
 
@@ -58,7 +58,7 @@ namespace Samples.Animation
       float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
       // ----- Move target if <NumPad4-9> are pressed.
-      Vector3F translation = new Vector3F();
+      Vector3 translation = new Vector3();
       if (InputService.IsDown(Keys.NumPad4))
         translation.X -= 1;
       if (InputService.IsDown(Keys.NumPad6))
@@ -76,7 +76,7 @@ namespace Samples.Animation
       _targetPosition += translation;
 
       // Convert target world space position to model space. - The IK solvers work in model space.
-      Vector3F localTargetPosition = _meshNode.PoseWorld.ToLocalPosition(_targetPosition);
+      Vector3 localTargetPosition = _meshNode.PoseWorld.ToLocalPosition(_targetPosition);
 
       // Reset the affected bones. This is optional. It removes unwanted twist from the bones.
       _meshNode.SkeletonPose.ResetBoneTransforms(_ikSolver.RootBoneIndex, _ikSolver.TipBoneIndex);

@@ -8,7 +8,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -63,7 +63,7 @@ namespace DigitalRise.Graphics
     /// Gets the triangle vertices.
     /// </summary>
     /// <value>The triangle vertices.</value>
-    internal Vector3F[] Vertices { get; set; }
+    internal Vector3[] Vertices { get; set; }
 
 
     /// <summary>
@@ -113,7 +113,7 @@ namespace DigitalRise.Graphics
     /// 
     /// <summary>
     /// Initializes a new instance of the <see cref="Occluder"/> class. (CLS-compliant constructor.
-    /// If possible use <see cref="Occluder(DigitalRise.Mathematics.Algebra.Vector3F[],ushort[])"/>)
+    /// If possible use <see cref="Occluder(DigitalRise.Mathematics.Algebra.Vector3[],ushort[])"/>)
     /// </summary>
     /// <param name="vertices">The vertex array.</param>
     /// <param name="indices">The index array.</param>
@@ -124,7 +124,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="vertices"/> or <paramref name="indices"/> is empty.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-    public Occluder(Vector3F[] vertices, int[] indices)
+    public Occluder(Vector3[] vertices, int[] indices)
       : this(vertices, ToUInt16(indices))
     {
     }
@@ -132,7 +132,7 @@ namespace DigitalRise.Graphics
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Occluder"/> class. (CLS-compliant constructor.
-    /// If possible use <see cref="Occluder(DigitalRise.Mathematics.Algebra.Vector3F[],ushort[])"/>)
+    /// If possible use <see cref="Occluder(DigitalRise.Mathematics.Algebra.Vector3[],ushort[])"/>)
     /// </summary>
     /// <param name="vertices">The vertex array.</param>
     /// <param name="indices">The index array.</param>
@@ -143,7 +143,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="vertices"/> or <paramref name="indices"/> is empty.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-    public Occluder(Vector3F[] vertices, short[] indices)
+    public Occluder(Vector3[] vertices, short[] indices)
       : this(vertices, ToUInt16(indices))
     {
     }
@@ -161,8 +161,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="vertices"/> or <paramref name="indices"/> is empty.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-    [CLSCompliant(false)]
-    public Occluder(Vector3F[] vertices, ushort[] indices)
+    public Occluder(Vector3[] vertices, ushort[] indices)
     {
       if (vertices == null)
         throw new ArgumentNullException("vertices");

@@ -2,11 +2,10 @@
 using CommonServiceLocator;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Samples.Particles
@@ -43,20 +42,20 @@ namespace Samples.Particles
       ps.ReferenceFrame = ParticleReferenceFrame.Local;
 
       // Particle positions start in the center of the particle system.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        DefaultValue = Vector3F.Zero,
+        DefaultValue = Vector3.Zero,
       });
 
       // Particles move in the up direction with a random deviation of 0.5 radians and a 
       // random speed.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = 0.5f, Direction = Vector3F.Up },
+        Distribution = new DirectionDistribution { Deviation = 0.5f, Direction = Vector3.Up },
       });
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
       ps.Effectors.Add(new StartValueEffector<float>
@@ -76,8 +75,8 @@ namespace Samples.Particles
       });
 
       // To create a wind effect, we apply an acceleration to all particles.
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.LinearAcceleration).DefaultValue =
-        new Vector3F(0.2f, -0.1f, 0);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.LinearAcceleration).DefaultValue =
+        new Vector3(0.2f, -0.1f, 0);
 
       ps.Effectors.Add(new LinearAccelerationEffector
       {

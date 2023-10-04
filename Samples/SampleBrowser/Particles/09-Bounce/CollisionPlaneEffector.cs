@@ -1,9 +1,9 @@
 ﻿using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Particles
 {
@@ -25,8 +25,8 @@ namespace Samples.Particles
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _positionParameter;
-    private IParticleParameter<Vector3F> _directionParameter;
+    private IParticleParameter<Vector3> _positionParameter;
+    private IParticleParameter<Vector3> _directionParameter;
     private IParticleParameter<float> _linearSpeedParameter;
     private IParticleParameter<float> _restitutionParameter;
     #endregion
@@ -67,7 +67,7 @@ namespace Samples.Particles
       PositionParameter = ParticleParameterNames.Position;
       DirectionParameter = ParticleParameterNames.Direction;
       LinearSpeedParameter = ParticleParameterNames.LinearSpeed;
-      _plane = new Plane(new Vector3F(0, 1, 0), 0);
+      _plane = new Plane(new Vector3(0, 1, 0), 0);
     }
     #endregion
 
@@ -104,8 +104,8 @@ namespace Samples.Particles
     // parameter collection is changed. Here we cache references to the needed parameters.
     protected override void OnRequeryParameters()
     {
-      _positionParameter = ParticleSystem.Parameters.Get<Vector3F>(PositionParameter);
-      _directionParameter = ParticleSystem.Parameters.Get<Vector3F>(DirectionParameter);
+      _positionParameter = ParticleSystem.Parameters.Get<Vector3>(PositionParameter);
+      _directionParameter = ParticleSystem.Parameters.Get<Vector3>(DirectionParameter);
       _linearSpeedParameter = ParticleSystem.Parameters.Get<float>(LinearSpeedParameter);
       _restitutionParameter = ParticleSystem.Parameters.Get<float>(RestitutionParameter);
     }
@@ -137,15 +137,15 @@ namespace Samples.Particles
       for (int i = startIndex; i < startIndex + count; i++)
       {
         // Get the particle position and check if the position is behind the plane.
-        Vector3F position = _positionParameter.GetValue(i);
-        if (Vector3F.Dot(position, _plane.Normal) > _plane.DistanceFromOrigin)
+        Vector3 position = _positionParameter.GetValue(i);
+        if (Vector3.Dot(position, _plane.Normal) > _plane.DistanceFromOrigin)
           continue;
 
         // Get the linear velocity of the particle.
-        Vector3F velocity = _directionParameter.GetValue(i) * _linearSpeedParameter.GetValue(i);
+        Vector3 velocity = _directionParameter.GetValue(i) * _linearSpeedParameter.GetValue(i);
 
         // Check if the particle is moving into the plane or away.
-        float normalSpeed = Vector3F.Dot(velocity, _plane.Normal);
+        float normalSpeed = Vector3.Dot(velocity, _plane.Normal);
         if (normalSpeed > 0)
           continue;
 
@@ -157,7 +157,7 @@ namespace Samples.Particles
 
         // Update LinearSpeed and Direction from the velocity vector.
         // The speed is the magnitude of the velocity vector.
-        var newSpeed = velocity.Length;
+        var newSpeed = velocity.Length();
         _linearSpeedParameter.SetValue(i, newSpeed);
 
         // Direction stores the normalized direction of the velocity vector.

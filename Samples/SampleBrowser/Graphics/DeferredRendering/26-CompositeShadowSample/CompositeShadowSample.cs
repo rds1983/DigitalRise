@@ -81,7 +81,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
         MaxDistance = 200,
         FadeOutRange = 0,
         ShadowFog = 0,
-        TargetArea = new Aabb(new Vector3F(-100, 0, -100), new Vector3F(100, 50, 100))
+        TargetArea = new Aabb(new Vector3(-100, 0, -100), new Vector3(100, 50, 100))
       };
       _vsmShadow.Filter = new Blur(GraphicsService);
       _vsmShadow.Filter.NumberOfPasses = 1;

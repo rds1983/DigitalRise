@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 #if !POOL_ENUMERABLES
 using DigitalRise.Collections;
@@ -112,12 +114,12 @@ namespace DigitalRise.Geometry.Partitioning
       if (_root == null)
         yield break;
 
-      var rayDirectionInverse = new Vector3F(
+      var rayDirectionInverse = new Vector3(
             1 / ray.Direction.X,
             1 / ray.Direction.Y,
             1 / ray.Direction.Z);
 
-      float epsilon = Numeric.EpsilonF * (1 + Aabb.Extent.Length);
+      float epsilon = Numeric.EpsilonF * (1 + Aabb.Extent.Length());
 
       var stack = DigitalRise.ResourcePools<Node>.Stacks.Obtain();
       stack.Push(_root);

@@ -9,6 +9,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
 using Microsoft.Xna.Framework;
+using DigitalRise.Mathematics;
 
 namespace DigitalRise.Geometry
 {
@@ -18,9 +19,9 @@ namespace DigitalRise.Geometry
   /// <remarks>
   /// This class is a collection of several helper methods to compute bounding volumes (see 
   /// <see cref="CreateBoundingShape"/>, 
-  /// <see cref="ComputeBoundingBox(IList{Vector3F}, out Vector3F, out Pose)"/> and
+  /// <see cref="ComputeBoundingBox(IList{Vector3}, out Vector3, out Pose)"/> and
   /// <see cref="ComputeBoundingSphere"/>) and convex hulls (see 
-  /// <see cref="CreateConvexHull(IEnumerable{Vector3F})"/>). The other methods will not be needed
+  /// <see cref="CreateConvexHull(IEnumerable{Vector3})"/>). The other methods will not be needed
   /// in most situations. For general collision detection tasks use the types in the namespace 
   /// <see cref="DigitalRise.Geometry.Collisions"/>.
   /// </remarks>
@@ -43,7 +44,7 @@ namespace DigitalRise.Geometry
     /// <exception cref="ArgumentException">
     /// <paramref name="points"/> is empty.
     /// </exception>
-    public static Shape CreateBoundingShape(IList<Vector3F> points)
+    public static Shape CreateBoundingShape(IList<Vector3> points)
     {
       if (points == null)
         throw new ArgumentNullException("points");
@@ -51,7 +52,7 @@ namespace DigitalRise.Geometry
         throw new ArgumentException("The list of 'points' is empty.");
 
       // Compute minimal sphere.
-      Vector3F center;
+      Vector3 center;
       float radius;
       ComputeBoundingSphere(points, out radius, out center);
       SphereShape sphere = new SphereShape(radius);
@@ -65,7 +66,7 @@ namespace DigitalRise.Geometry
       float capsuleVolume = capsule.GetVolume();
 
       // Compute minimal box.
-      Vector3F boxExtent;
+      Vector3 boxExtent;
       Pose boxPose;
       ComputeBoundingBox(points, out boxExtent, out boxPose);
       var box = new BoxShape(boxExtent);
@@ -75,7 +76,7 @@ namespace DigitalRise.Geometry
       // A TransformedShape is used if the shape needs to be translated or rotated.
       if (sphereVolume < boxVolume && sphereVolume < capsuleVolume)
       {
-        if (center.IsNumericallyZero)
+        if (center.IsNumericallyZero())
           return sphere;
 
         return new TransformedShape(new GeometricObject(sphere, new Pose(center)));
@@ -110,11 +111,11 @@ namespace DigitalRise.Geometry
     /// The returned mesh describes the convex hull. All faces are convex polygons.
     /// </para>
     /// <para>
-    /// This method calls <see cref="CreateConvexHull(IEnumerable{Vector3F},int,float)"/> with
+    /// This method calls <see cref="CreateConvexHull(IEnumerable{Vector3},int,float)"/> with
     /// no vertex limit and 0 skin width.
     /// </para>
     /// </remarks>
-    public static DcelMesh CreateConvexHull(IEnumerable<Vector3F> points)
+    public static DcelMesh CreateConvexHull(IEnumerable<Vector3> points)
     {
       return CreateConvexHull(points, int.MaxValue, 0);
     }
@@ -150,7 +151,7 @@ namespace DigitalRise.Geometry
     /// used to increase or decrease the size of the convex hull. 
     /// </para>
     /// </remarks>
-    public static DcelMesh CreateConvexHull(IEnumerable<Vector3F> points, int vertexLimit, float skinWidth)
+    public static DcelMesh CreateConvexHull(IEnumerable<Vector3> points, int vertexLimit, float skinWidth)
     {
       // Nothing to do for empty input.
       if (points == null)
@@ -181,9 +182,9 @@ namespace DigitalRise.Geometry
     /// <param name="azimuth">
     /// The azimuth angle [-π, π] measured from the Cartesian x-axis.
     /// </param>
-    internal static void ToSphericalCoordinates(Vector3F v, out float radius, out float inclination, out float azimuth)
+    internal static void ToSphericalCoordinates(Vector3 v, out float radius, out float inclination, out float azimuth)
     {
-      radius = v.Length;
+      radius = v.Length();
       if (radius == 0.0f)
       {
         azimuth = 0.0f;
@@ -208,16 +209,16 @@ namespace DigitalRise.Geometry
     /// The azimuth angle [-π, π] measured from the Cartesian x-axis.
     /// </param>
     /// <returns>The Cartesian coordinates.</returns>
-    internal static Vector3F ToCartesianCoordinates(float radius, float inclination, float azimuth)
+    internal static Vector3 ToCartesianCoordinates(float radius, float inclination, float azimuth)
     {
       if (radius == 0.0)
-        return new Vector3F();
+        return new Vector3();
 
       float sinφ = (float)Math.Sin(azimuth);
       float cosφ = (float)Math.Cos(azimuth);
       float sinθ = (float)Math.Sin(inclination);
       float cosθ = (float)Math.Cos(inclination);
-      return new Vector3F(
+      return new Vector3(
         radius * sinθ * cosφ,
         radius * sinθ * sinφ,
         radius * cosθ);
@@ -261,7 +262,7 @@ namespace DigitalRise.Geometry
       // is the normal and d is -DistanceToOrigin. The normals in the paper point 
       // inside, but in our implementation the normals need to point outside!
 
-      Vector3F normal;
+      Vector3 normal;
       float distance;
 
       // Near plane
@@ -359,7 +360,7 @@ namespace DigitalRise.Geometry
       // is the normal and d = -DistanceToOrigin. The normal points inside.
       // Our implementation: The normals point outside!
 
-      Vector3F normal;
+      Vector3 normal;
       float distance;
 
       // Near plane

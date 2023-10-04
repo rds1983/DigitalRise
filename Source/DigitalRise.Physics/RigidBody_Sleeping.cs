@@ -6,7 +6,7 @@ using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -142,8 +142,8 @@ namespace DigitalRise.Physics
       if (CanSleep)
       {
         IsSleeping = true;
-        _linearVelocity = Vector3F.Zero;
-        _angularVelocity = Vector3F.Zero;
+        _linearVelocity = Vector3.Zero;
+        _angularVelocity = Vector3.Zero;
         _noMovementTime = float.PositiveInfinity;
       }
     }
@@ -174,8 +174,8 @@ namespace DigitalRise.Physics
 
       if (MotionType == MotionType.Dynamic)
       {
-        if (LinearVelocity.LengthSquared < Simulation.Settings.Sleeping.LinearVelocityThresholdSquared
-           && AngularVelocity.LengthSquared < Simulation.Settings.Sleeping.AngularVelocityThresholdSquared)
+        if (LinearVelocity.LengthSquared() < Simulation.Settings.Sleeping.LinearVelocityThresholdSquared
+           && AngularVelocity.LengthSquared() < Simulation.Settings.Sleeping.AngularVelocityThresholdSquared)
         {
           // Movement is below threshold. Increase counter.
           _noMovementTime += deltaTime;
@@ -194,13 +194,13 @@ namespace DigitalRise.Physics
       }
       else
       {
-        if (LinearVelocity.LengthSquared < Numeric.EpsilonFSquared
-           && AngularVelocity.LengthSquared < Numeric.EpsilonFSquared)
+        if (LinearVelocity.LengthSquared() < Numeric.EpsilonFSquared
+           && AngularVelocity.LengthSquared() < Numeric.EpsilonFSquared)
         {
           // Kinematic bodies are set to sleep immediately!
           IsSleeping = true;
-          _linearVelocity = Vector3F.Zero;
-          _angularVelocity = Vector3F.Zero;
+          _linearVelocity = Vector3.Zero;
+          _angularVelocity = Vector3.Zero;
           _noMovementTime = float.PositiveInfinity;
         }
         else

@@ -201,17 +201,17 @@ namespace DigitalRise.GameBase
     /// </para>
     /// <code lang="csharp">
     /// <![CDATA[
-    /// GameObject.CreateProperty<Vector3F>(
+    /// GameObject.CreateProperty<Vector3>(
     ///   "Position", 
     ///   GamePropertyCategories.Common, 
     ///   "Defines the 3D position.", 
-    ///   new Vector3F());
+    ///   new Vector3());
     /// 
     /// var gameObject1 = new GameObject();
     /// var gameObject2 = new GameObject();
     /// 
-    /// var property1 = gameObject1.Properties.Get<Vector3F>("Position");
-    /// var property2 = gameObject2.Properties.Get<Vector3F>("Position");
+    /// var property1 = gameObject1.Properties.Get<Vector3>("Position");
+    /// var property2 = gameObject2.Properties.Get<Vector3>("Position");
     /// property1.Changed += property2.Change;
     /// ]]>
     /// </code>

@@ -31,30 +31,30 @@ namespace Samples.Geometry
     {
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
-      var points1a = new List<Vector3F>
+      var points1a = new List<Vector3>
       {
-                new Vector3F(0.0f, 0.0f, -0.1875f),
-                new Vector3F(0.0f, 0.0f, 0.1875f),
-                new Vector3F(10.0f, 0.0f, -0.1875f),
-                new Vector3F(10.0f, 0.0f, 0.1875f),
-                new Vector3F(10.0f, 5.0f, -0.1875f),
-                new Vector3F(10.0f, 5.0f, 0.1875f),
-                new Vector3F(0.0f, 5.0f, -0.1875f),
-                new Vector3F(0.0f, 5.0f, 0.1875f)
+                new Vector3(0.0f, 0.0f, -0.1875f),
+                new Vector3(0.0f, 0.0f, 0.1875f),
+                new Vector3(10.0f, 0.0f, -0.1875f),
+                new Vector3(10.0f, 0.0f, 0.1875f),
+                new Vector3(10.0f, 5.0f, -0.1875f),
+                new Vector3(10.0f, 5.0f, 0.1875f),
+                new Vector3(0.0f, 5.0f, -0.1875f),
+                new Vector3(0.0f, 5.0f, 0.1875f)
             };
 
-      var points1b = new List<Vector3F>
+      var points1b = new List<Vector3>
       {
-                new Vector3F(0.0f, 0.0f, -0.1875f),
-                new Vector3F(10.0f, 0.0f, -0.1875f),
-                new Vector3F(10.0f, 5.0f, -0.1875f),
-                new Vector3F(0.0f, 5.0f, -0.1875f),
-                new Vector3F(0.0f, 0.0f, 0.1875f),
-                new Vector3F(10.0f, 0.0f, 0.1875f),
-                new Vector3F(10.0f, 5.0f, 0.1875f),
-                new Vector3F(0.0f, 5.0f, 0.1875f)
+                new Vector3(0.0f, 0.0f, -0.1875f),
+                new Vector3(10.0f, 0.0f, -0.1875f),
+                new Vector3(10.0f, 5.0f, -0.1875f),
+                new Vector3(0.0f, 5.0f, -0.1875f),
+                new Vector3(0.0f, 0.0f, 0.1875f),
+                new Vector3(10.0f, 0.0f, 0.1875f),
+                new Vector3(10.0f, 5.0f, 0.1875f),
+                new Vector3(0.0f, 5.0f, 0.1875f)
             };
 
       var matrix1 = new Matrix44F(0.0f, 1.0f, 0.0f, 208.5f, -1.0f, 0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
@@ -62,16 +62,16 @@ namespace Samples.Geometry
       _part1A = new CollisionObject(new GeometricObject(new ConvexPolyhedron(points1a), Pose.FromMatrix(matrix1)));
       _part1B = new CollisionObject(new GeometricObject(new ConvexPolyhedron(points1b), Pose.FromMatrix(matrix1)));
 
-      var points2 = new List<Vector3F>
+      var points2 = new List<Vector3>
       {
-                new Vector3F(0.0f, 0.0f, -0.375f),
-                new Vector3F(0.0f, 0.0f, 0.375f),
-                new Vector3F(23.0f, 0.0f, -0.375f),
-                new Vector3F(23.0f, 0.0f, 0.375f),
-                new Vector3F(23.0f, 10.0f, -0.375f),
-                new Vector3F(23.0f, 10.0f, 0.375f),
-                new Vector3F(0.0f, 10.0f, -0.375f),
-                new Vector3F(0.0f, 10.0f, 0.375f)
+                new Vector3(0.0f, 0.0f, -0.375f),
+                new Vector3(0.0f, 0.0f, 0.375f),
+                new Vector3(23.0f, 0.0f, -0.375f),
+                new Vector3(23.0f, 0.0f, 0.375f),
+                new Vector3(23.0f, 10.0f, -0.375f),
+                new Vector3(23.0f, 10.0f, 0.375f),
+                new Vector3(0.0f, 10.0f, -0.375f),
+                new Vector3(0.0f, 10.0f, 0.375f)
             };
 
       var matrix2 = new Matrix44F(0.0f, 0.0f, -1.0f, 208.125f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 1.0f);
@@ -88,12 +88,12 @@ namespace Samples.Geometry
       var cd = new CollisionDetection();
 
 
-      float sizeB = _part2.GeometricObject.Aabb.Extent.Length;
+      float sizeB = _part2.GeometricObject.Aabb.Extent.Length();
       var perturbationEpsilon = sizeB * Math.Max(0.001f / 10, Numeric.EpsilonF * 10);
       var perturbationAngle = perturbationEpsilon / sizeB;
 
-      Vector3F v;
-      v = new Vector3F(1, 0, 0);
+      Vector3 v;
+      v = new Vector3(1, 0, 0);
 
       var translation = v * perturbationEpsilon;
       var rotation = Matrix33F.CreateRotation(v, perturbationAngle);

@@ -11,7 +11,7 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -39,10 +39,10 @@ namespace DigitalRise.Graphics.SceneGraph
     //--------------------------------------------------------------
 
     // Reference position for calculating light contribution.
-    private Vector3F? _referencePosition;
+    private Vector3? _referencePosition;
 
     // LOD computations:
-    private Vector3F _cameraPosition;
+    private Vector3 _cameraPosition;
     private float _lodBiasOverYScale;
 
     // Clip geometry tests:
@@ -235,12 +235,12 @@ namespace DigitalRise.Graphics.SceneGraph
       // Note: If we have no reference node, it still makes sense to sort the objects
       // by their contribution. We choose to get the light contribution at the position
       // of each light.
-      Vector3F position = _referencePosition ?? lightNode.PoseWorld.Position;
+      Vector3 position = _referencePosition ?? lightNode.PoseWorld.Position;
       //lightNode.SortTag = lightNode.GetLightContribution(position, 0.7f);
 
       // Or simpler: Sort light nodes by distance. --> Use for image-based lights.
       // (We use distance², because it is faster.)
-      //float distance = (position - lightNode.PoseWorld.Position).LengthSquared; 
+      //float distance = (position - lightNode.PoseWorld.Position).LengthSquared(); 
       //lightNode.SortTag = -distance;   // minus because we use descending sort.
       
       if (lightNode.Light is AmbientLight)
@@ -271,7 +271,7 @@ namespace DigitalRise.Graphics.SceneGraph
       else if (lightNode.Light is ImageBasedLight)
       {
         ImageBasedLights.Add(lightNode);
-        float distance = (position - lightNode.PoseWorld.Position).LengthSquared; 
+        float distance = (position - lightNode.PoseWorld.Position).LengthSquared(); 
         lightNode.SortTag = -distance;  // minus because we use descending sort.
       }
       else
@@ -282,7 +282,7 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    private bool HaveContact(IGeometricObject clipGeometry, Vector3F position)
+    private bool HaveContact(IGeometricObject clipGeometry, Vector3 position)
     {
       // Use a shared collision detection instance.
       var collisionDetection = SceneHelper.CollisionDetection;
@@ -325,9 +325,9 @@ namespace DigitalRise.Graphics.SceneGraph
           "Assuming that all scale factors are positive.");
 
         // Determine view-normalized distance between scene node and camera node.
-        distance = (node.PoseWorld.Position - _cameraPosition).Length;
+        distance = (node.PoseWorld.Position - _cameraPosition).Length();
         distance *= _lodBiasOverYScale;
-        distance /= node.ScaleWorld.LargestComponent;
+        distance /= node.ScaleWorld.LargestComponent();
       }
 
       // Distance Culling: Only handle nodes that are within MaxDistance.

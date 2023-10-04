@@ -4,8 +4,7 @@
 
 using System;
 using DigitalRise.Geometry.Meshes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -30,9 +29,9 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets an inner point.
     /// </summary>
     /// <value>An inner point. Always (0, 0, 0).</value>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
-      get { return Vector3F.Zero; }
+      get { return Vector3.Zero; }
     }
 
 
@@ -88,9 +87,9 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
-      return new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
+      return new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
     }
 
 

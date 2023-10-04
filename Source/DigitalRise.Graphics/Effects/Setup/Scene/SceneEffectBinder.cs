@@ -362,7 +362,7 @@ namespace DigitalRise.Graphics.Effects
       return (Vector3)(-context.CameraNode.ViewInverse.GetColumn(2).XYZ);
 
       // Same as
-      //return context.CameraNode.PoseWorld.ToWorldDirection(Vector3F.Forward);
+      //return context.CameraNode.PoseWorld.ToWorldDirection(Vector3.Forward);
     }
 
 
@@ -1936,7 +1936,7 @@ namespace DigitalRise.Graphics.Effects
         return Matrix.Identity;
 
       Matrix world = node.PoseWorld;
-      Vector3F scale = node.ScaleWorld;
+      Vector3 scale = node.ScaleWorld;
       world.M11 *= scale.X; world.M12 *= scale.X; world.M13 *= scale.X;
       world.M21 *= scale.Y; world.M22 *= scale.Y; world.M23 *= scale.Y;
       world.M31 *= scale.Z; world.M32 *= scale.Z; world.M33 *= scale.Z;
@@ -2153,7 +2153,7 @@ namespace DigitalRise.Graphics.Effects
         return Matrix.Identity;
 
       Matrix world = node.LastPoseWorld.HasValue ? node.LastPoseWorld.Value : node.PoseWorld;
-      Vector3F scale = node.LastScaleWorld.HasValue ? node.LastScaleWorld.Value : node.ScaleWorld;
+      Vector3 scale = node.LastScaleWorld.HasValue ? node.LastScaleWorld.Value : node.ScaleWorld;
       world.M11 *= scale.X; world.M12 *= scale.X; world.M13 *= scale.X;
       world.M21 *= scale.Y; world.M22 *= scale.Y; world.M23 *= scale.Y;
       world.M31 *= scale.Z; world.M32 *= scale.Z; world.M33 *= scale.Z;

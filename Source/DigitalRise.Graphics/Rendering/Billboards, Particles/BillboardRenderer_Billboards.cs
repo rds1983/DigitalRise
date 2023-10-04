@@ -3,11 +3,10 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Collections;
-using Microsoft.Xna.Framework.Content;
 using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -31,7 +30,7 @@ namespace DigitalRise.Graphics.Rendering
     {
       public float Distance;
       public int Index;
-      public Vector3F Position;
+      public Vector3 Position;
     }
 
 
@@ -459,7 +458,7 @@ namespace DigitalRise.Graphics.Rendering
     private void Draw(ParticleSystemNode node, ParticleSystemData particleSystemData)
     {
       // Scale and pose.
-      Vector3F scale = Vector3F.One;
+      Vector3 scale = Vector3.One;
       Pose pose = Pose.Identity;
       bool requiresTransformation = (particleSystemData.ReferenceFrame == ParticleReferenceFrame.Local);
       if (requiresTransformation)
@@ -469,7 +468,7 @@ namespace DigitalRise.Graphics.Rendering
       }
 
       // Tint color and alpha.
-      Vector3F color = node.Color;
+      Vector3 color = node.Color;
       float alpha = node.Alpha;
       float angleOffset = node.AngleOffset;
 
@@ -501,7 +500,7 @@ namespace DigitalRise.Graphics.Rendering
 
     #region ----- Particles -----
 
-    private void DrawParticlesOldToNew(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3F scale, ref Pose pose, ref Vector3F color, float alpha, float angleOffset)
+    private void DrawParticlesOldToNew(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3 scale, ref Pose pose, ref Vector3 color, float alpha, float angleOffset)
     {
       var b = new BillboardArgs
       {
@@ -547,7 +546,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private void DrawParticlesBackToFront(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3F scale, ref Pose pose, ref Vector3F color, float alpha, float angleOffset)
+    private void DrawParticlesBackToFront(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3 scale, ref Pose pose, ref Vector3 color, float alpha, float angleOffset)
     {
       var b = new BillboardArgs
       {
@@ -585,10 +584,10 @@ namespace DigitalRise.Graphics.Rendering
             particleIndex.Position = particles[i].Position;
 
           // Planar distance: Project vector onto look direction.
-          Vector3F cameraToParticle = particleIndex.Position - _cameraPose.Position;
-          particleIndex.Distance = Vector3F.Dot(cameraToParticle, _cameraForward);
+          Vector3 cameraToParticle = particleIndex.Position - _cameraPose.Position;
+          particleIndex.Distance = Vector3.Dot(cameraToParticle, _cameraForward);
           if (useLinearDistance)
-            particleIndex.Distance = cameraToParticle.Length * Math.Sign(particleIndex.Distance);
+            particleIndex.Distance = cameraToParticle.Length() * Math.Sign(particleIndex.Distance);
 
           _particleIndices.Add(ref particleIndex);
         }
@@ -650,7 +649,7 @@ namespace DigitalRise.Graphics.Rendering
     // p0 and p1 can have different colors and alpha values to create color gradients 
     // or a ribbon that fades in/out.
 
-    private void DrawParticleRibbonsFixed(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3F scale, ref Pose pose, ref Vector3F color, float alpha)
+    private void DrawParticleRibbonsFixed(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3 scale, ref Pose pose, ref Vector3 color, float alpha)
     {
       // At least two particles are required to create a ribbon.
       int numberOfParticles = particleSystemData.Particles.Count;
@@ -744,7 +743,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private void DrawParticleRibbonsAuto(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3F scale, ref Pose pose, ref Vector3F color, float alpha)
+    private void DrawParticleRibbonsAuto(ParticleSystemData particleSystemData, bool requiresTransformation, ref Vector3 scale, ref Pose pose, ref Vector3 color, float alpha)
     {
       // At least two particles are required to create a ribbon.
       int numberOfParticles = particleSystemData.Particles.Count;
@@ -756,7 +755,7 @@ namespace DigitalRise.Graphics.Rendering
       // - Build cross-products of normal and tangent vectors.
 
       // Is normal uniform across all particles?
-      Vector3F? uniformNormal;
+      Vector3? uniformNormal;
       switch (particleSystemData.BillboardOrientation.Normal)
       {
         case BillboardNormal.ViewPlaneAligned:
@@ -764,9 +763,10 @@ namespace DigitalRise.Graphics.Rendering
           break;
 
         case BillboardNormal.ViewpointOriented:
-          uniformNormal = _cameraPose.Position - pose.Position;
-          if (!uniformNormal.Value.TryNormalize())
-            uniformNormal = _defaultNormal;
+          var v = _cameraPose.Position - pose.Position;
+					if (!v.TryNormalize())
+						v = _defaultNormal;
+					uniformNormal = v;
           break;
 
         default:
@@ -839,13 +839,13 @@ namespace DigitalRise.Graphics.Rendering
         p0.TextureCoordinateU = 0;
 
         index++;
-        Vector3F nextPosition;
+        Vector3 nextPosition;
         if (requiresTransformation)
           nextPosition = pose.ToWorldPosition(particles[index].Position * scale);
         else
           nextPosition = particles[index].Position;
 
-        Vector3F normal;
+        Vector3 normal;
         if (uniformNormal.HasValue)
         {
           // Uniform normal.
@@ -859,8 +859,8 @@ namespace DigitalRise.Graphics.Rendering
             normal = pose.ToWorldDirection(normal);
         }
 
-        Vector3F previousDelta = nextPosition - p0.Position;
-        p0.Axis = Vector3F.Cross(normal, previousDelta);
+        Vector3 previousDelta = nextPosition - p0.Position;
+        p0.Axis = Vector3.Cross(normal, previousDelta);
         p0.Axis.TryNormalize();
 
         // Intermediate particles.
@@ -892,9 +892,9 @@ namespace DigitalRise.Graphics.Rendering
               normal = pose.ToWorldDirection(normal);
           }
 
-          Vector3F delta = nextPosition - p1.Position;
-          Vector3F tangent = delta + previousDelta; // Note: Should we normalize vectors for better average?
-          p1.Axis = Vector3F.Cross(normal, tangent);
+          Vector3 delta = nextPosition - p1.Position;
+          Vector3 tangent = delta + previousDelta; // Note: Should we normalize vectors for better average?
+          p1.Axis = Vector3.Cross(normal, tangent);
           p1.Axis.TryNormalize();
 
           p1.Color = particles[index].Color * color;
@@ -928,7 +928,7 @@ namespace DigitalRise.Graphics.Rendering
             normal = pose.ToWorldDirection(normal);
         }
 
-        p1.Axis = Vector3F.Cross(normal, previousDelta);
+        p1.Axis = Vector3.Cross(normal, previousDelta);
         p1.Axis.TryNormalize();
 
         if (requiresTransformation)

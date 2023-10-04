@@ -6,7 +6,7 @@ using System;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -45,7 +45,7 @@ namespace DigitalRise.Physics
     /// <paramref name="mesh"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void GetMass(ITriangleMesh mesh, out float mass, out Vector3F centerOfMass, out Matrix33F inertia)
+    public static void GetMass(ITriangleMesh mesh, out float mass, out Vector3 centerOfMass, out Matrix33F inertia)
     {
       if (mesh == null)
         throw new ArgumentNullException("mesh");
@@ -59,14 +59,14 @@ namespace DigitalRise.Physics
         var triangle = mesh.GetTriangle(triangleIndex);
 
         // Vertex coordinates.
-        Vector3F v0 = triangle.Vertex0;
-        Vector3F v1 = triangle.Vertex1;
-        Vector3F v2 = triangle.Vertex2;
+        Vector3 v0 = triangle.Vertex0;
+        Vector3 v1 = triangle.Vertex1;
+        Vector3 v2 = triangle.Vertex2;
 
         // Edges and cross products of edges
-        Vector3F a = v1 - v0;
-        Vector3F b = v2 - v0;
-        Vector3F d = Vector3F.Cross(a, b);
+        Vector3 a = v1 - v0;
+        Vector3 b = v2 - v0;
+        Vector3 d = Vector3.Cross(a, b);
 
         // Compute integral terms.
         float f1x, f2x, f3x, g0x, g1x, g2x;
@@ -102,7 +102,7 @@ namespace DigitalRise.Physics
 
       mass = i0;
 
-      centerOfMass = 1.0f / mass * new Vector3F(i1, i2, i3);
+      centerOfMass = 1.0f / mass * new Vector3(i1, i2, i3);
       // Clamp to zero.
       if (Numeric.IsZero(centerOfMass.X))
         centerOfMass.X = 0;

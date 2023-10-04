@@ -10,7 +10,7 @@ using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -95,8 +95,8 @@ namespace Samples
         // position and shoots forward (-z direction).
         var cameraGameObject = (CameraObject)_gameObjectService.Objects["Camera"];
         var cameraNode = cameraGameObject.CameraNode;
-        Vector3F cameraPosition = cameraNode.PoseWorld.Position;
-        Vector3F cameraDirection = cameraNode.PoseWorld.ToWorldDirection(Vector3F.Forward);
+        Vector3 cameraPosition = cameraNode.PoseWorld.Position;
+        Vector3 cameraDirection = cameraNode.PoseWorld.ToWorldDirection(Vector3.Forward);
 
         // Create a ray for picking.
         RayShape ray = new RayShape(cameraPosition, cameraDirection, 1000);
@@ -138,7 +138,7 @@ namespace Samples
 
             // Get the position where the ray hits the other object.
             // (The position is defined in the local space of the object.)
-            Vector3F hitPositionLocal = (contactSet.ObjectA == rayCollisionObject) ? contact.PositionBLocal : contact.PositionALocal;
+            Vector3 hitPositionLocal = (contactSet.ObjectA == rayCollisionObject) ? contact.PositionBLocal : contact.PositionALocal;
 
             _spring = new BallJoint
             {
@@ -177,8 +177,8 @@ namespace Samples
         // the ball-socket joint.
         var cameraGameObject = (CameraObject)_gameObjectService.Objects["Camera"];
         var cameraNode = cameraGameObject.CameraNode;
-        Vector3F cameraPosition = cameraNode.PoseWorld.Position;
-        Vector3F cameraDirection = cameraNode.PoseWorld.ToWorldDirection(-Vector3F.UnitZ);
+        Vector3 cameraPosition = cameraNode.PoseWorld.Position;
+        Vector3 cameraDirection = cameraNode.PoseWorld.ToWorldDirection(-Vector3.UnitZ);
 
         _spring.AnchorPositionBLocal = cameraPosition + cameraDirection * _springAttachmentDistanceFromObserver;
 

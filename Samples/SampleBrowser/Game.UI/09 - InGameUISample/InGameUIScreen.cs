@@ -61,8 +61,8 @@ namespace Samples.Game.UI
       bool screenHit = false;
 
       // Get the camera position and the view direction in world space.
-      Vector3F cameraPosition = _cameraObject.CameraNode.PoseWorld.Position;
-      Vector3F cameraDirection = _cameraObject.CameraNode.PoseWorld.ToWorldDirection(Vector3F.Forward);
+      Vector3 cameraPosition = _cameraObject.CameraNode.PoseWorld.Position;
+      Vector3 cameraDirection = _cameraObject.CameraNode.PoseWorld.ToWorldDirection(Vector3.Forward);
 
       // Create a ray (ideally this shape should be cached and reused).
       var ray = new RayShape(cameraPosition, cameraDirection, 1000);
@@ -134,7 +134,7 @@ namespace Samples.Game.UI
 
 
     // Returns the texture coordinates for a given point on the TV screen.
-    public Vector2 GetTextureCoordinate(Vector3F pointLocal)
+    public Vector2 GetTextureCoordinate(Vector3 pointLocal)
     {
       // We assume that the TV screen texture is mapped flat onto on side of the
       // box and is centered. - This is not exact since the screen is actually

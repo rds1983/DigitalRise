@@ -2,9 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -86,7 +85,7 @@ namespace DigitalRise.Physics.Constraints
     /// <see cref="AngularConstraintImpulse"/>.
     /// </para>
     /// </remarks>
-    Vector3F LinearConstraintImpulse { get; }
+    Vector3 LinearConstraintImpulse { get; }
 
 
     /// <summary>
@@ -104,7 +103,7 @@ namespace DigitalRise.Physics.Constraints
     /// <see cref="LinearConstraintImpulse"/>.
     /// </para>
     /// </remarks>
-    Vector3F AngularConstraintImpulse { get; }
+    Vector3 AngularConstraintImpulse { get; }
 
 
     /// <summary>

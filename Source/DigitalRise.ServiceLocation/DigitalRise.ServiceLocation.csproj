@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>DigitalRise.ServiceLocation</AssemblyName>
     <PackageId>DigitalRise.ServiceLocation</PackageId>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.7" />

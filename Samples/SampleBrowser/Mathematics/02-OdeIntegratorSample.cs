@@ -63,13 +63,13 @@ With increasing time step Explicit Euler integration is the first to become unst
       var debugRenderer = GraphicsScreen.DebugRenderer2D;
       debugRenderer.DrawText(text, new Vector2(400, yOffset - 90), Color.Black);
       debugRenderer.DrawLine(
-        new Vector3F(90, yOffset, 0),
-        new Vector3F(700, yOffset, 0),
+        new Vector3(90, yOffset, 0),
+        new Vector3(700, yOffset, 0),
         Color.Black,
         true);
       debugRenderer.DrawLine(
-        new Vector3F(100, yOffset - 110, 0),
-        new Vector3F(100, yOffset + 10, 0),
+        new Vector3(100, yOffset - 110, 0),
+        new Vector3(100, yOffset + 10, 0),
         Color.Black,
         true);
 
@@ -85,8 +85,8 @@ With increasing time step Explicit Euler integration is the first to become unst
         y = integrator.Integrate(y, time, time + _deltaTime);
 
         debugRenderer.DrawLine(
-          new Vector3F(100 + time * 600, yOffset - lastY, 0),
-          new Vector3F(100 + (time + _deltaTime) * 600, yOffset - y[0], 0),
+          new Vector3(100 + time * 600, yOffset - lastY, 0),
+          new Vector3(100 + (time + _deltaTime) * 600, yOffset - y[0], 0),
           Color.Black,
           true);
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
@@ -22,7 +23,7 @@ namespace Samples.Physics
     private readonly RigidBody _kinematicBody;  // The kinematic body that moves along the path.
     private Path3F _path;                       // The 3D path.
     private float _currentPathPosition;         // A value indicating the current position on the path.
-    private readonly Vector3F[] _pointList = new Vector3F[200];
+    private readonly Vector3[] _pointList = new Vector3[200];
 
 
     public KinematicSample(Microsoft.Xna.Framework.Game game)
@@ -33,7 +34,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -57,7 +58,7 @@ namespace Samples.Physics
       BoxShape boxShape = new BoxShape(1, 1, 1);
       for (int i = 0; i < numberOfBoxes; i++)
       {
-        Vector3F randomPosition = RandomHelper.Random.NextVector3F(-5, 5);
+        Vector3 randomPosition = RandomHelper.Random.NextVector3(-5, 5);
         randomPosition.Y = 5;
         QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
 
@@ -85,43 +86,43 @@ namespace Samples.Physics
       _path.Add(new PathKey3F
       {
         Parameter = 0,                                  // The path parameter defines position of the path key on the curve.
-        Point = new Vector3F(-4, 0.5f, -3),             // The world space position of the path key.
+        Point = new Vector3(-4, 0.5f, -3),             // The world space position of the path key.
         Interpolation = SplineInterpolation.CatmullRom, // The type of interpolation that is used between this path key and the next.
       });
       _path.Add(new PathKey3F
       {
         Parameter = 1,
-        Point = new Vector3F(-1, 0.5f, -5),
+        Point = new Vector3(-1, 0.5f, -5),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       _path.Add(new PathKey3F
       {
         Parameter = 2,
-        Point = new Vector3F(3, 0.5f, -4),
+        Point = new Vector3(3, 0.5f, -4),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       _path.Add(new PathKey3F
       {
         Parameter = 3,
-        Point = new Vector3F(0, 0.5f, 0),
+        Point = new Vector3(0, 0.5f, 0),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       _path.Add(new PathKey3F
       {
         Parameter = 4,
-        Point = new Vector3F(-3, 0.5f, 3),
+        Point = new Vector3(-3, 0.5f, 3),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       _path.Add(new PathKey3F
       {
         Parameter = 5,
-        Point = new Vector3F(-1, 0.5f, 5),
+        Point = new Vector3(-1, 0.5f, 5),
         Interpolation = SplineInterpolation.CatmullRom,
       });
       _path.Add(new PathKey3F
       {
         Parameter = 6,
-        Point = new Vector3F(0, 0.5f, 0),
+        Point = new Vector3(0, 0.5f, 0),
         Interpolation = SplineInterpolation.CatmullRom,
       });
 
@@ -150,7 +151,7 @@ namespace Samples.Physics
       float pathLength = _path.Last().Parameter;
       for (int i = 0; i <= numberOfSamples; i++)
       {
-        Vector3F pointOnPath = _path.GetPoint(pathLength / numberOfSamples * i);
+        Vector3 pointOnPath = _path.GetPoint(pathLength / numberOfSamples * i);
         _pointList[i] = pointOnPath;
       }
     }
@@ -168,13 +169,13 @@ namespace Samples.Physics
       float parameter = _path.GetParameterFromLength(newPathPosition, 10, 0.01f);
 
       // Get path point at the newPathPosition.
-      Vector3F position = _path.GetPoint(parameter);
+      Vector3 position = _path.GetPoint(parameter);
 
       // Get the path tangent at newPathPosition and use it as the forward direction.
-      Vector3F forward = _path.GetTangent(parameter).Normalized;
+      Vector3 forward = _path.GetTangent(parameter).Normalized();
 
       QuaternionF currentOrientation = QuaternionF.CreateRotation(_kinematicBody.Pose.Orientation);
-      QuaternionF targetOrientation = QuaternionF.CreateRotation(Vector3F.UnitY, forward);
+      QuaternionF targetOrientation = QuaternionF.CreateRotation(Vector3.UnitY, forward);
       QuaternionF orientationDelta = targetOrientation * currentOrientation.Conjugated;
 
       // Selective Negation:
@@ -200,12 +201,12 @@ namespace Samples.Physics
       deltaTime = Math.Max(deltaTime, Simulation.Settings.Timing.FixedTimeStep);
 
       // Determine the linear velocity that moves the body forward.
-      Vector3F linearVelocity = (position - _kinematicBody.Pose.Position) / deltaTime;
+      Vector3 linearVelocity = (position - _kinematicBody.Pose.Position) / deltaTime;
 
       // Determine the angular velocity that rotates the body.
-      Vector3F angularVelocity;
-      Vector3F rotationAxis = orientationDelta.Axis;
-      if (!rotationAxis.IsNumericallyZero)
+      Vector3 angularVelocity;
+      Vector3 rotationAxis = orientationDelta.Axis;
+      if (!rotationAxis.IsNumericallyZero())
       {
         // The angular velocity is computed as rotationAxis * rotationSpeed.
         // The rotation speed is computed as angle / time. (Note: The angle is given in radians.)
@@ -215,7 +216,7 @@ namespace Samples.Physics
       else
       {
         // The axis of rotation is 0. That means the no rotation should be applied.
-        angularVelocity = Vector3F.Zero;
+        angularVelocity = Vector3.Zero;
       }
 
       _kinematicBody.LinearVelocity = linearVelocity;

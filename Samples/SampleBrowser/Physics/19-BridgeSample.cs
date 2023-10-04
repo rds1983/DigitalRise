@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -24,7 +24,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -52,7 +52,7 @@ namespace Samples.Physics
         // A single plank of the bridge.
         RigidBody body = new RigidBody(boardShape)
         {
-          Pose = new Pose(new Vector3F(-10 + boardShape.WidthX * i, 4, 0))
+          Pose = new Pose(new Vector3(-10 + boardShape.WidthX * i, 4, 0))
         };
         Simulation.RigidBodies.Add(body);
 
@@ -70,14 +70,14 @@ namespace Samples.Physics
             // The columns are the axes. We set the local z axis in the first column. This is
             // the hinge axis. In the other two columns we set two orthonormal vectors.
             // (All three columns are orthonormal and form a valid rotation matrix.)
-            AnchorPoseALocal = new Pose(new Vector3F(boardShape.WidthX / 2, 0, 0),
+            AnchorPoseALocal = new Pose(new Vector3(boardShape.WidthX / 2, 0, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
             BodyB = body,
             // The attachment point is at the left side of the board.
             // The anchor orientation is defined as above.
-            AnchorPoseBLocal = new Pose(new Vector3F(-boardShape.WidthX / 2, 0, 0),
+            AnchorPoseBLocal = new Pose(new Vector3(-boardShape.WidthX / 2, 0, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
@@ -96,12 +96,12 @@ namespace Samples.Physics
           HingeJoint hinge = new HingeJoint
           {
             BodyA = Simulation.World,
-            AnchorPoseALocal = new Pose(new Vector3F(-9, 3, 0),
+            AnchorPoseALocal = new Pose(new Vector3(-9, 3, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
             BodyB = body,
-            AnchorPoseBLocal = new Pose(new Vector3F(-boardShape.WidthX / 2, 0, 0),
+            AnchorPoseBLocal = new Pose(new Vector3(-boardShape.WidthX / 2, 0, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
@@ -116,12 +116,12 @@ namespace Samples.Physics
           HingeJoint hinge = new HingeJoint
           {
             BodyA = Simulation.World,
-            AnchorPoseALocal = new Pose(new Vector3F(9, 3, 0),
+            AnchorPoseALocal = new Pose(new Vector3(9, 3, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
             BodyB = body,
-            AnchorPoseBLocal = new Pose(new Vector3F(boardShape.WidthX / 2, 0, 0),
+            AnchorPoseBLocal = new Pose(new Vector3(boardShape.WidthX / 2, 0, 0),
                                         new Matrix33F(0, 0, -1,
                                                       0, 1, 0,
                                                       1, 0, 0)),
@@ -137,23 +137,23 @@ namespace Samples.Physics
       BoxShape rampShape = new BoxShape(10, 10, 2);
       RigidBody ramp0 = new RigidBody(rampShape)
       {
-        Pose = new Pose(new Vector3F(-12.5f, -3f, 0), Matrix33F.CreateRotationZ(0.3f)),
+        Pose = new Pose(new Vector3(-12.5f, -3f, 0), Matrix33F.CreateRotationZ(0.3f)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(ramp0);
       RigidBody ramp1 = new RigidBody(rampShape)
       {
-        Pose = new Pose(new Vector3F(12.5f, -3f, 0), Matrix33F.CreateRotationZ(-0.3f)),
+        Pose = new Pose(new Vector3(12.5f, -3f, 0), Matrix33F.CreateRotationZ(-0.3f)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(ramp1);
 
       // Drop a few light boxes onto the bridge.
       BoxShape boxShape = new BoxShape(1, 1, 1);
-      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3F.One, 100, 0.01f, 3);
+      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3.One, 100, 0.01f, 3);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F randomPosition = new Vector3F(RandomHelper.Random.NextFloat(-10, 10), 5, 0);
+        Vector3 randomPosition = new Vector3(RandomHelper.Random.NextFloat(-10, 10), 5, 0);
         QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
         RigidBody body = new RigidBody(boxShape, boxMass, null)
         {

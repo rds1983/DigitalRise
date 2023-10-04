@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Dynamic;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -76,7 +75,7 @@ namespace DigitalRise.Geometry
     /// </summary>
     /// <value>The direction vector.</value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1043:UseIntegralOrStringArgumentForIndexers")]
-    public T this[Vector3F direction]
+    public T this[Vector3 direction]
     {
       get
       {
@@ -162,14 +161,14 @@ namespace DigitalRise.Geometry
     /// <param name="x">The x index.</param>
     /// <param name="y">The y index.</param>
     /// <param name="face">The face index.</param>
-    private void GetIndices(ref Vector3F direction, out int x, out int y, out int face)
+    private void GetIndices(ref Vector3 direction, out int x, out int y, out int face)
     {
       // Precompute factor used for lookup.
       int width = CubeMap.GetLength(1);
       float s = 0.5f * width;
 
       // Convert the direction vector to indices.
-      Vector3F abs = Vector3F.Absolute(direction);
+      Vector3 abs = Mathematics.MathHelper.Absolute(direction);
       if (abs.X >= abs.Y && abs.X >= abs.Z)
       {
         float oneOverX = 1.0f / abs.X;
@@ -240,7 +239,7 @@ namespace DigitalRise.Geometry
     /// lookup table with data or read all entries.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-    public IEnumerable<Vector3F> GetSampleDirections()
+    public IEnumerable<Vector3> GetSampleDirections()
     {
       int width = CubeMap.GetLength(1);
 
@@ -251,7 +250,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(1.0f, x, y);
+          yield return new Vector3(1.0f, x, y);
         }
       }
 
@@ -262,7 +261,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(-1.0f, x, y);
+          yield return new Vector3(-1.0f, x, y);
         }
       }
 
@@ -273,7 +272,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(x, 1.0f, y);
+          yield return new Vector3(x, 1.0f, y);
         }
       }
 
@@ -284,7 +283,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(x, -1.0f, y);
+          yield return new Vector3(x, -1.0f, y);
         }
       }
 
@@ -295,7 +294,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(x, y, 1.0f);
+          yield return new Vector3(x, y, 1.0f);
         }
       }
 
@@ -306,7 +305,7 @@ namespace DigitalRise.Geometry
         for (int j = 0; j < width; j++)
         {
           float x = (j + 0.5f) / width * 2.0f - 1.0f;
-          yield return new Vector3F(x, y, -1.0f);
+          yield return new Vector3(x, y, -1.0f);
         }
       }
     }

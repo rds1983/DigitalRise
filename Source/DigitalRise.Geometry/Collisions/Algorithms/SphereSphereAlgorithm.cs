@@ -5,8 +5,8 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -49,8 +49,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (sphereShapeA == null || sphereShapeB == null)
         throw new ArgumentException("The contact set must contain sphere shapes.", "contactSet");
 
-      Vector3F scaleA = Vector3F.Absolute(sphereObjectA.Scale);
-      Vector3F scaleB = Vector3F.Absolute(sphereObjectB.Scale);
+      Vector3 scaleA = MathHelper.Absolute(sphereObjectA.Scale);
+      Vector3 scaleB = MathHelper.Absolute(sphereObjectB.Scale);
 
       // Call MPR for non-uniformly scaled spheres.
       if (scaleA.X != scaleA.Y || scaleA.Y != scaleA.Z 
@@ -68,10 +68,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       float radiusB = sphereShapeB.Radius * scaleB.X;
 
       // Vector from center of A to center of B.
-      Vector3F centerA = sphereObjectA.Pose.Position;
-      Vector3F centerB = sphereObjectB.Pose.Position;
-      Vector3F aToB = centerB - centerA; 
-      float lengthAToB = aToB.Length;
+      Vector3 centerA = sphereObjectA.Pose.Position;
+      Vector3 centerB = sphereObjectB.Pose.Position;
+      Vector3 aToB = centerB - centerA; 
+      float lengthAToB = aToB.Length();
 
       // Check radius of spheres.
       float penetrationDepth = radiusA + radiusB - lengthAToB;
@@ -85,21 +85,21 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       }
 
       // ----- Create contact information.
-      Vector3F normal;
+      Vector3 normal;
       if (Numeric.IsZero(lengthAToB))
       {
         // Spheres are on the same position, we can choose any normal vector.
         // Possibly it would be better to consider the object movement (velocities), but 
         // it is not important since this case should be VERY rare.
-        normal = Vector3F.UnitY;
+        normal = Vector3.UnitY;
       }
       else
       {
-        normal = aToB.Normalized;
+        normal = aToB.Normalized();
       }
 
       // The contact point lies in the middle of the intersecting volume.
-      Vector3F position = centerA + normal * (radiusA - penetrationDepth / 2);
+      Vector3 position = centerA + normal * (radiusA - penetrationDepth / 2);
 
       // Update contact set.
       Contact contact = ContactHelper.CreateContact(contactSet, position, normal, penetrationDepth, false);

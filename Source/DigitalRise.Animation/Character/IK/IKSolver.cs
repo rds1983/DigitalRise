@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -93,7 +93,7 @@ namespace DigitalRise.Animation.Character
     /// Gets or sets the target position in model space.
     /// </summary>
     /// <value>The target position in model space.</value>
-    public Vector3F Target { get; set; }
+    public Vector3 Target { get; set; }
 
 
     /// <summary>
@@ -273,7 +273,7 @@ namespace DigitalRise.Animation.Character
         if (QuaternionF.Dot(originalTransform.Rotation, targetTransform.Rotation) < 0)
           rotationChange = -rotationChange;
 
-        if (rotationChange.Angle > maxRotationAngle && !rotationChange.V.IsNumericallyZero)
+        if (rotationChange.Angle > maxRotationAngle && !rotationChange.V.IsNumericallyZero())
         {
           // ReSharper disable EmptyGeneralCatchClause
           try
@@ -285,7 +285,7 @@ namespace DigitalRise.Animation.Character
           catch
           {
             // rotationChange.Angle = xxx. Can cause DivideByZeroException or similar.
-            // The !rotationChange.V.IsNumericallyZero should avoid this. But just to go sure.
+            // The !rotationChange.V.IsNumericallyZero() should avoid this. But just to go sure.
           }
           // ReSharper restore EmptyGeneralCatchClause
         }

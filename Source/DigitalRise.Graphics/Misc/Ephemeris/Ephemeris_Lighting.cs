@@ -18,7 +18,8 @@ using System.Collections.Generic;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -72,22 +73,22 @@ namespace DigitalRise.Graphics
     /// Gets the extraterrestrial sunlight intensity based on NASA data.
     /// </summary>
     /// <value>The sunlight intensity outside the earth's atmosphere in [lux].</value>
-    public static Vector3F ExtraterrestrialSunlight
+    public static Vector3 ExtraterrestrialSunlight
     {
       get
       {
         if (!_extraterrestrialSunlight.HasValue)
         {
           _spectrum.SetSolarSpectrum();
-          Vector3F sunlightXyz = _spectrum.ToXYZ();
-          Vector3F sunlightRgb = GraphicsHelper.XYZToRGB * sunlightXyz;
+          Vector3 sunlightXyz = _spectrum.ToXYZ();
+          Vector3 sunlightRgb = GraphicsHelper.XYZToRGB * sunlightXyz;
           _extraterrestrialSunlight = sunlightRgb;
         }
 
         return _extraterrestrialSunlight.Value;
       }
     }
-    private static Vector3F? _extraterrestrialSunlight;
+    private static Vector3? _extraterrestrialSunlight;
 
 
     /// <summary>
@@ -123,15 +124,15 @@ namespace DigitalRise.Graphics
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void GetSunlight(float altitude, float turbidity, Vector3F sunDirection,
-                                   out Vector3F directSunlight, out Vector3F scatteredSunlight)
+    public static void GetSunlight(float altitude, float turbidity, Vector3 sunDirection,
+                                   out Vector3 directSunlight, out Vector3 scatteredSunlight)
     {
       _spectrum.SetSolarSpectrum();
 
       sunDirection.TryNormalize();
       float cosZenith = sunDirection.Y;
 
-      Vector3F direct, indirect;
+      Vector3 direct, indirect;
       if (cosZenith > 0)
       {
         // Daylight - Sun is above horizon.
@@ -173,8 +174,8 @@ namespace DigitalRise.Graphics
 
         // Blend between table values and sunset light.
         float blend = MathHelper.Clamp(-solarAltitude / 5.0f, 0, 1);
-        direct =  InterpolationHelper.Lerp(direct, new Vector3F(0, 0, 0), blend);
-        indirect = InterpolationHelper.Lerp(indirect, new Vector3F(X, Y, Z), blend);
+        direct =  InterpolationHelper.Lerp(direct, new Vector3(0, 0, 0), blend);
+        indirect = InterpolationHelper.Lerp(indirect, new Vector3(X, Y, Z), blend);
       }
 
       // Convert XYZ to RGB.
@@ -206,10 +207,10 @@ namespace DigitalRise.Graphics
     /// </param>
     /// <inheritdoc cref="GetSunlight"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void GetMoonlight(float altitude, float turbidity, Vector3F moonPosition, float phaseAngle,
-                                    out Vector3F directMoonlight, out Vector3F scatteredMoonlight)
+    public static void GetMoonlight(float altitude, float turbidity, Vector3 moonPosition, float phaseAngle,
+                                    out Vector3 directMoonlight, out Vector3 scatteredMoonlight)
     {
-      Vector3F moonDirection = moonPosition.Normalized;
+      Vector3 moonDirection = moonPosition.Normalized();
       float cosZenith = moonDirection.Y;
       float zenith = MathF.Acos(cosZenith);
 
@@ -224,14 +225,14 @@ namespace DigitalRise.Graphics
 
 
     // Computes the luminance of the moon based on the simulated phase and distance from earth.
-    private static float GetMoonLuminance(Vector3F moonPosition, Vector3F moonDirection, float phaseAngle)
+    private static float GetMoonLuminance(Vector3 moonPosition, Vector3 moonDirection, float phaseAngle)
     {
       float moonAngle = MathHelper.ToDegrees(MathF.Asin(moonDirection.Y));
 
       const float Esm = 1905.0f;          // W/m2
       const float C = 0.072f;
       const float Rm = 1738.1f * 1000.0f;  // m
-      float d = moonPosition.Length;     // Moon distance.
+      float d = moonPosition.Length();     // Moon distance.
 
       float mPhase = phaseAngle;
 
@@ -258,7 +259,7 @@ namespace DigitalRise.Graphics
 
 
     // For reference: Here is a simpler method to approximate the sun color.
-    //private static Vector3F UpdateSunColor(Vector3F lightDirection, float turbidity)
+    //private static Vector3 UpdateSunColor(Vector3 lightDirection, float turbidity)
     //{
     //  // turbidity = 2;
 
@@ -270,10 +271,10 @@ namespace DigitalRise.Graphics
     //  // Ratio of small to large particle sizes. (0:4, usually 1.3)
     //  const float alpha = 1.3f;
 
-    //  //float cosineTheta = MathF.Min(1, 0.2f + Vector3F.Dot(Vector3F.UnitY, -lightDirection));
+    //  //float cosineTheta = MathF.Min(1, 0.2f + Vector3.Dot(Vector3.UnitY, -lightDirection));
     //  float cosineTheta = -lightDirection.Y;
 
-    //  Vector3F lightColor = new Vector3F();
+    //  Vector3 lightColor = new Vector3();
     //  if (!(cosineTheta < 0))
     //  {
     //    float theta = (float)MathF.Acos(cosineTheta);
@@ -303,7 +304,7 @@ namespace DigitalRise.Graphics
     //      // TODO: if m < 0 tau[i] == 0?
     //    }
 
-    //    lightColor = new Vector3F(tau[0], tau[1], tau[2]);
+    //    lightColor = new Vector3(tau[0], tau[1], tau[2]);
     //  }
 
     //  return lightColor;

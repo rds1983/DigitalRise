@@ -132,8 +132,8 @@ interpolation type can be changed.",
           _curve.PreLoop, _curve[0].Interpolation, _curve.SmoothEnds));
 
         // Draw two lines to create chart axes.
-        debugRenderer.DrawLine(new Vector3F(100, 300, 0), new Vector3F(1000, 300, 0), Color.Black, true);
-        debugRenderer.DrawLine(new Vector3F(300, 100, 0), new Vector3F(300, 320, 0), Color.Black, true);
+        debugRenderer.DrawLine(new Vector3(100, 300, 0), new Vector3(1000, 300, 0), Color.Black, true);
+        debugRenderer.DrawLine(new Vector3(300, 100, 0), new Vector3(300, 320, 0), Color.Black, true);
 
         Vector2 scale = new Vector2(400, 200);
         Vector2 offset = new Vector2(300, 100);
@@ -143,8 +143,8 @@ interpolation type can be changed.",
         {
           CurveKey2F key = _curve[index];
           Vector2 point = scale * key.Point + offset;
-          debugRenderer.DrawLine(new Vector3F(point.X - 5, point.Y - 5, 0), new Vector3F(point.X + 5, point.Y + 5, 0), Color.Black, true);
-          debugRenderer.DrawLine(new Vector3F(point.X + 5, point.Y - 5, 0), new Vector3F(point.X - 5, point.Y + 5, 0), Color.Black, true);
+          debugRenderer.DrawLine(new Vector3(point.X - 5, point.Y - 5, 0), new Vector3(point.X + 5, point.Y + 5, 0), Color.Black, true);
+          debugRenderer.DrawLine(new Vector3(point.X + 5, point.Y - 5, 0), new Vector3(point.X - 5, point.Y + 5, 0), Color.Black, true);
         }
 
         // Draw the curve.
@@ -153,7 +153,7 @@ interpolation type can be changed.",
         {
           Vector2 point0 = scale * _curve.GetPoint(x) + offset;
           Vector2 point1 = scale * _curve.GetPoint(x + stepSize) + offset;
-          debugRenderer.DrawLine(new Vector3F(point0.X, point0.Y, 0), new Vector3F(point1.X, point1.Y, 0), Color.Black, true);
+          debugRenderer.DrawLine(new Vector3(point0.X, point0.Y, 0), new Vector3(point1.X, point1.Y, 0), Color.Black, true);
         }
       }
 

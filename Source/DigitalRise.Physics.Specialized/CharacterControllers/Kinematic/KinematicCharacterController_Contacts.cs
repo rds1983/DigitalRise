@@ -10,7 +10,9 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -30,8 +32,8 @@ namespace DigitalRise.Physics.Specialized
 
     private struct CCContact
     {
-      public Vector3F Position;       // Local position on the capsule.
-      public Vector3F Normal;         // Normal pointing to capsule.
+      public Vector3 Position;       // Local position on the capsule.
+      public Vector3 Normal;         // Normal pointing to capsule.
       public float PenetrationDepth;
     }
     #endregion
@@ -68,7 +70,7 @@ namespace DigitalRise.Physics.Specialized
     // HasGroundContact is evaluated lazy and stored in this field. _hasGroundContact is
     // set to null in UpdateContacts().
     private bool? _hasGroundContact;
-    private readonly List<Vector3F> _bottomContacts = new List<Vector3F>();
+    private readonly List<Vector3> _bottomContacts = new List<Vector3>();
 
     // For BackupContacts()/RollbackContacts():
     private readonly List<CCContact> _backupContacts = new List<CCContact>();
@@ -161,19 +163,19 @@ namespace DigitalRise.Physics.Specialized
         }
 
         // Make contacts relative to center of the bottom cap.
-        Vector3F bottomCenter = new Vector3F(0, bottomOfCylinder, 0);
+        Vector3 bottomCenter = new Vector3(0, bottomOfCylinder, 0);
         for (int i = 0; i < numberOfBottomContacts; i++)
-          _bottomContacts[i] = (_bottomContacts[i] - bottomCenter).Normalized;
+          _bottomContacts[i] = (_bottomContacts[i] - bottomCenter).Normalized();
 
         // Check if we have opposite contacts:
         // Contacts are opposite if the angle between the contacts is greater than a given limit.
         for (int i = 0; i < numberOfBottomContacts; i++)
         {
-          Vector3F contactI = _bottomContacts[i];
+          Vector3 contactI = _bottomContacts[i];
           for (int j = i + 1; j < numberOfBottomContacts; j++)
           {
-            Vector3F contactJ = _bottomContacts[j];
-            if (Vector3F.Dot(contactI, contactJ) <= OppositeContactLimit)
+            Vector3 contactJ = _bottomContacts[j];
+            if (Vector3.Dot(contactI, contactJ) <= OppositeContactLimit)
             {
               // Contact i and j are on opposite sides.
               _hasGroundContact = true;
@@ -244,8 +246,8 @@ namespace DigitalRise.Physics.Specialized
 
       // Compute AABB and extend it by the movement radius.
       Aabb aabb = Body.Aabb;
-      aabb.Minimum = aabb.Minimum - new Vector3F(radius);
-      aabb.Maximum = aabb.Maximum + new Vector3F(radius);
+      aabb.Minimum = aabb.Minimum - new Vector3(radius);
+      aabb.Maximum = aabb.Maximum + new Vector3(radius);
 
       // Use broad-phase to get obstacles and create contact sets.
       IEnumerable<CollisionObject> overlaps = Simulation.CollisionDomain.BroadPhase.GetOverlaps(aabb);
@@ -300,7 +302,7 @@ namespace DigitalRise.Physics.Specialized
     /// <remarks>
     /// Duplicate planes are not added.
     /// </remarks>
-    private int AddBounds(Vector3F position)
+    private int AddBounds(Vector3 position)
     {
       int oldNumberOfBounds = _bounds.Count;
 
@@ -309,7 +311,7 @@ namespace DigitalRise.Physics.Specialized
       for (int i = 0; i < numberOfContacts; i++)
       {
         var contact = _contacts[i];
-        Vector3F normal = contact.Normal;
+        Vector3 normal = contact.Normal;
         float penetrationDepth = contact.PenetrationDepth;
         Plane plane = new Plane(normal, position + normal * penetrationDepth);
 
@@ -320,7 +322,7 @@ namespace DigitalRise.Physics.Specialized
         for (int j = 0; j < numberOfBounds; j++)
         {
           Plane existingPlane = _bounds[j];
-          if (Vector3F.AreNumericallyEqual(existingPlane.Normal, plane.Normal, CollisionDetection.Epsilon)
+          if (MathHelper.AreNumericallyEqual(existingPlane.Normal, plane.Normal, CollisionDetection.Epsilon)
               && Numeric.AreEqual(existingPlane.DistanceFromOrigin, plane.DistanceFromOrigin, CollisionDetection.Epsilon))
           {
             planeIsNew = false;
@@ -370,16 +372,16 @@ namespace DigitalRise.Physics.Specialized
     /// contact normal points against the movement direction and where the penetration depth is
     /// above the allowed limit.
     /// </remarks>
-    private bool HasUnallowedContact(Vector3F currentMovement)
+    private bool HasUnallowedContact(Vector3 currentMovement)
     {
-      bool noMovement = (currentMovement == Vector3F.Zero);
+      bool noMovement = (currentMovement == Vector3.Zero);
       float maxPenetrationDepth = AllowedPenetration + CollisionDetection.Epsilon;
 
       int numberOfContacts = _contacts.Count;
       for (int i = 0; i < numberOfContacts; i++)
       {
         var contact = _contacts[i];
-        if ((noMovement || Numeric.IsLess(Vector3F.Dot(contact.Normal, currentMovement), 0))
+        if ((noMovement || Numeric.IsLess(Vector3.Dot(contact.Normal, currentMovement), 0))
             && contact.PenetrationDepth > maxPenetrationDepth)
         {
           return true;
@@ -399,9 +401,9 @@ namespace DigitalRise.Physics.Specialized
     /// <see langword="true"/> if the slope is in the allowed range; otherwise, 
     /// <see langword="false"/>.
     /// </returns>
-    internal bool IsAllowedSlope(Vector3F normal)
+    internal bool IsAllowedSlope(Vector3 normal)
     {
-      return Vector3F.Dot(normal, UpVector) >= _cosSlopeLimit;
+      return Vector3.Dot(normal, UpVector) >= _cosSlopeLimit;
     }
     #endregion
   }

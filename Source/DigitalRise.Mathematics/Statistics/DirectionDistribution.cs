@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -23,7 +23,7 @@ namespace DigitalRise.Mathematics.Statistics
   /// standard deviation angle in radians.
   /// </para>
   /// </remarks>
-  public class DirectionDistribution : Distribution<Vector3F>
+  public class DirectionDistribution : Distribution<Vector3>
   {
     /// <summary>
     /// Gets or sets the direction of the cone (the central vector in the cone).
@@ -32,7 +32,7 @@ namespace DigitalRise.Mathematics.Statistics
     /// <exception cref="ArgumentException">
     /// The vector is not a valid direction. The length is 0.
     /// </exception>
-    public Vector3F Direction
+    public Vector3 Direction
     {
       get { return _direction; }
       set
@@ -42,8 +42,8 @@ namespace DigitalRise.Mathematics.Statistics
           _direction = value;
           try
           {
-            _normalizedDirection = _direction.Normalized;
-            _orthonormal = _normalizedDirection.Orthonormal1;
+            _normalizedDirection = _direction.Normalized();
+            _orthonormal = _normalizedDirection.Orthonormal1();
           }
           catch (DivideByZeroException)
           {
@@ -52,9 +52,9 @@ namespace DigitalRise.Mathematics.Statistics
         }
       }
     }
-    private Vector3F _direction = Vector3F.UnitY;
-    private Vector3F _normalizedDirection = Vector3F.UnitY;  // For optimization.
-    private Vector3F _orthonormal = Vector3F.UnitZ;
+    private Vector3 _direction = Vector3.UnitY;
+    private Vector3 _normalizedDirection = Vector3.UnitY;  // For optimization.
+    private Vector3 _orthonormal = Vector3.UnitZ;
 
 
     /// <summary>
@@ -91,7 +91,7 @@ namespace DigitalRise.Mathematics.Statistics
 
     
     /// <inheritdoc/>
-    public override Vector3F Next(Random random)
+    public override Vector3 Next(Random random)
     {
       if (random == null)
         throw new ArgumentNullException("random");

@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -18,7 +18,7 @@ namespace DigitalRise.Graphics
     /// The star position given as a direction vector. (Does not need to be normalized.)
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Position;
+    public Vector3 Position;
 
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace DigitalRise.Graphics
     /// The star color.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Color;
+    public Vector3 Color;
 
 
     /// <summary>
@@ -45,7 +45,7 @@ namespace DigitalRise.Graphics
     /// The star size in pixels. To avoid flickering, the star size needs to be at least 2.8 pixels.
     /// </param>
     /// <param name="color">The star color.</param>
-    public Star(Vector3F position, float size, Vector3F color)
+    public Star(Vector3 position, float size, Vector3 color)
     {
       Position = position;
       Size = size;

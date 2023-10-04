@@ -233,7 +233,7 @@ namespace DigitalRise.Graphics.Rendering
         _parameterDepthBias.SetValue((Vector4)shadow.EffectiveDepthBias);
         _parameterNormalOffset.SetValue((Vector4)shadow.EffectiveNormalOffset);
 
-        Vector3F lightBackwardWorld = lightNode.PoseWorld.Orientation.GetColumn(2);
+        Vector3 lightBackwardWorld = lightNode.PoseWorld.Orientation.GetColumn(2);
         _parameterLightDirection.SetValue((Vector3)cameraPose.ToLocalDirection(lightBackwardWorld));
         _parameterNumberOfCascades.SetValue(shadow.NumberOfCascades);
         _parameterShadowMap.SetValue(shadow.ShadowMap);

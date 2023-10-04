@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 
@@ -302,12 +303,12 @@ namespace DigitalRise.Animation.Character
       var rightShoulderB = skeletonB.GetBonePoseAbsolute(rightShoulderBoneIndexB).Translation;
 
       // Abort if any bone to bone distance is 0.
-      if (Vector3F.AreNumericallyEqual(boneA, neckA)
-          || Vector3F.AreNumericallyEqual(boneA, rightShoulderA)
-          || Vector3F.AreNumericallyEqual(leftShoulderA, rightShoulderA)
-          || Vector3F.AreNumericallyEqual(boneB, neckB)
-          || Vector3F.AreNumericallyEqual(boneB, rightShoulderB)
-          || Vector3F.AreNumericallyEqual(leftShoulderB, rightShoulderB))
+      if (MathHelper.AreNumericallyEqual(boneA, neckA)
+          || MathHelper.AreNumericallyEqual(boneA, rightShoulderA)
+          || MathHelper.AreNumericallyEqual(leftShoulderA, rightShoulderA)
+          || MathHelper.AreNumericallyEqual(boneB, neckB)
+          || MathHelper.AreNumericallyEqual(boneB, rightShoulderB)
+          || MathHelper.AreNumericallyEqual(leftShoulderB, rightShoulderB))
       {
         return;
       }

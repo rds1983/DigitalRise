@@ -57,9 +57,9 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       var random = new Random(123456);
       CircleDistribution d = new CircleDistribution { OuterRadius = 0 };
 
-      Assert.AreEqual(new Vector3F(), d.Next(random));
-      Assert.AreEqual(new Vector3F(), d.Next(random));
-      Assert.AreEqual(new Vector3F(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
     }
 
 
@@ -76,7 +76,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
         var value = d.Next(random);
 
-        var radius = value.Length;
+        var radius = value.Length();
         Assert.IsTrue(d.InnerRadius < radius && radius < d.OuterRadius
                       || d.OuterRadius < radius && radius < d.InnerRadius);
         Assert.AreEqual(0, value.Z);

@@ -83,7 +83,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="start">The start position in world space.</param>
     /// <param name="end">The end position in world space.</param>
     /// <param name="color">The color (using non-premultiplied alpha).</param>
-    public void Add(Vector3F start, Vector3F end, Color color)
+    public void Add(Vector3 start, Vector3 end, Color color)
     {
       ResizeBuffer(_numberOfLines + 1);
 

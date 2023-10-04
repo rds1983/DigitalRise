@@ -5,8 +5,8 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using DigitalRise.Mathematics;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -35,14 +35,14 @@ namespace DigitalRise.Geometry.Shapes
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public Vector3F PointOnLine;
+    public Vector3 PointOnLine;
 
 
     /// <summary>
     /// The normalized direction vector.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Direction;
+    public Vector3 Direction;
     #endregion
 
 
@@ -68,7 +68,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="pointOnLine">A point on the line.</param>
     /// <param name="direction">The direction. (Must be normalized.)</param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public Line(Vector3F pointOnLine, Vector3F direction)
+    public Line(Vector3 pointOnLine, Vector3 direction)
     {
       PointOnLine = pointOnLine;
       Direction = direction;
@@ -213,12 +213,12 @@ namespace DigitalRise.Geometry.Shapes
     /// <paramref name="scale"/> is a non-uniform scaling. Non-uniform scaling of lines is not 
     /// supported.
     /// </exception>
-    internal void Scale(ref Vector3F scale)
+    internal void Scale(ref Vector3 scale)
     {
       if (scale.X != scale.Y || scale.Y != scale.Z)
         throw new NotSupportedException("Computing collisions for lines with non-uniform scaling is not supported.");
 
-      Debug.Assert(Direction.IsNumericallyNormalized, "Line direction should be normalized.");
+      Debug.Assert(Direction.IsNumericallyNormalized(), "Line direction should be normalized.");
 
       PointOnLine *= scale.X;
 
@@ -233,7 +233,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="pose">The pose (position and orientation).</param>
     internal void ToWorld(ref Pose pose)
     {
-      Debug.Assert(Direction.IsNumericallyNormalized, "Line direction should be normalized.");
+      Debug.Assert(Direction.IsNumericallyNormalized(), "Line direction should be normalized.");
 
       PointOnLine = pose.ToWorldPosition(PointOnLine);
       Direction = pose.ToWorldDirection(Direction);
@@ -247,7 +247,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="pose">The pose (rotation and translation).</param>
     internal void ToLocal(ref Pose pose)
     {
-      Debug.Assert(Direction.IsNumericallyNormalized, "Line direction should be normalized.");
+      Debug.Assert(Direction.IsNumericallyNormalized(), "Line direction should be normalized.");
 
       PointOnLine = pose.ToLocalPosition(PointOnLine);
       Direction = pose.ToLocalDirection(Direction);

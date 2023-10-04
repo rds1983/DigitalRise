@@ -5,7 +5,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -23,7 +23,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(new Vector3F(0, 1, 0.25f).Normalized, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(new Vector3(0, 1, 0.25f).Normalized(), 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -48,8 +48,8 @@ namespace Samples.Physics
 
       // Create a rigid body that consists of multiple shapes: Two boxes and a cylinder between them.
       CompositeShape compositeShape = new CompositeShape();
-      compositeShape.Children.Add(new GeometricObject(new BoxShape(1f, 1f, 1f), new Pose(new Vector3F(1.5f, 0f, 0f))));
-      compositeShape.Children.Add(new GeometricObject(new BoxShape(1f, 1, 1f), new Pose(new Vector3F(-1.5f, 0f, 0f))));
+      compositeShape.Children.Add(new GeometricObject(new BoxShape(1f, 1f, 1f), new Pose(new Vector3(1.5f, 0f, 0f))));
+      compositeShape.Children.Add(new GeometricObject(new BoxShape(1f, 1, 1f), new Pose(new Vector3(-1.5f, 0f, 0f))));
       compositeShape.Children.Add(new GeometricObject(new CylinderShape(0.1f, 2), new Pose(Matrix33F.CreateRotationZ(ConstantsF.PiOver2))));
 
       // A CompositeMaterial is used to assign a different material to each shape.
@@ -60,7 +60,7 @@ namespace Samples.Physics
 
       RigidBody body = new RigidBody(compositeShape, null, compositeMaterial)
       {
-        Pose = new Pose(new Vector3F(0, 2.2f, -5)),
+        Pose = new Pose(new Vector3(0, 2.2f, -5)),
       };
       Simulation.RigidBodies.Add(body);
     }

@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Constraints;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -287,7 +287,7 @@ namespace DigitalRise.Physics
       // TODO: Maybe set MassInverse to dirty and do lazy evaluation?
 
       MassInverse = (MotionType == MotionType.Dynamic) ? MassFrame.MassInverse : 0;
-      Vector3F inertiaInverse = (MotionType == MotionType.Dynamic) ? MassFrame.InertiaInverse : Vector3F.Zero;
+      Vector3 inertiaInverse = (MotionType == MotionType.Dynamic) ? MassFrame.InertiaInverse : Vector3.Zero;
 
       if (LockRotationX)
         inertiaInverse.X = 0;

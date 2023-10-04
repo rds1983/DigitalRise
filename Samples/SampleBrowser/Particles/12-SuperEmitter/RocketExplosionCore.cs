@@ -2,10 +2,10 @@
 using CommonServiceLocator;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -29,14 +29,14 @@ namespace Samples.Particles
         EmissionLimit = 20,
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       Effectors.Add(new StartPositionEffector());
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = ConstantsF.TwoPi, Direction = Vector3F.UnitY },
+        Distribution = new DirectionDistribution { Deviation = ConstantsF.TwoPi, Direction = Vector3.UnitY },
       });
 
       Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -96,11 +96,11 @@ namespace Samples.Particles
         EndParameter = "EndSize",
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      Effectors.Add(new StartValueEffector<Vector3F>
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      Effectors.Add(new StartValueEffector<Vector3>
       {
         Parameter = ParticleParameterNames.Color,
-        Distribution = new LineSegmentDistribution { Start = new Vector3F(0.5f), End = new Vector3F(0.66f) },
+        Distribution = new LineSegmentDistribution { Start = new Vector3(0.5f), End = new Vector3(0.66f) },
       });
 
       Parameters.AddUniform<Texture2D>(ParticleParameterNames.Texture).DefaultValue =

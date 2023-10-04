@@ -2,10 +2,10 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -19,192 +19,192 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceAVertexB0Up()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(0, -1, 0), new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(0, -1, 0), new Vector3(10, 10, 0), new Vector3(-10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceAVertexB0Down()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(0, 1, 0), new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(0, 1, 0), new Vector3(10, -10, 0), new Vector3(-10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceAVertexB1Up()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-10, 10, 0), new Vector3F(0, -1, 0), new Vector3F(10, 10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-10, 10, 0), new Vector3(0, -1, 0), new Vector3(10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceAVertexB1Down()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-10, -10, 0), new Vector3F(0, 1, 0), new Vector3F(10, -10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-10, -10, 0), new Vector3(0, 1, 0), new Vector3(10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceAVertexB2Up()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0), new Vector3F(0, -1, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 10, 0), new Vector3(-10, 10, 0), new Vector3(0, -1, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceAVertexB2Down()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0), new Vector3F(0, 1, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, -10, 0), new Vector3(-10, -10, 0), new Vector3(0, 1, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA0Down()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(0, -1, 0), new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(0, -1, 0), new Vector3(10, 10, 0), new Vector3(-10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA0Up()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(0, 1, 0), new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(0, 1, 0), new Vector3(10, -10, 0), new Vector3(-10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA1Down()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(-10, 10, 0), new Vector3F(0, -1, 0), new Vector3F(10, 10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(-10, 10, 0), new Vector3(0, -1, 0), new Vector3(10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA1Up()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(-10, -10, 0), new Vector3F(0, 1, 0), new Vector3F(10, -10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(-10, -10, 0), new Vector3(0, 1, 0), new Vector3(10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA2Down()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0), new Vector3F(0, -1, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(10, 10, 0), new Vector3(-10, 10, 0), new Vector3(0, -1, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void FaceBVertexA2Up()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0), new Vector3F(0, 1, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(10, -10, 0), new Vector3(-10, -10, 0), new Vector3(0, 1, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.5f, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
     #endregion
@@ -217,288 +217,288 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void EdgeA0EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(-1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA0EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(-1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA0EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, 10, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA0EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, -10, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA0EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(10, 0, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA0EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(10, 0, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(-1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(-1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, 10, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, -10, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(10, 0, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA1EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(10, 0, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(-1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(-1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, 10, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(-1, -10, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-1, -10, 0), new Vector3(10, 0, 0), new Vector3(-1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
     [Test]
     public void EdgeA2EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(-1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-1, 10, 0), new Vector3(10, 0, 0), new Vector3(-1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
     #endregion
@@ -511,10 +511,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceASeparationUp()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(0, 1, 0), new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(0, 1, 0), new Vector3(10, 10, 0), new Vector3(-10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -524,10 +524,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceASeparationDown()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(0, -1, 0), new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(0, -1, 0), new Vector3(10, -10, 0), new Vector3(-10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -537,10 +537,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceBSeparationUp()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(0, 1, 0), new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(0, 1, 0), new Vector3(10, 10, 0), new Vector3(-10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -550,10 +550,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceBSeparationDown()
     {
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tA = new Triangle(new Vector3F(0, -1, 0), new Vector3F(10, -10, 0), new Vector3F(-10, -10, 0));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tA = new Triangle(new Vector3(0, -1, 0), new Vector3(10, -10, 0), new Vector3(-10, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -569,10 +569,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -582,10 +582,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -595,10 +595,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, 10, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, 10, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -608,10 +608,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, -10, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, -10, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -621,10 +621,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(10, 0, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -634,10 +634,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA0EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 0));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(10, 0, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -647,10 +647,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -660,10 +660,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -673,10 +673,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, 10, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, 10, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -686,10 +686,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, -10, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, -10, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -699,10 +699,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(10, 0, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -712,10 +712,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA1EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, -10));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, -10));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(10, 0, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -725,10 +725,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB0_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(1, -10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(1, -10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -738,10 +738,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB0_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(1, 10, 0), new Vector3F(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(1, 10, 0), new Vector3(10, 0, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -751,10 +751,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB1_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, 10, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, 10, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -764,10 +764,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB1_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, 0), new Vector3F(1, -10, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, 0), new Vector3(1, -10, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -777,10 +777,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB2_0()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(1, -10, 0), new Vector3F(10, 0, 0), new Vector3F(1, 10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(1, -10, 0), new Vector3(10, 0, 0), new Vector3(1, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -790,10 +790,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void SeparationEdgeA2EdgeB2_1()
     {
-      var tA = new Triangle(new Vector3F(0, 0, -10), new Vector3F(-10, 0, 0), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(1, 10, 0), new Vector3F(10, 0, 0), new Vector3F(1, -10, 0));
+      var tA = new Triangle(new Vector3(0, 0, -10), new Vector3(-10, 0, 0), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(1, 10, 0), new Vector3(10, 0, 0), new Vector3(1, -10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -809,16 +809,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceADegenerate()
     {
-      var tA = new Triangle(new Vector3F(-1, 0, 0), new Vector3F(10, 0, -0), new Vector3F(10, 0, 0));
-      var tB = new Triangle(new Vector3F(0, -10, -10), new Vector3F(0, -10, 10), new Vector3F(0, 10, 0));
+      var tA = new Triangle(new Vector3(-1, 0, 0), new Vector3(10, 0, -0), new Vector3(10, 0, 0));
+      var tB = new Triangle(new Vector3(0, -10, -10), new Vector3(0, -10, 10), new Vector3(0, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -826,16 +826,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceBDegenerate()
     {
-      var tB = new Triangle(new Vector3F(-1, 0, 0), new Vector3F(10, 0, -0), new Vector3F(10, 0, 0));
-      var tA = new Triangle(new Vector3F(0, -10, -10), new Vector3F(0, -10, 10), new Vector3F(0, 10, 0));
+      var tB = new Triangle(new Vector3(-1, 0, 0), new Vector3(10, 0, -0), new Vector3(10, 0, 0));
+      var tA = new Triangle(new Vector3(0, -10, -10), new Vector3(0, -10, 10), new Vector3(0, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-0.5f, 0, 0), p));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), n));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -843,10 +843,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void BothFacesDegenerate()
     {
-      var tA = new Triangle(new Vector3F(-10, 0, 0), new Vector3F(-10, 0, 0), new Vector3F(10, 0, 0));
-      var tB = new Triangle(new Vector3F(0, 0, -10), new Vector3F(0, 0, 10), new Vector3F(0, 0, 10));
+      var tA = new Triangle(new Vector3(-10, 0, 0), new Vector3(-10, 0, 0), new Vector3(10, 0, 0));
+      var tB = new Triangle(new Vector3(0, 0, -10), new Vector3(0, 0, 10), new Vector3(0, 0, 10));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -857,11 +857,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void PointPoint()
     {
-      var a = new Vector3F(1, 1, 1);
+      var a = new Vector3(1, 1, 1);
       var tA = new Triangle(a, a, a);
       var tB = new Triangle(a, a, a);
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -877,15 +877,15 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void VertexA0VertexB0()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, -10), new Vector3F(10, 10, 0), new Vector3F(-10, 10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, -10), new Vector3(10, 10, 0), new Vector3(-10, 10, 0));
 
-      Vector3F p, n;
+      Vector3 p, n;
       float d;
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(tA.Vertex0, p));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(tA.Vertex0, p));
       Assert.IsTrue(Numeric.AreEqual(0, d));
     }
     #endregion
@@ -898,8 +898,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void FaceEdge()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-10, -1, 0), new Vector3F(10, -1, 0), new Vector3F(0, 10, 0));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-10, -1, 0), new Vector3(10, -1, 0), new Vector3(0, 10, 0));
 
       for (int i = 0; i < 2; i++)
       {
@@ -907,18 +907,18 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
         {
           for (int k = 0; k < 3; k++)
           {
-            Vector3F p, n;
+            Vector3 p, n;
             float d;
             bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
             Assert.AreEqual(true, haveContact);
-            Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-5, -0.5f, 0), p)
-                          || Vector3F.AreNumericallyEqual(new Vector3F(5, -0.5f, 0), p));
+            Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-5, -0.5f, 0), p)
+                          || MathHelper.AreNumericallyEqual(new Vector3(5, -0.5f, 0), p));
             Assert.IsTrue(GeometryHelper.IsOver(tB, p));
             if (i == 0)
-              Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n));
+              Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
             else
-              Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+              Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
             Assert.IsTrue(Numeric.AreEqual(1, d));
 
             // "Rotate" triangle to test next edges.
@@ -948,8 +948,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void CoplanarAndSeparated()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(10, 0, 20), new Vector3F(-10, 0, 20), new Vector3F(0, 0, 40));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(10, 0, 20), new Vector3(-10, 0, 20), new Vector3(0, 0, 40));
 
       for (int i = 0; i < 2; i++)
       {
@@ -957,7 +957,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
         {
           for (int k = 0; k < 3; k++)
           {
-            Vector3F p, n;
+            Vector3 p, n;
             float d;
             bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -985,8 +985,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void CoplanarAndFaceVertex()
     {
-      var tA = new Triangle(new Vector3F(10, 0, 10), new Vector3F(0, 0, -10), new Vector3F(-10, 0, 10));
-      var tB = new Triangle(new Vector3F(-1, 0, 0), new Vector3F(-10, 0, 20), new Vector3F(10, 0, 20));
+      var tA = new Triangle(new Vector3(10, 0, 10), new Vector3(0, 0, -10), new Vector3(-10, 0, 10));
+      var tB = new Triangle(new Vector3(-1, 0, 0), new Vector3(-10, 0, 20), new Vector3(10, 0, 20));
 
       for (int i = 0; i < 2; i++)
       {
@@ -994,14 +994,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
         {
           for (int k = 0; k < 3; k++)
           {
-            Vector3F p, n;
+            Vector3 p, n;
             float d;
             bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
             Assert.AreEqual(true, haveContact);
-            Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n)
-                          || Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
-            Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-1, 0, 0), p));
+            Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n)
+                          || MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+            Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), p));
             Assert.AreEqual(0, d);
 
             // "Rotate" triangle to test next edges.
@@ -1026,8 +1026,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void CoplanarAndEdge()
     {
-      var tA = new Triangle(new Vector3F(10, 0, -10), new Vector3F(-10, 0, -10), new Vector3F(0, 0, 0));
-      var tB = new Triangle(new Vector3F(10, 0, -1), new Vector3F(-10, 0, -1), new Vector3F(10, 0, -2));
+      var tA = new Triangle(new Vector3(10, 0, -10), new Vector3(-10, 0, -10), new Vector3(0, 0, 0));
+      var tB = new Triangle(new Vector3(10, 0, -1), new Vector3(-10, 0, -1), new Vector3(10, 0, -2));
 
       for (int a = 0; a < 2; a++)
       {
@@ -1039,16 +1039,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
             {
               for (int k = 0; k < 3; k++)
               {
-                Vector3F p, n;
+                Vector3 p, n;
                 float d;
                 bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
                 Assert.AreEqual(true, haveContact);
-                Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 1, 0), n)
-                              || Vector3F.AreNumericallyEqual(new Vector3F(0, -1, 0), n));
+                Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n)
+                              || MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
                 Assert.IsTrue(GeometryHelper.IsOver(tA, p, 0.00001f));
                 Assert.IsTrue(GeometryHelper.IsOver(tB, p, 0.00001f));
-                //Assert.IsTrue(Vector3F.AreNumericallyEqual(?, p));
+                //Assert.IsTrue(MathHelper.AreNumericallyEqual(?, p));
                 Assert.AreEqual(0, d);
 
                 // "Rotate" triangle to test next edges.
@@ -1083,8 +1083,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     [Test]
     public void CoplanarAndDegenerate()
     {
-      var tA = new Triangle(new Vector3F(0, 0, 0), new Vector3F(0, 0, 10), new Vector3F(0, 0, 10));
-      var tB = new Triangle(new Vector3F(-10, 0, 10), new Vector3F(-10, 0, 20), new Vector3F(10, 0, 20));
+      var tA = new Triangle(new Vector3(0, 0, 0), new Vector3(0, 0, 10), new Vector3(0, 0, 10));
+      var tB = new Triangle(new Vector3(-10, 0, 10), new Vector3(-10, 0, 20), new Vector3(10, 0, 20));
 
       for (int i = 0; i < 2; i++)
       {
@@ -1092,7 +1092,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
         {
           for (int k = 0; k < 3; k++)
           {
-            Vector3F p, n;
+            Vector3 p, n;
             float d;
             bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
@@ -1134,14 +1134,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       {
         // Create two triangles.
         var tA = new Triangle();
-        tA.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
 
         var tB = new Triangle();
-        tB.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
 
         var ttTest = GeometryHelper.HaveContact(tA, tB);
 
@@ -1185,14 +1185,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       {
         // Create two triangles.
         var tA = new Triangle();
-        tA.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
 
         var tB = new Triangle();
-        tB.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
 
         var ttTest = GeometryHelper.HaveContact(tA, tB);
 

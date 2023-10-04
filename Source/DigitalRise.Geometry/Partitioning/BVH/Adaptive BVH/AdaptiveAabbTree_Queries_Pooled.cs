@@ -115,7 +115,7 @@ namespace DigitalRise.Geometry.Partitioning
     {
       private static readonly ResourcePool<GetOverlapsWithRayWork> Pool = new ResourcePool<GetOverlapsWithRayWork>(() => new GetOverlapsWithRayWork(), x => x.Initialize(), null);
       private Ray _ray;
-      private Vector3F _rayDirectionInverse;
+      private Vector3 _rayDirectionInverse;
       private float _epsilon;
       private readonly Stack<Node> _stack = new Stack<Node>();
 
@@ -123,7 +123,7 @@ namespace DigitalRise.Geometry.Partitioning
       {
         var enumerable = Pool.Obtain();
         enumerable._ray = ray;
-        enumerable._rayDirectionInverse = new Vector3F(1 / ray.Direction.X,
+        enumerable._rayDirectionInverse = new Vector3(1 / ray.Direction.X,
                                                        1 / ray.Direction.Y,
                                                        1 / ray.Direction.Z);
         enumerable._epsilon = Numeric.EpsilonF * (1 + aabbTree.Aabb.Extent.Length);

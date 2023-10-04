@@ -3,8 +3,9 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -34,8 +35,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     {
       CollisionObject ray = new CollisionObject(new GeometricObject
             {
-              Shape = new RayShape(new Vector3F(0, 0, -1), new Vector3F(1, 0, 0), 10),
-              Pose = new Pose(new Vector3F(0, 0, 1)),
+              Shape = new RayShape(new Vector3(0, 0, -1), new Vector3(1, 0, 0), 10),
+              Pose = new Pose(new Vector3(0, 0, 1)),
             });
 
       CollisionObject sphere = new CollisionObject(new GeometricObject
@@ -50,25 +51,25 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       set = algo.GetClosestPoints(ray, sphere);      
       Assert.AreEqual(0, set[0].PenetrationDepth);
-      Assert.AreEqual(Vector3F.UnitY, set[0].Normal);
+      Assert.AreEqual(Vector3.UnitY, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
 
       set = set.Swapped;
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set[0].PenetrationDepth);
-      Assert.AreEqual(-Vector3F.UnitY, set[0].Normal);
+      Assert.AreEqual(-Vector3.UnitY, set[0].Normal);
 
-      ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3F(10, 0, 0), sphere.GeometricObject.Pose.Orientation);
+      ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(10, 0, 0), sphere.GeometricObject.Pose.Orientation);
       set = algo.GetClosestPoints(sphere, ray);
       Assert.IsTrue(Numeric.AreEqual(9, set[0].PenetrationDepth));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(-Vector3F.UnitX, set[0].Normal));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
 
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3F(0, -2, 1), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, -2, 1), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(sphere, ray);
       Assert.IsTrue(Numeric.AreEqual(-9, set[0].PenetrationDepth));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(-Vector3F.UnitX, set[0].Normal));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(4.5f, 0, 0), set[0].Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(4.5f, 0, 0), set[0].Position));
       Assert.AreEqual(false, algo.HaveContact(ray, sphere));
 
       algo.UpdateContacts(set, 0);
@@ -76,10 +77,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       // Degenerate case: sphere radius is 0.
       ((GeometricObject)sphere.GeometricObject).Shape = new SphereShape(0);
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3F(0, 0, 1));
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, 0, 1));
       algo.UpdateClosestPoints(set, 0);
       Assert.AreEqual(0, set[0].PenetrationDepth);
-      Assert.AreEqual(-Vector3F.UnitY, set[0].Normal);
+      Assert.AreEqual(-Vector3.UnitY, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
     }
   }

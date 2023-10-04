@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>DigitalRise.GameBase</AssemblyName>
     <PackageId>DigitalRise.GameBase</PackageId>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

@@ -26,7 +26,7 @@ namespace DigitalRise.Graphics.Rendering
     //--------------------------------------------------------------
 
     // A cached array which is reused in GetBoundingSphere().
-    private readonly Vector3F[] _frustumCorners = new Vector3F[8];
+    private readonly Vector3[] _frustumCorners = new Vector3[8];
 
     // The near and far limits of all shadow maps.
     private readonly float[] _csmSplitDistances = new float[5];
@@ -242,7 +242,7 @@ namespace DigitalRise.Graphics.Rendering
           _splitVolume.SetFieldOfView(fieldOfViewY, aspectRatio, near, far);
 
           // Find the bounding sphere of the split camera frustum.
-          Vector3F center;
+          Vector3 center;
           float radius;
           GetBoundingSphere(_splitVolume, out center, out radius);
 
@@ -266,12 +266,12 @@ namespace DigitalRise.Graphics.Rendering
           center = lightPose.ToWorldPosition(center);
 
           Matrix33F orientation = lightPose.Orientation;
-          Vector3F backward = orientation.GetColumn(2);
+          Vector3 backward = orientation.GetColumn(2);
           var orthographicProjection = (OrthographicProjection)_orthographicCameraNode.Camera.Projection;
 
           // Create a tight orthographic frustum around the cascade's bounding sphere.
           orthographicProjection.SetOffCenter(-radius, radius, -radius, radius, 0, 2 * radius);
-          Vector3F cameraPosition = center + radius * backward;
+          Vector3 cameraPosition = center + radius * backward;
           Pose frustumPose = new Pose(cameraPosition, orientation);
           Pose view = frustumPose.Inverse;
           shadow.ViewProjections[split] = (Matrix)view * orthographicProjection;
@@ -332,7 +332,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private void GetBoundingSphere(ViewVolume viewVolume, out Vector3F center, out float radius)
+    private void GetBoundingSphere(ViewVolume viewVolume, out Vector3 center, out float radius)
     {
       float left = viewVolume.Left;
       float top = viewVolume.Top;
@@ -341,10 +341,10 @@ namespace DigitalRise.Graphics.Rendering
       float near = viewVolume.Near;
       float far = viewVolume.Far;
 
-      _frustumCorners[0] = new Vector3F(left, top, -near);
-      _frustumCorners[1] = new Vector3F(right, top, -near);
-      _frustumCorners[2] = new Vector3F(left, bottom, -near);
-      _frustumCorners[3] = new Vector3F(right, bottom, -near);
+      _frustumCorners[0] = new Vector3(left, top, -near);
+      _frustumCorners[1] = new Vector3(right, top, -near);
+      _frustumCorners[2] = new Vector3(left, bottom, -near);
+      _frustumCorners[3] = new Vector3(right, bottom, -near);
 
       float farOverNear = far / near;
       left *= farOverNear;
@@ -352,16 +352,16 @@ namespace DigitalRise.Graphics.Rendering
       right *= farOverNear;
       bottom *= farOverNear;
 
-      _frustumCorners[4] = new Vector3F(left, top, -far);
-      _frustumCorners[5] = new Vector3F(right, top, -far);
-      _frustumCorners[6] = new Vector3F(left, bottom, -far);
-      _frustumCorners[7] = new Vector3F(right, bottom, -far);
+      _frustumCorners[4] = new Vector3(left, top, -far);
+      _frustumCorners[5] = new Vector3(right, top, -far);
+      _frustumCorners[6] = new Vector3(left, bottom, -far);
+      _frustumCorners[7] = new Vector3(right, bottom, -far);
 
       GeometryHelper.ComputeBoundingSphere(_frustumCorners, out radius, out center);
     }
 
 
-    private static void SnapPositionToTexels(ref Vector3F position, float sizeWorld, int sizeTexels)
+    private static void SnapPositionToTexels(ref Vector3 position, float sizeWorld, int sizeTexels)
     {
       // The size of one texel in world units.
       float texelSize = sizeWorld / sizeTexels;

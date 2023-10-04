@@ -5,9 +5,9 @@
 using System;
 using System.Diagnostics;
 using DigitalRise.Geometry.Collisions;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -64,16 +64,16 @@ namespace DigitalRise.Physics.Constraints
         null);
 
     // Offset vector from center of mass to position on A/B in world space.
-    private Vector3F _rA;
+    private Vector3 _rA;
     private float _rALengthSquared;
-    private Vector3F _rB;
+    private Vector3 _rB;
     private float _rBLengthSquared;
-    private Vector3F _normal;             // Cached normal to avoid accessing Contact.Normal.
+    private Vector3 _normal;             // Cached normal to avoid accessing Contact.Normal.
 
     // First friction constraint direction (tangent normal to the contact normal).
-    private Vector3F _t0;
+    private Vector3 _t0;
     // Second friction constraint direction (tangent normal to _t0 and the contact normal).
-    private Vector3F _t1;
+    private Vector3 _t1;
 
     private float _restitution;
     private float _staticFriction;
@@ -164,13 +164,13 @@ namespace DigitalRise.Physics.Constraints
     /// Gets the relative velocity of the contact points in world space (including surface motion).
     /// </summary>
     /// <value>The relative velocity in world space.</value>
-    internal Vector3F RelativeVelocity
+    internal Vector3 RelativeVelocity
     {
       get
       {
-        Vector3F velA = BodyA._linearVelocity + Vector3F.Cross(BodyA._angularVelocity, _rA);
-        Vector3F velB = BodyB._linearVelocity + Vector3F.Cross(BodyB._angularVelocity, _rB);
-        Vector3F vRel = velB - velA;
+        Vector3 velA = BodyA._linearVelocity + Vector3.Cross(BodyA._angularVelocity, _rA);
+        Vector3 velB = BodyB._linearVelocity + Vector3.Cross(BodyB._angularVelocity, _rB);
+        Vector3 vRel = velB - velA;
 
         if (_surfaceMotionAEnabled || _surfaceMotionBEnabled)
         {
@@ -181,7 +181,7 @@ namespace DigitalRise.Physics.Constraints
             var surfaceVelocityA = BodyA.Pose.ToWorldDirection(materialA.SurfaceMotion);
 
             // Subtract motion in direction of normal vector.
-            surfaceVelocityA -= Vector3F.Dot(surfaceVelocityA, Contact.Normal) * Contact.Normal;
+            surfaceVelocityA -= Vector3.Dot(surfaceVelocityA, Contact.Normal) * Contact.Normal;
 
             vRel -= surfaceVelocityA;
           }
@@ -191,7 +191,7 @@ namespace DigitalRise.Physics.Constraints
             var surfaceVelocityB = BodyB.Pose.ToWorldDirection(materialB.SurfaceMotion);
 
             // Subtract motion in direction of normal vector.
-            surfaceVelocityB -= Vector3F.Dot(surfaceVelocityB, Contact.Normal) * Contact.Normal;
+            surfaceVelocityB -= Vector3.Dot(surfaceVelocityB, Contact.Normal) * Contact.Normal;
 
             vRel += surfaceVelocityB;
           }
@@ -210,7 +210,7 @@ namespace DigitalRise.Physics.Constraints
     {
       // For reference. 
       // (This property is not used. Instead the code is inlined in the methods below.)
-      get { return Vector3F.Dot(RelativeVelocity, Contact.Normal); }
+      get { return Vector3.Dot(RelativeVelocity, Contact.Normal); }
     }
 
 
@@ -229,7 +229,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public Vector3F LinearConstraintImpulse
+    public Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -241,11 +241,11 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    Vector3F IConstraint.AngularConstraintImpulse
+    Vector3 IConstraint.AngularConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
@@ -354,14 +354,14 @@ namespace DigitalRise.Physics.Constraints
       ErrorReduction = _simulation.Settings.Constraints.ContactErrorReduction;
       _minConstraintImpulse = _simulation.Settings.Constraints.MinConstraintImpulse;
 
-      Vector3F n = Contact.Normal;
+      Vector3 n = Contact.Normal;
       _rA = Contact.PositionAWorld - BodyA.PoseCenterOfMass.Position;
       _rB = Contact.PositionBWorld - BodyB.PoseCenterOfMass.Position;
       _rALengthSquared = -1;
       _rBLengthSquared = -1;
 
-      Vector3F vRel = RelativeVelocity;
-      float vRelN = Vector3F.Dot(vRel, n);
+      Vector3 vRel = RelativeVelocity;
+      float vRelN = Vector3.Dot(vRel, n);
 
       // Get material-dependent values.
       var materialA = BodyA.Material.GetProperties(BodyA, Contact.PositionALocal, Contact.FeatureA);
@@ -394,9 +394,9 @@ namespace DigitalRise.Physics.Constraints
       // velocity.
       _t0 = vRel - vRelN * n;
       if (!_t0.TryNormalize())
-        _t0 = n.Orthonormal1;
+        _t0 = n.Orthonormal1();
 
-      _t1 = Vector3F.Cross(_t0, n);
+      _t1 = Vector3.Cross(_t0, n);
 
       // Reset cached impulses.
       _penetrationConstraint.ConstraintImpulse = 0;
@@ -431,12 +431,12 @@ namespace DigitalRise.Physics.Constraints
       if (_rALengthSquared == -1)
       {
         // This is the first setup call and we must initialize the constraints.
-        _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3F.Cross(_rA, _normal), _normal, Vector3F.Cross(_rB, _normal));
-        _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3F.Cross(_rA, _t0), _t0, Vector3F.Cross(_rB, _t0));
-        _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3F.Cross(_rA, _t1), _t1, Vector3F.Cross(_rB, _t1));
+        _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3.Cross(_rA, _normal), _normal, Vector3.Cross(_rB, _normal));
+        _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3.Cross(_rA, _t0), _t0, Vector3.Cross(_rB, _t0));
+        _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3.Cross(_rA, _t1), _t1, Vector3.Cross(_rB, _t1));
 
-        _rALengthSquared = _rA.LengthSquared;
-        _rBLengthSquared = _rB.LengthSquared;
+        _rALengthSquared = _rA.LengthSquared();
+        _rBLengthSquared = _rB.LengthSquared();
       }
       else if (tolerance == 0)
       {
@@ -444,9 +444,9 @@ namespace DigitalRise.Physics.Constraints
         _rA = Contact.PositionAWorld - BodyA.PoseCenterOfMass.Position;
         _rB = Contact.PositionBWorld - BodyB.PoseCenterOfMass.Position;
 
-        _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3F.Cross(_rA, _normal), _normal, Vector3F.Cross(_rB, _normal));
-        _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3F.Cross(_rA, _t0), _t0, Vector3F.Cross(_rB, _t0));
-        _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3F.Cross(_rA, _t1), _t1, Vector3F.Cross(_rB, _t1));
+        _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3.Cross(_rA, _normal), _normal, Vector3.Cross(_rB, _normal));
+        _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3.Cross(_rA, _t0), _t0, Vector3.Cross(_rB, _t0));
+        _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3.Cross(_rA, _t1), _t1, Vector3.Cross(_rB, _t1));
       }
       else if (tolerance < 1)
       {
@@ -455,35 +455,35 @@ namespace DigitalRise.Physics.Constraints
         tolerance = 1 - tolerance;   // Invert, so that 1 means no tolerance and 0 is full tolerance.
         var newRA = Contact.PositionAWorld - BodyA.PoseCenterOfMass.Position;
         var newRB = Contact.PositionBWorld - BodyB.PoseCenterOfMass.Position;
-        //if (Vector3F.Dot(newRA, _rA) < tolerance * _rALengthSquared || Vector3F.Dot(newRB, _rB) < tolerance * _rBLengthSquared)
+        //if (Vector3.Dot(newRA, _rA) < tolerance * _rALengthSquared || Vector3.Dot(newRB, _rB) < tolerance * _rBLengthSquared)
         if (newRA.X * _rA.X + newRA.Y * _rA.Y + newRA.Z * _rA.Z < tolerance * _rALengthSquared
             || newRB.X * _rB.X + newRB.Y * _rB.Y + newRB.Z * _rB.Z < tolerance * _rBLengthSquared)
         {
           _rA = newRA;
           _rB = newRB;
 
-          _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3F.Cross(_rA, _normal), _normal, Vector3F.Cross(_rB, _normal));
-          _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3F.Cross(_rA, _t0), _t0, Vector3F.Cross(_rB, _t0));
-          _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3F.Cross(_rA, _t1), _t1, Vector3F.Cross(_rB, _t1));
+          _penetrationConstraint.Prepare(BodyA, BodyB, -_normal, -Vector3.Cross(_rA, _normal), _normal, Vector3.Cross(_rB, _normal));
+          _frictionConstraint0.Prepare(BodyA, BodyB, -_t0, -Vector3.Cross(_rA, _t0), _t0, Vector3.Cross(_rB, _t0));
+          _frictionConstraint1.Prepare(BodyA, BodyB, -_t1, -Vector3.Cross(_rA, _t1), _t1, Vector3.Cross(_rB, _t1));
         }
       }
 
       // Get relative velocity.
-      Vector3F vRel;
+      Vector3 vRel;
       if (_surfaceMotionAEnabled || _surfaceMotionBEnabled)
       {
         vRel = RelativeVelocity;
       }
       else
       {
-        //Vector3F velA = BodyA._linearVelocity + Vector3F.Cross(BodyA._angularVelocity, _rA);
-        //Vector3F velB = BodyB._linearVelocity + Vector3F.Cross(BodyB._angularVelocity, _rB);
-        //Vector3F vRel = velB - velA;
+        //Vector3 velA = BodyA._linearVelocity + Vector3.Cross(BodyA._angularVelocity, _rA);
+        //Vector3 velB = BodyB._linearVelocity + Vector3.Cross(BodyB._angularVelocity, _rB);
+        //Vector3 vRel = velB - velA;
 
-        Vector3F linearVelocityA = BodyA._linearVelocity;
-        Vector3F linearVelocityB = BodyB._linearVelocity;
-        Vector3F angularVelocityA = BodyA._angularVelocity;
-        Vector3F angularVelocityB = BodyB._angularVelocity;
+        Vector3 linearVelocityA = BodyA._linearVelocity;
+        Vector3 linearVelocityB = BodyB._linearVelocity;
+        Vector3 angularVelocityA = BodyA._angularVelocity;
+        Vector3 angularVelocityB = BodyB._angularVelocity;
 
         float velAX = linearVelocityA.X + angularVelocityA.Y * _rA.Z - angularVelocityA.Z * _rA.Y;
         float velAY = linearVelocityA.Y - angularVelocityA.X * _rA.Z + angularVelocityA.Z * _rA.X;
@@ -491,11 +491,11 @@ namespace DigitalRise.Physics.Constraints
         float velBX = linearVelocityB.X + angularVelocityB.Y * _rB.Z - angularVelocityB.Z * _rB.Y;
         float velBY = linearVelocityB.Y - angularVelocityB.X * _rB.Z + angularVelocityB.Z * _rB.X;
         float velBZ = linearVelocityB.Z + angularVelocityB.X * _rB.Y - angularVelocityB.Y * _rB.X;
-        vRel = new Vector3F(velBX - velAX, velBY - velAY, velBZ - velAZ);
+        vRel = new Vector3(velBX - velAX, velBY - velAY, velBZ - velAZ);
       }
 
       // Compute target velocity for restitution.
-      //float vRelN = Vector3F.Dot(vRel, n);
+      //float vRelN = Vector3.Dot(vRel, n);
       //if (vRelN < 0)
       //  _penetrationConstraint.TargetRelativeVelocity = -_restitution * vRelN;   // Objects coming closer --> Bounce 
       //else
@@ -549,12 +549,12 @@ namespace DigitalRise.Physics.Constraints
     public bool ApplyImpulse()
     {
       // Get relative velocity.
-      Vector3F linearVelocityA = BodyA._linearVelocity;
-      Vector3F angularVelocityA = BodyA._angularVelocity;
-      Vector3F linearVelocityB = BodyB._linearVelocity;
-      Vector3F angularVelocityB = BodyB._angularVelocity;
+      Vector3 linearVelocityA = BodyA._linearVelocity;
+      Vector3 angularVelocityA = BodyA._angularVelocity;
+      Vector3 linearVelocityB = BodyB._linearVelocity;
+      Vector3 angularVelocityB = BodyB._angularVelocity;
 
-      Vector3F vRel;
+      Vector3 vRel;
       if (_surfaceMotionAEnabled || _surfaceMotionBEnabled)
       {
         vRel = RelativeVelocity;
@@ -573,15 +573,15 @@ namespace DigitalRise.Physics.Constraints
       }
 
       // Apply non-penetration impulse.
-      //float impulse = _penetrationConstraint.SatisfyInequalityConstraint(BodyA, BodyB, Vector3F.Dot(vRel, Contact.Normal), 0);
+      //float impulse = _penetrationConstraint.SatisfyInequalityConstraint(BodyA, BodyB, Vector3.Dot(vRel, Contact.Normal), 0);
       float relativeVelocity = vRel.X * _normal.X + vRel.Y * _normal.Y + vRel.Z * _normal.Z;
       float impulse = _penetrationConstraint.SatisfyContactConstraint(BodyA, BodyB, relativeVelocity);
 
       // Apply friction impulses.
       float normalImpulse = _penetrationConstraint.ConstraintImpulse;
       float staticFrictionLimit = _staticFriction * normalImpulse;
-      //_frictionConstraint0.SatisfyFrictionConstraint(BodyA, BodyB, Vector3F.Dot(vRel, _t0), staticFrictionLimit, normalImpulse, _dynamicFriction);
-      //_frictionConstraint1.SatisfyFrictionConstraint(BodyA, BodyB, Vector3F.Dot(vRel, _t1), staticFrictionLimit, normalImpulse, _dynamicFriction);
+      //_frictionConstraint0.SatisfyFrictionConstraint(BodyA, BodyB, Vector3.Dot(vRel, _t0), staticFrictionLimit, normalImpulse, _dynamicFriction);
+      //_frictionConstraint1.SatisfyFrictionConstraint(BodyA, BodyB, Vector3.Dot(vRel, _t1), staticFrictionLimit, normalImpulse, _dynamicFriction);
       float relativeVelocityT0 = vRel.X * _t0.X + vRel.Y * _t0.Y + vRel.Z * _t0.Z;
       float frictionImpulse0 = _frictionConstraint0.SatisfyFrictionConstraint(
         BodyA, BodyB, relativeVelocityT0, staticFrictionLimit, normalImpulse, _dynamicFriction);

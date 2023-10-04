@@ -5,8 +5,8 @@
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry
 {
@@ -27,7 +27,7 @@ namespace DigitalRise.Geometry
       if (Numeric.IsZero(ray.Length))
         return HaveContact(aabb, ray.Origin);
 
-      var rayDirectionInverse = new Vector3F(
+      var rayDirectionInverse = new Vector3(
         1 / ray.Direction.X,
         1 / ray.Direction.Y,
         1 / ray.Direction.Z);
@@ -56,7 +56,7 @@ namespace DigitalRise.Geometry
       if (Numeric.IsZero(ray.Length))
         return HaveContact(aabb, ray.Origin);
 
-      var rayDirectionInverse = new Vector3F(
+      var rayDirectionInverse = new Vector3(
         1 / ray.Direction.X,
         1 / ray.Direction.Y,
         1 / ray.Direction.Z);
@@ -80,7 +80,7 @@ namespace DigitalRise.Geometry
       if (Numeric.IsZero(ray.Length))
         return HaveContact(aabb, ray.Origin);
 
-      var rayDirectionInverse = new Vector3F(
+      var rayDirectionInverse = new Vector3(
         1 / ray.Direction.X,
         1 / ray.Direction.Y,
         1 / ray.Direction.Z);
@@ -107,7 +107,7 @@ namespace DigitalRise.Geometry
     /// This method will return <see langword="true"/> if a ray is in the plane that goes through
     /// an AABB side (false positive).
     /// </remarks>
-    internal static bool HaveContactFast(Aabb aabb, Vector3F rayOrigin, Vector3F rayDirectionInverse, float rayLength)
+    internal static bool HaveContactFast(Aabb aabb, Vector3 rayOrigin, Vector3 rayDirectionInverse, float rayLength)
     {
       // Note: If HaveContact is called several times for the same ray, we could return
       // tMin and tMax --> Parameter (ref float tMin and ref float tMax). Check tMin and tMax
@@ -203,10 +203,10 @@ namespace DigitalRise.Geometry
     /// <see langword="true"/> if the AABB and the ray have a contact; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
-    /// Unlike <see cref="HaveContactFast(Aabb,Vector3F,Vector3F,float)"/>, this method is exact.
+    /// Unlike <see cref="HaveContactFast(Aabb,Vector3,Vector3,float)"/>, this method is exact.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    internal static bool HaveContact(Aabb aabb, Vector3F rayOrigin, Vector3F rayDirectionInverse, float rayLength, float epsilon)
+    internal static bool HaveContact(Aabb aabb, Vector3 rayOrigin, Vector3 rayDirectionInverse, float rayLength, float epsilon)
     {
       // Note: If HaveContact is called several times for the same ray, we could return
       // tMin and tMax --> Parameter (ref float tMin and ref float tMax). Check tMin and tMax
@@ -321,14 +321,14 @@ namespace DigitalRise.Geometry
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static bool HaveContact(Aabb aabbA, Aabb aabbB, Vector3F movementB)
+    public static bool HaveContact(Aabb aabbA, Aabb aabbB, Vector3 movementB)
     {
-      // TODO: Add overload GeometryHelper.HaveContact(Aabb aabbA, Vector3F movementA, Aabb aabbB, Vector3F movementB).
+      // TODO: Add overload GeometryHelper.HaveContact(Aabb aabbA, Vector3 movementA, Aabb aabbB, Vector3 movementB).
 
       // Testing if moving A and B have contact is the same as testing whether (A - B) hits a ray, 
       // where the ray is the relative movement of B (starting at the origin).
 
-      float movementBLength = movementB.Length;
+      float movementBLength = movementB.Length();
       if (Numeric.IsZero(movementBLength))
       {
         // Both AABBs are static.
@@ -337,10 +337,10 @@ namespace DigitalRise.Geometry
       else
       {
         // Convert to AABB vs. Ray check.
-        Vector3F movementBDirection = movementB / movementBLength;
+        Vector3 movementBDirection = movementB / movementBLength;
         Aabb aabbAMinusB = new Aabb(aabbA.Minimum - aabbB.Maximum, aabbA.Maximum - aabbB.Minimum);
-        Debug.Assert(aabbAMinusB.Minimum <= aabbAMinusB.Maximum);
-        return HaveContact(aabbAMinusB, new Ray(Vector3F.Zero, movementBDirection, movementBLength));
+        Debug.Assert(aabbAMinusB.Minimum.IsLessOrEqual(aabbAMinusB.Maximum));
+        return HaveContact(aabbAMinusB, new Ray(Vector3.Zero, movementBDirection, movementBLength));
       }
     }
   }

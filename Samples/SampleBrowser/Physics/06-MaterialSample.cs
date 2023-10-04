@@ -1,10 +1,10 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -22,7 +22,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -37,7 +37,7 @@ namespace Samples.Physics
       Simulation.RigidBodies.Add(groundPlane);
 
       // Add a static inclined ground plane.
-      RigidBody inclinedPlane = new RigidBody(new PlaneShape(new Vector3F(-0.3f, 1f, 0).Normalized, 0))
+      RigidBody inclinedPlane = new RigidBody(new PlaneShape(new Vector3(-0.3f, 1f, 0).Normalized(), 0))
       {
         Name = "InclinedPlane",
         MotionType = MotionType.Static,
@@ -58,7 +58,7 @@ namespace Samples.Physics
         RigidBody box = new RigidBody(boxShape, null, material) // The second argument (the mass frame) is null. The 
         {                                                       // simulation will automatically compute a default mass.
           Name = "Box" + i,
-          Pose = new Pose(new Vector3F(5, 6, -5 + i * 2)),
+          Pose = new Pose(new Vector3(5, 6, -5 + i * 2)),
         };
 
         Simulation.RigidBodies.Add(box);
@@ -77,7 +77,7 @@ namespace Samples.Physics
         RigidBody body = new RigidBody(sphereShape, null, material)
         {
           Name = "Ball" + i,
-          Pose = new Pose(new Vector3F(-1 - i * 2, 5, 0)),
+          Pose = new Pose(new Vector3(-1 - i * 2, 5, 0)),
         };
 
         Simulation.RigidBodies.Add(body);

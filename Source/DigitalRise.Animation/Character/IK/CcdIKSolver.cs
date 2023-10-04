@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -112,7 +112,7 @@ namespace DigitalRise.Animation.Character
     /// the hand center. Then the target will be grabbed correctly with the hand center and not the
     /// wrist.
     /// </remarks>
-    public Vector3F TipOffset
+    public Vector3 TipOffset
     {
       get { return _tipOffset; }
       set
@@ -124,7 +124,7 @@ namespace DigitalRise.Animation.Character
         }
       }
     }
-    private Vector3F _tipOffset;
+    private Vector3 _tipOffset;
 
 
     /// <summary>
@@ -264,7 +264,7 @@ namespace DigitalRise.Animation.Character
           // Get current tip position in local bone space.
           var bonePoseAbsolute = SkeletonPose.GetBonePoseAbsolute(boneIndex);
           var targetPositionLocal = bonePoseAbsolute.ToLocalPosition(Target);
-          Vector3F tipLocal;
+          Vector3 tipLocal;
           if (boneIndex == TipBoneIndex)
           {
             tipLocal = TipOffset;
@@ -276,7 +276,7 @@ namespace DigitalRise.Animation.Character
             tipLocal = bonePoseAbsolute.ToLocalPosition(tipAbsolute);
           }
 
-          if ((tipLocal - targetPositionLocal).LengthSquared < toleranceSquared)
+          if ((tipLocal - targetPositionLocal).LengthSquared() < toleranceSquared)
           {
             // Target reached! If this is the first iteration and the first bone, then we
             // didn't have to do anything and can abort. Otherwise we just leave the loops.

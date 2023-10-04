@@ -1,7 +1,8 @@
 ﻿using System;
 using DigitalRise.Animation.Character;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Animation
 {
@@ -17,12 +18,12 @@ namespace Samples.Animation
 
 
     // The fixed point on the bone in model space.
-    private Vector3F _fixedPointPosition;
-    private Vector3F _fixedPointVelocity;
+    private Vector3 _fixedPointPosition;
+    private Vector3 _fixedPointVelocity;
 
     // The particle connected to the fixed point (in model space).
-    private Vector3F _particlePosition;
-    private Vector3F _particleVelocity;
+    private Vector3 _particlePosition;
+    private Vector3 _particleVelocity;
 
 
     public SkeletonPose SkeletonPose { get; private set; }
@@ -30,20 +31,20 @@ namespace Samples.Animation
     public int BoneIndex { get; private set; }
 
     // The offset of the "fixed point" in bone space.
-    public Vector3F Offset { get; set; }
+    public Vector3 Offset { get; set; }
 
     // Spring and damping strengths.
     public float Spring { get; set; }
     public float Damping { get; set; }
 
 
-    public BoneJiggler(SkeletonPose skeletonPose, int boneIndex, Vector3F offset)
+    public BoneJiggler(SkeletonPose skeletonPose, int boneIndex, Vector3 offset)
     {
       if (skeletonPose == null)
         throw new ArgumentNullException("skeletonPose");
       if (boneIndex < 0 || boneIndex > skeletonPose.Skeleton.NumberOfBones)
         throw new ArgumentOutOfRangeException("boneIndex");
-      if (offset.IsNumericallyZero)
+      if (offset.IsNumericallyZero())
         throw new ArgumentException("Parameter offset must not be a zero vector.");
 
       SkeletonPose = skeletonPose;
@@ -60,11 +61,11 @@ namespace Samples.Animation
 
     public void Reset()
     {
-      _fixedPointPosition = new Vector3F(float.NaN);
-      _fixedPointVelocity = new Vector3F(float.NaN);
+      _fixedPointPosition = new Vector3(float.NaN);
+      _fixedPointVelocity = new Vector3(float.NaN);
 
-      _particlePosition = new Vector3F(float.NaN);
-      _particleVelocity = new Vector3F(float.NaN);
+      _particlePosition = new Vector3(float.NaN);
+      _particleVelocity = new Vector3(float.NaN);
     }
 
 
@@ -83,7 +84,7 @@ namespace Samples.Animation
 
       // If we haven't set the fixed point position before, then store the position 
       // and we are done.
-      if (_fixedPointPosition.IsNaN)
+      if (_fixedPointPosition.IsNaN())
       {
         _fixedPointPosition = fixedPointPosition;
         return;
@@ -95,7 +96,7 @@ namespace Samples.Animation
 
       // If the particle position was not set before, then we only store the current values.
       // The real work starts in the next frame.
-      if (_particlePosition.IsNaN)
+      if (_particlePosition.IsNaN())
       {
         _particlePosition = _fixedPointPosition;
         _particleVelocity = _fixedPointVelocity;

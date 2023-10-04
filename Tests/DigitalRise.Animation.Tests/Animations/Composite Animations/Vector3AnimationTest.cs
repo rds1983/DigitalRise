@@ -1,19 +1,20 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
 namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
-  public class Vector3FAnimationTest
+  public class Vector3AnimationTest
   {
     [Test]
     public void TraitsTest()
     {
-      var animationEx = new Vector3FAnimation();
-      Assert.AreEqual(Vector3FTraits.Instance, animationEx.Traits);
+      var animationEx = new Vector3Animation();
+      Assert.AreEqual(Vector3Traits.Instance, animationEx.Traits);
     }
 
 
@@ -46,27 +47,27 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new Vector3FAnimation();
+      var animationEx = new Vector3Animation();
       Assert.AreEqual(TimeSpan.FromSeconds(0.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector3FAnimation();
+      animationEx = new Vector3Animation();
       animationEx.X = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector3FAnimation();
+      animationEx = new Vector3Animation();
       animationEx.Y = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector3FAnimation();
+      animationEx = new Vector3Animation();
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector3FAnimation();
+      animationEx = new Vector3Animation();
       animationEx.X = animation;
       animationEx.Y = animation2;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector3FAnimation();
+      animationEx = new Vector3Animation();
       animationEx.Y = animation2;
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
@@ -115,7 +116,7 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new Vector3FAnimation
+      var animationEx = new Vector3Animation
       {
         X = animation,
         Y = animation2,
@@ -123,8 +124,8 @@ namespace DigitalRise.Animation.Tests
       };
 
 
-      var defaultSource = new Vector3F(1, 2, 3);
-      var defaultTarget = new Vector3F(5, 6, 7);
+      var defaultSource = new Vector3(1, 2, 3);
+      var defaultTarget = new Vector3(5, 6, 7);
 
       var result = animationEx.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget);
       Assert.AreEqual(defaultSource.X, result.X); // animation has not started.

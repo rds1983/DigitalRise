@@ -298,40 +298,40 @@ namespace DigitalRise.Graphics.Effects
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as <see cref="Vector3F"/>. 
+    ///// Gets the value of the effect parameter as <see cref="Vector3"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <returns>
-    ///// The value of the effect parameter as <see cref="Vector3F"/>.
+    ///// The value of the effect parameter as <see cref="Vector3"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector3F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector3"/>.
     ///// </exception>
-    //public static Vector3F GetValueVector3F(this EffectParameter parameter)
+    //public static Vector3 GetValueVector3(this EffectParameter parameter)
     //{
-    //  return (Vector3F)parameter.GetValueVector3();
+    //  return (Vector3)parameter.GetValueVector3();
     //}
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as an array of <see cref="Vector3F"/>. 
+    ///// Gets the value of the effect parameter as an array of <see cref="Vector3"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="count">The number of elements in the array.</param>
     ///// <returns>
-    ///// The value of the effect parameter as an array of <see cref="Vector3F"/>.
+    ///// The value of the effect parameter as an array of <see cref="Vector3"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector3F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector3"/>.
     ///// </exception>
-    //public static Vector3F[] GetValueVector3FArray(this EffectParameter parameter, int count)
+    //public static Vector3[] GetValueVector3Array(this EffectParameter parameter, int count)
     //{
     //  Vector3[] value = parameter.GetValueVector3Array(count);
 
     //  var arrayLength = value.Length;
-    //  Vector3F[] convertedValue = new Vector3F[arrayLength];
+    //  Vector3[] convertedValue = new Vector3[arrayLength];
     //  for (int i = 0; i < arrayLength; i++)
-    //    convertedValue[i] = (Vector3F)value[i];
+    //    convertedValue[i] = (Vector3)value[i];
 
     //  return convertedValue;
     //}
@@ -547,9 +547,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector3F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector3"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, Vector3F value)
+    //public static void SetValue(this EffectParameter parameter, Vector3 value)
     //{
     //  parameter.SetValue((Vector3)value);
     //}
@@ -561,9 +561,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="Vector3F"/>.
+    ///// Unable to cast this effect parameter to <see cref="Vector3"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, Vector3F[] value)
+    //public static void SetValue(this EffectParameter parameter, Vector3[] value)
     //{
     //  if (value != null)
     //  {
@@ -706,56 +706,6 @@ namespace DigitalRise.Graphics.Effects
       else
       {
         parameter.SetValue(color);
-      }
-    }
-
-
-    /// <summary>
-    /// Gets the value of the effect parameter as a RGB color represented as
-    /// <see cref="Vector3F"/>. 
-    /// </summary>
-    /// <param name="parameter">The effect parameter.</param>
-    /// <returns>
-    /// The value of the effect parameter as a RGB color represented as
-    /// <see cref="Vector3F"/>.
-    /// </returns>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static Vector3F GetColorVector3F(this EffectParameter parameter)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = parameter.GetValueVector4();
-        return new Vector3F(value.X, value.Y, value.Z);
-      }
-      else
-      {
-        return (Vector3F)parameter.GetValueVector3();
-      }
-    }
-
-
-    /// <summary>
-    /// Sets the value of the effect parameter to a RGB color.
-    /// </summary>
-    /// <param name="parameter">The parameter.</param>
-    /// <param name="color">The color given as <see cref="Vector3F"/>.</param>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void SetColor(this EffectParameter parameter, Vector3F color)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = new Vector4(color.X, color.Y, color.Z, 1);
-        parameter.SetValue(value);
-      }
-      else
-      {
-        parameter.SetValue((Vector3)color);
       }
     }
 
@@ -919,57 +869,6 @@ namespace DigitalRise.Graphics.Effects
 
     /// <summary>
     /// Gets the value of the effect parameter as a position vector represented as
-    /// <see cref="Vector3F"/>. 
-    /// </summary>
-    /// <param name="parameter">The effect parameter.</param>
-    /// <returns>
-    /// The value of the effect parameter as a position vector represented as
-    /// <see cref="Vector3F"/>.
-    /// </returns>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static Vector3F GetPositionVector3F(this EffectParameter parameter)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = parameter.GetValueVector4();
-        CheckPositionVector(parameter, value);
-        return new Vector3F(value.X, value.Y, value.Z);
-      }
-      else
-      {
-        return (Vector3F)parameter.GetValueVector3();
-      }
-    }
-
-
-    /// <summary>
-    /// Sets the value of the effect parameter to a position vector.
-    /// </summary>
-    /// <param name="parameter">The parameter.</param>
-    /// <param name="position">The position given as <see cref="Vector3F"/>.</param>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void SetPosition(this EffectParameter parameter, Vector3F position)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = new Vector4(position.X, position.Y, position.Z, 1);
-        parameter.SetValue(value);
-      }
-      else
-      {
-        parameter.SetValue((Vector3)position);
-      }
-    }
-
-
-    /// <summary>
-    /// Gets the value of the effect parameter as a position vector represented as
     /// <see cref="Vector4"/>. 
     /// </summary>
     /// <param name="parameter">The effect parameter.</param>
@@ -1127,57 +1026,6 @@ namespace DigitalRise.Graphics.Effects
       else
       {
         parameter.SetValue(direction);
-      }
-    }
-
-
-    /// <summary>
-    /// Gets the value of the effect parameter as a direction vector represented as
-    /// <see cref="Vector3F"/>. 
-    /// </summary>
-    /// <param name="parameter">The effect parameter.</param>
-    /// <returns>
-    /// The value of the effect parameter as a direction vector represented as
-    /// <see cref="Vector3F"/>.
-    /// </returns>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static Vector3F GetDirectionVector3F(this EffectParameter parameter)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = parameter.GetValueVector4();
-        CheckDirectionVector(parameter, value);
-        return new Vector3F(value.X, value.Y, value.Z);
-      }
-      else
-      {
-        return (Vector3F)parameter.GetValueVector3();
-      }
-    }
-
-
-    /// <summary>
-    /// Sets the value of the effect parameter to a direction vector.
-    /// </summary>
-    /// <param name="parameter">The parameter.</param>
-    /// <param name="direction">The direction given as <see cref="Vector3F"/>.</param>
-    /// <exception cref="InvalidCastException">
-    /// Unable to cast this effect parameter to <see cref="Vector3F"/>.
-    /// </exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void SetDirection(this EffectParameter parameter, Vector3F direction)
-    {
-      if (parameter.ColumnCount == 4)
-      {
-        Vector4 value = new Vector4(direction.X, direction.Y, direction.Z, 0);
-        parameter.SetValue(value);
-      }
-      else
-      {
-        parameter.SetValue((Vector3)direction);
       }
     }
 

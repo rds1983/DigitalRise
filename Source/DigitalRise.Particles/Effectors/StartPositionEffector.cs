@@ -3,15 +3,13 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Geometry;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles.Effectors
 {
   /// <summary>
-  /// Initializes a <see cref="Vector3F"/> particle parameter as a position vector and applies the 
+  /// Initializes a <see cref="Vector3"/> particle parameter as a position vector and applies the 
   /// transformation of the <see cref="ParticleSystem"/>'s <see cref="ParticleSystem.Pose"/>.
   /// </summary>
   /// <remarks>
@@ -43,7 +41,7 @@ namespace DigitalRise.Particles.Effectors
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _parameter;
+    private IParticleParameter<Vector3> _parameter;
     #endregion
 
 
@@ -53,11 +51,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the particle parameter that is initialized.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the particle parameter that is initialized.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "Position".
     /// </value>
     /// <remarks>
@@ -77,7 +75,7 @@ namespace DigitalRise.Particles.Effectors
     /// particles. The default is <see langword="null"/>, which means that the start value is set to
     /// <see cref="DefaultValue"/>.
     /// </value>
-    public Distribution<Vector3F> Distribution { get; set; }
+    public Distribution<Vector3> Distribution { get; set; }
 
 
     /// <summary>
@@ -87,7 +85,7 @@ namespace DigitalRise.Particles.Effectors
     /// <value>
     /// The start value that is used if <see cref="Distribution"/> is <see langword="null"/>.
     /// </value>
-    public Vector3F DefaultValue { get; set; }
+    public Vector3 DefaultValue { get; set; }
 
 
     // TODO: Add Emitter parameter if only particles of a certain emitter should be initialized?
@@ -137,7 +135,7 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override void OnRequeryParameters()
     {
-      _parameter = ParticleSystem.Parameters.Get<Vector3F>(Parameter);
+      _parameter = ParticleSystem.Parameters.Get<Vector3>(Parameter);
     }
 
 
@@ -147,7 +145,7 @@ namespace DigitalRise.Particles.Effectors
       if (_parameter != null && _parameter.Values == null)
       {
         // Initialize uniform parameter.
-        Vector3F startPosition = (Distribution != null) ? Distribution.Next(ParticleSystem.Random) : DefaultValue;
+        Vector3 startPosition = (Distribution != null) ? Distribution.Next(ParticleSystem.Random) : DefaultValue;
 
         if (ParticleSystem.ReferenceFrame == ParticleReferenceFrame.World)
         {
@@ -207,7 +205,7 @@ namespace DigitalRise.Particles.Effectors
       }
       else
       {
-        Vector3F startPosition = DefaultValue;
+        Vector3 startPosition = DefaultValue;
         if (ParticleSystem.ReferenceFrame == ParticleReferenceFrame.World)
         {
           var pose = ParticleSystem.GetPoseWorld();

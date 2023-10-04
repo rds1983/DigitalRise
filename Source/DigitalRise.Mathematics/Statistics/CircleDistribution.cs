@@ -3,7 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
@@ -18,18 +17,18 @@ namespace DigitalRise.Mathematics.Statistics
   /// values from the area of this ring are created.
   /// </para>
   /// </remarks>
-  public class CircleDistribution : Distribution<Vector3F>
+  public class CircleDistribution : Distribution<Vector3>
   {
     /// <summary>
     /// Gets or sets the center of the circle.
     /// </summary>
     /// <value>The center position. The default is (0, 0, 0).</value>
-    public Vector3F Center
+    public Vector3 Center
     {
       get { return _center; }
       set { _center = value; }
     }
-    private Vector3F _center;
+    private Vector3 _center;
 
 
     /// <summary>
@@ -103,7 +102,7 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <inheritdoc/>
-    public override Vector3F Next(Random random)
+    public override Vector3 Next(Random random)
     {
       if (random == null)
         throw new ArgumentNullException("random");
@@ -117,7 +116,7 @@ namespace DigitalRise.Mathematics.Statistics
       float x = (float)Math.Cos(angle) * radius;
       float y = (float)Math.Sqrt(radius * radius - x * x) * Math.Sign(angle);
 
-      return _center + new Vector3F(x * _scale.X, y * _scale.Y, 0);
+      return _center + new Vector3(x * _scale.X, y * _scale.Y, 0);
     }
   }
 }

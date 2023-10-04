@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 #if !POOL_ENUMERABLES
 using DigitalRise.Mathematics;
@@ -61,12 +63,12 @@ namespace DigitalRise.Geometry.Partitioning
       Aabb rayAabb = new Aabb(ray.Origin, ray.Origin);
       rayAabb.Grow(ray.Origin + ray.Direction * ray.Length);
 
-      var rayDirectionInverse = new Vector3F(
+      var rayDirectionInverse = new Vector3(
             1 / ray.Direction.X,
             1 / ray.Direction.Y,
             1 / ray.Direction.Z);
 
-      float epsilon = Numeric.EpsilonF * (1 + Aabb.Extent.Length);
+      float epsilon = Numeric.EpsilonF * (1 + Aabb.Extent.Length());
 
       foreach (var candidate in GetOverlaps(rayAabb))
         if (GeometryHelper.HaveContact(GetAabbForItem(candidate), ray.Origin, rayDirectionInverse, ray.Length, epsilon))
@@ -132,7 +134,7 @@ namespace DigitalRise.Geometry.Partitioning
 
 
     /// <inheritdoc/>
-    public virtual IEnumerable<Pair<T>> GetOverlaps(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose)
+    public virtual IEnumerable<Pair<T>> GetOverlaps(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose)
     {
       if (otherPartition == null)
         throw new ArgumentNullException("otherPartition");
@@ -146,8 +148,8 @@ namespace DigitalRise.Geometry.Partitioning
       UpdateInternal();
 
       // Compute transformations.
-      Vector3F scaleInverse = Vector3F.One / scale;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 scaleInverse = Vector3.One / scale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
       Pose toLocal = pose.Inverse * otherPose;
       Pose toOther = toLocal.Inverse;
 

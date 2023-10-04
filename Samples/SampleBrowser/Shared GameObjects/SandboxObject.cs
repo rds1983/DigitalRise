@@ -6,9 +6,9 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
 using DigitalRise.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -56,31 +56,31 @@ namespace Samples
       scene.Children.Add(_modelNode);
 
       // Create rigid bodies for the sides of the sandbox.
-      _floorRigidBody = new RigidBody(new PlaneShape(new Vector3F(0, 1, 0), 0))
+      _floorRigidBody = new RigidBody(new PlaneShape(new Vector3(0, 1, 0), 0))
       {
         Name = "Floor",
         MotionType = MotionType.Static,
       };
       _floorRigidBody.CollisionObject.CollisionGroup = 1;
-      _leftWallRigidBody = new RigidBody(new PlaneShape(new Vector3F(1, 0, 0), -10))
+      _leftWallRigidBody = new RigidBody(new PlaneShape(new Vector3(1, 0, 0), -10))
       {
         Name = "WallLeft",
         MotionType = MotionType.Static,
       };
       _leftWallRigidBody.CollisionObject.CollisionGroup = 1;
-      _rightWallRigidBody = new RigidBody(new PlaneShape(new Vector3F(-1, 0, 0), -10))
+      _rightWallRigidBody = new RigidBody(new PlaneShape(new Vector3(-1, 0, 0), -10))
       {
         Name = "WallRight",
         MotionType = MotionType.Static,
       };
       _rightWallRigidBody.CollisionObject.CollisionGroup = 1;
-      _backWallRigidBody = new RigidBody(new PlaneShape(new Vector3F(0, 0, 1), -10))
+      _backWallRigidBody = new RigidBody(new PlaneShape(new Vector3(0, 0, 1), -10))
       {
         Name = "WallBack",
         MotionType = MotionType.Static,
       };
       _backWallRigidBody.CollisionObject.CollisionGroup = 1;
-      _frontWallRigidBody = new RigidBody(new PlaneShape(new Vector3F(0, 0, -1), -10))
+      _frontWallRigidBody = new RigidBody(new PlaneShape(new Vector3(0, 0, -1), -10))
       {
         Name = "WallFront",
         MotionType = MotionType.Static,

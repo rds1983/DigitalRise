@@ -69,8 +69,8 @@ namespace Samples
       var topDownPerspective = new PerspectiveProjection();
       topDownPerspective.SetFieldOfView(MathHelper.ToRadians(90), 1, 1, 512);
       _topDownCameraNode = new CameraNode(new Camera(topDownPerspective));
-      _topDownCameraNode.PoseWorld = new Pose(new Vector3F(-10, 120, -10));
-      _topDownCameraNode.LookAt(new Vector3F(-10, 0, -10), Vector3F.UnitZ);
+      _topDownCameraNode.PoseWorld = new Pose(new Vector3(-10, 120, -10));
+      _topDownCameraNode.LookAt(new Vector3(-10, 0, -10), Vector3.UnitZ);
 
       _sceneQuery = new CustomSceneQuery();
       _debugRenderer = new DebugRenderer(GraphicsService, null);

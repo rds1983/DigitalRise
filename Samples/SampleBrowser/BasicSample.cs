@@ -1,7 +1,6 @@
 ﻿using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -41,7 +40,7 @@ namespace Samples
 
 
     // Adds a 3D camera and positions it using position and yaw/pitch angles [rad].
-    protected void SetCamera(Vector3F position, float yaw, float pitch)
+    protected void SetCamera(Vector3 position, float yaw, float pitch)
     {
       if (_cameraObject == null)
       {

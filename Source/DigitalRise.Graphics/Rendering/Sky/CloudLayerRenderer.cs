@@ -9,7 +9,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -49,7 +49,7 @@ namespace DigitalRise.Graphics.Rendering
     private readonly EffectPass _passOcclusionAlpha;
 
     private readonly Submesh _submesh;
-    private readonly Vector3F[] _queryGeometry;
+    private readonly Vector3[] _queryGeometry;
     #endregion
 
 
@@ -107,7 +107,7 @@ namespace DigitalRise.Graphics.Rendering
       //_submesh = MeshHelper.CreateSpherePatch(graphicsService.GraphicsDevice, 1, 1.1f, 10);
       _submesh = MeshHelper.CreateBox(graphicsService.GraphicsDevice);
 
-      _queryGeometry = new Vector3F[4];
+      _queryGeometry = new Vector3[4];
     }
     #endregion
 
@@ -169,7 +169,7 @@ namespace DigitalRise.Graphics.Rendering
         var sunDirection = node.SunDirection;
         _parameterSunDirection.SetValue((Vector3)sunDirection);
         _parameterSkyCurvature.SetValue(node.SkyCurvature);
-        _parameterTextureMatrix.SetValue((Matrix)new Matrix44F(node.TextureMatrix, Vector3F.Zero));
+        _parameterTextureMatrix.SetValue((Matrix)new Matrix44F(node.TextureMatrix, Vector3.Zero));
 
         // The sample at the pixel counts as one, the rest are for the blur.
         // Note: We must not set -1 because a for loop like
@@ -216,13 +216,13 @@ namespace DigitalRise.Graphics.Rendering
 
             // Use a camera which looks at the sun.
             // Get an relative up vector which is not parallel to the forward direction.
-            var lookAtUp = Vector3F.UnitY;
-            if (Vector3F.AreNumericallyEqual(sunDirection, lookAtUp))
-              lookAtUp = Vector3F.UnitZ;
+            var lookAtUp = Vector3.UnitY;
+            if (MathHelper.AreNumericallyEqual(sunDirection, lookAtUp))
+              lookAtUp = Vector3.UnitZ;
 
-            Vector3F zAxis = -sunDirection;
-            Vector3F xAxis = Vector3F.Cross(lookAtUp, zAxis).Normalized;
-            Vector3F yAxis = Vector3F.Cross(zAxis, xAxis);
+            Vector3 zAxis = -sunDirection;
+            Vector3 xAxis = Vector3.Cross(lookAtUp, zAxis).Normalized();
+            Vector3 yAxis = Vector3.Cross(zAxis, xAxis);
 
             var lookAtSunView = new Matrix(xAxis.X, yAxis.X, zAxis.X, 0,
                                            xAxis.Y, yAxis.Y, zAxis.Y, 0,
@@ -237,9 +237,9 @@ namespace DigitalRise.Graphics.Rendering
             // Create small quad shortly behind the near plane. 
             // Note: We use an "untranslated" view matrix, so we can ignore the camera position.
             float width = (projection.Top - projection.Bottom) * node.SunQuerySize;
-            Vector3F right = sunDirection.Orthonormal1 * (width / 2);
-            Vector3F up = sunDirection.Orthonormal2 * (width / 2);
-            Vector3F center = sunDirection * (projection.Near * 1.0001f);
+            Vector3 right = sunDirection.Orthonormal1() * (width / 2);
+            Vector3 up = sunDirection.Orthonormal2() * (width / 2);
+            Vector3 center = sunDirection * (projection.Near * 1.0001f);
             _queryGeometry[0] = center - up - right;
             _queryGeometry[1] = center + up - right;
             _queryGeometry[2] = center - up + right;
@@ -262,7 +262,7 @@ namespace DigitalRise.Graphics.Rendering
           node.SunOcclusion = 0;
         }
 
-        Matrix viewUntranslated = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3F(0));
+        Matrix viewUntranslated = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3(0));
         _parameterView.SetValue(viewUntranslated);
 
         // Render clouds.

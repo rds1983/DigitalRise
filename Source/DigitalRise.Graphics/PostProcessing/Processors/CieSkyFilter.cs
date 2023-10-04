@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -64,7 +65,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// Gets or sets the direction to the sun.
     /// </summary>
     /// <value>The direction to the sun. This vector is automatically normalized.</value>
-    public Vector3F SunDirection
+    public Vector3 SunDirection
     {
       get { return _sunDirection; }
       set
@@ -73,7 +74,7 @@ namespace DigitalRise.Graphics.PostProcessing
         _sunDirection.TryNormalize();
       }
     }
-    private Vector3F _sunDirection;
+    private Vector3 _sunDirection;
 
 
     /// <summary>
@@ -118,7 +119,7 @@ namespace DigitalRise.Graphics.PostProcessing
       _parameterSourceTexture = _effect.Parameters["SourceTexture"];
 
       Parameters = CieSkyParameters.Type12;
-      SunDirection = new Vector3F(0, 1, 0);
+      SunDirection = new Vector3(0, 1, 0);
       Exposure = 1;
       Strength = 1;
     }
@@ -162,7 +163,7 @@ namespace DigitalRise.Graphics.PostProcessing
 
       // Convert frustum far corners from view space to world space.
       for (int i = 0; i < _cameraFrustumFarCorners.Length; i++)
-        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[i]);
+        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3)_cameraFrustumFarCorners[i]);
 
 
       // The CIE model does not work if the sun is below the horizon. We simply project it back up

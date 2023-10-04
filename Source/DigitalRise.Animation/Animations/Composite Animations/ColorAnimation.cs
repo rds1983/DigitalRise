@@ -5,7 +5,6 @@
 using System;
 using DigitalRise.Animation.Traits;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 
 
 namespace DigitalRise.Animation
@@ -40,7 +39,6 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the red component.
     /// </summary>
     /// <value>The animation of the red component.</value>
-    [ContentSerializer(SharedResource = true)]
     public IAnimation<float> R { get; set; }
 
 
@@ -48,7 +46,6 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the green component.
     /// </summary>
     /// <value>The animation of the green component.</value>
-    [ContentSerializer(SharedResource = true)]
     public IAnimation<float> G { get; set; }
 
 
@@ -56,7 +53,6 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the blue component.
     /// </summary>
     /// <value>The animation of the blue component.</value>
-    [ContentSerializer(SharedResource = true)]
     public IAnimation<float> B { get; set; }
 
 
@@ -64,7 +60,6 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the alpha component.
     /// </summary>
     /// <value>The animation of the alpha component.</value>
-    [ContentSerializer(SharedResource = true)]
     public IAnimation<float> A { get; set; }
     #endregion
 

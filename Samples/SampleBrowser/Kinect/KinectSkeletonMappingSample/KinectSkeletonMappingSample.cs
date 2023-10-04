@@ -6,7 +6,6 @@ using DigitalRise.Geometry;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -62,7 +61,7 @@ data before you retarget it to a 3D model.",
       : base(game)
     {
       SampleFramework.IsMouseVisible = false;
-      SetCamera(new Vector3F(0, 1, 1), 0, 0);
+      SetCamera(new Vector3(0, 1, 1), 0, 0);
       
       // Add a background object.
       GameObjectService.Objects.Add(new SandboxObject(Services));
@@ -86,13 +85,13 @@ data before you retarget it to a 3D model.",
 
       var dudeModelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNodeA = dudeModelNode.FindFirstMeshNode().Clone();
-      _meshNodeA.PoseLocal = new Pose(new Vector3F(0, 0, 0));
+      _meshNodeA.PoseLocal = new Pose(new Vector3(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNodeA);
       GraphicsScreen.Scene.Children.Add(_meshNodeA);
 
       var marineModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl");
       _meshNodeB = marineModelNode.FindFirstMeshNode().Clone();
-      _meshNodeB.PoseLocal = new Pose(new Vector3F(0, 0, 0));
+      _meshNodeB.PoseLocal = new Pose(new Vector3(0, 0, 0));
       SampleHelper.EnablePerPixelLighting(_meshNodeB);
       GraphicsScreen.Scene.Children.Add(_meshNodeB);
     }
@@ -227,15 +226,15 @@ data before you retarget it to a 3D model.",
 
       // Change y offset of Kinect skeleton data.
       if (InputService.IsDown(Keys.NumPad8))
-        _kinectWrapper.Offset = _kinectWrapper.Offset + new Vector3F(0, 0.1f * deltaTime, 0);
+        _kinectWrapper.Offset = _kinectWrapper.Offset + new Vector3(0, 0.1f * deltaTime, 0);
       if (InputService.IsDown(Keys.NumPad5))
-        _kinectWrapper.Offset = _kinectWrapper.Offset - new Vector3F(0, 0.1f * deltaTime, 0);
+        _kinectWrapper.Offset = _kinectWrapper.Offset - new Vector3(0, 0.1f * deltaTime, 0);
 
       // Change scale of Kinect skeleton data.
       if (InputService.IsDown(Keys.NumPad9))
-        _kinectWrapper.Scale = _kinectWrapper.Scale + new Vector3F(0.1f * deltaTime);
+        _kinectWrapper.Scale = _kinectWrapper.Scale + new Vector3(0.1f * deltaTime);
       if (InputService.IsDown(Keys.NumPad6))
-        _kinectWrapper.Scale = _kinectWrapper.Scale - new Vector3F(0.1f * deltaTime);
+        _kinectWrapper.Scale = _kinectWrapper.Scale - new Vector3(0.1f * deltaTime);
 
       // Toggle drawing of Kinect skeletons.
       if (InputService.IsPressed(Keys.NumPad1, false))
@@ -275,9 +274,9 @@ data before you retarget it to a 3D model.",
       // Draw Kinect skeletons for debugging.
       if (_drawKinectSkeletons)
       {
-        var pose = new Pose(new Vector3F(0, _kinectSensorHeight, 0));
-        debugRenderer.DrawSkeleton(_kinectWrapper.SkeletonPoseA, pose, Vector3F.One, 0.1f, Color.Orange, true);
-        debugRenderer.DrawSkeleton(_kinectWrapper.SkeletonPoseB, pose, Vector3F.One, 0.1f, Color.Yellow, true);
+        var pose = new Pose(new Vector3(0, _kinectSensorHeight, 0));
+        debugRenderer.DrawSkeleton(_kinectWrapper.SkeletonPoseA, pose, Vector3.One, 0.1f, Color.Orange, true);
+        debugRenderer.DrawSkeleton(_kinectWrapper.SkeletonPoseB, pose, Vector3.One, 0.1f, Color.Yellow, true);
       }
 
       // Draw model skeletons of tracked players for debugging.

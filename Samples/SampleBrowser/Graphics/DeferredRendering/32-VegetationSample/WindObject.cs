@@ -93,7 +93,7 @@ namespace Samples.Graphics
     /// Gets the simulated wind velocity (direction and speed).
     /// </summary>
     /// <value>The wind velocity.</value>
-    public Vector3F Wind { get; private set; }
+    public Vector3 Wind { get; private set; }
 
 
     /// <summary>
@@ -204,7 +204,7 @@ namespace Samples.Graphics
       float p = _timeSinceWindChange / WindInterval;
       float speed = InterpolationHelper.Lerp(_lastSpeed, _nextSpeed, p);
       float angle = InterpolationHelper.Lerp(_lastAngle, _nextAngle, p);
-      Wind = speed * Matrix33F.CreateRotationY(angle) * Vector3F.UnitX;
+      Wind = speed * Matrix33F.CreateRotationY(angle) * Vector3.UnitX;
     }
   }
 }

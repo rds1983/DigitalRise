@@ -9,7 +9,8 @@ using DigitalRise.Collections;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -165,8 +166,8 @@ namespace DigitalRise.Animation.Character
       {
         var current = context.UncompressedKeyFrames[i];
         float parameter = (current.Time.Ticks - start.Time.Ticks) / ticks;
-        Vector3F lerpedTranslation = InterpolationHelper.Lerp(start.Transform.Translation, end.Transform.Translation, parameter);
-        float error = (current.Transform.Translation - lerpedTranslation).Length;
+        Vector3 lerpedTranslation = InterpolationHelper.Lerp(start.Transform.Translation, end.Transform.Translation, parameter);
+        float error = (current.Transform.Translation - lerpedTranslation).Length();
         if (error > maxError)
         {
           maxError = error;
@@ -187,8 +188,8 @@ namespace DigitalRise.Animation.Character
       {
         var current = context.UncompressedKeyFrames[i];
         float parameter = (current.Time.Ticks - start.Time.Ticks) / ticks;
-        Vector3F lerpedScale = InterpolationHelper.Lerp(start.Transform.Scale, end.Transform.Scale, parameter);
-        float error = (current.Transform.Scale - lerpedScale).Length;
+        Vector3 lerpedScale = InterpolationHelper.Lerp(start.Transform.Scale, end.Transform.Scale, parameter);
+        float error = (current.Transform.Scale - lerpedScale).Length();
         if (error > maxError)
         {
           maxError = error;

@@ -9,7 +9,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -258,7 +258,7 @@ namespace DigitalRise.Graphics.SceneGraph
       SetProxy(node, null);
       node.SceneChanged -= OnLodSceneChanged;
       node.PoseLocal = Pose.Identity;
-      node.ScaleLocal = Vector3F.One;
+      node.ScaleLocal = Vector3.One;
     }
 
 
@@ -290,7 +290,7 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    internal void SetScale(Vector3F scale)
+    internal void SetScale(Vector3 scale)
     {
       _ignoreChanges = true;
 

@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -37,12 +36,12 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// <param name="geometricObject">The geometric object.</param>
     /// <param name="radius">The radius of the bounding sphere.</param>
     /// <param name="center">The center of the bounding sphere in world space.</param>
-    internal static void GetBoundingSphere(IGeometricObject geometricObject, out float radius, out Vector3F center)
+    internal static void GetBoundingSphere(IGeometricObject geometricObject, out float radius, out Vector3 center)
     {
       // Get sphere from AABB.
       Aabb aabb = geometricObject.Aabb;
       center = aabb.Center;
-      radius = aabb.Extent.Length * 0.5f;
+      radius = aabb.Extent.Length() * 0.5f;
     }
 
 
@@ -57,10 +56,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     internal static float GetBoundingRadius(IGeometricObject geometricObject)
     {
       // Get offset bounding sphere radius + sphere offset.
-      Vector3F center;
+      Vector3 center;
       float radius;
       GetBoundingSphere(geometricObject, out radius, out center);
-      return (center - geometricObject.Pose.Position).Length + radius;
+      return (center - geometricObject.Pose.Position).Length() + radius;
     }
   }
 }

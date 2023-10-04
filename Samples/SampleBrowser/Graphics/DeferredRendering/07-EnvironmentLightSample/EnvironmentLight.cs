@@ -3,6 +3,7 @@ using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -34,7 +35,7 @@ namespace Samples.Graphics
       }
     }
 
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
     public float DiffuseIntensity { get; set; }
     public float SpecularIntensity { get; set; }
     public float HdrScale { get; set; }
@@ -48,7 +49,7 @@ namespace Samples.Graphics
 
     public EnvironmentLight()
     {
-      Color = new Vector3F(1);
+      Color = new Vector3(1);
       DiffuseIntensity = 1;
       SpecularIntensity = 1;
       HdrScale = 1;
@@ -88,7 +89,7 @@ namespace Samples.Graphics
 
 
     /// <inheritdoc/>
-    public override Vector3F GetIntensity(float distance)
+    public override Vector3 GetIntensity(float distance)
     {
       return Color * Math.Max(DiffuseIntensity, SpecularIntensity) * HdrScale;
     }

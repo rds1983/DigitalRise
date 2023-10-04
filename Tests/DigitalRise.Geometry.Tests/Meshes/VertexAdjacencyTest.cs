@@ -16,7 +16,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     {
       // Create a dummy mesh.
       var randomPoints = Enumerable.Range(0, 100)
-                                   .Select(i => RandomHelper.Random.NextVector3F(-100, 100));
+                                   .Select(i => RandomHelper.Random.NextVector3(-100, 100));
       var mesh = GeometryHelper.CreateConvexHull(randomPoints);
       VertexAdjacency vertexAdjacency = new VertexAdjacency(mesh);
         

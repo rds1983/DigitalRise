@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Diagnostics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions
 {
@@ -87,32 +86,32 @@ namespace DigitalRise.Geometry.Collisions
       // Remember: The magnitude of the cross product of two vectors is equal to the area of the 
       // defined parallelogram. The parallelogram is twice as large as the triangle area defined 
       // between the three points. 
-      Vector3F edge12 = contactSet[2].Position - contactSet[1].Position;
-      Vector3F edge13 = contactSet[3].Position - contactSet[1].Position;
-      Vector3F edge14 = contactSet[4].Position - contactSet[1].Position;
-      Vector3F edge23 = contactSet[3].Position - contactSet[2].Position;
-      Vector3F edge24 = contactSet[4].Position - contactSet[2].Position;
+      Vector3 edge12 = contactSet[2].Position - contactSet[1].Position;
+      Vector3 edge13 = contactSet[3].Position - contactSet[1].Position;
+      Vector3 edge14 = contactSet[4].Position - contactSet[1].Position;
+      Vector3 edge23 = contactSet[3].Position - contactSet[2].Position;
+      Vector3 edge24 = contactSet[4].Position - contactSet[2].Position;
 
       // Check 4 parallelograms.
-      float area = Vector3F.Cross(edge12, edge13).LengthSquared;
+      float area = Vector3.Cross(edge12, edge13).LengthSquared();
       float maxArea = area;
       int contactToDelete = 4;
 
-      area = Vector3F.Cross(edge12, edge14).LengthSquared;
+      area = Vector3.Cross(edge12, edge14).LengthSquared();
       if (area > maxArea)
       {
         maxArea = area;
         contactToDelete = 3;
       }
 
-      area = Vector3F.Cross(edge13, edge14).LengthSquared;
+      area = Vector3.Cross(edge13, edge14).LengthSquared();
       if (area > maxArea)
       {
         maxArea = area;
         contactToDelete = 2;
       }
 
-      area = Vector3F.Cross(edge23, edge24).LengthSquared;
+      area = Vector3.Cross(edge23, edge24).LengthSquared();
       if (area > maxArea)
       {
         // maxArea = area;

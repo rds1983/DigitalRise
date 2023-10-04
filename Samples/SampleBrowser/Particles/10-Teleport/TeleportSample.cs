@@ -34,8 +34,8 @@ namespace Samples.Particles
     {
       _boxDistribution = new BoxDistribution
       {
-        MinValue = new Vector3F(-5, 0, -5),
-        MaxValue = new Vector3F(5, 0, 5),
+        MinValue = new Vector3(-5, 0, -5),
+        MaxValue = new Vector3(5, 0, 5),
       };
     }
 

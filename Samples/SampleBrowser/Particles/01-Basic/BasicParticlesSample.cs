@@ -37,7 +37,7 @@ namespace Samples.Particles
 
       // The particle system's Pose defines the position and orientation of the particle system
       // in the world. 
-      _particleSystem.Pose = new Pose(new Vector3F(0, 2, 0));
+      _particleSystem.Pose = new Pose(new Vector3(0, 2, 0));
 
       // The properties of the particles in the particle system are defined using 
       // "particle parameters" (in the collection _particleSystem.Parameters).
@@ -51,9 +51,9 @@ namespace Samples.Particles
 
       // Each particle should have a position value. Therefore, we add a "varying" parameter
       // called "Position". "Varying" means that each particle has its own position value.
-      // The particle system will internally allocate a Vector3F array to store all particle
+      // The particle system will internally allocate a Vector3 array to store all particle
       // positions.
-      _particleSystem.Parameters.AddVarying<Vector3F>("Position");
+      _particleSystem.Parameters.AddVarying<Vector3>("Position");
 
       // When particles are created, we want them to appear at random position in a spherical
       // volume. We add an effector which initializes the particle "Positions" of newly created

@@ -7,7 +7,7 @@ using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -59,18 +59,18 @@ namespace DigitalRise.Physics
     /// Gets or sets the linear velocity of this body in world space.
     /// </summary>
     /// <value>The linear velocity in world space.</value>
-    public Vector3F LinearVelocity
+    public Vector3 LinearVelocity
     {
       get { return _linearVelocity; }
       set
       {
-        if (!value.IsNaN)
+        if (!value.IsNaN())
         {
           _linearVelocity = value;
 
           if (IsSleeping)
           {
-            var velocitySquared = _linearVelocity.LengthSquared;
+            var velocitySquared = _linearVelocity.LengthSquared();
             if (MotionType == MotionType.Dynamic)
             {
               if (Simulation == null || velocitySquared > Simulation.Settings.Sleeping.LinearVelocityThresholdSquared)
@@ -85,29 +85,29 @@ namespace DigitalRise.Physics
         }
         else
         {
-          _linearVelocity = Vector3F.Zero;
+          _linearVelocity = Vector3.Zero;
         }
       }
     }
-    internal Vector3F _linearVelocity;
+    internal Vector3 _linearVelocity;
 
 
     /// <summary>
     /// Gets or sets the angular velocity about the center of mass in world space.
     /// </summary>
     /// <value>The angular velocity in world space.</value>
-    public Vector3F AngularVelocity
+    public Vector3 AngularVelocity
     {
       get { return _angularVelocity; }
       set
       {
-        if (!value.IsNaN)
+        if (!value.IsNaN())
         {
           _angularVelocity = value;
 
           if (IsSleeping)
           {
-            var velocitySquared = _angularVelocity.LengthSquared;
+            var velocitySquared = _angularVelocity.LengthSquared();
             if (MotionType == MotionType.Dynamic)
             {
               if (Simulation == null || velocitySquared > Simulation.Settings.Sleeping.AngularVelocityThresholdSquared)
@@ -122,16 +122,16 @@ namespace DigitalRise.Physics
         }
         else
         {
-          _angularVelocity = Vector3F.Zero;
+          _angularVelocity = Vector3.Zero;
         }
       }
     }
-    internal Vector3F _angularVelocity;
+    internal Vector3 _angularVelocity;
 
 
     // Don't use this because if a value of the inertia tensor is infinite this can create
     // NaN. If we use InertiaInverse we already have valid values.
-    //public Vector3F AngularMomentumWorld
+    //public Vector3 AngularMomentumWorld
     //{
     //  get 
     //  { 
@@ -150,7 +150,7 @@ namespace DigitalRise.Physics
     /// This is used for Split Impulses. Also known as push impulses, flash impulses, first order
     /// world impulses, etc. This velocity is set to 0 at the end of each time step.
     /// </remarks>
-    internal Vector3F LinearCorrectionVelocity;  // A.k.a. bias velocity.
+    internal Vector3 LinearCorrectionVelocity;  // A.k.a. bias velocity.
 
 
     /// <summary>
@@ -161,7 +161,7 @@ namespace DigitalRise.Physics
     /// This is used for Split Impulses. Also known as push impulses, flash impulses, first order
     /// world impulses, etc. This velocity is set to 0 at the end of each time step.
     /// </remarks>
-    internal Vector3F AngularCorrectionVelocity;
+    internal Vector3 AngularCorrectionVelocity;
 
 
     /// <summary>
@@ -172,12 +172,12 @@ namespace DigitalRise.Physics
     {
       get
       {
-        Vector3F ω = AngularVelocity;
+        Vector3 ω = AngularVelocity;
         Matrix33F inertia = InertiaWorld;
 
         // Rotational engergy Erot = 1/2 * ω^T * I * ω = 1/2 * ω ∙ angularMomentumWorld
-        Vector3F angularMomentumWorld = inertia * ω;
-        float energy = 1.0f / 2.0f * Vector3F.Dot(ω, angularMomentumWorld);
+        Vector3 angularMomentumWorld = inertia * ω;
+        float energy = 1.0f / 2.0f * Vector3.Dot(ω, angularMomentumWorld);
         return energy;
       }
     }
@@ -191,7 +191,7 @@ namespace DigitalRise.Physics
     {
       get
       {
-        float velocity = LinearVelocity.Length;
+        float velocity = LinearVelocity.Length();
         return 1.0f / 2.0f * MassFrame.Mass * velocity * velocity;
       }
     }
@@ -223,7 +223,7 @@ namespace DigitalRise.Physics
     /// <param name="positionWorld">
     /// The position where the impulse is applied in world space.
     /// </param>
-    public void ApplyImpulse(Vector3F impulseWorld, Vector3F positionWorld)
+    public void ApplyImpulse(Vector3 impulseWorld, Vector3 positionWorld)
     {
       if (MotionType != MotionType.Dynamic)
         return;
@@ -231,11 +231,11 @@ namespace DigitalRise.Physics
       if (IsSleeping)
         WakeUp();
 
-      Vector3F radius = positionWorld - PoseCenterOfMass.Position;
+      Vector3 radius = positionWorld - PoseCenterOfMass.Position;
       LinearVelocity += MassInverse * impulseWorld;
 
-      //AngularMomentumWorld += Vector3F.Cross(radius, impulseWorld);
-      AngularVelocity += InertiaInverseWorld * Vector3F.Cross(radius, impulseWorld);
+      //AngularMomentumWorld += Vector3.Cross(radius, impulseWorld);
+      AngularVelocity += InertiaInverseWorld * Vector3.Cross(radius, impulseWorld);
     }
 
 
@@ -243,7 +243,7 @@ namespace DigitalRise.Physics
     /// Applies a linear impulse at the center of mass
     /// </summary>
     /// <param name="impulseWorld">The impulse in world space.</param>
-    public void ApplyLinearImpulse(Vector3F impulseWorld)
+    public void ApplyLinearImpulse(Vector3 impulseWorld)
     {
       if (MotionType != MotionType.Dynamic)
         return;
@@ -259,7 +259,7 @@ namespace DigitalRise.Physics
     /// Applies an angular impulse at the center of mass
     /// </summary>
     /// <param name="impulseWorld">The impulse in world space.</param>
-    public void ApplyAngularImpulse(Vector3F impulseWorld)
+    public void ApplyAngularImpulse(Vector3 impulseWorld)
     {
       if (MotionType != MotionType.Dynamic)
         return;
@@ -284,14 +284,14 @@ namespace DigitalRise.Physics
     /// velocities (<see cref="LinearCorrectionVelocity"/> and 
     /// <see cref="AngularCorrectionVelocity"/>) are changed.
     /// </remarks>
-    internal void ApplyCorrectionImpulse(Vector3F impulseWorld, Vector3F positionWorld)
+    internal void ApplyCorrectionImpulse(Vector3 impulseWorld, Vector3 positionWorld)
     {
       if (MotionType != MotionType.Dynamic)
         return;
 
-      Vector3F radius = positionWorld - PoseCenterOfMass.Position;
+      Vector3 radius = positionWorld - PoseCenterOfMass.Position;
       LinearCorrectionVelocity += MassInverse * impulseWorld;
-      AngularCorrectionVelocity += InertiaInverseWorld * Vector3F.Cross(radius, impulseWorld);
+      AngularCorrectionVelocity += InertiaInverseWorld * Vector3.Cross(radius, impulseWorld);
     }
 
 
@@ -305,9 +305,9 @@ namespace DigitalRise.Physics
     /// <remarks>
     /// This method computes the velocity of a point that is fixed on the moving body.
     /// </remarks>
-    public Vector3F GetVelocityOfWorldPoint(Vector3F positionWorld)
+    public Vector3 GetVelocityOfWorldPoint(Vector3 positionWorld)
     {
-      return LinearVelocity + Vector3F.Cross(AngularVelocity, positionWorld - PoseCenterOfMass.Position);
+      return LinearVelocity + Vector3.Cross(AngularVelocity, positionWorld - PoseCenterOfMass.Position);
     }
 
 
@@ -323,7 +323,7 @@ namespace DigitalRise.Physics
     /// <remarks>
     /// This method computes the velocity of a point that is fixed on the moving body.
     /// </remarks>
-    public virtual Vector3F GetVelocityOfLocalPoint(Vector3F positionLocal)
+    public virtual Vector3 GetVelocityOfLocalPoint(Vector3 positionLocal)
     {
       return GetVelocityOfWorldPoint(Pose.ToWorldPosition(positionLocal));
     }
@@ -346,11 +346,11 @@ namespace DigitalRise.Physics
         return;
 
       // Derivative of linear velocity: v' = a = F / m
-      //Vector3F linearAcceleration = AccumulatedForce * MassInverse;
+      //Vector3 linearAcceleration = AccumulatedForce * MassInverse;
       //LinearVelocity += deltaTime * linearAcceleration;
 
       // ----- Optimized version:
-      Vector3F newLinearVelocity;
+      Vector3 newLinearVelocity;
       newLinearVelocity.X = _linearVelocity.X + deltaTime * (AccumulatedForce.X * _massInverse);
       newLinearVelocity.Y = _linearVelocity.Y + deltaTime * (AccumulatedForce.Y * _massInverse);
       newLinearVelocity.Z = _linearVelocity.Z + deltaTime * (AccumulatedForce.Z * _massInverse);
@@ -362,7 +362,7 @@ namespace DigitalRise.Physics
       //AngularVelocity += InertiaInverseWorld * deltaTime * AccumulatedTorque;
 
       // ----- Optimized version:
-      Vector3F newAngularVelocity;
+      Vector3 newAngularVelocity;
       newAngularVelocity.X = _angularVelocity.X + deltaTime * (_inertiaInverseWorld.M00 * AccumulatedTorque.X + _inertiaInverseWorld.M01 * AccumulatedTorque.Y + _inertiaInverseWorld.M02 * AccumulatedTorque.Z);
       newAngularVelocity.Y = _angularVelocity.Y + deltaTime * (_inertiaInverseWorld.M10 * AccumulatedTorque.X + _inertiaInverseWorld.M11 * AccumulatedTorque.Y + _inertiaInverseWorld.M12 * AccumulatedTorque.Z);
       newAngularVelocity.Z = _angularVelocity.Z + deltaTime * (_inertiaInverseWorld.M20 * AccumulatedTorque.X + _inertiaInverseWorld.M21 * AccumulatedTorque.Y + _inertiaInverseWorld.M22 * AccumulatedTorque.Z);
@@ -390,30 +390,30 @@ namespace DigitalRise.Physics
         // velocities have not been reset. At this point the rigid body is definitely sleeping.
 
         // Reset the velocities...
-        _linearVelocity = Vector3F.Zero;
-        _angularVelocity = Vector3F.Zero;
+        _linearVelocity = Vector3.Zero;
+        _angularVelocity = Vector3.Zero;
 
         // ...and exit.
         return;
       }
 
       // Clamp velocities before we apply them.
-      if (_linearVelocity.IsNaN)
+      if (_linearVelocity.IsNaN())
       {
-        _linearVelocity = Vector3F.Zero;
+        _linearVelocity = Vector3.Zero;
       }
-      else if (_linearVelocity.LengthSquared > Simulation.Settings.Motion.MaxLinearVelocitySquared)
+      else if (_linearVelocity.LengthSquared() > Simulation.Settings.Motion.MaxLinearVelocitySquared)
       {
-        _linearVelocity.Length = Simulation.Settings.Motion.MaxLinearVelocity;
+        _linearVelocity.SetLength(Simulation.Settings.Motion.MaxLinearVelocity);
       }
 
-      if (_angularVelocity.IsNaN)
+      if (_angularVelocity.IsNaN())
       {
-        _angularVelocity = Vector3F.Zero;
+        _angularVelocity = Vector3.Zero;
       }
-      else if (_angularVelocity.LengthSquared > Simulation.Settings.Motion.MaxAngularVelocitySquared)
+      else if (_angularVelocity.LengthSquared() > Simulation.Settings.Motion.MaxAngularVelocitySquared)
       {
-        _angularVelocity.Length = Simulation.Settings.Motion.MaxAngularVelocity;
+        _angularVelocity.SetLength(Simulation.Settings.Motion.MaxAngularVelocity);
       }
 
       // Important: Use the center-of-mass pose!
@@ -428,7 +428,7 @@ namespace DigitalRise.Physics
 
       if (CcdEnabled
           && Simulation.Settings.Motion.CcdEnabled
-          && LinearVelocity.LengthSquared > Simulation.Settings.Motion.CcdVelocityThresholdSquared)
+          && LinearVelocity.LengthSquared() > Simulation.Settings.Motion.CcdVelocityThresholdSquared)
       {
         // Continuous collision detection.
         IsCcdActive = true;
@@ -447,8 +447,8 @@ namespace DigitalRise.Physics
         PoseCenterOfMass = targetPoseCOM;
       }
 
-      LinearCorrectionVelocity = Vector3F.Zero;
-      AngularCorrectionVelocity = Vector3F.Zero;
+      LinearCorrectionVelocity = Vector3.Zero;
+      AngularCorrectionVelocity = Vector3.Zero;
     }
     #endregion
   }

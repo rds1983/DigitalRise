@@ -51,7 +51,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
 
       // A DigitalRise model.
       _modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
-      _modelNode.PoseLocal = new Pose(new Vector3F(6, 0, -7));
+      _modelNode.PoseLocal = new Pose(new Vector3(6, 0, -7));
 
       // Create a geometric object with a height field shape.
       var numberOfSamplesX = 20;
@@ -61,9 +61,9 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
         for (int x = 0; x < numberOfSamplesX; x++)
           samples[z * numberOfSamplesX + x] = 1.0f + (float)(Math.Cos(z / 2f) * Math.Sin(x / 2f) * 1.0f);
       HeightField heightField = new HeightField(0, 0, 120, 120, samples, numberOfSamplesX, numberOfSamplesZ);
-      _geometricObject = new GeometricObject(heightField, new Pose(new Vector3F(5, 0, -5)))
+      _geometricObject = new GeometricObject(heightField, new Pose(new Vector3(5, 0, -5)))
       {
-        Scale = new Vector3F(0.01f, 0.05f, 0.02f),
+        Scale = new Vector3(0.01f, 0.05f, 0.02f),
       };
     }
 
@@ -82,27 +82,27 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       // Draw some points and line "in" and "over" the scene.
       for (int i = 0; i < 10; i++)
       {
-        var position = new Vector3F(-6, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
+        var position = new Vector3(-6, 0, -3) + random.NextVector3(-0.5f, 0.5f);
         _debugRenderer.DrawPoint(position, Color.Green, false);
       }
 
       for (int i = 0; i < 10; i++)
       {
-        var position = new Vector3F(-4, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
+        var position = new Vector3(-4, 0, -3) + random.NextVector3(-0.5f, 0.5f);
         _debugRenderer.DrawPoint(position, Color.Yellow, true);
       }
 
       for (int i = 0; i < 10; i++)
       {
-        var start = new Vector3F(-2, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
-        var end = new Vector3F(-2, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
+        var start = new Vector3(-2, 0, -3) + random.NextVector3(-0.5f, 0.5f);
+        var end = new Vector3(-2, 0, -3) + random.NextVector3(-0.5f, 0.5f);
         _debugRenderer.DrawLine(start, end, Color.Green, false);
       }
 
       for (int i = 0; i < 10; i++)
       {
-        var start = new Vector3F(0, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
-        var end = new Vector3F(0, 0, -3) + random.NextVector3F(-0.5f, 0.5f);
+        var start = new Vector3(0, 0, -3) + random.NextVector3(-0.5f, 0.5f);
+        var end = new Vector3(0, 0, -3) + random.NextVector3(-0.5f, 0.5f);
         _debugRenderer.DrawLine(start, end, Color.Yellow, true);
       }
 
@@ -113,8 +113,8 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       _debugRenderer.DrawText("Other objects are positioned in world space. Depth test enabled.");
 
       // Text can also be drawn in world space coordinates or in screen space coordinates.
-      _debugRenderer.DrawText("WorldSpacePosition (0, 0, 0)", new Vector3F(0, 0, 0), Color.Green, false);
-      _debugRenderer.DrawText("WorldSpacePosition (0, 0, -1)", new Vector3F(0, 0, -1), Color.Yellow, true);
+      _debugRenderer.DrawText("WorldSpacePosition (0, 0, 0)", new Vector3(0, 0, 0), Color.Green, false);
+      _debugRenderer.DrawText("WorldSpacePosition (0, 0, -1)", new Vector3(0, 0, -1), Color.Yellow, true);
       _debugRenderer.DrawText("ScreenPosition (600, 40)", new Vector2(600, 40), Color.White);
       _debugRenderer.DrawText("ScreenPosition (640, 360)", new Vector2(640, 360), Color.White);
 
@@ -122,43 +122,43 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       _debugRenderer.DrawTexture(NoiseHelper.GetGrainTexture(GraphicsService, 128), new Rectangle(1000, 10, 128, 128));
 
       // Axes can be drawn to display poses (positions and orientations).
-      _debugRenderer.DrawAxes(new Pose(new Vector3F(0, 0, 0)), 1, true);
+      _debugRenderer.DrawAxes(new Pose(new Vector3(0, 0, 0)), 1, true);
 
       // Axis-aligned bounding boxes (AABB)
-      _debugRenderer.DrawAabb(new Aabb(new Vector3F(-0.5f), new Vector3F(0.5f)), new Pose(new Vector3F(2, 0, -3)), Color.Green, false);
-      _debugRenderer.DrawAabb(new Aabb(new Vector3F(-0.5f), new Vector3F(0.5f)), new Pose(new Vector3F(4, 0, -3)), Color.Yellow, true);
+      _debugRenderer.DrawAabb(new Aabb(new Vector3(-0.5f), new Vector3(0.5f)), new Pose(new Vector3(2, 0, -3)), Color.Green, false);
+      _debugRenderer.DrawAabb(new Aabb(new Vector3(-0.5f), new Vector3(0.5f)), new Pose(new Vector3(4, 0, -3)), Color.Yellow, true);
 
       // Box shapes
       var orientation = random.NextQuaternionF();
-      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3F(-6, 0, -5), orientation), new Color(255, 0, 0, 100), false, false);
-      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3F(-6, 0, -5), orientation), Color.Green, true, false);
-      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3F(-4, 0, -5), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-6, 0, -5), orientation), new Color(255, 0, 0, 100), false, false);
+      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-6, 0, -5), orientation), Color.Green, true, false);
+      _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-4, 0, -5), orientation), Color.Yellow, true, true);
 
       // View volumes (frustums)
       var viewVolume = new PerspectiveViewVolume(1, 2, 0.1f, 1f);
-      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3F(-2, 0, -5), orientation), new Color(0, 255, 0, 100), false, false);
-      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3F(-2, 0, -5), orientation), Color.Green, true, false);
-      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3F(0, 0, -5), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3(-2, 0, -5), orientation), new Color(0, 255, 0, 100), false, false);
+      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3(-2, 0, -5), orientation), Color.Green, true, false);
+      _debugRenderer.DrawViewVolume(viewVolume, new Pose(new Vector3(0, 0, -5), orientation), Color.Yellow, true, true);
 
       // Spheres
-      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3F(2, 0, -5), orientation), new Color(0, 0, 255, 100), false, false);
-      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3F(2, 0, -5), orientation), Color.Green, true, false);
-      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3F(4, 0, -5), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3(2, 0, -5), orientation), new Color(0, 0, 255, 100), false, false);
+      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3(2, 0, -5), orientation), Color.Green, true, false);
+      _debugRenderer.DrawSphere(0.5f, new Pose(new Vector3(4, 0, -5), orientation), Color.Yellow, true, true);
 
       // Capsules
-      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3F(-6, 0, -7), orientation), new Color(255, 255, 0, 100), false, false);
-      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3F(-6, 0, -7), orientation), Color.Green, true, false);
-      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3F(-4, 0, -7), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3(-6, 0, -7), orientation), new Color(255, 255, 0, 100), false, false);
+      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3(-6, 0, -7), orientation), Color.Green, true, false);
+      _debugRenderer.DrawCapsule(0.3f, 1, new Pose(new Vector3(-4, 0, -7), orientation), Color.Yellow, true, true);
 
       // Cylinders
-      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3F(-2, 0, -7), orientation), new Color(255, 0, 255, 100), false, false);
-      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3F(-2, 0, -7), orientation), Color.Green, true, false);
-      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3F(0, 0, -7), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3(-2, 0, -7), orientation), new Color(255, 0, 255, 100), false, false);
+      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3(-2, 0, -7), orientation), Color.Green, true, false);
+      _debugRenderer.DrawCylinder(0.3f, 1, new Pose(new Vector3(0, 0, -7), orientation), Color.Yellow, true, true);
 
       // Cones
-      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3F(2, 0, -7), orientation), new Color(0, 255, 255, 100), false, false);
-      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3F(2, 0, -7), orientation), Color.Green, true, false);
-      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3F(4, 0, -7), orientation), Color.Yellow, true, true);
+      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3(2, 0, -7), orientation), new Color(0, 255, 255, 100), false, false);
+      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3(2, 0, -7), orientation), Color.Green, true, false);
+      _debugRenderer.DrawCone(0.3f, 1, new Pose(new Vector3(4, 0, -7), orientation), Color.Yellow, true, true);
 
       // The debug renderer can draw any IGeometricObjects, like SceneNodes, RigidBodies, etc.
       _debugRenderer.DrawObject(_geometricObject, Color.Brown, false, false);

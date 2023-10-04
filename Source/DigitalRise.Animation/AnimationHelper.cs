@@ -9,7 +9,7 @@ using DigitalRise.Animation.Traits;
 using DigitalRise.Linq;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation
 {
@@ -482,10 +482,10 @@ namespace DigitalRise.Animation
     /// <paramref name="currentPosition"/>, it will arrive at <paramref name="targetPosition"/>
     /// after <paramref name="deltaTime"/> seconds.
     /// </returns>
-    public static Vector3F ComputeLinearVelocity(Vector3F currentPosition, Vector3F targetPosition, float deltaTime)
+    public static Vector3 ComputeLinearVelocity(Vector3 currentPosition, Vector3 targetPosition, float deltaTime)
     {
       if (Numeric.IsZero(deltaTime))
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
       return (targetPosition - currentPosition) / deltaTime;
     }
@@ -510,10 +510,10 @@ namespace DigitalRise.Animation
     /// <paramref name="currentOrientation"/>, it will arrive at <paramref name="targetOrientation"/>
     /// after <paramref name="deltaTime"/> seconds.
     /// </returns>
-    public static Vector3F ComputeAngularVelocity(QuaternionF currentOrientation, QuaternionF targetOrientation, float deltaTime)
+    public static Vector3 ComputeAngularVelocity(QuaternionF currentOrientation, QuaternionF targetOrientation, float deltaTime)
     {
       if (Numeric.IsZero(deltaTime))
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
       // ----- Angular Velocity
       QuaternionF orientationDelta = targetOrientation * currentOrientation.Conjugated;
@@ -523,8 +523,8 @@ namespace DigitalRise.Animation
         orientationDelta = -orientationDelta;
 
       // Determine the angular velocity that rotates the body.
-      Vector3F rotationAxis = orientationDelta.Axis;
-      if (!rotationAxis.IsNumericallyZero)
+      Vector3 rotationAxis = orientationDelta.Axis;
+      if (!rotationAxis.IsNumericallyZero())
       {
         // The angular velocity is computed as rotationAxis * rotationSpeed.
         float rotationSpeed = (orientationDelta.Angle / deltaTime);
@@ -532,7 +532,7 @@ namespace DigitalRise.Animation
       }
 
       // The axis of rotation is 0. That means the no rotation should be applied.
-      return Vector3F.Zero;
+      return Vector3.Zero;
     }
 
 
@@ -548,7 +548,7 @@ namespace DigitalRise.Animation
     /// <paramref name="currentOrientation"/>, it will arrive at <paramref name="targetOrientation"/>
     /// after <paramref name="deltaTime"/> seconds.
     /// </returns>
-    public static Vector3F ComputeAngularVelocity(Matrix33F currentOrientation, Matrix33F targetOrientation, float deltaTime)
+    public static Vector3 ComputeAngularVelocity(Matrix33F currentOrientation, Matrix33F targetOrientation, float deltaTime)
     {
       return ComputeAngularVelocity(QuaternionF.CreateRotation(currentOrientation), QuaternionF.CreateRotation(targetOrientation), deltaTime);
     }

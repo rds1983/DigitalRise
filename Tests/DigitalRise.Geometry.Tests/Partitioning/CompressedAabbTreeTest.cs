@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using DigitalRise.Collections;
-using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+﻿using DigitalRise.Geometry.Shapes;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -15,17 +13,17 @@ namespace DigitalRise.Geometry.Partitioning.Tests
       switch (i)
       {
         case 0:
-          return new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
+          return new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
         case 1:
-          return new Aabb(new Vector3F(-1), new Vector3F(2));
+          return new Aabb(new Vector3(-1), new Vector3(2));
         case 2:
-          return new Aabb(new Vector3F(1), new Vector3F(3));
+          return new Aabb(new Vector3(1), new Vector3(3));
         case 3:
-          return new Aabb(new Vector3F(4), new Vector3F(5));
+          return new Aabb(new Vector3(4), new Vector3(5));
         case 4:
-          return new Aabb(new Vector3F(0), new Vector3F(1, float.NaN, 1));
+          return new Aabb(new Vector3(0), new Vector3(1, float.NaN, 1));
         default:
-          return new Aabb(new Vector3F(), new Vector3F());
+          return new Aabb(new Vector3(), new Vector3());
       }
     }
 

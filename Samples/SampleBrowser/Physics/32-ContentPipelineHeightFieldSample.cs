@@ -38,7 +38,7 @@ namespace Samples.Physics
       // The UserData contains the collision shape of type HeightField.
       HeightField heightField = (HeightField)_heightFieldModelNode.UserData;
 
-      _heightFieldModelNode.PoseWorld = new Pose(new Vector3F(-heightField.WidthX / 2, 0, -heightField.WidthZ / 2));
+      _heightFieldModelNode.PoseWorld = new Pose(new Vector3(-heightField.WidthX / 2, 0, -heightField.WidthZ / 2));
 
       // Create rigid body.
       _heightFieldBody = new RigidBody(heightField, null, null)
@@ -55,7 +55,7 @@ namespace Samples.Physics
       SphereShape sphereShape = new SphereShape(0.5f);
       for (int i = 0; i < 30; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-30, 30);
+        Vector3 position = RandomHelper.Random.NextVector3(-30, 30);
         position.Y = 20;
 
         RigidBody body = new RigidBody(sphereShape) { Pose = new Pose(position) };
@@ -65,7 +65,7 @@ namespace Samples.Physics
       BoxShape boxShape = new BoxShape(1, 1, 1);
       for (int i = 0; i < 30; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-30, 30);
+        Vector3 position = RandomHelper.Random.NextVector3(-30, 30);
         position.Y = 20;
 
         RigidBody body = new RigidBody(boxShape) { Pose = new Pose(position) };

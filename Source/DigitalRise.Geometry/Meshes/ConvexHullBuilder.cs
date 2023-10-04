@@ -9,7 +9,8 @@ using System.Linq;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -145,7 +146,7 @@ namespace DigitalRise.Geometry.Meshes
     /// <paramref name="points"/>.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    public void Grow(IEnumerable<Vector3F> points, int vertexLimit, float skinWidth)
+    public void Grow(IEnumerable<Vector3> points, int vertexLimit, float skinWidth)
     {
       Debug.Assert(_taggedEdges.Count == 0, "ConvexHullBuilder is in an invalid state.");
       Debug.Assert(_faces.Count == 0, "ConvexHullBuilder is in an invalid state.");
@@ -189,9 +190,9 @@ namespace DigitalRise.Geometry.Meshes
         fromUnitCube = Matrix44F.CreateTranslation(aabb.Center) * Matrix44F.CreateScale(extent / 2);
 
         foreach (var v in _mesh.Vertices)
-          v.Position = (Vector3F)toUnitCube.TransformPosition(v.Position);
+          v.Position = (Vector3)toUnitCube.TransformPosition(v.Position);
         for (int i = 0; i < pointList.Count; i++)
-          pointList[i] = (Vector3F)toUnitCube.TransformPosition(pointList[i]);
+          pointList[i] = (Vector3)toUnitCube.TransformPosition(pointList[i]);
       }
       #endregion
 
@@ -226,14 +227,14 @@ namespace DigitalRise.Geometry.Meshes
               continue;
 
             // Plane distance from origin.
-            var d = Vector3F.Dot(normal, face.Boundary.Origin.Position);
+            var d = Vector3.Dot(normal, face.Boundary.Origin.Position);
 
             // Find support point for this face under remaining points.
             var maxDistance = d;
             var maxIndex = i;
             for (int j = i; j < numberOfPoints; j++)
             {
-              float distance = Vector3F.Dot(normal, pointList[j]);
+              float distance = Vector3.Dot(normal, pointList[j]);
               if (distance > maxDistance)
               {
                 maxDistance = distance;
@@ -319,11 +320,11 @@ namespace DigitalRise.Geometry.Meshes
         // ----- Apply Vertex Limit and/or Skin Width 
 
         // Skin width must be converted to unit cube.
-        var skinWidthScale = (Vector3F)toUnitCube.TransformDirection(new Vector3F(skinWidth));
+        var skinWidthScale = (Vector3)toUnitCube.TransformDirection(new Vector3(skinWidth));
 
         // The assert after the cutting may fail for very low skin widths. But not when
         // the debugger is attached :-(. 
-        //skinWidthScale = Vector3F.Max(skinWidthScale, new Vector3F(100 * Numeric.EpsilonF));
+        //skinWidthScale = Vector3.Max(skinWidthScale, new Vector3(100 * Numeric.EpsilonF));
 
         _mesh.ModifyConvex(vertexLimit, skinWidthScale);
 
@@ -336,14 +337,14 @@ namespace DigitalRise.Geometry.Meshes
 
       // Convert back from unit cube.
       foreach (var v in _mesh.Vertices)
-        v.Position = (Vector3F)fromUnitCube.TransformPosition(v.Position);
+        v.Position = (Vector3)fromUnitCube.TransformPosition(v.Position);
     }
 
 
     // Sorts points and check if points are all in a plane.
     // We find 4 points that create a large tetrahedron and we move these points to the
     // start of the list.
-    private static bool SortPoints(List<Vector3F> pointList)
+    private static bool SortPoints(List<Vector3> pointList)
     {
       if (pointList.Count < 4)
         return false;
@@ -353,11 +354,11 @@ namespace DigitalRise.Geometry.Meshes
       // First we find 4 points that create a large tetrahedron.
 
       // Find extreme points in x direction of AABB.
-      Vector3F minimum = pointList[0];
+      Vector3 minimum = pointList[0];
       int minimumIndex = 0;
       for (int i = 1; i < pointList.Count; i++)
       {
-        Vector3F point = pointList[i];
+        Vector3 point = pointList[i];
         if (point.X < minimum.X)
         {
           minimum = point;
@@ -370,11 +371,11 @@ namespace DigitalRise.Geometry.Meshes
       pointList[0] = minimum;
 
       // Now the maximum in x direction.
-      Vector3F maximum = pointList[0];
+      Vector3 maximum = pointList[0];
       int maximumIndex = 0;
       for (int i = 1; i < pointList.Count; i++)
       {
-        Vector3F point = pointList[i];
+        Vector3 point = pointList[i];
         if (point.X > maximum.X)
         {
           maximum = point;
@@ -392,12 +393,12 @@ namespace DigitalRise.Geometry.Meshes
         isPlanar = true;
 
       Line line = new Line(minimum, lineDirection);
-      Vector3F third = pointList[0];
+      Vector3 third = pointList[0];
       int thirdIndex = 0;
       float maxDistanceSquared = GetDistanceFromLineSquared(ref line, ref third);
       for (int i = 2; i < pointList.Count; i++)
       {
-        Vector3F point = pointList[i];
+        Vector3 point = pointList[i];
         float distance = GetDistanceFromLineSquared(ref line, ref point);
         if (distance > maxDistanceSquared)
         {
@@ -417,14 +418,14 @@ namespace DigitalRise.Geometry.Meshes
       // Now we search for the 4th point with the maximal distance to this triangle.
       Triangle triangle = new Triangle(minimum, maximum, third);
       var triangleNormal = triangle.Normal;
-      Vector3F fourth = pointList[0];
+      Vector3 fourth = pointList[0];
       int fourthIndex = 0;
-      float maxDistance = Math.Abs(Vector3F.Dot(triangleNormal, fourth - triangle.Vertex0));
+      float maxDistance = Math.Abs(Vector3.Dot(triangleNormal, fourth - triangle.Vertex0));
       // This computes a value proportional to the distance from the face.
       for (int i = 3; i < pointList.Count; i++)
       {
-        Vector3F point = pointList[i];
-        float distance = Math.Abs(Vector3F.Dot(triangleNormal, point - triangle.Vertex0));
+        Vector3 point = pointList[i];
+        float distance = Math.Abs(Vector3.Dot(triangleNormal, point - triangle.Vertex0));
         if (distance > maxDistance)
         {
           maxDistance = distance;
@@ -462,7 +463,7 @@ namespace DigitalRise.Geometry.Meshes
     /// contain the original mesh.
     /// </para>
     /// </remarks>
-    private void GrowConvex(Vector3F point, DcelFace face)
+    private void GrowConvex(Vector3 point, DcelFace face)
     {
       // Depending on the current convex hull type we have to use different growing methods.
       switch (_type)
@@ -492,7 +493,7 @@ namespace DigitalRise.Geometry.Meshes
           //  bool degenerate = false;
           //  foreach (var face in _faces)
           //  {
-          //    if (face.Normal.LengthSquared < Numeric.EpsilonF * Numeric.EpsilonF)
+          //    if (face.Normal.LengthSquared() < Numeric.EpsilonF * Numeric.EpsilonF)
           //    {
           //      degenerate = true;
           //      break;
@@ -525,7 +526,7 @@ namespace DigitalRise.Geometry.Meshes
     /// Merges a point to an empty convex hull.
     /// </summary>
     /// <param name="point">The point.</param>
-    private void GrowEmptyConvex(Vector3F point)
+    private void GrowEmptyConvex(Vector3 point)
     {
       Debug.Assert(_mesh != null);
       Debug.Assert(_mesh.Vertices.Count == 0, "DCEL mesh is not empty.");
@@ -542,14 +543,14 @@ namespace DigitalRise.Geometry.Meshes
     /// Merges a point to a convex hull that is also a point.
     /// </summary>
     /// <param name="point">The point.</param>
-    private void GrowPointConvex(Vector3F point)
+    private void GrowPointConvex(Vector3 point)
     {
       Debug.Assert(_mesh != null);
       Debug.Assert(_mesh.Vertices.Count == 1, "DCEL mesh with 1 vertex was expected.");
       Debug.Assert(_type == ConvexHullType.Point);
 
       // Abort if the point is equal to the existing point in the mesh.
-      if (Vector3F.AreNumericallyEqual(_mesh.Vertex.Position, point))
+      if (MathHelper.AreNumericallyEqual(_mesh.Vertex.Position, point))
         return;
 
       DcelVertex newVertex = new DcelVertex(point, null);
@@ -573,17 +574,17 @@ namespace DigitalRise.Geometry.Meshes
     /// Merges a point to a convex hull that is a line segment.
     /// </summary>
     /// <param name="point">The point.</param>
-    private void GrowLinearConvex(Vector3F point)
+    private void GrowLinearConvex(Vector3 point)
     {
       Debug.Assert(_mesh != null);
       Debug.Assert(_mesh.Vertices.Count == 2, "DCEL mesh with 2 vertices was expected.");
       Debug.Assert(_type == ConvexHullType.Linear);
-      Debug.Assert(!Vector3F.AreNumericallyEqual(_mesh.Vertex.Position, point));
-      Debug.Assert(!Vector3F.AreNumericallyEqual(_mesh.Vertices[1].Position, point));
+      Debug.Assert(!MathHelper.AreNumericallyEqual(_mesh.Vertex.Position, point));
+      Debug.Assert(!MathHelper.AreNumericallyEqual(_mesh.Vertices[1].Position, point));
 
       // Abort if the point is equal to an existing point.
-      if (Vector3F.AreNumericallyEqual(point, _mesh.Vertex.Position)
-          || Vector3F.AreNumericallyEqual(point, _mesh.Vertex.Edge.Twin.Origin.Position))
+      if (MathHelper.AreNumericallyEqual(point, _mesh.Vertex.Position)
+          || MathHelper.AreNumericallyEqual(point, _mesh.Vertex.Edge.Twin.Origin.Position))
         return;
 
       var edge = _mesh.Vertex.Edge;
@@ -673,7 +674,7 @@ namespace DigitalRise.Geometry.Meshes
     /// Merges a point to a convex hull that is a polygon.
     /// </summary>
     /// <param name="point">The point.</param>
-    private void GrowPlanarConvex(Vector3F point)
+    private void GrowPlanarConvex(Vector3 point)
     {
       Debug.Assert(_mesh != null);
       Debug.Assert(_mesh.Vertices.Count > 2, "DCEL mesh with 3 or more vertices expected.");
@@ -712,7 +713,7 @@ namespace DigitalRise.Geometry.Meshes
       _isPlanar = true;
 
       // Get normal of front face.
-      Vector3F faceNormal = frontFace.Normal / frontFace.Normal.Length;
+      Vector3 faceNormal = frontFace.Normal / frontFace.Normal.Length();
 
       // Find a visible edge.
       DcelEdge currentEdge = _mesh.Vertex.Edge;
@@ -740,10 +741,10 @@ namespace DigitalRise.Geometry.Meshes
       }
 
       // Move the point a bit away to avoid numerical problems.
-      Vector3F v0 = visibleEdge.Origin.Position;
-      Vector3F v1 = visibleEdge.Twin.Origin.Position;
-      Vector3F segment = v1 - v0;
-      Vector3F normal = Vector3F.Cross(segment, faceNormal);
+      Vector3 v0 = visibleEdge.Origin.Position;
+      Vector3 v1 = visibleEdge.Twin.Origin.Position;
+      Vector3 segment = v1 - v0;
+      Vector3 normal = Vector3.Cross(segment, faceNormal);
       point += Numeric.EpsilonF * normal;
 
       // Now we need to find the lower vertex and upper vertex between which
@@ -887,7 +888,7 @@ namespace DigitalRise.Geometry.Meshes
     /// </summary>
     /// <param name="face">The face.</param>
     /// <param name="point">The point.</param>
-    private void GrowPlanarConvexToSpatial(DcelFace face, Vector3F point)
+    private void GrowPlanarConvexToSpatial(DcelFace face, Vector3 point)
     {
       _faces.Remove(face);
 
@@ -960,7 +961,7 @@ namespace DigitalRise.Geometry.Meshes
     /// A face which is visible from the given point. Can be <see langword="null"/>.
     /// </param>
     /// <returns><see langword="true"/> if the convex hull was grown.</returns>
-    private bool GrowSpatialConvex(Vector3F point, DcelFace startFace)
+    private bool GrowSpatialConvex(Vector3 point, DcelFace startFace)
     {
       Debug.Assert(_mesh != null);
       Debug.Assert(_mesh.Vertices.Count > 3, "DCEL mesh with more than 3 vertices expected.");
@@ -1191,11 +1192,11 @@ namespace DigitalRise.Geometry.Meshes
     /// <param name="line">The line.</param>
     /// <param name="point">The point.</param>
     /// <returns>The distance squared.</returns>
-    private static float GetDistanceFromLineSquared(ref Line line, ref Vector3F point)
+    private static float GetDistanceFromLineSquared(ref Line line, ref Vector3 point)
     {
-      Vector3F lineToPoint = point - line.PointOnLine;
-      Vector3F normalFromLineToPoint = lineToPoint - Vector3F.ProjectTo(lineToPoint, line.Direction);
-      return normalFromLineToPoint.LengthSquared;
+      Vector3 lineToPoint = point - line.PointOnLine;
+      Vector3 normalFromLineToPoint = lineToPoint - MathHelper.ProjectTo(lineToPoint, line.Direction);
+      return normalFromLineToPoint.LengthSquared();
     }
 
 
@@ -1206,7 +1207,7 @@ namespace DigitalRise.Geometry.Meshes
       for (int i = 0; i < _faces.Count; i++)
       {
         DcelFace face = _faces[i];
-        if (Numeric.IsZero(face.Normal.Length))
+        if (Numeric.IsZero(face.Normal.Length()))
         {
           // The triangle is degenerate and must be removed. 
           
@@ -1249,7 +1250,7 @@ namespace DigitalRise.Geometry.Meshes
             continue;
           }
 
-          if (Numeric.IsZero(neighborFace.Normal.Length))
+          if (Numeric.IsZero(neighborFace.Normal.Length()))
           {
             // Neighbor face is degenerate as well.
             // Both faces next to the long edge are removed.

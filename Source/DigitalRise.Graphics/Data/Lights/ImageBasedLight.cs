@@ -8,7 +8,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -169,7 +169,7 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// This property defines only the color of the light source - not its intensity.
     /// </remarks>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -387,7 +387,7 @@ namespace DigitalRise.Graphics
     /// <param name="texture">The cube map texture.</param>
     public ImageBasedLight(TextureCube texture)
     {
-      Color = new Vector3F(1);
+      Color = new Vector3(1);
       DiffuseIntensity = 1;
       SpecularIntensity = 1;
       HdrScale = 1;
@@ -446,7 +446,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    public override Vector3F GetIntensity(float distance)
+    public override Vector3 GetIntensity(float distance)
     {
       float diffuse = Numeric.IsNaN(DiffuseIntensity) ? 0.0f : DiffuseIntensity;
       float specular = Numeric.IsNaN(SpecularIntensity) ? 0.0f : SpecularIntensity;

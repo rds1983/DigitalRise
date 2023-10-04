@@ -6,8 +6,7 @@ using System;
 using System.Globalization;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -93,7 +92,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the tint color of the billboard.
     /// </summary>
     /// <value>The tint color (non-premultiplied). The default value is white (1, 1, 1).</value>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -115,7 +114,7 @@ namespace DigitalRise.Graphics
     {
       Shape = new SphereShape(0);
       Orientation = BillboardOrientation.ViewPlaneAligned;
-      Color = new Vector3F(1, 1, 1);
+      Color = new Vector3(1, 1, 1);
       Alpha = 1;
     }
     #endregion

@@ -4,7 +4,7 @@
 
 using System.Diagnostics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -20,7 +20,7 @@ namespace DigitalRise.Geometry.Meshes
     /// Gets or sets the coordinates of the vertex.
     /// </summary>
     /// <value>The coordinates of the vertex.</value>
-    public Vector3F Position { get; set; }
+    public Vector3 Position { get; set; }
 
 
     /// <summary>
@@ -84,7 +84,7 @@ namespace DigitalRise.Geometry.Meshes
     /// </summary>
     /// <param name="position">The position.</param>
     /// <param name="edge">The edge.</param>
-    public DcelVertex(Vector3F position, DcelEdge edge)
+    public DcelVertex(Vector3 position, DcelEdge edge)
     {
       Position = position;
       Edge = edge;

@@ -33,7 +33,7 @@ is playing.",
     private readonly AvatarRenderer _avatarRenderer;
 
     private AvatarPose _avatarPose;
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
 
     private TimelineClip _standAnimation;
     private AnimationController _standAnimationController;
@@ -55,7 +55,7 @@ is playing.",
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Create a random avatar.

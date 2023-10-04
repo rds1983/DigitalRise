@@ -4,9 +4,8 @@
 
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -54,8 +53,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         throw new ArgumentException("The contact set must contain a plane and a box shape.", "contactSet");
 
       // Get transformations.
-      Vector3F scalePlane = planeObject.Scale;
-      Vector3F scaleBox = boxObject.Scale;
+      Vector3 scalePlane = planeObject.Scale;
+      Vector3 scaleBox = boxObject.Scale;
       Pose posePlane = planeObject.Pose;
       Pose poseBox = boxObject.Pose;
 
@@ -65,16 +64,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       planeWorld.ToWorld(ref posePlane);        // Transform plane to world space.
 
       // Transform plane normal to local space of box.
-      Vector3F planeNormalLocalB = poseBox.ToLocalDirection(planeWorld.Normal);
+      Vector3 planeNormalLocalB = poseBox.ToLocalDirection(planeWorld.Normal);
 
       // Get support vertex nearest to the plane.
-      Vector3F supportVertexBLocal = boxShape.GetSupportPoint(-planeNormalLocalB, scaleBox);
+      Vector3 supportVertexBLocal = boxShape.GetSupportPoint(-planeNormalLocalB, scaleBox);
 
       // Transform support vertex into world space.
-      Vector3F supportVertexBWorld = poseBox.ToWorldPosition(supportVertexBLocal);
+      Vector3 supportVertexBWorld = poseBox.ToWorldPosition(supportVertexBLocal);
 
       // Project vertex onto separating axis (given by plane normal).
-      float distance = Vector3F.Dot(supportVertexBWorld, planeWorld.Normal);
+      float distance = Vector3.Dot(supportVertexBWorld, planeWorld.Normal);
 
       // Check for collision.
       float penetrationDepth = planeWorld.DistanceFromOrigin - distance;
@@ -96,28 +95,28 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       else
       {
         // Apply scale to box extent.
-        Vector3F boxHalfExtent = boxShape.Extent * scaleBox * 0.5f;
+        Vector3 boxHalfExtent = boxShape.Extent * scaleBox * 0.5f;
 
         // Check all box vertices against plane.
-        CheckContact(ref planeWorld, new Vector3F(-boxHalfExtent.X, -boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(-boxHalfExtent.X, -boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(-boxHalfExtent.X, boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(-boxHalfExtent.X, boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(-boxHalfExtent.X, -boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(-boxHalfExtent.X, -boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(-boxHalfExtent.X, boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(-boxHalfExtent.X, boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
 
-        CheckContact(ref planeWorld, new Vector3F(boxHalfExtent.X, -boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(boxHalfExtent.X, -boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(boxHalfExtent.X, boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
-        CheckContact(ref planeWorld, new Vector3F(boxHalfExtent.X, boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);  
+        CheckContact(ref planeWorld, new Vector3(boxHalfExtent.X, -boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(boxHalfExtent.X, -boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(boxHalfExtent.X, boxHalfExtent.Y, -boxHalfExtent.Z), ref poseBox, swapped, contactSet);
+        CheckContact(ref planeWorld, new Vector3(boxHalfExtent.X, boxHalfExtent.Y, boxHalfExtent.Z), ref poseBox, swapped, contactSet);  
       }
     }
 
 
     // Checks a vertex and adds a contact if the vertex touches the plane.
-    private void CheckContact(ref Plane planeWorld, Vector3F vertexLocal, ref Pose poseBox, bool swapped, ContactSet contactSet)
+    private void CheckContact(ref Plane planeWorld, Vector3 vertexLocal, ref Pose poseBox, bool swapped, ContactSet contactSet)
     {
-      Vector3F vertex = poseBox.ToWorldPosition(vertexLocal);
+      Vector3 vertex = poseBox.ToWorldPosition(vertexLocal);
 
-      float distance = Vector3F.Dot(vertex, planeWorld.Normal);
+      float distance = Vector3.Dot(vertex, planeWorld.Normal);
       
       float penetrationDepth = planeWorld.DistanceFromOrigin - distance;
 
@@ -130,10 +129,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
 
     // Adds a contact to the contact set.
-    private void AddContact(ref Vector3F vertex, ref Plane planeWorld, float penetrationDepth, bool swapped, ContactSet contactSet, CollisionQueryType type)
+    private void AddContact(ref Vector3 vertex, ref Plane planeWorld, float penetrationDepth, bool swapped, ContactSet contactSet, CollisionQueryType type)
     {
-      Vector3F position = vertex + planeWorld.Normal * (penetrationDepth / 2);
-      Vector3F normal = (swapped) ? -planeWorld.Normal : planeWorld.Normal;
+      Vector3 position = vertex + planeWorld.Normal * (penetrationDepth / 2);
+      Vector3 normal = (swapped) ? -planeWorld.Normal : planeWorld.Normal;
 
       // Update contact set.
       Contact contact = ContactHelper.CreateContact(contactSet, position, normal, penetrationDepth, false);

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -81,7 +81,7 @@ namespace DigitalRise.Geometry
     private Shape _shape;
 
 
-    public Vector3F Scale
+    public Vector3 Scale
     {
       get { return _scale; }
       set
@@ -90,7 +90,7 @@ namespace DigitalRise.Geometry
         _aabbIsValid = false;
       }
     }
-    private Vector3F _scale = new Vector3F(1, 1, 1);
+    private Vector3 _scale = new Vector3(1, 1, 1);
 
 
     // Events are not implemented.
@@ -117,7 +117,7 @@ namespace DigitalRise.Geometry
     public void Recycle()
     {
       Shape = null;
-      Scale = Vector3F.One;
+      Scale = Vector3.One;
       Pose = Pose.Identity;
       Pool.Recycle(this);
     }

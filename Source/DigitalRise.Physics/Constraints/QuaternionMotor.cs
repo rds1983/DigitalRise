@@ -6,7 +6,8 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -33,8 +34,8 @@ namespace DigitalRise.Physics.Constraints
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector3F _minImpulseLimits;
-    private Vector3F _maxImpulseLimits;
+    private Vector3 _minImpulseLimits;
+    private Vector3 _maxImpulseLimits;
     private readonly Constraint1D[] _constraints =
     {
       new Constraint1D(), 
@@ -180,17 +181,17 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
@@ -291,13 +292,13 @@ namespace DigitalRise.Physics.Constraints
         Debug.Assert(Numeric.AreEqual(angle, deltaRotation.Angle));
       }
 
-      Vector3F axis = new Vector3F(deltaRotation.X, deltaRotation.Y, deltaRotation.Z);
+      Vector3 axis = new Vector3(deltaRotation.X, deltaRotation.Y, deltaRotation.Z);
       if (!axis.TryNormalize())
       {
         // Do nothing.
-        _minImpulseLimits[0] = 0;
-        _minImpulseLimits[1] = 0;
-        _minImpulseLimits[2] = 0;
+        _minImpulseLimits.X = 0;
+        _minImpulseLimits.Y = 0;
+        _minImpulseLimits.Z = 0;
       }
       else
       {
@@ -311,8 +312,8 @@ namespace DigitalRise.Physics.Constraints
         if (!UseSingleAxisMode)
         {
           // In multi-axes-mode mode: constrain rotation on 2 orthogonal axes.
-          SetupConstraint(1, 0, 0, axis.Orthonormal1, deltaTime, errorReduction, softness, isActive);
-          SetupConstraint(2, 0, 0, axis.Orthonormal2, deltaTime, errorReduction, softness, isActive);
+          SetupConstraint(1, 0, 0, axis.Orthonormal1(), deltaTime, errorReduction, softness, isActive);
+          SetupConstraint(2, 0, 0, axis.Orthonormal2(), deltaTime, errorReduction, softness, isActive);
         }
       }
 
@@ -323,7 +324,7 @@ namespace DigitalRise.Physics.Constraints
     }
 
 
-    private void SetupConstraint(int index, float angle, float targetAngle, Vector3F axis,
+    private void SetupConstraint(int index, float angle, float targetAngle, Vector3 axis,
                                  float deltaTime, float errorReduction, float softness, bool isActive)
     {
       // Note: Cached constraint impulses are reset in Warmstart() if necessary.
@@ -333,8 +334,8 @@ namespace DigitalRise.Physics.Constraints
 
       if (!isActive)
       {
-        _minImpulseLimits[index] = 0;
-        _maxImpulseLimits[index] = 0;
+        _minImpulseLimits.SetComponentByIndex(index, 0);
+        _maxImpulseLimits.SetComponentByIndex(index, 0);
         constraint.ConstraintImpulse = 0;
         return;
       }
@@ -356,12 +357,12 @@ namespace DigitalRise.Physics.Constraints
 
       // ----- Impulse limits
       float impulseLimit = MaxForce * deltaTime;
-      _minImpulseLimits[index] = -impulseLimit;
-      _maxImpulseLimits[index] = impulseLimit;
+      _minImpulseLimits.SetComponentByIndex(index, -impulseLimit);
+      _maxImpulseLimits.SetComponentByIndex(index, impulseLimit);
 
       // Note: Softness must be set before!
       constraint.Softness = softness / deltaTime;
-      constraint.Prepare(BodyA, BodyB, Vector3F.Zero, -axis, Vector3F.Zero, axis);
+      constraint.Prepare(BodyA, BodyB, Vector3.Zero, -axis, Vector3.Zero, axis);
     }
 
 
@@ -370,12 +371,12 @@ namespace DigitalRise.Physics.Constraints
     {
       if (!UseSingleAxisMode)
       {
-        Vector3F impulse = new Vector3F();
+        Vector3 impulse = new Vector3();
         impulse.X = ApplyImpulse(0);
         impulse.Y = ApplyImpulse(1);
         impulse.Z = ApplyImpulse(2);
 
-        return impulse.LengthSquared > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
+        return impulse.LengthSquared() > Simulation.Settings.Constraints.MinConstraintImpulseSquared;
       }
       else
       {
@@ -387,7 +388,7 @@ namespace DigitalRise.Physics.Constraints
 
     private float ApplyImpulse(int index)
     {
-      if (_minImpulseLimits[index] != 0)
+      if (_minImpulseLimits.GetComponentByIndex(index) != 0)
       {
         Constraint1D constraint = _constraints[index];
         float relativeVelocity = constraint.GetRelativeVelocity(BodyA, BodyB);
@@ -395,8 +396,8 @@ namespace DigitalRise.Physics.Constraints
           BodyA,
           BodyB,
           relativeVelocity,
-          _minImpulseLimits[index],
-          _maxImpulseLimits[index]);
+          _minImpulseLimits.GetComponentByIndex(index),
+          _maxImpulseLimits.GetComponentByIndex(index));
 
         return impulse;
       }

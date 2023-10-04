@@ -13,7 +13,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.Particles;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -245,8 +245,8 @@ namespace DigitalRise.Graphics.Rendering
 
     // Camera information extracted from the view matrix.
     private Pose _cameraPose;         // The position and orientation of the camera in world space.
-    private Vector3F _cameraForward;  // The camera forward vector in world space.
-    private Vector3F _defaultNormal;  // The default normal vector.
+    private Vector3 _cameraForward;  // The camera forward vector in world space.
+    private Vector3 _defaultNormal;  // The default normal vector.
     #endregion
 
 
@@ -596,14 +596,14 @@ namespace DigitalRise.Graphics.Rendering
       if (sortByDistance)
       {
         // Determine distance to camera.
-        Vector3F cameraToNode = node.PoseWorld.Position - _cameraPose.Position;
+        Vector3 cameraToNode = node.PoseWorld.Position - _cameraPose.Position;
 
         // Planar distance: Project vector onto look direction.
-        distance = Vector3F.Dot(cameraToNode, _cameraForward);
+        distance = Vector3.Dot(cameraToNode, _cameraForward);
 
         // Use linear distance for viewpoint-oriented and world-oriented billboards.
         if (billboard.Orientation.Normal != BillboardNormal.ViewPlaneAligned)
-          distance = cameraToNode.LengthSquared * Math.Sign(distance);
+          distance = cameraToNode.LengthSquared() * Math.Sign(distance);
 
         if (backToFront)
           distance = -distance;
@@ -658,20 +658,20 @@ namespace DigitalRise.Graphics.Rendering
       if (sortByDistance)
       {
         // Position relative to ParticleSystemNode (root particle system).
-        Vector3F position = particleSystemData.Pose.Position;
+        Vector3 position = particleSystemData.Pose.Position;
 
         // Position in world space.
         position = node.PoseWorld.ToWorldPosition(position);
 
         // Determine distance to camera.
-        Vector3F cameraToNode = position - _cameraPose.Position;
+        Vector3 cameraToNode = position - _cameraPose.Position;
 
         // Planar distance: Project vector onto look direction.
-        distance = Vector3F.Dot(cameraToNode, _cameraForward);
+        distance = Vector3.Dot(cameraToNode, _cameraForward);
 
         // Use linear distance for viewpoint-oriented and world-oriented billboards.
         if (particleSystemData.BillboardOrientation.Normal != BillboardNormal.ViewPlaneAligned)
-          distance = cameraToNode.LengthSquared * Math.Sign(distance);
+          distance = cameraToNode.LengthSquared() * Math.Sign(distance);
 
         if (backToFront)
           distance = -distance;

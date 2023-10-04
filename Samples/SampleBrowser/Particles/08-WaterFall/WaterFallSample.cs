@@ -23,7 +23,7 @@ the direction of the water flow.",
       : base(game)
     {
       ParticleSystem particleSystem = WaterFall.CreateWaterFall(Services);
-      particleSystem.Pose = new Pose(new Vector3F(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
+      particleSystem.Pose = new Pose(new Vector3(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 
       _particleSystemNode = new ParticleSystemNode(particleSystem);

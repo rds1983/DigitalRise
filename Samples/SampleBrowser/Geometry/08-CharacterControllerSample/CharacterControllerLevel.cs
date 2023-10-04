@@ -7,7 +7,8 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Geometry
 {
@@ -19,24 +20,24 @@ namespace Samples.Geometry
     public static void Load(CollisionDomain collisionDomain)
     {
       // Create a box for the ground.
-      AddObject("Ground", new Pose(new Vector3F(0, -5, 0)), new BoxShape(60, 10, 60), collisionDomain);
+      AddObject("Ground", new Pose(new Vector3(0, -5, 0)), new BoxShape(60, 10, 60), collisionDomain);
 
       // Create a small flying sphere to visualize the approx. head height. - This is just
       // for debugging so that we have a feeling for heights.
-      AddObject("Sphere", new Pose(new Vector3F(0, 1.5f, 0)), new SphereShape(0.2f), collisionDomain);
+      AddObject("Sphere", new Pose(new Vector3(0, 1.5f, 0)), new SphereShape(0.2f), collisionDomain);
 
       // Create small walls at the level boundary.
-      AddObject("WallLeft", new Pose(new Vector3F(-30, 1, 0)), new BoxShape(0.3f, 2, 60), collisionDomain);
-      AddObject("WallRight", new Pose(new Vector3F(30, 1, 0)), new BoxShape(0.3f, 2, 60), collisionDomain);
-      AddObject("WallFront", new Pose(new Vector3F(0, 1, -30)), new BoxShape(60, 2, 0.3f), collisionDomain);
-      AddObject("WallBack", new Pose(new Vector3F(0, 1, 30)), new BoxShape(60, 2, 0.3f), collisionDomain);
+      AddObject("WallLeft", new Pose(new Vector3(-30, 1, 0)), new BoxShape(0.3f, 2, 60), collisionDomain);
+      AddObject("WallRight", new Pose(new Vector3(30, 1, 0)), new BoxShape(0.3f, 2, 60), collisionDomain);
+      AddObject("WallFront", new Pose(new Vector3(0, 1, -30)), new BoxShape(60, 2, 0.3f), collisionDomain);
+      AddObject("WallBack", new Pose(new Vector3(0, 1, 30)), new BoxShape(60, 2, 0.3f), collisionDomain);
 
       // Create a few bigger objects.
       // We position the boxes so that we have a few corners we can run into. Character controllers
       // should be stable when the user runs into corners.
-      AddObject("House0", new Pose(new Vector3F(10, 1, -10)), new BoxShape(8, 2, 8f), collisionDomain);
-      AddObject("House1", new Pose(new Vector3F(13, 1, -4)), new BoxShape(2, 2, 4), collisionDomain);
-      AddObject("House2", new Pose(new Vector3F(10, 2, -15), Matrix33F.CreateRotationY(-0.3f)), new BoxShape(8, 4, 2), collisionDomain);
+      AddObject("House0", new Pose(new Vector3(10, 1, -10)), new BoxShape(8, 2, 8f), collisionDomain);
+      AddObject("House1", new Pose(new Vector3(13, 1, -4)), new BoxShape(2, 2, 4), collisionDomain);
+      AddObject("House2", new Pose(new Vector3(10, 2, -15), Matrix33F.CreateRotationY(-0.3f)), new BoxShape(8, 4, 2), collisionDomain);
 
       //
       // Create stairs with increasing step height.
@@ -49,7 +50,7 @@ namespace Samples.Geometry
       for (int i = 0; i < 10; i++)
       {
         float stepHeight = 0.1f + i * 0.05f;
-        Pose pose = new Pose(new Vector3F(0, startHeight + stepHeight / 2, -2 - i * stepDepth));
+        Pose pose = new Pose(new Vector3(0, startHeight + stepHeight / 2, -2 - i * stepDepth));
         BoxShape shape = new BoxShape(2, stepHeight, stepDepth);
         AddObject("Step" + i, pose, shape, collisionDomain);
         startHeight += stepHeight;
@@ -84,24 +85,24 @@ namespace Samples.Geometry
         }
       }
       var heightField = new HeightField(0, 0, 20, 20, samples, numberOfSamplesX, numberOfSamplesZ);
-      AddObject("Heightfield", new Pose(new Vector3F(10, 0, 10)), heightField, collisionDomain);
+      AddObject("Heightfield", new Pose(new Vector3(10, 0, 10)), heightField, collisionDomain);
 
       // Create rubble on the floor (small random objects on the floor).
       // Our character should be able to move over small bumps on the ground.
       for (int i = 0; i < 50; i++)
       {
         Pose pose = new Pose(
-          new Vector3F(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20)),
+          new Vector3(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20)),
           RandomHelper.Random.NextQuaternionF());
-        BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3F(0.05f, 0.8f));
+        BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3(0.05f, 0.8f));
         AddObject("Stone" + i, pose, shape, collisionDomain);
       }
 
       // Create some slopes to see how our character performs on/under sloped surfaces.
       // Here we can test how the character controller behaves if the head touches an inclined
       // ceiling.
-      AddObject("SlopeGround", new Pose(new Vector3F(-2, 1.8f, -12), QuaternionF.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
-      AddObject("SlopeRoof", new Pose(new Vector3F(-2, 5.6f, -12), QuaternionF.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
+      AddObject("SlopeGround", new Pose(new Vector3(-2, 1.8f, -12), QuaternionF.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
+      AddObject("SlopeRoof", new Pose(new Vector3(-2, 5.6f, -12), QuaternionF.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
 
       // Slopes with different tilt angles.
       // The character controller has a slope limit. Only flat slopes should be climbable. 
@@ -109,7 +110,7 @@ namespace Samples.Geometry
       {
         float stepHeight = 0.1f + i * 0.1f;
         Pose pose = new Pose(
-          new Vector3F(-10, i * 0.5f, -i * 2),
+          new Vector3(-10, i * 0.5f, -i * 2),
           Matrix33F.CreateRotationX(MathHelper.ToRadians(10) + i * MathHelper.ToRadians(10)));
         BoxShape shape = new BoxShape(8 * (1 - i * 0.1f), 0.5f, 30);
         AddObject("Slope" + i, pose, shape, collisionDomain);
@@ -120,8 +121,8 @@ namespace Samples.Geometry
       // This objects let's us test how the character controller behaves while falling and
       // sliding along a vertical wall. (Run up the slope and then jump down while moving into
       // the wall.)
-      AddObject("LongSlope", new Pose(new Vector3F(-20, 3, -10), Matrix33F.CreateRotationX(0.4f)), new BoxShape(4, 5f, 30), collisionDomain);
-      AddObject("LongSlopeWall", new Pose(new Vector3F(-22, 5, -10)), new BoxShape(0.5f, 10f, 25), collisionDomain);
+      AddObject("LongSlope", new Pose(new Vector3(-20, 3, -10), Matrix33F.CreateRotationX(0.4f)), new BoxShape(4, 5f, 30), collisionDomain);
+      AddObject("LongSlopeWall", new Pose(new Vector3(-22, 5, -10)), new BoxShape(0.5f, 10f, 25), collisionDomain);
 
       // Create a mesh object to test walking on triangle meshes.
       // Normally, the mesh would be loaded from a file. Here, we make a composite shape and 
@@ -130,9 +131,9 @@ namespace Samples.Geometry
       // shape instead of the triangle mesh would be a lot faster.
       CompositeShape compositeShape = new CompositeShape();
       compositeShape.Children.Add(new GeometricObject(heightField, Pose.Identity));
-      compositeShape.Children.Add(new GeometricObject(new CylinderShape(1, 2), new Pose(new Vector3F(10, 1, 10))));
-      compositeShape.Children.Add(new GeometricObject(new SphereShape(3), new Pose(new Vector3F(15, 0, 15))));
-      compositeShape.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3F(15, 0, 5))));
+      compositeShape.Children.Add(new GeometricObject(new CylinderShape(1, 2), new Pose(new Vector3(10, 1, 10))));
+      compositeShape.Children.Add(new GeometricObject(new SphereShape(3), new Pose(new Vector3(15, 0, 15))));
+      compositeShape.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3(15, 0, 5))));
       ITriangleMesh mesh = compositeShape.GetMesh(0.01f, 3);
       TriangleMeshShape meshShape = new TriangleMeshShape(mesh);
 
@@ -148,7 +149,7 @@ namespace Samples.Geometry
         BottomUpBuildThreshold = 0,
       };
 
-      AddObject("Mesh", new Pose(new Vector3F(-30, 0, 10)), meshShape, collisionDomain);
+      AddObject("Mesh", new Pose(new Vector3(-30, 0, 10)), meshShape, collisionDomain);
     }
 
 

@@ -12,10 +12,9 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using System.ComponentModel;
 using System.Dynamic;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -73,7 +72,7 @@ namespace DigitalRise.Geometry.Shapes
     //--------------------------------------------------------------
 
     // The cached local space AABB
-    internal Aabb _aabbLocal = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+    internal Aabb _aabbLocal = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
     #endregion
 
 
@@ -88,14 +87,14 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This method returns a random vertex of the triangle mesh.
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
         // Return any point. - InnerPoint is mostly used for MPR. But MPR will not be used for 
         // TriangleMeshes. So the exact result doesn't matter.
         if (_mesh.NumberOfTriangles == 0)
-          return new Vector3F();
+          return new Vector3();
 
         // Take a triangle in the "middle".
         Triangle triangle = _mesh.GetTriangle(_mesh.NumberOfTriangles / 2);
@@ -439,7 +438,7 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       if (Numeric.IsNaN(_aabbLocal.Minimum.X))
       {
@@ -461,7 +460,7 @@ namespace DigitalRise.Geometry.Shapes
 
               for (int j = 0; j < 3; j++)
               {
-                Vector3F vertex = triangle[j];
+                Vector3 vertex = triangle[j];
                 if (isFirst)
                 {
                   isFirst = false;
@@ -567,7 +566,7 @@ namespace DigitalRise.Geometry.Shapes
         throw new ArgumentOutOfRangeException("triangleIndex");
 
       // Set cached AABB to "invalid".
-      _aabbLocal = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+      _aabbLocal = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
 
       // Fill new spatial partition.
       if (_partition != null)
@@ -754,11 +753,11 @@ namespace DigitalRise.Geometry.Shapes
         // We only have an ITriangleMesh.
         // Do same as above, but this time we do not have indices. Instead we use vertices
         // directly.
-        // We can use Pair<T> instead of Pair<T, T> because Pair<Vector3F>. We cannot use
+        // We can use Pair<T> instead of Pair<T, T> because Pair<Vector3>. We cannot use
         // Pair<int> above; maybe because the hashcode of two ints is to weak and there are
         // a lot of collisions in the hashtable.
 
-        var hashTable = new Dictionary<Pair<Vector3F>, EdgeEntry>(3 * numberOfTriangles);
+        var hashTable = new Dictionary<Pair<Vector3>, EdgeEntry>(3 * numberOfTriangles);
 
         for (int triangleIndex = 0; triangleIndex < numberOfTriangles; triangleIndex++)
         {
@@ -778,7 +777,7 @@ namespace DigitalRise.Geometry.Shapes
             //  Mathematics.MathHelper.Swap(ref vertex0, ref vertex1);
 
             EdgeEntry edge;
-            if (hashTable.TryGetValue(new Pair<Vector3F>(vertex0, vertex1), out edge))
+            if (hashTable.TryGetValue(new Pair<Vector3>(vertex0, vertex1), out edge))
             {
               // Found a neighbor triangle!
               TriangleNeighbors[triangleIndex * 3 + edgeIndex] = edge.TriangleIndex;
@@ -792,7 +791,7 @@ namespace DigitalRise.Geometry.Shapes
                 TriangleIndex = triangleIndex,
                 EdgeIndex = edgeIndex,
               };
-              hashTable.Add(new Pair<Vector3F>(vertex0, vertex1), edge);
+              hashTable.Add(new Pair<Vector3>(vertex0, vertex1), edge);
             }
           }
         }
@@ -804,7 +803,7 @@ namespace DigitalRise.Geometry.Shapes
     ///// Returns <see langword="true"/> if vector v0 is greater than vector v1 using lexicographic
     ///// ordering.
     ///// </summary>
-    //private static bool ShouldSwap(Vector3F v0, Vector3F v1)
+    //private static bool ShouldSwap(Vector3 v0, Vector3 v1)
     //{
     //  if (v0.X != v1.X)
     //    return v0.X > v1.X;

@@ -16,7 +16,8 @@
 using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -191,7 +192,7 @@ namespace DigitalRise.Graphics
     /// Gets the sun position in world space in meters.
     /// </summary>
     /// <value>The sun position in world space in meters.</value>
-    public Vector3F SunPosition { get; private set; }
+    public Vector3 SunPosition { get; private set; }
 
 
     /// <summary>
@@ -201,14 +202,14 @@ namespace DigitalRise.Graphics
     /// <value>
     /// The direction to the sun as seen from within the atmosphere considering optical refraction.
     /// </value>
-    public Vector3F SunDirectionRefracted { get; private set; }
+    public Vector3 SunDirectionRefracted { get; private set; }
 
 
     /// <summary>
     /// Gets the moon position in world space.
     /// </summary>
     /// <value>The moon position in world space in meters.</value>
-    public Vector3F MoonPosition { get; private set; }
+    public Vector3 MoonPosition { get; private set; }
 
 
     /// <summary>
@@ -349,7 +350,7 @@ namespace DigitalRise.Graphics
       // Earth radius at the equator. (We assume a perfect sphere. We do not support geodetic 
       // systems with imperfect earth spheres.)
       const float earthRadius = 6378.137f * 1000;
-      var equatorialToHorizontalTranslation = new Vector3F(0, -earthRadius - Altitude, 0);
+      var equatorialToHorizontalTranslation = new Vector3(0, -earthRadius - Altitude, 0);
 
       // Switching of the coordinate axes between Equatorial (z up) and Horizontal (y up).
       var axisSwitch = new Matrix33F(0, 1, 0,
@@ -393,12 +394,12 @@ namespace DigitalRise.Graphics
                                   - 0.000141f * MathF.Cos(2.0f * meanAnomaly);
 
       // Sun position.
-      Vector3F sunPositionEcliptic = ToCartesian(geocentricDistance, 0, _sunEclipticLongitude);
-      Vector3F sunPositionEquatorial = EclipticToEquatorial * sunPositionEcliptic;
+      Vector3 sunPositionEcliptic = ToCartesian(geocentricDistance, 0, _sunEclipticLongitude);
+      Vector3 sunPositionEquatorial = EclipticToEquatorial * sunPositionEcliptic;
 
       // Note: The sun formula is already corrected by precession.
       SunPosition = _equatorialToWorldNoPrecession.TransformDirection(sunPositionEquatorial);
-      Vector3F sunDirection = SunPosition.Normalized;
+      Vector3 sunDirection = SunPosition.Normalized();
 
       // Convert from astronomical units to meters.
       const float au = 149597870700f; // 1 au = 149,597,870,700 m
@@ -482,10 +483,10 @@ namespace DigitalRise.Graphics
       float dMoon = 1.0f / pip; // Earth radii
 
       // Moon position in Cartesian coordinates of the ecliptic coordinates system.
-      Vector3F moonPositionEcliptic = ToCartesian(dMoon, latitude, longitude);
+      Vector3 moonPositionEcliptic = ToCartesian(dMoon, latitude, longitude);
 
       // Moon position in Cartesian coordinates of the equatorial coordinates system.
-      Vector3F moonPositionEquatorial = EclipticToEquatorial * moonPositionEcliptic;
+      Vector3 moonPositionEquatorial = EclipticToEquatorial * moonPositionEcliptic;
 
       // To [m].
       moonPositionEquatorial *= 6378.137f * 1000;

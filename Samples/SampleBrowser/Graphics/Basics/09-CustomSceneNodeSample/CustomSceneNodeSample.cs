@@ -47,7 +47,7 @@ renderer is implemented.",
       // Add a few TextNodes. Position them along a circle.
       for (int i = 0; i < 36; i++)
       {
-        Vector3F position = Matrix33F.CreateRotationZ(MathHelper.ToRadians((float)i * 10)) * new Vector3F(1, 0, 0);
+        Vector3 position = Matrix33F.CreateRotationZ(MathHelper.ToRadians((float)i * 10)) * new Vector3(1, 0, 0);
         var textNode = new TextNode
         {
           PoseLocal = new Pose(position),

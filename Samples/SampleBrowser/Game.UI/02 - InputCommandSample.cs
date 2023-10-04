@@ -32,7 +32,7 @@ also be changed.",
       GraphicsScreen.ClearBackground = true;
 
       _position = new Vector2(600, 300);
-      _color = new Color((Vector3)RandomHelper.Random.NextVector3F(0, 1));
+      _color = new Color((Vector3)RandomHelper.Random.NextVector3(0, 1));
 
       // Create a command which detect presses of gamepad <A> or keyboard <Space>.
       _commandChangeColor = new ConfigurableInputCommand("ChangeColor")
@@ -120,12 +120,12 @@ also be changed.",
 
       // Check command value to determine if color should be changed.
       if (_commandChangeColor.Value > 0)
-        _color = new Color((Vector3)RandomHelper.Random.NextVector3F(0, 1));
+        _color = new Color((Vector3)RandomHelper.Random.NextVector3(0, 1));
 
       // Draw a sphere.
       var debugRenderer = GraphicsScreen.DebugRenderer2D;
       debugRenderer.Clear();
-      debugRenderer.DrawSphere(100, new Pose(new Vector3F(_position.X, _position.Y, 0.5f)), _color, false, false);
+      debugRenderer.DrawSphere(100, new Pose(new Vector3(_position.X, _position.Y, 0.5f)), _color, false, false);
     }
   }
 }

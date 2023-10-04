@@ -286,14 +286,14 @@ namespace DigitalRise.Graphics.Rendering
         // Get extent of bounding box. For infinite shapes we simply set a large value.
         var boundingBoxExtent = boundingBoxShape != null
                               ? boundingBoxShape.Extent * lightNode.ScaleWorld
-                              : new Vector3F(1e20f);
+                              : new Vector3(1e20f);
 
         // Falloff can only be used for box shapes but not for infinite shapes.
         float falloffRange = (boundingBoxShape != null) ? light.FalloffRange : 0;
 
         // AABB for localization in local space.
         // Use invalid min and max (min > max) to disable localization.
-        Aabb projectionAabb = new Aabb(new Vector3F(1), new Vector3F(-1));
+        Aabb projectionAabb = new Aabb(new Vector3(1), new Vector3(-1));
         if (light.EnableLocalizedReflection)
         {
           if (light.LocalizedReflectionBox.HasValue)
@@ -342,7 +342,7 @@ namespace DigitalRise.Graphics.Rendering
 
         // Convert frustum far corners from view space to world space.
         for (int j = 0; j < _frustumFarCorners.Length; j++)
-          _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_frustumFarCorners[j]);
+          _frustumFarCorners[j] = (Vector3)cameraPose.ToWorldDirection((Vector3)_frustumFarCorners[j]);
 
         EffectPass passLight = null;
         if (enableDiffuse &&  enableSpecular)

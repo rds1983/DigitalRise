@@ -29,7 +29,7 @@ and bone names.",
     private AvatarPose _avatarPose;
 
     // The world space position and orientation of the avatar.
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
 
 
     public BasicAvatarSample(Microsoft.Xna.Framework.Game game)
@@ -46,7 +46,7 @@ and bone names.",
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Create a random avatar.
@@ -95,7 +95,7 @@ and bone names.",
           SkeletonHelper.SetBoneRotationAbsolute(skeletonPose, elbowIndex, QuaternionF.CreateRotationY(ConstantsF.PiOver2));
 
           // Draw avatar skeleton for debugging.
-          _debugRenderer.DrawSkeleton(skeletonPose, _pose, Vector3F.One, 0.02f, Color.Orange, true);
+          _debugRenderer.DrawSkeleton(skeletonPose, _pose, Vector3.One, 0.02f, Color.Orange, true);
         }
       }
     }

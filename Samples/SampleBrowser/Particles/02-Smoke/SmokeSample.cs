@@ -35,15 +35,15 @@ App Hub XNA Particle Sample).",
       GraphicsScreen.Scene.Children.Add(_particleSystemNode0);
 
       _particleSystemNode1 = new ParticleSystemNode(particleSystem);
-      _particleSystemNode1.PoseWorld = new Pose(new Vector3F(5, 0, -5));
-      _particleSystemNode1.Color = new Vector3F(0.9f, 0.8f, 0.7f);
+      _particleSystemNode1.PoseWorld = new Pose(new Vector3(5, 0, -5));
+      _particleSystemNode1.Color = new Vector3(0.9f, 0.8f, 0.7f);
       _particleSystemNode1.Alpha = 0.8f;
       _particleSystemNode1.AngleOffset = 0.3f;
       GraphicsScreen.Scene.Children.Add(_particleSystemNode1);
 
       _particleSystemNode2 = new ParticleSystemNode(particleSystem);
-      _particleSystemNode2.PoseWorld = new Pose(new Vector3F(-10, 5, -5), Matrix33F.CreateRotationZ(-ConstantsF.PiOver2));
-      _particleSystemNode2.Color = new Vector3F(0.5f, 0.5f, 0.5f);
+      _particleSystemNode2.PoseWorld = new Pose(new Vector3(-10, 5, -5), Matrix33F.CreateRotationZ(-ConstantsF.PiOver2));
+      _particleSystemNode2.Color = new Vector3(0.5f, 0.5f, 0.5f);
       _particleSystemNode2.AngleOffset = 0.6f;
       GraphicsScreen.Scene.Children.Add(_particleSystemNode2);
     }

@@ -93,9 +93,9 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #1",
         StrokeThickness = 1,
-        StrokeColor = new Vector3F(0.7f, 0.3f, 0.5f),
+        StrokeColor = new Vector3(0.7f, 0.3f, 0.5f),
         StrokeAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(-2, 1, 0))
+        PoseLocal = new Pose(new Vector3(-2, 1, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -109,11 +109,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #2",
         StrokeThickness = 3,
-        StrokeColor = new Vector3F(0.2f, 0.3f, 0.3f),
+        StrokeColor = new Vector3(0.2f, 0.3f, 0.3f),
         StrokeAlpha = 0.5f,
         StrokeDashPattern = new Vector4F(10, 2, 3, 2),
         DashInWorldSpace = false,
-        PoseLocal = new Pose(new Vector3F(-1, 1, 0))
+        PoseLocal = new Pose(new Vector3(-1, 1, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -127,13 +127,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #3",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.3f, 0, 0.2f),
+        StrokeColor = new Vector3(0.3f, 0, 0.2f),
         StrokeAlpha = 1,
         StrokeDashPattern = new Vector4F(10, 2, 3, 2) / 100,
         DashInWorldSpace = true,
-        FillColor = new Vector3F(0.7f, 0, 0.5f),
+        FillColor = new Vector3(0.7f, 0, 0.5f),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-0, 1, 0))
+        PoseLocal = new Pose(new Vector3(-0, 1, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -147,13 +147,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #4",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 0, 0),
+        StrokeColor = new Vector3(0, 0, 0),
         StrokeAlpha = 1,
         StrokeDashPattern = new Vector4F(1, 1, 1, 1) / 100,
         DashInWorldSpace = true,
-        FillColor = new Vector3F(0.3f, 0.3f, 0.3f),
+        FillColor = new Vector3(0.3f, 0.3f, 0.3f),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(1, 1, 0))
+        PoseLocal = new Pose(new Vector3(1, 1, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -167,11 +167,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #5",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.3f),
+        StrokeColor = new Vector3(0.3f),
         StrokeAlpha = 1,
-        FillColor = new Vector3F(0.3f),
+        FillColor = new Vector3(0.3f),
         FillAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(2, 1, 0))
+        PoseLocal = new Pose(new Vector3(2, 1, 0))
       };
       _scene.Children.Add(figureNode);
     }
@@ -190,9 +190,9 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Ellipse #1",
         StrokeThickness = 1,
-        StrokeColor = new Vector3F(0.7f, 0.3f, 0.5f),
+        StrokeColor = new Vector3(0.7f, 0.3f, 0.5f),
         StrokeAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(-2, 2, 0))
+        PoseLocal = new Pose(new Vector3(-2, 2, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -206,11 +206,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Ellipse #2",
         StrokeThickness = 3,
-        StrokeColor = new Vector3F(0.2f, 0.3f, 0.3f),
+        StrokeColor = new Vector3(0.2f, 0.3f, 0.3f),
         StrokeAlpha = 0.5f,
         StrokeDashPattern = new Vector4F(10, 2, 3, 2),
         DashInWorldSpace = false,
-        PoseLocal = new Pose(new Vector3F(-1, 2, 0))
+        PoseLocal = new Pose(new Vector3(-1, 2, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -224,13 +224,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Ellipse #3",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.3f, 0, 0.2f),
+        StrokeColor = new Vector3(0.3f, 0, 0.2f),
         StrokeAlpha = 1,
         StrokeDashPattern = new Vector4F(10, 2, 3, 2) / 100,
         DashInWorldSpace = true,
-        FillColor = new Vector3F(0.7f, 0, 0.5f),
+        FillColor = new Vector3(0.7f, 0, 0.5f),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-0, 2, 0))
+        PoseLocal = new Pose(new Vector3(-0, 2, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -244,13 +244,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Ellipse #4",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 0, 0),
+        StrokeColor = new Vector3(0, 0, 0),
         StrokeAlpha = 1,
         StrokeDashPattern = new Vector4F(1, 1, 1, 1) / 100,
         DashInWorldSpace = true,
-        FillColor = new Vector3F(0.3f, 0.3f, 0.3f),
+        FillColor = new Vector3(0.3f, 0.3f, 0.3f),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(1, 2, 0))
+        PoseLocal = new Pose(new Vector3(1, 2, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -264,11 +264,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Ellipse #5",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.3f),
+        StrokeColor = new Vector3(0.3f),
         StrokeAlpha = 1,
-        FillColor = new Vector3F(0.3f),
+        FillColor = new Vector3(0.3f),
         FillAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(2, 2, 0))
+        PoseLocal = new Pose(new Vector3(2, 2, 0))
       };
       _scene.Children.Add(figureNode);
     }
@@ -288,11 +288,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #6",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f, 0.2f, 0.3f),
-        FillColor = new Vector3F(0.1f, 0.2f, 0.3f),
+        StrokeColor = new Vector3(0.1f, 0.2f, 0.3f),
+        FillColor = new Vector3(0.1f, 0.2f, 0.3f),
         StrokeAlpha = 0.5f,
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-4, 1, -2))
+        PoseLocal = new Pose(new Vector3(-4, 1, -2))
       };
       _scene.Children.Add(figureNode);
 
@@ -300,11 +300,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #7",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f, 0.2f, 0.3f),
-        FillColor = new Vector3F(0.1f, 0.2f, 0.3f),
+        StrokeColor = new Vector3(0.1f, 0.2f, 0.3f),
+        FillColor = new Vector3(0.1f, 0.2f, 0.3f),
         StrokeAlpha = 0.5f,
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-4, 1, -1))
+        PoseLocal = new Pose(new Vector3(-4, 1, -1))
       };
       _scene.Children.Add(figureNode);
 
@@ -312,11 +312,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #8",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f, 0.2f, 0.3f),
-        FillColor = new Vector3F(0.1f, 0.2f, 0.3f),
+        StrokeColor = new Vector3(0.1f, 0.2f, 0.3f),
+        FillColor = new Vector3(0.1f, 0.2f, 0.3f),
         StrokeAlpha = 0.5f,
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-4, 1, 0))
+        PoseLocal = new Pose(new Vector3(-4, 1, 0))
       };
       _scene.Children.Add(figureNode);
 
@@ -324,11 +324,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #9",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f, 0.2f, 0.3f),
-        FillColor = new Vector3F(0.1f, 0.2f, 0.3f),
+        StrokeColor = new Vector3(0.1f, 0.2f, 0.3f),
+        FillColor = new Vector3(0.1f, 0.2f, 0.3f),
         StrokeAlpha = 0.5f,
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-4, 1, 1))
+        PoseLocal = new Pose(new Vector3(-4, 1, 1))
       };
       _scene.Children.Add(figureNode);
 
@@ -336,11 +336,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Rectangle #10",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f, 0.2f, 0.3f),
-        FillColor = new Vector3F(0.1f, 0.2f, 0.3f),
+        StrokeColor = new Vector3(0.1f, 0.2f, 0.3f),
+        FillColor = new Vector3(0.1f, 0.2f, 0.3f),
         StrokeAlpha = 0.5f,
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(-4, 1, 2))
+        PoseLocal = new Pose(new Vector3(-4, 1, 2))
       };
       _scene.Children.Add(figureNode);
     }
@@ -354,13 +354,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         majorGridLines.Segments.Add(new LineSegment3F
         {
-          Point1 = new Vector3F(-5, 0, -5 + i),
-          Point2 = new Vector3F(5, 0, -5 + i),
+          Point1 = new Vector3(-5, 0, -5 + i),
+          Point2 = new Vector3(5, 0, -5 + i),
         });
         majorGridLines.Segments.Add(new LineSegment3F
         {
-          Point1 = new Vector3F(-5 + i, 0, -5),
-          Point2 = new Vector3F(-5 + i, 0, 5),
+          Point1 = new Vector3(-5 + i, 0, -5),
+          Point2 = new Vector3(-5 + i, 0, 5),
         });
       }
 
@@ -369,13 +369,13 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         minorGridLines.Segments.Add(new LineSegment3F
         {
-          Point1 = new Vector3F(-5, 0, -4.5f + i),
-          Point2 = new Vector3F(5, 0, -4.5f + i),
+          Point1 = new Vector3(-5, 0, -4.5f + i),
+          Point2 = new Vector3(5, 0, -4.5f + i),
         });
         minorGridLines.Segments.Add(new LineSegment3F
         {
-          Point1 = new Vector3F(-4.5f + i, 0, -5),
-          Point2 = new Vector3F(-4.5f + i, 0, 5),
+          Point1 = new Vector3(-4.5f + i, 0, -5),
+          Point2 = new Vector3(-4.5f + i, 0, 5),
         });
       }
 
@@ -384,7 +384,7 @@ can be observed between the big grid and the smaller transparent figures.",
         Name = "Major grid lines",
         PoseLocal = Pose.Identity,
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f),
+        StrokeColor = new Vector3(0.1f),
         StrokeAlpha = 1f,
       };
       var minorLinesNode = new FigureNode(minorGridLines)
@@ -392,7 +392,7 @@ can be observed between the big grid and the smaller transparent figures.",
         Name = "Minor grid lines",
         PoseLocal = Pose.Identity,
         StrokeThickness = 1,
-        StrokeColor = new Vector3F(0.1f),
+        StrokeColor = new Vector3(0.1f),
         StrokeAlpha = 1f,
         DashInWorldSpace = true,
         StrokeDashPattern = new Vector4F(10, 4, 0, 0) / 200,
@@ -401,7 +401,7 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Grid",
         Children = new SceneNodeCollection(),
-        PoseLocal = new Pose(new Vector3F(0, -0.5f, 0)),
+        PoseLocal = new Pose(new Vector3(0, -0.5f, 0)),
       };
       gridNode.Children.Add(majorLinesNode);
       gridNode.Children.Add(minorLinesNode);
@@ -414,10 +414,10 @@ can be observed between the big grid and the smaller transparent figures.",
     {
       var gridNode2 = _scene.GetSceneNode("Grid").Clone();
       gridNode2.Name = "Grid (Clone)";
-      ((FigureNode)gridNode2.Children[0]).StrokeColor = new Vector3F(0, 0.8f, 0.2f);
-      ((FigureNode)gridNode2.Children[1]).StrokeColor = new Vector3F(0, 0.8f, 0.2f);
-      gridNode2.PoseLocal = new Pose(new Vector3F(-4, 3, 0), RandomHelper.Random.NextQuaternionF());
-      gridNode2.ScaleLocal = new Vector3F(0.2f, 1, 0.1f);
+      ((FigureNode)gridNode2.Children[0]).StrokeColor = new Vector3(0, 0.8f, 0.2f);
+      ((FigureNode)gridNode2.Children[1]).StrokeColor = new Vector3(0, 0.8f, 0.2f);
+      gridNode2.PoseLocal = new Pose(new Vector3(-4, 3, 0), RandomHelper.Random.NextQuaternionF());
+      gridNode2.ScaleLocal = new Vector3(0.2f, 1, 0.1f);
       _scene.Children.Add(gridNode2);
     }
 
@@ -426,7 +426,7 @@ can be observed between the big grid and the smaller transparent figures.",
     private void CreateRandomPath()
     {
       var path = new Path3F();
-      var point = new Vector3F(0, 0, 0);
+      var point = new Vector3(0, 0, 0);
       path.Add(new PathKey3F
       {
         Interpolation = SplineInterpolation.CatmullRom,
@@ -435,7 +435,7 @@ can be observed between the big grid and the smaller transparent figures.",
       });
       for (int i = 1; i < 10; i++)
       {
-        point += RandomHelper.Random.NextQuaternionF().Rotate(new Vector3F(0, 0.5f, 0));
+        point += RandomHelper.Random.NextQuaternionF().Rotate(new Vector3(0, 0.5f, 0));
         path.Add(new PathKey3F
         {
           Interpolation = SplineInterpolation.CatmullRom,
@@ -449,9 +449,9 @@ can be observed between the big grid and the smaller transparent figures.",
       var pathLineNode = new FigureNode(pathFigure)
       {
         Name = "RandomPath",
-        PoseLocal = new Pose(new Vector3F(4, 1, 2)),
+        PoseLocal = new Pose(new Vector3(4, 1, 2)),
         StrokeThickness = 3,
-        StrokeColor = new Vector3F(0.5f, 0.3f, 1),
+        StrokeColor = new Vector3(0.5f, 0.3f, 1),
         StrokeAlpha = 1f,
         DashInWorldSpace = true,
         StrokeDashPattern = new Vector4F(10, 1, 1, 1) / 100,
@@ -475,8 +475,8 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         var transformedEllipse = new TransformedFigure(ellipse)
         {
-          Scale = new Vector3F(0.4f, 0.2f, 1),
-          Pose = new Pose(new Vector3F(-2 + i * 0.5f, 0, 0), Matrix33F.CreateRotationX(ConstantsF.PiOver2 * (i % 2)))
+          Scale = new Vector3(0.4f, 0.2f, 1),
+          Pose = new Pose(new Vector3(-2 + i * 0.5f, 0, 0), Matrix33F.CreateRotationX(ConstantsF.PiOver2 * (i % 2)))
         };
         compositeFigure.Children.Add(transformedEllipse);
       }
@@ -485,9 +485,9 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Chain",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0.1f),
+        StrokeColor = new Vector3(0.1f),
         StrokeAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(0, 3, 0)),
+        PoseLocal = new Pose(new Vector3(0, 3, 0)),
       });
     }
 
@@ -499,8 +499,8 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Gizmo",
         Children = new SceneNodeCollection(),
-        PoseLocal = new Pose(new Vector3F(3, 2, 0)),
-        ScaleLocal = new Vector3F(0.5f)
+        PoseLocal = new Pose(new Vector3(3, 2, 0)),
+        ScaleLocal = new Vector3(0.5f)
       };
 
       // Red arrow
@@ -512,8 +512,8 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Gizmo X",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(1, 0, 0),
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        StrokeColor = new Vector3(1, 0, 0),
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
@@ -526,8 +526,8 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Gizmo Y",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 1, 0),
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        StrokeColor = new Vector3(0, 1, 0),
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
@@ -540,8 +540,8 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Gizmo Z",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 0, 1),
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        StrokeColor = new Vector3(0, 0, 1),
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
@@ -564,73 +564,73 @@ can be observed between the big grid and the smaller transparent figures.",
         false));
       var transformedArc = new TransformedFigure(arc)
       {
-        Scale = new Vector3F(0.333f),
+        Scale = new Vector3(0.333f),
         Pose = new Pose(Matrix33F.CreateRotationY(MathHelper.ToRadians(-90)))
       };
       figureNode = new FigureNode(transformedArc)
       {
         Name = "Gizmo YZ",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(1, 0, 0),
-        FillColor = new Vector3F(1, 0, 0),
+        StrokeColor = new Vector3(1, 0, 0),
+        FillColor = new Vector3(1, 0, 0),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
       // Green arc
       transformedArc = new TransformedFigure(arc)
       {
-        Scale = new Vector3F(0.333f),
+        Scale = new Vector3(0.333f),
         Pose = new Pose(Matrix33F.CreateRotationX(MathHelper.ToRadians(90)))
       };
       figureNode = new FigureNode(transformedArc)
       {
         Name = "Gizmo XZ",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 1, 0),
-        FillColor = new Vector3F(0, 1, 0),
+        StrokeColor = new Vector3(0, 1, 0),
+        FillColor = new Vector3(0, 1, 0),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
       // Blue arc
       transformedArc = new TransformedFigure(arc)
       {
-        Scale = new Vector3F(0.333f),
+        Scale = new Vector3(0.333f),
       };
       figureNode = new FigureNode(transformedArc)
       {
         Name = "Gizmo XY",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(0, 0, 1),
-        FillColor = new Vector3F(0, 0, 1),
+        StrokeColor = new Vector3(0, 0, 1),
+        FillColor = new Vector3(0, 0, 1),
         FillAlpha = 0.5f,
-        PoseLocal = new Pose(new Vector3F(0, 0, 0))
+        PoseLocal = new Pose(new Vector3(0, 0, 0))
       };
       gizmoNode.Children.Add(figureNode);
 
       // Labels "X", "Y", "Z"
       var spriteNode = new SpriteNode(new TextSprite("X", spriteFont))
       {
-        Color = new Vector3F(1, 0, 0),
+        Color = new Vector3(1, 0, 0),
         Origin = new Vector2(0, 1),
-        PoseLocal = new Pose(new Vector3F(1, 0, 0))
+        PoseLocal = new Pose(new Vector3(1, 0, 0))
       };
       gizmoNode.Children.Add(spriteNode);
       spriteNode = new SpriteNode(new TextSprite("Y", spriteFont))
       {
-        Color = new Vector3F(0, 1, 0),
+        Color = new Vector3(0, 1, 0),
         Origin = new Vector2(0, 1),
-        PoseLocal = new Pose(new Vector3F(0, 1, 0))
+        PoseLocal = new Pose(new Vector3(0, 1, 0))
       };
       gizmoNode.Children.Add(spriteNode);
       spriteNode = new SpriteNode(new TextSprite("Z", spriteFont))
       {
-        Color = new Vector3F(0, 0, 1),
+        Color = new Vector3(0, 0, 1),
         Origin = new Vector2(0, 1),
-        PoseLocal = new Pose(new Vector3F(0, 0, 1))
+        PoseLocal = new Pose(new Vector3(0, 0, 1))
       };
       gizmoNode.Children.Add(spriteNode);
 
@@ -690,11 +690,11 @@ can be observed between the big grid and the smaller transparent figures.",
       {
         Name = "Flower",
         StrokeThickness = 2,
-        StrokeColor = new Vector3F(1, 0.2f, 0.2f),
-        FillColor = new Vector3F(1, 0.5f, 0.5f),
+        StrokeColor = new Vector3(1, 0.2f, 0.2f),
+        FillColor = new Vector3(1, 0.5f, 0.5f),
         FillAlpha = 1,
-        PoseLocal = new Pose(new Vector3F(3, 1, 0)),
-        ScaleLocal = new Vector3F(0.5f)
+        PoseLocal = new Pose(new Vector3(3, 1, 0)),
+        ScaleLocal = new Vector3(0.5f)
       };
       _scene.Children.Add(flowerNode);
     }

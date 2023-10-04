@@ -6,8 +6,7 @@ using System;
 using System.Globalization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -39,7 +38,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space). 
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get { return Position; }
     }
@@ -53,7 +52,7 @@ namespace DigitalRise.Geometry.Shapes
     /// This position vector is the offset of the point from the origin in the local coordinate 
     /// system.
     /// </remarks>
-    public Vector3F Position
+    public Vector3 Position
     {
       get { return _position; }
       set 
@@ -65,7 +64,7 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private Vector3F _position;
+    private Vector3 _position;
     #endregion
 
 
@@ -83,7 +82,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Initializes a new instance of the <see cref="PointShape"/> class.
     /// </summary>
     public PointShape() 
-      : this (Vector3F.Zero)
+      : this (Vector3.Zero)
     {
     }
 
@@ -92,7 +91,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Initializes a new instance of the <see cref="PointShape"/> class with the given position.
     /// </summary>
     /// <param name="position">The position (in the local coordinate system).</param>
-    public PointShape(Vector3F position)
+    public PointShape(Vector3 position)
     {
       _position = position;
     }
@@ -107,7 +106,7 @@ namespace DigitalRise.Geometry.Shapes
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public PointShape(float x, float y, float z)
     {
-      _position = new Vector3F(x, y, z);
+      _position = new Vector3(x, y, z);
     }
     #endregion
 
@@ -135,10 +134,10 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Note: Compute AABB in world space
-      Vector3F position = pose.ToWorldPosition(scale * _position);
+      Vector3 position = pose.ToWorldPosition(scale * _position);
       return new Aabb(position, position);
     }
 
@@ -157,7 +156,7 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
       return _position;
     }
@@ -174,7 +173,7 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
       return _position;
     }

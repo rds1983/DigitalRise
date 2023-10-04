@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -33,20 +33,20 @@ namespace Samples.Particles
         DefaultEmissionRate = 120,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
         Distribution = new CircleDistribution { OuterRadius = 2, InnerRadius = 2}
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
         
         // The start direction can be any direction (direction deviation is 360°).
-        Distribution = new DirectionDistribution { Deviation = ConstantsF.TwoPi, Direction = Vector3F.UnitY },
+        Distribution = new DirectionDistribution { Deviation = ConstantsF.TwoPi, Direction = Vector3.UnitY },
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -58,7 +58,7 @@ namespace Samples.Particles
 
       ps.Effectors.Add(new LinearVelocityEffector());
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3F(0, 1, 0);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3(0, 1, 0);
       ps.Effectors.Add(new LinearAccelerationEffector());
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Angle);

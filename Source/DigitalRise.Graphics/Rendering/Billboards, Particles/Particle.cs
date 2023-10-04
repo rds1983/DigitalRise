@@ -18,12 +18,12 @@ namespace DigitalRise.Graphics.Rendering
   internal struct Particle
   {
     public bool IsAlive;
-    public Vector3F Position;
-    public Vector3F Normal;
-    public Vector3F Axis;
+    public Vector3 Position;
+    public Vector3 Normal;
+    public Vector3 Axis;
     public Vector2 Size;
     public float Angle;
-    public Vector3F Color;
+    public Vector3 Color;
     public float Alpha;
     public float AnimationTime;
     public float BlendMode;

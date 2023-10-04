@@ -222,7 +222,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// Gets or sets the color of the blue shift.
     /// </summary>
     /// <value>The blue shift color. The default value is (1.05/4, 0.97/4, 1.27/4).</value>
-    public Vector3F BlueShiftColor { get; set; }
+    public Vector3 BlueShiftColor { get; set; }
 
 
     /// <summary>
@@ -312,7 +312,7 @@ namespace DigitalRise.Graphics.PostProcessing
       // As RGB this is (1.05, 0.97, 1.27). This color should be scaled by a user-defined
       // scale. The scotopic luminance computed in the shader is usually in the range [0, 4]. 
       // Therefore, we apply a scale factor of 0.25 as a default.
-      BlueShiftColor = new Vector3F(1.05f, 0.97f, 1.27f) * 0.25f;
+      BlueShiftColor = new Vector3(1.05f, 0.97f, 1.27f) * 0.25f;
       BlueShiftCenter = 0.04f;
       BlueShiftRange = 1;
 

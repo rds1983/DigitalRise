@@ -162,15 +162,15 @@ Debug drawing can be enabled in the Options window (F4) in the Batching tab:
         int extent = (meshIndex < 2) ? 20 : 100;
 
         // Create a list of random scales and poses.
-        var scales = new Vector3F[numberOfInstances];
+        var scales = new Vector3[numberOfInstances];
         var poses = new Pose[numberOfInstances];
         for (int i = 0; i < numberOfInstances; i++)
         {
           // Combine a random scale with the original scale of the mesh.
-          scales[i] = new Vector3F(random.NextFloat(0.5f, 1.2f)) * meshNode.ScaleWorld;
+          scales[i] = new Vector3(random.NextFloat(0.5f, 1.2f)) * meshNode.ScaleWorld;
 
           // Combine a random pose with the original pose of the mesh.
-          Vector3F position = new Vector3F(random.NextFloat(-extent, extent), 0, random.NextFloat(-extent, extent));
+          Vector3 position = new Vector3(random.NextFloat(-extent, extent), 0, random.NextFloat(-extent, extent));
           Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
 
           poses[i] = new Pose(position, orientation) * meshNode.PoseLocal;
@@ -195,7 +195,7 @@ Debug drawing can be enabled in the Options window (F4) in the Batching tab:
         {
           // It is recommended to manually set a suitable pose and shape, so that
           // the bounding shape contains all instances.
-          PoseLocal = new Pose(new Vector3F(0, 2, 0)),
+          PoseLocal = new Pose(new Vector3(0, 2, 0)),
           Shape = new BoxShape(2 * extent, 4, 2 * extent),
         };
         _staticInstancingNodes.Children.Add(instancingMeshNode);

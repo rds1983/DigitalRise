@@ -5,8 +5,8 @@
 using System;
 using System.Globalization;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Shapes
     /// This is the vertex of the AABB with smallest position.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Minimum;
+    public Vector3 Minimum;
 
 
     /// <summary>
@@ -60,7 +60,7 @@ namespace DigitalRise.Geometry.Shapes
     /// This is the vertex of the AABB with the largest position.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Maximum;
+    public Vector3 Maximum;
     #endregion
 
 
@@ -72,7 +72,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets the center.
     /// </summary>
     /// <value>The center.</value>
-    public Vector3F Center
+    public Vector3 Center
     {
       get { return (Minimum + Maximum) / 2; }
     }
@@ -82,7 +82,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets the extent vector (<see cref="Maximum"/> - <see cref="Minimum"/>).
     /// </summary>
     /// <value>The extent (the widths in x, y, and z) of the AABB.</value>
-    public Vector3F Extent
+    public Vector3 Extent
     {
       get { return Maximum - Minimum; }
     }
@@ -111,7 +111,7 @@ namespace DigitalRise.Geometry.Shapes
     /// </summary>
     /// <param name="minimum">The minimum.</param>
     /// <param name="maximum">The maximum.</param>
-    public Aabb(Vector3F minimum, Vector3F maximum)
+    public Aabb(Vector3 minimum, Vector3 maximum)
     {
       Minimum = minimum;
       Maximum = maximum;
@@ -186,8 +186,8 @@ namespace DigitalRise.Geometry.Shapes
     /// </remarks>
     public static bool AreNumericallyEqual(Aabb first, Aabb second)
     {
-      return Vector3F.AreNumericallyEqual(first.Minimum, second.Minimum)
-             && Vector3F.AreNumericallyEqual(first.Maximum, second.Maximum);
+      return MathHelper.AreNumericallyEqual(first.Minimum, second.Minimum)
+             && MathHelper.AreNumericallyEqual(first.Maximum, second.Maximum);
     }
 
 
@@ -207,8 +207,8 @@ namespace DigitalRise.Geometry.Shapes
     /// </remarks>
     public static bool AreNumericallyEqual(Aabb first, Aabb second, float epsilon)
     {
-      return Vector3F.AreNumericallyEqual(first.Minimum, second.Minimum, epsilon)
-             && Vector3F.AreNumericallyEqual(first.Maximum, second.Maximum, epsilon);
+      return MathHelper.AreNumericallyEqual(first.Minimum, second.Minimum, epsilon)
+             && MathHelper.AreNumericallyEqual(first.Maximum, second.Maximum, epsilon);
     }
 
 
@@ -281,7 +281,7 @@ namespace DigitalRise.Geometry.Shapes
     /// AABB.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public Aabb GetAabb(Vector3F scale, Pose pose)
+    public Aabb GetAabb(Vector3 scale, Pose pose)
     {
       Aabb aabb = this;
       aabb.Scale(scale);
@@ -313,24 +313,24 @@ namespace DigitalRise.Geometry.Shapes
       //  return new Aabb(Minimum, Maximum);
 
       // Use the same algorithm as in BoxShape.GetAabb().
-      //Vector3F halfExtent = (Maximum - Minimum) / 2;
-      Vector3F halfExtent;
+      //Vector3 halfExtent = (Maximum - Minimum) / 2;
+      Vector3 halfExtent;
       halfExtent.X = (Maximum.X - Minimum.X) / 2;
       halfExtent.Y = (Maximum.Y - Minimum.Y) / 2;
       halfExtent.Z = (Maximum.Z - Minimum.Z) / 2;
-      //Vector3F center = (Minimum + Maximum) / 2;
-      Vector3F center;
+      //Vector3 center = (Minimum + Maximum) / 2;
+      Vector3 center;
       center.X = (Minimum.X + Maximum.X) / 2;
       center.Y = (Minimum.Y + Maximum.Y) / 2;
       center.Z = (Minimum.Z + Maximum.Z) / 2;
-      Vector3F centerWorld = pose.ToWorldPosition(center);
+      Vector3 centerWorld = pose.ToWorldPosition(center);
 
       // Get world axes in local space. They are equal to the rows of the orientation matrix.
       //Matrix33F rotationMatrix = pose.Orientation;
-      //Vector3F worldX = rotationMatrix.GetRow(0);
-      //Vector3F worldY = rotationMatrix.GetRow(1);
-      //Vector3F worldZ = rotationMatrix.GetRow(2);
-      Vector3F worldX, worldY, worldZ;
+      //Vector3 worldX = rotationMatrix.GetRow(0);
+      //Vector3 worldY = rotationMatrix.GetRow(1);
+      //Vector3 worldZ = rotationMatrix.GetRow(2);
+      Vector3 worldX, worldY, worldZ;
       worldX.X = pose.Orientation.M00;
       worldX.Y = pose.Orientation.M01;
       worldX.Z = pose.Orientation.M02;
@@ -348,9 +348,9 @@ namespace DigitalRise.Geometry.Shapes
       // out the in which octant the world axes is pointing and build the correct half extent vector
       // for this octant. OR we mirror the world axis vectors into the +x/+y/+z octant by taking
       // the absolute vector.
-      //worldX = Vector3F.Absolute(worldX);
-      //worldY = Vector3F.Absolute(worldY);
-      //worldZ = Vector3F.Absolute(worldZ);
+      //worldX = MathHelper.Absolute(worldX);
+      //worldY = MathHelper.Absolute(worldY);
+      //worldZ = MathHelper.Absolute(worldZ);
       worldX.X = Math.Abs(worldX.X);
       worldX.Y = Math.Abs(worldX.Y);
       worldX.Z = Math.Abs(worldX.Z);
@@ -362,8 +362,8 @@ namespace DigitalRise.Geometry.Shapes
       worldZ.Z = Math.Abs(worldZ.Z);
 
       // Now we project the extent onto the world axes.
-      //Vector3F halfExtentWorld = new Vector3F(Vector3F.Dot(halfExtent, worldX), Vector3F.Dot(halfExtent, worldY), Vector3F.Dot(halfExtent, worldZ));
-      Vector3F halfExtentWorld;
+      //Vector3 halfExtentWorld = new Vector3(Vector3.Dot(halfExtent, worldX), Vector3.Dot(halfExtent, worldY), Vector3.Dot(halfExtent, worldZ));
+      Vector3 halfExtentWorld;
       halfExtentWorld.X = halfExtent.X * worldX.X + halfExtent.Y * worldX.Y + halfExtent.Z * worldX.Z;
       halfExtentWorld.Y = halfExtent.X * worldY.X + halfExtent.Y * worldY.Y + halfExtent.Z * worldY.Z;
       halfExtentWorld.Z = halfExtent.X * worldZ.X + halfExtent.Y * worldZ.Y + halfExtent.Z * worldZ.Z;
@@ -422,9 +422,9 @@ namespace DigitalRise.Geometry.Shapes
     ///// <paramref name="direction"/> if required.
     ///// </para>
     ///// </remarks>
-    //public override Vector3F GetSupportPoint(Vector3F direction)
+    //public override Vector3 GetSupportPoint(Vector3 direction)
     //{      
-    //  Vector3F localSupportVertex = new Vector3F
+    //  Vector3 localSupportVertex = new Vector3
     //  {
     //    X = ((direction.X >= 0) ? Maximum.X : Minimum.X),
     //    Y = ((direction.Y >= 0) ? Maximum.Y : Minimum.Y),
@@ -444,10 +444,10 @@ namespace DigitalRise.Geometry.Shapes
     /// Grows the AABB so that it includes the given point.
     /// </summary>
     /// <param name="point">The point to include.</param>
-    public void Grow(Vector3F point)
+    public void Grow(Vector3 point)
     {
-      Minimum = Vector3F.Min(Minimum, point);
-      Maximum = Vector3F.Max(Maximum, point);
+      Minimum = Vector3.Min(Minimum, point);
+      Maximum = Vector3.Max(Maximum, point);
     }
 
 
@@ -458,8 +458,8 @@ namespace DigitalRise.Geometry.Shapes
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public void Grow(Aabb aabb)
     {
-      Minimum = Vector3F.Min(Minimum, aabb.Minimum);
-      Maximum = Vector3F.Max(Maximum, aabb.Maximum);
+      Minimum = Vector3.Min(Minimum, aabb.Minimum);
+      Maximum = Vector3.Max(Maximum, aabb.Maximum);
     }
 
 
@@ -471,8 +471,8 @@ namespace DigitalRise.Geometry.Shapes
     public void Grow(IGeometricObject geometricObject)
     {
       Aabb geometryAabb = geometricObject.Aabb;
-      Minimum = Vector3F.Min(Minimum, geometryAabb.Minimum);
-      Maximum = Vector3F.Max(Maximum, geometryAabb.Maximum);
+      Minimum = Vector3.Min(Minimum, geometryAabb.Minimum);
+      Maximum = Vector3.Max(Maximum, geometryAabb.Maximum);
     }
 
 
@@ -500,12 +500,12 @@ namespace DigitalRise.Geometry.Shapes
     /// The AABB limits are multiplied with the scale factors.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-    public void Scale(Vector3F scale)
+    public void Scale(Vector3 scale)
     {
       // Scale Minimum and Maximum. If a scale factor is negative we have to exchange
       // Minimum and Maximum.
-      Vector3F oldMin = Minimum;
-      Vector3F oldMax = Maximum;
+      Vector3 oldMin = Minimum;
+      Vector3 oldMax = Maximum;
 
       if (scale.X >= 0)
       {
@@ -549,7 +549,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// The <paramref name="translation"/> is added to the AABB limits.
     /// </remarks>
-    public void Translate(Vector3F translation)
+    public void Translate(Vector3 translation)
     {
       Minimum += translation;
       Maximum += translation;

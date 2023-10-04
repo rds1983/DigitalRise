@@ -60,7 +60,7 @@ should be merged to drastically reduce the number of scene nodes.)",
 
       // Load environment.
       GameObjectService.Objects.Add(new StaticSkyObject(Services)); // (includes light nodes)
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0, 0))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3(0, 0, 0))));
 
       // Set main directional light to enable shadow caster culling.
       _graphicsScreen.LightNode = ((LightNode)_graphicsScreen.Scene.GetSceneNode("Sunlight"));
@@ -98,7 +98,7 @@ should be merged to drastically reduce the number of scene nodes.)",
         for (int j = 0; j < numberOfRows; j++)
         {
           var clone = buildingNode.Clone();
-          clone.PoseWorld = new Pose(new Vector3F((i - numberOfColumns / 2) * 20, 0, (j - numberOfRows / 2) * 20));
+          clone.PoseWorld = new Pose(new Vector3((i - numberOfColumns / 2) * 20, 0, (j - numberOfRows / 2) * 20));
           _graphicsScreen.Scene.Children.Add(clone);
         }
       }

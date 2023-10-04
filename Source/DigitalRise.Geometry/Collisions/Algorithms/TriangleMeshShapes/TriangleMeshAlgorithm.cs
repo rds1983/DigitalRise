@@ -10,8 +10,7 @@ using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -99,8 +98,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       Pose poseA = geometricObjectA.Pose;
       Pose poseB = geometricObjectB.Pose;
-      Vector3F scaleA = geometricObjectA.Scale;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // First we assume that we do not have a contact.
       contactSet.HaveContact = false;
@@ -141,8 +140,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             // Heuristic: Test large BVH vs. small BVH.
             Aabb aabbOfA = geometricObjectA.Aabb;
             Aabb aabbOfB = geometricObjectB.Aabb;
-            float largestExtentA = aabbOfA.Extent.LargestComponent;
-            float largestExtentB = aabbOfB.Extent.LargestComponent;
+            float largestExtentA = aabbOfA.Extent.LargestComponent();
+            float largestExtentB = aabbOfB.Extent.LargestComponent();
             IEnumerable<Pair<int>> overlaps;
             bool overlapsSwapped = largestExtentA < largestExtentB;
             if (overlapsSwapped)
@@ -215,8 +214,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         {
           Aabb aabbOfA = geometricObjectA.Aabb;
           Aabb aabbOfB = geometricObjectB.Aabb;
-          float largestExtentA = aabbOfA.Extent.LargestComponent;
-          float largestExtentB = aabbOfB.Extent.LargestComponent;
+          float largestExtentA = aabbOfA.Extent.LargestComponent();
+          float largestExtentB = aabbOfB.Extent.LargestComponent();
 
           // Choose which object should be A.
           if (triangleMeshShapeA == null)
@@ -272,7 +271,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             BoxShape testBoxShape = ResourcePools.BoxShapes.Obtain();
             testBoxShape.Extent = aabbOfA.Extent;
             testGeometricObjectA.Shape = testBoxShape;
-            testGeometricObjectA.Scale = Vector3F.One;
+            testGeometricObjectA.Scale = Vector3.One;
             testGeometricObjectA.Pose = new Pose(aabbOfA.Center);
 
             testCollisionObjectA.SetInternal(collisionObjectA, testGeometricObjectA);
@@ -302,7 +301,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             var aabbBInA = geometricObjectB.Shape.GetAabb(scaleB, poseA.Inverse * poseB);
 
             // Apply inverse scaling to do the AABB-tree checks in the unscaled local space of A.
-            aabbBInA.Scale(Vector3F.One / scaleA);
+            aabbBInA.Scale(Vector3.One / scaleA);
 
             if (type != CollisionQueryType.ClosestPoints)
             {
@@ -363,14 +362,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             else
             {
               // Make first guess for closest pair: inner point of B to inner point of mesh.
-              Vector3F innerPointA = poseA.ToWorldPosition(geometricObjectA.Shape.InnerPoint * scaleA);
-              Vector3F innerPointB = poseB.ToWorldPosition(geometricObjectB.Shape.InnerPoint * scaleB);
-              closestPairDistance = (innerPointB - innerPointA).Length + CollisionDetection.Epsilon;
+              Vector3 innerPointA = poseA.ToWorldPosition(geometricObjectA.Shape.InnerPoint * scaleA);
+              Vector3 innerPointB = poseB.ToWorldPosition(geometricObjectB.Shape.InnerPoint * scaleB);
+              closestPairDistance = (innerPointB - innerPointA).Length() + CollisionDetection.Epsilon;
             }
 
             // The search-space is a space where the closest points must lie in.
-            Vector3F minimum = aabbOfB.Minimum - new Vector3F(closestPairDistance);
-            Vector3F maximum = aabbOfB.Maximum + new Vector3F(closestPairDistance);
+            Vector3 minimum = aabbOfB.Minimum - new Vector3(closestPairDistance);
+            Vector3 maximum = aabbOfB.Maximum + new Vector3(closestPairDistance);
             Aabb searchSpaceAabb = new Aabb(minimum, maximum);
 
             // Test all triangles.
@@ -415,8 +414,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                   else
                     closestPairDistance = 0;
 
-                  searchSpaceAabb.Minimum = aabbOfB.Minimum - new Vector3F(closestPairDistance);
-                  searchSpaceAabb.Maximum = aabbOfB.Maximum + new Vector3F(closestPairDistance);
+                  searchSpaceAabb.Minimum = aabbOfB.Minimum - new Vector3(closestPairDistance);
+                  searchSpaceAabb.Maximum = aabbOfB.Maximum + new Vector3(closestPairDistance);
                 }
               }
             }
@@ -455,7 +454,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       var triangleMeshShape = ((TriangleMeshShape)geometricObjectA.Shape);
       Triangle triangle = triangleMeshShape.Mesh.GetTriangle(triangleIndex);
       Pose poseA = geometricObjectA.Pose;
-      Vector3F scaleA = geometricObjectA.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
 
       // Find collision algorithm. 
       CollisionAlgorithm collisionAlgorithm = CollisionDetection.AlgorithmMatrix[typeof(TriangleShape), collisionObjectB.GeometricObject.Shape.GetType()];
@@ -467,7 +466,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Set the shape temporarily to the current triangles.
       testGeometricObject.Shape = testTriangle;
-      testGeometricObject.Scale = Vector3F.One;
+      testGeometricObject.Scale = Vector3.One;
       testGeometricObject.Pose = poseA;
 
       testCollisionObject.SetInternal(collisionObjectA, testGeometricObject);
@@ -506,8 +505,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         {
           // To compute the triangle normal in world space we take the normal of the unscaled 
           // triangle and transform the normal with: (M^-1)^T = 1 / scale
-          Vector3F triangleNormalLocal = Vector3F.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0) / scaleA;
-          Vector3F triangleNormal = poseA.ToWorldDirection(triangleNormalLocal);
+          Vector3 triangleNormalLocal = Vector3.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0) / scaleA;
+          Vector3 triangleNormal = poseA.ToWorldDirection(triangleNormalLocal);
           if (triangleNormal.TryNormalize())
           {
             var preferredNormal = swapped ? -triangleNormal : triangleNormal;
@@ -519,16 +518,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
             if (testContactSet.Count > 0 && triangleMeshShape.EnableContactWelding)
             {
-              var contactDotTriangle = Vector3F.Dot(testContactSet[0].Normal, preferredNormal);
+              var contactDotTriangle = Vector3.Dot(testContactSet[0].Normal, preferredNormal);
               if (contactDotTriangle < WeldingLimit)
               {
                 // Bad normal. Perform welding.
 
-                Vector3F contactPositionOnTriangle = swapped
+                Vector3 contactPositionOnTriangle = swapped
                                                        ? testContactSet[0].PositionBLocal / scaleA
                                                        : testContactSet[0].PositionALocal / scaleA;
 
-                Vector3F neighborNormal;
+                Vector3 neighborNormal;
                 float triangleDotNeighbor;
                 GetNeighborNormal(triangleIndex, triangle, contactPositionOnTriangle, triangleNormal, triangleMeshShape, poseA, scaleA, out neighborNormal, out triangleDotNeighbor);
 
@@ -543,12 +542,12 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                   testContactSet.Clear();
                   testContactSet.PreferredNormal = preferredNormal;
                   collisionAlgorithm.ComputeCollision(testContactSet, queryType);
-                  testContactSet.PreferredNormal = Vector3F.Zero;
+                  testContactSet.PreferredNormal = Vector3.Zero;
 
                   if (testContactSet.Count > 0)
                   {
                     Contact c1 = testContactSet[0];
-                    float contact1DotTriangle = Vector3F.Dot(c1.Normal, preferredNormal);
+                    float contact1DotTriangle = Vector3.Dot(c1.Normal, preferredNormal);
 
                     // We use c1 instead of c0 if it has lower penetration depth (then it is simply
                     // better). Or we use c1 if the penetration depth increase is in an allowed range
@@ -622,9 +621,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
     // Gets neighbor normal and dot product of normals for contact welding.
     private static void GetNeighborNormal(
-      int triangleIndex, Triangle triangle, Vector3F contactPositionOnTriangle, Vector3F triangleNormal, 
-      TriangleMeshShape triangleMeshShape, Pose poseA, Vector3F scaleA, 
-      out Vector3F neighborNormal, out float triangleDotNeighbor)
+      int triangleIndex, Triangle triangle, Vector3 contactPositionOnTriangle, Vector3 triangleNormal, 
+      TriangleMeshShape triangleMeshShape, Pose poseA, Vector3 scaleA, 
+      out Vector3 neighborNormal, out float triangleDotNeighbor)
     {
       // Get barycentric coordinates of contact position.
       float u, v, w;
@@ -651,7 +650,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
               // TODO: Optimize: neighbor.Normal normalizes the normal but we denormalize it with 1/scaleA.
             if (newNeighborNormal.TryNormalize())
             {
-              float dot = Vector3F.Dot(triangleNormal, newNeighborNormal);
+              float dot = Vector3.Dot(triangleNormal, newNeighborNormal);
               if (dot < triangleDotNeighbor)
               {
                 triangleDotNeighbor = dot;
@@ -669,7 +668,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             var newNeighborNormal = poseA.ToWorldDirection(neighbor.Normal / scaleA);
             if (newNeighborNormal.TryNormalize())
             {
-              float dot = Vector3F.Dot(triangleNormal, newNeighborNormal);
+              float dot = Vector3.Dot(triangleNormal, newNeighborNormal);
               if (dot < triangleDotNeighbor)
               {
                 triangleDotNeighbor = dot;
@@ -687,7 +686,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             var newNeighborNormal = poseA.ToWorldDirection(neighbor.Normal / scaleA);
             if (newNeighborNormal.TryNormalize())
             {
-              float dot = Vector3F.Dot(triangleNormal, newNeighborNormal);
+              float dot = Vector3.Dot(triangleNormal, newNeighborNormal);
               if (dot < triangleDotNeighbor)
               {
                 triangleDotNeighbor = dot;
@@ -739,8 +738,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       Pose startPoseA = geometricObjectA.Pose;
       Pose startPoseB = geometricObjectB.Pose;
-      Vector3F scaleA = geometricObjectA.Scale;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // Get an AABB of the swept B in the space of A.
       // This simplified AABB can miss some rotational movement.
@@ -756,7 +755,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       var testGeometricObject = TestGeometricObject.Create();
       testGeometricObject.Shape = triangleShape;
-      testGeometricObject.Scale = Vector3F.One;
+      testGeometricObject.Scale = Vector3.One;
       testGeometricObject.Pose = startPoseA;
 
       var testCollisionObject = ResourcePools.TestCollisionObjects.Obtain();
@@ -768,7 +767,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (triangleMeshShapeA.Partition != null)
       {
         // Apply inverse scaling to do the AABB-tree checks in the unscaled local space of A.
-        aabbSweptBInA.Scale(Vector3F.One / scaleA);
+        aabbSweptBInA.Scale(Vector3.One / scaleA);
 
         foreach (var triangleIndex in triangleMeshShapeA.Partition.GetOverlaps(aabbSweptBInA))
         {

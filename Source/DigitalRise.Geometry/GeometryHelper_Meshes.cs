@@ -8,8 +8,8 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry
 {
@@ -99,14 +99,14 @@ namespace DigitalRise.Geometry
     // Computes the volume of a tretrahedron where point is the tip and (vertex0/1/2) is the
     // triangle base. The volume is negative if point is in front of the triangle face and 
     // positive if the point is in behind the triangle face.
-    private static float GetSignedTetrahedronVolume(Vector3F point, ref Triangle triangle)
+    private static float GetSignedTetrahedronVolume(Vector3 point, ref Triangle triangle)
     {
       // See Game Programming Gems 6 - Chapter Buoyancy
       var a = triangle.Vertex1 - triangle.Vertex0;
       var b = triangle.Vertex2 - triangle.Vertex0;
       var r = point - triangle.Vertex0;
 
-      float volume = 1.0f / 6.0f * Vector3F.Dot(Vector3F.Cross(b, a), r);
+      float volume = 1.0f / 6.0f * Vector3.Dot(Vector3.Cross(b, a), r);
       return volume;
     }
 
@@ -169,9 +169,9 @@ namespace DigitalRise.Geometry
           // Split triangle into 4 triangles.
           Triangle triangle = mesh.GetTriangle(i);
 
-          Vector3F v01 = (triangle.Vertex0 + triangle.Vertex1) / 2;
-          Vector3F v12 = (triangle.Vertex1 + triangle.Vertex2) / 2;
-          Vector3F v20 = (triangle.Vertex2 + triangle.Vertex0) / 2;
+          Vector3 v01 = (triangle.Vertex0 + triangle.Vertex1) / 2;
+          Vector3 v12 = (triangle.Vertex1 + triangle.Vertex2) / 2;
+          Vector3 v20 = (triangle.Vertex2 + triangle.Vertex0) / 2;
 
           tempMesh.Add(new Triangle(triangle.Vertex0, v01, v20));
           tempMesh.Add(new Triangle(v01, v12, v20));
@@ -212,7 +212,7 @@ namespace DigitalRise.Geometry
       int numberOfVertices = mesh.Vertices.Count;
       for (int i = 0; i < numberOfVertices; i++)
       {
-        Vector3F v = mesh.Vertices[i];
+        Vector3 v = mesh.Vertices[i];
 
         // Unit sphere: ||v|| = 1
         v.Normalize();
@@ -230,18 +230,18 @@ namespace DigitalRise.Geometry
 
       // 12 vertices
       var vertices = triangleMesh.Vertices;
-      vertices.Add(new Vector3F(0.0f, 1.0f, 0.0f));
-      vertices.Add(new Vector3F(0.894425f, 0.447215f, 0.0f));
-      vertices.Add(new Vector3F(0.276385f, 0.447215f, -0.85064f));
-      vertices.Add(new Vector3F(-0.7236f, 0.447215f, -0.52572f));
-      vertices.Add(new Vector3F(-0.7236f, 0.447215f, 0.52572f));
-      vertices.Add(new Vector3F(0.276385f, 0.447215f, 0.85064f));
-      vertices.Add(new Vector3F(0.7236f, -0.447215f, -0.52572f));
-      vertices.Add(new Vector3F(-0.276385f, -0.447215f, -0.85064f));
-      vertices.Add(new Vector3F(-0.894425f, -0.447215f, 0.0f));
-      vertices.Add(new Vector3F(-0.276385f, -0.447215f, 0.85064f));
-      vertices.Add(new Vector3F(0.7236f, -0.447215f, 0.52572f));
-      vertices.Add(new Vector3F(0.0f, -1.0f, 0.0f));
+      vertices.Add(new Vector3(0.0f, 1.0f, 0.0f));
+      vertices.Add(new Vector3(0.894425f, 0.447215f, 0.0f));
+      vertices.Add(new Vector3(0.276385f, 0.447215f, -0.85064f));
+      vertices.Add(new Vector3(-0.7236f, 0.447215f, -0.52572f));
+      vertices.Add(new Vector3(-0.7236f, 0.447215f, 0.52572f));
+      vertices.Add(new Vector3(0.276385f, 0.447215f, 0.85064f));
+      vertices.Add(new Vector3(0.7236f, -0.447215f, -0.52572f));
+      vertices.Add(new Vector3(-0.276385f, -0.447215f, -0.85064f));
+      vertices.Add(new Vector3(-0.894425f, -0.447215f, 0.0f));
+      vertices.Add(new Vector3(-0.276385f, -0.447215f, 0.85064f));
+      vertices.Add(new Vector3(0.7236f, -0.447215f, 0.52572f));
+      vertices.Add(new Vector3(0.0f, -1.0f, 0.0f));
 
       // 20 faces
       var indices = triangleMesh.Indices;
@@ -274,7 +274,7 @@ namespace DigitalRise.Geometry
 
     private struct WeldVertex
     {
-      public Vector3F Position;  // Vertex position.
+      public Vector3 Position;  // Vertex position.
       public int OriginalIndex;  // Index in Vertices array.
       public float SortValue;    // Absolute component sum of position: |X|+|Y|+|Z|
       public int MergedIndex;    // >= 0 if this vertex was merged.
@@ -315,7 +315,7 @@ namespace DigitalRise.Geometry
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="positionTolerance"/> is negative or 0.
     /// </exception>
-    public static int MergeDuplicatePositions(IList<Vector3F> positions, float positionTolerance)
+    public static int MergeDuplicatePositions(IList<Vector3> positions, float positionTolerance)
     {
       if (positions == null)
         throw new ArgumentNullException("positions");
@@ -354,7 +354,7 @@ namespace DigitalRise.Geometry
     /// <paramref name="positionTolerance"/> is negative or 0.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
-    public static int MergeDuplicatePositions(IList<Vector3F> positions, float positionTolerance, out int[] positionRemap)
+    public static int MergeDuplicatePositions(IList<Vector3> positions, float positionTolerance, out int[] positionRemap)
     {
       if (positions == null)
         throw new ArgumentNullException("positions");
@@ -373,7 +373,7 @@ namespace DigitalRise.Geometry
     }
 
 
-    private static int MergeDuplicatePositions(IList<Vector3F> positions, float positionTolerance, int[] positionRemap)
+    private static int MergeDuplicatePositions(IList<Vector3> positions, float positionTolerance, int[] positionRemap)
     {
       Debug.Assert(positions != null);
       Debug.Assert(positions.Count > 0);
@@ -385,7 +385,7 @@ namespace DigitalRise.Geometry
       var data = new WeldVertex[numberOfVertices];
       for (int i = 0; i < numberOfVertices; i++)
       {
-        Vector3F position = positions[i];
+        Vector3 position = positions[i];
         data[i].Position = position;
         data[i].OriginalIndex = i;
         data[i].SortValue = Math.Abs(position.X) + Math.Abs(position.Y) + Math.Abs(position.Z);
@@ -414,7 +414,7 @@ namespace DigitalRise.Geometry
           if (data[j].SortValue - data[i].SortValue > 3 * positionTolerance)
             break;
 
-          //if (Vector3F.AreNumericallyEqual(data[i].Position, data[j].Position, positionTolerance))
+          //if (MathHelper.AreNumericallyEqual(data[i].Position, data[j].Position, positionTolerance))
           // Optimized version: (Probably does not work for infinite float values!)
           float delta = Math.Abs(data[i].Position.X - data[j].Position.X);
           if (delta <= positionTolerance)

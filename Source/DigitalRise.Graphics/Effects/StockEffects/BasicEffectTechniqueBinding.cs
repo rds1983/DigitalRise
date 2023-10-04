@@ -121,7 +121,7 @@ namespace DigitalRise.Graphics.Effects
       if (binding3 != null)
         return binding3.Value;
 
-      var binding3F = binding as EffectParameterBinding<Vector3F>;
+      var binding3F = binding as EffectParameterBinding<Vector3>;
       if (binding3F != null)
         return (Vector3)binding3F.Value;
 
@@ -143,7 +143,7 @@ namespace DigitalRise.Graphics.Effects
       if (binding3 != null)
         return new Vector4(binding3.Value, 1);
 
-      var binding3F = binding as EffectParameterBinding<Vector3F>;
+      var binding3F = binding as EffectParameterBinding<Vector3>;
       if (binding3F != null)
         return new Vector4((Vector3)binding3F.Value, 1);
 

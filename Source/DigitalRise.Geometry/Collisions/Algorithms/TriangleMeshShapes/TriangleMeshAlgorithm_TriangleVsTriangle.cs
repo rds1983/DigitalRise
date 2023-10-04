@@ -5,8 +5,7 @@
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -32,8 +31,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       Triangle triangleB = triangleMeshShapeB.Mesh.GetTriangle(triangleIndexB);
       Pose poseA = geometricObjectA.Pose;
       Pose poseB = geometricObjectB.Pose;
-      Vector3F scaleA = geometricObjectA.Scale;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleA = geometricObjectA.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // Apply SRT.
       Triangle transformedTriangleA;
@@ -64,7 +63,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
           Mathematics.MathHelper.Swap(ref transformedTriangleB.Vertex0, ref transformedTriangleB.Vertex1);
 
         // Compute contact.
-        Vector3F position, normal;
+        Vector3 position, normal;
         float penetrationDepth;
         haveContact = TriangleTriangleAlgorithm.GetContact(
           ref transformedTriangleA, ref transformedTriangleB,
@@ -114,7 +113,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       testTriangleA.Vertex1 = transformedTriangleA.Vertex1;
       testTriangleA.Vertex2 = transformedTriangleA.Vertex2;
       testGeometricObjectA.Shape = testTriangleA;
-      Debug.Assert(testGeometricObjectA.Scale == Vector3F.One);
+      Debug.Assert(testGeometricObjectA.Scale == Vector3.One);
       Debug.Assert(testGeometricObjectA.Pose == Pose.Identity);
       testCollisionObjectA.SetInternal(collisionObjectA, testGeometricObjectA);
 
@@ -122,7 +121,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       testTriangleB.Vertex1 = transformedTriangleB.Vertex1;
       testTriangleB.Vertex2 = transformedTriangleB.Vertex2;
       testGeometricObjectB.Shape = testTriangleB;
-      Debug.Assert(testGeometricObjectB.Scale == Vector3F.One);
+      Debug.Assert(testGeometricObjectB.Scale == Vector3.One);
       Debug.Assert(testGeometricObjectB.Pose == Pose.Identity);
       testCollisionObjectB.SetInternal(collisionObjectB, testGeometricObjectB);
 

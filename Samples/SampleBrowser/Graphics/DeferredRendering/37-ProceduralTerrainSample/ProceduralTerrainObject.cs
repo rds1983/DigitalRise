@@ -8,14 +8,12 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Graphics
 {
@@ -91,7 +89,6 @@ namespace Samples.Graphics
     {
       // Get common services and game objects.
       _graphicsService = _services.GetInstance<IGraphicsService>();
-      var content = _services.GetInstance<ContentManager>();
       var scene = _services.GetInstance<IScene>();
       _simulation = _services.GetInstance<Simulation>();
       var gameObjectService = _services.GetInstance<IGameObjectService>();
@@ -147,7 +144,7 @@ namespace Samples.Graphics
 
       InitializeClipmapCellSizes();
 
-      InitializeTerrainLayers(content);
+      InitializeTerrainLayers();
 
       // Enable mipmaps when using anisotropic filtering on AMD graphics cards:
       //TerrainNode.DetailClipmap.EnableMipMap = true;
@@ -216,7 +213,7 @@ namespace Samples.Graphics
     // Initialize the terrain layers which define the detail textures which are painted onto
     // the terrain.
     // The materials are blended based on the terrain heights and slopes.
-    private void InitializeTerrainLayers(ContentManager content)
+    private void InitializeTerrainLayers()
     {
       var assetManager = _services.GetInstance<AssetManager>();
 
@@ -225,7 +222,7 @@ namespace Samples.Graphics
         DiffuseTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Gravel-Diffuse.dds"),
         NormalTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Gravel-Normal.dds"),
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Gravel-Specular.dds"),
-        DiffuseColor = new Vector3F(1 / 0.246f, 1 / 0.205f, 1 / 0.171f) * new Vector3F(0.042f, 0.039f, 0.027f),
+        DiffuseColor = new Vector3(1 / 0.246f, 1 / 0.205f, 1 / 0.171f) * new Vector3(0.042f, 0.039f, 0.027f),
         TileSize = DetailCellSize * 512,
       };
       _terrainTile.Layers.Add(materialGravel);
@@ -235,7 +232,7 @@ namespace Samples.Graphics
         DiffuseTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Diffuse.dds"),
         NormalTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Normal.dds"),
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Specular.dds"),
-        DiffuseColor = new Vector3F(0.17f, 0.20f, 0.11f),
+        DiffuseColor = new Vector3(0.17f, 0.20f, 0.11f),
         TileSize = DetailCellSize * 1024,
         TerrainHeightMin = -1000,
         TerrainHeightMax = 40,
@@ -249,7 +246,7 @@ namespace Samples.Graphics
         DiffuseTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Diffuse.dds"),
         NormalTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Normal.dds"),
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Grass-Dry-Specular.dds"),
-        DiffuseColor = new Vector3F(0.15f, 0.18f, 0.12f),
+        DiffuseColor = new Vector3(0.15f, 0.18f, 0.12f),
         TileSize = DetailCellSize * 1024,
         TerrainHeightMin = -1000,
         TerrainHeightMax = 60,
@@ -266,8 +263,8 @@ namespace Samples.Graphics
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
         HeightTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
         TileSize = DetailCellSize * 1024 * 10,
-        DiffuseColor = new Vector3F(0.15f, 0.15f, 0.12f),
-        SpecularColor = new Vector3F(2),
+        DiffuseColor = new Vector3(0.15f, 0.15f, 0.12f),
+        SpecularColor = new Vector3(2),
         SpecularPower = 100,
         TerrainHeightMin = -1000,
         TerrainHeightMax = 1000,
@@ -283,8 +280,8 @@ namespace Samples.Graphics
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
         HeightTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
         TileSize = DetailCellSize * 1024,
-        DiffuseColor = new Vector3F(0.15f, 0.15f, 0.13f),
-        SpecularColor = new Vector3F(0.5f),
+        DiffuseColor = new Vector3(0.15f, 0.15f, 0.13f),
+        SpecularColor = new Vector3(0.5f),
         SpecularPower = 20,
         Alpha = 0.7f,
         FadeOutStart = 4,
@@ -304,8 +301,8 @@ namespace Samples.Graphics
         NormalTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Snow-Normal.dds"),
         SpecularTexture = assetManager.LoadTexture2D(_graphicsService.GraphicsDevice, "Terrain/Snow-Specular.dds"),
         TileSize = DetailCellSize * 512,
-        DiffuseColor = new Vector3F(1),
-        SpecularColor = new Vector3F(1),
+        DiffuseColor = new Vector3(1),
+        SpecularColor = new Vector3(1),
         SpecularPower = 100,
         TerrainHeightMin = 60,
         TerrainHeightMax = 1000,
@@ -326,8 +323,8 @@ namespace Samples.Graphics
       TerrainNode.DetailClipmap.CellSizes[0] = DetailCellSize;
 
       var projection = _cameraObject.CameraNode.Camera.Projection;
-      Vector3F nearCorner = new Vector3F(projection.Left, projection.Bottom, projection.Near);
-      var maxViewDistance = (nearCorner / projection.Near * projection.Far).Length;
+      Vector3 nearCorner = new Vector3(projection.Left, projection.Bottom, projection.Near);
+      var maxViewDistance = (nearCorner / projection.Near * projection.Far).Length();
       var maxTerrainSize = 2 * maxViewDistance;
       var terrainExtent = TerrainNode.Terrain.Aabb.Extent;
       maxTerrainSize = Math.Min(maxTerrainSize, Math.Max(terrainExtent.X, terrainExtent.Z));

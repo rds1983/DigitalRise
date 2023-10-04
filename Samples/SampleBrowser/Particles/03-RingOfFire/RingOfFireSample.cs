@@ -41,7 +41,7 @@ The effect is a ring of fire consisting of a fire and a smoke effect.",
         new CircleDistribution { InnerRadius = 2, OuterRadius = 2 };
 
       // Position the particle system (including its child) in the level.
-      particleSystem.Pose = new Pose(new Vector3F(0, 3, 0));
+      particleSystem.Pose = new Pose(new Vector3(0, 3, 0));
 
       // We only need to add the parent particle system to the particle system service.
       // The service will automatically update the parent system each frame. The parent

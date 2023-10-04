@@ -9,8 +9,8 @@ using System.Linq;
 using DigitalRise.Threading;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -430,11 +430,11 @@ namespace DigitalRise.Geometry.Meshes
       }
 
       // Initialize vertex normals.
-      var normals = new Vector3F[triangleMesh.Vertices.Count];    // Vertex normals.
+      var normals = new Vector3[triangleMesh.Vertices.Count];    // Vertex normals.
       var neighborCounts = new int[triangleMesh.Vertices.Count];  // Numbers of triangles that touch each vertex.
       for (int i = 0; i < triangleMesh.Vertices.Count; i++)
       {
-        normals[i] = Vector3F.Zero;
+        normals[i] = Vector3.Zero;
         neighborCounts[i] = 0;
       }
 

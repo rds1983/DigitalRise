@@ -9,7 +9,7 @@ using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics.Specialized
 {
@@ -140,9 +140,9 @@ namespace Samples.Physics.Specialized
       {
         // Spectator Mode:
         // Camera is looking at the car from a fixed location in the level.
-        Vector3F position = new Vector3F(10, 8, 10);
-        Vector3F target = vehiclePose.Position;
-        Vector3F up = Vector3F.UnitY;
+        Vector3 position = new Vector3(10, 8, 10);
+        Vector3 target = vehiclePose.Position;
+        Vector3 up = Vector3.UnitY;
 
         // Set the new camera view matrix. (Setting the View matrix changes the Pose. 
         // The pose is simply the inverse of the view matrix). 
@@ -155,10 +155,10 @@ namespace Samples.Physics.Specialized
         Matrix33F yaw = Matrix33F.CreateRotationY(_yaw);
         Matrix33F pitch = Matrix33F.CreateRotationX(_pitch);
         Matrix33F orientation = vehiclePose.Orientation * yaw * pitch;
-        Vector3F forward = orientation * -Vector3F.UnitZ;
-        Vector3F up = Vector3F.UnitY;
-        Vector3F position = vehiclePose.Position - 10 * forward + 5 * up;
-        Vector3F target = vehiclePose.Position + 1 * up;
+        Vector3 forward = orientation * -Vector3.UnitZ;
+        Vector3 up = Vector3.UnitY;
+        Vector3 position = vehiclePose.Position - 10 * forward + 5 * up;
+        Vector3 target = vehiclePose.Position + 1 * up;
 
         CameraNode.View = Matrix44F.CreateLookAt(position, target, up);
       }

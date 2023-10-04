@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -60,21 +60,21 @@ namespace DigitalRise.Animation.Character
     /// Gets or sets the forward direction in bone space.
     /// </summary>
     /// <value>The forward direction in bone space.</value>
-    public Vector3F Forward { get; set; }
+    public Vector3 Forward { get; set; }
 
 
     /// <summary>
     /// Gets or sets the up direction in bone space.
     /// </summary>
     /// <value>The up direction in bone space.</value>
-    public Vector3F Up { get; set; }
+    public Vector3 Up { get; set; }
 
 
     /// <summary>
     /// Gets or sets the eye offset in bone space.
     /// </summary>
     /// <value>The eye offset in bone space.</value>
-    public Vector3F EyeOffset { get; set; }
+    public Vector3 EyeOffset { get; set; }
 
 
     /// <summary>
@@ -130,9 +130,9 @@ namespace DigitalRise.Animation.Character
         return;
 
       // The axes of the view space (where forward is -z, relative to bone space). 
-      Vector3F forward = Forward;
-      Vector3F up = Up;
-      Vector3F side = Vector3F.Cross(up, -forward);
+      Vector3 forward = Forward;
+      Vector3 up = Up;
+      Vector3 side = Vector3.Cross(up, -forward);
 
       // This matrix converts from view space to bone space (in other words, it 
       // rotates the -z direction into the view direction).
@@ -141,9 +141,9 @@ namespace DigitalRise.Animation.Character
                                        side.Z, up.Z, -forward.Z);
 
       // Get the components of the target direction relative to the view space axes.
-      float targetUp = Vector3F.Dot(targetDirection, up);
-      float targetSide = Vector3F.Dot(targetDirection, side);
-      float targetForward = Vector3F.Dot(targetDirection, forward);
+      float targetUp = Vector3.Dot(targetDirection, up);
+      float targetSide = Vector3.Dot(targetDirection, side);
+      float targetForward = Vector3.Dot(targetDirection, forward);
 
       // Limit rotations of the desired up and side vector.
       // The target forward direction is inverted if necessary. (If limited the bone 
@@ -169,16 +169,16 @@ namespace DigitalRise.Animation.Character
         * forward * (float)Math.Sqrt(Math.Max(0, 1 - targetUp * targetUp - targetSide * targetSide))
         + side * targetSide + up * targetUp;
 
-      Debug.Assert(targetDirection.IsNumericallyNormalized);
+      Debug.Assert(targetDirection.IsNumericallyNormalized());
 
       // Make axes of desired view space. 
       forward = targetDirection;
-      side = Vector3F.Cross(up, -forward);
+      side = Vector3.Cross(up, -forward);
       if (!side.TryNormalize())
         return;
 
-      up = Vector3F.Cross(side, forward);
-      Debug.Assert(up.IsNumericallyNormalized);
+      up = Vector3.Cross(side, forward);
+      Debug.Assert(up.IsNumericallyNormalized());
 
       // Create new view space matrix.
       var boneFromNewView = new Matrix33F(

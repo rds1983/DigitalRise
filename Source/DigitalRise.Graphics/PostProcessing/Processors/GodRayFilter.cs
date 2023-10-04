@@ -110,7 +110,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// <remarks>
     /// The direction of the light rays (pointing away from the light source).
     /// </remarks>
-    public Vector3F LightDirection { get; set; }
+    public Vector3 LightDirection { get; set; }
 
 
     /// <summary>
@@ -135,7 +135,7 @@ namespace DigitalRise.Graphics.PostProcessing
     /// This is an overall factor that applied to the light shaft image. It can be used like
     /// an exposure factor or a tint color.
     /// </remarks>
-    public Vector3F Intensity { get; set; }
+    public Vector3 Intensity { get; set; }
 
 
     /// <summary>
@@ -253,9 +253,9 @@ namespace DigitalRise.Graphics.PostProcessing
       _downsampleFilter = graphicsService.GetDownsampleFilter();
 
       Scale = 1;
-      LightDirection = new Vector3F(0, -1, 0);
+      LightDirection = new Vector3(0, -1, 0);
       LightRadius = 0.2f;
-      Intensity = new Vector3F(1, 1, 1);
+      Intensity = new Vector3(1, 1, 1);
       DownsampleFactor = 4;
       NumberOfSamples = 8;
       NumberOfPasses = 2;
@@ -310,7 +310,7 @@ namespace DigitalRise.Graphics.PostProcessing
 
       // Convert to clip space.
       Vector4F lightPositionProj = viewProjection * lightPositionWorld;
-      Vector3F lightPositionClip = Vector4F.HomogeneousDivide(lightPositionProj);
+      Vector3 lightPositionClip = Vector4F.HomogeneousDivide(lightPositionProj);
 
       // Convert from clip space [-1, 1] to texture space [0, 1].
       Vector2 lightPosition = new Vector2(lightPositionClip.X * 0.5f + 0.5f, -lightPositionClip.Y * 0.5f + 0.5f);

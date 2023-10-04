@@ -24,7 +24,7 @@ realistic than using only uniform distributions.",
   Press <Space> to fire a shot.")]
   public class DistributionsSample : BasicSample
   {
-    private readonly Vector3F _center = new Vector3F(300, 300, 0);
+    private readonly Vector3 _center = new Vector3(300, 300, 0);
     private readonly Random _random = new Random();
 
     // Here are two random value distributions.
@@ -42,8 +42,8 @@ realistic than using only uniform distributions.",
       GraphicsScreen.ClearBackground = true;
 
       // Draw a cross for the target.
-      debugRenderer.DrawLine(_center - new Vector3F(100, 0, 0), _center + new Vector3F(100, 0, 0), Color.Black, true);
-      debugRenderer.DrawLine(_center - new Vector3F(0, 100, 0), _center + new Vector3F(0, 100, 0), Color.Black, true);
+      debugRenderer.DrawLine(_center - new Vector3(100, 0, 0), _center + new Vector3(100, 0, 0), Color.Black, true);
+      debugRenderer.DrawLine(_center - new Vector3(0, 100, 0), _center + new Vector3(0, 100, 0), Color.Black, true);
     }
 
 
@@ -57,7 +57,7 @@ realistic than using only uniform distributions.",
         float distance = _distanceDistribution.Next(_random);
 
         // Create a vector v with the length of distance.
-        Vector3F v = new Vector3F(0, distance, 0);
+        Vector3 v = new Vector3(0, distance, 0);
 
         // Rotate v.
         QuaternionF rotation = QuaternionF.CreateRotationZ(MathHelper.ToRadians(angle));
@@ -66,13 +66,13 @@ realistic than using only uniform distributions.",
         // Draw a small cross for the hit.
         var debugRenderer = GraphicsScreen.DebugRenderer2D;
         debugRenderer.DrawLine(
-          _center + v + new Vector3F(-10, -10, 0),
-          _center + v + new Vector3F(10, 10, 0),
+          _center + v + new Vector3(-10, -10, 0),
+          _center + v + new Vector3(10, 10, 0),
           Color.Black,
           true);
         debugRenderer.DrawLine(
-          _center + v + new Vector3F(10, -10, 0),
-          _center + v + new Vector3F(-10, 10, 0),
+          _center + v + new Vector3(10, -10, 0),
+          _center + v + new Vector3(-10, 10, 0),
           Color.Black, true);
       }
 

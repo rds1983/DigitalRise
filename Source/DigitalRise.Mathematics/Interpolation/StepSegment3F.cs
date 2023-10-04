@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -24,18 +23,18 @@ namespace DigitalRise.Mathematics.Interpolation
   /// The tangents and the length of this special kind of curve are zero.
   /// </para>
   /// </remarks>
-  public class StepSegment3F : ICurve<float, Vector3F>, IRecyclable
+  public class StepSegment3F : ICurve<float, Vector3>, IRecyclable
   {
     /// <summary>
     /// Gets or sets the start point.
     /// </summary>
-    public Vector3F Point1 { get; set; }
+    public Vector3 Point1 { get; set; }
 
 
     /// <summary>
     /// Gets or sets the end point.
     /// </summary>
-    public Vector3F Point2 { get; set; }
+    public Vector3 Point2 { get; set; }
 
 
     /// <summary>
@@ -49,16 +48,16 @@ namespace DigitalRise.Mathematics.Interpolation
     /// </summary>
     /// <param name="parameter">The curve parameter.</param>
     /// <returns>The curve point.</returns>
-    public Vector3F GetPoint(float parameter)
+    public Vector3 GetPoint(float parameter)
     {
       return InterpolationHelper.Step(Point1, Point2, parameter, StepType);
     }
 
 
     /// <inheritdoc/>
-    public Vector3F GetTangent(float parameter)
+    public Vector3 GetTangent(float parameter)
     {
-      return Vector3F.Zero;
+      return Vector3.Zero;
     }
 
 
@@ -70,7 +69,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
 
     /// <inheritdoc/>
-    public void Flatten(ICollection<Vector3F> points, int maxNumberOfIterations, float tolerance)
+    public void Flatten(ICollection<Vector3> points, int maxNumberOfIterations, float tolerance)
     {
     }
 
@@ -113,8 +112,8 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <inheritdoc/>
     public void Recycle()
     {
-      Point1 = new Vector3F();
-      Point2 = new Vector3F();
+      Point1 = new Vector3();
+      Point2 = new Vector3();
       StepType = StepInterpolation.Left;
 
       Pool.Recycle(this);

@@ -5,8 +5,8 @@
 using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -164,7 +164,7 @@ namespace DigitalRise.Geometry.Partitioning
         {
           Info = itemInfo,
           IsMax = false,
-          Position = aabb.Minimum[axisIndex]
+          Position = aabb.Minimum.GetComponentByIndex(axisIndex)
         };
 
         // Maximum edge
@@ -172,7 +172,7 @@ namespace DigitalRise.Geometry.Partitioning
         {
           Info = itemInfo,
           IsMax = true,
-          Position = aabb.Maximum[axisIndex]
+          Position = aabb.Maximum.GetComponentByIndex(axisIndex)
         };
 
         // Append at the end of the edge list.
@@ -211,8 +211,8 @@ namespace DigitalRise.Geometry.Partitioning
         List<Edge> edgeList = _edges[axisIndex];
 
         // New positions of the min/max edges.
-        float newMinEdgePosition = aabb.Minimum[axisIndex];
-        float newMaxEdgePosition = aabb.Maximum[axisIndex];
+        float newMinEdgePosition = aabb.Minimum.GetComponentByIndex(axisIndex);
+        float newMaxEdgePosition = aabb.Maximum.GetComponentByIndex(axisIndex);
 
         // Old indices of the edges.
         int oldMinEdgeIndex = itemInfo.MinEdgeIndices[axisIndex];
@@ -308,13 +308,13 @@ namespace DigitalRise.Geometry.Partitioning
       else
       {
         // Get minimum and maximum from the edge lists.
-        var minimum = new Vector3F(
+        var minimum = new Vector3(
           _edges[0][0].Position,
           _edges[1][0].Position,
           _edges[2][0].Position);
 
         var maxEdgeIndex = _edges[0].Count - 1;
-        var maximum = new Vector3F(
+        var maximum = new Vector3(
           _edges[0][maxEdgeIndex].Position,
           _edges[1][maxEdgeIndex].Position,
           _edges[2][maxEdgeIndex].Position);

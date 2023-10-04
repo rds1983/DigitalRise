@@ -197,7 +197,7 @@ namespace DigitalRise.Graphics.Rendering
         node.LastFrame = frame;
 
         // Position, size, and origin in pixels.
-        Vector3F position = new Vector3F();
+        Vector3 position = new Vector3();
         Vector2 size = new Vector2();
         Vector2 origin = new Vector2();
 
@@ -217,7 +217,7 @@ namespace DigitalRise.Graphics.Rendering
             size = new Vector2(sourceRectangle.Width, sourceRectangle.Height);
 
             // Premultiply color.
-            Vector3F color3F = node.Color;
+            Vector3 color3F = node.Color;
             float alpha = node.Alpha;
             Color color = new Color(color3F.X * alpha, color3F.Y * alpha, color3F.Z * alpha, alpha);
 
@@ -250,7 +250,7 @@ namespace DigitalRise.Graphics.Rendering
                   position.Y = (int)(position.Y + 0.5f);
 
                   // Premultiply color.
-                  Vector3F color3F = node.Color;
+                  Vector3 color3F = node.Color;
                   float alpha = node.Alpha;
                   Color color = new Color(color3F.X * alpha, color3F.Y * alpha, color3F.Z * alpha, alpha);
 
@@ -276,7 +276,7 @@ namespace DigitalRise.Graphics.Rendering
                   position.Y = (int)(position.Y + 0.5f);
 
                   // Premultiply color.
-                  Vector3F color3F = node.Color;
+                  Vector3 color3F = node.Color;
                   float alpha = node.Alpha;
                   Color color = new Color(color3F.X * alpha, color3F.Y * alpha, color3F.Z * alpha, alpha);
 

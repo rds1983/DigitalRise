@@ -1,10 +1,9 @@
 ﻿using System;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -15,8 +14,8 @@ namespace Samples.Particles
   public class BeeEffector : ParticleEffector
   {
     private readonly BoxDistribution _distribution;
-    private IParticleParameter<Vector3F> _positionParameter;
-    private IParticleParameter<Vector3F> _targetPositionParameter;
+    private IParticleParameter<Vector3> _positionParameter;
+    private IParticleParameter<Vector3> _targetPositionParameter;
     private IParticleParameter<float> _speedParameter;
     private IParticleParameter<float> _sizeXParameter;
     private IParticleParameter<Pose> _cameraPoseParameter;
@@ -46,7 +45,7 @@ namespace Samples.Particles
       PositionParameter = ParticleParameterNames.Position;
       SpeedParameter = ParticleParameterNames.LinearSpeed;
       SizeXParameter = ParticleParameterNames.SizeX;
-      _distribution = new BoxDistribution { MinValue = -Vector3F.One, MaxValue = Vector3F.One };
+      _distribution = new BoxDistribution { MinValue = -Vector3.One, MaxValue = Vector3.One };
       MaxRange = 1.0f;
     }
 
@@ -74,8 +73,8 @@ namespace Samples.Particles
 
     protected override void OnRequeryParameters()
     {
-      _positionParameter = ParticleSystem.Parameters.Get<Vector3F>(PositionParameter);
-      _targetPositionParameter = ParticleSystem.Parameters.Get<Vector3F>(TargetPositionParameter);
+      _positionParameter = ParticleSystem.Parameters.Get<Vector3>(PositionParameter);
+      _targetPositionParameter = ParticleSystem.Parameters.Get<Vector3>(TargetPositionParameter);
       _speedParameter = ParticleSystem.Parameters.Get<float>(SpeedParameter);
       _sizeXParameter = ParticleSystem.Parameters.Get<float>(SizeXParameter);
       _cameraPoseParameter = ParticleSystem.Parameters.Get<Pose>(CameraPoseParameter);
@@ -98,8 +97,8 @@ namespace Samples.Particles
           || _targetPositionParameter == null)
         return;
 
-      Vector3F[] positions = _positionParameter.Values;
-      Vector3F[] targetPositions = _targetPositionParameter.Values;
+      Vector3[] positions = _positionParameter.Values;
+      Vector3[] targetPositions = _targetPositionParameter.Values;
       if (positions == null || targetPositions == null)
       {
         // This effector only works with varying parameters.
@@ -122,8 +121,8 @@ namespace Samples.Particles
         return;
       }
 
-      Vector3F[] positions = _positionParameter.Values;
-      Vector3F[] targetPositions = _targetPositionParameter.Values;
+      Vector3[] positions = _positionParameter.Values;
+      Vector3[] targetPositions = _targetPositionParameter.Values;
       float[] speeds = _speedParameter.Values;
       float[] sizes = _sizeXParameter.Values;
       Pose cameraPose = (_cameraPoseParameter != null) ? _cameraPoseParameter.DefaultValue : Pose.Identity;
@@ -135,17 +134,17 @@ namespace Samples.Particles
       }
 
       Random random = ParticleSystem.Random;
-      Vector3F center = ParticleSystem.Pose.Position;
+      Vector3 center = ParticleSystem.Pose.Position;
       float dt = (float)deltaTime.TotalSeconds;
       for (int i = startIndex; i < startIndex + count; i++)
       {
-        Vector3F targetPosition = targetPositions[i];
-        Vector3F lineSegment = targetPosition - positions[i];
-        float distance = lineSegment.Length;
+        Vector3 targetPosition = targetPositions[i];
+        Vector3 lineSegment = targetPosition - positions[i];
+        float distance = lineSegment.Length();
         if (Numeric.IsZero(distance))
         {
           // The bee has reached the target position. Choose a new direction and distance.
-          Vector3F d = _distribution.Next(random);
+          Vector3 d = _distribution.Next(random);
 
           // Keep the new target position within a certain range.
           if (Math.Abs(targetPosition.X + d.X - center.X) > MaxRange)
@@ -160,7 +159,7 @@ namespace Samples.Particles
         else
         {
           // Move bee towards target position.
-          Vector3F movementDirection = lineSegment / distance;
+          Vector3 movementDirection = lineSegment / distance;
           float movementDistance = speeds[i] * dt;
           if (movementDistance > distance)
             movementDistance = distance;

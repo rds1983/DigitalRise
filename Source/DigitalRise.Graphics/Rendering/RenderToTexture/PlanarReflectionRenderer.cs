@@ -9,8 +9,9 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -135,12 +136,12 @@ namespace DigitalRise.Graphics.Rendering
       var originalReferenceNode = context.ReferenceNode;
 
       Pose originalCameraPose = originalCameraNode.PoseWorld;
-      Vector3F originalCameraPosition = originalCameraPose.Position;
+      Vector3 originalCameraPosition = originalCameraPose.Position;
       Matrix33F originalCameraOrientation = originalCameraPose.Orientation;
 
-      Vector3F right = originalCameraOrientation.GetColumn(0);
-      Vector3F up = originalCameraOrientation.GetColumn(1);
-      Vector3F back = originalCameraOrientation.GetColumn(2);
+      Vector3 right = originalCameraOrientation.GetColumn(0);
+      Vector3 up = originalCameraOrientation.GetColumn(1);
+      Vector3 back = originalCameraOrientation.GetColumn(2);
 
       try
       {
@@ -172,10 +173,10 @@ namespace DigitalRise.Graphics.Rendering
             continue;
 
           // Do not render if we look at the back of the reflection plane.
-          Vector3F planeNormal = node.NormalWorld;
-          Vector3F planePosition = node.PoseWorld.Position;
-          Vector3F planeToCamera = originalCameraPosition - planePosition;
-          if (Vector3F.Dot(planeNormal, planeToCamera) < 0)
+          Vector3 planeNormal = node.NormalWorld;
+          Vector3 planePosition = node.PoseWorld.Position;
+          Vector3 planeToCamera = originalCameraPosition - planePosition;
+          if (Vector3.Dot(planeNormal, planeToCamera) < 0)
             continue;
 
           var cameraNode = node.CameraNode;
@@ -224,8 +225,8 @@ namespace DigitalRise.Graphics.Rendering
             projection.Far = node.Far.Value;
 
           // Set near clip plane.
-          Vector3F planeNormalCamera = cameraPose.ToLocalDirection(-node.NormalWorld);
-          Vector3F planePointCamera = cameraPose.ToLocalPosition(node.PoseWorld.Position);
+          Vector3 planeNormalCamera = cameraPose.ToLocalDirection(-node.NormalWorld);
+          Vector3 planePointCamera = cameraPose.ToLocalPosition(node.PoseWorld.Position);
           projection.NearClipPlane = new Plane(planeNormalCamera, planePointCamera);
 
           context.CameraNode = cameraNode;
@@ -267,9 +268,9 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private static Vector3F Reflect(Vector3F vector, Vector3F normal)
+    private static Vector3 Reflect(Vector3 vector, Vector3 normal)
     {
-      return vector - 2 * Vector3F.Dot(normal, vector) * normal;
+      return vector - 2 * Vector3.Dot(normal, vector) * normal;
     }
     #endregion
   }

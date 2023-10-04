@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -44,7 +44,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
         var node = new TestSceneNode();
         nodes[i] = node;
 
-        var position = random.NextVector3F(-1000, 1000);
+        var position = random.NextVector3(-1000, 1000);
         var orientation = random.NextQuaternionF();
         node.PoseLocal = new Pose(position, orientation);
 
@@ -99,12 +99,12 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
             if (random.NextFloat(0, 1) < 0.5f) // 50% change to move
             {
               var pose = node.PoseWorld;
-              pose.Position += random.NextVector3F(0, 10);
+              pose.Position += random.NextVector3(0, 10);
               node.PoseWorld = pose;
             }
             if (random.NextFloat(0, 1) < 0.1f) // 50% change to scale
             {
-              node.ScaleLocal = random.NextVector3F(0.5f, 1.5f);
+              node.ScaleLocal = random.NextVector3(0.5f, 1.5f);
             }
           }
         }
@@ -133,7 +133,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
         var node = new TestSceneNode();
         nodes[i] = node;
 
-        var position = random.NextVector3F(0, WorldSize);
+        var position = random.NextVector3(0, WorldSize);
         var orientation = random.NextQuaternionF();
         node.PoseLocal = new Pose(position, orientation);
 
@@ -143,7 +143,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
         else if (p < 0.2f)
           node.Shape = Shape.Infinite;
         else if (p < 0.6f)
-          node.Shape = new BoxShape(random.NextVector3F(0, WorldSize));
+          node.Shape = new BoxShape(random.NextVector3(0, WorldSize));
         else 
           node.Shape = new SphereShape(random.NextFloat(0, WorldSize));
       }
@@ -187,7 +187,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
           {
             // Move
             var pose = node.PoseWorld;
-            pose.Position = random.NextVector3F(0, WorldSize);
+            pose.Position = random.NextVector3(0, WorldSize);
             node.PoseWorld = pose;
             //scene.Validate();
           }
@@ -196,7 +196,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
             // Very small Move
             var pose = node.PoseWorld;
             const float maxDistance = WorldSize / 10000;
-            pose.Position += random.NextVector3F(-maxDistance, maxDistance);
+            pose.Position += random.NextVector3(-maxDistance, maxDistance);
             node.PoseWorld = pose;
             //scene.Validate();
           }
@@ -205,14 +205,14 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
             // Small Move
             var pose = node.PoseWorld;
             const float maxDistance = WorldSize / 100;
-            pose.Position += random.NextVector3F(-maxDistance, maxDistance);
+            pose.Position += random.NextVector3(-maxDistance, maxDistance);
             node.PoseWorld = pose;
             //scene.Validate();
           }
           else if (action == 5)
           {
             // Scale
-            node.ScaleLocal = random.NextVector3F(0.0f, 10f);
+            node.ScaleLocal = random.NextVector3(0.0f, 10f);
             //scene.Validate();
           }
           else if (action == 6)
@@ -231,7 +231,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
           else if (action == 8)
           {
             // Move camera.
-            cameraNode.PoseWorld = new Pose(random.NextVector3F(0, WorldSize), random.NextQuaternionF());
+            cameraNode.PoseWorld = new Pose(random.NextVector3(0, WorldSize), random.NextQuaternionF());
             //scene.Validate();
           }
           else if (action == 9)
@@ -239,13 +239,13 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
             // Change shape.
             int type = random.NextInteger(0, 5);
             if (type == 0)
-              node.Shape = new BoxShape(random.NextVector3F(0, WorldSize));
+              node.Shape = new BoxShape(random.NextVector3(0, WorldSize));
             else if (type == 1)
               node.Shape = new SphereShape(random.NextFloat(0, WorldSize));
             else if (type == 2)
-              node.Shape = new BoxShape(new Vector3F(Single.MaxValue));
+              node.Shape = new BoxShape(new Vector3(Single.MaxValue));
             else if (type == 3)
-              node.Shape = new BoxShape(new Vector3F(0));
+              node.Shape = new BoxShape(new Vector3(0));
             else if (type == 4)
               node.Shape = Shape.Empty;
             //scene.Validate();
@@ -300,13 +300,13 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
       // Disabled validation.
       GlobalSettings.ValidationLevel = 0;
       var scene = new Scene();
-      scene.Children.Add(new TestSceneNode { PoseLocal = new Pose(new Vector3F(float.NaN))});
+      scene.Children.Add(new TestSceneNode { PoseLocal = new Pose(new Vector3(float.NaN))});
 
       // Enabled validation.
       GlobalSettings.ValidationLevel = 0xff;
       scene = new Scene();
       // NaN pose.
-      Assert.Throws<GraphicsException>(()=> scene.Children.Add(new TestSceneNode { Name = "xyz", PoseLocal = new Pose(new Vector3F(float.NaN)) }));
+      Assert.Throws<GraphicsException>(()=> scene.Children.Add(new TestSceneNode { Name = "xyz", PoseLocal = new Pose(new Vector3(float.NaN)) }));
     }
 
 
@@ -352,7 +352,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
       GlobalSettings.ValidationLevel = 0xff;
       var scene = new Scene();
       // Invalid scale.
-      Assert.Throws<GraphicsException>(() => scene.Children.Add(new TestSceneNode { ScaleLocal = new Vector3F(float.PositiveInfinity, 1, 1) }));
+      Assert.Throws<GraphicsException>(() => scene.Children.Add(new TestSceneNode { ScaleLocal = new Vector3(float.PositiveInfinity, 1, 1) }));
     }
 
 
@@ -368,7 +368,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
       scene.Children.Add(n);
 
       // Invalid changes of already added node:
-      Assert.Throws<GraphicsException>(() => n.ScaleLocal = new Vector3F(1, 1, float.NaN));
+      Assert.Throws<GraphicsException>(() => n.ScaleLocal = new Vector3(1, 1, float.NaN));
     }
 
 
@@ -383,8 +383,8 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
 
       // Invalid changes of already added node:
       var mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(1), new Vector3F(2), new Vector3F(3)));
-      mesh.Add(new Triangle(new Vector3F(4), new Vector3F(float.NaN, 5, 5), new Vector3F(6)));
+      mesh.Add(new Triangle(new Vector3(1), new Vector3(2), new Vector3(3)));
+      mesh.Add(new Triangle(new Vector3(4), new Vector3(float.NaN, 5, 5), new Vector3(6)));
       var meshShape = new TriangleMeshShape(mesh);
       Assert.Throws<GraphicsException>(() => n.Shape = meshShape);
     }
@@ -400,7 +400,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
       scene.Children.Add(n);
 
       // Invalid changes of already added node:
-      Assert.Throws<GraphicsException>(() => n.PoseLocal = new Pose(new Vector3F(float.NaN)));
+      Assert.Throws<GraphicsException>(() => n.PoseLocal = new Pose(new Vector3(float.NaN)));
     }
   }
 }

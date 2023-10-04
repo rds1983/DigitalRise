@@ -6,8 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -117,7 +116,7 @@ namespace DigitalRise.Geometry
     /// Changing this property raises the <see cref="ShapeChanged"/> event.
     /// </para>
     /// </remarks>
-    public Vector3F Scale
+    public Vector3 Scale
     {
       get { return _scale; }
       set
@@ -129,7 +128,7 @@ namespace DigitalRise.Geometry
         }
       }
     }
-    private Vector3F _scale;
+    private Vector3 _scale;
 
 
     /// <inheritdoc/>
@@ -157,7 +156,7 @@ namespace DigitalRise.Geometry
     public GeometricObject()
     {
       _shape = Shape.Empty;
-      _scale = Vector3F.One;
+      _scale = Vector3.One;
       _pose = Pose.Identity;
     }
 
@@ -179,7 +178,7 @@ namespace DigitalRise.Geometry
 
       _shape = shape;
       _shape.Changed += OnShapeChanged;
-      _scale = Vector3F.One;
+      _scale = Vector3.One;
       _pose = Pose.Identity;
     }
 
@@ -195,7 +194,7 @@ namespace DigitalRise.Geometry
     /// <exception cref="ArgumentNullException">
     /// <paramref name="shape"/> is <see langword="null"/>.
     /// </exception>
-    public GeometricObject(Shape shape, Vector3F scale)
+    public GeometricObject(Shape shape, Vector3 scale)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");
@@ -226,7 +225,7 @@ namespace DigitalRise.Geometry
 
       _shape = shape;
       _shape.Changed += OnShapeChanged;
-      _scale = Vector3F.One;
+      _scale = Vector3.One;
       _pose = pose;
     }
 
@@ -244,7 +243,7 @@ namespace DigitalRise.Geometry
     /// <exception cref="ArgumentNullException">
     /// <paramref name="shape"/> is <see langword="null"/>.
     /// </exception>
-    public GeometricObject(Shape shape, Vector3F scale, Pose pose)
+    public GeometricObject(Shape shape, Vector3 scale, Pose pose)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");

@@ -1,5 +1,5 @@
 using System;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -31,22 +31,22 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       Assert.AreEqual(0, d.InnerRadius);
       Assert.AreEqual(1, d.OuterRadius);
-      Assert.AreEqual(Vector3F.One, d.Scale);
+      Assert.AreEqual(Vector3.One, d.Scale);
 
       d.InnerRadius = 2;
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(1, d.OuterRadius);
-      Assert.AreEqual(Vector3F.One, d.Scale);
+      Assert.AreEqual(Vector3.One, d.Scale);
 
       d.OuterRadius = 3;
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(3, d.OuterRadius);
-      Assert.AreEqual(Vector3F.One, d.Scale);
+      Assert.AreEqual(Vector3.One, d.Scale);
 
-      d.Scale = new Vector3F(0.5f, 2, 1.2f);
+      d.Scale = new Vector3(0.5f, 2, 1.2f);
       Assert.AreEqual(2, d.InnerRadius);
       Assert.AreEqual(3, d.OuterRadius);
-      Assert.AreEqual(new Vector3F(0.5f, 2, 1.2f), d.Scale);
+      Assert.AreEqual(new Vector3(0.5f, 2, 1.2f), d.Scale);
     }
 
 
@@ -56,9 +56,9 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       var random = new Random(123456);
       var d = new SphereDistribution { OuterRadius = 0 };
 
-      Assert.AreEqual(new Vector3F(), d.Next(random));
-      Assert.AreEqual(new Vector3F(), d.Next(random));
-      Assert.AreEqual(new Vector3F(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
+      Assert.AreEqual(new Vector3(), d.Next(random));
     }
 
 
@@ -75,7 +75,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
         var value = d.Next(random);
 
-        var radius = value.Length;
+        var radius = value.Length();
         Assert.IsTrue(d.InnerRadius < radius && radius < d.OuterRadius
                       || d.OuterRadius < radius && radius < d.InnerRadius);
       }

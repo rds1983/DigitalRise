@@ -9,6 +9,8 @@ using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
+using MathHelper = DigitalRise.Mathematics.MathHelper;
+
 namespace DigitalRise.Geometry.Shapes
 {
   /// <summary>
@@ -63,9 +65,9 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
-      get { return Vector3F.Zero; }
+      get { return Vector3.Zero; }
     }
 
 
@@ -199,15 +201,15 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
-      Vector3F halfExtent = new Vector3F(_widthX / 2, _widthY / 2, 0) * Vector3F.Absolute(scale);
+      Vector3 halfExtent = new Vector3(_widthX / 2, _widthY / 2, 0) * MathHelper.Absolute(scale);
 
       // Get world axes in local space. They are equal to the rows of the orientation matrix.
       Matrix33F rotationMatrix = pose.Orientation;
-      Vector3F worldX = rotationMatrix.GetRow(0);
-      Vector3F worldY = rotationMatrix.GetRow(1);
-      Vector3F worldZ = rotationMatrix.GetRow(2);
+      Vector3 worldX = rotationMatrix.GetRow(0);
+      Vector3 worldY = rotationMatrix.GetRow(1);
+      Vector3 worldZ = rotationMatrix.GetRow(2);
 
       // The half extent vector is in the +x/+y/+z octant of the world. We want to project
       // the extent onto the world axes. The half extent projected onto world x gives us the 
@@ -216,14 +218,14 @@ namespace DigitalRise.Geometry.Shapes
       // out the in which octant the world axes is pointing and build the correct half extent vector
       // for this octant. OR we mirror the world axis vectors into the +x/+y/+z octant by taking
       // the absolute vector.
-      worldX = Vector3F.Absolute(worldX);
-      worldY = Vector3F.Absolute(worldY);
-      worldZ = Vector3F.Absolute(worldZ);
+      worldX = MathHelper.Absolute(worldX);
+      worldY = MathHelper.Absolute(worldY);
+      worldZ = MathHelper.Absolute(worldZ);
 
       // Now we project the extent onto the world axes.
-      Vector3F halfExtentWorld = new Vector3F(Vector3F.Dot(halfExtent, worldX),
-                                              Vector3F.Dot(halfExtent, worldY),
-                                              Vector3F.Dot(halfExtent, worldZ));
+      Vector3 halfExtentWorld = new Vector3(Vector3.Dot(halfExtent, worldX),
+                                              Vector3.Dot(halfExtent, worldY),
+                                              Vector3.Dot(halfExtent, worldZ));
 
       return new Aabb(pose.Position - halfExtentWorld, pose.Position + halfExtentWorld);
     }
@@ -243,9 +245,9 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
-      Vector3F supportVertex = new Vector3F
+      Vector3 supportVertex = new Vector3
       {
         X = ((direction.X >= 0) ? _widthX / 2 : -_widthX / 2),
         Y = ((direction.Y >= 0) ? _widthY / 2 : -_widthY / 2),
@@ -268,9 +270,9 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
-      Vector3F supportVertex = new Vector3F
+      Vector3 supportVertex = new Vector3
       {
         X = ((directionNormalized.X >= 0) ? _widthX / 2 : -_widthX / 2),
         Y = ((directionNormalized.Y >= 0) ? _widthY / 2 : -_widthY / 2),
@@ -303,15 +305,15 @@ namespace DigitalRise.Geometry.Shapes
       TriangleMesh mesh = new TriangleMesh();
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(_widthX / 2, _widthY / 2, 0),
-        Vertex1 = new Vector3F(-_widthX / 2, _widthY / 2, 0),
-        Vertex2 = new Vector3F(-_widthX / 2, -_widthY / 2, 0),
+        Vertex0 = new Vector3(_widthX / 2, _widthY / 2, 0),
+        Vertex1 = new Vector3(-_widthX / 2, _widthY / 2, 0),
+        Vertex2 = new Vector3(-_widthX / 2, -_widthY / 2, 0),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-_widthX / 2, -_widthY / 2, 0),
-        Vertex1 = new Vector3F(_widthX / 2, -_widthY / 2, 0),
-        Vertex2 = new Vector3F(_widthX / 2, _widthY / 2, 0),
+        Vertex0 = new Vector3(-_widthX / 2, -_widthY / 2, 0),
+        Vertex1 = new Vector3(_widthX / 2, -_widthY / 2, 0),
+        Vertex2 = new Vector3(_widthX / 2, _widthY / 2, 0),
       }, true);
       return mesh;
     }

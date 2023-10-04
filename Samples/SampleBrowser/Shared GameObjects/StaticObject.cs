@@ -9,8 +9,8 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -22,7 +22,7 @@ namespace Samples
   {
     private readonly IServiceLocator _services;
     private readonly string _assetName;
-    private readonly Vector3F _scale;
+    private readonly Vector3 _scale;
     private readonly Pose _pose;
     private readonly bool _castsShadows;
     private readonly bool _addRigidBody;
@@ -31,12 +31,12 @@ namespace Samples
 
 
     public StaticObject(IServiceLocator services, string assetName, float scale, Pose pose)
-      : this(services, assetName, new Vector3F(scale), pose, true, false)
+      : this(services, assetName, new Vector3(scale), pose, true, false)
     {
     }
 
 
-    public StaticObject(IServiceLocator services, string assetName, Vector3F scale, Pose pose, bool castsShadows, bool addRigidBody)
+    public StaticObject(IServiceLocator services, string assetName, Vector3 scale, Pose pose, bool castsShadows, bool addRigidBody)
     {
       _services = services;
       _assetName = assetName;

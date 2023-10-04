@@ -30,7 +30,7 @@ namespace Samples.Animation
     {
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       var meshNode = modelNode.FindFirstMeshNode().Clone();
-      meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
+      meshNode.PoseLocal = new Pose(new Vector3(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(meshNode);
       GraphicsScreen.Scene.Children.Add(meshNode);
 

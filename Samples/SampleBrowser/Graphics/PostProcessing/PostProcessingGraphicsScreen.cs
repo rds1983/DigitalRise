@@ -8,7 +8,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 
@@ -82,7 +81,6 @@ namespace Samples
       _reticle = assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.
-      var uiContentManager = services.GetInstance<ContentManager>("UIContent");
       var spriteFont = DefaultAssets.DefaultFont;
       DebugRenderer = new DebugRenderer(GraphicsService, spriteFont)
       {

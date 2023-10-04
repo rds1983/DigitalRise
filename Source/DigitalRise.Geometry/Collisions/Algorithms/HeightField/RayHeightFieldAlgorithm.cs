@@ -7,7 +7,8 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -69,9 +70,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       contactSet.HaveContact = false;
 
       // Get transformations.
-      Vector3F rayScale = rayObject.Scale;
+      Vector3 rayScale = rayObject.Scale;
       Pose rayPose = rayObject.Pose;
-      Vector3F heightFieldScale = heightFieldObject.Scale;
+      Vector3 heightFieldScale = heightFieldObject.Scale;
       Pose heightFieldPose = heightFieldObject.Pose;
 
       // We do not support negative scaling. It is not clear what should happen when y is
@@ -90,7 +91,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Ray in local unscaled space of the mesh.
       Ray rayUnscaled = rayScaled;
-      var inverseCompositeScale = Vector3F.One / heightFieldScale;
+      var inverseCompositeScale = Vector3.One / heightFieldScale;
       rayUnscaled.Scale(ref inverseCompositeScale);
 
       // Get height field and basic info.
@@ -109,7 +110,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       // See GeometryHelper_Casts.cs method HaveContact(Aabb, ray) for explanation of the 
       // ray parameter formula.
 
-      var rayUnscaledDirectionInverse = new Vector3F(
+      var rayUnscaledDirectionInverse = new Vector3(
         1 / rayUnscaled.Direction.X,
         1 / rayUnscaled.Direction.Y,
         1 / rayUnscaled.Direction.Z);
@@ -194,7 +195,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
         // ----- Find cell exit and move indices to next cell.
         // The position where the ray leaves the current cell.
-        Vector3F cellExit;
+        Vector3 cellExit;
         float nextXParameter = float.PositiveInfinity;
         if (rayUnscaled.Direction.X > 0)
           nextXParameter = (originX + (indexX + 1) * cellWidthX - rayUnscaled.Origin.X) * rayUnscaledDirectionInverse.X;
@@ -313,11 +314,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
               return;
 
             var position = heightFieldPose.ToWorldPosition(cellEnter * heightFieldScale);
-            var normal = heightFieldPose.ToWorldDirection(Vector3F.UnitY);
+            var normal = heightFieldPose.ToWorldDirection(Vector3.UnitY);
             if (swapped)
               normal = -normal;
 
-            float penetrationDepth = (position - rayWorld.Origin).Length;
+            float penetrationDepth = (position - rayWorld.Origin).Length();
             Contact contact = ContactHelper.CreateContact(contactSet, position, normal, penetrationDepth, true);
             ContactHelper.Merge(contactSet, contact, type, CollisionDetection.ContactPositionTolerance);
             return;
@@ -342,38 +343,38 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
                             ref Triangle triangle,        // The unscaled triangle in the mesh space.
                             int triangleIndex,
                             ref Pose trianglePose,
-                            ref Vector3F triangleScale)
+                            ref Vector3 triangleScale)
     {
       // This code is from GeometryHelper_Triangles.cs. Sync changes!
 
-      Vector3F v0 = triangle.Vertex0 * triangleScale;
-      Vector3F v1 = triangle.Vertex1 * triangleScale;
-      Vector3F v2 = triangle.Vertex2 * triangleScale;
+      Vector3 v0 = triangle.Vertex0 * triangleScale;
+      Vector3 v1 = triangle.Vertex1 * triangleScale;
+      Vector3 v2 = triangle.Vertex2 * triangleScale;
 
-      Vector3F d1 = (v1 - v0);
-      Vector3F d2 = (v2 - v0);
-      Vector3F n = Vector3F.Cross(d1, d2);
+      Vector3 d1 = (v1 - v0);
+      Vector3 d2 = (v2 - v0);
+      Vector3 n = Vector3.Cross(d1, d2);
 
       // Tolerance value, see SOLID, Bergen: "Collision Detection in Interactive 3D Environments".
-      float ε = n.Length * Numeric.EpsilonFSquared;
+      float ε = n.Length() * Numeric.EpsilonFSquared;
 
-      Vector3F r = rayInField.Direction * rayInField.Length;
+      Vector3 r = rayInField.Direction * rayInField.Length;
 
-      float δ = -Vector3F.Dot(r, n);
+      float δ = -Vector3.Dot(r, n);
 
       // Degenerate triangle --> No hit.
       if (ε == 0.0f || Numeric.IsZero(δ, ε))
         return false;
 
-      Vector3F triangleToRayOrigin = rayInField.Origin - v0;
-      float λ = Vector3F.Dot(triangleToRayOrigin, n) / δ;
+      Vector3 triangleToRayOrigin = rayInField.Origin - v0;
+      float λ = Vector3.Dot(triangleToRayOrigin, n) / δ;
       if (λ < 0 || λ > 1)
         return false;
 
       // The ray hit the triangle plane.
-      Vector3F u = Vector3F.Cross(triangleToRayOrigin, r);
-      float μ1 = Vector3F.Dot(d2, u) / δ;
-      float μ2 = Vector3F.Dot(-d1, u) / δ;
+      Vector3 u = Vector3.Cross(triangleToRayOrigin, r);
+      float μ1 = Vector3.Dot(d2, u) / δ;
+      float μ2 = Vector3.Dot(-d1, u) / δ;
       if (μ1 + μ2 <= 1 + ε && μ1 >= -ε && μ2 >= -ε)
       {
         // Hit!
@@ -388,10 +389,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         float penetrationDepth = λ * rayInField.Length;
 
         // Create contact info.
-        Vector3F position = rayWorld.Origin + rayWorld.Direction * penetrationDepth;
+        Vector3 position = rayWorld.Origin + rayWorld.Direction * penetrationDepth;
         n = trianglePose.ToWorldDirection(n);
 
-        Debug.Assert(!n.IsNumericallyZero, "Degenerate cases of ray vs. triangle should be treated above.");
+        Debug.Assert(!n.IsNumericallyZero(), "Degenerate cases of ray vs. triangle should be treated above.");
         n.Normalize();
 
         if (δ < 0)

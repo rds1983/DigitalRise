@@ -40,7 +40,7 @@ namespace DigitalRise.Graphics.Rendering
     private struct Point
     {
       /// <summary>The position in world space.</summary>
-      public readonly Vector3F Position;
+      public readonly Vector3 Position;
 
       /// <summary>The color (using premultiplied alpha).</summary>
       public readonly Color Color;
@@ -50,7 +50,7 @@ namespace DigitalRise.Graphics.Rendering
       /// </summary>
       /// <param name="position">The position.</param>
       /// <param name="color">The color (using premultiplied alpha).</param>
-      public Point(Vector3F position, Color color)
+      public Point(Vector3 position, Color color)
       {
         Position = position;
         Color = color;
@@ -127,7 +127,7 @@ namespace DigitalRise.Graphics.Rendering
     /// </summary>
     /// <param name="position">The position in world space.</param>
     /// <param name="color">The color (non-premultiplied).</param>
-    public void Add(Vector3F position, Color color)
+    public void Add(Vector3 position, Color color)
     {
       _points.Add(new Point(position, Color.FromNonPremultiplied(color.R, color.G, color.B, color.A)));
     }

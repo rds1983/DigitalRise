@@ -130,7 +130,7 @@ namespace DigitalRise.Graphics.Rendering
 
 
     // For rendering using screen space quads:
-    private readonly Vector3F[] _quadVertices = new Vector3F[4];
+    private readonly Vector3[] _quadVertices = new Vector3[4];
     private Aabb _cameraNearPlaneAabbWorld;
     #endregion
 
@@ -417,15 +417,15 @@ namespace DigitalRise.Graphics.Rendering
         var projection = cameraNode.Camera.Projection;
 
         // Get min and max of near plane AABB in view space.
-        var min = new Vector3F(projection.Left, projection.Bottom, -projection.Near);
-        var max = new Vector3F(projection.Right, projection.Top, -projection.Near);
+        var min = new Vector3(projection.Left, projection.Bottom, -projection.Near);
+        var max = new Vector3(projection.Right, projection.Top, -projection.Near);
 
         // Convert min and max to world space.
         min = cameraPose.ToWorldPosition(min);
         max = cameraPose.ToWorldPosition(max);
 
         // Get world space aabb
-        _cameraNearPlaneAabbWorld = new Aabb(Vector3F.Min(min, max), Vector3F.Max(min, max));
+        _cameraNearPlaneAabbWorld = new Aabb(Vector3.Min(min, max), Vector3.Max(min, max));
       }
 
       // The BlendState is set below.
@@ -604,9 +604,9 @@ namespace DigitalRise.Graphics.Rendering
             if (GeometryHelper.HaveContact(_cameraNearPlaneAabbWorld, decalNode.Aabb))
             {
               // Make exact check of decal box against camera near plane AABB in camera space.
-              var decalBoxExtent = new Vector3F(1, 1, 1);
+              var decalBoxExtent = new Vector3(1, 1, 1);
               decalBoxExtent *= decalNode.ScaleLocal;
-              var decalBoxCenter = new Vector3F(0, 0, -decalNode.ScaleLocal.Z / 2);
+              var decalBoxCenter = new Vector3(0, 0, -decalNode.ScaleLocal.Z / 2);
 
               // Get pose of decal box in view space.
               var decalBoxPose = new Pose(
@@ -616,8 +616,8 @@ namespace DigitalRise.Graphics.Rendering
               // Aabb of camera near plane in view space.
               var projection = cameraNode.Camera.Projection;
               var cameraNearPlaneAabb = new Aabb(
-                new Vector3F(projection.Left, projection.Bottom, -projection.Near),
-                new Vector3F(projection.Right, projection.Top, -projection.Near));
+                new Vector3(projection.Left, projection.Bottom, -projection.Near),
+                new Vector3(projection.Right, projection.Top, -projection.Near));
 
               drawWithQuad = GeometryHelper.HaveContact(cameraNearPlaneAabb, decalBoxExtent, decalBoxPose, true);
             }
@@ -642,7 +642,7 @@ namespace DigitalRise.Graphics.Rendering
             // The quad vertices must be given decal space!
 
             var projection = cameraNode.Camera.Projection;
-            Vector3F scale = decalNode.ScaleWorld;
+            Vector3 scale = decalNode.ScaleWorld;
             Pose cameraToDecalPose = decalPose.Inverse * cameraPose;
 
             Vector4F scissor = GraphicsHelper.GetBounds(cameraNode, decalNode);
@@ -653,19 +653,19 @@ namespace DigitalRise.Graphics.Rendering
             float right = InterpolationHelper.Lerp(projection.Left, projection.Right, scissor.Z) * bias;
             float bottom = InterpolationHelper.Lerp(projection.Top, projection.Bottom, scissor.W) * bias;
             float z = -projection.Near * bias;
-            _quadVertices[0] = cameraToDecalPose.ToWorldPosition(new Vector3F(left, top, z));
+            _quadVertices[0] = cameraToDecalPose.ToWorldPosition(new Vector3(left, top, z));
             _quadVertices[0].X /= scale.X;
             _quadVertices[0].Y /= scale.Y;
             _quadVertices[0].Z /= scale.Z;
-            _quadVertices[1] = cameraToDecalPose.ToWorldPosition(new Vector3F(right, top, z));
+            _quadVertices[1] = cameraToDecalPose.ToWorldPosition(new Vector3(right, top, z));
             _quadVertices[1].X /= scale.X;
             _quadVertices[1].Y /= scale.Y;
             _quadVertices[1].Z /= scale.Z;
-            _quadVertices[2] = cameraToDecalPose.ToWorldPosition(new Vector3F(left, bottom, z));
+            _quadVertices[2] = cameraToDecalPose.ToWorldPosition(new Vector3(left, bottom, z));
             _quadVertices[2].X /= scale.X;
             _quadVertices[2].Y /= scale.Y;
             _quadVertices[2].Z /= scale.Z;
-            _quadVertices[3] = cameraToDecalPose.ToWorldPosition(new Vector3F(right, bottom, z));
+            _quadVertices[3] = cameraToDecalPose.ToWorldPosition(new Vector3(right, bottom, z));
             _quadVertices[3].X /= scale.X;
             _quadVertices[3].Y /= scale.Y;
             _quadVertices[3].Z /= scale.Z;

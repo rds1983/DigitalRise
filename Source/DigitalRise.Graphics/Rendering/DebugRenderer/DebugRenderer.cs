@@ -19,7 +19,7 @@ using DigitalRise.Text;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.Rendering
 {
@@ -868,7 +868,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawPoint(Vector3F position, Color color, bool drawOverScene)
+    public void DrawPoint(Vector3 position, Color color, bool drawOverScene)
     {
       if (!Enabled)
         return;
@@ -888,7 +888,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawLine(Vector3F start, Vector3F end, Color color, bool drawOverScene)
+    public void DrawLine(Vector3 start, Vector3 end, Color color, bool drawOverScene)
     {
       if (!Enabled)
         return;
@@ -922,7 +922,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawTriangle(Vector3F vertex0, Vector3F vertex1, Vector3F vertex2,
+    public void DrawTriangle(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2,
       Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled)
@@ -941,7 +941,7 @@ namespace DigitalRise.Graphics.Rendering
       else
         batch = TransparentTriangleBatch;
 
-      var normal = Vector3F.Cross(vertex1 - vertex0, vertex2 - vertex0);
+      var normal = Vector3.Cross(vertex1 - vertex0, vertex2 - vertex0);
       // (normal is normalized in the BasicEffect HLSL.)
 
       // Draw with swapped winding order!
@@ -970,7 +970,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawTriangle(Vector3F vertex0, Vector3F vertex1, Vector3F vertex2, Vector3F normal,
+    public void DrawTriangle(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2, Vector3 normal,
       Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled)
@@ -1012,7 +1012,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawTriangle(Triangle triangle, Pose pose, Vector3F scale,
+    public void DrawTriangle(Triangle triangle, Pose pose, Vector3 scale,
       Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled)
@@ -1066,7 +1066,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawTriangle(Triangle triangle, Pose pose, Vector3F scale, Vector3F normal,
+    public void DrawTriangle(Triangle triangle, Pose pose, Vector3 scale, Vector3 normal,
       Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled)
@@ -1121,7 +1121,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawTriangles(ITriangleMesh mesh, Pose pose, Vector3F scale,
+    public void DrawTriangles(ITriangleMesh mesh, Pose pose, Vector3 scale,
       Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled || mesh == null)
@@ -1140,14 +1140,14 @@ namespace DigitalRise.Graphics.Rendering
       else
         batch = TransparentTriangleBatch;
 
-      if (Vector3F.AreNumericallyEqual(scale, Vector3F.One) && !pose.HasRotation && !pose.HasTranslation)
+      if (MathHelper.AreNumericallyEqual(scale, Vector3.One) && !pose.HasRotation && !pose.HasTranslation)
       {
         int numberOfTriangles = mesh.NumberOfTriangles;
         for (int i = 0; i < numberOfTriangles; i++)
         {
           var triangle = mesh.GetTriangle(i);
 
-          var normal = Vector3F.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
+          var normal = Vector3.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
           // (normal is normalized in the BasicEffect HLSL.)
 
           // Draw with swapped winding order!
@@ -1168,7 +1168,7 @@ namespace DigitalRise.Graphics.Rendering
           triangle.Vertex1 = transform.TransformPosition(triangle.Vertex1);
           triangle.Vertex2 = transform.TransformPosition(triangle.Vertex2);
 
-          var normal = Vector3F.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
+          var normal = Vector3.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
           // (normal is normalized in the BasicEffect HLSL.)
 
           // Draw with swapped winding order!
@@ -1309,7 +1309,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(string text, Vector3F position, Color color, bool drawOverScene)
+    public void DrawText(string text, Vector3 position, Color color, bool drawOverScene)
     {
       DrawText(text, position, Vector2.Zero, color, drawOverScene);
     }
@@ -1325,7 +1325,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(StringBuilder text, Vector3F position, Color color, bool drawOverScene)
+    public void DrawText(StringBuilder text, Vector3 position, Color color, bool drawOverScene)
     {
       DrawText(text, position, Vector2.Zero, color, drawOverScene);
     }
@@ -1346,7 +1346,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(string text, Vector3F position, Vector2 relativeOrigin, Color color, bool drawOverScene)
+    public void DrawText(string text, Vector3 position, Vector2 relativeOrigin, Color color, bool drawOverScene)
     {
       if (!Enabled || string.IsNullOrEmpty(text))
         return;
@@ -1371,7 +1371,7 @@ namespace DigitalRise.Graphics.Rendering
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    public void DrawText(StringBuilder text, Vector3F position, Vector2 relativeOrigin, Color color, bool drawOverScene)
+    public void DrawText(StringBuilder text, Vector3 position, Vector2 relativeOrigin, Color color, bool drawOverScene)
     {
       if (!Enabled || text == null || text.Length == 0)
         return;
@@ -1397,14 +1397,14 @@ namespace DigitalRise.Graphics.Rendering
       if (!Enabled)
         return;
 
-      Vector3F corner0 = pose.ToWorldPosition(new Vector3F(aabb.Minimum.X, aabb.Minimum.Y, aabb.Maximum.Z));
-      Vector3F corner1 = pose.ToWorldPosition(new Vector3F(aabb.Maximum.X, aabb.Minimum.Y, aabb.Maximum.Z));
-      Vector3F corner2 = pose.ToWorldPosition(aabb.Maximum);
-      Vector3F corner3 = pose.ToWorldPosition(new Vector3F(aabb.Minimum.X, aabb.Maximum.Y, aabb.Maximum.Z));
-      Vector3F corner4 = pose.ToWorldPosition(aabb.Minimum);
-      Vector3F corner5 = pose.ToWorldPosition(new Vector3F(aabb.Maximum.X, aabb.Minimum.Y, aabb.Minimum.Z));
-      Vector3F corner6 = pose.ToWorldPosition(new Vector3F(aabb.Maximum.X, aabb.Maximum.Y, aabb.Minimum.Z));
-      Vector3F corner7 = pose.ToWorldPosition(new Vector3F(aabb.Minimum.X, aabb.Maximum.Y, aabb.Minimum.Z));
+      Vector3 corner0 = pose.ToWorldPosition(new Vector3(aabb.Minimum.X, aabb.Minimum.Y, aabb.Maximum.Z));
+      Vector3 corner1 = pose.ToWorldPosition(new Vector3(aabb.Maximum.X, aabb.Minimum.Y, aabb.Maximum.Z));
+      Vector3 corner2 = pose.ToWorldPosition(aabb.Maximum);
+      Vector3 corner3 = pose.ToWorldPosition(new Vector3(aabb.Minimum.X, aabb.Maximum.Y, aabb.Maximum.Z));
+      Vector3 corner4 = pose.ToWorldPosition(aabb.Minimum);
+      Vector3 corner5 = pose.ToWorldPosition(new Vector3(aabb.Maximum.X, aabb.Minimum.Y, aabb.Minimum.Z));
+      Vector3 corner6 = pose.ToWorldPosition(new Vector3(aabb.Maximum.X, aabb.Maximum.Y, aabb.Minimum.Z));
+      Vector3 corner7 = pose.ToWorldPosition(new Vector3(aabb.Minimum.X, aabb.Maximum.Y, aabb.Minimum.Z));
 
       DrawLine(corner0, corner1, color, drawOverScene);
       DrawLine(corner1, corner2, color, drawOverScene);
@@ -1458,21 +1458,21 @@ namespace DigitalRise.Graphics.Rendering
     /// disabled).
     /// </param>
     /// <seealso cref="ArrowHeadSize"/>
-    public void DrawArrow(Vector3F start, Vector3F end, Color color, bool drawOverScene)
+    public void DrawArrow(Vector3 start, Vector3 end, Color color, bool drawOverScene)
     {
       if (!Enabled)
         return;
 
       // TODO: Arrow could also be drawn as cylinder + cone, or with a preprepared model.
-      Vector3F shaft = end - start;
-      float length = shaft.Length;
+      Vector3 shaft = end - start;
+      float length = shaft.Length();
       if (Numeric.IsZero(length))
         return;
 
       DrawLine(start, end, color, drawOverScene);
 
-      Vector3F shaftDirection = shaft / length;
-      Vector3F normal = (shaftDirection).Orthonormal1;
+      Vector3 shaftDirection = shaft / length;
+      Vector3 normal = (shaftDirection).Orthonormal1();
       DrawLine(end, end - ArrowHeadSize * shaft + normal * length * 0.05f, color, drawOverScene);
       DrawLine(end, end - ArrowHeadSize * shaft - normal * length * 0.05f, color, drawOverScene);
     }
@@ -1495,9 +1495,9 @@ namespace DigitalRise.Graphics.Rendering
       if (!Enabled)
         return;
 
-      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3F.UnitX) * size, Color.Red, drawOverScene);
-      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3F.UnitY) * size, Color.Green, drawOverScene);
-      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3F.UnitZ) * size, Color.Blue, drawOverScene);
+      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3.UnitX) * size, Color.Red, drawOverScene);
+      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3.UnitY) * size, Color.Green, drawOverScene);
+      DrawArrow(pose.Position, pose.Position + pose.ToWorldDirection(Vector3.UnitZ) * size, Color.Blue, drawOverScene);
     }
 
 
@@ -1686,7 +1686,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawViewVolume(ViewVolume viewVolume, Pose pose, Vector3F scale, Color color, bool drawWireFrame, bool drawOverScene)
+    public void DrawViewVolume(ViewVolume viewVolume, Pose pose, Vector3 scale, Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (viewVolume == null)
         throw new ArgumentNullException("viewVolume");
@@ -1930,7 +1930,7 @@ namespace DigitalRise.Graphics.Rendering
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    public void DrawShape(Shape shape, Pose pose, Vector3F scale, Color color, bool drawWireFrame, bool drawOverScene)
+    public void DrawShape(Shape shape, Pose pose, Vector3 scale, Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled || shape == null)
         return;
@@ -2020,8 +2020,8 @@ namespace DigitalRise.Graphics.Rendering
       RayShape ray = shape as RayShape;
       if (ray != null)
       {
-        Vector3F start = ray.Origin;
-        Vector3F end = ray.Origin + ray.Direction * ray.Length;
+        Vector3 start = ray.Origin;
+        Vector3 end = ray.Origin + ray.Direction * ray.Length;
         DrawLine(pose.ToWorldPosition(start * scale), pose.ToWorldPosition(end * scale), color, drawOverScene);
         return;
       }
@@ -2053,7 +2053,7 @@ namespace DigitalRise.Graphics.Rendering
         Pose childPose = transformed.Child.Pose;
         if (Numeric.AreEqual(scale.X, scale.Y) && Numeric.AreEqual(scale.Y, scale.Z) || !childPose.HasRotation)
         {
-          Vector3F childScale = transformed.Child.Scale;
+          Vector3 childScale = transformed.Child.Scale;
           childPose.Position *= scale;
 
           DrawShape(transformed.Child.Shape, pose * childPose, scale * childScale, color, drawWireFrame, drawOverScene);
@@ -2160,7 +2160,7 @@ namespace DigitalRise.Graphics.Rendering
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public void DrawMesh(Submesh submesh, Pose pose, Vector3F scale, Color color, bool drawWireFrame, bool drawOverScene)
+    public void DrawMesh(Submesh submesh, Pose pose, Vector3 scale, Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled || submesh == null)
         return;
@@ -2200,7 +2200,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawMesh(Mesh mesh, Pose pose, Vector3F scale, Color color, bool drawWireFrame, bool drawOverScene)
+    public void DrawMesh(Mesh mesh, Pose pose, Vector3 scale, Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled || mesh == null)
         return;
@@ -2247,7 +2247,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="NotSupportedException">
     /// Drawing solid objects with disabled depth test is not yet supported.
     /// </exception>
-    public void DrawModel(Model model, Pose pose, Vector3F scale, Color color, bool drawWireFrame, bool drawOverScene)
+    public void DrawModel(Model model, Pose pose, Vector3 scale, Color color, bool drawWireFrame, bool drawOverScene)
     {
       if (!Enabled || model == null)
         return;
@@ -2354,7 +2354,7 @@ namespace DigitalRise.Graphics.Rendering
     /// space axes (x, y, z).
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters")]
-    public void DrawSkeleton(SkeletonPose skeletonPose, Pose pose, Vector3F scale, float axisLength, Color color, bool drawOverScene)
+    public void DrawSkeleton(SkeletonPose skeletonPose, Pose pose, Vector3 scale, float axisLength, Color color, bool drawOverScene)
     {
       if (!Enabled || skeletonPose == null)
         return;

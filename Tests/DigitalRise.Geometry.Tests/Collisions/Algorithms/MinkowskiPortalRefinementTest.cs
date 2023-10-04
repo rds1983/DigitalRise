@@ -4,8 +4,9 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -28,7 +29,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       CollisionObject a = new CollisionObject(new GeometricObject
       {
-        Shape = new TriangleShape(new Vector3F(0, 0, 0), new Vector3F(0, 1, 0), new Vector3F(0, 0, 1))
+        Shape = new TriangleShape(new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1))
       });
 
       CollisionObject b = new CollisionObject(new GeometricObject
@@ -42,16 +43,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, algo.HaveContact(a, b));
       Assert.IsTrue(Numeric.AreEqual(1, set[0].PenetrationDepth));
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(2, 0.1f, 0.2f));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2, 0.1f, 0.2f));
       algo.UpdateContacts(set, 0);      
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(0.9f, 0.1f, 0.2f));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0.9f, 0.1f, 0.2f));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(true, algo.HaveContact(a, b));
       Assert.AreEqual(1, set.Count);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0.1f, 0.2f), set[0].PositionAWorld, 0.02f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.1f, 0.2f), set[0].PositionAWorld, 0.02f));
     }
 
 
@@ -62,7 +63,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       CollisionObject box = new CollisionObject(new GeometricObject
       {
-        Pose = new Pose(new Vector3F(1.99999f, 0, 0)),
+        Pose = new Pose(new Vector3(1.99999f, 0, 0)),
         Shape = new BoxShape(2, 2, 2),
       });
 
@@ -76,13 +77,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       set = algo.GetContacts(box, sphere);
       Assert.AreEqual(1, set.Count);
       Assert.IsTrue(Numeric.AreEqual(0, set[0].PenetrationDepth));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-1, 0, 0), set[0].Normal, 0.001f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), set[0].Normal, 0.001f));
 
-      ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3F(0.2f, 0, 0));
+      ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(0.2f, 0, 0));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(1, set.Count);
       Assert.IsTrue(Numeric.AreEqual(0.2f, set[0].PenetrationDepth));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-1, 0, 0), set[0].Normal, 0.001f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), set[0].Normal, 0.001f));
     }
 
 
@@ -94,13 +95,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject a = new CollisionObject(new GeometricObject
       {
         Shape = new SphereShape(2), 
-        Pose = new Pose(new Vector3F(1, 2, 3)),
+        Pose = new Pose(new Vector3(1, 2, 3)),
       });
 
       CollisionObject b = new CollisionObject(new GeometricObject
       {
         Shape = new SphereShape(1),
-        Pose = new Pose(new Vector3F(1, 2, 3)),
+        Pose = new Pose(new Vector3(1, 2, 3)),
       });
 
       ContactSet set;
@@ -109,7 +110,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, algo.HaveContact(a, b));
       Assert.AreEqual(3, set[0].PenetrationDepth);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(2, 2, 3));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2, 2, 3));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(true, algo.HaveContact(a, b));
       Assert.AreEqual(2, set[0].PenetrationDepth);
@@ -121,14 +122,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       MinkowskiPortalRefinement algo = new MinkowskiPortalRefinement(new CollisionDetection());
 
       var tA = new Triangle();
-      tA.Vertex0 = new Vector3F(23.99746f, -2.72f, 1.486926f);
-      tA.Vertex1 = new Vector3F(24.00217f, -2.72f, 1.459832f);
-      tA.Vertex2 = new Vector3F(23.9906f, -2.72f, 1.484784f);
+      tA.Vertex0 = new Vector3(23.99746f, -2.72f, 1.486926f);
+      tA.Vertex1 = new Vector3(24.00217f, -2.72f, 1.459832f);
+      tA.Vertex2 = new Vector3(23.9906f, -2.72f, 1.484784f);
       
       var tB = new Triangle();
-      tB.Vertex0 = new Vector3F(23.03683f, -2.72f, 1.473877f);
-      tB.Vertex1 = new Vector3F(24.0843f, -2.72f, 1.339786f);
-      tB.Vertex2 = new Vector3F(23.73688f, -2.72f, 1.398957f);
+      tB.Vertex0 = new Vector3(23.03683f, -2.72f, 1.473877f);
+      tB.Vertex1 = new Vector3(24.0843f, -2.72f, 1.339786f);
+      tB.Vertex2 = new Vector3(23.73688f, -2.72f, 1.398957f);
       
       var coA = new CollisionObject(new GeometricObject(new TriangleShape(tA)));
       var coB = new CollisionObject(new GeometricObject(new TriangleShape(tB)));
@@ -150,14 +151,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       {
         // Create two triangles in a plane.
         var tA = new Triangle();
-        tA.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
 
         var tB = new Triangle();
-        tB.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
-        tB.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
+        tB.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), -290, RandomHelper.Random.NextFloat(-100, 100));
 
         var coA = new CollisionObject(new GeometricObject(new TriangleShape(tA)));
         var coB = new CollisionObject(new GeometricObject(new TriangleShape(tB)));
@@ -176,7 +177,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           {
             float u, v, w;
             GeometryHelper.GetClosestPoint(t0, t1[k], out u, out v, out w);
-            if (Vector3F.AreNumericallyEqual(t0.Vertex0 * u + t0.Vertex1 * v + t0.Vertex2 * w, t1[k]))
+            if (MathHelper.AreNumericallyEqual(t0.Vertex0 * u + t0.Vertex1 * v + t0.Vertex2 * w, t1[k]))
               haveContact = true;
           }
         }
@@ -187,7 +188,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
           {
             var lsA = new LineSegment(tA[j], tA[(j + 1) % 3]);
             var lsB = new LineSegment(tB[k], tB[(k + 1) % 3]);
-            Vector3F pA, pB;
+            Vector3 pA, pB;
             haveContact = GeometryHelper.GetClosestPoints(lsA, lsB, out pA, out pB);
           }
         }
@@ -233,14 +234,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       {
         // Create two triangles in a plane.
         var tA = new Triangle();
-        tA.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
-        tA.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
-        tA.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tA.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tA.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tA.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
         
         var tB = new Triangle();                                            
-        tB.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
-        tB.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
-        tB.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tB.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tB.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
+        tB.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1), RandomHelper.Random.NextFloat(-1, 1));
 
         var coA = new CollisionObject(new GeometricObject(new TriangleShape(tA)));
         var coB = new CollisionObject(new GeometricObject(new TriangleShape(tB)));

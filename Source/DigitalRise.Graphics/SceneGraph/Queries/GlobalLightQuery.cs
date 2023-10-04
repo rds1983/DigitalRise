@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -138,11 +137,11 @@ namespace DigitalRise.Graphics.SceneGraph
           }
 
           // Sort by estimated light contribution.
-          lightNode.SortTag = lightNode.GetLightContribution(Vector3F.Zero, 0.7f);
+          lightNode.SortTag = lightNode.GetLightContribution(Vector3.Zero, 0.7f);
 
           // Or simpler: Sort light nodes by distance.
           // (We use distance², because it is faster.)
-          //float distance = (referencePosition - lightNode.PoseWorld.Position).LengthSquared; 
+          //float distance = (referencePosition - lightNode.PoseWorld.Position).LengthSquared(); 
           //lightNode.SortTag = distance;
         }
       }

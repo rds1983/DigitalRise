@@ -7,7 +7,9 @@ using System.Globalization;
 using System.Xml.Serialization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -39,9 +41,9 @@ namespace DigitalRise.Geometry.Shapes
     /// A component of <paramref name="value"/> is negative.
     /// </exception>
     [XmlIgnore]
-    public Vector3F Extent
+    public Vector3 Extent
     {
-      get { return new Vector3F(_widthX, _widthY, _widthZ); }
+      get { return new Vector3(_widthX, _widthY, _widthZ); }
       set
       {
         if (value.X < 0 || value.Y < 0 || value.Z < 0)
@@ -65,9 +67,9 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
-      get { return Vector3F.Zero; }
+      get { return Vector3.Zero; }
     }
 
 
@@ -172,7 +174,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Initializes a new instance of the <see cref="BoxShape"/> class from the given extent vector.
     /// </summary>
     /// <param name="extent">The extent of the box.</param>
-    public BoxShape(Vector3F extent)
+    public BoxShape(Vector3 extent)
       : this(extent.X, extent.Y, extent.Z)
     {
     }
@@ -229,18 +231,18 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
-      Vector3F halfExtent = new Vector3F(_widthX / 2, _widthY / 2, _widthZ / 2) * Vector3F.Absolute(scale);
+      Vector3 halfExtent = new Vector3(_widthX / 2, _widthY / 2, _widthZ / 2) * MathHelper.Absolute(scale);
 
       if (pose == Pose.Identity)
         return new Aabb(-halfExtent, halfExtent);
 
       // Get world axes in local space. They are equal to the rows of the orientation matrix.
       Matrix33F rotationMatrix = pose.Orientation;
-      Vector3F worldX = rotationMatrix.GetRow(0);
-      Vector3F worldY = rotationMatrix.GetRow(1);
-      Vector3F worldZ = rotationMatrix.GetRow(2);
+      Vector3 worldX = rotationMatrix.GetRow(0);
+      Vector3 worldY = rotationMatrix.GetRow(1);
+      Vector3 worldZ = rotationMatrix.GetRow(2);
 
       // The half extent vector is in the +x/+y/+z octant of the world. We want to project
       // the extent onto the world axes. The half extent projected onto world x gives us the 
@@ -249,14 +251,14 @@ namespace DigitalRise.Geometry.Shapes
       // out the in which octant the world axes is pointing and build the correct half extent vector
       // for this octant. OR we mirror the world axis vectors into the +x/+y/+z octant by taking
       // the absolute vector.
-      worldX = Vector3F.Absolute(worldX);
-      worldY = Vector3F.Absolute(worldY);
-      worldZ = Vector3F.Absolute(worldZ);
+      worldX = MathHelper.Absolute(worldX);
+      worldY = MathHelper.Absolute(worldY);
+      worldZ = MathHelper.Absolute(worldZ);
 
       // Now we project the extent onto the world axes.
-      Vector3F halfExtentWorld = new Vector3F(Vector3F.Dot(halfExtent, worldX),
-                                              Vector3F.Dot(halfExtent, worldY),
-                                              Vector3F.Dot(halfExtent, worldZ));
+      Vector3 halfExtentWorld = new Vector3(Vector3.Dot(halfExtent, worldX),
+                                              Vector3.Dot(halfExtent, worldY),
+                                              Vector3.Dot(halfExtent, worldZ));
 
       return new Aabb(pose.Position - halfExtentWorld, pose.Position + halfExtentWorld);
     }
@@ -276,9 +278,9 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
-      Vector3F supportVertex = new Vector3F
+      Vector3 supportVertex = new Vector3
       {
         X = ((direction.X >= 0) ? _widthX / 2 : -_widthX / 2),
         Y = ((direction.Y >= 0) ? _widthY / 2 : -_widthY / 2),
@@ -301,9 +303,9 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
-      Vector3F supportVertex = new Vector3F
+      Vector3 supportVertex = new Vector3
       {
         X = ((directionNormalized.X >= 0) ? _widthX / 2 : -_widthX / 2),
         Y = ((directionNormalized.Y >= 0) ? _widthY / 2 : -_widthY / 2),
@@ -318,32 +320,32 @@ namespace DigitalRise.Geometry.Shapes
     ///// </summary>
     ///// <param name="index">The index.</param>
     ///// <returns>A box vertex in the local space of the box.</returns>
-    //internal Vector3F GetVertex(int index)
+    //internal Vector3 GetVertex(int index)
     //{
     //  switch (index)
     //  {
-    //    case 0:  return new Vector3F(-WidthX / 2, -WidthY / 2, -WidthZ / 2);
-    //    case 1:  return new Vector3F(-WidthX / 2, -WidthY / 2,  WidthZ / 2);
-    //    case 2:  return new Vector3F(-WidthX / 2,  WidthY / 2, -WidthZ / 2);
-    //    case 3:  return new Vector3F(-WidthX / 2,  WidthY / 2,  WidthZ / 2);
-    //    case 4:  return new Vector3F( WidthX / 2, -WidthY / 2, -WidthZ / 2);
-    //    case 5:  return new Vector3F( WidthX / 2, -WidthY / 2,  WidthZ / 2);
-    //    case 6:  return new Vector3F( WidthX / 2,  WidthY / 2, -WidthZ / 2);
-    //    default: return new Vector3F( WidthX / 2,  WidthY / 2,  WidthZ / 2);
+    //    case 0:  return new Vector3(-WidthX / 2, -WidthY / 2, -WidthZ / 2);
+    //    case 1:  return new Vector3(-WidthX / 2, -WidthY / 2,  WidthZ / 2);
+    //    case 2:  return new Vector3(-WidthX / 2,  WidthY / 2, -WidthZ / 2);
+    //    case 3:  return new Vector3(-WidthX / 2,  WidthY / 2,  WidthZ / 2);
+    //    case 4:  return new Vector3( WidthX / 2, -WidthY / 2, -WidthZ / 2);
+    //    case 5:  return new Vector3( WidthX / 2, -WidthY / 2,  WidthZ / 2);
+    //    case 6:  return new Vector3( WidthX / 2,  WidthY / 2, -WidthZ / 2);
+    //    default: return new Vector3( WidthX / 2,  WidthY / 2,  WidthZ / 2);
     //  }
     //}
 
 
-    internal LineSegment GetEdge(int axis, Vector3F supportDirection, Vector3F scale)
+    internal LineSegment GetEdge(int axis, Vector3 supportDirection, Vector3 scale)
     {
-      scale = Vector3F.Absolute(scale);
+      scale = MathHelper.Absolute(scale);
 
       var signX = supportDirection.X < 0 ? -1 : 1;
       var signY = supportDirection.Y < 0 ? -1 : 1;
       var signZ = supportDirection.Z < 0 ? -1 : 1;
 
-      Vector3F start = new Vector3F(signX * WidthX / 2 * scale.X, signY * WidthY / 2 * scale.Y, signZ * WidthZ / 2 * scale.Z);
-      Vector3F end = start;
+      Vector3 start = new Vector3(signX * WidthX / 2 * scale.X, signY * WidthY / 2 * scale.Y, signZ * WidthZ / 2 * scale.Z);
+      Vector3 end = start;
 
       switch (axis)
       {
@@ -402,85 +404,85 @@ namespace DigitalRise.Geometry.Shapes
       // -y face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, -halfExtentY, -halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, -halfExtentY, halfExtentZ),
       }, true);
 
       // +x face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, -halfExtentY, -halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, halfExtentY, halfExtentZ),
       }, true);
 
       // -z face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, -halfExtentY, -halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, halfExtentY, -halfExtentZ),
       }, true);
 
       // -x face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, -halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, -halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, -halfExtentY, halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, halfExtentY, -halfExtentZ),
       }, true);
 
       // +z face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, -halfExtentY, halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, -halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, -halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, halfExtentY, halfExtentZ),
       }, true);
 
       // +y face
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(-halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex1 = new Vector3F(-halfExtentX, halfExtentY, halfExtentZ),
-        Vertex2 = new Vector3F(halfExtentX, halfExtentY, halfExtentZ),
+        Vertex0 = new Vector3(-halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex1 = new Vector3(-halfExtentX, halfExtentY, halfExtentZ),
+        Vertex2 = new Vector3(halfExtentX, halfExtentY, halfExtentZ),
       }, true);
       mesh.Add(new Triangle
       {
-        Vertex0 = new Vector3F(halfExtentX, halfExtentY, halfExtentZ),
-        Vertex1 = new Vector3F(halfExtentX, halfExtentY, -halfExtentZ),
-        Vertex2 = new Vector3F(-halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex0 = new Vector3(halfExtentX, halfExtentY, halfExtentZ),
+        Vertex1 = new Vector3(halfExtentX, halfExtentY, -halfExtentZ),
+        Vertex2 = new Vector3(-halfExtentX, halfExtentY, -halfExtentZ),
       }, true);
 
       return mesh;

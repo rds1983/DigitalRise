@@ -10,6 +10,7 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using CommonServiceLocator;
 using AssetManagementBase;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -64,7 +65,7 @@ namespace Samples
       _meshNode = new MeshNode(mesh);
 
       // Set a random pose.
-      var randomPosition = new Vector3F(
+      var randomPosition = new Vector3(
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));

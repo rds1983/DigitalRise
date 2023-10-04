@@ -4,8 +4,9 @@
 
 using System;
 using DigitalRise.Geometry;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -48,7 +49,7 @@ namespace DigitalRise.Physics.Constraints
     /// <exception cref="ArgumentException">
     /// <paramref name="value"/> is a zero vector.
     /// </exception>
-    public Vector3F AxisALocal
+    public Vector3 AxisALocal
     {
       get { return _linearLimit.AnchorPoseALocal.Orientation.GetColumn(0); }
       set
@@ -61,8 +62,8 @@ namespace DigitalRise.Physics.Constraints
           // The free line axis is x-axis.
           Pose anchorPoseALocal = new Pose(AnchorPositionALocal);
           anchorPoseALocal.Orientation.SetColumn(0, value);
-          anchorPoseALocal.Orientation.SetColumn(1, value.Orthonormal1);
-          anchorPoseALocal.Orientation.SetColumn(2, value.Orthonormal2);
+          anchorPoseALocal.Orientation.SetColumn(1, value.Orthonormal1());
+          anchorPoseALocal.Orientation.SetColumn(2, value.Orthonormal2());
           _linearLimit.AnchorPoseALocal = anchorPoseALocal;
 
           OnChanged();
@@ -79,7 +80,7 @@ namespace DigitalRise.Physics.Constraints
     /// The constraint anchor position on <see cref="Constraint.BodyA"/> in local space of 
     /// <see cref="Constraint.BodyA"/>.
     /// </value>
-    public Vector3F AnchorPositionALocal
+    public Vector3 AnchorPositionALocal
     {
       get { return _linearLimit.AnchorPoseALocal.Position; }
       set
@@ -101,7 +102,7 @@ namespace DigitalRise.Physics.Constraints
     /// The constraint anchor position on <see cref="Constraint.BodyB"/> in local space of 
     /// <see cref="Constraint.BodyB"/>.
     /// </value>
-    public Vector3F AnchorPositionBLocal
+    public Vector3 AnchorPositionBLocal
     {
       get { return _linearLimit.AnchorPositionBLocal; }
       set
@@ -132,7 +133,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != ErrorReduction)
         {
-          _linearLimit.ErrorReduction = new Vector3F(value);
+          _linearLimit.ErrorReduction = new Vector3(value);
           OnChanged();
         }
       }
@@ -156,7 +157,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Softness)
         {
-          _linearLimit.Softness = new Vector3F(value);
+          _linearLimit.Softness = new Vector3(value);
           OnChanged();
         }
       }
@@ -177,7 +178,7 @@ namespace DigitalRise.Physics.Constraints
         var oldMin = _linearLimit.Minimum;
         if (value != oldMin.X)
         {
-          _linearLimit.Minimum = new Vector3F(value, oldMin.Y, oldMin.Z);
+          _linearLimit.Minimum = new Vector3(value, oldMin.Y, oldMin.Z);
           OnChanged();
         }
       }
@@ -198,7 +199,7 @@ namespace DigitalRise.Physics.Constraints
         var oldMax = _linearLimit.Maximum;
         if (value != oldMax.X)
         {
-          _linearLimit.Maximum = new Vector3F(value, oldMax.Y, oldMax.Z);
+          _linearLimit.Maximum = new Vector3(value, oldMax.Y, oldMax.Z);
           OnChanged();
         }
       }
@@ -221,7 +222,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _linearLimit.Restitution = new Vector3F(value);
+          _linearLimit.Restitution = new Vector3(value);
           OnChanged();
         }
       }
@@ -244,7 +245,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _linearLimit.MaxForce = new Vector3F(value);
+          _linearLimit.MaxForce = new Vector3(value);
           OnChanged();
         }
       }
@@ -252,7 +253,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -262,11 +263,11 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
@@ -293,8 +294,8 @@ namespace DigitalRise.Physics.Constraints
     {
       _linearLimit = new LinearLimit
       {
-        Minimum = new Vector3F(float.NegativeInfinity, 0, 0),
-        Maximum = new Vector3F(float.PositiveInfinity, 0, 0),
+        Minimum = new Vector3(float.NegativeInfinity, 0, 0),
+        Maximum = new Vector3(float.PositiveInfinity, 0, 0),
       };
     }
     #endregion

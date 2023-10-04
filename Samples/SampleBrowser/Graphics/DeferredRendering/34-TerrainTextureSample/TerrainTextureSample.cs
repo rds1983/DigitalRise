@@ -45,7 +45,7 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
 
       // Add a custom game object which controls the camera.
       var cameraGameObject = new CameraObject(Services, 60);
-      cameraGameObject.ResetPose(new Vector3F(0, 1.8f, 0), 0, 0);
+      cameraGameObject.ResetPose(new Vector3(0, 1.8f, 0), 0, 0);
       GameObjectService.Objects.Add(cameraGameObject);
       _graphicsScreen.ActiveCameraNode = cameraGameObject.CameraNode;
 
@@ -117,7 +117,7 @@ layers more interesting. The terrain in this example is a simple, flat terrain (
         SpecularTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Specular.dds"),
         HeightTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Terrain/Rock-02-Height.dds"),
         TileSize = detailCellSize * 1024,
-        DiffuseColor = new Vector3F(1 / 0.702f),
+        DiffuseColor = new Vector3(1 / 0.702f),
         BlendTexture = noiseTexture,
         BlendTextureChannel = 0,
         BlendRange = 0.1f,

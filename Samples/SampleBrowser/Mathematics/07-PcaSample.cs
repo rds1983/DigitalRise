@@ -37,19 +37,19 @@ points are computed.",
       // Draw a small cross for each point.
       var debugRenderer = GraphicsScreen.DebugRenderer2D;
       debugRenderer.Clear();
-      var center = new Vector3F(640, 360, 0);
+      var center = new Vector3(640, 360, 0);
       foreach (var point in points)
       {
         var x = point[0];
         var y = point[1];
         debugRenderer.DrawLine(
-          center + new Vector3F(x - 10, y - 10, 0),
-          center + new Vector3F(x + 10, y + 10, 0),
+          center + new Vector3(x - 10, y - 10, 0),
+          center + new Vector3(x + 10, y + 10, 0),
           Color.Black,
           true);
         debugRenderer.DrawLine(
-          center + new Vector3F(x + 10, y - 10, 0),
-          center + new Vector3F(x - 10, y + 10, 0),
+          center + new Vector3(x + 10, y - 10, 0),
+          center + new Vector3(x - 10, y + 10, 0),
           Color.Black,
           true);
       }
@@ -81,15 +81,15 @@ points are computed.",
       // Draw a line in the direction of the first principal component through the average point.
       // The line length is proportional to the standard deviation with an arbitrary scaling.
       debugRenderer.DrawLine(
-         center + new Vector3F(average.X, average.Y, 0) - 3 * standardDeviation0 * new Vector3F(pc0.X, pc0.Y, 0),
-         center + new Vector3F(average.X, average.Y, 0) + 3 * standardDeviation0 * new Vector3F(pc0.X, pc0.Y, 0),
+         center + new Vector3(average.X, average.Y, 0) - 3 * standardDeviation0 * new Vector3(pc0.X, pc0.Y, 0),
+         center + new Vector3(average.X, average.Y, 0) + 3 * standardDeviation0 * new Vector3(pc0.X, pc0.Y, 0),
          Color.Black,
          true);
 
       // Draw a line in the direction of the second principal component through the average point.
       debugRenderer.DrawLine(
-         center + new Vector3F(average.X, average.Y, 0) - 3 * standardDeviation1 * new Vector3F(pc1.X, pc1.Y, 0),
-         center + new Vector3F(average.X, average.Y, 0) + 3 * standardDeviation1 * new Vector3F(pc1.X, pc1.Y, 0),
+         center + new Vector3(average.X, average.Y, 0) - 3 * standardDeviation1 * new Vector3(pc1.X, pc1.Y, 0),
+         center + new Vector3(average.X, average.Y, 0) + 3 * standardDeviation1 * new Vector3(pc1.X, pc1.Y, 0),
          Color.Black,
          true);
     }

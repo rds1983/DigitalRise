@@ -1,10 +1,11 @@
 using System;
 using System.Diagnostics;
+using DigitalRise.Mathematics;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -20,23 +21,23 @@ namespace DigitalRise.Geometry.Shapes.Tests
       // Make a unit cube.
       _mesh = new TriangleMesh(); 
       // Bottom
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 0), new Vector3F(1, 0, 0)), true);
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(0, 1, 0), new Vector3F(1, 1, 0)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 1, 0)), true);
       // Top
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 1), new Vector3F(1, 0, 1), new Vector3F(1, 1, 1)), true);
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 1), new Vector3F(1, 1, 1), new Vector3F(0, 1, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 1), new Vector3(1, 0, 1), new Vector3(1, 1, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 1), new Vector3(1, 1, 1), new Vector3(0, 1, 1)), true);
       // Left
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0), new Vector3F(1, 0, 1)), true);
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 0, 1), new Vector3F(0, 0, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 0, 0), new Vector3(1, 0, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 0, 1), new Vector3(0, 0, 1)), true);
       // Right
-      _mesh.Add(new Triangle(new Vector3F(0, 1, 0), new Vector3F(0, 1, 1), new Vector3F(1, 1, 1)), true);
-      _mesh.Add(new Triangle(new Vector3F(0, 1, 0), new Vector3F(1, 1, 1), new Vector3F(1, 1, 0)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 1, 0), new Vector3(0, 1, 1), new Vector3(1, 1, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 1, 0), new Vector3(1, 1, 1), new Vector3(1, 1, 0)), true);
       // Front
-      _mesh.Add(new Triangle(new Vector3F(1, 0, 0), new Vector3F(1, 1, 0), new Vector3F(1, 1, 1)), true);
-      _mesh.Add(new Triangle(new Vector3F(1, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 1, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)), true);
       // Back
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(0, 0, 1), new Vector3F(0, 1, 1)), true);
-      _mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(0, 1, 1), new Vector3F(0, 1, 0)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 1)), true);
+      _mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(0, 1, 1), new Vector3(0, 1, 0)), true);
 
       _meshShape = new TriangleMeshShape { Mesh = _mesh };
 
@@ -72,8 +73,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void InnerPoint()
     {
-      Assert.AreEqual(new Vector3F(), new TriangleMeshShape().InnerPoint);
-      Assert.AreEqual(new Vector3F(0, 1, 1), _meshShape.InnerPoint);
+      Assert.AreEqual(new Vector3(), new TriangleMeshShape().InnerPoint);
+      Assert.AreEqual(new Vector3(0, 1, 1), _meshShape.InnerPoint);
     }
 
 
@@ -81,16 +82,16 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //public void GetAabb()
     //{
     //  Assert.AreEqual(new Aabb(), new ConvexHullOfPoints().GetAabb(Pose.Identity));
-    //  Assert.AreEqual(new Aabb(new Vector3F(10, 100, -13), new Vector3F(10, 100, -13)),
-    //                 new ConvexHullOfPoints().GetAabb(new Pose(new Vector3F(10, 100, -13),
-    //                                                                     QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f))));
-    //  Assert.AreEqual(new Aabb(new Vector3F(11, 102, 1003), new Vector3F(11, 102, 1003)),
-    //                 new ConvexHullOfPoints(new Vector3F(1, 2, 3)).GetAabb(new Pose(new Vector3F(10, 100, 1000),
+    //  Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
+    //                 new ConvexHullOfPoints().GetAabb(new Pose(new Vector3(10, 100, -13),
+    //                                                                     QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+    //  Assert.AreEqual(new Aabb(new Vector3(11, 102, 1003), new Vector3(11, 102, 1003)),
+    //                 new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000),
     //                                                                     QuaternionF.Identity)));
-    //  QuaternionF rotation = QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f);
-    //  Vector3F worldPos = rotation.Rotate(new Vector3F(1, 2, 3)) + new Vector3F(10, 100, 1000);
-    //  Assert.IsTrue(Vector3F.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3F(1, 2, 3)).GetAabb(new Pose(new Vector3F(10, 100, 1000), rotation)).Minimum));
-    //  Assert.IsTrue(Vector3F.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3F(1, 2, 3)).GetAabb(new Pose(new Vector3F(10, 100, 1000), rotation)).Maximum));
+    //  QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f);
+    //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));
     //}
 
 
@@ -199,9 +200,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
           // Count shared vertices.
           for (int j = 0; j < 3; j++)
           {
-            if (Vector3F.AreNumericallyEqual(vertex0, neighbor[j]))
+            if (MathHelper.AreNumericallyEqual(vertex0, neighbor[j]))
               sharedCount++;
-            if (Vector3F.AreNumericallyEqual(vertex1, neighbor[j]))
+            if (MathHelper.AreNumericallyEqual(vertex1, neighbor[j]))
               sharedCount++;
           }
 

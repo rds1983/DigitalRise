@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -111,7 +112,7 @@ namespace DigitalRise.Animation.Character
     /// the hand center. Then the target will be grabbed correctly with the hand center and not the
     /// wrist.
     /// </remarks>
-    public Vector3F TipOffset
+    public Vector3 TipOffset
     {
       get { return _tipOffset; }
       set
@@ -123,7 +124,7 @@ namespace DigitalRise.Animation.Character
         }
       }
     }
-    private Vector3F _tipOffset;
+    private Vector3 _tipOffset;
     #endregion
 
 
@@ -178,13 +179,13 @@ namespace DigitalRise.Animation.Character
           int boneIndex = _boneIndices[i];
           int childIndex = _boneIndices[i + 1];
           var boneVector = SkeletonPose.GetBonePoseAbsolute(childIndex).Translation - SkeletonPose.GetBonePoseAbsolute(boneIndex).Translation;
-          float boneLength = boneVector.Length;
+          float boneLength = boneVector.Length();
           _boneLengths.Add(boneLength);
           _totalChainLength += boneLength;
         }
 
         // Tip bone.
-        _boneLengths.Add((SkeletonPose.GetBonePoseAbsolute(TipBoneIndex).Scale * TipOffset).Length);
+        _boneLengths.Add((SkeletonPose.GetBonePoseAbsolute(TipBoneIndex).Scale * TipOffset).Length());
         _totalChainLength += _boneLengths[numberOfBones - 1];
 
         // Initialize _bones list with dummy values.
@@ -228,8 +229,8 @@ namespace DigitalRise.Animation.Character
       // If TipOffset is not 0, then we can rotate the last bone.
       // If TipOffset is 0, then the last bone defines the tip but is not rotated.
       // --> numberOfBones is set to the number of affected bones.
-      Vector3F tipAbsolute;
-      if (TipOffset.IsNumericallyZero)
+      Vector3 tipAbsolute;
+      if (TipOffset.IsNumericallyZero())
       {
         numberOfBones--;
         tipAbsolute = SkeletonPose.GetBonePoseAbsolute(TipBoneIndex).Translation;
@@ -241,7 +242,7 @@ namespace DigitalRise.Animation.Character
 
       // The root bone rotation that aligns the whole chain with the target.
       QuaternionF chainRotation = QuaternionF.Identity;
-      Vector3F boneToTarget, boneToTip;
+      Vector3 boneToTarget, boneToTip;
       float remainingChainLength = _totalChainLength;
 
       // Apply the soft limit to the distance to the IK goal
@@ -249,7 +250,7 @@ namespace DigitalRise.Animation.Character
       //distToIkGoal = vecToIkGoal.Length;
       //// Limit the extension to 98% and ramp it up over 5% of the chains length
       //vecToIkGoal *= (LimitValue(distToIkGoal, _totalChainLength * 0.98f, _totalChainLength * 0.08f)) / distToIkGoal;
-      //Vector3F goalPosition = _bones[0].Translation + vecToIkGoal;
+      //Vector3 goalPosition = _bones[0].Translation + vecToIkGoal;
 
       var targetAbsolute = Target;
 
@@ -266,7 +267,7 @@ namespace DigitalRise.Animation.Character
 
         // The bone to tip vector of the aligned chain (without other IK rotations!).
         boneToTip = tipAbsolute - _bones[i].Translation;
-        float boneToTipLength = boneToTip.Length;
+        float boneToTipLength = boneToTip.Length();
         boneToTip /= boneToTipLength; // TODO: Check for division by 0?
 
         if (i > 0)
@@ -278,7 +279,7 @@ namespace DigitalRise.Animation.Character
 
         // The bone to target vector of the new chain configuration.
         boneToTarget = targetAbsolute - _bones[i].Translation;
-        float boneToTargetLength = boneToTarget.Length;
+        float boneToTargetLength = boneToTarget.Length();
         boneToTarget /= boneToTargetLength;
 
         if (i == 0)
@@ -315,7 +316,7 @@ namespace DigitalRise.Animation.Character
           remainingChainLength -= _boneLengths[i];
 
           // The direction of the current bone. For the tip bone we use the TipOffset.
-          Vector3F boneDirection;
+          Vector3 boneDirection;
           if (i != TipBoneIndex)
             boneDirection = _bones[i].Rotation.Rotate(skeleton.GetBindPoseRelative(_boneIndices[i + 1]).Translation);
           else
@@ -326,12 +327,12 @@ namespace DigitalRise.Animation.Character
 
           // The bone rotates around an axis normal to the bone to target direction and the bone
           // vector.
-          Vector3F rotationAxis = Vector3F.Cross(boneToTarget, boneDirection);
+          Vector3 rotationAxis = Vector3.Cross(boneToTarget, boneDirection);
           if (!rotationAxis.TryNormalize())
             continue;       // TODO: If this happens, can we choose a useful direction?
 
           // The current angle between bone direction and bone to target vector.
-          float currentAngle = (float)Math.Acos(MathHelper.Clamp(Vector3F.Dot(boneDirection, boneToTarget), -1, 1));
+          float currentAngle = (float)Math.Acos(MathHelper.Clamp(Vector3.Dot(boneDirection, boneToTarget), -1, 1));
 
           // Side lengths of the involved triangles.
           var a = _boneLengths[i];

@@ -7,7 +7,7 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -128,13 +128,13 @@ namespace DigitalRise.Graphics
     /// <paramref name="lightNode"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "chromacity")]
-    public static float GetLightContribution(this LightNode lightNode, Vector3F position, float chromacityWeight)
+    public static float GetLightContribution(this LightNode lightNode, Vector3 position, float chromacityWeight)
     {
       if (lightNode == null)
         throw new ArgumentNullException("lightNode");
 
-      var distance = (position - lightNode.PoseWorld.Position).Length;
-      Vector3F intensity = lightNode.Light.GetIntensity(distance);
+      var distance = (position - lightNode.PoseWorld.Position).Length();
+      Vector3 intensity = lightNode.Light.GetIntensity(distance);
 
       // Following formula is from 
       //   Shader X3, Reduction of Lighting Calculations Using Spherical Harmonics.

@@ -1,10 +1,8 @@
 ﻿using DigitalRise;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -34,7 +32,7 @@ namespace Samples.Particles
       };
 
       // This EmitterVelocity parameter can be used by all child particle systems.
-      Parameters.AddUniform<Vector3F>(ParticleParameterNames.EmitterVelocity);
+      Parameters.AddUniform<Vector3>(ParticleParameterNames.EmitterVelocity);
 
       // The ParticleSystemRecycler recycles this instance into the resource pool when all 
       // particles are dead.

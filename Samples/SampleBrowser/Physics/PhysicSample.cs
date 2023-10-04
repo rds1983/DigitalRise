@@ -32,7 +32,7 @@ namespace Samples.Physics
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.White;
       GraphicsScreen.DrawReticle = true;
-      SetCamera(new Vector3F(0, 2, 10), 0, 0);
+      SetCamera(new Vector3(0, 2, 10), 0, 0);
 
       // Add game objects which implement simple physics interactions.
       GameObjectService.Objects.Add(new GrabObject(Services));

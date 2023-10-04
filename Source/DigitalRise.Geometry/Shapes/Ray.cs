@@ -6,8 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -35,14 +34,14 @@ namespace DigitalRise.Geometry.Shapes
     /// The origin of the ray.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Origin;
+    public Vector3 Origin;
 
 
     /// <summary>
     /// The normalized direction of the ray.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Direction;
+    public Vector3 Direction;
 
 
     /// <summary>
@@ -75,7 +74,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="origin">The origin.</param>
     /// <param name="direction">The direction.</param>
     /// <param name="length">The finite length.</param>
-    public Ray(Vector3F origin, Vector3F direction, float length)
+    public Ray(Vector3 origin, Vector3 direction, float length)
     {
       Origin = origin;
       Direction = direction;
@@ -227,12 +226,12 @@ namespace DigitalRise.Geometry.Shapes
     /// <paramref name="scale"/> is a non-uniform scaling. Non-uniform scaling of rays is not 
     /// supported.
     /// </exception>
-    internal void Scale(ref Vector3F scale)
+    internal void Scale(ref Vector3 scale)
     {
       if (scale.X == scale.Y && scale.Y == scale.Z)
       {
         // ----- Uniform scaling
-        Debug.Assert(Direction.IsNumericallyNormalized, "Ray direction should be normalized.");
+        Debug.Assert(Direction.IsNumericallyNormalized(), "Ray direction should be normalized.");
         Debug.Assert(Length > 0 && Numeric.IsGreater(Length, 0) || !float.IsInfinity(Length), "Ray length must be in the range 0 < length < infinity.");
 
         if (scale.X < 0)
@@ -258,7 +257,7 @@ namespace DigitalRise.Geometry.Shapes
         end *= scale;
         
         var direction = end - Origin;
-        Length = direction.Length;
+        Length = direction.Length();
       
         if (!Numeric.IsZero(Length))
           Direction = direction / Length;
@@ -274,7 +273,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="pose">The pose (position and orientation).</param>
     internal void ToWorld(ref Pose pose)
     {
-      Debug.Assert(Direction.IsNumericallyNormalized, "Ray direction should be normalized. Length = " + Direction.Length);
+      Debug.Assert(Direction.IsNumericallyNormalized(), "Ray direction should be normalized. Length = " + Direction.Length());
       Debug.Assert(Length > 0 && Numeric.IsGreater(Length, 0) || !float.IsInfinity(Length), "Ray length must be in the range 0 < length < infinity.");
 
       Origin = pose.ToWorldPosition(Origin);
@@ -289,7 +288,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="pose">The pose (rotation and translation).</param>
     internal void ToLocal(ref Pose pose)
     {
-      Debug.Assert(Direction.IsNumericallyNormalized, "Ray direction should be normalized. Length = " + Direction.Length);
+      Debug.Assert(Direction.IsNumericallyNormalized(), "Ray direction should be normalized. Length = " + Direction.Length());
       Debug.Assert(Length > 0 && Numeric.IsGreater(Length, 0) || !float.IsInfinity(Length), "Ray length must be in the range 0 < length < infinity.");
 
       Origin = pose.ToLocalPosition(Origin);

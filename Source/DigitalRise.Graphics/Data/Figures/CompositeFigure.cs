@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Collections;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -64,7 +63,7 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    internal override void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
+    internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
     {
       foreach (var child in Children)
         child.Flatten(vertices, strokeIndices, fillIndices);

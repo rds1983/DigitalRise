@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Geometry.Meshes.Tests
 {
@@ -14,15 +14,15 @@ namespace DigitalRise.Geometry.Meshes.Tests
     [Test]
     public void TestDcelVertex()
     {
-      Assert.AreEqual(Vector3F.Zero, new DcelVertex().Position);
+      Assert.AreEqual(Vector3.Zero, new DcelVertex().Position);
       Assert.AreEqual(0, new DcelVertex().Tag);
       Assert.AreEqual(null, new DcelVertex().Edge);
 
       DcelEdge edge = new DcelEdge();
 
-      Assert.AreEqual(new Vector3F(3, 2, 1), new DcelVertex(new Vector3F(3, 2, 1), edge).Position);
-      Assert.AreEqual(0, new DcelVertex(new Vector3F(3, 2, 1), edge).Tag);
-      Assert.AreEqual(edge, new DcelVertex(new Vector3F(3, 2, 1), edge).Edge);
+      Assert.AreEqual(new Vector3(3, 2, 1), new DcelVertex(new Vector3(3, 2, 1), edge).Position);
+      Assert.AreEqual(0, new DcelVertex(new Vector3(3, 2, 1), edge).Tag);
+      Assert.AreEqual(edge, new DcelVertex(new Vector3(3, 2, 1), edge).Edge);
     }
 
 
@@ -85,8 +85,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
 
       // Create a mesh.
       var mesh = DcelMesh.CreateCube();
-      mesh.CutConvex(new Plane(new Vector3F(1, 2, 3).Normalized, 0.6f));
-      mesh.CutConvex(new Plane(new Vector3F(-2, -3, 1).Normalized, 0.8f));
+      mesh.CutConvex(new Plane(new Vector3(1, 2, 3).Normalized(), 0.6f));
+      mesh.CutConvex(new Plane(new Vector3(-2, -3, 1).Normalized(), 0.8f));
 
       // Create clone with copy constructor and compare.
       var clone = new DcelMesh(mesh);
@@ -106,18 +106,18 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void ToTriangleMesh()
     {
       // Build DCEL mesh for tetrahedron.
-      var vertices = new[] { new Vector3F(0, 0, 0), 
-                             new Vector3F(1, 0, 0), 
-                             new Vector3F(0, 1, 0), 
-                             new Vector3F(0, 0, 1)};
+      var vertices = new[] { new Vector3(0, 0, 0), 
+                             new Vector3(1, 0, 0), 
+                             new Vector3(0, 1, 0), 
+                             new Vector3(0, 0, 1)};
       DcelMesh dcelMesh = GeometryHelper.CreateConvexHull(vertices);
 
       TriangleMesh triangleMesh = dcelMesh.ToTriangleMesh();
       Assert.AreEqual(4, triangleMesh.NumberOfTriangles);
-      Assert.IsTrue(new List<Vector3F>(triangleMesh.Vertices).Contains(new Vector3F(0, 0, 0)));
-      Assert.IsTrue(new List<Vector3F>(triangleMesh.Vertices).Contains(new Vector3F(1, 0, 0)));
-      Assert.IsTrue(new List<Vector3F>(triangleMesh.Vertices).Contains(new Vector3F(0, 1, 0)));
-      Assert.IsTrue(new List<Vector3F>(triangleMesh.Vertices).Contains(new Vector3F(0, 0, 1)));
+      Assert.IsTrue(new List<Vector3>(triangleMesh.Vertices).Contains(new Vector3(0, 0, 0)));
+      Assert.IsTrue(new List<Vector3>(triangleMesh.Vertices).Contains(new Vector3(1, 0, 0)));
+      Assert.IsTrue(new List<Vector3>(triangleMesh.Vertices).Contains(new Vector3(0, 1, 0)));
+      Assert.IsTrue(new List<Vector3>(triangleMesh.Vertices).Contains(new Vector3(0, 0, 1)));
     }
 
 
@@ -140,11 +140,11 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void FromTriangleMesh2()
     {
       var mesh = new TriangleMesh();
-      mesh.Vertices.Add(new Vector3F(0, 0, 0));
-      mesh.Vertices.Add(new Vector3F(1, 1, 1));
-      mesh.Vertices.Add(new Vector3F(2, 2, 2));
-      mesh.Vertices.Add(new Vector3F(3, 3, 3));
-      //mesh.Vertices.Add(new Vector3F(405, 322, 0));
+      mesh.Vertices.Add(new Vector3(0, 0, 0));
+      mesh.Vertices.Add(new Vector3(1, 1, 1));
+      mesh.Vertices.Add(new Vector3(2, 2, 2));
+      mesh.Vertices.Add(new Vector3(3, 3, 3));
+      //mesh.Vertices.Add(new Vector3(405, 322, 0));
 
       mesh.Indices.Add(0);
       mesh.Indices.Add(1);
@@ -172,7 +172,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       var mesh = new BoxShape(1, 2, 3).GetMesh(0.01f, 1);
 
       // Add a stray triangle. - Only fully connected meshes are supported!
-      mesh.Add(new Triangle(new Vector3F(10, 10, 10), new Vector3F(20, 20, 20), new Vector3F(30, 30, 30)), false);
+      mesh.Add(new Triangle(new Vector3(10, 10, 10), new Vector3(20, 20, 20), new Vector3(30, 30, 30)), false);
 
       var dcel = DcelMesh.FromTriangleMesh((ITriangleMesh)mesh);
     }
@@ -203,7 +203,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       DcelMesh mesh = new DcelMesh();
       Assert.IsFalse(mesh.IsConvex());
 
-      mesh.Vertex = new DcelVertex(new Vector3F(1, 2, 3), null);
+      mesh.Vertex = new DcelVertex(new Vector3(1, 2, 3), null);
       Assert.IsTrue(mesh.IsConvex());
 
       mesh = DcelMesh.FromTriangleMesh(new BoxShape(1, 2, 3).GetMesh(0.01f, 1));
@@ -235,16 +235,16 @@ namespace DigitalRise.Geometry.Meshes.Tests
       Assert.IsTrue(dcel.IsConvex());
       Assert.IsTrue(dcel.IsClosed());
 
-      bool result = dcel.CutConvex(new Plane(new Vector3F(0, 0, 1), 1.5f));
+      bool result = dcel.CutConvex(new Plane(new Vector3(0, 0, 1), 1.5f));
       Assert.IsFalse(result);
 
-      result = dcel.CutConvex(new Plane(new Vector3F(0, 0, 1), -1.5f));
+      result = dcel.CutConvex(new Plane(new Vector3(0, 0, 1), -1.5f));
       Assert.IsTrue(result);
       Assert.IsNull(dcel.Vertex);
       Assert.AreEqual(0, dcel.Vertices.Count);
 
       dcel = DcelMesh.FromTriangleMesh((ITriangleMesh)mesh);
-      result = dcel.CutConvex(new Plane(new Vector3F(0, 0, 1), 1f));
+      result = dcel.CutConvex(new Plane(new Vector3(0, 0, 1), 1f));
       Assert.IsTrue(result);
       Assert.IsTrue(dcel.IsValid());
       Assert.IsTrue(dcel.IsConvex());
@@ -273,8 +273,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void ModifyConvexVertexLimit()
     {
       var mesh = DcelMesh.CreateCube();
-      mesh.CutConvex(new Plane(new Vector3F(1, 2, 3).Normalized, 0.6f));
-      mesh.CutConvex(new Plane(new Vector3F(-2, -3, 1).Normalized, 0.8f));
+      mesh.CutConvex(new Plane(new Vector3(1, 2, 3).Normalized(), 0.6f));
+      mesh.CutConvex(new Plane(new Vector3(-2, -3, 1).Normalized(), 0.8f));
 
       Assert.IsTrue(mesh.Vertices.Count > 10);
 
@@ -290,8 +290,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
     {
       // Create a mesh.
       var mesh = DcelMesh.CreateCube();
-      mesh.CutConvex(new Plane(new Vector3F(1, 2, 3).Normalized, 0.6f));
-      mesh.CutConvex(new Plane(new Vector3F(-2, -3, 1).Normalized, 0.8f));
+      mesh.CutConvex(new Plane(new Vector3(1, 2, 3).Normalized(), 0.6f));
+      mesh.CutConvex(new Plane(new Vector3(-2, -3, 1).Normalized(), 0.8f));
 
       var aabb = mesh.GetAabb();
 

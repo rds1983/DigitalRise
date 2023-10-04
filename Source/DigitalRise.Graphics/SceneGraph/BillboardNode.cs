@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -65,7 +65,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the tint color of the billboard instance.
     /// </summary>
     /// <value>The tint color (non-premultiplied). The default value is white (1, 1, 1).</value>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -114,7 +114,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <remarks>
     /// The normal vector is the defined by the z-axis (0, 0, 1) in local space.
     /// </remarks>
-    public Vector3F Normal
+    public Vector3 Normal
     {
       get 
       {
@@ -131,7 +131,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <remarks>
     /// The axis vector is the up direction (0, 1, 0) in local space.
     /// </remarks>
-    public Vector3F Axis
+    public Vector3 Axis
     {
       get
       {
@@ -161,7 +161,7 @@ namespace DigitalRise.Graphics.SceneGraph
       IsRenderable = true;
       _billboard = billboard;
       Shape = billboard.Shape;
-      Color = new Vector3F(1, 1, 1);
+      Color = new Vector3(1, 1, 1);
       Alpha = 1.0f;
       _animationTime = float.NaN;
     }

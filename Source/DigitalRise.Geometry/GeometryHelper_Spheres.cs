@@ -5,8 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -29,28 +28,28 @@ namespace DigitalRise.Geometry
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-    public static void ComputeBoundingSphere(IEnumerable<Vector3F> points, out float radius, out Vector3F center)
+    public static void ComputeBoundingSphere(IEnumerable<Vector3> points, out float radius, out Vector3 center)
     {
       if (points == null)
         throw new ArgumentNullException("points");
 
-      List<Vector3F> pointList = DigitalRise.ResourcePools<Vector3F>.Lists.Obtain();
+      List<Vector3> pointList = DigitalRise.ResourcePools<Vector3>.Lists.Obtain();
 
       // Copy points into new list because the order of the points need to be changed.
       // (Try to avoid garbage when enumerating 'points'.)
-      if (points is Vector3F[])
+      if (points is Vector3[])
       {
-        foreach (Vector3F p in (Vector3F[])points)
+        foreach (Vector3 p in (Vector3[])points)
           pointList.Add(p);
       }
-      else if (points is List<Vector3F>)
+      else if (points is List<Vector3>)
       {
-        foreach (Vector3F p in (List<Vector3F>)points)
+        foreach (Vector3 p in (List<Vector3>)points)
           pointList.Add(p);
       }
       else
       {
-        foreach (Vector3F p in points)
+        foreach (Vector3 p in points)
           pointList.Add(p);
       }
 
@@ -59,7 +58,7 @@ namespace DigitalRise.Geometry
 
       ComputeWelzlSphere(pointList, 0, pointList.Count - 1, 0, out radius, out center);
 
-      DigitalRise.ResourcePools<Vector3F>.Lists.Recycle(pointList);
+      DigitalRise.ResourcePools<Vector3>.Lists.Recycle(pointList);
     }
 
 
@@ -79,14 +78,14 @@ namespace DigitalRise.Geometry
     /// (inclusive) should be handled in this call.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    private static void ComputeWelzlSphere(List<Vector3F> points, int firstPoint, int lastPoint, int numberOfSupportPoints, out float radius, out Vector3F center)
+    private static void ComputeWelzlSphere(List<Vector3> points, int firstPoint, int lastPoint, int numberOfSupportPoints, out float radius, out Vector3 center)
     {
       // This is an implementation of the Welzl algorithm.
       // See http://www.flipcode.com/archives/Smallest_Enclosing_Spheres.shtml.
       // The algorithm is also described in "Computational Tools for Computer Graphics" section 13.11.4,
       // "Real-Time Collision Detection" or "Physics-Based Animation".
 
-      center = new Vector3F(float.NaN);
+      center = new Vector3(float.NaN);
       radius = float.NaN;
 
       // Start with a sphere containing the support points.
@@ -114,7 +113,7 @@ namespace DigitalRise.Geometry
       // Handle all points from firstPoint to lastPoint (included).
       for (int i = firstPoint; i <= lastPoint; i++)
       {
-        Vector3F point = points[i];
+        Vector3 point = points[i];
 
         if (!HaveContact(radius, point - center))
         {
@@ -150,10 +149,10 @@ namespace DigitalRise.Geometry
     /// <remarks>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void ComputeCircumscribedSphere(Vector3F point0, Vector3F point1, out float radius, out Vector3F center)
+    public static void ComputeCircumscribedSphere(Vector3 point0, Vector3 point1, out float radius, out Vector3 center)
     {
       center = (point0 + point1) / 2;
-      radius = (point1 - point0).Length / 2;
+      radius = (point1 - point0).Length() / 2;
     }
 
 
@@ -177,15 +176,15 @@ namespace DigitalRise.Geometry
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void ComputeCircumscribedSphere(Vector3F point0, Vector3F point1, Vector3F point2, out float radius, out Vector3F center)
+    public static void ComputeCircumscribedSphere(Vector3 point0, Vector3 point1, Vector3 point2, out float radius, out Vector3 center)
     {
       // Compute barycentric coordinates of the circumcenter.
       // See http://en.wikipedia.org/wiki/Circumscribed_circle
 
       // Get the squared side lengths.
-      float a2 = (point2 - point1).LengthSquared;
-      float b2 = (point2 - point0).LengthSquared;
-      float c2 = (point1 - point0).LengthSquared;
+      float a2 = (point2 - point1).LengthSquared();
+      float b2 = (point2 - point0).LengthSquared();
+      float c2 = (point1 - point0).LengthSquared();
 
       float d = 2 * a2 * b2 + 2 * a2 * c2 + 2 * b2 * c2 - a2 * a2 - b2 * b2 - c2 * c2;
       float oneOverD = 1 / d;
@@ -195,7 +194,7 @@ namespace DigitalRise.Geometry
       float w = c2 * (a2 + b2 - c2) * oneOverD;
 
       center = u * point0 + v * point1 + w * point2;
-      radius = (point0 - center).Length;
+      radius = (point0 - center).Length();
     }
 
 
@@ -220,25 +219,25 @@ namespace DigitalRise.Geometry
     /// </para>
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void ComputeCircumscribedSphere(Vector3F point0, Vector3F point1, Vector3F point2, Vector3F point3, out float radius, out Vector3F center)
+    public static void ComputeCircumscribedSphere(Vector3 point0, Vector3 point1, Vector3 point2, Vector3 point3, out float radius, out Vector3 center)
     {
       // See "Geometric Tools for Computer Graphics" p. 801.
 
       // Set point0 to the origin and compute relative points for 1, 2 and 3.
-      Vector3F p1 = point1 - point0;
-      Vector3F p2 = point2 - point0;
-      Vector3F p3 = point3 - point0;
+      Vector3 p1 = point1 - point0;
+      Vector3 p2 = point2 - point0;
+      Vector3 p3 = point3 - point0;
 
       // Compute the distances to point0.
-      float length1Squared = p1.LengthSquared;
-      float length2Squared = p2.LengthSquared;
-      float length3Squared = p3.LengthSquared;
+      float length1Squared = p1.LengthSquared();
+      float length2Squared = p2.LengthSquared();
+      float length3Squared = p3.LengthSquared();
 
       // Compute the volume of the tetrahedron formed by the four points.
-      float volume = 1f / 6 * (Vector3F.Dot(p1, Vector3F.Cross(p2, p3)));
+      float volume = 1f / 6 * (Vector3.Dot(p1, Vector3.Cross(p2, p3)));
 
       // Compute the center.
-      center = new Vector3F();
+      center = new Vector3();
       float k = 1 / (12 * volume);
       center.X = point0.X + k * (+(p2.Y * p3.Z - p3.Y * p2.Z) * length1Squared
                                  - (p1.Y * p3.Z - p3.Y * p1.Z) * length2Squared
@@ -265,10 +264,10 @@ namespace DigitalRise.Geometry
     /// <returns>
     /// <see langword="true"/> if the specified point is inside; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool HaveContact(float sphereRadius, Vector3F point)
+    public static bool HaveContact(float sphereRadius, Vector3 point)
     {
       // Point distance to the sphere center.
-      float distanceToCenterSquared = point.LengthSquared;
+      float distanceToCenterSquared = point.LengthSquared();
 
       // To fight numerical problems: Extrude the sphere.
       float extendedRadius = sphereRadius + Math.Max(1, sphereRadius) * Numeric.EpsilonF;

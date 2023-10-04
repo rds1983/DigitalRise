@@ -185,21 +185,21 @@ namespace DigitalRise.UI.Rendering
 
     /// <summary>
     /// Converts the specified string representation of a 3-dimensional vector to its 
-    /// <see cref="Vector3F"/> equivalent, or throws an exception if the string cannot be
-    /// converted to a <see cref="Vector3F"/>.
+    /// <see cref="Vector3"/> equivalent, or throws an exception if the string cannot be
+    /// converted to a <see cref="Vector3"/>.
     /// </summary>
     /// <param name="value">
     /// The value. If this value is <see langword="null"/> or an empty string, 
-    /// <see cref="Vector3F.Zero"/> is returned as the default value.
+    /// <see cref="Vector3.Zero"/> is returned as the default value.
     /// </param>
-    /// <returns>The <see cref="Vector3F"/>.</returns>
+    /// <returns>The <see cref="Vector3"/>.</returns>
     /// <exception cref="FormatException">
-    /// Cannot convert <paramref name="value"/> to <see cref="Vector3F"/>.
+    /// Cannot convert <paramref name="value"/> to <see cref="Vector3"/>.
     /// </exception>
-    public static Vector3F ParseVector3F(string value)
+    public static Vector3 ParseVector3(string value)
     {
       if (string.IsNullOrEmpty(value))
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
       var values = value.Split(ListSeparators, StringSplitOptions.RemoveEmptyEntries);
       if (values.Length != 3)
@@ -208,7 +208,7 @@ namespace DigitalRise.UI.Rendering
         throw new FormatException(message);
       }
 
-      Vector3F result;
+      Vector3 result;
       result.X = float.Parse(values[0], CultureInfo.InvariantCulture);
       result.Y = float.Parse(values[1], CultureInfo.InvariantCulture);
       result.Z = float.Parse(values[2], CultureInfo.InvariantCulture);

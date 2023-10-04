@@ -52,7 +52,7 @@ namespace DigitalRise.Geometry.Meshes
         null,
         null);
 
-    private Vector3F[] _vertices;
+    private Vector3[] _vertices;
     private int[] _indices;
     #endregion
 
@@ -151,7 +151,7 @@ namespace DigitalRise.Geometry.Meshes
     /// <paramref name="polygonVertices"/> or <paramref name="triangleIndices"/> is 
     /// <see langword="null"/>.
     /// </exception>
-    public int Triangulate(IList<Vector3F> polygonVertices, IList<int> triangleIndices)
+    public int Triangulate(IList<Vector3> polygonVertices, IList<int> triangleIndices)
     {
       return Triangulate(polygonVertices, 0, polygonVertices.Count, triangleIndices);
     }
@@ -187,7 +187,7 @@ namespace DigitalRise.Geometry.Meshes
     /// <paramref name="polygonVertices"/> or <paramref name="triangleIndices"/> is 
     /// <see langword="null"/>.
     /// </exception>
-    public int Triangulate(IList<Vector3F> polygonVertices, int startIndex, int vertexCount, IList<int> triangleIndices)
+    public int Triangulate(IList<Vector3> polygonVertices, int startIndex, int vertexCount, IList<int> triangleIndices)
     {
       if (polygonVertices == null)
         throw new ArgumentNullException("polygonVertices");
@@ -199,7 +199,7 @@ namespace DigitalRise.Geometry.Meshes
 
       // Copy vertices to array for fast access.
       if (_vertices == null || _vertices.Length < vertexCount)
-        _vertices = new Vector3F[vertexCount];
+        _vertices = new Vector3[vertexCount];
 
       for (int i = 0; i < vertexCount; i++)
         _vertices[i] = polygonVertices[startIndex + i];
@@ -265,7 +265,7 @@ namespace DigitalRise.Geometry.Meshes
 
 
     // Transforms the polygon into the xy plane.
-    private static void Transform(Vector3F[] vertices, int numberOfVertices)
+    private static void Transform(Vector3[] vertices, int numberOfVertices)
     {
       // We could calculate the polygon normal to find the exact polygon plane and
       // then transform the vertices into the xy plane. However, this is expensive
@@ -275,7 +275,7 @@ namespace DigitalRise.Geometry.Meshes
 
       // Compute AABB and determine dominant axes.
       int i0, i1, i2;
-      Vector3F extent = GetAabb(vertices, numberOfVertices).Extent;
+      Vector3 extent = GetAabb(vertices, numberOfVertices).Extent;
       if (extent.X >= extent.Y && extent.X >= extent.Z)
       {
         i0 = 0;
@@ -324,15 +324,15 @@ namespace DigitalRise.Geometry.Meshes
         // Reorder components.
         for (int i = 0; i < numberOfVertices; i++)
         {
-          Vector3F v = vertices[i];
-          vertices[i] = new Vector3F(v[i0], v[i1], v[i2]);
+          Vector3 v = vertices[i];
+          vertices[i] = new Vector3(v.GetComponentByIndex(i0), v.GetComponentByIndex(i1), v.GetComponentByIndex(i2));
         }
       }
     }
 
 
     // Computes the AABB of the polygon.
-    private static Aabb GetAabb(Vector3F[] vertices, int numberOfVertices)
+    private static Aabb GetAabb(Vector3[] vertices, int numberOfVertices)
     {
       Aabb aabb = new Aabb(vertices[0], vertices[0]);
       for (int i = 1; i < numberOfVertices; i++)
@@ -343,7 +343,7 @@ namespace DigitalRise.Geometry.Meshes
 
 
     // Returns the indices of the polygon in counterclockwise order.
-    private static bool GetCounterClockwiseIndices(Vector3F[] vertices, int[] indices, int numberOfVertices)
+    private static bool GetCounterClockwiseIndices(Vector3[] vertices, int[] indices, int numberOfVertices)
     {
       if (GetSignedArea(vertices, numberOfVertices) > 0.0f)
       {
@@ -364,7 +364,7 @@ namespace DigitalRise.Geometry.Meshes
 
     // Gets the signed area of a planar non-self-intersecting polygon.
     // (Positive area = counterclockwise order, negative area = clockwise order)
-    private static float GetSignedArea(Vector3F[] vertices, int numberOfVertices)
+    private static float GetSignedArea(Vector3[] vertices, int numberOfVertices)
     {
       // The polygon needs to lie in the xy plane.
       // Reference: http://mathworld.wolfram.com/PolygonArea.html
@@ -379,7 +379,7 @@ namespace DigitalRise.Geometry.Meshes
     // Determines whether the triangle with the indices (u, v, w) is an ear of the 
     // polygon. (An ear is a triangle formed by three consecutive vertices A, B, C
     // for which no other vertices of the polygon are inside the triangle.)
-    private static bool IsEar(Vector3F[] vertices, int[] indices, int u, int v, int w, int numberOfVertices)
+    private static bool IsEar(Vector3[] vertices, int[] indices, int u, int v, int w, int numberOfVertices)
     {
       Vector2 A = new Vector2(vertices[indices[u]].X, vertices[indices[u]].Y);
       Vector2 B = new Vector2(vertices[indices[v]].X, vertices[indices[v]].Y);

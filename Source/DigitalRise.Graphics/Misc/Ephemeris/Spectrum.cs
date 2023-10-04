@@ -16,7 +16,8 @@
 using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -137,9 +138,9 @@ namespace DigitalRise.Graphics
     /// Converts the spectrum to XYZ color information.
     /// </summary>
     /// <returns>The XYZ color in [lux] (illuminance).</returns>
-    public Vector3F ToXYZ()
+    public Vector3 ToXYZ()
     {
-      Vector3F colorXYZ = new Vector3F(0, 0, 0);
+      Vector3 colorXYZ = new Vector3(0, 0, 0);
       for (int i = 1; i < NumberOfSamples; i++)
       {
         colorXYZ.X += Powers[i] * SampleToXYZ[i, 0];

@@ -182,7 +182,7 @@ namespace DigitalRise.Graphics.Rendering
 
         if (node.Stars != null && node.Stars.Count > 0)
         {
-          Matrix world = (Matrix)new Matrix44F(node.PoseWorld.Orientation, Vector3F.Zero);
+          Matrix world = (Matrix)new Matrix44F(node.PoseWorld.Orientation, Vector3.Zero);
           _effectParameterWorldViewProjection.SetValue(world * viewProjection);
 
           // In [ZFX] the star luminance of the precomputed star data is scaled with 

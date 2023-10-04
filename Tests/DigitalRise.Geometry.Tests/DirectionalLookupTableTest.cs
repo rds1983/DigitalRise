@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -17,7 +17,7 @@ namespace DigitalRise.Geometry.Tests
 
       // Store 6 * 4 * 4 values.
       int value = 0;
-      foreach (Vector3F direction in lookupTable.GetSampleDirections())
+      foreach (Vector3 direction in lookupTable.GetSampleDirections())
       {
         lookupTable[direction] = value;
         value++;
@@ -27,7 +27,7 @@ namespace DigitalRise.Geometry.Tests
 
       // Check values.
       value = 0;
-      foreach (Vector3F direction in lookupTable.GetSampleDirections())
+      foreach (Vector3 direction in lookupTable.GetSampleDirections())
       {
         Assert.AreEqual(value, lookupTable[direction]);
         value++;
@@ -45,7 +45,7 @@ namespace DigitalRise.Geometry.Tests
 
       // Store 6 * 4 * 4 values.
       int value = 0;
-      foreach (Vector3F direction in lookupTable.GetSampleDirections())
+      foreach (Vector3 direction in lookupTable.GetSampleDirections())
       {
         lookupTable[direction] = value;
         value++;
@@ -63,7 +63,7 @@ namespace DigitalRise.Geometry.Tests
 
       // Check values.
       value = 0;
-      foreach (Vector3F direction in lookupTable.GetSampleDirections())
+      foreach (Vector3 direction in lookupTable.GetSampleDirections())
       {
         Assert.AreEqual(value, lookupTable[direction]);
         value++;

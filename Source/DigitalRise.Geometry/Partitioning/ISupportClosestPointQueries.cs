@@ -4,8 +4,7 @@
 
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -91,6 +90,6 @@ namespace DigitalRise.Geometry.Partitioning
     /// <exception cref="ArgumentNullException">
     /// <paramref name="callback"/> is <see langword="null"/>.
     /// </exception>
-    void GetClosestPointCandidates(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose, Func<T, T, float> callback);
+    void GetClosestPointCandidates(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose, Func<T, T, float> callback);
   }
 }

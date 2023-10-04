@@ -10,7 +10,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Geometry
 {
@@ -24,8 +24,8 @@ and bounce off of each other.",
     // Create a custom GeometricObject class which stores a LinearVelocity.
     private class MovingGeometricObject : GeometricObject
     {
-      public Vector3F LinearVelocity { get; set; }
-      public Vector3F AngularVelocity { get; set; }
+      public Vector3 LinearVelocity { get; set; }
+      public Vector3 AngularVelocity { get; set; }
     }
 
     private float _defaultPlaneShapeMeshSize;
@@ -47,7 +47,7 @@ and bounce off of each other.",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 0, 20), 0, 0);
+      SetCamera(new Vector3(0, 0, 20), 0, 0);
 
       // We use one collision domain that manages all objects.
       _domain = new CollisionDomain(new CollisionDetection());
@@ -79,48 +79,48 @@ and bounce off of each other.",
       // Left plane.
       var leftPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(Vector3F.UnitX, 0),
-        Pose = new Pose(new Vector3F(-BoxSize, 0, 0)),
+        Shape = new PlaneShape(Vector3.UnitX, 0),
+        Pose = new Pose(new Vector3(-BoxSize, 0, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(leftPlane));
 
       // Right plane.
       var rightPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitX, 0),
-        Pose = new Pose(new Vector3F(BoxSize, 0, 0)),
+        Shape = new PlaneShape(-Vector3.UnitX, 0),
+        Pose = new Pose(new Vector3(BoxSize, 0, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(rightPlane));
 
       // Top plane.
       var topPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitY, 0),
-        Pose = new Pose(new Vector3F(0, BoxSize, 0)),
+        Shape = new PlaneShape(-Vector3.UnitY, 0),
+        Pose = new Pose(new Vector3(0, BoxSize, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(topPlane));
 
       // Bottom plane.
       var bottomPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(Vector3F.UnitY, 0),
-        Pose = new Pose(new Vector3F(0, -BoxSize, 0)),
+        Shape = new PlaneShape(Vector3.UnitY, 0),
+        Pose = new Pose(new Vector3(0, -BoxSize, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(bottomPlane));
 
       // Front plane.
       var frontPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitZ, 0),
-        Pose = new Pose(new Vector3F(0, 0, BoxSize)),
+        Shape = new PlaneShape(-Vector3.UnitZ, 0),
+        Pose = new Pose(new Vector3(0, 0, BoxSize)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(frontPlane));
 
       // Back plane.
       var backPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(Vector3F.UnitZ, 0),
-        Pose = new Pose(new Vector3F(0, 0, -BoxSize)),
+        Shape = new PlaneShape(Vector3.UnitZ, 0),
+        Pose = new Pose(new Vector3(0, 0, -BoxSize)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(backPlane));
     }
@@ -160,11 +160,11 @@ and bounce off of each other.",
           case 5:
             // Convex hull of several points.
             ConvexHullOfPoints hull = new ConvexHullOfPoints();
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize));
-            hull.Points.Add(new Vector3F(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize));
-            hull.Points.Add(new Vector3F(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize));
+            hull.Points.Add(new Vector3(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize));
+            hull.Points.Add(new Vector3(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize));
             randomShape = hull;
             break;
           case 6:
@@ -173,11 +173,11 @@ and bounce off of each other.",
             composite.Children.Add(
               new GeometricObject(
                 new BoxShape(ObjectSize, 3 * ObjectSize, ObjectSize),
-                new Pose(new Vector3F(0, 0, 0))));
+                new Pose(new Vector3(0, 0, 0))));
             composite.Children.Add(
               new GeometricObject(
                 new BoxShape(2 * ObjectSize, ObjectSize, ObjectSize),
-                new Pose(new Vector3F(0, 2 * ObjectSize, 0))));
+                new Pose(new Vector3(0, 2 * ObjectSize, 0))));
             randomShape = composite;
             break;
           default:
@@ -190,15 +190,15 @@ and bounce off of each other.",
 
         // Create an object with the random shape, pose, color and velocity.
         Pose randomPose = new Pose(
-          random.NextVector3F(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
+          random.NextVector3(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
           random.NextQuaternionF());
 
         var newObject = new MovingGeometricObject
         {
           Pose = randomPose,
           Shape = randomShape,
-          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3F(MaxLinearVelocity, 0, 0)),
-          AngularVelocity = random.NextQuaternionF().Rotate(Vector3F.Forward)
+          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
+          AngularVelocity = random.NextQuaternionF().Rotate(Vector3.Forward)
                             * RandomHelper.Random.NextFloat(0, MaxAngularVelocity),
         };
 
@@ -243,14 +243,14 @@ and bounce off of each other.",
 
         // Get the contact normal of the first collision point.
         var contact = contactSet[0];
-        Vector3F normal = contact.Normal;
+        Vector3 normal = contact.Normal;
 
         // Check if the objects move towards or away from each other in the direction of the normal.
-        if (Vector3F.Dot(objectB.LinearVelocity - objectA.LinearVelocity, normal) <= 0)
+        if (Vector3.Dot(objectB.LinearVelocity - objectA.LinearVelocity, normal) <= 0)
         {
           // Objects move towards each other. --> Reflect their velocities.
-          objectA.LinearVelocity -= 2 * Vector3F.ProjectTo(objectA.LinearVelocity, normal);
-          objectB.LinearVelocity -= 2 * Vector3F.ProjectTo(objectB.LinearVelocity, normal);
+          objectA.LinearVelocity -= 2 * MathHelper.ProjectTo(objectA.LinearVelocity, normal);
+          objectB.LinearVelocity -= 2 * MathHelper.ProjectTo(objectB.LinearVelocity, normal);
           objectA.AngularVelocity = -objectA.AngularVelocity;
           objectB.AngularVelocity = -objectB.AngularVelocity;
         }
@@ -264,11 +264,11 @@ and bounce off of each other.",
       foreach (var obj in objects)
       {
         // Update position.
-        Vector3F position = obj.Pose.Position + obj.LinearVelocity * timeStep;
+        Vector3 position = obj.Pose.Position + obj.LinearVelocity * timeStep;
 
         // Update rotation.
-        Vector3F rotationAxis = obj.AngularVelocity;
-        float angularSpeed = obj.AngularVelocity.Length;
+        Vector3 rotationAxis = obj.AngularVelocity;
+        float angularSpeed = obj.AngularVelocity.Length();
         Matrix33F rotation = (Numeric.IsZero(angularSpeed))
           ? Matrix33F.Identity
           : Matrix33F.CreateRotation(rotationAxis, angularSpeed * timeStep);

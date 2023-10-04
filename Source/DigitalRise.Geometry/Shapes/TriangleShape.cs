@@ -5,8 +5,8 @@
 using System;
 using System.Globalization;
 using DigitalRise.Geometry.Meshes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -43,7 +43,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get { return (_vertex0 + _vertex1 + _vertex2) / 3; }
     }
@@ -53,13 +53,13 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets the normal.
     /// </summary>
     /// <value>The normal.</value>
-    public Vector3F Normal
+    public Vector3 Normal
     {
       get
       {
-        Vector3F normal = Vector3F.Cross(_vertex1 - _vertex0, _vertex2 - _vertex0);
+        Vector3 normal = Vector3.Cross(_vertex1 - _vertex0, _vertex2 - _vertex0);
         if (!normal.TryNormalize())
-          normal = Vector3F.UnitY;
+          normal = Vector3.UnitY;
 
         return normal;
       }
@@ -74,7 +74,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="index"/> is out of range.
     /// </exception>
-    public Vector3F this[int index]
+    public Vector3 this[int index]
     {
       get
       {
@@ -105,7 +105,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets or sets the first vertex.
     /// </summary>
     /// <value>The first vertex.</value>
-    public Vector3F Vertex0
+    public Vector3 Vertex0
     {
       get { return _vertex0; }
       set
@@ -117,14 +117,14 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private Vector3F _vertex0;
+    private Vector3 _vertex0;
 
 
     /// <summary>
     /// Gets or sets the second vertex.
     /// </summary>
     /// <value>The second vertex.</value>
-    public Vector3F Vertex1
+    public Vector3 Vertex1
     {
       get { return _vertex1; }
       set
@@ -136,14 +136,14 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private Vector3F _vertex1;
+    private Vector3 _vertex1;
 
 
     /// <summary>
     /// Gets or sets the third vertex.
     /// </summary>
     /// <value>The third vertex.</value>
-    public Vector3F Vertex2
+    public Vector3 Vertex2
     {
       get { return _vertex2; }
       set
@@ -155,7 +155,7 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private Vector3F _vertex2;
+    private Vector3 _vertex2;
     #endregion
 
 
@@ -186,7 +186,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="vertex0">The first vertex.</param>
     /// <param name="vertex1">The second vertex.</param>
     /// <param name="vertex2">The third vertex.</param>
-    public TriangleShape(Vector3F vertex0, Vector3F vertex1, Vector3F vertex2)
+    public TriangleShape(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2)
     {
       _vertex0 = vertex0;
       _vertex1 = vertex1;
@@ -235,14 +235,14 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Note: Compute AABB in world space
-      Vector3F vertex0 = pose.ToWorldPosition(_vertex0 * scale);
-      Vector3F vertex1 = pose.ToWorldPosition(_vertex1 * scale);
-      Vector3F vertex2 = pose.ToWorldPosition(_vertex2 * scale);
-      Vector3F minimum = Vector3F.Min(vertex0, Vector3F.Min(vertex1, vertex2));
-      Vector3F maximum = Vector3F.Max(vertex0, Vector3F.Max(vertex1, vertex2));
+      Vector3 vertex0 = pose.ToWorldPosition(_vertex0 * scale);
+      Vector3 vertex1 = pose.ToWorldPosition(_vertex1 * scale);
+      Vector3 vertex2 = pose.ToWorldPosition(_vertex2 * scale);
+      Vector3 minimum = Vector3.Min(vertex0, Vector3.Min(vertex1, vertex2));
+      Vector3 maximum = Vector3.Max(vertex0, Vector3.Max(vertex1, vertex2));
       return new Aabb(minimum, maximum);
     }
 
@@ -263,11 +263,11 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
-      float distance0 = Vector3F.Dot(direction, _vertex0);
-      float distance1 = Vector3F.Dot(direction, _vertex1);
-      float distance2 = Vector3F.Dot(direction, _vertex2);
+      float distance0 = Vector3.Dot(direction, _vertex0);
+      float distance1 = Vector3.Dot(direction, _vertex1);
+      float distance2 = Vector3.Dot(direction, _vertex2);
 
       if (distance0 >= distance1 && distance0 >= distance2)
         return _vertex0;
@@ -292,11 +292,11 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
-      float distance0 = Vector3F.Dot(directionNormalized, _vertex0);
-      float distance1 = Vector3F.Dot(directionNormalized, _vertex1);
-      float distance2 = Vector3F.Dot(directionNormalized, _vertex2);
+      float distance0 = Vector3.Dot(directionNormalized, _vertex0);
+      float distance1 = Vector3.Dot(directionNormalized, _vertex1);
+      float distance2 = Vector3.Dot(directionNormalized, _vertex2);
 
       if (distance0 >= distance1 && distance0 >= distance2)
         return _vertex0;

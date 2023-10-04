@@ -68,7 +68,7 @@ namespace DigitalRise.Graphics.Rendering
       /// <summary>
       /// The position in world space.
       /// </summary>
-      public Vector3F Position;
+      public Vector3 Position;
 
       /// <summary>
       /// The relative origin of the text. (0, 0) means that the upper-left corner of the text is at
@@ -232,7 +232,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(string text, Vector3F position, Vector2 relativeOrigin, Color color)
+    public void Add(string text, Vector3 position, Vector2 relativeOrigin, Color color)
     {
       if (string.IsNullOrEmpty(text))
         return;
@@ -258,7 +258,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <paramref name="position"/>. Use (0.5, 0.5) to center the text.
     /// </param>
     /// <param name="color">The color.</param>
-    public void Add(StringBuilder text, Vector3F position, Vector2 relativeOrigin, Color color)
+    public void Add(StringBuilder text, Vector3 position, Vector2 relativeOrigin, Color color)
     {
       if (text == null)
         return;
@@ -321,7 +321,7 @@ namespace DigitalRise.Graphics.Rendering
         foreach (var textInfo in _texts3D)
         {
           // Transform position from world space to the viewport.
-          Vector3F pos = viewport.ProjectToViewport(textInfo.Position, viewProjection);
+          Vector3 pos = viewport.ProjectToViewport(textInfo.Position, viewProjection);
           if (pos.Z < 0 || pos.Z > 1)
             continue;
 

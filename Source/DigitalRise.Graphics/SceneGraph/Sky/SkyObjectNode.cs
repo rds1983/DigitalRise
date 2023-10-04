@@ -2,7 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 
@@ -99,7 +99,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the direction to the sun, used to shade the object to create "moon phases".
     /// </summary>
     /// <value>The direction to the sun. This vector is automatically normalized.</value>
-    public Vector3F SunDirection
+    public Vector3 SunDirection
     {
       get { return _sunDirection; }
       set
@@ -108,7 +108,7 @@ namespace DigitalRise.Graphics.SceneGraph
         _sunDirection.TryNormalize();
       }
     }
-    private Vector3F _sunDirection;
+    private Vector3 _sunDirection;
 
 
     /// <summary>
@@ -119,7 +119,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// "moon phases". The default value is (1, 1, 1).
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-    public Vector3F SunLight { get; set; }
+    public Vector3 SunLight { get; set; }
 
 
     /// <summary>
@@ -129,7 +129,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The intensity of the ambient light used to shade the texture. The ambient light has the same
     /// effect as a tint color.
     /// </value>
-    public Vector3F AmbientLight { get; set; }
+    public Vector3 AmbientLight { get; set; }
 
 
     /// <summary>
@@ -161,7 +161,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the color of the first glow.
     /// </summary>
     /// <value>The color of the first glow.</value>
-    public Vector3F GlowColor0 { get; set; }
+    public Vector3 GlowColor0 { get; set; }
 
 
     /// <summary>
@@ -180,7 +180,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the color of the second glow.
     /// </summary>
     /// <value>The color of the second glow.</value>
-    public Vector3F GlowColor1 { get; set; }
+    public Vector3 GlowColor1 { get; set; }
 
 
     /// <summary>
@@ -217,15 +217,15 @@ namespace DigitalRise.Graphics.SceneGraph
     {
       AngularDiameter = new Vector2(MathHelper.ToRadians(5));
       Alpha = 1;
-      SunDirection = new Vector3F(1, 1, 1);
-      SunLight = new Vector3F(1, 1, 1);
-      AmbientLight = new Vector3F(0, 0, 0);
+      SunDirection = new Vector3(1, 1, 1);
+      SunLight = new Vector3(1, 1, 1);
+      AmbientLight = new Vector3(0, 0, 0);
       LightWrap = 0.1f;
       LightSmoothness = 1;
 
-      GlowColor0 = new Vector3F(0.1f);
+      GlowColor0 = new Vector3(0.1f);
       GlowExponent0 = 200;
-      GlowColor1 = new Vector3F(0, 0, 0);
+      GlowColor1 = new Vector3(0, 0, 0);
       GlowExponent0 = 4000;
       GlowCutoffThreshold = 0.001f;
     }

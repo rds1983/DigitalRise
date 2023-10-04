@@ -1,6 +1,6 @@
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -37,7 +37,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject a = new CollisionObject(
         new GeometricObject
         {
-          Pose = new Pose(new Vector3F(0, 0, 0)),
+          Pose = new Pose(new Vector3(0, 0, 0)),
           Shape = new BoxShape(2, 2, 2),
         });
 
@@ -51,37 +51,37 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ContactSet set;
       BoxBoxAlgorithm algo = new BoxBoxAlgorithm(new CollisionDetection());
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(0, 3f, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 3f, 0));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       set = algo.GetContacts(a, b);
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(0, -3f, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, -3f, 0));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(3, 0f, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(3, 0f, 0));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(-3, 0f, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(-3, 0f, 0));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(0, 0f, 3));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0f, 3));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(0, 0f, -3));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0f, -3));
       Assert.AreEqual(false, algo.HaveContact(a, b));
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateContacts(set, 0);
@@ -96,10 +96,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
     {
       BoxShape box = new BoxShape(1, 2, 3);
 
-      Assert.AreEqual(0, GeometryHelper.GetOutcode(box.Extent, new Vector3F(0.1f, 0.1f, 0.1f)));
-      Assert.AreEqual(1 | 8, GeometryHelper.GetOutcode(box.Extent, new Vector3F(-1.1f, 2.1f, 0.1f)));
-      Assert.AreEqual(2 | 4 | 32, GeometryHelper.GetOutcode(box.Extent, new Vector3F(1.1f, -2.1f, 3.1f)));
-      Assert.AreEqual(16, GeometryHelper.GetOutcode(box.Extent, new Vector3F(0.1f, 0.9f, -3.1f)));
+      Assert.AreEqual(0, GeometryHelper.GetOutcode(box.Extent, new Vector3(0.1f, 0.1f, 0.1f)));
+      Assert.AreEqual(1 | 8, GeometryHelper.GetOutcode(box.Extent, new Vector3(-1.1f, 2.1f, 0.1f)));
+      Assert.AreEqual(2 | 4 | 32, GeometryHelper.GetOutcode(box.Extent, new Vector3(1.1f, -2.1f, 3.1f)));
+      Assert.AreEqual(16, GeometryHelper.GetOutcode(box.Extent, new Vector3(0.1f, 0.9f, -3.1f)));
     }
   }
 }

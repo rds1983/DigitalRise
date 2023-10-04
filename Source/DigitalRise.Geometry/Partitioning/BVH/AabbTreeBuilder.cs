@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -97,7 +97,7 @@ namespace DigitalRise.Geometry.Partitioning
 
             // Compute a "size" which can be used to estimate the fit of the new node. 
             // Here: volume + edges
-            Vector3F edges = mergedAabb.Extent;
+            Vector3 edges = mergedAabb.Extent;
             float size = edges.X * edges.Y * edges.Z + edges.X + edges.Y + edges.Z;
             if (size <= minSize)  // Note: We compare with ≤ because size can be ∞.
             {
@@ -160,10 +160,10 @@ namespace DigitalRise.Geometry.Partitioning
       node.Aabb = MergeLeaveAabbs(leaves, firstLeaf, lastLeaf);
 
       // Get max axis.
-      int splitAxis = node.Aabb.Extent.IndexOfLargestComponent;
+      int splitAxis = node.Aabb.Extent.IndexOfLargestComponent();
 
       // Split at center of AABB.
-      float splitValue = node.Aabb.Center[splitAxis];
+      float splitValue = node.Aabb.Center.GetComponentByIndex(splitAxis);
 
       // Sort indices in list.
       int rightLeaf;  // Leaf index where the right tree begins.
@@ -224,25 +224,25 @@ namespace DigitalRise.Geometry.Partitioning
         return leaves[firstLeaf];
 
       // Compute mean of AABB centers.
-      Vector3F mean = new Vector3F();
+      Vector3 mean = new Vector3();
       for (int i = firstLeaf; i <= lastLeaf; i++)
         mean += leaves[i].Aabb.Center;
 
       mean /= numberOfNodes;
 
       // Compute variance of AABB centers.
-      Vector3F variance = new Vector3F();
+      Vector3 variance = new Vector3();
       for (int i = firstLeaf; i <= lastLeaf; i++)
       {
-        Vector3F difference = leaves[i].Aabb.Center - mean;
+        Vector3 difference = leaves[i].Aabb.Center - mean;
         variance += difference * difference;
       }
 
       variance /= numberOfNodes;
 
       // Choose axis of max variance as split axis.
-      int splitAxis = variance.IndexOfLargestComponent;
-      float splitValue = mean[splitAxis];
+      int splitAxis = variance.IndexOfLargestComponent();
+      float splitValue = mean.GetComponentByIndex(splitAxis);
 
       IAabbTreeNode<T> node = createNode();
       node.Aabb = MergeLeaveAabbs(leaves, firstLeaf, lastLeaf);
@@ -318,16 +318,16 @@ namespace DigitalRise.Geometry.Partitioning
 
       IAabbTreeNode<T> node = createNode();
       node.Aabb = MergeLeaveAabbs(leaves, firstLeaf, lastLeaf);
-      Vector3F center = node.Aabb.Center;
+      Vector3 center = node.Aabb.Center;
 
       // Check which split yields the most balanced tree.
       int[,] splitCount = new int[3,2];   // splitCount[number of axis, left or right]
       for (int i = firstLeaf; i <= lastLeaf; i++)
       {
-        Vector3F offset = leaves[i].Aabb.Center - center;
+        Vector3 offset = leaves[i].Aabb.Center - center;
         for (int axis = 0; axis < 3; axis++)
         {
-          if (offset[axis] <= 0)
+          if (offset.GetComponentByIndex(axis) <= 0)
             splitCount[axis, 0]++;
           else
             splitCount[axis, 1]++;
@@ -348,7 +348,7 @@ namespace DigitalRise.Geometry.Partitioning
           {
             minDifference = difference;
             splitAxis = axis;
-            splitValue = center[axis];
+            splitValue = center.GetComponentByIndex(axis);
           }
         }
       }
@@ -415,7 +415,7 @@ namespace DigitalRise.Geometry.Partitioning
       // first are objects in the left half and then all objects in the right half.
       while (unhandledLeaf < rightLeaf)
       {
-        if (leaves[unhandledLeaf].Aabb.Center[splitAxis] <= splitValue)
+        if (leaves[unhandledLeaf].Aabb.Center.GetComponentByIndex(splitAxis) <= splitValue)
         {
           // Object of leaf is in left half. We can test the next.
           unhandledLeaf++;

@@ -22,7 +22,7 @@ namespace Samples.Particles
       : base(game)
     {
       _beeSwarm = BeeSwarm.Create(Services);
-      _beeSwarm.Pose = new Pose(new Vector3F(0, 4, 0));
+      _beeSwarm.Pose = new Pose(new Vector3(0, 4, 0));
 
       // Create 100 bees.
       _beeSwarm.AddParticles(100);

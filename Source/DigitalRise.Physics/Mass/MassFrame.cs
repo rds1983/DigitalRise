@@ -8,7 +8,7 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -207,16 +207,16 @@ namespace DigitalRise.Physics
     /// <remarks>
     /// This vector contains the diagonal elements of the diagonalized inertia matrix.
     /// </remarks>
-    public Vector3F Inertia
+    public Vector3 Inertia
     {
       get { return _inertia; }
       set
       {
-        _inertia = (value.IsNaN) ? new Vector3F(float.PositiveInfinity) : value;
+        _inertia = (value.IsNaN()) ? new Vector3(float.PositiveInfinity) : value;
         UpdateInertiaInverse();
       }
     }
-    private Vector3F _inertia = new Vector3F(166.67f);  // ~ 1 m box inertia for 1000 kg.
+    private Vector3 _inertia = new Vector3(166.67f);  // ~ 1 m box inertia for 1000 kg.
 
 
     // The inverse of 0 or large value is clamped to 0.
@@ -227,12 +227,12 @@ namespace DigitalRise.Physics
     /// <remarks>
     /// Extreme values (0 mass or very large mass) are clamped to 0.
     /// </remarks>
-    internal Vector3F InertiaInverse
+    internal Vector3 InertiaInverse
     {
       get { return _inertiaInverse; }
       private set { _inertiaInverse = value; }
     }
-    private Vector3F _inertiaInverse = new Vector3F(1.0f / 166.67f);
+    private Vector3 _inertiaInverse = new Vector3(1.0f / 166.67f);
 
 
     /// <summary>
@@ -247,7 +247,7 @@ namespace DigitalRise.Physics
       get { return _pose; }
       set
       {
-        Debug.Assert(!value.Position.IsNaN && !value.Orientation.IsNaN, "MassFrame.Pose is set to value containing NaN");
+        Debug.Assert(!value.Position.IsNaN() && !value.Orientation.IsNaN, "MassFrame.Pose is set to value containing NaN");
         _pose = value;
       }
     }
@@ -340,7 +340,7 @@ namespace DigitalRise.Physics
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="relativeDistanceThreshold"/> is negative.
     /// </exception>
-    public static MassFrame FromShapeAndDensity(Shape shape, Vector3F scale, float density, float relativeDistanceThreshold, int iterationLimit)
+    public static MassFrame FromShapeAndDensity(Shape shape, Vector3 scale, float density, float relativeDistanceThreshold, int iterationLimit)
     {
       return ComputeMassProperties(shape, scale, density, true, relativeDistanceThreshold, iterationLimit);
     }
@@ -392,7 +392,7 @@ namespace DigitalRise.Physics
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="relativeDistanceThreshold"/> is negative.
     /// </exception>
-    public static MassFrame FromShapeAndMass(Shape shape, Vector3F scale, float mass, float relativeDistanceThreshold, int iterationLimit)
+    public static MassFrame FromShapeAndMass(Shape shape, Vector3 scale, float mass, float relativeDistanceThreshold, int iterationLimit)
     {
       return ComputeMassProperties(shape, scale, mass, false, relativeDistanceThreshold, iterationLimit);
     }
@@ -424,7 +424,7 @@ namespace DigitalRise.Physics
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="relativeDistanceThreshold"/> is negative.
     /// </exception>
-    private static MassFrame ComputeMassProperties(Shape shape, Vector3F scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit)
+    private static MassFrame ComputeMassProperties(Shape shape, Vector3 scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");
@@ -435,20 +435,20 @@ namespace DigitalRise.Physics
 
       // Call MassHelper to compute mass, COM and inertia matrix (not diagonalized).
       float mass;
-      Vector3F centerOfMass;
+      Vector3 centerOfMass;
       Matrix33F inertia;
       MassHelper.GetMass(shape, scale, densityOrMass, isDensity, relativeDistanceThreshold, iterationLimit,
                          out mass, out centerOfMass, out inertia);
 
       // If anything is NaN, we use default values for a static/kinematic body.
-      if (Numeric.IsNaN(mass) || centerOfMass.IsNaN || inertia.IsNaN)
-        return new MassFrame { Mass = 0, Inertia = Vector3F.Zero };
+      if (Numeric.IsNaN(mass) || centerOfMass.IsNaN() || inertia.IsNaN)
+        return new MassFrame { Mass = 0, Inertia = Vector3.Zero };
 
       if (!Numeric.IsZero(inertia.M01) || !Numeric.IsZero(inertia.M02) || !Numeric.IsZero(inertia.M12))
       {
         // Inertia off-diagonal elements are not 0.
         // --> Have to make inertia a diagonal matrix.
-        Vector3F inertiaDiagonal;
+        Vector3 inertiaDiagonal;
         Matrix33F rotation;
         MassHelper.DiagonalizeInertia(inertia, out inertiaDiagonal, out rotation);
 
@@ -467,7 +467,7 @@ namespace DigitalRise.Physics
         MassFrame massFrame = new MassFrame
         {
           Mass = mass,
-          Inertia = new Vector3F(inertia.M00, inertia.M11, inertia.M22),
+          Inertia = new Vector3(inertia.M00, inertia.M11, inertia.M22),
           Pose = new Pose(centerOfMass),
           Density = isDensity ? densityOrMass : 0
         };
@@ -483,7 +483,7 @@ namespace DigitalRise.Physics
       // If an inertia element is very large, then treat this object as kinematic
       // regarding this axis. => Use inverse inertia = 0.
       // We use a very small epsilon because small objects have tiny inertia values.
-      InertiaInverse = new Vector3F(
+      InertiaInverse = new Vector3(
         (Numeric.IsZero(_inertia.X, 1e-10f) || _inertia.X >= MassLimit) ? 0 : 1 / _inertia.X,
         (Numeric.IsZero(_inertia.Y, 1e-10f) || _inertia.Y >= MassLimit) ? 0 : 1 / _inertia.Y,
         (Numeric.IsZero(_inertia.Z, 1e-10f) || _inertia.Z >= MassLimit) ? 0 : 1 / _inertia.Z);

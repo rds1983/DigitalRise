@@ -66,17 +66,17 @@ than 5 morph targets are active, the morph targets with the largest weights are 
         0.1f,
         10);
       var cameraNode = new CameraNode(new Camera(projection));
-      cameraNode.LookAt(new Vector3F(0.15f, 0.15f, 0.5f), new Vector3F(0.1f, 0.15f, 0), Vector3F.Up);
+      cameraNode.LookAt(new Vector3(0.15f, 0.15f, 0.5f), new Vector3(0.1f, 0.15f, 0), Vector3.Up);
       _graphicsScreen.Scene.Children.Add(cameraNode);
       _graphicsScreen.ActiveCameraNode = cameraNode;
 
       // Lighting setup:
       var keyLight = new LightNode(new Spotlight { DiffuseIntensity = 0.6f, SpecularIntensity = 0.4f });
-      keyLight.LookAt(new Vector3F(-2, 2, 2), new Vector3F(), Vector3F.Up);
+      keyLight.LookAt(new Vector3(-2, 2, 2), new Vector3(), Vector3.Up);
       _graphicsScreen.Scene.Children.Add(keyLight);
 
       var backLight = new LightNode(new Spotlight { DiffuseIntensity = 0.3f, SpecularIntensity = 0.3f });
-      backLight.LookAt(new Vector3F(1, 0.5f, -2), new Vector3F(), Vector3F.Up);
+      backLight.LookAt(new Vector3(1, 0.5f, -2), new Vector3(), Vector3.Up);
       _graphicsScreen.Scene.Children.Add(backLight);
       
       var fillLight = new LightNode(new AmbientLight { HemisphericAttenuation = 1, Intensity = 0.1f });
@@ -89,7 +89,7 @@ than 5 morph targets are active, the morph targets with the largest weights are 
 
       // Load the customized "Sintel" model (original: Durian Open Movie Project - http://www.sintel.org/).
       var model = AssetManager.LoadDRModel(GraphicsService, "Sintel/Sintel-Head.drmdl").Clone();
-      model.PoseWorld = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(MathHelper.ToRadians(10)) * Matrix33F.CreateRotationX(-MathHelper.ToRadians(90)));
+      model.PoseWorld = new Pose(new Vector3(0, 0, 0), Matrix33F.CreateRotationY(MathHelper.ToRadians(10)) * Matrix33F.CreateRotationX(-MathHelper.ToRadians(90)));
       _graphicsScreen.Scene.Children.Add(model);
 
       // The model consists of a root node and a mesh node.

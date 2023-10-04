@@ -5,9 +5,7 @@
 using System;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles
 {
@@ -30,7 +28,7 @@ namespace DigitalRise.Particles
       {
         if (_aabbIsValid == false)
         {
-          _aabb = Shape.GetAabb(Vector3F.One, Pose);
+          _aabb = Shape.GetAabb(Vector3.One, Pose);
           _aabbIsValid = true;
         }
 
@@ -135,9 +133,9 @@ namespace DigitalRise.Particles
     /// <value>Always returns (1, 1, 1).
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
-    Vector3F IGeometricObject.Scale
+    Vector3 IGeometricObject.Scale
     {
-      get { return Vector3F.One; }
+      get { return Vector3.One; }
     }
 
 

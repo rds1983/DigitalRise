@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -14,17 +14,17 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void Constructor()
     {
-      Assert.AreEqual(new Vector3F(), new Triangle().Vertex0);
-      Assert.AreEqual(new Vector3F(), new Triangle().Vertex1);
-      Assert.AreEqual(new Vector3F(), new Triangle().Vertex2);
+      Assert.AreEqual(new Vector3(), new Triangle().Vertex0);
+      Assert.AreEqual(new Vector3(), new Triangle().Vertex1);
+      Assert.AreEqual(new Vector3(), new Triangle().Vertex2);
 
-      Assert.AreEqual(new Vector3F(1, 2, 3), new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Vertex0);
-      Assert.AreEqual(new Vector3F(4, 5, 6), new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Vertex1);
-      Assert.AreEqual(new Vector3F(7, 8, 9), new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Vertex2);
+      Assert.AreEqual(new Vector3(1, 2, 3), new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Vertex0);
+      Assert.AreEqual(new Vector3(4, 5, 6), new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Vertex1);
+      Assert.AreEqual(new Vector3(7, 8, 9), new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Vertex2);
 
-      Assert.AreEqual(new Vector3F(1, 2, 3), new Triangle(new TriangleShape(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))).Vertex0);
-      Assert.AreEqual(new Vector3F(4, 5, 6), new Triangle(new TriangleShape(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))).Vertex1);
-      Assert.AreEqual(new Vector3F(7, 8, 9), new Triangle(new TriangleShape(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))).Vertex2);
+      Assert.AreEqual(new Vector3(1, 2, 3), new Triangle(new TriangleShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))).Vertex0);
+      Assert.AreEqual(new Vector3(4, 5, 6), new Triangle(new TriangleShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))).Vertex1);
+      Assert.AreEqual(new Vector3(7, 8, 9), new Triangle(new TriangleShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))).Vertex2);
     }
 
 
@@ -40,29 +40,29 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void TestProperties()
     {
       Triangle t = new Triangle();
-      Assert.AreEqual(new Vector3F(), t.Vertex0);
-      Assert.AreEqual(new Vector3F(), t.Vertex1);
-      Assert.AreEqual(new Vector3F(), t.Vertex2);
+      Assert.AreEqual(new Vector3(), t.Vertex0);
+      Assert.AreEqual(new Vector3(), t.Vertex1);
+      Assert.AreEqual(new Vector3(), t.Vertex2);
 
-      t.Vertex0 = new Vector3F(1, 2, 3);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t.Vertex0);
-      Assert.AreEqual(new Vector3F(), t.Vertex1);
-      Assert.AreEqual(new Vector3F(), t.Vertex2);
+      t.Vertex0 = new Vector3(1, 2, 3);
+      Assert.AreEqual(new Vector3(1, 2, 3), t.Vertex0);
+      Assert.AreEqual(new Vector3(), t.Vertex1);
+      Assert.AreEqual(new Vector3(), t.Vertex2);
 
-      t.Vertex1 = new Vector3F(4, 5, 6);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t.Vertex0);
-      Assert.AreEqual(new Vector3F(4, 5, 6), t.Vertex1);
-      Assert.AreEqual(new Vector3F(), t.Vertex2);
+      t.Vertex1 = new Vector3(4, 5, 6);
+      Assert.AreEqual(new Vector3(1, 2, 3), t.Vertex0);
+      Assert.AreEqual(new Vector3(4, 5, 6), t.Vertex1);
+      Assert.AreEqual(new Vector3(), t.Vertex2);
 
-      t.Vertex2 = new Vector3F(9, 7, 8);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t.Vertex0);
-      Assert.AreEqual(new Vector3F(4, 5, 6), t.Vertex1);
-      Assert.AreEqual(new Vector3F(9, 7, 8), t.Vertex2);
+      t.Vertex2 = new Vector3(9, 7, 8);
+      Assert.AreEqual(new Vector3(1, 2, 3), t.Vertex0);
+      Assert.AreEqual(new Vector3(4, 5, 6), t.Vertex1);
+      Assert.AreEqual(new Vector3(9, 7, 8), t.Vertex2);
 
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(Vector3F.Cross(new Vector3F(3, 3, 3), new Vector3F(8, 5, 5)).Normalized, t.Normal));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal));
 
       // Degenerate triangles can have any normal.
-      Assert.IsTrue(Numeric.AreEqual(1, new Triangle().Normal.Length));
+      Assert.IsTrue(Numeric.AreEqual(1, new Triangle().Normal.Length()));
     }
 
 
@@ -70,24 +70,24 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void TestIndexer()
     {
       Triangle t = new Triangle();
-      Assert.AreEqual(new Vector3F(), t[0]);
-      Assert.AreEqual(new Vector3F(), t[1]);
-      Assert.AreEqual(new Vector3F(), t[2]);
+      Assert.AreEqual(new Vector3(), t[0]);
+      Assert.AreEqual(new Vector3(), t[1]);
+      Assert.AreEqual(new Vector3(), t[2]);
 
-      t[0] = new Vector3F(1, 2, 3);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t[0]);
-      Assert.AreEqual(new Vector3F(), t[1]);
-      Assert.AreEqual(new Vector3F(), t[2]);
+      t[0] = new Vector3(1, 2, 3);
+      Assert.AreEqual(new Vector3(1, 2, 3), t[0]);
+      Assert.AreEqual(new Vector3(), t[1]);
+      Assert.AreEqual(new Vector3(), t[2]);
 
-      t[1] = new Vector3F(4, 5, 6);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t[0]);
-      Assert.AreEqual(new Vector3F(4, 5, 6), t[1]);
-      Assert.AreEqual(new Vector3F(), t[2]);
+      t[1] = new Vector3(4, 5, 6);
+      Assert.AreEqual(new Vector3(1, 2, 3), t[0]);
+      Assert.AreEqual(new Vector3(4, 5, 6), t[1]);
+      Assert.AreEqual(new Vector3(), t[2]);
 
-      t[2] = new Vector3F(7, 8, 9);
-      Assert.AreEqual(new Vector3F(1, 2, 3), t[0]);
-      Assert.AreEqual(new Vector3F(4, 5, 6), t[1]);
-      Assert.AreEqual(new Vector3F(7, 8, 9), t[2]);
+      t[2] = new Vector3(7, 8, 9);
+      Assert.AreEqual(new Vector3(1, 2, 3), t[0]);
+      Assert.AreEqual(new Vector3(4, 5, 6), t[1]);
+      Assert.AreEqual(new Vector3(7, 8, 9), t[2]);
 
       Assert.AreEqual(t.Vertex0, t[0]);
       Assert.AreEqual(t.Vertex1, t[1]);
@@ -100,7 +100,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void TestIndexerException0()
     {
       var t = new Triangle();
-      t[3] = Vector3F.Zero;
+      t[3] = Vector3.Zero;
     }
 
 
@@ -109,7 +109,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void TestIndexerException1()
     {
       var t = new Triangle();
-      t[-1] = Vector3F.Zero;
+      t[-1] = Vector3.Zero;
     }
 
 
@@ -117,7 +117,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void TestIndexerException2()
     {
-      Vector3F v = new Triangle()[3];
+      Vector3 v = new Triangle()[3];
     }
 
 
@@ -125,7 +125,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void TestIndexerException3()
     {
-      Vector3F v = new Triangle()[-1];
+      Vector3 v = new Triangle()[-1];
     }
 
 
@@ -133,29 +133,29 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void EqualsTest()
     {
       Assert.IsTrue(new Triangle().Equals(new Triangle()));
-      Assert.IsTrue(new Triangle().Equals(new Triangle(Vector3F.Zero, Vector3F.Zero, Vector3F.Zero)));
-      Assert.IsTrue(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Equals(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))));
-      Assert.IsTrue(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Equals((object)new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))));
-      Assert.IsFalse(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Equals(new Triangle(new Vector3F(0, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))));
-      Assert.IsFalse(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).Equals(new TriangleShape(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9))));
+      Assert.IsTrue(new Triangle().Equals(new Triangle(Vector3.Zero, Vector3.Zero, Vector3.Zero)));
+      Assert.IsTrue(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Equals(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))));
+      Assert.IsTrue(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Equals((object)new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))));
+      Assert.IsFalse(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Equals(new Triangle(new Vector3(0, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))));
+      Assert.IsFalse(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).Equals(new TriangleShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9))));
       Assert.IsFalse(new Triangle().Equals(null));
 
-      Assert.IsTrue(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)) == new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)));
-      Assert.IsTrue(new Triangle(new Vector3F(1, 2, 4), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)) != new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)));
+      Assert.IsTrue(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)) == new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)));
+      Assert.IsTrue(new Triangle(new Vector3(1, 2, 4), new Vector3(4, 5, 6), new Vector3(7, 8, 9)) != new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)));
     }
 
 
     [Test]
     public void LengthTest()
     {
-      Assert.AreEqual(2, new LineSegment(new Vector3F(1, 2, 3), new Vector3F(3, 2, 3)).Length);
+      Assert.AreEqual(2, new LineSegment(new Vector3(1, 2, 3), new Vector3(3, 2, 3)).Length);
     }
 
 
     [Test]
     public void LengthSquaredTest()
     {
-      Assert.AreEqual(4, new LineSegment(new Vector3F(1, 2, 3), new Vector3F(3, 2, 3)).LengthSquared);
+      Assert.AreEqual(4, new LineSegment(new Vector3(1, 2, 3), new Vector3(3, 2, 3)).LengthSquared());
     }
 
 
@@ -163,16 +163,16 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void GetHashCodeTest()
     {
       Assert.AreEqual(new Triangle().GetHashCode(), new Triangle().GetHashCode());
-      Assert.AreEqual(new Triangle().GetHashCode(), new Triangle(Vector3F.Zero, Vector3F.Zero, Vector3F.Zero).GetHashCode());
-      Assert.AreEqual(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).GetHashCode(), new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).GetHashCode());
-      Assert.AreNotEqual(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).GetHashCode(), new Triangle(new Vector3F(0, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).GetHashCode());
+      Assert.AreEqual(new Triangle().GetHashCode(), new Triangle(Vector3.Zero, Vector3.Zero, Vector3.Zero).GetHashCode());
+      Assert.AreEqual(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).GetHashCode(), new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).GetHashCode());
+      Assert.AreNotEqual(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).GetHashCode(), new Triangle(new Vector3(0, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).GetHashCode());
     }
 
 
     [Test]
     public void ToStringTest()
     {
-      Assert.IsTrue(new Triangle(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6), new Vector3F(7, 8, 9)).ToString().StartsWith("Triangle { "));
+      Assert.IsTrue(new Triangle(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).ToString().StartsWith("Triangle { "));
     }
 
 
@@ -191,21 +191,21 @@ namespace DigitalRise.Geometry.Shapes.Tests
       for (int i = 0; i < 100; i++)
       {
         var tA = new Triangle();
-        tA.Vertex0 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex1 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
-        tA.Vertex2 = new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex0 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex1 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
+        tA.Vertex2 = new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100));
 
         // Random scale including negative scale for mirroring.
-        var s = new Vector3F(RandomHelper.Random.NextFloat(-2, 2), RandomHelper.Random.NextFloat(-2, 2), RandomHelper.Random.NextFloat(-2, 2));
+        var s = new Vector3(RandomHelper.Random.NextFloat(-2, 2), RandomHelper.Random.NextFloat(-2, 2), RandomHelper.Random.NextFloat(-2, 2));
 
         // Random pose.
         var p = new Pose(
-          new Vector3F(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100)),
+          new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100)),
           RandomHelper.Random.NextQuaternionF());
 
         // For the correct triangle normal we have to use the inverse transpose:
         //   (M^-1)^T = 1 / scale
-        var n = Vector3F.Cross(tA.Vertex1 - tA.Vertex0, tA.Vertex2 - tA.Vertex0) / s;
+        var n = Vector3.Cross(tA.Vertex1 - tA.Vertex0, tA.Vertex2 - tA.Vertex0) / s;
         n = p.ToWorldDirection(n);
 
         if (n.TryNormalize())
@@ -219,7 +219,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
           if (s.X * s.Y * s.Z < 0)
             Mathematics.MathHelper.Swap(ref tA.Vertex0, ref tA.Vertex1);
 
-          bool areEqual = Vector3F.AreNumericallyEqual(n, tA.Normal, 0.001f);
+          bool areEqual = MathHelper.AreNumericallyEqual(n, tA.Normal, 0.001f);
           if (!areEqual)
             Debugger.Break();
           Assert.IsTrue(areEqual);

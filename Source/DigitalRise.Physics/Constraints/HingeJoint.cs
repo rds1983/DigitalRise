@@ -4,7 +4,7 @@
 
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -104,8 +104,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != ErrorReduction)
         {
-          _linearLimit.ErrorReduction = new Vector3F(value);
-          _angularLimit.ErrorReduction = new Vector3F(value);
+          _linearLimit.ErrorReduction = new Vector3(value);
+          _angularLimit.ErrorReduction = new Vector3(value);
           OnChanged();
         }
       }
@@ -129,8 +129,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Softness)
         {
-          _linearLimit.Softness = new Vector3F(value);
-          _angularLimit.Softness = new Vector3F(value);
+          _linearLimit.Softness = new Vector3(value);
+          _angularLimit.Softness = new Vector3(value);
           OnChanged();
         }
       }
@@ -151,7 +151,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Minimum)
         {
-          _angularLimit.Minimum = new Vector3F(value, 0, 0);
+          _angularLimit.Minimum = new Vector3(value, 0, 0);
           OnChanged();
         }
       }
@@ -172,7 +172,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Maximum)
         {
-          _angularLimit.Maximum = new Vector3F(value, 0, 0);
+          _angularLimit.Maximum = new Vector3(value, 0, 0);
           OnChanged();
         }
       }
@@ -195,7 +195,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _angularLimit.Restitution = new Vector3F(value);
+          _angularLimit.Restitution = new Vector3(value);
           OnChanged();
         }
       }
@@ -216,8 +216,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _linearLimit.MaxForce = new Vector3F(value);
-          _angularLimit.MaxForce = new Vector3F(value);
+          _linearLimit.MaxForce = new Vector3(value);
+          _angularLimit.MaxForce = new Vector3(value);
           OnChanged();
         }
       }
@@ -225,7 +225,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -235,7 +235,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
@@ -266,12 +266,12 @@ namespace DigitalRise.Physics.Constraints
           return 0;
 
         // Get hinge axis in world space.
-        Vector3F hingeAxisLocalA = AnchorPoseALocal.Orientation.GetColumn(0);
-        Vector3F hingeAxis = BodyA.Pose.ToWorldDirection(hingeAxisLocalA);
+        Vector3 hingeAxisLocalA = AnchorPoseALocal.Orientation.GetColumn(0);
+        Vector3 hingeAxis = BodyA.Pose.ToWorldDirection(hingeAxisLocalA);
 
         // Project relative angular velocity onto hinge axis.
-        Vector3F relativeAngularVelocity = BodyB.AngularVelocity - BodyA.AngularVelocity;
-        return Vector3F.Dot(relativeAngularVelocity, hingeAxis);
+        Vector3 relativeAngularVelocity = BodyB.AngularVelocity - BodyA.AngularVelocity;
+        return Vector3.Dot(relativeAngularVelocity, hingeAxis);
       }
     }
     #endregion
@@ -288,13 +288,13 @@ namespace DigitalRise.Physics.Constraints
     {
       _linearLimit = new LinearLimit
       {
-        Minimum = new Vector3F(0, 0, 0),
-        Maximum = new Vector3F(0, 0, 0),
+        Minimum = new Vector3(0, 0, 0),
+        Maximum = new Vector3(0, 0, 0),
       };
       _angularLimit = new AngularLimit
       {
-        Minimum = new Vector3F(float.NegativeInfinity, 0, 0),
-        Maximum = new Vector3F(float.PositiveInfinity, 0, 0),
+        Minimum = new Vector3(float.NegativeInfinity, 0, 0),
+        Maximum = new Vector3(float.PositiveInfinity, 0, 0),
       };
     }
     #endregion

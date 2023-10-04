@@ -41,7 +41,7 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue; 
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // Initialize collision detection.
       // Note: The physics Simulation also has a collision domain (Simulation.CollisionDomain)
@@ -63,10 +63,10 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
       GameObjectService.Objects.Add(_shipObjectB);
 
       // Position the second ship right of the first ship with an arbitrary rotation.
-      _shipObjectB.Pose = new Pose(new Vector3F(2, 0, 0), QuaternionF.CreateRotationY(0.7f) * QuaternionF.CreateRotationX(1.2f));
+      _shipObjectB.Pose = new Pose(new Vector3(2, 0, 0), QuaternionF.CreateRotationY(0.7f) * QuaternionF.CreateRotationX(1.2f));
 
       // Position the saucer left of the first ship with an arbitrary rotation.
-      _saucerObject.Pose = new Pose(new Vector3F(-2.5f, 0, 0), QuaternionF.CreateRotationY(0.2f) * QuaternionF.CreateRotationX(0.4f));
+      _saucerObject.Pose = new Pose(new Vector3(-2.5f, 0, 0), QuaternionF.CreateRotationY(0.2f) * QuaternionF.CreateRotationX(0.4f));
     }
 
 
@@ -76,7 +76,7 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
       float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
       // Move second ship with arrow keys.
-      Vector3F shipMovement = Vector3F.Zero;
+      Vector3 shipMovement = Vector3.Zero;
       if (InputService.IsDown(Keys.Left))
         shipMovement.X -= 1 * deltaTime;
       if (InputService.IsDown(Keys.Right))

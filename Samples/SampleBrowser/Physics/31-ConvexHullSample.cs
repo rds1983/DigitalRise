@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using AssetManagementBase;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -32,7 +32,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",            // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -48,7 +48,7 @@ namespace Samples.Physics
       Shape saucerShape = (Shape)_saucerModelNode.UserData;
       _saucerBody = new RigidBody(saucerShape)
       {
-        Pose = new Pose(new Vector3F(0, 2, 0), RandomHelper.Random.NextQuaternionF())
+        Pose = new Pose(new Vector3(0, 2, 0), RandomHelper.Random.NextQuaternionF())
       };
       Simulation.RigidBodies.Add(_saucerBody);
     }

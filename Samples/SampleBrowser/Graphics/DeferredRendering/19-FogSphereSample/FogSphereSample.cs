@@ -68,7 +68,7 @@ FogSphereNodes can be used to add light scattering effects to a scene. Example u
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -78,8 +78,8 @@ FogSphereNodes can be used to add light scattering effects to a scene. Example u
       var fogSphereNode = new FogSphereNode
       {
         Name = "FogSphere",
-        ScaleLocal = new Vector3F(5, 3, 5),
-        PoseWorld = new Pose(new Vector3F(0, 0, -3)),
+        ScaleLocal = new Vector3(5, 3, 5),
+        PoseWorld = new Pose(new Vector3(0, 0, -3)),
       };
       _graphicsScreen.Scene.Children.Add(fogSphereNode);
     }

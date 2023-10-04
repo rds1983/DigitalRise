@@ -3,10 +3,9 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -55,7 +54,7 @@ namespace DigitalRise.Physics.Constraints
         OnChanged();
       }
     }
-    private Plane _planeALocal = new Plane(Vector3F.UnitY, 0);
+    private Plane _planeALocal = new Plane(Vector3.UnitY, 0);
 
 
     /// <summary>
@@ -70,7 +69,7 @@ namespace DigitalRise.Physics.Constraints
     /// This point on the second body is restricted to be in front of the plane that is fixed on
     /// <see cref="Constraint.BodyA"/>.
     /// </remarks>
-    public Vector3F AnchorPositionBLocal
+    public Vector3 AnchorPositionBLocal
     {
       get { return _anchorPositionBLocal; }
       set
@@ -82,7 +81,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _anchorPositionBLocal;
+    private Vector3 _anchorPositionBLocal;
 
 
     /// <summary>
@@ -190,23 +189,23 @@ namespace DigitalRise.Physics.Constraints
     /// direction of the plane normal. An equivalent negative impulse was applied on 
     /// <see cref="Constraint.BodyA"/>.
     /// </remarks>
-    public Vector3F ConstraintImpulse
+    public Vector3 ConstraintImpulse
     {
       get { return _constraint.ConstraintImpulse * _constraint.JLinB; }
     }
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get { return _constraint.ConstraintImpulse * _constraint.JLinB; }
     }
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
-      get { return Vector3F.Zero; }
+      get { return Vector3.Zero; }
     }
     #endregion
 
@@ -228,18 +227,18 @@ namespace DigitalRise.Physics.Constraints
       var planeNormal = BodyA.Pose.ToWorldDirection(planeALocal.Normal);
 
       // Calculate a point on the new plane.
-      Vector3F pointOnPlane = BodyA.Pose.Position + planeNormal * planeALocal.DistanceFromOrigin;
+      Vector3 pointOnPlane = BodyA.Pose.Position + planeNormal * planeALocal.DistanceFromOrigin;
 
       // Project point on to normal vector to get the new DistanceFromOrigin.
-      var distanceFromOrigin = Vector3F.Dot(pointOnPlane, planeNormal);
+      var distanceFromOrigin = Vector3.Dot(pointOnPlane, planeNormal);
 
-      Vector3F anchorPositionB = BodyB.Pose.ToWorldPosition(AnchorPositionBLocal);
+      Vector3 anchorPositionB = BodyB.Pose.ToWorldPosition(AnchorPositionBLocal);
 
-      float separation = Vector3F.Dot(anchorPositionB, planeNormal) - distanceFromOrigin;
+      float separation = Vector3.Dot(anchorPositionB, planeNormal) - distanceFromOrigin;
       float penetrationDepth = -separation;
 
-      Vector3F rA = anchorPositionB - BodyA.PoseCenterOfMass.Position;
-      Vector3F rB = anchorPositionB - BodyB.PoseCenterOfMass.Position;
+      Vector3 rA = anchorPositionB - BodyA.PoseCenterOfMass.Position;
+      Vector3 rB = anchorPositionB - BodyB.PoseCenterOfMass.Position;
 
       // Remember old state.
       bool wasActive = _limitIsActive;
@@ -271,7 +270,7 @@ namespace DigitalRise.Physics.Constraints
         // ----- Impulse limits
 
         _constraint.Softness = Softness / deltaTime;
-        _constraint.Prepare(BodyA, BodyB, -planeNormal, -Vector3F.Cross(rA, planeNormal), planeNormal, Vector3F.Cross(rB, planeNormal));
+        _constraint.Prepare(BodyA, BodyB, -planeNormal, -Vector3.Cross(rA, planeNormal), planeNormal, Vector3.Cross(rB, planeNormal));
       }
       else
       {

@@ -32,7 +32,7 @@ namespace DigitalRise.Geometry
     #region Helper Methods
     //--------------------------------------------------------------
 
-    //private static void CROSS(out Vector3F result, ref Vector3F v1, ref Vector3F v2)
+    //private static void CROSS(out Vector3 result, ref Vector3 v1, ref Vector3 v2)
     //{
     //  result.X = v1.Y * v2.Z - v1.Z * v2.Y;
     //  result.Y = v1.Z * v2.X - v1.X * v2.Z;
@@ -40,13 +40,13 @@ namespace DigitalRise.Geometry
     //}
 
 
-    //private static float DOT(ref Vector3F v1, ref Vector3F v2)
+    //private static float DOT(ref Vector3 v1, ref Vector3 v2)
     //{
     //  return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
     //}
 
 
-    //private static void SUB(out Vector3F result, ref Vector3F v1, ref Vector3F v2)
+    //private static void SUB(out Vector3 result, ref Vector3 v1, ref Vector3 v2)
     //{
     //  result.X = v1.X - v2.X;
     //  result.Y = v1.Y - v2.Y;
@@ -54,7 +54,7 @@ namespace DigitalRise.Geometry
     //}
 
 
-    //private static void SCALAR(out Vector3F result, float alpha, ref Vector3F v)
+    //private static void SCALAR(out Vector3 result, float alpha, ref Vector3 v)
     //{
     //  result.X = alpha * v.X;
     //  result.Y = alpha * v.Y;
@@ -62,10 +62,10 @@ namespace DigitalRise.Geometry
     //}
 
 
-    private static bool CHECK_MIN_MAX(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-                                      ref Vector3F p2, ref Vector3F q2, ref Vector3F r2)
+    private static bool CHECK_MIN_MAX(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+                                      ref Vector3 p2, ref Vector3 q2, ref Vector3 r2)
     {
-      Vector3F v1, v2, N1;
+      Vector3 v1, v2, N1;
       //SUB(out v1, ref p2, ref q1);
       v1.X = p2.X - q1.X;
       v1.Y = p2.Y - q1.Y;
@@ -115,9 +115,9 @@ namespace DigitalRise.Geometry
     #region 3D Overlap Tests
     //--------------------------------------------------------------
 
-    private static bool coplanar_tri_tri3d(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-                                           ref Vector3F p2, ref Vector3F q2, ref Vector3F r2,
-                                           ref Vector3F normal_1)
+    private static bool coplanar_tri_tri3d(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+                                           ref Vector3 p2, ref Vector3 q2, ref Vector3 r2,
+                                           ref Vector3 normal_1)
     {
       // Projection of the triangles in 3D onto 2D such that the area of the projection is maximized. 
       // Then perform 2D test.
@@ -173,9 +173,9 @@ namespace DigitalRise.Geometry
     }
 
 
-    private static bool TRI_TRI_3D(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-                                   ref Vector3F p2, ref Vector3F q2, ref Vector3F r2,
-                                   float dp2, float dq2, float dr2, ref Vector3F N1)
+    private static bool TRI_TRI_3D(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+                                   ref Vector3 p2, ref Vector3 q2, ref Vector3 r2,
+                                   float dp2, float dq2, float dr2, ref Vector3 N1)
     {
       // Permutation in a canonical form of T2's vertices
       if (dp2 > 0.0f)
@@ -256,8 +256,8 @@ namespace DigitalRise.Geometry
       // tri_tri_overlap_test_3d
 
       float dp1, dq1, dr1, dp2, dq2, dr2;
-      Vector3F v1, v2;
-      Vector3F N1, N2;
+      Vector3 v1, v2;
+      Vector3 N1, N2;
 
       // Compute normal of triangle 2.
       //SUB(out v1, ref p2, ref r2);
@@ -392,12 +392,12 @@ namespace DigitalRise.Geometry
     //// This method is called when the triangles surely intersect
     //// It constructs the segment of intersection of the two triangles
     //// if they are not coplanar.
-    //private static int CONSTRUCT_INTERSECTION(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-    //                                          ref Vector3F p2, ref Vector3F q2, ref Vector3F r2,
-    //                                          ref Vector3F N1, ref Vector3F N2,
-    //                                          out Vector3F source, out Vector3F target)
+    //private static int CONSTRUCT_INTERSECTION(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+    //                                          ref Vector3 p2, ref Vector3 q2, ref Vector3 r2,
+    //                                          ref Vector3 N1, ref Vector3 N2,
+    //                                          out Vector3 source, out Vector3 target)
     //{
-    //  Vector3F v1, v2, N, v;
+    //  Vector3 v1, v2, N, v;
     //  float alpha;
     //  SUB(out v1, ref q1, ref p1);
     //  SUB(out v2, ref r2, ref p1);
@@ -442,8 +442,8 @@ namespace DigitalRise.Geometry
     //    }
     //    else
     //    {
-    //      source = Vector3F.Zero;
-    //      target = Vector3F.Zero;
+    //      source = Vector3.Zero;
+    //      target = Vector3.Zero;
     //      return 0;
     //    }
     //  }
@@ -453,8 +453,8 @@ namespace DigitalRise.Geometry
     //    CROSS(out N, ref v1, ref v2);
     //    if (DOT(ref v, ref N) < 0.0f)
     //    {
-    //      source = Vector3F.Zero;
-    //      target = Vector3F.Zero;
+    //      source = Vector3.Zero;
+    //      target = Vector3.Zero;
     //      return 0;
     //    }
     //    else
@@ -494,11 +494,11 @@ namespace DigitalRise.Geometry
     //}
 
 
-    //private static int TRI_TRI_INTER_3D(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-    //                                    ref Vector3F p2, ref Vector3F q2, ref Vector3F r2,
-    //                                    ref Vector3F N1, ref Vector3F N2,
+    //private static int TRI_TRI_INTER_3D(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+    //                                    ref Vector3 p2, ref Vector3 q2, ref Vector3 r2,
+    //                                    ref Vector3 N1, ref Vector3 N2,
     //                                    float dp2, float dq2, float dr2,
-    //                                    out Vector3F source, out Vector3F target, out int coplanar)
+    //                                    out Vector3 source, out Vector3 target, out int coplanar)
     //{
     //  coplanar = 0;
 
@@ -544,8 +544,8 @@ namespace DigitalRise.Geometry
     //        return CONSTRUCT_INTERSECTION(ref p1, ref r1, ref q1, ref r2, ref p2, ref q2, ref N1, ref N2, out source, out target);
     //      else
     //      {
-    //        source = Vector3F.Zero;
-    //        target = Vector3F.Zero;
+    //        source = Vector3.Zero;
+    //        target = Vector3.Zero;
     //        coplanar = 1;
     //        return coplanar_tri_tri3d(ref p1, ref q1, ref r1, ref p2, ref q2, ref r2, ref N1);
     //      }
@@ -558,13 +558,13 @@ namespace DigitalRise.Geometry
     //// two triangles if it exists. 
     //// coplanar returns whether the triangles are coplanar
     //// source and target are the endpoints of the line segment of intersection 
-    //public static int tri_tri_intersection_test_3d(ref Vector3F p1, ref Vector3F q1, ref Vector3F r1,
-    //                                               ref Vector3F p2, ref Vector3F q2, ref Vector3F r2,
-    //                                               ref int coplanar, out Vector3F source, out Vector3F target)
+    //public static int tri_tri_intersection_test_3d(ref Vector3 p1, ref Vector3 q1, ref Vector3 r1,
+    //                                               ref Vector3 p2, ref Vector3 q2, ref Vector3 r2,
+    //                                               ref int coplanar, out Vector3 source, out Vector3 target)
     //{
     //  float dp1, dq1, dr1, dp2, dq2, dr2;
-    //  Vector3F v1, v2;
-    //  Vector3F N1, N2;
+    //  Vector3 v1, v2;
+    //  Vector3 N1, N2;
 
     //  // Compute distance signs  of p1, q1 and r1 
     //  // to the plane of triangle(p2,q2,r2)
@@ -582,8 +582,8 @@ namespace DigitalRise.Geometry
 
     //  if (((dp1 * dq1) > 0.0f) && ((dp1 * dr1) > 0.0f))
     //  {
-    //    source = Vector3F.Zero;
-    //    target = Vector3F.Zero;
+    //    source = Vector3.Zero;
+    //    target = Vector3.Zero;
     //    return 0;
     //  }
 
@@ -604,8 +604,8 @@ namespace DigitalRise.Geometry
 
     //  if (((dp2 * dq2) > 0.0f) && ((dp2 * dr2) > 0.0f))
     //  {
-    //    source = Vector3F.Zero;
-    //    target = Vector3F.Zero;
+    //    source = Vector3.Zero;
+    //    target = Vector3.Zero;
     //    return 0;
     //  }
 
@@ -653,8 +653,8 @@ namespace DigitalRise.Geometry
     //      else
     //      {
     //        // triangles are co-planar
-    //        source = Vector3F.Zero;
-    //        target = Vector3F.Zero;
+    //        source = Vector3.Zero;
+    //        target = Vector3.Zero;
     //        coplanar = 1;
     //        return coplanar_tri_tri3d(ref p1, ref q1, ref r1, ref p2, ref q2, ref r2, ref N1);
     //      }

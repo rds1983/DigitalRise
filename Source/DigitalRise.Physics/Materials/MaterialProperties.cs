@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Materials
 {
@@ -111,12 +111,12 @@ namespace DigitalRise.Physics.Materials
     /// <remarks>
     /// This property can be used to simulate conveyor belts or similar objects.
     /// </remarks>
-    public Vector3F SurfaceMotion
+    public Vector3 SurfaceMotion
     {
       get { return _surfaceMotion; }
       set { _surfaceMotion = value; }
     }
-    private Vector3F _surfaceMotion;
+    private Vector3 _surfaceMotion;
 
 
     /// <overloads>
@@ -137,7 +137,7 @@ namespace DigitalRise.Physics.Materials
       _dynamicFriction = dynamicFriction;
       _restitution = restitution;
       _supportsSurfaceMotion = false;
-      _surfaceMotion = Vector3F.Zero;
+      _surfaceMotion = Vector3.Zero;
     }
 
 
@@ -151,7 +151,7 @@ namespace DigitalRise.Physics.Materials
     /// If set to <see langword="true"/> the material supports surface motion.
     /// </param>
     /// <param name="surfaceMotion">The surface motion velocity.</param>
-    public MaterialProperties(float staticFriction, float dynamicFriction, float restitution, bool supportsSurfaceMotion, Vector3F surfaceMotion)
+    public MaterialProperties(float staticFriction, float dynamicFriction, float restitution, bool supportsSurfaceMotion, Vector3 surfaceMotion)
     {
       _staticFriction = staticFriction;
       _dynamicFriction = dynamicFriction;
@@ -168,7 +168,7 @@ namespace DigitalRise.Physics.Materials
     /// <param name="dynamicFriction">The dynamic friction.</param>
     /// <param name="restitution">The coefficient of restitution.</param>
     /// <param name="surfaceMotion">The surface motion velocity.</param>
-    public MaterialProperties(float staticFriction, float dynamicFriction, float restitution, Vector3F surfaceMotion)
+    public MaterialProperties(float staticFriction, float dynamicFriction, float restitution, Vector3 surfaceMotion)
     {
       _staticFriction = staticFriction;
       _dynamicFriction = dynamicFriction;

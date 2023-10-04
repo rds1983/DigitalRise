@@ -1,7 +1,7 @@
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -65,10 +65,10 @@ namespace DigitalRise.Geometry.Collisions.Tests
     public void Test2()
     {
       // All objects touch.
-      CollisionObject a = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3F(0, 0, 0))));
-      CollisionObject b = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3F(1, 1, 0))));
-      CollisionObject c = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3F(10, 10, 10))));
-      CollisionObject d = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3F(0, 0, -1))));
+      CollisionObject a = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(0, 0, 0))));
+      CollisionObject b = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(1, 1, 0))));
+      CollisionObject c = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(10, 10, 10))));
+      CollisionObject d = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(0, 0, -1))));
 
       CollisionDomain domain = new CollisionDomain(new CollisionDetection());
       Assert.AreEqual(0, domain.InternalBroadPhase.CandidatePairs.Count);
@@ -122,7 +122,7 @@ namespace DigitalRise.Geometry.Collisions.Tests
 
       // Add 100 random objects.
       for (int i = 0; i < 100; i++)
-        domain.CollisionObjects.Add(new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(RandomHelper.Random.NextVector3F(0, testAreaSize)))));
+        domain.CollisionObjects.Add(new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(RandomHelper.Random.NextVector3(0, testAreaSize)))));
 
       for (int i = 0; i < 100; i++)
       {
@@ -145,7 +145,7 @@ namespace DigitalRise.Geometry.Collisions.Tests
 
           // Set new random position for a few.
           if (RandomHelper.Random.NextFloat(0, 1) < 0.7f)
-            ((GeometricObject)a.GeometricObject).Pose = new Pose(RandomHelper.Random.NextVector3F(0, testAreaSize));
+            ((GeometricObject)a.GeometricObject).Pose = new Pose(RandomHelper.Random.NextVector3(0, testAreaSize));
         }
 
         // Add new object.
@@ -154,7 +154,7 @@ namespace DigitalRise.Geometry.Collisions.Tests
           GeometricObject = new GeometricObject 
           { 
             Shape = new SphereShape(1),
-            Pose = new Pose(RandomHelper.Random.NextVector3F(0, testAreaSize)),
+            Pose = new Pose(RandomHelper.Random.NextVector3(0, testAreaSize)),
           }
         });
         
@@ -172,7 +172,7 @@ namespace DigitalRise.Geometry.Collisions.Tests
 
       // Add 100 random objects.
       for (int i = 0; i < 100; i++)
-        domain.CollisionObjects.Add(new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(RandomHelper.Random.NextVector3F(0, 20)))));
+        domain.CollisionObjects.Add(new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(RandomHelper.Random.NextVector3(0, 20)))));
 
       for (int i = 0; i < 100; i++)
       {
@@ -192,7 +192,7 @@ namespace DigitalRise.Geometry.Collisions.Tests
         }
 
         // Set new random position for one.
-        ((GeometricObject)domain.CollisionObjects[33].GeometricObject).Pose = new Pose(RandomHelper.Random.NextVector3F(0, 20));
+        ((GeometricObject)domain.CollisionObjects[33].GeometricObject).Pose = new Pose(RandomHelper.Random.NextVector3(0, 20));
 
         Console.WriteLine("Candidate pairs: " + domain.InternalBroadPhase.CandidatePairs.Count);
       }

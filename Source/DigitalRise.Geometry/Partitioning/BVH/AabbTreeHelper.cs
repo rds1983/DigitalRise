@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Linq;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -229,7 +228,7 @@ namespace DigitalRise.Geometry.Partitioning
     {
       // Compute same norm as in Bullet. (2 * Manhattan distance between the centers 
       // of the AABBs.)
-      Vector3F distance = (first.Minimum + first.Maximum) - (second.Minimum + second.Maximum);
+      Vector3 distance = (first.Minimum + first.Maximum) - (second.Minimum + second.Maximum);
       return Math.Abs(distance.X) + Math.Abs(distance.Y) + Math.Abs(distance.Z);
     }
 

@@ -9,7 +9,6 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
@@ -39,7 +38,7 @@ namespace Samples
 
       _lights.Add(new LightNode(new AmbientLight
       {
-        Color = new Vector3F(0.9f, 0.9f, 1f),
+        Color = new Vector3(0.9f, 0.9f, 1f),
         Intensity = 0.05f,
         HemisphericAttenuation = 1,
       })
@@ -48,19 +47,19 @@ namespace Samples
 
         // This ambient light is "infinite", the pose is irrelevant for the lighting. It is only
         // used for the debug rendering below.
-        PoseWorld = new Pose(new Vector3F(0, 4, 0)),
+        PoseWorld = new Pose(new Vector3(0, 4, 0)),
       });
 
       _lights.Add(new LightNode(new DirectionalLight
       {
-        Color = new Vector3F(0.6f, 0.8f, 1f),
+        Color = new Vector3(0.6f, 0.8f, 1f),
         DiffuseIntensity = 0.1f,
         SpecularIntensity = 0.1f,
       })
       {
         Name = "DirectionalLightWithShadow",
         Priority = 10,   // This is the most important light.
-        PoseWorld = new Pose(new Vector3F(0, 5, 0), Matrix33F.CreateRotationY(-1.4f) * Matrix33F.CreateRotationX(-0.6f)),
+        PoseWorld = new Pose(new Vector3(0, 5, 0), Matrix33F.CreateRotationY(-1.4f) * Matrix33F.CreateRotationX(-0.6f)),
         Shadow = new CascadedShadow
         {
           PreferredSize = 1024,
@@ -69,18 +68,18 @@ namespace Samples
 
       _lights.Add(new LightNode(new DirectionalLight
       {
-        Color = new Vector3F(0.8f, 0.4f, 0.0f),
+        Color = new Vector3(0.8f, 0.4f, 0.0f),
         DiffuseIntensity = 0.1f,
         SpecularIntensity = 0.0f,
       })
       {
         Name = "DirectionalLight",
-        PoseWorld = new Pose(new Vector3F(0, 6, 0), Matrix33F.CreateRotationY(-1.4f) * Matrix33F.CreateRotationX(-0.6f) * Matrix33F.CreateRotationX(ConstantsF.Pi)),
+        PoseWorld = new Pose(new Vector3(0, 6, 0), Matrix33F.CreateRotationY(-1.4f) * Matrix33F.CreateRotationX(-0.6f) * Matrix33F.CreateRotationX(ConstantsF.Pi)),
       });
 
       _lights.Add(new LightNode(new PointLight
       {
-        Color = new Vector3F(0, 1, 0),
+        Color = new Vector3(0, 1, 0),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
         Range = 3,
@@ -88,7 +87,7 @@ namespace Samples
       })
       {
         Name = "PointLight",
-        PoseWorld = new Pose(new Vector3F(-9, 1, 0))
+        PoseWorld = new Pose(new Vector3(-9, 1, 0))
       });
 
       _lights.Add(new LightNode(new PointLight
@@ -101,12 +100,12 @@ namespace Samples
       })
       {
         Name = "PointLightWithTexture",
-        PoseWorld = new Pose(new Vector3F(-3, 1, 0))
+        PoseWorld = new Pose(new Vector3(-3, 1, 0))
       });
 
       _lights.Add(new LightNode(new PointLight
       {
-        Color = new Vector3F(1, 1, 1),
+        Color = new Vector3(1, 1, 1),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
         Range = 3,
@@ -114,7 +113,7 @@ namespace Samples
       })
       {
         Name = "PointLightWithShadow",
-        PoseWorld = new Pose(new Vector3F(3, 1, 0)),
+        PoseWorld = new Pose(new Vector3(3, 1, 0)),
         Shadow = new CubeMapShadow
         {
           PreferredSize = 128,
@@ -123,7 +122,7 @@ namespace Samples
 
       _lights.Add(new LightNode(new PointLight
       {
-        Color = new Vector3F(1, 1, 1),
+        Color = new Vector3(1, 1, 1),
         DiffuseIntensity = 4,
         SpecularIntensity = 4,
         Range = 3,
@@ -132,7 +131,7 @@ namespace Samples
       })
       {
         Name = "PointLightWithTextureAndShadow",
-        PoseWorld = new Pose(new Vector3F(9, 1, 0)),
+        PoseWorld = new Pose(new Vector3(9, 1, 0)),
         Shadow = new CubeMapShadow
         {
           PreferredSize = 128,
@@ -145,7 +144,7 @@ namespace Samples
       })
       {
         Name = "ProjectorLight",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(-1, 1, -7), new Vector3F(-5, 0, -7), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(-1, 1, -7), new Vector3(-5, 0, -7), new Vector3(0, 1, 0))).Inverse,
       });
 
 			_lights.Add(new LightNode(new ProjectorLight
@@ -154,7 +153,7 @@ namespace Samples
       })
       {
         Name = "ProjectorLightWithShadow",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(5, 1, -7), new Vector3F(1, 0, -7), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(5, 1, -7), new Vector3(1, 0, -7), new Vector3(0, 1, 0))).Inverse,
         Shadow = new StandardShadow
 				{
           PreferredSize = 128,
@@ -163,13 +162,13 @@ namespace Samples
 
       _lights.Add(new LightNode(new Spotlight
       {
-        Color = new Vector3F(0, 1, 0),
+        Color = new Vector3(0, 1, 0),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
       })
       {
         Name = "Spotlight",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(-7, 1, -14), new Vector3F(-10, 0, -14), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(-7, 1, -14), new Vector3(-10, 0, -14), new Vector3(0, 1, 0))).Inverse,
       });
 
 			_lights.Add(new LightNode(new Spotlight
@@ -180,7 +179,7 @@ namespace Samples
       })
       {
         Name = "SpotlightWithTexture",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(-1, 1, -14), new Vector3F(-5, 0, -14), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(-1, 1, -14), new Vector3(-5, 0, -14), new Vector3(0, 1, 0))).Inverse,
       });
 
       _lights.Add(new LightNode(new Spotlight
@@ -190,7 +189,7 @@ namespace Samples
       })
       {
         Name = "SpotlightWithShadow",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(5, 1, -14), new Vector3F(1, 0, -14), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(5, 1, -14), new Vector3(1, 0, -14), new Vector3(0, 1, 0))).Inverse,
         Shadow = new StandardShadow
         {
           PreferredSize = 128,
@@ -199,14 +198,14 @@ namespace Samples
 
 			_lights.Add(new LightNode(new Spotlight
 			{
-        Color = new Vector3F(1, 1, 0),
+        Color = new Vector3(1, 1, 0),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
         Texture = assetManager.LoadTexture2D(graphicsService.GraphicsDevice, "TVBox/TestCard.png"),
       })
       {
         Name = "SpotlightWithTextureAndShadow",
-        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3F(11, 1, -14), new Vector3F(5, 0, -14), new Vector3F(0, 1, 0))).Inverse,
+        PoseWorld = Pose.FromMatrix(Matrix44F.CreateLookAt(new Vector3(11, 1, -14), new Vector3(5, 0, -14), new Vector3(0, 1, 0))).Inverse,
         Shadow = new StandardShadow
 				{
           PreferredSize = 128,

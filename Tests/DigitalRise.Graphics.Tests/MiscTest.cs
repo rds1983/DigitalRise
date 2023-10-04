@@ -2,7 +2,7 @@
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.Tests
 {
@@ -22,41 +22,41 @@ namespace DigitalRise.Graphics.Tests
     {
       // Validate code in Blur.fx.
       // Reference: "Screen Space Anisotropic Blurred Soft Shadows"
-      Vector3F normalView = new Vector3F(x, y, z);
+      Vector3 normalView = new Vector3(x, y, z);
       normalView.Normalize();
 
-      Vector3F axisMajor0, axisMinor0;
+      Vector3 axisMajor0, axisMinor0;
       float radiusMajor0, radiusMinor0;
       GetEllipseCoefficients(normalView, out axisMajor0, out axisMinor0, out radiusMajor0, out radiusMinor0);
       Assert.AreEqual(0.0f, axisMajor0.Z);
       Assert.AreEqual(0.0f, axisMinor0.Z);
-      Assert.IsTrue(axisMajor0.IsNumericallyNormalized);
-      Assert.IsTrue(axisMinor0.IsNumericallyNormalized);
+      Assert.IsTrue(axisMajor0.IsNumericallyNormalized());
+      Assert.IsTrue(axisMinor0.IsNumericallyNormalized());
 
-      Vector3F axisMajor1, axisMinor1;
+      Vector3 axisMajor1, axisMinor1;
       float radiusMajor1, radiusMinor1;
       GetEllipseCoefficients_Optimized(normalView, out axisMajor1, out axisMinor1, out radiusMajor1, out radiusMinor1);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(axisMajor0, axisMajor1));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(axisMinor0, axisMinor1));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(axisMajor0, axisMajor1));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(axisMinor0, axisMinor1));
       Assert.AreEqual(radiusMajor0, radiusMajor1);
       Assert.AreEqual(radiusMinor0, radiusMinor1);
     }
 
 
-    private static void GetEllipseCoefficients(Vector3F normalView, out Vector3F axisMajor, out Vector3F axisMinor, out float radiusMajor, out float radiusMinor)
+    private static void GetEllipseCoefficients(Vector3 normalView, out Vector3 axisMajor, out Vector3 axisMinor, out float radiusMajor, out float radiusMinor)
     {
-      axisMinor = new Vector3F(normalView.X, normalView.Y, 0);
+      axisMinor = new Vector3(normalView.X, normalView.Y, 0);
       if (!axisMinor.TryNormalize())
-        axisMinor = new Vector3F(0, 1, 0);
+        axisMinor = new Vector3(0, 1, 0);
 
-      Vector3F normalScreen = new Vector3F(0, 0, 1); // The normal vector of the screen.
-      axisMajor = Vector3F.Cross(axisMinor, normalScreen);
-      radiusMinor = Vector3F.Dot(normalView, normalScreen);
+      Vector3 normalScreen = new Vector3(0, 0, 1); // The normal vector of the screen.
+      axisMajor = Vector3.Cross(axisMinor, normalScreen);
+      radiusMinor = Vector3.Dot(normalView, normalScreen);
       radiusMajor = 1;
     }
 
 
-    private static void GetEllipseCoefficients_Optimized(Vector3F normalView, out Vector3F axisMajor, out Vector3F axisMinor, out float radiusMajor, out float radiusMinor)
+    private static void GetEllipseCoefficients_Optimized(Vector3 normalView, out Vector3 axisMajor, out Vector3 axisMinor, out float radiusMajor, out float radiusMinor)
     {
       Vector2 axisMinor2D;
       if (normalView.X != 0)

@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -30,7 +30,7 @@ namespace DigitalRise.Animation.Character
   {
     public TimeSpan Time;
     public QuaternionF Rotation;
-    public Vector3F Translation;
+    public Vector3 Translation;
   }
 
 

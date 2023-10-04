@@ -5,7 +5,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
@@ -41,13 +40,13 @@ namespace Samples
       var assetManager = _services.GetInstance<AssetManager>();
       _skyboxNode = new SkyboxNode(assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "Sky2.dds"))
       {
-        Color = new Vector3F(SkyExposure),
+        Color = new Vector3(SkyExposure),
       };
 
       // The ambient light.
       var ambientLight = new AmbientLight
       {
-        Color = new Vector3F(0.9f, 0.9f, 1f),
+        Color = new Vector3(0.9f, 0.9f, 1f),
         HdrScale = 0.1f,
         Intensity = 0.5f,
         HemisphericAttenuation = 0.8f,
@@ -60,7 +59,7 @@ namespace Samples
       // The main directional light.
       var sunlight = new DirectionalLight
       {
-        Color = new Vector3F(1, 0.9607844f, 0.9078432f),
+        Color = new Vector3(1, 0.9607844f, 0.9078432f),
         HdrScale = 0.4f,
         DiffuseIntensity = 1,
         SpecularIntensity = 1,

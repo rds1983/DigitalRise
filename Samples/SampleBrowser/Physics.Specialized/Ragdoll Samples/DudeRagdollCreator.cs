@@ -9,7 +9,7 @@ using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.Materials;
 using DigitalRise.Physics.Specialized;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Animation
 {
@@ -35,12 +35,12 @@ namespace Samples.Animation
       int footLeft = skeleton.GetIndex("L_Ankle1");
       var headPosition = skeletonPose.GetBonePoseAbsolute(head).Translation;
       var footPosition = skeletonPose.GetBonePoseAbsolute(footLeft).Translation;
-      var headToFootDistance = (headPosition - footPosition).Length;
+      var headToFootDistance = (headPosition - footPosition).Length();
 
       // We use the same mass properties for all bodies. This is not realistic but more stable 
       // because large mass differences or thin bodies (arms!) are less stable.
       // We use the mass properties of sphere proportional to the size of the model.
-      var massFrame = MassFrame.FromShapeAndMass(new SphereShape(headToFootDistance / 8), Vector3F.One, totalMass / numberOfBodies, 0.1f, 1);
+      var massFrame = MassFrame.FromShapeAndMass(new SphereShape(headToFootDistance / 8), Vector3.One, totalMass / numberOfBodies, 0.1f, 1);
 
       var material = new UniformMaterial();
 
@@ -52,71 +52,71 @@ namespace Samples.Animation
 
       var pelvis = skeleton.GetIndex("Pelvis");
       ragdoll.Bodies[pelvis] = new RigidBody(new BoxShape(0.3f * scale, 0.4f * scale, 0.55f * scale), massFrame, material);
-      ragdoll.BodyOffsets[pelvis] = new Pose(new Vector3F(0, 0, 0));
+      ragdoll.BodyOffsets[pelvis] = new Pose(new Vector3(0, 0, 0));
 
       var backLower = skeleton.GetIndex("Spine");
       ragdoll.Bodies[backLower] = new RigidBody(new BoxShape(0.36f * scale, 0.4f * scale, 0.55f * scale), massFrame, material);
-      ragdoll.BodyOffsets[backLower] = new Pose(new Vector3F(0.18f * scale, 0, 0));
+      ragdoll.BodyOffsets[backLower] = new Pose(new Vector3(0.18f * scale, 0, 0));
 
       var backUpper = skeleton.GetIndex("Spine2");
       ragdoll.Bodies[backUpper] = new RigidBody(new BoxShape(0.5f * scale, 0.4f * scale, 0.65f * scale), massFrame, material);
-      ragdoll.BodyOffsets[backUpper] = new Pose(new Vector3F(0.25f * scale, 0, 0));
+      ragdoll.BodyOffsets[backUpper] = new Pose(new Vector3(0.25f * scale, 0, 0));
 
       var neck = skeleton.GetIndex("Neck");
       ragdoll.Bodies[neck] = new RigidBody(new CapsuleShape(0.12f * scale, 0.3f * scale), massFrame, material);
-      ragdoll.BodyOffsets[neck] = new Pose(new Vector3F(0.15f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[neck] = new Pose(new Vector3(0.15f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
       ragdoll.Bodies[neck].CollisionObject.Enabled = false;
 
       ragdoll.Bodies[head] = new RigidBody(new SphereShape(0.2f * scale), massFrame, material);
-      ragdoll.BodyOffsets[head] = new Pose(new Vector3F(0.15f * scale, 0.02f * scale, 0));
+      ragdoll.BodyOffsets[head] = new Pose(new Vector3(0.15f * scale, 0.02f * scale, 0));
 
       var armUpperLeft = skeleton.GetIndex("L_UpperArm");
       ragdoll.Bodies[armUpperLeft] = new RigidBody(new CapsuleShape(0.12f * scale, 0.6f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armUpperLeft] = new Pose(new Vector3F(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armUpperLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var armLowerLeft = skeleton.GetIndex("L_Forearm");
       ragdoll.Bodies[armLowerLeft] = new RigidBody(new CapsuleShape(0.08f * scale, 0.5f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armLowerLeft] = new Pose(new Vector3F(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armLowerLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var handLeft = skeleton.GetIndex("L_Hand");
       ragdoll.Bodies[handLeft] = new RigidBody(new BoxShape(0.2f * scale, 0.06f * scale, 0.15f * scale), massFrame, material);
-      ragdoll.BodyOffsets[handLeft] = new Pose(new Vector3F(0.1f * scale, 0, 0));
+      ragdoll.BodyOffsets[handLeft] = new Pose(new Vector3(0.1f * scale, 0, 0));
 
       var armUpperRight = skeleton.GetIndex("R_UpperArm");
       ragdoll.Bodies[armUpperRight] = new RigidBody(new CapsuleShape(0.12f * scale, 0.6f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armUpperRight] = new Pose(new Vector3F(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armUpperRight] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var armLowerRight = skeleton.GetIndex("R_Forearm");
       ragdoll.Bodies[armLowerRight] = new RigidBody(new CapsuleShape(0.08f * scale, 0.5f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armLowerRight] = new Pose(new Vector3F(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armLowerRight] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var handRight = skeleton.GetIndex("R_Hand");
       ragdoll.Bodies[handRight] = new RigidBody(new BoxShape(0.2f * scale, 0.06f * scale, 0.15f * scale), massFrame, material);
-      ragdoll.BodyOffsets[handRight] = new Pose(new Vector3F(0.1f * scale, 0, 0));
+      ragdoll.BodyOffsets[handRight] = new Pose(new Vector3(0.1f * scale, 0, 0));
 
       var legUpperLeft = skeleton.GetIndex("L_Thigh1");
       ragdoll.Bodies[legUpperLeft] = new RigidBody(new CapsuleShape(0.16f * scale, 0.8f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legUpperLeft] = new Pose(new Vector3F(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legUpperLeft] = new Pose(new Vector3(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var legLowerLeft = skeleton.GetIndex("L_Knee2");
       ragdoll.Bodies[legLowerLeft] = new RigidBody(new CapsuleShape(0.12f * scale, 0.65f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legLowerLeft] = new Pose(new Vector3F(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legLowerLeft] = new Pose(new Vector3(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       //var footLeft = skeleton.GetIndex("L_Ankle1");
       ragdoll.Bodies[footLeft] = new RigidBody(new BoxShape(0.20f * scale, 0.5f * scale, 0.3f * scale), massFrame, material);
-      ragdoll.BodyOffsets[footLeft] = new Pose(new Vector3F(0.16f * scale, 0.15f * scale, 0));
+      ragdoll.BodyOffsets[footLeft] = new Pose(new Vector3(0.16f * scale, 0.15f * scale, 0));
 
       var legUpperRight = skeleton.GetIndex("R_Thigh");
       ragdoll.Bodies[legUpperRight] = new RigidBody(new CapsuleShape(0.16f * scale, 0.8f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legUpperRight] = new Pose(new Vector3F(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legUpperRight] = new Pose(new Vector3(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var legLowerRight = skeleton.GetIndex("R_Knee");
       ragdoll.Bodies[legLowerRight] = new RigidBody(new CapsuleShape(0.12f * scale, 0.65f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legLowerRight] = new Pose(new Vector3F(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legLowerRight] = new Pose(new Vector3(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
 
       var footRight = skeleton.GetIndex("R_Ankle");
       ragdoll.Bodies[footRight] = new RigidBody(new BoxShape(0.20f * scale, 0.5f * scale, 0.3f * scale), massFrame, material);
-      ragdoll.BodyOffsets[footRight] = new Pose(new Vector3F(0.16f * scale, 0.15f * scale, 0));
+      ragdoll.BodyOffsets[footRight] = new Pose(new Vector3(0.16f * scale, 0.15f * scale, 0));
       #endregion
 
       #region ----- Set Collision Filters -----
@@ -159,42 +159,42 @@ namespace Samples.Animation
       // We create hinge limits with AngularLimits in the back and in the knee. 
       // For all other joints we use TwistSwingLimits with symmetric cones. 
 
-      AddAngularLimit(skeletonPose, ragdoll, pelvis, backLower, new Vector3F(0, 0, -0.3f), new Vector3F(0, 0, 0.3f));
-      AddAngularLimit(skeletonPose, ragdoll, backLower, backUpper, new Vector3F(0, 0, -0.3f), new Vector3F(0, 0, 0.4f));
-      AddAngularLimit(skeletonPose, ragdoll, backUpper, neck, new Vector3F(0, 0, -0.3f), new Vector3F(0, 0, 0.3f));
-      AddTwistSwingLimit(ragdoll, neck, head, Matrix33F.Identity, Matrix33F.Identity, new Vector3F(-0.1f, -0.5f, -0.7f), new Vector3F(0.1f, 0.5f, 0.7f));
+      AddAngularLimit(skeletonPose, ragdoll, pelvis, backLower, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f));
+      AddAngularLimit(skeletonPose, ragdoll, backLower, backUpper, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.4f));
+      AddAngularLimit(skeletonPose, ragdoll, backUpper, neck, new Vector3(0, 0, -0.3f), new Vector3(0, 0, 0.3f));
+      AddTwistSwingLimit(ragdoll, neck, head, Matrix33F.Identity, Matrix33F.Identity, new Vector3(-0.1f, -0.5f, -0.7f), new Vector3(0.1f, 0.5f, 0.7f));
 
       var parentBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(backUpper).Inverse;
       var childBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(armUpperLeft).Inverse;
       var bindPoseRelative = parentBindPoseAbsolute.Inverse * childBindPoseAbsolute;
-      AddTwistSwingLimit(ragdoll, backUpper, armUpperLeft, bindPoseRelative.Orientation * Matrix33F.CreateRotationY(-0.5f) * Matrix33F.CreateRotationZ(-0.5f), Matrix33F.Identity, new Vector3F(-0.7f, -1.2f, -1.2f), new Vector3F(0.7f, 1.2f, 1.2f));
+      AddTwistSwingLimit(ragdoll, backUpper, armUpperLeft, bindPoseRelative.Orientation * Matrix33F.CreateRotationY(-0.5f) * Matrix33F.CreateRotationZ(-0.5f), Matrix33F.Identity, new Vector3(-0.7f, -1.2f, -1.2f), new Vector3(0.7f, 1.2f, 1.2f));
 
-      AddTwistSwingLimit(ragdoll, armUpperLeft, armLowerLeft, Matrix33F.CreateRotationZ(-1.2f), Matrix33F.Identity, new Vector3F(-0.3f, -1.2f, -1.2f), new Vector3F(0.3f, 1.2f, 1.2f));
-      AddTwistSwingLimit(ragdoll, armLowerLeft, handLeft, Matrix33F.Identity, Matrix33F.CreateRotationX(+ConstantsF.PiOver2), new Vector3F(-0.3f, -0.7f, -0.7f), new Vector3F(0.3f, 0.7f, 0.7f));
+      AddTwistSwingLimit(ragdoll, armUpperLeft, armLowerLeft, Matrix33F.CreateRotationZ(-1.2f), Matrix33F.Identity, new Vector3(-0.3f, -1.2f, -1.2f), new Vector3(0.3f, 1.2f, 1.2f));
+      AddTwistSwingLimit(ragdoll, armLowerLeft, handLeft, Matrix33F.Identity, Matrix33F.CreateRotationX(+ConstantsF.PiOver2), new Vector3(-0.3f, -0.7f, -0.7f), new Vector3(0.3f, 0.7f, 0.7f));
 
       parentBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(backUpper).Inverse;
       childBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(armUpperRight).Inverse;
       bindPoseRelative = parentBindPoseAbsolute.Inverse * childBindPoseAbsolute;
-      AddTwistSwingLimit(ragdoll, backUpper, armUpperRight, bindPoseRelative.Orientation * Matrix33F.CreateRotationY(0.5f) * Matrix33F.CreateRotationZ(-0.5f), Matrix33F.Identity, new Vector3F(-0.7f, -1.2f, -1.2f), new Vector3F(0.7f, 1.2f, 1.2f));
+      AddTwistSwingLimit(ragdoll, backUpper, armUpperRight, bindPoseRelative.Orientation * Matrix33F.CreateRotationY(0.5f) * Matrix33F.CreateRotationZ(-0.5f), Matrix33F.Identity, new Vector3(-0.7f, -1.2f, -1.2f), new Vector3(0.7f, 1.2f, 1.2f));
 
-      AddTwistSwingLimit(ragdoll, armUpperRight, armLowerRight, Matrix33F.CreateRotationZ(-1.2f), Matrix33F.Identity, new Vector3F(-0.3f, -1.2f, -1.2f), new Vector3F(0.3f, 1.2f, 1.2f));
-      AddTwistSwingLimit(ragdoll, armLowerRight, handRight, Matrix33F.Identity, Matrix33F.CreateRotationX(-ConstantsF.PiOver2), new Vector3F(-0.3f, -0.7f, -0.7f), new Vector3F(0.3f, 0.7f, 0.7f));
+      AddTwistSwingLimit(ragdoll, armUpperRight, armLowerRight, Matrix33F.CreateRotationZ(-1.2f), Matrix33F.Identity, new Vector3(-0.3f, -1.2f, -1.2f), new Vector3(0.3f, 1.2f, 1.2f));
+      AddTwistSwingLimit(ragdoll, armLowerRight, handRight, Matrix33F.Identity, Matrix33F.CreateRotationX(-ConstantsF.PiOver2), new Vector3(-0.3f, -0.7f, -0.7f), new Vector3(0.3f, 0.7f, 0.7f));
 
       parentBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(pelvis).Inverse;
       childBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(legUpperLeft).Inverse;
       bindPoseRelative = parentBindPoseAbsolute.Inverse * childBindPoseAbsolute;
-      AddTwistSwingLimit(ragdoll, pelvis, legUpperLeft, bindPoseRelative.Orientation * Matrix33F.CreateRotationZ(1.2f), Matrix33F.Identity, new Vector3F(-0.1f, -0.7f, -1.5f), new Vector3F(+0.1f, +0.7f, +1.5f));
+      AddTwistSwingLimit(ragdoll, pelvis, legUpperLeft, bindPoseRelative.Orientation * Matrix33F.CreateRotationZ(1.2f), Matrix33F.Identity, new Vector3(-0.1f, -0.7f, -1.5f), new Vector3(+0.1f, +0.7f, +1.5f));
 
-      AddAngularLimit(skeletonPose, ragdoll, legUpperLeft, legLowerLeft, new Vector3F(0, 0, -2.2f), new Vector3F(0, 0, 0.0f));
-      AddTwistSwingLimit(ragdoll, legLowerLeft, footLeft, Matrix33F.Identity, Matrix33F.Identity, new Vector3F(-0.1f, -0.3f, -0.7f), new Vector3F(0.1f, 0.3f, 0.7f));
+      AddAngularLimit(skeletonPose, ragdoll, legUpperLeft, legLowerLeft, new Vector3(0, 0, -2.2f), new Vector3(0, 0, 0.0f));
+      AddTwistSwingLimit(ragdoll, legLowerLeft, footLeft, Matrix33F.Identity, Matrix33F.Identity, new Vector3(-0.1f, -0.3f, -0.7f), new Vector3(0.1f, 0.3f, 0.7f));
 
       parentBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(pelvis).Inverse;
       childBindPoseAbsolute = (Pose)skeleton.GetBindPoseAbsoluteInverse(legUpperRight).Inverse;
       bindPoseRelative = parentBindPoseAbsolute.Inverse * childBindPoseAbsolute;
-      AddTwistSwingLimit(ragdoll, pelvis, legUpperRight, bindPoseRelative.Orientation * Matrix33F.CreateRotationZ(1.2f), Matrix33F.Identity, new Vector3F(-0.1f, -0.7f, -1.5f), new Vector3F(+0.1f, +0.7f, +1.5f));
+      AddTwistSwingLimit(ragdoll, pelvis, legUpperRight, bindPoseRelative.Orientation * Matrix33F.CreateRotationZ(1.2f), Matrix33F.Identity, new Vector3(-0.1f, -0.7f, -1.5f), new Vector3(+0.1f, +0.7f, +1.5f));
 
-      AddAngularLimit(skeletonPose, ragdoll, legUpperRight, legLowerRight, new Vector3F(0, 0, -2.2f), new Vector3F(0, 0, 0.0f));
-      AddTwistSwingLimit(ragdoll, legLowerRight, footRight, Matrix33F.Identity, Matrix33F.Identity, new Vector3F(-0.1f, -0.3f, -0.7f), new Vector3F(0.1f, 0.3f, 0.7f));
+      AddAngularLimit(skeletonPose, ragdoll, legUpperRight, legLowerRight, new Vector3(0, 0, -2.2f), new Vector3(0, 0, 0.0f));
+      AddTwistSwingLimit(ragdoll, legLowerRight, footRight, Matrix33F.Identity, Matrix33F.Identity, new Vector3(-0.1f, -0.3f, -0.7f), new Vector3(0.1f, 0.3f, 0.7f));
       #endregion
 
       #region ----- Add Motors -----
@@ -270,7 +270,7 @@ namespace Samples.Animation
     /// <param name="childAnchorOrientationLocal">The constraint anchor orientation relative to the child bone.</param>
     /// <param name="minimum">The minimum limits (twist/swing/swing).</param>
     /// <param name="maximum">The maximum limits (twist/swing/swing).</param>
-    private static void AddTwistSwingLimit(Ragdoll ragdoll, int parent, int child, Matrix33F parentAnchorOrientationLocal, Matrix33F childAnchorOrientationLocal, Vector3F minimum, Vector3F maximum)
+    private static void AddTwistSwingLimit(Ragdoll ragdoll, int parent, int child, Matrix33F parentAnchorOrientationLocal, Matrix33F childAnchorOrientationLocal, Vector3 minimum, Vector3 maximum)
     {
       var childBody = ragdoll.Bodies[child];
       var childOffset = ragdoll.BodyOffsets[child];
@@ -304,7 +304,7 @@ namespace Samples.Animation
     /// <remarks>
     /// The constraint anchor orientation is the orientation of the child bone.
     /// </remarks>
-    private static void AddAngularLimit(SkeletonPose skeletonPose, Ragdoll ragdoll, int parent, int child, Vector3F minimum, Vector3F maximum)
+    private static void AddAngularLimit(SkeletonPose skeletonPose, Ragdoll ragdoll, int parent, int child, Vector3 minimum, Vector3 maximum)
     {
       var skeleton = skeletonPose.Skeleton;
       var childBody = ragdoll.Bodies[child];
@@ -324,8 +324,8 @@ namespace Samples.Animation
         AnchorOrientationBLocal = childOffset.Orientation.Transposed,
         Minimum = minimum,
         Maximum = maximum,
-        ErrorReduction = new Vector3F(0.2f),
-        Softness = new Vector3F(0.001f)
+        ErrorReduction = new Vector3(0.2f),
+        Softness = new Vector3(0.001f)
       };
       ragdoll.Limits.Add(limit);
     }

@@ -5,8 +5,7 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -33,7 +32,7 @@ namespace DigitalRise.Graphics
   /// <para>
   /// Hemispheric Lighting: If <see cref="HemisphericAttenuation"/> is greater than 0, then the 
   /// <see cref="AmbientLight"/> acts as a hemispheric light with an up direction of (0, 1, 0) - see
-  /// <see cref="Vector3F.Up"/>. (A <see cref="LightNode"/> needs to be created to orient a 
+  /// <see cref="Vector3.Up"/>. (A <see cref="LightNode"/> needs to be created to orient a 
   /// light within a 3D scene.) A hemispheric light uses the normal vector of the lit surface to 
   /// attenuate the light intensity. See <see cref="HemisphericAttenuation"/> for more information.
   /// </para>
@@ -85,7 +84,7 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// This property defines only the color of the light source - not its intensity. 
     /// </remarks>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -146,7 +145,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     public AmbientLight()
     {
-      Color = Vector3F.One;
+      Color = Vector3.One;
       Intensity = 1;
       HdrScale = 1;
       HemisphericAttenuation = 0.7f;
@@ -186,7 +185,7 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    public override Vector3F GetIntensity(float distance)
+    public override Vector3 GetIntensity(float distance)
     {
       return Color * (Intensity * HdrScale);
     }

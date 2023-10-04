@@ -13,7 +13,7 @@ namespace Samples.Particles
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 2, 10), 0, 0);
+      SetCamera(new Vector3(0, 2, 10), 0, 0);
 
       GameObjectService.Objects.Add(new SandboxObject(Services));
     }

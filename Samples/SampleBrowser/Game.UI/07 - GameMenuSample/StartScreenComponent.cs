@@ -8,7 +8,6 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Threading;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 
@@ -66,7 +65,6 @@ namespace Samples.Game.UI
     public void LoadStuff()
     {
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      var contentManager = _services.GetInstance<ContentManager>();
       var theme = DefaultAssets.DefaultTheme;
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.

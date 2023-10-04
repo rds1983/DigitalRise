@@ -25,7 +25,7 @@ objects of the same color.",
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.Gray;
       GraphicsScreen.DrawReticle = true;
-      SetCamera(new Vector3F(0, 0, 10), 0, 0);
+      SetCamera(new Vector3(0, 0, 10), 0, 0);
 
       // ----- Initialize collision detection system.
       // We use one collision domain that manages all objects.
@@ -54,16 +54,16 @@ objects of the same color.",
       domain.CollisionDetection.CollisionFilter = filter;
 
       // Create a random list of points.
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       for (int i = 0; i < 100; i++)
-        points.Add(RandomHelper.Random.NextVector3F(-1.5f, 1.5f));
+        points.Add(RandomHelper.Random.NextVector3(-1.5f, 1.5f));
 
       // Add lots of spheres to the collision domain. Assign spheres to different collision groups.
       var random = new Random();
       var sphereShape = new SphereShape(0.7f);
       for (int i = 0; i < 20; i++)
       {
-        var randomPosition = new Vector3F(random.NextFloat(-6, 6), random.NextFloat(-3, 3), 0);
+        var randomPosition = new Vector3(random.NextFloat(-6, 6), random.NextFloat(-3, 3), 0);
         var geometricObject = new GeometricObject(sphereShape, new Pose(randomPosition));
         var collisionObject = new CollisionObject(geometricObject)
         {

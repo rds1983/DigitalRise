@@ -1,11 +1,10 @@
 ﻿using AssetManagementBase;
 using CommonServiceLocator;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -35,25 +34,25 @@ namespace Samples.Particles
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Lifetime).DefaultValue = 1;
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector());
 
       // The parameter "Axis" determines the orientation of the ribbon. 
       // We could use a fixed orientation. It is also possible to "twist" the ribbon
       // by using a varying parameter.
-      //ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Axis).DefaultValue =
-      //  Vector3F.Up;
+      //ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Axis).DefaultValue =
+      //  Vector3.Up;
 
       ps.Effectors.Add(new RibbonEffector());
       ps.Effectors.Add(new ReserveParticleEffector { Reserve = 1 });
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Size).DefaultValue = 1;
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new StartValueEffector<Vector3F>
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new StartValueEffector<Vector3>
       {
         Parameter = ParticleParameterNames.Color,
-        Distribution = new BoxDistribution { MinValue = new Vector3F(0.5f, 0.5f, 0.5f), MaxValue = new Vector3F(1, 1, 1) }
+        Distribution = new BoxDistribution { MinValue = new Vector3(0.5f, 0.5f, 0.5f), MaxValue = new Vector3(1, 1, 1) }
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Alpha);

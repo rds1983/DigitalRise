@@ -77,8 +77,8 @@ the water and then the alpha-blended objects above the water surface.",
       GameObjectService.Objects.Add(dynamicSkyObject);
 
       // Add a ground plane with some detail to see the water refractions.
-      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3F(0, 1, 0), 0)));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0.001f, 0))));
+      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3(0, 1, 0), 0)));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3(0, 0.001f, 0))));
 
       GameObjectService.Objects.Add(new DudeObject(Services));
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
@@ -96,7 +96,7 @@ the water and then the alpha-blended objects above the water surface.",
       var random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -105,20 +105,20 @@ the water and then the alpha-blended objects above the water surface.",
       // Define the appearance of the water.
       var water = new Water
       {
-        SpecularColor = new Vector3F(10f),
+        SpecularColor = new Vector3(10f),
 
         // Small water ripples/waves are created using scrolling normal maps.
         NormalMap0 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave0.dds"),
         NormalMap1 = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Wave1.dds"),
         NormalMap0Scale = 1.8f,
         NormalMap1Scale = 2.2f,
-        NormalMap0Velocity = new Vector3F(-0.02f, 0, 0.03f),
-        NormalMap1Velocity = new Vector3F(0.02f, 0, -0.03f),
+        NormalMap0Velocity = new Vector3(-0.02f, 0, 0.03f),
+        NormalMap1Velocity = new Vector3(0.02f, 0, -0.03f),
         NormalMap0Strength = 0.5f,
         NormalMap1Strength = 0.5f,
 
         ReflectionDistortion = 0.2f,
-        ReflectionColor = new Vector3F(0.7f),
+        ReflectionColor = new Vector3(0.7f),
         RefractionDistortion = 0.05f,
       };
 
@@ -127,10 +127,10 @@ the water and then the alpha-blended objects above the water surface.",
       // water body must be at height 0.
       var shape = new TransformedShape(new GeometricObject(
         new BoxShape(10, 1, 20),
-        new Pose(new Vector3F(0, -0.5f, 0))));
+        new Pose(new Vector3(0, -0.5f, 0))));
       _waterNode0 = new WaterNode(water, shape)
       {
-        PoseWorld = new Pose(new Vector3F(-1, 0.5f, 0), Matrix33F.CreateRotationY(0.1f)),
+        PoseWorld = new Pose(new Vector3(-1, 0.5f, 0), Matrix33F.CreateRotationY(0.1f)),
         SkyboxReflection = _graphicsScreen.Scene.GetDescendants().OfType<SkyboxNode>().First(),
         DepthBufferWriteEnable = true,
       };
@@ -159,7 +159,7 @@ the water and then the alpha-blended objects above the water surface.",
         Shape = _waterNode0.Shape,
 
         // Reflection plane is horizontal.
-        NormalLocal = new Vector3F(0, 1, 0),
+        NormalLocal = new Vector3(0, 1, 0),
       };
       _waterNode0.PlanarReflection = planarReflectionNode;
       _waterNode0.Children = new SceneNodeCollection(1) { planarReflectionNode };
@@ -169,7 +169,7 @@ the water and then the alpha-blended objects above the water surface.",
       // down the inclined surface.
       _waterNode1 = new WaterNode(water, GetSpiralShape())
       {
-        PoseWorld = new Pose(new Vector3F(10, 1.5f, 0), Matrix33F.CreateRotationY(0.1f)),
+        PoseWorld = new Pose(new Vector3(10, 1.5f, 0), Matrix33F.CreateRotationY(0.1f)),
         EnableUnderwaterEffect = false,
         SkyboxReflection = _graphicsScreen.Scene.GetDescendants().OfType<SkyboxNode>().First(),
         Flow = new WaterFlow
@@ -265,8 +265,8 @@ the water and then the alpha-blended objects above the water surface.",
 
       // The speed is max in the center and is 0 at the texture border.
       speed = 1;
-      if (!Numeric.IsZero(radius.Length))
-        speed = 1 - InterpolationHelper.HermiteSmoothStep(MathHelper.Clamp((radius.Length - 0.1f) / 0.4f, 0, 1));
+      if (!Numeric.IsZero(radius.Length()))
+        speed = 1 - InterpolationHelper.HermiteSmoothStep(MathHelper.Clamp((radius.Length() - 0.1f) / 0.4f, 0, 1));
     }
 
 
@@ -285,8 +285,8 @@ the water and then the alpha-blended objects above the water surface.",
       {
         float cos = (float)Math.Cos(angle);
         float sin = (float)Math.Sin(angle);
-        triangleMesh.Vertices.Add(new Vector3F(outerRadius * cos, y, outerRadius * sin));
-        triangleMesh.Vertices.Add(new Vector3F(innerRadius * cos, y, innerRadius * sin));
+        triangleMesh.Vertices.Add(new Vector3(outerRadius * cos, y, outerRadius * sin));
+        triangleMesh.Vertices.Add(new Vector3(innerRadius * cos, y, innerRadius * sin));
 
         if (i == 5)
           y -= 0.2f;

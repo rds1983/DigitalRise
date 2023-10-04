@@ -22,7 +22,7 @@
 
 //    private static bool AreNumericallyEqual(Pose expected, Pose actual)
 //    {
-//      return Vector3F.AreNumericallyEqual(expected.Position, actual.Position)
+//      return MathHelper.AreNumericallyEqual(expected.Position, actual.Position)
 //             && Matrix33F.AreNumericallyEqual(expected.Orientation, actual.Orientation);
 //    }
 
@@ -31,7 +31,7 @@
 //    public void IdentityTest()
 //    {
 //      var traits = PoseTraits.Instance;
-//      var value = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
+//      var value = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
 //      Assert.AreEqual(value, traits.Add(value, traits.Identity));
 //      Assert.AreEqual(value, traits.Add(traits.Identity, value));
 //    }
@@ -41,7 +41,7 @@
 //    public void MultiplyTest()
 //    {
 //      var traits = PoseTraits.Instance;
-//      var value = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
+//      var value = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
 //      Assert.IsTrue(AreNumericallyEqual(Pose.Identity, traits.Multiply(value, 0)));
 //      Assert.IsTrue(AreNumericallyEqual(value, traits.Multiply(value, 1)));
 //      Assert.IsTrue(AreNumericallyEqual(value * value, traits.Multiply(value, 2)));
@@ -59,8 +59,8 @@
 //      // the start value.
 
 //      var traits = PoseTraits.Instance;
-//      var from = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
-//      var by = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
+//      var from = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
+//      var by = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
 
 //      var to = traits.Add(from, by);
 //      Assert.IsTrue(AreNumericallyEqual(by * from, to));
@@ -77,8 +77,8 @@
 //      // each iteration.
 
 //      var traits = PoseTraits.Instance;
-//      var first = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());    // Animation value of first key frame.
-//      var last = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());     // Animation value of last key frame.
+//      var first = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());    // Animation value of first key frame.
+//      var last = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());     // Animation value of last key frame.
 //      var cycleOffset = traits.Add(traits.Inverse(first), last);
 
 //      // Cycle offset should be the difference between last and first key frame.
@@ -99,8 +99,8 @@
 //    public void InterpolationTest()
 //    {
 //      var traits = PoseTraits.Instance;
-//      var value0 = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
-//      var value1 = new Pose(_random.NextVector3F(-100, 100), _random.NextQuaternionF());
+//      var value0 = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
+//      var value1 = new Pose(_random.NextVector3(-100, 100), _random.NextQuaternionF());
 //      Assert.IsTrue(AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f)));
 //      Assert.IsTrue(AreNumericallyEqual(value1, traits.Interpolate(value0, value1, 1.0f)));
 //      Assert.IsTrue(AreNumericallyEqual(Pose.Interpolate(value0, value1, 0.75f), traits.Interpolate(value0, value1, 0.75f)));

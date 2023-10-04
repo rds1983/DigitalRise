@@ -4,7 +4,7 @@
 
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -24,7 +24,7 @@ namespace DigitalRise.Geometry.Meshes
     public Aabb Aabb;
 
     // The convex hull vertices.
-    public Vector3F[] Vertices;
+    public Vector3[] Vertices;
 
     // The convex hull. It must be either null or up-to-date. 
     public ConvexHullBuilder ConvexHullBuilder;

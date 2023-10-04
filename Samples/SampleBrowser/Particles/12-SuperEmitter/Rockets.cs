@@ -1,8 +1,7 @@
-﻿using DigitalRise.Mathematics.Algebra;
-using DigitalRise.Mathematics.Statistics;
+﻿using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -25,18 +24,18 @@ namespace Samples.Particles
         DefaultEmissionRate = 2,
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        Distribution = new BoxDistribution { MinValue = new Vector3F(-5, 0, -5), MaxValue = new Vector3F(5, 0, 0) },
+        Distribution = new BoxDistribution { MinValue = new Vector3(-5, 0, -5), MaxValue = new Vector3(5, 0, 0) },
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = 0.5f, Direction = Vector3F.UnitY },
+        Distribution = new DirectionDistribution { Deviation = 0.5f, Direction = Vector3.UnitY },
       });
 
       Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -48,7 +47,7 @@ namespace Samples.Particles
 
       Effectors.Add(new LinearVelocityEffector());
 
-      Parameters.AddUniform<Vector3F>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3F(0, -2f, 0);
+      Parameters.AddUniform<Vector3>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3(0, -2f, 0);
       Effectors.Add(new LinearAccelerationEffector());
 
       Parameters.AddUniform<float>(ParticleParameterNames.Alpha).DefaultValue = 0;

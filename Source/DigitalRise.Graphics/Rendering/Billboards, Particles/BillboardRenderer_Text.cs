@@ -95,7 +95,7 @@ namespace DigitalRise.Graphics.Rendering
         if (string.IsNullOrEmpty(text) && (stringBuilder == null || stringBuilder.Length == 0))
           continue;
 
-        Vector3F position = node.PoseWorld.Position;
+        Vector3 position = node.PoseWorld.Position;
         var orientation = billboard.Orientation;
 
         #region ----- Billboarding -----
@@ -103,14 +103,14 @@ namespace DigitalRise.Graphics.Rendering
         // (Code copied from BillboardBatchReach.)
 
         // Normal
-        Vector3F normal;
+        Vector3 normal;
         if (orientation.Normal == BillboardNormal.ViewPlaneAligned)
         {
           normal = _defaultNormal;
         }
         else if (orientation.Normal == BillboardNormal.ViewpointOriented)
         {
-          Vector3F n = _cameraPose.Position - position;
+          Vector3 n = _cameraPose.Position - position;
           normal = n.TryNormalize() ? n : _defaultNormal;
         }
         else
@@ -119,33 +119,33 @@ namespace DigitalRise.Graphics.Rendering
         }
 
         // Axis = up vector
-        Vector3F axis = node.Axis;
+        Vector3 axis = node.Axis;
         if (orientation.IsAxisInViewSpace)
           axis = _cameraPose.ToWorldDirection(axis);
 
-        if (1 - Vector3F.Dot(normal, axis) < Numeric.EpsilonF)
+        if (1 - Vector3.Dot(normal, axis) < Numeric.EpsilonF)
         {
           // Normal and axis are parallel.
           // --> Bend normal by adding a fraction of the camera down vector.
-          Vector3F cameraDown = -_cameraPose.Orientation.GetColumn(1);
+          Vector3 cameraDown = -_cameraPose.Orientation.GetColumn(1);
           normal += cameraDown * 0.001f;
           normal.Normalize();
         }
 
         // Compute right.
-        //Vector3F right = Vector3F.Cross(axis, normal);
+        //Vector3 right = Vector3.Cross(axis, normal);
         // Inlined:
-        Vector3F right;
+        Vector3 right;
         right.X = axis.Y * normal.Z - axis.Z * normal.Y;
         right.Y = axis.Z * normal.X - axis.X * normal.Z;
         right.Z = axis.X * normal.Y - axis.Y * normal.X;
         if (!right.TryNormalize())
-          right = normal.Orthonormal1;   // Normal and axis are parallel --> Choose random perpendicular vector.
+          right = normal.Orthonormal1();   // Normal and axis are parallel --> Choose random perpendicular vector.
 
         if (orientation.IsAxisFixed)
         {
           // Make sure normal is perpendicular to right and up.
-          //normal = Vector3F.Cross(right, axis);
+          //normal = Vector3.Cross(right, axis);
           // Inlined:
           normal.X = right.Y * axis.Z - right.Z * axis.Y;
           normal.Y = right.Z * axis.X - right.X * axis.Z;
@@ -156,7 +156,7 @@ namespace DigitalRise.Graphics.Rendering
         else
         {
           // Make sure axis is perpendicular to normal and right.
-          //axis = Vector3F.Cross(normal, right);
+          //axis = Vector3.Cross(normal, right);
           // Inlined:
           axis.X = normal.Y * right.Z - normal.Z * right.Y;
           axis.Y = normal.Z * right.X - normal.X * right.Z;
@@ -171,7 +171,7 @@ namespace DigitalRise.Graphics.Rendering
                                        normal.X, normal.Y, normal.Z, 0,
                                        position.X, position.Y, position.Z, 1);
 
-        Vector3F color3F = node.Color * billboard.Color;
+        Vector3 color3F = node.Color * billboard.Color;
         float alpha = node.Alpha * billboard.Alpha;
         Color color = new Color(color3F.X * alpha,
                                 color3F.Y * alpha,

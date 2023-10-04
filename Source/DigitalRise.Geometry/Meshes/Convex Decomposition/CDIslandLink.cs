@@ -8,9 +8,9 @@ using System.Linq;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -46,7 +46,7 @@ namespace DigitalRise.Geometry.Meshes
     public readonly Aabb Aabb;
 
     // The hull vertices of the hull over IslandA + IslandB.
-    public Vector3F[] Vertices;
+    public Vector3[] Vertices;
 
     // Either null or an the convex hull of the island.
     public ConvexHullBuilder ConvexHullBuilder;
@@ -66,7 +66,7 @@ namespace DigitalRise.Geometry.Meshes
       aabb.Grow(IslandB.Aabb);
       Aabb = aabb;
 
-      float aabbExtentLength = aabb.Extent.Length;
+      float aabbExtentLength = aabb.Extent.Length();
 
       Concavity = GetConcavity(vertexLimit, sampleVertices, sampleCenters);
 
@@ -119,13 +119,13 @@ namespace DigitalRise.Geometry.Meshes
           }
 
           var edge = triangle.Vertices[(i + 2) % 3] - triangle.Vertices[(i + 1) % 3];
-          perimeter += edge.Length;
+          perimeter += edge.Length();
         }
 
         // Add area of triangle.
         var edge0 = triangle.Vertices[1] - triangle.Vertices[0];
         var edge1 = triangle.Vertices[2] - triangle.Vertices[0];
-        area += Vector3F.Cross(edge0, edge1).Length / 2;
+        area += Vector3.Cross(edge0, edge1).Length() / 2;
       }
 
       float aspectRatio = perimeter * perimeter / (4 * ConstantsF.Pi * area);
@@ -218,7 +218,7 @@ namespace DigitalRise.Geometry.Meshes
         }
 
         Aabb aabb = Aabb;
-        float aabbExtent = aabb.Extent.Length;
+        float aabbExtent = aabb.Extent.Length();
 
         // Note: For a speed-up we could skip some ray tests in the next loop and only sample
         // a few vertices if there would be a lot of tests.
@@ -260,13 +260,13 @@ namespace DigitalRise.Geometry.Meshes
               var normal = triangle.VertexNormals[i];
 
               // Degenerate triangles are ignored.
-              if (normal.IsNumericallyZero)
+              if (normal.IsNumericallyZero())
                 continue;
 
               // Shoot a ray from outside the hull mesh to the vertex. 
               float hitDistance;
-              Vector3F rayOrigin = position + normal * aabbExtent;
-              float rayLength = (position - rayOrigin).Length;
+              Vector3 rayOrigin = position + normal * aabbExtent;
+              float rayLength = (position - rayOrigin).Length();
               var ray = new Ray(rayOrigin, -normal, rayLength);
               if (partition != null)
               {
@@ -304,13 +304,13 @@ namespace DigitalRise.Geometry.Meshes
             var normal = triangle.Normal;
 
             // Degenerate triangles are ignored.
-            if (normal.IsNumericallyZero)
+            if (normal.IsNumericallyZero())
               continue;
 
             // Shoot a ray from outside the hull mesh to the vertex. 
             float hitDistance;
-            Vector3F rayOrigin = center + normal * aabbExtent;
-            float rayLength = (center - rayOrigin).Length;
+            Vector3 rayOrigin = center + normal * aabbExtent;
+            float rayLength = (center - rayOrigin).Length();
             var ray = new Ray(rayOrigin, -normal, rayLength);
             if (partition != null)
             {

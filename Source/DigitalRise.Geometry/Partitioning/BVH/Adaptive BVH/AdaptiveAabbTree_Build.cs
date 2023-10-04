@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Linq;
-
+using DigitalRise.Mathematics;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -635,10 +635,10 @@ namespace DigitalRise.Geometry.Partitioning
       else
       {
         // Get max axis.
-        int splitAxis = node.Aabb.Extent.IndexOfLargestComponent;
+        int splitAxis = node.Aabb.Extent.IndexOfLargestComponent();
 
         // Split at center of AABB.
-        float splitValue = node.Aabb.Center[splitAxis];
+        float splitValue = node.Aabb.Center.GetComponentByIndex(splitAxis);
 
         // Sort leaves according to split-plane.
         SortLeaves(node.Leaves, splitAxis, splitValue, out rightLeaf);
@@ -653,12 +653,12 @@ namespace DigitalRise.Geometry.Partitioning
           if (leftleaves > rightLeaves)
           {
             // Move split-plane to midpoint of left sub-volume.
-            splitValue = (node.Aabb.Minimum[splitAxis] + splitValue) / 2;
+            splitValue = (node.Aabb.Minimum.GetComponentByIndex(splitAxis) + splitValue) / 2;
           }
           else
           {
             // Move split-plane to midpoint of right sub-volume.
-            splitValue = (node.Aabb.Maximum[splitAxis] + splitValue) / 2;
+            splitValue = (node.Aabb.Maximum.GetComponentByIndex(splitAxis) + splitValue) / 2;
           }
 
           // Sort again.
@@ -748,7 +748,7 @@ namespace DigitalRise.Geometry.Partitioning
       // first are objects in the left half and then all objects in the right half.
       while (unhandledLeaf < rightLeaf)
       {
-        if (leaves[unhandledLeaf].Aabb.Center[splitAxis] <= splitValue)
+        if (leaves[unhandledLeaf].Aabb.Center.GetComponentByIndex(splitAxis) <= splitValue)
         {
           // Object of leaf is in left half. We can test the next.
           unhandledLeaf++;

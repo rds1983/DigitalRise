@@ -5,8 +5,8 @@
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -44,7 +44,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       public float U, V, W, X;
 
       // Closest point in simplex.
-      public Vector3F ClosestPoint;
+      public Vector3 ClosestPoint;
 
       public void SetBarycentricCoordinates(float u, float v, float w, float x)
       {
@@ -68,20 +68,20 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     // The simplex is made up of vertices w, which are differences of points on A and
     // on B. Only the first NumberOfVertices in each array are valid.
     // The simplex points w_i.
-    private readonly Vector3F[] _w = new Vector3F[4];
+    private readonly Vector3[] _w = new Vector3[4];
     // The points in A which correspond to the simplex points.
-    private readonly Vector3F[] _pointsA = new Vector3F[4];
+    private readonly Vector3[] _pointsA = new Vector3[4];
     // The points in B which correspond to the simplex points.
-    private readonly Vector3F[] _pointsB = new Vector3F[4];
+    private readonly Vector3[] _pointsB = new Vector3[4];
 
     // True if a vertex was added since the last update.
     private bool _needsUpdate = true;
 
     // The last added w.
-    private Vector3F _lastW = new Vector3F(float.NaN);
+    private Vector3 _lastW = new Vector3(float.NaN);
 
     // Data for backup in error cases.
-    private Vector3F _lastClosestPointOnA, _lastClosestPointOnB, _lastClosestPoint;
+    private Vector3 _lastClosestPointOnA, _lastClosestPointOnB, _lastClosestPoint;
     #endregion
 
 
@@ -104,7 +104,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// property contains the closest point info of the last step and not for the new simplex.
     /// </para>
     /// </remarks>
-    public Vector3F ClosestPoint
+    public Vector3 ClosestPoint
     {
       get
       {
@@ -118,7 +118,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         _closestPoint = value;
       }
     }
-    private Vector3F _closestPoint;
+    private Vector3 _closestPoint;
 
 
     /// <summary>
@@ -134,7 +134,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// property contains the closest point info of the last step and not for the new simplex.
     /// </para>
     /// </remarks>
-    public Vector3F ClosestPointOnA
+    public Vector3 ClosestPointOnA
     {
       get
       {
@@ -148,7 +148,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         _closestPointOnA = value;
       }
     }
-    private Vector3F _closestPointOnA;
+    private Vector3 _closestPointOnA;
 
 
     /// <summary>
@@ -164,7 +164,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// property contains the closest point info of the last step and not for the new simplex.
     /// </para>
     /// </remarks>
-    public Vector3F ClosestPointOnB
+    public Vector3 ClosestPointOnB
     {
       get
       {
@@ -178,7 +178,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         _closestPointOnB = value;
       }
     }
-    private Vector3F _closestPointOnB;
+    private Vector3 _closestPointOnB;
 
 
     /// <summary>
@@ -239,7 +239,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         float maxDistance = 0;
         for (int i = 0; i < NumberOfVertices; i++)
         {
-          float distance = _w[i].LengthSquared;
+          float distance = _w[i].LengthSquared();
           if (distance > maxDistance)
             maxDistance = distance;
         }
@@ -263,11 +263,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     // unnecessary heap memory.
 
     //// Create list with points on A.
-    //public List<Vector3F> PointsOnA
+    //public List<Vector3> PointsOnA
     //{
     //  get
     //  {
-    //    List<Vector3F> list = new List<Vector3F>();
+    //    List<Vector3> list = new List<Vector3>();
     //    for (int i = 0; i < NumberOfVertices; i++)
     //      list.Add(_pointsA[i]);
     //    return list;
@@ -275,11 +275,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     //}
 
     //// Create list with points on B.
-    //public List<Vector3F> PointsOnB
+    //public List<Vector3> PointsOnB
     //{
     //  get
     //  {
-    //    List<Vector3F> list = new List<Vector3F>();
+    //    List<Vector3> list = new List<Vector3>();
     //    for (int i = 0; i < NumberOfVertices; i++)
     //      list.Add(_pointsB[i]);
     //    return list;
@@ -288,11 +288,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
 
     //// Create list with simplex points.
-    //public List<Vector3F> SimplexPoints
+    //public List<Vector3> SimplexPoints
     //{
     //  get
     //  {
-    //    List<Vector3F> list = new List<Vector3F>();
+    //    List<Vector3> list = new List<Vector3>();
     //    for (int i = 0; i < NumberOfVertices; i++)
     //      list.Add(_w[i]);
     //    return list;
@@ -369,9 +369,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// <remarks>
     /// <paramref name="w"/> = <paramref name="pointA"/> - <paramref name="pointB"/>.
     /// </remarks>
-    public void Add(Vector3F w, Vector3F pointA, Vector3F pointB)
+    public void Add(Vector3 w, Vector3 pointA, Vector3 pointB)
     {
-      Debug.Assert(Vector3F.AreNumericallyEqual(pointA - pointB, w), "w is unequal to pointA - pointB.");
+      Debug.Assert(MathHelper.AreNumericallyEqual(pointA - pointB, w), "w is unequal to pointA - pointB.");
 
       _w[NumberOfVertices] = w;
       _lastW = w;
@@ -402,16 +402,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     {
       for (int i = 0; i < 4; i++)
       {
-        _w[i] = new Vector3F(float.NaN);
-        _pointsA[i] = new Vector3F(float.NaN);
-        _pointsB[i] = new Vector3F(float.NaN);
+        _w[i] = new Vector3(float.NaN);
+        _pointsA[i] = new Vector3(float.NaN);
+        _pointsB[i] = new Vector3(float.NaN);
       }
 
-      ClosestPointOnA = new Vector3F(float.NaN);
-      ClosestPointOnB = new Vector3F(float.NaN);
-      ClosestPoint = new Vector3F(float.NaN);
+      ClosestPointOnA = new Vector3(float.NaN);
+      ClosestPointOnB = new Vector3(float.NaN);
+      ClosestPoint = new Vector3(float.NaN);
       _needsUpdate = true;
-      _lastW = new Vector3F(float.NaN);
+      _lastW = new Vector3(float.NaN);
       IsValid = false;
       NumberOfVertices = 0;
     }
@@ -429,14 +429,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// Only the vertices of the simplex are tested and the last added vertex <paramref name="w"/> 
     /// is checked.
     /// </remarks>
-    public bool Contains(Vector3F w)
+    public bool Contains(Vector3 w)
     {
       for (int i = 0; i < NumberOfVertices; i++)
-        if (Vector3F.AreNumericallyEqual(_w[i], w))
+        if (MathHelper.AreNumericallyEqual(_w[i], w))
           return true;
 
       // w could be already removed.
-      if (Vector3F.AreNumericallyEqual(_lastW, w))
+      if (MathHelper.AreNumericallyEqual(_lastW, w))
         return true;
 
       return false;
@@ -529,9 +529,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     {
       // The simplex is a line segment.
       // Find closest point of line segment W[0] to W[1] to origin.
-      Vector3F segmentVector = _w[1] - _w[0];
-      Vector3F segmentStartToOrigin = Vector3F.Zero - _w[0];
-      float param = Vector3F.Dot(segmentVector, segmentStartToOrigin);
+      Vector3 segmentVector = _w[1] - _w[0];
+      Vector3 segmentStartToOrigin = Vector3.Zero - _w[0];
+      float param = Vector3.Dot(segmentVector, segmentStartToOrigin);
 
       // Clamp parameter to [0,1].
       if (param <= 0)
@@ -542,7 +542,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       else
       {
         // Line parameter is > 0.
-        float lengthSquared = segmentVector.LengthSquared;
+        float lengthSquared = segmentVector.LengthSquared();
         if (param > lengthSquared)
         {
           // Clamp to 1.
@@ -581,7 +581,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       var info = new ClosestPointInfo();
 
-      GetClosestPointInTriangle(Vector3F.Zero, _w[0], _w[1], _w[2], ref info);
+      GetClosestPointInTriangle(Vector3.Zero, _w[0], _w[1], _w[2], ref info);
 
       ClosestPointOnA = _pointsA[0] * info.U
                           + _pointsA[1] * info.V
@@ -598,7 +598,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Following assert can fail, for example, for ray convex test if objects
       // are far away from the origin.
-      //Debug.Assert(Vector3F.AreNumericallyEqual(ClosestPoint, ClosestPointOnA - ClosestPointOnB, Math.Max(1, ClosestPoint.Length) * 0.0001f), "ClosestPoint computed from barycentric coordinates must be equal to ClosestPointOnA - ClosestPointOnB.");
+      //Debug.Assert(MathHelper.AreNumericallyEqual(ClosestPoint, ClosestPointOnA - ClosestPointOnB, Math.Max(1, ClosestPoint.Length) * 0.0001f), "ClosestPoint computed from barycentric coordinates must be equal to ClosestPointOnA - ClosestPointOnB.");
       Debug.Assert(Numeric.IsGreaterOrEqual(info.U, 0));
       Debug.Assert(Numeric.IsGreaterOrEqual(info.V, 0));
       Debug.Assert(Numeric.IsGreaterOrEqual(info.W, 0));
@@ -613,7 +613,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       ClosestPointInfo info = new ClosestPointInfo();
 
       // Find closest point of tetrahedron to origin.
-      bool? containsOrigin = GetClosestPoints(Vector3F.Zero, _w[0], _w[1], _w[2], _w[3], ref info);
+      bool? containsOrigin = GetClosestPoints(Vector3.Zero, _w[0], _w[1], _w[2], _w[3], ref info);
 
       // Origin is not contained.
       ClosestPointOnA = _pointsA[0] * info.U
@@ -642,7 +642,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Following assert can fail, for example, for ray convex test if objects
       // are far away from the origin.
-      //Debug.Assert(Vector3F.AreNumericallyEqual(ClosestPoint, ClosestPointOnA - ClosestPointOnB, Math.Max(1, ClosestPoint.Length) * 0.0001f), "ClosestPoint computed from barycentric coordinates must be equal to ClosestPointOnA - ClosestPointOnB.");
+      //Debug.Assert(MathHelper.AreNumericallyEqual(ClosestPoint, ClosestPointOnA - ClosestPointOnB, Math.Max(1, ClosestPoint.Length) * 0.0001f), "ClosestPoint computed from barycentric coordinates must be equal to ClosestPointOnA - ClosestPointOnB.");
       Debug.Assert(Numeric.IsGreaterOrEqual(info.U, 0));
       Debug.Assert(Numeric.IsGreaterOrEqual(info.V, 0));
       Debug.Assert(Numeric.IsGreaterOrEqual(info.W, 0));
@@ -658,7 +658,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     /// <param name="vertex1">The second vertex of the triangle.</param>
     /// <param name="vertex2">The third vertex of the triangle.</param>
     /// <param name="closestPointInfo">The closest-point information that will be set.</param>
-    private static void GetClosestPointInTriangle(Vector3F point, Vector3F vertex0, Vector3F vertex1, Vector3F vertex2, ref ClosestPointInfo closestPointInfo)
+    private static void GetClosestPointInTriangle(Vector3 point, Vector3 vertex0, Vector3 vertex1, Vector3 vertex2, ref ClosestPointInfo closestPointInfo)
     {
       float u, v, w;
       GeometryHelper.GetClosestPoint(new Triangle(vertex0, vertex1, vertex2), point, out u, out v, out w);
@@ -671,7 +671,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     // return true if point is inside the tetrahedron, false if point is outside. 
     // null if simplex is degenerated
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-    private static bool? GetClosestPoints(Vector3F point, Vector3F tetrahedronVertexA, Vector3F tetrahedronVertexB, Vector3F tetrahedronVertexC, Vector3F tetrahedronVertexD, ref ClosestPointInfo info)
+    private static bool? GetClosestPoints(Vector3 point, Vector3 tetrahedronVertexA, Vector3 tetrahedronVertexB, Vector3 tetrahedronVertexC, Vector3 tetrahedronVertexD, ref ClosestPointInfo info)
     {
       // Assume that the point is outside the tetrahedron. (This is the most likely case.)
       bool? containsPoint = false;
@@ -725,10 +725,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (isPointOutsideABC.Value)
       {
         GetClosestPointInTriangle(point, tetrahedronVertexA, tetrahedronVertexB, tetrahedronVertexC, ref tempInfo);
-        Vector3F closestPoint = tempInfo.ClosestPoint;
+        Vector3 closestPoint = tempInfo.ClosestPoint;
 
         // No comparison of actual distance with best distance required because this is the first test.
-        bestDistanceSquared = (point - closestPoint).LengthSquared;
+        bestDistanceSquared = (point - closestPoint).LengthSquared();
         info.ClosestPoint = closestPoint;
         info.SetBarycentricCoordinates(tempInfo.U, tempInfo.V, tempInfo.W, 0);
       }
@@ -738,8 +738,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (isPointOutsideACD.Value)
       {
         GetClosestPointInTriangle(point, tetrahedronVertexA, tetrahedronVertexC, tetrahedronVertexD, ref tempInfo);
-        Vector3F closestPoint = tempInfo.ClosestPoint;
-        float distance = (point - closestPoint).LengthSquared;
+        Vector3 closestPoint = tempInfo.ClosestPoint;
+        float distance = (point - closestPoint).LengthSquared();
         if (distance < bestDistanceSquared)
         {
           bestDistanceSquared = distance;
@@ -753,8 +753,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (isPointOutsideADB.Value)
       {
         GetClosestPointInTriangle(point, tetrahedronVertexA, tetrahedronVertexD, tetrahedronVertexB, ref tempInfo);
-        Vector3F closestPoint = tempInfo.ClosestPoint;
-        float distance = (point - closestPoint).LengthSquared;
+        Vector3 closestPoint = tempInfo.ClosestPoint;
+        float distance = (point - closestPoint).LengthSquared();
         if (distance < bestDistanceSquared)
         {
           bestDistanceSquared = distance;
@@ -768,8 +768,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       if (isPointOutsideBDC.Value)
       {
         GetClosestPointInTriangle(point, tetrahedronVertexB, tetrahedronVertexD, tetrahedronVertexC, ref tempInfo);
-        Vector3F closestPoint = tempInfo.ClosestPoint;
-        float distance = (point - closestPoint).LengthSquared;
+        Vector3 closestPoint = tempInfo.ClosestPoint;
+        float distance = (point - closestPoint).LengthSquared();
         if (distance < bestDistanceSquared)
         {
           //bestDistanceSquared = distance; // Not needed anymore.

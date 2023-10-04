@@ -39,7 +39,7 @@ namespace Samples.Particles
       });
 
       // Particle positions start on a circular area (in the xy-plane).
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
@@ -47,7 +47,7 @@ namespace Samples.Particles
       });
 
       // Particles move in forward direction with a random speed.
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Direction).DefaultValue = Vector3F.Forward;
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Direction).DefaultValue = Vector3.Forward;
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
       ps.Effectors.Add(new StartValueEffector<float>
       {
@@ -69,7 +69,7 @@ namespace Samples.Particles
       });
 
       // To create a wind effect, we apply an acceleration to all particles.
-      ps.Parameters.AddUniform<Vector3F>("Wind").DefaultValue = new Vector3F(-1, 3, -0.5f);
+      ps.Parameters.AddUniform<Vector3>("Wind").DefaultValue = new Vector3(-1, 3, -0.5f);
       ps.Effectors.Add(new LinearAccelerationEffector { AccelerationParameter = "Wind" });
 
       // Each particle starts with a random rotation angle and a random angular speed.

@@ -14,7 +14,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -36,7 +36,7 @@ namespace DigitalRise.Graphics
     private struct MergeJob
     {
       public Pose Pose;
-      public Vector3F Scale;
+      public Vector3 Scale;
       public Submesh Submesh;
       public byte MergedMaterialIndex;
       public byte VertexDeclarationIndex;
@@ -101,7 +101,7 @@ namespace DigitalRise.Graphics
         // For indices we only need one counter because we use only one shared index buffer.
         int indexCount = 0;
 
-        var mergedAabb = new Aabb(new Vector3F(float.MaxValue), new Vector3F(float.MinValue));
+        var mergedAabb = new Aabb(new Vector3(float.MaxValue), new Vector3(float.MinValue));
 
         // Merge materials, create job list, merge AABBs, check if there is an occluder.
         bool hasOccluder = false;
@@ -203,7 +203,7 @@ namespace DigitalRise.Graphics
         if (Numeric.IsFinite(extent.X + extent.Y + extent.Z))
         {
           var boxShape = new BoxShape(extent);
-          if (mergedAabb.Center.IsNumericallyZero)
+          if (mergedAabb.Center.IsNumericallyZero())
             mergedMesh.BoundingShape = boxShape;
           else
             mergedMesh.BoundingShape = new TransformedShape(new GeometricObject(boxShape, new Pose(mergedAabb.Center)));
@@ -270,7 +270,7 @@ namespace DigitalRise.Graphics
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "mesh")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "scales")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "poses")]
-    public static Mesh Merge(Mesh mesh, IList<Vector3F> scales, IList<Pose> poses)
+    public static Mesh Merge(Mesh mesh, IList<Vector3> scales, IList<Pose> poses)
     {
       if (mesh == null)
         throw new ArgumentNullException("mesh");
@@ -281,9 +281,9 @@ namespace DigitalRise.Graphics
 
       if (scales == null)
       {
-        var array = new Vector3F[poses.Count];
+        var array = new Vector3[poses.Count];
         for (int i = 0; i < array.Length; i++)
-          array[i] = Vector3F.One;
+          array[i] = Vector3.One;
 
         scales = array;
       }
@@ -383,7 +383,7 @@ namespace DigitalRise.Graphics
         }
 
         // Merge AABBs.
-        var mergedAabb = new Aabb(new Vector3F(float.MaxValue), new Vector3F(float.MinValue));
+        var mergedAabb = new Aabb(new Vector3(float.MaxValue), new Vector3(float.MinValue));
         for (int instanceIndex = 0; instanceIndex < poses.Count; instanceIndex++)
         {
           mergedAabb = Aabb.Merge(
@@ -402,7 +402,7 @@ namespace DigitalRise.Graphics
         if (Numeric.IsFinite(extent.X + extent.Y + extent.Z))
         {
           var boxShape = new BoxShape(extent);
-          if (mergedAabb.Center.IsNumericallyZero)
+          if (mergedAabb.Center.IsNumericallyZero())
             mergedMesh.BoundingShape = boxShape;
           else
             mergedMesh.BoundingShape = new TransformedShape(new GeometricObject(boxShape, new Pose(mergedAabb.Center)));
@@ -567,10 +567,10 @@ namespace DigitalRise.Graphics
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Binormal")]
     private static void TransformVertices(byte[] buffer, int startVertex, int vertexCount,
                                           VertexDeclaration vertexDeclaration,
-                                          Vector3F scale, Pose pose)
+                                          Vector3 scale, Pose pose)
     {
       // If the transform does not have a scale/rotation/translation, we can abort.
-      bool hasScale = Vector3F.AreNumericallyEqual(scale, Vector3F.One);
+      bool hasScale = MathHelper.AreNumericallyEqual(scale, Vector3.One);
       if (!pose.HasRotation && !pose.HasTranslation && !hasScale)
         return;
 
@@ -668,7 +668,7 @@ namespace DigitalRise.Graphics
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "occluders")]
     private static Occluder MergeOccluders(IEnumerable<MeshNode> meshNodes)
     {
-      var mergedVertices = new List<Vector3F>();
+      var mergedVertices = new List<Vector3>();
       var mergedIndices = new List<ushort>();
 
       foreach (var meshNode in meshNodes)
@@ -684,7 +684,7 @@ namespace DigitalRise.Graphics
         if (occluder == null)
           continue;
 
-        Vector3F[] vertices = occluder.Vertices;
+        Vector3[] vertices = occluder.Vertices;
         ushort[] indices = occluder.Indices;
 
         if (mergedVertices.Count + vertices.Length > ushort.MaxValue)
@@ -693,7 +693,7 @@ namespace DigitalRise.Graphics
         int currentVertexCount = mergedVertices.Count;
 
         // Transform vertices to world space and merge into list.
-        if (scale == Vector3F.One)
+        if (scale == Vector3.One)
         {
           for (int i = 0; i < vertices.Length; i++)
             mergedVertices.Add(pose.ToWorldPosition(vertices[i]));
@@ -715,7 +715,7 @@ namespace DigitalRise.Graphics
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Occluders")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "occluders")]
-    private static Occluder MergeOccluders(Mesh mesh, IList<Vector3F> scales, IList<Pose> poses)
+    private static Occluder MergeOccluders(Mesh mesh, IList<Vector3> scales, IList<Pose> poses)
     {
       Debug.Assert(mesh != null);
       Debug.Assert(mesh.Occluder != null);
@@ -724,15 +724,15 @@ namespace DigitalRise.Graphics
       Debug.Assert(poses.Count == scales.Count);
 
       var occluder = mesh.Occluder;
-      var mergedVertices = new List<Vector3F>();
+      var mergedVertices = new List<Vector3>();
       var mergedIndices = new List<ushort>();
 
       for (int instanceIndex = 0; instanceIndex < poses.Count; instanceIndex++)
       {
         Pose pose = poses[instanceIndex];
-        Vector3F scale = scales[instanceIndex];
+        Vector3 scale = scales[instanceIndex];
 
-        Vector3F[] vertices = occluder.Vertices;
+        Vector3[] vertices = occluder.Vertices;
         ushort[] indices = occluder.Indices;
 
         if (mergedVertices.Count + vertices.Length > ushort.MaxValue)
@@ -741,7 +741,7 @@ namespace DigitalRise.Graphics
         int currentVertexCount = mergedVertices.Count;
 
         // Transform vertices to world space and merge into list.
-        if (scale == Vector3F.One)
+        if (scale == Vector3.One)
         {
           for (int i = 0; i < vertices.Length; i++)
             mergedVertices.Add(pose.ToWorldPosition(vertices[i]));

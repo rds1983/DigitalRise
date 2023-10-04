@@ -11,7 +11,7 @@ namespace DigitalRise.Geometry.Partitioning
 {
   /// <summary>
   /// Wraps a closest-point callback to reduce calls of 
-  /// <see cref="ISupportClosestPointQueries{T}.GetClosestPointCandidates(Vector3F,Pose,ISpatialPartition{T},Vector3F,Pose,Func{T,T,float})"/>
+  /// <see cref="ISupportClosestPointQueries{T}.GetClosestPointCandidates(Vector3,Pose,ISpatialPartition{T},Vector3,Pose,Func{T,T,float})"/>
   /// to calls of <see cref="ISupportClosestPointQueries{T}.GetClosestPointCandidates(Aabb,float,Func{T,float})"/>.
   /// </summary>
   /// <typeparam name="T">The type of items in the spatial partition.</typeparam>
@@ -35,7 +35,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// </summary>
     /// <value>
     /// The original callback used in 
-    /// <see cref="ISupportClosestPointQueries{T}.GetClosestPointCandidates(Vector3F,Pose,ISpatialPartition{T},Vector3F,Pose,Func{T,T,float})"/>.
+    /// <see cref="ISupportClosestPointQueries{T}.GetClosestPointCandidates(Vector3,Pose,ISpatialPartition{T},Vector3,Pose,Func{T,T,float})"/>.
     /// </value>
     public Func<T, T, float> OriginalCallback { get; set; }
 

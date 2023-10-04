@@ -167,7 +167,7 @@ namespace DigitalRise.Graphics.Rendering
 
       // Convert frustum far corners from view space to world space.
       for (int i = 0; i < _cameraFrustumFarCorners.Length; i++)
-        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3F)_cameraFrustumFarCorners[i]);
+        _cameraFrustumFarCorners[i] = (Vector3)cameraPose.ToWorldDirection((Vector3)_cameraFrustumFarCorners[i]);
 
       _parameterGBuffer0.SetValue(context.GBuffer0);
 
@@ -238,7 +238,7 @@ namespace DigitalRise.Graphics.Rendering
           height1));
 
         var scatteringSymmetry = fog.ScatteringSymmetry;
-        bool useScatteringSymmetry = !scatteringSymmetry.IsNumericallyZero;
+        bool useScatteringSymmetry = !scatteringSymmetry.IsNumericallyZero();
 
         if (useScatteringSymmetry)
         {

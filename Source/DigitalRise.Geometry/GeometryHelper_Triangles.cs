@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry
 {
@@ -41,23 +41,23 @@ namespace DigitalRise.Geometry
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static void GetBarycentricFromPoint(Triangle triangle, Vector3F point, out float u, out float v, out float w)
+    public static void GetBarycentricFromPoint(Triangle triangle, Vector3 point, out float u, out float v, out float w)
     {
-      Vector3F v0 = triangle.Vertex0;
-      Vector3F v1 = triangle.Vertex1;
-      Vector3F v2 = triangle.Vertex2;
+      Vector3 v0 = triangle.Vertex0;
+      Vector3 v1 = triangle.Vertex1;
+      Vector3 v2 = triangle.Vertex2;
 
-      Vector3F ab = v1 - v0;
-      Vector3F ac = v2 - v0;
-      Vector3F ap = point - v0;
-      Vector3F bp = point - v1;
-      Vector3F cp = point - v2;
-      float d1 = Vector3F.Dot(ab, ap);
-      float d2 = Vector3F.Dot(ac, ap);
-      float d3 = Vector3F.Dot(ab, bp);
-      float d4 = Vector3F.Dot(ac, bp);
-      float d5 = Vector3F.Dot(ab, cp);
-      float d6 = Vector3F.Dot(ac, cp);
+      Vector3 ab = v1 - v0;
+      Vector3 ac = v2 - v0;
+      Vector3 ap = point - v0;
+      Vector3 bp = point - v1;
+      Vector3 cp = point - v2;
+      float d1 = Vector3.Dot(ab, ap);
+      float d2 = Vector3.Dot(ac, ap);
+      float d3 = Vector3.Dot(ab, bp);
+      float d4 = Vector3.Dot(ac, bp);
+      float d5 = Vector3.Dot(ab, cp);
+      float d6 = Vector3.Dot(ac, cp);
       float va = d3 * d6 - d5 * d4;
       float vb = d5 * d2 - d1 * d6;
       float vc = d1 * d4 - d3 * d2;
@@ -69,13 +69,13 @@ namespace DigitalRise.Geometry
       #region ----- Triangle vs Point in Triangle Plane -----
       //// Following code can be used if point is in the triangle plane.
       //// Unnormalized triangle normal.
-      //Vector3F m = Vector3F.Cross(v1 - v0, v2 - v0);
+      //Vector3 m = Vector3.Cross(v1 - v0, v2 - v0);
 
       //// Nominators and one-over-denominator for u and v ratios
       //float nu, nv, ood;
 
       //// Absolute normal components for determining projection plane.
-      //Vector3F mAbs = Vector3F.Absolute(m);
+      //Vector3 mAbs = MathHelper.Absolute(m);
 
       //// Compute area in plane of targets projection (to avoid degeneracies)
       //if (mAbs.X >= mAbs.Y && mAbs.X >= mAbs.Z)
@@ -129,27 +129,27 @@ namespace DigitalRise.Geometry
     /// Determines whether the projection of a point (into the triangle plane) is inside the given
     /// triangle. (This overload uses per-reference parameters for performance.)
     /// </summary>
-    /// <inheritdoc cref="GetBarycentricFromPoint(Triangle,Vector3F,out float,out float,out float)"/>
+    /// <inheritdoc cref="GetBarycentricFromPoint(Triangle,Vector3,out float,out float,out float)"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static void GetBarycentricFromPoint(ref Triangle triangle, ref Vector3F point, out float u, out float v, out float w)
+    public static void GetBarycentricFromPoint(ref Triangle triangle, ref Vector3 point, out float u, out float v, out float w)
     {
-      Vector3F v0 = triangle.Vertex0;
-      Vector3F v1 = triangle.Vertex1;
-      Vector3F v2 = triangle.Vertex2;
+      Vector3 v0 = triangle.Vertex0;
+      Vector3 v1 = triangle.Vertex1;
+      Vector3 v2 = triangle.Vertex2;
 
-      Vector3F ab = v1 - v0;
-      Vector3F ac = v2 - v0;
-      Vector3F ap = point - v0;
-      Vector3F bp = point - v1;
-      Vector3F cp = point - v2;
-      float d1 = Vector3F.Dot(ab, ap);
-      float d2 = Vector3F.Dot(ac, ap);
-      float d3 = Vector3F.Dot(ab, bp);
-      float d4 = Vector3F.Dot(ac, bp);
-      float d5 = Vector3F.Dot(ab, cp);
-      float d6 = Vector3F.Dot(ac, cp);
+      Vector3 ab = v1 - v0;
+      Vector3 ac = v2 - v0;
+      Vector3 ap = point - v0;
+      Vector3 bp = point - v1;
+      Vector3 cp = point - v2;
+      float d1 = Vector3.Dot(ab, ap);
+      float d2 = Vector3.Dot(ac, ap);
+      float d3 = Vector3.Dot(ab, bp);
+      float d4 = Vector3.Dot(ac, bp);
+      float d5 = Vector3.Dot(ab, cp);
+      float d6 = Vector3.Dot(ac, cp);
       float va = d3 * d6 - d5 * d4;
       float vb = d5 * d2 - d1 * d6;
       float vc = d1 * d4 - d3 * d2;
@@ -188,20 +188,20 @@ namespace DigitalRise.Geometry
       // This code is also used inline in RayHeightFieldAlgorithm and RayTriangleAlgorithm. Sync changes!
       hitDistance = float.NaN;
 
-      Vector3F v0 = triangle.Vertex0;
-      Vector3F v1 = triangle.Vertex1;
-      Vector3F v2 = triangle.Vertex2;
+      Vector3 v0 = triangle.Vertex0;
+      Vector3 v1 = triangle.Vertex1;
+      Vector3 v2 = triangle.Vertex2;
 
-      Vector3F d1 = (v1 - v0);
-      Vector3F d2 = (v2 - v0);
-      Vector3F n = Vector3F.Cross(d1, d2);
+      Vector3 d1 = (v1 - v0);
+      Vector3 d2 = (v2 - v0);
+      Vector3 n = Vector3.Cross(d1, d2);
       
       // Tolerance value, see SOLID, Bergen: "Collision Detection in Interactive 3D Environments".
-      float ε = n.Length * Numeric.EpsilonFSquared;
+      float ε = n.Length() * Numeric.EpsilonFSquared;
 
-      Vector3F r = ray.Direction * ray.Length;
+      Vector3 r = ray.Direction * ray.Length;
 
-      float δ = -Vector3F.Dot(r, n);
+      float δ = -Vector3.Dot(r, n);
 
       // Degenerate triangle --> No hit.
       if (ε == 0.0f || Numeric.IsZero(δ, ε))
@@ -211,16 +211,16 @@ namespace DigitalRise.Geometry
       if (!isTwoSided && δ < 0)
         return false;
 
-      Vector3F triangleToRayOrigin = ray.Origin - v0;
-      float λ = Vector3F.Dot(triangleToRayOrigin, n) / δ;
+      Vector3 triangleToRayOrigin = ray.Origin - v0;
+      float λ = Vector3.Dot(triangleToRayOrigin, n) / δ;
       hitDistance = λ * ray.Length;
       if (λ < 0 || λ > 1)
         return false;
 
       // The ray hit the triangle plane.
-      Vector3F u = Vector3F.Cross(triangleToRayOrigin, r);
-      float μ1 = Vector3F.Dot(d2, u) / δ;
-      float μ2 = Vector3F.Dot(-d1, u) / δ;
+      Vector3 u = Vector3.Cross(triangleToRayOrigin, r);
+      float μ1 = Vector3.Dot(d2, u) / δ;
+      float μ2 = Vector3.Dot(-d1, u) / δ;
       if (μ1 + μ2 <= 1 + ε && μ1 >= -ε && μ2 >= -ε)
       {
         // Hit!
@@ -256,7 +256,7 @@ namespace DigitalRise.Geometry
     /// triangle.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static Vector3F GetPointFromBarycentric(Triangle triangle, float u, float v, float w)
+    public static Vector3 GetPointFromBarycentric(Triangle triangle, float u, float v, float w)
     {
       return u * triangle.Vertex0 + v * triangle.Vertex1 + w * triangle.Vertex2;
     }
@@ -277,9 +277,9 @@ namespace DigitalRise.Geometry
     /// point position is counter-clockwise (CCW). The absolute of the returned value is linearly
     /// proportional to the distance from the triangle plane.
     /// </remarks>
-    public static float IsInFront(Triangle triangle, Vector3F point)
+    public static float IsInFront(Triangle triangle, Vector3 point)
     {
-      return Vector3F.Dot(triangle.Normal, point - triangle.Vertex0);
+      return Vector3.Dot(triangle.Normal, point - triangle.Vertex0);
     }
 
 
@@ -300,7 +300,7 @@ namespace DigitalRise.Geometry
     /// <see langword="true"/> if the orthogonal projection of <paramref name="point"/> is inside 
     /// the triangle; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool IsOver(Triangle triangle, Vector3F point)
+    public static bool IsOver(Triangle triangle, Vector3 point)
     {
       float u, v, w;
       GetBarycentricFromPoint(triangle, point, out u, out v, out w);
@@ -322,7 +322,7 @@ namespace DigitalRise.Geometry
     /// <see langword="true"/> if the orthogonal projection of <paramref name="point"/> is inside 
     /// the triangle; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool IsOver(Triangle triangle, Vector3F point, float epsilon)
+    public static bool IsOver(Triangle triangle, Vector3 point, float epsilon)
     {
       float u, v, w;
       GetBarycentricFromPoint(triangle, point, out u, out v, out w);
@@ -334,9 +334,9 @@ namespace DigitalRise.Geometry
     /// Determines whether the projection of a point (into the triangle plane) is inside the given
     /// triangle. (This overload uses per-reference parameters for performance.)
     /// </summary>
-    /// <inheritdoc cref="IsOver(Triangle, Vector3F)"/>
+    /// <inheritdoc cref="IsOver(Triangle, Vector3)"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-    public static bool IsOver(ref Triangle triangle, ref Vector3F point)
+    public static bool IsOver(ref Triangle triangle, ref Vector3 point)
     {
       float u, v, w;
       GetBarycentricFromPoint(ref triangle, ref point, out u, out v, out w);
@@ -356,22 +356,22 @@ namespace DigitalRise.Geometry
     /// <param name="w">The barycentric coordinate w.</param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static void GetClosestPoint(Triangle triangle, Vector3F point, out float u, out float v, out float w)
+    public static void GetClosestPoint(Triangle triangle, Vector3 point, out float u, out float v, out float w)
     {
       // See Ericson: "Real-Time Collision Detection", p. 141
 
-      Vector3F v0 = triangle.Vertex0;
-      Vector3F v1 = triangle.Vertex1;
-      Vector3F v2 = triangle.Vertex2;
+      Vector3 v0 = triangle.Vertex0;
+      Vector3 v1 = triangle.Vertex1;
+      Vector3 v2 = triangle.Vertex2;
 
       u = v = w = 0;
 
       // Check if point is in vertex region outside Vertex0.
-      Vector3F ab = v1 - v0;
-      Vector3F ac = v2 - v0;
-      Vector3F ap = point - v0;
-      float d1 = Vector3F.Dot(ab, ap);
-      float d2 = Vector3F.Dot(ac, ap);
+      Vector3 ab = v1 - v0;
+      Vector3 ac = v2 - v0;
+      Vector3 ap = point - v0;
+      float d1 = Vector3.Dot(ab, ap);
+      float d2 = Vector3.Dot(ac, ap);
       if (d1 <= 0 && d2 <= 0)
       {
         u = 1;
@@ -379,9 +379,9 @@ namespace DigitalRise.Geometry
       }
 
       // Check if point is in vertex region outside Vertex1.
-      Vector3F bp = point - v1;
-      float d3 = Vector3F.Dot(ab, bp);
-      float d4 = Vector3F.Dot(ac, bp);
+      Vector3 bp = point - v1;
+      float d3 = Vector3.Dot(ab, bp);
+      float d4 = Vector3.Dot(ac, bp);
       if (d3 >= 0 && d4 <= d3)
       {
         v = 1;
@@ -399,9 +399,9 @@ namespace DigitalRise.Geometry
       }
 
       // Check if point is in vertex region outside Vertex2.
-      Vector3F cp = point - v2;
-      float d5 = Vector3F.Dot(ab, cp);
-      float d6 = Vector3F.Dot(ac, cp);
+      Vector3 cp = point - v2;
+      float d5 = Vector3.Dot(ab, cp);
+      float d6 = Vector3.Dot(ac, cp);
       if (d6 >= 0 && d5 <= d6)
       {
         w = 1;
@@ -443,7 +443,7 @@ namespace DigitalRise.Geometry
     ///// <param name="vertices">The vertex array.</param>
     ///// <returns><see langword="true"/> if the point could be computed; <see langword="false"/> if the 
     ///// triangle is degenerated.</returns>
-    //public bool UpdateClosestPointToOrigin(List<Vector3F> vertices)
+    //public bool UpdateClosestPointToOrigin(List<Vector3> vertices)
     //{
     //  // Lets compute lambda1 and lambda2 such that the closest point to the origin x of Triangle (a, b, c)
     //  // is: a + lambda1 * ab + lambda2 * ac = x
@@ -460,16 +460,16 @@ namespace DigitalRise.Geometry
     //  // To avoid the division by det we store det and do not divide the lambdas by det.
     //  // Then the closest point is in the triangle if lambda1 + lambda2 <= det.
 
-    //  Vector3F a = vertices[_indices[0]];
-    //  Vector3F b = vertices[_indices[1]];
-    //  Vector3F c = vertices[_indices[2]];
-    //  Vector3F ab = b - a;
-    //  Vector3F ac = c - a;
-    //  float ab2 = ab.LengthSquared;
-    //  float ac2 = ac.LengthSquared;
-    //  float aDotAb = Vector3F.Dot(a, ab);
-    //  float aDotAc = Vector3F.Dot(a, ac);
-    //  float abDotAc = Vector3F.Dot(ab, ac);
+    //  Vector3 a = vertices[_indices[0]];
+    //  Vector3 b = vertices[_indices[1]];
+    //  Vector3 c = vertices[_indices[2]];
+    //  Vector3 ab = b - a;
+    //  Vector3 ac = c - a;
+    //  float ab2 = ab.LengthSquared();
+    //  float ac2 = ac.LengthSquared();
+    //  float aDotAb = Vector3.Dot(a, ab);
+    //  float aDotAc = Vector3.Dot(a, ac);
+    //  float abDotAc = Vector3.Dot(ab, ac);
 
     //  _det = ab2 * ac2 - abDotAc * abDotAc;
     //  _lambda1 = aDotAc * abDotAc - aDotAb * ac2;
@@ -478,7 +478,7 @@ namespace DigitalRise.Geometry
     //  if (_det > Numeric.EpsilonF)
     //  {
     //    _closestPointToOrigin = a + (_lambda1 * ab + _lambda2 * ac) / _det;
-    //    _distanceToOriginSquared = _closestPointToOrigin.LengthSquared;
+    //    _distanceToOriginSquared = _closestPointToOrigin.LengthSquared();
     //    return true;
     //  }
 
@@ -486,18 +486,18 @@ namespace DigitalRise.Geometry
     //}
 
 
-    /// <inheritdoc cref="Triangulator.Triangulate(IList{Vector3F},IList{int})"/>
+    /// <inheritdoc cref="Triangulator.Triangulate(IList{Vector3},IList{int})"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Indices")]
-    public static int Triangulate(IList<Vector3F> polygonVertices, IList<int> triangleIndices)
+    public static int Triangulate(IList<Vector3> polygonVertices, IList<int> triangleIndices)
     {
       return Triangulate(polygonVertices, 0, polygonVertices.Count, triangleIndices);
     }
 
 
-    /// <inheritdoc cref="Triangulator.Triangulate(IList{Vector3F},int,int,IList{int})"/>
+    /// <inheritdoc cref="Triangulator.Triangulate(IList{Vector3},int,int,IList{int})"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Indices")]
-    public static int Triangulate(IList<Vector3F> polygonVertices, int startIndex, int vertexCount, IList<int> triangleIndices)
+    public static int Triangulate(IList<Vector3> polygonVertices, int startIndex, int vertexCount, IList<int> triangleIndices)
     {
       if (vertexCount < 3)
         return 0;

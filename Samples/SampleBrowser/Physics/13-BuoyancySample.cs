@@ -5,7 +5,8 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Physics
 {
@@ -37,7 +38,7 @@ namespace Samples.Physics
 
       // First, define the shape of the water area. We will create simple pool.
       Shape poolShape = new BoxShape(16, 10, 16);
-      Vector3F poolCenter = new Vector3F(0, -5, 0);
+      Vector3 poolCenter = new Vector3(0, -5, 0);
 
       // Then create a geometric object for the water area. (A GeometricObject is required
       // to position the shape in the world. A GeometricObject stores shape, scale, position,
@@ -70,14 +71,14 @@ namespace Samples.Physics
       Buoyancy buoyancy = new Buoyancy
       {
         AreaOfEffect = new GeometricAreaOfEffect(_waterCollisionObject),
-        Surface = new Plane(Vector3F.Up, 0),
+        Surface = new Plane(Vector3.Up, 0),
 
         Density = 1000f,    // The density of water (1000 kg/m³).
         AngularDrag = 0.4f,
         LinearDrag = 4f,
 
         // Optional: Let the objects drift in the water by setting a flow velocity. 
-        //Velocity = new Vector3F(-0.5f, 0, 0.5f),
+        //Velocity = new Vector3(-0.5f, 0, 0.5f),
       };
       Simulation.ForceEffects.Add(buoyancy);
 
@@ -86,31 +87,31 @@ namespace Samples.Physics
       RigidBody bottom = new RigidBody(new BoxShape(36, 2, 36))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(0, -11, 0)),
+        Pose = new Pose(new Vector3(0, -11, 0)),
       };
       Simulation.RigidBodies.Add(bottom);
       RigidBody left = new RigidBody(new BoxShape(10, 10, 36))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(-13, -5, 0)),
+        Pose = new Pose(new Vector3(-13, -5, 0)),
       };
       Simulation.RigidBodies.Add(left);
       RigidBody right = new RigidBody(new BoxShape(10, 10, 36))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(13, -5, 0)),
+        Pose = new Pose(new Vector3(13, -5, 0)),
       };
       Simulation.RigidBodies.Add(right);
       RigidBody front = new RigidBody(new BoxShape(16, 10, 10))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(0, -5, 13)),
+        Pose = new Pose(new Vector3(0, -5, 13)),
       };
       Simulation.RigidBodies.Add(front);
       RigidBody back = new RigidBody(new BoxShape(16, 10, 10))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(0, -5, -13)),
+        Pose = new Pose(new Vector3(0, -5, -13)),
       };
       Simulation.RigidBodies.Add(back);
 
@@ -121,31 +122,31 @@ namespace Samples.Physics
 
       // Add a swimming board.
       BoxShape raftShape = new BoxShape(4, 0.3f, 4);
-      MassFrame raftMass = MassFrame.FromShapeAndDensity(raftShape, Vector3F.One, 700, 0.01f, 3);
+      MassFrame raftMass = MassFrame.FromShapeAndDensity(raftShape, Vector3.One, 700, 0.01f, 3);
       RigidBody raft = new RigidBody(raftShape, raftMass, null)
       {
-        Pose = new Pose(new Vector3F(0, 4, 0)),
+        Pose = new Pose(new Vector3(0, 4, 0)),
       };
       Simulation.RigidBodies.Add(raft);
 
       // Add some boxes on top of the swimming board.
       BoxShape boxShape = new BoxShape(1, 1, 1);
-      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3F.One, 700, 0.01f, 3);
+      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3.One, 700, 0.01f, 3);
       for (int i = 0; i < 5; i++)
       {
         RigidBody box = new RigidBody(boxShape, boxMass, null)
         {
-          Pose = new Pose(new Vector3F(0, 5 + i * 1.1f, 0)),
+          Pose = new Pose(new Vector3(0, 5 + i * 1.1f, 0)),
         };
         Simulation.RigidBodies.Add(box);
       }
 
       // Add some "heavy stones" represented as spheres.
       SphereShape stoneShape = new SphereShape(0.5f);
-      MassFrame stoneMass = MassFrame.FromShapeAndDensity(stoneShape, Vector3F.One, 2500, 0.01f, 3);
+      MassFrame stoneMass = MassFrame.FromShapeAndDensity(stoneShape, Vector3.One, 2500, 0.01f, 3);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-9, 9);
+        Vector3 position = RandomHelper.Random.NextVector3(-9, 9);
         position.Y = 5;
 
         RigidBody stone = new RigidBody(stoneShape, stoneMass, null)
@@ -157,10 +158,10 @@ namespace Samples.Physics
 
       // Add some very light objects.
       CylinderShape cylinderShape = new CylinderShape(0.3f, 1);
-      MassFrame cylinderMass = MassFrame.FromShapeAndDensity(cylinderShape, Vector3F.One, 500, 0.01f, 3);
+      MassFrame cylinderMass = MassFrame.FromShapeAndDensity(cylinderShape, Vector3.One, 500, 0.01f, 3);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-9, 9);
+        Vector3 position = RandomHelper.Random.NextVector3(-9, 9);
         position.Y = 5;
         QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
 

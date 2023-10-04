@@ -39,12 +39,12 @@ namespace DigitalRise.Graphics.Rendering
 
     // See OcclusionCulling.fx for description.
     public Vector2 Pixel;
-    public Vector3F Minimum;
-    public Vector3F Maximum;
+    public Vector3 Minimum;
+    public Vector3 Maximum;
 
     // For LOD metric and distance culling.
-    public Vector3F Position;
-    public Vector3F Scale;
+    public Vector3 Position;
+    public Vector3 Scale;
     public float MaxDistance;
     #endregion
 

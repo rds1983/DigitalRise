@@ -49,7 +49,7 @@ MeshRenderer class.",
 
       _model = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl").Clone();
       var meshNode = _model.FindFirstMeshNode();
-      meshNode.ScaleLocal = new Vector3F(1, 2, 1);
+      meshNode.ScaleLocal = new Vector3(1, 2, 1);
       var mesh = meshNode.Mesh;
       var timeline = new TimelineClip(mesh.Animations.Values.First())
       {

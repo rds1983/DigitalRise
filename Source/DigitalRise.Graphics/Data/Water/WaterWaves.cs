@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -86,7 +86,7 @@ namespace DigitalRise.Graphics
     /// <value>
     /// The center of the first tile in world space. (Only x and z are relevant. y is ignored.)
     /// </value>
-    public Vector3F TileCenter { get; protected set; }
+    public Vector3 TileCenter { get; protected set; }
 
 
     /// <summary>

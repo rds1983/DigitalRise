@@ -70,8 +70,8 @@ light AABB). Noise is used to hide banding artifacts.",
 
       //GameObjectService.Objects.Add(new GroundObject(Services));
       // Add a ground plane with some detail to see the water refractions.
-      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3F(0, 1, 0), 0)));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3F(0, 0.001f, 0))));
+      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(new Vector3(0, 1, 0), 0)));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Gravel/Gravel.drmdl", 1, new Pose(new Vector3(0, 0.001f, 0))));
 
       GameObjectService.Objects.Add(new DudeObject(Services));
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
@@ -92,7 +92,7 @@ light AABB). Noise is used to hide banding artifacts.",
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -115,7 +115,7 @@ light AABB). Noise is used to hide banding artifacts.",
 
           lightNode.Children.Add(new VolumetricLightNode
           {
-            Color = new Vector3F(0.1f),
+            Color = new Vector3(0.1f),
             NumberOfSamples = _numberOfSamples,
             MipMapBias = _mipMapBias,
           });

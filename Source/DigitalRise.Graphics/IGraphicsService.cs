@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Graphics.Effects;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.Graphics.Interop;
 using Microsoft.Xna.Framework;

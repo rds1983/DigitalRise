@@ -22,17 +22,17 @@ tight-fitting oriented bounding box for any random point set.",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // Generate random points.
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       for (int i = 0; i < 100; i++)
-        points.Add(RandomHelper.Random.NextVector3F(-1, 1));
+        points.Add(RandomHelper.Random.NextVector3(-1, 1));
 
       // Apply random transformation to points to make this sample more interesting.
       Matrix44F transform = new Matrix44F(
-        Matrix33F.CreateRotation(RandomHelper.Random.NextQuaternionF()) * Matrix33F.CreateScale(RandomHelper.Random.NextVector3F(0.1f, 2f)),
-        RandomHelper.Random.NextVector3F(-1, 1));
+        Matrix33F.CreateRotation(RandomHelper.Random.NextQuaternionF()) * Matrix33F.CreateScale(RandomHelper.Random.NextVector3(0.1f, 2f)),
+        RandomHelper.Random.NextVector3(-1, 1));
 
       for (int i = 0; i < points.Count; i++)
         points[i] = transform.TransformPosition(points[i]);
@@ -45,7 +45,7 @@ tight-fitting oriented bounding box for any random point set.",
       TriangleMesh convexHullMesh = convexHull.ToTriangleMesh();
 
       // Compute a tight-fitting oriented bounding box.
-      Vector3F boundingBoxExtent;   // The bounding box dimensions (widths in X, Y and Z).
+      Vector3 boundingBoxExtent;   // The bounding box dimensions (widths in X, Y and Z).
       Pose boundingBoxPose;         // The pose (world space position and orientation) of the bounding box.
       GeometryHelper.ComputeBoundingBox(points, out boundingBoxExtent, out boundingBoxPose);
       // (Note: The GeometryHelper also contains methods to compute a bounding sphere.)
@@ -54,7 +54,7 @@ tight-fitting oriented bounding box for any random point set.",
       foreach (var point in points)
         debugRenderer.DrawPoint(point, Color.White, true);
 
-      debugRenderer.DrawShape(new TriangleMeshShape(convexHullMesh), Pose.Identity, Vector3F.One, Color.Violet, false, false);
+      debugRenderer.DrawShape(new TriangleMeshShape(convexHullMesh), Pose.Identity, Vector3.One, Color.Violet, false, false);
       debugRenderer.DrawBox(boundingBoxExtent.X, boundingBoxExtent.Y, boundingBoxExtent.Z, boundingBoxPose, Color.Red, true, false);
     }
   }

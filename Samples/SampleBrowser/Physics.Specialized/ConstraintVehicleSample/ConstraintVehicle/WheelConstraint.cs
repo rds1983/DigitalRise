@@ -6,10 +6,10 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -54,7 +54,7 @@ namespace DigitalRise.Physics.Specialized
     #region Properties
     //--------------------------------------------------------------
 
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -66,9 +66,9 @@ namespace DigitalRise.Physics.Specialized
     }
 
 
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
-      get { return Vector3F.Zero; }
+      get { return Vector3.Zero; }
     }
     #endregion
 
@@ -108,12 +108,12 @@ namespace DigitalRise.Physics.Specialized
       Pose anchorPoseA = BodyA.Pose * new Pose(_wheel.Offset);
 
       // The ground contact position relative to the anchor pose.
-      Vector3F relativePosition = anchorPoseA.ToLocalPosition(_wheel.GroundPosition);
+      Vector3 relativePosition = anchorPoseA.ToLocalPosition(_wheel.GroundPosition);
 
       // Radius vectors from the centers of mass to the points where the 
       // suspension forces should be applied:
-      Vector3F rA = anchorPoseA.Position - BodyA.PoseCenterOfMass.Position;
-      Vector3F rB = _wheel.GroundPosition - BodyB.PoseCenterOfMass.Position;
+      Vector3 rA = anchorPoseA.Position - BodyA.PoseCenterOfMass.Position;
+      Vector3 rB = _wheel.GroundPosition - BodyB.PoseCenterOfMass.Position;
 
       // Get some simulation settings.
       float deltaTime = Simulation.Settings.Timing.FixedTimeStep;
@@ -141,7 +141,7 @@ namespace DigitalRise.Physics.Specialized
 
         _suspensionSpringConstraint.TargetRelativeVelocity = MathHelper.Clamp(deviation * errorReduction / deltaTime, -maxErrorCorrectionVelocity, maxErrorCorrectionVelocity);
         _suspensionSpringConstraint.Softness = softness / deltaTime;
-        _suspensionSpringConstraint.Prepare(BodyA, BodyB, -suspensionAxis, -Vector3F.Cross(rA, suspensionAxis), suspensionAxis, Vector3F.Cross(rB, suspensionAxis));
+        _suspensionSpringConstraint.Prepare(BodyA, BodyB, -suspensionAxis, -Vector3.Cross(rA, suspensionAxis), suspensionAxis, Vector3.Cross(rB, suspensionAxis));
       }
 
       // ----- Set up the hard suspension limit:
@@ -154,7 +154,7 @@ namespace DigitalRise.Physics.Specialized
         float errorReduction = Simulation.Settings.Constraints.ContactErrorReduction;
 
         _suspensionLimitConstraint.TargetRelativeVelocity = MathHelper.Clamp(deviation * errorReduction / deltaTime, -maxErrorCorrectionVelocity, maxErrorCorrectionVelocity);
-        _suspensionLimitConstraint.Prepare(BodyA, BodyB, -suspensionAxis, -Vector3F.Cross(rA, suspensionAxis), suspensionAxis, Vector3F.Cross(rB, suspensionAxis));
+        _suspensionLimitConstraint.Prepare(BodyA, BodyB, -suspensionAxis, -Vector3.Cross(rA, suspensionAxis), suspensionAxis, Vector3.Cross(rB, suspensionAxis));
       }
       else
       {
@@ -167,10 +167,10 @@ namespace DigitalRise.Physics.Specialized
 
       // ---- Set up lateral friction constraint:
       _sideConstraint.TargetRelativeVelocity = 0;
-      _sideConstraint.Prepare(BodyA, BodyB, -_wheel.GroundRight, -Vector3F.Cross(rA, _wheel.GroundRight), _wheel.GroundRight, Vector3F.Cross(rB, _wheel.GroundRight));
+      _sideConstraint.Prepare(BodyA, BodyB, -_wheel.GroundRight, -Vector3.Cross(rA, _wheel.GroundRight), _wheel.GroundRight, Vector3.Cross(rB, _wheel.GroundRight));
 
       // ----- Set up forward constraint (motor, brake, friction):
-      _forwardConstraint.Prepare(BodyA, BodyB, -_wheel.GroundForward, -Vector3F.Cross(rA, _wheel.GroundForward), _wheel.GroundForward, Vector3F.Cross(rB, _wheel.GroundForward));
+      _forwardConstraint.Prepare(BodyA, BodyB, -_wheel.GroundForward, -Vector3.Cross(rA, _wheel.GroundForward), _wheel.GroundForward, Vector3.Cross(rB, _wheel.GroundForward));
 
       if (Math.Abs(_wheel.MotorForce) > Math.Abs(_wheel.BrakeForce))
       {
@@ -240,9 +240,9 @@ namespace DigitalRise.Physics.Specialized
 
         // The friction force is limited by the normal force that presses onto the ground:
         //   MaxFrictionForce = µ * NormalForce
-        Vector3F suspensionAxis = _suspensionSpringConstraint.JLinB;
+        Vector3 suspensionAxis = _suspensionSpringConstraint.JLinB;
         float normalImpulse = _suspensionSpringConstraint.ConstraintImpulse
-                              + _suspensionLimitConstraint.ConstraintImpulse * Vector3F.Dot(_wheel.GroundNormal, suspensionAxis);
+                              + _suspensionLimitConstraint.ConstraintImpulse * Vector3.Dot(_wheel.GroundNormal, suspensionAxis);
 
         // Limit normal impulse. This can help, for example, after a jump when the
         // car hits the ground and creates a very high normal impulse. This could make
@@ -254,8 +254,8 @@ namespace DigitalRise.Physics.Specialized
         float maxFrictionImpulse = _wheel.Friction * Math.Abs(normalImpulse);
 
         // Compute combined force parallel to ground surface.
-        Vector3F tangentImpulse = newTotalForwardImpulse * _wheel.GroundForward + newTotalSideImpulse * _wheel.GroundRight;
-        float tangentImpulseLength = tangentImpulse.Length;
+        Vector3 tangentImpulse = newTotalForwardImpulse * _wheel.GroundForward + newTotalSideImpulse * _wheel.GroundRight;
+        float tangentImpulseLength = tangentImpulse.Length();
         if (tangentImpulseLength > maxFrictionImpulse)
         {
           // Not enough traction - that means, we are sliding!

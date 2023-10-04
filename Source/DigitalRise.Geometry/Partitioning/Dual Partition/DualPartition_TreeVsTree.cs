@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using DigitalRise.Collections;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 
 #if !POOL_ENUMERABLES
 using System.Linq;
@@ -31,7 +31,7 @@ namespace DigitalRise.Geometry.Partitioning
 
 
     /// <inheritdoc/>
-    public override IEnumerable<Pair<T>> GetOverlaps(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose)
+    public override IEnumerable<Pair<T>> GetOverlaps(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose)
     {
       UpdateInternal();
       var overlapsStatic = StaticPartition.GetOverlaps(scale, pose, otherPartition, otherScale, otherPose);

@@ -4,7 +4,7 @@
 
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -18,14 +18,14 @@ namespace DigitalRise.Physics
     // Accumulated external force (gravity, explosions, etc.) without constraint forces (from hinges, contacts, ...)
     // AccumulatedForce = UserForce + force of force effects
     // AccumulatedForce is not reset at the end of a time step.
-    internal Vector3F AccumulatedForce;
-    internal Vector3F AccumulatedTorque;
+    internal Vector3 AccumulatedForce;
+    internal Vector3 AccumulatedTorque;
 
     // User can set a UserForce with AddForce(). This force is not cleared between sub-timesteps.
     // But it is cleared at the end of the time step. To apply a permanent force call AddForce()
     // each frame or use a ForceEffect
-    internal Vector3F UserForce;
-    internal Vector3F UserTorque;
+    internal Vector3 UserForce;
+    internal Vector3 UserTorque;
     #endregion
 
 
@@ -40,16 +40,16 @@ namespace DigitalRise.Physics
     //--------------------------------------------------------------
 
     /// <summary>
-    /// Clears all forces that were set with <see cref="AddForce(Vector3F, Vector3F)"/>,
-    /// <see cref="AddForce(Vector3F)"/> or <see cref="AddTorque"/>.
+    /// Clears all forces that were set with <see cref="AddForce(Vector3, Vector3)"/>,
+    /// <see cref="AddForce(Vector3)"/> or <see cref="AddTorque"/>.
     /// </summary>
     /// <remarks>
     /// Forces are automatically cleared at the end of a simulation time step.
     /// </remarks>
     public void ClearForces()
     {
-      UserForce = new Vector3F();
-      UserTorque = new Vector3F();
+      UserForce = new Vector3();
+      UserTorque = new Vector3();
     }
 
 
@@ -70,14 +70,14 @@ namespace DigitalRise.Physics
     /// The force will influence the body in the next time step. The same force is applied for all
     /// internal sub time steps and the forces will be cleared at the end of a time step. If a
     /// permanent force should act on the rigid body, the method 
-    /// <see cref="AddForce(Vector3F,Vector3F)"/> must be called before each time step - or a 
+    /// <see cref="AddForce(Vector3,Vector3)"/> must be called before each time step - or a 
     /// <see cref="ForceEffect"/> can be used instead.
     /// </remarks>
-    public void AddForce(Vector3F forceWorld, Vector3F positionWorld)
+    public void AddForce(Vector3 forceWorld, Vector3 positionWorld)
     {
-      Vector3F radius = positionWorld - PoseCenterOfMass.Position;
+      Vector3 radius = positionWorld - PoseCenterOfMass.Position;
       UserForce += forceWorld;
-      UserTorque += Vector3F.Cross(radius, forceWorld);
+      UserTorque += Vector3.Cross(radius, forceWorld);
     }
 
 
@@ -89,10 +89,10 @@ namespace DigitalRise.Physics
     /// The force will influence the body in the next time step. The same force is applied for all
     /// internal sub time steps and the forces will be cleared at the end of a time step. If a
     /// permanent force should act on the rigid body, the method 
-    /// <see cref="AddForce(Vector3F)"/> must be called before each time step - or a 
+    /// <see cref="AddForce(Vector3)"/> must be called before each time step - or a 
     /// <see cref="ForceEffect"/> can be used instead.
     /// </remarks>
-    public void AddForce(Vector3F forceWorld)
+    public void AddForce(Vector3 forceWorld)
     {
       UserForce += forceWorld;
     }
@@ -108,7 +108,7 @@ namespace DigitalRise.Physics
     /// permanent torque should act on the rigid body, the method <see cref="AddTorque"/> must be
     /// called before each time step - or a <see cref="ForceEffect"/> can be used instead.
     /// </remarks>
-    public void AddTorque(Vector3F torqueWorld)
+    public void AddTorque(Vector3 torqueWorld)
     {
       UserTorque += torqueWorld;
     }

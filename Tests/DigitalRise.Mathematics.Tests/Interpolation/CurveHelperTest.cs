@@ -69,12 +69,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var s = new BezierSegment3F
       {
-        Point1 = new Vector3F(1, 1, 2),
-        ControlPoint1 = new Vector3F(1, 1, 2),
-        ControlPoint2 = new Vector3F(1, 1, 2),
-        Point2 = new Vector3F(1, 1, 2),
+        Point1 = new Vector3(1, 1, 2),
+        ControlPoint1 = new Vector3(1, 1, 2),
+        ControlPoint2 = new Vector3(1, 1, 2),
+        Point2 = new Vector3(1, 1, 2),
       };
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       s.Flatten(points, 1, 1);
       Assert.AreEqual(0, points.Count);
     }
@@ -103,12 +103,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var s = new BezierSegment3F
       {
-        Point1 = new Vector3F(1),
-        ControlPoint1 = new Vector3F(2),
-        ControlPoint2 = new Vector3F(3),
-        Point2 = new Vector3F(4),
+        Point1 = new Vector3(1),
+        ControlPoint1 = new Vector3(2),
+        ControlPoint2 = new Vector3(3),
+        Point2 = new Vector3(4),
       };
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       s.Flatten(points, 1, 10);
       Assert.AreEqual(2, points.Count);
       Assert.IsTrue(points.Contains(s.Point1));
@@ -139,15 +139,15 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var points = new[]
       {
-        new Vector3F(1, 2, 0.123f), new Vector3F(12, 13, 123),
-        new Vector3F(1231, 2.2f, 0.123f), new Vector3F(5, 122, 123),
-        new Vector3F(-11, 2, 0.123f), new Vector3F(-1, 123, 123),
-        new Vector3F(-123.123f, 122, 0.123f), new Vector3F(-2312, -123, 123),
+        new Vector3(1, 2, 0.123f), new Vector3(12, 13, 123),
+        new Vector3(1231, 2.2f, 0.123f), new Vector3(5, 122, 123),
+        new Vector3(-11, 2, 0.123f), new Vector3(-1, 123, 123),
+        new Vector3(-123.123f, 122, 0.123f), new Vector3(-2312, -123, 123),
       };
-      var length = (points[1] - points[0]).Length
-                   + (points[3] - points[2]).Length
-                   + (points[5] - points[4]).Length
-                   + (points[7] - points[6]).Length;
+      var length = (points[1] - points[0]).Length()
+                   + (points[3] - points[2]).Length()
+									 + (points[5] - points[4]).Length()
+									 + (points[7] - points[6]).Length();
       Assert.AreEqual(length, CurveHelper.GetLength(points.ToList()));
     }
   }

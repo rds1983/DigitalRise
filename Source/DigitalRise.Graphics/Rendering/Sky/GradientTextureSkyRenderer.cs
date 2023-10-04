@@ -130,7 +130,7 @@ namespace DigitalRise.Graphics.Rendering
 
       // Camera properties
       var cameraNode = context.CameraNode;
-      Matrix view = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3F());
+      Matrix view = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3());
       _parameterView.SetValue(view);
       Matrix projection = cameraNode.Camera.Projection;
       _parameterProjection.SetValue(projection);

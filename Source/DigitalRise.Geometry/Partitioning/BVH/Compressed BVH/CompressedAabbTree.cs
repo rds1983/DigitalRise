@@ -35,7 +35,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using System.ComponentModel;
 using System.Dynamic;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -113,8 +113,8 @@ namespace DigitalRise.Geometry.Partitioning
     private HashSet<Pair<int>> _selfOverlaps;
 
     internal Aabb _aabb;
-    internal Vector3F _quantizationFactor;
-    internal Vector3F _dequantizationFactor;
+    internal Vector3 _quantizationFactor;
+    internal Vector3 _dequantizationFactor;
 
     // Synchronization object for Update().
     private readonly object _syncRoot = new object();
@@ -634,11 +634,11 @@ namespace DigitalRise.Geometry.Partitioning
 
       // ----- Compute quantization factor.
       // Add a margin to the AABB to avoid divisions by zero.
-      Vector3F margin = new Vector3F(AabbMargin);
+      Vector3 margin = new Vector3(AabbMargin);
       _aabb.Minimum = aabb.Minimum - margin;
       _aabb.Maximum = aabb.Maximum + margin;
 
-      Vector3F extent = _aabb.Extent;
+      Vector3 extent = _aabb.Extent;
       if (Numeric.IsNaN(extent.X) || Numeric.IsNaN(extent.Y) || Numeric.IsNaN(extent.Z))
         throw new GeometryException("Cannot build CompressedAabbTree. The AABB of some items contains NaN.");
       if (float.IsInfinity(extent.X) || float.IsInfinity(extent.Y) || float.IsInfinity(extent.Z))
@@ -648,8 +648,8 @@ namespace DigitalRise.Geometry.Partitioning
       // The max value used for quantization is ushort.MaxValue minus 2: In order to calculate 
       // a conservative AABB we need to round the quantized min values down and the max values 
       // up.
-      _quantizationFactor = new Vector3F(65533) / extent;
-      _dequantizationFactor = Vector3F.One / _quantizationFactor;
+      _quantizationFactor = new Vector3(65533) / extent;
+      _dequantizationFactor = Vector3.One / _quantizationFactor;
     }
 
 
@@ -680,14 +680,14 @@ namespace DigitalRise.Geometry.Partitioning
     private void SetAabb(ref Node node, Aabb aabb)
     {
       Debug.Assert(
-        aabb.Minimum >= _aabb.Minimum
-        && aabb.Minimum <= _aabb.Maximum
-        && aabb.Maximum >= _aabb.Minimum
-        && aabb.Maximum <= _aabb.Maximum,
+        aabb.Minimum.IsGreaterOrEqual(_aabb.Minimum)
+        && aabb.Minimum.IsLessOrEqual(_aabb.Maximum)
+        && aabb.Maximum.IsGreaterOrEqual(_aabb.Minimum)
+        && aabb.Maximum.IsLessOrEqual(_aabb.Maximum),
         "Child node has invalid AABB. Child AABB must be contained in root AABB.");
 
-      Vector3F quantizedMinimum = (aabb.Minimum - _aabb.Minimum) * _quantizationFactor;
-      Vector3F quantizedMaximum = (aabb.Maximum - _aabb.Minimum) * _quantizationFactor;
+      Vector3 quantizedMinimum = (aabb.Minimum - _aabb.Minimum) * _quantizationFactor;
+      Vector3 quantizedMaximum = (aabb.Maximum - _aabb.Minimum) * _quantizationFactor;
 
       // Convert quantized minimum to ushort. (Subtract 1 to ensure that AABB is conservative.)
       node.MinimumX = (quantizedMinimum.X > 1.0f) ? (ushort)(quantizedMinimum.X - 1.0f) : (ushort)0;

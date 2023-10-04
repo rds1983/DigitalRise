@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -137,7 +137,7 @@ namespace DigitalRise.Geometry.Partitioning
 
     // TODO: Do we need this?
     // IEnumerable<T> GetOverlaps(IEnumerable<Aabb> aabbs);
-    // IEnumerable<T> GetOverlaps(Aabb aabb, Vector3F start, Vector3F end)
+    // IEnumerable<T> GetOverlaps(Aabb aabb, Vector3 start, Vector3 end)
     // event EventHandler<OverlapEventArgs<T>> OverlapsChanged;
 
 
@@ -335,7 +335,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// <paramref name="otherPartition"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-    IEnumerable<Pair<T>> GetOverlaps(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose);
+    IEnumerable<Pair<T>> GetOverlaps(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose);
 
 
     /// <overloads>

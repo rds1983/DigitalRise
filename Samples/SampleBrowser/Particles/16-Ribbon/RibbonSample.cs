@@ -43,8 +43,8 @@ namespace Samples.Particles
       // Create a rigid body for the sphere.
       _rigidBody = new RigidBody(new SphereShape(0.5f))
       {
-        Pose = new Pose(new Vector3F(-3, 0, 0)),
-        LinearVelocity = new Vector3F(10, 10, -3f),
+        Pose = new Pose(new Vector3(-3, 0, 0)),
+        LinearVelocity = new Vector3(10, 10, -3f),
       };
       Simulation.RigidBodies.Add(_rigidBody);
 

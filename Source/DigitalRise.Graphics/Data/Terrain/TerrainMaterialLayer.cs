@@ -143,9 +143,9 @@ namespace DigitalRise.Graphics
     /// This is material parameter. Changing this property affects all terrain layers that share
     /// the same material.
     /// </remarks>
-    public Vector3F DiffuseColor
+    public Vector3 DiffuseColor
     {
-      get { return (Vector3F)GetParameter<Vector3>(true, "DiffuseColor"); }
+      get { return (Vector3)GetParameter<Vector3>(true, "DiffuseColor"); }
       set { SetParameter(true, "DiffuseColor", (Vector3)value); }
     }
 
@@ -158,9 +158,9 @@ namespace DigitalRise.Graphics
     /// This is material parameter. Changing this property affects all terrain layers that share
     /// the same material.
     /// </remarks>
-    public Vector3F SpecularColor
+    public Vector3 SpecularColor
     {
-      get { return (Vector3F)GetParameter<Vector3>(true, "SpecularColor"); }
+      get { return (Vector3)GetParameter<Vector3>(true, "SpecularColor"); }
       set { SetParameter(true, "SpecularColor", (Vector3)value); }
     }
 
@@ -807,8 +807,8 @@ namespace DigitalRise.Graphics
       FadeOutStart = int.MaxValue;
       FadeOutEnd = int.MaxValue;
       TileSize = 1;
-      DiffuseColor = new Vector3F(1, 1, 1);
-      SpecularColor = new Vector3F(1, 1, 1);
+      DiffuseColor = new Vector3(1, 1, 1);
+      SpecularColor = new Vector3(1, 1, 1);
       SpecularPower = 10;
       Alpha = 1;
       DiffuseTexture = graphicService.GetDefaultTexture2DWhite();

@@ -49,7 +49,7 @@ namespace Samples.Graphics
 
       // Add some static objects.
       GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 1, Pose.Identity));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 1, new Pose(new Vector3F(3, 0, 1), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 1, new Pose(new Vector3(3, 0, 1), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
 
       // Add a dynamic object.
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));

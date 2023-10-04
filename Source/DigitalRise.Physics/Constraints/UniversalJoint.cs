@@ -116,8 +116,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != ErrorReduction)
         {
-          _linearLimit.ErrorReduction = new Vector3F(value);
-          _angularLimit.ErrorReduction = new Vector3F(value);
+          _linearLimit.ErrorReduction = new Vector3(value);
+          _angularLimit.ErrorReduction = new Vector3(value);
           OnChanged();
         }
       }
@@ -141,8 +141,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Softness)
         {
-          _linearLimit.Softness = new Vector3F(value);
-          _angularLimit.Softness = new Vector3F(value);
+          _linearLimit.Softness = new Vector3(value);
+          _angularLimit.Softness = new Vector3(value);
           OnChanged();
         }
       }
@@ -164,8 +164,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Minimum)
         {
-          _angularLimit.Minimum = new Vector3F(value.X, 0, _angularLimit.Minimum.Z);
-          _angularLimit.Maximum = new Vector3F(_angularLimit.Maximum.X, 0, -value.Y);
+          _angularLimit.Minimum = new Vector3(value.X, 0, _angularLimit.Minimum.Z);
+          _angularLimit.Maximum = new Vector3(_angularLimit.Maximum.X, 0, -value.Y);
           OnChanged();
         }
       }
@@ -187,8 +187,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Maximum)
         {
-          _angularLimit.Minimum = new Vector3F(_angularLimit.Minimum.X, 0, -value.Y);
-          _angularLimit.Maximum = new Vector3F(value.X, 0, _angularLimit.Maximum.Z);
+          _angularLimit.Minimum = new Vector3(_angularLimit.Minimum.X, 0, -value.Y);
+          _angularLimit.Maximum = new Vector3(value.X, 0, _angularLimit.Maximum.Z);
           OnChanged();
         }
       }
@@ -211,7 +211,7 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _angularLimit.Restitution = new Vector3F(value);
+          _angularLimit.Restitution = new Vector3(value);
           OnChanged();
         }
       }
@@ -232,8 +232,8 @@ namespace DigitalRise.Physics.Constraints
       {
         if (value != Restitution)
         {
-          _linearLimit.MaxForce = new Vector3F(value);
-          _angularLimit.MaxForce = new Vector3F(value);
+          _linearLimit.MaxForce = new Vector3(value);
+          _angularLimit.MaxForce = new Vector3(value);
           OnChanged();
         }
       }
@@ -241,7 +241,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
@@ -251,7 +251,7 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
@@ -278,13 +278,13 @@ namespace DigitalRise.Physics.Constraints
     {
       _linearLimit = new LinearLimit
       {
-        Minimum = new Vector3F(0, 0, 0),
-        Maximum = new Vector3F(0, 0, 0),
+        Minimum = new Vector3(0, 0, 0),
+        Maximum = new Vector3(0, 0, 0),
       };
       _angularLimit = new AngularLimit
       {
-        Minimum = new Vector3F(-ConstantsF.PiOver4, 0, -ConstantsF.PiOver4),
-        Maximum = new Vector3F(ConstantsF.PiOver4, 0, ConstantsF.PiOver4),
+        Minimum = new Vector3(-ConstantsF.PiOver4, 0, -ConstantsF.PiOver4),
+        Maximum = new Vector3(ConstantsF.PiOver4, 0, ConstantsF.PiOver4),
       };
     }
     #endregion

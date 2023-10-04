@@ -31,7 +31,7 @@ decals are not created using generic particle systems",
       : base(game)
     {
       GraphicsScreen.DrawReticle = true;
-      SetCamera(new Vector3F(0, 2, 6), 0, 0);
+      SetCamera(new Vector3(0, 2, 6), 0, 0);
 
       _decals = Decals.Create(Services);
       ParticleSystemService.ParticleSystems.Add(_decals);
@@ -46,8 +46,8 @@ decals are not created using generic particle systems",
       if (InputService.IsPressed(MouseButtons.Left, true) || InputService.IsPressed(Buttons.RightTrigger, true, LogicalPlayerIndex.One))
       {
         var cameraPose = GraphicsScreen.CameraNode.PoseWorld;
-        Vector3F cameraPosition = cameraPose.Position;
-        Vector3F cameraDirection = cameraPose.ToWorldDirection(Vector3F.Forward);
+        Vector3 cameraPosition = cameraPose.Position;
+        Vector3 cameraDirection = cameraPose.ToWorldDirection(Vector3.Forward);
 
         // Create a ray for picking.
         RayShape ray = new RayShape(cameraPosition, cameraDirection, 1000);
@@ -82,14 +82,14 @@ decals are not created using generic particle systems",
           {
             // We initialize the particle parameters Position, Normal and Axis manually using
             // the results of the collision detection:
-            var positionParameter = _decals.Parameters.Get<Vector3F>(ParticleParameterNames.Position);
+            var positionParameter = _decals.Parameters.Get<Vector3>(ParticleParameterNames.Position);
             positionParameter.Values[particleIndex] = hitPosition + normal * 0.01f;  // We add a slight 1 cm offset to avoid z-fighting.
 
-            var normalParameter = _decals.Parameters.Get<Vector3F>("Normal");
+            var normalParameter = _decals.Parameters.Get<Vector3>("Normal");
             normalParameter.Values[particleIndex] = normal;
 
-            var axisParameter = _decals.Parameters.Get<Vector3F>("Axis");
-            axisParameter.Values[particleIndex] = (normal == Vector3F.Up) ? Vector3F.Backward : Vector3F.Up;
+            var axisParameter = _decals.Parameters.Get<Vector3>("Axis");
+            axisParameter.Values[particleIndex] = (normal == Vector3.Up) ? Vector3.Backward : Vector3.Up;
           }
         }
       }

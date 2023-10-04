@@ -14,7 +14,7 @@ namespace Samples.Animation
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 1, 3), 0, 0);
+      SetCamera(new Vector3(0, 1, 3), 0, 0);
 
       // Add gravity and damping to the physics simulation. 
       // Note: The physics simulation is only used by the ragdoll samples.

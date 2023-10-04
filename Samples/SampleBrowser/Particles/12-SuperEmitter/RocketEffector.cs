@@ -1,8 +1,7 @@
 ﻿using System;
 using DigitalRise.Geometry;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -16,8 +15,8 @@ namespace Samples.Particles
   {
     // Needed particle parameters.
     private IParticleParameter<float> _normalizedAgeParameter;
-    private IParticleParameter<Vector3F> _positionParameter;
-    private IParticleParameter<Vector3F> _directionParameter;
+    private IParticleParameter<Vector3> _positionParameter;
+    private IParticleParameter<Vector3> _directionParameter;
     private IParticleParameter<float> _linearSpeedParameter;
     private IParticleParameter<ParticleSystem> _trailParameter;
 
@@ -32,8 +31,8 @@ namespace Samples.Particles
     protected override void OnRequeryParameters()
     {
       _normalizedAgeParameter = ParticleSystem.Parameters.Get<float>(ParticleParameterNames.NormalizedAge);
-      _positionParameter = ParticleSystem.Parameters.Get<Vector3F>(ParticleParameterNames.Position);
-      _directionParameter = ParticleSystem.Parameters.Get<Vector3F>(ParticleParameterNames.Direction);
+      _positionParameter = ParticleSystem.Parameters.Get<Vector3>(ParticleParameterNames.Position);
+      _directionParameter = ParticleSystem.Parameters.Get<Vector3>(ParticleParameterNames.Direction);
       _linearSpeedParameter = ParticleSystem.Parameters.Get<float>(ParticleParameterNames.LinearSpeed);
 
       // The "RocketTrail" parameter is required and added by this effector.
@@ -96,7 +95,7 @@ namespace Samples.Particles
           // Set the rocket particle velocity as the "EmitterVelocity" of the RocketTrail. This
           // velocity influences the start velocities of the rocket trails smoke particles.
           // The smoke should initially move with the rocket.
-          trail.Parameters.Get<Vector3F>(ParticleParameterNames.EmitterVelocity).DefaultValue = directions[i] * speeds[i];
+          trail.Parameters.Get<Vector3>(ParticleParameterNames.EmitterVelocity).DefaultValue = directions[i] * speeds[i];
         }
         else
         {
@@ -124,7 +123,7 @@ namespace Samples.Particles
           // Trigger an explosion add the position where the rocket particle has died.
           var explosion = RocketExplosion.Obtain();
           explosion.Pose = new Pose(positions[i]);
-          explosion.Parameters.Get<Vector3F>(ParticleParameterNames.EmitterVelocity).DefaultValue = directions[i] * speeds[i];
+          explosion.Parameters.Get<Vector3>(ParticleParameterNames.EmitterVelocity).DefaultValue = directions[i] * speeds[i];
           ParticleSystem.Children.Add(explosion);
 
           // Note: The RocketExplosion as a ParticleSystemRecycler effector that will automatically

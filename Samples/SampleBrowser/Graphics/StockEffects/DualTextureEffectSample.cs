@@ -18,7 +18,7 @@ namespace Samples.Graphics
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(8, 6, 8), ConstantsF.PiOver4, -0.4f);
+      SetCamera(new Vector3(8, 6, 8), ConstantsF.PiOver4, -0.4f);
 
       // Load the dual-textured model. This model is processed using the DigitalRise 
       // Model Processor - not the default XNA model processor!
@@ -36,7 +36,7 @@ namespace Samples.Graphics
       // model in this sample.
       modelNode = modelNode.Clone();
 
-      modelNode.ScaleLocal = new Vector3F(0.5f);
+      modelNode.ScaleLocal = new Vector3(0.5f);
 
       // Add the model to the scene.
       GraphicsScreen.Scene.Children.Add(modelNode);

@@ -4,11 +4,12 @@
 
 using System;
 using DigitalRise.Geometry.Collisions;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -39,7 +40,7 @@ namespace DigitalRise.Physics.Specialized
 
     protected override void OnApply()
     {
-      Vector3F up = _cc.UpVector;
+      Vector3 up = _cc.UpVector;
       float height = _cc.Height;                     // The height of the capsule (including the spherical caps).
       float radius = _cc.Width / 2;                  // The radius of the capsule.
       float bottomOfCylinder = -height / 2 + radius; // The bottom position of the cylindric part.
@@ -52,7 +53,7 @@ namespace DigitalRise.Physics.Specialized
       // We also count the number of contacts on the bottom spherical cap and compute the 
       // sum of the velocities of the contacts.
       var numberOfGroundContacts = 0;
-      var groundVelocity = Vector3F.Zero;
+      var groundVelocity = Vector3.Zero;
 
       // Loop over all contact constraints in the simulation to get all contacts of the CC. 
       // --> Apply gravity impulses on ground contacts. 
@@ -76,7 +77,7 @@ namespace DigitalRise.Physics.Specialized
         var position = swapped ? contact.PositionBLocal : contact.PositionALocal;
         var normal = swapped ? -contact.Normal : contact.Normal; // The normal points from CC to touchedBody.
 
-        if (Vector3F.Dot(position, up) < bottomOfCylinder)
+        if (Vector3.Dot(position, up) < bottomOfCylinder)
         {
           // ----- The contact is on the bottom spherical cap.
           // Apply gravity impulse on dynamic bodies.
@@ -119,13 +120,13 @@ namespace DigitalRise.Physics.Specialized
           // and not a brutal kicking.
 
           // Velocity of touchedBody at the contact.
-          Vector3F velocity = touchedBody.GetVelocityOfWorldPoint(contact.Position);
+          Vector3 velocity = touchedBody.GetVelocityOfWorldPoint(contact.Position);
 
           // Relative velocity between CC and touchedBody.
-          Vector3F relativeVelocity = _cc._lastDesiredVelocity - velocity;
+          Vector3 relativeVelocity = _cc._lastDesiredVelocity - velocity;
 
           // Relative velocity in normal direction.
-          float collisionVelocity = Vector3F.Dot(relativeVelocity, normal);
+          float collisionVelocity = Vector3.Dot(relativeVelocity, normal);
           if (collisionVelocity > 0)
           {
             // CC and body are colliding (not separating).
@@ -133,13 +134,13 @@ namespace DigitalRise.Physics.Specialized
             // Compute an impulse that changes the velocity of the contact from velocity to
             // _cc._lastDesiredVelocity.
             var matrixK = touchedBody.ComputeKMatrix(contact.Position);
-            Vector3F impulse = matrixK.Inverse * relativeVelocity;
+            Vector3 impulse = matrixK.Inverse * relativeVelocity;
 
             // Limit the impulse by the max force of the CC.
-            float impulseMagnitude = impulse.Length;
+            float impulseMagnitude = impulse.Length();
             float maxImpulseMagnitude = _cc.PushForce * deltaTime;
             if (impulseMagnitude > maxImpulseMagnitude && impulseMagnitude > 0)
-              impulse.Length = maxImpulseMagnitude;
+              impulse.SetLength(maxImpulseMagnitude);
 
             touchedBody.ApplyImpulse(impulse, contact.Position);
           }

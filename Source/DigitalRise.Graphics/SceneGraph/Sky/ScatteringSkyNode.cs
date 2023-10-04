@@ -8,6 +8,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
@@ -58,7 +59,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the direction to the sun.
     /// </summary>
     /// <value>The direction to the sun. This vector is automatically normalized.</value>
-    public Vector3F SunDirection
+    public Vector3 SunDirection
     {
       get { return _sunDirection; }
       set
@@ -67,7 +68,7 @@ namespace DigitalRise.Graphics.SceneGraph
         _sunDirection.TryNormalize();
       }
     }
-    private Vector3F _sunDirection;
+    private Vector3 _sunDirection;
 
 
     /// <summary>
@@ -77,7 +78,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The color of the sun light (outside the atmosphere). The default value is (1, 1, 1).
     /// Non-white sun colors can be used for dramatic effects or alien planet.
     /// </value>
-    public Vector3F SunColor { get; set; }
+    public Vector3 SunColor { get; set; }
 
 
     /// <summary>
@@ -133,14 +134,14 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the scatter/extinction coefficients for Rayleigh scattering.
     /// </summary>
     /// <value>The scatter/extinction coefficients for Rayleigh scattering.</value>
-    public Vector3F BetaRayleigh { get; set; }
+    public Vector3 BetaRayleigh { get; set; }
 
 
     /// <summary>
     /// Gets or sets the scatter/extinction coefficients for Mie scattering.
     /// </summary>
     /// <value>The scatter/extinction coefficients for Mie scattering.</value>
-    public Vector3F BetaMie { get; set; }
+    public Vector3 BetaMie { get; set; }
 
 
     /// <summary>
@@ -222,7 +223,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// 0.5, then the average color is shifted down to the horizon. If this value is greater than 
     /// 0.5, then the average color is shifted up to the zenith.
     /// </remarks>
-    public Vector3F BaseHorizonColor { get; set; }
+    public Vector3 BaseHorizonColor { get; set; }
 
 
     /// <summary>
@@ -233,7 +234,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The default value is (0, 0, 0).
     /// </value>
     /// <inheritdoc cref="BaseHorizonColor"/>
-    public Vector3F BaseZenithColor { get; set; }
+    public Vector3 BaseZenithColor { get; set; }
 
     
     /// <summary>
@@ -259,8 +260,8 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </summary>
     public ScatteringSkyNode()
     {
-      SunDirection = new Vector3F(0, 1, 0);
-      SunColor = new Vector3F(1);
+      SunDirection = new Vector3(0, 1, 0);
+      SunColor = new Vector3(1);
       SunIntensity = 5;
       PlanetRadius = 6360e3f;
       AtmosphereHeight = 160e3f;
@@ -268,9 +269,9 @@ namespace DigitalRise.Graphics.SceneGraph
       ScaleHeight = 15e3f;
       NumberOfSamples = 5;
 
-      //BetaRayleigh = new Vector3F(5.8e-6f, 13.5e-6f, 23.1e-6f);
-      BetaRayleigh = new Vector3F(6.95e-6f, 11.8e-6f, 24.4e-6f);
-      BetaMie = new Vector3F(2e-5f);
+      //BetaRayleigh = new Vector3(5.8e-6f, 13.5e-6f, 23.1e-6f);
+      BetaRayleigh = new Vector3(6.95e-6f, 11.8e-6f, 24.4e-6f);
+      BetaMie = new Vector3(2e-5f);
       // Since we do not have a separate ScaleHeight for Mie, our Mie coefficients
       // must be lower than in nature!
       BetaMie /= 40;
@@ -328,7 +329,7 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    private static float HitSphere(Vector3F rayOrigin, Vector3F rayDirection, float radius, out float enter, out float exit)
+    private static float HitSphere(Vector3 rayOrigin, Vector3 rayDirection, float radius, out float enter, out float exit)
     {
       // Solve the equation:  ||rayOrigin + distance * rayDirection|| = r
       //
@@ -339,8 +340,8 @@ namespace DigitalRise.Graphics.SceneGraph
       // D² is 1 because the rayDirection is normalized.
       //   =>  d = -O.D + sqrt((O.D)² - O² + r²)
 
-      float OD = Vector3F.Dot(rayOrigin, rayDirection);
-      float OO = Vector3F.Dot(rayOrigin, rayOrigin);
+      float OD = Vector3.Dot(rayOrigin, rayDirection);
+      float OO = Vector3.Dot(rayOrigin, rayOrigin);
       float radicand = OD * OD - OO + radius * radius;
       enter = Math.Max(0, -OD - (float)Math.Sqrt(radicand));
       exit = -OD + (float)Math.Sqrt(radicand);
@@ -380,13 +381,13 @@ namespace DigitalRise.Graphics.SceneGraph
     /// This method assumes that the observer is looking into the sky. It returns 0 below the
     /// horizon.
     /// </remarks>
-    public Vector3F GetTransmittance(Vector3F viewDirection)
+    public Vector3 GetTransmittance(Vector3 viewDirection)
     {
       float cosZenith = viewDirection.Y;
       if (cosZenith < 0)
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
-      Vector3F beta = BetaRayleigh + BetaMie;
+      Vector3 beta = BetaRayleigh + BetaMie;
       float opticalDepth = GetOpticalDepthSchueler(ObserverAltitude, ScaleHeight, PlanetRadius, cosZenith);
       return Exp(-opticalDepth * beta);
     }
@@ -411,27 +412,27 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    private void ComputeScattering(Vector3F viewDirection, bool applyPhaseFunction,
-                                   out Vector3F transmittance, 
-                                   out Vector3F colorRayleigh, 
-                                   out Vector3F colorMie)
+    private void ComputeScattering(Vector3 viewDirection, bool applyPhaseFunction,
+                                   out Vector3 transmittance, 
+                                   out Vector3 colorRayleigh, 
+                                   out Vector3 colorMie)
     {
       if (viewDirection.Y < 0)
       {
-        transmittance = Vector3F.Zero;
-        colorRayleigh = Vector3F.Zero;
-        colorMie = Vector3F.Zero;
+        transmittance = Vector3.Zero;
+        colorRayleigh = Vector3.Zero;
+        colorMie = Vector3.Zero;
         return;
       }
 
       float dummy, rayLength;
-      var rayStart = new Vector3F(0, PlanetRadius + ObserverAltitude, 0);
+      var rayStart = new Vector3(0, PlanetRadius + ObserverAltitude, 0);
       HitSphere(rayStart, viewDirection, PlanetRadius + AtmosphereHeight, out dummy, out rayLength);
 
       float neg = /*hitGround ? -1 :*/ 1;
 
       var rayEnd = rayStart + viewDirection * rayLength;
-      float radiusEnd = rayEnd.Length;
+      float radiusEnd = rayEnd.Length();
 
       var zenith = rayEnd / radiusEnd;
 
@@ -439,38 +440,38 @@ namespace DigitalRise.Graphics.SceneGraph
       float h = radiusEnd - PlanetRadius;
 
       // Optical depth of ray end (which is the sky or the terrain).
-      float cosRay = Vector3F.Dot(zenith, neg * viewDirection);
+      float cosRay = Vector3.Dot(zenith, neg * viewDirection);
       float lastRayDepth = GetOpticalDepthSchueler(h, ScaleHeight, PlanetRadius, cosRay);
 
       // Optical depth of ray end to sun.
-      float cosSun = Vector3F.Dot(zenith, SunDirection);
+      float cosSun = Vector3.Dot(zenith, SunDirection);
       float lastSunDepth = GetOpticalDepthSchueler(h, ScaleHeight, PlanetRadius, cosSun);
 
       float segmentLength = rayLength / NumberOfSamples;
-      var T = new Vector3F(1, 1, 1);   // The ray transmittance (camera to sky/terrain).
-      var S = new Vector3F(0, 0, 0);   // The inscattered light.
+      var T = new Vector3(1, 1, 1);   // The ray transmittance (camera to sky/terrain).
+      var S = new Vector3(0, 0, 0);   // The inscattered light.
       for (int i = NumberOfSamples - 1; i >= 0; i--)
       {
         var samplePoint = rayStart + i * segmentLength * viewDirection;
-        float radius = samplePoint.Length;
-        zenith = samplePoint / radius;
+        float radius = samplePoint.Length();
+			zenith = samplePoint / radius;
 
         h = radius - PlanetRadius;
 
-        cosRay = Vector3F.Dot(zenith, neg * viewDirection);
+        cosRay = Vector3.Dot(zenith, neg * viewDirection);
         float sampleRayDepth = GetOpticalDepthSchueler(h, ScaleHeight, PlanetRadius, cosRay);
         float segmentDepth = neg * (sampleRayDepth - lastRayDepth);
         var segmentT = Exp(-segmentDepth * (BetaRayleigh + BetaMie));
 
-        cosSun = Vector3F.Dot(zenith, SunDirection);
+        cosSun = Vector3.Dot(zenith, SunDirection);
         float sampleSunDepth = GetOpticalDepthSchueler(h, ScaleHeight, PlanetRadius, cosSun);
         float segmentSunDepth = 0.5f * (sampleSunDepth + lastSunDepth);
         var segmentS = Exp(-segmentSunDepth * (BetaRayleigh + BetaMie));
 
         //if (segmentT.IsNaN)
-        //  segmentT = Vector3F.Zero;
-        if (segmentS.IsNaN)
-          segmentS = Vector3F.Zero;
+        //  segmentT = Vector3.Zero;
+        if (segmentS.IsNaN())
+          segmentS = Vector3.Zero;
 
         S = S * segmentT;
         S += (float)Math.Exp(-h / ScaleHeight) * segmentLength * segmentS;
@@ -489,7 +490,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
       if (applyPhaseFunction)
       {
-        float cosTheta = Vector3F.Dot(SunDirection, viewDirection);
+        float cosTheta = Vector3.Dot(SunDirection, viewDirection);
         colorRayleigh *= PhaseFunctionRayleigh(cosTheta);
         colorMie *= PhaseFunction(cosTheta, GMie);
       }
@@ -504,7 +505,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </summary>
     /// <returns>The intensity of the direct sunlight.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-    public Vector3F GetSunlight()
+    public Vector3 GetSunlight()
     {
       if (SunDirection.Y >= 0)
       {
@@ -516,15 +517,15 @@ namespace DigitalRise.Graphics.SceneGraph
       // Get angle.
       float sunAngle = (float)MathHelper.ToDegrees(MathF.Asin(SunDirection.Y));
       if (sunAngle < -5)
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
       // Sample horizon instead of real direction.
-      Vector3F direction = SunDirection;
+      Vector3 direction = SunDirection;
       direction.Y = 0;
       if (!direction.TryNormalize())
-        return Vector3F.Zero;
+        return Vector3.Zero;
 
-      Vector3F horizonSunlight = GetTransmittance(direction) * SunIntensity;
+      Vector3 horizonSunlight = GetTransmittance(direction) * SunIntensity;
 
       // Lerp horizon sunlight to 0 at -5°.
       float f = 1 - MathHelper.Clamp(-sunAngle / 5.0f, 0, 1);
@@ -538,30 +539,30 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <param name="numberOfSamples">The number of samples.</param>
     /// <returns>The ambient light created by the sky.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow")]
-    public Vector3F GetAmbientLight(int numberOfSamples)
+    public Vector3 GetAmbientLight(int numberOfSamples)
     {
       var random = new Random(1234567);
       var sphereDistribution = new SphereDistribution
       {
-        Center = Vector3F.Zero,
+        Center = Vector3.Zero,
         InnerRadius = 1,
         OuterRadius = 1,
       };
 
-      Vector3F ambient = new Vector3F();
+      Vector3 ambient = new Vector3();
       for (int i = numberOfSamples - 1; i >= 0; i--)
       {
-        Vector3F sampleDirection = sphereDistribution.Next(random);
+        Vector3 sampleDirection = sphereDistribution.Next(random);
         if (sampleDirection.Y < 0)
           sampleDirection.Y *= -1;
 
-        Vector3F transmittance;
-        Vector3F colorR, colorM;
+        Vector3 transmittance;
+        Vector3 colorR, colorM;
         ComputeScattering(sampleDirection, true, out transmittance, out colorR, out colorM);
-        Debug.Assert(sampleDirection.IsNumericallyNormalized);
+        Debug.Assert(sampleDirection.IsNumericallyNormalized());
 
-        Vector3F sample = colorR + colorM + GetBaseColor(sampleDirection);
-        if (sample.IsNaN)
+        Vector3 sample = colorR + colorM + GetBaseColor(sampleDirection);
+        if (sample.IsNaN())
           numberOfSamples--;  // Ignore sample.
         else
           ambient += sample;
@@ -575,7 +576,7 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    private Vector3F GetBaseColor(Vector3F direction)
+    private Vector3 GetBaseColor(Vector3 direction)
     {
       // 0 = zenith, 1 = horizon
       float p = 1 - MathHelper.Clamp(
@@ -605,7 +606,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// You might need to desaturate the fog color.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow")]
-    public Vector3F GetFogColor(int numberOfSamples)
+    public Vector3 GetFogColor(int numberOfSamples)
     {
       return GetFogColor(numberOfSamples, 0);
     }
@@ -623,15 +624,15 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <returns>The fog color.</returns>
     /// <remarks>You might need to desaturate the fog color.</remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow")]
-    public Vector3F GetFogColor(int numberOfSamples, float elevation)
+    public Vector3 GetFogColor(int numberOfSamples, float elevation)
     {
-      var forward = new Vector3F((float)Math.Cos(elevation), (float)Math.Sin(elevation), 0);
-      Debug.Assert(forward.IsNumericallyNormalized);
+      var forward = new Vector3((float)Math.Cos(elevation), (float)Math.Sin(elevation), 0);
+      Debug.Assert(forward.IsNumericallyNormalized());
 
-      var color = new Vector3F();
+      var color = new Vector3();
       for (int i = numberOfSamples - 1; i >= 0; i--)
       {
-        Vector3F sampleDirection = QuaternionF.CreateRotationY(ConstantsF.TwoPi / numberOfSamples).Rotate(forward);
+        Vector3 sampleDirection = QuaternionF.CreateRotationY(ConstantsF.TwoPi / numberOfSamples).Rotate(forward);
 
         // Note: Crysis computes fog color without phase function and applies the phase function
         // in the fog shader. The color difference with and without phase function seems to be
@@ -642,13 +643,13 @@ namespace DigitalRise.Graphics.SceneGraph
         // average fog brightness constant.
         const bool usePhaseFunction = true;
 
-        Vector3F transmittance;
-        Vector3F colorR, colorM;
+        Vector3 transmittance;
+        Vector3 colorR, colorM;
         ComputeScattering(sampleDirection, usePhaseFunction, out transmittance, out colorR, out colorM);
-        Debug.Assert(sampleDirection.IsNumericallyNormalized);
+        Debug.Assert(sampleDirection.IsNumericallyNormalized());
 
-        Vector3F sample = colorR + colorM + GetBaseColor(sampleDirection);
-        if (sample.IsNaN)
+        Vector3 sample = colorR + colorM + GetBaseColor(sampleDirection);
+        if (sample.IsNaN())
           numberOfSamples--;  // Ignore sample.
         else
           color += sample;
@@ -659,9 +660,9 @@ namespace DigitalRise.Graphics.SceneGraph
     }
 
 
-    private static Vector3F Exp(Vector3F value)
+    private static Vector3 Exp(Vector3 value)
     {
-      return new Vector3F((float)Math.Exp(value.X), (float)Math.Exp(value.Y), (float)Math.Exp(value.Z));
+      return new Vector3((float)Math.Exp(value.X), (float)Math.Exp(value.Y), (float)Math.Exp(value.Z));
     }
     #endregion
   }

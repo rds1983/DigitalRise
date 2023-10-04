@@ -8,8 +8,9 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -23,7 +24,7 @@ namespace DigitalRise.Graphics
   /// towards the outside of the cone. This effect is called "spotlight falloff" (see below). The 
   /// <see cref="Spotlight"/> object defines the light properties of a spotlight positioned at the 
   /// origin (0, 0, 0) that shines in forward direction (0, 0, -1) - see 
-  /// <see cref="Vector3F.Forward"/>. A <see cref="LightNode"/> needs to be created to position and 
+  /// <see cref="Vector3.Forward"/>. A <see cref="LightNode"/> needs to be created to position and 
   /// orient a spotlight within a 3D scene.
   /// </para>
   /// <para>
@@ -125,7 +126,7 @@ namespace DigitalRise.Graphics
     /// <remarks>
     /// This property defines only the RGB color of the light source - not its intensity. 
     /// </remarks>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -187,7 +188,7 @@ namespace DigitalRise.Graphics
 
         var transformedShape = (TransformedShape)Shape;
         var cone = (ConeShape)transformedShape.Child.Shape;
-        ((GeometricObject)transformedShape.Child).Pose = new Pose(new Vector3F(0, 0, -value), transformedShape.Child.Pose.Orientation);
+        ((GeometricObject)transformedShape.Child).Pose = new Pose(new Vector3(0, 0, -value), transformedShape.Child.Pose.Orientation);
         cone.Height = value;
 
         // Changing the height and keeping the radius constant changes the CutoffAngle!
@@ -291,12 +292,12 @@ namespace DigitalRise.Graphics
     /// </summary>
     public Spotlight()
     {
-      Color = Vector3F.One;
+      Color = Vector3.One;
       DiffuseIntensity = 1;
       SpecularIntensity = 1;
       HdrScale = 1;
       _falloffAngle = 20.0f * ConstantsF.Pi / 180;
-      Shape = new TransformedShape(new GeometricObject(new ConeShape((float)Math.Tan(MathHelper.ToRadians(30)) * 5, 5), new Pose(new Vector3F(0, 0, -5), QuaternionF.CreateRotationX(ConstantsF.PiOver2))));
+      Shape = new TransformedShape(new GeometricObject(new ConeShape((float)Math.Tan(MathHelper.ToRadians(30)) * 5, 5), new Pose(new Vector3(0, 0, -5), QuaternionF.CreateRotationX(ConstantsF.PiOver2))));
       Attenuation = 2;
     }
     #endregion
@@ -340,21 +341,21 @@ namespace DigitalRise.Graphics
 
 
     /// <inheritdoc/>
-    public override Vector3F GetIntensity(float distance)
+    public override Vector3 GetIntensity(float distance)
     {
       float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, Attenuation);
-      return Vector3F.Max(Color * (DiffuseIntensity * HdrScale * attenuation),
+      return Vector3.Max(Color * (DiffuseIntensity * HdrScale * attenuation),
                           Color * (SpecularIntensity * HdrScale * attenuation));
     }
 
 
-    //public override Vector3F GetIntensity(Vector3F position)
+    //public override Vector3 GetIntensity(Vector3 position)
     //{
     //  float distance = position.Length;
-    //  float angle = !position.IsNumericallyZero ? Vector3F.GetAngle(Vector3F.Forward, position) : 0;
+    //  float angle = !position.IsNumericallyZero() ? MathHelper.GetAngle(Vector3.Forward, position) : 0;
     //  float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, AttenuationExponent);
     //  float spotlightFalloff = GraphicsHelper.GetAngularAttenuation(angle, FalloffAngle, CutoffAngle);
-    //  return Vector3F.Max(Color * (DiffuseIntensity * HdrScale * spotlightFalloff * attenuation),
+    //  return Vector3.Max(Color * (DiffuseIntensity * HdrScale * spotlightFalloff * attenuation),
     //                      Color * (SpecularIntensity * HdrScale * spotlightFalloff * attenuation));
     //}
     #endregion

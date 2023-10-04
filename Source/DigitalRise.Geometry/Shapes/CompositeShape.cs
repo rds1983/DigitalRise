@@ -12,7 +12,8 @@ using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -93,7 +94,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a random "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
@@ -105,7 +106,7 @@ namespace DigitalRise.Geometry.Shapes
           return child.Pose.ToWorldPosition(child.Shape.InnerPoint * child.Scale);
         }
         
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
@@ -236,7 +237,7 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // If we have a spatial partition, we can use the AABB of the whole spatial partition to 
       // quickly get an approximate AABB.
@@ -293,7 +294,7 @@ namespace DigitalRise.Geometry.Shapes
       float volume = 0;
       foreach (var child in Children)
       {
-        var scale = Vector3F.Absolute(child.Scale);
+        var scale = MathHelper.Absolute(child.Scale);
         volume += child.Shape.GetVolume(relativeError, iterationLimit) * scale.X * scale.Y * scale.Z;
       }
 
@@ -398,7 +399,7 @@ namespace DigitalRise.Geometry.Shapes
     protected override TriangleMesh OnGetMesh(float absoluteDistanceThreshold, int iterationLimit)
     {
       // Convert absolute error to relative error.
-      float maxExtent = GetAabb(Vector3F.One, Pose.Identity).Extent.LargestComponent;
+      float maxExtent = GetAabb(Vector3.One, Pose.Identity).Extent.LargestComponent();
       float relativeThreshold = !Numeric.IsZero(maxExtent)
                                 ? absoluteDistanceThreshold / maxExtent
                                 : Numeric.EpsilonF;

@@ -320,8 +320,8 @@ namespace DigitalRise.Graphics.Rendering
     {
       // Get camera properties used to calculate the distance of the scene node to the camera.
       var cameraNode = context.CameraNode;
-      Vector3F cameraPosition = new Vector3F();
-      Vector3F lookDirection = new Vector3F();
+      Vector3 cameraPosition = new Vector3();
+      Vector3 lookDirection = new Vector3();
       bool sortByDistance = (order == RenderOrder.BackToFront || order == RenderOrder.FrontToBack);
       bool backToFront = (order == RenderOrder.BackToFront);
       if (sortByDistance)
@@ -350,8 +350,8 @@ namespace DigitalRise.Graphics.Rendering
         float distance = 0;
         if (sortByDistance)
         {
-          Vector3F cameraToNode = node.PoseWorld.Position - cameraPosition;
-          distance = Vector3F.Dot(cameraToNode, lookDirection);
+          Vector3 cameraToNode = node.PoseWorld.Position - cameraPosition;
+          distance = Vector3.Dot(cameraToNode, lookDirection);
           if (backToFront)
             distance = -distance;
         }
@@ -484,7 +484,7 @@ namespace DigitalRise.Graphics.Rendering
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    private void Fill(FigureNode node, ArrayList<Vector3F> vertices, ArrayList<int> indices)
+    private void Fill(FigureNode node, ArrayList<Vector3> vertices, ArrayList<int> indices)
     {
       if (_mode != RenderMode.Fill)
       {
@@ -508,7 +508,7 @@ namespace DigitalRise.Graphics.Rendering
       }
 
       Matrix44F world = node.PoseWorld * Matrix44F.CreateScale(node.ScaleWorld);
-      Vector3F color3F = node.FillColor * node.FillAlpha;
+      Vector3 color3F = node.FillColor * node.FillAlpha;
       Color color = new Color(color3F.X, color3F.Y, color3F.Z, node.FillAlpha);
 
       var numberOfVertices = vertices.Count;
@@ -531,7 +531,7 @@ namespace DigitalRise.Graphics.Rendering
         out vertexBufferStartIndex, out indexBufferStartIndex);
 
       // Copy all vertices.
-      Vector3F[] vertexArray = vertices.Array;
+      Vector3[] vertexArray = vertices.Array;
       for (int i = 0; i < numberOfVertices; i++)
       {
         batchVertices[vertexBufferStartIndex + i].Position = (Vector3)(world.TransformPosition(vertexArray[i]));
@@ -567,7 +567,7 @@ namespace DigitalRise.Graphics.Rendering
     }
 
 
-    private void Stroke(FigureNode node, ArrayList<Vector3F> strokeVertices, ArrayList<int> strokeIndices)
+    private void Stroke(FigureNode node, ArrayList<Vector3> strokeVertices, ArrayList<int> strokeIndices)
     {
       if (_mode != RenderMode.Stroke)
       {
@@ -608,17 +608,17 @@ namespace DigitalRise.Graphics.Rendering
 
       // Convert to vertices.
       float lastDistance = 0;
-      Vector3F lastPosition = new Vector3F(float.NaN);
-      Vector3F lastWorld = new Vector3F();
-      Vector3F lastView = new Vector3F();
-      Vector3F lastProjected = new Vector3F();
+      Vector3 lastPosition = new Vector3(float.NaN);
+      Vector3 lastWorld = new Vector3();
+      Vector3 lastView = new Vector3();
+      Vector3 lastProjected = new Vector3();
 
       var data0 = new HalfVector4(0, 1, thickness, 0);
       var data1 = new HalfVector4(0, 0, thickness, 0);
       var data2 = new HalfVector4(1, 0, thickness, 0);
       var data3 = new HalfVector4(1, 1, thickness, 0);
 
-      Vector3F[] figurePoints = strokeVertices.Array;
+      Vector3[] figurePoints = strokeVertices.Array;
       int[] figureIndices = strokeIndices.Array;
       int numberOfLineSegments = strokeIndices.Count / 2;
 
@@ -632,8 +632,8 @@ namespace DigitalRise.Graphics.Rendering
         var notConnectedWithLast = start != lastPosition;
         lastPosition = end;
 
-        Vector3F startWorld = notConnectedWithLast ? world.TransformPosition(start) : lastWorld;
-        Vector3F endWorld = world.TransformPosition(end);
+        Vector3 startWorld = notConnectedWithLast ? world.TransformPosition(start) : lastWorld;
+        Vector3 endWorld = world.TransformPosition(end);
         lastWorld = endWorld;
 
         // Compute start/end distances of lines from beginning of line strip
@@ -644,7 +644,7 @@ namespace DigitalRise.Graphics.Rendering
         {
           if (!node.DashInWorldSpace)
           {
-            Vector3F startView = notConnectedWithLast ? worldView.TransformPosition(start) : lastView;
+            Vector3 startView = notConnectedWithLast ? worldView.TransformPosition(start) : lastView;
             var endView = worldView.TransformPosition(end);
             lastView = endView;
 
@@ -656,7 +656,7 @@ namespace DigitalRise.Graphics.Rendering
             float pEnd = MathHelper.Clamp((endView.Z - (-_cameraNear)) / deltaZ, 0, 1);
             endView = InterpolationHelper.Lerp(endView, startView, pEnd);
 
-            Vector3F startProjected;
+            Vector3 startProjected;
             if (notConnectedWithLast)
             {
               lastDistance = 0;
@@ -670,7 +670,7 @@ namespace DigitalRise.Graphics.Rendering
             lastProjected = endProjected;
 
             startDistance = lastDistance;
-            endDistance = startDistance + (endProjected - startProjected).Length;
+            endDistance = startDistance + (endProjected - startProjected).Length();
             lastDistance = endDistance;
           }
           else
@@ -679,7 +679,7 @@ namespace DigitalRise.Graphics.Rendering
               lastDistance = 0;
 
             startDistance = lastDistance;
-            endDistance = startDistance + (endWorld - startWorld).Length;
+            endDistance = startDistance + (endWorld - startWorld).Length();
             lastDistance = endDistance;
 
             // The shader needs to know that DashInWorldSpace is true. To avoid
@@ -726,7 +726,7 @@ namespace DigitalRise.Graphics.Rendering
     {
       var figureRenderData = node.Figure.RenderData;
       var nodeRenderData = (FigureNodeRenderData)node.RenderData;
-      Vector3F[] positions = figureRenderData.Vertices.Array;
+      Vector3[] positions = figureRenderData.Vertices.Array;
 
       #region ----- Cache vertex/index buffer for fill. -----
       var fillIndices = figureRenderData.FillIndices;
@@ -737,7 +737,7 @@ namespace DigitalRise.Graphics.Rendering
         // This code is similar to the code in Fill().
 
         Matrix44F world = node.PoseWorld * Matrix44F.CreateScale(node.ScaleWorld);
-        Vector3F color3F = node.FillColor * node.FillAlpha;
+        Vector3 color3F = node.FillColor * node.FillAlpha;
         Color color = new Color(color3F.X, color3F.Y, color3F.Z, node.FillAlpha);
 
         int numberOfVertices = figureRenderData.Vertices.Count;
@@ -801,7 +801,7 @@ namespace DigitalRise.Graphics.Rendering
         Matrix44F world = node.PoseWorld * Matrix44F.CreateScale(node.ScaleWorld);
 
         float thickness = node.StrokeThickness;
-        Vector3F color3F = node.StrokeColor * node.StrokeAlpha;
+        Vector3 color3F = node.StrokeColor * node.StrokeAlpha;
         HalfVector4 color = new HalfVector4(color3F.X, color3F.Y, color3F.Z, node.StrokeAlpha);
         Vector4F dash = node.StrokeDashPattern * node.StrokeThickness;
         bool usesDashPattern = (dash.Y + dash.Z) != 0;
@@ -813,8 +813,8 @@ namespace DigitalRise.Graphics.Rendering
 
         // Convert to vertices.
         float lastDistance = 0;
-        Vector3F lastPosition = new Vector3F(float.NaN);
-        Vector3F lastWorld = new Vector3F();
+        Vector3 lastPosition = new Vector3(float.NaN);
+        Vector3 lastWorld = new Vector3();
 
         HalfVector4 data0 = new HalfVector4(0, 1, thickness, 0);
         HalfVector4 data1 = new HalfVector4(0, 0, thickness, 0);
@@ -830,14 +830,14 @@ namespace DigitalRise.Graphics.Rendering
         {
           int startIndex = figureIndices[i * 2 + 0];
           int endIndex = figureIndices[i * 2 + 1];
-          Vector3F start = positions[startIndex];
-          Vector3F end = positions[endIndex];
+          Vector3 start = positions[startIndex];
+          Vector3 end = positions[endIndex];
 
           bool notConnectedWithLast = start != lastPosition;
           lastPosition = end;
 
-          Vector3F startWorld = notConnectedWithLast ? world.TransformPosition(start) : lastWorld;
-          Vector3F endWorld = world.TransformPosition(end);
+          Vector3 startWorld = notConnectedWithLast ? world.TransformPosition(start) : lastWorld;
+          Vector3 endWorld = world.TransformPosition(end);
           lastWorld = endWorld;
 
           // Compute start/end distances of lines from beginning of line strip
@@ -852,7 +852,7 @@ namespace DigitalRise.Graphics.Rendering
               lastDistance = 0;
 
             startDistance = lastDistance;
-            endDistance = startDistance + (endWorld - startWorld).Length;
+            endDistance = startDistance + (endWorld - startWorld).Length();
             lastDistance = endDistance;
 
             // The shader needs to know that DashInWorldSpace is true. To avoid

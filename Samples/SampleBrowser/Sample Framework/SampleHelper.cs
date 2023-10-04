@@ -17,7 +17,6 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.Specialized;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -48,7 +47,7 @@ namespace Samples
     /// <returns>The graphics mesh.</returns>
     public static Mesh CreateMesh(IGraphicsService graphicsService, Shape shape)
     {
-      return CreateMesh(graphicsService, shape, new Vector3F(1), new Vector3F(1),  100);
+      return CreateMesh(graphicsService, shape, new Vector3(1), new Vector3(1),  100);
     }
 
 
@@ -64,7 +63,7 @@ namespace Samples
     /// <param name="specularPower">The specular power of the material.</param>
     /// <returns>The graphics mesh.</returns>
     public static Mesh CreateMesh(IGraphicsService graphicsService, Shape shape,
-      Vector3F diffuse, Vector3F specular, float specularPower)
+      Vector3 diffuse, Vector3 specular, float specularPower)
     {
       // Create a DigitalRise.Geometry.Meshes.TriangleMesh from the shape and 
       // convert this to a DigitalRise.Graphics.Mesh.
@@ -81,7 +80,7 @@ namespace Samples
       var aabb = shape.GetAabb(Pose.Identity);
       var boxShape = new BoxShape(aabb.Extent);
       var center = aabb.Center;
-      if (center.IsNumericallyZero)
+      if (center.IsNumericallyZero())
         mesh.BoundingShape = boxShape;
       else
         mesh.BoundingShape = new TransformedShape(new GeometricObject(boxShape, new Pose(center)));
@@ -106,7 +105,7 @@ namespace Samples
     /// which is not optimal for performance.)
     /// </remarks>
     public static Mesh CreateMesh(IGraphicsService graphicsService, Submesh submesh,
-      Vector3F diffuse, Vector3F specular, float specularPower)
+      Vector3 diffuse, Vector3 specular, float specularPower)
     {
       Mesh mesh = new Mesh();
       mesh.Submeshes.Add(submesh);
@@ -215,7 +214,7 @@ namespace Samples
         var v1 = mesh.Vertices[i1];
         var v2 = mesh.Vertices[i2];
 
-        Vector3F n0, n1, n2;
+        Vector3 n0, n1, n2;
         if (angleLimit < 0)
         {
           // If the angle limit is negative, ComputeNormals() returns one normal per vertex.
@@ -367,7 +366,7 @@ namespace Samples
 
       // ----- Draw swing cone.
       // The tip of the swing cone:
-      Vector3F coneTip = joint.BodyA.Pose.ToWorldPosition(joint.AnchorPositionALocal);
+      Vector3 coneTip = joint.BodyA.Pose.ToWorldPosition(joint.AnchorPositionALocal);
 
       // The first point on the swing cone:
       var previousConePoint = limit.GetPointOnCone(0, coneTip, scale);
@@ -391,11 +390,11 @@ namespace Samples
 
       // ----- Draw twist axis.      
       // The x-axis is the twist direction. 
-      Vector3F twistAxis = Vector3F.UnitX;
+      Vector3 twistAxis = Vector3.UnitX;
       // The twist axis relative to body B.
-      Vector3F twistAxisDirectionBLocal = limit.AnchorOrientationBLocal * twistAxis;
+      Vector3 twistAxisDirectionBLocal = limit.AnchorOrientationBLocal * twistAxis;
       // The twist axis relative to world space.
-      Vector3F twistAxisDirection = limit.BodyB.Pose.ToWorldDirection(twistAxisDirectionBLocal);
+      Vector3 twistAxisDirection = limit.BodyB.Pose.ToWorldDirection(twistAxisDirectionBLocal);
       // (A similar computation is used in DrawArc() below.)
 
       // Line in twist direction.
@@ -405,7 +404,7 @@ namespace Samples
       Pose constraintToWorld = limit.BodyA.Pose * new Pose(limit.AnchorOrientationALocal);
 
       // Draw an arc that visualizes the twist limits.
-      DrawArc(debugRenderer, constraintToWorld, coneTip, Vector3F.UnitX, Vector3F.UnitY, limit.Minimum.X, limit.Maximum.X, scale, Color.Red, drawOverScene);
+      DrawArc(debugRenderer, constraintToWorld, coneTip, Vector3.UnitX, Vector3.UnitY, limit.Minimum.X, limit.Maximum.X, scale, Color.Red, drawOverScene);
     }
 
 
@@ -435,15 +434,15 @@ namespace Samples
       if (limit == null)
         throw new ArgumentNullException("limit");
 
-      Vector3F jointPosition = joint.BodyA.Pose.ToWorldPosition(joint.AnchorPositionALocal);
+      Vector3 jointPosition = joint.BodyA.Pose.ToWorldPosition(joint.AnchorPositionALocal);
 
       // A transformation that converts from constraint anchor space to world space.
       Pose constraintToWorld = limit.BodyA.Pose * new Pose(limit.AnchorOrientationALocal);
 
       // Draw an arc for each rotation axis. 
-      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3F.UnitX, Vector3F.UnitY, limit.Minimum.X, limit.Maximum.X, scale, Color.Red, drawOverScene);
-      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3F.UnitY, Vector3F.UnitX, limit.Minimum.Y, limit.Maximum.Y, scale, Color.Green, drawOverScene);
-      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3F.UnitZ, Vector3F.UnitX, limit.Minimum.Z, limit.Maximum.Z, scale, Color.Blue, drawOverScene);
+      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3.UnitX, Vector3.UnitY, limit.Minimum.X, limit.Maximum.X, scale, Color.Red, drawOverScene);
+      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3.UnitY, Vector3.UnitX, limit.Minimum.Y, limit.Maximum.Y, scale, Color.Green, drawOverScene);
+      DrawArc(debugRenderer, constraintToWorld, jointPosition, Vector3.UnitZ, Vector3.UnitX, limit.Minimum.Z, limit.Maximum.Z, scale, Color.Blue, drawOverScene);
     }
 
 
@@ -465,13 +464,13 @@ namespace Samples
     /// If set to <see langword="true"/> the object is drawn over the graphics scene (depth-test 
     /// disabled).
     /// </param>
-    private static void DrawArc(this DebugRenderer debugRenderer, Pose constraintToWorld, Vector3F center, Vector3F axis, Vector3F direction, float minimum, float maximum, float scale, Color color, bool drawOverScene)
+    private static void DrawArc(this DebugRenderer debugRenderer, Pose constraintToWorld, Vector3 center, Vector3 axis, Vector3 direction, float minimum, float maximum, float scale, Color color, bool drawOverScene)
     {
       if (minimum == 0 && maximum == 0)
         return;
 
       // Line from circle center to start of arc.
-      Vector3F previousArcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum).Rotate(direction));
+      Vector3 previousArcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum).Rotate(direction));
       debugRenderer.DrawLine(center, previousArcPoint, color, drawOverScene);
 
       // Draw arc.
@@ -479,7 +478,7 @@ namespace Samples
       float segmentAngle = (maximum - minimum) / numberOfSegments;
       for (int i = 0; i < numberOfSegments; i++)
       {
-        Vector3F arcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum + (i + 1) * segmentAngle).Rotate(direction));
+        Vector3 arcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum + (i + 1) * segmentAngle).Rotate(direction));
         debugRenderer.DrawLine(previousArcPoint, arcPoint, color, drawOverScene);
         previousArcPoint = arcPoint;
       }

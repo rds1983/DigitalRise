@@ -40,7 +40,7 @@ controls. The controls are sorted by their z value before rendering.",
       // The base class has created the graphics screen for the 3D objects.
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 1, 3), 0, 0);
+      SetCamera(new Vector3(0, 1, 3), 0, 0);
       _cameraObject = GameObjectService.Objects.OfType<CameraObject>().First();
 
       // We add another graphics screen on top which renders the GUI.
@@ -126,13 +126,13 @@ controls. The controls are sorted by their z value before rendering.",
         var rigidBody = dynamicObject.RigidBody;
 
         // Get a value which is proportional to the object radius.
-        float radius = rigidBody.Shape.GetAabb().Extent.Length * 0.35f;
+        float radius = rigidBody.Shape.GetAabb().Extent.Length() * 0.35f;
 
         // Position the progress bar above the object.
-        Vector3F positionWorld = rigidBody.Pose.Position + new Vector3F(0, radius, 0);
+        Vector3 positionWorld = rigidBody.Pose.Position + new Vector3(0, radius, 0);
 
         // Convert world space position to screen space.
-        Vector3F positionScreen = viewport.Project(positionWorld, viewProjection);
+        Vector3 positionScreen = viewport.Project(positionWorld, viewProjection);
 
         var progressBar = pair.Second;
         progressBar.X = positionScreen.X;

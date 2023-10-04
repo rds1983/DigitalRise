@@ -37,7 +37,7 @@ namespace DigitalRise.Graphics
     /// z-component defines the depth in clip space. (The depth of the clipping volume ranges from 
     /// <see cref="Viewport.MinDepth"/> to <see cref="Viewport.MaxDepth"/> - usually [0, 1].)
     /// </returns>
-    public static Vector3F Project(this Viewport viewport, Vector3F position, Matrix44F projection, Matrix44F view, Matrix44F world)
+    public static Vector3 Project(this Viewport viewport, Vector3 position, Matrix44F projection, Matrix44F view, Matrix44F world)
     {
       Matrix44F worldViewProjection = projection * view * world;
       return Project(viewport, position, worldViewProjection);
@@ -56,7 +56,7 @@ namespace DigitalRise.Graphics
     /// z-component defines the depth in clip space. (The depth of the clipping volume ranges from 
     /// <see cref="Viewport.MinDepth"/> to <see cref="Viewport.MaxDepth"/> - usually [0, 1].)
     /// </returns>
-    public static Vector3F Project(this Viewport viewport, Vector3F position, Matrix44F projection, Matrix44F view)
+    public static Vector3 Project(this Viewport viewport, Vector3 position, Matrix44F projection, Matrix44F view)
     {
       Matrix44F viewProjection = projection * view;
       return Project(viewport, position, viewProjection);
@@ -74,12 +74,12 @@ namespace DigitalRise.Graphics
     /// z-component defines the depth in clip space mapped to the range
     /// [<see cref="Viewport.MinDepth"/>, <see cref="Viewport.MaxDepth"/>] (usually [0, 1]).
     /// </returns>
-    public static Vector3F Project(this Viewport viewport, Vector3F position, Matrix44F projection)
+    public static Vector3 Project(this Viewport viewport, Vector3 position, Matrix44F projection)
     {
       // Transform position to clip space. (TransformPosition() transforms the position 
       // to clip space and performs the homogeneous divide.)
-      Vector3F positionClip = projection.TransformPosition(position);
-      Vector3F positionScreen = new Vector3F
+      Vector3 positionClip = projection.TransformPosition(position);
+      Vector3 positionScreen = new Vector3
       {
         X = (1f + positionClip.X) * 0.5f * viewport.Width + viewport.X,
         Y = (1f - positionClip.Y) * 0.5f * viewport.Height + viewport.Y,
@@ -99,12 +99,12 @@ namespace DigitalRise.Graphics
     /// The position in the viewport: The x- and y-components define the pixel position
     /// in the range [0, viewport width/height]. The z-component defines the depth in clip space.
     /// </returns>
-    internal static Vector3F ProjectToViewport(this Viewport viewport, Vector3F position, Matrix44F projection)
+    internal static Vector3 ProjectToViewport(this Viewport viewport, Vector3 position, Matrix44F projection)
     {
       // Transform position to clip space. (TransformPosition() transforms the position 
       // to clip space and performs the homogeneous divide.)
-      Vector3F positionClip = projection.TransformPosition(position);
-      Vector3F positionScreen = new Vector3F
+      Vector3 positionClip = projection.TransformPosition(position);
+      Vector3 positionScreen = new Vector3
       {
         X = (1f + positionClip.X) * 0.5f * viewport.Width,
         Y = (1f - positionClip.Y) * 0.5f * viewport.Height,
@@ -134,7 +134,7 @@ namespace DigitalRise.Graphics
     /// <param name="world">The world matrix.</param>
     /// <returns>The position in object space.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static Vector3F Unproject(this Viewport viewport, Vector3F position, Matrix44F projection, Matrix44F view, Matrix44F world)
+    public static Vector3 Unproject(this Viewport viewport, Vector3 position, Matrix44F projection, Matrix44F view, Matrix44F world)
     {
       Matrix44F worldViewProjection = projection * view * world;
       return Unproject(viewport, position, worldViewProjection);
@@ -154,7 +154,7 @@ namespace DigitalRise.Graphics
     /// <param name="view">The view matrix.</param>
     /// <returns>The position in world space.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static Vector3F Unproject(this Viewport viewport, Vector3F position, Matrix44F projection, Matrix44F view)
+    public static Vector3 Unproject(this Viewport viewport, Vector3 position, Matrix44F projection, Matrix44F view)
     {
       Matrix44F worldViewProjection = projection * view;
       return Unproject(viewport, position, worldViewProjection);
@@ -173,10 +173,10 @@ namespace DigitalRise.Graphics
     /// <param name="projection">The projection matrix.</param>
     /// <returns>The position in view space.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public static Vector3F Unproject(this Viewport viewport, Vector3F position, Matrix44F projection)
+    public static Vector3 Unproject(this Viewport viewport, Vector3 position, Matrix44F projection)
     {
       Matrix44F fromClipSpace = projection.Inverse;
-      Vector3F positionClip = new Vector3F
+      Vector3 positionClip = new Vector3
       {
         X = (position.X - viewport.X) / viewport.Width * 2f - 1f,
         Y = -((position.Y - viewport.Y) / viewport.Height * 2f - 1f),
@@ -207,7 +207,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="cameraNode"/> is <see langword="null"/>.
     /// </exception>
-    public static Rectangle GetScissorRectangle(CameraNode cameraNode, Viewport viewport, Vector3F positionWorld, float radius)
+    public static Rectangle GetScissorRectangle(CameraNode cameraNode, Viewport viewport, Vector3 positionWorld, float radius)
     {
       var rectangle = GetViewportRectangle(cameraNode, viewport, positionWorld, radius);
       rectangle.X += viewport.X;
@@ -255,7 +255,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="cameraNode"/> is <see langword="null"/>.
     /// </exception>
-    internal static Rectangle GetViewportRectangle(CameraNode cameraNode, Viewport viewport, Vector3F positionWorld, float radius)
+    internal static Rectangle GetViewportRectangle(CameraNode cameraNode, Viewport viewport, Vector3 positionWorld, float radius)
     {
       if (cameraNode == null)
         throw new ArgumentNullException("cameraNode");
@@ -294,7 +294,7 @@ namespace DigitalRise.Graphics
       var sphereShape = geometricObject.Shape as SphereShape;
       if (sphereShape != null)
       {
-        Vector3F scale = geometricObject.Scale;
+        Vector3 scale = geometricObject.Scale;
         if (scale.X == scale.Y && scale.Y == scale.Z)
         {
           return GetViewportRectangle(cameraNode, viewport, geometricObject.Pose.Position,
@@ -326,7 +326,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="cameraNode"/> is <see langword="null"/>.
     /// </exception>
-    internal static Vector4F GetBounds(CameraNode cameraNode, Vector3F positionWorld, float radius)
+    internal static Vector4F GetBounds(CameraNode cameraNode, Vector3 positionWorld, float radius)
     {
       var camera = cameraNode.Camera;
       var projection = camera.Projection;
@@ -336,7 +336,7 @@ namespace DigitalRise.Graphics
       float top = projection.Top;
       float height = projection.Height;
 
-      Vector3F l = cameraNode.PoseWorld.ToLocalPosition(positionWorld);
+      Vector3 l = cameraNode.PoseWorld.ToLocalPosition(positionWorld);
       float r = radius;
 
       // Default bounds (left, top, right, bottom)
@@ -504,7 +504,7 @@ namespace DigitalRise.Graphics
         return new Vector4F(0);
 
       // Does the AABB contain the origin?
-      if (GeometryHelper.HaveContact(aabb, Vector3F.Zero))
+      if (GeometryHelper.HaveContact(aabb, Vector3.Zero))
         return new Vector4F(0, 0, 1, 1);
 
       // Project the AABB far face to the near plane.
@@ -582,7 +582,7 @@ namespace DigitalRise.Graphics
 
       // Use bounding sphere of AABB in world space.
       var aabb = geometricObject.Aabb;
-      float diameter = aabb.Extent.Length;
+      float diameter = aabb.Extent.Length();
       float width = diameter;
       float height = diameter;
 
@@ -619,14 +619,14 @@ namespace DigitalRise.Graphics
         // ----- Perspective Projection
         // Camera properties.
         Pose cameraPose = cameraNode.PoseWorld;
-        Vector3F cameraPosition = cameraPose.Position;
+        Vector3 cameraPosition = cameraPose.Position;
         Matrix33F cameraOrientation = cameraPose.Orientation;
-        Vector3F cameraForward = -cameraOrientation.GetColumn(2);
+        Vector3 cameraForward = -cameraOrientation.GetColumn(2);
 
         // Get planar distance from camera to object by projecting the distance
         // vector onto the look direction.
-        Vector3F cameraToObject = aabb.Center - cameraPosition;
-        float distance = Vector3F.Dot(cameraToObject, cameraForward);
+        Vector3 cameraToObject = aabb.Center - cameraPosition;
+        float distance = Vector3.Dot(cameraToObject, cameraForward);
 
         // Assume that object is in front of camera (no frustum culling).
         distance = Math.Abs(distance);
@@ -706,19 +706,19 @@ namespace DigitalRise.Graphics
         "Assuming that all scale factors are positive.");
 
       Pose cameraPose = cameraNode.PoseWorld;
-      Vector3F cameraToObject = sceneNode.PoseWorld.Position - cameraPose.Position;
+      Vector3 cameraToObject = sceneNode.PoseWorld.Position - cameraPose.Position;
 
       // Get planar distance by projecting the distance vector onto the look direction.
       // This is stable for sideways movement but unstable for camera rotations.
-      //Vector3F cameraForward = -cameraPose.Orientation.GetColumn(2);
-      //float distance = Math.Abs(Vector3F.Dot(cameraToObject, cameraForward));
+      //Vector3 cameraForward = -cameraPose.Orientation.GetColumn(2);
+      //float distance = Math.Abs(Vector3.Dot(cameraToObject, cameraForward));
 
       // Get normal (radial) distance (stable for camera rotations, unstable for sideways movement).
-      float distance = cameraToObject.Length;
+      float distance = cameraToObject.Length();
 
       // Make distance independent of current FOV and scale.
       distance = GetViewNormalizedDistance(distance, cameraNode.Camera.Projection);
-      distance /= sceneNode.ScaleWorld.LargestComponent;
+      distance /= sceneNode.ScaleWorld.LargestComponent();
 
       return distance;
     }

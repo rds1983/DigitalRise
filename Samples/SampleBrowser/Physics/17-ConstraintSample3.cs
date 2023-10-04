@@ -6,7 +6,8 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Physics
 {
@@ -31,7 +32,7 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -44,21 +45,21 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       // hinge axis.
       RigidBody box0 = new RigidBody(new BoxShape(0.1f, 2f, 0.1f))
       {
-        Pose = new Pose(new Vector3F(-2, 1, 0)),
+        Pose = new Pose(new Vector3(-2, 1, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(box0);
       RigidBody box1 = new RigidBody(new BoxShape(0.1f, 0.4f, 1f))
       {
-        Pose = new Pose(new Vector3F(-2 + 0.05f, 1.8f, 0))
+        Pose = new Pose(new Vector3(-2 + 0.05f, 1.8f, 0))
       };
       Simulation.RigidBodies.Add(box1);
       HingeJoint hingeJoint = new HingeJoint
       {
         BodyA = box0,
         BodyB = box1,
-        AnchorPoseALocal = new Pose(new Vector3F(0.05f, 0.8f, 0)),
-        AnchorPoseBLocal = new Pose(new Vector3F(-0.05f, 0, 0)),
+        AnchorPoseALocal = new Pose(new Vector3(0.05f, 0.8f, 0)),
+        AnchorPoseBLocal = new Pose(new Vector3(-0.05f, 0, 0)),
         CollisionEnabled = false,
       };
       Simulation.Constraints.Add(hingeJoint);
@@ -66,7 +67,7 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       {
         BodyA = box0,
         // The rotation axis is the local x axis of BodyA.
-        AxisALocal = Vector3F.UnitX,
+        AxisALocal = Vector3.UnitX,
         BodyB = box1,
         TargetVelocity = 10,
         // The motor power is limit, so that the rotation can be stopped by other objects blocking
@@ -82,23 +83,23 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       // ----- A PrismaticJoint with a LinearVelocityMotor.
       RigidBody box2 = new RigidBody(new BoxShape(0.7f, 0.7f, 0.7f))
       {
-        Pose = new Pose(new Vector3F(0, 2, 0)),
+        Pose = new Pose(new Vector3(0, 2, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(box2);
       RigidBody box3 = new RigidBody(new BoxShape(0.5f, 1.5f, 0.5f))
       {
-        Pose = new Pose(new Vector3F(0, 1, 0))
+        Pose = new Pose(new Vector3(0, 1, 0))
       };
       Simulation.RigidBodies.Add(box3);
       _prismaticJoint = new PrismaticJoint
       {
         BodyA = box2,
         BodyB = box3,
-        AnchorPoseALocal = new Pose(new Vector3F(0, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseALocal = new Pose(new Vector3(0, 0, 0), new Matrix33F(0, 1, 0,
                                                                         -1, 0, 0,
                                                                          0, 0, 1)),
-        AnchorPoseBLocal = new Pose(new Vector3F(0, 0, 0), new Matrix33F(0, 1, 0,
+        AnchorPoseBLocal = new Pose(new Vector3(0, 0, 0), new Matrix33F(0, 1, 0,
                                                                         -1, 0, 0,
                                                                          0, 0, 1)),
         CollisionEnabled = false,
@@ -107,7 +108,7 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       _linearVelocityMotor = new LinearVelocityMotor
       {
         BodyA = box2,
-        AxisALocal = -Vector3F.UnitY,
+        AxisALocal = -Vector3.UnitY,
         BodyB = box3,
         TargetVelocity = 1,
         CollisionEnabled = false,
@@ -122,21 +123,21 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
       // The quaternion motor acts like a spring that controls the angle of joint.
       RigidBody box4 = new RigidBody(new BoxShape(0.5f, 0.5f, 0.5f))
       {
-        Pose = new Pose(new Vector3F(2, 2, 0)),
+        Pose = new Pose(new Vector3(2, 2, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(box4);
       RigidBody cylinder0 = new RigidBody(new CylinderShape(0.1f, 0.75f))
       {
-        Pose = new Pose(new Vector3F(2, 2 - 0.75f / 2 - 0.25f, 0))
+        Pose = new Pose(new Vector3(2, 2 - 0.75f / 2 - 0.25f, 0))
       };
       Simulation.RigidBodies.Add(cylinder0);
       _ballJoint = new BallJoint
       {
         BodyA = box4,
         BodyB = cylinder0,
-        AnchorPositionALocal = new Vector3F(0, -0.25f, 0),
-        AnchorPositionBLocal = new Vector3F(0, 0.75f / 2, 0),
+        AnchorPositionALocal = new Vector3(0, -0.25f, 0),
+        AnchorPositionBLocal = new Vector3(0, 0.75f / 2, 0),
         CollisionEnabled = false,
       };
       Simulation.Constraints.Add(_ballJoint);
@@ -154,8 +155,8 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
         CollisionEnabled = false,
         // The twist is limited to +/- 10°. The swing limits are +/- 40° and +/- 60°. This creates
         // a deformed cone that limits the swing movements (see visualization).
-        Minimum = new Vector3F(-MathHelper.ToRadians(10), -MathHelper.ToRadians(40), -MathHelper.ToRadians(60)),
-        Maximum = new Vector3F(MathHelper.ToRadians(10), MathHelper.ToRadians(40), MathHelper.ToRadians(60)),
+        Minimum = new Vector3(-MathHelper.ToRadians(10), -MathHelper.ToRadians(40), -MathHelper.ToRadians(60)),
+        Maximum = new Vector3(MathHelper.ToRadians(10), MathHelper.ToRadians(40), MathHelper.ToRadians(60)),
       };
       Simulation.Constraints.Add(_twistSwingLimit);
       QuaternionMotor quaternionMotor = new QuaternionMotor

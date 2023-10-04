@@ -88,7 +88,7 @@ Some things you can test using the available Options:
       GameObjectService.Objects.Add(new DynamicSkyObject(Services, true, false, true));
       GameObjectService.Objects.Add(new GroundObject(Services));
       GameObjectService.Objects.Add(new ObjectCreatorObject(Services));
-      GameObjectService.Objects.Add(new DudeObject(Services) { Pose = new Pose(new Vector3F(-4, 0, 4)) });
+      GameObjectService.Objects.Add(new DudeObject(Services) { Pose = new Pose(new Vector3(-4, 0, 4)) });
       GameObjectService.Objects.Add(new LavaBallsObject(Services));
 
       // Create 3 image-based lights.
@@ -110,11 +110,11 @@ Some things you can test using the available Options:
       // aligned to the with scene objects (walls, barrels, palm tree line).
       _imageBasedLights[1].Shape = new BoxShape(7.5f, 10, 7);
       _imageBasedLights[1].EnableLocalizedReflection = true;
-      _imageBasedLights[1].LocalizedReflectionBox = new Aabb(new Vector3F(-100, -2, -100), new Vector3F(3.5f, 2, 100));
+      _imageBasedLights[1].LocalizedReflectionBox = new Aabb(new Vector3(-100, -2, -100), new Vector3(3.5f, 2, 100));
 
       _imageBasedLights[2].Shape = new BoxShape(7.5f, 10, 7);
       _imageBasedLights[2].EnableLocalizedReflection = true;
-      _imageBasedLights[2].LocalizedReflectionBox = new Aabb(new Vector3F(-3, -2, -100), new Vector3F(3.5f, 2, 100));
+      _imageBasedLights[2].LocalizedReflectionBox = new Aabb(new Vector3(-3, -2, -100), new Vector3(3.5f, 2, 100));
 
       // Add 3 light nodes to add the IBL to the scene.
       for (int i = 0; i < 3; i++)
@@ -123,9 +123,9 @@ Some things you can test using the available Options:
         _graphicsScreen.Scene.Children.Add(_lightNodes[i]);
       }
 
-      _lightNodes[0].PoseLocal = _globalRotation * new Pose(new Vector3F(-5, 5, 5));
-      _lightNodes[1].PoseLocal = _globalRotation * new Pose(new Vector3F(0, 2, 0));
-      _lightNodes[2].PoseLocal = _globalRotation * new Pose(new Vector3F(0, 2, -4));
+      _lightNodes[0].PoseLocal = _globalRotation * new Pose(new Vector3(-5, 5, 5));
+      _lightNodes[1].PoseLocal = _globalRotation * new Pose(new Vector3(0, 2, 0));
+      _lightNodes[2].PoseLocal = _globalRotation * new Pose(new Vector3(0, 2, -4));
 
       // Increase specular power of ground to create sharper reflections.
       var groundModelNode = (ModelNode)_graphicsScreen.Scene.GetSubtree().Where(m => m.Name != null && m.Name.Contains("Ground")).First();
@@ -150,8 +150,8 @@ Some things you can test using the available Options:
       var mesh = SampleHelper.CreateMesh(
         GraphicsService,
         new SphereShape(0.1f),
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 1, 1),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 1, 1),
         1000000.0f);
 
       // Add a sphere under each image-based light node.
@@ -175,8 +175,8 @@ Some things you can test using the available Options:
         var mesh = SampleHelper.CreateMesh(
           GraphicsService,
           new SphereShape(0.2f),
-          new Vector3F(1 - (float)x / (NumX - 1)),  // Diffuse goes from 1 to 0.
-          new Vector3F((float)x / (NumX - 1)),      // Specular goes from 0 to 1.
+          new Vector3(1 - (float)x / (NumX - 1)),  // Diffuse goes from 1 to 0.
+          new Vector3((float)x / (NumX - 1)),      // Specular goes from 0 to 1.
           (float)Math.Pow(10, x));     // Specular power
 
         for (int z = 0; z < NumZ; z++)
@@ -184,7 +184,7 @@ Some things you can test using the available Options:
           _graphicsScreen.Scene.Children.Add(
             new MeshNode(mesh)
             {
-              PoseWorld = _globalRotation * new Pose(new Vector3F(x - 2, 1.5f, 3 - z))
+              PoseWorld = _globalRotation * new Pose(new Vector3(x - 2, 1.5f, 3 - z))
             });
         }
       }
@@ -200,7 +200,7 @@ Some things you can test using the available Options:
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(3.5f, 0, 2.5f - i / 2.0f);
+        Vector3 position = new Vector3(3.5f, 0, 2.5f - i / 2.0f);
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         Pose pose = _globalRotation * new Pose(position, orientation);
@@ -213,11 +213,11 @@ Some things you can test using the available Options:
           Services,
           "Building/concrete_small_window_1.drmdl",
 #if XNA
-          new Vector3F(1.0f, 1.6f, 1.8f),
-          _globalRotation * new Pose(new Vector3F(3.5f, 1.8f, -4f), Matrix33F.CreateRotationY(0)),
+          new Vector3(1.0f, 1.6f, 1.8f),
+          _globalRotation * new Pose(new Vector3(3.5f, 1.8f, -4f), Matrix33F.CreateRotationY(0)),
 #else
-          new Vector3F(1.8f, 1.6f, 1.0f),
-          _globalRotation * new Pose(new Vector3F(3.5f, 1.8f, -4f), Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
+          new Vector3(1.8f, 1.6f, 1.0f),
+          _globalRotation * new Pose(new Vector3(3.5f, 1.8f, -4f), Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
 #endif
           true,
           false));
@@ -227,8 +227,8 @@ Some things you can test using the available Options:
         new StaticObject(
           Services,
           "Building/wall_brick_1.drmdl",
-          new Vector3F(1.8f, 1.6f, 1),
-          _globalRotation * new Pose(new Vector3F(-3f, 1.8f, -4f), Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
+          new Vector3(1.8f, 1.6f, 1),
+          _globalRotation * new Pose(new Vector3(-3f, 1.8f, -4f), Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
           true,
           false));
 
@@ -237,8 +237,8 @@ Some things you can test using the available Options:
         new StaticObject(
           Services,
           "Building/wall_brick_1.drmdl",
-          new Vector3F(1.8f, 2.8f, 1),
-          _globalRotation * new Pose(new Vector3F(0.3f, 4, -4), Matrix33F.CreateRotationZ(ConstantsF.PiOver2) * Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
+          new Vector3(1.8f, 2.8f, 1),
+          _globalRotation * new Pose(new Vector3(0.3f, 4, -4), Matrix33F.CreateRotationZ(ConstantsF.PiOver2) * Matrix33F.CreateRotationY(ConstantsF.PiOver2)),
           true,
           false));
     }
@@ -275,15 +275,15 @@ Some things you can test using the available Options:
         {
           if (isChecked)
           {
-            _imageBasedLights[0].Color = new Vector3F(1, 0, 0);
-            _imageBasedLights[1].Color = new Vector3F(0, 1, 0);
-            _imageBasedLights[2].Color = new Vector3F(0, 0, 1);
+            _imageBasedLights[0].Color = new Vector3(1, 0, 0);
+            _imageBasedLights[1].Color = new Vector3(0, 1, 0);
+            _imageBasedLights[2].Color = new Vector3(0, 0, 1);
           }
           else
           {
-            _imageBasedLights[0].Color = new Vector3F(1);
-            _imageBasedLights[1].Color = new Vector3F(1);
-            _imageBasedLights[2].Color = new Vector3F(1);
+            _imageBasedLights[0].Color = new Vector3(1);
+            _imageBasedLights[1].Color = new Vector3(1);
+            _imageBasedLights[2].Color = new Vector3(1);
           }
         });
 

@@ -3,9 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Geometry.Collisions;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Constraints
 {  
@@ -191,11 +190,11 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public abstract Vector3F LinearConstraintImpulse { get; }
+    public abstract Vector3 LinearConstraintImpulse { get; }
 
 
     /// <inheritdoc/>
-    public abstract Vector3F AngularConstraintImpulse { get; }
+    public abstract Vector3 AngularConstraintImpulse { get; }
     #endregion
 
 

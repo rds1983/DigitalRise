@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -29,9 +28,9 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Uninitialize()
     {
       var ps = new ParticleSystem();
-      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction));
+      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction));
 
-      var e = new StartValueEffector<Vector3F> 
+      var e = new StartValueEffector<Vector3> 
       { 
         ParticleSystem = ps,
         Parameter = ParticleParameterNames.Direction

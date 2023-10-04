@@ -5,8 +5,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -61,63 +62,63 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void GetAxisAlignedBoundingBox()
     {
       Assert.AreEqual(new Aabb(), new SphereShape().GetAabb(Pose.Identity));
-      Assert.AreEqual(new Aabb(new Vector3F(10, 100, -13), new Vector3F(10, 100, -13)),
-                     new SphereShape().GetAabb(new Pose(new Vector3F(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f))));
-      Assert.AreEqual(new Aabb(new Vector3F(0, 90, 990), new Vector3F(20, 110, 1010)),
-                     new SphereShape(10).GetAabb(new Pose(new Vector3F(10, 100, 1000),
-                                                                         QuaternionF.CreateRotation(new Vector3F(1, 1, 1), 0.7f))));
+      Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
+                     new SphereShape().GetAabb(new Pose(new Vector3(10, 100, -13),
+                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+      Assert.AreEqual(new Aabb(new Vector3(0, 90, 990), new Vector3(20, 110, 1010)),
+                     new SphereShape(10).GetAabb(new Pose(new Vector3(10, 100, 1000),
+                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
     }
 
 
     [Test]
     public void GetSupportPoint()
     {
-      Assert.AreEqual(new Vector3F(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3F(1, 0, 0)));
-      Assert.AreEqual(new Vector3F(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3F(0, 1, 0)));
-      Assert.AreEqual(new Vector3F(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3F(0, 0, 1)));
-      Assert.AreEqual(new Vector3F(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3F(1, 1, 1)));
+      Assert.AreEqual(new Vector3(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3(1, 0, 0)));
+      Assert.AreEqual(new Vector3(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3(0, 1, 0)));
+      Assert.AreEqual(new Vector3(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3(0, 0, 1)));
+      Assert.AreEqual(new Vector3(0, 0, 0), new SphereShape().GetSupportPoint(new Vector3(1, 1, 1)));
 
-      Assert.AreEqual(new Vector3F(10, 0, 0), new SphereShape(10).GetSupportPoint(new Vector3F(1, 0, 0)));
-      Assert.AreEqual(new Vector3F(0, 10, 0), new SphereShape(10).GetSupportPoint(new Vector3F(0, 1, 0)));
-      Assert.AreEqual(new Vector3F(0, 0, 10), new SphereShape(10).GetSupportPoint(new Vector3F(0, 0, 1)));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(5.773502f), new SphereShape(10).GetSupportPoint(new Vector3F(1, 1, 1))));
+      Assert.AreEqual(new Vector3(10, 0, 0), new SphereShape(10).GetSupportPoint(new Vector3(1, 0, 0)));
+      Assert.AreEqual(new Vector3(0, 10, 0), new SphereShape(10).GetSupportPoint(new Vector3(0, 1, 0)));
+      Assert.AreEqual(new Vector3(0, 0, 10), new SphereShape(10).GetSupportPoint(new Vector3(0, 0, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(5.773502f), new SphereShape(10).GetSupportPoint(new Vector3(1, 1, 1))));
     }
 
 
     //[Test]
     //public void GetSupportPointDistance()
     //{
-    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3F(1, 0, 0)));
-    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3F(0, 1, 0)));
-    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3F(0, 0, 1)));
-    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3F(1, 1, 1)));
+    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3(1, 0, 0)));
+    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3(0, 1, 0)));
+    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3(0, 0, 1)));
+    //  Assert.AreEqual(0, new Sphere().GetSupportPointDistance(new Vector3(1, 1, 1)));
 
-    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3F(1, 0, 0)));
-    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3F(0, 1, 0)));
-    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3F(0, 0, 1)));
-    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3F(1, 1, 1)));
+    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3(1, 0, 0)));
+    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3(0, 1, 0)));
+    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3(0, 0, 1)));
+    //  Assert.AreEqual(10, new Sphere(10).GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 
     [Test]
     public void InnerPoint()
     {
-      Assert.AreEqual(new Vector3F(0, 0, 0), new SphereShape(2).InnerPoint);
+      Assert.AreEqual(new Vector3(0, 0, 0), new SphereShape(2).InnerPoint);
     }
 
 
     [Test]
     public void HaveContactWithPoint()
     {
-      Assert.IsTrue(GeometryHelper.HaveContact(0, new Vector3F()));
-      Assert.IsTrue(GeometryHelper.HaveContact(0, new Vector3F(Numeric.EpsilonF, 0, 0)));
-      Assert.IsFalse(GeometryHelper.HaveContact(0, new Vector3F(Numeric.EpsilonF)));
+      Assert.IsTrue(GeometryHelper.HaveContact(0, new Vector3()));
+      Assert.IsTrue(GeometryHelper.HaveContact(0, new Vector3(Numeric.EpsilonF, 0, 0)));
+      Assert.IsFalse(GeometryHelper.HaveContact(0, new Vector3(Numeric.EpsilonF)));
 
-      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3F(0, 0, 0)));
-      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3F(-10, 0, 0)));
-      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3F(-10.00001f, 0, 0)));
-      Assert.IsFalse(GeometryHelper.HaveContact(10, new Vector3F(0, 10.01f, 0)));
+      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3(0, 0, 0)));
+      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3(-10, 0, 0)));
+      Assert.IsTrue(GeometryHelper.HaveContact(10, new Vector3(-10.00001f, 0, 0)));
+      Assert.IsFalse(GeometryHelper.HaveContact(10, new Vector3(0, 10.01f, 0)));
     }
 
     [Test]
@@ -191,7 +192,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.Greater(mesh.NumberOfTriangles, 1);
       
       for (int i = 0; i < mesh.Vertices.Count; i++)
-        Assert.IsTrue(Numeric.AreEqual(3, mesh.Vertices[i].Length));
+        Assert.IsTrue(Numeric.AreEqual(3, mesh.Vertices[i].Length()));
 
     }
   }

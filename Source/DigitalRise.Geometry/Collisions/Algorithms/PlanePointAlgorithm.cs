@@ -38,9 +38,9 @@
 //    //  Sphere sphereA = (Sphere)a.Shape;
 //    //  Plane planeB = (Plane)b.Shape;
 
-//    //  Vector3F planeWorldNormal = b.Pose.ToWorldDirection(planeB.Normal);
-//    //  float planeDistanceFromWorldOrigin = Vector3F.Dot(b.Pose.Position + planeWorldNormal * planeB.DistanceFromOrigin, planeWorldNormal);
-//    //  float planeToSphereDistance = Vector3F.Dot(a.Pose.Position, planeWorldNormal) - sphereA.Radius - planeDistanceFromWorldOrigin;
+//    //  Vector3 planeWorldNormal = b.Pose.ToWorldDirection(planeB.Normal);
+//    //  float planeDistanceFromWorldOrigin = Vector3.Dot(b.Pose.Position + planeWorldNormal * planeB.DistanceFromOrigin, planeWorldNormal);
+//    //  float planeToSphereDistance = Vector3.Dot(a.Pose.Position, planeWorldNormal) - sphereA.Radius - planeDistanceFromWorldOrigin;
 
 //    //  // HaveContact queries can stop here.
 //    //  if (type == CollisionQueryType.Boolean)
@@ -55,7 +55,7 @@
 
 //    //  // Compute contact details.
 //    //  float penetrationDepth = -planeToSphereDistance;
-//    //  Vector3F position = a.Pose.Position - planeWorldNormal * (sphereA.Radius - penetrationDepth / 2);
+//    //  Vector3 position = a.Pose.Position - planeWorldNormal * (sphereA.Radius - penetrationDepth / 2);
 
 //    //  Contact contact;
 //    //  if (swapped == false)

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -28,7 +28,7 @@ namespace DigitalRise.Mathematics.Statistics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="points"/> is <see langword="null"/>.
     /// </exception>
-    public static Matrix33F ComputeCovarianceMatrix(IList<Vector3F> points)
+    public static Matrix33F ComputeCovarianceMatrix(IList<Vector3> points)
     {
       // Notes: See "Real-Time Collision Detection" p. 93
 
@@ -39,7 +39,7 @@ namespace DigitalRise.Mathematics.Statistics
       float oneOverNumberOfPoints = 1f / numberOfPoints;
 
       // Compute the center of mass.
-      Vector3F centerOfMass = Vector3F.Zero;
+      Vector3 centerOfMass = Vector3.Zero;
       for (int i = 0; i < numberOfPoints; i++)
         centerOfMass += points[i];
       centerOfMass *= oneOverNumberOfPoints;
@@ -55,7 +55,7 @@ namespace DigitalRise.Mathematics.Statistics
       for (int i = 0; i < numberOfPoints; i++)
       {
         // Translate points so that center of mass is at origin.
-        Vector3F p = points[i] - centerOfMass;
+        Vector3 p = points[i] - centerOfMass;
 
         // Compute covariance of translated point.
         c00 += p.X * p.X;

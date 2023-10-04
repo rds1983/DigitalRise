@@ -55,7 +55,7 @@ namespace DigitalRise.Graphics.Rendering
     {
       // Box
       [FieldOffset(0)]
-      public Vector3F Extent;
+      public Vector3 Extent;
 
       // Capsule, Cone, Cylinder, Sphere
       [FieldOffset(0)]
@@ -79,7 +79,7 @@ namespace DigitalRise.Graphics.Rendering
 
       // Shape, Model, Submesh
       [FieldOffset(0)]
-      public Vector3F Scale;
+      public Vector3 Scale;
     }
 
     private class PrimitiveJob
@@ -259,7 +259,7 @@ namespace DigitalRise.Graphics.Rendering
       job.Type = PrimitiveJobType.Box;
       job.Pose = pose;
       job.Color = color;
-      job.Size.Extent = new Vector3F(widthX, widthY, widthZ);
+      job.Size.Extent = new Vector3(widthX, widthY, widthZ);
       _primitives.Add(job);
 
       _usesTransparency = _usesTransparency || (color.A < 255);
@@ -387,7 +387,7 @@ namespace DigitalRise.Graphics.Rendering
       }
       else
       {
-        var aabb = new Aabb(new Vector3F(left, bottom, -far), new Vector3F(right, top, -near));
+        var aabb = new Aabb(new Vector3(left, bottom, -far), new Vector3(right, top, -near));
         pose.Position += pose.ToWorldDirection(aabb.Center);
 
         job.Type = PrimitiveJobType.Box;
@@ -409,7 +409,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="pose">The pose.</param>
     /// <param name="scale">The scale.</param>
     /// <param name="color">The color.</param>
-    public void AddShape(Shape shape, Pose pose, Vector3F scale, Color color)
+    public void AddShape(Shape shape, Pose pose, Vector3 scale, Color color)
     {
       var job = PrimitiveJobPool.Obtain();
       job.Type = PrimitiveJobType.Shape;
@@ -430,7 +430,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="pose">The pose.</param>
     /// <param name="scale">The scale.</param>
     /// <param name="color">The color.</param>
-    public void AddModel(Model model, Pose pose, Vector3F scale, Color color)
+    public void AddModel(Model model, Pose pose, Vector3 scale, Color color)
     {
       var job = PrimitiveJobPool.Obtain();
       job.Type = PrimitiveJobType.Model;
@@ -451,7 +451,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <param name="pose">The pose.</param>
     /// <param name="scale">The scale.</param>
     /// <param name="color">The color.</param>
-    public void AddSubmesh(Submesh submesh, Pose pose, Vector3F scale, Color color)
+    public void AddSubmesh(Submesh submesh, Pose pose, Vector3 scale, Color color)
     {
       var job = PrimitiveJobPool.Obtain();
       job.Type = PrimitiveJobType.Submesh;
@@ -496,7 +496,7 @@ namespace DigitalRise.Graphics.Rendering
         // Update depth (distance from camera).
         foreach (var job in _primitives)
         {
-          Vector3F position = job.Pose.Position;
+          Vector3 position = job.Pose.Position;
           job.Depth = view.TransformPosition(position).Z;
         }
 
@@ -593,14 +593,14 @@ namespace DigitalRise.Graphics.Rendering
 
       float farOverNear = far / near;
 
-      Vector3F corner0 = job.Pose.ToWorldPosition(new Vector3F(left, bottom, -near));
-      Vector3F corner1 = job.Pose.ToWorldPosition(new Vector3F(right, bottom, -near));
-      Vector3F corner2 = job.Pose.ToWorldPosition(new Vector3F(right, top, -near));
-      Vector3F corner3 = job.Pose.ToWorldPosition(new Vector3F(left, top, -near));
-      Vector3F corner4 = job.Pose.ToWorldPosition(new Vector3F(left * farOverNear, bottom * farOverNear, -far));
-      Vector3F corner5 = job.Pose.ToWorldPosition(new Vector3F(right * farOverNear, bottom * farOverNear, -far));
-      Vector3F corner6 = job.Pose.ToWorldPosition(new Vector3F(right * farOverNear, top * farOverNear, -far));
-      Vector3F corner7 = job.Pose.ToWorldPosition(new Vector3F(left * farOverNear, top * farOverNear, -far));
+      Vector3 corner0 = job.Pose.ToWorldPosition(new Vector3(left, bottom, -near));
+      Vector3 corner1 = job.Pose.ToWorldPosition(new Vector3(right, bottom, -near));
+      Vector3 corner2 = job.Pose.ToWorldPosition(new Vector3(right, top, -near));
+      Vector3 corner3 = job.Pose.ToWorldPosition(new Vector3(left, top, -near));
+      Vector3 corner4 = job.Pose.ToWorldPosition(new Vector3(left * farOverNear, bottom * farOverNear, -far));
+      Vector3 corner5 = job.Pose.ToWorldPosition(new Vector3(right * farOverNear, bottom * farOverNear, -far));
+      Vector3 corner6 = job.Pose.ToWorldPosition(new Vector3(right * farOverNear, top * farOverNear, -far));
+      Vector3 corner7 = job.Pose.ToWorldPosition(new Vector3(left * farOverNear, top * farOverNear, -far));
 
       if (DrawWireFrame)
       {
@@ -622,23 +622,23 @@ namespace DigitalRise.Graphics.Rendering
         _triangleBatch.Clear();
 
         // Right face
-        var n = job.Pose.ToWorldDirection(new Vector3F(near, 0, right));
+        var n = job.Pose.ToWorldDirection(new Vector3(near, 0, right));
         // (normal is normalized in the BasicEffect HLSL.)
         _triangleBatch.Add(ref corner1, ref corner2, ref corner5, ref n, ref job.Color);
         _triangleBatch.Add(ref corner2, ref corner6, ref corner5, ref n, ref job.Color);
 
         // Left face
-        n = job.Pose.ToWorldDirection(new Vector3F(-near, 0, -left));
+        n = job.Pose.ToWorldDirection(new Vector3(-near, 0, -left));
         _triangleBatch.Add(ref corner0, ref corner4, ref corner3, ref n, ref job.Color);
         _triangleBatch.Add(ref corner3, ref corner4, ref corner7, ref n, ref job.Color);
 
         // Top face
-        n = job.Pose.ToWorldDirection(new Vector3F(0, near, top));
+        n = job.Pose.ToWorldDirection(new Vector3(0, near, top));
         _triangleBatch.Add(ref corner3, ref corner7, ref corner2, ref n, ref job.Color);
         _triangleBatch.Add(ref corner7, ref corner6, ref corner2, ref n, ref job.Color);
 
         // Bottom face
-        n = job.Pose.ToWorldDirection(new Vector3F(0, -near, -bottom));
+        n = job.Pose.ToWorldDirection(new Vector3(0, -near, -bottom));
         _triangleBatch.Add(ref corner0, ref corner1, ref corner4, ref n, ref job.Color);
         _triangleBatch.Add(ref corner4, ref corner1, ref corner5, ref n, ref job.Color);
 
@@ -667,10 +667,10 @@ namespace DigitalRise.Graphics.Rendering
         if (Numeric.AreEqual(1.0f, cameraProjection.M33))
         {
           // Orthographic projection
-          Vector3F position = job.Pose.Position;
-          Vector3F right = cameraPose.Orientation.GetColumn(0);
-          Vector3F up = cameraPose.Orientation.GetColumn(1);
-          Vector3F forward = cameraPose.Orientation.GetColumn(2);
+          Vector3 position = job.Pose.Position;
+          Vector3 right = cameraPose.Orientation.GetColumn(0);
+          Vector3 up = cameraPose.Orientation.GetColumn(1);
+          Vector3 forward = cameraPose.Orientation.GetColumn(2);
           Matrix pose = new Matrix(right.X, right.Y, right.Z, 0,
                                    up.X, up.Y, up.Z, 0,
                                    forward.X, forward.Y, forward.Z, 0,
@@ -686,7 +686,7 @@ namespace DigitalRise.Graphics.Rendering
         else
         {
           // Perspective projection
-          Vector3F right = cameraPose.Orientation * Vector3F.Right;
+          Vector3 right = cameraPose.Orientation * Vector3.Right;
           RenderSphereOutline(job.Size.Radius, ref job.Pose.Position, ref cameraPose, ref right, ref job.Color);
         }
       }
@@ -704,16 +704,16 @@ namespace DigitalRise.Graphics.Rendering
 
 
     // Render outline of sphere in perspective projection.
-    private void RenderSphereOutline(float radius, ref Vector3F center, ref Pose cameraPose, ref Vector3F right, ref Color color)
+    private void RenderSphereOutline(float radius, ref Vector3 center, ref Pose cameraPose, ref Vector3 right, ref Color color)
     {
       // TODO: Try alternative algorithm. See http://www.gamasutra.com/view/feature/131351/the_mechanics_of_robust_stencil_.php?page=6
 
       // Forward direction of camera in world space.
-      Vector3F forward = cameraPose.Orientation * Vector3F.Forward;
+      Vector3 forward = cameraPose.Orientation * Vector3.Forward;
 
       // Vector pointing from camera position to center of sphere.
-      Vector3F cameraToCenter = center - cameraPose.Position;
-      float cameraToCenterLength = cameraToCenter.Length;
+      Vector3 cameraToCenter = center - cameraPose.Position;
+      float cameraToCenterLength = cameraToCenter.Length();
       if (Numeric.IsLessOrEqual(cameraToCenterLength, radius))
       {
         // Camera is within sphere.
@@ -731,18 +731,18 @@ namespace DigitalRise.Graphics.Rendering
       float α = (float)Math.Asin(radius / cameraToCenterLength);
 
       // Determine the normal of the triangle.
-      Vector3F normal = Vector3F.Cross(right, cameraToCenter);
-      if (normal.IsNumericallyZero)
-        normal = Vector3F.Up;
+      Vector3 normal = Vector3.Cross(right, cameraToCenter);
+      if (normal.IsNumericallyZero())
+        normal = Vector3.Up;
 
       // adjacent = √(hypotenuse² + opposite²)
       float radiusSquared = radius * radius;
       float cameraToCenterLengthSquared = cameraToCenterLength * cameraToCenterLength;
       float cameraToPointLength = (float)Math.Sqrt(cameraToCenterLengthSquared - radiusSquared);
-      Vector3F cameraToPoint = Matrix33F.CreateRotation(normal, α) * cameraToCenter;
+      Vector3 cameraToPoint = Matrix33F.CreateRotation(normal, α) * cameraToCenter;
 
       // Get the first point on the outline in world space.
-      Vector3F pStart = cameraPose.Position + cameraToPoint * cameraToPointLength;
+      Vector3 pStart = cameraPose.Position + cameraToPoint * cameraToPointLength;
 
       // Incrementally rotate the right vector 360° and repeat to find the remaining 
       // points on the outline.
@@ -751,14 +751,14 @@ namespace DigitalRise.Graphics.Rendering
       {
         float β = i * ConstantsF.TwoPi / NumberOfSegments;
 
-        Vector3F rightRotated = Matrix33F.CreateRotation(forward, -β) * right;
-        normal = Vector3F.Cross(rightRotated, cameraToCenter);
-        if (normal.IsNumericallyZero)
-          normal = Vector3F.Up;
+        Vector3 rightRotated = Matrix33F.CreateRotation(forward, -β) * right;
+        normal = Vector3.Cross(rightRotated, cameraToCenter);
+        if (normal.IsNumericallyZero())
+          normal = Vector3.Up;
 
         cameraToPointLength = (float)Math.Sqrt(cameraToCenterLengthSquared - radiusSquared);
         cameraToPoint = Matrix33F.CreateRotation(normal, α) * cameraToCenter;
-        Vector3F pEnd = cameraPose.Position + cameraToPoint * cameraToPointLength;
+        Vector3 pEnd = cameraPose.Position + cameraToPoint * cameraToPointLength;
         _lineBatch.Add(pStart, pEnd, color);
         pStart = pEnd;
       }
@@ -784,10 +784,10 @@ namespace DigitalRise.Graphics.Rendering
         _hemisphereLinePrimitive.Draw();
 
         // 4 lines
-        Vector3F dx = radius * job.Pose.ToWorldDirection(new Vector3F(1, 0, 0));
-        Vector3F dy = (height / 2 - radius) * job.Pose.ToWorldDirection(new Vector3F(0, 1, 0));
-        Vector3F dz = radius * job.Pose.ToWorldDirection(new Vector3F(0, 0, 1));
-        Vector3F center = job.Pose.Position;
+        Vector3 dx = radius * job.Pose.ToWorldDirection(new Vector3(1, 0, 0));
+        Vector3 dy = (height / 2 - radius) * job.Pose.ToWorldDirection(new Vector3(0, 1, 0));
+        Vector3 dz = radius * job.Pose.ToWorldDirection(new Vector3(0, 0, 1));
+        Vector3 center = job.Pose.Position;
         _lineBatch.Add(center + dy + dx, center - dy + dx, job.Color);
         _lineBatch.Add(center + dy - dx, center - dy - dx, job.Color);
         _lineBatch.Add(center + dy + dz, center - dy + dz, job.Color);

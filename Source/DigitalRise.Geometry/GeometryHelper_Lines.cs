@@ -6,8 +6,8 @@ using System;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry
 {
@@ -35,12 +35,12 @@ namespace DigitalRise.Geometry
     /// <returns><see langword="true"/> if the <paramref name="point"/> is on the line.</returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public static bool GetClosestPoint(Line line, Vector3F point, out Vector3F closestPointOnLine)
+    public static bool GetClosestPoint(Line line, Vector3 point, out Vector3 closestPointOnLine)
     {
       float parameter;
       GetLineParameter(new LineSegment(line.PointOnLine, line.PointOnLine + line.Direction), point, out parameter);
       closestPointOnLine = line.PointOnLine + parameter * line.Direction;
-      return Vector3F.AreNumericallyEqual(point, closestPointOnLine);
+      return MathHelper.AreNumericallyEqual(point, closestPointOnLine);
     }
 
 
@@ -66,7 +66,7 @@ namespace DigitalRise.Geometry
     /// <paramref name="point1"/> are identical); otherwise <see langword="false"/>.
     /// </returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static bool GetClosestPoints(Line line0, Line line1, out Vector3F point0, out Vector3F point1)
+    public static bool GetClosestPoints(Line line0, Line line1, out Vector3 point0, out Vector3 point1)
     {
       float s, t;
       GetLineParameters(
@@ -77,7 +77,7 @@ namespace DigitalRise.Geometry
 
       point0 = line0.PointOnLine + s * line0.Direction;
       point1 = line1.PointOnLine + t * line1.Direction;
-      return Vector3F.AreNumericallyEqual(point0, point1);
+      return MathHelper.AreNumericallyEqual(point0, point1);
     }
 
     
@@ -94,13 +94,13 @@ namespace DigitalRise.Geometry
     /// </returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public static bool GetClosestPoints(LineSegment lineSegment, Vector3F point, out Vector3F closestPointOnLineSegment)
+    public static bool GetClosestPoints(LineSegment lineSegment, Vector3 point, out Vector3 closestPointOnLineSegment)
     {
       float parameter;
       GetLineParameter(lineSegment, point, out parameter);
       parameter = Math.Max(0, Math.Min(1, parameter));
       closestPointOnLineSegment = lineSegment.Start + parameter * (lineSegment.End - lineSegment.Start);
-      return Vector3F.AreNumericallyEqual(point, closestPointOnLineSegment);
+      return MathHelper.AreNumericallyEqual(point, closestPointOnLineSegment);
     }
 
 
@@ -120,12 +120,12 @@ namespace DigitalRise.Geometry
     /// <paramref name="point1"/> are identical); otherwise <see langword="false"/>.
     /// </returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static bool GetClosestPoints(LineSegment segment0, LineSegment segment1, out Vector3F point0, out Vector3F point1)
+    public static bool GetClosestPoints(LineSegment segment0, LineSegment segment1, out Vector3 point0, out Vector3 point1)
     {
       float s, t;
       GetLineParameters(segment0, segment1, out s, out t);
       AdjustClosestPoints(segment0, segment1, s, t, out point0, out point1);
-      return Vector3F.AreNumericallyEqual(point0, point1);
+      return MathHelper.AreNumericallyEqual(point0, point1);
     }
 
 
@@ -147,12 +147,12 @@ namespace DigitalRise.Geometry
     /// </returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public static bool GetClosestPoints(LineSegment segment, Line line, out Vector3F pointOnLine, out Vector3F pointOnSegment)
+    public static bool GetClosestPoints(LineSegment segment, Line line, out Vector3 pointOnLine, out Vector3 pointOnSegment)
     {
       float s, t;
       GetLineParameters(new LineSegment(line.PointOnLine, line.PointOnLine + line.Direction), segment, out s, out t);
       AdjustClosestPoints(segment, line, s, t, out pointOnLine, out pointOnSegment);
-      return Vector3F.AreNumericallyEqual(pointOnLine, pointOnSegment);
+      return MathHelper.AreNumericallyEqual(pointOnLine, pointOnSegment);
     }
 
 
@@ -173,12 +173,12 @@ namespace DigitalRise.Geometry
       float epsilonSquared = Numeric.EpsilonFSquared;
 
       // Compute parameters form Equation (1) and (2).
-      Vector3F lA = segmentA.End - segmentA.Start;
-      Vector3F lB = segmentB.End - segmentB.Start;
+      Vector3 lA = segmentA.End - segmentA.Start;
+      Vector3 lB = segmentB.End - segmentB.Start;
 
       // From Equation (15)
-      float l11 = lA.LengthSquared;
-      float l22 = lB.LengthSquared;
+      float l11 = lA.LengthSquared();
+      float l22 = lB.LengthSquared();
 
       if (l11 < epsilonSquared)
       {
@@ -196,10 +196,10 @@ namespace DigitalRise.Geometry
       {
         // No segment has length 0.
         // From Equation (3)
-        Vector3F aToB = segmentB.Start - segmentA.Start;
+        Vector3 aToB = segmentB.Start - segmentA.Start;
 
         // From Equation (15)
-        float l12 = -Vector3F.Dot(lA, lB);
+        float l12 = -Vector3.Dot(lA, lB);
 
         float detL = l11 * l22 - l12 * l12;
         if (Math.Abs(detL) < epsilonSquared)
@@ -225,8 +225,8 @@ namespace DigitalRise.Geometry
         {
           // Non-parallel lines.
           // From Equation (15)
-          float ra = Vector3F.Dot(lA, aToB);
-          float rb = -Vector3F.Dot(lB, aToB);
+          float ra = Vector3.Dot(lA, aToB);
+          float rb = -Vector3.Dot(lB, aToB);
 
           // Equation (12)
           t = (l11 * rb - ra * l12) / detL;
@@ -242,9 +242,9 @@ namespace DigitalRise.Geometry
 
 
     // Similar to GetLineParameters(LineSegment, LineSegment, ...)
-    internal static void GetLineParameter(LineSegment lineSegment, Vector3F point, out float parameter)
+    internal static void GetLineParameter(LineSegment lineSegment, Vector3 point, out float parameter)
     {
-      float lengthSquared = lineSegment.LengthSquared;
+      float lengthSquared = lineSegment.LengthSquared();
       if (lengthSquared < Numeric.EpsilonFSquared)
       {
         // Segment has zero length.
@@ -252,15 +252,15 @@ namespace DigitalRise.Geometry
         return;
       }
 
-      Vector3F lineToPoint = point - lineSegment.Start;
+      Vector3 lineToPoint = point - lineSegment.Start;
 
       // Parameter computed from equation 20.
-      parameter = Vector3F.Dot(lineSegment.End - lineSegment.Start, lineToPoint) / lengthSquared;
+      parameter = Vector3.Dot(lineSegment.End - lineSegment.Start, lineToPoint) / lengthSquared;
     }
 
 
     // Like the AdjustClosestPoint for two segments but simpler.
-    private static void AdjustClosestPoints(LineSegment segment, Line line, float s, float t, out Vector3F pointOnLine, out Vector3F pointOnSegment)
+    private static void AdjustClosestPoints(LineSegment segment, Line line, float s, float t, out Vector3 pointOnLine, out Vector3 pointOnSegment)
     {
       if (t < 0)
       {
@@ -285,7 +285,7 @@ namespace DigitalRise.Geometry
     // This method takes not-clamped line parameters and computes parameters which lie on the line segment.
     // If a parameter is not in [0,1] we have to clamp it to the segment. In this case there might
     // be a new closer point on the other segment. 
-    private static void AdjustClosestPoints(LineSegment segment0, LineSegment segment1, float s, float t, out Vector3F point0, out Vector3F point1)
+    private static void AdjustClosestPoints(LineSegment segment0, LineSegment segment1, float s, float t, out Vector3 point0, out Vector3 point1)
     {
       if ((s < 0 || s > 1) && (t < 0 || t > 1))
       {

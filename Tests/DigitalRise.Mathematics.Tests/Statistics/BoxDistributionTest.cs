@@ -1,5 +1,5 @@
 using System;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -12,11 +12,11 @@ namespace DigitalRise.Mathematics.Statistics.Tests
     public void ZeroWidth()
     {
       var random = new Random(123456);
-      var d = new BoxDistribution { MinValue = new Vector3F(1, 2, 3), MaxValue = new Vector3F(1, 2, 3) };
+      var d = new BoxDistribution { MinValue = new Vector3(1, 2, 3), MaxValue = new Vector3(1, 2, 3) };
 
-      Assert.AreEqual(new Vector3F(1, 2, 3), d.Next(random));
-      Assert.AreEqual(new Vector3F(1, 2, 3), d.Next(random));
-      Assert.AreEqual(new Vector3F(1, 2, 3), d.Next(random));
+      Assert.AreEqual(new Vector3(1, 2, 3), d.Next(random));
+      Assert.AreEqual(new Vector3(1, 2, 3), d.Next(random));
+      Assert.AreEqual(new Vector3(1, 2, 3), d.Next(random));
     }
 
 
@@ -28,8 +28,8 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       for (int i = 0; i < 100; i++)
       {
-        d.MinValue = RandomHelper.Random.NextVector3F(-1, 1);
-        d.MaxValue = RandomHelper.Random.NextVector3F(-1, 1);
+        d.MinValue = RandomHelper.Random.NextVector3(-1, 1);
+        d.MaxValue = RandomHelper.Random.NextVector3(-1, 1);
 
         var value = d.Next(random);
 

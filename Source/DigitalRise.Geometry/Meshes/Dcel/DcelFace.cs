@@ -4,8 +4,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Meshes
 {
@@ -45,7 +44,7 @@ namespace DigitalRise.Geometry.Meshes
     /// Gets the normal of a convex face. (Not normalized. For internal use only.)
     /// </summary>
     /// <value>The normal of a convex face. (Not normalized. For internal use only.)</value>
-    internal Vector3F Normal
+    internal Vector3 Normal
     {
       // TODO: Maybe we could cache the normal vectors and not recompute them.
       // However, the normals must be invalidated when the topology changes.
@@ -53,14 +52,14 @@ namespace DigitalRise.Geometry.Meshes
       {
         // Get the first 3 vertices.
         DcelEdge edge = Boundary;
-        Vector3F v0 = edge.Origin.Position;
+        Vector3 v0 = edge.Origin.Position;
         edge = edge.Next;
-        Vector3F v1 = edge.Origin.Position;
+        Vector3 v1 = edge.Origin.Position;
         edge = edge.Next;
-        Vector3F v2 = edge.Origin.Position;
+        Vector3 v2 = edge.Origin.Position;
 
         // Compute face normal. (Not normalized.)
-        Vector3F normal = Vector3F.Cross(v1 - v0, v2 - v0);
+        Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
 
         // normal can be zero or close to zero when
         //   - face is a degenerate triangle,

@@ -7,9 +7,9 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
 using DigitalRise.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -60,7 +60,7 @@ namespace Samples
       // instance stored in the content manager.
       _modelNode = sharedModelNode.Clone();
 
-      _modelNode.PoseWorld = new Pose(Vector3F.Zero, Matrix33F.CreateRotationY(-ConstantsF.PiOver2));
+      _modelNode.PoseWorld = new Pose(Vector3.Zero, Matrix33F.CreateRotationY(-ConstantsF.PiOver2));
 
       // The collision shape is stored in the UserData.
       var shape = (Shape)_modelNode.UserData;

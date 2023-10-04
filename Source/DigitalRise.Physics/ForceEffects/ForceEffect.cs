@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.ForceEffects
 {
@@ -61,18 +61,18 @@ namespace DigitalRise.Physics.ForceEffects
   /// </para>
   /// <para>
   /// <strong>Applying Forces:</strong> A <see cref="ForceEffect"/> must not call 
-  /// <see cref="RigidBody"/>.<see cref="RigidBody.AddForce(Vector3F)"/> or other force related
+  /// <see cref="RigidBody"/>.<see cref="RigidBody.AddForce(Vector3)"/> or other force related
   /// methods of the <see cref="RigidBody"/> directly. Those methods are reserved for the user. The
   /// reason is: If a user applies a force with 
-  /// <see cref="RigidBody"/>.<see cref="RigidBody.AddForce(Vector3F)"/>, the added force is 
+  /// <see cref="RigidBody"/>.<see cref="RigidBody.AddForce(Vector3)"/>, the added force is 
   /// constant for the whole duration of 
   /// <see cref="Physics.Simulation"/>.<see cref="Physics.Simulation.Update(TimeSpan)"/>. If the 
   /// simulation divides one call to <see cref="Physics.Simulation.Update(TimeSpan)"/> in several 
   /// sub time steps, the same user force is applied in all sub time steps. But force effects are 
   /// called by the simulation in each sub time step. They can set a different force in each sub 
   /// time step. Therefore, force effects must use a different set of methods and these methods are 
-  /// <see cref="AddForce(RigidBody, Vector3F, Vector3F)"/>, 
-  /// <see cref="AddForce(RigidBody, Vector3F)"/> and <see cref="AddTorque(RigidBody, Vector3F)"/> 
+  /// <see cref="AddForce(RigidBody, Vector3, Vector3)"/>, 
+  /// <see cref="AddForce(RigidBody, Vector3)"/> and <see cref="AddTorque(RigidBody, Vector3)"/> 
   /// of this class. 
   /// </para>
   /// <para>
@@ -198,9 +198,9 @@ namespace DigitalRise.Physics.ForceEffects
     /// </para>
     /// <para>
     /// This method is responsible for applying the forces of the effect to the rigid bodies. To
-    /// apply a force the methods <see cref="ForceEffect.AddForce(RigidBody, Vector3F, Vector3F)"/>, 
-    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3F)"/> and/or 
-    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3F)"/> of the <see cref="ForceEffect"/> 
+    /// apply a force the methods <see cref="ForceEffect.AddForce(RigidBody, Vector3, Vector3)"/>, 
+    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3)"/> and/or 
+    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3)"/> of the <see cref="ForceEffect"/> 
     /// base class must be used. Do not use the <strong>AddForce</strong>/<strong>AddTorque</strong> 
     /// methods of the <see cref="RigidBody"/> class.
     /// </para>
@@ -258,11 +258,11 @@ namespace DigitalRise.Physics.ForceEffects
     /// The world space position where the force is a applied on the body.
     /// </param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    protected static void AddForce(RigidBody body, Vector3F forceWorld, Vector3F positionWorld)
+    protected static void AddForce(RigidBody body, Vector3 forceWorld, Vector3 positionWorld)
     {
-      Vector3F r = positionWorld - body.PoseCenterOfMass.Position;
+      Vector3 r = positionWorld - body.PoseCenterOfMass.Position;
       body.AccumulatedForce += forceWorld;
-      body.AccumulatedTorque += Vector3F.Cross(r, forceWorld);
+      body.AccumulatedTorque += Vector3.Cross(r, forceWorld);
     }
 
 
@@ -272,7 +272,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// <param name="body">The rigid body.</param>
     /// <param name="forceWorld">The force in world space.</param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    protected static void AddForce(RigidBody body, Vector3F forceWorld)
+    protected static void AddForce(RigidBody body, Vector3 forceWorld)
     {
       body.AccumulatedForce += forceWorld;
     }
@@ -284,7 +284,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// <param name="body">The rigid body.</param>
     /// <param name="torqueWorld">The torque in world space.</param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    protected static void AddTorque(RigidBody body, Vector3F torqueWorld)
+    protected static void AddTorque(RigidBody body, Vector3 torqueWorld)
     {
       body.AccumulatedTorque += torqueWorld;
     }

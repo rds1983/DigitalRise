@@ -8,8 +8,7 @@ using System.Globalization;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -111,7 +110,7 @@ namespace DigitalRise.Geometry.Shapes
     private float _maxHeight = float.NaN;
 
     // Array with normals for the height entries. - Used when UseFastCollisionApproximation is set.
-    //internal Vector3F[,] NormalArray = null;
+    //internal Vector3[,] NormalArray = null;
     #endregion
 
 
@@ -248,14 +247,14 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
         // Return a point in the center below the surface.
         float centerX = _originX + _widthX / 2;
         float centerZ = _originZ + _widthZ / 2;
-        Vector3F p = new Vector3F(centerX, GetHeight(centerX, centerZ) - _depth / 2, centerZ);
+        Vector3 p = new Vector3(centerX, GetHeight(centerX, centerZ) - _depth / 2, centerZ);
 
         if (!Numeric.IsNaN(p.Y))
           return p;
@@ -269,7 +268,7 @@ namespace DigitalRise.Geometry.Shapes
             if (Numeric.IsNaN(height))
               continue;
 
-            return new Vector3F(
+            return new Vector3(
               _originX + x * _widthX / (_numberOfSamplesX - 1),
               height - _depth / 2,
               _originZ + z * _widthZ / (_numberOfSamplesZ - 1));
@@ -277,7 +276,7 @@ namespace DigitalRise.Geometry.Shapes
         }
 
         // There are no non-hole vertices? Return dummy value.
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
@@ -601,7 +600,7 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Recompute local cached AABB if it is invalid.
       if (Numeric.IsNaN(_minHeight))
@@ -619,8 +618,8 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
 
-      Vector3F minimum = new Vector3F(_originX, _minHeight, _originZ);
-      Vector3F maximum = new Vector3F(_originX + _widthX, _maxHeight, _originZ + _widthZ);
+      Vector3 minimum = new Vector3(_originX, _minHeight, _originZ);
+      Vector3 maximum = new Vector3(_originX + _widthX, _maxHeight, _originZ + _widthZ);
 
       // Apply scale.
       var scaledLocalAabb = new Aabb(minimum, maximum);
@@ -683,7 +682,7 @@ namespace DigitalRise.Geometry.Shapes
       triangle.Vertex0.Y = 0;
       triangle.Vertex1.Y = 0;
       triangle.Vertex2.Y = 0;
-      GeometryHelper.GetBarycentricFromPoint(triangle, new Vector3F(x, 0, z), out u, out v, out w);
+      GeometryHelper.GetBarycentricFromPoint(triangle, new Vector3(x, 0, z), out u, out v, out w);
 
       Debug.Assert((Numeric.IsGreaterOrEqual(u, 0) && Numeric.IsGreaterOrEqual(v, 0)) && Numeric.IsLessOrEqual(u + v, 1));
 
@@ -745,9 +744,9 @@ namespace DigitalRise.Geometry.Shapes
 
         // Build vertices.
         // Note: If this order is changed, methods here and in HeightFieldAlgorithm (neighbor selection) must be updated.
-        triangle.Vertex0 = new Vector3F(x, height0, z);
-        triangle.Vertex2 = new Vector3F(x + cellWidthX, height1, z);  // Vertex 1 and 2 swapped for correct counter clockwise order!
-        triangle.Vertex1 = new Vector3F(x, height2, z + cellWidthZ);
+        triangle.Vertex0 = new Vector3(x, height0, z);
+        triangle.Vertex2 = new Vector3(x + cellWidthX, height1, z);  // Vertex 1 and 2 swapped for correct counter clockwise order!
+        triangle.Vertex1 = new Vector3(x, height2, z + cellWidthZ);
       }
       else
       {
@@ -761,9 +760,9 @@ namespace DigitalRise.Geometry.Shapes
         // Build vertices.
         // Note: If this order is changed, methods here and in HeightFieldAlgorithm (neighbor selection) 
         // and RayHeightFieldAlgorithm must be updated.
-        triangle.Vertex0 = new Vector3F(x, height0, z + cellWidthZ);
-        triangle.Vertex2 = new Vector3F(x + cellWidthX, height1, z); // Vertex 1 and 2 swapped for correct counter clockwise order!
-        triangle.Vertex1 = new Vector3F(x + cellWidthX, height2, z + cellWidthZ);
+        triangle.Vertex0 = new Vector3(x, height0, z + cellWidthZ);
+        triangle.Vertex2 = new Vector3(x + cellWidthX, height1, z); // Vertex 1 and 2 swapped for correct counter clockwise order!
+        triangle.Vertex1 = new Vector3(x + cellWidthX, height2, z + cellWidthZ);
       }
       return triangle;
     }
@@ -790,7 +789,7 @@ namespace DigitalRise.Geometry.Shapes
       int arrayLengthX = Array.GetLength(0);
       int arrayLengthZ = Array.GetLength(1);
 
-      NormalArray = new Vector3F[arrayLengthX, arrayLengthZ];
+      NormalArray = new Vector3[arrayLengthX, arrayLengthZ];
       for (int x = 0; x < arrayLengthX; x++)
       {
         for (int z = 0; z < arrayLengthZ; z++)
@@ -805,22 +804,22 @@ namespace DigitalRise.Geometry.Shapes
           float h4 = Array[x, Math.Max(z - 1, 0)];
 
           // This could be used for very smooth surfaces.
-          //NormalArray[x, z] = new Vector3F(
+          //NormalArray[x, z] = new Vector3(
           //  h3 - h1,
           //  2,
-          //  h4 - h2).Normalized;
+          //  h4 - h2).Normalized();
 
           // This is more accurate.
-          //NormalArray[x, z] = (new Vector3F(-h1, 1, -h2).Normalized
-          //                     + new Vector3F(h3, 1, -h2).Normalized
-          //                     + new Vector3F(h3, 1, h4).Normalized
-          //                     + new Vector3F(-h1, 1, h4).Normalized
-          //                    ).Normalized;
+          //NormalArray[x, z] = (new Vector3(-h1, 1, -h2).Normalized
+          //                     + new Vector3(h3, 1, -h2).Normalized
+          //                     + new Vector3(h3, 1, h4).Normalized
+          //                     + new Vector3(-h1, 1, h4).Normalized
+          //                    ).Normalized();
 
           // Or, use the neighbor triangles to compute the normals - 
           // the advantage of this method is that the normals fit the visible
           // triangle mesh.
-          var normal = Vector3F.Zero;
+          var normal = Vector3.Zero;
           if (x - 1 >= 0)
           {
             if (z - 1 >= 0)
@@ -830,7 +829,7 @@ namespace DigitalRise.Geometry.Shapes
             if (z + 1 < arrayLengthZ)
             {
               normal += (GetTriangle(x - 1, z, false).Normal 
-                         + GetTriangle(x - 1, z, true).Normal).Normalized;
+                         + GetTriangle(x - 1, z, true).Normal).Normalized();
             }
           }
 
@@ -839,7 +838,7 @@ namespace DigitalRise.Geometry.Shapes
             if (z - 1 >= 0)
             {
               normal += (GetTriangle(x, z - 1, false).Normal
-                         + GetTriangle(x, z - 1, true).Normal).Normalized;
+                         + GetTriangle(x, z - 1, true).Normal).Normalized();
             }
             if (z + 1 < arrayLengthZ)
             {
@@ -888,7 +887,7 @@ namespace DigitalRise.Geometry.Shapes
         for (int x = 0; x < _numberOfSamplesX; x++)
         {
           mesh.Vertices.Add(
-            new Vector3F(
+            new Vector3(
               _originX + (float)x / numberOfCellsInX * WidthX,
               _samples[z * NumberOfSamplesX + x],
               _originZ + (float)z / numberOfCellsInZ * WidthZ));

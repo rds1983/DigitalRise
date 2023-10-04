@@ -268,7 +268,7 @@ namespace DigitalRise.UI.Rendering
       return position;
 
       // ----- Alternatively, using a 3x3 matrix:
-      //Vector3F p = new Vector3F(point.X, point.Y, 1);
+      //Vector3 p = new Vector3(point.X, point.Y, 1);
       //p = ToMatrix33F() * p;
       //return new Vector2(p.X, p.Y);
     }
@@ -284,7 +284,7 @@ namespace DigitalRise.UI.Rendering
       if (Numeric.IsZero(Scale.X) || Numeric.IsZero(Scale.Y))
         return new Vector2(float.NaN);
 
-      Vector3F p = new Vector3F(position.X, position.Y, 1);
+      Vector3 p = new Vector3(position.X, position.Y, 1);
       p = ToMatrix33F().Inverse * p;
       return new Vector2(p.X, p.Y);
     }

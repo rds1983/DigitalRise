@@ -2,13 +2,13 @@
 using CommonServiceLocator;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Particles
 {
@@ -34,11 +34,11 @@ namespace Samples.Particles
         DefaultEmissionRate = 40,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        Distribution = new LineSegmentDistribution { Start = new Vector3F(-0.2f, 0, -6), End = new Vector3F(0.2f, 0, -6) }
+        Distribution = new LineSegmentDistribution { Start = new Vector3(-0.2f, 0, -6), End = new Vector3(0.2f, 0, -6) }
       });
 
       // The particles are rendered using axial billboards.
@@ -47,11 +47,11 @@ namespace Samples.Particles
 
       // The "Axis" parameter defines the up-axis of the particle billboard. In this
       // case the "Axis" is the direction of each particle.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Axis);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Axis);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Axis,
-        Distribution = new DirectionDistribution { Deviation = 0.3f, Direction = new Vector3F(1, 0.5f, -1f).Normalized },
+        Distribution = new DirectionDistribution { Deviation = 0.3f, Direction = new Vector3(1, 0.5f, -1f).Normalized() },
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -69,7 +69,7 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Damping).DefaultValue = 0.5f;
       ps.Effectors.Add(new SingleDampingEffector());
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3F(0, -5f, 0);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.LinearAcceleration).DefaultValue = new Vector3(0, -5f, 0);
       ps.Effectors.Add(new LinearAccelerationEffector
       {
         DirectionParameter = ParticleParameterNames.Axis
@@ -81,7 +81,7 @@ namespace Samples.Particles
       ps.Effectors.Add(new CollisionPlaneEffector
       {
         DirectionParameter = ParticleParameterNames.Axis,
-        Plane = new Plane(new Vector3F(0, 1, 0), 0.03f),
+        Plane = new Plane(new Vector3(0, 1, 0), 0.03f),
       });
 
       // Add more collision plane effectors for the 4 walls of our sandbox.
@@ -89,22 +89,22 @@ namespace Samples.Particles
       ps.Effectors.Add(new CollisionPlaneEffector
       {
         DirectionParameter = ParticleParameterNames.Axis,
-        Plane = new Plane(new Vector3F(-1, 0, 0), -10 + offset),
+        Plane = new Plane(new Vector3(-1, 0, 0), -10 + offset),
       });
       ps.Effectors.Add(new CollisionPlaneEffector
       {
         DirectionParameter = ParticleParameterNames.Axis,
-        Plane = new Plane(new Vector3F(0, 0, 1), -10 + offset),
+        Plane = new Plane(new Vector3(0, 0, 1), -10 + offset),
       });
       ps.Effectors.Add(new CollisionPlaneEffector
       {
         DirectionParameter = ParticleParameterNames.Axis,
-        Plane = new Plane(new Vector3F(1, 0, 0), -10 + offset),
+        Plane = new Plane(new Vector3(1, 0, 0), -10 + offset),
       });
       ps.Effectors.Add(new CollisionPlaneEffector
       {
         DirectionParameter = ParticleParameterNames.Axis,
-        Plane = new Plane(new Vector3F(0, 0, -1), -10 + offset),
+        Plane = new Plane(new Vector3(0, 0, -1), -10 + offset),
       });
 
       // Particles billboards get stretched in the y-direction. The stretch is time-dependent.
@@ -122,10 +122,10 @@ namespace Samples.Particles
         Value2 = 0.03f,
       });
 
-      ps.Parameters.AddUniform<Vector3F>("StartColor").DefaultValue = new Vector3F(1.0f, 1.0f, 0.8f);
-      ps.Parameters.AddUniform<Vector3F>("EndColor").DefaultValue = new Vector3F(1.0f, 0.3f, 0.0f);
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new Vector3FLerpEffector
+      ps.Parameters.AddUniform<Vector3>("StartColor").DefaultValue = new Vector3(1.0f, 1.0f, 0.8f);
+      ps.Parameters.AddUniform<Vector3>("EndColor").DefaultValue = new Vector3(1.0f, 0.3f, 0.0f);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new Vector3LerpEffector
       {
         ValueParameter = ParticleParameterNames.Color,
         StartParameter = "StartColor",

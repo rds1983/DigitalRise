@@ -3,11 +3,10 @@ using AssetManagementBase;
 using CommonServiceLocator;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -38,7 +37,7 @@ namespace Samples.Particles
       // This parent particle system defines the uniform Gravity parameter for the child
       // particle systems. Uniform particle parameters can be "inherited" - if a child
       // does not have a required uniform parameter, it uses the parameter of the parent.
-      ps.Parameters.AddUniform<Vector3F>("Gravity").DefaultValue = new Vector3F(0, -1f, 0);
+      ps.Parameters.AddUniform<Vector3>("Gravity").DefaultValue = new Vector3(0, -1f, 0);
 
       ParticleSystemValidator.Validate(ps);
       ParticleSystemValidator.Validate(ps.Children[0]);
@@ -65,19 +64,19 @@ namespace Samples.Particles
         DefaultEmissionRate = 18,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        DefaultValue = new Vector3F(0.0f, 0.1f, 0.0f),
-        Distribution = new LineSegmentDistribution { Start = new Vector3F(-0.5f, 0.05f, 0.0f), End = new Vector3F(0.5f, 0.05f, 0.0f) }
+        DefaultValue = new Vector3(0.0f, 0.1f, 0.0f),
+        Distribution = new LineSegmentDistribution { Start = new Vector3(-0.5f, 0.05f, 0.0f), End = new Vector3(0.5f, 0.05f, 0.0f) }
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        DefaultValue = Vector3F.Forward,
+        DefaultValue = Vector3.Forward,
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -159,12 +158,12 @@ namespace Samples.Particles
         DefaultEmissionRate = 5,
       });
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        DefaultValue = new Vector3F(0.0f, 0.1f, 0.0f),
-        Distribution = new LineSegmentDistribution { Start = new Vector3F(-0.1f, 0.05f, 0.0f), End = new Vector3F(0.1f, 0.05f, 0.0f) }
+        DefaultValue = new Vector3(0.0f, 0.1f, 0.0f),
+        Distribution = new LineSegmentDistribution { Start = new Vector3(-0.1f, 0.05f, 0.0f), End = new Vector3(0.1f, 0.05f, 0.0f) }
       });
 
       // Render particles with a custom orientation. (The orientation of each particle
@@ -173,15 +172,15 @@ namespace Samples.Particles
         new BillboardOrientation(BillboardNormal.Custom, false, true);
 
       // The "Normal" parameter is the face normal of the particle billboard.
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Normal).DefaultValue = new Vector3F(0, 1, 0);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Normal).DefaultValue = new Vector3(0, 1, 0);
 
       // The "Axis" parameter is the up-axis of the particle billboard. In this case
       // the "Axis" is the direction of the water flow.
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Axis);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Axis);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Axis,
-        DefaultValue = Vector3F.Forward,
+        DefaultValue = Vector3.Forward,
       });
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -217,7 +216,7 @@ namespace Samples.Particles
         Value2 = 1.6f,
       });
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Color).DefaultValue = new Vector3F(0.90f, 0.95f, 1.0f);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Color).DefaultValue = new Vector3(0.90f, 0.95f, 1.0f);
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Alpha);
       ps.Parameters.AddUniform<float>("TargetAlpha").DefaultValue = 1.0f;

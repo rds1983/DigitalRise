@@ -60,7 +60,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <remarks>
     /// This method cannot be used for curves that contain gaps!
     /// </remarks>
-    internal static void Flatten(ICurve<float, Vector3F> curve, ICollection<Vector3F> points, int maxNumberOfIterations, float tolerance)
+    internal static void Flatten(ICurve<float, Vector3> curve, ICollection<Vector3> points, int maxNumberOfIterations, float tolerance)
     {
       if (tolerance <= 0)
         throw new ArgumentOutOfRangeException("tolerance", "The tolerance must be greater than zero.");
@@ -79,14 +79,14 @@ namespace DigitalRise.Mathematics.Interpolation
         return;
       }
 
-      var list = ResourcePools<Vector3F>.Lists.Obtain();
+      var list = ResourcePools<Vector3>.Lists.Obtain();
 
       Flatten(curve, list, 0, 1, curve.GetPoint(0), curve.GetPoint(1), 0, totalLength, 1, maxNumberOfIterations, tolerance);
 
       foreach (var point in list)
         points.Add(point);
 
-      ResourcePools<Vector3F>.Lists.Recycle(list);
+      ResourcePools<Vector3>.Lists.Recycle(list);
     }
 
 
@@ -109,10 +109,10 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    private static void Flatten(ICurve<float, Vector3F> curve, List<Vector3F> points, float p0, float p1, Vector3F point0, Vector3F point1, float length0, float length1, int iteration, int maxNumberOfIterations, float tolerance)
+    private static void Flatten(ICurve<float, Vector3> curve, List<Vector3> points, float p0, float p1, Vector3 point0, Vector3 point1, float length0, float length1, int iteration, int maxNumberOfIterations, float tolerance)
     {
       if (iteration >= maxNumberOfIterations
-          || Math.Abs((length1 - length0) - (point1 - point0).Length) < tolerance)
+          || Math.Abs((length1 - length0) - (point1 - point0).Length()) < tolerance)
       {
         points.Add(point0);
         points.Add(point1);
@@ -145,12 +145,12 @@ namespace DigitalRise.Mathematics.Interpolation
     /// <summary>
     /// Computes the length of a list of 3D line segments.
     /// </summary>
-    internal static float GetLength(List<Vector3F> lineSegments)
+    internal static float GetLength(List<Vector3> lineSegments)
     {
       int numberOfSegments = lineSegments.Count / 2;
       float length = 0;
       for (int i = 0; i < numberOfSegments; i++)
-        length += (lineSegments[2 * i + 0] - lineSegments[2 * i + 1]).Length;
+        length += (lineSegments[2 * i + 0] - lineSegments[2 * i + 1]).Length();
 
       return length;
     }

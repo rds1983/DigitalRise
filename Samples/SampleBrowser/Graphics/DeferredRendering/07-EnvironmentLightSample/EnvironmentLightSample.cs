@@ -60,15 +60,15 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
       GameObjectService.Objects.Add(lavaBallsObject);
       GameObjectService.Objects.Add(new ObjectCreatorObject(Services));
       GameObjectService.Objects.Add(new FogObject(Services));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 0.9f, new Pose(new Vector3F(0, 0, -2))));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3F(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 0.9f, new Pose(new Vector3(0, 0, -2))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
       GameObjectService.Objects.Add(new StaticSkyObject(Services));
 
       // Add a few palm trees.
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -89,7 +89,7 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
       // Add the environment light.
       var environmentLight = new EnvironmentLight
       {
-        Color = new Vector3F(0.1f),
+        Color = new Vector3(0.1f),
         DiffuseIntensity = 0,
         SpecularIntensity = 1,
         EnvironmentMap = AssetManager.LoadTextureCube(GraphicsService.GraphicsDevice, "Sky2.dds"),

@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Interpolation
 {
@@ -13,7 +12,7 @@ namespace DigitalRise.Mathematics.Interpolation
   /// </summary>
   /// <inheritdoc cref="Path3F"/>
   [Serializable]
-  public class PathKey3F : CurveKey<float, Vector3F>
+  public class PathKey3F : CurveKey<float, Vector3>
   {
     private float _parameter;
 

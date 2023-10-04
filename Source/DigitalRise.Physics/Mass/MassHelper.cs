@@ -5,7 +5,7 @@
 using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics
 {
@@ -40,7 +40,7 @@ namespace DigitalRise.Physics
     /// All valid inertia matrices can be transformed into a coordinate space where all elements
     /// non-diagonal matrix elements are 0. The axis of this special space are the principal axes.
     /// </remarks>
-    internal static void DiagonalizeInertia(Matrix33F inertia, out Vector3F inertiaDiagonal, out Matrix33F rotation)
+    internal static void DiagonalizeInertia(Matrix33F inertia, out Vector3 inertiaDiagonal, out Matrix33F rotation)
     {
       // Alternatively we could use Jacobi transformation (iterative method, see Bullet/btMatrix3x3.diagonalize() 
       // and Numerical Recipes book) or we could find the eigenvalues using the characteristic 
@@ -50,7 +50,7 @@ namespace DigitalRise.Physics
 
       // Perform eigenvalue decomposition.
       var eigenValueDecomposition = new EigenvalueDecompositionF(inertia.ToMatrixF());
-      inertiaDiagonal = eigenValueDecomposition.RealEigenvalues.ToVector3F();
+      inertiaDiagonal = eigenValueDecomposition.RealEigenvalues.ToVector3();
       rotation = eigenValueDecomposition.V.ToMatrix33F();
 
       if (!rotation.IsRotation)
@@ -59,7 +59,7 @@ namespace DigitalRise.Physics
         // we have to swap two columns.
         Mathematics.MathHelper.Swap(ref inertiaDiagonal.Y, ref inertiaDiagonal.Z);
 
-        Vector3F dummy = rotation.GetColumn(1);
+        Vector3 dummy = rotation.GetColumn(1);
         rotation.SetColumn(1, rotation.GetColumn(2));
         rotation.SetColumn(2, dummy);
 
@@ -86,11 +86,11 @@ namespace DigitalRise.Physics
     /// returned.
     /// </remarks>
     /// <seealso cref="GetUntranslatedMassInertia"/>
-    private static Matrix33F GetTranslatedMassInertia(float mass, Matrix33F inertia, Vector3F translation)
+    private static Matrix33F GetTranslatedMassInertia(float mass, Matrix33F inertia, Vector3 translation)
     {
       // The current center of mass is at the origin. 
       // Using the "transfer of axes" or "parallel axes" theorem:
-      Vector3F translation2 = translation * translation;
+      Vector3 translation2 = translation * translation;
       inertia.M00 += mass * (translation2.Y + translation2.Z);
       inertia.M11 += mass * (translation2.X + translation2.Z);
       inertia.M22 += mass * (translation2.X + translation2.Y);
@@ -128,13 +128,13 @@ namespace DigitalRise.Physics
     /// inertia is returned.
     /// </remarks>
     /// <seealso cref="GetTranslatedMassInertia"/>
-    private static Matrix33F GetUntranslatedMassInertia(float mass, Matrix33F inertia, Vector3F translation)
+    private static Matrix33F GetUntranslatedMassInertia(float mass, Matrix33F inertia, Vector3 translation)
     {
-      if (translation.IsNumericallyZero)
+      if (translation.IsNumericallyZero())
         return inertia;
 
       // Do the inverse of GetTranslatedMassInertia.
-      Vector3F translation2 = translation * translation;
+      Vector3 translation2 = translation * translation;
       inertia.M00 -= mass * (translation2.Y + translation2.Z);
       inertia.M11 -= mass * (translation2.X + translation2.Z);
       inertia.M22 -= mass * (translation2.X + translation2.Y);

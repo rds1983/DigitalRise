@@ -5,7 +5,8 @@
 using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -110,7 +111,7 @@ namespace DigitalRise.Animation.Character
     /// the hand center. Then the target will be grabbed correctly with the hand center and not the
     /// wrist.
     /// </remarks>
-    public Vector3F TipOffset
+    public Vector3 TipOffset
     {
       get { return _tipOffset; }
       set
@@ -122,7 +123,7 @@ namespace DigitalRise.Animation.Character
         }
       }
     }
-    private Vector3F _tipOffset;
+    private Vector3 _tipOffset;
 
 
     /// <summary>
@@ -154,7 +155,7 @@ namespace DigitalRise.Animation.Character
     /// The hinge axis relative to the root bone. The vector must not be a zero length
     /// vector. The default is (0, 1, 0).
     /// </value>
-    public Vector3F HingeAxis
+    public Vector3 HingeAxis
     {
       get { return _hingeAxis; }
       set
@@ -168,7 +169,7 @@ namespace DigitalRise.Animation.Character
         }
       }
     }
-    private Vector3F _hingeAxis;
+    private Vector3 _hingeAxis;
 
 
     /// <summary>
@@ -220,7 +221,7 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     public TwoJointIKSolver()
     {
-      HingeAxis = Vector3F.UnitY;
+      HingeAxis = Vector3.UnitY;
       MinHingeAngle = 0;
       MaxHingeAngle = 3 * ConstantsF.PiOver4;
     }
@@ -271,7 +272,7 @@ namespace DigitalRise.Animation.Character
       var tipBonePoseAbsolute = SkeletonPose.GetBonePoseAbsolute(TipBoneIndex);
 
       // Get tip position in model space.
-      Vector3F tipAbsolute;
+      Vector3 tipAbsolute;
       if (TipBoneOrientation != null)
       {
         // If the user has specified an absolute tip rotation, then we consider this rotation and
@@ -287,12 +288,12 @@ namespace DigitalRise.Animation.Character
       }
 
       // Abort if we already touch the target.
-      if (Vector3F.AreNumericallyEqual(tipAbsolute, Target))
+      if (MathHelper.AreNumericallyEqual(tipAbsolute, Target))
         return;
 
       // Root to target vector.
       var rootToTarget = Target - rootBonePoseAbsolute.Translation;
-      var rootToTargetLength = rootToTarget.Length;
+      var rootToTargetLength = rootToTarget.Length();
       if (Numeric.IsZero(rootToTargetLength))
         return;
       rootToTarget /= rootToTargetLength;
@@ -300,7 +301,7 @@ namespace DigitalRise.Animation.Character
       // ----- Align chain with target.
       // Align the root to target vector with the root to tip vector.
       var rootToTip = tipAbsolute - rootBonePoseAbsolute.Translation;
-      var rootToTipLength = rootToTip.Length;
+      var rootToTipLength = rootToTip.Length();
       if (!Numeric.IsZero(rootToTipLength))
       {
         rootToTip /= rootToTipLength;
@@ -325,25 +326,25 @@ namespace DigitalRise.Animation.Character
 
       // Project vectors to hinge plane. Everything should be in a plane for the following 
       // computations.
-      rootToHinge -= hingeAxis * Vector3F.Dot(rootToHinge, hingeAxis);
-      hingeToTip -= hingeAxis * Vector3F.Dot(hingeToTip, hingeAxis);
+      rootToHinge -= hingeAxis * Vector3.Dot(rootToHinge, hingeAxis);
+      hingeToTip -= hingeAxis * Vector3.Dot(hingeToTip, hingeAxis);
 
       // Get lengths.
-      float rootToHingeLength = rootToHinge.Length;
+      float rootToHingeLength = rootToHinge.Length();
       if (Numeric.IsZero(rootToHingeLength))
         return;
       rootToHinge /= rootToHingeLength;
 
-      float hingeToTipLength = hingeToTip.Length;
+      float hingeToTipLength = hingeToTip.Length();
       if (Numeric.IsZero(hingeToTipLength))
         return;
       hingeToTip /= hingeToTipLength;
 
       // Compute current hinge angle (angle between root bone and hinge bone).
-      float currentHingeAngle = (float)Math.Acos(MathHelper.Clamp(Vector3F.Dot(rootToHinge, hingeToTip), -1, 1));
+      float currentHingeAngle = (float)Math.Acos(MathHelper.Clamp(Vector3.Dot(rootToHinge, hingeToTip), -1, 1));
 
       // Make sure the computed angle is about the hingeAxis and not about -hingeAxis.
-      if (Vector3F.Dot(Vector3F.Cross(rootToHinge, hingeToTip), hingeAxis) < 0)
+      if (Vector3.Dot(Vector3.Cross(rootToHinge, hingeToTip), hingeAxis) < 0)
         currentHingeAngle = -currentHingeAngle;
 
       // Using law of cosines to compute the desired hinge angle using the triangle lengths.
@@ -369,7 +370,7 @@ namespace DigitalRise.Animation.Character
       // If we hit a hinge limit, then we can move the tip closer to the target by aligning
       // the whole chain again.
       rootToTip = tipAbsolute - rootBonePoseAbsolute.Translation;
-      rootToTipLength = rootToTip.Length;
+      rootToTipLength = rootToTip.Length();
       if (!Numeric.IsZero(rootToTipLength))
       {
         rootToTip /= rootToTipLength;

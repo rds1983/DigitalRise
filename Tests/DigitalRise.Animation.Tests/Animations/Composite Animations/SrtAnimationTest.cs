@@ -1,6 +1,7 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -20,9 +21,9 @@ namespace DigitalRise.Animation.Tests
     [Test]
     public void GetTotalDurationTest()
     {
-      var animation = new AnimationClip<Vector3F>
+      var animation = new AnimationClip<Vector3>
       {
-        Animation = new Vector3FFromToByAnimation
+        Animation = new Vector3FromToByAnimation
         {
           Duration = TimeSpan.FromSeconds(6.0),
         },

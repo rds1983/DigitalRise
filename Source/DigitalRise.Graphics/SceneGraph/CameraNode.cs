@@ -46,7 +46,7 @@ namespace DigitalRise.Graphics.SceneGraph
   /// </item>
   /// <item>
   /// <description>
-  /// By calling the method <see cref="SceneHelper.LookAt(SceneNode,Vector3F,Vector3F)"/>.
+  /// By calling the method <see cref="SceneHelper.LookAt(SceneNode,Vector3,Vector3)"/>.
   /// </description>
   /// </item>
   /// </list>

@@ -41,7 +41,7 @@ At regular intervals, the intermediate decomposition is updated and rendered to 
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(3, 3, 3), 0.8f, -0.6f);
+      SetCamera(new Vector3(3, 3, 3), 0.8f, -0.6f);
 
       // Load model.
       _modelNode = AssetManager.LoadDRModel(GraphicsService, "Saucer/Saucer.drmdl").Clone();

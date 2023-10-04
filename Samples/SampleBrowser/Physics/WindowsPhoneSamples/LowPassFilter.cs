@@ -1,10 +1,9 @@
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
   /// <summary>
-  /// Filters a <see cref="Vector3F"/> signal using a first order low-pass filter.
+  /// Filters a <see cref="Vector3"/> signal using a first order low-pass filter.
   /// </summary>
   /// <remarks>
   /// <para>
@@ -16,7 +15,7 @@ namespace Samples.Physics
   /// </remarks>
   internal class LowPassFilter
   {
-    private Vector3F _filteredValue;
+    private Vector3 _filteredValue;
 
 
     /// <summary>
@@ -31,7 +30,7 @@ namespace Samples.Physics
     /// Initializes a new instance of the <see cref="LowPassFilter"/> class.
     /// </summary>
     /// <param name="initialValue">The initial value.</param>
-    public LowPassFilter(Vector3F initialValue)
+    public LowPassFilter(Vector3 initialValue)
     {
       TimeConstant = 0.1f;
       _filteredValue = initialValue;
@@ -44,7 +43,7 @@ namespace Samples.Physics
     /// <param name="value">The current value.</param>
     /// <param name="deltaTime">The time since the last call of <see cref="Filter"/>.</param>
     /// <returns>The filtered value.</returns>
-    public Vector3F Filter(Vector3F value, float deltaTime)
+    public Vector3 Filter(Vector3 value, float deltaTime)
     {
       float p = deltaTime;
       float weight1 = p / (p + TimeConstant);

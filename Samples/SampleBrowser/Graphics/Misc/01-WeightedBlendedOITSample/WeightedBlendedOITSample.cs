@@ -62,12 +62,12 @@ namespace Samples.Graphics
       // Load two instances of the "Tank" model:
       // The first instance is rendered opaque (for reference).
       var model = AssetManager.LoadDRModel(GraphicsService, "WeightedBlendedOIT/tank.drmdl").Clone();
-      model.PoseWorld = new Pose(new Vector3F(-4, 0, 0));
+      model.PoseWorld = new Pose(new Vector3(-4, 0, 0));
       _graphicsScreen.Scene.Children.Add(model);
 
       // The second instance is rendered transparent.
       model = AssetManager.LoadDRModel(GraphicsService, "WeightedBlendedOIT/tank.drmdl").Clone();
-      model.PoseWorld = new Pose(new Vector3F(4, 0, 0));
+      model.PoseWorld = new Pose(new Vector3(4, 0, 0));
       // Set flag to indicate that this instance should be rendered transparent.
       model.GetSubtree().ForEach(node => node.UserFlags = (short)WboitFlags.Transparent);
       _graphicsScreen.Scene.Children.Add(model);

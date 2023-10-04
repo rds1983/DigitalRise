@@ -1,10 +1,9 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -52,7 +51,7 @@ Tip: Press <M> to see the triangulated height field cells.",
 
       RigidBody ground = new RigidBody(heightField)
       {
-        Pose = new Pose(new Vector3F(0, -10, 0)),
+        Pose = new Pose(new Vector3(0, -10, 0)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(ground);
@@ -113,7 +112,7 @@ Tip: Press <M> to see the triangulated height field cells.",
       {
         RigidBody body = new RigidBody(boxShape, null, roughMaterial)
         {
-          Pose = new Pose(new Vector3F(-19 + i * 4, 10, -10)),
+          Pose = new Pose(new Vector3(-19 + i * 4, 10, -10)),
         };
         Simulation.RigidBodies.Add(body);
       }

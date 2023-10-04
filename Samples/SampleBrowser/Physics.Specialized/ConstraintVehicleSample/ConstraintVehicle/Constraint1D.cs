@@ -4,7 +4,8 @@
 
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -14,14 +15,14 @@ namespace DigitalRise.Physics.Constraints
   //[Obfuscation(Feature = "controlflow")]
   internal class Constraint1D
   {
-    public Vector3F JLinA;
-    public Vector3F JAngA;
-    public Vector3F JLinB;
-    public Vector3F JAngB;
-    public Vector3F WJTLinA;
-    public Vector3F WJTAngA;
-    public Vector3F WJTLinB;
-    public Vector3F WJTAngB;
+    public Vector3 JLinA;
+    public Vector3 JAngA;
+    public Vector3 JLinB;
+    public Vector3 JAngB;
+    public Vector3 WJTLinA;
+    public Vector3 WJTAngA;
+    public Vector3 WJTLinB;
+    public Vector3 WJTAngB;
     public float JWJTInverse;
     public float TargetRelativeVelocity;
     public float Softness;
@@ -31,7 +32,7 @@ namespace DigitalRise.Physics.Constraints
     /// <summary>
     /// Initializes the 1-dimensional constraint.
     /// </summary>
-    public void Prepare(RigidBody bodyA, RigidBody bodyB, Vector3F jLinA, Vector3F jAngA, Vector3F jLinB, Vector3F jAngB)
+    public void Prepare(RigidBody bodyA, RigidBody bodyB, Vector3 jLinA, Vector3 jAngA, Vector3 jLinB, Vector3 jAngB)
     {
       JLinA = jLinA;
       JAngA = jAngA;
@@ -99,10 +100,10 @@ namespace DigitalRise.Physics.Constraints
     /// </summary>
     public float GetRelativeVelocity(RigidBody bodyA, RigidBody bodyB)
     {
-      Vector3F linearVelocityA = bodyA.LinearVelocity;
-      Vector3F angularVelocityA = bodyA.AngularVelocity;
-      Vector3F linearVelocityB = bodyB.LinearVelocity;
-      Vector3F angularVelocityB = bodyB.AngularVelocity;
+      Vector3 linearVelocityA = bodyA.LinearVelocity;
+      Vector3 angularVelocityA = bodyA.AngularVelocity;
+      Vector3 linearVelocityB = bodyB.LinearVelocity;
+      Vector3 angularVelocityB = bodyB.AngularVelocity;
       return JLinA.X * linearVelocityA.X + JLinA.Y * linearVelocityA.Y + JLinA.Z * linearVelocityA.Z
              + JAngA.X * angularVelocityA.X + JAngA.Y * angularVelocityA.Y + JAngA.Z * angularVelocityA.Z
              + JLinB.X * linearVelocityB.X + JLinB.Y * linearVelocityB.Y + JLinB.Z * linearVelocityB.Z

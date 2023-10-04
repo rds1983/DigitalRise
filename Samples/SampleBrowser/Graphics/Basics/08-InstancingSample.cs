@@ -66,7 +66,7 @@ For more information about instancing have a look at the following sample:
           pose.Position.X -= x;
           pose.Position.Z -= z;
           clone.PoseLocal = pose;
-          clone.ScaleLocal = new Vector3F(0.7f);
+          clone.ScaleLocal = new Vector3(0.7f);
           SetRandomColorAndAlpha(clone);
           _scene.Children.Add(clone);
         }
@@ -80,11 +80,11 @@ For more information about instancing have a look at the following sample:
 
     private void SetRandomColorAndAlpha(ModelNode model)
     {
-      var randomColor3F = RandomHelper.Random.NextVector3F(0, 4);
+      var randomColor3F = RandomHelper.Random.NextVector3(0, 4);
 
       // Desaturate random color to avoid eye cancer. ;-)
-      float luminance = Vector3F.Dot(randomColor3F, GraphicsHelper.LuminanceWeights);
-      var randomColor = (Vector3)InterpolationHelper.Lerp(new Vector3F(luminance), randomColor3F, 0.5f);
+      float luminance = Vector3.Dot(randomColor3F, GraphicsHelper.LuminanceWeights);
+      var randomColor = (Vector3)InterpolationHelper.Lerp(new Vector3(luminance), randomColor3F, 0.5f);
 
       var randomAlpha = MathHelper.Clamp(RandomHelper.Random.NextFloat(0, 5), 0, 1);
 

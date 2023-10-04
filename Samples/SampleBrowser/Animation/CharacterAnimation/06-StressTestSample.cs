@@ -60,7 +60,7 @@ namespace Samples.Animation
         var rowLength = (int)Math.Sqrt(NumberOfModels);
         var x = (i % rowLength) - rowLength / 2;
         var z = -i / rowLength;
-        var position = new Vector3F(x, 0, z) * 1.5f;
+        var position = new Vector3(x, 0, z) * 1.5f;
 
         _meshNodes[i] = meshNode.Clone();
         _meshNodes[i].PoseWorld = new Pose(position);

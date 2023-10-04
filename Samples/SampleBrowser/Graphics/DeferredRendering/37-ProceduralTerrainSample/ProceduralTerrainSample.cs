@@ -38,7 +38,7 @@ namespace Samples.Graphics
 
       // Add a custom game object which controls the camera.
       var cameraGameObject = new CameraObject(Services, 5000);
-      cameraGameObject.ResetPose(new Vector3F(0, 2, 5), 0, 0);
+      cameraGameObject.ResetPose(new Vector3(0, 2, 5), 0, 0);
       GameObjectService.Objects.Add(cameraGameObject);
       _graphicsScreen.ActiveCameraNode = cameraGameObject.CameraNode;
 

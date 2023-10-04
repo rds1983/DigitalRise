@@ -71,8 +71,8 @@ buffers (Submeshes), shaders and shader parameters (Materials).",
       // _model is the root of a tree of scene nodes. The mesh nodes are the child 
       // nodes. When we scale or move the _model, we automatically scale and move 
       // all child nodes.
-      _model.ScaleLocal = new Vector3F(0.8f);
-      _model.PoseWorld = new Pose(new Vector3F(0, 0, -2), Matrix33F.CreateRotationY(-0.3f));
+      _model.ScaleLocal = new Vector3(0.8f);
+      _model.PoseWorld = new Pose(new Vector3(0, 0, -2), Matrix33F.CreateRotationY(-0.3f));
 
       // Let's loop through the mesh nodes of the model:
       foreach (var meshNode in _model.MeshNodes())

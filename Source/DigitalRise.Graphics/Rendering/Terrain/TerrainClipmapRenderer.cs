@@ -310,7 +310,7 @@ namespace DigitalRise.Graphics.Rendering
       Debug.Assert(_previousMaterialBinding == null);
 
       // Loop over all layers. Render each layer into all levels (if there is an invalid region).
-      Aabb tileAabb = new Aabb(new Vector3F(-Terrain.TerrainLimit), new Vector3F(Terrain.TerrainLimit));
+      Aabb tileAabb = new Aabb(new Vector3(-Terrain.TerrainLimit), new Vector3(Terrain.TerrainLimit));
       ProcessLayer(graphicsDevice, context, clipmap, isBaseClipmap, _clearLayer, tileAabb);
       foreach (var tile in node.Terrain.Tiles)
       {
@@ -356,7 +356,7 @@ namespace DigitalRise.Graphics.Rendering
       {
         // Compute new origins.
         int texelsPerLevel = clipmap.CellsPerLevel - 2 * border;
-        Vector3F referencePosition3D = lodCameraNode.PoseWorld.Position;
+        Vector3 referencePosition3D = lodCameraNode.PoseWorld.Position;
         Vector2 referencePosition2D = new Vector2(referencePosition3D.X, referencePosition3D.Z);
         clipmap.LevelSizes[level] = clipmap.ActualCellSizes[level] * texelsPerLevel;
         Vector2 levelOrigin = new Vector2(
@@ -579,8 +579,8 @@ namespace DigitalRise.Graphics.Rendering
                 verticalAabb.Maximum.X = oldOrigin.X;
               }
 
-              Debug.Assert(horizontalAabb.Minimum <= horizontalAabb.Maximum);
-              Debug.Assert(verticalAabb.Minimum <= verticalAabb.Maximum);
+              Debug.Assert(horizontalAabb.Minimum.IsLessOrEqual(horizontalAabb.Maximum));
+              Debug.Assert(verticalAabb.Minimum.IsLessOrEqual(verticalAabb.Maximum));
               Debug.Assert(Numeric.AreEqual(horizontalAabb.Extent.X, levelSize));
 
               // (Assertions need larger epsilon.)
@@ -674,7 +674,7 @@ namespace DigitalRise.Graphics.Rendering
         var numberOfInvalidRegions = clipmap.InvalidRegions[level].Count;
         if (numberOfInvalidRegions == 0)
         {
-          clipmap.CombinedInvalidRegionsAabbs[level] = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+          clipmap.CombinedInvalidRegionsAabbs[level] = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
         }
         else
         {
@@ -684,7 +684,7 @@ namespace DigitalRise.Graphics.Rendering
         }
 
         // For debugging:
-        //clipmap.CombinedInvalidRegionsAabbs[level] = new Aabb(new Vector3F(float.MinValue), new Vector3F(float.MaxValue));
+        //clipmap.CombinedInvalidRegionsAabbs[level] = new Aabb(new Vector3(float.MinValue), new Vector3(float.MaxValue));
       }
     }
 

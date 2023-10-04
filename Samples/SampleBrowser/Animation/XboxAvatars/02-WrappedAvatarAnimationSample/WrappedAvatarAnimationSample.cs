@@ -33,7 +33,7 @@ the DigitalRise Animation system.",
 
     private AvatarAnimationPreset _currentAvatarAnimationPreset;
     private AvatarPose _avatarPose;
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
 
 
     public WrappedAvatarAnimationSample(Microsoft.Xna.Framework.Game game)
@@ -50,7 +50,7 @@ the DigitalRise Animation system.",
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Create a random avatar.

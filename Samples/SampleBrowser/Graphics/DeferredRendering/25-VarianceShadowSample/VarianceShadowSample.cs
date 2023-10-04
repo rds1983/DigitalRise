@@ -73,7 +73,7 @@ Press <F4> to open the Options window where you can change shadow settings.",
       {
         // If a target area is set, the VSM covers the given area.
         // If no target area is set, the VSM covers the area in front of the camera.
-        TargetArea = new Aabb(new Vector3F(-100, 0, -100), new Vector3F(100, 50, 100)),
+        TargetArea = new Aabb(new Vector3(-100, 0, -100), new Vector3(100, 50, 100)),
       };
       _lightNode.Shadow = _varianceShadow;
 

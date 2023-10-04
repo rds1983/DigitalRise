@@ -48,7 +48,7 @@ namespace Samples.Physics
       };
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0), null, roughMaterial)
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0), null, roughMaterial)
       {
         MotionType = MotionType.Static,
       };
@@ -65,37 +65,37 @@ namespace Samples.Physics
 
       // ----- Chassis
       BoxShape chassisShape = new BoxShape(1.7f, 1, 4f);
-      MassFrame chassisMass = MassFrame.FromShapeAndDensity(chassisShape, Vector3F.One, 200, 0.01f, 3);
+      MassFrame chassisMass = MassFrame.FromShapeAndDensity(chassisShape, Vector3.One, 200, 0.01f, 3);
       // Here is a trick: The car topples over very easily. By lowering the center of mass we 
       // make it more stable.
-      chassisMass.Pose = new Pose(new Vector3F(0, -1, 0));
+      chassisMass.Pose = new Pose(new Vector3(0, -1, 0));
       RigidBody chassis = new RigidBody(chassisShape, chassisMass, null)
       {
-        Pose = new Pose(new Vector3F(0, 1, 0)),
+        Pose = new Pose(new Vector3(0, 1, 0)),
       };
       Simulation.RigidBodies.Add(chassis);
 
       // ------ Wheels
       CylinderShape cylinderShape = new CylinderShape(0.4f, 0.3f);
-      MassFrame wheelMass = MassFrame.FromShapeAndDensity(cylinderShape, Vector3F.One, 500, 0.01f, 3);
+      MassFrame wheelMass = MassFrame.FromShapeAndDensity(cylinderShape, Vector3.One, 500, 0.01f, 3);
       RigidBody wheelFrontLeft = new RigidBody(cylinderShape, wheelMass, roughMaterial)
       {
-        Pose = new Pose(new Vector3F(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(wheelFrontLeft);
       RigidBody wheelFrontRight = new RigidBody(cylinderShape, wheelMass, roughMaterial)
       {
-        Pose = new Pose(new Vector3F(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(wheelFrontRight);
       RigidBody wheelBackLeft = new RigidBody(cylinderShape, wheelMass, roughMaterial)
       {
-        Pose = new Pose(new Vector3F(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(wheelBackLeft);
       RigidBody wheelBackRight = new RigidBody(cylinderShape, wheelMass, roughMaterial)
       {
-        Pose = new Pose(new Vector3F(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
+        Pose = new Pose(new Vector3(0, 1, 0), Matrix33F.CreateRotationZ(ConstantsF.PiOver2)),
       };
       Simulation.RigidBodies.Add(wheelBackRight);
 
@@ -111,7 +111,7 @@ namespace Samples.Physics
         // steering axis. In the last column we set the -x axis. This is the wheel rotation axis.
         // In the middle column is a vector that is normal to the first and last axis.
         // (All three columns are orthonormal and form a valid rotation matrix.)
-        AnchorPoseALocal = new Pose(new Vector3F(-0.9f, -0.4f, -1.4f),
+        AnchorPoseALocal = new Pose(new Vector3(-0.9f, -0.4f, -1.4f),
                                     new Matrix33F(0, 0, -1,
                                                   1, 0, 0,
                                                   0, -1, 0)),
@@ -135,7 +135,7 @@ namespace Samples.Physics
       {
         BodyA = chassis,
         BodyB = wheelFrontRight,
-        AnchorPoseALocal = new Pose(new Vector3F(0.9f, -0.4f, -1.4f),
+        AnchorPoseALocal = new Pose(new Vector3(0.9f, -0.4f, -1.4f),
                                     new Matrix33F(0, 0, -1,
                                                   1, 0, 0,
                                                   0, -1, 0)),
@@ -153,7 +153,7 @@ namespace Samples.Physics
       HingeJoint backLeftHinge = new HingeJoint
       {
         BodyA = chassis,
-        AnchorPoseALocal = new Pose(new Vector3F(-0.9f, -0.4f, 1.4f)),
+        AnchorPoseALocal = new Pose(new Vector3(-0.9f, -0.4f, 1.4f)),
         BodyB = wheelBackLeft,
         // --> To define the constraint anchor orientation:
         // The columns are the axes. We set the local y axis in the first column. This is
@@ -169,7 +169,7 @@ namespace Samples.Physics
       HingeJoint backRightHinge = new HingeJoint
       {
         BodyA = chassis,
-        AnchorPoseALocal = new Pose(new Vector3F(0.9f, -0.4f, 1.4f)),
+        AnchorPoseALocal = new Pose(new Vector3(0.9f, -0.4f, 1.4f)),
         BodyB = wheelBackRight,
         AnchorPoseBLocal = new Pose(new Matrix33F(0, 0, 1,
                                                   1, 0, 0,
@@ -208,10 +208,10 @@ namespace Samples.Physics
 
       // ----- Drop a few boxes to create obstacles.
       BoxShape boxShape = new BoxShape(1, 1, 1);
-      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3F.One, 100, 0.01f, 3);
+      MassFrame boxMass = MassFrame.FromShapeAndDensity(boxShape, Vector3.One, 100, 0.01f, 3);
       for (int i = 0; i < 20; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-20, 20);
+        Vector3 position = RandomHelper.Random.NextVector3(-20, 20);
         position.Y = 5;
         QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
 
@@ -248,7 +248,7 @@ namespace Samples.Physics
         wheelVelocity -= 60;
 
       // The normal rotation axis is the -x axis.
-      Vector3F axis = -Vector3F.UnitX;
+      Vector3 axis = -Vector3.UnitX;
       // Rotate the axis by the steering angle.
       axis = QuaternionF.CreateRotationY(_steeringAngle).Rotate(axis);
 

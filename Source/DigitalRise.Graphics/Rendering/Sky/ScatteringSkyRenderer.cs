@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -135,7 +136,7 @@ namespace DigitalRise.Graphics.Rendering
 
       // Camera properties
       var cameraNode = context.CameraNode;
-      Matrix view = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3F());
+      Matrix view = (Matrix)new Matrix44F(cameraNode.PoseWorld.Orientation.Transposed, new Vector3());
       _parameterView.SetValue(view);
       Matrix projection = cameraNode.Camera.Projection;
       _parameterProjection.SetValue(projection);
@@ -166,7 +167,7 @@ namespace DigitalRise.Graphics.Rendering
         _parameterGMie.SetValue(node.GMie);
         _parameterTransmittance.SetValue(node.Transmittance);
 
-        if (node.BaseHorizonColor.IsNumericallyZero && node.BaseZenithColor.IsNumericallyZero)
+        if (node.BaseHorizonColor.IsNumericallyZero() && node.BaseZenithColor.IsNumericallyZero())
         {
           // No base color.
           if (context.IsHdrEnabled())

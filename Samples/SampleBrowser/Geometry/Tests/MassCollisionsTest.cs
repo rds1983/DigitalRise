@@ -28,8 +28,8 @@ namespace Samples.Geometry
     // Create a custom GeometricObject class which stores a LinearVelocity.
     private class MovingGeometricObject : GeometricObject
     {
-      public Vector3F LinearVelocity { get; set; }
-      public Vector3F AngularVelocity { get; set; }
+      public Vector3 LinearVelocity { get; set; }
+      public Vector3 AngularVelocity { get; set; }
     }
 
     private float _defaultPlaneShapeMeshSize;
@@ -52,7 +52,7 @@ namespace Samples.Geometry
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(0, 0, 20), 0, 0);
+      SetCamera(new Vector3(0, 0, 20), 0, 0);
 
       // We use one collision domain that manages all objects.
       _domain = new CollisionDomain { EnableMultithreading = false };
@@ -91,48 +91,48 @@ namespace Samples.Geometry
       // Left plane.
       var leftPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(Vector3F.UnitX, 0),
-        Pose = new Pose(new Vector3F(-BoxSize, 0, 0)),
+        Shape = new PlaneShape(Vector3.UnitX, 0),
+        Pose = new Pose(new Vector3(-BoxSize, 0, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(leftPlane));
 
       // Right plane.
       var rightPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitX, 0),
-        Pose = new Pose(new Vector3F(BoxSize, 0, 0)),
+        Shape = new PlaneShape(-Vector3.UnitX, 0),
+        Pose = new Pose(new Vector3(BoxSize, 0, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(rightPlane));
 
       // Top plane.
       var topPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitY, 0),
-        Pose = new Pose(new Vector3F(0, BoxSize, 0)),
+        Shape = new PlaneShape(-Vector3.UnitY, 0),
+        Pose = new Pose(new Vector3(0, BoxSize, 0)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(topPlane));
 
       // Bottom plane.
       //var bottomPlane = new MovingGeometricObject
       //{
-      //  Shape = new PlaneShape(Vector3F.UnitY, 0),
-      //  Pose = new Pose(new Vector3F(0, -BoxSize, 0)),
+      //  Shape = new PlaneShape(Vector3.UnitY, 0),
+      //  Pose = new Pose(new Vector3(0, -BoxSize, 0)),
       //};
       //_domain.CollisionObjects.Add(new CollisionObject(bottomPlane));
 
       // Front plane.
       var frontPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(-Vector3F.UnitZ, 0),
-        Pose = new Pose(new Vector3F(0, 0, BoxSize)),
+        Shape = new PlaneShape(-Vector3.UnitZ, 0),
+        Pose = new Pose(new Vector3(0, 0, BoxSize)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(frontPlane));
 
       // Back plane.
       var backPlane = new MovingGeometricObject
       {
-        Shape = new PlaneShape(Vector3F.UnitZ, 0),
-        Pose = new Pose(new Vector3F(0, 0, -BoxSize)),
+        Shape = new PlaneShape(Vector3.UnitZ, 0),
+        Pose = new Pose(new Vector3(0, 0, -BoxSize)),
       };
       _domain.CollisionObjects.Add(new CollisionObject(backPlane));
     }
@@ -182,11 +182,11 @@ namespace Samples.Geometry
           case 5:
             // Convex hull of several points.
             ConvexHullOfPoints hull = new ConvexHullOfPoints();
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize));
-            hull.Points.Add(new Vector3F(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize));
-            hull.Points.Add(new Vector3F(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
-            hull.Points.Add(new Vector3F(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize));
+            hull.Points.Add(new Vector3(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize));
+            hull.Points.Add(new Vector3(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize));
+            hull.Points.Add(new Vector3(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize));
             shape = hull;
             break;
           case 6:
@@ -195,11 +195,11 @@ namespace Samples.Geometry
             composite.Children.Add(
               new GeometricObject(
                 new BoxShape(ObjectSize, 3 * ObjectSize, ObjectSize),
-                new Pose(new Vector3F(0, 0, 0))));
+                new Pose(new Vector3(0, 0, 0))));
             composite.Children.Add(
               new GeometricObject(
                 new BoxShape(2 * ObjectSize, ObjectSize, ObjectSize),
-                new Pose(new Vector3F(0, 2 * ObjectSize, 0))));
+                new Pose(new Vector3(0, 2 * ObjectSize, 0))));
             shape = composite;
             break;
           case 7:
@@ -208,34 +208,34 @@ namespace Samples.Geometry
           case 8:
             {
               var compBvh = new CompositeShape();
-              compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3F(0, 0.5f, 0), Matrix33F.Identity)));
-              compBvh.Children.Add(new GeometricObject(new BoxShape(0.8f, 0.5f, 0.5f), new Pose(new Vector3F(0.5f, 0.7f, 0), Matrix33F.CreateRotationZ(-MathHelper.ToRadians(15)))));
-              compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3F(0, 1.15f, 0), Matrix33F.Identity)));
-              compBvh.Children.Add(new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3F(0.6f, 1.15f, 0), Matrix33F.CreateRotationX(0.3f))));
+              compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3(0, 0.5f, 0), Matrix33F.Identity)));
+              compBvh.Children.Add(new GeometricObject(new BoxShape(0.8f, 0.5f, 0.5f), new Pose(new Vector3(0.5f, 0.7f, 0), Matrix33F.CreateRotationZ(-MathHelper.ToRadians(15)))));
+              compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3(0, 1.15f, 0), Matrix33F.Identity)));
+              compBvh.Children.Add(new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3(0.6f, 1.15f, 0), Matrix33F.CreateRotationX(0.3f))));
               compBvh.Partition = new AabbTree<int>();
               shape = compBvh;
               break;
             }
           case 9:
             CompositeShape comp = new CompositeShape();
-            comp.Children.Add(new GeometricObject(new BoxShape(0.5f * ObjectSize, 1 * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3F(0, 0.5f * ObjectSize, 0), QuaternionF.Identity)));
-            comp.Children.Add(new GeometricObject(new BoxShape(0.8f * ObjectSize, 0.5f * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3F(0.3f * ObjectSize, 0.7f * ObjectSize, 0), QuaternionF.CreateRotationZ(-MathHelper.ToRadians(45)))));
-            comp.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3F(0, 1.15f * ObjectSize, 0), QuaternionF.Identity)));
+            comp.Children.Add(new GeometricObject(new BoxShape(0.5f * ObjectSize, 1 * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0, 0.5f * ObjectSize, 0), QuaternionF.Identity)));
+            comp.Children.Add(new GeometricObject(new BoxShape(0.8f * ObjectSize, 0.5f * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0.3f * ObjectSize, 0.7f * ObjectSize, 0), QuaternionF.CreateRotationZ(-MathHelper.ToRadians(45)))));
+            comp.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3(0, 1.15f * ObjectSize, 0), QuaternionF.Identity)));
             shape = comp;
             break;
           case 10:
             shape = new ConvexHullOfPoints(new[]
             {
-              new Vector3F(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize),
-              new Vector3F(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize),
-              new Vector3F(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
-              new Vector3F(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
-              new Vector3F(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize)
+              new Vector3(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize),
+              new Vector3(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize),
+              new Vector3(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
+              new Vector3(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
+              new Vector3(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize)
             });
             break;
           case 11:
             ConvexHullOfShapes shapeHull = new ConvexHullOfShapes();
-            shapeHull.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3F(0, 2 * ObjectSize, 0), Matrix33F.Identity)));
+            shapeHull.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3(0, 2 * ObjectSize, 0), Matrix33F.Identity)));
             shapeHull.Children.Add(new GeometricObject(new BoxShape(1 * ObjectSize, 2 * ObjectSize, 3 * ObjectSize), Pose.Identity));
             shape = shapeHull;
             break;
@@ -253,11 +253,11 @@ namespace Samples.Geometry
             shape = heightField;
             break;
           //case 14:
-          //shape = new LineShape(new Vector3F(0.1f, 0.2f, 0.3f), new Vector3F(0.1f, 0.2f, -0.3f).Normalized);
+          //shape = new LineShape(new Vector3(0.1f, 0.2f, 0.3f), new Vector3(0.1f, 0.2f, -0.3f).Normalized());
           //break;            
           case 15:
             shape = new LineSegmentShape(
-              new Vector3F(0.1f, 0.2f, 0.3f), new Vector3F(0.1f, 0.2f, 0.3f) + 3 * ObjectSize * new Vector3F(0.1f, 0.2f, -0.3f));
+              new Vector3(0.1f, 0.2f, 0.3f), new Vector3(0.1f, 0.2f, 0.3f) + 3 * ObjectSize * new Vector3(0.1f, 0.2f, -0.3f));
             break;
           case 16:
             shape = new MinkowskiDifferenceShape
@@ -283,10 +283,10 @@ namespace Samples.Geometry
             shape = new PointShape(0.1f, 0.3f, 0.2f);
             break;
           case 21:
-            shape = new RayShape(new Vector3F(0.2f, 0, -0.12f), new Vector3F(1, 2, 3).Normalized, ObjectSize * 2);
+            shape = new RayShape(new Vector3(0.2f, 0, -0.12f), new Vector3(1, 2, 3).Normalized(), ObjectSize * 2);
             break;
           case 22:
-            shape = new RayShape(new Vector3F(0.2f, 0, -0.12f), new Vector3F(1, 2, 3).Normalized, ObjectSize * 2)
+            shape = new RayShape(new Vector3(0.2f, 0, -0.12f), new Vector3(1, 2, 3).Normalized(), ObjectSize * 2)
             {
               StopsAtFirstHit = true
             };
@@ -298,24 +298,24 @@ namespace Samples.Geometry
             shape = new TransformedShape(
               new GeometricObject(
                 new BoxShape(1 * ObjectSize, 2 * ObjectSize, 3 * ObjectSize),
-                new Pose(new Vector3F(0.1f, 1, -0.2f))));
+                new Pose(new Vector3(0.1f, 1, -0.2f))));
             break;
           case 25:
             shape = new TriangleShape(
-              new Vector3F(ObjectSize, 0, 0), new Vector3F(0, ObjectSize, 0), new Vector3F(ObjectSize, ObjectSize, ObjectSize));
+              new Vector3(ObjectSize, 0, 0), new Vector3(0, ObjectSize, 0), new Vector3(ObjectSize, ObjectSize, ObjectSize));
             break;
           //case 26:
           //  {
           //    // Create a composite object from which we get the mesh.
           //    CompositeShape compBvh = new CompositeShape();
-          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3F(0, 0.5f, 0), Matrix33F.Identity)));
+          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3(0, 0.5f, 0), Matrix33F.Identity)));
           //    compBvh.Children.Add(
           //      new GeometricObject(
           //        new BoxShape(0.8f, 0.5f, 0.5f),
-          //        new Pose(new Vector3F(0.5f, 0.7f, 0), Matrix33F.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
-          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3F(0, 1.15f, 0), Matrix33F.Identity)));
+          //        new Pose(new Vector3(0.5f, 0.7f, 0), Matrix33F.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
+          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3(0, 1.15f, 0), Matrix33F.Identity)));
           //    compBvh.Children.Add(
-          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3F(0.6f, 1.15f, 0), Matrix33F.CreateRotationX(0.3f))));
+          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3(0.6f, 1.15f, 0), Matrix33F.CreateRotationX(0.3f))));
 
           //    TriangleMeshShape meshBvhShape = new TriangleMeshShape { Mesh = compBvh.GetMesh(0.01f, 3) };
           //    meshBvhShape.Partition = new AabbTree<int>();
@@ -326,14 +326,14 @@ namespace Samples.Geometry
           //  {
           //    // Create a composite object from which we get the mesh.
           //    CompositeShape compBvh = new CompositeShape();
-          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3F(0, 0.5f, 0), QuaternionF.Identity)));
+          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3(0, 0.5f, 0), QuaternionF.Identity)));
           //    compBvh.Children.Add(
           //      new GeometricObject(
           //        new BoxShape(0.8f, 0.5f, 0.5f),
-          //        new Pose(new Vector3F(0.5f, 0.7f, 0), QuaternionF.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
-          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3F(0, 1.15f, 0), QuaternionF.Identity)));
+          //        new Pose(new Vector3(0.5f, 0.7f, 0), QuaternionF.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
+          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3(0, 1.15f, 0), QuaternionF.Identity)));
           //    compBvh.Children.Add(
-          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3F(0.6f, 1.15f, 0), QuaternionF.CreateRotationX(0.3f))));
+          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3(0.6f, 1.15f, 0), QuaternionF.CreateRotationX(0.3f))));
 
           //    TriangleMeshShape meshBvhShape = new TriangleMeshShape { Mesh = compBvh.GetMesh(0.01f, 3) };
           //    meshBvhShape.Partition = new AabbTree<int>();
@@ -343,11 +343,11 @@ namespace Samples.Geometry
           case 28:
             shape = new ConvexPolyhedron(new[]
             {
-              new Vector3F(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize),
-              new Vector3F(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize),
-              new Vector3F(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
-              new Vector3F(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
-              new Vector3F(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize)
+              new Vector3(-1 * ObjectSize, -2 * ObjectSize, -1 * ObjectSize),
+              new Vector3(2 * ObjectSize, -1 * ObjectSize, -0.5f * ObjectSize),
+              new Vector3(1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
+              new Vector3(-1 * ObjectSize, 2 * ObjectSize, 1 * ObjectSize),
+              new Vector3(-1 * ObjectSize, 0.7f * ObjectSize, -0.6f * ObjectSize)
             });
             break;
           case 29:
@@ -359,27 +359,27 @@ namespace Samples.Geometry
 
         // Create an object with the random shape, pose, color and velocity.
         Pose randomPose = new Pose(
-          random.NextVector3F(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
+          random.NextVector3(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
           random.NextQuaternionF());
         var newObject = new MovingGeometricObject
         {
           Pose = randomPose,
           Shape = shape,
-          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3F(MaxLinearVelocity, 0, 0)),
-          AngularVelocity = random.NextQuaternionF().Rotate(Vector3F.Forward)
+          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
+          AngularVelocity = random.NextQuaternionF().Rotate(Vector3.Forward)
                             * RandomHelper.Random.NextFloat(0, MaxAngularVelocity),
         };
 
         if (RandomHelper.Random.NextBool())
-          newObject.LinearVelocity = Vector3F.Zero;
+          newObject.LinearVelocity = Vector3.Zero;
         if (RandomHelper.Random.NextBool())
-          newObject.AngularVelocity = Vector3F.Zero;
+          newObject.AngularVelocity = Vector3.Zero;
 
         if (shape is LineShape || shape is HeightField)
         {
           // Do not move lines or the height field.
-          newObject.LinearVelocity = Vector3F.Zero;
-          newObject.AngularVelocity = Vector3F.Zero;
+          newObject.LinearVelocity = Vector3.Zero;
+          newObject.AngularVelocity = Vector3.Zero;
         }
 
         // Create only 1 heightField!
@@ -388,7 +388,7 @@ namespace Samples.Geometry
           if (isFirstHeightField)
           {
             isFirstHeightField = true;
-            newObject.Pose = new Pose(new Vector3F(-BoxSize, -BoxSize, -BoxSize));
+            newObject.Pose = new Pose(new Vector3(-BoxSize, -BoxSize, -BoxSize));
           }
           else
           {
@@ -488,7 +488,7 @@ namespace Samples.Geometry
 
         // Get normal vector. If objects are sensors, the contact set does not tell us
         // the right normal.
-        Vector3F normal = Vector3F.Zero;
+        Vector3 normal = Vector3.Zero;
         if (contactSet.Count > 0)
         {
           // Take normal from contact set.
@@ -503,9 +503,9 @@ namespace Samples.Geometry
           else if (moB.Shape is PlaneShape)
             normal = -((PlaneShape)moB.Shape).Normal;
           else if (moA.Shape is HeightField)
-            normal = Vector3F.UnitY;
+            normal = Vector3.UnitY;
           else
-            normal = -Vector3F.UnitY;
+            normal = -Vector3.UnitY;
         }
         //else if (moA.Shape is Plane || moB.Shape is Plane                       )
         //{
@@ -518,22 +518,22 @@ namespace Samples.Geometry
         //else if (moA.Shape is HeightField || moB.Shape is HeightField)
         //{
         //  // Use up-vector for height field contacts.
-        //  normal = Vector3F.UnitY;
+        //  normal = Vector3.UnitY;
         //  if (moB.Shape is HeightField)
         //    normal = -normal;
         //}
         //else
         //{
         //  // Use random normal.
-        //  normal = RandomHelper.NextVector3F(-1, 1).Normalized;
+        //  normal = RandomHelper.NextVector3(-1, 1).Normalized();
         //}
 
         // Check if the objects move towards or away from each other in the direction of the normal.
-        if (normal != Vector3F.Zero && Vector3F.Dot(moB.LinearVelocity - moA.LinearVelocity, normal) <= 0)
+        if (normal != Vector3.Zero && Vector3.Dot(moB.LinearVelocity - moA.LinearVelocity, normal) <= 0)
         {
           // Objects move towards each other. --> Reflect their velocities.
-          moA.LinearVelocity -= 2 * Vector3F.ProjectTo(moA.LinearVelocity, normal);
-          moB.LinearVelocity -= 2 * Vector3F.ProjectTo(moB.LinearVelocity, normal);
+          moA.LinearVelocity -= 2 * MathHelper.ProjectTo(moA.LinearVelocity, normal);
+          moB.LinearVelocity -= 2 * MathHelper.ProjectTo(moB.LinearVelocity, normal);
           moA.AngularVelocity = -moA.AngularVelocity;
           moB.AngularVelocity = -moB.AngularVelocity;
         }
@@ -547,11 +547,11 @@ namespace Samples.Geometry
       foreach (var obj in objects)
       {
         // Update position.
-        Vector3F position = obj.Pose.Position + obj.LinearVelocity * timeStep;
+        Vector3 position = obj.Pose.Position + obj.LinearVelocity * timeStep;
 
         // Update rotation.
-        Vector3F rotationAxis = obj.AngularVelocity;
-        float angularSpeed = obj.AngularVelocity.Length;
+        Vector3 rotationAxis = obj.AngularVelocity;
+        float angularSpeed = obj.AngularVelocity.Length();
         Matrix33F rotation = (Numeric.IsZero(angularSpeed))
           ? Matrix33F.Identity
           : Matrix33F.CreateRotation(rotationAxis, angularSpeed * timeStep);

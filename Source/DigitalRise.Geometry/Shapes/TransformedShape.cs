@@ -7,7 +7,9 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -78,7 +80,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
@@ -158,7 +160,7 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Note: 
       // Uniform scaling is no problem. The scale can be applied anytime in the process.
@@ -190,7 +192,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <inheritdoc/>
     public override float GetVolume(float relativeError, int iterationLimit)
     {
-      Vector3F scale = Vector3F.Absolute(Child.Scale);
+      Vector3 scale = MathHelper.Absolute(Child.Scale);
       return Child.Shape.GetVolume(relativeError, iterationLimit) * scale.X * scale.Y * scale.Z;
     }
 
@@ -230,8 +232,8 @@ namespace DigitalRise.Geometry.Shapes
     protected override TriangleMesh OnGetMesh(float absoluteDistanceThreshold, int iterationLimit)
     {
       // Convert absolute error to relative error.
-      Vector3F extents = GetAabb(Vector3F.One, Pose.Identity).Extent;
-      float maxExtent = extents.LargestComponent;
+      Vector3 extents = GetAabb(Vector3.One, Pose.Identity).Extent;
+      float maxExtent = extents.LargestComponent();
       float relativeThreshold = !Numeric.IsZero(maxExtent) 
                                 ? absoluteDistanceThreshold / maxExtent
                                 : Numeric.EpsilonF;

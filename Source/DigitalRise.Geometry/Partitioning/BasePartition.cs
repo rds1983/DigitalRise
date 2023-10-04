@@ -12,7 +12,7 @@ using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -747,8 +747,8 @@ namespace DigitalRise.Geometry.Partitioning
           bool rebuild = forceRebuild || _needsRebuild;
 
           // Set invalid aabb.
-          _aabb = new Aabb(Vector3F.One, Vector3F.Zero);
-          Debug.Assert(_aabb.Minimum > _aabb.Maximum);
+          _aabb = new Aabb(Vector3.One, Vector3.Zero);
+          Debug.Assert(_aabb.Minimum.IsGreaterThen(_aabb.Maximum));
 
           EnsureSet(ref _addedItems);
           EnsureSet(ref _removedItems);

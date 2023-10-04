@@ -67,7 +67,7 @@ namespace Samples.Graphics
       GameObjectService.Objects.Add(dynamicSkyObject);
 
       // Add an island model.
-      GameObjectService.Objects.Add(new StaticObject(Services, "Island/Island.drmdl", new Vector3F(30), new Pose(new Vector3F(0, 0.75f, 0)), true, true));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Island/Island.drmdl", new Vector3(30), new Pose(new Vector3(0, 0.75f, 0)), true, true));
 
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
       GameObjectService.Objects.Add(new DynamicObject(Services, 2));
@@ -84,7 +84,7 @@ namespace Samples.Graphics
       Random random = new Random(12345);
       for (int i = 0; i < 20; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-7, 4), 0, random.NextFloat(13, 18));
+        Vector3 position = new Vector3(random.NextFloat(-7, 4), 0, random.NextFloat(13, 18));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.8f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -93,25 +93,25 @@ namespace Samples.Graphics
       // Define the appearance of the water.
       var waterOcean = new Water
       {
-        SpecularColor = new Vector3F(20f),
+        SpecularColor = new Vector3(20f),
         SpecularPower = 500,
 
         NormalMap0 = null,
         NormalMap1 = null,
 
         RefractionDistortion = 0.1f,
-        ReflectionColor = new Vector3F(0.2f),
-        RefractionColor = new Vector3F(0.6f),
+        ReflectionColor = new Vector3(0.2f),
+        RefractionColor = new Vector3(0.6f),
 
         // Water is scattered in high waves and this makes the wave crests brighter.
         // ScatterColor defines the intensity of this effect.
-        ScatterColor = new Vector3F(0.05f, 0.1f, 0.1f),
+        ScatterColor = new Vector3(0.05f, 0.1f, 0.1f),
 
         // Foam is automatically rendered where the water intersects geometry and
         // where wave are high.
         FoamMap = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Water/Foam.png"),
         FoamMapScale = 5,
-        FoamColor = new Vector3F(1),
+        FoamColor = new Vector3(1),
         FoamCrestMin = 0.3f,
         FoamCrestMax = 0.8f,
 
@@ -125,7 +125,7 @@ namespace Samples.Graphics
       // water plane.
       _waterNode = new WaterNode(waterOcean, null)
       {
-        PoseWorld = new Pose(new Vector3F(0, 0.5f, 0)),
+        PoseWorld = new Pose(new Vector3(0, 0.5f, 0)),
         SkyboxReflection = _graphicsScreen.Scene.GetDescendants().OfType<SkyboxNode>().First(),
 
         // ExtraHeight must be set to a value greater than the max. wave height. 
@@ -140,7 +140,7 @@ namespace Samples.Graphics
       {
         TextureSize = 256,
         HeightScale = 0.004f,
-        Wind = new Vector3F(10, 0, 10),
+        Wind = new Vector3(10, 0, 10),
         Directionality = 1,
         Choppiness = 1,
         TileSize = 20,
@@ -159,7 +159,7 @@ namespace Samples.Graphics
       var planarReflectionNode = new PlanarReflectionNode(renderToTexture)
       {
         Shape = _waterNode.Shape,
-        NormalLocal = new Vector3F(0, 1, 0),
+        NormalLocal = new Vector3(0, 1, 0),
         IsEnabled = false,
       };
       _waterNode.PlanarReflection = planarReflectionNode;
@@ -169,7 +169,7 @@ namespace Samples.Graphics
       // computes buoyancy of a flat water surface.
       Simulation.ForceEffects.Add(new Buoyancy
       {
-        Surface = new Plane(new Vector3F(0, 1, 0), _waterNode.PoseWorld.Position.Y),
+        Surface = new Plane(new Vector3(0, 1, 0), _waterNode.PoseWorld.Position.Y),
         Density = 1500,
         AngularDrag = 0.3f,
         LinearDrag = 3,
@@ -200,14 +200,14 @@ namespace Samples.Graphics
         if (_waterColorType == 0)
         {
           _waterColorType = 1;
-          _waterNode.Water.UnderwaterFogDensity = new Vector3F(12, 8, 8) * 0.04f;
-          _waterNode.Water.WaterColor = new Vector3F(10, 30, 79) * 0.002f;
+          _waterNode.Water.UnderwaterFogDensity = new Vector3(12, 8, 8) * 0.04f;
+          _waterNode.Water.WaterColor = new Vector3(10, 30, 79) * 0.002f;
         }
         else
         {
           _waterColorType = 0;
-          _waterNode.Water.UnderwaterFogDensity = new Vector3F(1, 0.8f, 0.6f);
-          _waterNode.Water.WaterColor = new Vector3F(0.2f, 0.4f, 0.5f);
+          _waterNode.Water.UnderwaterFogDensity = new Vector3(1, 0.8f, 0.6f);
+          _waterNode.Water.WaterColor = new Vector3(0.2f, 0.4f, 0.5f);
         }
       }
 
@@ -268,32 +268,32 @@ namespace Samples.Graphics
         }
 
         // 3 displacement vectors are stored in the UserData.
-        var previousDisplacements = body.UserData as Vector3F[];
+        var previousDisplacements = body.UserData as Vector3[];
         if (previousDisplacements == null)
         {
-          previousDisplacements = new Vector3F[3];
+          previousDisplacements = new Vector3[3];
           body.UserData = previousDisplacements;
         }
 
         for (int i = 0; i < 3; i++)
         {
           // Get an arbitrary position on or near the body.
-          Vector3F position = new Vector3F(
+          Vector3 position = new Vector3(
             (i < 2) ? aabb.Minimum.X : aabb.Maximum.X,
             aabb.Minimum.Y,
             (i % 2 == 0) ? aabb.Minimum.Z : aabb.Maximum.Z);
 
           // Get wave displacement of this position.
           var waves = (OceanWaves)_waterNode.Waves;
-          Vector3F displacement, normal;
+          Vector3 displacement, normal;
           waves.GetDisplacement(position.X, position.Z, out displacement, out normal);
 
           // Compute velocity from displacement change.
-          Vector3F currentVelocity = body.GetVelocityOfWorldPoint(position);
-          Vector3F desiredVelocity = (displacement - previousDisplacements[i]) / deltaTime;
+          Vector3 currentVelocity = body.GetVelocityOfWorldPoint(position);
+          Vector3 desiredVelocity = (displacement - previousDisplacements[i]) / deltaTime;
 
           // Apply impulse proportional to the velocity change of the water.
-          Vector3F velocityDelta = desiredVelocity - currentVelocity;
+          Vector3 velocityDelta = desiredVelocity - currentVelocity;
           body.ApplyImpulse(
             velocityDelta * body.MassFrame.Mass * waterPenetration * 0.1f,
             position);

@@ -24,8 +24,8 @@ namespace DigitalRise.Graphics.SceneGraph
   /// <see cref="SceneNode.PoseLocal"/> or <see cref="SceneNode.PoseWorld"/>. The light direction is 
   /// the local forward direction (0, 0, -1) of the scene node. The <see cref="SceneHelper"/> class 
   /// provides helper methods to direct the light at a certain target: see methods 
-  /// <see cref="SceneHelper.LookAt(SceneNode,Vector3F,Vector3F)"/> and 
-  /// <see cref="SceneHelper.LookAt(SceneNode,Vector3F,Vector3F,Vector3F)"/>.
+  /// <see cref="SceneHelper.LookAt(SceneNode,Vector3,Vector3)"/> and 
+  /// <see cref="SceneHelper.LookAt(SceneNode,Vector3,Vector3,Vector3)"/>.
   /// </para>
   /// <para>
   /// The <see cref="Shadow"/> property defines whether the light creates a shadow. The property is

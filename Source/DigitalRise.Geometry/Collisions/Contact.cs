@@ -6,8 +6,8 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions
 {
@@ -179,28 +179,28 @@ namespace DigitalRise.Geometry.Collisions
     /// separated contacts this position is halfway between the two objects. 
     /// </para>
     /// </remarks>
-    public Vector3F Position { get; set; }
+    public Vector3 Position { get; set; }
 
 
     /// <summary>
     /// Gets or sets the contact position on object A in the local space of object A.
     /// </summary>
     /// <value>The contact position on A in the local space of object A.</value>
-    public Vector3F PositionALocal { get; set; }
+    public Vector3 PositionALocal { get; set; }
 
 
     /// <summary>
     /// Gets or sets the contact position on object B in the local space of object B.
     /// </summary>
     /// <value>The contact position on B in the local space of object B.</value>
-    public Vector3F PositionBLocal { get; set; }
+    public Vector3 PositionBLocal { get; set; }
 
 
     /// <summary>
     /// Gets the contact position on object A (in world space).
     /// </summary>
     /// <value>The contact position on A (in world space).</value>
-    public Vector3F PositionAWorld
+    public Vector3 PositionAWorld
     {
       get
       {
@@ -216,7 +216,7 @@ namespace DigitalRise.Geometry.Collisions
     /// Gets the contact position on object B (in world space).
     /// </summary>
     /// <value>The contact position on B (in world space).</value>
-    public Vector3F PositionBWorld
+    public Vector3 PositionBWorld
     {
       get
       {
@@ -239,16 +239,16 @@ namespace DigitalRise.Geometry.Collisions
     /// This vector shows the direction into which object B has to move to move away from object A.
     /// This value is stored as a normalized vector.
     /// </remarks>
-    public Vector3F Normal
+    public Vector3 Normal
     {
       get { return _normal; }
       set
       {
-        Debug.Assert(value.IsNumericallyNormalized, "Normal vector must be normalized. Length = " + value.Length);
+        Debug.Assert(value.IsNumericallyNormalized(), "Normal vector must be normalized. Length = " + value.Length());
         _normal = value;
       }
     }
-    private Vector3F _normal = Vector3F.UnitY;
+    private Vector3 _normal = Vector3.UnitY;
 
 
     /// <summary>

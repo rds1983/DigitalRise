@@ -10,7 +10,8 @@ using DigitalRise.Collections;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation
 {
@@ -61,16 +62,16 @@ namespace DigitalRise.Animation
         TargetProperty = animation.TargetProperty,
       };
 
-      Vector3FKeyFrameAnimation scaleAnimation = null;
+      Vector3KeyFrameAnimation scaleAnimation = null;
       QuaternionFKeyFrameAnimation rotationAnimation = null;
-      Vector3FKeyFrameAnimation translationAnimation = null;
+      Vector3KeyFrameAnimation translationAnimation = null;
 
       // Create Scale channel if required.
       foreach (var keyFrame in keyFrames)
       {
-        if (!Vector3F.AreNumericallyEqual(keyFrame.Value.Scale, Vector3F.One))
+        if (!MathHelper.AreNumericallyEqual(keyFrame.Value.Scale, Vector3.One))
         {
-          scaleAnimation = new Vector3FKeyFrameAnimation();
+          scaleAnimation = new Vector3KeyFrameAnimation();
           break;
         }
       }
@@ -88,9 +89,9 @@ namespace DigitalRise.Animation
       // Create Translation channel if required.
       foreach (var keyFrame in keyFrames)
       {
-        if (!keyFrame.Value.Translation.IsNumericallyZero)
+        if (!keyFrame.Value.Translation.IsNumericallyZero())
         {
-          translationAnimation = new Vector3FKeyFrameAnimation();
+          translationAnimation = new Vector3KeyFrameAnimation();
           break;
         }
       }
@@ -99,7 +100,7 @@ namespace DigitalRise.Animation
       {
         // The animation does not contain any transformations. However, the keyframe times (start
         // and end) may be relevant.
-        translationAnimation = new Vector3FKeyFrameAnimation();
+        translationAnimation = new Vector3KeyFrameAnimation();
       }
 
       if (keyFrames.Count <= 2)
@@ -110,13 +111,13 @@ namespace DigitalRise.Animation
 
           var keyFrame = keyFrames[0];
           if (scaleAnimation != null)
-            scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3F>(keyFrame.Time, keyFrame.Value.Scale));
+            scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Scale));
 
           if (rotationAnimation != null)
             rotationAnimation.KeyFrames.Add(new KeyFrame<QuaternionF>(keyFrame.Time, keyFrame.Value.Rotation));
 
           if (translationAnimation != null)
-            translationAnimation.KeyFrames.Add(new KeyFrame<Vector3F>(keyFrame.Time, keyFrame.Value.Translation));
+            translationAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Translation));
         }
 
         // Add second (last) keyframe.
@@ -126,13 +127,13 @@ namespace DigitalRise.Animation
 
           var keyFrame = keyFrames[1];
           if (scaleAnimation != null)
-            scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3F>(keyFrame.Time, keyFrame.Value.Scale));
+            scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Scale));
 
           if (rotationAnimation != null)
             rotationAnimation.KeyFrames.Add(new KeyFrame<QuaternionF>(keyFrame.Time, keyFrame.Value.Rotation));
 
           if (translationAnimation != null)
-            translationAnimation.KeyFrames.Add(new KeyFrame<Vector3F>(keyFrame.Time, keyFrame.Value.Translation));
+            translationAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Translation));
         }
       }
       else
@@ -278,10 +279,10 @@ namespace DigitalRise.Animation
     }
 
 
-    private static float ComputeError(Vector3F current, Vector3F start, Vector3F end, float parameter)
+    private static float ComputeError(Vector3 current, Vector3 start, Vector3 end, float parameter)
     {
-      Vector3F lerpedValue = InterpolationHelper.Lerp(start, end, parameter);
-      return (current - lerpedValue).Length;
+      Vector3 lerpedValue = InterpolationHelper.Lerp(start, end, parameter);
+      return (current - lerpedValue).Length();
     }
 
 

@@ -7,7 +7,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -25,7 +25,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -55,32 +55,32 @@ namespace Samples.Physics
       // ----- Add a convex hull of random points.
       ConvexHullOfPoints convexHullOfPoints = new ConvexHullOfPoints();
       for (int i = 0; i < 20; i++)
-        convexHullOfPoints.Points.Add(RandomHelper.Random.NextVector3F(-0.5f, 0.5f));
+        convexHullOfPoints.Points.Add(RandomHelper.Random.NextVector3(-0.5f, 0.5f));
       Simulation.RigidBodies.Add(new RigidBody(convexHullOfPoints));
 
       // ----- Add a convex polyhedron. 
       // (A ConvexPolyhedron is similar to the ConvexHullOfPoints. The difference is that 
       // the points in a ConvexHullOfPoints can be changed at runtime. A ConvexPolyhedron 
       // cannot be changed at runtime, but it is faster.)
-      List<Vector3F> points = new List<Vector3F>();
+      List<Vector3> points = new List<Vector3>();
       for (int i = 0; i < 20; i++)
-        points.Add(RandomHelper.Random.NextVector3F(-0.7f, 0.7f));
+        points.Add(RandomHelper.Random.NextVector3(-0.7f, 0.7f));
       ConvexPolyhedron convexPolyhedron = new ConvexPolyhedron(points);
       Simulation.RigidBodies.Add(new RigidBody(convexPolyhedron));
 
       // ----- Add a composite shape (a table that consists of 5 boxes).
       CompositeShape composite = new CompositeShape();
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3F(-0.75f, 0.4f, -0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3F(0.75f, 0.4f, -0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3F(-0.75f, 0.4f, 0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3F(0.75f, 0.4f, 0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(1.8f, 0.1f, 1.1f), new Pose(new Vector3F(0, 0.8f, 0))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3(-0.75f, 0.4f, -0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3(0.75f, 0.4f, -0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3(-0.75f, 0.4f, 0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 0.8f, 0.1f), new Pose(new Vector3(0.75f, 0.4f, 0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(1.8f, 0.1f, 1.1f), new Pose(new Vector3(0, 0.8f, 0))));
       Simulation.RigidBodies.Add(new RigidBody(composite));
 
       // ----- Add a convex hull of multiple shapes.
       ConvexHullOfShapes convexHullOfShapes = new ConvexHullOfShapes();
-      convexHullOfShapes.Children.Add(new GeometricObject(new CylinderShape(0.2f, 0.8f), new Pose(new Vector3F(-0.4f, 0, 0))));
-      convexHullOfShapes.Children.Add(new GeometricObject(new CylinderShape(0.2f, 0.8f), new Pose(new Vector3F(+0.4f, 0, 0))));
+      convexHullOfShapes.Children.Add(new GeometricObject(new CylinderShape(0.2f, 0.8f), new Pose(new Vector3(-0.4f, 0, 0))));
+      convexHullOfShapes.Children.Add(new GeometricObject(new CylinderShape(0.2f, 0.8f), new Pose(new Vector3(+0.4f, 0, 0))));
       Simulation.RigidBodies.Add(new RigidBody(convexHullOfShapes));
 
       // ----- Add the Minkowski sum of two shapes. 
@@ -103,8 +103,8 @@ namespace Samples.Physics
       // Here we first create a composite shape and convert the shape into a triangle 
       // mesh. (Any Shape in DigitalRise.Geometry can be converted to a triangle mesh.)
       CompositeShape dumbbell = new CompositeShape();
-      dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3F(0.6f, 0.0f, 0.0f))));
-      dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3F(-0.6f, 0.0f, 0.0f))));
+      dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3(0.6f, 0.0f, 0.0f))));
+      dumbbell.Children.Add(new GeometricObject(new SphereShape(0.4f), new Pose(new Vector3(-0.6f, 0.0f, 0.0f))));
       dumbbell.Children.Add(new GeometricObject(new CylinderShape(0.1f, 0.6f), new Pose(Matrix33F.CreateRotationZ(ConstantsF.PiOver2))));
 
       TriangleMeshShape triangleMeshShape = new TriangleMeshShape(dumbbell.GetMesh(0.01f, 2));
@@ -136,7 +136,7 @@ namespace Samples.Physics
       {
         RigidBody body = Simulation.RigidBodies[i];
 
-        Vector3F position = RandomHelper.Random.NextVector3F(-3, 3);
+        Vector3 position = RandomHelper.Random.NextVector3(-3, 3);
         position.Y = 3;   // Position the objects 3m above ground.
         QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
         body.Pose = new Pose(position, orientation);

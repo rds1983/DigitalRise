@@ -8,7 +8,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry
 {
@@ -32,7 +32,7 @@ namespace DigitalRise.Geometry
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static void ComputeBoundingCapsule(IList<Vector3F> points, out float radius, out float height, out Pose pose)
+    public static void ComputeBoundingCapsule(IList<Vector3> points, out float radius, out float height, out Pose pose)
     {
       if (points == null)
         throw new ArgumentNullException("points");
@@ -74,29 +74,29 @@ namespace DigitalRise.Geometry
       // v transforms from local coordinate space of the capsule into world space.
       var v = evd.V.ToMatrix33F();
 
-      Debug.Assert(v.GetColumn(0).IsNumericallyNormalized);
-      Debug.Assert(v.GetColumn(1).IsNumericallyNormalized);
-      Debug.Assert(v.GetColumn(2).IsNumericallyNormalized);
+      Debug.Assert(v.GetColumn(0).IsNumericallyNormalized());
+      Debug.Assert(v.GetColumn(1).IsNumericallyNormalized());
+      Debug.Assert(v.GetColumn(2).IsNumericallyNormalized());
 
       // v is like a rotation matrix, but the coordinate system is not necessarily right handed.
       // --> Make sure it is right-handed.
-      v.SetColumn(2, Vector3F.Cross(v.GetColumn(0), v.GetColumn(1)));
+      v.SetColumn(2, Vector3.Cross(v.GetColumn(0), v.GetColumn(1)));
 
       // Make local Y the largest axis. (Y is the long capsule axis.)
-      Vector3F eigenValues = evd.RealEigenvalues.ToVector3F();
-      int largestComponentIndex = eigenValues.IndexOfLargestComponent;
+      Vector3 eigenValues = evd.RealEigenvalues.ToVector3();
+      int largestComponentIndex = eigenValues.IndexOfLargestComponent();
       if (largestComponentIndex != 1)
       {
         // Swap two columns to create a right handed rotation matrix.
-        Vector3F colLargest = v.GetColumn(largestComponentIndex);
-        Vector3F col1 = v.GetColumn(1);
+        Vector3 colLargest = v.GetColumn(largestComponentIndex);
+        Vector3 col1 = v.GetColumn(1);
         v.SetColumn(1, colLargest);
         v.SetColumn(largestComponentIndex, col1);
-        v.SetColumn(2, Vector3F.Cross(v.GetColumn(0), v.GetColumn(1)));
+        v.SetColumn(2, Vector3.Cross(v.GetColumn(0), v.GetColumn(1)));
       }
 
       // Compute capsule for the orientation given by v.
-      Vector3F center;
+      Vector3 center;
       ComputeBoundingCapsule(points, v, out radius, out height, out center);
       pose = new Pose(center, v);
     }
@@ -104,10 +104,10 @@ namespace DigitalRise.Geometry
 
     // Computes the bounding capsule with the given orientation.
     // Returns the volume of the capsule.
-    internal static float ComputeBoundingCapsule(IList<Vector3F> points, Matrix33F orientation, out float radius, out float height, out Vector3F center)
+    internal static float ComputeBoundingCapsule(IList<Vector3> points, Matrix33F orientation, out float radius, out float height, out Vector3 center)
     {
       // Transform all points to local space. 
-      var localPoints = new Vector3F[points.Count];
+      var localPoints = new Vector3[points.Count];
       for (int i = 0; i < localPoints.Length; i++)
         localPoints[i] = orientation.Transposed * points[i];
 
@@ -125,9 +125,9 @@ namespace DigitalRise.Geometry
 
       // Now all points are in local space.
       // Project points to xz-plane.
-      var projectedPoints = new Vector3F[localPoints.Length];
+      var projectedPoints = new Vector3[localPoints.Length];
       for (int i = 0; i < localPoints.Length; i++)
-        projectedPoints[i] = new Vector3F(localPoints[i].X, 0, localPoints[i].Z);
+        projectedPoints[i] = new Vector3(localPoints[i].X, 0, localPoints[i].Z);
 
       // Compute Welzl sphere for projected points. This gives us the final radius and 
       // x and z of the final center.
@@ -151,7 +151,7 @@ namespace DigitalRise.Geometry
         if (p.Y > cylinderTop)
         {
           // Point is above cylinder. We might have to grow the cylinder upwards.
-          if ((p - new Vector3F(0, cylinderTop, 0)).LengthSquared > radiusSquared)
+          if ((p - new Vector3(0, cylinderTop, 0)).LengthSquared() > radiusSquared)
           {
             // p is not contained by the spherical cap. :-(
             // Grow cylinderTop so that the point is exactly on the spherical cap surface.
@@ -160,7 +160,7 @@ namespace DigitalRise.Geometry
             // In other words:
             cylinderTop = p.Y; // Now the point is in the cylinder.
             // Move cylinder down as far as possible.
-            float distanceToAxisSquared = new Vector3F(p.X, 0, p.Z).LengthSquared;
+            float distanceToAxisSquared = new Vector3(p.X, 0, p.Z).LengthSquared();
             if (distanceToAxisSquared < radiusSquared)
               cylinderTop -= (float)Math.Sqrt(radiusSquared - distanceToAxisSquared);
           }
@@ -168,10 +168,10 @@ namespace DigitalRise.Geometry
         else if (p.Y < cylinderBottom)
         {
           // Same as above but with the bottom of the cylinder.
-          if ((p - new Vector3F(0, cylinderBottom, 0)).LengthSquared > radiusSquared)
+          if ((p - new Vector3(0, cylinderBottom, 0)).LengthSquared() > radiusSquared)
           {
             cylinderBottom = p.Y;
-            float distanceToAxisSquared = new Vector3F(p.X, 0, p.Z).LengthSquared;
+            float distanceToAxisSquared = new Vector3(p.X, 0, p.Z).LengthSquared();
             if (distanceToAxisSquared < radiusSquared)
               cylinderBottom += (float)Math.Sqrt(radiusSquared - distanceToAxisSquared);
           }

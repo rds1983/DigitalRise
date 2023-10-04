@@ -63,14 +63,14 @@ The right ball uses ParticleReferenceFrame.Local.",
       // Create a rigid body for the left sphere.
       _rigidBody0 = new RigidBody(new SphereShape(0.5f))
       {
-        Pose = new Pose(new Vector3F(-3, 4, 0)),
+        Pose = new Pose(new Vector3(-3, 4, 0)),
       };
       Simulation.RigidBodies.Add(_rigidBody0);
 
       // Create a rigid body for the right sphere. (Sharing the same shape, mass and material.)
       _rigidBody1 = new RigidBody(_rigidBody0.Shape, _rigidBody0.MassFrame, _rigidBody0.Material)
       {
-        Pose = new Pose(new Vector3F(3, 4, 0)),
+        Pose = new Pose(new Vector3(3, 4, 0)),
       };
       Simulation.RigidBodies.Add(_rigidBody1);
 

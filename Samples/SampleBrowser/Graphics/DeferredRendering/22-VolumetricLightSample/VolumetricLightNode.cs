@@ -3,8 +3,7 @@ using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Graphics
 {
@@ -31,7 +30,7 @@ namespace Samples.Graphics
     /// Gets or sets the color (tint color and effect intensity).
     /// </summary>
     /// <value>The color (tint color and effect intensity). The default value is (1, 1, 1).</value>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -88,7 +87,7 @@ namespace Samples.Graphics
 
       Shape = Shape.Empty;
 
-      Color = new Vector3F(1, 1, 1);
+      Color = new Vector3(1, 1, 1);
       NumberOfSamples = 10;
     }
     #endregion

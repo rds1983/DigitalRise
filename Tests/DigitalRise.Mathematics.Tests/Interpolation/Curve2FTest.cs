@@ -125,20 +125,20 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
       //CatmullRomSegment3F catmullOscillate = new CatmullRomSegment3F()
       //{
-      //  Point1 = new Vector3F(10, 12, 14),
-      //  Point2 = new Vector3F(10, 14, 8),
-      //  Point3 = new Vector3F(20, 14, 8),
-      //  Point4 = new Vector3F(20, 14, 8),
+      //  Point1 = new Vector3(10, 12, 14),
+      //  Point2 = new Vector3(10, 14, 8),
+      //  Point3 = new Vector3(20, 14, 8),
+      //  Point4 = new Vector3(20, 14, 8),
       //};
-      //Assert.IsTrue(Vector3F.AreNumericallyEqual(catmullOscillate.GetPoint(0.3f), curve.GetPoint(43)));
-      //Assert.IsTrue(Vector3F.AreNumericallyEqual(catmullOscillate.GetPoint(0.9f), curve.GetPoint(51)));
+      //Assert.IsTrue(MathHelper.AreNumericallyEqual(catmullOscillate.GetPoint(0.3f), curve.GetPoint(43)));
+      //Assert.IsTrue(MathHelper.AreNumericallyEqual(catmullOscillate.GetPoint(0.9f), curve.GetPoint(51)));
 
       //CatmullRomSegment3F catmullCircle = new CatmullRomSegment3F()
       //{
-      //  Point1 = new Vector3F(10, 12, 14),
-      //  Point2 = new Vector3F(10, 14, 8),
-      //  Point3 = new Vector3F(20, 14, 8),
-      //  Point4 = new Vector3F(0, 0, 1),
+      //  Point1 = new Vector3(10, 12, 14),
+      //  Point2 = new Vector3(10, 14, 8),
+      //  Point3 = new Vector3(20, 14, 8),
+      //  Point4 = new Vector3(0, 0, 1),
       //};
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Cycle;
@@ -155,14 +155,14 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y - 4), curve.GetPoint(4f)));
       CatmullRomSegment3F catmull = new CatmullRomSegment3F 
       { 
-        Point1 = new Vector3F(40, 3, 0),
-        Point2 = new Vector3F(45, 10, 0),
-        Point3 = new Vector3F(48, 5, 0),
-        Point4 = new Vector3F(48, 5, 0),
+        Point1 = new Vector3(40, 3, 0),
+        Point2 = new Vector3(45, 10, 0),
+        Point3 = new Vector3(48, 5, 0),
+        Point4 = new Vector3(48, 5, 0),
       };
-      Vector3F endTangent = catmull.GetTangent(1);
+      Vector3 endTangent = catmull.GetTangent(1);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(55f, 5 + (55-48) * endTangent.Y / endTangent.X), curve.GetPoint(55f)));
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3F(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f)));
+      //Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f)));
 
       // Test more linear pre- and post-behavior.
       curve = new Curve2F();

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -17,7 +17,7 @@ namespace DigitalRise.Graphics
   /// <para>
   /// The <see cref="PathFigure3F"/> can be used to define data for line rendering. Lines are 
   /// defined using curve segments (see property <see cref="Segments"/>). A curve segment is any
-  /// object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector3F&gt;</see>. 
+  /// object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector3&gt;</see>. 
   /// Examples: <see cref="LineSegment3F"/>, <see cref="BezierSegment3F"/>, <see cref="Path3F"/>, 
   /// etc. 
   /// </para>
@@ -47,7 +47,7 @@ namespace DigitalRise.Graphics
     /// <value>The curve segments.</value>
     /// <remarks>
     /// Curve segments need to be added to the <see cref="Segments"/> collection. A curve segment is 
-    /// any object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector3F&gt;</see>. 
+    /// any object that implements <see cref="ICurve{TParam,TPoint}">ICurve&lt;float, Vector3&gt;</see>. 
     /// Examples: <see cref="LineSegment3F"/>, <see cref="BezierSegment3F"/>, <see cref="Path3F"/>, 
     /// etc. 
     /// </remarks>
@@ -74,11 +74,11 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    internal override void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
+    internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
     {
-      var segmentVertices = ResourcePools<Vector3F>.Lists.Obtain();
+      var segmentVertices = ResourcePools<Vector3>.Lists.Obtain();
 
-      Vector3F previousVertex = new Vector3F(float.NaN);
+      Vector3 previousVertex = new Vector3(float.NaN);
       foreach (var curve in Segments)
       {
         if (!IsStroked(curve))
@@ -96,7 +96,7 @@ namespace DigitalRise.Graphics
         if (vertexCount < 2)
           continue;
 
-        Vector3F startVertex = segmentVertices[0];
+        Vector3 startVertex = segmentVertices[0];
         bool isNewShape;
         int segmentStartIndex;  // Start of current segment in 'vertices'.
         if (startVertex == previousVertex)
@@ -121,12 +121,12 @@ namespace DigitalRise.Graphics
         previousVertex = vertices.Array[vertices.Count - 1];
       }
 
-      ResourcePools<Vector3F>.Lists.Recycle(segmentVertices);
+      ResourcePools<Vector3>.Lists.Recycle(segmentVertices);
     }
 
 
     // Adds vertices from segmentVertices to vertices.
-    private static void CommitVertices(List<Vector3F> segmentVertices, bool isNewShape, ArrayList<Vector3F> vertices)
+    private static void CommitVertices(List<Vector3> segmentVertices, bool isNewShape, ArrayList<Vector3> vertices)
     {
       if (isNewShape)
       {
@@ -141,7 +141,7 @@ namespace DigitalRise.Graphics
     }
 
 
-    private static bool IsStroked(ICurve<float, Vector3F> segment)
+    private static bool IsStroked(ICurve<float, Vector3> segment)
     {
       var strokedSegment = segment as StrokedSegment3F;
       return strokedSegment == null || strokedSegment.IsStroked;

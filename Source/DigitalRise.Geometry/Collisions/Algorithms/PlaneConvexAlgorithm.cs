@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -65,8 +64,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         throw new ArgumentException("The contact set must contain a plane and a convex shape.", "contactSet");
 
       // Get transformations.
-      Vector3F scalePlane = planeObject.Scale;
-      Vector3F scaleB = convexObject.Scale;
+      Vector3 scalePlane = planeObject.Scale;
+      Vector3 scaleB = convexObject.Scale;
       Pose planePose = planeObject.Pose;
       Pose poseB = convexObject.Pose;
 
@@ -76,16 +75,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       planeWorld.ToWorld(ref planePose);        // Transform plane to world space.
 
       // Transform plane normal to local space of convex.
-      Vector3F planeNormalLocalB = poseB.ToLocalDirection(planeWorld.Normal);
+      Vector3 planeNormalLocalB = poseB.ToLocalDirection(planeWorld.Normal);
 
       // Get support vertex nearest to the plane.
-      Vector3F supportVertexBLocal = convexShape.GetSupportPoint(-planeNormalLocalB, scaleB);
+      Vector3 supportVertexBLocal = convexShape.GetSupportPoint(-planeNormalLocalB, scaleB);
 
       // Transform support vertex into world space.
-      Vector3F supportVertexBWorld = poseB.ToWorldPosition(supportVertexBLocal);
+      Vector3 supportVertexBWorld = poseB.ToWorldPosition(supportVertexBLocal);
 
       // Project vertex onto separating axis (given by plane normal).
-      float distance = Vector3F.Dot(supportVertexBWorld, planeWorld.Normal);
+      float distance = Vector3.Dot(supportVertexBWorld, planeWorld.Normal);
 
       // Check for collision.
       float penetrationDepth = planeWorld.DistanceFromOrigin - distance;
@@ -99,8 +98,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       }
 
       // Position is between support vertex and plane.
-      Vector3F position = supportVertexBWorld + planeWorld.Normal * (penetrationDepth / 2);
-      Vector3F normal = (swapped) ? -planeWorld.Normal : planeWorld.Normal;
+      Vector3 position = supportVertexBWorld + planeWorld.Normal * (penetrationDepth / 2);
+      Vector3 normal = (swapped) ? -planeWorld.Normal : planeWorld.Normal;
 
       // Update contact set.
       Contact contact = ContactHelper.CreateContact(contactSet, position, normal, penetrationDepth, false);
@@ -112,7 +111,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
           && contactSet.Count < 4)
       {
         // Special treatment for tetrahedra: Test all vertices against plane.
-        IList<Vector3F> vertices = null;
+        IList<Vector3> vertices = null;
         if (convexShape is ConvexHullOfPoints)
         {
           var convexHullOfPoints = (ConvexHullOfPoints)convexShape;
@@ -132,11 +131,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
           {
             // Test is the same as above.
             var vertex = vertices[i];
-            Vector3F scaledVertex = vertex * scaleB;
+            Vector3 scaledVertex = vertex * scaleB;
             if (scaledVertex != supportVertexBLocal) // supportVertexBLocal has already been added.
             {
-              Vector3F vertexWorld = poseB.ToWorldPosition(scaledVertex);
-              distance = Vector3F.Dot(vertexWorld, planeWorld.Normal);
+              Vector3 vertexWorld = poseB.ToWorldPosition(scaledVertex);
+              distance = Vector3.Dot(vertexWorld, planeWorld.Normal);
               penetrationDepth = planeWorld.DistanceFromOrigin - distance;
               if (penetrationDepth >= 0)
               {

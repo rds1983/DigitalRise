@@ -3,7 +3,6 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Collections;
-using Microsoft.Xna.Framework.Content;
 
 
 namespace DigitalRise.UI.Rendering
@@ -49,13 +48,6 @@ namespace DigitalRise.UI.Rendering
   /// </remarks>
   public class Theme
   {
-    /// <summary>
-    /// Gets or sets the content manager.
-    /// </summary>
-    /// <value>The content manager.</value>
-    public ContentManager Content { get; set; }
-
-
     /// <summary>
     /// Gets the cursor definitions.
     /// </summary>

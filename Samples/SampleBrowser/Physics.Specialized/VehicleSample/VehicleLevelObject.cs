@@ -10,7 +10,8 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using CommonServiceLocator;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Physics.Specialized
 {
@@ -35,7 +36,7 @@ namespace Samples.Physics.Specialized
       var simulation = _services.GetInstance<Simulation>();
 
       // ----- Add a ground plane.
-      AddBody(simulation, "GroundPlane", Pose.Identity, new PlaneShape(Vector3F.UnitY, 0), MotionType.Static);
+      AddBody(simulation, "GroundPlane", Pose.Identity, new PlaneShape(Vector3.UnitY, 0), MotionType.Static);
 
       // ----- Create a height field.
       var numberOfSamplesX = 20;
@@ -57,43 +58,43 @@ namespace Samples.Physics.Specialized
       }
       HeightField heightField = new HeightField(0, 0, 120, 120, samples, numberOfSamplesX, numberOfSamplesZ);
       //heightField.UseFastCollisionApproximation = true;
-      AddBody(simulation, "HeightField", new Pose(new Vector3F(10, 0, 20)), heightField, MotionType.Static);
+      AddBody(simulation, "HeightField", new Pose(new Vector3(10, 0, 20)), heightField, MotionType.Static);
 
       // ----- Create rubble on the floor (small random objects on the floor).
       for (int i = 0; i < 60; i++)
       {
-        Vector3F position = new Vector3F(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20));
+        Vector3 position = new Vector3(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20));
         QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
-        BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3F(0.05f, 0.5f));
+        BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3(0.05f, 0.5f));
         AddBody(simulation, "Stone" + i, new Pose(position, orientation), shape, MotionType.Static);
       }
 
       // ----- Slopes with different tilt angles.
       // Create a loop.
-      Vector3F slopePosition = new Vector3F(-20, -0.25f, -5);
+      Vector3 slopePosition = new Vector3(-20, -0.25f, -5);
       BoxShape slopeShape = new BoxShape(8, 0.5f, 2);
       for (int i = 1; i < 33; i++)
       {
         Matrix33F oldRotation = Matrix33F.CreateRotationX((i - 1) * MathHelper.ToRadians(10));
         Matrix33F rotation = Matrix33F.CreateRotationX(i * MathHelper.ToRadians(10));
 
-        slopePosition += (oldRotation * new Vector3F(0, 0, -slopeShape.WidthZ)) / 2
-                         + (rotation * new Vector3F(0, 0, -slopeShape.WidthZ)) / 2;
+        slopePosition += (oldRotation * new Vector3(0, 0, -slopeShape.WidthZ)) / 2
+                         + (rotation * new Vector3(0, 0, -slopeShape.WidthZ)) / 2;
 
         AddBody(simulation, "Loop" + i, new Pose(slopePosition, rotation), slopeShape, MotionType.Static);
       }
 
       // Create an arched bridge.
-      slopePosition = new Vector3F(-10, -2, -15);
+      slopePosition = new Vector3(-10, -2, -15);
       slopeShape = new BoxShape(8f, 0.5f, 5);
       for (int i = 1; i < 8; i++)
       {
         Matrix33F oldRotation = Matrix33F.CreateRotationX(MathHelper.ToRadians(40) - (i - 1) * MathHelper.ToRadians(10));
         Matrix33F rotation = Matrix33F.CreateRotationX(MathHelper.ToRadians(40) - i * MathHelper.ToRadians(10));
 
-        slopePosition += (oldRotation * new Vector3F(0, 0, -slopeShape.WidthZ)) / 2
-                         + (rotation * new Vector3F(0, 0, -slopeShape.WidthZ)) / 2;
-        Vector3F position = slopePosition - rotation * new Vector3F(0, slopeShape.WidthY / 2, 0);
+        slopePosition += (oldRotation * new Vector3(0, 0, -slopeShape.WidthZ)) / 2
+                         + (rotation * new Vector3(0, 0, -slopeShape.WidthZ)) / 2;
+        Vector3 position = slopePosition - rotation * new Vector3(0, slopeShape.WidthY / 2, 0);
 
         AddBody(simulation, "Bridge" + i, new Pose(position, rotation), slopeShape, MotionType.Static);
       }
@@ -103,17 +104,17 @@ namespace Samples.Physics.Specialized
       // composite shape to a triangle mesh. (Just for testing.)
       CompositeShape compositeShape = new CompositeShape();
       compositeShape.Children.Add(new GeometricObject(heightField, Pose.Identity));
-      compositeShape.Children.Add(new GeometricObject(new CylinderShape(1, 2), new Pose(new Vector3F(10, 1, 10))));
-      compositeShape.Children.Add(new GeometricObject(new SphereShape(3), new Pose(new Vector3F(15, 0, 15))));
-      compositeShape.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3F(15, 0, 5))));
+      compositeShape.Children.Add(new GeometricObject(new CylinderShape(1, 2), new Pose(new Vector3(10, 1, 10))));
+      compositeShape.Children.Add(new GeometricObject(new SphereShape(3), new Pose(new Vector3(15, 0, 15))));
+      compositeShape.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Pose(new Vector3(15, 0, 5))));
       ITriangleMesh mesh = compositeShape.GetMesh(0.01f, 3);
       TriangleMeshShape meshShape = new TriangleMeshShape(mesh, true);
       meshShape.Partition = new AabbTree<int>() { BottomUpBuildThreshold = 0 };
-      AddBody(simulation, "Mesh", new Pose(new Vector3F(-120, 0, 20)), meshShape, MotionType.Static);
+      AddBody(simulation, "Mesh", new Pose(new Vector3(-120, 0, 20)), meshShape, MotionType.Static);
 
       // ----- Create a seesaw.
-      var seesawBase = AddBody(simulation, "SeesawBase", new Pose(new Vector3F(15, 0.5f, 0)), new BoxShape(0.2f, 1, 6), MotionType.Static);
-      var seesaw = AddBody(simulation, "Seesaw", new Pose(new Vector3F(16, 1.05f, 0)), new BoxShape(15, 0.1f, 6), MotionType.Dynamic);
+      var seesawBase = AddBody(simulation, "SeesawBase", new Pose(new Vector3(15, 0.5f, 0)), new BoxShape(0.2f, 1, 6), MotionType.Static);
+      var seesaw = AddBody(simulation, "Seesaw", new Pose(new Vector3(16, 1.05f, 0)), new BoxShape(15, 0.1f, 6), MotionType.Dynamic);
       seesaw.MassFrame.Mass = 500;
       seesaw.CanSleep = false;
 
@@ -122,11 +123,11 @@ namespace Samples.Physics.Specialized
       {
         BodyA = seesaw,
         BodyB = seesawBase,
-        AnchorPoseALocal = new Pose(new Vector3F(1.0f, 0, 0),
+        AnchorPoseALocal = new Pose(new Vector3(1.0f, 0, 0),
                                     new Matrix33F(0, 0, -1,
                                                   0, 1, 0,
                                                   1, 0, 0)),
-        AnchorPoseBLocal = new Pose(new Vector3F(0, 0.5f, 0),
+        AnchorPoseBLocal = new Pose(new Vector3(0, 0.5f, 0),
                                     new Matrix33F(0, 0, -1,
                                                   0, 1, 0,
                                                   1, 0, 0)),
@@ -138,7 +139,7 @@ namespace Samples.Physics.Specialized
       SphereShape sphereShape = new SphereShape(0.5f);
       for (int i = 0; i < 40; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-60, 60);
+        Vector3 position = RandomHelper.Random.NextVector3(-60, 60);
         position.Y = 10;
         AddBody(simulation, "Sphere" + i, new Pose(position), sphereShape, MotionType.Dynamic);
       }
@@ -146,7 +147,7 @@ namespace Samples.Physics.Specialized
       BoxShape boxShape = new BoxShape(1.0f, 1.0f, 1.0f);
       for (int i = 0; i < 40; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-60, 60);
+        Vector3 position = RandomHelper.Random.NextVector3(-60, 60);
         position.Y = 1;
         AddBody(simulation, "Box" + i, new Pose(position), boxShape, MotionType.Dynamic);
       }

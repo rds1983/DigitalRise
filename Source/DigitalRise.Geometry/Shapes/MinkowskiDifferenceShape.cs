@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -38,13 +37,13 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space). 
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get 
       {
         // Return the difference of child inner points.
-        Vector3F innerPointA = _objectA.Pose.ToWorldPosition(_objectA.Shape.InnerPoint);
-        Vector3F innerPointB = _objectB.Pose.ToWorldPosition(_objectB.Shape.InnerPoint);
+        Vector3 innerPointA = _objectA.Pose.ToWorldPosition(_objectA.Shape.InnerPoint);
+        Vector3 innerPointB = _objectB.Pose.ToWorldPosition(_objectB.Shape.InnerPoint);
         return innerPointA - innerPointB;
       }
     }
@@ -241,14 +240,14 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
-      Vector3F directionLocalA = _objectA.Pose.ToLocalDirection(directionNormalized);
-      Vector3F directionLocalB = _objectB.Pose.ToLocalDirection(-directionNormalized);
-      Vector3F pointALocalA = ((ConvexShape)_objectA.Shape).GetSupportPointNormalized(directionLocalA);
-      Vector3F pointBLocalB = ((ConvexShape)_objectB.Shape).GetSupportPointNormalized(directionLocalB);
-      Vector3F pointA = _objectA.Pose.ToWorldPosition(pointALocalA);
-      Vector3F pointB = _objectB.Pose.ToWorldPosition(pointBLocalB);
+      Vector3 directionLocalA = _objectA.Pose.ToLocalDirection(directionNormalized);
+      Vector3 directionLocalB = _objectB.Pose.ToLocalDirection(-directionNormalized);
+      Vector3 pointALocalA = ((ConvexShape)_objectA.Shape).GetSupportPointNormalized(directionLocalA);
+      Vector3 pointBLocalB = ((ConvexShape)_objectB.Shape).GetSupportPointNormalized(directionLocalB);
+      Vector3 pointA = _objectA.Pose.ToWorldPosition(pointALocalA);
+      Vector3 pointB = _objectB.Pose.ToWorldPosition(pointBLocalB);
       return pointA - pointB;
     }
 

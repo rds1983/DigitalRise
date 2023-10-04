@@ -31,7 +31,7 @@ namespace Samples.Animation
     private readonly AvatarRenderer _avatarRenderer;
 
     private AvatarPose _avatarPose;
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
     private TimelineClip _walkAnimation;
     private MeshNode _baseballBatMeshNode;
 
@@ -47,7 +47,7 @@ namespace Samples.Animation
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Create a random avatar.
@@ -105,7 +105,7 @@ namespace Samples.Animation
       {
         // Update pose of attached baseball bat.
         // The offset of the baseball bat origin to the bone origin (in bone space)
-        Pose offset = new Pose(new Vector3F(0.01f, 0.05f, 0.0f), Matrix33F.CreateRotationY(MathHelper.ToRadians(-20)));
+        Pose offset = new Pose(new Vector3(0.01f, 0.05f, 0.0f), Matrix33F.CreateRotationY(MathHelper.ToRadians(-20)));
         // The bone position in model space
         SrtTransform bonePose = _avatarPose.SkeletonPose.GetBonePoseAbsolute((int)AvatarBone.SpecialRight);
         // The baseball bat matrix in world space

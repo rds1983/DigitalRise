@@ -3,8 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -39,7 +39,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space). 
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
@@ -55,7 +55,7 @@ namespace DigitalRise.Geometry.Shapes
     /// The scale factors for scaling in x, y and z. The default value is (1, 1, 1)
     /// which means "no scaling".
     /// </value>
-    public Vector3F Scale
+    public Vector3 Scale
     {
       get { return _scale; }
       set
@@ -67,7 +67,7 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private Vector3F _scale;
+    private Vector3 _scale;
 
 
     /// <summary>
@@ -120,7 +120,7 @@ namespace DigitalRise.Geometry.Shapes
       // Note: Virtual OnChanged() must not be called in constructor.
       _shape = new PointShape();
       _shape.Changed += OnChildShapeChanged;
-      _scale = Vector3F.One;
+      _scale = Vector3.One;
     }
 
 
@@ -140,7 +140,7 @@ namespace DigitalRise.Geometry.Shapes
       // Note: Virtual OnChanged() must not be called in constructor.
       _shape = shape;
       _shape.Changed += OnChildShapeChanged;
-      _scale = Vector3F.One; 
+      _scale = Vector3.One; 
     }
 
 
@@ -153,7 +153,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentNullException">
     /// 	<paramref name="shape"/> is <see langword="null"/>.
     /// </exception>
-    public ScaledConvexShape(ConvexShape shape, Vector3F scale)
+    public ScaledConvexShape(ConvexShape shape, Vector3 scale)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");
@@ -202,7 +202,7 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
       return _shape.GetSupportPoint(direction, _scale);
     }
@@ -219,7 +219,7 @@ namespace DigitalRise.Geometry.Shapes
     /// A support point regarding a direction is an extreme point of the shape that is furthest away
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
       if (_scale.X == _scale.Y && _scale.Y == _scale.Z)
       {
@@ -239,7 +239,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <inheritdoc/>
     public override float GetVolume(float relativeError, int iterationLimit)
     {
-      Vector3F scale = Vector3F.Absolute(Scale);
+      Vector3 scale = MathHelper.Absolute(Scale);
       return Shape.GetVolume(relativeError, iterationLimit) * scale.X * scale.Y * scale.Z;
     }
 

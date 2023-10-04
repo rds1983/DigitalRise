@@ -352,10 +352,10 @@ namespace DigitalRise.Graphics.Rendering
 
       //var cameraNode = context.CameraNode;
       //var pose = cameraNode.PoseWorld;
-      //var forward = pose.ToWorldDirection(Vector3F.Forward);
+      //var forward = pose.ToWorldDirection(Vector3.Forward);
       //var forwardAbsolute = forward;
       //forwardAbsolute.Absolute();
-      //var indexOfLargestComponent = forwardAbsolute.IndexOfLargestComponent;
+      //var indexOfLargestComponent = forwardAbsolute.IndexOfLargestComponent();
       //Vector3 holePosition;
       //if (indexOfLargestComponent == 0)
       //{

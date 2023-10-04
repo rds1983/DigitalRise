@@ -1,5 +1,4 @@
 ﻿#if !ANDROID && !IOS   // Cannot read from vertex buffer in MonoGame/OpenGLES.
-using System.Linq;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
@@ -10,7 +9,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using AssetManagementBase;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -29,7 +28,7 @@ mesh as a collision shape.",
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -98,7 +97,7 @@ mesh as a collision shape.",
       var bowlBody = new RigidBody(meshShape, new MassFrame(), null)
       {
         Name = "Bowl",
-        Pose = new Pose(new Vector3F()),
+        Pose = new Pose(new Vector3()),
         MotionType = MotionType.Static
       };
       Simulation.RigidBodies.Add(bowlBody);
@@ -108,7 +107,7 @@ mesh as a collision shape.",
       RigidBody sphere = new RigidBody(sphereShape)
       {
         Name = "Sphere",
-        Pose = new Pose(new Vector3F(0, 10, 0)),
+        Pose = new Pose(new Vector3(0, 10, 0)),
       };
       Simulation.RigidBodies.Add(sphere);
     }

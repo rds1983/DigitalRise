@@ -5,8 +5,7 @@
 using System;
 using System.Diagnostics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -52,12 +51,12 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Compute relative linear velocity.
       // (linearRelVel ∙ normal > 0 if objects are getting closer.)
-      Vector3F linearVelocityA = targetPoseA.Position - startPoseA.Position;
-      Vector3F linearVelocityB = targetPoseB.Position - startPoseB.Position;
-      Vector3F linearVelocityRelative = linearVelocityA - linearVelocityB;
+      Vector3 linearVelocityA = targetPoseA.Position - startPoseA.Position;
+      Vector3 linearVelocityB = targetPoseB.Position - startPoseB.Position;
+      Vector3 linearVelocityRelative = linearVelocityA - linearVelocityB;
 
       // Abort if relative movement is zero.
-      if (Numeric.IsZero(linearVelocityRelative.Length))
+      if (Numeric.IsZero(linearVelocityRelative.Length()))
         return 1;
 
       var distanceAlgorithm = collisionDetection.AlgorithmMatrix[objectA, objectB];
@@ -91,7 +90,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
           return 1;
         }
 
-        Vector3F normal = testContactSet[0].Normal;
+        Vector3 normal = testContactSet[0].Normal;
         float distance = -testContactSet[0].PenetrationDepth;
 
         float λ = 0;
@@ -100,7 +99,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         for (int i = 0; i < MaxNumberOfIterations && distance > 0; i++)
         {
           // |v∙n|
-          float velocityProjected = Vector3F.Dot(linearVelocityRelative, normal);
+          float velocityProjected = Vector3.Dot(linearVelocityRelative, normal);
 
           // Abort for separating objects.
           if (Numeric.IsLess(velocityProjected, 0))
@@ -119,10 +118,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
             break;
 
           // Get new interpolated poses - only positions are changed.
-          Vector3F positionA = startPoseA.Position + λ * (targetPoseA.Position - startPoseA.Position);
+          Vector3 positionA = startPoseA.Position + λ * (targetPoseA.Position - startPoseA.Position);
           testGeometricObjectA.Pose = new Pose(positionA, startPoseA.Orientation);
 
-          Vector3F positionB = startPoseB.Position + λ * (targetPoseB.Position - startPoseB.Position);
+          Vector3 positionB = startPoseB.Position + λ * (targetPoseB.Position - startPoseB.Position);
           testGeometricObjectB.Pose = new Pose(positionB, startPoseB.Orientation);
 
           // Get new closest point distance.

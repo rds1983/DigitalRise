@@ -14,7 +14,8 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Threading;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -42,8 +43,8 @@ namespace DigitalRise.Graphics.SceneGraph
   /// (see <see cref="SceneNode.Shape"/>). The bounding shape is always empty (see 
   /// <see cref="EmptyShape"/>) - it is not used. Since a <see cref="Scene"/> is always the root of 
   /// a 3D scene <see cref="SceneNode.PoseLocal"/> and <see cref="SceneNode.PoseWorld"/> are always 
-  /// identical. The default scale is <see cref="Vector3F.One"/>, the default position is 
-  /// <see cref="Vector3F.Zero"/> and the default orientation is <see cref="QuaternionF.Identity"/>.
+  /// identical. The default scale is <see cref="Vector3.One"/>, the default position is 
+  /// <see cref="Vector3.Zero"/> and the default orientation is <see cref="QuaternionF.Identity"/>.
   /// By setting a different values the entire scene is moved or rotated in world space.
   /// </para>
   /// <para>
@@ -369,7 +370,7 @@ namespace DigitalRise.Graphics.SceneGraph
         return;
 
       // Check for NaN.
-      Vector3F scale = node.ScaleLocal;
+      Vector3 scale = node.ScaleLocal;
       if (!Numeric.IsFinite(scale.X) || !Numeric.IsFinite(scale.Y) || !Numeric.IsFinite(scale.Z))
       {
         var message = string.Format(

@@ -26,14 +26,14 @@ namespace DigitalRise.Graphics.PostProcessing
     /// Gets or sets the scale factor.
     /// </summary>
     /// <value>The scale factor. The default is (1, 1, 1).</value>
-    public Vector3F Scale { get; set; }
+    public Vector3 Scale { get; set; }
 
 
     /// <summary>
     /// Gets or sets the offset.
     /// </summary>
     /// <value>The offset. The default value is (0, 0, 0).</value>
-    public Vector3F Offset { get; set; }
+    public Vector3 Offset { get; set; }
 
 
     /// <summary>
@@ -51,8 +51,8 @@ namespace DigitalRise.Graphics.PostProcessing
       _offsetParameter = _effect.Parameters["Offset"];
       _textureParameter = _effect.Parameters["SourceTexture"];
 
-      Scale = new Vector3F(1, 1, 1);
-      Offset = new Vector3F(0, 0, 0);
+      Scale = new Vector3(1, 1, 1);
+      Offset = new Vector3(0, 0, 0);
     }
 
 

@@ -5,7 +5,7 @@
 using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -15,7 +15,7 @@ namespace DigitalRise.Graphics.SceneGraph
   internal class OccluderData
   {
     /// <summary>The vertices in world space.</summary>
-    public Vector3F[] Vertices;
+    public Vector3[] Vertices;
 
     /// <summary>The indices.</summary>
     public ushort[] Indices;
@@ -29,7 +29,7 @@ namespace DigitalRise.Graphics.SceneGraph
     {
       // The occluder is given in local space. The vertices need to be transformed
       // to world space before submitting the vertices to the render batch. 
-      Vertices = new Vector3F[occluder.Vertices.Length];
+      Vertices = new Vector3[occluder.Vertices.Length];
 
       // The indices are copied as is. (Indices are updated on-the-fly when the
       // values are copied to the render batch.)
@@ -43,15 +43,15 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <param name="occluder">The occluder.</param>
     /// <param name="pose">The pose of the <see cref="OccluderNode"/>.</param>
     /// <param name="scale">The scale of the <see cref="OccluderNode"/>.</param>
-    public void Update(Occluder occluder, Pose pose, Vector3F scale)
+    public void Update(Occluder occluder, Pose pose, Vector3 scale)
     {
       Debug.Assert(
         Vertices.Length == occluder.Vertices.Length
         && Indices == occluder.Indices,
         "OccluderData does not match.");
 
-      Vector3F[] localVertices = occluder.Vertices;
-      if (scale == Vector3F.One)
+      Vector3[] localVertices = occluder.Vertices;
+      if (scale == Vector3.One)
       {
         for (int i = 0; i < Vertices.Length; i++)
           Vertices[i] = pose.ToWorldPosition(localVertices[i]);

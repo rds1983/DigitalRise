@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Linq;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -138,7 +139,7 @@ namespace DigitalRise.Geometry.Partitioning
 
 
     /// <inheritdoc/>
-    public override IEnumerable<Pair<T>> GetOverlaps(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose)
+    public override IEnumerable<Pair<T>> GetOverlaps(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose)
     {
       if (otherPartition == null)
         throw new ArgumentNullException("otherPartition");
@@ -171,11 +172,11 @@ namespace DigitalRise.Geometry.Partitioning
     }
 
 
-    private IEnumerable<Pair<T>> GetOverlapsImpl(Vector3F scale, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose)
+    private IEnumerable<Pair<T>> GetOverlapsImpl(Vector3 scale, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose)
     {
       // Compute transformations.
-      Vector3F scaleInverse = Vector3F.One / scale;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 scaleInverse = Vector3.One / scale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
       Pose toLocal = otherPose;
       Pose toOther = otherPose.Inverse;
 
@@ -207,11 +208,11 @@ namespace DigitalRise.Geometry.Partitioning
     }
 
 
-    private IEnumerable<Pair<T>> GetOverlapsImpl(Vector3F scale, DynamicAabbTree<T> otherTree, Vector3F otherScale, Pose otherPose)
+    private IEnumerable<Pair<T>> GetOverlapsImpl(Vector3 scale, DynamicAabbTree<T> otherTree, Vector3 otherScale, Pose otherPose)
     {
       // Compute transformations.
-      Vector3F scaleA = scale;      // Rename scales for readability.
-      Vector3F scaleB = otherScale;
+      Vector3 scaleA = scale;      // Rename scales for readability.
+      Vector3 scaleB = otherScale;
       Pose bToA = otherPose;
 
 #if !POOL_ENUMERABLES
@@ -277,11 +278,11 @@ namespace DigitalRise.Geometry.Partitioning
     /// <see langword="true"/> if is <paramref name="nodeA"/> bigger than <paramref name="nodeB"/>;
     /// otherwise, <see langword="false"/>.
     /// </returns>
-    private static bool IsABiggerThanB(Node nodeA, Vector3F scaleA, Node nodeB, Vector3F scaleB)
+    private static bool IsABiggerThanB(Node nodeA, Vector3 scaleA, Node nodeB, Vector3 scaleB)
     {
-      Vector3F extentA = nodeA.Aabb.Extent * Vector3F.Absolute(scaleA);
-      Vector3F extentB = nodeB.Aabb.Extent * Vector3F.Absolute(scaleB);
-      return extentA.LargestComponent > extentB.LargestComponent;
+      Vector3 extentA = nodeA.Aabb.Extent * MathHelper.Absolute(scaleA);
+      Vector3 extentB = nodeB.Aabb.Extent * MathHelper.Absolute(scaleB);
+      return extentA.LargestComponent() > extentB.LargestComponent();
     }
 
 
@@ -296,7 +297,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// <returns>
     /// <see langword="true"/> if the AABBs have contact; otherwise, <see langword="false"/>.
     /// </returns>
-    private static bool HaveAabbContact(Node nodeA, Vector3F scaleA, Node nodeB, Vector3F scaleB, Pose poseB)
+    private static bool HaveAabbContact(Node nodeA, Vector3 scaleA, Node nodeB, Vector3 scaleB, Pose poseB)
     {
       // Scale AABB of A.
       Aabb aabbA = nodeA.Aabb;
@@ -307,7 +308,7 @@ namespace DigitalRise.Geometry.Partitioning
       aabbB.Scale(scaleB);
 
       // Convert AABB of B to OBB in local space of A.
-      Vector3F boxExtentB = aabbB.Extent;
+      Vector3 boxExtentB = aabbB.Extent;
       Pose poseBoxB = poseB * new Pose(aabbB.Center);
 
       // Test AABB of A against OBB.
@@ -318,7 +319,7 @@ namespace DigitalRise.Geometry.Partitioning
 
     /// <inheritdoc/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-    public void GetClosestPointCandidates(Vector3F scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3F otherScale, Pose otherPose, Func<T, T, float> callback)
+    public void GetClosestPointCandidates(Vector3 scale, Pose pose, ISpatialPartition<T> otherPartition, Vector3 otherScale, Pose otherPose, Func<T, T, float> callback)
     {
       if (otherPartition == null)
         throw new ArgumentNullException("otherPartition");
@@ -375,7 +376,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// <param name="closestPointDistanceSquared">
     /// The squared of the current closest-point distance.
     /// </param>
-    private void GetClosestPointCandidatesImpl(Node nodeA, Vector3F scaleA, Node nodeB, Vector3F scaleB, Pose poseB, Func<T, T, float> callback, ref float closestPointDistanceSquared)
+    private void GetClosestPointCandidatesImpl(Node nodeA, Vector3 scaleA, Node nodeB, Vector3 scaleB, Pose poseB, Func<T, T, float> callback, ref float closestPointDistanceSquared)
     {
       // closestPointDistanceSquared == -1 indicates early exit.
       if (nodeA == null || nodeB == null || closestPointDistanceSquared < 0)
@@ -426,7 +427,7 @@ namespace DigitalRise.Geometry.Partitioning
         aabbB.Scale(scaleB);
 
         // Convert AABB of B to OBB in local space of A.
-        Vector3F boxExtentB = aabbB.Extent;
+        Vector3 boxExtentB = aabbB.Extent;
         Pose poseBoxB = poseB * new Pose(aabbB.Center);
 
         // Scale left child AABB of A.
@@ -434,7 +435,7 @@ namespace DigitalRise.Geometry.Partitioning
         leftChildAabb.Scale(scaleA);
 
         // Convert left child AABB of A to OBB in local space of A.
-        Vector3F leftChildBoxExtent = leftChildAabb.Extent;
+        Vector3 leftChildBoxExtent = leftChildAabb.Extent;
         Pose leftChildBoxPose = new Pose(leftChildAabb.Center);
 
         // Compute lower bound for distance to left child.
@@ -445,7 +446,7 @@ namespace DigitalRise.Geometry.Partitioning
         rightChildAabb.Scale(scaleA);
 
         // Convert right child AABB of A to OBB in local space of A.
-        Vector3F rightChildBoxExtent = rightChildAabb.Extent;
+        Vector3 rightChildBoxExtent = rightChildAabb.Extent;
         Pose rightChildBoxPose = new Pose(rightChildAabb.Center);
 
         // Compute lower bound for distance to right child.
@@ -510,7 +511,7 @@ namespace DigitalRise.Geometry.Partitioning
           aabbA.Scale(scaleA);
 
           // Convert AABB of A to OBB in local space of A.
-          Vector3F boxExtentA = aabbA.Extent;
+          Vector3 boxExtentA = aabbA.Extent;
           Pose poseBoxA = new Pose(aabbA.Center);
 
           // Scale left child AABB of B.
@@ -518,7 +519,7 @@ namespace DigitalRise.Geometry.Partitioning
           leftChildAabb.Scale(scaleB);
 
           // Convert left child AABB of B to OBB in local space of A.
-          Vector3F childBoxExtent = leftChildAabb.Extent;
+          Vector3 childBoxExtent = leftChildAabb.Extent;
           Pose poseLeft = poseB * new Pose(leftChildAabb.Center);
 
           // Compute lower bound for distance to left child.
@@ -575,7 +576,7 @@ namespace DigitalRise.Geometry.Partitioning
     }
 
 
-    private void GetClosestPointCandidatesImpl(Vector3F scale, Pose pose, ISupportClosestPointQueries<T> otherPartition, Vector3F otherScale, Pose otherPose, Func<T, T, float> callback)
+    private void GetClosestPointCandidatesImpl(Vector3 scale, Pose pose, ISupportClosestPointQueries<T> otherPartition, Vector3 otherScale, Pose otherPose, Func<T, T, float> callback)
     {
       // Test leaf nodes against other partition.
 
@@ -586,7 +587,7 @@ namespace DigitalRise.Geometry.Partitioning
 
       // Prepare transformation to transform leaf AABBs into local space of other partition.
       Pose toOther = otherPose.Inverse * pose;
-      Vector3F otherScaleInverse = Vector3F.One / otherScale;
+      Vector3 otherScaleInverse = Vector3.One / otherScale;
 
       float closestPointDistanceSquared = float.PositiveInfinity;
       foreach (var leaf in _leaves.Values)

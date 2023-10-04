@@ -4,8 +4,9 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Geometry
 {
@@ -108,16 +109,16 @@ namespace Samples.Geometry
     private readonly CollisionDomain _collisionDomain;
 
     // Current velocity from gravity.
-    private Vector3F _gravityVelocity;
+    private Vector3 _gravityVelocity;
 
     // Current velocity from jumping.
-    private Vector3F _jumpVelocity;
+    private Vector3 _jumpVelocity;
 
     // The last valid position (set at the beginning of Move()).
-    private Vector3F _oldPosition;
+    private Vector3 _oldPosition;
 
     // The desired target position (set in Move()).
-    private Vector3F _desiredPosition;
+    private Vector3 _desiredPosition;
     #endregion
 
 
@@ -134,20 +135,20 @@ namespace Samples.Geometry
 
 
     // The bottom position (the lowest point on the capsule).
-    public Vector3F Position
+    public Vector3 Position
     {
       get
       {
-        return GeometricObject.Pose.Position - new Vector3F(0, Height / 2, 0);
+        return GeometricObject.Pose.Position - new Vector3(0, Height / 2, 0);
       }
       set
       {
         Pose oldPose = GeometricObject.Pose;
-        Pose newPose = new Pose(value + new Vector3F(0, Height / 2, 0), oldPose.Orientation);
+        Pose newPose = new Pose(value + new Vector3(0, Height / 2, 0), oldPose.Orientation);
         GeometricObject.Pose = newPose;
 
         // Note: GeometricObject.Pose is a struct. That means we cannot simply set
-        //   GeometricObject.Pose.Position = value + new Vector3F(0, Height / 2, 0);
+        //   GeometricObject.Pose.Position = value + new Vector3(0, Height / 2, 0);
         // We need to set the whole struct.
       }
     }
@@ -165,7 +166,7 @@ namespace Samples.Geometry
       // Create a game object for the character controller.
       GeometricObject = new GeometricObject(
         new CapsuleShape(Width / 2, Height),
-        new Pose(new Vector3F(0, Height / 2, 0)));
+        new Pose(new Vector3(0, Height / 2, 0)));
 
       // Create a collision object for the game object and add it to the collision domain.
       CollisionObject = new CollisionObject(GeometricObject);
@@ -180,7 +181,7 @@ namespace Samples.Geometry
 
     // Move the character to the new desired position, sliding along obstacles and stepping 
     // automatically up and down. Gravity is applied.
-    public void Move(Vector3F desiredPosition,
+    public void Move(Vector3 desiredPosition,
                      float deltaTime,     // The size of the time step in seconds.
                      bool jump)           // True if character should jump.
     {
@@ -188,33 +189,33 @@ namespace Samples.Geometry
       _oldPosition = Position;
 
       // Desired movement vector:
-      Vector3F desiredMovement = desiredPosition - Position;
+      Vector3 desiredMovement = desiredPosition - Position;
 
       if (HasGroundContact())
       {
         // The character starts on the ground.
 
         // Reset velocity from gravity.
-        _gravityVelocity = Vector3F.Zero;
+        _gravityVelocity = Vector3.Zero;
 
         // Add jump velocity or reset jump velocity.
         if (jump)
-          _jumpVelocity = new Vector3F(0, 4, 0);
+          _jumpVelocity = new Vector3(0, 4, 0);
         else
-          _jumpVelocity = Vector3F.Zero;
+          _jumpVelocity = Vector3.Zero;
       }
 
       // Add up movement to desired movement.
       desiredMovement += _jumpVelocity * deltaTime;
 
       // Add down movement due to gravity.
-      _gravityVelocity += new Vector3F(0, -9.81f, 0) * deltaTime;
+      _gravityVelocity += new Vector3(0, -9.81f, 0) * deltaTime;
       desiredMovement += _gravityVelocity * deltaTime;
 
       // Compute the total desired position.
       _desiredPosition = _oldPosition + desiredMovement;
 
-      bool isJumping = _jumpVelocity != Vector3F.Zero;
+      bool isJumping = _jumpVelocity != Vector3.Zero;
 
       // Try to slide to desired position. 
       // If we are jumping we do not stop at the first obstacle. If we are not jumping 
@@ -235,12 +236,12 @@ namespace Samples.Geometry
 
       // Limit amount of movement to the length of the desired movement.
       // (Position corrections could have added additional movement.)
-      Vector3F actualMovement = Position - _oldPosition;
-      float desiredMovementLength = (_desiredPosition - _oldPosition).Length;
-      if (actualMovement.Length > desiredMovementLength)
+      Vector3 actualMovement = Position - _oldPosition;
+      float desiredMovementLength = (_desiredPosition - _oldPosition).Length();
+      if (actualMovement.Length() > desiredMovementLength)
       {
         // Correct length of movement.
-        Position = _oldPosition + actualMovement.Normalized * desiredMovementLength;
+        Position = _oldPosition + actualMovement.Normalized() * desiredMovementLength;
 
         // Update collision detection info for new corrected Position.
         _collisionDomain.Update(CollisionObject);
@@ -254,13 +255,13 @@ namespace Samples.Geometry
     private bool Slide(bool stopAtObstacle)
     {
       // We try to move to the _desiredPosition. 
-      Vector3F desiredMovement = _desiredPosition - Position;
+      Vector3 desiredMovement = _desiredPosition - Position;
 
       // Abort if the movement length is zero.
-      if (desiredMovement.IsNumericallyZero)
+      if (desiredMovement.IsNumericallyZero())
         return true;
 
-      Vector3F desiredMovementDirection = desiredMovement.Normalized;
+      Vector3 desiredMovementDirection = desiredMovement.Normalized();
 
       // All bounding planes are collected in this list.
       List<Plane> bounds = new List<Plane>();
@@ -268,7 +269,7 @@ namespace Samples.Geometry
       bool startedOnGround = HasGroundContact();
 
       // Loop until we have found an allowed position or until iteration limit is exceeded.
-      Vector3F startPosition = Position;
+      Vector3 startPosition = Position;
       bool blocked = false;                    // Flag: true if a steep plane was hit.
       bool targetPositionIsValid = false;
       for (int i = 0; i < IterationLimit && !targetPositionIsValid; i++)
@@ -277,7 +278,7 @@ namespace Samples.Geometry
         AddBounds(bounds, Position);
 
         // In this loop: We correct currentMovement until the movement is within the allowed space.
-        Vector3F currentMovement = desiredMovement;
+        Vector3 currentMovement = desiredMovement;
         for (int j = 0; j < SolverIterationLimit && !targetPositionIsValid; j++)
         {
           // Assume the current position (= startPosition + currentMovement) is valid.
@@ -287,7 +288,7 @@ namespace Samples.Geometry
           foreach (Plane plane in bounds)
           {
             // Ignore the plane if we are moving away from it.
-            if (Numeric.IsGreaterOrEqual(Vector3F.Dot(plane.Normal, currentMovement), 0))
+            if (Numeric.IsGreaterOrEqual(Vector3.Dot(plane.Normal, currentMovement), 0))
               continue;
 
             // Get distance from plane.
@@ -298,7 +299,7 @@ namespace Samples.Geometry
 
               // Slide along the wall: We simply recover from penetration by moving into the plane 
               // normal direction.
-              Vector3F correction = plane.Normal * -distance;
+              Vector3 correction = plane.Normal * -distance;
 
               if (!IsAllowedSlope(plane.Normal))
               {
@@ -307,15 +308,15 @@ namespace Samples.Geometry
                 if (stopAtObstacle)
                 {
                   // We should stop at obstacle: Move back until no penetration.
-                  correction = (-distance) / Vector3F.Dot(desiredMovementDirection, plane.Normal) * desiredMovementDirection;
+                  correction = (-distance) / Vector3.Dot(desiredMovementDirection, plane.Normal) * desiredMovementDirection;
                   blocked = true;
                 }
                 else
                 {
                   // Slide laterally (don't slide "up" forbidden slopes).
-                  Vector3F correctionDirection = new Vector3F(plane.Normal.X, 0, plane.Normal.Z);
+                  Vector3 correctionDirection = new Vector3(plane.Normal.X, 0, plane.Normal.Z);
                   if (correctionDirection.TryNormalize())
-                    correction = (-distance) / Vector3F.Dot(correctionDirection, plane.Normal) * correctionDirection;
+                    correction = (-distance) / Vector3.Dot(correctionDirection, plane.Normal) * correctionDirection;
                 }
               }
 
@@ -355,7 +356,7 @@ namespace Samples.Geometry
       }
 
       if (!targetPositionIsValid
-          || Numeric.IsNaN(Position.Length))   // Position contains NaN!? We have messed it up :-(
+          || Numeric.IsNaN(Position.Length()))   // Position contains NaN!? We have messed it up :-(
       {
         // No valid position found --> Reset position.
         Position = startPosition;
@@ -371,23 +372,23 @@ namespace Samples.Geometry
     // If a step-up was performed true is returned, otherwise false.
     private bool StepUp()
     {
-      Vector3F startPosition = Position;
-      Vector3F desiredMovement = _desiredPosition - startPosition;
+      Vector3 startPosition = Position;
+      Vector3 desiredMovement = _desiredPosition - startPosition;
 
       // Compute forward direction (movement direction normal to the up direction). 
       // Abort if the movement is not forward directed.
-      Vector3F forward = new Vector3F(desiredMovement.X, 0, desiredMovement.Z);
+      Vector3 forward = new Vector3(desiredMovement.X, 0, desiredMovement.Z);
       if (!forward.TryNormalize())
         return false;
 
       // Test if there is enough room if we step up and forward. There must be at least room
       // for half the capsule.
-      Position = Position + new Vector3F(0, StepHeight, 0) + forward * (Width / 2 - AllowedPenetration);
+      Position = Position + new Vector3(0, StepHeight, 0) + forward * (Width / 2 - AllowedPenetration);
 
       // Update collision info.
       _collisionDomain.Update(CollisionObject);
 
-      if (HasUnallowedContact(Vector3F.Zero))
+      if (HasUnallowedContact(Vector3.Zero))
       {
         // Not enough room :-(. Undo movement.
         Position = startPosition;
@@ -405,8 +406,8 @@ namespace Samples.Geometry
     private void StepDown()
     {
       // We try a downward movement with the StepHeight.
-      Vector3F startPosition = Position;
-      Vector3F desiredMovement = new Vector3F(0, -StepHeight, 0);
+      Vector3 startPosition = Position;
+      Vector3 desiredMovement = new Vector3(0, -StepHeight, 0);
 
       // All bounding planes are collected in this list.
       List<Plane> bounds = new List<Plane>();
@@ -419,7 +420,7 @@ namespace Samples.Geometry
         AddBounds(bounds, Position);
 
         // In this loop: We correct currentMovement until the movement is within the allowed space.
-        Vector3F currentMovement = desiredMovement;
+        Vector3 currentMovement = desiredMovement;
         for (int j = 0; j < SolverIterationLimit && !targetPositionIsValid; j++)
         {
           // Assume the current position (= startPosition + currentMovement) is valid.
@@ -435,7 +436,7 @@ namespace Samples.Geometry
               // We are in the forbidden space.
 
               // Correct the position upwards. Do not slide.
-              Vector3F correction = (-distance) / Vector3F.Dot(Vector3F.UnitY, plane.Normal) * Vector3F.UnitY;
+              Vector3 correction = (-distance) / Vector3.Dot(Vector3.UnitY, plane.Normal) * Vector3.UnitY;
               currentMovement += correction;
 
               // We have to check the new currentMovement.
@@ -446,7 +447,7 @@ namespace Samples.Geometry
 
         // Abort if the iteration limit was exceeded (no valid target position found) 
         // or if the current movement is not positive.
-        if (!targetPositionIsValid || Numeric.IsLessOrEqual(Vector3F.Dot(currentMovement, desiredMovement), 0))
+        if (!targetPositionIsValid || Numeric.IsLessOrEqual(Vector3.Dot(currentMovement, desiredMovement), 0))
         {
           targetPositionIsValid = false;
           break;
@@ -456,11 +457,11 @@ namespace Samples.Geometry
         Position = startPosition + currentMovement;
         _collisionDomain.Update(CollisionObject);
 
-        targetPositionIsValid = !HasUnallowedContact(Vector3F.Zero);
+        targetPositionIsValid = !HasUnallowedContact(Vector3.Zero);
       }
 
       if (!targetPositionIsValid
-          || Numeric.IsNaN(Position.Length)) // Position contains NaN!? We have messed it up :-(
+          || Numeric.IsNaN(Position.Length())) // Position contains NaN!? We have messed it up :-(
       {
         // No valid position found --> Reset position.
         Position = startPosition;
@@ -473,7 +474,7 @@ namespace Samples.Geometry
     // at the given position. 
     // Note: All planes are relative to the given position - usually the bottom of the
     // character controller.
-    private void AddBounds(List<Plane> bounds, Vector3F position)
+    private void AddBounds(List<Plane> bounds, Vector3 position)
     {
       // Get contact sets from domain and add a plane for each contact.
       foreach (ContactSet contactSet in _collisionDomain.GetContacts(CollisionObject))
@@ -481,7 +482,7 @@ namespace Samples.Geometry
         foreach (Contact contact in contactSet)
         {
           // Get the contact normal vector pointing to the character controller. 
-          Vector3F normal = (contactSet.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
+          Vector3 normal = (contactSet.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
 
           // The penetration depth measures how much the character controller penetrates the 
           // obstacle.
@@ -507,7 +508,7 @@ namespace Samples.Geometry
         foreach (Contact contact in set)
         {
           // Get the contact normal vector pointing to the character controller. 
-          Vector3F normal = (set.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
+          Vector3 normal = (set.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
 
           // If the contact position height is on the lower cap of the capsule 
           // and if the slope of the contact is allowed, we have ground contact.
@@ -521,7 +522,7 @@ namespace Samples.Geometry
 
 
     // Returns true if there are any contacts that are not allowed for the given movement vector.
-    private bool HasUnallowedContact(Vector3F movement)
+    private bool HasUnallowedContact(Vector3 movement)
     {
       // Iterate over all contact sets. For each contact set we check all contacts.
       foreach (ContactSet contactSet in _collisionDomain.GetContacts(CollisionObject))
@@ -529,13 +530,13 @@ namespace Samples.Geometry
         foreach (Contact contact in contactSet)
         {
           // Get the contact normal vector pointing to the character controller. 
-          Vector3F normal = (contactSet.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
+          Vector3 normal = (contactSet.ObjectB == CollisionObject) ? contact.Normal : -contact.Normal;
 
           // It is ok if the normal vector of a contact points into the movement direction because
           // in this case we move away from the obstacle.
           // If the normal vector points against the movement direction and the penetration depth
           // is larger than the AllowedPenetration, we have an unallowed contact.
-          if ((movement == Vector3F.Zero || Numeric.IsLess(Vector3F.Dot(normal, movement), 0))
+          if ((movement == Vector3.Zero || Numeric.IsLess(Vector3.Dot(normal, movement), 0))
               && contact.PenetrationDepth > AllowedPenetration)
           {
             return true;
@@ -547,11 +548,11 @@ namespace Samples.Geometry
 
 
     // Returns true if 'normal' is a plane normal of a plane where we can stand on.
-    private bool IsAllowedSlope(Vector3F normal)
+    private bool IsAllowedSlope(Vector3 normal)
     {
       // If dot product of normal and up-vector is greater than the
       // cosine of the max slope angle, then we can stand on the plane.
-      return Vector3F.Dot(normal, Vector3F.UnitY) >= (float)Math.Cos(SlopeLimit);
+      return Vector3.Dot(normal, Vector3.UnitY) >= (float)Math.Cos(SlopeLimit);
     }
     #endregion
   }

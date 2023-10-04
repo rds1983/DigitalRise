@@ -1,10 +1,10 @@
 ﻿using AssetManagementBase;
 using CommonServiceLocator;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -28,11 +28,11 @@ namespace Samples.Particles
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Size).DefaultValue = 0.3f;
 
       // Following particle parameters are initialized externally:
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
-      ps.Parameters.AddVarying<Vector3F>("Normal");
-      ps.Parameters.AddVarying<Vector3F>("Axis");
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>("Normal");
+      ps.Parameters.AddVarying<Vector3>("Axis");
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Color).DefaultValue = new Vector3F(0.667f, 0.667f, 0.667f);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Color).DefaultValue = new Vector3(0.667f, 0.667f, 0.667f);
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Alpha);
       ps.Effectors.Add(new SingleLinearSegment3Effector

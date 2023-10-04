@@ -7,7 +7,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -62,15 +62,15 @@ namespace Samples.Particles
         MaxNumberOfParticles = 200,
       };
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       ps.Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
         Distribution = new DirectionDistribution
         {
-          Direction = new Vector3F(0, 0, 1),
+          Direction = new Vector3(0, 0, 1),
           Deviation = 0.6f,
         }
       });
@@ -118,7 +118,7 @@ namespace Samples.Particles
         FactorParameter = ParticleParameterNames.NormalizedAge,
       });
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Color).DefaultValue = new Vector3F(0.6f, 0.5f, 0.4f);
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Color).DefaultValue = new Vector3(0.6f, 0.5f, 0.4f);
 
       ps.Parameters.AddVarying<float>(ParticleParameterNames.Alpha);
       ps.Parameters.AddUniform<float>("TargetAlpha").DefaultValue = 1;

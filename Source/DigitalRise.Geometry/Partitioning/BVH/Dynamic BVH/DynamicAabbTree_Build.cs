@@ -5,9 +5,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Linq;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Partitioning
 {
@@ -355,18 +355,18 @@ namespace DigitalRise.Geometry.Partitioning
         // Let's assume a linear motion.
 
         // Expand AABB by margin and along motion.
-        Vector3F velocity = (newAabb.Center - node.Aabb.Center) * MotionPrediction;
+        Vector3 velocity = (newAabb.Center - node.Aabb.Center) * MotionPrediction;
         Expand(ref newAabb, RelativeMargin);  // Add margin to account for jiggling.
         Expand(ref newAabb, ref velocity);    // Expand in direction to account for linear motion.
 
         // Note: Bullet uses 
         //
-        //   Vector3F delta = newAabb.Minimum - node.Aabb.Minimum;
+        //   Vector3 delta = newAabb.Minimum - node.Aabb.Minimum;
         //
         // to estimate the direction (positive x or negative x, ...).
         // Then Bullet calculates the velocity as 
         //
-        //   Vector3F velocity = newAabb.Extent / 2 * MotionPrediction;
+        //   Vector3 velocity = newAabb.Extent / 2 * MotionPrediction;
         //   if (delta.X < 0) velocity.X = -velocity.X;
         //   if (delta.Y < 0) velocity.Y = -velocity.Y;
         //   if (delta.Z < 0) velocity.Z = -velocity.Z;
@@ -392,7 +392,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// </summary>
     /// <param name="aabb">The AABB to be expanded.</param>
     /// <param name="direction">The direction.</param>
-    private static void Expand(ref Aabb aabb, ref Vector3F direction)
+    private static void Expand(ref Aabb aabb, ref Vector3 direction)
     {
       if (direction.X >= 0)
         aabb.Maximum.X += direction.X;
@@ -418,7 +418,7 @@ namespace DigitalRise.Geometry.Partitioning
     /// <param name="margin">The relative margin.</param>
     private static void Expand(ref Aabb aabb, float margin)
     {
-      Vector3F delta = new Vector3F(aabb.Extent.LargestComponent * margin);
+      Vector3 delta = new Vector3(aabb.Extent.LargestComponent() * margin);
       aabb.Minimum -= delta;
       aabb.Maximum += delta;
     }

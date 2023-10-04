@@ -27,11 +27,11 @@ The right box stack is simulated with bad simulation settings.",
     {
       // Initialize the default simulation with a box stack on the left.
       Simulation firstSimulation = Simulation;
-      InitializeSimulation(firstSimulation, new Vector3F(-3, 0, 0));
+      InitializeSimulation(firstSimulation, new Vector3(-3, 0, 0));
 
       // Initialize a second simulation with a box stack on the right.
       _secondSimulation = new Simulation();
-      InitializeSimulation(_secondSimulation, new Vector3F(3, 0, 0));
+      InitializeSimulation(_secondSimulation, new Vector3(3, 0, 0));
 
       // Disable sleeping so that we can see the result of changed simulation settings and
       // bodies are not automatically disabled.
@@ -53,14 +53,14 @@ The right box stack is simulated with bad simulation settings.",
     }
 
 
-    private void InitializeSimulation(Simulation simulation, Vector3F offset)
+    private void InitializeSimulation(Simulation simulation, Vector3 offset)
     {
       // Add default force effects.
       simulation.ForceEffects.Add(new Gravity());
       simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",
         MotionType = MotionType.Static,
@@ -77,7 +77,7 @@ The right box stack is simulated with bad simulation settings.",
         RigidBody stackBox = new RigidBody(boxShape)
         {
           Name = "StackBox" + i,
-          Pose = new Pose(new Vector3F(0, yPosition, 0) + offset),
+          Pose = new Pose(new Vector3(0, yPosition, 0) + offset),
         };
         simulation.RigidBodies.Add(stackBox);
         yPosition += boxSize - overlap;

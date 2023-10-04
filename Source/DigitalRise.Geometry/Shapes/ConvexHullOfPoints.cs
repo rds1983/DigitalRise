@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -38,10 +37,10 @@ namespace DigitalRise.Geometry.Shapes
     //--------------------------------------------------------------
 
     // The cached local space AABB
-    private Aabb _aabbLocal = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+    private Aabb _aabbLocal = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
 
     // The cached inner point.
-    private Vector3F _innerPoint = new Vector3F(float.NaN);
+    private Vector3 _innerPoint = new Vector3(float.NaN);
     #endregion
 
 
@@ -59,7 +58,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <remarks>
     /// This point is a "deep" inner point of the shape (in local space).
     /// </remarks>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get
       {
@@ -68,12 +67,12 @@ namespace DigitalRise.Geometry.Shapes
         {
           // Compute the average of all points.
           int numberOfPoints = _points.Count;
-          Vector3F innerPoint = new Vector3F();
+          Vector3 innerPoint = new Vector3();
           if (numberOfPoints > 0)
           {
             for (int i = 0; i < numberOfPoints; i++)
             {
-              Vector3F point = _points[i];
+              Vector3 point = _points[i];
               innerPoint += point;
             }
 
@@ -98,7 +97,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public IList<Vector3F> Points
+    public IList<Vector3> Points
     {
       get { return _points; }
       set
@@ -113,7 +112,7 @@ namespace DigitalRise.Geometry.Shapes
         }
       }
     }
-    private IList<Vector3F> _points;
+    private IList<Vector3> _points;
     #endregion
 
 
@@ -135,7 +134,7 @@ namespace DigitalRise.Geometry.Shapes
     /// </remarks>
     public ConvexHullOfPoints()
     {
-      _points = new List<Vector3F>();
+      _points = new List<Vector3>();
     }
 
 
@@ -146,11 +145,11 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="points">
     /// A collection of points which are copied into the <see cref="Points"/> list.
     /// </param>
-    public ConvexHullOfPoints(IEnumerable<Vector3F> points)
+    public ConvexHullOfPoints(IEnumerable<Vector3> points)
     {
-      _points = new List<Vector3F>();
+      _points = new List<Vector3>();
       if (points != null)
-        foreach (Vector3F p in points)
+        foreach (Vector3 p in points)
           _points.Add(p);
     }
 
@@ -166,7 +165,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentNullException">
     /// <paramref name="points"/> is <see langword="null"/>.
     /// </exception>
-    public ConvexHullOfPoints(IList<Vector3F> points)
+    public ConvexHullOfPoints(IList<Vector3> points)
     {
       if (points == null)
         throw new ArgumentNullException("points");
@@ -201,11 +200,11 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Recompute local cached AABB if it is invalid.
       if (Numeric.IsNaN(_aabbLocal.Minimum.X))
-        _aabbLocal = base.GetAabb(Vector3F.One, Pose.Identity);
+        _aabbLocal = base.GetAabb(Vector3.One, Pose.Identity);
 
       // Apply scale and pose to AABB.
       return _aabbLocal.GetAabb(scale, pose);
@@ -226,7 +225,7 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPoint(Vector3F direction)
+    public override Vector3 GetSupportPoint(Vector3 direction)
     {
       return GetSupportPointInternal(ref direction);
     }
@@ -245,26 +244,26 @@ namespace DigitalRise.Geometry.Shapes
     /// from the center regarding the given direction. This point is not necessarily unique.
     /// </para>
     /// </remarks>
-    public override Vector3F GetSupportPointNormalized(Vector3F directionNormalized)
+    public override Vector3 GetSupportPointNormalized(Vector3 directionNormalized)
     {
       return GetSupportPointInternal(ref directionNormalized);
     }
 
 
-    private Vector3F GetSupportPointInternal(ref Vector3F direction)
+    private Vector3 GetSupportPointInternal(ref Vector3 direction)
     {
       // The direction vector does not need to be normalized: Below we project the points onto
       // the direction vector and measure the length of the projection. However, we do not need
       // the correct length, we only need a value which we can compare.
 
       // Return point with the largest distance in the given direction.
-      Vector3F supportVertex = new Vector3F();
+      Vector3 supportVertex = new Vector3();
       float maxDistance = float.NegativeInfinity;
       int numberOfPoints = _points.Count;
       for (int i = 0; i < numberOfPoints; i++)
       {
-        Vector3F vertex = _points[i];
-        float distance = Vector3F.Dot(vertex, direction);
+        Vector3 vertex = _points[i];
+        float distance = Vector3.Dot(vertex, direction);
         if (distance > maxDistance)
         {
           supportVertex = vertex;
@@ -293,8 +292,8 @@ namespace DigitalRise.Geometry.Shapes
     protected override void OnChanged(ShapeChangedEventArgs eventArgs)
     {
       // Set cached AABB to "invalid".
-      _aabbLocal = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
-      _innerPoint = new Vector3F(float.NaN);
+      _aabbLocal = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
+      _innerPoint = new Vector3(float.NaN);
 
       base.OnChanged(eventArgs);
     }

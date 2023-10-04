@@ -169,7 +169,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </remarks>
     public bool IsNumericallyNormalized
     {
-      get { return Numeric.AreEqual(LengthSquared, 1.0f); }
+      get { return Numeric.AreEqual(LengthSquared(), 1.0f); }
     }
 
 
@@ -187,7 +187,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </remarks>
     public bool IsNumericallyZero
     {
-      get { return Numeric.IsZero(LengthSquared, Numeric.EpsilonFSquared); }
+      get { return Numeric.IsZero(LengthSquared(), Numeric.EpsilonFSquared); }
     }
 
 
@@ -221,19 +221,6 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Returns the squared length of this vector.
-    /// </summary>
-    /// <returns>The squared length of this vector.</returns>
-    public float LengthSquared
-    {
-      get
-      {
-        return X * X + Y * Y + Z * Z + W * W;
-      }
-    }
-
-
-    /// <summary>
     /// Returns the normalized vector.
     /// </summary>
     /// <value>The normalized vector.</value>
@@ -256,13 +243,13 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Gets or sets the components x, y and z as a <see cref="Vector3F"/>.
+    /// Gets or sets the components x, y and z as a <see cref="Vector3"/>.
     /// </summary>
     /// <value>The 3-dimensional vector (x, y, z).</value>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-    public Vector3F XYZ
+    public Vector3 XYZ
     {
-      get { return new Vector3F(X, Y, Z); }
+      get { return new Vector3(X, Y, Z); }
       set
       {
         X = value.X;
@@ -474,7 +461,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="vector">The vector (x, y, z).</param>
     /// <param name="w">The w component.</param>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public Vector4F(Vector3F vector, float w)
+    public Vector4F(Vector3 vector, float w)
     {
       X = vector.X;
       Y = vector.Y;
@@ -1236,7 +1223,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </returns>
     public bool TryNormalize()
     {
-      float lengthSquared = LengthSquared;
+      float lengthSquared = LengthSquared();
       if (Numeric.IsZero(lengthSquared, Numeric.EpsilonFSquared))
         return false;
 
@@ -1264,25 +1251,36 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="target">The target vector.</param>
     public void ProjectTo(Vector4F target)
     {
-      this = Dot(this, target) / target.LengthSquared * target;
+      this = Dot(this, target) / target.LengthSquared() * target;
     }
-    #endregion
 
 
-    //--------------------------------------------------------------
-    #region Static Methods
-    //--------------------------------------------------------------
+		/// <summary>
+		/// Returns the squared length of this vector.
+		/// </summary>
+		/// <returns>The squared length of this vector.</returns>
+		public float LengthSquared()
+		{
+			return X * X + Y * Y + Z * Z + W * W;
+		}
 
-    /// <summary>
-    /// Returns a vector with the absolute values of the elements of the given vector.
-    /// </summary>
-    /// <param name="vector">The vector.</param>
-    /// <returns>A vector with the absolute values of the elements of the given vector.</returns>
-    /// <remarks>
-    /// The original vector is copied and then each vector element is set to its absolute value (see
-    /// <see cref="Math.Abs(float)"/>).
-    /// </remarks>
-    public static Vector4F Absolute(Vector4F vector)
+		#endregion
+
+
+		//--------------------------------------------------------------
+		#region Static Methods
+		//--------------------------------------------------------------
+
+		/// <summary>
+		/// Returns a vector with the absolute values of the elements of the given vector.
+		/// </summary>
+		/// <param name="vector">The vector.</param>
+		/// <returns>A vector with the absolute values of the elements of the given vector.</returns>
+		/// <remarks>
+		/// The original vector is copied and then each vector element is set to its absolute value (see
+		/// <see cref="Math.Abs(float)"/>).
+		/// </remarks>
+		public static Vector4F Absolute(Vector4F vector)
     {
       return new Vector4F(Math.Abs(vector.X), Math.Abs(vector.Y), Math.Abs(vector.Z), Math.Abs(vector.W));
     }
@@ -1428,15 +1426,15 @@ namespace DigitalRise.Mathematics.Algebra
     /// <exception cref="DivideByZeroException">
     /// Component W is 0.
     /// </exception>
-    public static Vector3F HomogeneousDivide(Vector4F vector)
+    public static Vector3 HomogeneousDivide(Vector4F vector)
     {
       float w = vector.W;
 
       if (w == 1.0f)
-        return new Vector3F(vector.X, vector.Y, vector.Z);
+        return new Vector3(vector.X, vector.Y, vector.Z);
 
       float oneOverW = 1 / w;
-      return new Vector3F(vector.X * oneOverW, vector.Y * oneOverW, vector.Z * oneOverW);
+      return new Vector3(vector.X * oneOverW, vector.Y * oneOverW, vector.Z * oneOverW);
     }
 
 
@@ -1482,7 +1480,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </returns>
     public static Vector4F ProjectTo(Vector4F vector, Vector4F target)
     {
-      return Dot(vector, target) / target.LengthSquared * target;
+      return Dot(vector, target) / target.LengthSquared() * target;
     }
 
 

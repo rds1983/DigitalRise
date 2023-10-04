@@ -7,7 +7,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Samples.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
@@ -235,8 +234,8 @@ namespace Samples
         EnableBlueShift = true,
         BlueShiftCenter = 0.0004f,
         BlueShiftRange = 0.5f,
-        //BlueShiftColor = new Vector3F(1.05f / 4f, 0.97f / 4f, 1.27f / 4f),  // Default physically-based blue-shift
-        BlueShiftColor = new Vector3F(0.25f, 0.25f, 0.7f),  // More dramatic blue-shift
+        //BlueShiftColor = new Vector3(1.05f / 4f, 0.97f / 4f, 1.27f / 4f),  // Default physically-based blue-shift
+        BlueShiftColor = new Vector3(0.25f, 0.25f, 0.7f),  // More dramatic blue-shift
         MinExposure = 0,
         MaxExposure = 10,
         BloomIntensity = 1,
@@ -250,7 +249,6 @@ namespace Samples
 			_reticle = assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.
-      var uiContentManager = services.GetInstance<ContentManager>("UIContent");
       var spriteFont = DefaultAssets.DefaultFont;
       DebugRenderer = new DebugRenderer(GraphicsService, spriteFont)
       {

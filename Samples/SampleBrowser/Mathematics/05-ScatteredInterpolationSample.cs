@@ -33,7 +33,7 @@ Scattered interpolation is used to compute a complete height field from the rand
     {
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
-      SetCamera(new Vector3F(0, 3, 5), 0, -0.5f);
+      SetCamera(new Vector3(0, 3, 5), 0, -0.5f);
 
       DoScatteredInterpolation();
     }
@@ -43,14 +43,14 @@ Scattered interpolation is used to compute a complete height field from the rand
     {
       // Create random points for a height field.
       // The height field is in the x/z plane. Height is along the y axis.
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       for (int i = 0; i < 9; i++)
       {
         float x = i * 10;
         float y = RandomHelper.Random.NextFloat(0, 20);
         float z = RandomHelper.Random.NextInteger(0, 44) * 2;
 
-        points.Add(new Vector3F(x, y, z));
+        points.Add(new Vector3(x, y, z));
       }
 
       // Now we setup scattered interpolation.
@@ -98,7 +98,7 @@ Scattered interpolation is used to compute a complete height field from the rand
 
       // Draw the random data points.
       const float scale = 0.04f;
-      Vector3F offset = new Vector3F(-2, 0, -2);
+      Vector3 offset = new Vector3(-2, 0, -2);
       foreach (var point in points)
         debugRenderer.DrawPoint(scale * point + offset, Color.Black, false);
 
@@ -114,8 +114,8 @@ Scattered interpolation is used to compute a complete height field from the rand
           {
             float y1 = heightField[x + stepSize, z];
             debugRenderer.DrawLine(
-              scale * new Vector3F(x, y0, z) + offset,
-              scale * new Vector3F(x + stepSize, y1, z) + offset,
+              scale * new Vector3(x, y0, z) + offset,
+              scale * new Vector3(x + stepSize, y1, z) + offset,
               Color.Black,
               false);
           }
@@ -124,8 +124,8 @@ Scattered interpolation is used to compute a complete height field from the rand
           {
             float y2 = heightField[x, z + stepSize];
             debugRenderer.DrawLine(
-              scale * new Vector3F(x, y0, z) + offset,
-              scale * new Vector3F(x, y2, z + stepSize) + offset,
+              scale * new Vector3(x, y0, z) + offset,
+              scale * new Vector3(x, y2, z + stepSize) + offset,
               Color.Black,
               false);
           }

@@ -2,6 +2,7 @@
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Analysis;
+using Microsoft.Xna.Framework;
 
 // Both XNA and DigitalRise have a class called MathHelper. To avoid compiler errors
 // we need to define which MathHelper we want to use.
@@ -78,10 +79,10 @@ namespace Samples.Mathematics
       debugRenderer.DrawText("----- RotateVector Example:");
 
       // Create a vector. We will rotate this vector.
-      Vector3F v = new Vector3F(1, 2, 3);
+      Vector3 v = new Vector3(1, 2, 3);
 
       // Create another vector which defines the axis of a rotation.
-      Vector3F rotationAxis = Vector3F.UnitZ;
+      Vector3 rotationAxis = Vector3.UnitZ;
 
       // The rotation angle in radians. We want to rotate 50°.
       float rotationAngle = MathHelper.ToRadians(50);
@@ -93,7 +94,7 @@ namespace Samples.Mathematics
       QuaternionF rotation = QuaternionF.CreateRotation(rotationAxis, rotationAngle);
 
       // Rotate the vector v using the rotation quaternion.
-      Vector3F vRotated = rotation.Rotate(v);
+      Vector3 vRotated = rotation.Rotate(v);
 
       // ----- Part 2: Rotate a vector with a matrix.
 
@@ -102,14 +103,14 @@ namespace Samples.Mathematics
       Matrix33F rotationMatrix = Matrix33F.CreateRotation(rotationAxis, rotationAngle);
 
       // Rotate the vector v using the rotation matrix.
-      Vector3F vRotated2 = rotationMatrix * v;
+      Vector3 vRotated2 = rotationMatrix * v;
 
       // ----- Part 3: Compare the results.
       // The result of both rotations should be identical. 
       // Because of numerical errors there can be minor differences in the results.
-      // Therefore we use Vector3F.AreNumericallyEqual() two check if the results
+      // Therefore we use MathHelper.AreNumericallyEqual() two check if the results
       // are equal (within a sensible numerical tolerance).
-      if (Vector3F.AreNumericallyEqual(vRotated, vRotated2))
+      if (MathHelper.AreNumericallyEqual(vRotated, vRotated2))
         debugRenderer.DrawText("Vectors are equal.\n");   // This message is written.
       else
         debugRenderer.DrawText("Vectors are not equal.\n");
@@ -123,13 +124,13 @@ namespace Samples.Mathematics
       debugRenderer.DrawText("----- CompareVectors Example:");
 
       // Define a vector.
-      Vector3F v0 = new Vector3F(1000, 2000, 3000);
+      Vector3 v0 = new Vector3(1000, 2000, 3000);
 
       // Define a rotation quaternion that rotates 360° around the x axis.
       QuaternionF rotation = QuaternionF.CreateRotationX(MathHelper.ToRadians(360));
 
       // Rotate v0.
-      Vector3F v1 = rotation.Rotate(v0);
+      Vector3 v1 = rotation.Rotate(v0);
 
       // The rotated vector v1 should be identical to v0 because a 360° rotation 
       // should not change the vector. - But due to numerical errors v0 and v1 are 
@@ -139,10 +140,10 @@ namespace Samples.Mathematics
       else
         debugRenderer.DrawText("Vectors are not equal.");   // This message is written. 
 
-      // With Vector3F.AreNumericallyEqual() we can check if two vectors are equal 
+      // With MathHelper.AreNumericallyEqual() we can check if two vectors are equal 
       // when we allow a small numeric tolerance. The tolerance that is applied is 
       // Numeric.EpsilonF, e.g. 10^-5.
-      if (Vector3F.AreNumericallyEqual(v0, v1))
+      if (MathHelper.AreNumericallyEqual(v0, v1))
         debugRenderer.DrawText("Vectors are numerically equal.\n");   // This message is written.
       else
         debugRenderer.DrawText("Vectors are not numerically equal.\n");
@@ -171,14 +172,14 @@ namespace Samples.Mathematics
                                      1, -2, 3);
 
         // Define the result vector b:
-        Vector3F b = new Vector3F(6, 0, -8);
+        Vector3 b = new Vector3(6, 0, -8);
 
         // x can be computed with x = A^-1 * b.
-        Vector3F x = A.Inverse * b;
+        Vector3 x = A.Inverse * b;
         // Note: A.Inverse will throw an exception if A is not invertible.
 
         // Check the result.
-        if (Vector3F.AreNumericallyEqual(A * x, b))
+        if (MathHelper.AreNumericallyEqual(A * x, b))
           debugRenderer.DrawText("Solution is correct.\n");   // This message is written. 
         else
           debugRenderer.DrawText("Solution is incorrect.\n");

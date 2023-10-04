@@ -47,7 +47,7 @@ tank model are animated.",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(8, 6, 8), ConstantsF.PiOver4, -0.4f);
+      SetCamera(new Vector3(8, 6, 8), ConstantsF.PiOver4, -0.4f);
 
       // Load the models. The models are processed using the DigitalRise Model 
       // Processor - not the default XNA model processor!
@@ -72,7 +72,7 @@ tank model are animated.",
       _tank = _tank.Clone();
 
       // The grid is a bit too large. We can scale it to make it smaller.
-      _grid.ScaleLocal = new Vector3F(0.3f);
+      _grid.ScaleLocal = new Vector3(0.3f);
 
       // No need to scale the tank model - the tank was already scaled by the 
       // DigitalRise Model Processor because a scale factor is defined in the 

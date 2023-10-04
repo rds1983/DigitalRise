@@ -5,8 +5,8 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -93,25 +93,25 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <exception cref="ArgumentException">
     /// The normal vector must be normalized.
     /// </exception>
-    public Vector3F NormalLocal
+    public Vector3 NormalLocal
     {
       get { return _normalLocal; }
       set
       {
-        if (!value.IsNumericallyNormalized)
+        if (!value.IsNumericallyNormalized())
           throw new ArgumentException("The normal vector must be normalized.");
 
         _normalLocal = value;
       }
     }
-    private Vector3F _normalLocal;
+    private Vector3 _normalLocal;
 
 
     /// <summary>
     /// Gets the normal of the reflection plane in world space.
     /// </summary>
     /// <value>The normal world of the reflection plane in world space.</value>
-    public Vector3F NormalWorld
+    public Vector3 NormalWorld
     {
       get { return PoseWorld.ToWorldDirection(_normalLocal); }
     }
@@ -150,7 +150,7 @@ namespace DigitalRise.Graphics.SceneGraph
     {
       CameraNode = new CameraNode(new Camera(new PerspectiveProjection()));
       FieldOfViewScale = 1;
-      _normalLocal = new Vector3F(0, 0, 1);
+      _normalLocal = new Vector3(0, 0, 1);
     }
     #endregion
 

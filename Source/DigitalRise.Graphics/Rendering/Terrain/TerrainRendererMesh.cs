@@ -8,7 +8,7 @@ using System.IO;
 using System.Threading.Tasks;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 
@@ -249,31 +249,31 @@ namespace DigitalRise.Graphics.Rendering
               //   G-----H-----I
 
               var indexA = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x, y, z));
+              levelTriangleMesh.Vertices.Add(new Vector3(x, y, z));
 
               var indexB = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + 0.5f * cellSize, y, z));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + 0.5f * cellSize, y, z));
 
               var indexC = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + cellSize, y, z));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + cellSize, y, z));
 
               var indexD = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x, y, z + 0.5f * cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x, y, z + 0.5f * cellSize));
 
               var indexE = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + 0.5f * cellSize, y, z + 0.5f * cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + 0.5f * cellSize, y, z + 0.5f * cellSize));
 
               var indexF = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + cellSize, y, z + 0.5f * cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + cellSize, y, z + 0.5f * cellSize));
 
               var indexG = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x, y, z + cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x, y, z + cellSize));
 
               var indexH = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + 0.5f * cellSize, y, z + cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + 0.5f * cellSize, y, z + cellSize));
 
               var indexI = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + cellSize, y, z + cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + cellSize, y, z + cellSize));
 
               // Triangles using ADEG:
               if (x != minInclusive)
@@ -388,16 +388,16 @@ namespace DigitalRise.Graphics.Rendering
               //   C-----D
 
               int indexA = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x, y, z));
+              levelTriangleMesh.Vertices.Add(new Vector3(x, y, z));
 
               int indexB = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + cellSize, y, z));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + cellSize, y, z));
 
               int indexC = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x, y, z + cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x, y, z + cellSize));
 
               int indexD = index++;
-              levelTriangleMesh.Vertices.Add(new Vector3F(x + cellSize, y, z + cellSize));
+              levelTriangleMesh.Vertices.Add(new Vector3(x + cellSize, y, z + cellSize));
 
               levelTriangleMesh.Indices.Add(indexA);
               levelTriangleMesh.Indices.Add(indexB);
@@ -426,7 +426,7 @@ namespace DigitalRise.Graphics.Rendering
         int index = 0;
         for (int i = 0; i < vertices.Length; i++)
         {
-          Vector3F v = triangleMesh.Vertices[i];
+          Vector3 v = triangleMesh.Vertices[i];
           vertices[index++] = new TerrainVertex(new HalfVector4(v.X, v.Y, v.Z, 1));
         }
       }

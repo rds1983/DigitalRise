@@ -1,15 +1,14 @@
 ﻿using System;
 using DigitalRise;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using DigitalRise.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Samples.Particles
 {
@@ -55,17 +54,17 @@ namespace Samples.Particles
         EmissionRateParameter = ParticleParameterNames.EmissionRate,
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction);
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction);
       Effectors.Add(new StartDirectionEffector
       {
         Parameter = ParticleParameterNames.Direction,
-        Distribution = new DirectionDistribution { Deviation = ConstantsF.Pi, Direction = Vector3F.UnitY },
+        Distribution = new DirectionDistribution { Deviation = ConstantsF.Pi, Direction = Vector3.UnitY },
       });
 
       Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed);
@@ -78,7 +77,7 @@ namespace Samples.Particles
       // The StartVelocityBiasEffector adds a velocity to new particles. We use this to add
       // the rocket velocity (stored in the parameter "EmitterVelocity") to the start velocities
       // of the particles.
-      Parameters.AddUniform<Vector3F>(ParticleParameterNames.EmitterVelocity);
+      Parameters.AddUniform<Vector3>(ParticleParameterNames.EmitterVelocity);
       Effectors.Add(new StartVelocityBiasEffector { Strength = 0.1f });
 
       Effectors.Add(new LinearVelocityEffector());
@@ -120,11 +119,11 @@ namespace Samples.Particles
         EndParameter = "EndSize",
       });
 
-      Parameters.AddVarying<Vector3F>(ParticleParameterNames.Color);
-      Effectors.Add(new StartValueEffector<Vector3F>
+      Parameters.AddVarying<Vector3>(ParticleParameterNames.Color);
+      Effectors.Add(new StartValueEffector<Vector3>
       {
         Parameter = ParticleParameterNames.Color,
-        Distribution = new LineSegmentDistribution { Start = new Vector3F(0.5f, 0.4f, 0.25f), End = new Vector3F(0.7f, 0.6f, 0.5f) },
+        Distribution = new LineSegmentDistribution { Start = new Vector3(0.5f, 0.4f, 0.25f), End = new Vector3(0.7f, 0.6f, 0.5f) },
       });
 
       Parameters.AddVarying<float>(ParticleParameterNames.Alpha);

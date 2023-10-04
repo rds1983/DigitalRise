@@ -31,7 +31,7 @@ from texture atlases.",
       // Position the campfire (including its child) in the level.
       // (The fire effect lies in the xy plane and shoots into the forward direction (= -z axis).
       // Therefore, we rotate the particle system to shoot upwards.)
-      particleSystem.Pose = new Pose(new Vector3F(0, 0.2f, 0), Matrix33F.CreateRotationX(ConstantsF.PiOver2));
+      particleSystem.Pose = new Pose(new Vector3(0, 0.2f, 0), Matrix33F.CreateRotationX(ConstantsF.PiOver2));
 
       ParticleSystemService.ParticleSystems.Add(particleSystem);
 

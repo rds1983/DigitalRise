@@ -96,7 +96,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <param name="color">The color in gamma space.</param>
     /// <returns>The color value in linear space.</returns>
-    internal static Vector3F FromGamma(Vector3F color)
+    internal static Vector3 FromGamma(Vector3 color)
     {
       color.X = FromGamma(color.X);
       color.Y = FromGamma(color.Y);
@@ -141,7 +141,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <param name="color">The color in linear space.</param>
     /// <returns>The color value in gamma space.</returns>
-    internal static Vector3F ToGamma(Vector3F color)
+    internal static Vector3 ToGamma(Vector3 color)
     {
       color.X = ToGamma(color.X);
       color.Y = ToGamma(color.Y);
@@ -188,9 +188,9 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <remarks>
     /// These weights were chosen according to ITU Rec 709 (HDTV; same as sRGB). To convert a color
-    /// to luminance use the dot product: <c>Vector3F.Dot(color, LuminanceWeights)</c>
+    /// to luminance use the dot product: <c>Vector3.Dot(color, LuminanceWeights)</c>
     /// </remarks>
-    public static readonly Vector3F LuminanceWeights = new Vector3F(0.2126f, 0.7152f, 0.0722f);
+    public static readonly Vector3 LuminanceWeights = new Vector3(0.2126f, 0.7152f, 0.0722f);
 
 
     /// <summary>
@@ -200,7 +200,7 @@ namespace DigitalRise.Graphics
     /// <param name="Y">Y.</param>
     /// <param name="x">x.</param>
     /// <param name="y">y.</param>
-    internal static void ConvertXYZToYxy(Vector3F XYZ, out float Y, out float x, out float y)
+    internal static void ConvertXYZToYxy(Vector3 XYZ, out float Y, out float x, out float y)
     {
       float X = XYZ.X;
       Y = XYZ.Y;
@@ -218,9 +218,9 @@ namespace DigitalRise.Graphics
     /// <param name="x">The x.</param>
     /// <param name="y">The y.</param>
     /// <returns>The XYZ color value.</returns>
-    internal static Vector3F ConvertYxyToXYZ(float Y, float x, float y)
+    internal static Vector3 ConvertYxyToXYZ(float Y, float x, float y)
     {
-      Vector3F result;
+      Vector3 result;
       result.X = x * Y / y;
       result.Y = Y;
       result.Z = (1 - x - y) * Y / y;

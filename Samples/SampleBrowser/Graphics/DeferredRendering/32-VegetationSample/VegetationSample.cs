@@ -153,13 +153,13 @@ window.",
       // (However, this is inefficient for large amounts of plants.)
       _graphicsScreen.Scene.Children.Add(new MeshNode(palmMesh)
       {
-        PoseLocal = new Pose(new Vector3F(-2, 0, 0))
+        PoseLocal = new Pose(new Vector3(-2, 0, 0))
       });
       plantLodGroupNode.PoseLocal = Pose.Identity;
       _graphicsScreen.Scene.Children.Add(plantLodGroupNode);
       _graphicsScreen.Scene.Children.Add(new MeshNode(grassMesh)
       {
-        PoseLocal = new Pose(new Vector3F(2, 0, 0))
+        PoseLocal = new Pose(new Vector3(2, 0, 0))
       });
 
 #if WINDOWS

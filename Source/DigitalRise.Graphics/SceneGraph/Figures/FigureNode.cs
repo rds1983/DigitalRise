@@ -4,7 +4,7 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -80,7 +80,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the stroke color.
     /// </summary>
     /// <value>The stroke color (non-premultiplied). The default value is white (1, 1, 1).</value>
-    public Vector3F StrokeColor
+    public Vector3 StrokeColor
     {
       get { return _strokeColor; }
       set
@@ -92,7 +92,7 @@ namespace DigitalRise.Graphics.SceneGraph
         RenderData.SafeDispose();
       }
     }
-    private Vector3F _strokeColor;
+    private Vector3 _strokeColor;
 
 
     /// <summary>
@@ -223,7 +223,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the fill color.
     /// </summary>
     /// <value>The fill color (non-premultiplied). The default value is white (1, 1, 1).</value>
-    public Vector3F FillColor
+    public Vector3 FillColor
     {
       get { return _fillColor; }
       set
@@ -235,7 +235,7 @@ namespace DigitalRise.Graphics.SceneGraph
         RenderData.SafeDispose();
       }
     }
-    private Vector3F _fillColor;
+    private Vector3 _fillColor;
 
 
     /// <summary>
@@ -311,12 +311,12 @@ namespace DigitalRise.Graphics.SceneGraph
       _figure = figure;
       Shape = figure.BoundingShape;
 
-      StrokeColor = new Vector3F(1, 1, 1);
+      StrokeColor = new Vector3(1, 1, 1);
       StrokeAlpha = 1;
       StrokeThickness = 1;
       StrokeDashPattern = new Vector4F(1, 0, 0, 0);
       DashInWorldSpace = true;
-      FillColor = new Vector3F(1, 1, 1);
+      FillColor = new Vector3(1, 1, 1);
       FillAlpha = 1;
     }
     #endregion

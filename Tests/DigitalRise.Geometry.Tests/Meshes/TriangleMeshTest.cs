@@ -4,10 +4,11 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Meshes.Tests
 {
@@ -17,7 +18,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     [Test]
     public void GetTriangle()
     {
-      Triangle t1 = new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 1));
+      Triangle t1 = new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1));
       
       TriangleMesh mesh = new TriangleMesh();
       mesh.Add(t1, false);
@@ -33,7 +34,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void GetTriangleException()
     {
       TriangleMesh mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 1)), false);
+      mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)), false);
       mesh.GetTriangle(-1);
     }
 
@@ -42,7 +43,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void GetTriangleException2()
     {
       TriangleMesh mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 1)), false);
+      mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)), false);
       mesh.GetTriangle(1);
     }
 
@@ -52,15 +53,15 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void AddMesh()
     {
       TriangleMesh mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 2)), true);
-      mesh.Add(new Triangle(new Vector3F(0, 1, 0), new Vector3F(1, 2, 1), new Vector3F(1, 1, 1)), true);
+      mesh.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 2)), true);
+      mesh.Add(new Triangle(new Vector3(0, 1, 0), new Vector3(1, 2, 1), new Vector3(1, 1, 1)), true);
 
       var mesh2 = new TriangleMesh();
-      mesh2.Add(new Triangle(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1), new Vector3F(1, 0, 1)), true);
+      mesh2.Add(new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)), true);
 
       mesh2.Add(mesh, true);
       Assert.AreEqual(3, mesh2.NumberOfTriangles);
-      Assert.AreEqual(new Triangle(new Vector3F(0, 1, 0), new Vector3F(1, 2, 1), new Vector3F(1, 1, 1)), mesh2.GetTriangle(2));
+      Assert.AreEqual(new Triangle(new Vector3(0, 1, 0), new Vector3(1, 2, 1), new Vector3(1, 1, 1)), mesh2.GetTriangle(2));
     }
 
 
@@ -77,7 +78,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void AddTriangleShouldRemoveDegenerateTriangle()
     {
       var mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(1, 1, 1), new Vector3F(1, 1, 1), new Vector3F(1, 1, 1.000001f)), true, 0.001f, true);
+      mesh.Add(new Triangle(new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1.000001f)), true, 0.001f, true);
       Assert.AreEqual(0, mesh.NumberOfTriangles);
     }
 
@@ -86,7 +87,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void AddTriangleShouldRemoveDegenerateTriangle2()
     {
       var mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(1, 1, 1), new Vector3F(1, 1, 1), new Vector3F(1, 1, 1.000001f)), false, 0.001f, true);
+      mesh.Add(new Triangle(new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1.000001f)), false, 0.001f, true);
       Assert.AreEqual(0, mesh.NumberOfTriangles);
     }
 
@@ -101,7 +102,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       mesh.Indices = null;
       Assert.AreEqual(0, mesh.NumberOfTriangles);
 
-      mesh.Add(new Triangle(new Vector3F(1, 1, 1), new Vector3F(1, 1, 1), new Vector3F(1, 1, 1.000001f)), false, 0.001f, false);
+      mesh.Add(new Triangle(new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1.000001f)), false, 0.001f, false);
       Assert.AreEqual(3, mesh.Vertices.Count);
     }
 
@@ -111,14 +112,14 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void Transform()
     {
       var mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(0, 1, 2), new Vector3F(3, 4, 5), new Vector3F(6, 7, 8)), true);
-      mesh.Add(new Triangle(new Vector3F(-0, -1, -2), new Vector3F(-3, -4, -5), new Vector3F(-6, -7, -8)), true);
+      mesh.Add(new Triangle(new Vector3(0, 1, 2), new Vector3(3, 4, 5), new Vector3(6, 7, 8)), true);
+      mesh.Add(new Triangle(new Vector3(-0, -1, -2), new Vector3(-3, -4, -5), new Vector3(-6, -7, -8)), true);
 
       var trans = RandomHelper.Random.NextMatrix44F(-1, 1);
       mesh.Transform(trans);
 
-      Assert.AreEqual(trans.TransformPosition(new Vector3F(0, 1, 2)), mesh.Vertices[0]);
-      Assert.AreEqual(trans.TransformPosition(new Vector3F(-6, -7, -8)), mesh.Vertices[5]);
+      Assert.AreEqual(trans.TransformPosition(new Vector3(0, 1, 2)), mesh.Vertices[0]);
+      Assert.AreEqual(trans.TransformPosition(new Vector3(-6, -7, -8)), mesh.Vertices[5]);
     }
 
 
@@ -126,8 +127,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void Clone()
     {
       var mesh = new TriangleMesh();
-      mesh.Add(new Triangle(new Vector3F(0, 1, 2), new Vector3F(3, 4, 5), new Vector3F(6, 7, 8)), true);
-      mesh.Add(new Triangle(new Vector3F(-0, -1, -2), new Vector3F(-3, -4, -5), new Vector3F(-6, -7, -8)), true);
+      mesh.Add(new Triangle(new Vector3(0, 1, 2), new Vector3(3, 4, 5), new Vector3(6, 7, 8)), true);
+      mesh.Add(new Triangle(new Vector3(-0, -1, -2), new Vector3(-3, -4, -5), new Vector3(-6, -7, -8)), true);
       mesh.Tag = new SphereShape(3);
 
       var clone = mesh.Clone();
@@ -147,8 +148,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void SerializationXml()
     {
       var a = new TriangleMesh();
-      a.Add(new Triangle(new Vector3F(0, 1, 2), new Vector3F(3, 4, 5), new Vector3F(6, 7, 8)), true);
-      a.Add(new Triangle(new Vector3F(-0, -1, -2), new Vector3F(-3, -4, -5), new Vector3F(-6, -7, -8)), true);
+      a.Add(new Triangle(new Vector3(0, 1, 2), new Vector3(3, 4, 5), new Vector3(6, 7, 8)), true);
+      a.Add(new Triangle(new Vector3(-0, -1, -2), new Vector3(-3, -4, -5), new Vector3(-6, -7, -8)), true);
 
 
       // Serialize object.
@@ -179,8 +180,8 @@ namespace DigitalRise.Geometry.Meshes.Tests
     public void SerializationBinary()
     {
       var a = new TriangleMesh();
-      a.Add(new Triangle(new Vector3F(0, 1, 2), new Vector3F(3, 4, 5), new Vector3F(6, 7, 8)), false);
-      a.Add(new Triangle(new Vector3F(-0, -1, -2), new Vector3F(-3, -4, -5), new Vector3F(-6, -7, -8)), false);
+      a.Add(new Triangle(new Vector3(0, 1, 2), new Vector3(3, 4, 5), new Vector3(6, 7, 8)), false);
+      a.Add(new Triangle(new Vector3(-0, -1, -2), new Vector3(-3, -4, -5), new Vector3(-6, -7, -8)), false);
 
       // Serialize object.
       var stream = new MemoryStream();
@@ -214,7 +215,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       {
         var n0 = mesh.GetTriangle(i).Normal;
         var n1 = clone.GetTriangle(i).Normal;
-        Assert.IsTrue(Vector3F.AreNumericallyEqual(n0, -n1));
+        Assert.IsTrue(MathHelper.AreNumericallyEqual(n0, -n1));
       }
     }
 
@@ -225,7 +226,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       TriangleMesh mesh = new TriangleMesh();
       Assert.AreEqual(0, mesh.WeldVertices());
 
-      mesh.Add(new Triangle(new Vector3F(1, 2, 3), new Vector3F(3, 4, 5), new Vector3F(1.00001f, 2.00001f, 3f)), false);
+      mesh.Add(new Triangle(new Vector3(1, 2, 3), new Vector3(3, 4, 5), new Vector3(1.00001f, 2.00001f, 3f)), false);
 
       Assert.AreEqual(3, mesh.Vertices.Count);
 
@@ -243,7 +244,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       {
         for (int j = i + 1; j < mesh.Vertices.Count; j++)
         {
-          Assert.IsFalse(Vector3F.AreNumericallyEqual(mesh.Vertices[i], mesh.Vertices[j]));
+          Assert.IsFalse(MathHelper.AreNumericallyEqual(mesh.Vertices[i], mesh.Vertices[j]));
         }
       }
 

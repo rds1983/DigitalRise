@@ -47,7 +47,7 @@ usually faster than convex hulls. Etc.",
     {
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.FindFirstMeshNode().Clone();
-      _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
+      _meshNode.PoseLocal = new Pose(new Vector3(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);
 
@@ -92,7 +92,7 @@ usually faster than convex hulls. Etc.",
       var skeleton = mesh.Skeleton;
 
       // Extract the vertices from the mesh sorted per bone.
-      var verticesPerBone = new List<Vector3F>[skeleton.NumberOfBones];
+      var verticesPerBone = new List<Vector3>[skeleton.NumberOfBones];
       // Also get the AABB of the model.
       Aabb? aabb = null;
       foreach (var submesh in mesh.Submeshes)
@@ -140,7 +140,7 @@ usually faster than convex hulls. Etc.",
         // Sort the vertices per bone. 
         for (int i = 0; i < submesh.VertexCount; i++)
         {
-          var vertex = (Vector3F)positions[i];
+          var vertex = (Vector3)positions[i];
 
           // Here, we only check the first bone index. We could also check the
           // bone weights to add the vertex to all bone vertex lists where the 
@@ -149,7 +149,7 @@ usually faster than convex hulls. Etc.",
           //Vector4 boneWeights = boneWeightsArray[i];
           int boneIndex = (int)boneIndices.X;
           if (verticesPerBone[boneIndex] == null)
-            verticesPerBone[boneIndex] = new List<Vector3F>();
+            verticesPerBone[boneIndex] = new List<Vector3>();
           verticesPerBone[boneIndex].Add(vertex);
 
           // Add vertex to AABB.
@@ -167,7 +167,7 @@ usually faster than convex hulls. Etc.",
       // because large mass differences or thin bodies (arms!) are less stable.
       // We use the mass properties of sphere proportional to the size of the model.
       const float totalMass = 80;     // The total mass of the ragdoll.
-      var massFrame = MassFrame.FromShapeAndMass(new SphereShape(aabb.Value.Extent.Y / 8), Vector3F.One, totalMass / numberOfBodies, 0.1f, 1);
+      var massFrame = MassFrame.FromShapeAndMass(new SphereShape(aabb.Value.Extent.Y / 8), Vector3.One, totalMass / numberOfBodies, 0.1f, 1);
 
       var material = new UniformMaterial();
 

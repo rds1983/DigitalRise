@@ -1,9 +1,8 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -22,7 +21,7 @@ through the wall. The right object uses CCD and collides with the wall.",
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",            // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -33,7 +32,7 @@ through the wall. The right object uses CCD and collides with the wall.",
       RigidBody body = new RigidBody(new BoxShape(10, 10, 0.1f))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(0, 5, -5))
+        Pose = new Pose(new Vector3(0, 5, -5))
       };
       Simulation.RigidBodies.Add(body);
 
@@ -43,15 +42,15 @@ through the wall. The right object uses CCD and collides with the wall.",
       SphereShape bulletShape = new SphereShape(0.2f);
       body = new RigidBody(bulletShape)
       {
-        Pose = new Pose(new Vector3F(-2, 5, 5.5f)),
-        LinearVelocity = new Vector3F(0, 0, -100),
+        Pose = new Pose(new Vector3(-2, 5, 5.5f)),
+        LinearVelocity = new Vector3(0, 0, -100),
       };
       Simulation.RigidBodies.Add(body);
 
       body = new RigidBody(bulletShape)
       {
-        Pose = new Pose(new Vector3F(2, 5, 5.5f)),
-        LinearVelocity = new Vector3F(0, 0, -100),
+        Pose = new Pose(new Vector3(2, 5, 5.5f)),
+        LinearVelocity = new Vector3(0, 0, -100),
 
         // Enable CCD for this body.
         CcdEnabled = true,

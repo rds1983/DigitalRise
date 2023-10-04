@@ -12,10 +12,10 @@ using DigitalRise.Physics;
 using DigitalRise.Physics.Materials;
 using DigitalRise.Physics.Specialized;
 using CommonServiceLocator;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics.Specialized
 {
@@ -28,8 +28,8 @@ namespace Samples.Physics.Specialized
     // Note:
     // To reset the vehicle position, simply call:
     //  _vehicle.Chassis.Pose = myPose;
-    //  _vehicle.Chassis.LinearVelocity = Vector3F.Zero;
-    //  _vehicle.Chassis.AngularVelocity = Vector3F.Zero;
+    //  _vehicle.Chassis.LinearVelocity = Vector3.Zero;
+    //  _vehicle.Chassis.AngularVelocity = Vector3.Zero;
 
 
     //--------------------------------------------------------------
@@ -118,7 +118,7 @@ namespace Samples.Physics.Specialized
       // Samples.)
 
       // The mass properties of the car. We use a mass of 800 kg.
-      var mass = MassFrame.FromShapeAndMass(chassisShape, Vector3F.One, 800, 0.1f, 1);
+      var mass = MassFrame.FromShapeAndMass(chassisShape, Vector3.One, 800, 0.1f, 1);
 
       // Trick: We artificially modify the center of mass of the rigid body. Lowering the center
       // of mass makes the car more stable against rolling in tight curves. 
@@ -139,7 +139,7 @@ namespace Samples.Physics.Specialized
 
       var chassis = new RigidBody(chassisShape, mass, material)
       {
-        Pose = new Pose(new Vector3F(0, 2, 0)),  // Start position
+        Pose = new Pose(new Vector3(0, 2, 0)),  // Start position
         UserData = "NoDraw",                     // (Remove this line to render the collision model.)
       };
 
@@ -147,10 +147,10 @@ namespace Samples.Physics.Specialized
       Vehicle = new Vehicle(_simulation, chassis);
 
       // Add 4 wheels.
-      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3F(-0.9f, 0.6f, -2.0f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 2 });  // Front left
-      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3F(0.9f, 0.6f, -2.0f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 2 });   // Front right
-      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3F(-0.9f, 0.6f, 0.98f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 1.8f });// Back left
-      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3F(0.9f, 0.6f, 0.98f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 1.8f }); // Back right
+      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3(-0.9f, 0.6f, -2.0f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 2 });  // Front left
+      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3(0.9f, 0.6f, -2.0f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 2 });   // Front right
+      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3(-0.9f, 0.6f, 0.98f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 1.8f });// Back left
+      Vehicle.Wheels.Add(new Wheel { Offset = new Vector3(0.9f, 0.6f, 0.98f), Radius = 0.36f, SuspensionRestLength = 0.55f, MinSuspensionLength = 0.25f, Friction = 1.8f }); // Back right
 
       // Vehicles are disabled per default. This way we can create the vehicle and the simulation
       // objects are only added when needed.

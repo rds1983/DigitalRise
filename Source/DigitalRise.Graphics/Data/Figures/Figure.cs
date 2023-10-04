@@ -5,9 +5,8 @@
 using System;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -200,7 +199,7 @@ namespace DigitalRise.Graphics
     /// <param name="vertices">The vertices.</param>
     /// <param name="strokeIndices">The line indices (2 indices per line).</param>
     /// <param name="fillIndices">The triangle indices (3 indices per triangle).</param>
-    internal abstract void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices);
+    internal abstract void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices);
     #endregion
   }
 }

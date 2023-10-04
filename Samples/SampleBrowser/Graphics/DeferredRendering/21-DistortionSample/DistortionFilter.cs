@@ -5,7 +5,6 @@ using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 

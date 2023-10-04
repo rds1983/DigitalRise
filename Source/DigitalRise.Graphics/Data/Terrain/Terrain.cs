@@ -439,7 +439,7 @@ namespace DigitalRise.Graphics
     //  {
     //    // No layer or all clear layers...
     //    // Create a dummy shape: Move shape "far away" to always be culled.
-    //    childObject.Pose = new Pose(new Vector3F(TerrainLayer.TerrainLimit));
+    //    childObject.Pose = new Pose(new Vector3(TerrainLayer.TerrainLimit));
     //    return;
     //  }
 

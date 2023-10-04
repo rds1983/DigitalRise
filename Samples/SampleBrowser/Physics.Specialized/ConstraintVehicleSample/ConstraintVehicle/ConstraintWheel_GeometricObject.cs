@@ -6,7 +6,7 @@ using System;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -46,9 +46,9 @@ namespace DigitalRise.Physics.Specialized
     }
 
 
-    Vector3F IGeometricObject.Scale
+    Vector3 IGeometricObject.Scale
     {
-      get { return Vector3F.One; }
+      get { return Vector3.One; }
     }
 
 

@@ -5,8 +5,9 @@
 using System;
 using System.Globalization;
 using DigitalRise.Geometry.Meshes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -32,7 +33,7 @@ namespace DigitalRise.Geometry.Shapes
     #region Fields
     //--------------------------------------------------------------
 
-    private Vector3F _normal;
+    private Vector3 _normal;
     private float _distanceFromOrigin;
     #endregion
 
@@ -49,12 +50,12 @@ namespace DigitalRise.Geometry.Shapes
     /// This vector points away from the volume of this shape.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="value"/> is not normalized.</exception>
-    public Vector3F Normal
+    public Vector3 Normal
     {
       get { return _normal; }
       set 
       {
-        if (!value.IsNumericallyNormalized)
+        if (!value.IsNumericallyNormalized())
           throw new ArgumentException("The plane normal must be normalized.");
 
         if (_normal != value)
@@ -92,7 +93,7 @@ namespace DigitalRise.Geometry.Shapes
     /// Gets an inner point.
     /// </summary>
     /// <value>An inner point.</value>
-    public override Vector3F InnerPoint
+    public override Vector3 InnerPoint
     {
       get { return _normal * _distanceFromOrigin; }
     }
@@ -136,7 +137,7 @@ namespace DigitalRise.Geometry.Shapes
     /// direction.
     /// </remarks>
     public PlaneShape()
-      : this(Vector3F.UnitY, 0)
+      : this(Vector3.UnitY, 0)
     {
     }
 
@@ -152,9 +153,9 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentException">
     /// <paramref name="normal"/> is not normalized.
     /// </exception>
-    public PlaneShape(Vector3F normal, float distanceFromOrigin)
+    public PlaneShape(Vector3 normal, float distanceFromOrigin)
     {
-      if (!normal.IsNumericallyNormalized)
+      if (!normal.IsNumericallyNormalized())
         throw new ArgumentException("The plane normal must be normalized.", "normal");
 
       _normal = normal;
@@ -177,21 +178,21 @@ namespace DigitalRise.Geometry.Shapes
     /// <paramref name="point0"/>, <paramref name="point1"/>, and <paramref name="point2"/> do not 
     /// form a valid triangle.
     /// </exception>
-    public PlaneShape(Vector3F point0, Vector3F point1, Vector3F point2)
+    public PlaneShape(Vector3 point0, Vector3 point1, Vector3 point2)
     {
-      if (Vector3F.AreNumericallyEqual(point0, point1)
-          || Vector3F.AreNumericallyEqual(point0, point2)
-          || Vector3F.AreNumericallyEqual(point1, point2))
+      if (MathHelper.AreNumericallyEqual(point0, point1)
+          || MathHelper.AreNumericallyEqual(point0, point2)
+          || MathHelper.AreNumericallyEqual(point1, point2))
         throw new ArgumentException("The points do not form a valid triangle.");
 
       // Compute normal vector.
-      _normal = Vector3F.Cross(point1 - point0, point2 - point0);
+      _normal = Vector3.Cross(point1 - point0, point2 - point0);
 
       if (!_normal.TryNormalize())
         throw new ArgumentException("The points do not form a valid triangle.");
 
       // Compute the distance from the origin.
-      _distanceFromOrigin = Vector3F.Dot(point0, _normal);
+      _distanceFromOrigin = Vector3.Dot(point0, _normal);
     }
 
 
@@ -204,13 +205,13 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentException">
     /// <paramref name="normal"/> is not normalized.
     /// </exception>
-    public PlaneShape(Vector3F normal, Vector3F pointOnPlane)
+    public PlaneShape(Vector3 normal, Vector3 pointOnPlane)
     {
-      if (!normal.IsNumericallyNormalized)
+      if (!normal.IsNumericallyNormalized())
         throw new ArgumentException("The plane normal must be normalized.", "normal");
 
       _normal = normal;
-      _distanceFromOrigin = Vector3F.Dot(pointOnPlane, _normal);
+      _distanceFromOrigin = Vector3.Dot(pointOnPlane, _normal);
     }
 
 
@@ -223,7 +224,7 @@ namespace DigitalRise.Geometry.Shapes
     /// <exception cref="ArgumentException">The plane normal is not normalized.</exception>
     public PlaneShape(Plane plane)
     {
-      if (!plane.Normal.IsNumericallyNormalized)
+      if (!plane.Normal.IsNumericallyNormalized())
         throw new ArgumentException("The plane normal must be normalized.", "plane");
 
       _normal = plane.Normal;
@@ -256,15 +257,15 @@ namespace DigitalRise.Geometry.Shapes
 
 
     /// <inheritdoc/>
-    public override Aabb GetAabb(Vector3F scale, Pose pose)
+    public override Aabb GetAabb(Vector3 scale, Pose pose)
     {
       // Uniform scales do not influence the normal direction. Non-uniform scales change the normal
       // direction, but don't make much sense for planes. --> Return an infinite AABB.
       if (scale.X != scale.Y || scale.Y != scale.Z)
-        return new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
+        return new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
 
       // Note: Compute AABB in world space
-      Vector3F normal = pose.ToWorldDirection(_normal);
+      Vector3 normal = pose.ToWorldDirection(_normal);
 
       // Negative uniform scaling --> invert normal.
       if (scale.X < 0)
@@ -276,46 +277,46 @@ namespace DigitalRise.Geometry.Shapes
       // Most of the time the AABB fills the whole space. Only when the plane is axis-aligned then
       // the AABB is different.
       // Using numerical comparison we "clamp" the plane to an axis-aligned plane if possible.
-      if (Vector3F.AreNumericallyEqual(normal, Vector3F.UnitX))
+      if (MathHelper.AreNumericallyEqual(normal, Vector3.UnitX))
       {
-        Vector3F minimum = new Vector3F(float.NegativeInfinity);
-        Vector3F maximum = new Vector3F(pose.Position.X + scaledDistance, float.PositiveInfinity, float.PositiveInfinity);
+        Vector3 minimum = new Vector3(float.NegativeInfinity);
+        Vector3 maximum = new Vector3(pose.Position.X + scaledDistance, float.PositiveInfinity, float.PositiveInfinity);
         return new Aabb(minimum, maximum);
       }
-      else if (Vector3F.AreNumericallyEqual(normal, Vector3F.UnitY))
+      else if (MathHelper.AreNumericallyEqual(normal, Vector3.UnitY))
       {
-        Vector3F minimum = new Vector3F(float.NegativeInfinity);
-        Vector3F maximum = new Vector3F(float.PositiveInfinity, pose.Position.Y + scaledDistance, float.PositiveInfinity);
+        Vector3 minimum = new Vector3(float.NegativeInfinity);
+        Vector3 maximum = new Vector3(float.PositiveInfinity, pose.Position.Y + scaledDistance, float.PositiveInfinity);
         return new Aabb(minimum, maximum);
       }
-      else if (Vector3F.AreNumericallyEqual(normal, Vector3F.UnitZ))
+      else if (MathHelper.AreNumericallyEqual(normal, Vector3.UnitZ))
       {
-        Vector3F minimum = new Vector3F(float.NegativeInfinity);
-        Vector3F maximum = new Vector3F(float.PositiveInfinity, float.PositiveInfinity, pose.Position.Z + scaledDistance);
+        Vector3 minimum = new Vector3(float.NegativeInfinity);
+        Vector3 maximum = new Vector3(float.PositiveInfinity, float.PositiveInfinity, pose.Position.Z + scaledDistance);
         return new Aabb(minimum, maximum);
       }
-      else if (Vector3F.AreNumericallyEqual(normal, -Vector3F.UnitX))
+      else if (MathHelper.AreNumericallyEqual(normal, -Vector3.UnitX))
       {
-        Vector3F minimum = new Vector3F(pose.Position.X - scaledDistance, float.NegativeInfinity, float.NegativeInfinity);
-        Vector3F maximum = new Vector3F(float.PositiveInfinity);
+        Vector3 minimum = new Vector3(pose.Position.X - scaledDistance, float.NegativeInfinity, float.NegativeInfinity);
+        Vector3 maximum = new Vector3(float.PositiveInfinity);
         return new Aabb(minimum, maximum);
       }
-      else if (Vector3F.AreNumericallyEqual(normal, -Vector3F.UnitY))
+      else if (MathHelper.AreNumericallyEqual(normal, -Vector3.UnitY))
       {
-        Vector3F minimum = new Vector3F(float.NegativeInfinity, pose.Position.Y - scaledDistance, float.NegativeInfinity);
-        Vector3F maximum = new Vector3F(float.PositiveInfinity);
+        Vector3 minimum = new Vector3(float.NegativeInfinity, pose.Position.Y - scaledDistance, float.NegativeInfinity);
+        Vector3 maximum = new Vector3(float.PositiveInfinity);
         return new Aabb(minimum, maximum);
       }
-      else if (Vector3F.AreNumericallyEqual(normal, -Vector3F.UnitZ))
+      else if (MathHelper.AreNumericallyEqual(normal, -Vector3.UnitZ))
       {
-        Vector3F minimum = new Vector3F(float.NegativeInfinity, float.NegativeInfinity, pose.Position.Z - scaledDistance);
-        Vector3F maximum = new Vector3F(float.PositiveInfinity);
+        Vector3 minimum = new Vector3(float.NegativeInfinity, float.NegativeInfinity, pose.Position.Z - scaledDistance);
+        Vector3 maximum = new Vector3(float.PositiveInfinity);
         return new Aabb(minimum, maximum);
       }
       else
       {
         // Plane is not axis-aligned. --> AABB is infinite
-        return new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
+        return new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
       }
     }
 
@@ -357,9 +358,9 @@ namespace DigitalRise.Geometry.Shapes
     /// </remarks>
     protected override TriangleMesh OnGetMesh(float absoluteDistanceThreshold, int iterationLimit)
     {
-      Vector3F center = Normal * DistanceFromOrigin;
-      Vector3F orthoNormal1 = Normal.Orthonormal1;
-      Vector3F orthoNormal2 = Normal.Orthonormal2;
+      Vector3 center = Normal * DistanceFromOrigin;
+      Vector3 orthoNormal1 = Normal.Orthonormal1();
+      Vector3 orthoNormal2 = Normal.Orthonormal2();
 
       // Plane 
 

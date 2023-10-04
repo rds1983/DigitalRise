@@ -7,7 +7,6 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -160,7 +159,7 @@ namespace Samples.Graphics
     private readonly List<MeshNode> _partners = new List<MeshNode>();
 
     private RenderTarget2D _intersectionImage;
-    private Vector3F _color;
+    private Vector3 _color;
     private float _alpha;
     private Rectangle _totalScissorRectangle;
 
@@ -301,7 +300,7 @@ namespace Samples.Graphics
     /// Invalid render context: Camera node needs to be set in render context.
     /// </exception>
     public void ComputeIntersection(IEnumerable<Pair<MeshNode>> meshNodePairs,
-      Vector3F color, float alpha, float maxConvexity, RenderContext context)
+      Vector3 color, float alpha, float maxConvexity, RenderContext context)
     {
       if (_isDisposed)
         throw new ObjectDisposedException("IntersectionRenderer has already been disposed.");

@@ -11,7 +11,6 @@ using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -61,21 +60,21 @@ namespace Samples.Graphics
 
       _particleCloud0 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
-        PoseLocal = new Pose(new Vector3F(-0, 100, -400)),
+        PoseLocal = new Pose(new Vector3(-0, 100, -400)),
       };
       ParticleSystemService.ParticleSystems.Add(_particleCloud0.ParticleSystem);
       _graphicsScreen.Scene.Children.Add(_particleCloud0);
 
       _particleCloud1 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
-        PoseLocal = new Pose(new Vector3F(-200, 100, -200)),
+        PoseLocal = new Pose(new Vector3(-200, 100, -200)),
       };
       ParticleSystemService.ParticleSystems.Add(_particleCloud1.ParticleSystem);
       _graphicsScreen.Scene.Children.Add(_particleCloud1);
 
       _particleCloud2 = new ParticleSystemNode(CreateParticleCloud(AssetManager))
       {
-        PoseLocal = new Pose(new Vector3F(400, 400, -400)),
+        PoseLocal = new Pose(new Vector3(400, 400, -400)),
       };
       ParticleSystemService.ParticleSystems.Add(_particleCloud2.ParticleSystem);
       _graphicsScreen.Scene.Children.Add(_particleCloud2);
@@ -95,16 +94,16 @@ namespace Samples.Graphics
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Lifetime).DefaultValue = float.PositiveInfinity;
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
         Distribution = new SphereDistribution
         {
-          Center = new Vector3F(0),
+          Center = new Vector3(0),
           InnerRadius = 0,
           OuterRadius = 1,
-          Scale = new Vector3F(100, 50, 100),
+          Scale = new Vector3(100, 50, 100),
         },
       });
 
@@ -122,11 +121,11 @@ namespace Samples.Graphics
         Distribution = new UniformDistributionF(100, 200),
       });
 
-      ps.Parameters.AddUniform<Vector3F>(ParticleParameterNames.Color);
-      ps.Effectors.Add(new StartValueEffector<Vector3F>
+      ps.Parameters.AddUniform<Vector3>(ParticleParameterNames.Color);
+      ps.Effectors.Add(new StartValueEffector<Vector3>
       {
         Parameter = ParticleParameterNames.Color,
-        DefaultValue = new Vector3F(0.6f),
+        DefaultValue = new Vector3(0.6f),
       });
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Alpha).DefaultValue = 0.5f;
@@ -174,9 +173,9 @@ namespace Samples.Graphics
 
       // Update color of clouds.
       var cloudColor = (_dynamicSkyObject.AmbientLight + _dynamicSkyObject.SunLight) * 2;
-      _particleCloud0.ParticleSystem.Parameters.Get<Vector3F>(ParticleParameterNames.Color).DefaultValue = cloudColor;
-      _particleCloud1.ParticleSystem.Parameters.Get<Vector3F>(ParticleParameterNames.Color).DefaultValue = cloudColor;
-      _particleCloud2.ParticleSystem.Parameters.Get<Vector3F>(ParticleParameterNames.Color).DefaultValue = cloudColor;
+      _particleCloud0.ParticleSystem.Parameters.Get<Vector3>(ParticleParameterNames.Color).DefaultValue = cloudColor;
+      _particleCloud1.ParticleSystem.Parameters.Get<Vector3>(ParticleParameterNames.Color).DefaultValue = cloudColor;
+      _particleCloud2.ParticleSystem.Parameters.Get<Vector3>(ParticleParameterNames.Color).DefaultValue = cloudColor;
     }
   }
 }

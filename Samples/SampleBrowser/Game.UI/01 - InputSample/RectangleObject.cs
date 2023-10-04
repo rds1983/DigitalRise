@@ -146,7 +146,7 @@ namespace Samples.Game.UI
         Size,
         Size,
         1,
-        new Pose(new Vector3F(_left + Size / 2, _top + Size / 2, depth)),
+        new Pose(new Vector3(_left + Size / 2, _top + Size / 2, depth)),
         _color,
         false,
         false);
@@ -163,7 +163,7 @@ namespace Samples.Game.UI
 
     private void SetRandomColor()
     {
-      _color = new Color((Vector3)RandomHelper.Random.NextVector3F(0, 1));
+      _color = new Color((Vector3)RandomHelper.Random.NextVector3(0, 1));
     }
   }
 }

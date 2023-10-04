@@ -114,7 +114,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </remarks>
     public bool IsNumericallyNormalized
     {
-      get { return Numeric.AreEqual(LengthSquared, 1.0f); }
+      get { return Numeric.AreEqual(LengthSquared(), 1.0f); }
     }
 
 
@@ -132,7 +132,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </remarks>
     public bool IsNumericallyZero
     {
-      get { return Numeric.IsZero(LengthSquared, Numeric.EpsilonFSquared); }
+      get { return Numeric.IsZero(LengthSquared(), Numeric.EpsilonFSquared); }
     }
 
 
@@ -148,7 +148,7 @@ namespace DigitalRise.Mathematics.Algebra
     {
       get
       {
-        return (float) Math.Sqrt(LengthSquared);
+        return (float) Math.Sqrt(LengthSquared());
       }
       set
       {
@@ -160,16 +160,6 @@ namespace DigitalRise.Mathematics.Algebra
         for (int i = 0; i < NumberOfElements; i++)
           _v[i] = _v[i] * scale;
       }
-    }
-
-
-    /// <summary>
-    /// Returns the squared length of this vector.
-    /// </summary>
-    /// <returns>The squared length of this vector.</returns>
-    public float LengthSquared
-    {
-      get { return Dot(this, this); }
     }
 
 
@@ -1259,7 +1249,7 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector3F"/>.
+    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector3"/>.
     /// </summary>
     /// <param name="vector">The vector.</param>
     /// <returns>The result of the conversion.</returns>
@@ -1269,27 +1259,27 @@ namespace DigitalRise.Mathematics.Algebra
     /// <exception cref="InvalidCastException">
     /// This vector has more than 3 elements.
     /// </exception>
-    public static explicit operator Vector3F(VectorF vector)
+    public static explicit operator Vector3(VectorF vector)
     {
       if (vector == null)
         throw new ArgumentNullException("vector");
       if (vector.NumberOfElements != 3)
         throw new InvalidCastException("The number of elements does not match.");
 
-      return new Vector3F(vector[0], vector[1], vector[2]);
+      return new Vector3(vector[0], vector[1], vector[2]);
     }
 
 
     /// <summary>
-    /// Converts this <see cref="VectorF"/> to <see cref="Vector3F"/>.
+    /// Converts this <see cref="VectorF"/> to <see cref="Vector3"/>.
     /// </summary>
     /// <returns>The result of the conversion.</returns>
     /// <exception cref="InvalidCastException">
     /// This vector has more than 3 elements.
     /// </exception>
-    public Vector3F ToVector3F()
+    public Vector3 ToVector3()
     {
-      return (Vector3F) this;
+      return (Vector3) this;
     }
 
 
@@ -1515,7 +1505,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </returns>
     public bool TryNormalize()
     {
-      float lengthSquared = LengthSquared;
+      float lengthSquared = LengthSquared();
       if (Numeric.IsZero(lengthSquared, Numeric.EpsilonFSquared))
         return false;
 
@@ -1545,7 +1535,7 @@ namespace DigitalRise.Mathematics.Algebra
       if (target == null)
         throw new ArgumentNullException("target");
 
-      Set(Dot(this, target) / target.LengthSquared * target);
+      Set(Dot(this, target) / target.LengthSquared() * target);
     }
 
 
@@ -1948,8 +1938,18 @@ namespace DigitalRise.Mathematics.Algebra
       if (target == null)
         throw new ArgumentNullException("target");
 
-      return Dot(vector, target) / target.LengthSquared * target;
+      return Dot(vector, target) / target.LengthSquared() * target;
     }
-    #endregion
-  }
+
+		/// <summary>
+		/// Returns the squared length of this vector.
+		/// </summary>
+		/// <returns>The squared length of this vector.</returns>
+		public float LengthSquared()
+		{
+			return Dot(this, this);
+		}
+
+		#endregion
+	}
 }

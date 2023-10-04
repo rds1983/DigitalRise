@@ -7,7 +7,9 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
+using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -58,8 +60,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         throw new ArgumentException("The contact set must contain a plane and a ray.", "contactSet");
 
       // Get transformations.
-      Vector3F planeScale = planeObject.Scale;
-      Vector3F rayScale = rayObject.Scale;
+      Vector3 planeScale = planeObject.Scale;
+      Vector3 rayScale = rayObject.Scale;
       Pose rayPose = rayObject.Pose;
       Pose planePose = planeObject.Pose;
 
@@ -77,9 +79,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       LineSegment segment = new LineSegment { Start = ray.Origin, End = ray.Origin + ray.Direction * ray.Length };
 
       // Check if ray origin is inside the plane. Otherwise call plane vs. ray query.
-      Vector3F linePoint;
-      Vector3F planePoint = Vector3F.Zero;
-      if (Vector3F.Dot(segment.Start, plane.Normal) <= plane.DistanceFromOrigin)
+      Vector3 linePoint;
+      Vector3 planePoint = Vector3.Zero;
+      if (Vector3.Dot(segment.Start, plane.Normal) <= plane.DistanceFromOrigin)
       {
         // The origin of the ray is below the plane.
         linePoint = segment.Start;
@@ -99,22 +101,22 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       }
 
       // ----- Create contact info.
-      Vector3F position;
+      Vector3 position;
       float penetrationDepth;
       if (contactSet.HaveContact)
       {
         // We have a contact.
         position = planePose.ToWorldPosition(linePoint);
-        penetrationDepth = (linePoint - segment.Start).Length;
+        penetrationDepth = (linePoint - segment.Start).Length();
       }
       else
       {
         // Closest points, but separated.
         position = planePose.ToWorldPosition((planePoint + linePoint) / 2);
-        penetrationDepth = -(linePoint - planePoint).Length;
+        penetrationDepth = -(linePoint - planePoint).Length();
       }
 
-      Vector3F normal = planePose.ToWorldDirection(plane.Normal);
+      Vector3 normal = planePose.ToWorldDirection(plane.Normal);
       if (swapped)
         normal = -normal;
 

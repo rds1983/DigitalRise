@@ -10,7 +10,6 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 
 
 namespace DigitalRise.Graphics.Rendering
@@ -174,19 +173,10 @@ namespace DigitalRise.Graphics.Rendering
       if (graphicsDevice.GraphicsProfile == GraphicsProfile.HiDef)
       {
         // Use custom effect with sRGB reads in pixel shader.
-        try
-        {
-          _effect = graphicsService.GetStockEffect("DigitalRise/SpriteEffect");
-          _transformParameter = _effect.Parameters["Transform"];
-          _techniqueLinear = _effect.Techniques["Sprite"];
-          _techniqueGamma = _effect.Techniques["SpriteWithGamma"];
-        }
-        catch (ContentLoadException)
-        {
-          // If we cannot load the HiDef effect, fall back to Reach. This happens in the Linux
-          // build when it runs in Windows.
-          _effect = null;
-        }
+        _effect = graphicsService.GetStockEffect("DigitalRise/SpriteEffect");
+        _transformParameter = _effect.Parameters["Transform"];
+        _techniqueLinear = _effect.Techniques["Sprite"];
+        _techniqueGamma = _effect.Techniques["SpriteWithGamma"];
       }
     }
 
@@ -303,9 +293,9 @@ namespace DigitalRise.Graphics.Rendering
       // Camera properties
       var cameraNode = context.CameraNode;
       var cameraPose = cameraNode.PoseWorld;
-      Vector3F cameraRight = cameraPose.Orientation.GetColumn(0);    // 1st column vector
-      Vector3F cameraUp = cameraPose.Orientation.GetColumn(1);       // 2nd column vector
-      Vector3F cameraForward = -cameraPose.Orientation.GetColumn(2); // 3rd column vector (negated)
+      Vector3 cameraRight = cameraPose.Orientation.GetColumn(0);    // 1st column vector
+      Vector3 cameraUp = cameraPose.Orientation.GetColumn(1);       // 2nd column vector
+      Vector3 cameraForward = -cameraPose.Orientation.GetColumn(2); // 3rd column vector (negated)
       Matrix44F view = cameraNode.View;
       Matrix44F projection = cameraNode.Camera.Projection;
       bool isOrthographic = (projection.M33 != 0);
@@ -387,8 +377,8 @@ namespace DigitalRise.Graphics.Rendering
 
           // Directional lights are positioned at infinite distance and are not affected
           // by the position of the camera.
-          Vector3F lightDirectionWorld = -node.PoseWorld.Orientation.GetColumn(2);  // 3rd column vector (negated)
-          Vector3F lightDirectionView = cameraPose.ToLocalDirection(lightDirectionWorld);
+          Vector3 lightDirectionWorld = -node.PoseWorld.Orientation.GetColumn(2);  // 3rd column vector (negated)
+          Vector3 lightDirectionView = cameraPose.ToLocalDirection(lightDirectionWorld);
           if (lightDirectionView.Z < 0)
           {
             // Light comes from behind camera.
@@ -397,7 +387,7 @@ namespace DigitalRise.Graphics.Rendering
           }
 
           // Project position to viewport.
-          Vector3F screenPosition = viewport.ProjectToViewport(-lightDirectionView, projection);
+          Vector3 screenPosition = viewport.ProjectToViewport(-lightDirectionView, projection);
 
           // LensFlare.QuerySize is the size relative to viewport.
           querySize = lensFlare.QuerySize * viewport.Height;
@@ -433,9 +423,9 @@ namespace DigitalRise.Graphics.Rendering
           // ----- Local lights
 
           // Determine planar distance to camera.
-          Vector3F position = node.PoseWorld.Position;
-          Vector3F cameraToNode = position - cameraPose.Position;
-          float distance = Vector3F.Dot(cameraToNode, cameraForward);
+          Vector3 position = node.PoseWorld.Position;
+          Vector3 cameraToNode = position - cameraPose.Position;
+          float distance = Vector3.Dot(cameraToNode, cameraForward);
           if (distance < cameraNode.Camera.Projection.Near)
           {
             // Light is behind near plane.
@@ -448,7 +438,7 @@ namespace DigitalRise.Graphics.Rendering
             "Assuming that all scale factors are positive.");
 
           // LensFlare.QuerySize is the size in world space.
-          querySize = node.ScaleWorld.LargestComponent * node.LensFlare.QuerySize;
+          querySize = node.ScaleWorld.LargestComponent() * node.LensFlare.QuerySize;
 
           // Estimate screen space size of query geometry.
           float screenSizeX = viewport.Width * querySize * xScale;
@@ -470,12 +460,12 @@ namespace DigitalRise.Graphics.Rendering
 
           // Draw screen-aligned quad in world space.
           querySize /= 2;
-          Vector3F upVector = querySize * cameraUp;
-          Vector3F rightVector = querySize * cameraRight;
+          Vector3 upVector = querySize * cameraUp;
+          Vector3 rightVector = querySize * cameraRight;
 
           // Offset quad by half its size towards the camera. Otherwise, the geometry 
           // of the light source could obstruct the query geometry.
-          position -= querySize * cameraToNode.Normalized;
+          position -= querySize * cameraToNode.Normalized();
           _queryGeometry[0].Position = (Vector3)(position - rightVector - upVector);
           _queryGeometry[1].Position = (Vector3)(position - rightVector + upVector);
           _queryGeometry[2].Position = (Vector3)(position + rightVector - upVector);
@@ -525,7 +515,7 @@ namespace DigitalRise.Graphics.Rendering
       // Camera properties
       var cameraNode = context.CameraNode;
       var cameraPose = cameraNode.PoseWorld;
-      Vector3F cameraForward = -cameraPose.Orientation.GetColumn(2); // 3rd column vector (negated)
+      Vector3 cameraForward = -cameraPose.Orientation.GetColumn(2); // 3rd column vector (negated)
       Matrix44F view = cameraNode.View;
       Matrix44F projection = cameraNode.Camera.Projection;
 
@@ -604,8 +594,8 @@ namespace DigitalRise.Graphics.Rendering
         if (lensFlare.IsDirectional)
         {
           // ----- Directional lights
-          Vector3F lightDirectionWorld = -node.PoseWorld.Orientation.GetColumn(2);  // 3rd column vector (negated)
-          Vector3F lightDirectionView = cameraPose.ToLocalDirection(lightDirectionWorld);
+          Vector3 lightDirectionWorld = -node.PoseWorld.Orientation.GetColumn(2);  // 3rd column vector (negated)
+          Vector3 lightDirectionView = cameraPose.ToLocalDirection(lightDirectionWorld);
 
           // In Reach profile check light direction for visibility.
           // (In HiDef profile this check is done UpdateOcclusion().)
@@ -615,20 +605,20 @@ namespace DigitalRise.Graphics.Rendering
             continue;
           }
 
-          Vector3F position = viewport.ProjectToViewport(-lightDirectionView, projection);
+          Vector3 position = viewport.ProjectToViewport(-lightDirectionView, projection);
           screenPosition = new Vector2(position.X, position.Y);
         }
         else
         {
           // ----- Local lights
-          Vector3F position = node.PoseWorld.Position;
+          Vector3 position = node.PoseWorld.Position;
 
           // In Reach profile check light direction for visibility.
           // (In HiDef profile this check is done UpdateOcclusion().)
           if (!hiDef)
           {
-            Vector3F cameraToNode = position - cameraPose.Position;
-            float distance = Vector3F.Dot(cameraToNode, cameraForward);
+            Vector3 cameraToNode = position - cameraPose.Position;
+            float distance = Vector3.Dot(cameraToNode, cameraForward);
             if (distance < cameraNode.Camera.Projection.Near)
             {
               // Light is behind near plane.

@@ -13,7 +13,6 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using System.Linq;
@@ -59,7 +58,7 @@ namespace Samples
       // veins (cube map texture) onto the environment.
       _pointLight = new PointLight
       {
-        Color = new Vector3F(1, 1, 1),
+        Color = new Vector3(1, 1, 1),
         DiffuseIntensity = 2,
         SpecularIntensity = 2,
         Range = 1.5f,
@@ -115,7 +114,7 @@ namespace Samples
       var body = _bodyPrototype.Clone();
 
       // Spawn at random position.
-      var randomPosition = new Vector3F(
+      var randomPosition = new Vector3(
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));

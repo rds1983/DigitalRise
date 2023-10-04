@@ -263,7 +263,7 @@ namespace DigitalRise.Graphics.Rendering
         {
           var layer = layers[i] ?? EmptyLayer;
           _parameterTextures[i].SetValue(layer.Texture ?? renderTargets[i]);
-          _parameterMatrices[i].SetValue((Matrix)new Matrix44F(layer.TextureMatrix, Vector3F.Zero));
+          _parameterMatrices[i].SetValue((Matrix)new Matrix44F(layer.TextureMatrix, Vector3.Zero));
           _parameterDensities[i].SetValue(new Vector2(layer.DensityScale, layer.DensityOffset));
         }
         _parameterCoverage.SetValue(cloudMap.Coverage);

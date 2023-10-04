@@ -433,10 +433,10 @@ namespace DigitalRise.Graphics.Rendering
       // Around the camera we push the waves down to avoid that the camera cuts the near plane.
       // Get largest vector from camera to near plane corners.
       float nearPlaneRadius =
-        new Vector3F(Math.Max(Math.Abs(projection.Right), Math.Abs(projection.Left)),
+        new Vector3(Math.Max(Math.Abs(projection.Right), Math.Abs(projection.Left)),
                      Math.Max(Math.Abs(projection.Top), Math.Abs(projection.Bottom)),
                      projection.Near
-                    ).Length;
+                    ).Length();
 
       var originalSourceTexture = context.SourceTexture;
 
@@ -486,8 +486,8 @@ namespace DigitalRise.Graphics.Rendering
 							{
 								// Test water AABB.
 								var aabb = node.Aabb;
-								aabb.Minimum -= new Vector3F(nearPlaneRadius);
-								aabb.Maximum += new Vector3F(nearPlaneRadius);
+								aabb.Minimum -= new Vector3(nearPlaneRadius);
+								aabb.Maximum += new Vector3(nearPlaneRadius);
 								isCameraUnderwater = GeometryHelper.HaveContact(aabb, cameraNode.PoseWorld.Position);
 							}
 						}
@@ -526,7 +526,7 @@ namespace DigitalRise.Graphics.Rendering
 
 				// Query ambient and directional lights.
 				var lightQuery = context.Scene.Query<GlobalLightQuery>(cameraNode, context);
-				Vector3F ambientLight = Vector3F.Zero;
+				Vector3 ambientLight = Vector3.Zero;
 				if (lightQuery.AmbientLights.Count > 0)
 				{
 					var light = (AmbientLight)lightQuery.AmbientLights[0].Light;
@@ -535,8 +535,8 @@ namespace DigitalRise.Graphics.Rendering
 
 				effectData._parameterAmbientLight.SetValue((Vector3)ambientLight);
 
-				Vector3F directionalLightDirection = new Vector3F(0, -1, 0);
-				Vector3F directionalLightIntensity = Vector3F.Zero;
+				Vector3 directionalLightDirection = new Vector3(0, -1, 0);
+				Vector3 directionalLightIntensity = Vector3.Zero;
 				if (lightQuery.DirectionalLights.Count > 0)
 				{
 					var lightNode = lightQuery.DirectionalLights[0];
@@ -602,7 +602,7 @@ namespace DigitalRise.Graphics.Rendering
         {
           data.LastNormalUpdateFrame = frame;
 
-          var baseVelocity = (node.Flow != null) ? node.Flow.BaseVelocity : Vector3F.Zero;
+          var baseVelocity = (node.Flow != null) ? node.Flow.BaseVelocity : Vector3.Zero;
 
           // Increase offset.
           // (Note: We have to subtract value and divide by scale because if the normal
@@ -669,7 +669,7 @@ namespace DigitalRise.Graphics.Rendering
 							// cube map and objects or texts in it are mirrored.)
 							var mirrorZ = Matrix44F.CreateScale(1, 1, -1);
 							Matrix33F orientation = node.SkyboxReflection.PoseWorld.Orientation;
-							effectData._parameterReflectionMatrix.SetValue((Matrix)(new Matrix44F(orientation, Vector3F.Zero) * mirrorZ));
+							effectData._parameterReflectionMatrix.SetValue((Matrix)(new Matrix44F(orientation, Vector3.Zero) * mirrorZ));
 
 							if (effectData._parameterCubeReflectionMap != null)
 								effectData._parameterCubeReflectionMap.SetValue(node.SkyboxReflection.Texture);
@@ -842,7 +842,7 @@ namespace DigitalRise.Graphics.Rendering
 
           // Get world space (x, z) to texture space matrix.
           Aabb aabb = node.Shape.GetAabb();
-          Vector3F extent = aabb.Extent;
+          Vector3 extent = aabb.Extent;
           Matrix44F m = Matrix44F.CreateScale(1 / extent.X, 1, 1 / extent.Z)
                         * Matrix44F.CreateTranslation(-aabb.Minimum.X, 0, -aabb.Minimum.Z)
                         * Matrix44F.CreateScale(1 / node.ScaleLocal.X, 1, 1 / node.ScaleLocal.Z)
@@ -961,7 +961,7 @@ namespace DigitalRise.Graphics.Rendering
 
         // The box is centered on the camera. (Ignore camera orientation in case
         // the camera has a roll.)
-        Vector3F position = cameraNode.PoseWorld.Position;
+        Vector3 position = cameraNode.PoseWorld.Position;
 
         // Top of box must go through water node origin, except when waves are 
         // rendered. (Waves are bent up or down at the near plane.)
@@ -1024,7 +1024,7 @@ namespace DigitalRise.Graphics.Rendering
         }
 
         // Position the quad under the camera and choose a size large enough to cover everything.
-        Vector3F position = cameraNode.PoseWorld.Position;
+        Vector3 position = cameraNode.PoseWorld.Position;
         position.Y = node.PoseWorld.Position.Y;
 
         // Add a bit to make sure that the surface is rendered above the underwater geometry.
@@ -1033,10 +1033,10 @@ namespace DigitalRise.Graphics.Rendering
         position.Y += Numeric.EpsilonF * 10;
 
         float farPlaneRadius =
-          new Vector3F(Math.Max(Math.Abs(projection.Right), Math.Abs(projection.Left)),
+          new Vector3(Math.Max(Math.Abs(projection.Right), Math.Abs(projection.Left)),
                        Math.Max(Math.Abs(projection.Top), Math.Abs(projection.Bottom)),
                        projection.Far
-                      ).Length;
+                      ).Length();
         float size = 2 * farPlaneRadius;
 
         Matrix44F world = Matrix44F.CreateTranslation(position) * Matrix44F.CreateScale(size, 1, size);
@@ -1146,10 +1146,10 @@ namespace DigitalRise.Graphics.Rendering
       // around the visible FOV.
       Pose cameraPose = cameraNode.PoseWorld;
       Matrix33F cameraOrientation = cameraPose.Orientation;
-      Vector3F cameraUp = cameraOrientation.GetColumn(1);
-      Vector3F cameraBack = cameraOrientation.GetColumn(2);
+      Vector3 cameraUp = cameraOrientation.GetColumn(1);
+      Vector3 cameraBack = cameraOrientation.GetColumn(2);
 
-      Vector3F pushedBackCameraPosition = cameraPose.Position + cameraBack * ProjectedGridParameters.Offset;
+      Vector3 pushedBackCameraPosition = cameraPose.Position + cameraBack * ProjectedGridParameters.Offset;
 
       if (_projectedGridNearCorners == null)
         _projectedGridNearCorners = new Vector3[4];
@@ -1157,10 +1157,10 @@ namespace DigitalRise.Graphics.Rendering
       float seaLevel = node.PoseWorld.Position.Y;
 
       // Get view space vectors from camera to near plane.
-      Vector3F rightTopDirection = new Vector3F(projection.Right, projection.Top, -projection.Near);
-      Vector3F leftTopDirection = new Vector3F(projection.Left, projection.Top, -projection.Near);
-      Vector3F leftBottomDirection = new Vector3F(projection.Left, projection.Bottom, -projection.Near);
-      Vector3F rightBottomDirection = new Vector3F(projection.Right, projection.Bottom, -projection.Near);
+      Vector3 rightTopDirection = new Vector3(projection.Right, projection.Top, -projection.Near);
+      Vector3 leftTopDirection = new Vector3(projection.Left, projection.Top, -projection.Near);
+      Vector3 leftBottomDirection = new Vector3(projection.Left, projection.Bottom, -projection.Near);
+      Vector3 rightBottomDirection = new Vector3(projection.Right, projection.Bottom, -projection.Near);
 
       // Transform vectors to world space directions.
       rightTopDirection = cameraPose.ToWorldDirection(rightTopDirection);
@@ -1193,10 +1193,10 @@ namespace DigitalRise.Graphics.Rendering
 
         // Convert near plane corners to world space.
         // Transform vectors to world space directions.
-        Vector3F rightTopPosition = rightTopDirection + pushedBackCameraPosition;
-        Vector3F leftTopPosition = leftTopDirection + pushedBackCameraPosition;
-        Vector3F rightBottomPosition = rightBottomDirection + pushedBackCameraPosition;
-        Vector3F leftBottomPosition = leftBottomDirection + pushedBackCameraPosition;
+        Vector3 rightTopPosition = rightTopDirection + pushedBackCameraPosition;
+        Vector3 leftTopPosition = leftTopDirection + pushedBackCameraPosition;
+        Vector3 rightBottomPosition = rightBottomDirection + pushedBackCameraPosition;
+        Vector3 leftBottomPosition = leftBottomDirection + pushedBackCameraPosition;
 
         // Get min and max y of the corners.
         float minY = Math.Min(rightTopPosition.Y, leftTopPosition.Y);
@@ -1208,8 +1208,8 @@ namespace DigitalRise.Graphics.Rendering
         Debug.Assert(minY < maxY);
 
         // Vertically the projected grid is bound by the horizon plane and the water plane.
-        Plane topPlane = new Plane(Vector3F.UnitY, pushedBackCameraPosition.Y);
-        Plane bottomPlane = new Plane(Vector3F.UnitY, seaLevel);
+        Plane topPlane = new Plane(Vector3.UnitY, pushedBackCameraPosition.Y);
+        Plane bottomPlane = new Plane(Vector3.UnitY, seaLevel);
         if (seaLevel > pushedBackCameraPosition.Y)
         {
           // Camera is under water.
@@ -1230,15 +1230,15 @@ namespace DigitalRise.Graphics.Rendering
         // the camera origin and the left-most and right-most near plane quad corners.
         // These plane are parallel to the camera up axis.
         // (The left vector in this case is orthogonal to world up. It is not the camera left.)
-        Vector3F left = Vector3F.Cross(cameraBack, Vector3F.UnitY);
+        Vector3 left = Vector3.Cross(cameraBack, Vector3.UnitY);
 
         // Get left-most and right-most corner.
-        Vector3F leftMostCorner = rightTopPosition;
-        float leftMostDistance = Vector3F.Dot(left, rightTopDirection);
-        Vector3F rightMostCorner = rightTopPosition;
+        Vector3 leftMostCorner = rightTopPosition;
+        float leftMostDistance = Vector3.Dot(left, rightTopDirection);
+        Vector3 rightMostCorner = rightTopPosition;
         float rightMostDistance = -leftMostDistance;
 
-        float d = Vector3F.Dot(left, leftTopDirection);
+        float d = Vector3.Dot(left, leftTopDirection);
         if (d > leftMostDistance)
         {
           leftMostCorner = leftTopPosition;
@@ -1250,7 +1250,7 @@ namespace DigitalRise.Graphics.Rendering
           rightMostDistance = -d;
         }
 
-        d = Vector3F.Dot(left, rightBottomDirection);
+        d = Vector3.Dot(left, rightBottomDirection);
         if (d > leftMostDistance)
         {
           leftMostCorner = rightBottomPosition;
@@ -1262,7 +1262,7 @@ namespace DigitalRise.Graphics.Rendering
           rightMostDistance = -d;
         }
 
-        d = Vector3F.Dot(left, leftBottomDirection);
+        d = Vector3.Dot(left, leftBottomDirection);
         if (d > leftMostDistance)
         {
           leftMostCorner = leftBottomPosition;
@@ -1277,7 +1277,7 @@ namespace DigitalRise.Graphics.Rendering
         // The projected grid must cover a quad on the near plane. Let's compute a rotated
         // camera with the same near plane (= identical camera forward/backward direction) but
         // an up vector which is parallel to the world up vector.
-        Vector3F rotatedCameraUp = Vector3F.Cross(left, cameraBack).Normalized;
+        Vector3 rotatedCameraUp = Vector3.Cross(left, cameraBack).Normalized();
 
         // The side planes go through the left/right-most points and through the camera origin.
         // They are parallel to the up vector of the rotated camera.
@@ -1342,7 +1342,7 @@ namespace DigitalRise.Graphics.Rendering
 
     // Following code was taken from the FogRenderer and modified.
     // We have to keep this in sync with the FogRenderer.
-    private void SetFogParameters(EffectData effectData, IList<FogNode> fogNodes, CameraNode cameraNode, Vector3F lightDirection)
+    private void SetFogParameters(EffectData effectData, IList<FogNode> fogNodes, CameraNode cameraNode, Vector3 lightDirection)
     {
       FogNode fogNode = null;
       Fog fog = null;

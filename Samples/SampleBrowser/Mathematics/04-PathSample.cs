@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 // Both XNA and DigitalRise also have a type called CurveLoopType. To avoid compiler 
 // errors we need to define which CurveLoopType we want to use.
 using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Mathematics
 {
@@ -29,7 +29,7 @@ namespace Samples.Mathematics
     {
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
-      SetCamera(new Vector3F(0, 2, 5), 0, 0);
+      SetCamera(new Vector3(0, 2, 5), 0, 0);
 
       CreatePath();
     }
@@ -55,7 +55,7 @@ namespace Samples.Mathematics
         var key = new PathKey3F
         {
           Parameter = i,
-          Point = new Vector3F(x, y, z),
+          Point = new Vector3(x, y, z),
           Interpolation = SplineInterpolation.CatmullRom
         };
         _path.Add(key);
@@ -109,7 +109,7 @@ namespace Samples.Mathematics
       // This uses an iterative root finding process to find the path parameter where the
       // path length is 130.
       // Then we can get the path position with 
-      //   Vector3F pathPointAt130Length = _path.GetPoint(parameter).
+      //   Vector3 pathPointAt130Length = _path.GetPoint(parameter).
     }
 
 
@@ -139,9 +139,9 @@ namespace Samples.Mathematics
       // Get path parameter where the path length is equal to traveledDistance.
       var parameter = _path.GetParameterFromLength(traveledDistance, 10, 0.01f);
       // Get path point at the traveledDistance.
-      Vector3F position = _path.GetPoint(parameter);
+      Vector3 position = _path.GetPoint(parameter);
       // Get the path tangent at traveledDistance and use it as the forward direction.
-      Vector3F forward = _path.GetTangent(parameter).Normalized;
+      Vector3 forward = _path.GetTangent(parameter).Normalized();
       // Draw an object on the path.
       DrawObject(position, forward);
 
@@ -151,22 +151,22 @@ namespace Samples.Mathematics
 
     // Draws an arrow like object at the given position and pointing into the given
     // forward direction.
-    private void DrawObject(Vector3F position, Vector3F forward)
+    private void DrawObject(Vector3 position, Vector3 forward)
     {
       // Compute two vectors that are orthogonal to the forward direction.
-      Vector3F right, up;
-      if (Vector3F.AreNumericallyEqual(forward, Vector3F.Up))
+      Vector3 right, up;
+      if (MathHelper.AreNumericallyEqual(forward, Vector3.Up))
       {
         // The forward direction is close to the up vector (0, 1, 0). In this case we 
         // simply set the default directions right (1, 0, 0) and backward (0, 0, 1).
-        right = Vector3F.Right;
-        up = Vector3F.Backward;
+        right = Vector3.Right;
+        up = Vector3.Backward;
       }
       else
       {
         // Use the cross product calculate the orthogonal directions.
-        right = Vector3F.Cross(forward, Vector3F.Up).Normalized;
-        up = Vector3F.Cross(right, forward);
+        right = Vector3.Cross(forward, Vector3.Up).Normalized();
+        up = Vector3.Cross(right, forward);
       }
 
       // Length of the object.
@@ -174,7 +174,7 @@ namespace Samples.Mathematics
       // Width of the object.
       const float width = 0.1f;
       // Position of the tip of the object.
-      Vector3F cusp = position + forward * length / 2;
+      Vector3 cusp = position + forward * length / 2;
 
       // We draw the object with 4 lines.
       var debugRenderer = GraphicsScreen.DebugRenderer;

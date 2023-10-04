@@ -138,7 +138,7 @@ namespace DigitalRise.Graphics.Rendering
       // Camera properties
       var cameraNode = context.CameraNode;
       Pose cameraPose = cameraNode.PoseWorld;
-      Matrix view = (Matrix)new Matrix44F(cameraPose.Orientation.Transposed, new Vector3F(0));
+      Matrix view = (Matrix)new Matrix44F(cameraPose.Orientation.Transposed, new Vector3(0));
       Matrix projection = cameraNode.Camera.Projection;
       _effectParameterViewProjection.SetValue(view * projection);
 
@@ -157,10 +157,10 @@ namespace DigitalRise.Graphics.Rendering
 
         // Get billboard axes from scene node pose.
         Matrix33F orientation = node.PoseWorld.Orientation;
-        Vector3F right = orientation.GetColumn(0);
-        Vector3F up = orientation.GetColumn(1);
-        Vector3F normal = orientation.GetColumn(2);
-        Vector3F forward = -normal;
+        Vector3 right = orientation.GetColumn(0);
+        Vector3 up = orientation.GetColumn(1);
+        Vector3 normal = orientation.GetColumn(2);
+        Vector3 forward = -normal;
 
         _effectParameterNormal.SetValue((Vector3)(normal));
 
@@ -211,15 +211,15 @@ namespace DigitalRise.Graphics.Rendering
         }
 
         // ----- Render glows.
-        if (node.GlowColor0.LengthSquared > 0 || node.GlowColor1.LengthSquared > 0)
+        if (node.GlowColor0.LengthSquared() > 0 || node.GlowColor1.LengthSquared() > 0)
         {
           _effectParameterGlow0.SetValue(new Vector4((Vector3)node.GlowColor0, node.GlowExponent0));
           _effectParameterGlow1.SetValue(new Vector4((Vector3)node.GlowColor1, node.GlowExponent1));
 
-          float halfWidth0 = (float)Math.Tan(Math.Acos(Math.Pow(node.GlowCutoffThreshold / node.GlowColor0.LargestComponent, 1 / node.GlowExponent0)));
+          float halfWidth0 = (float)Math.Tan(Math.Acos(Math.Pow(node.GlowCutoffThreshold / node.GlowColor0.LargestComponent(), 1 / node.GlowExponent0)));
           if (!Numeric.IsPositiveFinite(halfWidth0))
             halfWidth0 = 0;
-          float halfWidth1 = (float)Math.Tan(Math.Acos(Math.Pow(node.GlowCutoffThreshold / node.GlowColor1.LargestComponent, 1 / node.GlowExponent1)));
+          float halfWidth1 = (float)Math.Tan(Math.Acos(Math.Pow(node.GlowCutoffThreshold / node.GlowColor1.LargestComponent(), 1 / node.GlowExponent1)));
           if (!Numeric.IsPositiveFinite(halfWidth1))
             halfWidth1 = 0;
           float halfWidth = Math.Max(halfWidth0, halfWidth1);

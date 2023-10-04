@@ -1,9 +1,8 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -21,7 +20,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -35,7 +34,7 @@ namespace Samples.Physics
 
       // Optional: Use a small overlap between boxes to improve the stability.
       float overlap = Simulation.Settings.Constraints.AllowedPenetration * 0.5f;
-      Vector3F position = new Vector3F(0, boxSize / 2 - overlap, 0);
+      Vector3 position = new Vector3(0, boxSize / 2 - overlap, 0);
       for (int i = 0; i < numberOfBoxes; i++)
       {
         RigidBody box = new RigidBody(boxShape)

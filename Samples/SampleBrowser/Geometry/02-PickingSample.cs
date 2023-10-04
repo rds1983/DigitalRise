@@ -43,7 +43,7 @@ pick object using the mouse cursor.",
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
       GraphicsScreen.DrawReticle = true;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // ----- Initialize collision detection system.
       // We use one collision domain that manages all objects.
@@ -71,15 +71,15 @@ pick object using the mouse cursor.",
       _box = new CollisionObject(
         new GeometricObject(
           new BoxShape(1, 2, 3),
-          new Pose(new Vector3F(0, 0, 0), RandomHelper.Random.NextQuaternionF())));
+          new Pose(new Vector3(0, 0, 0), RandomHelper.Random.NextQuaternionF())));
 
       // Create a collision object with a sphere shape at position (-5, 0, 0).
-      _sphere = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3F(-5, 0, 0))));
+      _sphere = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(-5, 0, 0))));
 
       // Create a random list of points.
-      var points = new List<Vector3F>();
+      var points = new List<Vector3>();
       for (int i = 0; i < 100; i++)
-        points.Add(RandomHelper.Random.NextVector3F(-1.5f, 1.5f));
+        points.Add(RandomHelper.Random.NextVector3(-1.5f, 1.5f));
 
       // Create a triangle mesh of the convex hull.
       // (See also the ConvexHullSample for info on convex hull creation.)
@@ -108,7 +108,7 @@ pick object using the mouse cursor.",
 
 
       // Create a collision object with the random triangle mesh shape.
-      _mesh = new CollisionObject(new GeometricObject(meshShape, new Pose(new Vector3F(5, 0, 0))));
+      _mesh = new CollisionObject(new GeometricObject(meshShape, new Pose(new Vector3(5, 0, 0))));
 
       // Add collision object to collision domain.
       _domain.CollisionObjects.Add(_box);
@@ -121,7 +121,7 @@ pick object using the mouse cursor.",
       // an infinite length. However, in the collision detection we use rays with
       // a finite length. This increases the performance and improves the numerical
       // stability of the algorithms.)
-      RayShape rayShape = new RayShape(Vector3F.Zero, Vector3F.Forward, 1000);
+      RayShape rayShape = new RayShape(Vector3.Zero, Vector3.Forward, 1000);
       _ray = new CollisionObject(new GeometricObject(rayShape, Pose.Identity));
 
       // The ray is just one additional collision object in our collision domain.
@@ -166,8 +166,8 @@ pick object using the mouse cursor.",
         // orientation rotates the ray from shooting into +x direction into a ray
         // shooting in viewing direction (rayEnd - rayStart).
         ((GeometricObject)_ray.GeometricObject).Pose = new Pose(
-          (Vector3F)rayStart,
-          QuaternionF.CreateRotation(Vector3F.Forward, (Vector3F)(rayEnd - rayStart)));
+          (Vector3)rayStart,
+          QuaternionF.CreateRotation(Vector3.Forward, (Vector3)(rayEnd - rayStart)));
       }
       else
       {

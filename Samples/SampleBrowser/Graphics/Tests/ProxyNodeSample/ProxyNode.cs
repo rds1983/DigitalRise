@@ -3,8 +3,8 @@ using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace Samples.Graphics
 {
@@ -103,7 +103,7 @@ namespace Samples.Graphics
         SetProxy(_node, null);
         _node.SceneChanged -= OnNodeSceneChanged;
         _node.PoseLocal = Pose.Identity;
-        _node.ScaleLocal = Vector3F.One;
+        _node.ScaleLocal = Vector3.One;
       }
 
       _node = node;
@@ -212,7 +212,7 @@ namespace Samples.Graphics
       Aabb? aabb = _node.GetSubtreeAabb();
       if (aabb.HasValue)
       {
-        Vector3F extent = aabb.Value.Extent;
+        Vector3 extent = aabb.Value.Extent;
         if (float.IsInfinity(extent.X) || float.IsInfinity(extent.Y) || float.IsInfinity(extent.Z))
         {
           // The extent of the subtree is infinite in one or more dimensions.
@@ -261,7 +261,7 @@ namespace Samples.Graphics
       // Make box the size of the AABB.
       boxShape.Extent = aabb.Extent;
 
-      if (aabb.Center.IsNumericallyZero)
+      if (aabb.Center.IsNumericallyZero())
       {
         // Bounding box is centered at origin.
         return boxShape;

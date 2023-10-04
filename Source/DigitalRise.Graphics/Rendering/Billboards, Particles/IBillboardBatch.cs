@@ -11,14 +11,14 @@ namespace DigitalRise.Graphics.Rendering
   // Data required by DrawBillboard()
   internal struct BillboardArgs
   {
-    public Vector3F Position;
-    public Vector3F Normal;
-    public Vector3F Axis;
+    public Vector3 Position;
+    public Vector3 Normal;
+    public Vector3 Axis;
     public BillboardOrientation Orientation;
     public float Angle;
     public Vector2 Size;
     public float Softness;
-    public Vector3F Color;
+    public Vector3 Color;
     public float Alpha;
     public float ReferenceAlpha;
     public float AnimationTime;
@@ -29,11 +29,11 @@ namespace DigitalRise.Graphics.Rendering
   // Data required by DrawRibbon()
   internal struct RibbonArgs
   {
-    public Vector3F Position;
-    public Vector3F Axis;
+    public Vector3 Position;
+    public Vector3 Axis;
     public float Size;
     public float Softness;
-    public Vector3F Color;
+    public Vector3 Color;
     public float Alpha;
     public float AnimationTime;
     public float ReferenceAlpha;

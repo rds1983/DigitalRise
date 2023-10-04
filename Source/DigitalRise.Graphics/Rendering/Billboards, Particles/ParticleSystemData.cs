@@ -58,14 +58,14 @@ namespace DigitalRise.Graphics.Rendering
 
     // Uniform or varying particle parameters:
     public IParticleParameter<float> NormalizedAgeParameter;
-    public IParticleParameter<Vector3F> PositionParameter;
-    public IParticleParameter<Vector3F> NormalParameter;
-    public IParticleParameter<Vector3F> AxisParameter;
+    public IParticleParameter<Vector3> PositionParameter;
+    public IParticleParameter<Vector3> NormalParameter;
+    public IParticleParameter<Vector3> AxisParameter;
     public IParticleParameter<float> SizeParameter;
     public IParticleParameter<float> SizeXParameter;
     public IParticleParameter<float> SizeYParameter;
     public IParticleParameter<float> AngleParameter;
-    public IParticleParameter<Vector3F> ColorParameter;
+    public IParticleParameter<Vector3> ColorParameter;
     public IParticleParameter<float> AlphaParameter;
     public IParticleParameter<float> AnimationTimeParameter;
     public IParticleParameter<float> BlendModeParameter;
@@ -141,14 +141,14 @@ namespace DigitalRise.Graphics.Rendering
 
       // Uniform or varying particle parameters.
       NormalizedAgeParameter = parameters.Get<float>(ParticleParameterNames.NormalizedAge);
-      PositionParameter = parameters.Get<Vector3F>(ParticleParameterNames.Position);
-      NormalParameter = parameters.Get<Vector3F>(ParticleParameterNames.Normal);
-      AxisParameter = parameters.Get<Vector3F>(ParticleParameterNames.Axis);
+      PositionParameter = parameters.Get<Vector3>(ParticleParameterNames.Position);
+      NormalParameter = parameters.Get<Vector3>(ParticleParameterNames.Normal);
+      AxisParameter = parameters.Get<Vector3>(ParticleParameterNames.Axis);
       SizeParameter = parameters.Get<float>(ParticleParameterNames.Size);
       SizeXParameter = parameters.Get<float>(ParticleParameterNames.SizeX);
       SizeYParameter = parameters.Get<float>(ParticleParameterNames.SizeY);
       AngleParameter = parameters.Get<float>(ParticleParameterNames.Angle);
-      ColorParameter = parameters.Get<Vector3F>(ParticleParameterNames.Color);
+      ColorParameter = parameters.Get<Vector3>(ParticleParameterNames.Color);
       AlphaParameter = parameters.Get<float>(ParticleParameterNames.Alpha);
       AnimationTimeParameter = parameters.Get<float>(ParticleParameterNames.AnimationTime);
       BlendModeParameter = parameters.Get<float>(ParticleParameterNames.BlendMode);
@@ -283,12 +283,12 @@ namespace DigitalRise.Graphics.Rendering
       // Initialize particles with default values.
       var defaultParticle = new Particle
       {
-        Position = (PositionParameter != null) ? PositionParameter.DefaultValue : new Vector3F(),
-        Normal = (NormalParameter != null) ? NormalParameter.DefaultValue : Vector3F.UnitZ,
-        Axis = (AxisParameter != null) ? AxisParameter.DefaultValue : Vector3F.Up,
+        Position = (PositionParameter != null) ? PositionParameter.DefaultValue : new Vector3(),
+        Normal = (NormalParameter != null) ? NormalParameter.DefaultValue : Vector3.UnitZ,
+        Axis = (AxisParameter != null) ? AxisParameter.DefaultValue : Vector3.Up,
         Size = size,
         Angle = (AngleParameter != null) ? AngleParameter.DefaultValue : 0.0f,
-        Color = (ColorParameter != null) ? ColorParameter.DefaultValue : Vector3F.One,
+        Color = (ColorParameter != null) ? ColorParameter.DefaultValue : Vector3.One,
         Alpha = (AlphaParameter != null) ? AlphaParameter.DefaultValue : 1.0f,
         BlendMode = (BlendModeParameter != null) ? BlendModeParameter.DefaultValue : 1.0f,
 

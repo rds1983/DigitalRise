@@ -188,8 +188,8 @@ namespace Samples.Graphics
           var instances = new InstanceData[_numberOfInstancesPerCell];
           for (int i = 0; i < instances.Length; i++)
           {
-            Vector3F scale = new Vector3F(random.NextFloat(0.5f, 1.5f));
-            Pose pose = new Pose(new Vector3F(xOrigin + x * _cellSize + random.NextFloat(0, _cellSize),
+            Vector3 scale = new Vector3(random.NextFloat(0.5f, 1.5f));
+            Pose pose = new Pose(new Vector3(xOrigin + x * _cellSize + random.NextFloat(0, _cellSize),
                                               0,
                                               zOrigin + z * _cellSize + random.NextFloat(0, _cellSize)),
                                  Matrix33F.CreateRotationY(random.NextFloat(0, 10)));
@@ -200,7 +200,7 @@ namespace Samples.Graphics
 
           _nodes[x, z] = new MeshInstancingNode<InstanceData>(_mesh, instances)
           {
-            PoseLocal = new Pose(new Vector3F(xOrigin + (0.5f + x) * _cellSize, 
+            PoseLocal = new Pose(new Vector3(xOrigin + (0.5f + x) * _cellSize, 
                                               boxShape.WidthY / 2, 
                                               zOrigin + (0.5f + z) * _cellSize)),
             Shape = boxShape,
@@ -264,8 +264,8 @@ namespace Samples.Graphics
       // Create an AABB with the camera position and add the MaxDistance.
       var cameraPosition = _cameraObject.CameraNode.PoseWorld.Position;
       var cameraAabb = new Aabb(cameraPosition, cameraPosition);
-      cameraAabb.Minimum -= new Vector3F(MaxDistance);
-      cameraAabb.Maximum += new Vector3F(MaxDistance);
+      cameraAabb.Minimum -= new Vector3(MaxDistance);
+      cameraAabb.Maximum += new Vector3(MaxDistance);
 
       // Add all scene nodes which are within the MaxDistance to the scene.
       // Remove the other scene nodes.

@@ -16,7 +16,8 @@
 using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics
 {
@@ -46,14 +47,14 @@ namespace DigitalRise.Graphics
     /// The Cartesian coordinate system is right handed; y points east; z points up.
     /// In other words: Latitude and longitude are relative to +x; z increases with latitude. 
     /// </remarks>
-    private static Vector3F ToCartesian(float radius, float latitude, float longitude)
+    private static Vector3 ToCartesian(float radius, float latitude, float longitude)
     {
       float sinLat = MathF.Sin(latitude);
       float cosLat = MathF.Cos(latitude);
       float sinLong = MathF.Sin(longitude);
       float cosLong = MathF.Cos(longitude);
 
-      Vector3F v;
+      Vector3 v;
       v.X = radius * cosLong * cosLat;
       v.Y = radius * sinLong * cosLat;  // East
       v.Z = radius * sinLat;            // Up

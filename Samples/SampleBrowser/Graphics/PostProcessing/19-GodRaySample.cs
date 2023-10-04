@@ -28,7 +28,7 @@ namespace Samples.Graphics
       // The god ray filter light direction should match the direction of the sun light,
       // which was added by the StaticSkyObject.
       var lightNode = GraphicsScreen.Scene.GetSceneNode("Sunlight");
-      _godRayFilter.LightDirection = lightNode.PoseWorld.ToWorldDirection(Vector3F.Forward);
+      _godRayFilter.LightDirection = lightNode.PoseWorld.ToWorldDirection(Vector3.Forward);
     }
 
 

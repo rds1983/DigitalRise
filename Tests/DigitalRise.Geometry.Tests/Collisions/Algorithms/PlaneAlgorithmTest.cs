@@ -1,7 +1,7 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -37,11 +37,11 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject a = new CollisionObject(new GeometricObject
                   {
                     Shape = new BoxShape(1, 2, 3),
-                    Pose = new Pose(new Vector3F(0, -1, 0)),
+                    Pose = new Pose(new Vector3(0, -1, 0)),
                   });
       CollisionObject b = new CollisionObject(new GeometricObject
                   {
-                    Shape = new PlaneShape(new Vector3F(0, 1, 0), 0),
+                    Shape = new PlaneShape(new Vector3(0, 1, 0), 0),
                   });
 
       Assert.AreEqual(true, algo.HaveContact(a, b));
@@ -64,24 +64,24 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject a = new CollisionObject(new GeometricObject
       {
         Shape = new BoxShape(1, 2, 3),
-        Pose = new Pose(new Vector3F(0, 2, 0)),
+        Pose = new Pose(new Vector3(0, 2, 0)),
       });
       CollisionObject b = new CollisionObject(new GeometricObject
       {
-        Shape = new PlaneShape(new Vector3F(0, 1, 0), 0),
+        Shape = new PlaneShape(new Vector3(0, 1, 0), 0),
       });
 
       Assert.AreEqual(false, algo.HaveContact(a, b));      
       Assert.AreEqual(1,algo.GetClosestPoints(a, b).Count);
-      Assert.AreEqual(new Vector3F(0, -1, 0), algo.GetClosestPoints(a, b)[0].Normal);
-      Assert.AreEqual(new Vector3F(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(a, b)[0].Position);
+      Assert.AreEqual(new Vector3(0, -1, 0), algo.GetClosestPoints(a, b)[0].Normal);
+      Assert.AreEqual(new Vector3(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(a, b)[0].Position);
       Assert.IsTrue(Numeric.AreEqual(-1, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
 
       // Test swapped.
       Assert.AreEqual(false, algo.HaveContact(b, a));
       Assert.AreEqual(1, algo.GetClosestPoints(b, a).Count);
-      Assert.AreEqual(new Vector3F(0, 1, 0), algo.GetClosestPoints(b, a)[0].Normal);
-      Assert.AreEqual(new Vector3F(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(b, a)[0].Position);
+      Assert.AreEqual(new Vector3(0, 1, 0), algo.GetClosestPoints(b, a)[0].Normal);
+      Assert.AreEqual(new Vector3(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(b, a)[0].Position);
       Assert.IsTrue(Numeric.AreEqual(-1, algo.GetClosestPoints(b, a)[0].PenetrationDepth));
 
       Assert.AreEqual(0, algo.GetContacts(a, b).Count);

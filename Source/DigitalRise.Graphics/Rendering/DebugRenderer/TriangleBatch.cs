@@ -96,8 +96,8 @@ namespace DigitalRise.Graphics.Rendering
     /// <remarks>
     /// Triangles have to use clockwise winding for front sides.
     /// </remarks>
-    public void Add(Vector3F vertex0, Vector3F normal0, Vector3F vertex1, Vector3F normal1, 
-                    Vector3F vertex2, Vector3F normal2, Color color)
+    public void Add(Vector3 vertex0, Vector3 normal0, Vector3 vertex1, Vector3 normal1, 
+                    Vector3 vertex2, Vector3 normal2, Color color)
     {
       // Premultiply color with alpha.
       color = Color.FromNonPremultiplied(color.R, color.G, color.B, color.A);
@@ -129,8 +129,8 @@ namespace DigitalRise.Graphics.Rendering
     /// <remarks>
     /// Triangles have to use clockwise winding for front sides.
     /// </remarks>
-    public void Add(Vector3F vertex0, Vector3F vertex1, Vector3F vertex2,
-                    Vector3F normal, Color color)
+    public void Add(Vector3 vertex0, Vector3 vertex1, Vector3 vertex2,
+                    Vector3 normal, Color color)
     {
       // Premultiply color with alpha.
       color = Color.FromNonPremultiplied(color.R, color.G, color.B, color.A);
@@ -162,8 +162,8 @@ namespace DigitalRise.Graphics.Rendering
     /// <remarks>
     /// Triangles have to use clockwise winding for front sides.
     /// </remarks>
-    public void Add(ref Vector3F vertex0, ref Vector3F vertex1, ref Vector3F vertex2, 
-                    ref Vector3F normal, ref Color color)
+    public void Add(ref Vector3 vertex0, ref Vector3 vertex1, ref Vector3 vertex2, 
+                    ref Vector3 normal, ref Color color)
     {
       // Premultiply color with alpha.
       var colorPremultiplied = Color.FromNonPremultiplied(color.R, color.G, color.B, color.A);

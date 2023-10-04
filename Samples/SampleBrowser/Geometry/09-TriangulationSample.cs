@@ -34,7 +34,7 @@ namespace Samples.Geometry
       {
         // Add vertex. 
         Vector2 position = InputService.MousePosition;
-        _mesh.Vertices.Add(new Vector3F(position.X, position.Y, 0));
+        _mesh.Vertices.Add(new Vector3(position.X, position.Y, 0));
 
         // Use GeometryHelper to compute indices of triangulated polygon.
         _mesh.Indices.Clear();
@@ -53,10 +53,10 @@ namespace Samples.Geometry
         if (numberOfTriangles > 0)
         {
           // Draw fill triangles.
-          debugRenderer.DrawTriangles(_mesh, Pose.Identity, Vector3F.One, new Color(1.0f, 0.0f, 0.0f, 0.25f), false, false);
+          debugRenderer.DrawTriangles(_mesh, Pose.Identity, Vector3.One, new Color(1.0f, 0.0f, 0.0f, 0.25f), false, false);
 
           // Draw wireframe.
-          debugRenderer.DrawTriangles(_mesh, Pose.Identity, Vector3F.One, new Color(1.0f, 0.0f, 0.0f, 1.0f), true, false);
+          debugRenderer.DrawTriangles(_mesh, Pose.Identity, Vector3.One, new Color(1.0f, 0.0f, 0.0f, 1.0f), true, false);
         }
       }
     }

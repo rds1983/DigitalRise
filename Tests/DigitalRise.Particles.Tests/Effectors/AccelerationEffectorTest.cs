@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles.Effectors;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -63,9 +62,9 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Uninitialize()
     {
       var ps = new ParticleSystem();
-      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Direction));
+      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction));
       var wp1 = new WeakReference(ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed));
-      var wp2 = new WeakReference(ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.LinearAcceleration));
+      var wp2 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.LinearAcceleration));
 
       var e = new LinearAccelerationEffector { ParticleSystem = ps };
 
@@ -87,9 +86,9 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void WrongParameters()
     {
       var ps = new ParticleSystem();
-      ps.Parameters.AddUniform<Vector3F>("D");
+      ps.Parameters.AddUniform<Vector3>("D");
       ps.Parameters.AddUniform<float>("L");
-      ps.Parameters.AddUniform<Vector3F>("A");
+      ps.Parameters.AddUniform<Vector3>("A");
 
       var e = new LinearAccelerationEffector { ParticleSystem = ps };
 
@@ -110,13 +109,13 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Test0()
     {
       var ps = new ParticleSystem();
-      var direction = ps.Parameters.AddUniform<Vector3F>("D");
+      var direction = ps.Parameters.AddUniform<Vector3>("D");
       var speed = ps.Parameters.AddUniform<float>("L");
-      var acceleration = ps.Parameters.AddUniform<Vector3F>("A");
+      var acceleration = ps.Parameters.AddUniform<Vector3>("A");
 
-      direction.DefaultValue = new Vector3F(0, 1 , 0);
+      direction.DefaultValue = new Vector3(0, 1 , 0);
       speed.DefaultValue = 1;
-      acceleration.DefaultValue = new Vector3F(0, -1, 0);
+      acceleration.DefaultValue = new Vector3(0, -1, 0);
 
       var e = new LinearAccelerationEffector
       {
@@ -134,14 +133,14 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
       
-      Assert.AreEqual(new Vector3F(0, 1, 0), direction.DefaultValue);
+      Assert.AreEqual(new Vector3(0, 1, 0), direction.DefaultValue);
       Assert.AreEqual(0, speed.DefaultValue);
 
       e.BeginUpdate(dt);
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.AreEqual(new Vector3F(0, -1, 0), direction.DefaultValue);
+      Assert.AreEqual(new Vector3(0, -1, 0), direction.DefaultValue);
       Assert.AreEqual(1, speed.DefaultValue);
     }
 
@@ -150,13 +149,13 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Test1()
     {
       var ps = new ParticleSystem();
-      var direction = ps.Parameters.AddVarying<Vector3F>("D");
+      var direction = ps.Parameters.AddVarying<Vector3>("D");
       var speed = ps.Parameters.AddVarying<float>("L");
-      var acceleration = ps.Parameters.AddUniform<Vector3F>("A");
+      var acceleration = ps.Parameters.AddUniform<Vector3>("A");
 
-      direction.Values[11] = new Vector3F(0, 1, 0);
+      direction.Values[11] = new Vector3(0, 1, 0);
       speed.Values[11] = 1;
-      acceleration.DefaultValue = new Vector3F(0, -1, 0);
+      acceleration.DefaultValue = new Vector3(0, -1, 0);
 
       var e = new LinearAccelerationEffector
       {
@@ -174,14 +173,14 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.AreEqual(new Vector3F(0, 1, 0), direction.Values[11]);
+      Assert.AreEqual(new Vector3(0, 1, 0), direction.Values[11]);
       Assert.AreEqual(0, speed.Values[11]);
 
       e.BeginUpdate(dt);
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.AreEqual(new Vector3F(0, -1, 0), direction.Values[11]);
+      Assert.AreEqual(new Vector3(0, -1, 0), direction.Values[11]);
       Assert.AreEqual(1, speed.Values[11]);
     }
 
@@ -190,13 +189,13 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Test2()
     {
       var ps = new ParticleSystem();
-      var direction = ps.Parameters.AddVarying<Vector3F>("D");
+      var direction = ps.Parameters.AddVarying<Vector3>("D");
       var speed = ps.Parameters.AddVarying<float>("L");
-      var acceleration = ps.Parameters.AddVarying<Vector3F>("A");
+      var acceleration = ps.Parameters.AddVarying<Vector3>("A");
 
-      direction.Values[11] = new Vector3F(0, 1, 0);
+      direction.Values[11] = new Vector3(0, 1, 0);
       speed.Values[11] = 1;
-      acceleration.Values[11] = new Vector3F(0, -1, 0);
+      acceleration.Values[11] = new Vector3(0, -1, 0);
 
       var e = new LinearAccelerationEffector
       {
@@ -214,14 +213,14 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.AreEqual(new Vector3F(0, 1, 0), direction.Values[11]);
+      Assert.AreEqual(new Vector3(0, 1, 0), direction.Values[11]);
       Assert.AreEqual(0, speed.Values[11]);
 
       e.BeginUpdate(dt);
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.AreEqual(new Vector3F(0, -1, 0), direction.Values[11]);
+      Assert.AreEqual(new Vector3(0, -1, 0), direction.Values[11]);
       Assert.AreEqual(1, speed.Values[11]);
     }
 
@@ -230,13 +229,13 @@ namespace DigitalRise.Particles.Tests.Effectors
     public void Test3()
     {
       var ps = new ParticleSystem();
-      var direction = ps.Parameters.AddVarying<Vector3F>("D");
+      var direction = ps.Parameters.AddVarying<Vector3>("D");
       var speed = ps.Parameters.AddUniform<float>("L");
-      var acceleration = ps.Parameters.AddVarying<Vector3F>("A");
+      var acceleration = ps.Parameters.AddVarying<Vector3>("A");
 
-      direction.Values[11] = new Vector3F(0, 1, 0);
+      direction.Values[11] = new Vector3(0, 1, 0);
       speed.DefaultValue = 1;
-      acceleration.DefaultValue = new Vector3F(0, -1, 0);
+      acceleration.DefaultValue = new Vector3(0, -1, 0);
 
       var e = new LinearAccelerationEffector
       {
@@ -254,14 +253,14 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      //Assert.AreEqual(new Vector3F(0, 1, 0), direction.Values[11]);
+      //Assert.AreEqual(new Vector3(0, 1, 0), direction.Values[11]);
       //Assert.AreEqual(0, speed.DefaultValue);
 
       e.BeginUpdate(dt);
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      //Assert.AreEqual(new Vector3F(0, -1, 0), direction.Values[11]);
+      //Assert.AreEqual(new Vector3(0, -1, 0), direction.Values[11]);
       //Assert.AreEqual(1, speed.DefaultValue);
     }
   }

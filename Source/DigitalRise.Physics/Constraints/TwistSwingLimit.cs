@@ -125,7 +125,7 @@ namespace DigitalRise.Physics.Constraints
     /// <exception cref="ArgumentOutOfRangeException">
     /// A minimum swing limit is positive.
     /// </exception>
-    public Vector3F Minimum
+    public Vector3 Minimum
     {
       get { return _minimum; }
       set
@@ -140,7 +140,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _minimum = new Vector3F(0, -ConstantsF.PiOver4, -ConstantsF.PiOver4);
+    private Vector3 _minimum = new Vector3(0, -ConstantsF.PiOver4, -ConstantsF.PiOver4);
 
 
     /// <summary>
@@ -159,7 +159,7 @@ namespace DigitalRise.Physics.Constraints
     /// <exception cref="ArgumentOutOfRangeException">
     /// A maximum swing limit is negative.
     /// </exception>
-    public Vector3F Maximum
+    public Vector3 Maximum
     {
       get { return _maximum; }
       set
@@ -174,7 +174,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private Vector3F _maximum = new Vector3F(0, ConstantsF.PiOver4, ConstantsF.PiOver4);
+    private Vector3 _maximum = new Vector3(0, ConstantsF.PiOver4, ConstantsF.PiOver4);
 
 
     /// <summary>
@@ -279,17 +279,17 @@ namespace DigitalRise.Physics.Constraints
 
 
     /// <inheritdoc/>
-    public override Vector3F LinearConstraintImpulse
+    public override Vector3 LinearConstraintImpulse
     {
       get
       {
-        return Vector3F.Zero;
+        return Vector3.Zero;
       }
     }
 
 
     /// <inheritdoc/>
-    public override Vector3F AngularConstraintImpulse
+    public override Vector3 AngularConstraintImpulse
     {
       get
       {
@@ -299,7 +299,7 @@ namespace DigitalRise.Physics.Constraints
     }
 
 
-    //public Vector3F RelativePosition
+    //public Vector3 RelativePosition
     //{
     //  get
     //  {
@@ -316,7 +316,7 @@ namespace DigitalRise.Physics.Constraints
     //    Matrix33F relativeOrientation = anchorOrientationA.Transposed * anchorOrientationB;
 
     //    // The Euler angles.
-    //    Vector3F angles = GetAngles(relativeOrientation);
+    //    Vector3 angles = GetAngles(relativeOrientation);
 
     //    return angles;
     //  }
@@ -348,12 +348,12 @@ namespace DigitalRise.Physics.Constraints
       QuaternionF total = QuaternionF.CreateRotation(anchorOrientationB * anchorOrientationA.Transposed);
 
       // Compute swing axis and angle.
-      Vector3F xAxisA = anchorOrientationA.GetColumn(0);
-      Vector3F yAxisA = anchorOrientationA.GetColumn(1);
-      Vector3F xAxisB = anchorOrientationB.GetColumn(0);
+      Vector3 xAxisA = anchorOrientationA.GetColumn(0);
+      Vector3 yAxisA = anchorOrientationA.GetColumn(1);
+      Vector3 xAxisB = anchorOrientationB.GetColumn(0);
       QuaternionF swing = QuaternionF.CreateRotation(xAxisA, xAxisB);
 
-      Vector3F swingAxis = new Vector3F(swing.X, swing.Y, swing.Z);
+      Vector3 swingAxis = new Vector3(swing.X, swing.Y, swing.Z);
       if (!swingAxis.TryNormalize())
         swingAxis = yAxisA;
 
@@ -361,11 +361,11 @@ namespace DigitalRise.Physics.Constraints
 
       Debug.Assert(
         0 <= swingAngle && swingAngle <= ConstantsF.Pi,
-        "QuaternionF.CreateRotation(Vector3F, Vector3F) should only create rotations along the \"short arc\".");
+        "QuaternionF.CreateRotation(Vector3, Vector3) should only create rotations along the \"short arc\".");
 
       // The swing limits create a deformed cone. If we look onto the x-axis of A:
       // y-axis goes to the right. z-axis goes up. 
-      Vector3F xAxisBInAnchorA = Matrix33F.MultiplyTransposed(anchorOrientationA, xAxisB);
+      Vector3 xAxisBInAnchorA = Matrix33F.MultiplyTransposed(anchorOrientationA, xAxisB);
       float directionY = xAxisBInAnchorA.Y;
       float directionZ = xAxisBInAnchorA.Z;
 
@@ -402,8 +402,8 @@ namespace DigitalRise.Physics.Constraints
         // is not correct for this axis...
         // Create a swing axis from the ellipse normal.
         //float k = ellipseASquared / ellipseBSquared * directionZ / directionY;
-        //var normal = anchorOrientationA * new Vector3F(0, -k, 1).Normalized;
-        //if (Vector3F.Dot(normal, swingAxis) < 0)
+        //var normal = anchorOrientationA * new Vector3(0, -k, 1).Normalized();
+        //if (Vector3.Dot(normal, swingAxis) < 0)
         //  swingAxis = -normal;
         //else
         //  swingAxis = normal;
@@ -434,8 +434,8 @@ namespace DigitalRise.Physics.Constraints
       }
 
       // The axis of the twist quaternion is parallel to xAxisA.
-      Vector3F twistAxis = new Vector3F(twist.X, twist.Y, twist.Z);
-      if (Vector3F.Dot(twistAxis, xAxisA) < 0)
+      Vector3 twistAxis = new Vector3(twist.X, twist.Y, twist.Z);
+      if (Vector3.Dot(twistAxis, xAxisA) < 0)
       {
         // The axis of the twist quaternion points in the opposite direction of xAxisA.
         // The twist angle need to be inverted.
@@ -447,7 +447,7 @@ namespace DigitalRise.Physics.Constraints
       LimitState oldYLimitState = _limitStates[1];
 
       // Note: All axes between xAxisA and xAxisB should be valid twist axes.
-      SetupConstraint(0, twistAngle, xAxisB, Minimum[0], Maximum[0]);
+      SetupConstraint(0, twistAngle, xAxisB, Minimum.X, Maximum.X);
       SetupConstraint(1, swingAngle, swingAxis, -swingLimit, swingLimit);
 
       // Warm-start the constraints if the previous limit state matches the new limit state.
@@ -456,7 +456,7 @@ namespace DigitalRise.Physics.Constraints
     }
 
 
-    private void SetupConstraint(int index, float position, Vector3F axis, float minimum, float maximum)
+    private void SetupConstraint(int index, float position, Vector3 axis, float minimum, float maximum)
     {
       // Note: Cached constraint impulses are reset in Warmstart() if necessary.
 
@@ -545,7 +545,7 @@ namespace DigitalRise.Physics.Constraints
 
       // Note: Softness must be set before!
       constraint.Softness = Softness / deltaTime;
-      constraint.Prepare(BodyA, BodyB, Vector3F.Zero, -axis, Vector3F.Zero, axis);
+      constraint.Prepare(BodyA, BodyB, Vector3.Zero, -axis, Vector3.Zero, axis);
     }
 
 
@@ -620,7 +620,7 @@ namespace DigitalRise.Physics.Constraints
     /// between 0 to 360°. Draw lines between neighbor points and the points and the cone tip. This
     /// creates a wire frame visualization of the swing limit cone.
     /// </remarks>
-    public Vector3F GetPointOnCone(float angle, Vector3F coneTip, float distanceFromTip)
+    public Vector3 GetPointOnCone(float angle, Vector3 coneTip, float distanceFromTip)
     {
       // angle = 0 is BodyA +Y axis. angles rotate around BodyA +X axis.
 
@@ -642,10 +642,10 @@ namespace DigitalRise.Physics.Constraints
         swingLimit = (float)Math.Sqrt((1 + slopeSquared) / (1 / ellipseASquared + slopeSquared / ellipseBSquared));
       }
 
-      var swingAxis = new Vector3F(0, -directionZ, directionY);
+      var swingAxis = new Vector3(0, -directionZ, directionY);
       var swing = QuaternionF.CreateRotation(swingAxis, swingLimit);
 
-      var pointInAnchorA = swing.Rotate(new Vector3F(distanceFromTip, 0, 0));
+      var pointInAnchorA = swing.Rotate(new Vector3(distanceFromTip, 0, 0));
 
       var pointInA = AnchorOrientationALocal * pointInAnchorA;
       if (BodyA != null)

@@ -1,10 +1,9 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -54,7 +53,7 @@ different scale.",
       Simulation.ForceEffects.Add(new Damping { AngularDamping = 0.9f });
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",
         MotionType = MotionType.Static,
@@ -70,7 +69,7 @@ different scale.",
       {
         RigidBody stackBox = new RigidBody(boxShape)
         {
-          Pose = new Pose(new Vector3F(0, yPosition, 0)),
+          Pose = new Pose(new Vector3(0, yPosition, 0)),
         };
         Simulation.RigidBodies.Add(stackBox);
         yPosition += boxSize - overlap;
@@ -80,7 +79,7 @@ different scale.",
       SphereShape sphereShape = new SphereShape(boxSize * 0.5f);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-0.5f, 0.5f);
+        Vector3 position = RandomHelper.Random.NextVector3(-0.5f, 0.5f);
         position.Y = 1;
 
         RigidBody body = new RigidBody(sphereShape)

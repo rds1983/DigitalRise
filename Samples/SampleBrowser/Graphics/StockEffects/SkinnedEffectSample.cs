@@ -32,7 +32,7 @@ for a sky dome.",
       SampleFramework.IsMouseVisible = false;
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.CornflowerBlue;
-      SetCamera(new Vector3F(1, 1, 3), 0.2f, 0);
+      SetCamera(new Vector3(1, 1, 3), 0.2f, 0);
 
       // Create a sky mesh and add an instance of this mesh to the scene.
       var skyMesh = ProceduralSkyDome.CreateMesh(GraphicsService, AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "sky.png"));

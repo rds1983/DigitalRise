@@ -39,7 +39,7 @@ namespace Samples
     private float _farDistance;
 
     // Position and Orientation of camera.
-    private Vector3F _defaultPosition = new Vector3F(0, 2, 5);
+    private Vector3 _defaultPosition = new Vector3(0, 2, 5);
     private float _defaultYaw;
     private float _defaultPitch;
     private float _currentYaw;
@@ -127,7 +127,7 @@ namespace Samples
     }
 
 
-    public void ResetPose(Vector3F position, float yaw, float pitch)
+    public void ResetPose(Vector3 position, float yaw, float pitch)
     {
       _defaultPosition = position;
       _defaultYaw = yaw;
@@ -228,7 +228,7 @@ namespace Samples
       // Create velocity from <W>, <A>, <S>, <D> and <R>, <F> keys. 
       // <R> or DPad up is used to move up ("rise"). 
       // <F> or DPad down is used to move down ("fall").
-      Vector3F velocity = Vector3F.Zero;
+      Vector3 velocity = Vector3.Zero;
       KeyboardState keyboardState = _inputService.KeyboardState;
       if (keyboardState.IsKeyDown(Keys.W))
         velocity.Z--;
@@ -254,7 +254,7 @@ namespace Samples
         velocity *= SpeedBoost;
 
       // Multiply the velocity by time to get the translation for this frame.
-      Vector3F translation = velocity * LinearVelocityMagnitude * deltaTimeF;
+      Vector3 translation = velocity * LinearVelocityMagnitude * deltaTimeF;
 
       // Update SceneNode.LastPoseWorld - this is required for some effects, like
       // camera motion blur. 

@@ -4,9 +4,7 @@
 
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -85,7 +83,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       //      Scale                     scaleB * childScale
 
       Pose poseB = geometricObjectB.Pose;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // Apply scale to pose and test geometric object.
       // (Note: The scaling is either uniform or the transformed object has no local rotation.
@@ -196,7 +194,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         throw new ArgumentException("objectA or objectB must be a TransformedShape.");
 
       Pose poseB = geometricObjectB.Pose;
-      Vector3F scaleB = geometricObjectB.Scale;
+      Vector3 scaleB = geometricObjectB.Scale;
 
       // Note: Non-uniform scaling for rotated child objects is not supported
       // but we might still get a usable TOI query result.

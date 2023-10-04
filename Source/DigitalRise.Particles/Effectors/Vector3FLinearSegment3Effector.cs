@@ -4,19 +4,19 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles.Effectors
 {
   /// <summary>
   /// Evaluates 3 piecewise linear functions consisting of 3 segments and multiplies the result with
-  /// a particle parameter. (This effector is the <see cref="Vector3F"/> version of the 
+  /// a particle parameter. (This effector is the <see cref="Vector3"/> version of the 
   /// <see cref="SingleLinearSegment3Effector"/>.)
   /// </summary>
   /// <remarks>
   /// <para>
   /// This effector is similar to the <see cref="SingleLinearSegment3Effector"/>, only that a
-  /// piecewise linear function is evaluated for each component of a <see cref="Vector3F"/>.
+  /// piecewise linear function is evaluated for each component of a <see cref="Vector3"/>.
   /// </para>
   /// <para>
   /// A piecewise linear function is defined using several data points:
@@ -47,27 +47,27 @@ namespace DigitalRise.Particles.Effectors
   /// <item>
   /// <term><see cref="InputParameter"/></term>
   /// <description>
-  /// The <see cref="Vector3F"/> parameter that is multiplied with the function value.
+  /// The <see cref="Vector3"/> parameter that is multiplied with the function value.
   /// </description>
   /// </item>
   /// <item>
   /// <term><see cref="TimeParameter"/></term>
   /// <description>
-  /// The <see cref="Vector3F"/> parameter that stores the result of the function value multiplied
+  /// The <see cref="Vector3"/> parameter that stores the result of the function value multiplied
   /// with the <see cref="InputParameter"/>.
   /// </description>
   /// </item>
   /// </list>
   /// </para>
   /// </remarks>
-  public class Vector3FLinearSegment3Effector : ParticleEffector
+  public class Vector3LinearSegment3Effector : ParticleEffector
   {
     //--------------------------------------------------------------
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _inputParameter;
-    private IParticleParameter<Vector3F> _outputParameter;
+    private IParticleParameter<Vector3> _inputParameter;
+    private IParticleParameter<Vector3> _outputParameter;
     private IParticleParameter<float> _timeParameter;
     #endregion
 
@@ -78,12 +78,12 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that is multiplied with the value of the piecewise 
-    /// linear function. (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// linear function. (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that is multiplied with the value of the piecewise linear 
     /// function. This parameter is optional.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is <see langword="null"/>.
     /// </value>
     /// <remarks>
@@ -96,11 +96,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that stores the result.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that stores the result.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is <see langword="null"/>.
     /// </value>
     /// <remarks>
@@ -144,12 +144,12 @@ namespace DigitalRise.Particles.Effectors
     /// Gets or sets the value of the first data point.
     /// </summary>
     /// <value>The value of the first data point.</value>
-    public Vector3F Value0
+    public Vector3 Value0
     {
       get { return _value0; }
       set { _value0 = value; }
     }
-    private Vector3F _value0;
+    private Vector3 _value0;
 
 
     /// <summary>
@@ -168,12 +168,12 @@ namespace DigitalRise.Particles.Effectors
     /// Gets or sets the value of the second data point.
     /// </summary>
     /// <value>The value of the second data point.</value>
-    public Vector3F Value1
+    public Vector3 Value1
     {
       get { return _value1; }
       set { _value1 = value; }
     }
-    private Vector3F _value1;
+    private Vector3 _value1;
 
 
     /// <summary>
@@ -192,12 +192,12 @@ namespace DigitalRise.Particles.Effectors
     /// Gets or sets the value of the third data point.
     /// </summary>
     /// <value>The value of the third data point.</value>
-    public Vector3F Value2
+    public Vector3 Value2
     {
       get { return _value2; }
       set { _value2 = value; }
     }
-    private Vector3F _value2;
+    private Vector3 _value2;
 
 
     /// <summary>
@@ -216,12 +216,12 @@ namespace DigitalRise.Particles.Effectors
     /// Gets or sets the value of the last data point.
     /// </summary>
     /// <value>The value of the last data point.</value>
-    public Vector3F Value3
+    public Vector3 Value3
     {
       get { return _value3; }
       set { _value3 = value; }
     }
-    private Vector3F _value3;
+    private Vector3 _value3;
     #endregion
 
 
@@ -230,13 +230,13 @@ namespace DigitalRise.Particles.Effectors
     //--------------------------------------------------------------
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Vector3FLinearSegment3Effector"/> class.
+    /// Initializes a new instance of the <see cref="Vector3LinearSegment3Effector"/> class.
     /// </summary>
-    public Vector3FLinearSegment3Effector()
+    public Vector3LinearSegment3Effector()
     {
       TimeParameter = ParticleParameterNames.NormalizedAge;
       Time3 = 1;
-      Value3 = new Vector3F(1);
+      Value3 = new Vector3(1);
     }
     #endregion
 
@@ -248,7 +248,7 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override ParticleEffector CreateInstanceCore()
     {
-      return new Vector3FLinearSegment3Effector();
+      return new Vector3LinearSegment3Effector();
     }
 
 
@@ -258,8 +258,8 @@ namespace DigitalRise.Particles.Effectors
       // Clone ParticleEffector properties.
       base.CloneCore(source);
 
-      // Clone Vector3FLinearSegment3Effector properties.
-      var sourceTyped = (Vector3FLinearSegment3Effector)source;
+      // Clone Vector3LinearSegment3Effector properties.
+      var sourceTyped = (Vector3LinearSegment3Effector)source;
       InputParameter = sourceTyped.InputParameter;
       OutputParameter = sourceTyped.OutputParameter;
       TimeParameter = sourceTyped.TimeParameter;
@@ -277,8 +277,8 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override void OnRequeryParameters()
     {
-      _inputParameter = ParticleSystem.Parameters.Get<Vector3F>(InputParameter);
-      _outputParameter = ParticleSystem.Parameters.Get<Vector3F>(OutputParameter);
+      _inputParameter = ParticleSystem.Parameters.Get<Vector3>(InputParameter);
+      _outputParameter = ParticleSystem.Parameters.Get<Vector3>(OutputParameter);
       _timeParameter = ParticleSystem.Parameters.Get<float>(TimeParameter);
     }
 
@@ -298,12 +298,12 @@ namespace DigitalRise.Particles.Effectors
       if (_outputParameter == null || _timeParameter == null)
         return;
 
-      Vector3F[] values = _outputParameter.Values;
+      Vector3[] values = _outputParameter.Values;
       if (values == null)
       {
         // Value is a uniform parameter.
         var t = _timeParameter.DefaultValue;
-        Vector3F y;
+        Vector3 y;
 
         if (t <= _time0)
           y = _value0;
@@ -331,7 +331,7 @@ namespace DigitalRise.Particles.Effectors
       if (_outputParameter == null || _timeParameter == null)
         return;
 
-      Vector3F[] values = _outputParameter.Values;
+      Vector3[] values = _outputParameter.Values;
       if (values == null)
       {
         // Value is a uniform parameter. Uniform parameters are handled in OnBeginUpdate().
@@ -340,8 +340,8 @@ namespace DigitalRise.Particles.Effectors
 
       // Value is a varying parameter.
       float[] times = _timeParameter.Values;
-      Vector3F[] inputs = null;
-      Vector3F defaultInput = new Vector3F(1);
+      Vector3[] inputs = null;
+      Vector3 defaultInput = new Vector3(1);
       if (_inputParameter != null)
       {
         inputs = _inputParameter.Values;
@@ -365,7 +365,7 @@ namespace DigitalRise.Particles.Effectors
         {
           var t = times[i];
 
-          Vector3F y;
+          Vector3 y;
           if (t <= _time0)
             y = _value0;
           else if (t <= _time1)
@@ -387,7 +387,7 @@ namespace DigitalRise.Particles.Effectors
         {
           var t = times[i];
 
-          Vector3F y;
+          Vector3 y;
           if (t <= _time0)
             y = _value0;
           else if (t <= _time1)
@@ -406,7 +406,7 @@ namespace DigitalRise.Particles.Effectors
       {
         // Optimized case: All time is uniform. Input is varying.
         var t = _timeParameter.DefaultValue;
-        Vector3F y;
+        Vector3 y;
         if (t <= _time0)
           y = _value0;
         else if (t <= _time1)
@@ -425,7 +425,7 @@ namespace DigitalRise.Particles.Effectors
       {
         // Optimized case: Time and Input are uniform.
         var t = _timeParameter.DefaultValue;
-        Vector3F y;
+        Vector3 y;
         if (t <= _time0)
           y = _value0;
         else if (t <= _time1)

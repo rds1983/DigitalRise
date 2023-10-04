@@ -179,13 +179,13 @@ namespace DigitalRise.Geometry.Partitioning
       private ISpatialPartition<T> _otherPartition;
       private IEnumerator<Node> _leafNodes;
       private IEnumerator<T> _otherCandidates;
-      private Vector3F _scale;
-      private Vector3F _otherScaleInverse;
+      private Vector3 _scale;
+      private Vector3 _otherScaleInverse;
       private Pose _toOther;
 
       public static IEnumerable<Pair<T>> Create(AdaptiveAabbTree<T> partition,
         ISpatialPartition<T> otherPartition, IEnumerable<Node> leafNodes,
-        ref Vector3F scale, ref Vector3F otherScaleInverse, ref Pose toOther)
+        ref Vector3 scale, ref Vector3 otherScaleInverse, ref Pose toOther)
       {
         var enumerable = Pool.Obtain();
         enumerable._partition = partition;
@@ -255,12 +255,12 @@ namespace DigitalRise.Geometry.Partitioning
       private static readonly ResourcePool<GetOverlapsWithTransformedTreeWork> Pool = new ResourcePool<GetOverlapsWithTransformedTreeWork>(() => new GetOverlapsWithTransformedTreeWork(), x => x.Initialize(), null);
       private AdaptiveAabbTree<T> _partition;
       private readonly Stack<Pair<Node, Node>> _stack = new Stack<Pair<Node, Node>>();
-      private Vector3F _scaleA;
-      private Vector3F _scaleB;
+      private Vector3 _scaleA;
+      private Vector3 _scaleB;
       private Pose _bToA;
 
       public static IEnumerable<Pair<T>> Create(AdaptiveAabbTree<T> partition, AdaptiveAabbTree<T> otherPartition,
-        ref Vector3F scaleA, ref Vector3F scaleB, ref Pose bToA)
+        ref Vector3 scaleA, ref Vector3 scaleB, ref Pose bToA)
       {
         var enumerable = Pool.Obtain();
         enumerable._partition = partition;

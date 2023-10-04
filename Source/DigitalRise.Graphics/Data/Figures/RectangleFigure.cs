@@ -4,7 +4,7 @@
 
 using DigitalRise.Collections;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -109,17 +109,17 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    internal override void Flatten(ArrayList<Vector3F> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
+    internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
     {
       int index = vertices.Count;
 
       float x = WidthX / 2;
       float y = WidthY / 2;
 
-      vertices.Add(new Vector3F(-x, -y, 0));
-      vertices.Add(new Vector3F(-x, y, 0));
-      vertices.Add(new Vector3F(x, y, 0));
-      vertices.Add(new Vector3F(x, -y, 0));
+      vertices.Add(new Vector3(-x, -y, 0));
+      vertices.Add(new Vector3(-x, y, 0));
+      vertices.Add(new Vector3(x, y, 0));
+      vertices.Add(new Vector3(x, -y, 0));
 
       strokeIndices.Add(index + 0);
       strokeIndices.Add(index + 1);

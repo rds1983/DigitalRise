@@ -110,20 +110,20 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    public void RandomVector3F()
+    public void RandomVector3()
     {
-      Vector3F vector = RandomHelper.Random.NextVector3F(-20.0f, -10.0f);
+      Vector3 vector = RandomHelper.Random.NextVector3(-20.0f, -10.0f);
       Assert.IsTrue(-20.0f <= vector.X && vector.X <= -10.0f);
       Assert.IsTrue(-20.0f <= vector.Y && vector.Y <= -10.0f);
       Assert.IsTrue(-20.0f <= vector.Z && vector.Z <= -10.0f);
 
-      vector = RandomHelper.Random.NextVector3F(1.0f, 1.0f);
+      vector = RandomHelper.Random.NextVector3(1.0f, 1.0f);
       Assert.AreEqual(1.0f, vector.X);
       Assert.AreEqual(1.0f, vector.Y);
       Assert.AreEqual(1.0f, vector.Z);
 
       // Must not throw exception.
-      RandomHelper.NextVector3F(null, 1, 3);
+      RandomHelper.NextVector3(null, 1, 3);
     }
 
 

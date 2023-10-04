@@ -106,7 +106,7 @@ namespace DigitalRise.Graphics
     //--------------------------------------------------------------
 
     /// <inheritdoc/>
-    internal override void Flatten(Collections.ArrayList<Vector3F> vertices, Collections.ArrayList<int> strokeIndices, Collections.ArrayList<int> fillIndices)
+    internal override void Flatten(Collections.ArrayList<Vector3> vertices, Collections.ArrayList<int> strokeIndices, Collections.ArrayList<int> fillIndices)
     {
       _arcSegment.IsLargeArc = true;
       _arcSegment.Point1 = new Vector2(RadiusX, 0);
@@ -126,7 +126,7 @@ namespace DigitalRise.Graphics
 
       // Add 3D vertices. We skip the duplicated vertices.
       for (int i = 0; i < numberOfVertices; i += 2)
-        vertices.Add(new Vector3F(tempVertices[i].X, tempVertices[i].Y, 0));
+        vertices.Add(new Vector3(tempVertices[i].X, tempVertices[i].Y, 0));
 
       // Add stroke indices. 
       for (int i = 0; i < numberOfVertices - 1; i++)
@@ -139,7 +139,7 @@ namespace DigitalRise.Graphics
       {
         // Add a center vertex.
         var centerIndex = vertices.Count;
-        vertices.Add(new Vector3F(0, 0, 0));
+        vertices.Add(new Vector3(0, 0, 0));
 
         // Add one triangle per circle segment. 
         for (int i = 0; i < numberOfVertices / 2 - 1; i++)

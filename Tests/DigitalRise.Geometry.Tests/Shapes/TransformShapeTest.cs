@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -16,7 +17,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void Constructor()
     {
       Assert.AreNotEqual(null, new TransformedShape().Child);
-      Assert.AreEqual(Vector3F.Zero, new TransformedShape().InnerPoint);      
+      Assert.AreEqual(Vector3.Zero, new TransformedShape().InnerPoint);      
     }
 
 
@@ -34,7 +35,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       Assert.AreEqual(Pose.Identity, new TransformedShape().Child.Pose);
 
-      Assert.AreEqual(new Vector3F(0, 0, 0), new CompositeShape().InnerPoint);
+      Assert.AreEqual(new Vector3(0, 0, 0), new CompositeShape().InnerPoint);
     }
 
 
@@ -45,35 +46,35 @@ namespace DigitalRise.Geometry.Shapes.Tests
       {
         Child = new GeometricObject
         {
-          Pose = new Pose(new Vector3F(0, 1, 0)),
+          Pose = new Pose(new Vector3(0, 1, 0)),
           Shape = new PointShape(1, 0, 0),
         },
       };
 
-      Assert.AreEqual(new Vector3F(1, 1, 0), t.InnerPoint);
+      Assert.AreEqual(new Vector3(1, 1, 0), t.InnerPoint);
     }
 
 
     [Test]
     public void GetAabb()
     {
-      Assert.AreEqual(new Vector3F(0, 0, 0), new TransformedShape().GetAabb(Pose.Identity).Minimum);
-      Assert.AreEqual(new Vector3F(0, 0, 0), new TransformedShape().GetAabb(Pose.Identity).Maximum);
+      Assert.AreEqual(new Vector3(0, 0, 0), new TransformedShape().GetAabb(Pose.Identity).Minimum);
+      Assert.AreEqual(new Vector3(0, 0, 0), new TransformedShape().GetAabb(Pose.Identity).Maximum);
 
       TransformedShape t = new TransformedShape
       {
         Child = new GeometricObject
         {
-          Pose = new Pose(new Vector3F(0, 1, 0)),
+          Pose = new Pose(new Vector3(0, 1, 0)),
           Shape = new SphereShape(10),
         },
       };
 
-      Assert.AreEqual(new Vector3F(-10, -9, -10), t.GetAabb(Pose.Identity).Minimum);
-      Assert.AreEqual(new Vector3F(10, 11, 10), t.GetAabb(Pose.Identity).Maximum);
+      Assert.AreEqual(new Vector3(-10, -9, -10), t.GetAabb(Pose.Identity).Minimum);
+      Assert.AreEqual(new Vector3(10, 11, 10), t.GetAabb(Pose.Identity).Maximum);
 
-      Assert.AreEqual(new Vector3F(-8, -9, -10), t.GetAabb(new Pose(new Vector3F(2, 0, 0))).Minimum);
-      Assert.AreEqual(new Vector3F(12, 11, 10), t.GetAabb(new Pose(new Vector3F(2, 0, 0))).Maximum);
+      Assert.AreEqual(new Vector3(-8, -9, -10), t.GetAabb(new Pose(new Vector3(2, 0, 0))).Minimum);
+      Assert.AreEqual(new Vector3(12, 11, 10), t.GetAabb(new Pose(new Vector3(2, 0, 0))).Maximum);
     }
 
 
@@ -94,12 +95,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(_propertyChanged);
       _propertyChanged = false;
 
-      ((GeometricObject)t.Child).Pose = new Pose(new Vector3F(1, 2, 3));
+      ((GeometricObject)t.Child).Pose = new Pose(new Vector3(1, 2, 3));
       Assert.IsTrue(_propertyChanged);
       _propertyChanged = false;
 
       // Setting Pose to the same value does not create a changed event.
-      ((GeometricObject)t.Child).Pose = new Pose(new Vector3F(1, 2, 3));
+      ((GeometricObject)t.Child).Pose = new Pose(new Vector3(1, 2, 3));
       Assert.IsFalse(_propertyChanged);
       _propertyChanged = false;
 
@@ -121,7 +122,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void Clone()
     {
-      Pose pose = new Pose(new Vector3F(1, 2, 3));
+      Pose pose = new Pose(new Vector3(1, 2, 3));
       PointShape pointShape = new PointShape(3, 4, 5);
       GeometricObject geometry = new GeometricObject(pointShape, pose);
 
@@ -144,7 +145,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //[Test]
     //public void SerializationXml()
     //{
-    //  Pose pose = new Pose(new Vector3F(1, 2, 3));
+    //  Pose pose = new Pose(new Vector3(1, 2, 3));
     //  PointShape pointShape = new PointShape(3, 4, 5);
     //  var a = new TransformedShape(new GeometricObject(pointShape, pose));
 
@@ -172,7 +173,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Ignore("Binary serialization not supported in PCL version.")]
     public void SerializationBinary()
     {
-      Pose pose = new Pose(new Vector3F(1, 2, 3));
+      Pose pose = new Pose(new Vector3(1, 2, 3));
       PointShape pointShape = new PointShape(3, 4, 5);
       var a = new TransformedShape(new GeometricObject(pointShape, pose));
 

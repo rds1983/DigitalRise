@@ -143,7 +143,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the tint color.
     /// </summary>
     /// <value>The tint color (non-premultiplied). The default value is white (1, 1, 1).</value>
-    public Vector3F Color { get; set; }
+    public Vector3 Color { get; set; }
 
 
     /// <summary>
@@ -182,7 +182,7 @@ namespace DigitalRise.Graphics.SceneGraph
     public Vector2 Scale
     {
       get { return new Vector2(ScaleLocal.X, ScaleLocal.Y); }
-      set { ScaleLocal = new Vector3F(value.X, value.Y, 1); }
+      set { ScaleLocal = new Vector3(value.X, value.Y, 1); }
     }
 
 
@@ -232,7 +232,7 @@ namespace DigitalRise.Graphics.SceneGraph
       _sprite = sprite;
       IsRenderable = true;
       Shape = Shape.Infinite;
-      Color = Vector3F.One;
+      Color = Vector3.One;
       Alpha = 1;
       LastBounds = Rectangle.Empty;
       LastDepth = 0;

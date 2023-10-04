@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -18,18 +17,18 @@ namespace DigitalRise.Mathematics.Statistics
   /// within this shell. 
   /// </para>
   /// </remarks>
-  public class SphereDistribution : Distribution<Vector3F>
+  public class SphereDistribution : Distribution<Vector3>
   {
     /// <summary>
     /// Gets or sets the center of the sphere.
     /// </summary>
     /// <value>The center position. The default is (0, 0, 0).</value>
-    public Vector3F Center
+    public Vector3 Center
     {
       get { return _center; }
       set { _center = value; }
     }
-    private Vector3F _center;
+    private Vector3 _center;
 
 
     /// <summary>
@@ -96,16 +95,16 @@ namespace DigitalRise.Mathematics.Statistics
     /// Gets or sets the scale factors that are multiplied to the random position.
     /// </summary>
     /// <value>The scale factors in x, y and z direction. The default value is (1, 1, 1).</value>
-    public Vector3F Scale
+    public Vector3 Scale
     {
       get { return _scale; }
       set { _scale = value; }
     }
-    private Vector3F _scale = new Vector3F(1);
+    private Vector3 _scale = new Vector3(1);
 
 
     /// <inheritdoc/>
-    public override Vector3F Next(Random random)
+    public override Vector3 Next(Random random)
     {
       if (random == null)
         throw new ArgumentNullException("random");
@@ -119,7 +118,7 @@ namespace DigitalRise.Mathematics.Statistics
       float x = (float)Math.Cos(angle) * zProjected;
       float y = (float)Math.Sqrt(zProjected * zProjected - x * x) * Math.Sign(angle);
       
-      Vector3F direction = new Vector3F(x, y, z);
+      Vector3 direction = new Vector3(x, y, z);
 
       // Note: It is okay if inner and outer radius are swapped. No need to swap the values.
       float randomVolume = random.NextFloat(_innerVolume, _outerVolume);

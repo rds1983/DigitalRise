@@ -677,13 +677,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void LengthSquared()
     {
       VectorF v = new VectorF(new float[] { 1, 0, 0, 0 });
-      Assert.AreEqual(1.0f, v.LengthSquared);
+      Assert.AreEqual(1.0f, v.LengthSquared());
       v = new VectorF(new float[] { 0, 1, 0, 0 });
-      Assert.AreEqual(1.0f, v.LengthSquared);
+      Assert.AreEqual(1.0f, v.LengthSquared());
       v = new VectorF(new float[] { 0, 0, 1, 0 });
-      Assert.AreEqual(1.0f, v.LengthSquared);
+      Assert.AreEqual(1.0f, v.LengthSquared());
       v = new VectorF(new float[] { 0, 0, 0, 1 });
-      Assert.AreEqual(1.0f, v.LengthSquared);
+      Assert.AreEqual(1.0f, v.LengthSquared());
 
       float x = -1.9f;
       float y = 2.1f;
@@ -691,7 +691,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float w = 1.0f;
       float lengthSquared = x * x + y * y + z * z + w * w;
       v = new VectorF(new[] { x, y, z, w });
-      Assert.AreEqual(lengthSquared, v.LengthSquared);
+      Assert.AreEqual(lengthSquared, v.LengthSquared());
     }
 
 
@@ -1365,44 +1365,44 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ExplicitCastToVector3F()
+    public void ExplicitCastToVector3()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f });
-      Vector3F u = (Vector3F)v;
+      Vector3 u = (Vector3)v;
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
-      Assert.AreEqual(3.3f, u[2]);
+      Assert.AreEqual(1.1f, u.X);
+      Assert.AreEqual(2.2f, u.Y);
+      Assert.AreEqual(3.3f, u.Z);
     }
 
 
     [Test]
-    public void ToVector3F()
+    public void ToVector3()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f });
-      Vector3F u = v.ToVector3F();
+      Vector3 u = v.ToVector3();
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
-      Assert.AreEqual(3.3f, u[2]);
+      Assert.AreEqual(1.1f, u.X);
+      Assert.AreEqual(2.2f, u.Y);
+      Assert.AreEqual(3.3f, u.Z);
     }
 
 
     [Test]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void ExplicitCastToVector3FException1()
+    public void ExplicitCastToVector3Exception1()
     {
       VectorF v = null;
-      Vector3F u = (Vector3F)v;
+      Vector3 u = (Vector3)v;
     }
 
 
     [Test]
     [ExpectedException(typeof(InvalidCastException))]
-    public void ExplicitCastToVector3FException2()
+    public void ExplicitCastToVector3Exception2()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f, 4.4f, 5.5f });
-      Vector3F u = (Vector3F)v;
+      Vector3 u = (Vector3)v;
     }
 
 

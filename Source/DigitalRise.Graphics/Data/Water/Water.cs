@@ -4,10 +4,9 @@
 
 using System;
 using System.Globalization;
-using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -84,7 +83,7 @@ namespace DigitalRise.Graphics
     /// local space of the <see cref="WaterNode"/>. The y component of this vector is usually
     /// ignored because water waves are only moving horizontally.
     /// </remarks>
-    public Vector3F NormalMap0Velocity { get; set; }
+    public Vector3 NormalMap0Velocity { get; set; }
 
 
     /// <summary>
@@ -92,7 +91,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <value>The scroll velocity of the second normal map.</value>
     /// <inheritdoc cref="NormalMap0Velocity"/>
-    public Vector3F NormalMap1Velocity { get; set; }
+    public Vector3 NormalMap1Velocity { get; set; }
 
 
     /// <summary>
@@ -119,7 +118,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the tint color of the specular highlight.
     /// </summary>
     /// <value>The tint color of the specular highlight. The default value is (1, 1, 1).</value>
-    public Vector3F SpecularColor { get; set; }
+    public Vector3 SpecularColor { get; set; }
 
 
     /// <summary>
@@ -133,7 +132,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the tint color of the reflection.
     /// </summary>
     /// <value>The tint color of the reflection. The default value is (1, 1, 1).</value>
-    public Vector3F ReflectionColor { get; set; }
+    public Vector3 ReflectionColor { get; set; }
 
 
     /// <summary>
@@ -149,7 +148,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the tint color of the refraction.
     /// </summary>
     /// <value>The tint color of the refraction. The default value is (1, 1, 1).</value>
-    public Vector3F RefractionColor { get; set; }
+    public Vector3 RefractionColor { get; set; }
 
 
     /// <summary>
@@ -170,7 +169,7 @@ namespace DigitalRise.Graphics
     /// the water is more transparent. Natural water has a higher extinction of red, which creates
     /// blue/green water. 
     /// </remarks>
-    public Vector3F UnderwaterFogDensity { get; set; }
+    public Vector3 UnderwaterFogDensity { get; set; }
 
 
     /// <summary>
@@ -217,7 +216,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <value>The color of the water.</value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-    public Vector3F WaterColor { get; set; }
+    public Vector3 WaterColor { get; set; }
 
 
     /// <summary>
@@ -229,7 +228,7 @@ namespace DigitalRise.Graphics
     /// wave and comes back out at the front side. <see cref="ScatterColor"/> determines the 
     /// intensity of this effect.
     /// </remarks>
-    public Vector3F ScatterColor { get; set; }
+    public Vector3 ScatterColor { get; set; }
 
 
     /// <summary>
@@ -268,7 +267,7 @@ namespace DigitalRise.Graphics
     /// <value>
     /// The color of the foam.
     /// </value>
-    public Vector3F FoamColor { get; set; }
+    public Vector3 FoamColor { get; set; }
 
 
     /// <summary>
@@ -382,21 +381,21 @@ namespace DigitalRise.Graphics
     {
       NormalMap0Scale = 1;
       NormalMap1Scale = 1;
-      NormalMap0Velocity = new Vector3F(0.1f, 0, 0.3f);
-      NormalMap1Velocity = new Vector3F(-0.1f, 0, 0.3f);
+      NormalMap0Velocity = new Vector3(0.1f, 0, 0.3f);
+      NormalMap1Velocity = new Vector3(-0.1f, 0, 0.3f);
       NormalMap0Strength = 1;
       NormalMap1Strength = 1;
 
-      SpecularColor = new Vector3F(1);
+      SpecularColor = new Vector3(1);
       SpecularPower = 1000;
 
       ReflectionDistortion = 0.1f;
-      ReflectionColor = new Vector3F(1);
+      ReflectionColor = new Vector3(1);
 
       RefractionDistortion = 0.1f;
-      RefractionColor = new Vector3F(1);
+      RefractionColor = new Vector3(1);
 
-      UnderwaterFogDensity = new Vector3F(0.5f, 0.4f, 0.3f) * 2;
+      UnderwaterFogDensity = new Vector3(0.5f, 0.4f, 0.3f) * 2;
 
       FresnelBias = 0.02f;
       FresnelScale = 1 - FresnelBias;
@@ -404,12 +403,12 @@ namespace DigitalRise.Graphics
 
       IntersectionSoftness = 0.5f;
 
-      WaterColor = new Vector3F(0.2f, 0.4f, 0.5f);
-      ScatterColor = new Vector3F(0.05f, 0.1f, 0.05f) / 2;
+      WaterColor = new Vector3(0.2f, 0.4f, 0.5f);
+      ScatterColor = new Vector3(0.05f, 0.1f, 0.05f) / 2;
 
       FoamMapScale = 1;
       FoamDistortion = 0.01f;
-      FoamColor = new Vector3F(1);
+      FoamColor = new Vector3(1);
       FoamShoreIntersection = 1;
       FoamCrestMin = 0;
       FoamCrestMax = 1f;

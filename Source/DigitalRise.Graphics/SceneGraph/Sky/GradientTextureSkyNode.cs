@@ -3,7 +3,9 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -58,7 +60,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the direction to the sun.
     /// </summary>
     /// <value>The direction to the sun. This vector is automatically normalized.</value>
-    public Vector3F SunDirection
+    public Vector3 SunDirection
     {
       get { return _sunDirection; }
       set
@@ -67,7 +69,7 @@ namespace DigitalRise.Graphics.SceneGraph
         _sunDirection.TryNormalize();
       }
     }
-    private Vector3F _sunDirection;
+    private Vector3 _sunDirection;
 
 
     /// <summary>
@@ -150,7 +152,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </summary>
     public GradientTextureSkyNode()
     {
-      SunDirection = new Vector3F(1, 1, 1);
+      SunDirection = new Vector3(1, 1, 1);
       TimeOfDay = new TimeSpan(12, 0, 0);
       Color = new Vector4F(1, 1, 1, 1);
       CieSkyParameters = CieSkyParameters.Type12;

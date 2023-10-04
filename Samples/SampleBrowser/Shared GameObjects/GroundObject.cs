@@ -6,6 +6,7 @@ using DigitalRise.Physics;
 using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -31,7 +32,7 @@ namespace Samples
 			var assetManager = _services.GetInstance<AssetManager>();
 			var graphicsService = _services.GetInstance<IGraphicsService>();
       _modelNode = assetManager.LoadDRModel(graphicsService, "Ground/Ground.drmdl").Clone();
-			_modelNode.ScaleLocal = new Vector3F(0.5f);
+			_modelNode.ScaleLocal = new Vector3(0.5f);
 
       foreach (var node in _modelNode.GetSubtree())
       {
@@ -51,7 +52,7 @@ namespace Samples
       scene.Children.Add(_modelNode);
 
       // Create rigid body.
-      _rigidBody = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      _rigidBody = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         MotionType = MotionType.Static,
       };

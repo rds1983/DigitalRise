@@ -50,7 +50,7 @@ namespace Samples.Graphics
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services, 10);
-      _cameraObject.ResetPose(new Vector3F(0, 0, -4), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 0, -4), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Create a new scene with some lights.
@@ -74,20 +74,20 @@ namespace Samples.Graphics
         MeshHelper.CreateSubmesh(GraphicsService.GraphicsDevice, new BoxShape(1, 1, 2).GetMesh(0.001f, 5), MathHelper.ToRadians(70)),
       },
       Color.DarkBlue);
-      meshNodeA.PoseWorld = new Pose(RandomHelper.Random.NextVector3F(-0.5f, 0.5f),
+      meshNodeA.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-0.5f, 0.5f),
                                     RandomHelper.Random.NextQuaternionF());
       _scene.Children.Add(meshNodeA);
       _debugRenderer.DrawObject(meshNodeA, Color.Green, true, false);
 
       var shape = new TransformedShape(
-        new GeometricObject(new SphereShape(0.5f), new Pose(new Vector3F(1, 0, 0))));
+        new GeometricObject(new SphereShape(0.5f), new Pose(new Vector3(1, 0, 0))));
       var meshNodeB = CreateMeshNode(new[]
       {
         MeshHelper.CreateTorus(GraphicsService.GraphicsDevice, 1, 0.3f, 30),
         MeshHelper.CreateSubmesh(GraphicsService.GraphicsDevice, shape.GetMesh(0.001f, 4), MathHelper.ToRadians(90)),
       },
       Color.Gray);
-      meshNodeB.PoseWorld = new Pose(RandomHelper.Random.NextVector3F(-1f, 1f),
+      meshNodeB.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-1f, 1f),
                                     RandomHelper.Random.NextQuaternionF());
       _scene.Children.Add(meshNodeB);
       _debugRenderer.DrawObject(meshNodeB, Color.Green, true, false);
@@ -98,9 +98,9 @@ namespace Samples.Graphics
         MeshHelper.CreateSubmesh(GraphicsService.GraphicsDevice, new BoxShape(1, 1, 2).GetMesh(0.001f, 5), MathHelper.ToRadians(70))
       },
       Color.DarkGreen);
-      meshNodeC.PoseWorld = new Pose(RandomHelper.Random.NextVector3F(-1f, 1f),
+      meshNodeC.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-1f, 1f),
                                     RandomHelper.Random.NextQuaternionF());
-      meshNodeC.ScaleLocal = new Vector3F(0.1f, 1f, 0.5f);
+      meshNodeC.ScaleLocal = new Vector3(0.1f, 1f, 0.5f);
       _scene.Children.Add(meshNodeC);
       _debugRenderer.DrawObject(meshNodeC, Color.Green, true, false);
 
@@ -136,7 +136,7 @@ namespace Samples.Graphics
       // It destroys the current render target content.
       _intersectionRenderer.ComputeIntersection(
         _meshNodePairs,
-        new Vector3F(1, 0.2f, 0),     // Diffuse color
+        new Vector3(1, 0.2f, 0),     // Diffuse color
         0.8f,                         // Alpha
         _maxConvexity,                // Max convexity
         context);                     // context.CameraNode and Viewport need to be set.

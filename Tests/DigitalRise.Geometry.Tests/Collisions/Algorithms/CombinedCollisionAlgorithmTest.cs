@@ -1,6 +1,6 @@
 ﻿using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -42,7 +42,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject b = new CollisionObject(new GeometricObject
             {
               Shape = new SphereShape(1),
-              Pose = new Pose(new Vector3F(3, 0, 0)),
+              Pose = new Pose(new Vector3(3, 0, 0)),
             });
 
       ContactSet set = cca.GetClosestPoints(a, b);
@@ -51,7 +51,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       set = cca.GetContacts(a, b);
       Assert.IsTrue(set == null || set.Count == 0);
 
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(2, 0, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2, 0, 0));
 
       set = cca.GetClosestPoints(a, b);
       Assert.AreEqual(1, set.Count);
@@ -92,7 +92,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       CollisionObject b = new CollisionObject();
       ((GeometricObject)b.GeometricObject).Shape = new CircleShape(2);
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3F(4, 0, 0));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(4, 0, 0));
 
       Assert.AreEqual(false, cca.HaveContact(a, b));
       Assert.AreEqual(0, cca.GetContacts(a, b).Count);
@@ -110,10 +110,10 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       public override void ComputeCollision(ContactSet contactSet, CollisionQueryType type)
       {
         contactSet.Clear();
-        contactSet.Add(ContactHelper.CreateContact(contactSet, new Vector3F(1, 2, 3), Vector3F.UnitZ, 1, false));
+        contactSet.Add(ContactHelper.CreateContact(contactSet, new Vector3(1, 2, 3), Vector3.UnitZ, 1, false));
 
         if (type == CollisionQueryType.Contacts)
-          contactSet.Add(ContactHelper.CreateContact(contactSet, new Vector3F(2, 2, 3), Vector3F.UnitZ, 1.2f, false));
+          contactSet.Add(ContactHelper.CreateContact(contactSet, new Vector3(2, 2, 3), Vector3.UnitZ, 1.2f, false));
 
         contactSet.HaveContact = true;
       }

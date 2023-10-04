@@ -2,9 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Physics.Constraints;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Physics.ForceEffects
 {
@@ -65,7 +65,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// the first body).
     /// </summary>
     /// <value>The attachment position for the first body in local space.</value>
-    public Vector3F AttachmentPositionALocal { get; set; }
+    public Vector3 AttachmentPositionALocal { get; set; }
 
 
     /// <summary>
@@ -73,7 +73,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// the second body).
     /// </summary>
     /// <value>The attachment position for the second body in local space.</value>
-    public Vector3F AttachmentPositionBLocal { get; set; }
+    public Vector3 AttachmentPositionBLocal { get; set; }
 
 
     /// <summary>
@@ -150,32 +150,32 @@ namespace DigitalRise.Physics.ForceEffects
     /// </para>
     /// <para>
     /// This method is responsible for applying the forces of the effect to the rigid bodies. To
-    /// apply a force the methods <see cref="ForceEffect.AddForce(RigidBody, Vector3F, Vector3F)"/>,
-    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3F)"/> and/or
-    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3F)"/> of the <see cref="ForceEffect"/>
+    /// apply a force the methods <see cref="ForceEffect.AddForce(RigidBody, Vector3, Vector3)"/>,
+    /// <see cref="ForceEffect.AddForce(RigidBody, Vector3)"/> and/or
+    /// <see cref="ForceEffect.AddTorque(RigidBody, Vector3)"/> of the <see cref="ForceEffect"/>
     /// base class must be used. Do not use the <strong>AddForce</strong>/<strong>AddTorque</strong>
     /// methods of the <see cref="RigidBody"/> class.
     /// </para>
     /// </remarks>
     protected override void OnApply()
     {
-      Vector3F worldPosA = (BodyA != null) ? BodyA.Pose.ToWorldPosition(AttachmentPositionALocal) : AttachmentPositionALocal;
-      Vector3F velA = (BodyA != null) ? BodyA.GetVelocityOfLocalPoint(AttachmentPositionALocal) : Vector3F.Zero;
-      Vector3F worldPosB = (BodyB != null) ? BodyB.Pose.ToWorldPosition(AttachmentPositionBLocal) : AttachmentPositionBLocal;
-      Vector3F velB = (BodyB != null) ? BodyB.GetVelocityOfLocalPoint(AttachmentPositionBLocal) : Vector3F.Zero;
+      Vector3 worldPosA = (BodyA != null) ? BodyA.Pose.ToWorldPosition(AttachmentPositionALocal) : AttachmentPositionALocal;
+      Vector3 velA = (BodyA != null) ? BodyA.GetVelocityOfLocalPoint(AttachmentPositionALocal) : Vector3.Zero;
+      Vector3 worldPosB = (BodyB != null) ? BodyB.Pose.ToWorldPosition(AttachmentPositionBLocal) : AttachmentPositionBLocal;
+      Vector3 velB = (BodyB != null) ? BodyB.GetVelocityOfLocalPoint(AttachmentPositionBLocal) : Vector3.Zero;
 
       // Compute spring force.
-      Vector3F springVectorAToB = worldPosB - worldPosA;
-      float currentLength = springVectorAToB.Length;
+      Vector3 springVectorAToB = worldPosB - worldPosA;
+      float currentLength = springVectorAToB.Length();
 
       if (!springVectorAToB.TryNormalize())
-        springVectorAToB = Vector3F.UnitY;
+        springVectorAToB = Vector3.UnitY;
 
-      Vector3F force = SpringConstant * (currentLength - Length) * springVectorAToB;
+      Vector3 force = SpringConstant * (currentLength - Length) * springVectorAToB;
 
       // Compute damping force.
-      Vector3F velRel = velA - velB;
-      force += -DampingConstant * Vector3F.Dot(velRel, springVectorAToB) * springVectorAToB;
+      Vector3 velRel = velA - velB;
+      force += -DampingConstant * Vector3.Dot(velRel, springVectorAToB) * springVectorAToB;
 
       // Not needed anymore. Simulation.EvaluateForce automatically wakes up rigid bodies for big 
       // force changes.

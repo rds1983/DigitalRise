@@ -52,7 +52,7 @@ Mode 4: 'Active ragdoll with motors'
     private readonly AvatarDescription _avatarDescription;
     private readonly AvatarRenderer _avatarRenderer;
 
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
 
     // The _skeletonAnimation is one of the predefined key frame animations.
     // The _skeletonAnimation is applied to the _targetPose.
@@ -89,7 +89,7 @@ Mode 4: 'Active ragdoll with motors'
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Add some objects which allow the user to interact with the rigid bodies.
@@ -120,13 +120,13 @@ Mode 4: 'Active ragdoll with motors'
       };
 
       // Add a ground plane in the simulation.
-      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3F.UnitY, 0)) { MotionType = MotionType.Static });
+      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3.UnitY, 0)) { MotionType = MotionType.Static });
 
       // Distribute a few dynamic spheres and boxes across the landscape.
       SphereShape sphereShape = new SphereShape(0.3f);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-10, 10);
+        Vector3 position = RandomHelper.Random.NextVector3(-10, 10);
         position.Y = 1;
         Simulation.RigidBodies.Add(new RigidBody(sphereShape) { Pose = new Pose(position) });
       }
@@ -134,7 +134,7 @@ Mode 4: 'Active ragdoll with motors'
       BoxShape boxShape = new BoxShape(0.6f, 0.6f, 0.6f);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-10, 10);
+        Vector3 position = RandomHelper.Random.NextVector3(-10, 10);
         position.Y = 1;
         Simulation.RigidBodies.Add(new RigidBody(boxShape) { Pose = new Pose(position) });
       }

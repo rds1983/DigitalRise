@@ -208,7 +208,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the wind velocity.
     /// </summary>
     /// <value>The wind velocity. The default value is (10, 0, 10).</value>
-    public Vector3F Wind
+    public Vector3 Wind
     {
       get { return _wind; }
       set
@@ -220,7 +220,7 @@ namespace DigitalRise.Graphics
         _isDirty = true;
       }
     }
-    private Vector3F _wind;
+    private Vector3 _wind;
 
 
     /// <summary>
@@ -405,7 +405,7 @@ namespace DigitalRise.Graphics
       TextureSize = 256;
       CpuSize = 16;
       Gravity = 9.81f;
-      Wind = new Vector3F(10, 0, 10);
+      Wind = new Vector3(10, 0, 10);
       HeightScale = 0.01f;
       Directionality = 1;
       Choppiness = 1;
@@ -690,7 +690,7 @@ namespace DigitalRise.Graphics
       Vector2 kDirection = k / kLength;
 
       // Largest possible wave L = V² / g
-      float windSpeedSquared = Wind.LengthSquared;
+      float windSpeedSquared = Wind.LengthSquared();
       float windSpeed = (float)Math.Sqrt(windSpeedSquared);
       if (windSpeed < Numeric.EpsilonF)
         return 0;
@@ -737,13 +737,13 @@ namespace DigitalRise.Graphics
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    public bool GetDisplacement(float x, float z, out Vector3F displacement, out Vector3F normal)
+    public bool GetDisplacement(float x, float z, out Vector3 displacement, out Vector3 normal)
     {
       if (!EnableCpuQueries)
         throw new InvalidOperationException("OceanWaves.GetDisplacement() can only be called if EnableCpuQueries is set to true.");
 
-      displacement = new Vector3F(0);
-      normal = new Vector3F(0, 1, 0);
+      displacement = new Vector3(0);
+      normal = new Vector3(0, 1, 0);
       if (_h == null)
         return false;
 
@@ -787,9 +787,9 @@ namespace DigitalRise.Graphics
                                             py);
 #endif
 
-      displacement = new Vector3F(-d.X * Choppiness, h, -d.Y * Choppiness);
+      displacement = new Vector3(-d.X * Choppiness, h, -d.Y * Choppiness);
 
-      normal = new Vector3F(-n.X, 0, -n.Y);
+      normal = new Vector3(-n.X, 0, -n.Y);
       normal.Y = (float)Math.Sqrt(1 - normal.X * normal.X - normal.Y * normal.Y);
       return true;
     }

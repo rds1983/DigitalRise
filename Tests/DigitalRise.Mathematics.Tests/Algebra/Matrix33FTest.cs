@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -382,7 +383,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Assert.IsTrue(!Matrix33F.Zero.IsOrthogonal);
       Assert.IsTrue(Matrix33F.Identity.IsOrthogonal);
-      Assert.IsTrue(Matrix33F.CreateRotation(new Vector3F(1, 2, 3).Normalized, 0.5f).IsOrthogonal);
+      Assert.IsTrue(Matrix33F.CreateRotation(new Vector3(1, 2, 3).Normalized(), 0.5f).IsOrthogonal);
       Assert.IsTrue(new Matrix33F(1, 0, 0, 0, 1, 0, 0, 0, -1).IsOrthogonal);
     }
 
@@ -392,7 +393,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Assert.IsTrue(!Matrix33F.Zero.IsRotation);
       Assert.IsTrue(Matrix33F.Identity.IsRotation);
-      Assert.IsTrue(Matrix33F.CreateRotation(new Vector3F(1, 2, 3).Normalized, 0.5f).IsRotation);
+      Assert.IsTrue(Matrix33F.CreateRotation(new Vector3(1, 2, 3).Normalized(), 0.5f).IsRotation);
       Assert.IsTrue(!new Matrix33F(1, 0, 0, 0, 1, 0, 0, 0, -1).IsRotation);
     }
 
@@ -477,9 +478,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = new Matrix33F(1, 2, 3,
                                   2, 5, 8,
                                   7, 6, -1);
-      Vector3F v = Vector3F.One;
-      Vector3F w = m * v;
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector3 v = Vector3.One;
+      Vector3 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.Identity, m * m.Inverse));
     }
 
@@ -490,9 +491,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = new Matrix33F(0.0001f, 0, 0,
                                   0, 0.0001f, 0,
                                   0, 0, 0.0001f);
-      Vector3F v = Vector3F.One;
-      Vector3F w = m * v;
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector3 v = Vector3.One;
+      Vector3 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.Identity, m * m.Inverse));
     }
 
@@ -522,11 +523,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = new Matrix33F(1, 2, 3,
                                   2, 5, 8,
                                   7, 6, -1);
-      Vector3F v = Vector3F.One;
-      Vector3F w = m * v;
+      Vector3 v = Vector3.One;
+      Vector3 w = m * v;
       Matrix33F im = m;
       im.Invert();
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, im * w));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.Identity, m * im));
     }
 
@@ -552,9 +553,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetColumn()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      Assert.AreEqual(new Vector3F(1.0f, 4.0f, 7.0f), m.GetColumn(0));
-      Assert.AreEqual(new Vector3F(2.0f, 5.0f, 8.0f), m.GetColumn(1));
-      Assert.AreEqual(new Vector3F(3.0f, 6.0f, 9.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector3(1.0f, 4.0f, 7.0f), m.GetColumn(0));
+      Assert.AreEqual(new Vector3(2.0f, 5.0f, 8.0f), m.GetColumn(1));
+      Assert.AreEqual(new Vector3(3.0f, 6.0f, 9.0f), m.GetColumn(2));
     }
 
 
@@ -580,20 +581,20 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumn()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(0, new Vector3F(0.1f, 0.2f, 0.3f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetColumn(0));
-      Assert.AreEqual(new Vector3F(2.0f, 5.0f, 8.0f), m.GetColumn(1));
-      Assert.AreEqual(new Vector3F(3.0f, 6.0f, 9.0f), m.GetColumn(2));
+      m.SetColumn(0, new Vector3(0.1f, 0.2f, 0.3f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetColumn(0));
+      Assert.AreEqual(new Vector3(2.0f, 5.0f, 8.0f), m.GetColumn(1));
+      Assert.AreEqual(new Vector3(3.0f, 6.0f, 9.0f), m.GetColumn(2));
 
-      m.SetColumn(1, new Vector3F(0.4f, 0.5f, 0.6f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetColumn(0));
-      Assert.AreEqual(new Vector3F(0.4f, 0.5f, 0.6f), m.GetColumn(1));
-      Assert.AreEqual(new Vector3F(3.0f, 6.0f, 9.0f), m.GetColumn(2));
+      m.SetColumn(1, new Vector3(0.4f, 0.5f, 0.6f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetColumn(0));
+      Assert.AreEqual(new Vector3(0.4f, 0.5f, 0.6f), m.GetColumn(1));
+      Assert.AreEqual(new Vector3(3.0f, 6.0f, 9.0f), m.GetColumn(2));
 
-      m.SetColumn(2, new Vector3F(0.7f, 0.8f, 0.9f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetColumn(0));
-      Assert.AreEqual(new Vector3F(0.4f, 0.5f, 0.6f), m.GetColumn(1));
-      Assert.AreEqual(new Vector3F(0.7f, 0.8f, 0.9f), m.GetColumn(2));
+      m.SetColumn(2, new Vector3(0.7f, 0.8f, 0.9f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetColumn(0));
+      Assert.AreEqual(new Vector3(0.4f, 0.5f, 0.6f), m.GetColumn(1));
+      Assert.AreEqual(new Vector3(0.7f, 0.8f, 0.9f), m.GetColumn(2));
     }
 
 
@@ -602,7 +603,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException1()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(-1, Vector3F.One);
+      m.SetColumn(-1, Vector3.One);
     }
 
 
@@ -611,7 +612,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException2()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetColumn(3, Vector3F.One);
+      m.SetColumn(3, Vector3.One);
     }
 
 
@@ -619,9 +620,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetRow()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      Assert.AreEqual(new Vector3F(1.0f, 2.0f, 3.0f), m.GetRow(0));
-      Assert.AreEqual(new Vector3F(4.0f, 5.0f, 6.0f), m.GetRow(1));
-      Assert.AreEqual(new Vector3F(7.0f, 8.0f, 9.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector3(1.0f, 2.0f, 3.0f), m.GetRow(0));
+      Assert.AreEqual(new Vector3(4.0f, 5.0f, 6.0f), m.GetRow(1));
+      Assert.AreEqual(new Vector3(7.0f, 8.0f, 9.0f), m.GetRow(2));
     }
 
 
@@ -647,20 +648,20 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRow()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(0, new Vector3F(0.1f, 0.2f, 0.3f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetRow(0));
-      Assert.AreEqual(new Vector3F(4.0f, 5.0f, 6.0f), m.GetRow(1));
-      Assert.AreEqual(new Vector3F(7.0f, 8.0f, 9.0f), m.GetRow(2));
+      m.SetRow(0, new Vector3(0.1f, 0.2f, 0.3f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetRow(0));
+      Assert.AreEqual(new Vector3(4.0f, 5.0f, 6.0f), m.GetRow(1));
+      Assert.AreEqual(new Vector3(7.0f, 8.0f, 9.0f), m.GetRow(2));
 
-      m.SetRow(1, new Vector3F(0.4f, 0.5f, 0.6f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetRow(0));
-      Assert.AreEqual(new Vector3F(0.4f, 0.5f, 0.6f), m.GetRow(1));
-      Assert.AreEqual(new Vector3F(7.0f, 8.0f, 9.0f), m.GetRow(2));
+      m.SetRow(1, new Vector3(0.4f, 0.5f, 0.6f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetRow(0));
+      Assert.AreEqual(new Vector3(0.4f, 0.5f, 0.6f), m.GetRow(1));
+      Assert.AreEqual(new Vector3(7.0f, 8.0f, 9.0f), m.GetRow(2));
 
-      m.SetRow(2, new Vector3F(0.7f, 0.8f, 0.9f));
-      Assert.AreEqual(new Vector3F(0.1f, 0.2f, 0.3f), m.GetRow(0));
-      Assert.AreEqual(new Vector3F(0.4f, 0.5f, 0.6f), m.GetRow(1));
-      Assert.AreEqual(new Vector3F(0.7f, 0.8f, 0.9f), m.GetRow(2));
+      m.SetRow(2, new Vector3(0.7f, 0.8f, 0.9f));
+      Assert.AreEqual(new Vector3(0.1f, 0.2f, 0.3f), m.GetRow(0));
+      Assert.AreEqual(new Vector3(0.4f, 0.5f, 0.6f), m.GetRow(1));
+      Assert.AreEqual(new Vector3(0.7f, 0.8f, 0.9f), m.GetRow(2));
     }
 
 
@@ -669,7 +670,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException1()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(-1, Vector3F.One);
+      m.SetRow(-1, Vector3.One);
     }
 
 
@@ -678,7 +679,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException2()
     {
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
-      m.SetRow(3, Vector3F.One);
+      m.SetRow(3, Vector3.One);
     }
 
 
@@ -724,16 +725,16 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F i = Matrix33F.CreateScale(1.0f);
       Assert.AreEqual(Matrix33F.Identity, i);
 
-      Vector3F v = Vector3F.One;
+      Vector3 v = Vector3.One;
       Matrix33F m = Matrix33F.CreateScale(2.0f);
       Assert.AreEqual(2 * v, m * v);
 
       m = Matrix33F.CreateScale(-1.0f, 1.5f, 2.0f);
-      Assert.AreEqual(new Vector3F(-1.0f, 1.5f, 2.0f), m * v);
+      Assert.AreEqual(new Vector3(-1.0f, 1.5f, 2.0f), m * v);
 
-      Vector3F scale = new Vector3F(-2.0f, -3.0f, -4.0f);
+      Vector3 scale = new Vector3(-2.0f, -3.0f, -4.0f);
       m = Matrix33F.CreateScale(scale);
-      v = new Vector3F(1.0f, 2.0f, 3.0f);
+      v = new Vector3(1.0f, 2.0f, 3.0f);
       Assert.AreEqual(v * scale, m * v);
     }
 
@@ -741,17 +742,17 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void CreateRotation()
     {
-      Matrix33F m = Matrix33F.CreateRotation(Vector3F.UnitX, 0.0f);
+      Matrix33F m = Matrix33F.CreateRotation(Vector3.UnitX, 0.0f);
       Assert.AreEqual(Matrix33F.Identity, m);
 
-      m = Matrix33F.CreateRotation(Vector3F.UnitX, (float) Math.PI / 2);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(Vector3F.UnitZ, m * Vector3F.UnitY));
+      m = Matrix33F.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitZ, m * Vector3.UnitY));
 
-      m = Matrix33F.CreateRotation(Vector3F.UnitY, (float) Math.PI / 2);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(Vector3F.UnitX, m * Vector3F.UnitZ));
+      m = Matrix33F.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitX, m * Vector3.UnitZ));
 
-      m = Matrix33F.CreateRotation(Vector3F.UnitZ, (float) Math.PI / 2);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(Vector3F.UnitY, m * Vector3F.UnitX));
+      m = Matrix33F.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitY, m * Vector3.UnitX));
     }
 
 
@@ -759,7 +760,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void CreateRotationException()
     {
-      Matrix33F.CreateRotation(Vector3F.Zero, 1f);
+      Matrix33F.CreateRotation(Vector3.Zero, 1f);
     }
 
 
@@ -768,12 +769,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float) MathHelper.ToRadians(30.0f);
       Matrix33F m = Matrix33F.CreateRotationX(angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, (float) Math.Cos(angle), (float) Math.Sin(angle)), m * Vector3F.UnitY));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, (float) Math.Cos(angle), (float) Math.Sin(angle)), m * Vector3.UnitY));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3F.UnitX, angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(q.Rotate(Vector3F.One), m * Vector3F.One));
+      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitX, angle);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3F.UnitX, angle), m));
+      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitX, angle), m));
     }
 
 
@@ -782,12 +783,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float) MathHelper.ToRadians(30);
       Matrix33F m = Matrix33F.CreateRotationY(angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F((float) Math.Sin(angle), 0, (float) Math.Cos(angle)), m * Vector3F.UnitZ));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3((float) Math.Sin(angle), 0, (float) Math.Cos(angle)), m * Vector3.UnitZ));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3F.UnitY, angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(q.Rotate(Vector3F.One), m * Vector3F.One));
+      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitY, angle);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3F.UnitY, angle), m));
+      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitY, angle), m));
     }
 
 
@@ -796,12 +797,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float) MathHelper.ToRadians(30);
       Matrix33F m = Matrix33F.CreateRotationZ(angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F((float) Math.Cos(angle), (float) Math.Sin(angle), 0), m * Vector3F.UnitX));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3((float) Math.Cos(angle), (float) Math.Sin(angle), 0), m * Vector3.UnitX));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3F.UnitZ, angle);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(q.Rotate(Vector3F.One), m * Vector3F.One));
+      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitZ, angle);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3F.UnitZ, angle), m));
+      Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitZ, angle), m));
     }
 
 
@@ -809,14 +810,14 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void FromQuaternion()
     {
       float angle = -1.6f;
-      Vector3F axis = new Vector3F(1.0f, 2.0f, -3.0f);
+      Vector3 axis = new Vector3(1.0f, 2.0f, -3.0f);
       Matrix33F matrix = Matrix33F.CreateRotation(axis, angle);
       QuaternionF q = QuaternionF.CreateRotation(axis, angle);
       Matrix33F matrixFromQuaternion = Matrix33F.CreateRotation(q);
-      Vector3F v = new Vector3F(0.3f, -2.4f, 5.6f);
-      Vector3F result1 = matrix * v;
-      Vector3F result2 = matrixFromQuaternion * v;
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(result1, result2));
+      Vector3 v = new Vector3(0.3f, -2.4f, 5.6f);
+      Vector3 result1 = matrix * v;
+      Vector3 result2 = matrixFromQuaternion * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
     }
 
 
@@ -1002,7 +1003,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F result = m1 * m2;
       for (int column = 0; column < 3; column++)
         for (int row = 0; row < 3; row++)
-          Assert.AreEqual(Vector3F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector3.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
@@ -1026,41 +1027,41 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F result = Matrix33F.Multiply(m1, m2);
       for (int column = 0; column < 3; column++)
         for (int row = 0; row < 3; row++)
-          Assert.AreEqual(Vector3F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector3.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
     [Test]
     public void MultiplyVectorOperator()
     {
-      Vector3F v = new Vector3F(2.34f, 3.45f, 4.56f);
+      Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
       Assert.AreEqual(v, Matrix33F.Identity * v);
-      Assert.AreEqual(Vector3F.Zero, Matrix33F.Zero * v);
+      Assert.AreEqual(Vector3.Zero, Matrix33F.Zero * v);
 
       Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
                                 43, 65, 87);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, m * m.Inverse * v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m * m.Inverse * v));
 
       for (int i = 0; i < 3; i++)
-        Assert.AreEqual(Vector3F.Dot(m.GetRow(i), v), (m * v)[i]);
+        Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
     }
 
 
     [Test]
     public void MultiplyVector()
     {
-      Vector3F v = new Vector3F(2.34f, 3.45f, 4.56f);
+      Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
       Assert.AreEqual(v, Matrix33F.Multiply(Matrix33F.Identity, v));
-      Assert.AreEqual(Vector3F.Zero, Matrix33F.Multiply(Matrix33F.Zero, v));
+      Assert.AreEqual(Vector3.Zero, Matrix33F.Multiply(Matrix33F.Zero, v));
 
       Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
                                 43, 65, 87);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(v, Matrix33F.Multiply(m * m.Inverse, v)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, Matrix33F.Multiply(m * m.Inverse, v)));
 
       for (int i = 0; i < 3; i++)
-        Assert.AreEqual(Vector3F.Dot(m.GetRow(i), v), Matrix33F.Multiply(m, v)[i]);
+        Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), Matrix33F.Multiply(m, v).GetComponentByIndex(i));
     }
 
 
@@ -1068,7 +1069,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void MultiplyTransposed()
     {
       var m = RandomHelper.Random.NextMatrix33F(1, 10);
-      var v = RandomHelper.Random.NextVector3F(1, 10);
+      var v = RandomHelper.Random.NextVector3(1, 10);
 
       Assert.AreEqual(m.Transposed * v, Matrix33F.MultiplyTransposed(m, v));
     }

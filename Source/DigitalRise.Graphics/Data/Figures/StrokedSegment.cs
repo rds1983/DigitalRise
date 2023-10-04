@@ -17,7 +17,7 @@ namespace DigitalRise.Graphics
   /// The type of the curve parameter (usually <see cref="float"/> or <see cref="double"/>).
   /// </typeparam>
   /// <typeparam name="TPoint">
-  /// The type of the curve points (such as <see cref="Vector2"/>, <see cref="Vector3F"/>, etc.).
+  /// The type of the curve points (such as <see cref="Vector2"/>, <see cref="Vector3"/>, etc.).
   /// </typeparam>
   /// <remarks>
   /// Curve segments within a <see cref="PathFigure2F"/> are stroked by default. The 
@@ -43,9 +43,9 @@ namespace DigitalRise.Graphics
   /// };
   /// var figureNode1 = new FigureNode(boxFigure1)
   /// {
-  ///   StrokeColor = new Vector3F(0, 0, 0),
+  ///   StrokeColor = new Vector3(0, 0, 0),
   ///   StrokeThickness = 2,
-  ///   FillColor = new Vector3F(0.5f, 0.5f, 0.5f)
+  ///   FillColor = new Vector3(0.5f, 0.5f, 0.5f)
   /// };
   /// 
   /// // Box where top and bottom edges are stroked.
@@ -65,9 +65,9 @@ namespace DigitalRise.Graphics
   /// };
   /// var figureNode2 = new FigureNode(boxFigure2)
   /// {
-  ///   StrokeColor = new Vector3F(0, 0, 0),
+  ///   StrokeColor = new Vector3(0, 0, 0),
   ///   StrokeThickness = 2,
-  ///   FillColor = new Vector3F(0.5f, 0.5f, 0.5f)
+  ///   FillColor = new Vector3(0.5f, 0.5f, 0.5f)
   /// };
   /// ]]>
   /// </code>
@@ -243,7 +243,7 @@ namespace DigitalRise.Graphics
   /// Wraps a 3D curve segment (single-precision) and determines whether it is stroked or not.
   /// </summary>
   /// <inheritdoc/>
-  public class StrokedSegment3F : StrokedSegment<float, Vector3F>
+  public class StrokedSegment3F : StrokedSegment<float, Vector3>
   {
     /// <overloads>
     /// <summary>
@@ -259,7 +259,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="curve"/> is <see langword="null"/>.
     /// </exception>
-    public StrokedSegment3F(ICurve<float, Vector3F> curve)
+    public StrokedSegment3F(ICurve<float, Vector3> curve)
       : base(curve)
     {
     }
@@ -275,7 +275,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="curve"/> is <see langword="null"/>.
     /// </exception>
-    public StrokedSegment3F(ICurve<float, Vector3F> curve, bool isStroked)
+    public StrokedSegment3F(ICurve<float, Vector3> curve, bool isStroked)
       : base(curve, isStroked)
     {
     }

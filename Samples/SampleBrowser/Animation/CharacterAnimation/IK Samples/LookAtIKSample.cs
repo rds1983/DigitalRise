@@ -23,7 +23,7 @@ namespace Samples.Animation
   {
     private readonly MeshNode _meshNode;
 
-    private Vector3F _targetPosition = new Vector3F(-1, 0, 0);
+    private Vector3 _targetPosition = new Vector3(-1, 0, 0);
 
     // The IK solver - one per affected bone.
     private readonly LookAtIKSolver _spine1IK;
@@ -38,7 +38,7 @@ namespace Samples.Animation
     {
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Dude/Dude.drmdl");
       _meshNode = modelNode.FindFirstMeshNode().Clone();
-      _meshNode.PoseLocal = new Pose(new Vector3F(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
+      _meshNode.PoseLocal = new Pose(new Vector3(0, 0, 0), Matrix33F.CreateRotationY(ConstantsF.Pi));
       SampleHelper.EnablePerPixelLighting(_meshNode);
       GraphicsScreen.Scene.Children.Add(_meshNode);
 
@@ -58,10 +58,10 @@ namespace Samples.Animation
         BoneIndex = 3,
 
         // The bone space axis that points in look direction.
-        Forward = Vector3F.UnitY,
+        Forward = Vector3.UnitY,
 
         // The bone space axis that points in up direction
-        Up = Vector3F.UnitX,
+        Up = Vector3.UnitX,
 
         // An arbitrary rotation limit.
         Limit = ConstantsF.PiOver4,
@@ -74,49 +74,49 @@ namespace Samples.Animation
         // It is important to set the EyeOffsets. If we do not set EyeOffsets, the IK solver 
         // assumes that the eyes are positioned in the origin of the bone. 
         // Approximate EyeOffsets are sufficient.
-        EyeOffset = new Vector3F(0.8f, 0, 0),
+        EyeOffset = new Vector3(0.8f, 0, 0),
       };
 
       _spine2IK = new LookAtIKSolver
       {
         SkeletonPose = _meshNode.SkeletonPose,
         BoneIndex = 4,
-        Forward = Vector3F.UnitY,
-        Up = Vector3F.UnitX,
+        Forward = Vector3.UnitY,
+        Up = Vector3.UnitX,
         Limit = ConstantsF.PiOver4,
         Weight = 0.2f,
-        EyeOffset = new Vector3F(0.64f, 0, 0),
+        EyeOffset = new Vector3(0.64f, 0, 0),
       };
 
       _spine3IK = new LookAtIKSolver
       {
         SkeletonPose = _meshNode.SkeletonPose,
         BoneIndex = 5,
-        Forward = Vector3F.UnitY,
-        Up = Vector3F.UnitX,
+        Forward = Vector3.UnitY,
+        Up = Vector3.UnitX,
         Limit = ConstantsF.PiOver4,
         Weight = 0.3f,
-        EyeOffset = new Vector3F(0.48f, 0, 0),
+        EyeOffset = new Vector3(0.48f, 0, 0),
       };
 
       _neckIK = new LookAtIKSolver
       {
         SkeletonPose = _meshNode.SkeletonPose,
         BoneIndex = 6,
-        Forward = Vector3F.UnitY,
-        Up = Vector3F.UnitX,
+        Forward = Vector3.UnitY,
+        Up = Vector3.UnitX,
         Limit = ConstantsF.PiOver4,
         Weight = 0.4f,
-        EyeOffset = new Vector3F(0.32f, 0, 0),
+        EyeOffset = new Vector3(0.32f, 0, 0),
       };
 
       _headIK = new LookAtIKSolver
       {
         SkeletonPose = _meshNode.SkeletonPose,
         BoneIndex = 7,
-        Forward = Vector3F.UnitY,
-        Up = Vector3F.UnitX,
-        EyeOffset = new Vector3F(0.16f, 0.16f, 0),
+        Forward = Vector3.UnitY,
+        Up = Vector3.UnitX,
+        EyeOffset = new Vector3(0.16f, 0.16f, 0),
         Weight = 1.0f,
         Limit = ConstantsF.PiOver4,
       };
@@ -128,7 +128,7 @@ namespace Samples.Animation
       base.Update(gameTime);
 
       // ----- Move target if <NumPad4-9> are pressed.
-      Vector3F translation = new Vector3F();
+      Vector3 translation = new Vector3();
       if (InputService.IsDown(Keys.NumPad4))
         translation.X -= 1;
       if (InputService.IsDown(Keys.NumPad6))
@@ -148,7 +148,7 @@ namespace Samples.Animation
 
       // Convert target world space position to model space.
       // (The IK solvers work in model space.)
-      Vector3F localTargetPosition = _meshNode.PoseWorld.ToLocalPosition(_targetPosition);
+      Vector3 localTargetPosition = _meshNode.PoseWorld.ToLocalPosition(_targetPosition);
 
       // Update the IK solver target positions.
       _spine1IK.Target = localTargetPosition;

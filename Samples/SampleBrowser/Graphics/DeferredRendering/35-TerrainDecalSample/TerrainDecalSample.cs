@@ -43,7 +43,7 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
 
       // Add a custom game object which controls the camera.
       var cameraObject = new CameraObject(Services, 5000);
-      cameraObject.ResetPose(new Vector3F(0, 2, 5), 0, 0);
+      cameraObject.ResetPose(new Vector3(0, 2, 5), 0, 0);
       GameObjectService.Objects.Add(cameraObject);
       _graphicsScreen.ActiveCameraNode = cameraObject.CameraNode;
 
@@ -67,8 +67,8 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
         Pose = GetRandomPose(),
         Width = 2,
         Height = 2,
-        DiffuseColor = new Vector3F(0.08f),
-        SpecularColor = new Vector3F(0.2f),
+        DiffuseColor = new Vector3(0.08f),
+        SpecularColor = new Vector3(0.2f),
         SpecularPower = 100,
         DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Decal_diffuse_mask.dds"), // Original: "Decals/Blood_diffuse_mask",
         NormalTexture =  GraphicsService.GetDefaultNormalTexture(),   // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_normal.png"),
@@ -85,8 +85,8 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
         Pose = GetRandomPose(),
         Width = 2,
         Height = 2,
-        DiffuseColor = new Vector3F(0.0f),
-        SpecularColor = new Vector3F(0.5f),
+        DiffuseColor = new Vector3(0.0f),
+        SpecularColor = new Vector3(0.5f),
         SpecularPower = 100,
         DiffuseTexture = AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Decal_diffuse_mask.dds"), // Original: "Decals/Blood_diffuse_mask",
         NormalTexture = GraphicsService.GetDefaultNormalTexture(),   // Original: AssetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Decals/Blood_normal.png"),
@@ -115,7 +115,7 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
     {
       // Get a random position.
       const float decalAreaSize = 20;
-      var randomPosition = new Vector3F(
+      var randomPosition = new Vector3(
         RandomHelper.Random.NextFloat(-decalAreaSize, decalAreaSize),
         0,
         RandomHelper.Random.NextFloat(-decalAreaSize, 0));

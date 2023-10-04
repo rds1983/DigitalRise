@@ -7,7 +7,6 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -30,11 +29,11 @@ namespace Samples.Particles
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.Lifetime).DefaultValue = float.PositiveInfinity;
 
-      ps.Parameters.AddVarying<Vector3F>(ParticleParameterNames.Position);
+      ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Position);
       ps.Effectors.Add(new StartPositionEffector
       {
         Parameter = ParticleParameterNames.Position,
-        DefaultValue = new Vector3F(0, 0, 0)
+        DefaultValue = new Vector3(0, 0, 0)
       });
 
       ps.Parameters.AddUniform<float>(ParticleParameterNames.SizeY).DefaultValue = 0.1f;
@@ -56,7 +55,7 @@ namespace Samples.Particles
       });
 
       // The BeeEffector creates the random movement of the bees.
-      ps.Parameters.AddVarying<Vector3F>("TargetPosition");
+      ps.Parameters.AddVarying<Vector3>("TargetPosition");
       ps.Parameters.AddUniform<Pose>("CameraPose").DefaultValue = Pose.Identity;
       ps.Effectors.Add(new BeeEffector
       {

@@ -7,7 +7,7 @@ using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples
 {
@@ -75,7 +75,7 @@ namespace Samples
     private void OnDirectionalLightNodeChanged(object sender, SceneChangedEventArgs eventArgs)
     {
       _godRayFilter.Enabled = _directionalLightNode.IsEnabled;
-      _godRayFilter.LightDirection = _directionalLightNode.PoseWorld.ToWorldDirection(Vector3F.Forward);
+      _godRayFilter.LightDirection = _directionalLightNode.PoseWorld.ToWorldDirection(Vector3.Forward);
     }
   }
 }

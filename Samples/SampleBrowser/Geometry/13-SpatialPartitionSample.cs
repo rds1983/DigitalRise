@@ -31,7 +31,7 @@ be faster in certain cases.",
       GraphicsScreen.ClearBackground = true;
       GraphicsScreen.BackgroundColor = Color.Gray;
       GraphicsScreen.DrawReticle = true;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // Create a spatial partition. DigitalRise Geometry supports several types, see also
       // http://digitalrune.github.io/DigitalRise-Documentation/html/e32cab3b-cc7c-42ee-8ec9-23dd4467edd0.htm#WhichPartition
@@ -71,7 +71,7 @@ be faster in certain cases.",
       var random = new Random();
       for (int i = 0; i < 50; i++)
       {
-        var randomPosition = new Vector3F(random.NextFloat(-6, 6), random.NextFloat(-3, 3), random.NextFloat(-10, 0));
+        var randomPosition = new Vector3(random.NextFloat(-6, 6), random.NextFloat(-3, 3), random.NextFloat(-10, 0));
         var geometricObject = new GeometricObject(triangleMeshShape, new Pose(randomPosition));
         _spatialPartition.Add(geometricObject);
       }
@@ -96,7 +96,7 @@ be faster in certain cases.",
       var ray = new Ray
       {
         Origin = cameraPose.Position,
-        Direction = cameraPose.ToWorldDirection(Vector3F.Forward),
+        Direction = cameraPose.ToWorldDirection(Vector3.Forward),
         Length = 100,
       };
 
@@ -143,7 +143,7 @@ be faster in certain cases.",
 
       // Draw hit triangle.
       if (closestHitGeometricObject != null)
-        debugRenderer.DrawTriangle(closestHitTriangle, closestHitGeometricObject.Pose, Vector3F.One, Color.Red, true, true);
+        debugRenderer.DrawTriangle(closestHitTriangle, closestHitGeometricObject.Pose, Vector3.One, Color.Red, true, true);
     }
   }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -606,10 +606,10 @@ namespace DigitalRise.Animation.Tests
         TargetObject = "ObjectB",   // Ignored because ObjectA is selected by animationGroup1.
         TargetProperty = "Value",   // Required.
       };
-      var animationA3 = new Vector3FFromToByAnimation // Ignored because of incompatible type.
+      var animationA3 = new Vector3FromToByAnimation // Ignored because of incompatible type.
       {
-        From = new Vector3F(300.0f),
-        To = new Vector3F(400.0f),
+        From = new Vector3(300.0f),
+        To = new Vector3(400.0f),
         TargetObject = "ObjectA",
         TargetProperty = "Value",
       };
@@ -652,7 +652,7 @@ namespace DigitalRise.Animation.Tests
       var controller = manager.CreateController(animationGroupRoot, new[] { objectA, objectB, objectC });
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[0]).Property);
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[1]).Property);
-      Assert.AreEqual(null, ((AnimationInstance<Vector3F>)controller.AnimationInstance.Children[0].Children[2]).Property);
+      Assert.AreEqual(null, ((AnimationInstance<Vector3>)controller.AnimationInstance.Children[0].Children[2]).Property);
       Assert.AreEqual(null, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[3]).Property);
       Assert.AreEqual(propertyB, ((AnimationInstance<float>)controller.AnimationInstance.Children[1]).Property);
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[2]).Property);
@@ -701,7 +701,7 @@ namespace DigitalRise.Animation.Tests
       controller.UpdateAndApply();
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[0]).Property);
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[1]).Property);
-      Assert.AreEqual(null, ((AnimationInstance<Vector3F>)controller.AnimationInstance.Children[0].Children[2]).Property);
+      Assert.AreEqual(null, ((AnimationInstance<Vector3>)controller.AnimationInstance.Children[0].Children[2]).Property);
       Assert.AreEqual(null, ((AnimationInstance<float>)controller.AnimationInstance.Children[0].Children[3]).Property);
       Assert.AreEqual(propertyB, ((AnimationInstance<float>)controller.AnimationInstance.Children[1]).Property);
       Assert.AreEqual(propertyA1, ((AnimationInstance<float>)controller.AnimationInstance.Children[2]).Property);

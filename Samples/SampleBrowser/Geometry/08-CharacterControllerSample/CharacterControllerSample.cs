@@ -96,11 +96,11 @@ a more advanced, faster and more stable character controller implementation.",
 
       // Create character controller. 
       _character = new CharacterController(_domain);
-      _character.Position = new Vector3F(0, 0, 1);
+      _character.Position = new Vector3(0, 0, 1);
 
       // Create the trigger volume. 
       _triggerVolume = new CollisionObject(
-        new GeometricObject(new SphereShape(3), new Pose(new Vector3F(-5, 0, 5))))
+        new GeometricObject(new SphereShape(3), new Pose(new Vector3(-5, 0, 5))))
       {
         // We do not want to compute detailed contact information (contact points, contact 
         // normal vectors, etc.). We are only interested if the object touches another object or not.
@@ -185,7 +185,7 @@ a more advanced, faster and more stable character controller implementation.",
 
       // Create velocity from WASD keys.
       // TODO: Diagonal movement is faster ;-). Fix this.
-      Vector3F velocityVector = Vector3F.Zero;
+      Vector3 velocityVector = Vector3.Zero;
       if (Keyboard.GetState().IsKeyDown(Keys.W))
         velocityVector.Z--;
       if (Keyboard.GetState().IsKeyDown(Keys.S))
@@ -201,7 +201,7 @@ a more advanced, faster and more stable character controller implementation.",
       velocityVector = QuaternionF.CreateRotationY(_yaw).Rotate(velocityVector);
 
       // New compute desired character controller position in world space:
-      Vector3F targetPosition = _character.Position + velocityVector;
+      Vector3 targetPosition = _character.Position + velocityVector;
 
       // Check if user wants to jump.
       bool jump = Keyboard.GetState().IsKeyDown(Keys.Space);
@@ -213,13 +213,13 @@ a more advanced, faster and more stable character controller implementation.",
       // ----- Set view matrix for graphics.
       // For third person we move the eye position back, behind the body (+z direction is 
       // the "back" direction).
-      Vector3F thirdPersonDistance = cameraOrientation.Rotate(new Vector3F(0, 0, 6));
+      Vector3 thirdPersonDistance = cameraOrientation.Rotate(new Vector3(0, 0, 6));
 
       // Compute camera pose (= position + orientation). 
       _cameraNode.PoseWorld = new Pose
       {
         Position = _character.Position         // Floor position of character
-                   + new Vector3F(0, 1.6f, 0)  // + Eye height
+                   + new Vector3(0, 1.6f, 0)  // + Eye height
                    + thirdPersonDistance,
         Orientation = cameraOrientation.ToRotationMatrix33()
       };

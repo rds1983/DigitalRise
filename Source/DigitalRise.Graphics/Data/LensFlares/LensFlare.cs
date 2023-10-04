@@ -89,7 +89,7 @@ namespace DigitalRise.Graphics
     /// </value>
     /// <remarks>
     /// Directional lights are treated as if placed at an infinite distance. The light direction is
-    /// defined by the forward direction (see <see cref="Vector3F.Forward"/>) of the 
+    /// defined by the forward direction (see <see cref="Vector3.Forward"/>) of the 
     /// <see cref="LensFlareNode"/>.
     /// </remarks>
     public bool IsDirectional { get; private set; }

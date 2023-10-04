@@ -1,5 +1,5 @@
 using System;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -14,66 +14,66 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       path.Add(new PathKey3F()
       {
         Parameter = 10,
-        Point = new Vector3F(1, 2, 3),
+        Point = new Vector3(1, 2, 3),
         Interpolation = SplineInterpolation.StepLeft,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 15,
-        Point = new Vector3F(4, 5, 7),
+        Point = new Vector3(4, 5, 7),
         Interpolation = SplineInterpolation.StepCentered,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 18,
-        Point = new Vector3F(5, 7, 10),
+        Point = new Vector3(5, 7, 10),
         Interpolation = SplineInterpolation.StepRight,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 20,
-        Point = new Vector3F(5, 7, 13),
+        Point = new Vector3(5, 7, 13),
         Interpolation = SplineInterpolation.Linear,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 25,
-        Point = new Vector3F(6, 7, 14),
+        Point = new Vector3(6, 7, 14),
         Interpolation = SplineInterpolation.Bezier,
-        TangentIn = new Vector3F(5, 6, 13),
-        TangentOut = new Vector3F(7, 8, 15),
+        TangentIn = new Vector3(5, 6, 13),
+        TangentOut = new Vector3(7, 8, 15),
       });      
       path.Add(new PathKey3F()
       {
         Parameter = 31,
-        Point = new Vector3F(8, 10, 16),
+        Point = new Vector3(8, 10, 16),
         Interpolation = SplineInterpolation.BSpline,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 35,
-        Point = new Vector3F(10, 12, 14),
+        Point = new Vector3(10, 12, 14),
         Interpolation = SplineInterpolation.Hermite,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       path.Add(new PathKey3F()
       {
         Parameter = 40,
-        Point = new Vector3F(10, 14, 8),
+        Point = new Vector3(10, 14, 8),
         Interpolation = SplineInterpolation.CatmullRom,
-        TangentIn = new Vector3F(1, 0, 0),
-        TangentOut = new Vector3F(1, 0, 0),
+        TangentIn = new Vector3(1, 0, 0),
+        TangentOut = new Vector3(1, 0, 0),
       });
       return path;
     }

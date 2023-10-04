@@ -4,12 +4,12 @@
 
 using System;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles.Effectors
 {
   /// <summary>
-  /// Linearly interpolates a particle parameter of type <see cref="Vector3F"/> between a start and 
+  /// Linearly interpolates a particle parameter of type <see cref="Vector3"/> between a start and 
   /// an end value.
   /// </summary>
   /// <remarks>
@@ -20,19 +20,19 @@ namespace DigitalRise.Particles.Effectors
   /// <item>
   /// <term><see cref="ValueParameter"/></term>
   /// <description>
-  /// The <see cref="Vector3F"/> parameter that stores the result of the linear interpolation.
+  /// The <see cref="Vector3"/> parameter that stores the result of the linear interpolation.
   /// </description>
   /// </item>
   /// <item>
   /// <term><see cref="StartParameter"/></term>
   /// <description>
-  /// A <see cref="Vector3F"/> parameter that defines the start value.
+  /// A <see cref="Vector3"/> parameter that defines the start value.
   /// </description>
   /// </item>
   /// <item>
   /// <term><see cref="EndParameter"/></term>
   /// <description>
-  /// A <see cref="Vector3F"/> parameter that defines the end value.
+  /// A <see cref="Vector3"/> parameter that defines the end value.
   /// </description>
   /// </item>
   /// <item>
@@ -46,15 +46,15 @@ namespace DigitalRise.Particles.Effectors
   /// </list>
   /// </para>
   /// </remarks>
-  public class Vector3FLerpEffector : ParticleEffector
+  public class Vector3LerpEffector : ParticleEffector
   {
     //--------------------------------------------------------------
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _startParameter;
-    private IParticleParameter<Vector3F> _endParameter;
-    private IParticleParameter<Vector3F> _valueParameter;
+    private IParticleParameter<Vector3> _startParameter;
+    private IParticleParameter<Vector3> _endParameter;
+    private IParticleParameter<Vector3> _valueParameter;
     private IParticleParameter<float> _factorParameter;
     #endregion
 
@@ -65,11 +65,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that stores the interpolation result.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that stores the interpolation result.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is <see langword="null"/>.
     /// </value>
     /// <remarks>
@@ -82,11 +82,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the start value.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the start value.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is <see langword="null"/>.
     /// </value>
     /// <remarks>
@@ -99,11 +99,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the end value.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the end value.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is <see langword="null"/>.
     /// </value>
     /// <remarks>
@@ -116,11 +116,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the interpolation factor.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the interpolation factor.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "NormalizedAge".
     /// </value>
     /// <remarks>
@@ -137,9 +137,9 @@ namespace DigitalRise.Particles.Effectors
     //--------------------------------------------------------------
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Vector3FLerpEffector"/> class.
+    /// Initializes a new instance of the <see cref="Vector3LerpEffector"/> class.
     /// </summary>
-    public Vector3FLerpEffector()
+    public Vector3LerpEffector()
     {
       FactorParameter = ParticleParameterNames.NormalizedAge;
     }
@@ -153,7 +153,7 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override ParticleEffector CreateInstanceCore()
     {
-      return new Vector3FLerpEffector();
+      return new Vector3LerpEffector();
     }
 
 
@@ -163,8 +163,8 @@ namespace DigitalRise.Particles.Effectors
       // Clone ParticleEffector properties.
       base.CloneCore(source);
 
-      // Clone Vector3FLerpEffector properties.
-      var sourceTyped = (Vector3FLerpEffector)source;
+      // Clone Vector3LerpEffector properties.
+      var sourceTyped = (Vector3LerpEffector)source;
       ValueParameter = sourceTyped.ValueParameter;
       StartParameter = sourceTyped.StartParameter;
       EndParameter = sourceTyped.EndParameter;
@@ -175,9 +175,9 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override void OnRequeryParameters()
     {
-      _valueParameter = ParticleSystem.Parameters.Get<Vector3F>(ValueParameter);
-      _startParameter = ParticleSystem.Parameters.Get<Vector3F>(StartParameter);
-      _endParameter = ParticleSystem.Parameters.Get<Vector3F>(EndParameter);
+      _valueParameter = ParticleSystem.Parameters.Get<Vector3>(ValueParameter);
+      _startParameter = ParticleSystem.Parameters.Get<Vector3>(StartParameter);
+      _endParameter = ParticleSystem.Parameters.Get<Vector3>(EndParameter);
       _factorParameter = ParticleSystem.Parameters.Get<float>(FactorParameter);
     }
 
@@ -203,7 +203,7 @@ namespace DigitalRise.Particles.Effectors
         return;
       }
 
-      Vector3F[] values = _valueParameter.Values;
+      Vector3[] values = _valueParameter.Values;
       if (values == null)
       {
         // Value is a uniform parameter.
@@ -224,7 +224,7 @@ namespace DigitalRise.Particles.Effectors
         return;
       }
 
-      Vector3F[] values = _valueParameter.Values;
+      Vector3[] values = _valueParameter.Values;
       if (values == null)
       {
         // Value is a uniform parameter. Uniform parameters are handled in OnBeginUpdate().
@@ -232,8 +232,8 @@ namespace DigitalRise.Particles.Effectors
       }
 
       // Value is a varying parameter.
-      Vector3F[] starts = _startParameter.Values;
-      Vector3F[] ends = _endParameter.Values;
+      Vector3[] starts = _startParameter.Values;
+      Vector3[] ends = _endParameter.Values;
       float[] factors = _factorParameter.Values;
 
       if (starts != null && ends != null && factors != null)
@@ -248,8 +248,8 @@ namespace DigitalRise.Particles.Effectors
       else if (starts == null && ends == null && factors != null)
       {
         // Optimized case: Start and End are uniform parameters, Factor is varying parameter.
-        Vector3F startValue = _startParameter.DefaultValue;
-        Vector3F endValue = _endParameter.DefaultValue;
+        Vector3 startValue = _startParameter.DefaultValue;
+        Vector3 endValue = _endParameter.DefaultValue;
         for (int i = startIndex; i < startIndex + count; i++)
         {
           var f = factors[i];

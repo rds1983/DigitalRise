@@ -168,7 +168,7 @@ namespace DigitalRise.Graphics
   /// <summary>
   /// Manages a collection of 3D path segments.
   /// </summary>
-  public class PathSegment3FCollection : FigureDataCollection<ICurve<float, Vector3F>>
+  public class PathSegment3FCollection : FigureDataCollection<ICurve<float, Vector3>>
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="PathSegment3FCollection"/> class.

@@ -1,9 +1,8 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -21,7 +20,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -32,14 +31,14 @@ namespace Samples.Physics
       RigidBody body = new RigidBody(new BoxShape(0.1f, 1, 2))
       {
         MotionType = MotionType.Static,
-        Pose = new Pose(new Vector3F(0, 0.5f, 0))
+        Pose = new Pose(new Vector3(0, 0.5f, 0))
       };
       Simulation.RigidBodies.Add(body);
 
       // Create a plank.
       body = new RigidBody(new BoxShape(5, 0.1f, 1.3f))
       {
-        Pose = new Pose(new Vector3F(0, 1.05f, 0))
+        Pose = new Pose(new Vector3(0, 1.05f, 0))
       };
       Simulation.RigidBodies.Add(body);
 
@@ -53,32 +52,32 @@ namespace Samples.Physics
       // up to approx. 1%. The procedure aborts after 3 iterations. 
       // Since the shape is a box FromShapeAndDensity computes the exact mass and the last two
       // parameters are irrelevant in this case.)
-      MassFrame mass = MassFrame.FromShapeAndDensity(boxShape, Vector3F.One, 200, 0.01f, 3);
+      MassFrame mass = MassFrame.FromShapeAndDensity(boxShape, Vector3.One, 200, 0.01f, 3);
 
       body = new RigidBody(boxShape, mass, null)
       {
-        Pose = new Pose(new Vector3F(-1.5f, 2f, 0))
+        Pose = new Pose(new Vector3(-1.5f, 2f, 0))
       };
       Simulation.RigidBodies.Add(body);
 
       body = new RigidBody(boxShape, mass, null)
       {
-        Pose = new Pose(new Vector3F(-1.5f, 2.7f, 0))
+        Pose = new Pose(new Vector3(-1.5f, 2.7f, 0))
       };
       Simulation.RigidBodies.Add(body);
 
       body = new RigidBody(boxShape, mass, null)
       {
-        Pose = new Pose(new Vector3F(-1.5f, 3.4f, 0))
+        Pose = new Pose(new Vector3(-1.5f, 3.4f, 0))
       };
       Simulation.RigidBodies.Add(body);
 
       // ----- Create a heavy body on the right.
       // The heavy body has a density of 2000.
-      mass = MassFrame.FromShapeAndDensity(boxShape, Vector3F.One, 2000, 0.01f, 3);
+      mass = MassFrame.FromShapeAndDensity(boxShape, Vector3.One, 2000, 0.01f, 3);
       body = new RigidBody(boxShape, mass, null)
       {
-        Pose = new Pose(new Vector3F(1.5f, 3, 0))
+        Pose = new Pose(new Vector3(1.5f, 3, 0))
       };
       Simulation.RigidBodies.Add(body);
     }

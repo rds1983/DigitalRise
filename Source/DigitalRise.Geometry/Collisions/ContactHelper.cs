@@ -8,7 +8,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions
 {
@@ -45,8 +45,8 @@ namespace DigitalRise.Geometry.Collisions
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static Contact CreateContact(CollisionObject objectA,
                                         CollisionObject objectB,
-                                        Vector3F position,
-                                        Vector3F normal,
+                                        Vector3 position,
+                                        Vector3 normal,
                                         float penetrationDepth,
                                         bool isRayHit)
     {
@@ -66,34 +66,34 @@ namespace DigitalRise.Geometry.Collisions
       }
       else
       {
-        //Vector3F halfPenetration = normal * (penetrationDepth / 2);
+        //Vector3 halfPenetration = normal * (penetrationDepth / 2);
         //contact.PositionALocal = objectA.GeometricObject.Pose.ToLocalPosition(position + halfPenetration);
         //contact.PositionBLocal = objectB.GeometricObject.Pose.ToLocalPosition(position - halfPenetration);
 
         // ----- Optimized version:
         float halfPenetration = penetrationDepth / 2;
-        Vector3F halfPenetrationVector;
+        Vector3 halfPenetrationVector;
         halfPenetrationVector.X = normal.X * halfPenetration;
         halfPenetrationVector.Y = normal.Y * halfPenetration;
         halfPenetrationVector.Z = normal.Z * halfPenetration;
 
         var poseA = objectA.GeometricObject.Pose;
-        Vector3F diffA;
+        Vector3 diffA;
         diffA.X = position.X + halfPenetrationVector.X - poseA.Position.X;
         diffA.Y = position.Y + halfPenetrationVector.Y - poseA.Position.Y;
         diffA.Z = position.Z + halfPenetrationVector.Z - poseA.Position.Z;
-        Vector3F positionALocal;
+        Vector3 positionALocal;
         positionALocal.X = poseA.Orientation.M00 * diffA.X + poseA.Orientation.M10 * diffA.Y + poseA.Orientation.M20 * diffA.Z;
         positionALocal.Y = poseA.Orientation.M01 * diffA.X + poseA.Orientation.M11 * diffA.Y + poseA.Orientation.M21 * diffA.Z;
         positionALocal.Z = poseA.Orientation.M02 * diffA.X + poseA.Orientation.M12 * diffA.Y + poseA.Orientation.M22 * diffA.Z;
         contact.PositionALocal = positionALocal;
 
         var poseB = objectB.GeometricObject.Pose;
-        Vector3F diffB;
+        Vector3 diffB;
         diffB.X = position.X - halfPenetrationVector.X - poseB.Position.X;
         diffB.Y = position.Y - halfPenetrationVector.Y - poseB.Position.Y;
         diffB.Z = position.Z - halfPenetrationVector.Z - poseB.Position.Z;
-        Vector3F positionBLocal;
+        Vector3 positionBLocal;
         positionBLocal.X = poseB.Orientation.M00 * diffB.X + poseB.Orientation.M10 * diffB.Y + poseB.Orientation.M20 * diffB.Z;
         positionBLocal.Y = poseB.Orientation.M01 * diffB.X + poseB.Orientation.M11 * diffB.Y + poseB.Orientation.M21 * diffB.Z;
         positionBLocal.Z = poseB.Orientation.M02 * diffB.X + poseB.Orientation.M12 * diffB.Y + poseB.Orientation.M22 * diffB.Z;
@@ -126,8 +126,8 @@ namespace DigitalRise.Geometry.Collisions
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
     public static Contact CreateContact(ContactSet contactSet,
-                                        Vector3F position,
-                                        Vector3F normal,
+                                        Vector3 position,
+                                        Vector3 normal,
                                         float penetrationDepth,
                                         bool isRayHit)
     {
@@ -286,7 +286,7 @@ namespace DigitalRise.Geometry.Collisions
         if (contact.FeatureA == otherContact.FeatureA && contact.FeatureB == otherContact.FeatureB)
         {
           // Check position difference.
-          float distanceSquared = (otherContact.Position - contact.Position).LengthSquared;
+          float distanceSquared = (otherContact.Position - contact.Position).LengthSquared();
           if (distanceSquared < minDistanceSquared)
           {
             minDistanceSquared = distanceSquared;
@@ -444,14 +444,14 @@ namespace DigitalRise.Geometry.Collisions
     /// removed.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void RemoveBadContacts(ContactSet contactSet, Vector3F normal, float minDotProduct)
+    public static void RemoveBadContacts(ContactSet contactSet, Vector3 normal, float minDotProduct)
     {
       for (int i = contactSet.Count - 1; i >= 0; i--)
       {
         Contact contact = contactSet[i];
-        Vector3F contactNormal = contact.Normal;
+        Vector3 contactNormal = contact.Normal;
 
-        // float dot = Vector3F.Dot(contactNormal, normal);
+        // float dot = Vector3.Dot(contactNormal, normal);
         
         // ----- Optimized version:
         float dot = contactNormal.X * normal.X + contactNormal.Y * normal.Y + contactNormal.Z * normal.Z;
@@ -559,17 +559,17 @@ namespace DigitalRise.Geometry.Collisions
       Pose poseB = contactSet.ObjectB.GeometricObject.Pose;
 
       // Get local positions in world space.
-      //Vector3F positionA = poseA.ToWorldPosition(contact.PositionALocal);
-      //Vector3F positionB = poseB.ToWorldPosition(contact.PositionBLocal);
+      //Vector3 positionA = poseA.ToWorldPosition(contact.PositionALocal);
+      //Vector3 positionB = poseB.ToWorldPosition(contact.PositionBLocal);
 
       // ----- Optimized version:
-      Vector3F positionALocal = contact.PositionALocal;
-      Vector3F positionA;
+      Vector3 positionALocal = contact.PositionALocal;
+      Vector3 positionA;
       positionA.X = poseA.Orientation.M00 * positionALocal.X + poseA.Orientation.M01 * positionALocal.Y + poseA.Orientation.M02 * positionALocal.Z + poseA.Position.X;
       positionA.Y = poseA.Orientation.M10 * positionALocal.X + poseA.Orientation.M11 * positionALocal.Y + poseA.Orientation.M12 * positionALocal.Z + poseA.Position.Y;
       positionA.Z = poseA.Orientation.M20 * positionALocal.X + poseA.Orientation.M21 * positionALocal.Y + poseA.Orientation.M22 * positionALocal.Z + poseA.Position.Z;
-      Vector3F positionBLocal = contact.PositionBLocal;
-      Vector3F positionB;
+      Vector3 positionBLocal = contact.PositionBLocal;
+      Vector3 positionB;
       positionB.X = poseB.Orientation.M00 * positionBLocal.X + poseB.Orientation.M01 * positionBLocal.Y + poseB.Orientation.M02 * positionBLocal.Z + poseB.Position.X;
       positionB.Y = poseB.Orientation.M10 * positionBLocal.X + poseB.Orientation.M11 * positionBLocal.Y + poseB.Orientation.M12 * positionBLocal.Z + poseB.Position.Y;
       positionB.Z = poseB.Orientation.M20 * positionBLocal.X + poseB.Orientation.M21 * positionBLocal.Y + poseB.Orientation.M22 * positionBLocal.Z + poseB.Position.Z;
@@ -581,15 +581,15 @@ namespace DigitalRise.Geometry.Collisions
       if (contact.PenetrationDepth >= 0)
       {
         // ----- Contact.
-        Vector3F bToA = positionA - positionB;  // Vector from contact on A to contact on B
+        Vector3 bToA = positionA - positionB;  // Vector from contact on A to contact on B
         if (!contact.IsRayHit)
         {
           // ----- Normal contact.
           // Update penetration depth: Difference of world position projected onto normal.
-          //contact.PenetrationDepth = Vector3F.Dot(bToA, contact.Normal);
+          //contact.PenetrationDepth = Vector3.Dot(bToA, contact.Normal);
 
           // ----- Optimized version:
-          Vector3F contactNormal = contact.Normal;
+          Vector3 contactNormal = contact.Normal;
           contact.PenetrationDepth = bToA.X * contactNormal.X + bToA.Y * contactNormal.Y + bToA.Z * contactNormal.Z;
         }
         else
@@ -600,7 +600,7 @@ namespace DigitalRise.Geometry.Collisions
           // Get ray. Only one shape is a ray because ray vs. ray do normally not collide.
           RayShape ray = contactSet.ObjectA.GeometricObject.Shape as RayShape;
           float rayScale = contactSet.ObjectA.GeometricObject.Scale.X;   // Non-uniformly scaled rays are not support, so we only need Scale.X!
-          Vector3F hitPositionLocal;  // Hit position in local space of ray.
+          Vector3 hitPositionLocal;  // Hit position in local space of ray.
           if (ray != null)
           {
             hitPositionLocal = poseA.ToLocalPosition(contact.Position);
@@ -617,7 +617,7 @@ namespace DigitalRise.Geometry.Collisions
           // is not supported.
           if (ray != null)
           {
-            contact.PenetrationDepth = Vector3F.Dot(hitPositionLocal - ray.Origin * rayScale, ray.Direction);
+            contact.PenetrationDepth = Vector3.Dot(hitPositionLocal - ray.Origin * rayScale, ray.Direction);
 
             // If the new penetration depth is negative or greater than the ray length, 
             // the objects have separated along the ray direction.
@@ -635,13 +635,13 @@ namespace DigitalRise.Geometry.Collisions
         if (contact.IsRayHit)
         {
           // For ray casts: Remove contact if movement in any direction is too large.
-          driftSquared = bToA.LengthSquared;
+          driftSquared = bToA.LengthSquared();
         }
         else
         {
           // For contacts: Remove contacts if horizontal movement (perpendicular to contact normal) 
           // is too large.
-          driftSquared = (bToA - contact.Normal * contact.PenetrationDepth).LengthSquared;
+          driftSquared = (bToA - contact.Normal * contact.PenetrationDepth).LengthSquared();
         }
 
         // Remove contact if drift is too large.
@@ -657,8 +657,8 @@ namespace DigitalRise.Geometry.Collisions
         // We have no problem if we are wrong and this is actually a penetration because this 
         // contact is automatically updated or removed when new contacts are computed in
         // the narrow phase.
-        Vector3F aToB = positionB - positionA;  // Vector from contact on A to contact on B
-        contact.PenetrationDepth = -aToB.Length;
+        Vector3 aToB = positionB - positionA;  // Vector from contact on A to contact on B
+        contact.PenetrationDepth = -aToB.Length();
 
         // If points moved into contact, remove this pair, because we don't have a valid
         // contact normal.
@@ -666,7 +666,7 @@ namespace DigitalRise.Geometry.Collisions
           return true;
 
         // Update normal.
-        contact.Normal = aToB.Normalized;
+        contact.Normal = aToB.Normalized();
 
         return false;
       }
@@ -734,16 +734,16 @@ namespace DigitalRise.Geometry.Collisions
       var centerToContact = contactPosition - pose.Position;
 
       // Compute a perturbation angle proportional to the dimension of the object.
-      var radius = geometricObject.Aabb.Extent.Length;
+      var radius = geometricObject.Aabb.Extent.Length();
       var angle = collisionDetection.ContactPositionTolerance / radius;
 
       // axis1 is in the contact tangent plane, orthogonal to normal.
-      var axis1 = Vector3F.Cross(normal, centerToContact);
+      var axis1 = Vector3.Cross(normal, centerToContact);
 
       // If axis1 is zero then normal and centerToContact are collinear. This happens 
       // for example for spheres or cone tips against flat faces. In these cases we assume
       // that there will be max. 1 contact.
-      if (axis1.IsNumericallyZero)
+      if (axis1.IsNumericallyZero())
         return;
 
       var axis1Local = pose.ToLocalDirection(axis1);
@@ -769,7 +769,7 @@ namespace DigitalRise.Geometry.Collisions
       if (testContactSet.Count > 0)
       {
         // axis2 is in the contact tangent plane, orthogonal to axis1.
-        var axis2 = Vector3F.Cross(axis1, normal);
+        var axis2 = Vector3.Cross(axis1, normal);
         var axis2Local = pose.ToLocalDirection(axis2);
 
         var rotation2 = Matrix33F.CreateRotation(axis2Local, -angle);

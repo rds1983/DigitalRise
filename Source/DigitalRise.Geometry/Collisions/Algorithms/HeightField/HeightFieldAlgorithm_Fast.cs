@@ -7,7 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -24,12 +24,12 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Get scales and poses
       Pose heightFieldPose = heightFieldGeometricObject.Pose;
-      Vector3F heightFieldScale = heightFieldGeometricObject.Scale;
+      Vector3 heightFieldScale = heightFieldGeometricObject.Scale;
       if (heightFieldScale.X < 0 || heightFieldScale.Y < 0 || heightFieldScale.Z < 0)
         throw new NotSupportedException("Computing collisions for height fields with a negative scaling is not supported.");
 
       Pose convexPose = convexGeometricObject.Pose;
-      Vector3F convexScale = convexGeometricObject.Scale;
+      Vector3 convexScale = convexGeometricObject.Scale;
 
       // Get a point in the convex. (Could also use center of AABB.)
       var convexPoint = convexPose.ToWorldPosition(convex.InnerPoint * convexScale);
@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // Get height and normal.
       float height;
-      Vector3F normal;
+      Vector3 normal;
       int featureIndex;
       GetHeight(heightField, xUnscaled, zUnscaled, out height, out normal, out featureIndex);
 
@@ -70,15 +70,15 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       var normalInConvex = convexPose.ToLocalDirection(normal);
 
       // Convert plane point to convex space. 
-      Vector3F planePoint = new Vector3F(convexPoint.X, height, convexPoint.Z);
+      Vector3 planePoint = new Vector3(convexPoint.X, height, convexPoint.Z);
       planePoint = heightFieldPose.ToWorldPosition(planePoint);
       planePoint = convexPose.ToLocalPosition(planePoint);
 
       // Get convex support point in plane normal direction.
-      Vector3F supportPoint = convex.GetSupportPoint(-normalInConvex, convexScale);
+      Vector3 supportPoint = convex.GetSupportPoint(-normalInConvex, convexScale);
 
       // Get penetration depth.
-      float penetrationDepth = Vector3F.Dot((planePoint - supportPoint), normalInConvex);
+      float penetrationDepth = Vector3.Dot((planePoint - supportPoint), normalInConvex);
 
       // Abort if there is no contact.
       if (penetrationDepth < 0)
@@ -98,7 +98,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         return;
 
       // Contact position is in the "middle of the penetration".
-      Vector3F position = convexPose.ToWorldPosition(supportPoint + normalInConvex * (penetrationDepth / 2));
+      Vector3 position = convexPose.ToWorldPosition(supportPoint + normalInConvex * (penetrationDepth / 2));
 
       if (swapped)
         normal = -normal;
@@ -119,13 +119,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
         // Trying to create a full contact set.
 
         // We use arbitrary orthonormal values to perturb the normal direction.
-        var ortho1 = normalInConvex.Orthonormal1;
-        var ortho2 = normalInConvex.Orthonormal2;
+        var ortho1 = normalInConvex.Orthonormal1();
+        var ortho2 = normalInConvex.Orthonormal2();
 
         // Test 4 perturbed support directions.
         for (int i = 0; i < 4; i++)
         {
-          Vector3F direction;
+          Vector3 direction;
           switch (i)
           {
             case 0:
@@ -144,7 +144,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
           // Support point vs. plane test as above:
           supportPoint = convex.GetSupportPoint(direction, convexScale);
-          penetrationDepth = Vector3F.Dot((planePoint - supportPoint), normalInConvex);
+          penetrationDepth = Vector3.Dot((planePoint - supportPoint), normalInConvex);
           if (penetrationDepth >= 0)
           {
             position = convexPose.ToWorldPosition(supportPoint + normalInConvex * (penetrationDepth / 2));
@@ -157,7 +157,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
 
     // This method is copied from HeightField.cs and modified to return the normal (not normalized!).
-    private static void GetHeight(HeightField heightField, float x, float z, out float height, out Vector3F normal, out int featureIndex)
+    private static void GetHeight(HeightField heightField, float x, float z, out float height, out Vector3 normal, out int featureIndex)
     {
       int arrayLengthX = heightField.NumberOfSamplesX;
       int arrayLengthZ = heightField.NumberOfSamplesZ;
@@ -194,7 +194,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       triangle.Vertex0.Y = 0;
       triangle.Vertex1.Y = 0;
       triangle.Vertex2.Y = 0;
-      GeometryHelper.GetBarycentricFromPoint(triangle, new Vector3F(x, 0, z), out u, out v, out w);
+      GeometryHelper.GetBarycentricFromPoint(triangle, new Vector3(x, 0, z), out u, out v, out w);
 
       featureIndex = (indexZ * (arrayLengthX - 1) + indexX) * 2;
       if (useSecondTriangle)
@@ -213,7 +213,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       triangle.Vertex1.Y = height1;
       triangle.Vertex2.Y = height2;
 
-      normal = Vector3F.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
+      normal = Vector3.Cross(triangle.Vertex1 - triangle.Vertex0, triangle.Vertex2 - triangle.Vertex0);
     }
 
 
@@ -221,7 +221,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
     // An experimental method that returns height and normal values that are bilinearly interpolated
     // from the cell corners.
     // Normal is returned unnormalized!
-    private static void GetHeight(HeightField heightField, float x, float z, out float height, out Vector3F normal)
+    private static void GetHeight(HeightField heightField, float x, float z, out float height, out Vector3 normal)
     {
       int arrayLengthX = heightField.Array.GetLength(0);
       int arrayLengthZ = heightField.Array.GetLength(1);
@@ -245,17 +245,17 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
       float h1 = heightField.Array[indexX, indexZ + 1];
       float h2 = heightField.Array[indexX + 1, indexZ + 1];
       float h3 = heightField.Array[indexX + 1, indexZ];
-      Vector3F n0 = heightField.NormalArray[indexX, indexZ];
-      Vector3F n1 = heightField.NormalArray[indexX, indexZ + 1];
-      Vector3F n2 = heightField.NormalArray[indexX + 1, indexZ + 1];
-      Vector3F n3 = heightField.NormalArray[indexX + 1, indexZ];
+      Vector3 n0 = heightField.NormalArray[indexX, indexZ];
+      Vector3 n1 = heightField.NormalArray[indexX, indexZ + 1];
+      Vector3 n2 = heightField.NormalArray[indexX + 1, indexZ + 1];
+      Vector3 n3 = heightField.NormalArray[indexX + 1, indexZ];
 
       // Bilinear interpolation of the corners.
       float h01 = InterpolationHelper.Lerp(h0, h1, fractionZ);
       float h32 = InterpolationHelper.Lerp(h3, h2, fractionZ);
       height = InterpolationHelper.Lerp(h01, h32, fractionX);
-      Vector3F n01 = InterpolationHelper.Lerp(n0, n1, fractionZ).Normalized;
-      Vector3F n32 = InterpolationHelper.Lerp(n3, n2, fractionZ).Normalized;
+      Vector3 n01 = InterpolationHelper.Lerp(n0, n1, fractionZ).Normalized();
+      Vector3 n32 = InterpolationHelper.Lerp(n3, n2, fractionZ).Normalized();
       normal = InterpolationHelper.Lerp(n01, n32, fractionX);
     }*/
   }

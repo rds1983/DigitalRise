@@ -3,11 +3,10 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -75,7 +74,7 @@ namespace Samples.Physics
       // approximate mass frame (which can take some time for large meshes).
       var ground = new RigidBody(triangleMeshShape, new MassFrame(), null)
       {
-        Pose = new Pose(new Vector3F(-50, 0, -50f)),
+        Pose = new Pose(new Vector3(-50, 0, -50f)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(ground);
@@ -84,7 +83,7 @@ namespace Samples.Physics
       SphereShape sphereShape = new SphereShape(0.5f);
       for (int i = 0; i < 30; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-30, 30);
+        Vector3 position = RandomHelper.Random.NextVector3(-30, 30);
         position.Y = 20;
 
         RigidBody body = new RigidBody(sphereShape)
@@ -97,7 +96,7 @@ namespace Samples.Physics
       BoxShape boxShape = new BoxShape(1, 1, 1);
       for (int i = 0; i < 30; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-30, 30);
+        Vector3 position = RandomHelper.Random.NextVector3(-30, 30);
         position.Y = 20;
 
         RigidBody body = new RigidBody(boxShape)

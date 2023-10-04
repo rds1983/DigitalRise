@@ -10,7 +10,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -54,7 +54,7 @@ triangle mesh.",
     // ----- Gravity
     // When the gravity is high, small bumps can have a higher impact. Try to use a lower gravity, 
     // for example:
-    //   simulation.ForceEffects.Add(new Gravity() { Acceleration = new Vector3F(0, -5, 0)});
+    //   simulation.ForceEffects.Add(new Gravity() { Acceleration = new Vector3(0, -5, 0)});
     //
     // ----- Height field instead of triangle mesh
     // Try to use a height field instead of a triangle mesh - if the scenario allows to use a 
@@ -135,7 +135,7 @@ triangle mesh.",
       // sphere roll over a curved surface.
 
       // Add basic force effects.
-      Simulation.ForceEffects.Add(new Gravity { Acceleration = new Vector3F(0, -30, 0) });   // Higher gravity to make the problem more visible.
+      Simulation.ForceEffects.Add(new Gravity { Acceleration = new Vector3(0, -30, 0) });   // Higher gravity to make the problem more visible.
       Simulation.ForceEffects.Add(new Damping());
 
       // Use the custom contact filter to improve sphere contacts.
@@ -175,7 +175,7 @@ triangle mesh.",
       // approximate mass frame (which can take some time for large meshes).
       var ground = new RigidBody(_triangleMeshShape, new MassFrame(), null)
       {
-        Pose = new Pose(new Vector3F(-34, 0, -40f)),
+        Pose = new Pose(new Vector3(-34, 0, -40f)),
         MotionType = MotionType.Static,
       };
       Simulation.RigidBodies.Add(ground);
@@ -213,9 +213,9 @@ triangle mesh.",
         _timeUntilReset = new TimeSpan(0, 0, 0, 8); // 8 seconds.
 
         // Reset position and velocity of the sphere.
-        _sphere.Pose = new Pose(new Vector3F(-20, 20, -15));
-        _sphere.LinearVelocity = Vector3F.Zero;
-        _sphere.AngularVelocity = Vector3F.Zero;
+        _sphere.Pose = new Pose(new Vector3(-20, 20, -15));
+        _sphere.LinearVelocity = Vector3.Zero;
+        _sphere.AngularVelocity = Vector3.Zero;
       }
 
       // If Y is pressed, toggle smooth movement tricks.

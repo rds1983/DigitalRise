@@ -43,32 +43,32 @@ The red objects show the first time of impact.",
       : base(game)
     {
       GraphicsScreen.ClearBackground = true;
-      SetCamera(new Vector3F(0, 1, 10), 0, 0);
+      SetCamera(new Vector3(0, 1, 10), 0, 0);
 
       // ----- Initialize collision detection and create objects.
 
       // Create a geometric object with a capsule shape.
       // Position it on the top with an arbitrary rotation.
-      _startPoseA = new Pose(new Vector3F(0, 2, 0), Matrix33F.CreateRotationZ(0.1f));
+      _startPoseA = new Pose(new Vector3(0, 2, 0), Matrix33F.CreateRotationZ(0.1f));
       var geometricObjectA = new GeometricObject(new CapsuleShape(0.2f, 1), _startPoseA);
       _collisionObjectA = new CollisionObject(geometricObjectA);
 
       // Object A moves to the bottom of the screen.
-      _targetPoseA = new Pose(new Vector3F(0, -2, 0), Matrix33F.CreateRotationZ(0.63f));
+      _targetPoseA = new Pose(new Vector3(0, -2, 0), Matrix33F.CreateRotationZ(0.63f));
 
       // Create a geometric object with a composite shape.
       // Position it on the left with an arbitrary rotation.
-      _startPoseB = new Pose(new Vector3F(-3, -1, 0), Matrix33F.CreateRotationZ(0.2f));
+      _startPoseB = new Pose(new Vector3(-3, -1, 0), Matrix33F.CreateRotationZ(0.2f));
       var composite = new CompositeShape();
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3F(-0.75f, 0.5f, -0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3F(0.75f, 0.5f, -0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3F(-0.75f, 0.5f, 0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3F(0.75f, 0.5f, 0.5f))));
-      composite.Children.Add(new GeometricObject(new BoxShape(1.8f, 0.1f, 1.1f), new Pose(new Vector3F(0, 1f, 0))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3(-0.75f, 0.5f, -0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3(0.75f, 0.5f, -0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3(-0.75f, 0.5f, 0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(0.1f, 1, 0.1f), new Pose(new Vector3(0.75f, 0.5f, 0.5f))));
+      composite.Children.Add(new GeometricObject(new BoxShape(1.8f, 0.1f, 1.1f), new Pose(new Vector3(0, 1f, 0))));
       var geometricObjectB = new GeometricObject(composite, _startPoseB);
 
       // Object B moves to the left of the screen.
-      _targetPoseB = new Pose(new Vector3F(3, -1, 0), Matrix33F.CreateRotationZ(0.3f));
+      _targetPoseB = new Pose(new Vector3(3, -1, 0), Matrix33F.CreateRotationZ(0.3f));
 
       // Create collision objects for the geometric objects. 
       // (A collision object is just a wrapper around the geometric object that stores additional 
@@ -87,7 +87,7 @@ The red objects show the first time of impact.",
     {
       // ----- Move object A with arrow keys.
       // Compute displacement.
-      Vector3F displacement = Vector3F.Zero;
+      Vector3 displacement = Vector3.Zero;
       if (InputService.IsDown(Keys.Up))
         displacement.Y += 0.1f;
       if (InputService.IsDown(Keys.Left))
@@ -123,12 +123,12 @@ The red objects show the first time of impact.",
       debugRenderer.Clear();
 
       // Draw game objects in the start pose.
-      debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, _startPoseA, Vector3F.One, Color.Gray, false, false);
-      debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, _startPoseB, Vector3F.One, Color.Gray, false, false);
+      debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, _startPoseA, Vector3.One, Color.Gray, false, false);
+      debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, _startPoseB, Vector3.One, Color.Gray, false, false);
 
       // Draw game objects in the target pose.
-      debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, _targetPoseA, Vector3F.One, Color.Gray, false, false);
-      debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, _targetPoseB, Vector3F.One, Color.Gray, false, false);
+      debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, _targetPoseA, Vector3.One, Color.Gray, false, false);
+      debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, _targetPoseB, Vector3.One, Color.Gray, false, false);
 
       // Draw objects at the first time of impact.
       if (_timeOfImpact < 1)
@@ -138,8 +138,8 @@ The red objects show the first time of impact.",
         var poseB = Pose.Interpolate(_startPoseB, _targetPoseB, _timeOfImpact);
 
         // Draw intermediate objects.       
-        debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, poseA, Vector3F.One, Color.Red, false, false);
-        debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, poseB, Vector3F.One, Color.Red, false, false);
+        debugRenderer.DrawShape(_collisionObjectA.GeometricObject.Shape, poseA, Vector3.One, Color.Red, false, false);
+        debugRenderer.DrawShape(_collisionObjectB.GeometricObject.Shape, poseB, Vector3.One, Color.Red, false, false);
       }
     }
   }

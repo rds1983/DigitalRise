@@ -8,8 +8,9 @@ using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Physics.ForceEffects
 {
@@ -129,7 +130,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// </summary>
     /// <value>
     /// The water surface plane (in world space). The default value is 
-    /// <c>new Plane(Vector3F.UnitY, 0)</c>.
+    /// <c>new Plane(Vector3.UnitY, 0)</c>.
     /// </value>
     /// <remarks>
     /// <para>
@@ -171,7 +172,7 @@ namespace DigitalRise.Physics.ForceEffects
     /// This vector can be used to create flowing water that drags objects in the velocity
     /// direction.
     /// </remarks>
-    public Vector3F Velocity { get; set; }
+    public Vector3 Velocity { get; set; }
     #endregion
 
 
@@ -213,10 +214,10 @@ namespace DigitalRise.Physics.ForceEffects
     {
       Density = 1000;
       Gravity = 10;
-      Surface = new Plane(Vector3F.UnitY, 0);
+      Surface = new Plane(Vector3.UnitY, 0);
       AngularDrag = 0.5f;
       LinearDrag = 5.0f;
-      Velocity = Vector3F.Zero;
+      Velocity = Vector3.Zero;
     }
     #endregion
 
@@ -240,13 +241,13 @@ namespace DigitalRise.Physics.ForceEffects
       }
 
       // Compute size of volume that is in the water and the center of the submerged volume.
-      Vector3F centerOfSubmergedVolume;
+      Vector3 centerOfSubmergedVolume;
       float submergedVolume = GetSubmergedVolume(body.Scale, body.Pose, data.Mesh, out centerOfSubmergedVolume);
 
       if (submergedVolume > 0)
       {
         // The up force.
-        Vector3F buoyancyForce = (Density * submergedVolume * Gravity) * Surface.Normal;
+        Vector3 buoyancyForce = (Density * submergedVolume * Gravity) * Surface.Normal;
 
         // The total volume of the body.
         float totalVolume = data.Volume * body.Scale.X * body.Scale.Y * body.Scale.Z;
@@ -255,11 +256,11 @@ namespace DigitalRise.Physics.ForceEffects
         float submergedMass = body.MassFrame.Mass * submergedVolume / totalVolume;
 
         // Compute linear drag.
-        Vector3F centerLinearVelocity = body.GetVelocityOfWorldPoint(centerOfSubmergedVolume);
-        Vector3F dragForce = (submergedMass * LinearDrag) * (Velocity - centerLinearVelocity);
+        Vector3 centerLinearVelocity = body.GetVelocityOfWorldPoint(centerOfSubmergedVolume);
+        Vector3 dragForce = (submergedMass * LinearDrag) * (Velocity - centerLinearVelocity);
 
         // Apply up force and linear drag force.
-        Vector3F totalForce = buoyancyForce + dragForce;
+        Vector3 totalForce = buoyancyForce + dragForce;
         AddForce(body, totalForce, centerOfSubmergedVolume);
 
         // Apply torque for angular drag.
@@ -267,7 +268,7 @@ namespace DigitalRise.Physics.ForceEffects
         // proportional value for the scaled shape.
         float length = data.Length * 1.0f / 3.0f * (body.Scale.X + body.Scale.Y + body.Scale.Z);
         float lengthSquared = length * length;
-        Vector3F dragTorque = (-submergedMass * AngularDrag * lengthSquared) * body.AngularVelocity;
+        Vector3 dragTorque = (-submergedMass * AngularDrag * lengthSquared) * body.AngularVelocity;
         AddTorque(body, dragTorque);
       }
     }
@@ -320,22 +321,22 @@ namespace DigitalRise.Physics.ForceEffects
       BuoyancyData data = new BuoyancyData();
       data.Mesh = shape.GetMesh(0.01f, 4);
       data.Volume = data.Mesh.GetVolume();
-      data.Length = shape.GetAabb(Pose.Identity).Extent.LargestComponent;
+      data.Length = shape.GetAabb(Pose.Identity).Extent.LargestComponent();
 
       body.BuoyancyData = data;
     }
 
 
     // Computes the volume of the submerged mesh part and the center of buoyancy.
-    private float GetSubmergedVolume(Vector3F scale, Pose pose, TriangleMesh mesh, out Vector3F center)
+    private float GetSubmergedVolume(Vector3 scale, Pose pose, TriangleMesh mesh, out Vector3 center)
     {
-      center = Vector3F.Zero;
+      center = Vector3.Zero;
 
       // Get surface plane in local space.
       Plane planeLocal = new Plane
       {
         Normal = pose.ToLocalDirection(Surface.Normal),
-        DistanceFromOrigin = Surface.DistanceFromOrigin - Vector3F.Dot(Surface.Normal, pose.Position),
+        DistanceFromOrigin = Surface.DistanceFromOrigin - Vector3.Dot(Surface.Normal, pose.Position),
       };
 
       const float tinyDepth = -1e-6f;
@@ -353,7 +354,7 @@ namespace DigitalRise.Physics.ForceEffects
         int sampleVertexIndex = 0;
         for (int i = 0; i < numberOfVertices; i++)
         {
-          float depth = Vector3F.Dot(planeLocal.Normal, mesh.Vertices[i] * scale) - planeLocal.DistanceFromOrigin;
+          float depth = Vector3.Dot(planeLocal.Normal, mesh.Vertices[i] * scale) - planeLocal.DistanceFromOrigin;
           if (depth < tinyDepth)
           {
             numberOfSubmergedVertices++;
@@ -368,7 +369,7 @@ namespace DigitalRise.Physics.ForceEffects
           return 0;
 
         // Get the reference point. We project a submerged vertex onto the surface plane.
-        Vector3F point = mesh.Vertices[sampleVertexIndex] - depths[sampleVertexIndex] * planeLocal.Normal;
+        Vector3 point = mesh.Vertices[sampleVertexIndex] - depths[sampleVertexIndex] * planeLocal.Normal;
 
         float volume = 0;
 
@@ -382,11 +383,11 @@ namespace DigitalRise.Physics.ForceEffects
           int i2 = mesh.Indices[i * 3 + 2];
 
           // Vertices and depths.
-          Vector3F v0 = mesh.Vertices[i0] * scale;
+          Vector3 v0 = mesh.Vertices[i0] * scale;
           float d0 = depths[i0];
-          Vector3F v1 = mesh.Vertices[i1] * scale;
+          Vector3 v1 = mesh.Vertices[i1] * scale;
           float d1 = depths[i1];
-          Vector3F v2 = mesh.Vertices[i2] * scale;
+          Vector3 v2 = mesh.Vertices[i2] * scale;
           float d2 = depths[i2];
 
           if (d0 * d1 < 0)
@@ -415,7 +416,7 @@ namespace DigitalRise.Physics.ForceEffects
         const float tinyVolume = 1e-6f;
         if (volume <= tinyVolume)
         {
-          center = Vector3F.Zero;
+          center = Vector3.Zero;
           return 0;
         }
 
@@ -438,11 +439,11 @@ namespace DigitalRise.Physics.ForceEffects
     // Clips the partially submerged triangle.
     // Returns the volume of the submerged tetrahedra. The center (weighted by the volumes)
     // is also computed.
-    private static float ClipTriangle(Vector3F point, Vector3F v0, Vector3F v1, Vector3F v2, float d0, float d1, float d2, ref Vector3F center)
+    private static float ClipTriangle(Vector3 point, Vector3 v0, Vector3 v1, Vector3 v2, float d0, float d1, float d2, ref Vector3 center)
     {
       Debug.Assert(d0 * d1 < 0);
 
-      Vector3F vc0 = v0 + d0 / (d0 - d1) * (v1 - v0);
+      Vector3 vc0 = v0 + d0 / (d0 - d1) * (v1 - v0);
 
       float volume = 0;
 
@@ -451,14 +452,14 @@ namespace DigitalRise.Physics.ForceEffects
         if (d2 < 0)
         {
           // Two triangles in the water.
-          Vector3F vc1 = v1 + d1 / (d1 - d2) * (v2 - v1);
+          Vector3 vc1 = v1 + d1 / (d1 - d2) * (v2 - v1);
           volume += GetSignedTetrahedronVolume(point, vc0, vc1, v0, ref center);
           volume += GetSignedTetrahedronVolume(point, vc1, v2, v0, ref center);
         }
         else
         {
           // One triangle in the water.
-          Vector3F vc1 = v0 + d0 / (d0 - d2) * (v2 - v0);
+          Vector3 vc1 = v0 + d0 / (d0 - d2) * (v2 - v0);
           volume += GetSignedTetrahedronVolume(point, vc0, vc1, v0, ref center);
         }
       }
@@ -467,14 +468,14 @@ namespace DigitalRise.Physics.ForceEffects
         if (d2 < 0)
         {
           // Two triangles in the water.
-          Vector3F vc1 = v0 + d0 / (d0 - d2) * (v2 - v0);
+          Vector3 vc1 = v0 + d0 / (d0 - d2) * (v2 - v0);
           volume += GetSignedTetrahedronVolume(point, vc0, v1, v2, ref center);
           volume += GetSignedTetrahedronVolume(point, vc0, v2, vc1, ref center);
         }
         else
         {
           // One triangle in the water.
-          Vector3F vc1 = v1 + d1 / (d1 - d2) * (v2 - v1);
+          Vector3 vc1 = v1 + d1 / (d1 - d2) * (v2 - v1);
           volume += GetSignedTetrahedronVolume(point, vc0, v1, vc1, ref center);
         }
       }
@@ -485,14 +486,14 @@ namespace DigitalRise.Physics.ForceEffects
 
     // Returns the volume of the tetrahedron (p, v0, v1, v2) and returns the tetrahedron center
     // weighted with the volume.
-    private static float GetSignedTetrahedronVolume(Vector3F p, Vector3F v0, Vector3F v1, Vector3F v2, ref Vector3F center)
+    private static float GetSignedTetrahedronVolume(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2, ref Vector3 center)
     {
       // See Game Programming Gems 6 - Chapter Buoyancy
       var a = v1 - v0;
       var b = v2 - v0;
       var r = p - v0;
 
-      float volume = 1.0f / 6.0f * Vector3F.Dot(Vector3F.Cross(b, a), r);
+      float volume = 1.0f / 6.0f * Vector3.Dot(Vector3.Cross(b, a), r);
       center += 0.25f * volume * (v0 + v1 + v2 + p);
       return volume;
     }

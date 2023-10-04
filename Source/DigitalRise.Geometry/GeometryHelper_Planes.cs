@@ -5,7 +5,8 @@
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Geometry
 {
@@ -30,11 +31,11 @@ namespace DigitalRise.Geometry
     /// counter-clockwise. The front-face (which points to the outside of the shape - the empty 
     /// half-space) is defined through the counter-clockwise order of the points.
     /// </remarks>
-    public static bool? ArePointsOnOppositeSides(Vector3F pointP, Vector3F pointQ, Vector3F planePointA, Vector3F planePointB, Vector3F planePointC)
+    public static bool? ArePointsOnOppositeSides(Vector3 pointP, Vector3 pointQ, Vector3 planePointA, Vector3 planePointB, Vector3 planePointC)
     {
-      Vector3F normal = Vector3F.Cross(planePointB - planePointA, planePointC - planePointA);
-      float signP = Vector3F.Dot(pointP - planePointA, normal);
-      float signQ = Vector3F.Dot(pointQ - planePointA, normal);
+      Vector3 normal = Vector3.Cross(planePointB - planePointA, planePointC - planePointA);
+      float signP = Vector3.Dot(pointP - planePointA, normal);
+      float signQ = Vector3.Dot(pointQ - planePointA, normal);
 
       if (Numeric.IsZero(signP * signQ, Numeric.EpsilonFSquared))
       {
@@ -67,7 +68,7 @@ namespace DigitalRise.Geometry
     /// the point is either above or below the plane.
     /// </returns>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
-    public static bool GetClosestPoint(Plane plane, Vector3F point, out Vector3F pointOnPlane)
+    public static bool GetClosestPoint(Plane plane, Vector3 point, out Vector3 pointOnPlane)
     {
       float distance = GetDistance(plane, point);
       pointOnPlane = point - plane.Normal * distance;
@@ -83,7 +84,7 @@ namespace DigitalRise.Geometry
     /// <returns>
     /// The point on the surface of the plane that is closest to <paramref name="point"/>.
     /// </returns>
-    internal static Vector3F GetClosestPoint(Plane plane, Vector3F point)
+    internal static Vector3 GetClosestPoint(Plane plane, Vector3 point)
     {
       float distance = GetDistance(plane, point);
       return point - plane.Normal * distance;
@@ -111,11 +112,11 @@ namespace DigitalRise.Geometry
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public static bool GetClosestPoints(Plane plane, Line line, out Vector3F pointOnPlane, out Vector3F pointOnLine)
+    public static bool GetClosestPoints(Plane plane, Line line, out Vector3 pointOnPlane, out Vector3 pointOnLine)
     {
       // See Coutinho: "Dynamic Simulations of Multibody Systems", p. 267
 
-      float directionDotNormal = Vector3F.Dot(line.Direction, plane.Normal);
+      float directionDotNormal = Vector3.Dot(line.Direction, plane.Normal);
       if (Numeric.IsZero(directionDotNormal))
       {
         // Line is parallel to plane.
@@ -125,7 +126,7 @@ namespace DigitalRise.Geometry
       }
 
       // Non-parallel line will hit the plane.
-      float parameter = (plane.DistanceFromOrigin - Vector3F.Dot(line.PointOnLine, plane.Normal)) / directionDotNormal;
+      float parameter = (plane.DistanceFromOrigin - Vector3.Dot(line.PointOnLine, plane.Normal)) / directionDotNormal;
       pointOnLine = pointOnPlane = line.PointOnLine + parameter * line.Direction;
       return true;
     }
@@ -152,12 +153,12 @@ namespace DigitalRise.Geometry
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OnLine")]
-    public static bool GetClosestPoints(Plane plane, LineSegment lineSegment, out Vector3F pointOnPlane, out Vector3F pointOnLineSegment)
+    public static bool GetClosestPoints(Plane plane, LineSegment lineSegment, out Vector3 pointOnPlane, out Vector3 pointOnLineSegment)
     {
       // See Coutinho: "Dynamic Simulations of Multibody Systems", p. 267
 
-      Vector3F segmentVector = lineSegment.End - lineSegment.Start;
-      float segmentDotNormal = Vector3F.Dot(segmentVector, plane.Normal);
+      Vector3 segmentVector = lineSegment.End - lineSegment.Start;
+      float segmentDotNormal = Vector3.Dot(segmentVector, plane.Normal);
       if (Numeric.IsZero(segmentDotNormal))
       {
         // Line is parallel
@@ -166,7 +167,7 @@ namespace DigitalRise.Geometry
         return false;
       }
 
-      float parameter = (plane.DistanceFromOrigin - Vector3F.Dot(lineSegment.Start, plane.Normal)) / segmentDotNormal;
+      float parameter = (plane.DistanceFromOrigin - Vector3.Dot(lineSegment.Start, plane.Normal)) / segmentDotNormal;
 
       // If parameter is outside [0, 1], we have to clamp it to the segment.
       if (parameter < 0)
@@ -197,9 +198,9 @@ namespace DigitalRise.Geometry
     /// The signed distance. This value is positive if the point is in the positive half-space
     /// (separation); otherwise, negative (penetration).
     /// </returns>
-    public static float GetDistance(Plane plane, Vector3F point)
+    public static float GetDistance(Plane plane, Vector3 point)
     {
-      float projectedLength = Vector3F.Dot(point, plane.Normal);  // Length of projection on the normal.
+      float projectedLength = Vector3.Dot(point, plane.Normal);  // Length of projection on the normal.
       return projectedLength - plane.DistanceFromOrigin;
     }
 
@@ -215,18 +216,18 @@ namespace DigitalRise.Geometry
     /// <see cref="float.NaN"/>) is returned if there is no unique intersection point, for example,
     /// when two planes are parallel or the planes intersect in a line.
     /// </returns>
-    public static Vector3F GetIntersection(Plane planeA, Plane planeB, Plane planeC)
+    public static Vector3 GetIntersection(Plane planeA, Plane planeB, Plane planeC)
     {
       // Get a point that meets this requirements: Dot(plane.Normal, point) == plane.DistanceFromOrigin
       Matrix33F matrix = new Matrix33F(planeA.Normal.X, planeA.Normal.Y, planeA.Normal.Z,
                                        planeB.Normal.X, planeB.Normal.Y, planeB.Normal.Z,
                                        planeC.Normal.X, planeC.Normal.Y, planeC.Normal.Z);
-      Vector3F distances = new Vector3F(planeA.DistanceFromOrigin, planeB.DistanceFromOrigin, planeC.DistanceFromOrigin);
+      Vector3 distances = new Vector3(planeA.DistanceFromOrigin, planeB.DistanceFromOrigin, planeC.DistanceFromOrigin);
       bool isInvertible = matrix.TryInvert();
       if (isInvertible)
         return matrix * distances;
       else
-        return new Vector3F(float.NaN);
+        return new Vector3(float.NaN);
     }
 
 
@@ -248,12 +249,12 @@ namespace DigitalRise.Geometry
     public static bool HaveContact(Aabb aabb, Plane plane)
     {
       // Get support point of AABB nearest to the plane.
-      Vector3F support = new Vector3F(
+      Vector3 support = new Vector3(
         plane.Normal.X > 0 ? aabb.Minimum.X : aabb.Maximum.X,
         plane.Normal.Y > 0 ? aabb.Minimum.Y : aabb.Maximum.Y,
         plane.Normal.Z > 0 ? aabb.Minimum.Z : aabb.Maximum.Z);
 
-      float projectedLength = Vector3F.Dot(support, plane.Normal);
+      float projectedLength = Vector3.Dot(support, plane.Normal);
       return projectedLength <= plane.DistanceFromOrigin;
     }
   }

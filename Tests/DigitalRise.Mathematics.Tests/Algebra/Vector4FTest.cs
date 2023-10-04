@@ -50,7 +50,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(3.0f, v.Z);
       Assert.AreEqual(4.0f, v.W);
 
-      v = new Vector4F(new Vector3F(1.0f, 2.0f, 3.0f), 4.0f);
+      v = new Vector4F(new Vector3(1.0f, 2.0f, 3.0f), 4.0f);
       Assert.AreEqual(1.0f, v.X);
       Assert.AreEqual(2.0f, v.Y);
       Assert.AreEqual(3.0f, v.Z);
@@ -614,10 +614,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void LengthSquared()
     {
-      Assert.AreEqual(1.0f, Vector4F.UnitX.LengthSquared);
-      Assert.AreEqual(1.0f, Vector4F.UnitY.LengthSquared);
-      Assert.AreEqual(1.0f, Vector4F.UnitZ.LengthSquared);
-      Assert.AreEqual(1.0f, Vector4F.UnitW.LengthSquared);
+      Assert.AreEqual(1.0f, Vector4F.UnitX.LengthSquared());
+      Assert.AreEqual(1.0f, Vector4F.UnitY.LengthSquared());
+      Assert.AreEqual(1.0f, Vector4F.UnitZ.LengthSquared());
+      Assert.AreEqual(1.0f, Vector4F.UnitW.LengthSquared());
 
       float x = -1.9f;
       float y = 2.1f;
@@ -625,7 +625,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float w = 1.0f;
       float length = x * x + y * y + z * z + w * w;
       Vector4F v = new Vector4F(x, y, z, w);
-      Assert.AreEqual(length, v.LengthSquared);
+      Assert.AreEqual(length, v.LengthSquared());
     }
 
 
@@ -713,10 +713,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void XYZ()
     {
       Vector4F v4 = new Vector4F(1.0f, 2.0f, 3.0f, 5.0f);
-      Vector3F v3 = v4.XYZ;
-      Assert.AreEqual(new Vector3F(1.0f, 2.0f, 3.0f), v3);
+      Vector3 v3 = v4.XYZ;
+      Assert.AreEqual(new Vector3(1.0f, 2.0f, 3.0f), v3);
 
-      v4.XYZ = new Vector3F(0.1f, 0.2f, 0.3f);
+      v4.XYZ = new Vector3(0.1f, 0.2f, 0.3f);
       Assert.AreEqual(0.1f, v4.X);
       Assert.AreEqual(0.2f, v4.Y);
       Assert.AreEqual(0.3f, v4.Z);
@@ -727,12 +727,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void HomogeneousDivide()
     {
       Vector4F v4 = new Vector4F(1.0f, 2.0f, 3.0f, 1.0f);
-      Vector3F v3 = Vector4F.HomogeneousDivide(v4);
-      Assert.AreEqual(new Vector3F(1.0f, 2.0f, 3.0f), v3);
+      Vector3 v3 = Vector4F.HomogeneousDivide(v4);
+      Assert.AreEqual(new Vector3(1.0f, 2.0f, 3.0f), v3);
 
       v4 = new Vector4F(1.0f, 2.0f, 3.0f, 10.0f);
       v3 = Vector4F.HomogeneousDivide(v4);
-      Assert.AreEqual(new Vector3F(1.0f / 10.0f, 2.0f / 10.0f, 3.0f / 10.0f), v3);
+      Assert.AreEqual(new Vector3(1.0f / 10.0f, 2.0f / 10.0f, 3.0f / 10.0f), v3);
     }
 
 

@@ -4,8 +4,7 @@
 
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Particles.Effectors
 {
@@ -29,7 +28,7 @@ namespace DigitalRise.Particles.Effectors
   /// <item>
   /// <term><see cref="DirectionParameter"/></term>
   /// <description>
-  /// A normalized <see cref="Vector3F"/> parameter that defines the movement direction (direction 
+  /// A normalized <see cref="Vector3"/> parameter that defines the movement direction (direction 
   /// of the linear velocity vector). This parameter is modified by applying the bias velocity.
   /// Per default, the parameter "Direction" is used.
   /// </description>
@@ -45,7 +44,7 @@ namespace DigitalRise.Particles.Effectors
   /// <item>
   /// <term><see cref="BiasVelocityParameter"/></term>
   /// <description>
-  /// A <see cref="Vector3F"/> parameter that defines the bias velocity. 
+  /// A <see cref="Vector3"/> parameter that defines the bias velocity. 
   /// Per default, the parameter "EmitterVelocity" is used.
   /// </description>
   /// </item>
@@ -58,9 +57,9 @@ namespace DigitalRise.Particles.Effectors
     #region Fields
     //--------------------------------------------------------------
 
-    private IParticleParameter<Vector3F> _directionParameter;
+    private IParticleParameter<Vector3> _directionParameter;
     private IParticleParameter<float> _linearSpeedParameter;
-    private IParticleParameter<Vector3F> _biasVelocityParameter;
+    private IParticleParameter<Vector3> _biasVelocityParameter;
     #endregion
 
 
@@ -70,11 +69,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the movement direction.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the movement direction.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "Direction".
     /// </value>
     /// <remarks>
@@ -104,11 +103,11 @@ namespace DigitalRise.Particles.Effectors
 
     /// <summary>
     /// Gets or sets the name of the parameter that defines the bias velocity vector.
-    /// (A varying or uniform parameter of type <see cref="Vector3F"/>.)
+    /// (A varying or uniform parameter of type <see cref="Vector3"/>.)
     /// </summary>
     /// <value>
     /// The name of the parameter that defines the bias velocity vector.
-    /// (Parameter type: varying or uniform, value type: <see cref="Vector3F"/>) <br/>
+    /// (Parameter type: varying or uniform, value type: <see cref="Vector3"/>) <br/>
     /// The default value is "EmitterVelocity".
     /// </value>
     /// <remarks>
@@ -180,9 +179,9 @@ namespace DigitalRise.Particles.Effectors
     /// <inheritdoc/>
     protected override void OnRequeryParameters()
     {
-      _directionParameter = ParticleSystem.Parameters.Get<Vector3F>(DirectionParameter);
+      _directionParameter = ParticleSystem.Parameters.Get<Vector3>(DirectionParameter);
       _linearSpeedParameter = ParticleSystem.Parameters.Get<float>(SpeedParameter);
-      _biasVelocityParameter = ParticleSystem.Parameters.Get<Vector3F>(BiasVelocityParameter);
+      _biasVelocityParameter = ParticleSystem.Parameters.Get<Vector3>(BiasVelocityParameter);
     }
 
 
@@ -203,9 +202,9 @@ namespace DigitalRise.Particles.Effectors
       }
 
       // Initialize uniform parameters.
-      Vector3F velocity = _directionParameter.DefaultValue * _linearSpeedParameter.DefaultValue;
+      Vector3 velocity = _directionParameter.DefaultValue * _linearSpeedParameter.DefaultValue;
       velocity += _biasVelocityParameter.DefaultValue * Strength;
-      var newSpeed = velocity.Length;
+      var newSpeed = velocity.Length();
       _linearSpeedParameter.DefaultValue = newSpeed;
       if (!Numeric.IsZero(newSpeed))
         _directionParameter.DefaultValue = velocity / newSpeed;
@@ -230,18 +229,18 @@ namespace DigitalRise.Particles.Effectors
         return;
       }
 
-      Vector3F[] directions = _directionParameter.Values;
+      Vector3[] directions = _directionParameter.Values;
       float[] speeds = _linearSpeedParameter.Values;
-      Vector3F[] biases = _biasVelocityParameter.Values;
+      Vector3[] biases = _biasVelocityParameter.Values;
 
       if (directions != null && speeds != null && biases != null)
       {
         // Optimized case: Direction, Speed, and Acceleration are varying parameters.
         for (int i = startIndex; i < startIndex + count; i++)
         {
-          Vector3F velocity = directions[i] * speeds[i];
+          Vector3 velocity = directions[i] * speeds[i];
           velocity += biases[i] * Strength;
-          speeds[i] = velocity.Length;
+          speeds[i] = velocity.Length();
           if (!Numeric.IsZero(speeds[i]))
             directions[i] = velocity / speeds[i];
         }
@@ -249,12 +248,12 @@ namespace DigitalRise.Particles.Effectors
       else if (directions != null && speeds != null)
       {
         // Optimized case: Direction and Speed are varying parameters, Bias is uniform.
-        Vector3F bias = _biasVelocityParameter.DefaultValue * Strength;
+        Vector3 bias = _biasVelocityParameter.DefaultValue * Strength;
         for (int i = startIndex; i < startIndex + count; i++)
         {
-          Vector3F velocity = directions[i] * speeds[i];
+          Vector3 velocity = directions[i] * speeds[i];
           velocity += bias;
-          speeds[i] = velocity.Length;
+          speeds[i] = velocity.Length();
           if (!Numeric.IsZero(speeds[i]))
             directions[i] = velocity / speeds[i];
         }
@@ -263,12 +262,12 @@ namespace DigitalRise.Particles.Effectors
       {
         // General case: Either Direction or Speed is varying parameter.
         // This path does not make sense much sense. - But maybe someone has an idea how to use it.
-        Vector3F bias = _biasVelocityParameter.DefaultValue * Strength;
+        Vector3 bias = _biasVelocityParameter.DefaultValue * Strength;
         for (int i = startIndex; i < startIndex + count; i++)
         {
-          Vector3F velocity = _directionParameter.GetValue(i) * _linearSpeedParameter.GetValue(i);
+          Vector3 velocity = _directionParameter.GetValue(i) * _linearSpeedParameter.GetValue(i);
           velocity += bias;
-          var newSpeed = velocity.Length;
+          var newSpeed = velocity.Length();
           _linearSpeedParameter.SetValue(i, newSpeed);
           if (!Numeric.IsZero(newSpeed))
             _directionParameter.SetValue(i, velocity / newSpeed);

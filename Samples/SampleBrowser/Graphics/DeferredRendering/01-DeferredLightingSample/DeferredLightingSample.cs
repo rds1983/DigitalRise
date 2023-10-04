@@ -67,7 +67,7 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
       // Add a god ray post-process filter and a game object which updates the god ray directions.
       var godRayFilter = new GodRayFilter(GraphicsService)
       {
-        Intensity = new Vector3F(1.0f),
+        Intensity = new Vector3(1.0f),
         NumberOfSamples = 12,
         NumberOfPasses = 2,
         Softness = 1,
@@ -98,7 +98,7 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));

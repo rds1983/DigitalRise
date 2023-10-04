@@ -8,7 +8,7 @@ using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -67,7 +67,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The total effective scale (which incorporates the scale factors of parent scene nodes).
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
-    Vector3F IGeometricObject.Scale
+    Vector3 IGeometricObject.Scale
     {
       get { return ScaleWorld; }
     }
@@ -91,7 +91,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// The total effective scale (which incorporates the scale factors of parent scene nodes).
     /// </value>
     [Category("Geometry")]
-    public Vector3F ScaleWorld
+    public Vector3 ScaleWorld
     {
       get
       {
@@ -101,7 +101,7 @@ namespace DigitalRise.Graphics.SceneGraph
         return _scaleWorld;
       }
     }
-    private Vector3F _scaleWorld;
+    private Vector3 _scaleWorld;
 
 
     /// <summary>
@@ -156,7 +156,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </para>
     /// </remarks>
     [Category("Geometry")]
-    public Vector3F ScaleLocal
+    public Vector3 ScaleLocal
     {
       get { return _scaleLocal; }
       set
@@ -169,7 +169,7 @@ namespace DigitalRise.Graphics.SceneGraph
         }
       }
     }
-    private Vector3F _scaleLocal;
+    private Vector3 _scaleLocal;
 
 
     /// <summary>
@@ -220,9 +220,9 @@ namespace DigitalRise.Graphics.SceneGraph
     /// </para>
     /// </remarks>
     [Category("Geometry")]
-    public Vector3F? LastScaleWorld
+    public Vector3? LastScaleWorld
     {
-      get { return GetFlag(SceneNodeFlags.HasLastScaleWorld) ? _lastScaleWorld : (Vector3F?)null; }
+      get { return GetFlag(SceneNodeFlags.HasLastScaleWorld) ? _lastScaleWorld : (Vector3?)null; }
       set
       {
         if (value.HasValue)
@@ -236,7 +236,7 @@ namespace DigitalRise.Graphics.SceneGraph
         }
       }
     }
-    private Vector3F _lastScaleWorld;
+    private Vector3 _lastScaleWorld;
 
 
     /// <summary>
@@ -359,8 +359,8 @@ namespace DigitalRise.Graphics.SceneGraph
       _poseWorld = Pose.Identity;
       _poseLocal = Pose.Identity;
 
-      _scaleWorld = Vector3F.One;
-      _scaleLocal = Vector3F.One;
+      _scaleWorld = Vector3.One;
+      _scaleLocal = Vector3.One;
 
       _shape = Shape.Empty;
     }
@@ -431,7 +431,7 @@ namespace DigitalRise.Graphics.SceneGraph
     {
       if (Parent != null)
       {
-        if (Parent.ScaleWorld == Vector3F.One)
+        if (Parent.ScaleWorld == Vector3.One)
         {
           _poseWorld = Parent.PoseWorld * _poseLocal;
         }
@@ -459,7 +459,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
       if (Parent != null)
       {
-        Vector3F sParent = Parent.ScaleWorld;
+        Vector3 sParent = Parent.ScaleWorld;
         if (sParent.X == sParent.Y && sParent.Y == sParent.Z)
         {
           // ----- Uniform scaling

@@ -185,8 +185,8 @@ namespace DigitalRise.Graphics.Effects
           {
             if (value is Vector3)
               binding = new ConstParameterBinding<Vector3>(effect, parameter, (Vector3)value);
-            else if (value is Vector3F)
-              binding = new ConstParameterBinding<Vector3F>(effect, parameter, (Vector3F)value);
+            else if (value is Vector3)
+              binding = new ConstParameterBinding<Vector3>(effect, parameter, (Vector3)value);
           }
           else if (parameter.ColumnCount == 4 || parameter.RowCount == 4)
           {
@@ -258,8 +258,8 @@ namespace DigitalRise.Graphics.Effects
           {
             if (value is Vector3[])
               binding = new ConstParameterArrayBinding<Vector3>(effect, parameter, (Vector3[])value);
-            else if (value is Vector3F[])
-              binding = new ConstParameterArrayBinding<Vector3F>(effect, parameter, (Vector3F[])value);
+            else if (value is Vector3[])
+              binding = new ConstParameterArrayBinding<Vector3>(effect, parameter, (Vector3[])value);
           }
           else if (parameter.ColumnCount == 4 || parameter.RowCount == 4)
           {

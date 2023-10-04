@@ -503,11 +503,11 @@ namespace DigitalRise.Animation.Character
       {
         var boneTransform = skeletonPose.GetBoneTransform(boneIndex);
         if (resetScale)
-          boneTransform.Scale = Vector3F.One;
+          boneTransform.Scale = Vector3.One;
         if (resetRotation)
           boneTransform.Rotation = QuaternionF.Identity;
         if (resetTranslation)
-          boneTransform.Translation = Vector3F.Zero;
+          boneTransform.Translation = Vector3.Zero;
 
         skeletonPose.SetBoneTransform(boneIndex, boneTransform);
 
@@ -550,11 +550,11 @@ namespace DigitalRise.Animation.Character
 
       var boneTransform = skeletonPose.GetBoneTransform(boneIndex);
       if (resetScale)
-        boneTransform.Scale = Vector3F.One;
+        boneTransform.Scale = Vector3.One;
       if (resetRotation)
         boneTransform.Rotation = QuaternionF.Identity;
       if (resetTranslation)
-        boneTransform.Translation = Vector3F.Zero;
+        boneTransform.Translation = Vector3.Zero;
 
       skeletonPose.SetBoneTransform(boneIndex, boneTransform);
 

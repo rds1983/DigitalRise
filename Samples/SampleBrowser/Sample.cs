@@ -11,7 +11,6 @@ using DigitalRise.Physics;
 using DigitalRise.ServiceLocation;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using AssetManagementBase;
 
 namespace Samples

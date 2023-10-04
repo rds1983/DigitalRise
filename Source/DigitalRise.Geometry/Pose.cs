@@ -56,7 +56,7 @@ namespace DigitalRise.Geometry
     /// <summary>
     /// A pose with no translation and no rotation.
     /// </summary>
-    public static readonly Pose Identity = new Pose(Vector3F.Zero, Matrix33F.Identity);
+    public static readonly Pose Identity = new Pose(Vector3.Zero, Matrix33F.Identity);
     #endregion
 
 
@@ -69,7 +69,7 @@ namespace DigitalRise.Geometry
     /// </summary>
     [DataMember]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
-    public Vector3F Position;
+    public Vector3 Position;
 
 
     /// <summary>
@@ -112,7 +112,7 @@ namespace DigitalRise.Geometry
     /// </value>
     public bool HasTranslation
     {
-      get { return !Position.IsNumericallyZero; }
+      get { return !Position.IsNumericallyZero(); }
     }
 
 
@@ -154,7 +154,7 @@ namespace DigitalRise.Geometry
     /// </summary>
     /// <param name="position">The position.</param>
     /// <param name="orientation">The orientation.</param>
-    public Pose(Vector3F position, Matrix33F orientation)
+    public Pose(Vector3 position, Matrix33F orientation)
     {
       Position = position;
       Orientation = orientation;
@@ -165,7 +165,7 @@ namespace DigitalRise.Geometry
     /// Initializes a new instance of the <see cref="Pose"/> class from position.
     /// </summary>
     /// <param name="position">The position.</param>
-    public Pose(Vector3F position)
+    public Pose(Vector3 position)
     {
       Position = position;
       Orientation = Matrix33F.Identity;
@@ -178,7 +178,7 @@ namespace DigitalRise.Geometry
     /// <param name="orientation">The orientation.</param>
     public Pose(Matrix33F orientation)
     {
-      Position = Vector3F.Zero;
+      Position = Vector3.Zero;
       Orientation = orientation;
     }
 
@@ -188,7 +188,7 @@ namespace DigitalRise.Geometry
     /// </summary>
     /// <param name="position">The position.</param>
     /// <param name="orientation">The orientation.</param>
-    public Pose(Vector3F position, QuaternionF orientation)
+    public Pose(Vector3 position, QuaternionF orientation)
     {
       Position = position;
       Orientation = orientation.ToRotationMatrix33();
@@ -201,7 +201,7 @@ namespace DigitalRise.Geometry
     /// <param name="orientation">The orientation.</param>
     public Pose(QuaternionF orientation)
     {
-      Position = Vector3F.Zero;
+      Position = Vector3.Zero;
       Orientation = orientation.ToRotationMatrix33();
     }
     #endregion
@@ -266,12 +266,12 @@ namespace DigitalRise.Geometry
     /// This method can be used to transform direction vectors. It applies only the rotation to the 
     /// vector. The translation is ignored. 
     /// </remarks>
-    public Vector3F ToWorldDirection(Vector3F localDirection)
+    public Vector3 ToWorldDirection(Vector3 localDirection)
     {
       // return Orientation * localDirection;
 
       // ----- Optimized version:
-      Vector3F result;
+      Vector3 result;
       result.X = Orientation.M00 * localDirection.X + Orientation.M01 * localDirection.Y + Orientation.M02 * localDirection.Z;
       result.Y = Orientation.M10 * localDirection.X + Orientation.M11 * localDirection.Y + Orientation.M12 * localDirection.Z;
       result.Z = Orientation.M20 * localDirection.X + Orientation.M21 * localDirection.Y + Orientation.M22 * localDirection.Z;
@@ -291,12 +291,12 @@ namespace DigitalRise.Geometry
     /// This method can be used to transform direction vectors. It applies only the rotation to the 
     /// vector. The translation is ignored. 
     /// </remarks>
-    public Vector3F ToLocalDirection(Vector3F worldDirection)
+    public Vector3 ToLocalDirection(Vector3 worldDirection)
     {
       //return Matrix33F.MultiplyTransposed(Orientation, worldDirection);
 
       // ----- Optimized version:
-      Vector3F result;
+      Vector3 result;
       result.X = Orientation.M00 * worldDirection.X + Orientation.M10 * worldDirection.Y + Orientation.M20 * worldDirection.Z;
       result.Y = Orientation.M01 * worldDirection.X + Orientation.M11 * worldDirection.Y + Orientation.M21 * worldDirection.Z;
       result.Z = Orientation.M02 * worldDirection.X + Orientation.M12 * worldDirection.Y + Orientation.M22 * worldDirection.Z;
@@ -312,12 +312,12 @@ namespace DigitalRise.Geometry
     /// <returns>
     /// The position in world space (or the parent space for nested coordinate spaces).
     /// </returns>
-    public Vector3F ToWorldPosition(Vector3F localPosition)
+    public Vector3 ToWorldPosition(Vector3 localPosition)
     {
       //return Orientation * localPosition + Position;
 
       // ----- Optimized version:
-      Vector3F result;
+      Vector3 result;
       result.X = Orientation.M00 * localPosition.X + Orientation.M01 * localPosition.Y + Orientation.M02 * localPosition.Z + Position.X;
       result.Y = Orientation.M10 * localPosition.X + Orientation.M11 * localPosition.Y + Orientation.M12 * localPosition.Z + Position.Y;
       result.Z = Orientation.M20 * localPosition.X + Orientation.M21 * localPosition.Y + Orientation.M22 * localPosition.Z + Position.Z;
@@ -333,16 +333,16 @@ namespace DigitalRise.Geometry
     /// The position vector in world space (or the parent space for nested coordinate spaces).
     /// </param>
     /// <returns>The position in local space.</returns>
-    public Vector3F ToLocalPosition(Vector3F worldPosition)
+    public Vector3 ToLocalPosition(Vector3 worldPosition)
     {
       //return Matrix33F.MultiplyTransposed(Orientation, worldPosition - Position);
 
       // ----- Optimized version:
-      Vector3F diff;
+      Vector3 diff;
       diff.X = worldPosition.X - Position.X;
       diff.Y = worldPosition.Y - Position.Y;
       diff.Z = worldPosition.Z - Position.Z;
-      Vector3F result;
+      Vector3 result;
       result.X = Orientation.M00 * diff.X + Orientation.M10 * diff.Y + Orientation.M20 * diff.Z;
       result.Y = Orientation.M01 * diff.X + Orientation.M11 * diff.Y + Orientation.M21 * diff.Z;
       result.Z = Orientation.M02 * diff.X + Orientation.M12 * diff.Y + Orientation.M22 * diff.Z;
@@ -364,7 +364,7 @@ namespace DigitalRise.Geometry
       Debug.Assert(IsValid(poseMatrix), "Matrix is not a valid pose matrix. Pose matrix must only contain rotations and translations.");
 
       return new Pose(
-        new Vector3F(poseMatrix.M03, poseMatrix.M13, poseMatrix.M23),
+        new Vector3(poseMatrix.M03, poseMatrix.M13, poseMatrix.M23),
         new Matrix33F(poseMatrix.M00, poseMatrix.M01, poseMatrix.M02,
                       poseMatrix.M10, poseMatrix.M11, poseMatrix.M12,
                       poseMatrix.M20, poseMatrix.M21, poseMatrix.M22));
@@ -409,7 +409,7 @@ namespace DigitalRise.Geometry
       Debug.Assert(IsValid((Matrix44F)poseMatrix), "Matrix is not a valid pose matrix. Pose matrix must only contain rotations and translations.");
 
       return new Pose(
-        new Vector3F(poseMatrix.M41, poseMatrix.M42, poseMatrix.M43),
+        new Vector3(poseMatrix.M41, poseMatrix.M42, poseMatrix.M43),
         new Matrix33F(poseMatrix.M11, poseMatrix.M21, poseMatrix.M31,
                       poseMatrix.M12, poseMatrix.M22, poseMatrix.M32,
                       poseMatrix.M13, poseMatrix.M23, poseMatrix.M33));
@@ -554,9 +554,9 @@ namespace DigitalRise.Geometry
       Vector4F v2 = matrix * Vector4F.UnitY;
       Vector4F v3 = matrix * Vector4F.UnitZ;
 
-      return Numeric.AreEqual(v1.LengthSquared, 1)
-             && Numeric.AreEqual(v2.LengthSquared, 1)
-             && Numeric.AreEqual(v3.LengthSquared, 1)
+      return Numeric.AreEqual(v1.LengthSquared(), 1)
+             && Numeric.AreEqual(v2.LengthSquared(), 1)
+             && Numeric.AreEqual(v3.LengthSquared(), 1)
              && Numeric.IsZero(Vector4F.Dot(v1, v2))
              && Numeric.IsZero(Vector4F.Dot(v2, v3))
              && Numeric.IsZero(Vector4F.Dot(v1, v3))
@@ -796,7 +796,7 @@ namespace DigitalRise.Geometry
     /// <returns>A 4x4-matrix that represents the same transformation as the pose.</returns>
     public static implicit operator Matrix44F(Pose pose)
     {
-      Vector3F v = pose.Position;
+      Vector3 v = pose.Position;
       Matrix33F m = pose.Orientation;
       return new Matrix44F(m.M00, m.M01, m.M02, v.X,
                            m.M10, m.M11, m.M12, v.Y,
@@ -818,7 +818,7 @@ namespace DigitalRise.Geometry
     /// </remarks>
     public static implicit operator Matrix(Pose pose)
     {
-      Vector3F v = pose.Position;
+      Vector3 v = pose.Position;
       Matrix33F m = pose.Orientation;
       return new Matrix(m.M00, m.M10, m.M20, 0,
                         m.M01, m.M11, m.M21, 0,

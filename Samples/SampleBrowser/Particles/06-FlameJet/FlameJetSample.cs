@@ -27,7 +27,7 @@ namespace Samples.Particles
       : base(game)
     {
       _flameJet = FlameJet.Create(Services);
-      _flameJet.Pose = new Pose(new Vector3F(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.PiOver2));
+      _flameJet.Pose = new Pose(new Vector3(0, 2, 0), Matrix33F.CreateRotationY(ConstantsF.PiOver2));
       ParticleSystemService.ParticleSystems.Add(_flameJet);
 
       _particleSystemNode = new ParticleSystemNode(_flameJet);

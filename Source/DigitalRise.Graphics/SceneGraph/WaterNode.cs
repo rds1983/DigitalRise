@@ -8,8 +8,8 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -68,7 +68,7 @@ namespace DigitalRise.Graphics.SceneGraph
     //--------------------------------------------------------------
 
     // Cached underwater test result.
-    private Vector3F _lastTestPosition = new Vector3F(float.NaN);
+    private Vector3 _lastTestPosition = new Vector3(float.NaN);
     private bool _lastTestResult;
     #endregion
 
@@ -418,12 +418,12 @@ namespace DigitalRise.Graphics.SceneGraph
         var planeShape = Shape as PlaneShape;
         if (planeShape != null)
         {
-          planeShape.Normal = new Vector3F(0, 1, 0);
+          planeShape.Normal = new Vector3(0, 1, 0);
           planeShape.DistanceFromOrigin = ExtraHeight;
         }
         else
         {
-          Shape = new PlaneShape(new Vector3F(0, 1, 0), ExtraHeight);
+          Shape = new PlaneShape(new Vector3(0, 1, 0), ExtraHeight);
         }
 
         return;
@@ -432,7 +432,7 @@ namespace DigitalRise.Graphics.SceneGraph
       // Check if we have a valid AABB.
       var aabb = Volume.GetAabb();
 
-      if (!Numeric.IsZeroOrPositiveFinite(aabb.Extent.LengthSquared))
+      if (!Numeric.IsZeroOrPositiveFinite(aabb.Extent.LengthSquared()))
         throw new GraphicsException("Invalid water volume. The water volume must be a finite shape or null.");
 
       // Apply ExtraHeight. We also apply it horizontally because choppy waves
@@ -447,7 +447,7 @@ namespace DigitalRise.Graphics.SceneGraph
       aabb.Maximum.Z += ExtraHeight;
 
       // Create shape from volume AABB.
-      if (aabb.Center.IsNumericallyZero)
+      if (aabb.Center.IsNumericallyZero())
       {
         // Use BoxShape.
         var boxShape = Shape as BoxShape;
@@ -487,7 +487,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <remarks>
     /// A position is underwater if it is inside the <see cref="Shape"/> of this node.
     /// </remarks>
-    public bool IsUnderwater(Vector3F position)
+    public bool IsUnderwater(Vector3 position)
     {
       //if (!EnableUnderwaterEffect)
       //  return false;
@@ -503,7 +503,7 @@ namespace DigitalRise.Graphics.SceneGraph
         // Return cached result if the point and the water pose/shape are still the same.
         if (!IsDirty)
         {
-          if (Vector3F.AreNumericallyEqual(position, _lastTestPosition))
+          if (MathHelper.AreNumericallyEqual(position, _lastTestPosition))
             return _lastTestResult;
         }
         else
@@ -563,11 +563,11 @@ namespace DigitalRise.Graphics.SceneGraph
           testGeometricObject.Shape = _rayShape;
 
           // Shoot down. Start 1 unit above the surface.
-          Vector3F origin = position;
+          Vector3 origin = position;
           origin.Y = Math.Max(Aabb.Maximum.Y, origin.Y) + 1;
           _rayShape.Origin = origin;
-          _rayShape.Length = (origin - position).Length;
-          _rayShape.Direction = Vector3F.Down;
+          _rayShape.Length = (origin - position).Length();
+          _rayShape.Direction = Vector3.Down;
           if (!collisionDetection.HaveContact(_testCollisionObject, _waterCollisionObject))
             return false; // Camera is above water.
 
@@ -575,8 +575,8 @@ namespace DigitalRise.Graphics.SceneGraph
           origin = position;
           origin.Y = Math.Min(Aabb.Minimum.Y, origin.Y) - 1;
           _rayShape.Origin = origin;
-          _rayShape.Length = (origin - position).Length;
-          _rayShape.Direction = Vector3F.Up;
+          _rayShape.Length = (origin - position).Length();
+          _rayShape.Direction = Vector3.Up;
 
           _lastTestResult = collisionDetection.HaveContact(_testCollisionObject, _waterCollisionObject);
           return _lastTestResult;

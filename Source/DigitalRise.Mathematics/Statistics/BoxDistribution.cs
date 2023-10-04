@@ -3,8 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Statistics
 {
@@ -17,34 +16,34 @@ namespace DigitalRise.Mathematics.Statistics
   /// defined by the its <see cref="MinValue"/> corner and its <see cref="MaxValue"/> corner.
   /// </para>
   /// </remarks>
-  public class BoxDistribution : Distribution<Vector3F>
+  public class BoxDistribution : Distribution<Vector3>
   {
     /// <summary>
     /// Gets or sets the minimum value.
     /// </summary>
     /// <value>The minium value. The default is (-1, -1, -1).</value>
-    public Vector3F MinValue
+    public Vector3 MinValue
     {
       get { return _minValue; }
       set { _minValue = value; }
     }
-    private Vector3F _minValue = new Vector3F(-1, -1, -1);
+    private Vector3 _minValue = new Vector3(-1, -1, -1);
 
 
     /// <summary>
     /// Gets or sets the maximum value.
     /// </summary>
     /// <value>The maximum value. The default is (1, 1, 1).</value>
-    public Vector3F MaxValue
+    public Vector3 MaxValue
     {
       get { return _maxValue; }
       set { _maxValue = value; }
     }
-    private Vector3F _maxValue = new Vector3F(1, 1, 1);
+    private Vector3 _maxValue = new Vector3(1, 1, 1);
     
 
     /// <inheritdoc/>
-    public override Vector3F Next(Random random)
+    public override Vector3 Next(Random random)
     {
       if (random == null)
         throw new ArgumentNullException("random");
@@ -53,7 +52,7 @@ namespace DigitalRise.Mathematics.Statistics
       float y = random.NextFloat(_minValue.Y, _maxValue.Y);
       float z = random.NextFloat(_minValue.Z, _maxValue.Z);
 
-      return new Vector3F(x, y, z);
+      return new Vector3(x, y, z);
     }
   }
 }

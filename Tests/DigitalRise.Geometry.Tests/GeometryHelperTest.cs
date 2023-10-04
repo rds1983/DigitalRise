@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -31,7 +31,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ComputeBoundingShapeWithEmptyList()
     {
-      GeometryHelper.CreateBoundingShape(new List<Vector3F>());
+      GeometryHelper.CreateBoundingShape(new List<Vector3>());
     }
 
 
@@ -40,16 +40,16 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       var points = new[]
       {
-        new Vector3F(-3, 0, 0),
-        new Vector3F(-2, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(2, 0, 0),
-        new Vector3F(3, 0, 0),
+        new Vector3(-3, 0, 0),
+        new Vector3(-2, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(2, 0, 0),
+        new Vector3(3, 0, 0),
       };
       var shape = GeometryHelper.CreateBoundingShape(points);
       BoxShape box = (BoxShape)shape;
-      Assert.AreEqual(new Vector3F(6, 0, 0), box.Extent);
+      Assert.AreEqual(new Vector3(6, 0, 0), box.Extent);
     }
 
 
@@ -57,12 +57,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void ComputeBoundingShapeCenteredSphere()
     {
       RandomHelper.Random = new Random(123);
-      var radius = new Vector3F(3, 0, 0);
-      var points = new List<Vector3F>
+      var radius = new Vector3(3, 0, 0);
+      var points = new List<Vector3>
       {
-        new Vector3F(3, 0, 0), new Vector3F(-3, 0, 0), 
-        new Vector3F(0, 3, 0), new Vector3F(0, -3, 0), 
-        new Vector3F(0, 0, 3), new Vector3F(0, 0, -3), 
+        new Vector3(3, 0, 0), new Vector3(-3, 0, 0), 
+        new Vector3(0, 3, 0), new Vector3(0, -3, 0), 
+        new Vector3(0, 0, 3), new Vector3(0, 0, -3), 
       };
 
       for (int i = 0; i < 40; i++)
@@ -97,14 +97,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       var points = new[]
       {
-        new Vector3F(-3, 0, 0),
-        new Vector3F(-2, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(2, 0, 0),
-        new Vector3F(3, 0, 0),
+        new Vector3(-3, 0, 0),
+        new Vector3(-2, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(2, 0, 0),
+        new Vector3(3, 0, 0),
       };
-      Vector3F box;
+      Vector3 box;
       Pose pose;
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(6, pose.ToWorldDirection(box).X));
@@ -124,9 +124,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
       {
         // Fill list with a random number of random points.
         int numberOfPoints = RandomHelper.Random.NextInteger(2, 100);
-        List<Vector3F> points = new List<Vector3F>();
+        List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfPoints; i++)
-          points.Add(RandomHelper.Random.NextVector3F(-10, 100));
+          points.Add(RandomHelper.Random.NextVector3(-10, 100));
 
         Shape shape = GeometryHelper.CreateBoundingShape(points);
         GeometricObject geometry = new GeometricObject(shape);
@@ -166,7 +166,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentNullException))]
     public void ComputeBoxWithNullArgument()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
       GeometryHelper.ComputeBoundingBox(null, out box, out pose);
     }
@@ -176,159 +176,159 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ComputeBoxWithEmptyList()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
-      GeometryHelper.ComputeBoundingBox(new List<Vector3F>(), out box, out pose);
+      GeometryHelper.ComputeBoundingBox(new List<Vector3>(), out box, out pose);
     }
 
 
     [Test]
     public void ComputeBox()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
 
-      List<Vector3F> points = new List<Vector3F>()
+      List<Vector3> points = new List<Vector3>()
       {
-        new Vector3F(1, 0, 0),
+        new Vector3(1, 0, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), pose.Position));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(1, 0, 0),
-        new Vector3F(1, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(1, 0, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), pose.Position));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 3, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 3, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 2, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 2, 0), pose.Position));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 3, 0),
-        new Vector3F(0, 3, 0),
-        new Vector3F(0, 1, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 3, 0),
+        new Vector3(0, 3, 0),
+        new Vector3(0, 1, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 2, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 2, 0), pose.Position));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 5, 0),
-        new Vector3F(0, 1, 2),
-        new Vector3F(0, 5, 2),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 5, 0),
+        new Vector3(0, 1, 2),
+        new Vector3(0, 5, 2),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 0));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 4));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 3, 1), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 3, 1), pose.Position));
 
       // Cube
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(-1, -1, -1),
-        new Vector3F(-1, -1, 1),
-        new Vector3F(-1, 1, -1),
-        new Vector3F(-1, 1, 1),
-        new Vector3F(1, -1, -1),
-        new Vector3F(1, -1, 1),
-        new Vector3F(1, 1, -1),
-        new Vector3F(1, 1, 1),
+        new Vector3(-1, -1, -1),
+        new Vector3(-1, -1, 1),
+        new Vector3(-1, 1, -1),
+        new Vector3(-1, 1, 1),
+        new Vector3(1, -1, -1),
+        new Vector3(1, -1, 1),
+        new Vector3(1, 1, -1),
+        new Vector3(1, 1, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position));
 
       // Cube
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(-1, -1, -1),
-        new Vector3F(-1, -1, 1),
-        new Vector3F(-1, 1, -1),
-        new Vector3F(-1, 1, 1),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(1, -1, -1),
-        new Vector3F(1, -1, 1),
-        new Vector3F(1, 1, -1),
-        new Vector3F(1, 1, 1),
+        new Vector3(-1, -1, -1),
+        new Vector3(-1, -1, 1),
+        new Vector3(-1, 1, -1),
+        new Vector3(-1, 1, 1),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(1, -1, -1),
+        new Vector3(1, -1, 1),
+        new Vector3(1, 1, -1),
+        new Vector3(1, 1, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position));
 
       // Box
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(-2, -3, -1),
-        new Vector3F(-2, -3, 1),
-        new Vector3F(-2, 3, -1),
-        new Vector3F(-2, 3, 1),
-        new Vector3F(-2, 0, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(2, 0, 0),
-        new Vector3F(2, -3, -1),
-        new Vector3F(2, -3, 1),
-        new Vector3F(2, 3, -1),
-        new Vector3F(2, 3, 1),
+        new Vector3(-2, -3, -1),
+        new Vector3(-2, -3, 1),
+        new Vector3(-2, 3, -1),
+        new Vector3(-2, 3, 1),
+        new Vector3(-2, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(2, 0, 0),
+        new Vector3(2, -3, -1),
+        new Vector3(2, -3, 1),
+        new Vector3(2, 3, -1),
+        new Vector3(2, 3, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
       Assert.IsTrue(Numeric.AreEqual(box.X, 4));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 6));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position));
     }
 
 
     [Test]
     public void ComputeBoxForCube()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
 
       // Cube
-      var points = new List<Vector3F>()
+      var points = new List<Vector3>()
       {
-        new Vector3F(-1, -1, -1),
-        new Vector3F(-1, -1, 1),
-        new Vector3F(-1, 1, -1),
-        new Vector3F(-1, 1, 1),
-        new Vector3F(1, -1, -1),
-        new Vector3F(1, -1, 1),
-        new Vector3F(1, 1, -1),
-        new Vector3F(1, 1, 1),
+        new Vector3(-1, -1, -1),
+        new Vector3(-1, -1, 1),
+        new Vector3(-1, 1, -1),
+        new Vector3(-1, 1, 1),
+        new Vector3(1, -1, -1),
+        new Vector3(1, -1, 1),
+        new Vector3(1, 1, -1),
+        new Vector3(1, 1, 1),
       };
 
       // Translate and rotate cube.
-      Pose cubePose = new Pose(new Vector3F(10, 2, 3), RandomHelper.Random.NextQuaternionF());
+      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternionF());
       for (int i = 0; i < points.Count; i++)
         points[i] = cubePose.ToWorldPosition(points[i]);
 
@@ -336,33 +336,33 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(Numeric.AreEqual(box.X, 2, 0.2f));
       Assert.IsTrue(Numeric.AreEqual(box.Y, 2, 0.2f));
       Assert.IsTrue(Numeric.AreEqual(box.Z, 2, 0.2f));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(10, 2, 3), pose.Position));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(10, 2, 3), pose.Position));
     }
 
 
     [Test]
     public void ComputeBoxForCapsules()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
 
       var points = new CapsuleShape(1, 3).GetMesh(0.01f, 4).Vertices;
 
-      Pose cubePose = new Pose(new Vector3F(10, 2, 3), RandomHelper.Random.NextQuaternionF());
+      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternionF());
       for (int i = 0; i < points.Count; i++)
         points[i] = cubePose.ToWorldPosition(points[i]);
 
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.LargestComponent, 3, 0.2f));
-      Assert.IsTrue(Numeric.AreEqual(box.SmallestComponent, 2, 0.2f));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(10, 2, 3), pose.Position));
+      Assert.IsTrue(Numeric.AreEqual(box.LargestComponent(), 3, 0.2f));
+      Assert.IsTrue(Numeric.AreEqual(box.SmallestComponent(), 2, 0.2f));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(10, 2, 3), pose.Position));
     }
 
 
     [Test]
     public void ComputeBoxWithRandomPoints()
     {
-      Vector3F box;
+      Vector3 box;
       Pose pose;
 
       const int numberOfTests = 100;
@@ -371,9 +371,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
       {
         // Fill list with a random number of random points.
         int numberOfPoints = RandomHelper.Random.NextInteger(2, 100);
-        List<Vector3F> points = new List<Vector3F>();
+        List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfPoints; i++)
-          points.Add(RandomHelper.Random.NextVector3F(-10, 100));
+          points.Add(RandomHelper.Random.NextVector3(-10, 100));
 
         GeometryHelper.ComputeBoundingBox(points, out box, out pose);
 
@@ -381,7 +381,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
         Assert.IsTrue(box.X >= 0);
         Assert.IsTrue(box.Y >= 0);
         Assert.IsTrue(box.Z >= 0);
-        Assert.IsTrue(!float.IsNaN(pose.Position.Length));
+        Assert.IsTrue(!float.IsNaN(pose.Position.Length()));
         Assert.IsTrue(pose.Orientation.IsRotation);
 
         // Test if all points are in the box.
@@ -442,16 +442,16 @@ namespace DigitalRise.Geometry.Shapes.Tests
       {
         // Fill list with a random number of random points.
         int numberOfPoints = RandomHelper.Random.NextInteger(2, 100);
-        List<Vector3F> points = new List<Vector3F>();
+        List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfPoints; i++)
-          points.Add(RandomHelper.Random.NextVector3F(-10, 100));
+          points.Add(RandomHelper.Random.NextVector3(-10, 100));
 
         GeometryHelper.ComputeBoundingCapsule(points, out radius, out height, out pose);
 
         // Check if sphere can be valid.
         Assert.IsTrue(radius >= 0);
         Assert.IsTrue(height >= 2 * radius);
-        Assert.IsTrue(!float.IsNaN(pose.Position.Length));
+        Assert.IsTrue(!float.IsNaN(pose.Position.Length()));
         Assert.IsTrue(pose.Orientation.IsRotation);
 
         // Test if all points are in the shape.
@@ -478,7 +478,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentNullException))]
     public void ComputeSphereWithNullArgument()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
       GeometryHelper.ComputeBoundingSphere(null, out radius, out center);
     }
@@ -488,161 +488,161 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [ExpectedException(typeof(ArgumentException))]
     public void ComputeSphereWithEmptyList()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
-      GeometryHelper.ComputeBoundingSphere(new List<Vector3F>(), out radius, out center);
+      GeometryHelper.ComputeBoundingSphere(new List<Vector3>(), out radius, out center);
     }
 
 
     [Test]
     public void ComputeSphere()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
 
-      List<Vector3F> points = new List<Vector3F>()
+      List<Vector3> points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
+        new Vector3(0, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(0, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(0, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(0, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(2, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(2, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(2, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(2, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(2, 0, 0),
-        new Vector3F(2.000001f, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(2, 0, 0),
+        new Vector3(2.000001f, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(1, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(-1, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(-1, 0, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 0, 1),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 0, 1),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(1, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 0, 1),
-        new Vector3F(0, -1, 0),
-        new Vector3F(0, -1.000001f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(1, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 0, 1),
+        new Vector3(0, -1, 0),
+        new Vector3(0, -1.000001f, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(0.1f, 0, 0),
-        new Vector3F(0, 0.2f, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 0, 1),
-        new Vector3F(0, 0, 0),
-        new Vector3F(0, -1, 0),
-        new Vector3F(0, -1.000001f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0.1f, 0, 0),
+        new Vector3(0, 0.2f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 0, 1),
+        new Vector3(0, 0, 0),
+        new Vector3(0, -1, 0),
+        new Vector3(0, -1.000001f, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(0.1f, 0, 0),
-        new Vector3F(0, 0.2f, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(0, -1, 0),
-        new Vector3F(0, -1.000001f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0.1f, 0, 0),
+        new Vector3(0, 0.2f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0, -1, 0),
+        new Vector3(0, -1.000001f, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
 
-      points = new List<Vector3F>()
+      points = new List<Vector3>()
       {
-        new Vector3F(0, 0, 0),
-        new Vector3F(0.1f, 0, 0),
-        new Vector3F(0, 0.2f, 0),
-        new Vector3F(0, 0, 0),
-        new Vector3F(-1, 0, 0),
-        new Vector3F(0, 1, 0),
-        new Vector3F(0, 0, 1),
-        new Vector3F(0, 0, 0),
-        new Vector3F(0, -0.4f, 0.3f),
-        new Vector3F(0, -1, 0),
-        new Vector3F(0, -1.000001f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0.1f, 0, 0),
+        new Vector3(0, 0.2f, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 1, 0),
+        new Vector3(0, 0, 1),
+        new Vector3(0, 0, 0),
+        new Vector3(0, -0.4f, 0.3f),
+        new Vector3(0, -1, 0),
+        new Vector3(0, -1.000001f, 0),
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, 0), center));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), center));
       Assert.IsTrue(Numeric.AreEqual(1, radius));
     }
 
@@ -650,7 +650,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ComputeSphereWithRandomPoints()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
 
       const int numberOfTests = 1000;
@@ -659,9 +659,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
       {
         // Fill list with a random number of random points.
         int numberOfPoints = RandomHelper.Random.NextInteger(2, 100);
-        List<Vector3F> points = new List<Vector3F>();
+        List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfPoints; i++)
-          points.Add(RandomHelper.Random.NextVector3F(-10, 100));
+          points.Add(RandomHelper.Random.NextVector3(-10, 100));
 
         GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
 
@@ -678,7 +678,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
         {
           var p = points[i];
 
-          float distanceFromSurface = (p - center).Length - radius;
+          float distanceFromSurface = (p - center).Length() - radius;
 
           if (Numeric.IsZero(distanceFromSurface, epsilon))
             numberOfSupportPoints++;
@@ -703,8 +703,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
         approximateCenter /= numberOfPoints;
         float approximateRadius = 0;
         for (int i = 0; i < numberOfPoints; i++)
-          if ((points[i] - approximateCenter).Length > approximateRadius)
-            approximateRadius = (points[i] - approximateCenter).Length;
+          if ((points[i] - approximateCenter).Length() > approximateRadius)
+            approximateRadius = (points[i] - approximateCenter).Length();
         //if (approximateRadius < radius)
         //  Debugger.Break();
         Assert.GreaterOrEqual(approximateRadius, radius);
@@ -715,55 +715,55 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ComputeCircumscribedSphereFor3Points()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
 
       // Compute sphere and test if all points are on the surface.
-      Vector3F p0 = new Vector3F(0, 0, 0);
-      Vector3F p1 = new Vector3F(1, 0, 0);
-      Vector3F p2 = new Vector3F(0, 1, 0);
+      Vector3 p0 = new Vector3(0, 0, 0);
+      Vector3 p1 = new Vector3(1, 0, 0);
+      Vector3 p2 = new Vector3(0, 1, 0);
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
-      float distance = (p0 - center).Length;
+      float distance = (p0 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p1 - center).Length;
+      distance = (p1 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p2 - center).Length;
+      distance = (p2 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
 
       // Compute sphere and test if all points are on the surface.
-      p0 = new Vector3F(0, 0, 1);
-      p1 = new Vector3F(1, 0, 0);
-      p2 = new Vector3F(0, 1, 0);
+      p0 = new Vector3(0, 0, 1);
+      p1 = new Vector3(1, 0, 0);
+      p2 = new Vector3(0, 1, 0);
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
-      distance = (p0 - center).Length;
+      distance = (p0 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p1 - center).Length;
+      distance = (p1 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p2 - center).Length;
+      distance = (p2 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
 
 
       // Compute sphere and test if all points are on the surface.
-      p0 = new Vector3F(120, -44, 45);
-      p1 = new Vector3F(-21, 23, -78);
-      p2 = new Vector3F(93, 231, 65);
+      p0 = new Vector3(120, -44, 45);
+      p1 = new Vector3(-21, 23, -78);
+      p2 = new Vector3(93, 231, 65);
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
-      distance = (p0 - center).Length;
+      distance = (p0 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p1 - center).Length;
+      distance = (p1 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p2 - center).Length;
+      distance = (p2 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
 
       // Test a degenerate case.
-      p0 = new Vector3F(120, -44, 45);
-      p1 = new Vector3F(-21, 23, -78);
+      p0 = new Vector3(120, -44, 45);
+      p1 = new Vector3(-21, 23, -78);
       p2 = p1;
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
@@ -775,48 +775,48 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ComputeCircumscribedSphereFor4Points()
     {
-      Vector3F center;
+      Vector3 center;
       float radius;
 
       // Compute sphere and test if all points are on the surface.
-      Vector3F p0 = new Vector3F(0, 0, 0);
-      Vector3F p1 = new Vector3F(1, 0, 0);
-      Vector3F p2 = new Vector3F(0, 1, 0);
-      Vector3F p3 = new Vector3F(0, 0, 1);
+      Vector3 p0 = new Vector3(0, 0, 0);
+      Vector3 p1 = new Vector3(1, 0, 0);
+      Vector3 p2 = new Vector3(0, 1, 0);
+      Vector3 p3 = new Vector3(0, 0, 1);
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, p3, out radius, out center);
 
-      float distance = (p0 - center).Length;
+      float distance = (p0 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p1 - center).Length;
+      distance = (p1 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p2 - center).Length;
+      distance = (p2 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p3 - center).Length;
+      distance = (p3 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
 
       // Compute sphere and test if all points are on the surface.
-      p0 = new Vector3F(120, -44, 45);
-      p1 = new Vector3F(-21, 23, -78);
-      p2 = new Vector3F(93, 231, 65);
-      p3 = new Vector3F(88, -97, -75);
+      p0 = new Vector3(120, -44, 45);
+      p1 = new Vector3(-21, 23, -78);
+      p2 = new Vector3(93, 231, 65);
+      p3 = new Vector3(88, -97, -75);
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, p3, out radius, out center);
 
-      distance = (p0 - center).Length;
+      distance = (p0 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p1 - center).Length;
+      distance = (p1 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p2 - center).Length;
+      distance = (p2 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
-      distance = (p3 - center).Length;
+      distance = (p3 - center).Length();
       Assert.IsTrue(Numeric.AreEqual(distance, radius));
 
 
       // Test a degenerate case.
-      p0 = new Vector3F(120, -44, 45);
-      p1 = new Vector3F(-21, 23, -78);
-      p2 = new Vector3F(93, 231, 65);
+      p0 = new Vector3(120, -44, 45);
+      p1 = new Vector3(-21, 23, -78);
+      p2 = new Vector3(93, 231, 65);
       p3 = p2;
 
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, p3, out radius, out center);
@@ -828,20 +828,20 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void HaveContactAabb()
     {
-      var aabb1 = new Aabb(new Vector3F(10, 10, 10), new Vector3F(10, 10, 10));
-      var aabb2 = new Aabb(new Vector3F(10, 10, 10), new Vector3F(20, 20, 20));
-      var aabb3 = new Aabb(new Vector3F(30, 10, 10), new Vector3F(40, 20, 20));
-      var aabbInf = new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
-      var aabbNaN = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+      var aabb1 = new Aabb(new Vector3(10, 10, 10), new Vector3(10, 10, 10));
+      var aabb2 = new Aabb(new Vector3(10, 10, 10), new Vector3(20, 20, 20));
+      var aabb3 = new Aabb(new Vector3(30, 10, 10), new Vector3(40, 20, 20));
+      var aabbInf = new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
+      var aabbNaN = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
       Assert.IsTrue(GeometryHelper.HaveContact(aabb1, aabb1));
       Assert.IsTrue(GeometryHelper.HaveContact(aabb1, aabbInf));
       Assert.IsTrue(GeometryHelper.HaveContact(aabbInf, aabbInf));
       Assert.IsTrue(GeometryHelper.HaveContact(aabb1, aabb2));
       Assert.IsFalse(GeometryHelper.HaveContact(aabb2, aabb3));
 
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb3, new Vector3F(30, 10, 10)));
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb3, new Vector3F(32, 12, 12)));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb3, new Vector3F(29, 10, 10)));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb3, new Vector3(30, 10, 10)));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb3, new Vector3(32, 12, 12)));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb3, new Vector3(29, 10, 10)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(aabb1, aabbNaN));
       Assert.IsFalse(GeometryHelper.HaveContact(aabbNaN, aabb1));
@@ -853,12 +853,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void HaveContactAabbPoint()
     {
-      var p = new Vector3F(10, 10, 10);
-      var aabb1 = new Aabb(new Vector3F(10, 10, 10), new Vector3F(10, 10, 10));
-      var aabb2 = new Aabb(new Vector3F(10, 10, 10), new Vector3F(20, 20, 20));
-      var aabb3 = new Aabb(new Vector3F(30, 10, 10), new Vector3F(40, 20, 20));
-      var aabbInf = new Aabb(new Vector3F(float.NegativeInfinity), new Vector3F(float.PositiveInfinity));
-      var aabbNaN = new Aabb(new Vector3F(float.NaN), new Vector3F(float.NaN));
+      var p = new Vector3(10, 10, 10);
+      var aabb1 = new Aabb(new Vector3(10, 10, 10), new Vector3(10, 10, 10));
+      var aabb2 = new Aabb(new Vector3(10, 10, 10), new Vector3(20, 20, 20));
+      var aabb3 = new Aabb(new Vector3(30, 10, 10), new Vector3(40, 20, 20));
+      var aabbInf = new Aabb(new Vector3(float.NegativeInfinity), new Vector3(float.PositiveInfinity));
+      var aabbNaN = new Aabb(new Vector3(float.NaN), new Vector3(float.NaN));
       Assert.IsTrue(GeometryHelper.HaveContact(aabb1, p));
       Assert.IsTrue(GeometryHelper.HaveContact(aabb2, p));
       Assert.IsFalse(GeometryHelper.HaveContact(aabb3, p));
@@ -871,106 +871,106 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void HaveContactAabbBox2()
     {
-      var box = new Vector3F(1, 1, 1);
-      var aabb = new Aabb(new Vector3F(-1, -1, -1), new Vector3F(1, 1, 1));
+      var box = new Vector3(1, 1, 1);
+      var aabb = new Aabb(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
 
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(0, 0, 0)), true));
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1, 0, 0)), true));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 0, 0)), true));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1, 0, 0)), true));
 
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(-2, 0, 0)), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(0, -2, 0)), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(0, 0, -2)), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(2, 0, 0)), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(0, 2, 0)), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(0, 0, 2)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(-2, 0, 0)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, -2, 0)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 0, -2)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(2, 0, 0)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 2, 0)), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 0, 2)), true));
 
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(-45))), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationY(MathHelper.ToRadians(90))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(-45))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationY(MathHelper.ToRadians(90))), true));
 
       // Edge test case where MakeEdgeTest makes a difference.
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3F(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), false));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), false));
     }
 
 
     [Test]
     public void HaveContactAabbRay()
     {
-      var aabb = new Aabb(new Vector3F(-1), new Vector3F(1));
+      var aabb = new Aabb(new Vector3(-1), new Vector3(1));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, 2, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, 0, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, -2, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, 2, 0), new Vector3F(-1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, 0, 0), new Vector3F(-1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-2, -2, 0), new Vector3F(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, 2, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, 0, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, -2, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, 2, 0), new Vector3(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, 0, 0), new Vector3(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-2, -2, 0), new Vector3(-1, 0, 0), 10)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, -2), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, 2), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, -2), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, 2), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
 
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -1, 0).Normalized, 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -1.1f, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -0.9f, 0).Normalized, 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -1, 0).Normalized(), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -1.1f, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -0.9f, 0).Normalized(), 10)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -1, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -1.1f, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -0.9f, 0).Normalized, 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -1, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -1.1f, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -0.9f, 0).Normalized(), 10)));
 
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0).Normalized, 0)));
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0).Normalized, 0)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 0, 0), new Vector3(1, 0, 0).Normalized(), 0)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(0, 0, 0), new Vector3(1, 0, 0).Normalized(), 0)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(-1.1f, 0, 0), -new Vector3F(1, 0, 0).Normalized, 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(-1.1f, 0, 0), -new Vector3(1, 0, 0).Normalized(), 10)));
 
       // Ray is parallel to one AABB side but not touching.
-      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(1, -2, 0), new Vector3F(0, -1, 0).Normalized, 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(1, -2, 0), new Vector3(0, -1, 0).Normalized(), 10)));
 
       // Ray is parallel to one AABB side and touching.
-      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3F(1, 0, 0), new Vector3F(0, -1, 0).Normalized, 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContact(aabb, new Ray(new Vector3(1, 0, 0), new Vector3(0, -1, 0).Normalized(), 10)));
     }
 
 
     [Test]
     public void HaveContactAabbRayFast()
     {
-      var aabb = new Aabb(new Vector3F(-1), new Vector3F(1));
+      var aabb = new Aabb(new Vector3(-1), new Vector3(1));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, 2, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, 0, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, -2, 0), new Vector3F(1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, 2, 0), new Vector3F(-1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, 0, 0), new Vector3F(-1, 0, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-2, -2, 0), new Vector3F(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, 2, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, 0, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, -2, 0), new Vector3(1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, 2, 0), new Vector3(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, 0, 0), new Vector3(-1, 0, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-2, -2, 0), new Vector3(-1, 0, 0), 10)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, -2), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, 2), new Vector3F(0, 1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, -2, 0), new Vector3F(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, -2), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, 2), new Vector3(0, 1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, -2, 0), new Vector3(0, -1, 0), 10)));
 
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -1, 0).Normalized, 10)));
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -1.1f, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 2f, 0), new Vector3F(1, -0.9f, 0).Normalized, 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -1, 0).Normalized(), 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -1.1f, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 2f, 0), new Vector3(1, -0.9f, 0).Normalized(), 10)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -1, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -1.1f, 0).Normalized, 10)));
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 1.5f, 0), -new Vector3F(1, -0.9f, 0).Normalized, 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -1, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -1.1f, 0).Normalized(), 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 1.5f, 0), -new Vector3(1, -0.9f, 0).Normalized(), 10)));
 
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0).Normalized, 0)));
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0).Normalized, 0)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 0, 0), new Vector3(1, 0, 0).Normalized(), 0)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(0, 0, 0), new Vector3(1, 0, 0).Normalized(), 0)));
 
-      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(-1.1f, 0, 0), -new Vector3F(1, 0, 0).Normalized, 10)));
+      Assert.AreEqual(false, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(-1.1f, 0, 0), -new Vector3(1, 0, 0).Normalized(), 10)));
 
       // Ray is parallel to one AABB side but not touching. Method returns false positive!
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(1, -2, 0), new Vector3F(0, -1, 0).Normalized, 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(1, -2, 0), new Vector3(0, -1, 0).Normalized(), 10)));
 
       // Ray is parallel to one AABB side and touching.
-      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3F(1, 0, 0), new Vector3F(0, -1, 0).Normalized, 10)));
+      Assert.AreEqual(true, GeometryHelper.HaveContactFast(aabb, new Ray(new Vector3(1, 0, 0), new Vector3(0, -1, 0).Normalized(), 10)));
     }
 
 
@@ -979,44 +979,44 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void HaveContactAabbMovingAabb()
     {
       Assert.IsTrue(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0), new Vector3F(1)),
-        new Aabb(new Vector3F(0), new Vector3F(1)),
-        new Vector3F(0, 0, 0)));
+        new Aabb(new Vector3(0), new Vector3(1)),
+        new Aabb(new Vector3(0), new Vector3(1)),
+        new Vector3(0, 0, 0)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0), new Vector3F(1)),
-        new Aabb(new Vector3F(2), new Vector3F(3)),
-        new Vector3F(0, 0, 0)));
+        new Aabb(new Vector3(0), new Vector3(1)),
+        new Aabb(new Vector3(2), new Vector3(3)),
+        new Vector3(0, 0, 0)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-        new Aabb(new Vector3F(-2, 0, 0), new Vector3F(-1, 1, 1)),
-        new Vector3F(0, 0, 0)));
+        new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+        new Aabb(new Vector3(-2, 0, 0), new Vector3(-1, 1, 1)),
+        new Vector3(0, 0, 0)));
 
       Assert.IsTrue(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-        new Aabb(new Vector3F(-2, 0, 0), new Vector3F(-1, 1, 1)),
-        new Vector3F(2, 0, 0)));
+        new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+        new Aabb(new Vector3(-2, 0, 0), new Vector3(-1, 1, 1)),
+        new Vector3(2, 0, 0)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-        new Aabb(new Vector3F(-2, 0, 0), new Vector3F(-1, 1, 1)),
-        new Vector3F(0, 2, 0)));
+        new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+        new Aabb(new Vector3(-2, 0, 0), new Vector3(-1, 1, 1)),
+        new Vector3(0, 2, 0)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(
-        new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-        new Aabb(new Vector3F(-2, 0, 0), new Vector3F(-1, 1, 1)),
-        new Vector3F(-2, 0, 0)));
+        new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+        new Aabb(new Vector3(-2, 0, 0), new Vector3(-1, 1, 1)),
+        new Vector3(-2, 0, 0)));
 
       Assert.IsTrue(GeometryHelper.HaveContact(
-              new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-              new Aabb(new Vector3F(3 - 0.1f, 1, 0), new Vector3F(4, 2, 1)),
-              new Vector3F(-2, -2, 0)));
+              new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+              new Aabb(new Vector3(3 - 0.1f, 1, 0), new Vector3(4, 2, 1)),
+              new Vector3(-2, -2, 0)));
 
       Assert.IsFalse(GeometryHelper.HaveContact(
-              new Aabb(new Vector3F(0, 0, 0), new Vector3F(1, 1, 1)),
-              new Aabb(new Vector3F(3 + 0.1f, 1, 0), new Vector3F(4, 2, 1)),
-              new Vector3F(-2, -2, 0)));
+              new Aabb(new Vector3(0, 0, 0), new Vector3(1, 1, 1)),
+              new Aabb(new Vector3(3 + 0.1f, 1, 0), new Vector3(4, 2, 1)),
+              new Vector3(-2, -2, 0)));
 
     }
 
@@ -1024,49 +1024,49 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetClosestPointAabbPoint()
     {
-      Aabb aabb = new Aabb(new Vector3F(1, 2, 3), new Vector3F(4, 5, 6));
+      Aabb aabb = new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6));
 
       // Touching corner contacts.
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(1, 2, 3), new Vector3F(1, 2, 3), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(1, 2, 6), new Vector3F(1, 2, 6), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(1, 5, 3), new Vector3F(1, 5, 3), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(1, 5, 6), new Vector3F(1, 5, 6), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(4, 2, 3), new Vector3F(4, 2, 3), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(4, 2, 6), new Vector3F(4, 2, 6), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(4, 5, 3), new Vector3F(4, 5, 3), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(4, 5, 6), new Vector3F(4, 5, 6), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(1, 2, 3), new Vector3(1, 2, 3), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(1, 2, 6), new Vector3(1, 2, 6), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(1, 5, 3), new Vector3(1, 5, 3), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(1, 5, 6), new Vector3(1, 5, 6), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(4, 2, 3), new Vector3(4, 2, 3), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(4, 2, 6), new Vector3(4, 2, 6), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(4, 5, 3), new Vector3(4, 5, 3), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(4, 5, 6), new Vector3(4, 5, 6), true);
 
       // Touching face contacts.
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 2, 4), new Vector3F(2, 2, 4), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 4), new Vector3F(2, 3, 4), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 5, 4), new Vector3F(2, 5, 4), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(1, 3, 4), new Vector3F(1, 3, 4), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 3), new Vector3F(2, 3, 3), true);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 6), new Vector3F(2, 3, 6), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 2, 4), new Vector3(2, 2, 4), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 4), new Vector3(2, 3, 4), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 5, 4), new Vector3(2, 5, 4), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(1, 3, 4), new Vector3(1, 3, 4), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 3), new Vector3(2, 3, 3), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 6), new Vector3(2, 3, 6), true);
 
       // Intersection
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 4), new Vector3F(2, 3, 4), true);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 4), new Vector3(2, 3, 4), true);
 
       // Separated contacts
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(0, 0, 0), new Vector3F(1, 2, 3), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(10, 10, 10), new Vector3F(4, 5, 6), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(0, 0, 0), new Vector3(1, 2, 3), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(10, 10, 10), new Vector3(4, 5, 6), false);
 
       // Separated contacts (in Voronoi regions of faces).
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 1, 4), new Vector3F(2, 2, 4), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(5, 3, 4), new Vector3F(4, 3, 4), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 7, 4), new Vector3F(2, 5, 4), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(-1, 3, 4), new Vector3F(1, 3, 4), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 2), new Vector3F(2, 3, 3), false);
-      TestGetClosestPointAabbPoint(aabb, new Vector3F(2, 3, 7), new Vector3F(2, 3, 6), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 1, 4), new Vector3(2, 2, 4), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(5, 3, 4), new Vector3(4, 3, 4), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 7, 4), new Vector3(2, 5, 4), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(-1, 3, 4), new Vector3(1, 3, 4), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 2), new Vector3(2, 3, 3), false);
+      TestGetClosestPointAabbPoint(aabb, new Vector3(2, 3, 7), new Vector3(2, 3, 6), false);
 
       // We could also check separated contacts in the Voronoi regions of the edges and corners.
       // But this should be enough.
     }
 
 
-    private void TestGetClosestPointAabbPoint(Aabb aabb, Vector3F point, Vector3F expectedPoint, bool expectedResult)
+    private void TestGetClosestPointAabbPoint(Aabb aabb, Vector3 point, Vector3 expectedPoint, bool expectedResult)
     {
-      Vector3F pointOnAabb;
+      Vector3 pointOnAabb;
       bool result = GeometryHelper.GetClosestPoint(aabb, point, out pointOnAabb);
       Assert.AreEqual(expectedPoint, pointOnAabb);
       Assert.AreEqual(expectedResult, result);
@@ -1077,45 +1077,45 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void CartesionToSphericalCoordinateConversion()
     {
       float radius, azimuth, inclination;
-      Vector3F v;
+      Vector3 v;
 
-      v = new Vector3F(0, 0, 0);
+      v = new Vector3(0, 0, 0);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(0.0f, radius);
       Assert.AreEqual(0.0f, azimuth);
       Assert.AreEqual(0.0f, inclination);
 
-      v = new Vector3F(0, 0, 2);
+      v = new Vector3(0, 0, 2);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(0.0f, azimuth);
       Assert.AreEqual(0.0f, inclination);
 
-      v = new Vector3F(2, 0, 0);
+      v = new Vector3(2, 0, 0);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(0.0f, azimuth);
       Assert.AreEqual(ConstantsF.PiOver2, inclination);
 
-      v = new Vector3F(0, 2, 0);
+      v = new Vector3(0, 2, 0);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(ConstantsF.PiOver2, azimuth);
       Assert.AreEqual(ConstantsF.PiOver2, inclination);
 
-      v = new Vector3F(0, 0, -2);
+      v = new Vector3(0, 0, -2);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(0.0f, azimuth);
       Assert.AreEqual(ConstantsF.Pi, inclination);
 
-      v = new Vector3F(-2, 0, 0);
+      v = new Vector3(-2, 0, 0);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(ConstantsF.Pi, azimuth);
       Assert.AreEqual(ConstantsF.PiOver2, inclination);
 
-      v = new Vector3F(0, -2, 0);
+      v = new Vector3(0, -2, 0);
       GeometryHelper.ToSphericalCoordinates(v, out radius, out inclination, out azimuth);
       Assert.AreEqual(2.0f, radius);
       Assert.AreEqual(-ConstantsF.PiOver2, azimuth);
@@ -1125,43 +1125,43 @@ namespace DigitalRise.Geometry.Shapes.Tests
       azimuth = 0;
       inclination = 0;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.AreEqual(new Vector3F(0, 0, 0), v);
+      Assert.AreEqual(new Vector3(0, 0, 0), v);
 
       radius = 2;
       azimuth = 0;
       inclination = 0;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.AreEqual(new Vector3F(0, 0, 2), v);
+      Assert.AreEqual(new Vector3(0, 0, 2), v);
 
       radius = 2;
       azimuth = 0;
       inclination = ConstantsF.PiOver2;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(2, 0, 0), v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(2, 0, 0), v));
 
       radius = 2;
       azimuth = ConstantsF.PiOver2;
       inclination = ConstantsF.PiOver2;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 2, 0), v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 2, 0), v));
 
       radius = 2;
       azimuth = 0;
       inclination = ConstantsF.Pi;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, 0, -2), v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, -2), v));
 
       radius = 2;
       azimuth = ConstantsF.Pi;
       inclination = ConstantsF.PiOver2;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(-2, 0, 0), v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-2, 0, 0), v));
 
       radius = 2;
       azimuth = -ConstantsF.PiOver2;
       inclination = ConstantsF.PiOver2;
       v = GeometryHelper.ToCartesianCoordinates(radius, inclination, azimuth);
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(new Vector3F(0, -2, 0), v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -2, 0), v));
     }
 
 
@@ -1171,8 +1171,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       float hitDistance;
       bool hit;
 
-      Ray ray = new Ray(new Vector3F(-1, 0, 0), Vector3F.UnitX, 2);
-      Triangle triangle = new Triangle(new Vector3F(0, 0, 1), new Vector3F(0, 1, 0), new Vector3F(0, -1, -1));
+      Ray ray = new Ray(new Vector3(-1, 0, 0), Vector3.UnitX, 2);
+      Triangle triangle = new Triangle(new Vector3(0, 0, 1), new Vector3(0, 1, 0), new Vector3(0, -1, -1));
 
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
       Assert.IsTrue(hit);
@@ -1182,22 +1182,22 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(hit);
       Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
 
-      ray = new Ray(new Vector3F(-1, 0, 0), -Vector3F.UnitX, 2);
+      ray = new Ray(new Vector3(-1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, false, out hitDistance);
       Assert.IsFalse(hit);
       //Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
 
-      ray = new Ray(new Vector3F(1, 0, 0), -Vector3F.UnitX, 2);
+      ray = new Ray(new Vector3(1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, false, out hitDistance);
       Assert.IsFalse(hit);
       //Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
 
-      ray = new Ray(new Vector3F(1, 0, 0), -Vector3F.UnitX, 2);
+      ray = new Ray(new Vector3(1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
       Assert.IsTrue(hit);
       Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
 
-      ray = new Ray(new Vector3F(1, 1.1f, 0), -Vector3F.UnitX, 2);
+      ray = new Ray(new Vector3(1, 1.1f, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
       Assert.IsFalse(hit);
     }
@@ -1207,7 +1207,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void ExtractPlanes()
     {
       var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternionF())
-                 * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3F(0, 1));
+                 * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3(0, 1));
 
       var projection = Matrix44F.CreatePerspectiveFieldOfView(
         MathHelper.ToRadians(90),
@@ -1230,7 +1230,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void ExtractPlanesException()
     {
       var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternionF())
-                 * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3F(0, 1));
+                 * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3(0, 1));
 
       var projection = Matrix44F.CreatePerspectiveFieldOfView(
         MathHelper.ToRadians(90),
@@ -1250,39 +1250,39 @@ namespace DigitalRise.Geometry.Shapes.Tests
       var viewProjectionInverse = viewProjection.Inverse;
 
       var nearPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(1, -1, 0)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 0)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, 1, 0)));
+        viewProjectionInverse.TransformPosition(new Vector3(1, -1, 0)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 0)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, 1, 0)));
       ComparePlanes(nearPlane, planes[0]);
 
       var farPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, -1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, -1, 1)));
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, -1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, -1, 1)));
       ComparePlanes(farPlane, planes[1]);
 
       var leftPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, -1, 0)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, 1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, -1, 1)));
+        viewProjectionInverse.TransformPosition(new Vector3(-1, -1, 0)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, 1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, -1, 1)));
       ComparePlanes(leftPlane, planes[2]);
 
       var rightPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(1, -1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 0)));
+        viewProjectionInverse.TransformPosition(new Vector3(1, -1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 0)));
       ComparePlanes(rightPlane, planes[3]);
 
       var bottomPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(1, -1, 0)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, -1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, -1, 1)));
+        viewProjectionInverse.TransformPosition(new Vector3(1, -1, 0)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, -1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, -1, 1)));
       ComparePlanes(bottomPlane, planes[4]);
 
       var topPlane = new Plane(
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 0)),
-        viewProjectionInverse.TransformPosition(new Vector3F(1, 1, 1)),
-        viewProjectionInverse.TransformPosition(new Vector3F(-1, 1, 1)));
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 0)),
+        viewProjectionInverse.TransformPosition(new Vector3(1, 1, 1)),
+        viewProjectionInverse.TransformPosition(new Vector3(-1, 1, 1)));
       ComparePlanes(topPlane, planes[5]);
     }
 
@@ -1290,7 +1290,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     private static void ComparePlanes(Plane plane0, Plane plane1)
     {
       Assert.IsTrue(Numeric.AreEqual(plane0.DistanceFromOrigin, plane1.DistanceFromOrigin));
-      Assert.IsTrue(Vector3F.AreNumericallyEqual(plane0.Normal, plane1.Normal));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(plane0.Normal, plane1.Normal));
     }
 
 
@@ -1300,8 +1300,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       RandomHelper.Random = new Random(1234567);
       for (int i = 0; i < 100; i++)
       {
-        var t = new Triangle(RandomHelper.Random.NextVector3F(-100, 100), RandomHelper.Random.NextVector3F(-100, 100), RandomHelper.Random.NextVector3F(-100, 100));
-        var p = RandomHelper.Random.NextVector3F(-100, 100);
+        var t = new Triangle(RandomHelper.Random.NextVector3(-100, 100), RandomHelper.Random.NextVector3(-100, 100), RandomHelper.Random.NextVector3(-100, 100));
+        var p = RandomHelper.Random.NextVector3(-100, 100);
 
         float u, v, w;
         GeometryHelper.GetBarycentricFromPoint(t, p, out u, out v, out w);
@@ -1322,7 +1322,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
           po = n;
 
         float epsilon = Numeric.EpsilonF * 10;
-        Assert.IsTrue(Vector3F.AreNumericallyEqual(po, n, epsilon) || Vector3F.AreNumericallyEqual(po, -n, epsilon));
+        Assert.IsTrue(MathHelper.AreNumericallyEqual(po, n, epsilon) || MathHelper.AreNumericallyEqual(po, -n, epsilon));
       }
     }
 
@@ -1330,39 +1330,39 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetLineParametersParallelLineSegments()
     {
-      var a = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0));
-      var b = new LineSegment(new Vector3F(2, 0, 0), new Vector3F(3, 0, 0));
+      var a = new LineSegment(new Vector3(0, 0, 0), new Vector3(1, 0, 0));
+      var b = new LineSegment(new Vector3(2, 0, 0), new Vector3(3, 0, 0));
       float s, t;
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(2, s);
       Assert.AreEqual(0, t);
 
-      a = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0));
-      b = new LineSegment(new Vector3F(1, 0, 0), new Vector3F(3, 0, 0));
+      a = new LineSegment(new Vector3(0, 0, 0), new Vector3(1, 0, 0));
+      b = new LineSegment(new Vector3(1, 0, 0), new Vector3(3, 0, 0));
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(1, s);
       Assert.AreEqual(0, t);
 
-      a = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(4, 0, 0));
-      b = new LineSegment(new Vector3F(1, 0, 0), new Vector3F(3, 0, 0));
+      a = new LineSegment(new Vector3(0, 0, 0), new Vector3(4, 0, 0));
+      b = new LineSegment(new Vector3(1, 0, 0), new Vector3(3, 0, 0));
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(0.25f, s);
       Assert.AreEqual(0, t);
 
-      a = new LineSegment(new Vector3F(1, 0, 0), new Vector3F(2, 0, 0));
-      b = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0));
+      a = new LineSegment(new Vector3(1, 0, 0), new Vector3(2, 0, 0));
+      b = new LineSegment(new Vector3(0, 0, 0), new Vector3(1, 0, 0));
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(0, s);
       Assert.AreEqual(1, t);
 
-      a = new LineSegment(new Vector3F(2, 0, 0), new Vector3F(3, 0, 0));
-      b = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(1, 0, 0));
+      a = new LineSegment(new Vector3(2, 0, 0), new Vector3(3, 0, 0));
+      b = new LineSegment(new Vector3(0, 0, 0), new Vector3(1, 0, 0));
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(-1, s);
       Assert.AreEqual(1, t);
 
-      a = new LineSegment(new Vector3F(1, 0, 0), new Vector3F(2, 0, 0));
-      b = new LineSegment(new Vector3F(0, 0, 0), new Vector3F(2, 0, 0));
+      a = new LineSegment(new Vector3(1, 0, 0), new Vector3(2, 0, 0));
+      b = new LineSegment(new Vector3(0, 0, 0), new Vector3(2, 0, 0));
       GeometryHelper.GetLineParameters(a, b, out s, out t);
       Assert.AreEqual(0, s);
       Assert.AreEqual(0.5f, t);

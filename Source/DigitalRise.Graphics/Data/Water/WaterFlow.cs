@@ -5,7 +5,7 @@
 using System;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -103,7 +103,7 @@ namespace DigitalRise.Graphics
     /// The y component of the velocity is usually irrelevant because water flows only horizontally
     /// across the water surface.
     /// </remarks>
-    public Vector3F BaseVelocity { get; set; }
+    public Vector3 BaseVelocity { get; set; }
 
 
     /// <summary>
@@ -224,7 +224,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     public WaterFlow()
     {
-      BaseVelocity = new Vector3F(0, 0, 0);
+      BaseVelocity = new Vector3(0, 0, 0);
       SurfaceSlopeSpeed = 0;
       FlowMapSpeed = 0;
       CycleDuration = 2;

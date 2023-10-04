@@ -20,7 +20,7 @@ namespace DigitalRise.Mathematics.Interpolation
 
     // This nested class gets a curve parameter using a root finder. This class can be 
     // resource pooled to avoid the allocation of new root finders and delegates.
-    // This class supports float, Vector2 and Vector3F curves.
+    // This class supports float, Vector2 and Vector3 curves.
     private sealed class GetParameterHelper1F
     {
       private readonly ImprovedNewtonRaphsonMethodF _rootFinder;
@@ -89,11 +89,11 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    // Same as GetParameterHelper1F but for Vector3F splines.
+    // Same as GetParameterHelper1F but for Vector3 splines.
     private sealed class GetParameterHelper3F
     {
       private readonly ImprovedNewtonRaphsonMethodF _rootFinder;
-      private ICurve<float, Vector3F> _curve;
+      private ICurve<float, Vector3> _curve;
       private int _maxNumberOfIterations;
       private float _tolerance;
 
@@ -109,10 +109,10 @@ namespace DigitalRise.Mathematics.Interpolation
 
       private float GetTangentLength(float parameter)
       {
-        return _curve.GetTangent(parameter).Length;
+        return _curve.GetTangent(parameter).Length();
       }
 
-      public float GetParameter(ICurve<float, Vector3F> curve, float length, int maxNumberOfIterations, float tolerance)
+      public float GetParameter(ICurve<float, Vector3> curve, float length, int maxNumberOfIterations, float tolerance)
       {
         _curve = curve;
         _maxNumberOfIterations = maxNumberOfIterations;
@@ -126,14 +126,14 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    // Same as GetParameterHelper1F but for GetLength for Vector2 and Vector3F.
+    // Same as GetParameterHelper1F but for GetLength for Vector2 and Vector3.
     private sealed class GetLengthHelper
     {
       private readonly RombergIntegratorF _integrator;
       private readonly Func<float, float> _function2F;
       private readonly Func<float, float> _function3F;
       private ICurve<float, Vector2> _curve2F;
-      private ICurve<float, Vector3F> _curve3F;
+      private ICurve<float, Vector3> _curve3F;
 
       public GetLengthHelper()
       {
@@ -143,7 +143,7 @@ namespace DigitalRise.Mathematics.Interpolation
       }
 
       private float GetTangentLength2F(float x) { return _curve2F.GetTangent(x).Length(); }
-      private float GetTangentLength3F(float x) { return _curve3F.GetTangent(x).Length; }
+      private float GetTangentLength3F(float x) { return _curve3F.GetTangent(x).Length(); }
 
       public float GetLength(ICurve<float, Vector2> curve, float start, float end, int minNumberOfIterations, int maxNumberOfIterations, float tolerance)
       {
@@ -156,7 +156,7 @@ namespace DigitalRise.Mathematics.Interpolation
         return length;
       }
 
-      public float GetLength(ICurve<float, Vector3F> curve, float start, float end, int minNumberOfIterations, int maxNumberOfIterations, float tolerance)
+      public float GetLength(ICurve<float, Vector3> curve, float start, float end, int minNumberOfIterations, int maxNumberOfIterations, float tolerance)
       {
         _curve3F = curve;
         _integrator.MinNumberOfIterations = minNumberOfIterations;
@@ -260,7 +260,7 @@ namespace DigitalRise.Mathematics.Interpolation
     }
 
 
-    internal static float GetParameter(ICurve<float, Vector3F> curve, float desiredLength, float totalCurveLength, int maxNumberOfIterations, float tolerance)
+    internal static float GetParameter(ICurve<float, Vector3> curve, float desiredLength, float totalCurveLength, int maxNumberOfIterations, float tolerance)
     {
       if (desiredLength <= tolerance)
         return 0;
@@ -336,7 +336,7 @@ namespace DigitalRise.Mathematics.Interpolation
     /// the <paramref name="maxNumberOfIterations"/> were performed, or when the 
     /// <paramref name="tolerance"/> criterion is met - whichever comes first.
     /// </remarks>
-    internal static float GetLength(ICurve<float, Vector3F> curve, float start, float end, int minNumberOfIterations, int maxNumberOfIterations, float tolerance)
+    internal static float GetLength(ICurve<float, Vector3> curve, float start, float end, int minNumberOfIterations, int maxNumberOfIterations, float tolerance)
     {
       if (tolerance <= 0)
         throw new ArgumentOutOfRangeException("tolerance", "The tolerance must be greater than zero.");

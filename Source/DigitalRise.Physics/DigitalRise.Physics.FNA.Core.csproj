@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Physics.FNA</PackageId>
     <AssemblyName>DigitalRise.Physics</AssemblyName>
     <Description>DigitalRise.Physics for FNA.Core</Description>

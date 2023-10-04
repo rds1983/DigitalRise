@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Mathematics.Algebra
 {
@@ -890,9 +890,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="matrix">The matrix.</param>
     /// <param name="vector">The column vector.</param>
     /// <returns>The resulting column vector.</returns>
-    public static Vector3F operator *(Matrix33F matrix, Vector3F vector)
+    public static Vector3 operator *(Matrix33F matrix, Vector3 vector)
     {
-      Vector3F result;
+      Vector3 result;
       result.X = matrix.M00 * vector.X + matrix.M01 * vector.Y + matrix.M02 * vector.Z;
       result.Y = matrix.M10 * vector.X + matrix.M11 * vector.Y + matrix.M12 * vector.Z;
       result.Z = matrix.M20 * vector.X + matrix.M21 * vector.Y + matrix.M22 * vector.Z;
@@ -906,9 +906,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// <param name="matrix">The matrix.</param>
     /// <param name="vector">The column vector.</param>
     /// <returns>The resulting column vector.</returns>
-    public static Vector3F Multiply(Matrix33F matrix, Vector3F vector)
+    public static Vector3 Multiply(Matrix33F matrix, Vector3 vector)
     {
-      Vector3F result;
+      Vector3 result;
       result.X = matrix.M00 * vector.X + matrix.M01 * vector.Y + matrix.M02 * vector.Z;
       result.Y = matrix.M10 * vector.X + matrix.M11 * vector.Y + matrix.M12 * vector.Z;
       result.Z = matrix.M20 * vector.X + matrix.M21 * vector.Y + matrix.M22 * vector.Z;
@@ -926,9 +926,9 @@ namespace DigitalRise.Mathematics.Algebra
     /// This method transposes the given matrix and multiplies the transposed matrix with the given
     /// vector.
     /// </remarks>
-    public static Vector3F MultiplyTransposed(Matrix33F matrix, Vector3F vector)
+    public static Vector3 MultiplyTransposed(Matrix33F matrix, Vector3 vector)
     {
-      Vector3F result;
+      Vector3 result;
       result.X = matrix.M00 * vector.X + matrix.M10 * vector.Y + matrix.M20 * vector.Z;
       result.Y = matrix.M01 * vector.X + matrix.M11 * vector.Y + matrix.M21 * vector.Z;
       result.Z = matrix.M02 * vector.X + matrix.M12 * vector.Y + matrix.M22 * vector.Z;
@@ -1175,16 +1175,16 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Gets a column as <see cref="Vector3F"/>.
+    /// Gets a column as <see cref="Vector3"/>.
     /// </summary>
     /// <param name="index">The index of the column (0, 1, or 2).</param>
     /// <returns>The column vector.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public Vector3F GetColumn(int index)
+    public Vector3 GetColumn(int index)
     {
-      Vector3F column;
+      Vector3 column;
       switch (index)
       {
         case 0:
@@ -1210,14 +1210,14 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Sets a column from a <see cref="Vector3F"/>.
+    /// Sets a column from a <see cref="Vector3"/>.
     /// </summary>
     /// <param name="index">The index of the column (0, 1, or 2).</param>
     /// <param name="columnVector">The column vector.</param>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public void SetColumn(int index, Vector3F columnVector)
+    public void SetColumn(int index, Vector3 columnVector)
     {
       switch (index)
       {
@@ -1243,16 +1243,16 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Gets a row as <see cref="Vector3F"/>.
+    /// Gets a row as <see cref="Vector3"/>.
     /// </summary>
     /// <param name="index">The index of the row (0, 1, or 2).</param>
     /// <returns>The row vector.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public Vector3F GetRow(int index)
+    public Vector3 GetRow(int index)
     {
-      Vector3F row;
+      Vector3 row;
       switch (index)
       {
         case 0:
@@ -1278,14 +1278,14 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Sets a row from a <see cref="Vector3F"/>.
+    /// Sets a row from a <see cref="Vector3"/>.
     /// </summary>
     /// <param name="index">The index of the row (0, 1, or 2).</param>
     /// <param name="rowVector">The row vector.</param>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The <paramref name="index"/> is out of range.
     /// </exception>
-    public void SetRow(int index, Vector3F rowVector)
+    public void SetRow(int index, Vector3 rowVector)
     {
       switch (index)
       {
@@ -1340,12 +1340,12 @@ namespace DigitalRise.Mathematics.Algebra
       // http://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process and
       // http://fgiesen.wordpress.com/2013/06/02/modified-gram-schmidt-orthogonalization/.
 
-      var column0 = new Vector3F(M00, M10, M20);
-      var column1 = new Vector3F(M01, M11, M21);
-      var column2 = new Vector3F(M02, M12, M22);
+      var column0 = new Vector3(M00, M10, M20);
+      var column1 = new Vector3(M01, M11, M21);
+      var column2 = new Vector3(M02, M12, M22);
 
-      column1 = column1 - Vector3F.ProjectTo(column1, column0);
-      column2 = column2 - Vector3F.ProjectTo(column2, column0) - Vector3F.ProjectTo(column2, column1);
+      column1 = column1 - MathHelper.ProjectTo(column1, column0);
+      column2 = column2 - MathHelper.ProjectTo(column2, column0) - MathHelper.ProjectTo(column2, column1);
 
       column0.TryNormalize();
       column1.TryNormalize();
@@ -1666,7 +1666,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </summary>
     /// <param name="scale">Amounts to scale by the x, y, and z-axis.</param>
     /// <returns>The created scaling matrix.</returns>
-    public static Matrix33F CreateScale(Vector3F scale)
+    public static Matrix33F CreateScale(Vector3 scale)
     {
       Matrix33F result = new Matrix33F 
       {
@@ -1693,7 +1693,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// <exception cref="ArgumentException">
     /// The <paramref name="axis"/> vector has 0 length.
     /// </exception>
-    public static Matrix33F CreateRotation(Vector3F axis, float angle)
+    public static Matrix33F CreateRotation(Vector3 axis, float angle)
     {
       if (!axis.TryNormalize())
         throw new ArgumentException("The axis vector has length 0.");

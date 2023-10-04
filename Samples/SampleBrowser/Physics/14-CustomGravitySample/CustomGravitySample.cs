@@ -1,10 +1,10 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Physics
 {
@@ -34,9 +34,8 @@ to the gravity of a planet.",
       for (int i = 0; i < 10; i++)
       {
         // A random position 10 m above the planet center.
-        Vector3F randomPosition = RandomHelper.Random.NextVector3F(-1, 1);
-        randomPosition.Length = 10;
-
+        Vector3 randomPosition = RandomHelper.Random.NextVector3(-1, 1);
+        randomPosition.SetLength(10);
         RigidBody body = new RigidBody(cylinderShape)
         {
           Pose = new Pose(randomPosition),
@@ -47,10 +46,10 @@ to the gravity of a planet.",
       Shape sphereShape = new SphereShape(0.5f);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F randomPosition = RandomHelper.Random.NextVector3F(-1, 1);
-        randomPosition.Length = 10;
+        Vector3 randomPosition = RandomHelper.Random.NextVector3(-1, 1);
+        randomPosition.SetLength(10);
 
-        RigidBody body = new RigidBody(sphereShape)
+				RigidBody body = new RigidBody(sphereShape)
         {
           Pose = new Pose(randomPosition),
         };

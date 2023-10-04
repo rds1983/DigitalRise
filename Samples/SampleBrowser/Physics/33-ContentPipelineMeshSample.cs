@@ -1,13 +1,13 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using AssetManagementBase;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Physics
 {
@@ -34,7 +34,7 @@ namespace Samples.Physics
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane.
-      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      RigidBody groundPlane = new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         Name = "GroundPlane",           // Names are not required but helpful for debugging.
         MotionType = MotionType.Static,
@@ -48,8 +48,8 @@ namespace Samples.Physics
       // instance stored in the content manager.
       _modelNode = sharedModelNode.Clone();
       
-      _modelNode.PoseWorld = new Pose(new Vector3F(0, 2, -5), Matrix33F.CreateRotationY(MathHelper.ToRadians(-30)));
-      _modelNode.ScaleLocal = new Vector3F(8);
+      _modelNode.PoseWorld = new Pose(new Vector3(0, 2, -5), Matrix33F.CreateRotationY(MathHelper.ToRadians(-30)));
+      _modelNode.ScaleLocal = new Vector3(8);
 
       // The UserData contains the collision shape of type TriangleMeshShape.
       TriangleMeshShape triangleMesh = (TriangleMeshShape)_modelNode.UserData;
@@ -77,7 +77,7 @@ namespace Samples.Physics
       SphereShape sphereShape = new SphereShape(0.5f);
       for (int i = 0; i < 40; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-15, 10);
+        Vector3 position = RandomHelper.Random.NextVector3(-15, 10);
         position.Y = RandomHelper.Random.NextFloat(20, 40);
 
         RigidBody body = new RigidBody(sphereShape) { Pose = new Pose(position) };
@@ -87,7 +87,7 @@ namespace Samples.Physics
       BoxShape boxShape = new BoxShape(1, 1, 1);
       for (int i = 0; i < 40; i++)
       {
-        Vector3F position = RandomHelper.Random.NextVector3F(-15, 10);
+        Vector3 position = RandomHelper.Random.NextVector3(-15, 10);
         position.Y = RandomHelper.Random.NextFloat(20, 40);
 
         RigidBody body = new RigidBody(boxShape) { Pose = new Pose(position) };

@@ -7,7 +7,8 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics
 {
@@ -63,8 +64,8 @@ namespace DigitalRise.Physics
     /// <paramref name="relativeDistanceThreshold"/> is negative.
     /// </exception>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Keep code simple.")]
-    internal static void GetMass(Shape shape, Vector3F scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit,
-                                 out float mass, out Vector3F centerOfMass, out Matrix33F inertia)
+    internal static void GetMass(Shape shape, Vector3 scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit,
+                                 out float mass, out Vector3 centerOfMass, out Matrix33F inertia)
     {
       if (shape == null)
         throw new ArgumentNullException("shape");
@@ -74,7 +75,7 @@ namespace DigitalRise.Physics
         throw new ArgumentOutOfRangeException("relativeDistanceThreshold", "The relative distance threshold must not be negative.");
 
       mass = 0;
-      centerOfMass = Vector3F.Zero;
+      centerOfMass = Vector3.Zero;
       inertia = Matrix33F.Zero;
 
       // Note: We support all shape types of DigitalRise Geometry.
@@ -136,7 +137,7 @@ namespace DigitalRise.Physics
         {
           // Call GetMass for the child geometric object.
           float childMass;
-          Vector3F childCenterOfMass;
+          Vector3 childCenterOfMass;
           Matrix33F childInertia;
           GetMass(child, scale, density, true, relativeDistanceThreshold, iterationLimit, out childMass, out childCenterOfMass, out childInertia);
 
@@ -204,11 +205,11 @@ namespace DigitalRise.Physics
     }
 
 
-    private static void GetMass(SphereShape sphere, Vector3F scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
+    private static void GetMass(SphereShape sphere, Vector3 scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
     {
-      scale = Vector3F.Absolute(scale);
-      Vector3F radius = sphere.Radius * scale;
-      Vector3F radiusSquared = radius * radius;
+      scale = MathHelper.Absolute(scale);
+      Vector3 radius = sphere.Radius * scale;
+      Vector3 radiusSquared = radius * radius;
 
       mass = (isDensity) ? 4.0f / 3.0f * ConstantsF.Pi * radius.X * radius.Y * radius.Z * densityOrMass : densityOrMass;
 
@@ -219,9 +220,9 @@ namespace DigitalRise.Physics
     }
 
 
-    private static void GetMass(CylinderShape cylinder, Vector3F scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
+    private static void GetMass(CylinderShape cylinder, Vector3 scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
     {
-      scale = Vector3F.Absolute(scale);
+      scale = MathHelper.Absolute(scale);
       float radiusX = cylinder.Radius * scale.X;
       float heightY = cylinder.Height * scale.Y;
       float radiusZ = cylinder.Radius * scale.Z;
@@ -234,7 +235,7 @@ namespace DigitalRise.Physics
     }
 
 
-    private static void GetMass(ConeShape cone, Vector3F scale, float densityOrMass, bool isDensity, out float mass, out Vector3F centerOfMass, out Matrix33F inertia)
+    private static void GetMass(ConeShape cone, Vector3 scale, float densityOrMass, bool isDensity, out float mass, out Vector3 centerOfMass, out Matrix33F inertia)
     {
       float radiusX = cone.Radius * Math.Abs(scale.X);
       float radiusZ = cone.Radius * Math.Abs(scale.Z);
@@ -242,7 +243,7 @@ namespace DigitalRise.Physics
 
       mass = (isDensity) ? 1.0f / 3.0f * ConstantsF.Pi * radiusX * radiusZ * height * densityOrMass : densityOrMass;
 
-      centerOfMass = new Vector3F(0, height / 4, 0) * Math.Sign(scale.Y);
+      centerOfMass = new Vector3(0, height / 4, 0) * Math.Sign(scale.Y);
 
       inertia = Matrix33F.Zero;
       inertia.M00 = 3.0f / 20.0f * mass * (radiusZ * radiusZ + 1.0f / 4.0f * height * height);
@@ -251,11 +252,11 @@ namespace DigitalRise.Physics
     }
 
 
-    private static void GetMass(CapsuleShape capsule, Vector3F scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
+    private static void GetMass(CapsuleShape capsule, Vector3 scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
     {
-      scale = Vector3F.Absolute(scale);
-      Vector3F radius = capsule.Radius * scale;
-      Vector3F radius2 = radius * radius;
+      scale = MathHelper.Absolute(scale);
+      Vector3 radius = capsule.Radius * scale;
+      Vector3 radius2 = radius * radius;
       float height = capsule.Height * scale.Y - 2 * radius.Y; // Height of cylinder part.
       float height2 = height * height;
       mass = (isDensity) ? ConstantsF.Pi * radius.X * radius.Z * (4.0f / 3.0f * radius.Y + height) * densityOrMass : densityOrMass;
@@ -268,10 +269,10 @@ namespace DigitalRise.Physics
     }
 
 
-    private static void GetMass(BoxShape box, Vector3F scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
+    private static void GetMass(BoxShape box, Vector3 scale, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
     {
-      scale = Vector3F.Absolute(scale);
-      Vector3F extent = box.Extent * scale;
+      scale = MathHelper.Absolute(scale);
+      Vector3 extent = box.Extent * scale;
       GetMass(extent, densityOrMass, isDensity, out mass, out inertia);
     }
 
@@ -279,9 +280,9 @@ namespace DigitalRise.Physics
     /// <summary>
     /// Gets the mass properties of a box.
     /// </summary>
-    private static void GetMass(Vector3F boxExtent, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
+    private static void GetMass(Vector3 boxExtent, float densityOrMass, bool isDensity, out float mass, out Matrix33F inertia)
     {
-      Vector3F extentSquared = boxExtent * boxExtent;
+      Vector3 extentSquared = boxExtent * boxExtent;
       if (isDensity)
         mass = boxExtent.X * boxExtent.Y * boxExtent.Z * densityOrMass;
       else
@@ -303,8 +304,8 @@ namespace DigitalRise.Physics
     /// for the contained shape.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    private static void GetMass(IGeometricObject geometricObject, Vector3F scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit,
-                                out float mass, out Vector3F centerOfMass, out Matrix33F inertia)
+    private static void GetMass(IGeometricObject geometricObject, Vector3 scale, float densityOrMass, bool isDensity, float relativeDistanceThreshold, int iterationLimit,
+                                out float mass, out Vector3 centerOfMass, out Matrix33F inertia)
     {
       // Computes mass in parent/world space of the geometric object!
       // centerOfMass is in world space and inertia is around the CM in world space!
@@ -322,14 +323,14 @@ namespace DigitalRise.Physics
       // Inertia around center of mass in local space.
       Matrix33F inertiaCMLocal;
 
-      Vector3F centerOfMassLocal;
+      Vector3 centerOfMassLocal;
 
       var body = geometricObject as RigidBody;
       if (body != null)
       {
         // The geometric object is a rigid body and we use the properties of this body.
 
-        if (!Vector3F.AreNumericallyEqual(scale, Vector3F.One))
+        if (!MathHelper.AreNumericallyEqual(scale, Vector3.One))
           throw new NotSupportedException("Scaling is not supported when a child geometric object is a RigidBody.");
         
         var massFrame = body.MassFrame;

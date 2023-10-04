@@ -56,7 +56,7 @@ turns the mesh into the flat, black shadow.",
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(-8, 6, 8), -ConstantsF.PiOver4, -0.4f);
+      _cameraObject.ResetPose(new Vector3(-8, 6, 8), -ConstantsF.PiOver4, -0.4f);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Add a default light setup (ambient light + 3 directional lights).
@@ -68,7 +68,7 @@ turns the mesh into the flat, black shadow.",
 
       // Add a ground plane model to the scene graph.
       var grid = AssetManager.LoadDRModel(GraphicsService, "Ground/Ground.drmdl").Clone();
-      grid.ScaleLocal = new Vector3F(0.3f);
+      grid.ScaleLocal = new Vector3(0.3f);
       _scene.Children.Add(grid);
 
       // Add a tank model to the scene graph.
@@ -88,7 +88,7 @@ turns the mesh into the flat, black shadow.",
       {
         // The plane onto which the shadows are projected. It is positioned a bit above the ground
         // plane to avoid z-fighting.
-        ShadowedPlane = new Plane(new Vector3F(0, 1, 0), 0.01f),
+        ShadowedPlane = new Plane(new Vector3(0, 1, 0), 0.01f),
 
         // The shadow color is a transparent black.
         ShadowColor = new Vector4F(0, 0, 0, 0.4f),
@@ -104,11 +104,11 @@ turns the mesh into the flat, black shadow.",
       // Move the directional light in a circle.
       float deltaTimeF = (float)gameTime.ElapsedGameTime.TotalSeconds;
       _lightAngle += 0.3f * deltaTimeF;
-      var position = QuaternionF.CreateRotationY(_lightAngle).Rotate(new Vector3F(6, 6, 0));
+      var position = QuaternionF.CreateRotationY(_lightAngle).Rotate(new Vector3(6, 6, 0));
 
       // Make the light look at the world space origin.
-      var lightTarget = Vector3F.Zero;
-      var lookAtMatrix = Matrix44F.CreateLookAt(position, lightTarget, Vector3F.Up);
+      var lightTarget = Vector3.Zero;
+      var lookAtMatrix = Matrix44F.CreateLookAt(position, lightTarget, Vector3.Up);
       
       // A look-at matrix is the inverse of a normal world or pose matrix.
       _mainDirectionalLightNode.PoseWorld =

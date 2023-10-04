@@ -3,7 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -70,14 +70,14 @@ namespace DigitalRise.Graphics
 
       var vertices = new[]
       {
-        new Vector3F(-0.5f, -0.5f, +0.5f),
-        new Vector3F(+0.5f, -0.5f, +0.5f),
-        new Vector3F(+0.5f, +0.5f, +0.5f),
-        new Vector3F(-0.5f, +0.5f, +0.5f),
-        new Vector3F(-0.5f, -0.5f, -0.5f),
-        new Vector3F(+0.5f, -0.5f, -0.5f),
-        new Vector3F(+0.5f, +0.5f, -0.5f),
-        new Vector3F(-0.5f, +0.5f, -0.5f)
+        new Vector3(-0.5f, -0.5f, +0.5f),
+        new Vector3(+0.5f, -0.5f, +0.5f),
+        new Vector3(+0.5f, +0.5f, +0.5f),
+        new Vector3(-0.5f, +0.5f, +0.5f),
+        new Vector3(-0.5f, -0.5f, -0.5f),
+        new Vector3(+0.5f, -0.5f, -0.5f),
+        new Vector3(+0.5f, +0.5f, -0.5f),
+        new Vector3(-0.5f, +0.5f, -0.5f)
       };
 
       submesh.VertexBuffer = new VertexBuffer(

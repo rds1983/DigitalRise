@@ -48,7 +48,7 @@ bone name, bone indices and bone coordinate systems.",
       _dudeMeshNode = dudeModelNode.FindFirstMeshNode();
 
       // Set the world space position and orientation of the dude.
-      _dudeMeshNode.PoseLocal = new Pose(new Vector3F(-1f, 0, 0));
+      _dudeMeshNode.PoseLocal = new Pose(new Vector3(-1f, 0, 0));
 
       // The imported Mesh of the Dude has a Skeleton, which defines the bone hierarchy.
       var skeleton = _dudeMeshNode.Mesh.Skeleton;
@@ -62,7 +62,7 @@ bone name, bone indices and bone coordinate systems.",
       // Load the marine model:
       var marineModelNode = AssetManager.LoadDRModel(GraphicsService, "Marine/PlayerMarine.drmdl").Clone();
       _marineMeshNode = marineModelNode.FindFirstMeshNode();
-      _marineMeshNode.PoseLocal = new Pose(new Vector3F(1f, 0, 0));
+      _marineMeshNode.PoseLocal = new Pose(new Vector3(1f, 0, 0));
 
       // Enable per-pixel lighting.
       SampleHelper.EnablePerPixelLighting(_dudeMeshNode);

@@ -87,7 +87,7 @@ For more info, have a look at the material and effect files of the loaded ground
       Random random = new Random(12345);
       for (int i = 0; i < 10; i++)
       {
-        Vector3F position = new Vector3F(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
+        Vector3 position = new Vector3(random.NextFloat(-3, -8), 0, random.NextFloat(0, -5));
         Matrix33F orientation = Matrix33F.CreateRotationY(random.NextFloat(0, ConstantsF.TwoPi));
         float scale = random.NextFloat(0.5f, 1.2f);
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
@@ -96,7 +96,7 @@ For more info, have a look at the material and effect files of the loaded ground
       // Load ground model which uses normal mapping.
       var modelNode = AssetManager.LoadDRModel(GraphicsService, "Parallax/Ground.drmdl");
       _meshNode = modelNode.FindFirstMeshNode().Clone();
-      _meshNode.ScaleLocal = new Vector3F(0.1f);
+      _meshNode.ScaleLocal = new Vector3(0.1f);
       _meshNode.IsStatic = true;
 
       Debug.Assert(_meshNode.Mesh.Materials.Count == 1, "Mesh should have only one material.");
@@ -122,7 +122,7 @@ For more info, have a look at the material and effect files of the loaded ground
       _graphicsScreen.Scene.Children.Add(_meshNode);
 
       // Create rigid body for ground plane.
-      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         MotionType = MotionType.Static,
       });

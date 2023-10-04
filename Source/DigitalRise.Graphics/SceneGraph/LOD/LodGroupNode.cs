@@ -7,7 +7,8 @@ using System.Diagnostics;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
-
+using DigitalRise.Mathematics;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -253,7 +254,7 @@ namespace DigitalRise.Graphics.SceneGraph
       Aabb? aabb = null;
       bool isInfinite = false;
       Levels.SetPose(Pose.Identity);     // AABB has to be relative to local space!
-      Levels.SetScale(Vector3F.One);     // AABB has to be relative to local space!
+      Levels.SetScale(Vector3.One);     // AABB has to be relative to local space!
       foreach (var lod in Levels)
         isInfinite |= SceneHelper.GetSubtreeAabbInternal(lod.Node, ref aabb);
       Levels.SetPose(PoseWorld);
@@ -311,7 +312,7 @@ namespace DigitalRise.Graphics.SceneGraph
       // Make bounding box the size of the unscaled AABB.
       boxShape.Extent = unscaledExtent;
 
-      if (unscaledCenter.IsNumericallyZero)
+      if (unscaledCenter.IsNumericallyZero())
       {
         // Bounding box is centered at origin.
         return boxShape;

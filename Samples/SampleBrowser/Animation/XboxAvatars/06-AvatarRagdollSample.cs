@@ -31,7 +31,7 @@ namespace Samples.Animation
     private readonly AvatarRenderer _avatarRenderer;
 
     private AvatarPose _avatarPose;
-    private Pose _pose = new Pose(new Vector3F(-0.5f, 0, 0));
+    private Pose _pose = new Pose(new Vector3(-0.5f, 0, 0));
 
     private Ragdoll _ragdoll;
 
@@ -46,7 +46,7 @@ namespace Samples.Animation
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);
-      _cameraObject.ResetPose(new Vector3F(0, 1, -3), ConstantsF.Pi, 0);
+      _cameraObject.ResetPose(new Vector3(0, 1, -3), ConstantsF.Pi, 0);
       GameObjectService.Objects.Add(_cameraObject);
 
       // Add some objects which allow the user to interact with the rigid bodies.
@@ -60,7 +60,7 @@ namespace Samples.Animation
       Simulation.ForceEffects.Add(new Damping());
 
       // Add a ground plane in the simulation.
-      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3F.UnitY, 0))
+      Simulation.RigidBodies.Add(new RigidBody(new PlaneShape(Vector3.UnitY, 0))
       {
         MotionType = MotionType.Static
       });
