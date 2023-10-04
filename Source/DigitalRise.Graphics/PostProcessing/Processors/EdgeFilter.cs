@@ -141,14 +141,14 @@ namespace DigitalRise.Graphics.PostProcessing
     /// Gets or sets the color of the silhouette edges.
     /// </summary>
     /// <value>The color of the silhouette edges.</value>
-    public Vector4F SilhouetteColor { get; set; }
+    public Vector4 SilhouetteColor { get; set; }
 
 
     /// <summary>
     /// Gets or sets the color of the crease edges.
     /// </summary>
     /// <value>The color of the crease edges.</value>
-    public Vector4F CreaseColor { get; set; }
+    public Vector4 CreaseColor { get; set; }
     #endregion
 
 
@@ -187,8 +187,8 @@ namespace DigitalRise.Graphics.PostProcessing
       DepthSensitivity = 1000;  // = farPlaneDistance / (maxDistance - minDistance)
       NormalThreshold = 0.1f;
       NormalSensitivity = 2f;
-      SilhouetteColor = new Vector4F(0, 0, 0, 1);
-      CreaseColor = new Vector4F(0, 0, 0, 1);
+      SilhouetteColor = new Vector4(0, 0, 0, 1);
+      CreaseColor = new Vector4(0, 0, 0, 1);
     }
     #endregion
 
@@ -224,7 +224,7 @@ namespace DigitalRise.Graphics.PostProcessing
       _parameterDepthSensitivity.SetValue(DepthSensitivity);
       _parameterNormalThreshold.SetValue(NormalThreshold);
       _parameterNormalSensitivity.SetValue(NormalSensitivity);
-      _parameterCameraBackward.SetValue((Vector3)(context.CameraNode.ViewInverse.GetColumn(2).XYZ));
+      _parameterCameraBackward.SetValue((Vector3)(context.CameraNode.ViewInverse.GetColumn(2).XYZ()));
       _parameterSilhouetteColor.SetValue((Vector4)SilhouetteColor);
       _parameterCreaseColor.SetValue((Vector4)CreaseColor);
       if (_parameterSourceTexture != null)

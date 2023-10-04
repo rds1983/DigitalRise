@@ -47,7 +47,7 @@ namespace DigitalRise.UI.Controls
   ///   var text = new TextBlock
   ///   {
   ///     Text = message,
-  ///     Margin = new Vector4F(4),
+  ///     Margin = new Vector4(4),
   ///     HorizontalAlignment = HorizontalAlignment.Center,
   ///   };
   /// 
@@ -56,12 +56,12 @@ namespace DigitalRise.UI.Controls
   ///     Content = new TextBlock { Text = "Ok" },
   ///     IsCancel = true,    // Cancel buttons are clicked when the user presses ESC (or BACK or B on the gamepad).
   ///     IsDefault = true,   // Default buttons are clicked when the user presses ENTER or SPACE (or START or A on the gamepad).
-  ///     Margin = new Vector4F(4),
+  ///     Margin = new Vector4(4),
   ///     Width = 60,
   ///     HorizontalAlignment = HorizontalAlignment.Center,
   ///   };
   /// 
-  ///   var stackPanel = new StackPanel { Margin = new Vector4F(4) };
+  ///   var stackPanel = new StackPanel { Margin = new Vector4(4) };
   ///   stackPanel.Children.Add(text);
   ///   stackPanel.Children.Add(button);
   ///   
@@ -235,7 +235,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int ResizeBorderPropertyId = CreateProperty(
-      typeof(Window), "ResizeBorder", GamePropertyCategories.Layout, null, new Vector4F(4),
+      typeof(Window), "ResizeBorder", GamePropertyCategories.Layout, null, new Vector4(4),
       UIPropertyOptions.AffectsRender);
 
     /// <summary>
@@ -246,9 +246,9 @@ namespace DigitalRise.UI.Controls
     /// The dimensions of the window border where resize operations can start. The default value
     /// is (4, 4, 4, 4).
     /// </value>
-    public Vector4F ResizeBorder
+    public Vector4 ResizeBorder
     {
-      get { return GetValue<Vector4F>(ResizeBorderPropertyId); }
+      get { return GetValue<Vector4>(ResizeBorderPropertyId); }
       set { SetValue(ResizeBorderPropertyId, value); }
     }
 

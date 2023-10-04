@@ -4,8 +4,7 @@ using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -127,8 +126,8 @@ namespace Samples.Game.UI
         };
 
         // Whenever the padding is changed, the panel margin should be updated.
-        var panelMargin = _panel.Properties.Get<Vector4F>(UIControl.MarginPropertyId);
-        var padding = this.Properties.Get<Vector4F>(UIControl.PaddingPropertyId);
+        var panelMargin = _panel.Properties.Get<Vector4>(UIControl.MarginPropertyId);
+        var padding = this.Properties.Get<Vector4>(UIControl.PaddingPropertyId);
         padding.Changed += panelMargin.Change;
 
         // Add Items to the panel.

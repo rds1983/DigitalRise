@@ -178,7 +178,7 @@ namespace DigitalRise.Graphics
     /// The first three columns of the world matrix is stored in <see cref="Register0"/> to
     /// <see cref="Register2"/>. The color is stored in <see cref="Register3"/>.
     ///  </remarks>
-    public InstanceData(Vector3 scale, Pose pose, Vector4F color)
+    public InstanceData(Vector3 scale, Pose pose, Vector4 color)
     {
       Matrix world = pose;
       world.M11 *= scale.X; world.M12 *= scale.X; world.M13 *= scale.X;

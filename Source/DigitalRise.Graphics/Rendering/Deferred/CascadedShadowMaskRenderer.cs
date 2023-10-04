@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -175,7 +176,7 @@ namespace DigitalRise.Graphics.Rendering
 
         _parameterParameters1.SetValue(new Vector4(
           shadow.FadeOutRange,
-          shadow.Distances[shadow.NumberOfCascades - 1],
+          shadow.Distances.GetComponentByIndex(shadow.NumberOfCascades - 1),
           shadow.VisualizeCascades ? 1 : 0,
           shadow.ShadowFog));
 
@@ -217,9 +218,9 @@ namespace DigitalRise.Graphics.Rendering
         if (_parameterDistances != null)
         {
           // Set not used entries to large values.
-          Vector4F distances = shadow.Distances;
+          Vector4 distances = shadow.Distances;
           for (int j = shadow.NumberOfCascades; j < 4; j++)
-            distances[j] = 10 * cameraFar;
+            distances.SetComponentByIndex(j, 10 * cameraFar);
 
           _parameterDistances.SetValue((Vector4)distances);
         }

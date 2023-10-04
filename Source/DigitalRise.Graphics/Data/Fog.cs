@@ -178,7 +178,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the color of the fog at <see cref="Height0"/>.
     /// </summary>
     /// <value>The color of the fog at <see cref="Height0"/> (using premultiplied alpha).</value>
-    public Vector4F Color0 { get; set; }
+    public Vector4 Color0 { get; set; }
 
 
     /// <summary>
@@ -212,7 +212,7 @@ namespace DigitalRise.Graphics
     /// Gets or sets the color of the fog at <see cref="Height1"/>.
     /// </summary>
     /// <value>The color of the fog at <see cref="Height1"/> (using premultiplied alpha).</value>
-    public Vector4F Color1 { get; set; }
+    public Vector4 Color1 { get; set; }
 
 
     /// <summary>
@@ -285,9 +285,9 @@ namespace DigitalRise.Graphics
     {
       Density = 1f;
       Height0 = 0;
-      Color0 = new Vector4F(0.5f, 0.5f, 0.5f, 1);
+      Color0 = new Vector4(0.5f, 0.5f, 0.5f, 1);
       Height1 = 100;
-      Color1 = new Vector4F(0.5f, 0.5f, 0.5f, 1);
+      Color1 = new Vector4(0.5f, 0.5f, 0.5f, 1);
       HeightFalloff = 0;
       Start = 0;
       End = 50;

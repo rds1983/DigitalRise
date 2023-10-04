@@ -365,15 +365,15 @@ namespace DigitalRise.Animation.Character.Tests
     public void MultiplyVector4()
     {
       var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
-      var v = new Vector4F(7, 9, -12, -2);
+      var v = new Vector4(7, 9, -12, -2);
 
       var result1 = a * v;
       var result2 = a.ToMatrix44F() * v;
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(result1, result2));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
 
       result1 = SrtTransform.Multiply(a, v);
       result2 = a.ToMatrix44F() * v;
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(result1, result2));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
     }
 
 

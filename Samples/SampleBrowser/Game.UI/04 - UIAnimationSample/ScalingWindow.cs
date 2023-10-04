@@ -21,7 +21,7 @@ namespace Samples.Game.UI
 
       Content = new TextBlock
       {
-        Margin = new Vector4F(8),
+        Margin = new Vector4(8),
         Text = "The 'RenderScale' of this window is animated.",
         WrapText = true,
       };

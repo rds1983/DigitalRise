@@ -61,8 +61,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button0",
         Content = new TextBlock { Text = "Animate Buttons" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
       button0.Click += (s, e) => PlayStartAnimation();
@@ -71,8 +71,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button1",
         Content = new TextBlock { Text = "Open FadingWindow" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button1.Click += (s, e) => new FadingWindow(Services).Show(_uiScreen);
@@ -81,8 +81,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button2",
         Content = new TextBlock { Text = "Open ScalingWindow" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button2.Click += (s, e) => new ScalingWindow(Services).Show(_uiScreen);
@@ -91,8 +91,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button3",
         Content = new TextBlock { Text = "Open RotatingWindow" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button3.Click += (s, e) => new RotatingWindow(Services).Show(_uiScreen);
@@ -101,8 +101,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button4",
         Content = new TextBlock { Text = "Open EasingWindow" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button4.Click += (s, e) => new EasingWindow(Services).Show(_uiScreen);
@@ -111,8 +111,8 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button5",
         Content = new TextBlock { Text = "Close All Windows" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button5.Click += (s, e) => CloseWindows();
@@ -121,13 +121,13 @@ The DigitalRise Animation library is used to animate the GUI controls.",
       {
         Name = "Button6",
         Content = new TextBlock { Text = "Exit" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button6.Click += (s, e) => Exit();
 
-      _buttonStackPanel = new StackPanel { Margin = new Vector4F(40) };
+      _buttonStackPanel = new StackPanel { Margin = new Vector4(40) };
       _buttonStackPanel.Children.Add(button0);
       _buttonStackPanel.Children.Add(button1);
       _buttonStackPanel.Children.Add(button2);

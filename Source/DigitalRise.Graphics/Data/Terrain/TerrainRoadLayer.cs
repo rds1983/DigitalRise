@@ -282,9 +282,9 @@ namespace DigitalRise.Graphics
     /// This is material parameter. Changing this property affects all terrain layers that share
     /// the same material.
     /// </remarks>
-    public Vector4F BorderBlendRange
+    public Vector4 BorderBlendRange
     {
-      get { return (Vector4F)GetParameter<Vector4>(true, "BorderBlendRange"); }
+      get { return (Vector4)GetParameter<Vector4>(true, "BorderBlendRange"); }
       set { SetParameter(true, "BorderBlendRange", (Vector4)value); }
     }
 

@@ -33,7 +33,7 @@ namespace DigitalRise.UI.Controls
   /// var dropDown = new DropDownButton
   /// {
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   MaxDropDownHeight = 250,
   /// };
   /// 

@@ -61,19 +61,19 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVector4F()
+    public void LerpVector4()
     {
-      Vector4F v = new Vector4F(1.0f, 10.0f, 100.0f, 1000.0f);
-      Vector4F w = new Vector4F(2.0f, 20.0f, 200.0f, 2000.0f);
-      Vector4F lerp0 = InterpolationHelper.Lerp(v, w, 0.0f);
-      Vector4F lerp1 = InterpolationHelper.Lerp(v, w, 1.0f);
-      Vector4F lerp05 = InterpolationHelper.Lerp(v, w, 0.5f);
-      Vector4F lerp025 = InterpolationHelper.Lerp(v, w, 0.25f);
+      Vector4 v = new Vector4(1.0f, 10.0f, 100.0f, 1000.0f);
+      Vector4 w = new Vector4(2.0f, 20.0f, 200.0f, 2000.0f);
+      Vector4 lerp0 = InterpolationHelper.Lerp(v, w, 0.0f);
+      Vector4 lerp1 = InterpolationHelper.Lerp(v, w, 1.0f);
+      Vector4 lerp05 = InterpolationHelper.Lerp(v, w, 0.5f);
+      Vector4 lerp025 = InterpolationHelper.Lerp(v, w, 0.25f);
 
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector4F(1.5f, 15.0f, 150.0f, 1500.0f), lerp05);
-      Assert.AreEqual(new Vector4F(1.25f, 12.5f, 125.0f, 1250.0f), lerp025);
+      Assert.AreEqual(new Vector4(1.5f, 15.0f, 150.0f, 1500.0f), lerp05);
+      Assert.AreEqual(new Vector4(1.25f, 12.5f, 125.0f, 1250.0f), lerp025);
     }
 
 
@@ -292,42 +292,42 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //[Test]
     //public void Hermite()
     //{
-    //  Vector4F v1 = new Vector4F(1.0f, 2.0f, 3.0f, 1.0f);
-    //  Vector4F v2 = new Vector4F(-1.0f, 2.1f, 3.0f, 1.0f);
-    //  Vector4F t1 = new Vector4F(2.0f, 1.0f, 5.0f, 0.0f); t1.Normalize();
-    //  Vector4F t2 = new Vector4F(0.0f, 2.0f, -3.0f, 0.0f); t2.Normalize();
+    //  Vector4 v1 = new Vector4(1.0f, 2.0f, 3.0f, 1.0f);
+    //  Vector4 v2 = new Vector4(-1.0f, 2.1f, 3.0f, 1.0f);
+    //  Vector4 t1 = new Vector4(2.0f, 1.0f, 5.0f, 0.0f); t1.Normalize();
+    //  Vector4 t2 = new Vector4(0.0f, 2.0f, -3.0f, 0.0f); t2.Normalize();
 
-    //  Vector4F hermite = Vector4F.Hermite(v1, t1, v2, t2, 0.0f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(v1, hermite));
+    //  Vector4 hermite = Vector4.Hermite(v1, t1, v2, t2, 0.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v1, hermite));
 
-    //  hermite = Vector4F.Hermite(v1, t1, v2, t2, 1.0f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(v2, hermite));
+    //  hermite = Vector4.Hermite(v1, t1, v2, t2, 1.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, hermite));
     //}
 
 
     //[Test]
     //public void CatmullRom()
     //{
-    //  Vector4F v1 = new Vector4F(1.0f, 2.0f, 3.0f, 1.0f);
-    //  Vector4F v2 = new Vector4F(-1.0f, 2.1f, 3.0f, 1.0f);
-    //  Vector4F v3 = new Vector4F(2.0f, 1.0f, 5.0f, 1.0f);
-    //  Vector4F v4 = new Vector4F(0.0f, 2.0f, -3.0f, 1.0f);
+    //  Vector4 v1 = new Vector4(1.0f, 2.0f, 3.0f, 1.0f);
+    //  Vector4 v2 = new Vector4(-1.0f, 2.1f, 3.0f, 1.0f);
+    //  Vector4 v3 = new Vector4(2.0f, 1.0f, 5.0f, 1.0f);
+    //  Vector4 v4 = new Vector4(0.0f, 2.0f, -3.0f, 1.0f);
 
-    //  Vector4F catmullRom = Vector4F.CatmullRom(v1, v2, v3, v4, 0.0f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(v2, catmullRom));
+    //  Vector4 catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, catmullRom));
 
-    //  catmullRom = Vector4F.CatmullRom(v1, v2, v3, v4, 1.0f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(v3, catmullRom));
+    //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 1.0f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v3, catmullRom));
 
-    //  Vector4F t2 = (v3 - v1) / 2.0f;
-    //  Vector4F t3 = (v4 - v2) / 2.0f;
-    //  Vector4F hermite = Vector4F.Hermite(v2, t2, v3, t3, 0.3f);
-    //  catmullRom = Vector4F.CatmullRom(v1, v2, v3, v4, 0.3f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(hermite, catmullRom));
+    //  Vector4 t2 = (v3 - v1) / 2.0f;
+    //  Vector4 t3 = (v4 - v2) / 2.0f;
+    //  Vector4 hermite = Vector4.Hermite(v2, t2, v3, t3, 0.3f);
+    //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.3f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
 
-    //  hermite = Vector4F.Hermite(v2, t2, v3, t3, 0.6f);
-    //  catmullRom = Vector4F.CatmullRom(v1, v2, v3, v4, 0.6f);
-    //  Assert.IsTrue(Vector4F.AreNumericallyEqual(hermite, catmullRom));
+    //  hermite = Vector4.Hermite(v2, t2, v3, t3, 0.6f);
+    //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.6f);
+    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
     //}
 
 
@@ -382,17 +382,17 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void CosineInterpolationVector4F()
+    public void CosineInterpolationVector4()
     {
-      Vector4F v = new Vector4F(1.0f, 10.0f, 100.0f, 1000.0f);
-      Vector4F w = new Vector4F(2.0f, 20.0f, 200.0f, 2000.0f);
-      Vector4F lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0f);
-      Vector4F lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0f);
-      Vector4F lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5f);
+      Vector4 v = new Vector4(1.0f, 10.0f, 100.0f, 1000.0f);
+      Vector4 w = new Vector4(2.0f, 20.0f, 200.0f, 2000.0f);
+      Vector4 lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0f);
+      Vector4 lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0f);
+      Vector4 lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5f);
 
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new Vector4F(1.5f, 15.0f, 150.0f, 1500.0f), lerp05);
+      Assert.AreEqual(new Vector4(1.5f, 15.0f, 150.0f, 1500.0f), lerp05);
     }
 
 

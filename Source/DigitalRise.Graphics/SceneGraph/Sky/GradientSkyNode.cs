@@ -50,28 +50,28 @@ namespace DigitalRise.Graphics.SceneGraph
     /// Gets or sets the color of the horizon below the sun.
     /// </summary>
     /// <value>The color of the horizon below the sun (using premultiplied alpha).</value>
-    public Vector4F FrontColor { get; set; }
+    public Vector4 FrontColor { get; set; }
 
 
     /// <summary>
     /// Gets or sets the color of the horizon opposite the sun.
     /// </summary>
     /// <value>The color of the horizon opposite the sun (using premultiplied alpha).</value>
-    public Vector4F BackColor { get; set; }
+    public Vector4 BackColor { get; set; }
 
 
     /// <summary>
     /// Gets or sets the color at the zenith.
     /// </summary>
     /// <value>The color at the zenith (using premultiplied alpha).</value>
-    public Vector4F ZenithColor { get; set; }
+    public Vector4 ZenithColor { get; set; }
 
 
     /// <summary>
     /// Gets or sets the color at the ground.
     /// </summary>
     /// <value>The color at the ground (using premultiplied alpha).</value>
-    public Vector4F GroundColor { get; set; }
+    public Vector4 GroundColor { get; set; }
 
 
     /// <summary>
@@ -200,10 +200,10 @@ namespace DigitalRise.Graphics.SceneGraph
     public GradientSkyNode()
     {
       SunDirection = new Vector3(1, 1, 1);
-      FrontColor = new Vector4F(0.9f, 0.5f, 0, 1);
-      ZenithColor = new Vector4F(0, 0.4f, 0.9f, 1);
-      BackColor = new Vector4F(0.4f, 0.6f, 0.9f, 1);
-      GroundColor = new Vector4F(1, 0.8f, 0.6f, 1);
+      FrontColor = new Vector4(0.9f, 0.5f, 0, 1);
+      ZenithColor = new Vector4(0, 0.4f, 0.9f, 1);
+      BackColor = new Vector4(0.4f, 0.6f, 0.9f, 1);
+      GroundColor = new Vector4(1, 0.8f, 0.6f, 1);
       FrontZenithShift = 0.5f;
       BackZenithShift = 0.5f;
       FrontGroundShift = 0.5f;

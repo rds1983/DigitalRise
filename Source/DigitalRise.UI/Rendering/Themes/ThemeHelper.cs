@@ -140,7 +140,7 @@ namespace DigitalRise.UI.Rendering
 
       try
       {
-        Vector4F vector = ParseVector4F(value);
+        Vector4 vector = ParseVector4(value);
         return new Color((byte)vector.X, (byte)vector.Y, (byte)vector.Z, (byte)vector.W);
       }
       catch (Exception exception)
@@ -218,21 +218,21 @@ namespace DigitalRise.UI.Rendering
 
     /// <summary>
     /// Converts the specified string representation of a 4-dimensional vector to its 
-    /// <see cref="Vector4F"/> equivalent, or throws an exception if the string cannot be
-    /// converted to a <see cref="Vector4F"/>.
+    /// <see cref="Vector4"/> equivalent, or throws an exception if the string cannot be
+    /// converted to a <see cref="Vector4"/>.
     /// </summary>
     /// <param name="value">
     /// The value. If this value is <see langword="null"/> or an empty string, 
-    /// <see cref="Vector4F.Zero"/> is returned as the default value.
+    /// <see cref="Vector4.Zero"/> is returned as the default value.
     /// </param>
-    /// <returns>The <see cref="Vector4F"/>.</returns>
+    /// <returns>The <see cref="Vector4"/>.</returns>
     /// <exception cref="FormatException">
-    /// Cannot convert <paramref name="value"/> to <see cref="Vector4F"/>.
+    /// Cannot convert <paramref name="value"/> to <see cref="Vector4"/>.
     /// </exception>
-    public static Vector4F ParseVector4F(string value)
+    public static Vector4 ParseVector4(string value)
     {
       if (string.IsNullOrEmpty(value))
-        return Vector4F.Zero;
+        return Vector4.Zero;
 
       var values = value.Split(ListSeparators, StringSplitOptions.RemoveEmptyEntries);
       if (values.Length != 4)
@@ -241,7 +241,7 @@ namespace DigitalRise.UI.Rendering
         throw new FormatException(message);
       }
 
-      Vector4F result;
+      Vector4 result;
       result.X = float.Parse(values[0], CultureInfo.InvariantCulture);
       result.Y = float.Parse(values[1], CultureInfo.InvariantCulture);
       result.Z = float.Parse(values[2], CultureInfo.InvariantCulture);
@@ -269,7 +269,7 @@ namespace DigitalRise.UI.Rendering
     {
       try
       {
-        Vector4F vector = ParseVector4F(value);
+        Vector4 vector = ParseVector4(value);
         return new Rectangle((int)vector.X, (int)vector.Y, (int)vector.Z, (int)vector.W);
       }
       catch (Exception exception)

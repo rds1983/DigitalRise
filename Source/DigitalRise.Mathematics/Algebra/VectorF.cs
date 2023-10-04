@@ -1284,7 +1284,7 @@ namespace DigitalRise.Mathematics.Algebra
 
 
     /// <summary>
-    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector4F"/>.
+    /// Performs an explicit conversion from <see cref="VectorF"/> to <see cref="Vector4"/>.
     /// </summary>
     /// <param name="vector">The vector.</param>
     /// <returns>The result of the conversion.</returns>
@@ -1294,27 +1294,27 @@ namespace DigitalRise.Mathematics.Algebra
     /// <exception cref="InvalidCastException">
     /// This vector has more than 4 elements.
     /// </exception>
-    public static explicit operator Vector4F(VectorF vector)
+    public static explicit operator Vector4(VectorF vector)
     {
       if (vector == null)
         throw new ArgumentNullException("vector");
       if (vector.NumberOfElements != 4)
         throw new InvalidCastException("The number of elements does not match.");
 
-      return new Vector4F(vector[0], vector[1], vector[2], vector[3]);
+      return new Vector4(vector[0], vector[1], vector[2], vector[3]);
     }
 
 
     /// <summary>
-    /// Converts this <see cref="VectorF"/> to <see cref="Vector4F"/>.
+    /// Converts this <see cref="VectorF"/> to <see cref="Vector4"/>.
     /// </summary>
     /// <returns>The result of the conversion.</returns>
     /// <exception cref="InvalidCastException">
     /// This vector has more than 4 elements.
     /// </exception>
-    public Vector4F ToVector4F()
+    public Vector4 ToVector4()
     {
-      return (Vector4F) this;
+      return (Vector4) this;
     }
 
 

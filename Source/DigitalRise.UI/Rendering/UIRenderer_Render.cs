@@ -258,7 +258,7 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     private static RectangleF GetContentBoundsRounded(UIControl control)
     {
-      Vector4F padding = control.Padding;
+      Vector4 padding = control.Padding;
       return new RectangleF(
         (int)(control.ActualX + padding.X + 0.5f),
         (int)(control.ActualY + padding.Y + 0.5f),
@@ -563,7 +563,7 @@ namespace DigitalRise.UI.Rendering
             && IsCaretVisible(new Vector2(console.VisualCaretX, console.VisualCaretY)))
         {
           float charWidth = font.MeasureString("A").X;
-          Vector4F padding = console.Padding;
+          Vector4 padding = console.Padding;
           RectangleF caretRectangle = new RectangleF(
             console.ActualX + padding.X + console.VisualCaretX * charWidth - 1,  // minus 1 pixel
             console.ActualY + padding.Y + console.VisualCaretY * font.LineHeight - 1,
@@ -744,7 +744,7 @@ namespace DigitalRise.UI.Rendering
       
       // Get bounds without margin.
       Rectangle source = image.SourceRectangle;
-      Vector4F margin = image.Margin;
+      Vector4 margin = image.Margin;
       bounds.X += margin.X;
       bounds.Y += margin.Y;
       bounds.Width -= margin.X + margin.Z;

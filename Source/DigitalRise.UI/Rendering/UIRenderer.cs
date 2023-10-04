@@ -353,7 +353,7 @@ namespace DigitalRise.UI.Rendering
     /// </returns>
     /// <remarks>
     /// <para>
-    /// The base implementation of this method supports following types: <see cref="Vector4F"/>,
+    /// The base implementation of this method supports following types: <see cref="Vector4"/>,
     /// <see cref="Color"/>, <see cref="Rectangle"/>, <see cref="Rectangle"/>?,
     /// <see cref="Texture2D"/>, enumerations, types that have a <see cref="TypeConverter"/>, and
     /// types that implement <see cref="IConvertible"/>.
@@ -377,9 +377,9 @@ namespace DigitalRise.UI.Rendering
       {
         result = (T)(object)ThemeHelper.ParseVector3(attribute.Value);
       }
-      else if (result is Vector4F)
+      else if (result is Vector4)
       {
-        result = (T)(object)ThemeHelper.ParseVector4F(attribute.Value);
+        result = (T)(object)ThemeHelper.ParseVector4(attribute.Value);
       }
       else if (typeof(T) == typeof(string) || typeof(T) == typeof(object))
       {

@@ -803,7 +803,7 @@ namespace DigitalRise.Graphics.Rendering
         float thickness = node.StrokeThickness;
         Vector3 color3F = node.StrokeColor * node.StrokeAlpha;
         HalfVector4 color = new HalfVector4(color3F.X, color3F.Y, color3F.Z, node.StrokeAlpha);
-        Vector4F dash = node.StrokeDashPattern * node.StrokeThickness;
+        Vector4 dash = node.StrokeDashPattern * node.StrokeThickness;
         bool usesDashPattern = (dash.Y + dash.Z) != 0;
         HalfVector4 dashSum = new HalfVector4(
           dash.X,

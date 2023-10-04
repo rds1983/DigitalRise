@@ -46,7 +46,7 @@ namespace DigitalRise.UI.Rendering
     /// <value>
     /// The margin (left, top, right, bottom). Can be negative to draw outside of the control area.
     /// </value>
-    public Vector4F Margin { get; set; }
+    public Vector4 Margin { get; set; }
 
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace DigitalRise.UI.Rendering
     /// horizontally. The left-center and right-center parts will be stretched vertically. The 
     /// center part will be stretched horizontally and vertically.
     /// </remarks>
-    public Vector4F Border { get; set; }
+    public Vector4 Border { get; set; }
 
 
     /// <summary>

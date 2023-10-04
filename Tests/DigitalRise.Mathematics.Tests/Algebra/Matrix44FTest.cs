@@ -405,7 +405,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Vector3 translation = new Vector3(1.0f, 2.0f, 3.0f);
       Matrix44F m = Matrix44F.CreateTranslation(translation);
-      Assert.AreEqual(translation, m.GetColumn(3).XYZ);
+      Assert.AreEqual(translation, m.GetColumn(3).XYZ());
     }
 
 
@@ -414,7 +414,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Vector3 translation = new Vector3(1.0f, 2.0f, 3.0f);
       Matrix44F m = Matrix44F.CreateTranslation(1.0f, 2.0f, 3.0f);
-      Assert.AreEqual(translation, m.GetColumn(3).XYZ);
+      Assert.AreEqual(translation, m.GetColumn(3).XYZ());
     }
 
 
@@ -450,9 +450,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                 2, 5, 8, 3,
                                 7, 6, -1, 1,
                                 4, 9, 7, 7);
-      Vector4F v = Vector4F.One;
-      Vector4F w = m * v;
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector4 v = Vector4.One;
+      Vector4 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse));
     }
 
@@ -464,9 +464,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                   0, 0.0001f, 0, 0,
                                   0, 0, 0.0001f, 0,
                                   0, 0, 0, 0.0001f);
-      Vector4F v = Vector4F.One;
-      Vector4F w = m * v;
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, m.Inverse * w));
+      Vector4 v = Vector4.One;
+      Vector4 w = m * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
       Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse));
     }
 
@@ -497,22 +497,22 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                 2, 5, 8, 3,
                                 7, 6, -1, 1,
                                 4, 9, 7, 7);
-      Vector4F v = Vector4F.One;
-      Vector4F w = m * v;
+      Vector4 v = Vector4.One;
+      Vector4 w = m * v;
       Matrix44F im = m;
       im.Invert();
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, im * w));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
       Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * im));
 
       m = new Matrix44F(0.4f, 34, 0.33f, 4,
                                 2, 5, -8, 3,
                                 7, 0, -1, 1,
                                 4, 9, -7, -45);
-      v = Vector4F.One;
+      v = Vector4.One;
       w = m * v;
       im = m;
       im.Invert();
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, im * w));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
       Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * im));
     }
 
@@ -600,10 +600,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetColumn()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      Assert.AreEqual(new Vector4F(1.0f, 5.0f, 9.0f, 13.0f), m.GetColumn(0));
-      Assert.AreEqual(new Vector4F(2.0f, 6.0f, 10.0f, 14.0f), m.GetColumn(1));
-      Assert.AreEqual(new Vector4F(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
-      Assert.AreEqual(new Vector4F(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
+      Assert.AreEqual(new Vector4(1.0f, 5.0f, 9.0f, 13.0f), m.GetColumn(0));
+      Assert.AreEqual(new Vector4(2.0f, 6.0f, 10.0f, 14.0f), m.GetColumn(1));
+      Assert.AreEqual(new Vector4(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector4(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
     }
 
 
@@ -629,29 +629,29 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumn()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetColumn(0, new Vector4F(0.1f, 0.2f, 0.3f, 0.4f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
-      Assert.AreEqual(new Vector4F(2.0f, 6.0f, 10.0f, 14.0f), m.GetColumn(1));
-      Assert.AreEqual(new Vector4F(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
-      Assert.AreEqual(new Vector4F(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
+      m.SetColumn(0, new Vector4(0.1f, 0.2f, 0.3f, 0.4f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
+      Assert.AreEqual(new Vector4(2.0f, 6.0f, 10.0f, 14.0f), m.GetColumn(1));
+      Assert.AreEqual(new Vector4(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector4(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
 
-      m.SetColumn(1, new Vector4F(0.4f, 0.5f, 0.6f, 0.7f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
-      Assert.AreEqual(new Vector4F(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
-      Assert.AreEqual(new Vector4F(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
+      m.SetColumn(1, new Vector4(0.4f, 0.5f, 0.6f, 0.7f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
+      Assert.AreEqual(new Vector4(3.0f, 7.0f, 11.0f, 15.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector4(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
 
-      m.SetColumn(2, new Vector4F(0.7f, 0.8f, 0.9f, 1.0f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
-      Assert.AreEqual(new Vector4F(0.7f, 0.8f, 0.9f, 1.0f), m.GetColumn(2));
-      Assert.AreEqual(new Vector4F(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
+      m.SetColumn(2, new Vector4(0.7f, 0.8f, 0.9f, 1.0f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
+      Assert.AreEqual(new Vector4(0.7f, 0.8f, 0.9f, 1.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector4(4.0f, 8.0f, 12.0f, 16.0f), m.GetColumn(3));
 
-      m.SetColumn(3, new Vector4F(1.1f, 1.8f, 1.9f, 1.2f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
-      Assert.AreEqual(new Vector4F(0.7f, 0.8f, 0.9f, 1.0f), m.GetColumn(2));
-      Assert.AreEqual(new Vector4F(1.1f, 1.8f, 1.9f, 1.2f), m.GetColumn(3));
+      m.SetColumn(3, new Vector4(1.1f, 1.8f, 1.9f, 1.2f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetColumn(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetColumn(1));
+      Assert.AreEqual(new Vector4(0.7f, 0.8f, 0.9f, 1.0f), m.GetColumn(2));
+      Assert.AreEqual(new Vector4(1.1f, 1.8f, 1.9f, 1.2f), m.GetColumn(3));
     }
 
 
@@ -660,7 +660,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException1()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetColumn(-1, Vector4F.One);
+      m.SetColumn(-1, Vector4.One);
     }
 
 
@@ -669,7 +669,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetColumnException2()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetColumn(4, Vector4F.One);
+      m.SetColumn(4, Vector4.One);
     }
 
 
@@ -677,10 +677,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void GetRow()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      Assert.AreEqual(new Vector4F(1.0f, 2.0f, 3.0f, 4.0f), m.GetRow(0));
-      Assert.AreEqual(new Vector4F(5.0f, 6.0f, 7.0f, 8.0f), m.GetRow(1));
-      Assert.AreEqual(new Vector4F(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
-      Assert.AreEqual(new Vector4F(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
+      Assert.AreEqual(new Vector4(1.0f, 2.0f, 3.0f, 4.0f), m.GetRow(0));
+      Assert.AreEqual(new Vector4(5.0f, 6.0f, 7.0f, 8.0f), m.GetRow(1));
+      Assert.AreEqual(new Vector4(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector4(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
     }
 
 
@@ -706,29 +706,29 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRow()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetRow(0, new Vector4F(0.1f, 0.2f, 0.3f, 0.4f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
-      Assert.AreEqual(new Vector4F(5.0f, 6.0f, 7.0f, 8.0f), m.GetRow(1));
-      Assert.AreEqual(new Vector4F(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
-      Assert.AreEqual(new Vector4F(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
+      m.SetRow(0, new Vector4(0.1f, 0.2f, 0.3f, 0.4f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
+      Assert.AreEqual(new Vector4(5.0f, 6.0f, 7.0f, 8.0f), m.GetRow(1));
+      Assert.AreEqual(new Vector4(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector4(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
 
-      m.SetRow(1, new Vector4F(0.4f, 0.5f, 0.6f, 0.7f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
-      Assert.AreEqual(new Vector4F(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
-      Assert.AreEqual(new Vector4F(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
+      m.SetRow(1, new Vector4(0.4f, 0.5f, 0.6f, 0.7f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
+      Assert.AreEqual(new Vector4(9.0f, 10.0f, 11.0f, 12.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector4(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
 
-      m.SetRow(2, new Vector4F(0.7f, 0.8f, 0.9f, 1.0f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
-      Assert.AreEqual(new Vector4F(0.7f, 0.8f, 0.9f, 1.0f), m.GetRow(2));
-      Assert.AreEqual(new Vector4F(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
+      m.SetRow(2, new Vector4(0.7f, 0.8f, 0.9f, 1.0f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
+      Assert.AreEqual(new Vector4(0.7f, 0.8f, 0.9f, 1.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector4(13.0f, 14.0f, 15.0f, 16.0f), m.GetRow(3));
 
-      m.SetRow(3, new Vector4F(1.7f, 1.8f, 1.9f, 1.3f));
-      Assert.AreEqual(new Vector4F(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
-      Assert.AreEqual(new Vector4F(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
-      Assert.AreEqual(new Vector4F(0.7f, 0.8f, 0.9f, 1.0f), m.GetRow(2));
-      Assert.AreEqual(new Vector4F(1.7f, 1.8f, 1.9f, 1.3f), m.GetRow(3));
+      m.SetRow(3, new Vector4(1.7f, 1.8f, 1.9f, 1.3f));
+      Assert.AreEqual(new Vector4(0.1f, 0.2f, 0.3f, 0.4f), m.GetRow(0));
+      Assert.AreEqual(new Vector4(0.4f, 0.5f, 0.6f, 0.7f), m.GetRow(1));
+      Assert.AreEqual(new Vector4(0.7f, 0.8f, 0.9f, 1.0f), m.GetRow(2));
+      Assert.AreEqual(new Vector4(1.7f, 1.8f, 1.9f, 1.3f), m.GetRow(3));
     }
 
 
@@ -737,7 +737,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException1()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetRow(-1, Vector4F.One);
+      m.SetRow(-1, Vector4.One);
     }
 
 
@@ -746,7 +746,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void SetRowException2()
     {
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
-      m.SetRow(4, Vector4F.One);
+      m.SetRow(4, Vector4.One);
     }
 
 
@@ -792,9 +792,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F i = Matrix44F.CreateScale(1.0f);
       Assert.AreEqual(Matrix44F.Identity, i);
 
-      Vector4F v = Vector4F.One;
+      Vector4 v = Vector4.One;
       Matrix44F m = Matrix44F.CreateScale(2.0f);
-      Vector4F scaled = m * v;
+      Vector4 scaled = m * v;
       Assert.AreEqual(2 * v.X, scaled.X);
       Assert.AreEqual(2 * v.Y, scaled.Y);
       Assert.AreEqual(2 * v.Z, scaled.Z);
@@ -810,7 +810,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector3 scale = new Vector3(-2.0f, -3.0f, -4.0f);
       m = Matrix44F.CreateScale(scale);
-      v = new Vector4F(1.0f, 2.0f, 3.0f, 1.0f);
+      v = new Vector4(1.0f, 2.0f, 3.0f, 1.0f);
       scaled = m * v;
       Assert.AreEqual(-2.0f * v.X, scaled.X);
       Assert.AreEqual(-3.0f * v.Y, scaled.Y);
@@ -879,10 +879,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F matrix = Matrix44F.CreateRotation(axis, angle);
       QuaternionF q = QuaternionF.CreateRotation(axis, angle);
       Matrix44F matrixFromQuaternion = Matrix44F.CreateRotation(q);
-      Vector4F v = new Vector4F(0.3f, -2.4f, 5.6f, 1.0f);
-      Vector4F result1 = matrix * v;
-      Vector4F result2 = matrixFromQuaternion * v;
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(result1, result2));
+      Vector4 v = new Vector4(0.3f, -2.4f, 5.6f, 1.0f);
+      Vector4 result1 = matrix * v;
+      Vector4 result2 = matrixFromQuaternion * v;
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
     }
 
 
@@ -1070,7 +1070,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F result = m1 * m2;
       for (int column = 0; column < 4; column++)
         for (int row = 0; row < 4; row++)
-          Assert.AreEqual(Vector4F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector4.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
@@ -1096,43 +1096,43 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F result = Matrix44F.Multiply(m1, m2);
       for (int column = 0; column < 4; column++)
         for (int row = 0; row < 4; row++)
-          Assert.AreEqual(Vector4F.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+          Assert.AreEqual(Vector4.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
     }
 
 
     [Test]
     public void MultiplyVectorOperator()
     {
-      Vector4F v = new Vector4F(2.34f, 3.45f, 4.56f, 23.4f);
+      Vector4 v = new Vector4(2.34f, 3.45f, 4.56f, 23.4f);
       Assert.AreEqual(v, Matrix44F.Identity * v);
-      Assert.AreEqual(Vector4F.Zero, Matrix44F.Zero * v);
+      Assert.AreEqual(Vector4.Zero, Matrix44F.Zero * v);
 
       Matrix44F m = new Matrix44F(12, 23, 45, 56,
                                   67, 89, 90, 12,
                                   43, 65, 87, 43,
                                   34, -12, 84, 44);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, m * m.Inverse * v));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m * m.Inverse * v));
 
       for (int i = 0; i < 4; i++)
-        Assert.AreEqual(Vector4F.Dot(m.GetRow(i), v), (m * v)[i]);
+        Assert.AreEqual(Vector4.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
     }
 
 
     [Test]
     public void MultiplyVector()
     {
-      Vector4F v = new Vector4F(2.34f, 3.45f, 4.56f, 23.4f);
+      Vector4 v = new Vector4(2.34f, 3.45f, 4.56f, 23.4f);
       Assert.AreEqual(v, Matrix44F.Multiply(Matrix44F.Identity, v));
-      Assert.AreEqual(Vector4F.Zero, Matrix44F.Multiply(Matrix44F.Zero, v));
+      Assert.AreEqual(Vector4.Zero, Matrix44F.Multiply(Matrix44F.Zero, v));
 
       Matrix44F m = new Matrix44F(12, 23, 45, 56,
                                   67, 89, 90, 12,
                                   43, 65, 87, 43,
                                   34, -12, 84, 44);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(v, Matrix44F.Multiply(m * m.Inverse, v)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, Matrix44F.Multiply(m * m.Inverse, v)));
 
       for (int i = 0; i < 4; i++)
-        Assert.AreEqual(Vector4F.Dot(m.GetRow(i), v), Matrix44F.Multiply(m, v)[i]);
+        Assert.AreEqual(Vector4.Dot(m.GetRow(i), v), Matrix44F.Multiply(m, v).GetComponentByIndex(i));
     }
 
 
@@ -1145,7 +1145,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       // Random transformation
       Matrix44F transform = translation * rotation * scale * translation.Inverse * rotation.Inverse;
-      Vector4F v4 = new Vector4F(1.0f, 2.0f, 0.5f, 1.0f);
+      Vector4 v4 = new Vector4(1.0f, 2.0f, 0.5f, 1.0f);
       Vector3 v3 = new Vector3(1.0f, 2.0f, 0.5f);
 
       v4 = transform * v4;
@@ -1168,9 +1168,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       // Random transformation
       Matrix44F transform = translation * rotation * scale * translation.Inverse * rotation.Inverse;
-      Vector4F p1 = new Vector4F(1.0f, 2.0f, 0.5f, 1.0f);
-      Vector4F p2 = new Vector4F(-3.4f, 5.5f, -0.5f, 1.0f);
-      Vector4F d = p1 - p2;
+      Vector4 p1 = new Vector4(1.0f, 2.0f, 0.5f, 1.0f);
+      Vector4 p2 = new Vector4(-3.4f, 5.5f, -0.5f, 1.0f);
+      Vector4 d = p1 - p2;
       Vector3 v = new Vector3(d.X, d.Y, d.Z);
 
       p1 = transform * p1;
@@ -1197,17 +1197,17 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector3 d = (x3 - p3);
       Vector3 n3 = d.Orthonormal1();
 
-      Vector4F p4 = new Vector4F(p3.X, p3.Y, p3.Z, 1.0f);
-      Vector4F x4 = new Vector4F(x3.X, x3.Y, x3.Z, 1.0f);
-      Vector4F n4 = new Vector4F(n3.X, n3.Y, n3.Z, 0.0f);
-      float planeEquation = Vector4F.Dot((x4 - p4), n4);
+      Vector4 p4 = new Vector4(p3.X, p3.Y, p3.Z, 1.0f);
+      Vector4 x4 = new Vector4(x3.X, x3.Y, x3.Z, 1.0f);
+      Vector4 n4 = new Vector4(n3.X, n3.Y, n3.Z, 0.0f);
+      float planeEquation = Vector4.Dot((x4 - p4), n4);
       Assert.IsTrue(Numeric.IsZero(planeEquation));
 
       p4 = transform * p4;
       x4 = transform * x4;
       n3 = transform.TransformNormal(n3);
-      n4 = new Vector4F(n3.X, n3.Y, n3.Z, 0.0f);
-      planeEquation = Vector4F.Dot((x4 - p4), n4);
+      n4 = new Vector4(n3.X, n3.Y, n3.Z, 0.0f);
+      planeEquation = Vector4.Dot((x4 - p4), n4);
       Assert.IsTrue(Numeric.IsZero(planeEquation));
     }
 
@@ -1906,9 +1906,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void OrthographicWithNegativeNear()
     {
       Matrix44F projection = Matrix44F.CreateOrthographic(4, 3, -1, 11);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(-1, 1, 0, 1), projection * new Vector4F(-2, 1.5f, 1, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(1, 1, 0.5f, 1), projection * new Vector4F(2, 1.5f, -5, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(1, -1, 1, 1), projection * new Vector4F(2, -1.5f, -11, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(-2, 1.5f, 1, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(2, 1.5f, -5, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(2, -1.5f, -11, 1)));
     }
 
     [Test]
@@ -1948,9 +1948,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void OrthographicOffCenterWithNegativeNear()
     {
       Matrix44F projection = Matrix44F.CreateOrthographicOffCenter(0, 4, 0, 3, -1, 11);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(-1, 1, 0, 1), projection * new Vector4F(0, 3, 1, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(1, 1, 0.5f, 1), projection * new Vector4F(4, 3, -5, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual(new Vector4F(1, -1, 1, 1), projection * new Vector4F(4, 0, -11, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(0, 3, 1, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(4, 3, -5, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(4, 0, -11, 1)));
     }
 
     [Test]
@@ -1958,11 +1958,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Matrix44F projection = Matrix44F.CreatePerspective(4, 3, 1, 11);
 
-      Vector3 p = Vector4F.HomogeneousDivide(projection * new Vector4F(-2, -1.5f, -1, 1));
+      Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(-2, -1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(2, 1.5f, -1, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(2, 1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(0, 0, -11, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), p));
     }
 
@@ -2008,11 +2008,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float fieldOfView = (float)(2 * Math.Atan(1.5 / 1));
       Matrix44F projection = Matrix44F.CreatePerspectiveFieldOfView(fieldOfView, 4f / 3f, 1, 11);
 
-      Vector3 p = Vector4F.HomogeneousDivide(projection * new Vector4F(-2, -1.5f, -1, 1));
+      Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(-2, -1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(2, 1.5f, -1, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(2, 1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(0, 0, -11, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), p));
     }
 
@@ -2063,11 +2063,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Matrix44F projection = Matrix44F.CreatePerspectiveOffCenter(0, 4, 0, 3, 1, 11);
 
-      Vector3 p = Vector4F.HomogeneousDivide(projection * new Vector4F(0, 0, -1, 1));
+      Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(4, 3, -1, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(4, 3, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
-      p = Vector4F.HomogeneousDivide(projection * new Vector4F(0, 0, -11, 1));
+      p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 1), p));
     }
 
@@ -2111,11 +2111,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Matrix44F pInfinite = Matrix44F.CreatePerspective(4, 3, 1, float.PositiveInfinity);
 
-      Vector3 v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(-2, -1.5f, -1, 1));
+      Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(-2, -1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(2, 1.5f, -1, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(2, 1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(0, 0, -1000, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(0, v.X);
       Assert.AreEqual(0, v.Y);
       Assert.LessOrEqual(0.999, v.Z);
@@ -2128,11 +2128,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float fieldOfView = (float)(2 * Math.Atan(1.5 / 1));
       Matrix44F pInfinite = Matrix44F.CreatePerspectiveFieldOfView(fieldOfView, 4f / 3f, 1, float.PositiveInfinity);
 
-      Vector3 v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(-2, -1.5f, -1, 1));
+      Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(-2, -1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(2, 1.5f, -1, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(2, 1.5f, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(0, 0, -1000, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(0, v.X);
       Assert.AreEqual(0, v.Y);
       Assert.LessOrEqual(0.999, v.Z);
@@ -2143,11 +2143,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Matrix44F pInfinite = Matrix44F.CreatePerspectiveOffCenter(0, 4, 0, 3, 1, float.PositiveInfinity);
 
-      Vector3 v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(0, 0, -1, 1));
+      Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(4, 3, -1, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(4, 3, -1, 1));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
-      v = Vector4F.HomogeneousDivide(pInfinite * new Vector4F(0, 0, -1000, 1));
+      v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(-1, v.X);
       Assert.AreEqual(-1, v.Y);
       Assert.LessOrEqual(0.999, v.Z);

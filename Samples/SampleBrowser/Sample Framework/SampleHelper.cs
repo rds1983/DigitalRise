@@ -519,7 +519,7 @@ namespace Samples
       {
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(Margin, Margin, Margin, 0),
+        Margin = new Vector4(Margin, Margin, Margin, 0),
       };
       scrollViewer.Content = panel;
 
@@ -543,7 +543,7 @@ namespace Samples
       var groupBox = new GroupBox
       {
         Title = title,
-        Margin = new Vector4F(0, 0, 0, Margin),
+        Margin = new Vector4(0, 0, 0, Margin),
         HorizontalAlignment = HorizontalAlignment.Stretch,
 
         // For GroupBoxes inside TabControls we need a different style 
@@ -554,7 +554,7 @@ namespace Samples
 
       var panel = new StackPanel
       {
-        Margin = new Vector4F(Margin, Margin + 4, Margin, -2),
+        Margin = new Vector4(Margin, Margin + 4, Margin, -2),
       };
       groupBox.Content = panel;
 
@@ -567,7 +567,7 @@ namespace Samples
       var button = new Button
       {
         Content = new TextBlock { Text = title },
-        Margin = new Vector4F(0, 0, 0, Margin),
+        Margin = new Vector4(0, 0, 0, Margin),
         ToolTip = toolTip,
       };
       button.Click += (s, e) => clickHandler();
@@ -581,7 +581,7 @@ namespace Samples
       var checkBox = new CheckBox
       {
         Content = new TextBlock { Text = title },
-        Margin = new Vector4F(0, 0, 0, Margin),
+        Margin = new Vector4(0, 0, 0, Margin),
         IsChecked = defaultValue,
         ToolTip = toolTip,
       };
@@ -602,7 +602,7 @@ namespace Samples
       var horizontalStackPanel = new StackPanel
       {
         Orientation = Orientation.Horizontal,
-        Margin = new Vector4F(0, 0, 0, Margin),
+        Margin = new Vector4(0, 0, 0, Margin),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         ToolTip = toolTip,
       };
@@ -611,7 +611,7 @@ namespace Samples
       horizontalStackPanel.Children.Add(new TextBlock
       {
         Text = title + ": ",
-        Margin = new Vector4F(0, 4, 0, 0),
+        Margin = new Vector4(0, 4, 0, 0),
         Width = 170,
       });
 
@@ -645,7 +645,7 @@ namespace Samples
       var horizontalStackPanel = new StackPanel
       {
         Orientation = Orientation.Horizontal,
-        Margin = new Vector4F(0, 0, 0, Margin),
+        Margin = new Vector4(0, 0, 0, Margin),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         ToolTip = toolTip,
       };

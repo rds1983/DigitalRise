@@ -92,7 +92,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
       {
         PreferredSize = 1024,
         Prefer16Bit = true,
-        Distances = new Vector4F(4, 12, 20, 80),
+        Distances = new Vector4(4, 12, 20, 80),
         MinLightDistance = 200,
       };
 
@@ -102,7 +102,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
         PreferredSize = 1024,
         Prefer16Bit = true,
         NumberOfCascades = 2,
-        Distances = new Vector4F(4, 12, 0, 0),
+        Distances = new Vector4(4, 12, 0, 0),
         MinLightDistance = 200,
       };
 

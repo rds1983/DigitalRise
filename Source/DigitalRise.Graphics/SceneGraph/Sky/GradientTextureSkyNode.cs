@@ -107,7 +107,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// <remarks>
     /// This property can be used to tint the sky, change the brightness or change its opacity.
     /// </remarks>
-    public Vector4F Color { get; set; }
+    public Vector4 Color { get; set; }
 
 
     /// <summary>
@@ -154,7 +154,7 @@ namespace DigitalRise.Graphics.SceneGraph
     {
       SunDirection = new Vector3(1, 1, 1);
       TimeOfDay = new TimeSpan(12, 0, 0);
-      Color = new Vector4F(1, 1, 1, 1);
+      Color = new Vector4(1, 1, 1, 1);
       CieSkyParameters = CieSkyParameters.Type12;
     }
     #endregion

@@ -188,7 +188,7 @@ Debug drawing can be enabled in the Options window (F4) in the Batching tab:
         // Strategy C: Create one MeshInstancingNode which contains all instances for one mesh.
         var instances = new InstanceData[numberOfInstances];
         for (int i = 0; i < numberOfInstances; i++)
-          instances[i] = new InstanceData(scales[i], poses[i], new Vector4F(1));
+          instances[i] = new InstanceData(scales[i], poses[i], new Vector4(1));
 
         // Create MeshInstancingNode.
         var instancingMeshNode = new MeshInstancingNode<InstanceData>(mesh, instances)

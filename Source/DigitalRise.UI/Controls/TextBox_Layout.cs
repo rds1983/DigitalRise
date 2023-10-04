@@ -104,7 +104,7 @@ namespace DigitalRise.UI.Controls
         availableSize.Y = height;
 
       // Remove padding from constraint size.
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       Vector2 contentSize = availableSize; // Text area size
       if (Numeric.IsPositiveFinite(availableSize.X))
         contentSize.X -= padding.X + padding.Z;
@@ -203,7 +203,7 @@ namespace DigitalRise.UI.Controls
       RectangleF controlBounds = new RectangleF(position.X, position.Y, size.X, size.Y);
 
       // Get content bounds by subtracting the padding.
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       RectangleF contentBounds = controlBounds;
       contentBounds.X += padding.X;
       contentBounds.Y += padding.Y;
@@ -212,7 +212,7 @@ namespace DigitalRise.UI.Controls
 
       // Determine whether the actual size is different than the desired size, which
       // has been calculated in OnMeasure().
-      Vector4F margin = Margin;
+      Vector4 margin = Margin;
       bool sizeChanged = (DesiredWidth != size.X + margin.X + margin.Z);
 
       // If the actual size is different, we need to reevaluate the visibility of

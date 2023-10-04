@@ -21,8 +21,8 @@ namespace DigitalRise.UI.Controls
   /// var button = new Button
   /// {
   ///   Content = new TextBlock { Text = "Click Me!" },
-  ///   Margin = new Vector4F(4),
-  ///   Padding = new Vector4F(6),
+  ///   Margin = new Vector4(4),
+  ///   Padding = new Vector4(6),
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
   /// };
   /// 

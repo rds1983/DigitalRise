@@ -306,11 +306,11 @@ namespace DigitalRise.Graphics.PostProcessing
       Matrix44F viewProjection = projection * view;
 
       // We simply place the light source "far away" in opposite light ray direction.
-      Vector4F lightPositionWorld = new Vector4F(-LightDirection * 10000, 1);
+      Vector4 lightPositionWorld = new Vector4(-LightDirection * 10000, 1);
 
       // Convert to clip space.
-      Vector4F lightPositionProj = viewProjection * lightPositionWorld;
-      Vector3 lightPositionClip = Vector4F.HomogeneousDivide(lightPositionProj);
+      Vector4 lightPositionProj = viewProjection * lightPositionWorld;
+      Vector3 lightPositionClip = MathHelper.HomogeneousDivide(lightPositionProj);
 
       // Convert from clip space [-1, 1] to texture space [0, 1].
       Vector2 lightPosition = new Vector2(lightPositionClip.X * 0.5f + 0.5f, -lightPositionClip.Y * 0.5f + 0.5f);

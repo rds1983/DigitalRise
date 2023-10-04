@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -27,19 +25,19 @@ namespace Samples.Game.UI
       var applicationTitle = new TextBlock
       {
         Text = "DIGITALRUNE GUI SAMPLE",
-        Margin = new Vector4F(12, 0, 0, 0),
+        Margin = new Vector4(12, 0, 0, 0),
       };
 
       var pageTitle = new TextBlock
       {
         Text = "controls",
         Style = "TextBlockTitle",
-        Margin = new Vector4F(9, -7, 0, 0),
+        Margin = new Vector4(9, -7, 0, 0),
       };
 
       var titlePanel = new StackPanel
       {
-        Margin = new Vector4F(12, 24, 8, 8),
+        Margin = new Vector4(12, 24, 8, 8),
       };
       titlePanel.Children.Add(applicationTitle);
       titlePanel.Children.Add(pageTitle);
@@ -47,7 +45,7 @@ namespace Samples.Game.UI
       var textBlock = new TextBlock
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         WrapText = true,
         Text = "This is a window with a lot of controls.\n" +
                "All controls are within a scroll viewer.\n" +
@@ -58,41 +56,41 @@ namespace Samples.Game.UI
       var buttonEnabled = new Button
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "Button" },
       };
 
       var buttonDisabled = new Button
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "Button (Disabled)" },
         IsEnabled = false,
       };
 
       var checkBoxEnabled = new CheckBox
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "CheckBox" },
       };
 
       var checkBoxEnabledChecked = new CheckBox
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "CheckBox" },
         IsChecked = true,
       };
 
       var checkBoxDisabled = new CheckBox
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "CheckBox (Disabled)" },
         IsEnabled = false,
       };
 
       var checkBoxDisabledChecked = new CheckBox
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "CheckBox (Disabled)" },
         IsEnabled = false,
         IsChecked = true,
@@ -100,33 +98,33 @@ namespace Samples.Game.UI
 
       var checkBoxLotsOfText = new CheckBox
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "CheckBox with a lot of text that does not fit into a single line." },
       };
 
       var radioButton0 = new RadioButton
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "RadioButton" },
       };
 
       var radioButton1 = new RadioButton
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "RadioButton with a lot of text that does not fit into a single line." },
         IsChecked = true
       };
 
       var radioButton2 = new RadioButton
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "RadioButton" },
         IsEnabled = false,
       };
 
       var radioButton3 = new RadioButton
       {
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Content = new TextBlock { Text = "RadioButton (Disabled)" },
         IsEnabled = false,
         IsChecked = true,
@@ -136,7 +134,7 @@ namespace Samples.Game.UI
       var dropDownButton = new DropDownButton
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Title = "DROPDOWN ITEMS",
         SelectedIndex = 0,
       };
@@ -148,7 +146,7 @@ namespace Samples.Game.UI
       var dropDownButtonDisabled = new DropDownButton
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Title = "DROPDOWN ITEMS",
         IsEnabled = false,
         SelectedIndex = 0,
@@ -161,7 +159,7 @@ namespace Samples.Game.UI
       var textBoxEnabled = new TextBox
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         GuideTitle = "GUIDE TITLE",
         GuideDescription = "Guide description:",
         Text = "TextBox (Enabled)"
@@ -170,7 +168,7 @@ namespace Samples.Game.UI
       var textBoxDisabled = new TextBox
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Text = "TextBox (Disabled)",
         IsEnabled = false,
       };
@@ -178,21 +176,21 @@ namespace Samples.Game.UI
       var slider = new Slider
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 24, 0, 24),
+        Margin = new Vector4(0, 24, 0, 24),
         Value = 33
       };
 
       var progressBar = new ProgressBar
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         Value = 66,
       };
 
       var progressBarIndeterminate = new ProgressBar
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(0, 10, 0, 10),
+        Margin = new Vector4(0, 10, 0, 10),
         IsIndeterminate = true,
       };
 
@@ -200,7 +198,7 @@ namespace Samples.Game.UI
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Stretch,
-        Margin = new Vector4F(0, 0, 8, 0),
+        Margin = new Vector4(0, 0, 8, 0),
       };
       stackPanel.Children.Add(textBlock);
       stackPanel.Children.Add(buttonEnabled);
@@ -228,14 +226,14 @@ namespace Samples.Game.UI
         VerticalAlignment = VerticalAlignment.Stretch,
         Content = stackPanel,
         HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-        Margin = new Vector4F(24, 0, 8, 0)
+        Margin = new Vector4(24, 0, 8, 0)
       };
 
       var layoutRoot = new StackPanel
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Stretch,
-        Margin = new Vector4F(0, 0, 0, 0),
+        Margin = new Vector4(0, 0, 0, 0),
       };
       layoutRoot.Children.Add(titlePanel);
       layoutRoot.Children.Add(scrollViewer);

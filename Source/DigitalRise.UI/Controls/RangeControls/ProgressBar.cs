@@ -25,7 +25,7 @@ namespace DigitalRise.UI.Controls
   /// var progressBar = new ProgressBar
   /// {
   ///   IsIndeterminate = false,
-  ///   Margin = new Vector4F(4, 8, 4, 4),
+  ///   Margin = new Vector4(4, 8, 4, 4),
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
   /// };
   /// 

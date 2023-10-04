@@ -440,7 +440,7 @@ GameComponent with a StateMachine.",
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = VerticalAlignment.Bottom,
-        Margin = new Vector4F(150, 0, 0, 200)
+        Margin = new Vector4(150, 0, 0, 200)
       };
       _menuWindow.Content = stackPanel;
 
@@ -604,7 +604,7 @@ GameComponent with a StateMachine.",
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = VerticalAlignment.Bottom,
-        Margin = new Vector4F(150, 0, 0, 200)
+        Margin = new Vector4(150, 0, 0, 200)
       };
       _subMenuWindow.Content = stackPanel;
 

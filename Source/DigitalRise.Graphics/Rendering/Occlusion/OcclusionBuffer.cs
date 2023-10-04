@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Threading;
 using Microsoft.Xna.Framework;
@@ -796,7 +797,7 @@ namespace DigitalRise.Graphics.Rendering
         context.CameraNode = _orthographicCameraNode;
 
         // Part of camera frustum covered by shadow map.
-        var maxShadowDistance = shadow.Distances[shadow.NumberOfCascades - 1];
+        var maxShadowDistance = shadow.Distances.GetComponentByIndex(shadow.NumberOfCascades - 1);
         _splitVolume.SetFieldOfView(cameraProjection.FieldOfViewY, cameraProjection.AspectRatio, cameraProjection.Near, Math.Min(cameraProjection.Far, maxShadowDistance));
 
         // Find the bounding sphere of the camera frustum.

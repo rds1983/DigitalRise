@@ -64,7 +64,7 @@ namespace DigitalRise.UI.Controls
     {
       get
       {
-        Vector4F padding = Padding;
+        Vector4 padding = Padding;
         return new RectangleF(
           ActualX + padding.X, 
           ActualY + padding.Y,
@@ -218,7 +218,7 @@ namespace DigitalRise.UI.Controls
         if (child != Content)
           child.Measure(availableSize);
 
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       if (hasContent)
       {
         availableSize.X -= padding.X + padding.Z;
@@ -264,7 +264,7 @@ namespace DigitalRise.UI.Controls
 
       if (Content != null)
       {
-        Vector4F padding = Padding;
+        Vector4 padding = Padding;
         position.X += padding.X;
         position.Y += padding.Y;
         size.X -= padding.X + padding.Z;

@@ -78,7 +78,7 @@ namespace Samples.Game.UI
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = VerticalAlignment.Stretch,
         Width = 500,
-        Margin = new Vector4F(20),
+        Margin = new Vector4(20),
       };
       _uiScreen.Children.Add(_console);
 

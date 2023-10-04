@@ -89,7 +89,7 @@ controls. The controls are sorted by their z value before rendering.",
           Y = 100,
           Width = 100,
           Height = 20,
-          Margin = new Vector4F(-50, -10, 0, 0),  // Use a margin to center the control.
+          Margin = new Vector4(-50, -10, 0, 0),  // Use a margin to center the control.
         };
         _uiScreen.Children.Add(progressBar);
 

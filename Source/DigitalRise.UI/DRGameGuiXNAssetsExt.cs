@@ -184,11 +184,11 @@ namespace AssetManagementBase
 							{
 								Name = (string)imageElement.Attribute("Name"),
 								SourceRectangle = ThemeHelper.ParseRectangle((string)imageElement.Attribute("Source")),
-								Margin = ThemeHelper.ParseVector4F((string)imageElement.Attribute("Margin")),
+								Margin = ThemeHelper.ParseVector4((string)imageElement.Attribute("Margin")),
 								HorizontalAlignment = ThemeHelper.ParseHorizontalAlignment((string)imageElement.Attribute("HorizontalAlignment")),
 								VerticalAlignment = ThemeHelper.ParseVerticalAlignment((string)imageElement.Attribute("VerticalAlignment")),
 								TileMode = ThemeHelper.ParseTileMode((string)imageElement.Attribute("TileMode")),
-								Border = ThemeHelper.ParseVector4F((string)imageElement.Attribute("Border")),
+								Border = ThemeHelper.ParseVector4((string)imageElement.Attribute("Border")),
 								IsOverlay = (bool?)imageElement.Attribute("IsOverlay") ?? false,
 								Color = ThemeHelper.ParseColor((string)imageElement.Attribute("Color"), Color.White),
 							};

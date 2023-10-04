@@ -1129,7 +1129,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int PaddingPropertyId = CreateProperty(
-      typeof(UIControl), "Padding", GamePropertyCategories.Layout, null, Vector4F.Zero,
+      typeof(UIControl), "Padding", GamePropertyCategories.Layout, null, Vector4.Zero,
       UIPropertyOptions.AffectsMeasure);
 
     /// <summary>
@@ -1140,9 +1140,9 @@ namespace DigitalRise.UI.Controls
     /// <remarks>
     /// How this value is used depends on the control type.
     /// </remarks>
-    public Vector4F Padding
+    public Vector4 Padding
     {
-      get { return GetValue<Vector4F>(PaddingPropertyId); }
+      get { return GetValue<Vector4>(PaddingPropertyId); }
       set { SetValue(PaddingPropertyId, value); }
     }
 
@@ -1152,7 +1152,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int MarginPropertyId = CreateProperty(
-      typeof(UIControl), "Margin", GamePropertyCategories.Layout, null, Vector4F.Zero,
+      typeof(UIControl), "Margin", GamePropertyCategories.Layout, null, Vector4.Zero,
       UIPropertyOptions.AffectsMeasure);
 
     /// <summary>
@@ -1160,9 +1160,9 @@ namespace DigitalRise.UI.Controls
     /// This is a game object property.
     /// </summary>
     /// <value>The margin as 4D vector (left, top, right bottom).</value>
-    public Vector4F Margin
+    public Vector4 Margin
     {
-      get { return GetValue<Vector4F>(MarginPropertyId); }
+      get { return GetValue<Vector4>(MarginPropertyId); }
       set { SetValue(MarginPropertyId, value); }
     }
 

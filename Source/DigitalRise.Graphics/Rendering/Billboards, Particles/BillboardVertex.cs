@@ -44,12 +44,12 @@ namespace DigitalRise.Graphics.Rendering
     public Vector3 Position;
     public Vector3 Normal;   // If (0, 0, 0) => vertex belongs to ribbon.
     public Vector3 Axis;
-    public Vector4F Color;
+    public Vector4 Color;
     public Vector2 TextureCoordinate;
-    public Vector4F Args0;
-    public Vector4F Args1;
-    public Vector4F Args2;
-    public Vector4F Args3;
+    public Vector4 Args0;
+    public Vector4 Args1;
+    public Vector4 Args2;
+    public Vector4 Args3;
     #endregion
 
 

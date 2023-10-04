@@ -168,7 +168,7 @@ namespace DigitalRise.Graphics.SceneGraph
     /// in world space units and whether perspective foreshortening is applied.
     /// </para>
     /// </remarks>
-    public Vector4F StrokeDashPattern
+    public Vector4 StrokeDashPattern
     {
       get { return _strokeDashPattern; }
       set
@@ -180,7 +180,7 @@ namespace DigitalRise.Graphics.SceneGraph
         RenderData.SafeDispose();
       }
     }
-    private Vector4F _strokeDashPattern;
+    private Vector4 _strokeDashPattern;
 
 
     /// <summary>
@@ -314,7 +314,7 @@ namespace DigitalRise.Graphics.SceneGraph
       StrokeColor = new Vector3(1, 1, 1);
       StrokeAlpha = 1;
       StrokeThickness = 1;
-      StrokeDashPattern = new Vector4F(1, 0, 0, 0);
+      StrokeDashPattern = new Vector4(1, 0, 0, 0);
       DashInWorldSpace = true;
       FillColor = new Vector3(1, 1, 1);
       FillAlpha = 1;

@@ -2,10 +2,8 @@
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
-using DigitalRise.Mathematics.Algebra;
-using Microsoft.Xna.Framework.Graphics;
 using Console = DigitalRise.UI.Controls.Console;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -24,7 +22,7 @@ namespace Samples.Game.UI
       var button0 = new Button
       {
         Content = new TextBlock { Text = "Button" },
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
 
       // ----- Button with mixed content
@@ -40,7 +38,7 @@ namespace Samples.Game.UI
 
       buttonContentPanel.Children.Add(new TextBlock
       {
-        Margin = new Vector4F(4, 0, 0, 0),
+        Margin = new Vector4(4, 0, 0, 0),
         Text = "Button with image",
         VerticalAlignment = VerticalAlignment.Center,
       });
@@ -48,14 +46,14 @@ namespace Samples.Game.UI
       var button1 = new Button
       {
         Content = buttonContentPanel,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
 
       // ----- Drop-down button
       var dropDown = new DropDownButton
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         MaxDropDownHeight = 250,
       };
       for (int i = 0; i < 20; i++)
@@ -67,26 +65,26 @@ namespace Samples.Game.UI
       // ----- Check box
       var checkBox = new CheckBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Content = new TextBlock { Text = "CheckBox" },
       };
 
       // ----- Group of radio buttons
       var radioButton0 = new RadioButton
       {
-        Margin = new Vector4F(4, 8, 4, 4),
+        Margin = new Vector4(4, 8, 4, 4),
         Content = new TextBlock { Text = "RadioButton0" },
       };
 
       var radioButton1 = new RadioButton
       {
-        Margin = new Vector4F(4, 2, 4, 2),
+        Margin = new Vector4(4, 2, 4, 2),
         Content = new TextBlock { Text = "RadioButton1" },
       };
 
       var radioButton2 = new RadioButton
       {
-        Margin = new Vector4F(4, 2, 4, 4),
+        Margin = new Vector4(4, 2, 4, 4),
         Content = new TextBlock { Text = "RadioButton1" },
       };
 
@@ -95,7 +93,7 @@ namespace Samples.Game.UI
       {
         IsIndeterminate = false,
         Value = 75,
-        Margin = new Vector4F(4, 8, 4, 4),
+        Margin = new Vector4(4, 8, 4, 4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Cursor = renderer.GetCursor("Wait"),
       };
@@ -104,7 +102,7 @@ namespace Samples.Game.UI
       var progressBar1 = new ProgressBar
       {
         IsIndeterminate = true,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Cursor = renderer.GetCursor("Wait"),
       };
@@ -113,13 +111,13 @@ namespace Samples.Game.UI
       var slider = new Slider
       {
         Value = 60,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
 
       var sliderValue = new TextBlock
       {
-        Margin = new Vector4F(4, 0, 4, 4),
+        Margin = new Vector4(4, 0, 4, 4),
         Text = "(Value = 60)",
         HorizontalAlignment = HorizontalAlignment.Right
       };
@@ -138,14 +136,14 @@ namespace Samples.Game.UI
         LargeChange = 10,
         Value = 45,
         ViewportSize = 0.3f,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
 
       // Add the controls to the first vertical stack panel.
       var stackPanel0 = new StackPanel
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
       stackPanel0.Children.Add(button0);
       stackPanel0.Children.Add(button1);
@@ -165,10 +163,10 @@ namespace Samples.Game.UI
       {
         Title = "GroupBox",
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Content = new TextBlock
         {
-          Margin = new Vector4F(4),
+          Margin = new Vector4(4),
           Text = "GroupBox Content"
         }
       };
@@ -176,23 +174,23 @@ namespace Samples.Game.UI
       // ----- Tab control with 3 tab items
       var tabItem0 = new TabItem
       {
-        TabPage = new TextBlock { Margin = new Vector4F(4), Text = "Page 0" },
+        TabPage = new TextBlock { Margin = new Vector4(4), Text = "Page 0" },
         Content = new TextBlock { Text = "Item 0" },
       };
       var tabItem1 = new TabItem
       {
-        TabPage = new TextBlock { Margin = new Vector4F(4), Text = "Page 1" },
+        TabPage = new TextBlock { Margin = new Vector4(4), Text = "Page 1" },
         Content = new TextBlock { Text = "Item 1" },
       };
       var tabItem2 = new TabItem
       {
-        TabPage = new TextBlock { Margin = new Vector4F(4), Text = "Page 2" },
+        TabPage = new TextBlock { Margin = new Vector4(4), Text = "Page 2" },
         Content = new TextBlock { Text = "Item 2" },
       };
       var tabControl = new TabControl
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
       tabControl.Items.Add(tabItem0);
       tabControl.Items.Add(tabItem1);
@@ -206,7 +204,7 @@ namespace Samples.Game.UI
 
       var scrollViewer = new ScrollViewer
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         MinHeight = 100,
         HorizontalOffset = 200,
@@ -218,7 +216,7 @@ namespace Samples.Game.UI
       // ----- Text box
       var textBox0 = new TextBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "The quick brown fox jumps over the lazy dog.",
         MaxLines = 1,
         HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -227,7 +225,7 @@ namespace Samples.Game.UI
       // ----- Password box
       var textBox1 = new TextBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Secret password!",
         MaxLines = 1,
         IsPassword = true,
@@ -237,7 +235,7 @@ namespace Samples.Game.UI
       // ----- Multi-line text box
       var textBox2 = new TextBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend, nulla semper vestibulum congue, lectus lectus aliquam magna, lobortis luctus sem magna sit amet elit. Integer at neque nec mi dapibus tincidunt. Maecenas elit quam, varius luctus rutrum ut, congue quis libero. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eu ante eros. Etiam odio lectus, sagittis non dictum eu, faucibus vitae magna. Maecenas mi lorem, semper vel condimentum sit amet, vehicula quis nulla. Cras suscipit scelerisque orci, ac ullamcorper lorem egestas sed. Nulla facilisi. Nam justo enim, mollis nec condimentum non, consectetur vel purus. Curabitur ac diam vitae justo ultricies auctor.\n"
              + "Pellentesque interdum vehicula nisi sed congue. Etiam eget magna nec metus suscipit tincidunt et in lectus. Praesent sapien tortor, congue et semper eu, mattis ac lorem. Duis id est et justo tempus consectetur. Aliquam rutrum ullamcorper augue non varius. Fusce ornare lectus et ipsum lobortis ut venenatis tellus sodales. Proin venenatis scelerisque dui eu viverra. Pellentesque vitae risus eget tellus vehicula molestie et quis ante. Nulla imperdiet rhoncus ante, eu tristique ante euismod id. Sed varius varius hendrerit. Praesent massa tortor, gravida suscipit lacinia non, suscipit a ipsum. Integer vulputate, felis vitae consectetur bibendum, ante velit tincidunt nunc, in convallis erat dolor eu purus.",
         MinLines = 5,
@@ -248,7 +246,7 @@ namespace Samples.Game.UI
       // ----- Console (command prompt)
       var console = new Console
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         MinHeight = 100,
       };
@@ -257,7 +255,7 @@ namespace Samples.Game.UI
       var stackPanel1 = new StackPanel
       {
         Width = 250,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
       stackPanel1.Children.Add(groupBox);
       stackPanel1.Children.Add(tabControl);

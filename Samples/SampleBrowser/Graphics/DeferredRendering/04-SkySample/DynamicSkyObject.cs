@@ -918,7 +918,7 @@ namespace Samples
       foreach (var fogNode in ((Scene)_scene).GetSubtree().OfType<FogNode>())
       {
         var fog = fogNode.Fog;
-        fog.Color0 = fog.Color1 = new Vector4F(fogColor, 1);
+        fog.Color0 = fog.Color1 = new Vector4(fogColor, 1);
         fog.ScatteringSymmetry = FogScatteringSymmetry;
       }
 

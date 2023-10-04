@@ -278,7 +278,7 @@ namespace DigitalRise.UI.Controls
       _isMeasureInProgress = true;
 
       // Subtract margin before calling OnMeasure().
-      Vector4F margin = Margin;
+      Vector4 margin = Margin;
       availableSize.X -= margin.X + margin.Z;
       availableSize.Y -= margin.Y + margin.W;
 
@@ -401,7 +401,7 @@ namespace DigitalRise.UI.Controls
       _isArrangeInProgress = true;
 
       // Determine actual position.
-      Vector4F margin = Margin;
+      Vector4 margin = Margin;
       ActualX = position.X + margin.X;
       ActualY = position.Y + margin.Y;
 

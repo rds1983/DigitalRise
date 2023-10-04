@@ -1,7 +1,7 @@
-﻿using DigitalRise.Mathematics.Algebra;
+﻿using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Traits.Tests
 {
@@ -23,13 +23,13 @@ namespace DigitalRise.Animation.Traits.Tests
     {
       var traits = Vector4Traits.Instance;
       var value = new Vector4(-1, -2, 3, 1);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)Vector4.Zero, (Vector4F)traits.Multiply(value, 0)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)value, (Vector4F)traits.Multiply(value, 1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(value + value), (Vector4F)traits.Multiply(value, 2)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(value + value + value), (Vector4F)traits.Multiply(value, 3)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(-value), (Vector4F)traits.Multiply(value, -1)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(-value - value), (Vector4F)traits.Multiply(value, -2)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(-value - value - value), (Vector4F)traits.Multiply(value, -3)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector4.Zero, traits.Multiply(value, 0)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(value, traits.Multiply(value, 1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((value + value), traits.Multiply(value, 2)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((value + value + value), traits.Multiply(value, 3)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value), traits.Multiply(value, -1)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value - value), traits.Multiply(value, -2)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value - value - value), traits.Multiply(value, -3)));
     }
 
 
@@ -44,10 +44,10 @@ namespace DigitalRise.Animation.Traits.Tests
       var by = new Vector4(4, -5, 6, 1);
 
       var to = traits.Add(from, by);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(by + from), (Vector4F)to));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((by + from), to));
 
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)from, (Vector4F)traits.Add(to, traits.Inverse(by))));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)by, (Vector4F)traits.Add(traits.Inverse(from), to)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(from, traits.Add(to, traits.Inverse(by))));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(by, traits.Add(traits.Inverse(from), to)));
     }
 
 
@@ -63,16 +63,16 @@ namespace DigitalRise.Animation.Traits.Tests
       var cycleOffset = traits.Add(traits.Inverse(first), last);
 
       // Cycle offset should be the difference between last and first key frame.
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)last, (Vector4F)traits.Add(first, cycleOffset)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)last, (Vector4F)(cycleOffset + first)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, traits.Add(first, cycleOffset)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, (cycleOffset + first)));
 
       // Check multiple cycles (post-loop).
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)last, (Vector4F)traits.Add(first, traits.Multiply(cycleOffset, 1))));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(cycleOffset + cycleOffset + last), (Vector4F)traits.Add(first, traits.Multiply(cycleOffset, 3))));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1))));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((cycleOffset + cycleOffset + last), traits.Add(first, traits.Multiply(cycleOffset, 3))));
 
       // Check multiple cycles (pre-loop).
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)first, (Vector4F)traits.Add(last, traits.Multiply(cycleOffset, -1))));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(first - cycleOffset - cycleOffset), (Vector4F)traits.Add(last, traits.Multiply(cycleOffset, -3))));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1))));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((first - cycleOffset - cycleOffset), traits.Add(last, traits.Multiply(cycleOffset, -3))));
     }
 
 
@@ -82,9 +82,9 @@ namespace DigitalRise.Animation.Traits.Tests
       var traits = Vector4Traits.Instance;
       var value0 = new Vector4(1, 2, 3, 1);
       var value1 = new Vector4(-4, 5, -6, 5);
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)value0, (Vector4F)traits.Interpolate(value0, value1, 0.0f)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)value1, (Vector4F)traits.Interpolate(value0, value1, 1.0f)));
-      Assert.IsTrue(Vector4F.AreNumericallyEqual((Vector4F)(0.25f * value0 + 0.75f * value1), (Vector4F)traits.Interpolate(value0, value1, 0.75f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(value1, traits.Interpolate(value0, value1, 1.0f)));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual((0.25f * value0 + 0.75f * value1), traits.Interpolate(value0, value1, 0.75f)));
     }
   }
 }

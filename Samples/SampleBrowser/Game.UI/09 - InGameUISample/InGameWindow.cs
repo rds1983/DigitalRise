@@ -33,7 +33,7 @@ namespace Samples.Game.UI
 
       var panel = new Canvas
       {
-        Margin = new Vector4F(8),
+        Margin = new Vector4(8),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Stretch,
       };

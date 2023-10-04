@@ -31,7 +31,7 @@ namespace DigitalRise.UI.Controls
   /// 
   /// buttonContentPanel.Children.Add(new TextBlock
   /// {
-  ///   Margin = new Vector4F(4, 0, 0, 0),
+  ///   Margin = new Vector4(4, 0, 0, 0),
   ///   Text = "Label",
   ///   VerticalAlignment = VerticalAlignment.Center,
   /// });
@@ -39,7 +39,7 @@ namespace DigitalRise.UI.Controls
   /// var button = new Button
   /// {
   ///   Content = buttonContentPanel,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   /// };
   /// 
   /// // To show the button, add it to an existing content control or panel.
@@ -113,7 +113,7 @@ namespace DigitalRise.UI.Controls
       if (hasHeight && height < availableSize.Y)
         availableSize.Y = height;
 
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       availableSize.X -= padding.X + padding.Z;
       availableSize.Y -= padding.Y + padding.W;
 
@@ -166,7 +166,7 @@ namespace DigitalRise.UI.Controls
     /// <inheritdoc/>
     protected override void OnArrange(Vector2 position, Vector2 size)
     {
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       position.X += padding.X;
       position.Y += padding.Y;
       size.X -= padding.X + padding.Z;

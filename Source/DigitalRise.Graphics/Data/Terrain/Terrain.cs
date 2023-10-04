@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
@@ -102,7 +101,7 @@ namespace DigitalRise.Graphics
     /// textures.
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-    public Vector4F[] BaseClearValues { get; private set; }
+    public Vector4[] BaseClearValues { get; private set; }
 
 
     /// <summary>
@@ -114,7 +113,7 @@ namespace DigitalRise.Graphics
     /// 0, 0, 0).
     /// </value>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-    public Vector4F[] DetailClearValues { get; private set; }
+    public Vector4[] DetailClearValues { get; private set; }
 
 
     /// <summary>
@@ -149,9 +148,9 @@ namespace DigitalRise.Graphics
       InvalidBaseRegions = new List<Aabb>();
       InvalidDetailRegions = new List<Aabb>();
       Shape = Shape.Infinite;
-      BaseClearValues = new Vector4F[4];
-      DetailClearValues = new Vector4F[4];
-      BaseClearValues[0] = new Vector4F(-10000, 0, 0, 1);
+      BaseClearValues = new Vector4[4];
+      DetailClearValues = new Vector4[4];
+      BaseClearValues[0] = new Vector4(-10000, 0, 0, 1);
 
       Tiles = new TerrainTileCollection(this);
 

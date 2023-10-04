@@ -313,7 +313,7 @@ namespace Samples
       // ----- Info (bottom left)
       _infoPanel = new StackPanel
       {
-        Margin = new Vector4F(10),
+        Margin = new Vector4(10),
         HorizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment = VerticalAlignment.Bottom,
       };
@@ -347,7 +347,7 @@ namespace Samples
       _buttonsPanel = new StackPanel
       {
         Background = new Color(0, 0, 0, 64),
-        Padding = new Vector4F(10),
+        Padding = new Vector4(10),
         HorizontalAlignment = HorizontalAlignment.Right,
         VerticalAlignment = VerticalAlignment.Bottom,
       };
@@ -366,7 +366,7 @@ namespace Samples
       // ----- FPS Counter (top right)
       _fpsPanel = new StackPanel
       {
-        Margin = new Vector4F(10),
+        Margin = new Vector4(10),
         HorizontalAlignment = HorizontalAlignment.Right,
         VerticalAlignment = VerticalAlignment.Top,
       };
@@ -406,10 +406,10 @@ namespace Samples
       };
 
       if (panel.Children.Count > 0)
-        button.Margin = (panel.Orientation == Orientation.Horizontal) ? new Vector4F(3, 0, 0, 0) : new Vector4F(0, 3, 0, 0);
+        button.Margin = (panel.Orientation == Orientation.Horizontal) ? new Vector4(3, 0, 0, 0) : new Vector4(0, 3, 0, 0);
 
 #if WINDOWS_PHONE || ANDROID || IOS
-      button.Padding = new Vector4F(15);
+      button.Padding = new Vector4(15);
 #endif
 
       if (clickHandler != null)
@@ -450,7 +450,7 @@ namespace Samples
 
       var panel = new StackPanel
       {
-        Margin = new Vector4F(10),
+        Margin = new Vector4(10),
         Orientation = Orientation.Vertical,
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Stretch
@@ -474,13 +474,13 @@ namespace Samples
       var label = new TextBlock
       {
         Text = "Select Sample:",
-        Margin = new Vector4F(2, 10, 0, 0)
+        Margin = new Vector4(2, 10, 0, 0)
       };
       panel.Children.Add(label);
 
       var tabControl = new TabControl
       {
-        Margin = new Vector4F(0, 3, 0, 0),
+        Margin = new Vector4(0, 3, 0, 0),
         Width = 580,
 #if WINDOWS_PHONE || ANDROID || IOS
         Height = 300
@@ -514,7 +514,7 @@ namespace Samples
         var itemsPanel = new StackPanel
         {
           Orientation = Orientation.Vertical,
-          Margin = new Vector4F(5),
+          Margin = new Vector4(5),
           HorizontalAlignment = HorizontalAlignment.Stretch,
           VerticalAlignment = VerticalAlignment.Stretch
         };
@@ -534,9 +534,9 @@ namespace Samples
             Content = new TextBlock { Text = title },
             Width = 200,
 #if WINDOWS_PHONE || ANDROID || IOS
-            Padding = new Vector4F(10),
+            Padding = new Vector4(10),
 #else
-            Padding = new Vector4F(0, 5, 0, 5),
+            Padding = new Vector4(0, 5, 0, 5),
 #endif
           };
           int sampleIndex = _samples.IndexOf(sample);
@@ -551,7 +551,7 @@ namespace Samples
           summary = summary.Replace("\r\n", " ");
           var summaryTextBlock = new TextBlock
           {
-            Margin = new Vector4F(0, 3, 0, 12),
+            Margin = new Vector4(0, 3, 0, 12),
             Text = summary,
             WrapText = true
           };
@@ -629,7 +629,7 @@ namespace Samples
       {
         HorizontalAlignment = HorizontalAlignment.Stretch,
         VerticalAlignment = VerticalAlignment.Stretch,
-        Margin = new Vector4F(SampleHelper.Margin),
+        Margin = new Vector4(SampleHelper.Margin),
       };
       _optionsWindow.Content = _optionsTabControl;
 

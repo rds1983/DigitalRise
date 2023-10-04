@@ -7,7 +7,8 @@ using System.Diagnostics;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Graphics
 {
@@ -382,19 +383,19 @@ namespace DigitalRise.Graphics
 
       if (_nearClipPlane.HasValue)
       {
-        Vector4F clipPlane = new Vector4F(_nearClipPlane.Value.Normal, -_nearClipPlane.Value.DistanceFromOrigin);
+        Vector4 clipPlane = new Vector4(_nearClipPlane.Value.Normal, -_nearClipPlane.Value.DistanceFromOrigin);
 
         // Calculate the clip-space corner point opposite the clipping plane as
         // (-sign(clipPlane.x), -sign(clipPlane.y), 1, 1) and transform it into
         // camera space by multiplying it by the inverse of the projection matrix.
-        Vector4F q;
+        Vector4 q;
         q.X = (-Math.Sign(clipPlane.X) + projection.M02) / projection.M00;
         q.Y = (-Math.Sign(clipPlane.Y) + projection.M12) / projection.M11;
         q.Z = -1.0f;
         q.W = (1.0f + projection.M22) / projection.M23;
 
         // Calculate the scaled plane vector
-        Vector4F c = clipPlane * (1.0f / Vector4F.Dot(clipPlane, q));
+        Vector4 c = clipPlane * (1.0f / Vector4.Dot(clipPlane, q));
 
         // Replace the third row of the projection matrix
         projection.M20 = c.X;

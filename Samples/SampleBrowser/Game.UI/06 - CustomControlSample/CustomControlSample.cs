@@ -49,7 +49,7 @@ The DigitalRise Blog contains a detailed description for this project; see secti
       UIService.Screens.Add(_uiScreen);
 
       // Add a tree view control to the screen.
-      var padding = new Vector4F(0, 2, 4, 2);
+      var padding = new Vector4(0, 2, 4, 2);
       var treeView = new TreeView
       {
         X = 10,

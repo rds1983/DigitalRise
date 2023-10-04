@@ -34,20 +34,20 @@ namespace Samples.Game.UI
 
       Title = "EasingWindow";
 
-      StackPanel stackPanel = new StackPanel { Margin = new Vector4F(8) };
+      StackPanel stackPanel = new StackPanel { Margin = new Vector4(8) };
       Content = stackPanel;
 
       TextBlock textBlock = new TextBlock
       {
         Text = "Test different Easing Functions in this window.",
-        Margin = new Vector4F(0, 0, 0, 8),
+        Margin = new Vector4(0, 0, 0, 8),
       };
       stackPanel.Children.Add(textBlock);
 
       StackPanel horizontalPanel = new StackPanel
       {
         Orientation = Orientation.Horizontal,
-        Margin = new Vector4F(0, 0, 0, 8)
+        Margin = new Vector4(0, 0, 0, 8)
       };
       stackPanel.Children.Add(horizontalPanel);
 
@@ -55,7 +55,7 @@ namespace Samples.Game.UI
       {
         Text = "Easing Function:",
         Width = 80,
-        Margin = new Vector4F(0, 0, 8, 0),
+        Margin = new Vector4(0, 0, 8, 0),
       };
       horizontalPanel.Children.Add(textBlock);
 
@@ -88,7 +88,7 @@ namespace Samples.Game.UI
       horizontalPanel = new StackPanel
       {
         Orientation = Orientation.Horizontal,
-        Margin = new Vector4F(0, 0, 0, 8)
+        Margin = new Vector4(0, 0, 0, 8)
       };
       stackPanel.Children.Add(horizontalPanel);
 
@@ -96,7 +96,7 @@ namespace Samples.Game.UI
       {
         Text = "Easing Mode:",
         Width = 80,
-        Margin = new Vector4F(0, 0, 8, 0),
+        Margin = new Vector4(0, 0, 8, 0),
       };
       horizontalPanel.Children.Add(textBlock);
 
@@ -113,7 +113,7 @@ namespace Samples.Game.UI
 
       _slider = new Slider
       {
-        Margin = new Vector4F(0, 16, 0, 0),
+        Margin = new Vector4(0, 16, 0, 0),
         SmallChange = 0.01f,
         LargeChange = 0.1f,
         Minimum = -0.5f,
@@ -128,7 +128,7 @@ namespace Samples.Game.UI
       {
         Text = _slider.Value.ToString("F2"),
         HorizontalAlignment = HorizontalAlignment.Center,
-        Margin = new Vector4F(0, 0, 0, 8),
+        Margin = new Vector4(0, 0, 0, 8),
       };
       stackPanel.Children.Add(valueLabel);
 
@@ -140,7 +140,7 @@ namespace Samples.Game.UI
       {
         Content = new TextBlock { Text = "Animate" },
         HorizontalAlignment = HorizontalAlignment.Center,
-        Margin = new Vector4F(0, 0, 0, 8),
+        Margin = new Vector4(0, 0, 0, 8),
       };
       button.Click += OnButtonClicked;
       stackPanel.Children.Add(button);

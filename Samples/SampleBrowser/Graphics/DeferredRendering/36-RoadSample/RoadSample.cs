@@ -130,7 +130,7 @@ This sample also uses the vehicle of one of the vehicle samples.",
 
         // The border blend range controls how the border of the road fades out.
         // We fade out 5% of the texture on each side of the road.
-        BorderBlendRange = new Vector4F(0.05f, 0.05f, 0.05f, 0.05f),
+        BorderBlendRange = new Vector4(0.05f, 0.05f, 0.05f, 0.05f),
       };
 
       // Create 3D spline path with some semi-random control points.
@@ -187,7 +187,7 @@ This sample also uses the vehicle of one of the vehicle samples.",
           ((TerrainRoadPathKey)_roadPath[0]).SideFalloff;
 
         // Since the path is closed we do not have to fade out the start and the end of the road.
-        _roadLayer.BorderBlendRange *= new Vector4F(1, 0, 1, 0);
+        _roadLayer.BorderBlendRange *= new Vector4(1, 0, 1, 0);
       }
 
       // Convert the path to a mesh.

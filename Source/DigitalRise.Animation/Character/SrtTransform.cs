@@ -970,7 +970,7 @@ namespace DigitalRise.Animation.Character
     /// Multiplying an SRT transform with a vector is equal to transforming a vector from local 
     /// space to parent space.
     /// </remarks>
-    public static Vector4F operator *(SrtTransform srt, Vector4F vector)
+    public static Vector4 operator *(SrtTransform srt, Vector4 vector)
     {
       return srt.ToMatrix44F() * vector;
     }
@@ -986,7 +986,7 @@ namespace DigitalRise.Animation.Character
     /// Multiplying a SRT matrix with a vector is equal to transforming a vector from local space
     /// to parent space.
     /// </remarks>
-    public static Vector4F Multiply(SrtTransform srt, Vector4F vector)
+    public static Vector4 Multiply(SrtTransform srt, Vector4 vector)
     {
       return srt.ToMatrix44F() * vector;
     }

@@ -1,11 +1,9 @@
-#if !WP7 && !WP8
 using System;
 using DigitalRise.GameBase;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -27,39 +25,39 @@ namespace Samples.Game.UI
 
       var nameTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Your name:",
       };
 
       var nameTextBox = new TextBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Text = "Player1",
       };
 
       var passwordTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Your password:",
       };
 
       var passwordTextBox = new TextBox
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         IsPassword = true,
       };
 
       var difficultyTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Difficulty:",
       };
 
       var easyRadioButton = new RadioButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Content = new TextBlock { Text = "Easy" },
         GroupName = "Difficulty",
@@ -67,7 +65,7 @@ namespace Samples.Game.UI
 
       var normalRadioButton = new RadioButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Content = new TextBlock { Text = "Normal" },
         GroupName = "Difficulty",
@@ -76,7 +74,7 @@ namespace Samples.Game.UI
 
       var hardRadioButton = new RadioButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Content = new TextBlock { Text = "Hard" },
         GroupName = "Difficulty",
@@ -84,13 +82,13 @@ namespace Samples.Game.UI
 
       var modeTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Mode:",
       };
 
       var simulationRadioButton = new RadioButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Content = new TextBlock { Text = "Simulation" },
         GroupName = "Mode",
@@ -98,7 +96,7 @@ namespace Samples.Game.UI
 
       var arcadeRadioButton = new RadioButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Content = new TextBlock { Text = "Arcade" },
         GroupName = "Mode",
@@ -107,7 +105,7 @@ namespace Samples.Game.UI
 
       var generalPanel = new StackPanel
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
       generalPanel.Children.Add(nameTextBlock);
@@ -130,13 +128,13 @@ namespace Samples.Game.UI
 
       var resolutionTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Resolution:",
       };
 
       var resolutionDropDownButton = new DropDownButton
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         MaxDropDownHeight = 400,
       };
@@ -150,13 +148,13 @@ namespace Samples.Game.UI
 
       var qualityTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Text = "Quality:",
       };
 
       var qualityValueTextBlock = new TextBlock
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
       };
 
       var qualityTextPanel = new StackPanel
@@ -168,7 +166,7 @@ namespace Samples.Game.UI
 
       var qualitySlider = new Slider
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
         Minimum = 0,
         Maximum = 10,
@@ -195,7 +193,7 @@ namespace Samples.Game.UI
 
       var graphicsPanel = new StackPanel
       {
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
       graphicsPanel.Children.Add(resolutionTextBlock);
@@ -213,7 +211,7 @@ namespace Samples.Game.UI
       {
         Width = 300,
         Height = 300,
-        Margin = new Vector4F(4)
+        Margin = new Vector4(4)
       };
       tabControl.Items.Add(generalTab);
       tabControl.Items.Add(graphicsTab);
@@ -221,7 +219,7 @@ namespace Samples.Game.UI
       var okButton = new Button
       {
         Width = 100,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Content = new TextBlock { Text = "OK (START)" },
         IsDefault = true,
       };
@@ -230,7 +228,7 @@ namespace Samples.Game.UI
       var cancelButton = new Button
       {
         Width = 100,
-        Margin = new Vector4F(4),
+        Margin = new Vector4(4),
         Content = new TextBlock { Text = "Cancel (BACK)" },
         IsCancel = true,
       };
@@ -246,7 +244,7 @@ namespace Samples.Game.UI
 
       var mainPanel = new StackPanel
       {
-        Margin = new Vector4F(4)
+        Margin = new Vector4(4)
       };
       mainPanel.Children.Add(tabControl);
       mainPanel.Children.Add(buttonPanel);
@@ -304,4 +302,3 @@ namespace Samples.Game.UI
     }
   }
 }
-#endif

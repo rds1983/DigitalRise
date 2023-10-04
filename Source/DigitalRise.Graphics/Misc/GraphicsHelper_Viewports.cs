@@ -261,7 +261,7 @@ namespace DigitalRise.Graphics
         throw new ArgumentNullException("cameraNode");
 
       // Relative bounds: (left, top, right, bottom).
-      Vector4F bounds = GetBounds(cameraNode, positionWorld, radius);
+      Vector4 bounds = GetBounds(cameraNode, positionWorld, radius);
 
       // Rectangle in viewport.
       int left = (int)(bounds.X * viewport.Width);               // implicit floor()
@@ -303,7 +303,7 @@ namespace DigitalRise.Graphics
       }
 
       // Relative bounds: (left, top, right, bottom).
-      Vector4F bounds = GetBounds(cameraNode, geometricObject);
+      Vector4 bounds = GetBounds(cameraNode, geometricObject);
 
       // Rectangle in viewport.
       int left = (int)(bounds.X * viewport.Width);               // implicit floor()
@@ -326,7 +326,7 @@ namespace DigitalRise.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="cameraNode"/> is <see langword="null"/>.
     /// </exception>
-    internal static Vector4F GetBounds(CameraNode cameraNode, Vector3 positionWorld, float radius)
+    internal static Vector4 GetBounds(CameraNode cameraNode, Vector3 positionWorld, float radius)
     {
       var camera = cameraNode.Camera;
       var projection = camera.Projection;
@@ -340,7 +340,7 @@ namespace DigitalRise.Graphics
       float r = radius;
 
       // Default bounds (left, top, right, bottom)
-      var bounds = new Vector4F(0, 0, 1, 1);
+      var bounds = new Vector4(0, 0, 1, 1);
 
       // ----- Solve for N = (x, 0, z).
 
@@ -465,7 +465,7 @@ namespace DigitalRise.Graphics
     /// <paramref name="cameraNode"/> or <paramref name="geometricObject"/> is 
     /// <see langword="null"/>.
     /// </exception>
-    internal static Vector4F GetBounds(CameraNode cameraNode, IGeometricObject geometricObject)
+    internal static Vector4 GetBounds(CameraNode cameraNode, IGeometricObject geometricObject)
     {
       // Notes:
       // Do not call this GetBounds() method for spheres. Use the other overload for spheres.
@@ -501,11 +501,11 @@ namespace DigitalRise.Graphics
 
       // Is the AABB in front of the near plane (= totally clipped)?
       if (aabb.Minimum.Z >= -near)
-        return new Vector4F(0);
+        return new Vector4(0);
 
       // Does the AABB contain the origin?
       if (GeometryHelper.HaveContact(aabb, Vector3.Zero))
-        return new Vector4F(0, 0, 1, 1);
+        return new Vector4(0, 0, 1, 1);
 
       // Project the AABB far face to the near plane.
       Vector2 min;
@@ -537,7 +537,7 @@ namespace DigitalRise.Graphics
         max.Y = Math.Max(max.Y, aabb.Maximum.Y / -aabb.Maximum.Z * near);
       }
 
-      Vector4F bounds;
+      Vector4 bounds;
       bounds.X = (min.X - left) / width;
       bounds.Y = (top - max.Y) / height;
       bounds.Z = (max.X - left) / width;

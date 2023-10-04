@@ -178,7 +178,7 @@ namespace DigitalRise.Graphics.Rendering
         else
         {
           // Add base color.
-          _parameterBaseHorizonColor.SetValue((Vector4)new Vector4F(node.BaseHorizonColor, node.BaseColorShift));
+          _parameterBaseHorizonColor.SetValue((Vector4)new Vector4(node.BaseHorizonColor, node.BaseColorShift));
           _parameterBaseZenithColor.SetValue((Vector3)node.BaseZenithColor);
 
           if (context.IsHdrEnabled())

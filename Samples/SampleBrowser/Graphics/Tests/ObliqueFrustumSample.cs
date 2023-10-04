@@ -85,7 +85,7 @@ namespace Samples.Graphics
         //else
         //  y = 0;
 
-        Vector4F c = m * new Vector4F(x, y, z, 1);
+        Vector4 c = m * new Vector4(x, y, z, 1);
         c /= c.W;
         Color color = Color.Orange;
         if (c.X < -1 || c.X > 1 || c.Y < -1 || c.Y > 1 || c.Z < 0 || c.Z > 1)

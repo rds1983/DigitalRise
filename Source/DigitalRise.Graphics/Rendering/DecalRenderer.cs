@@ -645,7 +645,7 @@ namespace DigitalRise.Graphics.Rendering
             Vector3 scale = decalNode.ScaleWorld;
             Pose cameraToDecalPose = decalPose.Inverse * cameraPose;
 
-            Vector4F scissor = GraphicsHelper.GetBounds(cameraNode, decalNode);
+            Vector4 scissor = GraphicsHelper.GetBounds(cameraNode, decalNode);
             // Use a bias to avoid that this quad is clipped by the near plane.
             const float bias = 1.0001f;
             float left = InterpolationHelper.Lerp(projection.Left, projection.Right, scissor.X) * bias;

@@ -27,8 +27,8 @@ namespace DigitalRise.UI.Controls
   /// var button = new Button
   /// {
   ///   Content = new TextBlock { Text = "Click Me!" },
-  ///   Margin = new Vector4F(4),
-  ///   Padding = new Vector4F(6),
+  ///   Margin = new Vector4(4),
+  ///   Padding = new Vector4(6),
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
   /// };
   /// 
@@ -203,7 +203,7 @@ namespace DigitalRise.UI.Controls
         availableSize.Y = height;
 
       // Remove padding from constraint size.
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       Vector2 contentSize = availableSize;
       if (Numeric.IsPositiveFinite(availableSize.X))
         contentSize.X -= padding.X + padding.Z;

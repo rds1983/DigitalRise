@@ -91,7 +91,7 @@ turns the mesh into the flat, black shadow.",
         ShadowedPlane = new Plane(new Vector3(0, 1, 0), 0.01f),
 
         // The shadow color is a transparent black.
-        ShadowColor = new Vector4F(0, 0, 0, 0.4f),
+        ShadowColor = new Vector4(0, 0, 0, 0.4f),
 
         // The light position is set in Update().
         //LightPosition = ...
@@ -117,11 +117,11 @@ turns the mesh into the flat, black shadow.",
       // Update the light position of the renderer.
       // To create a local light shadow (light rays are not parallel), we have to set the light 
       // position and a 4th component of 1.
-      //_projectedShadowRenderer.LightPosition = new Vector4F(position, 1);
+      //_projectedShadowRenderer.LightPosition = new Vector4(position, 1);
       // To create a directional light shadow (light rays are parallel), we have to set the inverse
       // light direction and 0.
       var lightRayDirection = (lightTarget - position);
-      _projectedShadowRenderer.LightPosition = new Vector4F(-lightRayDirection, 0);
+      _projectedShadowRenderer.LightPosition = new Vector4(-lightRayDirection, 0);
 
       // For debugging: Draw coordinate axes at (0, 0, 0).
       _debugRenderer.Clear();

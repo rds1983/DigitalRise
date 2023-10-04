@@ -625,15 +625,15 @@ namespace DigitalRise.Geometry.Meshes
       var numberOfTriangles = NumberOfTriangles;
 
       // Array with the normalized triangle normals. The weight is stored in the W component.
-      Vector4F[] triangleNormals = new Vector4F[numberOfTriangles];
+      Vector4[] triangleNormals = new Vector4[numberOfTriangles];
 
       // An array of lists. One list per vertex. Each list contains all triangle 
       // normals for a vertex.
-      List<Vector4F>[] normalsPerVertex = new List<Vector4F>[numberOfVertices];
+      List<Vector4>[] normalsPerVertex = new List<Vector4>[numberOfVertices];
       for (int i = 0; i < numberOfVertices; i++)
       {
         // For each vertex there will be on average less than 6 neighbor triangles.
-        normalsPerVertex[i] = new List<Vector4F>(6);
+        normalsPerVertex[i] = new List<Vector4>(6);
       }
 
       // Loop over triangles and collect triangle normal info.
@@ -653,7 +653,7 @@ namespace DigitalRise.Geometry.Meshes
         {
           float weight = (float)Math.Sqrt(lengthSquared);
 
-          var normal4 = new Vector4F(normal / weight, weight);
+          var normal4 = new Vector4(normal / weight, weight);
           triangleNormals[i] = normal4;
           normalsPerVertex[i0].Add(normal4);
           normalsPerVertex[i1].Add(normal4);
@@ -670,7 +670,7 @@ namespace DigitalRise.Geometry.Meshes
       for (int i = 0; i < numberOfTriangles; i++)
       {
         var triangleNormal4 = triangleNormals[i];
-        var triangleNormal = triangleNormal4.XYZ;
+        var triangleNormal = triangleNormal4.XYZ();
 
         if (triangleNormal4.W == 0)
         {
@@ -691,7 +691,7 @@ namespace DigitalRise.Geometry.Meshes
             // Average all normals in the normal list of the current vertex.
             foreach (var normal4 in normalsPerVertex[vertexIndex])
             {
-              var normal = normal4.XYZ;
+              var normal = normal4.XYZ();
               var weight = normal4.W;
 
               // Angle limit test.

@@ -59,7 +59,7 @@ namespace DigitalRise.UI.Controls
   /// // Use a scroll viewer to show a region of the texture.
   /// var scrollViewer = new ScrollViewer
   /// {
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   Width = 200
   ///   Height = 200,
   /// };
@@ -576,7 +576,7 @@ namespace DigitalRise.UI.Controls
         if (child != _horizontalScrollBar && child != _verticalScrollBar && child != Content)
           child.Measure(availableSize);
 
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
 
       // Determine the extent size (the desired size of the content).
       ExtentWidth = 0;
@@ -661,7 +661,7 @@ namespace DigitalRise.UI.Controls
       // This method handles only the content and the scroll bars. Other visual children are
       // ignored.
 
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       var horizontalScrollBarVisibility = HorizontalScrollBarVisibility;
       var verticalScrollBarVisibility = VerticalScrollBarVisibility;
 
@@ -746,7 +746,7 @@ namespace DigitalRise.UI.Controls
     }
 
 
-    private void CalculateViewport(Vector2 size, Vector4F padding, ScrollBarVisibility horizontalScrollBarVisibility, ScrollBarVisibility verticalScrollBarVisibility,
+    private void CalculateViewport(Vector2 size, Vector4 padding, ScrollBarVisibility horizontalScrollBarVisibility, ScrollBarVisibility verticalScrollBarVisibility,
                                    out bool horizontalScrollBarVisible, out bool verticalScrollBarVisible, ref Vector2 viewportSize)
     {
       // Determine whether scroll bars are visible.

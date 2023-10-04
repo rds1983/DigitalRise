@@ -233,7 +233,7 @@ See source code for more details.",
       // Compute shadow matrix for the new light direction.
       var lightRayDirection = (lightTarget - position);
       _shadowMatrix = ProjectedShadowRenderer.CreateShadowMatrix(
-        new Plane(new Vector3(0, 1, 0), 0.01f), new Vector4F(-lightRayDirection, 0));
+        new Plane(new Vector3(0, 1, 0), 0.01f), new Vector4(-lightRayDirection, 0));
 
       // Update the scene - this must be called once per frame.
       _scene.Update(gameTime.ElapsedGameTime);

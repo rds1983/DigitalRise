@@ -135,10 +135,10 @@ updates over several frames and to update distant cascades less often.",
           _cascadedShadow.NumberOfCascades = (int)value;
           switch ((int)value)
           {
-            case 1: _cascadedShadow.Distances = new Vector4F(80); break;
-            case 2: _cascadedShadow.Distances = new Vector4F(20, 80, 80, 80); break;
-            case 3: _cascadedShadow.Distances = new Vector4F(12, 20, 80, 80); break;
-            case 4: _cascadedShadow.Distances = new Vector4F(4, 12, 20, 80); break;
+            case 1: _cascadedShadow.Distances = new Vector4(80); break;
+            case 2: _cascadedShadow.Distances = new Vector4(20, 80, 80, 80); break;
+            case 3: _cascadedShadow.Distances = new Vector4(12, 20, 80, 80); break;
+            case 4: _cascadedShadow.Distances = new Vector4(4, 12, 20, 80); break;
           }
           _cascadedShadow.ShadowMap.SafeDispose();
           _cascadedShadow.ShadowMap = null;
@@ -151,7 +151,7 @@ updates over several frames and to update distant cascades less often.",
         0,
         10,
         _cascadedShadow.DepthBias.X,
-        value => _cascadedShadow.DepthBias = new Vector4F(value));
+        value => _cascadedShadow.DepthBias = new Vector4(value));
 
       SampleHelper.AddSlider(
         shadowPanel,
@@ -160,7 +160,7 @@ updates over several frames and to update distant cascades less often.",
         0,
         10,
         _cascadedShadow.NormalOffset.X,
-        value => _cascadedShadow.NormalOffset = new Vector4F(value));
+        value => _cascadedShadow.NormalOffset = new Vector4(value));
 
       SampleHelper.AddSlider(
         shadowPanel,
@@ -226,7 +226,7 @@ updates over several frames and to update distant cascades less often.",
       cachingPanel.Children.Add(new TextBlock
       {
         Text = "Set a value > 0 to update shadow map less frequently.",
-        Margin = new Vector4F(0, 0, SampleHelper.Margin, 0),
+        Margin = new Vector4(0, 0, SampleHelper.Margin, 0),
       });
 
       SampleHelper.AddSlider(

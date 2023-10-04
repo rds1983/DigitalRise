@@ -279,10 +279,10 @@ namespace DigitalRise.Graphics.Rendering
           // Convert depth bias from "texel" to light space [0, 1] depth.
           // Minus sign to move receiver depth closer to light. Divide by depth to normalize.
           float unitsPerTexel = orthographicProjection.Width / shadow.ShadowMap.Height;
-          shadow.EffectiveDepthBias[split] = -shadow.DepthBias[split] * unitsPerTexel / orthographicProjection.Depth;
+          shadow.EffectiveDepthBias.SetComponentByIndex(split, -shadow.DepthBias.GetComponentByIndex(split) * unitsPerTexel / orthographicProjection.Depth);
 
           // Convert normal offset from "texel" to world space.
-          shadow.EffectiveNormalOffset[split] = shadow.NormalOffset[split] * unitsPerTexel;
+          shadow.EffectiveNormalOffset.SetComponentByIndex(split, shadow.NormalOffset.GetComponentByIndex(split) * unitsPerTexel);
 
           // For rendering the shadow map, move near plane back by MinLightDistance 
           // to catch occluders in front of the cascade.

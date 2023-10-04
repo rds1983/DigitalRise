@@ -16,7 +16,7 @@ namespace DigitalRise.UI.Controls
   /// <![CDATA[
   /// var checkBox = new CheckBox
   /// {
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   Content = new TextBlock { Text = "Enable feature XYZ" },
   ///   IsChecked = true
   /// };

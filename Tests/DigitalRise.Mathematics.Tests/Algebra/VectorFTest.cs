@@ -1407,46 +1407,46 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ExplicitCastToVector4F()
+    public void ExplicitCastToVector4()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f, 4.4f });
-      Vector4F u = (Vector4F)v;
+      Vector4 u = (Vector4)v;
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
-      Assert.AreEqual(3.3f, u[2]);
-      Assert.AreEqual(4.4f, u[3]);
+      Assert.AreEqual(1.1f, u.GetComponentByIndex(0));
+      Assert.AreEqual(2.2f, u.GetComponentByIndex(1));
+      Assert.AreEqual(3.3f, u.GetComponentByIndex(2));
+      Assert.AreEqual(4.4f, u.GetComponentByIndex(3));
     }
 
 
     [Test]
-    public void ToVector4F()
+    public void ToVector4()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f, 4.4f });
-      Vector4F u = v.ToVector4F();
+      Vector4 u = v.ToVector4();
 
-      Assert.AreEqual(1.1f, u[0]);
-      Assert.AreEqual(2.2f, u[1]);
-      Assert.AreEqual(3.3f, u[2]);
-      Assert.AreEqual(4.4f, u[3]);
+      Assert.AreEqual(1.1f, u.GetComponentByIndex(0));
+      Assert.AreEqual(2.2f, u.GetComponentByIndex(1));
+      Assert.AreEqual(3.3f, u.GetComponentByIndex(2));
+      Assert.AreEqual(4.4f, u.GetComponentByIndex(3));
     }
 
 
     [Test]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void ExplicitCastToVector4FException1()
+    public void ExplicitCastToVector4Exception1()
     {
       VectorF v = null;
-      Vector4F u = (Vector4F)v;
+      Vector4 u = (Vector4)v;
     }
 
 
     [Test]
     [ExpectedException(typeof(InvalidCastException))]
-    public void ExplicitCastToVector4FException2()
+    public void ExplicitCastToVector4Exception2()
     {
       VectorF v = new VectorF(new[] { 1.1f, 2.2f, 3.3f, 4.4f, 5.5f });
-      Vector4F u = (Vector4F)v;
+      Vector4 u = (Vector4)v;
     }
 
 

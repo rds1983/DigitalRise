@@ -5,6 +5,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using DigitalRise.Mathematics;
 
 
 namespace DigitalRise.Graphics.Rendering
@@ -69,7 +70,7 @@ namespace DigitalRise.Graphics.Rendering
       // The environment is facing the camera.
       // --> Set normal = cameraBackward.
       var cameraNode = context.CameraNode;
-      _parameterNormal.SetValue((cameraNode != null) ? (Vector3)cameraNode.ViewInverse.GetColumn(2).XYZ : Vector3.Backward);
+      _parameterNormal.SetValue((cameraNode != null) ? (Vector3)cameraNode.ViewInverse.GetColumn(2).XYZ() : Vector3.Backward);
 
       // Clear specular to arbitrary value.
       _parameterSpecularPower.SetValue(1.0f);

@@ -21,7 +21,7 @@ namespace DigitalRise.UI.Controls
   /// // Group 123
   /// var radioButton1 = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 8, 4, 4),
+  ///   Margin = new Vector4(4, 8, 4, 4),
   ///   Content = new TextBlock { Text = "Option 1" },
   ///   IsChecked = true,
   ///   GroupName = "Group 123"
@@ -29,14 +29,14 @@ namespace DigitalRise.UI.Controls
   /// 
   /// var radioButton2 = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 2, 4, 2),
+  ///   Margin = new Vector4(4, 2, 4, 2),
   ///   Content = new TextBlock { Text = "Option 2" },
   ///   GroupName = "Group 123"
   /// };
   /// 
   /// var radioButton3 = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 2, 4, 4),
+  ///   Margin = new Vector4(4, 2, 4, 4),
   ///   Content = new TextBlock { Text = "Option 3" },
   ///   GroupName = "Group 123"
   /// };
@@ -50,14 +50,14 @@ namespace DigitalRise.UI.Controls
   /// {
   ///   Title = "Options 1, 2, 3",
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   Content = stackPanel
   /// };
   /// 
   /// // Group ABC
   /// var radioButtonA = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 8, 4, 4),
+  ///   Margin = new Vector4(4, 8, 4, 4),
   ///   Content = new TextBlock { Text = "Option A" },
   ///   IsChecked = true,
   ///   GroupName = "Group ABC"
@@ -65,14 +65,14 @@ namespace DigitalRise.UI.Controls
   /// 
   /// var radioButtonB = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 2, 4, 2),
+  ///   Margin = new Vector4(4, 2, 4, 2),
   ///   Content = new TextBlock { Text = "Option B" },
   ///   GroupName = "Group ABC"
   /// };
   /// 
   /// var radioButtonC = new RadioButton
   /// {
-  ///   Margin = new Vector4F(4, 2, 4, 4),
+  ///   Margin = new Vector4(4, 2, 4, 4),
   ///   Content = new TextBlock { Text = "Option C" },
   ///   GroupName = "Group ABC"
   /// };
@@ -86,7 +86,7 @@ namespace DigitalRise.UI.Controls
   /// {
   ///   Title = "Options A, B, C",
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   Content = stackPanel
   /// };
   /// 

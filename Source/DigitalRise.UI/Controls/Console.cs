@@ -879,7 +879,7 @@ namespace DigitalRise.UI.Controls
         _charWidth = font.MeasureString("A").X;
 
         // The number of visual rows and columns that fit into the console.
-        Vector4F padding = Padding;
+        Vector4 padding = Padding;
         _numberOfLines = (int)((size.Y - padding.Y - padding.W) / font.LineHeight);
         _numberOfColumns = (int)((size.X - padding.X - padding.Z) / _charWidth);
 

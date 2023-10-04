@@ -117,7 +117,7 @@ namespace DigitalRise.Graphics.Rendering
     /// <exception cref="ArgumentNullException">
     /// <paramref name="context"/> is <see langword="null"/>.
     /// </exception>
-    public void Render(RenderContext context, Vector4F color)
+    public void Render(RenderContext context, Vector4 color)
     {
       Render(context, color, null, false);
     }
@@ -139,7 +139,7 @@ namespace DigitalRise.Graphics.Rendering
     /// </exception>
     public void Render(RenderContext context, Texture2D colorTexture)
     {
-      Render(context, Vector4F.Zero, colorTexture, colorTexture == null);
+      Render(context, Vector4.Zero, colorTexture, colorTexture == null);
     }
 
 
@@ -164,11 +164,11 @@ namespace DigitalRise.Graphics.Rendering
     /// </exception>
     public void Render(RenderContext context, bool preserveColor)
     {
-      Render(context, Vector4F.Zero, null, preserveColor);
+      Render(context, Vector4.Zero, null, preserveColor);
     }
 
 
-    private void Render(RenderContext context, Vector4F color, Texture2D colorTexture, bool preserveColor)
+    private void Render(RenderContext context, Vector4 color, Texture2D colorTexture, bool preserveColor)
     {
       if (context == null)
         throw new ArgumentNullException("context");

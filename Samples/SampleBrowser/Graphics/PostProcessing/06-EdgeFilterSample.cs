@@ -15,14 +15,14 @@ namespace Samples.Graphics
     36)]
   public class EdgeFilterSample : PostProcessingSample
   {
-    private readonly Vector4F[] _edgeColors =
+    private readonly Vector4[] _edgeColors =
     {
-      new Vector4F(0, 0, 0, 1),          // Black
-      new Vector4F(0.5f, 0.5f, 0.5f, 1), // Gray
-      new Vector4F(1, 1, 1, 1),          // White
-      new Vector4F(1, 0, 0, 1),          // Red
-      new Vector4F(0, 1, 0, 1),          // Green
-      new Vector4F(0, 0, 1, 1)           // Blue
+      new Vector4(0, 0, 0, 1),          // Black
+      new Vector4(0.5f, 0.5f, 0.5f, 1), // Gray
+      new Vector4(1, 1, 1, 1),          // White
+      new Vector4(1, 0, 0, 1),          // Red
+      new Vector4(0, 1, 0, 1),          // Green
+      new Vector4(0, 0, 1, 1)           // Blue
     };
     private readonly EdgeFilter _edgeFilter;
     private int _silhouetteColorIndex;
@@ -34,8 +34,8 @@ namespace Samples.Graphics
     {
       _edgeFilter = new EdgeFilter(GraphicsService)
       {
-        SilhouetteColor = new Vector4F(0, 0, 0, 1),
-        CreaseColor = new Vector4F(0, 0, 0, 1)
+        SilhouetteColor = new Vector4(0, 0, 0, 1),
+        CreaseColor = new Vector4(0, 0, 0, 1)
       };
       GraphicsScreen.PostProcessors.Add(_edgeFilter);
     }

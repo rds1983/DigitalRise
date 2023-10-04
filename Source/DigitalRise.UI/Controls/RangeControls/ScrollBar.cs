@@ -309,7 +309,7 @@ namespace DigitalRise.UI.Controls
       float minimum = Minimum;
       float maximum = Maximum;
       float range = maximum - minimum;
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
 
       if (!inputService.IsMouseOrTouchHandled)
       {
@@ -387,7 +387,7 @@ namespace DigitalRise.UI.Controls
         float minimum = Minimum;
         float maximum = Maximum;
         float range = maximum - minimum;
-        Vector4F padding = Padding;
+        Vector4 padding = Padding;
 
         if (Orientation == Orientation.Horizontal)
         {

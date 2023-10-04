@@ -1,19 +1,20 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
 using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
 namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
-  public class Vector4FAnimationTest
+  public class Vector4AnimationTest
   {
     [Test]
     public void TraitsTest()
     {
-      var animationEx = new Vector4FAnimation();
-      Assert.AreEqual(Vector4FTraits.Instance, animationEx.Traits);
+      var animationEx = new Vector4Animation();
+      Assert.AreEqual(Vector4Traits.Instance, animationEx.Traits);
     }
 
 
@@ -46,31 +47,31 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new Vector4FAnimation();
+      var animationEx = new Vector4Animation();
       Assert.AreEqual(TimeSpan.FromSeconds(0.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.W = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.X = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.Y = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.W = animation;
       animationEx.X = animation2;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new Vector4FAnimation();
+      animationEx = new Vector4Animation();
       animationEx.Y = animation2;
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
@@ -132,7 +133,7 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Stop,
       };
 
-      var animationEx = new Vector4FAnimation
+      var animationEx = new Vector4Animation
       {
         X = animation,
         Y = animation2,
@@ -141,8 +142,8 @@ namespace DigitalRise.Animation.Tests
       };
 
 
-      var defaultSource = new Vector4F(1, 2, 3, 4);
-      var defaultTarget = new Vector4F(5, 6, 7, 8);
+      var defaultSource = new Vector4(1, 2, 3, 4);
+      var defaultTarget = new Vector4(5, 6, 7, 8);
 
       var result = animationEx.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget);
       Assert.AreEqual(defaultSource.X, result.X); // animation has not started.

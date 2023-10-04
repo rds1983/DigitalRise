@@ -1,9 +1,8 @@
 ﻿using System;
 using DigitalRise.Animation;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using CommonServiceLocator;
-
+using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
 {
@@ -20,7 +19,7 @@ namespace Samples.Game.UI
 
       Content = new TextBlock
       {
-        Margin = new Vector4F(8),
+        Margin = new Vector4(8),
         Text = "The 'Opacity' of this window is animated.",
         WrapText = true,
       };

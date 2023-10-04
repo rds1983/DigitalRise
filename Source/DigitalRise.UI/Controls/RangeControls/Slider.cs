@@ -34,13 +34,13 @@ namespace DigitalRise.UI.Controls
   /// var slider = new Slider
   /// {
   ///   Value = 60,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   ///   HorizontalAlignment = HorizontalAlignment.Stretch,
   /// };
   /// 
   /// var textBlock = new TextBlock
   /// {
-  ///   Margin = new Vector4F(4, 0, 4, 4),
+  ///   Margin = new Vector4(4, 0, 4, 4),
   ///   Text = "(Value = 60)",
   ///   HorizontalAlignment = HorizontalAlignment.Right
   /// };
@@ -191,7 +191,7 @@ namespace DigitalRise.UI.Controls
       float minimum = Minimum;
       float maximum = Maximum;
       float range = maximum - minimum;
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
 
       if (IsFocusWithin)
       {
@@ -299,7 +299,7 @@ namespace DigitalRise.UI.Controls
         float minimum = Minimum;
         float maximum = Maximum;
         float range = maximum - minimum;
-        Vector4F padding = Padding;
+        Vector4 padding = Padding;
 
         float contentWidth = size.X - padding.X - padding.Z - _thumb.DesiredWidth;
         float thumbCenterPosition = contentWidth / range * (value - Minimum);

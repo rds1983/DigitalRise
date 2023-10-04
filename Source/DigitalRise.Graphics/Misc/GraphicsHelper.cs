@@ -110,7 +110,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <param name="color">The color in gamma space.</param>
     /// <returns>The color value in linear space.</returns>
-    internal static Vector4F FromGamma(Vector4F color)
+    internal static Vector4 FromGamma(Vector4 color)
     {
       color.X = FromGamma(color.X);
       color.Y = FromGamma(color.Y);
@@ -155,7 +155,7 @@ namespace DigitalRise.Graphics
     /// </summary>
     /// <param name="color">The color in linear space.</param>
     /// <returns>The color value in gamma space.</returns>
-    internal static Vector4F ToGamma(Vector4F color)
+    internal static Vector4 ToGamma(Vector4 color)
     {
       color.X = ToGamma(color.X);
       color.Y = ToGamma(color.Y);

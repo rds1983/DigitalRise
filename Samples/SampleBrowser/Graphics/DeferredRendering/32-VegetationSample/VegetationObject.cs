@@ -193,7 +193,7 @@ namespace Samples.Graphics
                                               0,
                                               zOrigin + z * _cellSize + random.NextFloat(0, _cellSize)),
                                  Matrix33F.CreateRotationY(random.NextFloat(0, 10)));
-            Vector4F color = new Vector4F(1);
+            Vector4 color = new Vector4(1);
 
             instances[i] = new InstanceData(scale, pose, color);
           }

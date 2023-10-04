@@ -359,7 +359,7 @@ namespace DigitalRise.Graphics.Effects
       if (context.CameraNode == null)
         throw new EffectBindingException("CameraNode needs to be set in render context.");
 
-      return (Vector3)(-context.CameraNode.ViewInverse.GetColumn(2).XYZ);
+      return (Vector3)(-context.CameraNode.ViewInverse.GetColumn(2).XYZ());
 
       // Same as
       //return context.CameraNode.PoseWorld.ToWorldDirection(Vector3.Forward);
@@ -908,7 +908,7 @@ namespace DigitalRise.Graphics.Effects
     private static readonly Func<CascadedShadow, float> GetDirectionalLightShadowFadeOutRange_ = shadow => shadow.FadeOutRange;
 #pragma warning disable 618
     private static readonly Func<CascadedShadow, float> GetDirectionalLightShadowFadeOutDistance_ = shadow => shadow.FadeOutDistance;
-    private static readonly Func<CascadedShadow, float> GetDirectionalLightShadowMaxDistance_ = shadow => shadow.Distances[shadow.NumberOfCascades - 1];
+    private static readonly Func<CascadedShadow, float> GetDirectionalLightShadowMaxDistance_ = shadow => shadow.Distances.GetComponentByIndex(shadow.NumberOfCascades - 1);
 #pragma warning restore 618
     private static readonly Func<CascadedShadow, float> GetDirectionalLightShadowFog_ = shadow => shadow.ShadowFog;
 
@@ -1810,7 +1810,7 @@ namespace DigitalRise.Graphics.Effects
       if (nodes != null)
       {
         // Undo premultiplied alpha.
-        return (Vector3)nodes[0].Fog.Color0.XYZ / nodes[0].Fog.Color1.W;
+        return (Vector3)nodes[0].Fog.Color0.XYZ() / nodes[0].Fog.Color1.W;
       }
 
       return new Vector3(1, 1, 1);
@@ -1824,7 +1824,7 @@ namespace DigitalRise.Graphics.Effects
       {
         // Undo premultiplied alpha.
         return new Vector4(
-          (Vector3)nodes[0].Fog.Color0.XYZ / nodes[0].Fog.Color0.W,
+          (Vector3)nodes[0].Fog.Color0.XYZ() / nodes[0].Fog.Color0.W,
           nodes[0].Fog.Color0.W);
       }
 

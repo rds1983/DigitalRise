@@ -231,7 +231,7 @@ namespace DigitalRise.Graphics.Effects
           {
             var near = (context.CameraNode != null) ? context.CameraNode.Camera.Projection.Near : 0.1f;
             _cascadedShadowParameters.ParameterCascadeDistances.SetValue(
-              new Vector4(near, shadow.Distances[0], shadow.Distances[1], shadow.Distances[2]));
+              new Vector4(near, shadow.Distances.X, shadow.Distances.Y, shadow.Distances.Z));
           }
           else
           {

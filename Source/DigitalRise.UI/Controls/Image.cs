@@ -36,7 +36,7 @@ namespace DigitalRise.UI.Controls
   /// 
   /// buttonContentPanel.Children.Add(new TextBlock
   /// {
-  ///   Margin = new Vector4F(4, 0, 0, 0),
+  ///   Margin = new Vector4(4, 0, 0, 0),
   ///   Text = "Label",
   ///   VerticalAlignment = VerticalAlignment.Center,
   /// });
@@ -44,7 +44,7 @@ namespace DigitalRise.UI.Controls
   /// var button = new Button
   /// {
   ///   Content = buttonContentPanel,
-  ///   Margin = new Vector4F(4),
+  ///   Margin = new Vector4(4),
   /// };
   /// 
   /// // To show the button, add it to an existing content control or panel.
@@ -170,7 +170,7 @@ namespace DigitalRise.UI.Controls
 
       float width = Width;
       float height = Height;
-      Vector4F padding = Padding;
+      Vector4 padding = Padding;
       Vector2 desiredSize = Vector2.Zero;
 
       if (Numeric.IsPositiveFinite(width))

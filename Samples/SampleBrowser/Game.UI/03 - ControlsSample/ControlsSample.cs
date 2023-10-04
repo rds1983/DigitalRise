@@ -86,22 +86,22 @@ namespace Samples.Game.UI
       {
         HorizontalAlignment = HorizontalAlignment.Right,
         VerticalAlignment = VerticalAlignment.Top,
-        Margin = new Vector4F(40),
+        Margin = new Vector4(40),
       });
 
       // Add a text label.
       var textBlock = new TextBlock
       {
         Text = "Press button to open window: ",
-        Margin = new Vector4F(4)
+        Margin = new Vector4(4)
       };
 
       // Add buttons that open samples.
       var button0 = new Button
       {
         Content = new TextBlock { Text = "Sample #1: Controls" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch,
       };
       button0.Click += (s, e) =>
@@ -113,8 +113,8 @@ namespace Samples.Game.UI
       var button1 = new Button
       {
         Content = new TextBlock { Text = "Sample #2: ScrollViewer" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button1.Click += (s, e) =>
@@ -126,8 +126,8 @@ namespace Samples.Game.UI
       var button2 = new Button
       {
         Content = new TextBlock { Text = "Sample #3: Transformations" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button2.Click += (s, e) =>
@@ -139,8 +139,8 @@ namespace Samples.Game.UI
       var button3 = new Button
       {
         Content = new TextBlock { Text = "Sample #4: Dialogs" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button3.Click += (s, e) =>
@@ -152,8 +152,8 @@ namespace Samples.Game.UI
       var button4 = new Button
       {
         Content = new TextBlock { Text = "Sample #5: Console" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button4.Click += (s, e) =>
@@ -165,8 +165,8 @@ namespace Samples.Game.UI
       var button5 = new Button
       {
         Content = new TextBlock { Text = "Switch UI Theme" },
-        Margin = new Vector4F(4),
-        Padding = new Vector4F(6),
+        Margin = new Vector4(4),
+        Padding = new Vector4(6),
         HorizontalAlignment = HorizontalAlignment.Stretch
       };
       button5.Click += (s, e) =>
@@ -176,7 +176,7 @@ namespace Samples.Game.UI
         _changeTheme = true;
       };
 
-      var stackPanel = new StackPanel { Margin = new Vector4F(40) };
+      var stackPanel = new StackPanel { Margin = new Vector4(40) };
       stackPanel.Children.Add(textBlock);
       stackPanel.Children.Add(button0);
       stackPanel.Children.Add(button1);

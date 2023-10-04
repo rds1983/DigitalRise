@@ -39,7 +39,7 @@ namespace DigitalRise.Graphics.Effects
     ///// <para>
     ///// <strong>Notes for users of DigitalRise Mathematics:</strong><br/> 
     ///// The DigitalRise vector types (see <see cref="Vector2"/>, <see cref="Vector3"/>, 
-    ///// <see cref="Vector4F"/>) are column-vectors, whereas vectors in DirectX and XNA are 
+    ///// <see cref="Vector4"/>) are column-vectors, whereas vectors in DirectX and XNA are 
     ///// row-vectors. When the DigitalRise vector types are set using an 
     ///// <see cref="EffectParameterBinding{T}"/> they are automatically converted to the corresponding 
     ///// XNA vector types and then applied using the right 

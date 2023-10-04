@@ -550,16 +550,16 @@ namespace DigitalRise.Geometry
     /// </remarks>
     public static bool IsValid(Matrix44F matrix)
     {
-      Vector4F v1 = matrix * Vector4F.UnitX;
-      Vector4F v2 = matrix * Vector4F.UnitY;
-      Vector4F v3 = matrix * Vector4F.UnitZ;
+      Vector4 v1 = matrix * Vector4.UnitX;
+      Vector4 v2 = matrix * Vector4.UnitY;
+      Vector4 v3 = matrix * Vector4.UnitZ;
 
       return Numeric.AreEqual(v1.LengthSquared(), 1)
              && Numeric.AreEqual(v2.LengthSquared(), 1)
              && Numeric.AreEqual(v3.LengthSquared(), 1)
-             && Numeric.IsZero(Vector4F.Dot(v1, v2))
-             && Numeric.IsZero(Vector4F.Dot(v2, v3))
-             && Numeric.IsZero(Vector4F.Dot(v1, v3))
+             && Numeric.IsZero(Vector4.Dot(v1, v2))
+             && Numeric.IsZero(Vector4.Dot(v2, v3))
+             && Numeric.IsZero(Vector4.Dot(v1, v3))
              && Numeric.AreEqual(1.0f, matrix.Determinant)
              && Numeric.IsZero(matrix.M30)
              && Numeric.IsZero(matrix.M31)
@@ -737,7 +737,7 @@ namespace DigitalRise.Geometry
     /// Multiplying a pose matrix with a vector is equal to transforming a vector from local space
     /// to world space (or parent space for nested coordinate spaces).
     /// </remarks>
-    public static Vector4F operator *(Pose pose, Vector4F vector)
+    public static Vector4 operator *(Pose pose, Vector4 vector)
     {
       return pose.ToMatrix44F() * vector;
     }
@@ -753,7 +753,7 @@ namespace DigitalRise.Geometry
     /// Multiplying a pose matrix with a vector is equal to transforming a vector from local space
     /// to world space (or parent space for nested coordinate spaces).
     /// </remarks>
-    public static Vector4F Multiply(Pose pose, Vector4F vector)
+    public static Vector4 Multiply(Pose pose, Vector4 vector)
     {
       return pose.ToMatrix44F() * vector;
     }

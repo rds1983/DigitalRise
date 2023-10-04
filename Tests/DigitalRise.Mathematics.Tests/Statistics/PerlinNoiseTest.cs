@@ -99,7 +99,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       var random = new Random(15485863);
       for (int i = 0; i < 1000000; i++)
       {
-        var v = random.NextVector4F(0, 255);
+        var v = random.NextVector4(0, 255);
         var n = PerlinNoise.Compute(v.X, v.Y, v.Z, v.W);
         min = Math.Min(min, n);
         max = Math.Max(max, n);
@@ -115,7 +115,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       Random random = new Random(1234567);
       for (int i = 0; i < 100; i++)
       {
-        var v = random.NextVector4F(-1000, 1000);
+        var v = random.NextVector4(-1000, 1000);
 
         Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X - 256)));
         Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X + 256)));
@@ -138,9 +138,9 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       Random random = new Random(1234567);
       for (int i = 0; i < 100; i++)
       {
-        var v = random.NextVector4F(-1000, 1000);
+        var v = random.NextVector4(-1000, 1000);
 
-        var randomPeriod = random.NextVector4F(2, 444);
+        var randomPeriod = random.NextVector4(2, 444);
         var px = (int)randomPeriod.X;
         var py = (int)randomPeriod.Y;
         var pz = (int)randomPeriod.Z;
