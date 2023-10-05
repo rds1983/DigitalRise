@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Graphics
 {
@@ -220,7 +221,7 @@ See source code for more details.",
       // Move the directional light in a circle.
       float deltaTimeF = (float)gameTime.ElapsedGameTime.TotalSeconds;
       _lightAngle += 0.3f * deltaTimeF;
-      var position = QuaternionF.CreateRotationY(_lightAngle).Rotate(new Vector3(6, 6, 0));
+      var position = MathHelper.CreateRotationY(_lightAngle).Rotate(new Vector3(6, 6, 0));
 
       // Make the light look at the world space origin.
       var lightTarget = Vector3.Zero;

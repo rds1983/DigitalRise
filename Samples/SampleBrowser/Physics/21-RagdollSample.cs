@@ -45,7 +45,7 @@ namespace Samples.Physics
       {
         Vector3 position = RandomHelper.Random.NextVector3(-5, 5);
         position.Y = 0.5f;
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(boxShape)
         {

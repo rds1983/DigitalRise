@@ -153,7 +153,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
       for (int i = 0; i < 100; i++)
       {
         Vector3 position = new Vector3(random.NextFloat(-100, 100), random.NextFloat(0, 3), random.NextFloat(-100, 100));
-        QuaternionF orientation = random.NextQuaternionF();
+        Quaternion orientation = random.NextQuaternion();
         Vector3 scale = random.NextVector3(0.1f, 4f);
         var meshNode = new MeshNode(boxMesh)
         {
@@ -216,7 +216,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
       for (int i = 0; i < 100; i++)
       {
         Vector3 position = new Vector3(random.NextFloat(-80, 80), 1, random.NextFloat(-100, 100));
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
         float scale = random.NextFloat(0.5f, 1.2f);
         gameObjectService.Objects.Add(new StaticObject(services, "Rock/rock_05.drmdl", scale, new Pose(position, orientation)));
       }

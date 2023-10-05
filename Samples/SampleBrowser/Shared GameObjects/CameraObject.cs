@@ -150,7 +150,7 @@ namespace Samples
 
         CameraNode.PoseWorld = new Pose(
           _defaultPosition,
-          QuaternionF.CreateRotationY(_currentYaw) * QuaternionF.CreateRotationX(_currentPitch));
+          MathHelper.CreateRotationY(_currentYaw) * MathHelper.CreateRotationX(_currentPitch));
       }
     }
 
@@ -223,7 +223,7 @@ namespace Samples
       }
 
       // Compute new orientation of the camera.
-      QuaternionF orientation = QuaternionF.CreateRotationY(_currentYaw) * QuaternionF.CreateRotationX(_currentPitch);
+      Quaternion orientation = MathHelper.CreateRotationY(_currentYaw) * MathHelper.CreateRotationX(_currentPitch);
 
       // Create velocity from <W>, <A>, <S>, <D> and <R>, <F> keys. 
       // <R> or DPad up is used to move up ("rise"). 

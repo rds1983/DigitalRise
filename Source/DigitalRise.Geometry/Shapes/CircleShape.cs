@@ -246,7 +246,7 @@ namespace DigitalRise.Geometry.Shapes
       alpha = ConstantsF.TwoPi / numberOfSegments;
 
       Vector3 r0 = new Vector3(_radius, 0, 0);
-      QuaternionF rotation = QuaternionF.CreateRotationZ(alpha);
+      Quaternion rotation = MathHelper.CreateRotationZ(alpha);
 
       TriangleMesh mesh = new TriangleMesh();
 

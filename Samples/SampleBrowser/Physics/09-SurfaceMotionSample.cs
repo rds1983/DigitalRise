@@ -68,7 +68,7 @@ namespace Samples.Physics
           RandomHelper.Random.NextFloat(-4, 4),
           RandomHelper.Random.NextFloat(1, 3),
           RandomHelper.Random.NextFloat(-1, 1));
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(boxShape)
         {

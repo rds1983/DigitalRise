@@ -4,11 +4,11 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Geometry
 {
@@ -71,7 +71,7 @@ pick object using the mouse cursor.",
       _box = new CollisionObject(
         new GeometricObject(
           new BoxShape(1, 2, 3),
-          new Pose(new Vector3(0, 0, 0), RandomHelper.Random.NextQuaternionF())));
+          new Pose(new Vector3(0, 0, 0), RandomHelper.Random.NextQuaternion())));
 
       // Create a collision object with a sphere shape at position (-5, 0, 0).
       _sphere = new CollisionObject(new GeometricObject(new SphereShape(1), new Pose(new Vector3(-5, 0, 0))));
@@ -167,7 +167,7 @@ pick object using the mouse cursor.",
         // shooting in viewing direction (rayEnd - rayStart).
         ((GeometricObject)_ray.GeometricObject).Pose = new Pose(
           (Vector3)rayStart,
-          QuaternionF.CreateRotation(Vector3.Forward, (Vector3)(rayEnd - rayStart)));
+          MathHelper.CreateRotation(Vector3.Forward, (Vector3)(rayEnd - rayStart)));
       }
       else
       {

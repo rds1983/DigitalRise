@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 
 using Microsoft.Xna.Framework;
@@ -127,9 +128,9 @@ namespace DigitalRise.Animation.Character
     }
 
 
-    //public static void RotateBoneWorld(this SkeletonPose SkeletonPose, int boneIndex, QuaternionF rotation, Matrix44F world)
+    //public static void RotateBoneWorld(this SkeletonPose SkeletonPose, int boneIndex, Quaternion rotation, Matrix44F world)
     //{
-    //  QuaternionF worldRotation = QuaternionF.CreateRotation(world.Minor);
+    //  Quaternion worldRotation = MathHelper.CreateRotation(world.Minor);
     //  RotateBoneAbsolute(SkeletonPose, boneIndex, worldRotation.Conjugated * rotation);
     //}
 
@@ -144,7 +145,7 @@ namespace DigitalRise.Animation.Character
     ///// <exception cref="ArgumentNullException">
     ///// <paramref name="skeletonPose" /> is <see langword="null"/>.
     ///// </exception>
-    //public static void RotateBoneLocal(this SkeletonPose skeletonPose, int boneIndex, QuaternionF rotation)
+    //public static void RotateBoneLocal(this SkeletonPose skeletonPose, int boneIndex, Quaternion rotation)
     //{
     //  if (skeletonPose == null)
     //    throw new ArgumentNullException("skeletonPose");
@@ -164,7 +165,7 @@ namespace DigitalRise.Animation.Character
     /// <exception cref="ArgumentNullException">
     /// <paramref name="skeletonPose" /> is <see langword="null"/>.
     /// </exception>
-    public static void RotateBoneAbsolute(this SkeletonPose skeletonPose, int boneIndex, QuaternionF rotation)
+    public static void RotateBoneAbsolute(this SkeletonPose skeletonPose, int boneIndex, Quaternion rotation)
     {
       if (skeletonPose == null)
         throw new ArgumentNullException("skeletonPose");
@@ -181,8 +182,8 @@ namespace DigitalRise.Animation.Character
       // ...
 
       // Rotation relative to bone bind pose space (using similarity transformation).
-      var rotationRelative = bindPoseRelative.Rotation.Conjugated
-                             * parentBonePoseAbsolute.Rotation.Conjugated
+      var rotationRelative = bindPoseRelative.Rotation.Conjugated()
+                             * parentBonePoseAbsolute.Rotation.Conjugated()
                              * rotation
                              * parentBonePoseAbsolute.Rotation
                              * bindPoseRelative.Rotation;
@@ -207,7 +208,7 @@ namespace DigitalRise.Animation.Character
     /// <exception cref="ArgumentNullException">
     /// <paramref name="skeletonPose" /> is <see langword="null"/>.
     /// </exception>
-    public static void SetBoneRotationAbsolute(this SkeletonPose skeletonPose, int boneIndex, QuaternionF rotation)
+    public static void SetBoneRotationAbsolute(this SkeletonPose skeletonPose, int boneIndex, Quaternion rotation)
     {
       if (skeletonPose == null)
         throw new ArgumentNullException("skeletonPose");
@@ -221,8 +222,8 @@ namespace DigitalRise.Animation.Character
       // rotation = parentBonePoseAbsolute * bindPoseRelative * rotationRelative;
       // rotationRelative = boneTransform.
 
-      var rotationRelative = bindPoseRelative.Rotation.Conjugated
-                             * parentBonePoseAbsolute.Rotation.Conjugated
+      var rotationRelative = bindPoseRelative.Rotation.Conjugated()
+                             * parentBonePoseAbsolute.Rotation.Conjugated()
                              * rotation;
       
       rotationRelative.Normalize();
@@ -505,7 +506,7 @@ namespace DigitalRise.Animation.Character
         if (resetScale)
           boneTransform.Scale = Vector3.One;
         if (resetRotation)
-          boneTransform.Rotation = QuaternionF.Identity;
+          boneTransform.Rotation = Quaternion.Identity;
         if (resetTranslation)
           boneTransform.Translation = Vector3.Zero;
 
@@ -552,7 +553,7 @@ namespace DigitalRise.Animation.Character
       if (resetScale)
         boneTransform.Scale = Vector3.One;
       if (resetRotation)
-        boneTransform.Rotation = QuaternionF.Identity;
+        boneTransform.Rotation = Quaternion.Identity;
       if (resetTranslation)
         boneTransform.Translation = Vector3.Zero;
 

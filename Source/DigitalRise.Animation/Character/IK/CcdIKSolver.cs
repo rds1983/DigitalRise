@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -291,15 +292,15 @@ namespace DigitalRise.Animation.Character
           // Rotate bone so that it points to the target.
           if (tipLocal.TryNormalize() && targetPositionLocal.TryNormalize())
           {
-            var rotation = QuaternionF.CreateRotation(tipLocal, targetPositionLocal);
-            var angle = rotation.Angle;
+            var rotation =MathHelper.CreateRotation(tipLocal, targetPositionLocal);
+            var angle = rotation.Angle();
 
             // If the bone gain is less than 1, then we make a smaller correction. We will need
             // more iterations but the change is more evenly distributed over the chain.
             if (BoneGain < 1)
             {
               angle = angle * BoneGain;
-              rotation.Angle = angle;
+              rotation.SetAngle(angle);
             }
 
             // Apply rotation to bone transform.

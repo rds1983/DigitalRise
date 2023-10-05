@@ -6,9 +6,9 @@ using System;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Materials;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -167,7 +167,7 @@ namespace DigitalRise.Physics.Specialized
         Name = "CharacterController",
         
         Pose = new Pose(shape.Height / 2 * upVector, 
-                        QuaternionF.CreateRotation(Vector3.UnitY, upVector)),
+                        MathHelper.CreateRotation(Vector3.UnitY, upVector)),
       };
 
       // When the user changes the shape, we must re-compute all contacts.

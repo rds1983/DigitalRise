@@ -491,7 +491,7 @@ collision is detected.",
     private void TiltCamera(TimeSpan deltaTime)
     {
       // (Note: We use DigitalRise Mathematics instead of the XNA math types - mainly because 
-      // DigitalRise Mathematics provides a 3x3 matrix to describe rotations and the QuaternionF 
+      // DigitalRise Mathematics provides a 3x3 matrix to describe rotations and the Quaternion 
       // provides a nice helper function to create a rotation from two given vectors.
       // 
       // Please note that DigitalRise Mathematics uses column vectors whereas XNA uses row vectors.
@@ -513,9 +513,9 @@ collision is detected.",
         // We have some valid sensor readings.
         // Let's compute the tilt of the camera. When the phone is lying flat on a table the camera
         // looks down onto the scene. When the phone is tilted we want to rotate the position of
-        // the camera. QuaternionF contains a useful helper function that creates a rotation from
+        // the camera. Quaternion contains a useful helper function that creates a rotation from
         // two given directions - exactly what we need here.
-        cameraTilt = QuaternionF.CreateRotation(currentGravityDirection, new Vector3(0, -1, 0)).ToRotationMatrix33();
+        cameraTilt = MathHelper.CreateRotation(currentGravityDirection, new Vector3(0, -1, 0)).ToRotationMatrix33();
       }
       else
       {

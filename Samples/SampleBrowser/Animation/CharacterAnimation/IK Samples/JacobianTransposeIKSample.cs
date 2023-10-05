@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using DigitalRise.Animation.Character;
+﻿using DigitalRise.Animation.Character;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AssetManagementBase;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Animation
 {
@@ -77,7 +76,7 @@ Limits are used to keep the palm of the hand parallel to the ground.",
       // if it wants to place the hand on horizontal plane.
       SrtTransform bonePoseAbsolute = _meshNode.SkeletonPose.GetBonePoseAbsolute(15);
       Vector3 palmAxis = bonePoseAbsolute.ToParentDirection(-Vector3.UnitY);
-      bonePoseAbsolute.Rotation = QuaternionF.CreateRotation(palmAxis, Vector3.UnitY) * bonePoseAbsolute.Rotation;
+      bonePoseAbsolute.Rotation = MathHelper.CreateRotation(palmAxis, Vector3.UnitY) * bonePoseAbsolute.Rotation;
       _meshNode.SkeletonPose.SetBonePoseAbsolute(15, bonePoseAbsolute);
     }
 

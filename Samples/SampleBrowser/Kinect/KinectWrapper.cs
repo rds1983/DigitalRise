@@ -273,7 +273,7 @@ namespace Samples.Kinect
           // Apply scale and offset.
           position = position * Scale + Offset;
 
-          var orientation = QuaternionF.Identity;   // TODO: Use orientations of body.JointOrientations.
+          var orientation = Quaternion.Identity;   // TODO: Use orientations of body.JointOrientations.
 
           skeletonPose.SetBonePoseAbsolute(i, new SrtTransform(orientation, position));
         }

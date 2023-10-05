@@ -5,7 +5,8 @@
 using System;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -281,13 +282,13 @@ namespace DigitalRise.Animation.Character
     {
       CacheDerivedData();
 
-      DoWork(SkeletonMapper.RotationOffset.Conjugated, SkeletonMapper.SkeletonPoseB, SkeletonMapper.SkeletonPoseA,
+      DoWork(SkeletonMapper.RotationOffset.Conjugated(), SkeletonMapper.SkeletonPoseB, SkeletonMapper.SkeletonPoseA,
              SpineBoneIndexB, NeckBoneIndexB, LeftShoulderBoneIndexB, RightShoulderBoneIndexB,
              SpineBoneIndexA, NeckBoneIndexA, LeftShoulderBoneIndexA, RightShoulderBoneIndexA);
     }
 
 
-    private static void DoWork(QuaternionF skeletonOffset, SkeletonPose skeletonA, SkeletonPose skeletonB, int boneIndexA, int neckBoneIndexA, int leftShoulderBoneIndexA, int rightShoulderBoneIndexA, int boneIndexB, int neckBoneIndexB, int leftShoulderBoneIndexB, int rightShoulderBoneIndexB)
+    private static void DoWork(Quaternion skeletonOffset, SkeletonPose skeletonA, SkeletonPose skeletonB, int boneIndexA, int neckBoneIndexA, int leftShoulderBoneIndexA, int rightShoulderBoneIndexA, int boneIndexB, int neckBoneIndexB, int leftShoulderBoneIndexB, int rightShoulderBoneIndexB)
     {
       // Reset root bone.
       skeletonB.ResetBoneTransforms(boneIndexB, boneIndexB, false, true, false);
@@ -319,7 +320,7 @@ namespace DigitalRise.Animation.Character
       var shoulderAxisB = rightShoulderB - leftShoulderB;
 
       // Create a twist rotation from the shoulder vectors.
-      var shoulderRotation = QuaternionF.CreateRotation(shoulderAxisB, shoulderAxisA);
+      var shoulderRotation = MathHelper.CreateRotation(shoulderAxisB, shoulderAxisA);
 
       // Apply this twist to the spine. (Modifies the neckB position.)
       neckB = boneB + shoulderRotation.Rotate(neckB - boneB);
@@ -330,7 +331,7 @@ namespace DigitalRise.Animation.Character
       var spineAxisB = neckB - boneB;
 
       // Create swing rotation from spine vectors.
-      var spineRotation = QuaternionF.CreateRotation(spineAxisB, spineAxisA);
+      var spineRotation = MathHelper.CreateRotation(spineAxisB, spineAxisA);
 
       // Apply the shoulder twist rotation followed by the spine swing rotation.
       skeletonB.RotateBoneAbsolute(boneIndexB, spineRotation * shoulderRotation);

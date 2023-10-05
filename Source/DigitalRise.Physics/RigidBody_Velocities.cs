@@ -8,6 +8,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Settings;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics
 {
@@ -418,13 +419,13 @@ namespace DigitalRise.Physics
 
       // Important: Use the center-of-mass pose!
       var x = PoseCenterOfMass.Position;
-      var q = QuaternionF.CreateRotation(PoseCenterOfMass.Orientation);
+      var q = MathHelper.CreateRotation(PoseCenterOfMass.Orientation);
 
       // Derivative of position: velocity
       // Derivative of orientation: q' = 1/2 * (0, ω) * q
       var xDerivative = LinearVelocity + LinearCorrectionVelocity;
-      var qDerivative = 0.5f * new QuaternionF(0, AngularVelocity + AngularCorrectionVelocity) * q;
-      Pose targetPoseCOM = new Pose(x + deltaTime * xDerivative, (q + deltaTime * qDerivative).Normalized);
+      var qDerivative = new Quaternion(AngularVelocity + AngularCorrectionVelocity, 0) * 0.5f * q;
+      Pose targetPoseCOM = new Pose(x + deltaTime * xDerivative, (q + qDerivative * deltaTime).Normalized());
 
       if (CcdEnabled
           && Simulation.Settings.Motion.CcdEnabled

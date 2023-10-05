@@ -61,7 +61,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
 
       // Shooting into plane.
-      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 1, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 1, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(1, algo.GetContacts(b, a)[0].PenetrationDepth);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), algo.GetContacts(b, a)[0].PositionALocal));

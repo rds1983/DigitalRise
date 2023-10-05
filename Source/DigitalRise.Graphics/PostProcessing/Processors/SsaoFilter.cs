@@ -273,7 +273,7 @@ namespace DigitalRise.Graphics.PostProcessing
 
       // 16 random vectors for Crytek-style point samples.
       //for (int i = 0; i < vectors.Length; i++)
-      //  vectors[i] = (Vector3)random.NextQuaternionF().Rotate(Vector3.One).Normalized();
+      //  vectors[i] = (Vector3)random.NextQuaternion().Rotate(Vector3.One).Normalized();
       //    //* random.NextFloat(0.5f, 1) // Note: StarCraft 2 uses varying length to vary the sample offset length.
 
       // We create rotated random vectors with uniform distribution in 360°. Each random vector

@@ -169,7 +169,7 @@ namespace Samples
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));
-      RigidBody.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternionF());
+      RigidBody.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternion());
       ModelNode.PoseWorld = RigidBody.Pose;
 
       // Add rigid body to physics simulation and model to scene.

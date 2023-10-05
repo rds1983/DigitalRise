@@ -1,11 +1,10 @@
-﻿#if !WP7 && !WP8
-using DigitalRise.Geometry;
+﻿using DigitalRise.Geometry;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Graphics
 {
@@ -49,7 +48,7 @@ namespace Samples.Graphics
 
       // Add some static objects.
       GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 1, Pose.Identity));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 1, new Pose(new Vector3(3, 0, 1), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 1, new Pose(new Vector3(3, 0, 1), MathHelper.CreateRotationY(MathHelper.ToRadians(-20)))));
 
       // Add a dynamic object.
       GameObjectService.Objects.Add(new DynamicObject(Services, 1));
@@ -66,4 +65,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

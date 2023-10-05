@@ -29,12 +29,12 @@ namespace DigitalRise.Geometry.Collisions.Tests
       _objectB = new CollisionObject(new GeometricObject
       {
         Shape = new SphereShape(1),
-        Pose = new Pose(new Vector3(2, 0, 0), QuaternionF.Identity),
+        Pose = new Pose(new Vector3(2, 0, 0), Quaternion.Identity),
       });
       _objectC = new CollisionObject(new GeometricObject
       {
         Shape = new SphereShape(1),
-        Pose = new Pose(new Vector3(10, 0, 0), QuaternionF.Identity),
+        Pose = new Pose(new Vector3(10, 0, 0), Quaternion.Identity),
       });
     }
 

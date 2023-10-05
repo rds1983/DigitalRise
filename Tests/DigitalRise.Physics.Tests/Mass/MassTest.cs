@@ -305,7 +305,7 @@ namespace DigitalRise.Physics.Tests
     [Test]
     public void TransformedShapeMassWithScaling()
     {
-      var s = new TransformedShape(new GeometricObject(new BoxShape(3, 2, 1), new Vector3(0.7f), new Pose(new Vector3(-1, 7, 4), RandomHelper.Random.NextQuaternionF())));
+      var s = new TransformedShape(new GeometricObject(new BoxShape(3, 2, 1), new Vector3(0.7f), new Pose(new Vector3(-1, 7, 4), RandomHelper.Random.NextQuaternion())));
       float m0;
       Vector3 com0;
       Matrix33F i0;
@@ -352,7 +352,7 @@ namespace DigitalRise.Physics.Tests
     [ExpectedException(typeof(NotSupportedException))]
     public void TransformedShapeNonuniformScaleWithRotationNotSupported()
     {
-      var s = new TransformedShape(new GeometricObject(new BoxShape(3, 2, 1), new Vector3(0.7f, 0.8f, 0.9f), new Pose(new Vector3(-1, 7, 4), QuaternionF.CreateRotationX(1))));
+      var s = new TransformedShape(new GeometricObject(new BoxShape(3, 2, 1), new Vector3(0.7f, 0.8f, 0.9f), new Pose(new Vector3(-1, 7, 4), MathHelper.CreateRotationX(1))));
       float m0;
       Vector3 com0;
       Matrix33F i0;
@@ -410,8 +410,8 @@ namespace DigitalRise.Physics.Tests
     public void CompositeShapeWithRotatedChildren()
     {
       var s = new CompositeShape();
-      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternionF())));
-      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternionF())));
+      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternion())));
+      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternion())));
       float m0;
       Vector3 com0;
       Matrix33F i0;
@@ -436,8 +436,8 @@ namespace DigitalRise.Physics.Tests
     {
       // The first composite shape does not use rigid bodies.
       var s = new CompositeShape();
-      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternionF())));
-      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternionF())));
+      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternion())));
+      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternion())));
       float m0;
       Vector3 com0;
       Matrix33F i0;
@@ -474,8 +474,8 @@ namespace DigitalRise.Physics.Tests
     {
       // The first composite shape does not use rigid bodies.
       var s = new CompositeShape();
-      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternionF())));
-      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternionF())));
+      s.Children.Add(new GeometricObject(new BoxShape(1, 2, 3), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(100, 10, 0), RandomHelper.Random.NextQuaternion())));
+      s.Children.Add(new GeometricObject(new ConeShape(1, 2), new Vector3(1.1f, 0.3f, 0.8f), new Pose(new Vector3(-10, -10, 0), RandomHelper.Random.NextQuaternion())));
 
       // The second composite shape uses rigid bodies as children.
       var r0 = new RigidBody(s.Children[0].Shape);

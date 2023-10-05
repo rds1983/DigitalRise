@@ -169,7 +169,7 @@ PrismaticJoint with LinearVelocityMotor, BallJoint with TwistSwingLimit and Quat
         // The QuaternionMotor controls the orientation of the second body relative to the first
         // body. Here, we define that the cylinder should swing 30° away from the default 
         // orientation.
-        TargetOrientation = QuaternionF.CreateRotationZ(MathHelper.ToRadians(30)),
+        TargetOrientation = MathHelper.CreateRotationZ(MathHelper.ToRadians(30)),
         // Position and orientation motors are similar to damped-springs. We can control
         // the stiffness and damping of the spring. (It is also possible to set the SpringConstant
         // to 0 if the QuaternionMotor should only act as a rotational damping.)

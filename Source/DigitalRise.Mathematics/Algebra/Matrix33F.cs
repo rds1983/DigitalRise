@@ -1733,7 +1733,7 @@ namespace DigitalRise.Mathematics.Algebra
     /// </summary>
     /// <param name="rotation">The rotation described by a unit quaternion.</param>
     /// <returns>The created rotation matrix.</returns>
-    public static Matrix33F CreateRotation(QuaternionF rotation)
+    public static Matrix33F CreateRotation(Quaternion rotation)
     {
       return rotation.ToRotationMatrix33();
     }

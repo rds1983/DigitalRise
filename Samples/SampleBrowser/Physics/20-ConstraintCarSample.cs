@@ -9,6 +9,7 @@ using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Materials;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Physics
 {
@@ -213,7 +214,7 @@ namespace Samples.Physics
       {
         Vector3 position = RandomHelper.Random.NextVector3(-20, 20);
         position.Y = 5;
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(boxShape, boxMass, null)
         {
@@ -250,7 +251,7 @@ namespace Samples.Physics
       // The normal rotation axis is the -x axis.
       Vector3 axis = -Vector3.UnitX;
       // Rotate the axis by the steering angle.
-      axis = QuaternionF.CreateRotationY(_steeringAngle).Rotate(axis);
+      axis = MathHelper.CreateRotationY(_steeringAngle).Rotate(axis);
 
       // Set the axes and the velocities of the motors.
       _frontLeftMotor.AxisALocal = axis;

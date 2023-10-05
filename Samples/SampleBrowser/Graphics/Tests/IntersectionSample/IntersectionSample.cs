@@ -75,7 +75,7 @@ namespace Samples.Graphics
       },
       Color.DarkBlue);
       meshNodeA.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-0.5f, 0.5f),
-                                    RandomHelper.Random.NextQuaternionF());
+                                    RandomHelper.Random.NextQuaternion());
       _scene.Children.Add(meshNodeA);
       _debugRenderer.DrawObject(meshNodeA, Color.Green, true, false);
 
@@ -88,7 +88,7 @@ namespace Samples.Graphics
       },
       Color.Gray);
       meshNodeB.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-1f, 1f),
-                                    RandomHelper.Random.NextQuaternionF());
+                                    RandomHelper.Random.NextQuaternion());
       _scene.Children.Add(meshNodeB);
       _debugRenderer.DrawObject(meshNodeB, Color.Green, true, false);
 
@@ -99,7 +99,7 @@ namespace Samples.Graphics
       },
       Color.DarkGreen);
       meshNodeC.PoseWorld = new Pose(RandomHelper.Random.NextVector3(-1f, 1f),
-                                    RandomHelper.Random.NextQuaternionF());
+                                    RandomHelper.Random.NextQuaternion());
       meshNodeC.ScaleLocal = new Vector3(0.1f, 1f, 0.5f);
       _scene.Children.Add(meshNodeC);
       _debugRenderer.DrawObject(meshNodeC, Color.Green, true, false);

@@ -60,10 +60,10 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <remarks>
     /// The scale is set to <see cref="Vector3.One"/>, the rotation is set to 
-    /// <see cref="QuaternionF.Identity"/>, and the translation is set to 
+    /// <see cref="Quaternion.Identity"/>, and the translation is set to 
     /// <see cref="Vector3.Zero"/>.
     /// </remarks>
-    public static readonly SrtTransform Identity = new SrtTransform(Vector3.One, QuaternionF.Identity, Vector3.Zero);
+    public static readonly SrtTransform Identity = new SrtTransform(Vector3.One, Quaternion.Identity, Vector3.Zero);
     #endregion
 
 
@@ -80,7 +80,7 @@ namespace DigitalRise.Animation.Character
     /// <summary>
     /// The rotation.
     /// </summary>
-    public QuaternionF Rotation;
+    public Quaternion Rotation;
 
 
     /// <summary>
@@ -180,7 +180,7 @@ namespace DigitalRise.Animation.Character
     /// Initializes a new instance of the <see cref="SrtTransform"/> struct with the given rotation.
     /// </summary>
     /// <param name="rotation">The rotation.</param>
-    public SrtTransform(QuaternionF rotation)
+    public SrtTransform(Quaternion rotation)
     {
       Scale = Vector3.One;
       Rotation = rotation;
@@ -195,7 +195,7 @@ namespace DigitalRise.Animation.Character
     public SrtTransform(Matrix33F rotation)
     {
       Scale = Vector3.One;
-      Rotation = QuaternionF.CreateRotation(rotation);
+      Rotation = MathHelper.CreateRotation(rotation);
       Translation = Vector3.Zero;
     }
 
@@ -206,7 +206,7 @@ namespace DigitalRise.Animation.Character
     /// </summary>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(QuaternionF rotation, Vector3 translation)
+    public SrtTransform(Quaternion rotation, Vector3 translation)
     {
       Scale = Vector3.One;
       Rotation = rotation;
@@ -223,7 +223,7 @@ namespace DigitalRise.Animation.Character
     public SrtTransform(Matrix33F rotation, Vector3 translation)
     {
       Scale = Vector3.One;
-      Rotation = QuaternionF.CreateRotation(rotation);
+      Rotation = MathHelper.CreateRotation(rotation);
       Translation = translation;
     }    
 
@@ -235,7 +235,7 @@ namespace DigitalRise.Animation.Character
     /// <param name="scale">The scale.</param>
     /// <param name="rotation">The rotation.</param>
     /// <param name="translation">The translation.</param>
-    public SrtTransform(Vector3 scale, QuaternionF rotation, Vector3 translation)
+    public SrtTransform(Vector3 scale, Quaternion rotation, Vector3 translation)
     {
       Scale = scale;
       Rotation = rotation;
@@ -253,7 +253,7 @@ namespace DigitalRise.Animation.Character
     public SrtTransform(Vector3 scale, Matrix33F rotation, Vector3 translation)
     {
       Scale = scale;
-      Rotation = QuaternionF.CreateRotation(rotation);
+      Rotation = MathHelper.CreateRotation(rotation);
       Translation = translation;
     }
     #endregion
@@ -318,7 +318,7 @@ namespace DigitalRise.Animation.Character
     /// </remarks>
     public Vector3 ToLocalDirection(Vector3 worldDirection)
     {
-      return Rotation.Conjugated.Rotate(worldDirection);
+      return Rotation.Conjugated().Rotate(worldDirection);
     }
 
 
@@ -340,7 +340,7 @@ namespace DigitalRise.Animation.Character
     /// <returns>The position in local space.</returns>
     public Vector3 ToLocalPosition(Vector3 worldPosition)
     {
-      return Rotation.Conjugated.Rotate(worldPosition - Translation) * new Vector3(1 / Scale.X, 1 / Scale.Y, 1 / Scale.Z);
+      return Rotation.Conjugated().Rotate(worldPosition - Translation) * new Vector3(1 / Scale.X, 1 / Scale.Y, 1 / Scale.Z);
     }
 
 
@@ -479,7 +479,7 @@ namespace DigitalRise.Animation.Character
     /// </returns>
     public static bool AreNumericallyEqual(SrtTransform srtA, SrtTransform srtB)
     {
-      return QuaternionF.AreNumericallyEqual(srtA.Rotation, srtB.Rotation)
+      return MathHelper.AreNumericallyEqual(srtA.Rotation, srtB.Rotation)
              && MathHelper.AreNumericallyEqual(srtA.Translation, srtB.Translation)
              && MathHelper.AreNumericallyEqual(srtA.Scale, srtB.Scale);
     }
@@ -509,11 +509,11 @@ namespace DigitalRise.Animation.Character
     public static SrtTransform Interpolate(SrtTransform startTransform, SrtTransform endTransform, float parameter)
     {
       // Lerp rotation.
-      QuaternionF sourceRotation = startTransform.Rotation;
-      QuaternionF targetRotation = endTransform.Rotation;
+      Quaternion sourceRotation = startTransform.Rotation;
+      Quaternion targetRotation = endTransform.Rotation;
 
       // Get angle between quaternions:
-      //float cosθ = QuaternionF.Dot(sourceRotation, targetRotation);
+      //float cosθ = Quaternion.Dot(sourceRotation, targetRotation);
       float cosθ = sourceRotation.W * targetRotation.W + sourceRotation.X * targetRotation.X + sourceRotation.Y * targetRotation.Y + sourceRotation.Z * targetRotation.Z;
 
       // Invert one quaternion if we would move along the long arc of interpolation.
@@ -525,7 +525,7 @@ namespace DigitalRise.Animation.Character
         targetRotation.Z = -targetRotation.Z;
       }
 
-      QuaternionF resultRotation;
+      Quaternion resultRotation;
       resultRotation.W = sourceRotation.W + (targetRotation.W - sourceRotation.W) * parameter;
       resultRotation.X = sourceRotation.X + (targetRotation.X - sourceRotation.X) * parameter;
       resultRotation.Y = sourceRotation.Y + (targetRotation.Y - sourceRotation.Y) * parameter;
@@ -574,11 +574,11 @@ namespace DigitalRise.Animation.Character
       result.Translation.Z = startTransform.Translation.Z + (endTransform.Translation.Z - startTransform.Translation.Z) * parameter;
 
       // Lerp rotation.
-      QuaternionF sourceRotation = startTransform.Rotation;
-      QuaternionF targetRotation = endTransform.Rotation;
+      Quaternion sourceRotation = startTransform.Rotation;
+      Quaternion targetRotation = endTransform.Rotation;
 
       // Get angle between quaternions:
-      //float cosθ = QuaternionF.Dot(sourceRotation, targetRotation);
+      //float cosθ = Quaternion.Dot(sourceRotation, targetRotation);
       float cosθ = sourceRotation.W * targetRotation.W + sourceRotation.X * targetRotation.X + sourceRotation.Y * targetRotation.Y + sourceRotation.Z * targetRotation.Z;
 
       // Invert one quaternion if we would move along the long arc of interpolation.
@@ -744,7 +744,7 @@ namespace DigitalRise.Animation.Character
       result.Rotation.Z = srt1.Rotation.W * srt2.Rotation.Z + srt1.Rotation.X * srt2.Rotation.Y - srt1.Rotation.Y * srt2.Rotation.X + srt1.Rotation.Z * srt2.Rotation.W;
 
       // Quaternion rotation:
-      Vector3 localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V();
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -813,7 +813,7 @@ namespace DigitalRise.Animation.Character
       //               srt1.Translation + srt1.Scale * srt1.Rotation.Rotate(srt2.Translation));
 
       // Inlined:
-      Vector3 localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V();
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -870,7 +870,7 @@ namespace DigitalRise.Animation.Character
       // Inlined:
       SrtTransform srtResult;
 
-      Vector3 localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V();
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;
@@ -927,7 +927,7 @@ namespace DigitalRise.Animation.Character
       // Inlined:
       SrtTransform srtResult;
 
-      Vector3 localV = srt1.Rotation.V;
+      Vector3 localV = srt1.Rotation.V();
       float localW = srt1.Rotation.W;
       float w = -(localV.X * srt2.Translation.X + localV.Y * srt2.Translation.Y + localV.Z * srt2.Translation.Z);
       float vX = localV.Y * srt2.Translation.Z - localV.Z * srt2.Translation.Y + localW * srt2.Translation.X;

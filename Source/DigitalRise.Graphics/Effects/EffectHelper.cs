@@ -218,40 +218,40 @@ namespace DigitalRise.Graphics.Effects
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as <see cref="QuaternionF"/>. 
+    ///// Gets the value of the effect parameter as <see cref="Quaternion"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <returns>
-    ///// The value of the effect parameter as <see cref="QuaternionF"/>.
+    ///// The value of the effect parameter as <see cref="Quaternion"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="QuaternionF"/>.
+    ///// Unable to cast this effect parameter to <see cref="Quaternion"/>.
     ///// </exception>
-    //public static QuaternionF GetValueQuaternionF(this EffectParameter parameter)
+    //public static Quaternion GetValueQuaternion(this EffectParameter parameter)
     //{
-    //  return (QuaternionF)parameter.GetValueQuaternion();
+    //  return (Quaternion)parameter.GetValueQuaternion();
     //}
 
 
     ///// <summary>
-    ///// Gets the value of the effect parameter as an array of <see cref="QuaternionF"/>. 
+    ///// Gets the value of the effect parameter as an array of <see cref="Quaternion"/>. 
     ///// </summary>
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="count">The number of elements in the array.</param>
     ///// <returns>
-    ///// The value of the effect parameter as an array of <see cref="QuaternionF"/>.
+    ///// The value of the effect parameter as an array of <see cref="Quaternion"/>.
     ///// </returns>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="QuaternionF"/>.
+    ///// Unable to cast this effect parameter to <see cref="Quaternion"/>.
     ///// </exception>
-    //public static QuaternionF[] GetValueQuaternionFArray(this EffectParameter parameter, int count)
+    //public static Quaternion[] GetValueQuaternionArray(this EffectParameter parameter, int count)
     //{
     //  Quaternion[] value = parameter.GetValueQuaternionArray(count);
 
     //  var arrayLength = value.Length;
-    //  QuaternionF[] convertedValue = new QuaternionF[arrayLength];
+    //  Quaternion[] convertedValue = new Quaternion[arrayLength];
     //  for (int i = 0; i < arrayLength; i++)
-    //    convertedValue[i] = (QuaternionF)value[i];
+    //    convertedValue[i] = (Quaternion)value[i];
 
     //  return convertedValue;
     //}
@@ -475,9 +475,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="QuaternionF"/>.
+    ///// Unable to cast this effect parameter to <see cref="Quaternion"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, QuaternionF value)
+    //public static void SetValue(this EffectParameter parameter, Quaternion value)
     //{
     //  parameter.SetValue((Quaternion)value);
     //}
@@ -489,9 +489,9 @@ namespace DigitalRise.Graphics.Effects
     ///// <param name="parameter">The effect parameter.</param>
     ///// <param name="value">The value to assign to the effect parameter.</param>
     ///// <exception cref="InvalidCastException">
-    ///// Unable to cast this effect parameter to <see cref="QuaternionF"/>.
+    ///// Unable to cast this effect parameter to <see cref="Quaternion"/>.
     ///// </exception>
-    //public static void SetValue(this EffectParameter parameter, QuaternionF[] value)
+    //public static void SetValue(this EffectParameter parameter, Quaternion[] value)
     //{
     //  if (value != null)
     //  {

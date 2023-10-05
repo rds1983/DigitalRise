@@ -23,7 +23,7 @@ namespace DigitalRise.Physics.Constraints
   /// (controlled by <see cref="SpringConstant"/> and <see cref="DampingConstant"/>).
   /// </para>
   /// <para>
-  /// The target orientation is defined using a <see cref="QuaternionF"/>. In contrast, 
+  /// The target orientation is defined using a <see cref="Quaternion"/>. In contrast, 
   /// <see cref="EulerMotor"/> is a motor that controls the orientation where the target orientation
   /// is defined using 3 Euler angle.
   /// </para>
@@ -104,7 +104,7 @@ namespace DigitalRise.Physics.Constraints
     /// This target orientation is the target orientation of <see cref="AnchorOrientationBLocal"/>
     /// relative to <see cref="AnchorOrientationALocal"/>.
     /// </remarks>
-    public QuaternionF TargetOrientation
+    public Quaternion TargetOrientation
     {
       get { return _targetOrientation; }
       set
@@ -116,7 +116,7 @@ namespace DigitalRise.Physics.Constraints
         }
       }
     }
-    private QuaternionF _targetOrientation = QuaternionF.Identity;
+    private Quaternion _targetOrientation = Quaternion.Identity;
 
 
 
@@ -280,16 +280,16 @@ namespace DigitalRise.Physics.Constraints
       Matrix33F anchorOrientationB = BodyB.Pose.Orientation * AnchorOrientationBLocal;
 
       Matrix33F relativeOrientationMatrix = anchorOrientationA.Transposed * anchorOrientationB;
-      QuaternionF relativeOrientation = QuaternionF.CreateRotation(relativeOrientationMatrix);
-      QuaternionF deltaRotation = TargetOrientation * relativeOrientation.Conjugated;
+      Quaternion relativeOrientation = MathHelper.CreateRotation(relativeOrientationMatrix);
+      Quaternion deltaRotation = TargetOrientation * relativeOrientation.Conjugated();
 
-      float angle = deltaRotation.Angle;
+      float angle = deltaRotation.Angle();
       if (angle > ConstantsF.Pi)
       {
         // Quaternion should be the shortest arc quaternion (angle < 180°).
         deltaRotation = -deltaRotation;
         angle = ConstantsF.TwoPi - angle;
-        Debug.Assert(Numeric.AreEqual(angle, deltaRotation.Angle));
+        Debug.Assert(Numeric.AreEqual(angle, deltaRotation.Angle()));
       }
 
       Vector3 axis = new Vector3(deltaRotation.X, deltaRotation.Y, deltaRotation.Z);

@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
@@ -41,7 +42,7 @@ namespace DigitalRise.Animation.Character
     private bool _isDirty = true;
 
     // Converts from A space to B space. Only rotations.
-    private QuaternionF _rotationAToB;
+    private Quaternion _rotationAToB;
     #endregion
 
 
@@ -143,7 +144,7 @@ namespace DigitalRise.Animation.Character
     public float ScaleAToB { get; set; }
 
 
-    // TODO: public QuaternionF RotationOffset { get; set; }
+    // TODO: public Quaternion RotationOffset { get; set; }
     // Offset from BoneA to BoneB. This could be used to correct the Archer - Dude mapping.
     // The archer is in T-Pose. The Dude has lowered arms. The rotation offset rotates from
     // horizontal arms to lowered arms.
@@ -231,7 +232,7 @@ namespace DigitalRise.Animation.Character
         // Apply rotation offset to change from model A space to model B space.
         // Change model B space to B bone space.
         // --> The result transforms from bone A space to bone B space.
-        _rotationAToB = bindPoseBAbsoluteInverse.Rotation * SkeletonMapper.RotationOffset * bindPoseAAbsoluteInverse.Rotation.Conjugated;
+        _rotationAToB = bindPoseBAbsoluteInverse.Rotation * SkeletonMapper.RotationOffset * bindPoseAAbsoluteInverse.Rotation.Conjugated();
       }
       _rotationAToB.Normalize();
     }
@@ -252,7 +253,7 @@ namespace DigitalRise.Animation.Character
           SkeletonMapper.SkeletonPoseB,
           BoneIndexB,
           ScaleAToB,
-          _rotationAToB.Conjugated,
+          _rotationAToB.Conjugated(),
           _rotationAToB);
       else
         MapLocal(
@@ -262,7 +263,7 @@ namespace DigitalRise.Animation.Character
           SkeletonMapper.SkeletonPoseB,
           BoneIndexB,
           ScaleAToB,
-          _rotationAToB.Conjugated,
+          _rotationAToB.Conjugated(),
           _rotationAToB);
     }
 
@@ -283,7 +284,7 @@ namespace DigitalRise.Animation.Character
           BoneIndexA,
           1 / ScaleAToB,
           _rotationAToB,
-          _rotationAToB.Conjugated);
+          _rotationAToB.Conjugated());
       else
         MapLocal(
           MapTranslations,
@@ -293,20 +294,20 @@ namespace DigitalRise.Animation.Character
           BoneIndexA,
           1 / ScaleAToB,
           _rotationAToB,
-          _rotationAToB.Conjugated);
+          _rotationAToB.Conjugated());
     }
 
 
     /// <summary>
     /// Perform mapping in absolute space.
     /// </summary>
-    private static void MapAbsolute(bool mapTranslations, SkeletonPose skeletonA, int boneIndexA, SkeletonPose skeletonB, int boneIndexB, float scaleAToB, QuaternionF rotationBToA, QuaternionF rotationAToB)
+    private static void MapAbsolute(bool mapTranslations, SkeletonPose skeletonA, int boneIndexA, SkeletonPose skeletonB, int boneIndexB, float scaleAToB, Quaternion rotationBToA, Quaternion rotationAToB)
     {
       // The current absolute bone pose of bone A.
       var boneAActualRotationAbsolute = skeletonA.GetBonePoseAbsolute(boneIndexA).Rotation;
       var boneABindRotationAbsolute = skeletonA.Skeleton.GetBindPoseAbsoluteInverse(boneIndexA).Rotation;
 
-      var boneBBindRotationAbsolute = skeletonB.Skeleton.GetBindPoseAbsoluteInverse(boneIndexB).Rotation.Inverse;
+      var boneBBindRotationAbsolute = skeletonB.Skeleton.GetBindPoseAbsoluteInverse(boneIndexB).Rotation.Inverse();
 
       var relativeRotation = boneAActualRotationAbsolute * boneABindRotationAbsolute;
 
@@ -329,7 +330,7 @@ namespace DigitalRise.Animation.Character
     /// <summary>
     /// Perform mapping in local bone space.
     /// </summary>
-    private static void MapLocal(bool mapTranslations, SkeletonPose skeletonA, int boneIndexA, SkeletonPose skeletonB, int boneIndexB, float scaleAToB, QuaternionF rotationBToA, QuaternionF rotationAToB)
+    private static void MapLocal(bool mapTranslations, SkeletonPose skeletonA, int boneIndexA, SkeletonPose skeletonB, int boneIndexB, float scaleAToB, Quaternion rotationBToA, Quaternion rotationAToB)
     {
       var boneTransform = skeletonA.GetBoneTransform(boneIndexA);
 

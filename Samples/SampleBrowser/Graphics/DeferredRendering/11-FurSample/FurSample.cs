@@ -97,7 +97,7 @@ parameter is automatically set each frame using an effect parameter binding.",
       _meshNode.UserData = _rigidBody;
 
       // Set a random pose.
-      _rigidBody.Pose = new Pose(new Vector3(0, 1, 0), RandomHelper.Random.NextQuaternionF());
+      _rigidBody.Pose = new Pose(new Vector3(0, 1, 0), RandomHelper.Random.NextQuaternion());
       _meshNode.PoseWorld = _rigidBody.Pose;
 
       // Add rigid body to physics simulation and model to scene.

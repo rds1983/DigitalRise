@@ -154,7 +154,7 @@ namespace Samples.Physics
       for (int i = 0; i < 10; i++)
       {
         Vector3 randomPosition = new Vector3(RandomHelper.Random.NextFloat(-10, 10), 5, 0);
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
         RigidBody body = new RigidBody(boxShape, boxMass, null)
         {
           Pose = new Pose(randomPosition, randomOrientation),

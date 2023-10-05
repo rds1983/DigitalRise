@@ -160,7 +160,7 @@ less stable. Which settings are acceptable depends on the simulation scenario.",
           RandomHelper.Random.NextInteger(-40, 40),
           10,
           RandomHelper.Random.NextInteger(-40, 40));
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
         newBody.Pose = new Pose(randomPosition, randomOrientation);
 
         Simulation.RigidBodies.Add(newBody);

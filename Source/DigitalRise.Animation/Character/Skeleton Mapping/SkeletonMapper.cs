@@ -4,7 +4,7 @@
 
 using DigitalRise.Collections;
 using DigitalRise.Mathematics.Algebra;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Animation.Character
 {
@@ -108,7 +108,7 @@ namespace DigitalRise.Animation.Character
     /// to model B space.)
     /// </summary>
     /// <value>
-    /// The rotation offset. The default value is <see cref="QuaternionF.Identity"/>.
+    /// The rotation offset. The default value is <see cref="Quaternion.Identity"/>.
     /// </value>
     /// <remarks>
     /// The rotation offset rotates the first skeleton into the direction of the second skeleton.
@@ -116,7 +116,7 @@ namespace DigitalRise.Animation.Character
     /// if one skeleton uses Y as the local "up" axis and the other skeleton uses Z as the local
     /// "up" axis.
     /// </remarks>
-    public QuaternionF RotationOffset
+    public Quaternion RotationOffset
     {
       get { return _rotationOffset; }
       set
@@ -128,7 +128,7 @@ namespace DigitalRise.Animation.Character
         }
       }
     }
-    private QuaternionF _rotationOffset = QuaternionF.Identity;
+    private Quaternion _rotationOffset = Quaternion.Identity;
     #endregion
 
 

@@ -194,12 +194,12 @@ namespace DigitalRise.Geometry.Tests.Shapes
         new GeometricObject(
           new BoxShape(1, 2, 3),
           new Vector3(10, 10, 10),
-          new Pose(new Vector3(1, 2, 3), RandomHelper.Random.NextQuaternionF())));
+          new Pose(new Vector3(1, 2, 3), RandomHelper.Random.NextQuaternion())));
       c.Children.Add(
         new GeometricObject(
           new BoxShape(4, 5, 6),
           new Vector3(2, 2, 2),
-          new Pose(new Vector3(10, -2, 0), RandomHelper.Random.NextQuaternionF())));
+          new Pose(new Vector3(10, -2, 0), RandomHelper.Random.NextQuaternion())));
 
       var v0 = c.GetVolume(0.001f, 10);
 
@@ -217,7 +217,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       c.Child = new GeometricObject(
           new BoxShape(1, 2, 3),
           new Vector3(10, 10, 10),
-          new Pose(new Vector3(1, 2, 3), RandomHelper.Random.NextQuaternionF()));
+          new Pose(new Vector3(1, 2, 3), RandomHelper.Random.NextQuaternion()));
 
       var v0 = c.GetVolume(0.001f, 10);
 

@@ -46,14 +46,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(Vector3.UnitY, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(line0, line1));
 
-      ((GeometricObject)line1.GeometricObject).Pose = new Pose(line1.GeometricObject.Pose.Position, QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)line1.GeometricObject).Pose = new Pose(line1.GeometricObject.Pose.Position, MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(line0, line1);
       Assert.IsTrue(Numeric.AreEqual(0, set[0].PenetrationDepth));
       Assert.AreEqual(new Vector3(1, 2, 3), set[0].Position);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitZ, set[0].Normal));
       Assert.AreEqual(true, algo.HaveContact(line0, line1));
 
-      ((GeometricObject)line1.GeometricObject).Pose = new Pose(new Vector3(1, 2, 4), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)line1.GeometricObject).Pose = new Pose(new Vector3(1, 2, 4), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(line1, line0);
       Assert.IsTrue(Numeric.AreEqual(-2, set[0].PenetrationDepth));
       Assert.AreEqual(new Vector3(1, 2, 4), set[0].Position);

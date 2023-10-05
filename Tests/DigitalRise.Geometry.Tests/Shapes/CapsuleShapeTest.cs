@@ -4,10 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -101,10 +100,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Aabb(), new CapsuleShape().GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
                      new CapsuleShape().GetAabb(new Pose(new Vector3(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+                                                                         MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
       Assert.AreEqual(new Aabb(new Vector3(0, 80, 990), new Vector3(20, 120, 1010)),
                      new CapsuleShape(10, 40).GetAabb(new Pose(new Vector3(10, 100, 1000),
-                                                                   QuaternionF.Identity)));
+                                                                   Quaternion.Identity)));
       // TODO: Test rotations.
     }
 

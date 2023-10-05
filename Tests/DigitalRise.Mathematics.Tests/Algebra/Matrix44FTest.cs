@@ -396,7 +396,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float angle = 0.3f;
       Vector3 axis = new Vector3(1.0f, 2.0f, 3.0f);
       Matrix44F m = Matrix44F.CreateRotation(axis, angle);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(QuaternionF.CreateRotation(axis, angle).ToRotationMatrix44(), m));
+      Assert.IsTrue(Matrix44F.AreNumericallyEqual(MathHelper.CreateRotation(axis, angle).ToRotationMatrix44(), m));
     }
 
 
@@ -877,7 +877,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float angle = -1.6f;
       Vector3 axis = new Vector3(1.0f, 2.0f, -3.0f);
       Matrix44F matrix = Matrix44F.CreateRotation(axis, angle);
-      QuaternionF q = QuaternionF.CreateRotation(axis, angle);
+      Quaternion q = MathHelper.CreateRotation(axis, angle);
       Matrix44F matrixFromQuaternion = Matrix44F.CreateRotation(q);
       Vector4 v = new Vector4(0.3f, -2.4f, 5.6f, 1.0f);
       Vector4 result1 = matrix * v;
@@ -1670,18 +1670,18 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void DecomposeTest()
     {
       Vector3 scale = new Vector3(1.0f, 2.0f, 3.0f);
-      QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
+      Quaternion rotation = MathHelper.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
       Vector3 translation = new Vector3(-3.0f, 0.5f, 9.0f);
 
       Matrix44F srt = Matrix44F.CreateTranslation(translation) * Matrix44F.CreateRotation(rotation) * Matrix44F.CreateScale(scale);
 
       Vector3 scaleOfMatrix;
-      QuaternionF rotationOfMatrix;
+      Quaternion rotationOfMatrix;
       Vector3 translationOfMatrix;
       bool result = srt.Decompose(out scaleOfMatrix, out rotationOfMatrix, out translationOfMatrix);
       Assert.IsTrue(result);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(scale, scaleOfMatrix));
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(rotation, rotationOfMatrix));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotation, rotationOfMatrix));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(translation, translationOfMatrix));
     }
 
@@ -1690,13 +1690,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void DecomposeWithNegativeScaleTest()
     {
       Vector3 scale = new Vector3(-2.0f, 3.0f, 4.0f);
-      QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
+      Quaternion rotation = MathHelper.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
       Vector3 translation = new Vector3(-3.0f, 0.5f, 9.0f);
 
       Matrix44F srt = Matrix44F.CreateTranslation(translation) * Matrix44F.CreateRotation(rotation) * Matrix44F.CreateScale(scale);
 
       Vector3 scaleOfMatrix;
-      QuaternionF rotationOfMatrix;
+      Quaternion rotationOfMatrix;
       Vector3 translationOfMatrix;
       bool result = srt.Decompose(out scaleOfMatrix, out rotationOfMatrix, out translationOfMatrix);
       Assert.IsTrue(result);
@@ -1711,7 +1711,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F matrix = new Matrix44F();
 
       Vector3 scaleOfMatrix;
-      QuaternionF rotationOfMatrix;
+      Quaternion rotationOfMatrix;
       Vector3 translationOfMatrix;
       bool result = matrix.Decompose(out scaleOfMatrix, out rotationOfMatrix, out translationOfMatrix);
       Assert.IsFalse(result);
@@ -1726,14 +1726,14 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void DecomposeWithZeroScale()
     {
       Vector3 s0;
-      QuaternionF r0 = QuaternionF.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
+      Quaternion r0 = MathHelper.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
       Vector3 t0 = new Vector3(-3.0f, 0.5f, 9.0f);
 
       s0 = new Vector3(0, -2, 3);
       Matrix44F srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
 
       Vector3 s1;
-      QuaternionF r1;
+      Quaternion r1;
       Vector3 t1;
       bool result = srt0.Decompose(out s1, out r1, out t1);
       Matrix44F srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
@@ -1777,14 +1777,14 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void DecomposeFast()
     {
       Vector3 s0;
-      QuaternionF r0 = QuaternionF.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
+      Quaternion r0 = MathHelper.CreateRotation(new Vector3(4, 5, 6), MathHelper.ToRadians(37));
       Vector3 t0 = new Vector3(-3.0f, 0.5f, 9.0f);
 
       s0 = new Vector3(-4, -2, 3);
       Matrix44F srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
 
       Vector3 s1;
-      QuaternionF r1;
+      Quaternion r1;
       Vector3 t1;
       srt0.DecomposeFast(out s1, out r1, out t1);
       Matrix44F srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);

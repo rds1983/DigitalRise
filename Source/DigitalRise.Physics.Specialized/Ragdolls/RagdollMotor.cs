@@ -7,6 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Character;
 using DigitalRise.Geometry;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.Constraints;
 
@@ -381,7 +382,7 @@ namespace DigitalRise.Physics.Specialized
 
         // Set the relative motor target.
         var rotationMatrix = parentPose.Orientation.Transposed * childPose.Orientation;
-        _quaternionMotor.TargetOrientation = QuaternionF.CreateRotation(rotationMatrix);
+        _quaternionMotor.TargetOrientation = MathHelper.CreateRotation(rotationMatrix);
       }
     }
     #endregion

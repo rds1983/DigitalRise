@@ -42,7 +42,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       CollisionObject sphere = new CollisionObject(new GeometricObject
             {
               Shape = new SphereShape(1),
-              Pose = new Pose(RandomHelper.Random.NextQuaternionF()),
+              Pose = new Pose(RandomHelper.Random.NextQuaternion()),
             });
 
       RaySphereAlgorithm algo = new RaySphereAlgorithm(new CollisionDetection());
@@ -65,7 +65,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
 
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, -2, 1), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, -2, 1), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(sphere, ray);
       Assert.IsTrue(Numeric.AreEqual(-9, set[0].PenetrationDepth));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));

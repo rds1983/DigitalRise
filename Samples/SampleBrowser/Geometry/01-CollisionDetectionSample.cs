@@ -1,10 +1,11 @@
 ﻿using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Geometry
 {
@@ -60,7 +61,7 @@ If an object is in contact with another object, it is drawn yellow.",
       complexShape.Children.Add(new GeometricObject(new CircleShape(1), new Pose(new Vector3(0, 0, -1))));
       var geometricObjectC = new GeometricObject(
         complexShape,
-        new Pose(new Vector3(0, 2, 0), QuaternionF.CreateRotation(Vector3.UnitZ, new Vector3(1, 1, 1))));
+        new Pose(new Vector3(0, 2, 0), MathHelper.CreateRotation(Vector3.UnitZ, new Vector3(1, 1, 1))));
 
       // Create collision objects for the geometric objects.
       // (A collision object is just a wrapper around the geometric object that

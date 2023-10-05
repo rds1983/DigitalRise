@@ -32,7 +32,6 @@ namespace DigitalRise.Graphics.Effects
       //{ typeof(Matrix33F),  },
       { typeof(Matrix44F),    ValidateMatrix      },
       { typeof(Quaternion),   ValidateVector4     },
-      { typeof(QuaternionF),  ValidateVector4     },
       { typeof(float),        ValidateSingle      },
 #if !MONOGAME
       { typeof(string),       ValidateString      },
@@ -60,7 +59,6 @@ namespace DigitalRise.Graphics.Effects
       //{ typeof(Matrix33F),   (Action<EffectParameter, Matrix33F>)  ((parameter, value) => parameter.SetValue(value))             },
       { typeof(Matrix44F),   (Action<EffectParameter, Matrix44F>)  ((parameter, value) => parameter.SetValue((Matrix)value))     },
       { typeof(Quaternion),  (Action<EffectParameter, Quaternion>) ((parameter, value) => parameter.SetValue(value))             },
-      { typeof(QuaternionF), (Action<EffectParameter, QuaternionF>)((parameter, value) => parameter.SetValue((Quaternion)value)) },
       { typeof(float),       (Action<EffectParameter, float>)      ((parameter, value) => parameter.SetValue(value))             },
 #if !MONOGAME
       { typeof(string),      (Action<EffectParameter, string>)     ((parameter, value) => parameter.SetValue(value))             },
@@ -90,7 +88,6 @@ namespace DigitalRise.Graphics.Effects
 #if !MONOGAME
       { typeof(Quaternion),  (Action<EffectParameter, Quaternion[]>) ((parameter, value) => parameter.SetValue(value)) },
 #endif
-      //{ typeof(QuaternionF), (Action<EffectParameter, QuaternionF[]>)((parameter, value) => parameter.SetValue(value)) },
       { typeof(float),       (Action<EffectParameter, float[]>)      ((parameter, value) => parameter.SetValue(value)) },
       { typeof(Vector2),     (Action<EffectParameter, Vector2[]>)    ((parameter, value) => parameter.SetValue(value)) },
       { typeof(Vector3),     (Action<EffectParameter, Vector3[]>)    ((parameter, value) => parameter.SetValue(value)) },
@@ -216,9 +213,9 @@ namespace DigitalRise.Graphics.Effects
               if (parameter.ColumnCount == 2 && parameter.RowCount == 1)
                 return "Vector2";
               if (parameter.ColumnCount == 3 && parameter.RowCount == 1)
-                return "Vector3, Vector3";
+                return "Vector3";
               if (parameter.ColumnCount == 4 && parameter.RowCount == 1)
-                return "Vector4, Vector4, Quaternion, Quaternion4F";
+                return "Vector4, Quaternion";
               break;
             case EffectParameterClass.Matrix:
               return "Matrix, Matrix44F";

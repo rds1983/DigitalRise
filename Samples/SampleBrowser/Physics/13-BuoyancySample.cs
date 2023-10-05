@@ -163,7 +163,7 @@ namespace Samples.Physics
       {
         Vector3 position = RandomHelper.Random.NextVector3(-9, 9);
         position.Y = 5;
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody cylinder = new RigidBody(cylinderShape, cylinderMass, null)
         {

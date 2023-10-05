@@ -8,6 +8,7 @@ using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -280,8 +281,8 @@ namespace DigitalRise.Geometry.Shapes
       TriangleMesh mesh = new TriangleMesh();
 
       // The world space vertices are created by rotating "radius vectors" with this rotations.
-      QuaternionF rotationY = QuaternionF.CreateRotationY(alpha);
-      QuaternionF rotationZ = QuaternionF.CreateRotationZ(alpha);
+      Quaternion rotationY = MathHelper.CreateRotationY(alpha);
+      Quaternion rotationZ = MathHelper.CreateRotationZ(alpha);
 
       // We use two nested loops: In each loop a "radius vector" is rotated further to get a 
       // new vertex.

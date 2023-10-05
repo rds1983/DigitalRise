@@ -3,6 +3,7 @@ using DigitalRise.Animation.Character;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Animation
 {
@@ -114,7 +115,7 @@ namespace Samples.Animation
       var particleLocal = bonePoseWorld.Inverse.TransformPosition(_particlePosition);
 
       // Create rotation between the fixed point vector and the particle vector.
-      var boneTransform = new SrtTransform(QuaternionF.CreateRotation(Offset, particleLocal));
+      var boneTransform = new SrtTransform(MathHelper.CreateRotation(Offset, particleLocal));
       SkeletonPose.SetBoneTransform(BoneIndex, boneTransform);
     }
   }

@@ -127,7 +127,7 @@ performance improvement. (Hold <F4> to show/reset profiling data.)",
         randomPosition.Z = RandomHelper.Random.NextFloat(-LevelSize / 2, LevelSize / 2);
 
         // Create a random orientation.
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
 
         // Create object and add it to collision domain.
         var geometricObject = new GeometricObject(randomShape, new Pose(randomPosition, randomOrientation));

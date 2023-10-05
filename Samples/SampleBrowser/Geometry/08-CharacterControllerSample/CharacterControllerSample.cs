@@ -181,7 +181,7 @@ a more advanced, faster and more stable character controller implementation.",
       _pitch = MathHelper.Clamp(_pitch, -ConstantsF.PiOver2, ConstantsF.PiOver2);
 
       // Compute new orientation of the camera.
-      QuaternionF cameraOrientation = QuaternionF.CreateRotationY(_yaw) * QuaternionF.CreateRotationX(_pitch);
+      Quaternion cameraOrientation = MathHelper.CreateRotationY(_yaw) * MathHelper.CreateRotationX(_pitch);
 
       // Create velocity from WASD keys.
       // TODO: Diagonal movement is faster ;-). Fix this.
@@ -198,7 +198,7 @@ a more advanced, faster and more stable character controller implementation.",
 
       // Velocity vector is currently in view space. -z is the forward direction. 
       // We have to convert this vector to world space by rotating it.
-      velocityVector = QuaternionF.CreateRotationY(_yaw).Rotate(velocityVector);
+      velocityVector = MathHelper.CreateRotationY(_yaw).Rotate(velocityVector);
 
       // New compute desired character controller position in world space:
       Vector3 targetPosition = _character.Position + velocityVector;

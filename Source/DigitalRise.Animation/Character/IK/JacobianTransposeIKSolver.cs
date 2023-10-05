@@ -8,6 +8,7 @@ using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -344,7 +345,7 @@ namespace DigitalRise.Animation.Character
           float angle = velocities[i] * StepSize;
 
           // Apply rotation.
-          QuaternionF rotationChange = QuaternionF.CreateRotation(axis, angle);
+          Quaternion rotationChange = MathHelper.CreateRotation(axis, angle);
           SkeletonPose.RotateBoneAbsolute(currentBoneIndex, rotationChange);
 
           currentBoneIndex = skeleton.GetParent(currentBoneIndex);

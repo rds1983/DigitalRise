@@ -16,7 +16,7 @@ namespace DigitalRise.Animation.Traits.Tests
 
     private SrtTransform NextRandomValue()
     {
-      return new SrtTransform(new Vector3(_random.NextFloat(-10, 10)), _random.NextQuaternionF(), _random.NextVector3(-10, 10));
+      return new SrtTransform(new Vector3(_random.NextFloat(-10, 10)), _random.NextQuaternion(), _random.NextVector3(-10, 10));
     }
 
 
@@ -130,18 +130,18 @@ namespace DigitalRise.Animation.Traits.Tests
       Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Scale * w0 + value1.Scale * w1 + value2.Scale * w2, result.Scale));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Translation * w0 + value1.Translation * w1 + value2.Translation * w2, result.Translation));
 
-      QuaternionF expected;
+      Quaternion expected;
       expected = value0.Rotation * w0;
       // Consider "selective negation" when blending quaternions!
-      if (QuaternionF.Dot(expected, value1.Rotation) < 0)
+      if (Quaternion.Dot(expected, value1.Rotation) < 0)
         value1.Rotation = -value1.Rotation;
       expected += value1.Rotation * w1;
-      if (QuaternionF.Dot(expected, value2.Rotation) < 0)
+      if (Quaternion.Dot(expected, value2.Rotation) < 0)
         value2.Rotation = -value2.Rotation;
       expected += value2.Rotation * w2;
       expected.Normalize();
 
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(expected, result.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, result.Rotation));
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
@@ -60,7 +61,7 @@ realistic than using only uniform distributions.",
         Vector3 v = new Vector3(0, distance, 0);
 
         // Rotate v.
-        QuaternionF rotation = QuaternionF.CreateRotationZ(MathHelper.ToRadians(angle));
+        Quaternion rotation = MathHelper.CreateRotationZ(MathHelper.ToRadians(angle));
         v = rotation.Rotate(v);
 
         // Draw a small cross for the hit.

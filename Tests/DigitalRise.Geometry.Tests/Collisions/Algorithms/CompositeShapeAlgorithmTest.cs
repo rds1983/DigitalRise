@@ -53,7 +53,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(0, set[0].PenetrationDepth);
       Assert.AreEqual(new Vector3(0, 0, 3), set[0].PositionBWorld);
 
-      ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = set.Swapped; // new order: (a, b)
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(true, algo.HaveContact(a, b));

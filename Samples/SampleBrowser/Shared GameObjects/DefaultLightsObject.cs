@@ -3,8 +3,9 @@ using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples
 {
@@ -48,7 +49,7 @@ namespace Samples
 			{
 				Name = "KeyLight",
 				Priority = 10,   // This is the most important light.
-				PoseWorld = new Pose(QuaternionF.CreateRotation(Vector3.Forward, new Vector3(-0.5265408f, -0.5735765f, -0.6275069f))),
+				PoseWorld = new Pose(MathHelper.CreateRotation(Vector3.Forward, new Vector3(-0.5265408f, -0.5735765f, -0.6275069f))),
 			};
 
 			var fillLight = new DirectionalLight
@@ -60,7 +61,7 @@ namespace Samples
 			_fillLightNode = new LightNode(fillLight)
 			{
 				Name = "FillLight",
-				PoseWorld = new Pose(QuaternionF.CreateRotation(Vector3.Forward, new Vector3(0.7198464f, 0.3420201f, 0.6040227f))),
+				PoseWorld = new Pose(MathHelper.CreateRotation(Vector3.Forward, new Vector3(0.7198464f, 0.3420201f, 0.6040227f))),
 			};
 
 			var backLight = new DirectionalLight
@@ -72,7 +73,7 @@ namespace Samples
 			_backLightNode = new LightNode(backLight)
 			{
 				Name = "BackLight",
-				PoseWorld = new Pose(QuaternionF.CreateRotation(Vector3.Forward, new Vector3(0.4545195f, -0.7660444f, 0.4545195f))),
+				PoseWorld = new Pose(MathHelper.CreateRotation(Vector3.Forward, new Vector3(0.4545195f, -0.7660444f, 0.4545195f))),
 			};
 
 			var scene = _services.GetInstance<IScene>();

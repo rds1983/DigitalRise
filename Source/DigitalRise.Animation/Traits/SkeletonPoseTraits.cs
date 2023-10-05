@@ -220,7 +220,7 @@ namespace DigitalRise.Animation.Traits
         var nextRotation = nextTransforms[i].Rotation;
 
         // Get angle between quaternions:
-        //float cosθ = QuaternionF.Dot(rotation, nextRotation);
+        //float cosθ = Quaternion.Dot(rotation, nextRotation);
         float cosθ = rotation.W * nextRotation.W + rotation.X * nextRotation.X + rotation.Y * nextRotation.Y + rotation.Z * nextRotation.Z;
 
         // Invert one quaternion if we would move along the long arc of interpolation.

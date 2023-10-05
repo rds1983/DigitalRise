@@ -144,8 +144,8 @@ namespace DigitalRise.Animation.Character
       {
         var current = context.UncompressedKeyFrames[i];
         float parameter = (current.Time.Ticks - start.Time.Ticks) / ticks;
-        QuaternionF lerpedRotation = InterpolationHelper.Lerp(start.Transform.Rotation, end.Transform.Rotation, parameter);
-        float error = QuaternionF.GetAngle(current.Transform.Rotation, lerpedRotation);
+        Quaternion lerpedRotation = InterpolationHelper.Lerp(start.Transform.Rotation, end.Transform.Rotation, parameter);
+        float error = MathHelper.GetAngle(current.Transform.Rotation, lerpedRotation);
         if (error > maxError)
         {
           maxError = error;

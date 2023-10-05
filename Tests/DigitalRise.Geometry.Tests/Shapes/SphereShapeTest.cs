@@ -64,10 +64,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Aabb(), new SphereShape().GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
                      new SphereShape().GetAabb(new Pose(new Vector3(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+                                                                         MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
       Assert.AreEqual(new Aabb(new Vector3(0, 90, 990), new Vector3(20, 110, 1010)),
                      new SphereShape(10).GetAabb(new Pose(new Vector3(10, 100, 1000),
-                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+                                                                         MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
     }
 
 

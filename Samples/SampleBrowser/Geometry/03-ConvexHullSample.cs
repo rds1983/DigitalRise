@@ -31,7 +31,7 @@ tight-fitting oriented bounding box for any random point set.",
 
       // Apply random transformation to points to make this sample more interesting.
       Matrix44F transform = new Matrix44F(
-        Matrix33F.CreateRotation(RandomHelper.Random.NextQuaternionF()) * Matrix33F.CreateScale(RandomHelper.Random.NextVector3(0.1f, 2f)),
+        Matrix33F.CreateRotation(RandomHelper.Random.NextQuaternion()) * Matrix33F.CreateScale(RandomHelper.Random.NextVector3(0.1f, 2f)),
         RandomHelper.Random.NextVector3(-1, 1));
 
       for (int i = 0; i < points.Count; i++)

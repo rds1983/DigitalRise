@@ -7,7 +7,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -123,13 +123,13 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Aabb(), new RectangleShape().GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
                      new RectangleShape().GetAabb(new Pose(new Vector3(10, 100, -13),
-                                                                         QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+                                                                         MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
       Assert.AreEqual(new Aabb(new Vector3(5, 90, 1000), new Vector3(15, 110, 1000)),
                      new RectangleShape(10, 20).GetAabb(new Pose(new Vector3(10, 100, 1000),
-                                                                   QuaternionF.Identity)));
+                                                                   Quaternion.Identity)));
       Assert.AreEqual(new Aabb(new Vector3(5, 100, 990), new Vector3(15, 100, 1010)),
                      new RectangleShape(10, 20).GetAabb(new Pose(new Vector3(10, 100, 1000),
-                                                                   QuaternionF.CreateRotationX(ConstantsF.PiOver2))));
+                                                                   MathHelper.CreateRotationX(ConstantsF.PiOver2))));
       // TODO: Test complex rotations.
     }
 

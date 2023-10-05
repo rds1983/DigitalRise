@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
@@ -11,9 +11,9 @@ namespace DigitalRise.Animation.Tests
     [Test]
     public void GetEnumeratorTest()
     {
-      var collection = new KeyFrameCollection<QuaternionF>();
-      var keyFrame = new KeyFrame<QuaternionF>();
-      var keyFrame2 = new KeyFrame<QuaternionF>();
+      var collection = new KeyFrameCollection<Quaternion>();
+      var keyFrame = new KeyFrame<Quaternion>();
+      var keyFrame2 = new KeyFrame<Quaternion>();
       collection.Add(keyFrame);
       collection.Add(keyFrame2);
 

@@ -93,7 +93,7 @@ namespace Samples.Geometry
       {
         Pose pose = new Pose(
           new Vector3(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20)),
-          RandomHelper.Random.NextQuaternionF());
+          RandomHelper.Random.NextQuaternion());
         BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3(0.05f, 0.8f));
         AddObject("Stone" + i, pose, shape, collisionDomain);
       }
@@ -101,8 +101,8 @@ namespace Samples.Geometry
       // Create some slopes to see how our character performs on/under sloped surfaces.
       // Here we can test how the character controller behaves if the head touches an inclined
       // ceiling.
-      AddObject("SlopeGround", new Pose(new Vector3(-2, 1.8f, -12), QuaternionF.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
-      AddObject("SlopeRoof", new Pose(new Vector3(-2, 5.6f, -12), QuaternionF.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
+      AddObject("SlopeGround", new Pose(new Vector3(-2, 1.8f, -12), MathHelper.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
+      AddObject("SlopeRoof", new Pose(new Vector3(-2, 5.6f, -12), MathHelper.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), collisionDomain);
 
       // Slopes with different tilt angles.
       // The character controller has a slope limit. Only flat slopes should be climbable. 

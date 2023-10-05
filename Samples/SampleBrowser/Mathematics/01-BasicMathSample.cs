@@ -91,7 +91,7 @@ namespace Samples.Mathematics
 
       // Create a quaternion that represents a 50° rotation around the axis given
       // by rotationAxis.
-      QuaternionF rotation = QuaternionF.CreateRotation(rotationAxis, rotationAngle);
+      Quaternion rotation = MathHelper.CreateRotation(rotationAxis, rotationAngle);
 
       // Rotate the vector v using the rotation quaternion.
       Vector3 vRotated = rotation.Rotate(v);
@@ -127,7 +127,7 @@ namespace Samples.Mathematics
       Vector3 v0 = new Vector3(1000, 2000, 3000);
 
       // Define a rotation quaternion that rotates 360° around the x axis.
-      QuaternionF rotation = QuaternionF.CreateRotationX(MathHelper.ToRadians(360));
+      Quaternion rotation = MathHelper.CreateRotationX(MathHelper.ToRadians(360));
 
       // Rotate v0.
       Vector3 v1 = rotation.Rotate(v0);

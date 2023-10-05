@@ -129,7 +129,7 @@ text, points, lines, arrows, bounding boxes, geometric objects, ...",
       _debugRenderer.DrawAabb(new Aabb(new Vector3(-0.5f), new Vector3(0.5f)), new Pose(new Vector3(4, 0, -3)), Color.Yellow, true);
 
       // Box shapes
-      var orientation = random.NextQuaternionF();
+      var orientation = random.NextQuaternion();
       _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-6, 0, -5), orientation), new Color(255, 0, 0, 100), false, false);
       _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-6, 0, -5), orientation), Color.Green, true, false);
       _debugRenderer.DrawBox(1, 1, 1, new Pose(new Vector3(-4, 0, -5), orientation), Color.Yellow, true, true);

@@ -119,43 +119,43 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpQuaternionF()
+    public void LerpQuaternion()
     {
       // Warning: The not all results are not verified
-      QuaternionF q1 = new QuaternionF(1.0f, 2.0f, 3.0f, 4.0f).Normalized;
-      QuaternionF q2 = new QuaternionF(2.0f, 4.0f, 6.0f, 8.0f).Normalized;
-      QuaternionF lerp = InterpolationHelper.Lerp(q1, q2, 0.75f);
-      Assert.IsTrue(lerp.IsNumericallyNormalized);
+      Quaternion q1 = new Quaternion(2.0f, 3.0f, 4.0f, 1.0f).Normalized();
+      Quaternion q2 = new Quaternion(4.0f, 6.0f, 8.0f, 2.0f).Normalized();
+      Quaternion lerp = InterpolationHelper.Lerp(q1, q2, 0.75f);
+      Assert.IsTrue(lerp.IsNumericallyNormalized());
 
       lerp = InterpolationHelper.Lerp(q1, q2, 0);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q1, lerp));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, lerp));
 
       lerp = InterpolationHelper.Lerp(q1, q2, 1);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q2, lerp));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, lerp));
 
-      q1 = QuaternionF.Identity;
-      q2 = QuaternionF.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
+      q1 = Quaternion.Identity;
+      q2 = MathHelper.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       Vector3 v = lerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
 
-      q1 = QuaternionF.Identity;
-      q2 = QuaternionF.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
+      q1 = Quaternion.Identity;
+      q2 = MathHelper.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitZ);
       result = new Vector3(1.0f, 0.0f, 1.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
 
-      q1 = QuaternionF.Identity;
-      q2 = QuaternionF.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
+      q1 = Quaternion.Identity;
+      q2 = MathHelper.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitY);
       result = new Vector3(0.0f, 1.0f, 1.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
 
-      q1 = new QuaternionF(-1.0f, 0.0f, 0.0f, 0.0f);
-      q2 = QuaternionF.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
+      q1 = new Quaternion(0.0f, 0.0f, 0.0f, -1.0f);
+      q2 = MathHelper.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitX);
       result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
@@ -485,28 +485,28 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     public void SlerpSinglePrecision()
     {
       // Warning: The not all results are not verified
-      QuaternionF q1 = new QuaternionF(1.0f, 2.0f, 3.0f, 4.0f).Normalized;
-      QuaternionF q2 = new QuaternionF(2.0f, 4.0f, 6.0f, 8.0f).Normalized;
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.75f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = new Quaternion(2.0f, 3.0f, 4.0f, 1.0f).Normalized();
+      Quaternion q2 = new Quaternion(6.0f, 8.0f, 2.0f, 4.0f).Normalized();
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.75f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
 
       slerp = InterpolationHelper.Slerp(q1, q2, 0);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q1, slerp));
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, slerp));
 
       slerp = InterpolationHelper.Slerp(q1, q2, 1);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q2, slerp));
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, slerp));
     }
 
 
     [Test]
     public void SlerpZSinglePrecision()
     {
-      QuaternionF q1 = QuaternionF.Identity;
-      QuaternionF q2 = QuaternionF.CreateRotation(Vector3.UnitZ, (float)Math.PI / 2);
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = Quaternion.Identity;
+      Quaternion q2 = MathHelper.CreateRotation(Vector3.UnitZ, (float)Math.PI / 2);
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
@@ -516,10 +516,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void SlerpYSinglePrecision()
     {
-      QuaternionF q1 = QuaternionF.Identity;
-      QuaternionF q2 = QuaternionF.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = Quaternion.Identity;
+      Quaternion q2 = MathHelper.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitZ);
       Vector3 result = new Vector3(1.0f, 0.0f, 1.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
@@ -529,10 +529,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void SlerpXSinglePrecision()
     {
-      QuaternionF q1 = QuaternionF.Identity;
-      QuaternionF q2 = QuaternionF.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = Quaternion.Identity;
+      Quaternion q2 = MathHelper.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitY);
       Vector3 result = new Vector3(0.0f, 1.0f, 1.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
@@ -542,10 +542,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void SlerpNegatedSinglePrecision()
     {
-      QuaternionF q1 = new QuaternionF(-1.0f, 0.0f, 0.0f, 0.0f);
-      QuaternionF q2 = QuaternionF.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = new Quaternion(0.0f, 0.0f, 0.0f, -1.0f);
+      Quaternion q2 = MathHelper.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
@@ -555,18 +555,18 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void SlerpGeneralSinglePrecision()
     {
-      QuaternionF q1 = QuaternionF.CreateRotation(-Vector3.UnitY, (float) Math.PI / 2);
-      QuaternionF q2 = QuaternionF.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
-      QuaternionF slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Quaternion q1 = MathHelper.CreateRotation(-Vector3.UnitY, (float) Math.PI / 2);
+      Quaternion q2 = MathHelper.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
+      Quaternion slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f / 3.0f, 2.0f / 3.0f, 2.0f / 3.0f);  // I hope this is correct.
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
 
-      q1 = QuaternionF.CreateRotation(-Vector3.UnitY, (float) Math.PI / 2);
-      q2 = QuaternionF.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
+      q1 = MathHelper.CreateRotation(-Vector3.UnitY, (float) Math.PI / 2);
+      q2 = MathHelper.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
       slerp = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(slerp.IsNumericallyNormalized);
+      Assert.IsTrue(slerp.IsNumericallyNormalized());
       v = slerp.Rotate(Vector3.UnitX);
       result = new Vector3(1.0f / 3.0f, 2.0f / 3.0f, 2.0f / 3.0f);  // I hope this is correct.
       Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
@@ -576,26 +576,26 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void SquadSinglePrecision()
     {
-      QuaternionF q0 = QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.3f);
-      QuaternionF q1 = QuaternionF.CreateRotation(new Vector3(1, 0, 1), 0.4f);
-      QuaternionF q2 = QuaternionF.CreateRotation(new Vector3(1, 0, -1), -0.6f);
-      QuaternionF q3 = QuaternionF.CreateRotation(new Vector3(0, 1, 1), 0.2f);
+      Quaternion q0 = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.3f);
+      Quaternion q1 = MathHelper.CreateRotation(new Vector3(1, 0, 1), 0.4f);
+      Quaternion q2 = MathHelper.CreateRotation(new Vector3(1, 0, -1), -0.6f);
+      Quaternion q3 = MathHelper.CreateRotation(new Vector3(0, 1, 1), 0.2f);
 
-      QuaternionF q, a, b, p;
-      QuaternionF expected;
+      Quaternion q, a, b, p;
+      Quaternion expected;
 
       InterpolationHelper.SquadSetup(q0, q1, q2, q3, out q, out a, out b, out p);
 
       // t = 0
-      QuaternionF result = InterpolationHelper.Squad(q, a, b, p, 0.0f);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q1, result));
+      Quaternion result = InterpolationHelper.Squad(q, a, b, p, 0.0f);
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, result));
 
       // t = 1.0f
       result = InterpolationHelper.Squad(q, a, b, p, 1.0f);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(q2, result));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, result));
 
       // Check series (just for debugging)
-      QuaternionF r1, r2, r3, r4, r5, r6, r7, r8, r9;
+      Quaternion r1, r2, r3, r4, r5, r6, r7, r8, r9;
       r1 = InterpolationHelper.Squad(q, a, b, p, 0.1f);
       r2 = InterpolationHelper.Squad(q, a, b, p, 0.2f);
       r3 = InterpolationHelper.Squad(q, a, b, p, 0.3f);
@@ -610,7 +610,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       InterpolationHelper.SquadSetup(q1, q1, q2, q2, out q, out a, out b, out p);
       result = InterpolationHelper.Squad(q, a, b, p, 0.5f);
       expected = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(expected, result));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, result));
     }
 
 

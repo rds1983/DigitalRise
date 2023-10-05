@@ -32,9 +32,9 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animation2 = new AnimationClip<QuaternionF>
+      var animation2 = new AnimationClip<Quaternion>
       {
-        Animation = new QuaternionFFromToByAnimation
+        Animation = new QuaternionFromToByAnimation
         {
           Duration = TimeSpan.FromSeconds(5.0),
         },

@@ -416,7 +416,7 @@ can be observed between the big grid and the smaller transparent figures.",
       gridNode2.Name = "Grid (Clone)";
       ((FigureNode)gridNode2.Children[0]).StrokeColor = new Vector3(0, 0.8f, 0.2f);
       ((FigureNode)gridNode2.Children[1]).StrokeColor = new Vector3(0, 0.8f, 0.2f);
-      gridNode2.PoseLocal = new Pose(new Vector3(-4, 3, 0), RandomHelper.Random.NextQuaternionF());
+      gridNode2.PoseLocal = new Pose(new Vector3(-4, 3, 0), RandomHelper.Random.NextQuaternion());
       gridNode2.ScaleLocal = new Vector3(0.2f, 1, 0.1f);
       _scene.Children.Add(gridNode2);
     }
@@ -435,7 +435,7 @@ can be observed between the big grid and the smaller transparent figures.",
       });
       for (int i = 1; i < 10; i++)
       {
-        point += RandomHelper.Random.NextQuaternionF().Rotate(new Vector3(0, 0.5f, 0));
+        point += RandomHelper.Random.NextQuaternion().Rotate(new Vector3(0, 0.5f, 0));
         path.Add(new PathKey3F
         {
           Interpolation = SplineInterpolation.CatmullRom,

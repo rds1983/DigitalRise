@@ -48,7 +48,7 @@ namespace Samples.Physics
       Shape saucerShape = (Shape)_saucerModelNode.UserData;
       _saucerBody = new RigidBody(saucerShape)
       {
-        Pose = new Pose(new Vector3(0, 2, 0), RandomHelper.Random.NextQuaternionF())
+        Pose = new Pose(new Vector3(0, 2, 0), RandomHelper.Random.NextQuaternion())
       };
       Simulation.RigidBodies.Add(_saucerBody);
     }

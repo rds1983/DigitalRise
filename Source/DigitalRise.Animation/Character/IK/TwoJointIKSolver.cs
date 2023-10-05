@@ -208,7 +208,7 @@ namespace DigitalRise.Animation.Character
     /// according to the orientation of the bar.
     /// </para>
     /// </remarks>
-    public QuaternionF? TipBoneOrientation { get; set; }
+    public Quaternion? TipBoneOrientation { get; set; }
     #endregion
 
 
@@ -306,8 +306,8 @@ namespace DigitalRise.Animation.Character
       {
         rootToTip /= rootToTipLength;
         
-        var rotation = QuaternionF.CreateRotation(rootToTip, rootToTarget);
-        if (rotation.Angle > Numeric.EpsilonF)
+        var rotation = MathHelper.CreateRotation(rootToTip, rootToTarget);
+        if (rotation.Angle() > Numeric.EpsilonF)
         {
           // Apply rotation to root bone.
           rootBonePoseAbsolute.Rotation = rotation * rootBonePoseAbsolute.Rotation;
@@ -360,7 +360,7 @@ namespace DigitalRise.Animation.Character
 
       // Compute delta rotation between current and desired angle.
       float deltaAngle = desiredHingeAngle - currentHingeAngle;
-      var hingeRotation = QuaternionF.CreateRotation(hingeAxis, deltaAngle);
+      var hingeRotation = MathHelper.CreateRotation(hingeAxis, deltaAngle);
       hingeBonePoseAbsolute.Rotation = hingeRotation * hingeBonePoseAbsolute.Rotation;
 
       // Update tip position.
@@ -374,7 +374,7 @@ namespace DigitalRise.Animation.Character
       if (!Numeric.IsZero(rootToTipLength))
       {
         rootToTip /= rootToTipLength;
-        var rotation = QuaternionF.CreateRotation(rootToTip, rootToTarget);
+        var rotation = MathHelper.CreateRotation(rootToTip, rootToTarget);
         rootBonePoseAbsolute.Rotation = rotation * rootBonePoseAbsolute.Rotation;
         hingeBonePoseAbsolute.Rotation = rotation * hingeBonePoseAbsolute.Rotation;
       }

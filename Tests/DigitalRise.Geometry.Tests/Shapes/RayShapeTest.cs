@@ -122,7 +122,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Aabb(new Vector3(0, 0, 0), new Vector3(100, 0, 0)), new RayShape().GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(11, 102, 1003), new Vector3(11, 112, 1003)),
                      new RayShape(new Vector3(1, 2, 3), new Vector3(0, 1, 0), 10).GetAabb(new Pose(new Vector3(10, 100, 1000),
-                                                                         QuaternionF.Identity)));
+                                                                         Quaternion.Identity)));
     }
 
 

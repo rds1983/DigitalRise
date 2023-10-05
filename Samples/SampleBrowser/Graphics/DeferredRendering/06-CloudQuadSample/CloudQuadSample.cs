@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.Rendering;
@@ -9,8 +8,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using MathHelper = Microsoft.Xna.Framework.MathHelper;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Graphics
 {
@@ -59,7 +57,7 @@ update the new effect parameters used by Cloud.fx.",
       GameObjectService.Objects.Add(new LavaBallsObject(Services));
       GameObjectService.Objects.Add(new FogObject(Services));
       GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Barrier.drmdl", 0.9f, new Pose(new Vector3(0, 0, -2))));
-      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3(3, 0, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(-20)))));
+      GameObjectService.Objects.Add(new StaticObject(Services, "Barrier/Cylinder.drmdl", 0.9f, new Pose(new Vector3(3, 0, 0), MathHelper.CreateRotationY(MathHelper.ToRadians(-20)))));
 
       // The DynamicSkyObject creates the dynamic sky and lights but no clouds.
       var dynamicSkyObject = new DynamicSkyObject(Services, false, false, false);
@@ -142,4 +140,3 @@ update the new effect parameters used by Cloud.fx.",
     }
   }
 }
-#endif

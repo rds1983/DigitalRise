@@ -2,12 +2,12 @@
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples
 {
@@ -68,7 +68,7 @@ namespace Samples
       {
         Name = "Sunlight",
         Priority = 10,   // This is the most important light.
-        PoseWorld = new Pose(QuaternionF.CreateRotationY(-1.4f) * QuaternionF.CreateRotationX(-0.6f)),
+        PoseWorld = new Pose(MathHelper.CreateRotationY(-1.4f) * MathHelper.CreateRotationX(-0.6f)),
 
         // This light uses Cascaded Shadow Mapping.
         Shadow = new CascadedShadow

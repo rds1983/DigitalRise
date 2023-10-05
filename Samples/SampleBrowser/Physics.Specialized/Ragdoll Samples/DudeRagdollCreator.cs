@@ -10,6 +10,7 @@ using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.Materials;
 using DigitalRise.Physics.Specialized;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Animation
 {
@@ -64,7 +65,7 @@ namespace Samples.Animation
 
       var neck = skeleton.GetIndex("Neck");
       ragdoll.Bodies[neck] = new RigidBody(new CapsuleShape(0.12f * scale, 0.3f * scale), massFrame, material);
-      ragdoll.BodyOffsets[neck] = new Pose(new Vector3(0.15f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[neck] = new Pose(new Vector3(0.15f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       ragdoll.Bodies[neck].CollisionObject.Enabled = false;
 
       ragdoll.Bodies[head] = new RigidBody(new SphereShape(0.2f * scale), massFrame, material);
@@ -72,11 +73,11 @@ namespace Samples.Animation
 
       var armUpperLeft = skeleton.GetIndex("L_UpperArm");
       ragdoll.Bodies[armUpperLeft] = new RigidBody(new CapsuleShape(0.12f * scale, 0.6f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armUpperLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armUpperLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var armLowerLeft = skeleton.GetIndex("L_Forearm");
       ragdoll.Bodies[armLowerLeft] = new RigidBody(new CapsuleShape(0.08f * scale, 0.5f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armLowerLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armLowerLeft] = new Pose(new Vector3(0.2f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var handLeft = skeleton.GetIndex("L_Hand");
       ragdoll.Bodies[handLeft] = new RigidBody(new BoxShape(0.2f * scale, 0.06f * scale, 0.15f * scale), massFrame, material);
@@ -84,11 +85,11 @@ namespace Samples.Animation
 
       var armUpperRight = skeleton.GetIndex("R_UpperArm");
       ragdoll.Bodies[armUpperRight] = new RigidBody(new CapsuleShape(0.12f * scale, 0.6f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armUpperRight] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armUpperRight] = new Pose(new Vector3(0.2f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var armLowerRight = skeleton.GetIndex("R_Forearm");
       ragdoll.Bodies[armLowerRight] = new RigidBody(new CapsuleShape(0.08f * scale, 0.5f * scale), massFrame, material);
-      ragdoll.BodyOffsets[armLowerRight] = new Pose(new Vector3(0.2f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[armLowerRight] = new Pose(new Vector3(0.2f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var handRight = skeleton.GetIndex("R_Hand");
       ragdoll.Bodies[handRight] = new RigidBody(new BoxShape(0.2f * scale, 0.06f * scale, 0.15f * scale), massFrame, material);
@@ -96,11 +97,11 @@ namespace Samples.Animation
 
       var legUpperLeft = skeleton.GetIndex("L_Thigh1");
       ragdoll.Bodies[legUpperLeft] = new RigidBody(new CapsuleShape(0.16f * scale, 0.8f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legUpperLeft] = new Pose(new Vector3(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legUpperLeft] = new Pose(new Vector3(0.4f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var legLowerLeft = skeleton.GetIndex("L_Knee2");
       ragdoll.Bodies[legLowerLeft] = new RigidBody(new CapsuleShape(0.12f * scale, 0.65f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legLowerLeft] = new Pose(new Vector3(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legLowerLeft] = new Pose(new Vector3(0.32f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       //var footLeft = skeleton.GetIndex("L_Ankle1");
       ragdoll.Bodies[footLeft] = new RigidBody(new BoxShape(0.20f * scale, 0.5f * scale, 0.3f * scale), massFrame, material);
@@ -108,11 +109,11 @@ namespace Samples.Animation
 
       var legUpperRight = skeleton.GetIndex("R_Thigh");
       ragdoll.Bodies[legUpperRight] = new RigidBody(new CapsuleShape(0.16f * scale, 0.8f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legUpperRight] = new Pose(new Vector3(0.4f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legUpperRight] = new Pose(new Vector3(0.4f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var legLowerRight = skeleton.GetIndex("R_Knee");
       ragdoll.Bodies[legLowerRight] = new RigidBody(new CapsuleShape(0.12f * scale, 0.65f * scale), massFrame, material);
-      ragdoll.BodyOffsets[legLowerRight] = new Pose(new Vector3(0.32f * scale, 0, 0), QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ragdoll.BodyOffsets[legLowerRight] = new Pose(new Vector3(0.32f * scale, 0, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
 
       var footRight = skeleton.GetIndex("R_Ankle");
       ragdoll.Bodies[footRight] = new RigidBody(new BoxShape(0.20f * scale, 0.5f * scale, 0.3f * scale), massFrame, material);

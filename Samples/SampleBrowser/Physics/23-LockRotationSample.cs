@@ -40,7 +40,7 @@ bodies are locked. - Just to demonstrate the effect of the RigidBody.LockRotatio
       {
         Vector3 position = RandomHelper.Random.NextVector3(-10, 10);
         position.Y = 5;
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(boxShape)
         {
@@ -57,7 +57,7 @@ bodies are locked. - Just to demonstrate the effect of the RigidBody.LockRotatio
       {
         Vector3 randomPosition = RandomHelper.Random.NextVector3(-10, 10);
         randomPosition.Y = 5;
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(capsuleShape)
         {

@@ -297,7 +297,7 @@ namespace DigitalRise.Graphics
       SpecularIntensity = 1;
       HdrScale = 1;
       _falloffAngle = 20.0f * ConstantsF.Pi / 180;
-      Shape = new TransformedShape(new GeometricObject(new ConeShape((float)Math.Tan(MathHelper.ToRadians(30)) * 5, 5), new Pose(new Vector3(0, 0, -5), QuaternionF.CreateRotationX(ConstantsF.PiOver2))));
+      Shape = new TransformedShape(new GeometricObject(new ConeShape((float)Math.Tan(MathHelper.ToRadians(30)) * 5, 5), new Pose(new Vector3(0, 0, -5), MathHelper.CreateRotationX(ConstantsF.PiOver2))));
       Attenuation = 2;
     }
     #endregion

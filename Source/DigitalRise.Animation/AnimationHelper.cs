@@ -10,6 +10,7 @@ using DigitalRise.Linq;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation
 {
@@ -510,24 +511,24 @@ namespace DigitalRise.Animation
     /// <paramref name="currentOrientation"/>, it will arrive at <paramref name="targetOrientation"/>
     /// after <paramref name="deltaTime"/> seconds.
     /// </returns>
-    public static Vector3 ComputeAngularVelocity(QuaternionF currentOrientation, QuaternionF targetOrientation, float deltaTime)
+    public static Vector3 ComputeAngularVelocity(Quaternion currentOrientation, Quaternion targetOrientation, float deltaTime)
     {
       if (Numeric.IsZero(deltaTime))
         return Vector3.Zero;
 
       // ----- Angular Velocity
-      QuaternionF orientationDelta = targetOrientation * currentOrientation.Conjugated;
+      Quaternion orientationDelta = targetOrientation * currentOrientation.Conjugated();
 
       // Make sure we move along the shortest arc.
-      if (QuaternionF.Dot(currentOrientation, targetOrientation) < 0)
+      if (Quaternion.Dot(currentOrientation, targetOrientation) < 0)
         orientationDelta = -orientationDelta;
 
       // Determine the angular velocity that rotates the body.
-      Vector3 rotationAxis = orientationDelta.Axis;
+      Vector3 rotationAxis = orientationDelta.Axis();
       if (!rotationAxis.IsNumericallyZero())
       {
         // The angular velocity is computed as rotationAxis * rotationSpeed.
-        float rotationSpeed = (orientationDelta.Angle / deltaTime);
+        float rotationSpeed = (orientationDelta.Angle() / deltaTime);
         return rotationAxis * rotationSpeed;
       }
 
@@ -550,7 +551,7 @@ namespace DigitalRise.Animation
     /// </returns>
     public static Vector3 ComputeAngularVelocity(Matrix33F currentOrientation, Matrix33F targetOrientation, float deltaTime)
     {
-      return ComputeAngularVelocity(QuaternionF.CreateRotation(currentOrientation), QuaternionF.CreateRotation(targetOrientation), deltaTime);
+      return ComputeAngularVelocity(MathHelper.CreateRotation(currentOrientation), MathHelper.CreateRotation(targetOrientation), deltaTime);
     }
   }
 }

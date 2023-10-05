@@ -2,7 +2,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -87,15 +87,15 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       Assert.AreEqual(new Aabb(), new Aabb().GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(10, 100, 1000), new Vector3(10, 100, 1000)),
-                      new Aabb().GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+                      new Aabb().GetAabb(new Pose(new Vector3(10, 100, 1000), Quaternion.Identity)));
       Assert.AreEqual(new Aabb(new Vector3(10, 100, 1000), new Vector3(10, 100, 1000)),
-                      new Aabb().GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.CreateRotation(new Vector3(1, 2, 3), 0.7f))));
+                      new Aabb().GetAabb(new Pose(new Vector3(10, 100, 1000), MathHelper.CreateRotation(new Vector3(1, 2, 3), 0.7f))));
       
       
       Aabb aabb = new Aabb(new Vector3(1, 10, 100), new Vector3(2, 20, 200));
       Assert.AreEqual(aabb, aabb.GetAabb(Pose.Identity));
       Assert.AreEqual(new Aabb(new Vector3(11, 110, 1100), new Vector3(12, 120, 1200)),
-                      aabb.GetAabb(new Pose(new Vector3(10, 100, 1000), QuaternionF.Identity)));
+                      aabb.GetAabb(new Pose(new Vector3(10, 100, 1000), Quaternion.Identity)));
       // TODO: Test rotations.
     }
 

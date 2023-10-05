@@ -9,6 +9,7 @@ using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -330,7 +331,7 @@ namespace DigitalRise.Geometry.Shapes
       alpha = ConstantsF.TwoPi / numberOfSegments;
 
       Vector3 r0 = new Vector3(Radius, 0, 0);
-      QuaternionF rotation = QuaternionF.CreateRotationY(alpha);
+      Quaternion rotation = MathHelper.CreateRotationY(alpha);
 
       TriangleMesh mesh = new TriangleMesh();
 

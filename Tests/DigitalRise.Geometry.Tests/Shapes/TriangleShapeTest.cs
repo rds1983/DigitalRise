@@ -137,11 +137,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(new Aabb(), new TriangleShape().GetAabb(Pose.Identity));
     //  Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
     //                 new TriangleShape().GetAabb(new Pose(new Vector3(10, 100, -13),
-    //                                                                     QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+    //                                                                     MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
     //  Assert.AreEqual(new Aabb(new Vector3(11, 102, 1003), new Vector3(11, 102, 1003)),
     //                 new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000),
-    //                                                                     QuaternionF.Identity)));
-    //  QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f);
+    //                                                                     Quaternion.Identity)));
+    //  Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
     //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));

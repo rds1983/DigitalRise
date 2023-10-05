@@ -44,7 +44,7 @@ namespace DigitalRise.Animation
     /// Gets or sets the animation of the <see cref="SrtTransform.Rotation"/> value.
     /// </summary>
     /// <value>The animation of the <see cref="SrtTransform.Rotation"/> value.</value>
-    public IAnimation<QuaternionF> Rotation { get; set; }
+    public IAnimation<Quaternion> Rotation { get; set; }
 
 
     /// <summary>
@@ -80,7 +80,7 @@ namespace DigitalRise.Animation
     /// <param name="scale">The animation of the <see cref="SrtTransform.Scale"/> component.</param>
     /// <param name="rotation">The animation of the <see cref="SrtTransform.Rotation"/> component.</param>
     /// <param name="translation">The animation of the <see cref="SrtTransform.Translation"/> component.</param>
-    public SrtAnimation(IAnimation<Vector3> scale, IAnimation<QuaternionF> rotation, IAnimation<Vector3> translation)
+    public SrtAnimation(IAnimation<Vector3> scale, IAnimation<Quaternion> rotation, IAnimation<Vector3> translation)
     {
       Scale = scale;
       Rotation = rotation;

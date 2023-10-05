@@ -151,7 +151,7 @@ namespace DigitalRise.Graphics.Effects
       if (bindingQ != null)
         return ToVector(bindingQ.Value);
 
-      var bindingQF = binding as EffectParameterBinding<QuaternionF>;
+      var bindingQF = binding as EffectParameterBinding<Quaternion>;
       if (bindingQF != null)
         return ToVector(bindingQF.Value);
 
@@ -160,12 +160,6 @@ namespace DigitalRise.Graphics.Effects
 
 
     private static Vector4 ToVector(Quaternion quaternion)
-    {
-      return new Vector4(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
-    }
-
-
-    private static Vector4 ToVector(QuaternionF quaternion)
     {
       return new Vector4(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
     }

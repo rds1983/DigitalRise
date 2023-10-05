@@ -7,10 +7,10 @@ using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Geometry
 {
@@ -33,12 +33,12 @@ contacts. This works only for a contact set of two triangle mesh shapes!",
       // Create two collision objects with triangle mesh shapes.
       var meshA = new SphereShape(1).GetMesh(0.01f, 4);
       var shapeA = new TriangleMeshShape(meshA, true) { Partition = new CompressedAabbTree() };
-      var poseA = new Pose(new Vector3(-1, 0, 0), RandomHelper.Random.NextQuaternionF());
+      var poseA = new Pose(new Vector3(-1, 0, 0), RandomHelper.Random.NextQuaternion());
       var collisionObjectA = new CollisionObject(new GeometricObject(shapeA, poseA));
 
       var meshB = new BoxShape(0.2f, 2, 1f).GetMesh(0.01f, 4);
       var shapeB = new TriangleMeshShape(meshB, true) { Partition = new CompressedAabbTree() };
-      var poseB = new Pose(new Vector3(0.1f, 0, 0), RandomHelper.Random.NextQuaternionF());
+      var poseB = new Pose(new Vector3(0.1f, 0, 0), RandomHelper.Random.NextQuaternion());
       var collisionObjectB = new CollisionObject(new GeometricObject(shapeB, poseB));
 
       // Explicitly create a contact set. (Normally you would get the contact set
@@ -193,7 +193,7 @@ namespace Samples.Geometry
         var pose = new Pose(");
       Append(text, co.GeometricObject.Pose.Position);
       text.Append(", ");
-      Append(text, QuaternionF.CreateRotation(co.GeometricObject.Pose.Orientation));
+      Append(text, MathHelper.CreateRotation(co.GeometricObject.Pose.Orientation));
       text.Append(@");
         var scale = ");
       Append(text, co.GeometricObject.Scale);
@@ -236,9 +236,9 @@ namespace Samples.Geometry
     }
 
 
-    private static void Append(StringBuilder text, QuaternionF q)
+    private static void Append(StringBuilder text, Quaternion q)
     {
-      text.Append(string.Format(CultureInfo.InvariantCulture, "new QuaternionF({0}f, {1}f, {2}f, {3}f)",
+      text.Append(string.Format(CultureInfo.InvariantCulture, "new Quaternion({0}f, {1}f, {2}f, {3}f)",
         q.W, q.X, q.Y, q.Z));
     }
 

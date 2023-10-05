@@ -38,7 +38,7 @@ namespace Samples.Graphics
       model = model.Clone();
 
       // Position the model and add it to the scene.
-      model.PoseWorld = new Pose(RandomHelper.Random.NextQuaternionF());
+      model.PoseWorld = new Pose(RandomHelper.Random.NextQuaternion());
       model.ScaleLocal = new Vector3(0.4f);
       GraphicsScreen.Scene.Children.Add(model);
 

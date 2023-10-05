@@ -130,7 +130,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
                       new HeightField(0, 0, 10, 20, _samples, 3, 8) { Depth = 0 }.GetAabb(Pose.Identity));
 
       // Now with pose.
-      QuaternionF rotation = QuaternionF.CreateRotationX(0.2f);
+      Quaternion rotation = MathHelper.CreateRotationX(0.2f);
       Pose pose = new Pose(new Vector3(1, 1, 1), rotation);
       _field.Depth = 0;
       var box = new TransformedShape(

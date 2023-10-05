@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
 using AssetManagementBase;
 using DigitalRise.Animation.Character;
 using DigitalRise.Character.Skeleton_Animations;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.Effects;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using glTFLoader;
 using glTFLoader.Schema;
@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json.Linq;
 using static glTFLoader.Schema.AnimationChannelTarget;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -502,7 +503,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
 				var translation = gltfNode.Translation != null ? gltfNode.Translation.ToVector3() : Vector3.Zero;
 				var scale = gltfNode.Scale != null ? gltfNode.Scale.ToVector3() : Vector3.One;
-				var rotation = gltfNode.Rotation != null ? gltfNode.Rotation.ToQuaternion() : QuaternionF.Identity;
+				var rotation = gltfNode.Rotation != null ? gltfNode.Rotation.ToQuaternion() : Quaternion.Identity;
 
 				node.PoseLocal = new Pose(translation, rotation);
 				node.ScaleLocal = scale;
@@ -650,10 +651,9 @@ namespace DigitalRise.Graphics.SceneGraph
 
 							if (nodeAnimation.Rotations != null)
 							{
-								var defaultRotation = QuaternionF.CreateRotation(node.PoseLocal.Orientation);
+								var defaultRotation = MathHelper.CreateRotation(node.PoseLocal.Orientation);
 								defaultRotation.Conjugate();
-								var b = new QuaternionF(nodeAnimation.Rotations[i].W, nodeAnimation.Rotations[i].X, nodeAnimation.Rotations[i].Y, nodeAnimation.Rotations[i].Z);
-								nodeAnimation.Rotations[i] = (defaultRotation * b).ToXna();
+								nodeAnimation.Rotations[i] = (defaultRotation * nodeAnimation.Rotations[i]);
 							}
 
 							if (nodeAnimation.Scales != null)

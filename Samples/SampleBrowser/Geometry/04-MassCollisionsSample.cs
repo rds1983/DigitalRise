@@ -191,14 +191,14 @@ and bounce off of each other.",
         // Create an object with the random shape, pose, color and velocity.
         Pose randomPose = new Pose(
           random.NextVector3(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
-          random.NextQuaternionF());
+          random.NextQuaternion());
 
         var newObject = new MovingGeometricObject
         {
           Pose = randomPose,
           Shape = randomShape,
-          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
-          AngularVelocity = random.NextQuaternionF().Rotate(Vector3.Forward)
+          LinearVelocity = random.NextQuaternion().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
+          AngularVelocity = random.NextQuaternion().Rotate(Vector3.Forward)
                             * RandomHelper.Random.NextFloat(0, MaxAngularVelocity),
         };
 

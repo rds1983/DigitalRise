@@ -7,6 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms
 {
@@ -54,18 +55,18 @@ namespace DigitalRise.Geometry.Collisions.Algorithms
 
       // qEnd = ∆q * qStart 
       // => ∆q = qEnd * qStart.Inverse
-      QuaternionF qA = QuaternionF.CreateRotation(targetPoseA.Orientation * startPoseA.Orientation.Transposed);
+      Quaternion qA = MathHelper.CreateRotation(targetPoseA.Orientation * startPoseA.Orientation.Transposed);
 
       // ω = ∆α / ∆t, ∆t = 1
       // => ω = ∆α
-      float ωA = qA.Angle;                                                        // Magnitude |ω|
-      Vector3 ωAxisA = (!Numeric.AreEqual(qA.W, 1)) ? qA.Axis : Vector3.UnitX;  // Rotation axis of ω
+      float ωA = qA.Angle();                                                        // Magnitude |ω|
+      Vector3 ωAxisA = (!Numeric.AreEqual(qA.W, 1)) ? qA.Axis() : Vector3.UnitX;  // Rotation axis of ω
 
       // Get angular velocity ω of object B (as magnitude + rotation axis).
       // (Same as above.)
-      QuaternionF qB = QuaternionF.CreateRotation(targetPoseB.Orientation * startPoseB.Orientation.Transposed);
-      float ωB = qB.Angle;                                                        // Magnitude |ω|
-      Vector3 ωAxisB = (!Numeric.AreEqual(qB.W, 1)) ? qB.Axis : Vector3.UnitX;  // Rotation axis of ω
+      Quaternion qB = MathHelper.CreateRotation(targetPoseB.Orientation * startPoseB.Orientation.Transposed);
+      float ωB = qB.Angle();                                                        // Magnitude |ω|
+      Vector3 ωAxisB = (!Numeric.AreEqual(qB.W, 1)) ? qB.Axis() : Vector3.UnitX;  // Rotation axis of ω
 
       // Bounding sphere radii.
       float rMaxA = GetBoundingRadius(geometricObjectA);

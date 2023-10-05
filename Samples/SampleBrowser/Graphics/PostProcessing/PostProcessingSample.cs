@@ -2,11 +2,10 @@
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Graphics
 {
@@ -57,7 +56,7 @@ namespace Samples.Graphics
           RandomHelper.Random.NextFloat(-5, 5),
           0,
           RandomHelper.Random.NextFloat(-10, 0));
-        var randomOrientation = QuaternionF.CreateRotationY(RandomHelper.Random.NextFloat(0, ConstantsF.TwoPi));
+        var randomOrientation = MathHelper.CreateRotationY(RandomHelper.Random.NextFloat(0, ConstantsF.TwoPi));
 
         GameObjectService.Objects.Add(new DudeObject(Services)
         {

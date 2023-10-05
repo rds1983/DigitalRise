@@ -267,19 +267,19 @@ namespace DigitalRise.Animation.Character
       if (maxRotationAngle < ConstantsF.Pi)
       {
         // Compute relative rotation.
-        var rotationChange = targetTransform.Rotation * originalTransform.Rotation.Conjugated;
+        var rotationChange = targetTransform.Rotation * originalTransform.Rotation.Conjugated();
 
         // Make sure we rotate around the shortest arc.
-        if (QuaternionF.Dot(originalTransform.Rotation, targetTransform.Rotation) < 0)
+        if (Quaternion.Dot(originalTransform.Rotation, targetTransform.Rotation) < 0)
           rotationChange = -rotationChange;
 
-        if (rotationChange.Angle > maxRotationAngle && !rotationChange.V.IsNumericallyZero())
+        if (rotationChange.Angle() > maxRotationAngle && !rotationChange.V().IsNumericallyZero())
         {
           // ReSharper disable EmptyGeneralCatchClause
           try
           {
             // Limit rotation.
-            rotationChange.Angle = maxRotationAngle;
+            rotationChange.SetAngle(maxRotationAngle);
             targetTransform.Rotation = rotationChange * originalTransform.Rotation;
           }
           catch

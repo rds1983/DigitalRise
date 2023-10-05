@@ -7,6 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Constraints
 {
@@ -345,23 +346,23 @@ namespace DigitalRise.Physics.Constraints
       // anchor orientation B:
       //   QB = QTotal * QA
       //   => QTotal = QB * QA.Inverse
-      QuaternionF total = QuaternionF.CreateRotation(anchorOrientationB * anchorOrientationA.Transposed);
+      Quaternion total = MathHelper.CreateRotation(anchorOrientationB * anchorOrientationA.Transposed);
 
       // Compute swing axis and angle.
       Vector3 xAxisA = anchorOrientationA.GetColumn(0);
       Vector3 yAxisA = anchorOrientationA.GetColumn(1);
       Vector3 xAxisB = anchorOrientationB.GetColumn(0);
-      QuaternionF swing = QuaternionF.CreateRotation(xAxisA, xAxisB);
+      Quaternion swing = MathHelper.CreateRotation(xAxisA, xAxisB);
 
       Vector3 swingAxis = new Vector3(swing.X, swing.Y, swing.Z);
       if (!swingAxis.TryNormalize())
         swingAxis = yAxisA;
 
-      float swingAngle = swing.Angle;
+      float swingAngle = swing.Angle();
 
       Debug.Assert(
         0 <= swingAngle && swingAngle <= ConstantsF.Pi,
-        "QuaternionF.CreateRotation(Vector3, Vector3) should only create rotations along the \"short arc\".");
+        "MathHelper.CreateRotation(Vector3, Vector3) should only create rotations along the \"short arc\".");
 
       // The swing limits create a deformed cone. If we look onto the x-axis of A:
       // y-axis goes to the right. z-axis goes up. 
@@ -410,7 +411,7 @@ namespace DigitalRise.Physics.Constraints
       }
 
 #if DEBUG
-      //Debug.Assert(QuaternionF.Dot(swing, total) >= 0);
+      //Debug.Assert(Quaternion.Dot(swing, total) >= 0);
       var swingAxisALocal = Matrix33F.MultiplyTransposed(anchorOrientationA, swingAxis);
       Debug.Assert(Numeric.IsZero(swingAxisALocal.X));
 #endif
@@ -419,11 +420,11 @@ namespace DigitalRise.Physics.Constraints
       // First we twist around the x-axis of A. Then we swing.
       //   QTotal = QSwing * QTwist
       //   => QSwing.Inverse * QTotal = QTwist
-      QuaternionF twist = swing.Conjugated * total;
+      Quaternion twist = swing.Conjugated() * total;
       twist.Normalize();
 
       // The quaternion returns an angle in the range [0, 2π].
-      float twistAngle = twist.Angle;
+      float twistAngle = twist.Angle();
 
       // The minimum and maximum twist limits are in the range [-π, π].
       if (twistAngle > ConstantsF.Pi)
@@ -643,7 +644,7 @@ namespace DigitalRise.Physics.Constraints
       }
 
       var swingAxis = new Vector3(0, -directionZ, directionY);
-      var swing = QuaternionF.CreateRotation(swingAxis, swingLimit);
+      var swing = MathHelper.CreateRotation(swingAxis, swingLimit);
 
       var pointInAnchorA = swing.Rotate(new Vector3(distanceFromTip, 0, 0));
 

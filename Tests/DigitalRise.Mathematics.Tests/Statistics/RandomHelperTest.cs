@@ -163,20 +163,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
     
     [Test]
-    public void RandomQuaternionF()
-    {
-      QuaternionF quaternion1 = RandomHelper.Random.NextQuaternionF();
-      QuaternionF quaternion2 = RandomHelper.Random.NextQuaternionF();
-      Assert.AreNotEqual(quaternion1, quaternion2);
-      Assert.IsTrue(quaternion1.IsNumericallyNormalized);
-      Assert.IsTrue(quaternion2.IsNumericallyNormalized);
-
-      // Must not throw exception.
-      RandomHelper.NextQuaternionF(null);
-    }
-
-
-    [Test]
     public void RandomMatrix22F()
     {
       Matrix22F matrix = RandomHelper.Random.NextMatrix22F(10.0f, 100.0f);

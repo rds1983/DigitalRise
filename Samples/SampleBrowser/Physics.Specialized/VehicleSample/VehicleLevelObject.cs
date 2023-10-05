@@ -64,7 +64,7 @@ namespace Samples.Physics.Specialized
       for (int i = 0; i < 60; i++)
       {
         Vector3 position = new Vector3(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20));
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
         BoxShape shape = new BoxShape(RandomHelper.Random.NextVector3(0.05f, 0.5f));
         AddBody(simulation, "Stone" + i, new Pose(position, orientation), shape, MotionType.Static);
       }

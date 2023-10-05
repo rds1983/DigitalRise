@@ -77,19 +77,19 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Gets a random unit <see cref="QuaternionF"/>.
+    /// Gets a random unit <see cref="Quaternion"/>.
     /// </summary>
     /// <param name="random">
     /// The random number generator. If this parameter is <see langword="null"/>, the global random
     /// number generator (see <see cref="RandomHelper.Random"/>) is used.
     /// </param>
-    /// <returns>A random unit <see cref="QuaternionF"/>.</returns>
-    public static QuaternionF NextQuaternionF(this Random random)
+    /// <returns>A random unit <see cref="Quaternion"/>.</returns>
+    public static Quaternion NextQuaternion(this Random random)
     {
       if (random == null)
         random = Random;
 
-      return QuaternionF.CreateRotation(NextVector3(random, -1, 1), NextFloat(random, 0, ConstantsF.TwoPi));
+      return MathHelper.CreateRotation(NextVector3(random, -1, 1), NextFloat(random, 0, ConstantsF.TwoPi));
     }
 
 

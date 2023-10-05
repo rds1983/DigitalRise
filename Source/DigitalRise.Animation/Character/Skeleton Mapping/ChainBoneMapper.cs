@@ -295,7 +295,7 @@ namespace DigitalRise.Animation.Character
       directionA = SkeletonMapper.RotationOffset.Rotate(directionA);
 
       // Compute and apply rotation between the two direction vectors.
-      var rotation = QuaternionF.CreateRotation(directionB, directionA);
+      var rotation = MathHelper.CreateRotation(directionB, directionA);
       skeletonInstanceB.RotateBoneAbsolute(RootBoneIndexB, rotation);
     }
 
@@ -331,9 +331,9 @@ namespace DigitalRise.Animation.Character
       if (directionB.IsNumericallyZero() || directionA.IsNumericallyZero())
         return;
 
-      directionB = SkeletonMapper.RotationOffset.Conjugated.Rotate(directionB);
+      directionB = SkeletonMapper.RotationOffset.Conjugated().Rotate(directionB);
 
-      var rotation = QuaternionF.CreateRotation(directionA, directionB);
+      var rotation = MathHelper.CreateRotation(directionA, directionB);
       skeletonInstanceA.RotateBoneAbsolute(RootBoneIndexA, rotation);
     }
     #endregion

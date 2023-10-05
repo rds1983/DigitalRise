@@ -6,7 +6,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Tests
 {
@@ -334,16 +334,16 @@ namespace DigitalRise.Geometry.Collisions.Tests
       Assert.AreEqual(1, domain.GetContacts(ray).Count());
       Assert.AreEqual(true, domain.HaveContact(ray, e));
 
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, QuaternionF.CreateRotationZ(ConstantsF.PiOver2));
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       domain.Update(0.01f);
       Assert.AreEqual(0, domain.GetContacts(ray).Count());
 
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, QuaternionF.CreateRotationZ(ConstantsF.Pi));
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, MathHelper.CreateRotationZ(ConstantsF.Pi));
       domain.Update(0.01f);
       Assert.AreEqual(1, domain.GetContacts(ray).Count());
       Assert.AreEqual(true, domain.HaveContact(ray, b));
 
-      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, QuaternionF.Identity);
+      ((GeometricObject)ray.GeometricObject).Pose = new Pose(((GeometricObject)ray.GeometricObject).Pose.Position, Quaternion.Identity);
       domain.Update(0.01f);
 
       // Positions: b=-10, e=20, c=30, d=40, f=110

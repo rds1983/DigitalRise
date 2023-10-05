@@ -107,7 +107,7 @@ namespace DigitalRise.Mathematics.Statistics
       float angle2 = (float)random.NextDouble() * ConstantsF.TwoPi;
 
       // TODO: Optimize!
-      return (QuaternionF.CreateRotation(_normalizedDirection, angle2) * QuaternionF.CreateRotation(_orthonormal, angle1)).Rotate(_normalizedDirection);
+      return (MathHelper.CreateRotation(_normalizedDirection, angle2) * MathHelper.CreateRotation(_orthonormal, angle1)).Rotate(_normalizedDirection);
     }
   }
 }

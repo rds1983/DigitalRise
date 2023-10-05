@@ -11,8 +11,10 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Linq;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
@@ -322,7 +324,7 @@ namespace DigitalRise.Graphics.SceneGraph
 
       Matrix44F view = Matrix44F.CreateLookAt(position, target, upVector);
       Matrix44F viewInverse = view.Inverse;
-      QuaternionF orientation = QuaternionF.CreateRotation(viewInverse.Minor);
+      Quaternion orientation = MathHelper.CreateRotation(viewInverse.Minor);
       node.PoseWorld = new Pose(position, orientation);
     }
 

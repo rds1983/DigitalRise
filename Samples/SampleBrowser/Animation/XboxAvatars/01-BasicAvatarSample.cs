@@ -85,14 +85,14 @@ and bone names.",
           // Rotate arm of avatar. 
           SkeletonPose skeletonPose = _avatarPose.SkeletonPose;
           int shoulderIndex = skeletonPose.Skeleton.GetIndex("ShoulderLeft");
-          skeletonPose.SetBoneTransform(shoulderIndex, new SrtTransform(QuaternionF.CreateRotationZ(-0.9f)));
+          skeletonPose.SetBoneTransform(shoulderIndex, new SrtTransform(MathHelper.CreateRotationZ(-0.9f)));
 
           // The class SkeletonHelper provides some useful extension methods.
           // One is SetBoneRotationAbsolute() which sets the orientation of a bone relative 
           // to model space.
           // Rotate elbow to make the lower arm point forward.
           int elbowIndex = skeletonPose.Skeleton.GetIndex("ElbowLeft");
-          SkeletonHelper.SetBoneRotationAbsolute(skeletonPose, elbowIndex, QuaternionF.CreateRotationY(ConstantsF.PiOver2));
+          SkeletonHelper.SetBoneRotationAbsolute(skeletonPose, elbowIndex, MathHelper.CreateRotationY(ConstantsF.PiOver2));
 
           // Draw avatar skeleton for debugging.
           _debugRenderer.DrawSkeleton(skeletonPose, _pose, Vector3.One, 0.02f, Color.Orange, true);

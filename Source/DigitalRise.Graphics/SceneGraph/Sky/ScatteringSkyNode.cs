@@ -632,7 +632,7 @@ namespace DigitalRise.Graphics.SceneGraph
       var color = new Vector3();
       for (int i = numberOfSamples - 1; i >= 0; i--)
       {
-        Vector3 sampleDirection = QuaternionF.CreateRotationY(ConstantsF.TwoPi / numberOfSamples).Rotate(forward);
+        Vector3 sampleDirection = MathHelper.CreateRotationY(ConstantsF.TwoPi / numberOfSamples).Rotate(forward);
 
         // Note: Crysis computes fog color without phase function and applies the phase function
         // in the fog shader. The color difference with and without phase function seems to be

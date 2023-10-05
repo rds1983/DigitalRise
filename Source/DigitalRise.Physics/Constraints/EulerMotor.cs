@@ -24,7 +24,7 @@ namespace DigitalRise.Physics.Constraints
   /// <para>
   /// The target orientation is defined using Euler angles. In contrast, 
   /// <see cref="QuaternionMotor"/> is a motor that controls the orientation where the target 
-  /// orientation is defined using a <see cref="QuaternionF"/>.
+  /// orientation is defined using a <see cref="Quaternion"/>.
   /// </para>
   /// <para>
   /// <strong>Euler Angles:</strong>

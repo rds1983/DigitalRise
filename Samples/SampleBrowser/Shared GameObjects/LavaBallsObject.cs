@@ -118,7 +118,7 @@ namespace Samples
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));
-      body.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternionF());
+      body.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternion());
       model.PoseWorld = _bodyPrototype.Pose;
       scene.Children.Add(model);
       simulation.RigidBodies.Add(body);

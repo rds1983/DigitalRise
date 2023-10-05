@@ -7,6 +7,7 @@ using System.Diagnostics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character
 {
@@ -187,7 +188,7 @@ namespace DigitalRise.Animation.Character
         side.Z, up.Z, -forward.Z);
 
       // Apply a bone transform that rotates the rest view space to the desired view space.
-      QuaternionF boneTransform = QuaternionF.CreateRotation(boneFromNewView * boneFromView.Transposed);
+      Quaternion boneTransform = MathHelper.CreateRotation(boneFromNewView * boneFromView.Transposed);
 
       var startTransform = SkeletonPose.GetBoneTransform(BoneIndex);
       var lookAtTransform = new SrtTransform(startTransform.Scale, boneTransform, startTransform.Translation);

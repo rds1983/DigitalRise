@@ -49,7 +49,7 @@ namespace DigitalRise.Physics.Constraints.Tests
     {
       var body = new RigidBody(new BoxShape(1, 2, 3));
 
-      body.Pose = new Pose(new Vector3(10, 20, 30), QuaternionF.CreateRotationY(1.1f));
+      body.Pose = new Pose(new Vector3(10, 20, 30), MathHelper.CreateRotationY(1.1f));
       body.LinearVelocity = new Vector3(1, 2, 3);
       body.AngularVelocity = new Vector3(4, 5, 6);
 

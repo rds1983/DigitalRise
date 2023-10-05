@@ -1,19 +1,19 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
-using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
 
 namespace DigitalRise.Animation.Tests
 {
   [TestFixture]
-  public class QuaternionFAnimationTest
+  public class QuaternionAnimationTest
   {
     [Test]
     public void TraitsTest()
     {
-      var animationEx = new QuaternionFAnimation();
-      Assert.AreEqual(QuaternionFTraits.Instance, animationEx.Traits);
+      var animationEx = new QuaternionAnimation();
+      Assert.AreEqual(QuaternionTraits.Instance, animationEx.Traits);
     }
 
 
@@ -46,31 +46,31 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Hold,
       };
 
-      var animationEx = new QuaternionFAnimation();
+      var animationEx = new QuaternionAnimation();
       Assert.AreEqual(TimeSpan.FromSeconds(0.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.W = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.X = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.Y = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.W = animation;
       animationEx.X = animation2;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
 
-      animationEx = new QuaternionFAnimation();
+      animationEx = new QuaternionAnimation();
       animationEx.Y = animation2;
       animationEx.Z = animation;
       Assert.AreEqual(TimeSpan.FromSeconds(13.0), animationEx.GetTotalDuration());
@@ -133,7 +133,7 @@ namespace DigitalRise.Animation.Tests
         FillBehavior = FillBehavior.Stop,
       };
 
-      var animationEx = new QuaternionFAnimation
+      var animationEx = new QuaternionAnimation
       {
         W = animation,
         X = animation2,
@@ -141,8 +141,8 @@ namespace DigitalRise.Animation.Tests
         Z = animation4,
       };
 
-      var defaultSource = new QuaternionF(1, 2, 3, 4);
-      var defaultTarget = new QuaternionF(5, 6, 7, 8);
+      var defaultSource = new Quaternion(1, 2, 3, 4);
+      var defaultTarget = new Quaternion(5, 6, 7, 8);
 
       var result = animationEx.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget);
       Assert.AreEqual(defaultSource.W, result.W); // animation has not started.

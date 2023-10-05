@@ -101,8 +101,8 @@ namespace Samples.Physics.Specialized
       }
 
       // ----- V obstacle to test if we get stuck.
-      AddBody(simulation, "V0", new Pose(new Vector3(-5.5f, 0, 10), QuaternionF.CreateRotationZ(0.2f)), new BoxShape(1f, 2f, 2), MotionType.Static);
-      AddBody(simulation, "V1", new Pose(new Vector3(-4, 0, 10), QuaternionF.CreateRotationZ(-0.2f)), new BoxShape(1f, 2f, 2), MotionType.Static);
+      AddBody(simulation, "V0", new Pose(new Vector3(-5.5f, 0, 10), MathHelper.CreateRotationZ(0.2f)), new BoxShape(1f, 2f, 2), MotionType.Static);
+      AddBody(simulation, "V1", new Pose(new Vector3(-4, 0, 10), MathHelper.CreateRotationZ(-0.2f)), new BoxShape(1f, 2f, 2), MotionType.Static);
 
       // ----- Create a height field.
       // Terrain that is uneven is best modeled with a height field. Height fields are faster
@@ -138,7 +138,7 @@ namespace Samples.Physics.Specialized
       for (int i = 0; i < 50; i++)
       {
         Vector3 position = new Vector3(RandomHelper.Random.NextFloat(-5, 5), 0, RandomHelper.Random.NextFloat(10, 20));
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
         Vector3 size = RandomHelper.Random.NextVector3(0.05f, 0.8f);
         AddBody(simulation, "Stone" + i, new Pose(position, orientation), new BoxShape(size), MotionType.Static);
       }
@@ -146,8 +146,8 @@ namespace Samples.Physics.Specialized
       // ----- Create some slopes to see how our character performs on/under sloped surfaces.
       // Here we can test how the character controller behaves if the head touches an inclined
       // ceiling.
-      AddBody(simulation, "SlopeGround", new Pose(new Vector3(-2, 1.8f, -12), QuaternionF.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), MotionType.Static);
-      AddBody(simulation, "SlopeRoof", new Pose(new Vector3(-2, 5.6f, -12), QuaternionF.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), MotionType.Static);
+      AddBody(simulation, "SlopeGround", new Pose(new Vector3(-2, 1.8f, -12), MathHelper.CreateRotationX(0.4f)), new BoxShape(2, 0.5f, 10), MotionType.Static);
+      AddBody(simulation, "SlopeRoof", new Pose(new Vector3(-2, 5.6f, -12), MathHelper.CreateRotationX(-0.4f)), new BoxShape(2, 0.5f, 10), MotionType.Static);
 
       // Create slopes with increasing tilt angles.
       // The character controller has a slope limit. Only flat slopes should be climbable. 

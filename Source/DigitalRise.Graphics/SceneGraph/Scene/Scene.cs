@@ -44,7 +44,7 @@ namespace DigitalRise.Graphics.SceneGraph
   /// <see cref="EmptyShape"/>) - it is not used. Since a <see cref="Scene"/> is always the root of 
   /// a 3D scene <see cref="SceneNode.PoseLocal"/> and <see cref="SceneNode.PoseWorld"/> are always 
   /// identical. The default scale is <see cref="Vector3.One"/>, the default position is 
-  /// <see cref="Vector3.Zero"/> and the default orientation is <see cref="QuaternionF.Identity"/>.
+  /// <see cref="Vector3.Zero"/> and the default orientation is <see cref="Quaternion.Identity"/>.
   /// By setting a different values the entire scene is moved or rotated in world space.
   /// </para>
   /// <para>

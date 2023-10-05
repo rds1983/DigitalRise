@@ -63,7 +63,7 @@ namespace DigitalRise.Animation
       };
 
       Vector3KeyFrameAnimation scaleAnimation = null;
-      QuaternionFKeyFrameAnimation rotationAnimation = null;
+      QuaternionKeyFrameAnimation rotationAnimation = null;
       Vector3KeyFrameAnimation translationAnimation = null;
 
       // Create Scale channel if required.
@@ -79,9 +79,9 @@ namespace DigitalRise.Animation
       // Create Rotation channel if required.
       foreach (var keyFrame in keyFrames)
       {
-        if (!QuaternionF.AreNumericallyEqual(keyFrame.Value.Rotation, QuaternionF.Identity))
+        if (!MathHelper.AreNumericallyEqual(keyFrame.Value.Rotation, Quaternion.Identity))
         {
-          rotationAnimation = new QuaternionFKeyFrameAnimation();
+          rotationAnimation = new QuaternionKeyFrameAnimation();
           break;
         }
       }
@@ -114,7 +114,7 @@ namespace DigitalRise.Animation
             scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Scale));
 
           if (rotationAnimation != null)
-            rotationAnimation.KeyFrames.Add(new KeyFrame<QuaternionF>(keyFrame.Time, keyFrame.Value.Rotation));
+            rotationAnimation.KeyFrames.Add(new KeyFrame<Quaternion>(keyFrame.Time, keyFrame.Value.Rotation));
 
           if (translationAnimation != null)
             translationAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Translation));
@@ -130,7 +130,7 @@ namespace DigitalRise.Animation
             scaleAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Scale));
 
           if (rotationAnimation != null)
-            rotationAnimation.KeyFrames.Add(new KeyFrame<QuaternionF>(keyFrame.Time, keyFrame.Value.Rotation));
+            rotationAnimation.KeyFrames.Add(new KeyFrame<Quaternion>(keyFrame.Time, keyFrame.Value.Rotation));
 
           if (translationAnimation != null)
             translationAnimation.KeyFrames.Add(new KeyFrame<Vector3>(keyFrame.Time, keyFrame.Value.Translation));
@@ -286,10 +286,10 @@ namespace DigitalRise.Animation
     }
 
 
-    private static float ComputeError(QuaternionF current, QuaternionF start, QuaternionF end, float parameter)
+    private static float ComputeError(Quaternion current, Quaternion start, Quaternion end, float parameter)
     {
-      QuaternionF lerpedValue = InterpolationHelper.Lerp(start, end, parameter);
-      return QuaternionF.GetAngle(current, lerpedValue);
+      Quaternion lerpedValue = InterpolationHelper.Lerp(start, end, parameter);
+      return MathHelper.GetAngle(current, lerpedValue);
     }
   }
 }

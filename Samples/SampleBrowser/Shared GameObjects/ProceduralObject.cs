@@ -69,7 +69,7 @@ namespace Samples
         RandomHelper.Random.NextFloat(-10, 10),
         RandomHelper.Random.NextFloat(2, 5),
         RandomHelper.Random.NextFloat(-20, 0));
-      _rigidBody.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternionF());
+      _rigidBody.Pose = new Pose(randomPosition, RandomHelper.Random.NextQuaternion());
       _meshNode.PoseWorld = _rigidBody.Pose;
 
       // Add mesh node to scene graph.

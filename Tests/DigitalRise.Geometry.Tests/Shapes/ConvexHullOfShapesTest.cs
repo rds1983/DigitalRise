@@ -15,8 +15,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [SetUp]
     public void SetUp()
     {
-      child0 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(0, 5, 0), QuaternionF.CreateRotationX(ConstantsF.PiOver2)));
-      child1 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(0, -5, 0), QuaternionF.CreateRotationX(ConstantsF.PiOver2)));
+      child0 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(0, 5, 0), MathHelper.CreateRotationX(ConstantsF.PiOver2)));
+      child1 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(0, -5, 0), MathHelper.CreateRotationX(ConstantsF.PiOver2)));
 
       cs = new ConvexHullOfShapes();
       cs.Children.Add(child0);
@@ -36,7 +36,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       Assert.AreEqual(new Vector3(0, 0, 0), new ConvexHullOfShapes().InnerPoint);
       Assert.AreEqual(new Vector3(0, 0, 0), cs.InnerPoint);
-      cs.Children.Add(new GeometricObject(new PointShape(new Vector3(5, 0, 0)), new Pose(new Vector3(1, 0, 0), QuaternionF.Identity)));
+      cs.Children.Add(new GeometricObject(new PointShape(new Vector3(5, 0, 0)), new Pose(new Vector3(1, 0, 0), Quaternion.Identity)));
       Assert.AreEqual(new Vector3(2, 0, 0), cs.InnerPoint);
     }
 

@@ -105,7 +105,7 @@ namespace Samples.Physics.Specialized
       get
       {
         Vector3 position = CharacterController.Position;
-        QuaternionF orientation = QuaternionF.CreateRotationY(_yaw) * QuaternionF.CreateRotationX(_pitch);
+        Quaternion orientation = MathHelper.CreateRotationY(_yaw) * MathHelper.CreateRotationX(_pitch);
         return new Pose(position, orientation);
       }
     }
@@ -204,7 +204,7 @@ namespace Samples.Physics.Specialized
       UpdateOrientation(deltaTimeF);
 
       // Compute the new orientation of the camera.
-      QuaternionF orientation = QuaternionF.CreateRotationY(_yaw) * QuaternionF.CreateRotationX(_pitch);
+      Quaternion orientation = MathHelper.CreateRotationY(_yaw) * MathHelper.CreateRotationX(_pitch);
 
       // ----- Compute translation
       // Create velocity from <W>, <A>, <S>, <D> and gamepad sticks.       

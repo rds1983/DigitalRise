@@ -12,6 +12,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry
 {
@@ -141,7 +142,7 @@ namespace DigitalRise.Geometry
             {
               Vector3 centerNew;
               Vector3 boxExtentNew;
-              Matrix33F vNew = QuaternionF.CreateRotation(αX, Vector3.UnitX, αY, Vector3.UnitY, αZ, Vector3.UnitZ, true).ToRotationMatrix33();
+              Matrix33F vNew = MathHelper.CreateRotation(αX, Vector3.UnitX, αY, Vector3.UnitY, αZ, Vector3.UnitZ, true).ToRotationMatrix33();
               float volumeNew = ComputeBoundingBox(points, vNew, volume, out boxExtentNew, out centerNew);
               if (volumeNew < volume)
               {

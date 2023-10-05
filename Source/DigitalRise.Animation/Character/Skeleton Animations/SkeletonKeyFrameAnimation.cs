@@ -1131,15 +1131,12 @@ namespace DigitalRise.Animation.Character
 				for (var i = 0; i < pair.Value.Times.Length; ++i)
 				{
 					var ts = TimeSpan.FromSeconds(boneTransforms.Times[i]);
-					var r = boneTransforms.Rotations != null ? boneTransforms.Rotations[i] : Quaternion.Identity;
-					var t = boneTransforms.Translations != null ? boneTransforms.Translations[i] : Vector3.Zero;
-					var s = boneTransforms.Scales != null ? boneTransforms.Scales[i] : Vector3.One;
 
 					var transform = new SrtTransform
 					{
-						Scale = new Vector3(s.X, s.Y, s.Z),
-						Rotation = new QuaternionF(r.W, r.X, r.Y, r.Z),
-						Translation = new Vector3(t.X, t.Y, t.Z)
+						Scale = boneTransforms.Scales != null ? boneTransforms.Scales[i] : Vector3.One,
+						Rotation = boneTransforms.Rotations != null ? boneTransforms.Rotations[i] : Quaternion.Identity,
+						Translation = boneTransforms.Translations != null ? boneTransforms.Translations[i] : Vector3.Zero
 					};
 
 					result.AddKeyFrame(pair.Key, ts, transform);

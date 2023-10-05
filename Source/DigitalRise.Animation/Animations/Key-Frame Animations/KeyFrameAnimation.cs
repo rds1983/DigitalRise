@@ -25,7 +25,7 @@ namespace DigitalRise.Animation
   /// (default) the values between two key frames are interpolated. Each key frame animation class
   /// decides which type of a interpolation is most appropriate. For example, linear interpolation
   /// (LERP) is used for <see langword="Single"/>, <see cref="Vector2"/>, <see cref="Vector3"/>, 
-  /// etc. LERP is also used for <see cref="QuaternionF"/> (Spherical linear interpolation (SLERP)
+  /// etc. LERP is also used for <see cref="Quaternion"/> (Spherical linear interpolation (SLERP)
   /// is not used for performance reasons). When 
   /// interpolation is disabled, the animation returns the value of the previous key frame. 
   /// </para>

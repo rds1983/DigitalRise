@@ -138,7 +138,7 @@ namespace Samples.Physics
 
         Vector3 position = RandomHelper.Random.NextVector3(-3, 3);
         position.Y = 3;   // Position the objects 3m above ground.
-        QuaternionF orientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion orientation = RandomHelper.Random.NextQuaternion();
         body.Pose = new Pose(position, orientation);
       }
     }

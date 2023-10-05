@@ -440,7 +440,7 @@ namespace DigitalRise.Geometry.Partitioning.Tests
     private void TestGetOverlaps5(ISpatialPartition<int> partition)
     {
       // Get random pose for _partition2
-      var pose = new Pose(GetRandomAabb().Center, RandomHelper.Random.NextQuaternionF());
+      var pose = new Pose(GetRandomAabb().Center, RandomHelper.Random.NextQuaternion());
       var scale = RandomHelper.Random.NextVector3(0.1f, 3f);
 
       // Compute desired result.

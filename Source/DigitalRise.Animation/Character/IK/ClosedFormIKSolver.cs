@@ -241,7 +241,7 @@ namespace DigitalRise.Animation.Character
       }
 
       // The root bone rotation that aligns the whole chain with the target.
-      QuaternionF chainRotation = QuaternionF.Identity;
+      Quaternion chainRotation = Quaternion.Identity;
       Vector3 boneToTarget, boneToTip;
       float remainingChainLength = _totalChainLength;
 
@@ -286,7 +286,7 @@ namespace DigitalRise.Animation.Character
         {
           // This is the first bone: Compute rotation that aligns the whole initial chain with
           // the target.
-          chainRotation = QuaternionF.CreateRotation(boneToTip, boneToTarget);
+          chainRotation = MathHelper.CreateRotation(boneToTip, boneToTarget);
 
           // Update tip.
           tipAbsolute = _bones[i].Translation + (boneToTarget * boneToTipLength);
@@ -301,8 +301,8 @@ namespace DigitalRise.Animation.Character
           // rotation aligns the last bone with the target.
           // TODO: Find an explanation/derivation of this additional rotation.
           _bones[i] = new SrtTransform(
-            _bones[i].Scale, 
-            QuaternionF.CreateRotation(boneToTip, boneToTarget) * chainRotation * _bones[i].Rotation, 
+            _bones[i].Scale,
+						MathHelper.CreateRotation(boneToTip, boneToTarget) * chainRotation * _bones[i].Rotation, 
             _bones[i].Translation);
         }
 
@@ -392,7 +392,7 @@ namespace DigitalRise.Animation.Character
           // Apply the rotation to the current bones 
           _bones[i] = new SrtTransform(
             _bones[i].Scale, 
-            (QuaternionF.CreateRotation(rotationAxis, deltaAngle) * _bones[i].Rotation).Normalized, 
+            (MathHelper.CreateRotation(rotationAxis, deltaAngle) * _bones[i].Rotation).Normalized(), 
             _bones[i].Translation);
         }
       }

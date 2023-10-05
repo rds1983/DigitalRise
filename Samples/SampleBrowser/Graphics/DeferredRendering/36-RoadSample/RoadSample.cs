@@ -4,15 +4,15 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
+using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Samples.Physics.Specialized;
 using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
 using AssetManagementBase;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Graphics
 {
@@ -148,7 +148,7 @@ This sample also uses the vehicle of one of the vehicle samples.",
         RandomHelper.Random.NextFloat(-20, 20));
 
       // The direction to the next path key.
-      Vector3 direction = QuaternionF.CreateRotationY(RandomHelper.Random.NextFloat(0, 10)).Rotate(Vector3.Forward);
+      Vector3 direction = MathHelper.CreateRotationY(RandomHelper.Random.NextFloat(0, 10)).Rotate(Vector3.Forward);
 
       // Add path keys.
       for (int j = 0; j < 10; j++)
@@ -174,7 +174,7 @@ This sample also uses the vehicle of one of the vehicle samples.",
         // Get next random position and direction.
         position += direction * RandomHelper.Random.NextFloat(20, 40);
         position.Y += RandomHelper.Random.NextFloat(-2, 2);
-        direction = QuaternionF.CreateRotationY(RandomHelper.Random.NextFloat(-1, 1))
+        direction = MathHelper.CreateRotationY(RandomHelper.Random.NextFloat(-1, 1))
                                .Rotate(direction);
       }
 

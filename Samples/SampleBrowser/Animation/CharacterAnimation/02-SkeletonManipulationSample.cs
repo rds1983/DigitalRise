@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
 using DigitalRise.Animation.Character;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Animation
 {
@@ -56,7 +54,7 @@ namespace Samples.Animation
       int upperArmIndex = skeleton.GetIndex("L_UpperArm");
 
       // Define the desired bone transform.
-      SrtTransform boneTransform = new SrtTransform(QuaternionF.CreateRotationY(_upperArmAngle));
+      SrtTransform boneTransform = new SrtTransform(MathHelper.CreateRotationY(_upperArmAngle));
 
       // Set the new bone transform.
       var skeletonPose = _meshNode.SkeletonPose;
@@ -66,7 +64,7 @@ namespace Samples.Animation
       // One is SetBoneRotationAbsolute() which sets the orientation of a bone relative 
       // to model space. 
       int handIndex = skeleton.GetIndex("L_Hand");
-      SkeletonHelper.SetBoneRotationAbsolute(skeletonPose, handIndex, QuaternionF.CreateRotationX(ConstantsF.Pi));
+      SkeletonHelper.SetBoneRotationAbsolute(skeletonPose, handIndex, MathHelper.CreateRotationX(ConstantsF.Pi));
     }
   }
 }

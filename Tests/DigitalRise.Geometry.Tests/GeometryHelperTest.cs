@@ -66,7 +66,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
 
       for (int i = 0; i < 40; i++)
-        points.Add(RandomHelper.Random.NextQuaternionF().Rotate(radius));
+        points.Add(RandomHelper.Random.NextQuaternion().Rotate(radius));
 
       var shape = GeometryHelper.CreateBoundingShape(points);
       SphereShape s = (SphereShape)shape;
@@ -328,7 +328,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
 
       // Translate and rotate cube.
-      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternionF());
+      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternion());
       for (int i = 0; i < points.Count; i++)
         points[i] = cubePose.ToWorldPosition(points[i]);
 
@@ -348,7 +348,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
       var points = new CapsuleShape(1, 3).GetMesh(0.01f, 4).Vertices;
 
-      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternionF());
+      Pose cubePose = new Pose(new Vector3(10, 2, 3), RandomHelper.Random.NextQuaternion());
       for (int i = 0; i < points.Count; i++)
         points[i] = cubePose.ToWorldPosition(points[i]);
 
@@ -884,13 +884,13 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 2, 0)), true));
       Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(0, 0, 2)), true));
 
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(-45))), true));
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), QuaternionF.CreateRotationZ(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationY(MathHelper.ToRadians(90))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), MathHelper.CreateRotationZ(MathHelper.ToRadians(45))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), MathHelper.CreateRotationZ(MathHelper.ToRadians(-45))), true));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.5f, 1.5f, 0), MathHelper.CreateRotationZ(MathHelper.ToRadians(45)) * MathHelper.CreateRotationY(MathHelper.ToRadians(90))), true));
 
       // Edge test case where MakeEdgeTest makes a difference.
-      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), true));
-      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), QuaternionF.CreateRotationY(MathHelper.ToRadians(45)) * QuaternionF.CreateRotationZ(MathHelper.ToRadians(45))), false));
+      Assert.IsFalse(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), MathHelper.CreateRotationY(MathHelper.ToRadians(45)) * MathHelper.CreateRotationZ(MathHelper.ToRadians(45))), true));
+      Assert.IsTrue(GeometryHelper.HaveContact(aabb, box, new Pose(new Vector3(1.6f, 1.6f, 0), MathHelper.CreateRotationY(MathHelper.ToRadians(45)) * MathHelper.CreateRotationZ(MathHelper.ToRadians(45))), false));
     }
 
 
@@ -1206,7 +1206,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ExtractPlanes()
     {
-      var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternionF())
+      var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternion())
                  * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3(0, 1));
 
       var projection = Matrix44F.CreatePerspectiveFieldOfView(
@@ -1229,7 +1229,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ExtractPlanesException()
     {
-      var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternionF())
+      var view = Matrix44F.CreateRotation(RandomHelper.Random.NextQuaternion())
                  * Matrix44F.CreateTranslation(RandomHelper.Random.NextVector3(0, 1));
 
       var projection = Matrix44F.CreatePerspectiveFieldOfView(

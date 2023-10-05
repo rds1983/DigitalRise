@@ -771,7 +771,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = Matrix33F.CreateRotationX(angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, (float) Math.Cos(angle), (float) Math.Sin(angle)), m * Vector3.UnitY));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitX, angle);
+      Quaternion q = MathHelper.CreateRotation(Vector3.UnitX, angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitX, angle), m));
@@ -785,7 +785,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = Matrix33F.CreateRotationY(angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3((float) Math.Sin(angle), 0, (float) Math.Cos(angle)), m * Vector3.UnitZ));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitY, angle);
+      Quaternion q = MathHelper.CreateRotation(Vector3.UnitY, angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitY, angle), m));
@@ -799,7 +799,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = Matrix33F.CreateRotationZ(angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3((float) Math.Cos(angle), (float) Math.Sin(angle), 0), m * Vector3.UnitX));
 
-      QuaternionF q = QuaternionF.CreateRotation(Vector3.UnitZ, angle);
+      Quaternion q = MathHelper.CreateRotation(Vector3.UnitZ, angle);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(q.Rotate(Vector3.One), m * Vector3.One));
 
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(Matrix33F.CreateRotation(Vector3.UnitZ, angle), m));
@@ -812,7 +812,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float angle = -1.6f;
       Vector3 axis = new Vector3(1.0f, 2.0f, -3.0f);
       Matrix33F matrix = Matrix33F.CreateRotation(axis, angle);
-      QuaternionF q = QuaternionF.CreateRotation(axis, angle);
+      Quaternion q = MathHelper.CreateRotation(axis, angle);
       Matrix33F matrixFromQuaternion = Matrix33F.CreateRotation(q);
       Vector3 v = new Vector3(0.3f, -2.4f, 5.6f);
       Vector3 result1 = matrix * v;

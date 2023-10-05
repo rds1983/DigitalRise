@@ -11,7 +11,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using Microsoft.Xna.Framework;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry
 {
@@ -188,7 +188,7 @@ namespace DigitalRise.Geometry
     /// </summary>
     /// <param name="position">The position.</param>
     /// <param name="orientation">The orientation.</param>
-    public Pose(Vector3 position, QuaternionF orientation)
+    public Pose(Vector3 position, Quaternion orientation)
     {
       Position = position;
       Orientation = orientation.ToRotationMatrix33();
@@ -199,7 +199,7 @@ namespace DigitalRise.Geometry
     /// Initializes a new instance of the <see cref="Pose"/> class from orientation.
     /// </summary>
     /// <param name="orientation">The orientation.</param>
-    public Pose(QuaternionF orientation)
+    public Pose(Quaternion orientation)
     {
       Position = Vector3.Zero;
       Orientation = orientation.ToRotationMatrix33();
@@ -529,8 +529,8 @@ namespace DigitalRise.Geometry
 
       // Slerp orientation.
       var interpolatedOrientation = InterpolationHelper.Lerp(
-        QuaternionF.CreateRotation(startPose.Orientation),
-        QuaternionF.CreateRotation(endPose.Orientation),
+        MathHelper.CreateRotation(startPose.Orientation),
+				MathHelper.CreateRotation(endPose.Orientation),
         parameter);
 
       return new Pose(interpolatedPosition, interpolatedOrientation);

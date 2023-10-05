@@ -63,10 +63,10 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
       GameObjectService.Objects.Add(_shipObjectB);
 
       // Position the second ship right of the first ship with an arbitrary rotation.
-      _shipObjectB.Pose = new Pose(new Vector3(2, 0, 0), QuaternionF.CreateRotationY(0.7f) * QuaternionF.CreateRotationX(1.2f));
+      _shipObjectB.Pose = new Pose(new Vector3(2, 0, 0), MathHelper.CreateRotationY(0.7f) * MathHelper.CreateRotationX(1.2f));
 
       // Position the saucer left of the first ship with an arbitrary rotation.
-      _saucerObject.Pose = new Pose(new Vector3(-2.5f, 0, 0), QuaternionF.CreateRotationY(0.2f) * QuaternionF.CreateRotationX(0.4f));
+      _saucerObject.Pose = new Pose(new Vector3(-2.5f, 0, 0), MathHelper.CreateRotationY(0.2f) * MathHelper.CreateRotationX(0.4f));
     }
 
 

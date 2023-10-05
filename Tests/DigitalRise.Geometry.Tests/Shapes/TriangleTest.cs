@@ -201,7 +201,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
         // Random pose.
         var p = new Pose(
           new Vector3(RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100), RandomHelper.Random.NextFloat(-100, 100)),
-          RandomHelper.Random.NextQuaternionF());
+          RandomHelper.Random.NextQuaternion());
 
         // For the correct triangle normal we have to use the inverse transpose:
         //   (M^-1)^T = 1 / scale

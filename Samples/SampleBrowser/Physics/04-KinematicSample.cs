@@ -10,7 +10,7 @@ using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 using CurveLoopType = DigitalRise.Mathematics.Interpolation.CurveLoopType;
-
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples.Physics
 {
@@ -60,7 +60,7 @@ namespace Samples.Physics
       {
         Vector3 randomPosition = RandomHelper.Random.NextVector3(-5, 5);
         randomPosition.Y = 5;
-        QuaternionF randomOrientation = RandomHelper.Random.NextQuaternionF();
+        Quaternion randomOrientation = RandomHelper.Random.NextQuaternion();
 
         RigidBody body = new RigidBody(boxShape)
         {
@@ -174,9 +174,9 @@ namespace Samples.Physics
       // Get the path tangent at newPathPosition and use it as the forward direction.
       Vector3 forward = _path.GetTangent(parameter).Normalized();
 
-      QuaternionF currentOrientation = QuaternionF.CreateRotation(_kinematicBody.Pose.Orientation);
-      QuaternionF targetOrientation = QuaternionF.CreateRotation(Vector3.UnitY, forward);
-      QuaternionF orientationDelta = targetOrientation * currentOrientation.Conjugated;
+      Quaternion currentOrientation =MathHelper.CreateRotation(_kinematicBody.Pose.Orientation);
+      Quaternion targetOrientation = MathHelper.CreateRotation(Vector3.UnitY, forward);
+      Quaternion orientationDelta = targetOrientation * currentOrientation.Conjugated();
 
       // Selective Negation:
       // A certain rotation can be described by two quaternions: q and -q. For example, if you look 
@@ -186,7 +186,7 @@ namespace Samples.Physics
       // is proportional to the cosine of the rotation angle. If the cosine of the angle is < 0, 
       // the angle is larger than +/- 90 degrees. In this case we must use -orientationDelta to 
       // rotate using the smaller angle.
-      if (QuaternionF.Dot(currentOrientation, targetOrientation) < 0)
+      if (Quaternion.Dot(currentOrientation, targetOrientation) < 0)
         orientationDelta = -orientationDelta;
 
       // We could directly set the new position of the kinematic body. However, directly 
@@ -205,12 +205,12 @@ namespace Samples.Physics
 
       // Determine the angular velocity that rotates the body.
       Vector3 angularVelocity;
-      Vector3 rotationAxis = orientationDelta.Axis;
+      Vector3 rotationAxis = orientationDelta.Axis();
       if (!rotationAxis.IsNumericallyZero())
       {
         // The angular velocity is computed as rotationAxis * rotationSpeed.
         // The rotation speed is computed as angle / time. (Note: The angle is given in radians.)
-        float rotationSpeed = (orientationDelta.Angle / deltaTime);
+        float rotationSpeed = (orientationDelta.Angle() / deltaTime);
         angularVelocity = rotationAxis * rotationSpeed;
       }
       else

@@ -45,7 +45,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
         nodes[i] = node;
 
         var position = random.NextVector3(-1000, 1000);
-        var orientation = random.NextQuaternionF();
+        var orientation = random.NextQuaternion();
         node.PoseLocal = new Pose(position, orientation);
 
         float p = random.NextFloat(0, 1);
@@ -134,7 +134,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
         nodes[i] = node;
 
         var position = random.NextVector3(0, WorldSize);
-        var orientation = random.NextQuaternionF();
+        var orientation = random.NextQuaternion();
         node.PoseLocal = new Pose(position, orientation);
 
         float p = random.NextFloat(0, 100);
@@ -218,7 +218,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
           else if (action == 6)
           {
             // Rotate
-            node.PoseWorld = new Pose(node.PoseWorld.Position, random.NextQuaternionF());
+            node.PoseWorld = new Pose(node.PoseWorld.Position, random.NextQuaternion());
             //scene.Validate();
           }
           else if (action == 7)
@@ -231,7 +231,7 @@ namespace DigitalRise.Graphics.SceneGraph.Tests
           else if (action == 8)
           {
             // Move camera.
-            cameraNode.PoseWorld = new Pose(random.NextVector3(0, WorldSize), random.NextQuaternionF());
+            cameraNode.PoseWorld = new Pose(random.NextVector3(0, WorldSize), random.NextQuaternion());
             //scene.Validate();
           }
           else if (action == 9)

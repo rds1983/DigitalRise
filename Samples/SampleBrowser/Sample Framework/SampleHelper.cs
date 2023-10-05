@@ -470,7 +470,7 @@ namespace Samples
         return;
 
       // Line from circle center to start of arc.
-      Vector3 previousArcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum).Rotate(direction));
+      Vector3 previousArcPoint = center + scale * constraintToWorld.ToWorldDirection(MathHelper.CreateRotation(axis, minimum).Rotate(direction));
       debugRenderer.DrawLine(center, previousArcPoint, color, drawOverScene);
 
       // Draw arc.
@@ -478,7 +478,7 @@ namespace Samples
       float segmentAngle = (maximum - minimum) / numberOfSegments;
       for (int i = 0; i < numberOfSegments; i++)
       {
-        Vector3 arcPoint = center + scale * constraintToWorld.ToWorldDirection(QuaternionF.CreateRotation(axis, minimum + (i + 1) * segmentAngle).Rotate(direction));
+        Vector3 arcPoint = center + scale * constraintToWorld.ToWorldDirection(MathHelper.CreateRotation(axis, minimum + (i + 1) * segmentAngle).Rotate(direction));
         debugRenderer.DrawLine(previousArcPoint, arcPoint, color, drawOverScene);
         previousArcPoint = arcPoint;
       }

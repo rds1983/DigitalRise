@@ -13,23 +13,23 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ConstructorTest()
     {
-      var rotationQ = new QuaternionF(1, 2, 3, 4).Normalized;
+      var rotationQ = new Quaternion(1, 2, 3, 4).Normalized();
 
       var srt = new SrtTransform(rotationQ.ToRotationMatrix33());
 
       Assert.AreEqual(Vector3.One, srt.Scale);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(rotationQ, srt.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
       Assert.AreEqual(Vector3.Zero, srt.Translation);
 
       srt = new SrtTransform(rotationQ);
 
       Assert.AreEqual(Vector3.One, srt.Scale);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(rotationQ, srt.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
       Assert.AreEqual(Vector3.Zero, srt.Translation);
 
       srt = new SrtTransform(new Vector3(-1, 2, -3), rotationQ.ToRotationMatrix33(), new Vector3(10, 9, -8));
       Assert.AreEqual(new Vector3(-1, 2, -3), srt.Scale);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(rotationQ, srt.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
       Assert.AreEqual(new Vector3(10, 9, -8), srt.Translation);
     }
 
@@ -40,7 +40,7 @@ namespace DigitalRise.Animation.Character.Tests
       var identity = SrtTransform.Identity;
 
       Assert.AreEqual(Vector3.One, identity.Scale);
-      Assert.AreEqual(QuaternionF.Identity, identity.Rotation);
+      Assert.AreEqual(Quaternion.Identity, identity.Rotation);
       Assert.AreEqual(Vector3.Zero, identity.Translation);
     }
 
@@ -48,7 +48,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void HasScaleTest()
     {
-      var srt = new SrtTransform(new Vector3(1, 1, 1), QuaternionF.Identity, Vector3.Zero);
+      var srt = new SrtTransform(new Vector3(1, 1, 1), Quaternion.Identity, Vector3.Zero);
       Assert.IsFalse(srt.HasScale);
 
       srt.Scale = new Vector3(1.00001f, 1.000001f, 1.000001f);
@@ -71,13 +71,13 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void HasRotationTest()
     {
-      var srt = new SrtTransform(new Vector3(1, 1, 1), QuaternionF.Identity, Vector3.Zero);
+      var srt = new SrtTransform(new Vector3(1, 1, 1), Quaternion.Identity, Vector3.Zero);
       Assert.IsFalse(srt.HasRotation);
 
-      srt.Rotation = QuaternionF.CreateRotationX(0.000001f);
+      srt.Rotation = MathHelper.CreateRotationX(0.000001f);
       Assert.IsFalse(srt.HasRotation);
 
-      srt.Rotation = QuaternionF.CreateRotationX(0.1f);
+      srt.Rotation = MathHelper.CreateRotationX(0.1f);
       Assert.IsTrue(srt.HasRotation);
     }
 
@@ -85,7 +85,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void HasTranslationTest()
     {
-      var srt = new SrtTransform(QuaternionF.Identity, Vector3.Zero);
+      var srt = new SrtTransform(Quaternion.Identity, Vector3.Zero);
       Assert.IsFalse(srt.HasTranslation);
 
       srt.Translation = new Vector3(0.000001f, 0.000001f, 0.000001f);
@@ -108,8 +108,8 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void EqualsTest()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
-      var b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
+      var b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
 
       Assert.IsFalse(((object)a).Equals(3));
 
@@ -119,70 +119,70 @@ namespace DigitalRise.Animation.Character.Tests
       Assert.IsFalse(a != b);
       Assert.AreEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 22, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 22, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 33), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 33), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(11, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(11, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(11, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(11, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 22, 3, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 22, 3, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 33, 4).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 33, 4).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 44).Normalized, new Vector3(4, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 44).Normalized(), new Vector3(4, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(44, 5, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(44, 5, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 55, 6));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 55, 6));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
       Assert.IsTrue(a != b);
       Assert.AreNotEqual(a.GetHashCode(), b.GetHashCode());
 
-      b = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 66));
+      b = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 66));
       Assert.IsFalse(a.Equals(b));
       Assert.IsFalse(((object)a).Equals(b));
       Assert.IsFalse(a == b);
@@ -206,13 +206,13 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void InterpolateTest()
     {
-      SrtTransform a = new SrtTransform(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, 5, 6));
+      SrtTransform a = new SrtTransform(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, 5, 6));
       SrtTransform b = a;
 
       var c = SrtTransform.Interpolate(a, b, 0.5f);
       Assert.AreEqual(a, c);
 
-      b = new SrtTransform(new Vector3(7, 9, 8), new QuaternionF(6, 6, 4, 2).Normalized, new Vector3(-2, 4, -9));
+      b = new SrtTransform(new Vector3(7, 9, 8), new Quaternion(6, 6, 4, 2).Normalized(), new Vector3(-2, 4, -9));
       c = SrtTransform.Interpolate(a, b, 0);
       Assert.AreEqual(a, c);
 
@@ -222,11 +222,10 @@ namespace DigitalRise.Animation.Character.Tests
       c = SrtTransform.Interpolate(a, b, 0.3f);
       Assert.AreEqual(a.Translation * 0.7f + b.Translation * 0.3f, c.Translation);
       Assert.AreEqual(a.Scale * 0.7f + b.Scale * 0.3f, c.Scale);
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(
-        new QuaternionF(
-          a.Rotation.W * 0.7f + b.Rotation.W * 0.3f,
-          a.Rotation.V * 0.7f + b.Rotation.V * 0.3f).Normalized,
-        c.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(
+        new Quaternion(a.Rotation.V() * 0.7f + b.Rotation.V() * 0.3f, 
+                       a.Rotation.W * 0.7f + b.Rotation.W * 0.3f).Normalized(),
+				c.Rotation));
     }
 
 
@@ -235,25 +234,25 @@ namespace DigitalRise.Animation.Character.Tests
     public void FromToMatrixTest()
     {
       var t = new Vector3(1, 2, 3);
-      var r = new QuaternionF(1, 2, 3, 4).Normalized;
+      var r = new Quaternion(1, 2, 3, 4).Normalized();
       var s = new Vector3(2, 7, 9);
       var m = Matrix44F.CreateTranslation(t) * Matrix44F.CreateRotation(r) * Matrix44F.CreateScale(s);
 
       var srt = SrtTransform.FromMatrix(m);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(t, srt.Translation));
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(r, srt.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(r, srt.Rotation));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(s, srt.Scale));
 
       // XNA:
       srt = SrtTransform.FromMatrix((Matrix)m);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(t, srt.Translation));
-      Assert.IsTrue(QuaternionF.AreNumericallyEqual(r, srt.Rotation));
+      Assert.IsTrue(MathHelper.AreNumericallyEqual(r, srt.Rotation));
       Assert.IsTrue(MathHelper.AreNumericallyEqual(s, srt.Scale));
 
       // With negative scale, the decomposition is not unique (many possible combinations of 
       // axis mirroring + rotation).
       t = new Vector3(1, 2, 3);
-      r = new QuaternionF(1, 2, 3, 4).Normalized;
+      r = new Quaternion(1, 2, 3, 4).Normalized();
       s = new Vector3(2, -7, 9);
       m = Matrix44F.CreateTranslation(t) * Matrix44F.CreateRotation(r) * Matrix44F.CreateScale(s);
       srt = SrtTransform.FromMatrix(m);
@@ -278,7 +277,7 @@ namespace DigitalRise.Animation.Character.Tests
     public void InverseTest()
     {
       var identity = SrtTransform.Identity;
-      var a = new SrtTransform(new Vector3(-2, -2, -2), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(-2, -2, -2), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var aInverse = a.Inverse;
       
       var aa = a * aInverse;
@@ -288,7 +287,7 @@ namespace DigitalRise.Animation.Character.Tests
       Assert.IsTrue(SrtTransform.AreNumericallyEqual(identity, aa));
 
 
-      a = new SrtTransform(new Vector3(-3, 7, -4), QuaternionF.Identity, new Vector3(4, -5, 6));
+      a = new SrtTransform(new Vector3(-3, 7, -4), Quaternion.Identity, new Vector3(4, -5, 6));
       aInverse = a.Inverse;
 
       aa = a * aInverse;
@@ -302,9 +301,9 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void MultiplyWithUniformScaleIsAssociative()
     {
-      var a = new SrtTransform(new Vector3(2), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
-      var b = new SrtTransform(new Vector3(-3), new QuaternionF(3, -2, 1, 9).Normalized, new Vector3(7, -4, 2));
-      var c = new SrtTransform(new Vector3(4), new QuaternionF(7, -5, 3, 1).Normalized, new Vector3(-8, -1, -7));
+      var a = new SrtTransform(new Vector3(2), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
+      var b = new SrtTransform(new Vector3(-3), new Quaternion(3, -2, 1, 9).Normalized(), new Vector3(7, -4, 2));
+      var c = new SrtTransform(new Vector3(4), new Quaternion(7, -5, 3, 1).Normalized(), new Vector3(-8, -1, -7));
 
       // Assocative for uniform scale
       Assert.IsTrue(SrtTransform.AreNumericallyEqual((a*b)*c, a*(b*c)));
@@ -314,9 +313,9 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void MultiplyWithScaleWithoutRotationIsAssociative()
     {
-      var a = new SrtTransform(new Vector3(2), QuaternionF.Identity, new Vector3(4, -5, 6));
-      var b = new SrtTransform(new Vector3(-3), QuaternionF.Identity, new Vector3(7, -4, 2));
-      var c = new SrtTransform(new Vector3(4), QuaternionF.Identity, new Vector3(-8, -1, -7));
+      var a = new SrtTransform(new Vector3(2), Quaternion.Identity, new Vector3(4, -5, 6));
+      var b = new SrtTransform(new Vector3(-3), Quaternion.Identity, new Vector3(7, -4, 2));
+      var c = new SrtTransform(new Vector3(4), Quaternion.Identity, new Vector3(-8, -1, -7));
 
       // Assocative for uniform scale
       Assert.IsTrue(SrtTransform.AreNumericallyEqual((a * b) * c, a * (b * c)));
@@ -327,8 +326,8 @@ namespace DigitalRise.Animation.Character.Tests
     public void MultiplyWithoutRotationIsTheSameAsMatrixMultiply()
     {
       // Result is the same as Matrix mulitiplication without scale.
-      var a = new SrtTransform(new Vector3(1, 2, 3), QuaternionF.Identity, new Vector3(4, -5, 6));
-      var b = new SrtTransform(new Vector3(5, 6, -3), QuaternionF.Identity, new Vector3(7, -4, 2));
+      var a = new SrtTransform(new Vector3(1, 2, 3), Quaternion.Identity, new Vector3(4, -5, 6));
+      var b = new SrtTransform(new Vector3(5, 6, -3), Quaternion.Identity, new Vector3(7, -4, 2));
 
       var result1 = (a * b).ToMatrix44F();
       var result2 = a.ToMatrix44F() * b.ToMatrix44F();
@@ -340,8 +339,8 @@ namespace DigitalRise.Animation.Character.Tests
     public void MultiplyWithUniformScaleIsTheSameAsMatrixMultiply()
     {
       // Result is the same as Matrix mulitiplication without scale.
-      var a = new SrtTransform(new Vector3(7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
-      var b = new SrtTransform(new Vector3(-3), new QuaternionF(3, -2, 1, 9).Normalized, new Vector3(7, -4, 2));
+      var a = new SrtTransform(new Vector3(7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
+      var b = new SrtTransform(new Vector3(-3), new Quaternion(3, -2, 1, 9).Normalized(), new Vector3(7, -4, 2));
 
       var result1 = (a * b).ToMatrix44F();
       var result2 = a.ToMatrix44F() * b.ToMatrix44F();
@@ -352,8 +351,8 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void Multiply()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
-      var b = new SrtTransform(new Vector3(-3, 9, -2), new QuaternionF(3, -2, 1, 9).Normalized, new Vector3(7, -4, 2));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
+      var b = new SrtTransform(new Vector3(-3, 9, -2), new Quaternion(3, -2, 1, 9).Normalized(), new Vector3(7, -4, 2));
 
       var result1 = SrtTransform.Multiply(a, b).ToMatrix44F();
       var result2 = a * b;
@@ -364,7 +363,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void MultiplyVector4()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var v = new Vector4(7, 9, -12, -2);
 
       var result1 = a * v;
@@ -380,7 +379,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ToParentDirection()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var v = new Vector3(7, 9, -12);
 
       var result1 = a.ToParentDirection(v);
@@ -392,7 +391,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ToLocalDirection()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var v = new Vector3(7, 9, -12);
 
       var result1 = a.ToLocalDirection(v);
@@ -404,7 +403,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ToParentPosition()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var v = new Vector3(7, 9, -12);
 
       var result1 = a.ToParentPosition(v);
@@ -416,7 +415,7 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ToLocalPosition()
     {
-      var a = new SrtTransform(new Vector3(1, 2, 7), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(4, -5, 6));
+      var a = new SrtTransform(new Vector3(1, 2, 7), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(4, -5, 6));
       var v = new Vector3(7, 9, -12);
 
       var result1 = a.ToLocalPosition(v);
@@ -428,14 +427,14 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void FromPose()
     {
-      var pose = new Pose(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized);
+      var pose = new Pose(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized());
       var srt = SrtTransform.FromPose(pose);
 
       Assert.AreEqual(Vector3.One, srt.Scale);
       Assert.AreEqual(pose.Position, srt.Translation);
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
       
-      pose = new Pose(new Vector3(1, 2, 3), new QuaternionF(1, 2, 3, 4).Normalized);
+      pose = new Pose(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized());
       srt = pose;
 
       Assert.AreEqual(Vector3.One, srt.Scale);
@@ -447,13 +446,13 @@ namespace DigitalRise.Animation.Character.Tests
     [Test]
     public void ToPose()
     {
-      var srt = new SrtTransform(new Vector3(4, 5, 6), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(1, 2, 3));
+      var srt = new SrtTransform(new Vector3(4, 5, 6), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(1, 2, 3));
       var pose = srt.ToPose();
 
       Assert.AreEqual(pose.Position, srt.Translation);
       Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
 
-      srt = new SrtTransform(new Vector3(4, 5, 6), new QuaternionF(1, 2, 3, 4).Normalized, new Vector3(1, 2, 3));
+      srt = new SrtTransform(new Vector3(4, 5, 6), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(1, 2, 3));
       pose = (Pose)srt;
 
       Assert.AreEqual(pose.Position, srt.Translation);

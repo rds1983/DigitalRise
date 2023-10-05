@@ -218,9 +218,9 @@ namespace Samples.Geometry
             }
           case 9:
             CompositeShape comp = new CompositeShape();
-            comp.Children.Add(new GeometricObject(new BoxShape(0.5f * ObjectSize, 1 * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0, 0.5f * ObjectSize, 0), QuaternionF.Identity)));
-            comp.Children.Add(new GeometricObject(new BoxShape(0.8f * ObjectSize, 0.5f * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0.3f * ObjectSize, 0.7f * ObjectSize, 0), QuaternionF.CreateRotationZ(-MathHelper.ToRadians(45)))));
-            comp.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3(0, 1.15f * ObjectSize, 0), QuaternionF.Identity)));
+            comp.Children.Add(new GeometricObject(new BoxShape(0.5f * ObjectSize, 1 * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0, 0.5f * ObjectSize, 0), Quaternion.Identity)));
+            comp.Children.Add(new GeometricObject(new BoxShape(0.8f * ObjectSize, 0.5f * ObjectSize, 0.5f * ObjectSize), new Pose(new Vector3(0.3f * ObjectSize, 0.7f * ObjectSize, 0), MathHelper.CreateRotationZ(-MathHelper.ToRadians(45)))));
+            comp.Children.Add(new GeometricObject(new SphereShape(0.3f * ObjectSize), new Pose(new Vector3(0, 1.15f * ObjectSize, 0), Quaternion.Identity)));
             shape = comp;
             break;
           case 10:
@@ -326,14 +326,14 @@ namespace Samples.Geometry
           //  {
           //    // Create a composite object from which we get the mesh.
           //    CompositeShape compBvh = new CompositeShape();
-          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3(0, 0.5f, 0), QuaternionF.Identity)));
+          //    compBvh.Children.Add(new GeometricObject(new BoxShape(0.5f, 1, 0.5f), new Pose(new Vector3(0, 0.5f, 0), Quaternion.Identity)));
           //    compBvh.Children.Add(
           //      new GeometricObject(
           //        new BoxShape(0.8f, 0.5f, 0.5f),
-          //        new Pose(new Vector3(0.5f, 0.7f, 0), QuaternionF.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
-          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3(0, 1.15f, 0), QuaternionF.Identity)));
+          //        new Pose(new Vector3(0.5f, 0.7f, 0), MathHelper.CreateRotationZ(-(float)MathHelper.ToRadians(15)))));
+          //    compBvh.Children.Add(new GeometricObject(new SphereShape(0.3f), new Pose(new Vector3(0, 1.15f, 0), Quaternion.Identity)));
           //    compBvh.Children.Add(
-          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3(0.6f, 1.15f, 0), QuaternionF.CreateRotationX(0.3f))));
+          //      new GeometricObject(new CapsuleShape(0.2f, 1), new Pose(new Vector3(0.6f, 1.15f, 0), MathHelper.CreateRotationX(0.3f))));
 
           //    TriangleMeshShape meshBvhShape = new TriangleMeshShape { Mesh = compBvh.GetMesh(0.01f, 3) };
           //    meshBvhShape.Partition = new AabbTree<int>();
@@ -360,13 +360,13 @@ namespace Samples.Geometry
         // Create an object with the random shape, pose, color and velocity.
         Pose randomPose = new Pose(
           random.NextVector3(-BoxSize + ObjectSize * 2, BoxSize - ObjectSize * 2),
-          random.NextQuaternionF());
+          random.NextQuaternion());
         var newObject = new MovingGeometricObject
         {
           Pose = randomPose,
           Shape = shape,
-          LinearVelocity = random.NextQuaternionF().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
-          AngularVelocity = random.NextQuaternionF().Rotate(Vector3.Forward)
+          LinearVelocity = random.NextQuaternion().Rotate(new Vector3(MaxLinearVelocity, 0, 0)),
+          AngularVelocity = random.NextQuaternion().Rotate(Vector3.Forward)
                             * RandomHelper.Random.NextFloat(0, MaxAngularVelocity),
         };
 

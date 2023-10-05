@@ -20,7 +20,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [SetUp]
     public void SetUp()
     {
-      child0 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(), QuaternionF.CreateRotationX(ConstantsF.PiOver2)));
+      child0 = new GeometricObject(new CircleShape(3), new Pose(new Vector3(), MathHelper.CreateRotationX(ConstantsF.PiOver2)));
       child1 = new GeometricObject(new LineSegmentShape(new Vector3(0, 5, 0), new Vector3(0, -5, 0)), Pose.Identity);
 
       cs = new MinkowskiSumShape 
@@ -36,7 +36,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       Assert.AreEqual(new Vector3(0, 0, 0), new ConvexHullOfShapes().InnerPoint);
       Assert.AreEqual(new Vector3(0, 0, 0), cs.InnerPoint);
-      cs.ObjectB = new GeometricObject(new PointShape(new Vector3(5, 0, 0)), new Pose(new Vector3(1, 0, 0), QuaternionF.Identity));
+      cs.ObjectB = new GeometricObject(new PointShape(new Vector3(5, 0, 0)), new Pose(new Vector3(1, 0, 0), Quaternion.Identity));
       Assert.AreEqual(new Vector3(6, 0, 0), cs.InnerPoint);
     }
 
@@ -48,11 +48,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(new Aabb(), new ConvexHullOfPoints().GetAabb(Pose.Identity));
     //  Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
     //                 new ConvexHullOfPoints().GetAabb(new Pose(new Vector3(10, 100, -13),
-    //                                                                     QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+    //                                                                     MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
     //  Assert.AreEqual(new Aabb(new Vector3(11, 102, 1003), new Vector3(11, 102, 1003)),
     //                 new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000),
-    //                                                                     QuaternionF.Identity)));
-    //  QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f);
+    //                                                                     Quaternion.Identity)));
+    //  Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
     //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));

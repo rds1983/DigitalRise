@@ -83,7 +83,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       CollisionObject objectB = new CollisionObject();
       ((GeometricObject)objectB.GeometricObject).Shape = new PlaneShape(new Vector3(0, 1, 0).Normalized(), 2);
-      ((GeometricObject)objectB.GeometricObject).Pose = new Pose(new Vector3(1, 0, 0), QuaternionF.CreateRotationZ(-(float)Math.PI));
+      ((GeometricObject)objectB.GeometricObject).Pose = new Pose(new Vector3(1, 0, 0), MathHelper.CreateRotationZ(-(float)Math.PI));
 
       ContactSet cs = ContactSet.Create(objectA, objectB);
       algo.UpdateContacts(cs, 0);

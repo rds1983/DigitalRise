@@ -18,7 +18,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void SetUp()
     {
       cs = new MinkowskiDifferenceShape();
-      cs.ObjectA = new GeometricObject(new CircleShape(3), new Pose(new Vector3(1, 0, 0), QuaternionF.CreateRotationX(ConstantsF.PiOver2)));
+      cs.ObjectA = new GeometricObject(new CircleShape(3), new Pose(new Vector3(1, 0, 0), MathHelper.CreateRotationX(ConstantsF.PiOver2)));
       cs.ObjectB = new GeometricObject(new LineSegmentShape(new Vector3(0, 5, 0), new Vector3(0, -5, 0)), Pose.Identity);
     }
 
@@ -31,7 +31,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(Pose.Identity, new MinkowskiDifferenceShape().ObjectB.Pose);
 
       var m = new MinkowskiDifferenceShape(
-        new GeometricObject(new CircleShape(3), new Pose(new Vector3(1, 0, 0), QuaternionF.CreateRotationX(ConstantsF.PiOver2))),
+        new GeometricObject(new CircleShape(3), new Pose(new Vector3(1, 0, 0), MathHelper.CreateRotationX(ConstantsF.PiOver2))),
         new GeometricObject(new LineSegmentShape(new Vector3(0, 5, 0), new Vector3(0, -5, 0)), Pose.Identity));
       Assert.AreEqual(new Vector3(1, 0, 0), m.ObjectA.Pose.Position);
       Assert.AreEqual(new Vector3(0, 0, 0), m.ObjectB.Pose.Position);
@@ -60,7 +60,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(3, ((CircleShape)cs.ObjectA.Shape).Radius);
       Assert.AreEqual(new Vector3(0, 5, 0), ((LineSegmentShape)cs.ObjectB.Shape).Start);
       Assert.AreEqual(new Vector3(0, -5, 0), ((LineSegmentShape) cs.ObjectB.Shape).End);
-      Assert.AreEqual(new Pose(new Vector3(1, 0, 0), QuaternionF.CreateRotationX(ConstantsF.PiOver2)), cs.ObjectA.Pose);
+      Assert.AreEqual(new Pose(new Vector3(1, 0, 0), MathHelper.CreateRotationX(ConstantsF.PiOver2)), cs.ObjectA.Pose);
       Assert.AreEqual(Pose.Identity, cs.ObjectB.Pose);
     }
 
@@ -94,11 +94,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(new Aabb(), new ConvexHullOfPoints().GetAabb(Pose.Identity));
     //  Assert.AreEqual(new Aabb(new Vector3(10, 100, -13), new Vector3(10, 100, -13)),
     //                 new ConvexHullOfPoints().GetAabb(new Pose(new Vector3(10, 100, -13),
-    //                                                                     QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
+    //                                                                     MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f))));
     //  Assert.AreEqual(new Aabb(new Vector3(11, 102, 1003), new Vector3(11, 102, 1003)),
     //                 new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000),
-    //                                                                     QuaternionF.Identity)));
-    //  QuaternionF rotation = QuaternionF.CreateRotation(new Vector3(1, 1, 1), 0.7f);
+    //                                                                     Quaternion.Identity)));
+    //  Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
     //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
     //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));
@@ -122,7 +122,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       MinkowskiDifferenceShape m = new MinkowskiDifferenceShape();
       ((GeometricObject)m.ObjectB).Shape = new LineSegmentShape(new Vector3(1, 0, 0), new Vector3(3, 0, 0));
       Assert.AreEqual(new Vector3(-1, 0, 0), m.GetSupportPoint(new Vector3(1, 1, 0)));
-      ((GeometricObject)m.ObjectB).Pose = new Pose(new Vector3(1, 1, 0), QuaternionF.Identity);
+      ((GeometricObject)m.ObjectB).Pose = new Pose(new Vector3(1, 1, 0), Quaternion.Identity);
       Assert.AreEqual(new Vector3(-2, -1, 0), m.GetSupportPoint(new Vector3(1, 1, 0)));
       ((GeometricObject)m.ObjectA).Shape = new CircleShape(20);
       Assert.AreEqual(new Vector3(18, -1, 0), m.GetSupportPoint(new Vector3(1, 0, 0)));
