@@ -295,6 +295,15 @@ float4 CameraMisc;
 // Structures
 //-----------------------------------------------------------------------------
 
+struct VSInput
+{
+  float4 Position: SV_Position;
+  float3 Normal: NORMAL;
+#if PROJECTED_GRID || DISPLACEMENT
+  float2 TexCoord: TEXCOORD;
+#endif
+};
+
 struct VSOutput
 {
   float2 TexCoord0 : TEXCOORD0;
@@ -331,9 +340,7 @@ struct PSUnderwaterInput
 // Functions
 //-----------------------------------------------------------------------------
 
-VSOutput VS(float4 position : POSITION,
-            float3 normal : NORMAL,
-            float2 texCoord : TEXCOORD)
+VSOutput VS(VSInput input)
 {
   VSOutput output = (VSOutput)0;
   
@@ -341,8 +348,8 @@ VSOutput VS(float4 position : POSITION,
 #if !PROJECTED_GRID
   {
     // No projected grid.
-    output.PositionWorld = mul(position, World).xyz;
-    output.NormalOrWaveMapInfo = mul(normal, (float3x3)World);
+    output.PositionWorld = mul(input.Position, World).xyz;
+    output.NormalOrWaveMapInfo = mul(input.Normal, (float3x3)World);
   }
 #else
   {
@@ -352,9 +359,9 @@ VSOutput VS(float4 position : POSITION,
     // Note: We could make the last lerp using pow(texCoord.y + 0.000001, k).
     // By changing k, the user can choose to have more resolution at the bottom
     // or the top.
-    float3 viewDirection = lerp(lerp(NearCorners[0], NearCorners[1], texCoord.x),
-                                lerp(NearCorners[2], NearCorners[3], texCoord.x),
-                                texCoord.y);
+    float3 viewDirection = lerp(lerp(NearCorners[0], NearCorners[1], input.TexCoord.x),
+                                lerp(NearCorners[2], NearCorners[3], input.TexCoord.x),
+                                input.TexCoord.y);
     
     // Clamp view direction to a "down" direction to avoid "back projection".
     // If the camera is underwater, we must clamp to an "up" direction.
@@ -388,7 +395,7 @@ VSOutput VS(float4 position : POSITION,
     // Edge attenuation:
     // Convert texCoord from [0, 1] to [-1, 1] and flip negative to [0, 1].
     // --> isEdge is 1 at projected grid edge and 0 in the grid center.
-    float2 isEdge = abs(texCoord.xy * 2 - 1);
+    float2 isEdge = abs(input.TexCoord.xy * 2 - 1);
     // Lerp displacement to 0 at edges.
     float2 a = (isEdge - (1 - EdgeAttenuation)) / EdgeAttenuation;
     // Note: Have to use clamp instead of saturate because of compiler bug.
