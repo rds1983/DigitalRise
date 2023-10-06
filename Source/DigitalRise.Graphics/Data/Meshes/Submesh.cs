@@ -298,6 +298,24 @@ namespace DigitalRise.Graphics
       if (Mesh != null)
         Mesh.InvalidateMorphTargetNames();
     }
+
+    public Submesh Clone()
+    {
+      return new Submesh
+      {
+        PrimitiveType = PrimitiveType,
+				VertexBuffer = VertexBuffer,
+				VertexBufferEx = VertexBufferEx,
+				StartVertex = StartVertex,
+				VertexCount = VertexCount,
+				IndexBuffer = IndexBuffer,
+				StartIndex = StartIndex,
+				PrimitiveCount = PrimitiveCount,
+        _materialIndex = _materialIndex,
+        MorphTargets = MorphTargets,
+        UserData = UserData,
+      };
+    }
     #endregion
   }
 }

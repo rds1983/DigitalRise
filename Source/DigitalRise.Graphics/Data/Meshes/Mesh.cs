@@ -295,6 +295,31 @@ namespace DigitalRise.Graphics
     }
     #endregion
 
+    public Mesh Clone()
+    {
+			Mesh mesh = new Mesh
+			{
+				BoundingShape = BoundingShape.Clone(),
+        Name = Name,
+        Occluder = Occluder,
+        Animations = Animations,
+        Skeleton = Skeleton,
+        UserData = UserData
+			};
+
+      foreach(var material in Materials)
+      {
+        mesh.Materials.Add(material);
+      }
+
+      foreach(var submesh in Submeshes)
+      {
+        mesh.Submeshes.Add(submesh.Clone());
+      }
+
+      return mesh;
+		}
+
     #endregion
   }
 }
