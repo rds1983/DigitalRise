@@ -300,7 +300,7 @@ namespace DigitalRise.UI.Controls
     /// </summary>
     [Browsable(false)]
     public static readonly int PasswordCharacterPropertyId = CreateProperty(
-      typeof(TextBox), "PasswordCharacter", GamePropertyCategories.Behavior, null, '�',
+      typeof(TextBox), "PasswordCharacter", GamePropertyCategories.Behavior, null, '•',
       UIPropertyOptions.AffectsMeasure);
 
     /// <summary>

@@ -32,7 +32,7 @@ namespace DigitalRise.UI.Rendering
   /// <strong>Processing and Loading:</strong>
   /// To load a theme add the XML file to an XNA Content Project. The content project needs to 
   /// reference the following DigitalRise content pipeline assemblies: 
-  /// "DigitalRise.Mathematics.Content.Pipeline.dll" and DigitalRise.Game.UI.Content.Pipeline.dll".
+  /// "DigitalRise.Mathematics.Content.Pipeline.dll" and DigitalRise.UI.Content.Pipeline.dll".
   /// Once the assembly references are added, set the <strong>Content Importer</strong> and the 
   /// <strong>Content Processor</strong> of the XML file to "UI Theme - DigitalRise". The theme and 
   /// all related files are then automatically built together with the content project.

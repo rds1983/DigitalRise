@@ -4,7 +4,7 @@
 
   <Fonts>
     <Font Name="Default" File="Inter-Regular.ttf" Size="14" IsDefault="True"/>
-    <Font Name="Console" File="Inter-Regular.ttf" Size="14"/>
+    <Font Name="Console" File="CourierPrime-Regular.ttf" Size="14"/>
   </Fonts>
 
 

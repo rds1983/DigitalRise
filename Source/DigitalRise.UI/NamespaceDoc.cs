@@ -5,7 +5,7 @@
 namespace DigitalRise.UI
 {
   /// <summary>
-  /// The <see cref="N:DigitalRise.Game.UI"/> namespace provides general types to manage a graphical
+  /// The <see cref="N:DigitalRise.UI"/> namespace provides general types to manage a graphical
   /// user interface (GUI).
   /// </summary>
   [System.Runtime.CompilerServices.CompilerGenerated]

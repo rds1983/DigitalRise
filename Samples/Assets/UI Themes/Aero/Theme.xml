@@ -2,23 +2,9 @@
 
 <Theme>
 
-  <Cursors>
-    <Cursor Name="Arrow" File="Cursors/Arrow.cur" IsDefault="True"/>
-    <Cursor Name="Cross" File="Cursors/Cross.cur"/>
-    <Cursor Name="IBeam" File="Cursors/IBeam.cur"/>
-    <Cursor Name="SizeAll" File="Cursors/SizeAll.cur"/>
-    <Cursor Name="SizeNESW" File="Cursors/SizeNESW.cur"/>
-    <Cursor Name="SizeNS" File="Cursors/SizeNS.cur"/>
-    <Cursor Name="SizeNWSE" File="Cursors/SizeNWSE.cur"/>
-    <Cursor Name="SizeWE" File="Cursors/SizeWE.cur"/>
-    <Cursor Name="Unavailable" File="Cursors/Unavailable.cur"/>
-    <Cursor Name="Wait" File="Cursors/Wait.ani"/>
-  </Cursors>
-
-
   <Fonts>
-    <Font Name="Default" File="/Fonts/DroidSans.ttf" Size="14" IsDefault="True"/>
-    <Font Name="Console" File="/Fonts/DroidSans.ttf" Size="14"/>
+    <Font Name="Default" File="Fonts/Inter-Regular.ttf" Size="14" IsDefault="True"/>
+    <Font Name="Console" File="Fonts/CourierPrime-Regular.ttf" Size="14"/>
   </Fonts>
 
 

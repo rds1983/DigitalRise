@@ -150,7 +150,7 @@ namespace DigitalRise.UI
         if (_germanKeyMap == null)
         {
           _germanKeyMap = new KeyMap();
-          _germanKeyMap.LoadEmbeddedResource("DigitalRise.Game.UI.Resources.GermanKeyMap.xml");
+          _germanKeyMap.LoadEmbeddedResource("GermanKeyMap.xml");
         }
         return _germanKeyMap;
       }
@@ -169,7 +169,7 @@ namespace DigitalRise.UI
         if (_englishKeyMap == null)
         {
           _englishKeyMap = new KeyMap();
-          _englishKeyMap.LoadEmbeddedResource("DigitalRise.Game.UI.Resources.EnglishKeyMap.xml");
+          _englishKeyMap.LoadEmbeddedResource("EnglishKeyMap.xml");
         }
         return _englishKeyMap;
       }
@@ -188,7 +188,7 @@ namespace DigitalRise.UI
         if (_englishKeyMapGermanChatPad == null)
         {
           _englishKeyMapGermanChatPad = new KeyMap();
-          _englishKeyMapGermanChatPad.LoadEmbeddedResource("DigitalRise.Game.UI.Resources.EnglishKeyMapGermanChatPad.xml");
+          _englishKeyMapGermanChatPad.LoadEmbeddedResource("EnglishKeyMapGermanChatPad.xml");
         }
         return _englishKeyMapGermanChatPad;
       }
@@ -251,17 +251,9 @@ namespace DigitalRise.UI
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
     private void LoadEmbeddedResource(string keyMapName)
     {
-      // Get current assembly.
-      var assembly = Assembly.GetExecutingAssembly();
-      Stream stream = assembly.GetManifestResourceStream(keyMapName);
-      if (stream != null)
-      {
-        using (XmlReader reader = XmlReader.Create(stream))
-          Load(reader);
-        //Load(XDocument.Load(reader));
-
-        stream.Dispose();
-      }
+      using (var stream = Resources.AssetManager.Open(keyMapName))
+      using (XmlReader reader = XmlReader.Create(stream))
+        Load(reader);
     }
 
 

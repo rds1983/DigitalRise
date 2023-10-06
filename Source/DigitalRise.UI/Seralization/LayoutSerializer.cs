@@ -28,7 +28,7 @@ namespace DigitalRise.UI
   /// <code lang="csharp">
   /// <![CDATA[
   /// <?xml version="1.0" encoding="utf-8" ?>
-  /// <Layout DefaultNamespace="DigitalRise.Game.UI.Controls">
+  /// <Layout DefaultNamespace="DigitalRise.UI.Controls">
   ///   <MyClass Namespace="NamespaceFoo1.Foo2">
   ///     <Data>123</Data>
   ///   </MyClass>
@@ -41,7 +41,7 @@ namespace DigitalRise.UI
   ///     <Text>This is a test button...</Text>
   ///   </Button>
   /// 
-  ///   <Window Name="Window1" Namespace="DigitalRise.Game.UI.Controls">
+  ///   <Window Name="Window1" Namespace="DigitalRise.UI.Controls">
   ///     <Content>
   ///       <StackPanel Name="Panel0">
   ///         <Children>

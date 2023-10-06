@@ -5,8 +5,10 @@ namespace DigitalRise.UI
 {
 	internal static class Resources
 	{
-		private static AssetManager _assetManagerResources = AssetManager.CreateResourceAssetManager(typeof(Resources).Assembly, "Resources");
+		private static AssetManager _assetManager = AssetManager.CreateResourceAssetManager(typeof(Resources).Assembly, "Resources");
 		private static Theme _defaultTheme;
+
+		public static AssetManager AssetManager => _assetManager;
 
 		public static Theme DefaultTheme
 		{
@@ -17,7 +19,7 @@ namespace DigitalRise.UI
 					return _defaultTheme;
 				}
 
-				_defaultTheme = _assetManagerResources.LoadTheme("DefaultTheme/Theme.xml");
+				_defaultTheme = _assetManager.LoadTheme("DefaultTheme/Theme.xml");
 
 				return _defaultTheme;
 			}

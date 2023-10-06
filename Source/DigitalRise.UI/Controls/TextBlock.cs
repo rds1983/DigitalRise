@@ -197,14 +197,12 @@ namespace DigitalRise.UI.Controls
 
       // Remove padding from constraint size.
       Vector4 padding = Padding;
-      Vector2 contentSize = availableSize;
-      if (Numeric.IsPositiveFinite(availableSize.X))
-        contentSize.X -= padding.X + padding.Z;
-      if (Numeric.IsPositiveFinite(availableSize.Y))
-        contentSize.Y -= padding.Y + padding.W;
+      if (WrapText && Numeric.IsPositiveFinite(availableSize.X))
+      {
+				_richText.Width = (int)(availableSize.X - (padding.X + padding.Z));
+      }
 
       // Measure text size.
-      _richText.Width = WrapText ? (int)contentSize.X : null;
       var sz = _richText.Size;
       Vector2 size = new Vector2(sz.X, sz.Y);
       return new Vector2(
@@ -212,6 +210,13 @@ namespace DigitalRise.UI.Controls
         hasHeight ? height : size.Y + padding.Y + padding.W);
     }
 
-    #endregion
-  }
+		protected override void OnArrange(Vector2 position, Vector2 size)
+		{
+			base.OnArrange(position, size);
+
+      // TODO: Assign VisualClip
+		}
+
+		#endregion
+	}
 }

@@ -5,6 +5,7 @@ using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
+using DigitalRise;
 
 namespace Samples.Game.UI
 {
@@ -65,13 +66,16 @@ namespace Samples.Game.UI
         UIService.Screens.Remove(_uiScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      string themeName;
+      Theme theme;
       if (_themeNumber == 0)
-        themeName = "UI Themes/BlendBlue/Theme.xml";
+      {
+        theme = UIDefaults.Theme;
+      }
       else
-        themeName = "UI Themes/Aero/Theme.xml";
-
-      Theme theme = AssetManager.LoadTheme(themeName);
+      {
+        var themeName = "UI Themes/Aero/Theme.xml";
+				theme = AssetManager.LoadTheme(themeName);
+			}
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(theme);
@@ -199,7 +203,7 @@ namespace Samples.Game.UI
       if (_changeTheme)
       {
         // Load a new theme.
-        _themeNumber = (_themeNumber + 1) % 4;
+        _themeNumber = (_themeNumber + 1) % 2;
         CreateGui();
         _changeTheme = false;
       }
