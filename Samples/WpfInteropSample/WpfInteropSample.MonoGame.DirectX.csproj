@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Windows.Interop\DigitalRise.Windows.Interop.MonoGame.DirectX.csproj" />
   </ItemGroup>
 
