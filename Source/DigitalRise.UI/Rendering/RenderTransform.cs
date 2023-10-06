@@ -8,6 +8,7 @@ using System.Text;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
+using FontStashSharp.RichText;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -621,28 +622,72 @@ namespace DigitalRise.UI.Rendering
       spriteBatch.Draw(texture, (Vector2)position, sourceRectangle, color, Rotation, (Vector2)spriteOrigin, (Vector2)scale, SpriteEffects.None, 0.0f);
     }
 
+		/// <overloads>
+		/// <summary>
+		/// Transforms a string and adds it to a batch of sprites for rendering.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Transforms a string and adds it to a batch of sprites for rendering using the specified 
+		/// font, text, position, and color.
+		/// </summary>
+		/// <param name="spriteBatch">The sprite batch for rendering.</param>
+		/// <param name="spriteFont">A font for displaying text.</param>
+		/// <param name="text">The text string.</param>
+		/// <param name="position">The location in screen coordinates to draw the sprite.</param>
+		/// <param name="color">
+		/// The color to tint a sprite. Use white for full color with no tinting.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="spriteBatch"/> or <paramref name="spriteFont"/> is <see langword="null"/>.
+		/// </exception>
+		public void DrawRichText(SpriteBatch spriteBatch, RichTextLayout richText, Vector2 position, Color color)
+		{
+			if (spriteBatch == null)
+				throw new ArgumentNullException("spriteBatch");
 
-    /// <overloads>
-    /// <summary>
-    /// Transforms a string and adds it to a batch of sprites for rendering.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Transforms a string and adds it to a batch of sprites for rendering using the specified 
-    /// font, text, position, and color.
-    /// </summary>
-    /// <param name="spriteBatch">The sprite batch for rendering.</param>
-    /// <param name="spriteFont">A font for displaying text.</param>
-    /// <param name="text">The text string.</param>
-    /// <param name="position">The location in screen coordinates to draw the sprite.</param>
-    /// <param name="color">
-    /// The color to tint a sprite. Use white for full color with no tinting.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="spriteBatch"/> or <paramref name="spriteFont"/> is <see langword="null"/>.
-    /// </exception>
-    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, string text, Vector2 position, Color color)
+			if (Numeric.IsZero(Scale.X) || Numeric.IsZero(Scale.Y))
+				return;
+
+			// Adjust parameters for sprite batch.
+			Vector2 origin = Origin - position;
+			position = position + origin + Translation;
+
+			if (this == Identity)
+			{
+				position.X = (int)position.X;
+				position.Y = (int)position.Y;
+				origin.X = (int)origin.X;
+				origin.Y = (int)origin.Y;
+			}
+
+      richText.Draw(spriteBatch, position, color, Scale, Rotation, origin);
+		}
+
+
+		/// <overloads>
+		/// <summary>
+		/// Transforms a string and adds it to a batch of sprites for rendering.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Transforms a string and adds it to a batch of sprites for rendering using the specified 
+		/// font, text, position, and color.
+		/// </summary>
+		/// <param name="spriteBatch">The sprite batch for rendering.</param>
+		/// <param name="spriteFont">A font for displaying text.</param>
+		/// <param name="text">The text string.</param>
+		/// <param name="position">The location in screen coordinates to draw the sprite.</param>
+		/// <param name="color">
+		/// The color to tint a sprite. Use white for full color with no tinting.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="spriteBatch"/> or <paramref name="spriteFont"/> is <see langword="null"/>.
+		/// </exception>
+		public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, string text, Vector2 position, Color color, 
+      TextStyle textStyle = TextStyle.None, FontSystemEffect effect = FontSystemEffect.None, int effectAmount = 0)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -662,7 +707,7 @@ namespace DigitalRise.UI.Rendering
         origin.Y = (int)origin.Y;
       }
 
-      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin);
+      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
     }
 
 
@@ -677,8 +722,8 @@ namespace DigitalRise.UI.Rendering
     /// <param name="color">
     /// The color to tint a sprite. Use white for full color with no tinting.
     /// </param>
-    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, StringBuilder text,
-                           Vector2 position, Color color)
+    public void DrawString(SpriteBatch spriteBatch, SpriteFontBase spriteFont, StringBuilder text, Vector2 position, Color color,
+			TextStyle textStyle = TextStyle.None, FontSystemEffect effect = FontSystemEffect.None, int effectAmount = 0)
     {
       if (spriteBatch == null)
         throw new ArgumentNullException("spriteBatch");
@@ -698,7 +743,7 @@ namespace DigitalRise.UI.Rendering
         origin.Y = (int)origin.Y;
       }
 
-      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin);
+      spriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
     }
 
 

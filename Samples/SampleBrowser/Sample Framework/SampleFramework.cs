@@ -302,9 +302,8 @@ namespace Samples
       // ----- Title (top left)
       _titleTextBlock = new TextBlock
       {
-        Font = "DejaVuSans",
         Foreground = Color.White,
-        Text = "No sample selected",
+        Text = "/es1No sample selected",
         X = 10,
         Y = 10,
       };
@@ -320,29 +319,11 @@ namespace Samples
       _guiGraphicsScreen.UIScreen.Children.Add(_infoPanel);
       _controllerTextBlock = new TextBlock
       {
-        Font = "DejaVuSans",
         Foreground = Color.White,
-        Text = "Controller disconnected. Press <Start> to use controller.",
+        Text = "/es1Controller disconnected. Press <Start> to use controller.",
       };
       _infoPanel.Children.Add(_controllerTextBlock);
 
-#if XBOX
-      _buttonsPanel = new StackPanel(); // Not used.
-      var infoTextBlock = new TextBlock
-      {
-        Font = "DejaVuSans",
-        Foreground = Color.White,
-        Text = "Press <Left Stick> to show/hide help.",
-      };
-      _infoPanel.Children.Add(infoTextBlock);
-      infoTextBlock = new TextBlock
-      {
-        Font = "DejaVuSans",
-        Foreground = Color.White,
-        Text = "Press <Back> to show/hide menu.",
-      };
-      _infoPanel.Children.Add(infoTextBlock);
-#else
       // ----- Buttons (bottom right)
       _buttonsPanel = new StackPanel
       {
@@ -361,7 +342,6 @@ namespace Samples
 #if !NETFX_CORE && !IOS
       AddButton(_buttonsPanel, "Exit (Alt-F4)", _game.Exit);
 #endif
-#endif
 
       // ----- FPS Counter (top right)
       _fpsPanel = new StackPanel
@@ -373,18 +353,16 @@ namespace Samples
       _guiGraphicsScreen.UIScreen.Children.Add(_fpsPanel);
       _updateFpsTextBlock = new TextBlock
       {
-        Font = "DejaVuSans",
         Foreground = Color.Yellow,
         HorizontalAlignment = HorizontalAlignment.Right,
-        Text = "Update",
+        Text = "/es1Update",
       };
       _fpsPanel.Children.Add(_updateFpsTextBlock);
       _drawFpsTextBlock = new TextBlock
       {
-        Font = "DejaVuSans",
         Foreground = Color.Yellow,
         HorizontalAlignment = HorizontalAlignment.Right,
-        Text = "Draw",
+        Text = "/es1Draw",
       };
       _fpsPanel.Children.Add(_drawFpsTextBlock);
 
@@ -1043,7 +1021,7 @@ namespace Samples
       {
         {
           _stringBuilder.Clear();
-          _stringBuilder.Append("Update: ");
+          _stringBuilder.Append("/es1Update: ");
           float fps = (float)Math.Round(_numberOfUpdates / _stopwatch.Elapsed.TotalSeconds);
           _stringBuilder.AppendNumber((int)fps);
           _stringBuilder.Append(" fps, ");
@@ -1053,7 +1031,7 @@ namespace Samples
         }
         {
           _stringBuilder.Clear();
-          _stringBuilder.Append("Draw: ");
+          _stringBuilder.Append("/es1Draw: ");
           float fps = (float)Math.Round(_numberOfDraws / _stopwatch.Elapsed.TotalSeconds);
           _stringBuilder.AppendNumber((int)fps);
           _stringBuilder.Append(" fps, ");
@@ -1208,7 +1186,9 @@ namespace Samples
         foreach (var controlsAttribute in ControlsAttribute.GetControlsAttribute(gameObject.GetType()))
           helpText += "\n\n" + controlsAttribute.Description;
 
-      _titleTextBlock.Text = (_sample != null) ? category + " - " + name : name;
+      _titleTextBlock.Text = "/es1";
+
+			_titleTextBlock.Text += (_sample != null) ? category + " - " + name : name;
       _helpTextBlock.Text = helpText;
     }
     #endregion

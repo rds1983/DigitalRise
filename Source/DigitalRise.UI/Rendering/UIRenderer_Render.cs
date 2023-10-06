@@ -373,7 +373,7 @@ namespace DigitalRise.UI.Rendering
 
       // Render text.
       var textBlock = control as TextBlock;
-      if (textBlock != null && textBlock.VisualText.Length > 0)
+      if (textBlock != null && !string.IsNullOrEmpty(textBlock.Text))
       {
         RectangleF contentBounds = GetContentBoundsRounded(textBlock);
         Rectangle originalScissorRectangle = GraphicsDevice.ScissorRectangle;
@@ -391,7 +391,7 @@ namespace DigitalRise.UI.Rendering
         // Render text.
         Vector2 position = new Vector2(contentBounds.X, contentBounds.Y);
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
-        context.RenderTransform.DrawString(SpriteBatch, GetFont(textBlock.Font), textBlock.VisualText, position, foreground);
+        context.RenderTransform.DrawRichText(SpriteBatch, textBlock.RichTextLayout, position, foreground);
 
         if (textBlock.VisualClip)
         {

@@ -11,6 +11,7 @@ using DigitalRise.GameBase;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
+using FontStashSharp.RichText;
 using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
@@ -42,24 +43,16 @@ namespace DigitalRise.UI.Controls
   /// </example>
   public class TextBlock : UIControl
   {
-    // TODO: Possible new properties: TextAlignment (Left, Right, Center, Justify)
+		private readonly RichTextLayout _richText = new RichTextLayout
+		{
+			SupportsCommands = true
+		};
 
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-    #endregion
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
-
-    /// <summary>
-    /// Gets the text exactly as it should be displayed (wrapping already applied).
-    /// </summary>
-    /// <value>The text, exactly as it should be displayed (wrapping already applied).</value>
-    public StringBuilder VisualText { get; private set; }
-
+    public RichTextLayout RichTextLayout => _richText;
 
     /// <summary>
     /// Gets a value indicating whether the renderer should clip the rendered 
@@ -83,7 +76,7 @@ namespace DigitalRise.UI.Controls
     #region Game Object Properties & Events
     //--------------------------------------------------------------
 
-    /// <summary> 
+/*    /// <summary> 
     /// The ID of the <see cref="UseEllipsis"/> game object property.
     /// </summary>
     [Browsable(false)]
@@ -103,7 +96,7 @@ namespace DigitalRise.UI.Controls
     {
       get { return GetValue<bool>(UseEllipsisPropertyId); }
       set { SetValue(UseEllipsisPropertyId, value); }
-    }
+    }*/
 
 
     /// <summary> 
@@ -160,7 +153,6 @@ namespace DigitalRise.UI.Controls
     public TextBlock()
     {
       Style = "TextBlock";
-      VisualText = new StringBuilder();
     }
     #endregion
 
@@ -180,9 +172,10 @@ namespace DigitalRise.UI.Controls
 
       // Clear old renderer info.
       VisualClip = false;
-      VisualText.Clear();
+      _richText.Text = Text;
+			_richText.Font = screen.Renderer.GetFont(Font);
 
-      string text = Text;
+			string text = Text;
       float width = Width;
       float height = Height;
       bool hasWidth = Numeric.IsPositiveFinite(width);
@@ -211,231 +204,13 @@ namespace DigitalRise.UI.Controls
         contentSize.Y -= padding.Y + padding.W;
 
       // Measure text size.
-      var font = screen.Renderer.GetFont(Font);
-      Vector2 size = (Vector2)font.MeasureString(text);
-      if (size.IsLessThen(contentSize))
-      {
-        // All text is visible. (VisualText is equal to Text.)
-        VisualText.Append(text);
-        return new Vector2(
-          hasWidth ? width : size.X + padding.X + padding.Z,
-          hasHeight ? height : size.Y + padding.Y + padding.W);
-      }
-
-      // Get number of lines.
-      int numberOfLines = 1;
-      for (int i = 0; i < text.Length - 1; i++)
-        if (text[i] == '\n')
-          numberOfLines++;
-
-      if (numberOfLines == 1 && size.Y > contentSize.Y)
-      {
-        // Not enough space for a single line height. --> Keep all text and use clipping.
-        VisualText.Append(text);
-        VisualClip = true;
-        return new Vector2(
-          hasWidth ? width : size.X + padding.X + padding.Z,
-          hasHeight ? height : size.Y + padding.Y + padding.W);
-      }
-
-      if (!WrapText)
-      {
-        // Not using word wrapping.
-
-        // Compute desired size.
-        Vector2 desiredSize = new Vector2(
-          hasWidth ? width : availableSize.X,
-          hasHeight ? height : availableSize.Y);
-
-        desiredSize.X = Math.Min(desiredSize.X, size.X + padding.X + padding.Z);
-        desiredSize.Y = Math.Min(desiredSize.Y, size.Y + padding.Y + padding.W);
-
-        if (numberOfLines > 1            // 2 or more lines?
-            || !UseEllipsis              // No ellipsis needed?
-            || size.Y > contentSize.Y)   // Single line is already to high?
-        {
-          // Just clip the text.
-          VisualClip = true;
-          VisualText.Append(text);
-        }
-        else
-        {
-          // 1 line that is too long and we have to insert an ellipsis.
-          VisualText.Append(text);
-          TrimText(VisualText, font, contentSize.X);
-        }
-
-        return desiredSize;
-      }
-
-      // Get words.
-      var words = SplitText();
-
-      // Note: We can compute line heights without font.MeasureString(). But we cannot compute 
-      // line widths without font.MeasureString() because we do not have kerning information.
-      int lineHeight = font.LineHeight;
-      Debug.Assert(lineHeight <= contentSize.Y, "At least one line must fit into content");
-      float currentHeight = lineHeight;
-
-      // Add words to string builder until space runs out.
-      // In each loop iteration one line is built.
-      int index = 0;
-      int lineWordCount = 0;
-      var line = new StringBuilder();
-      while (currentHeight < contentSize.Y  // Room for one more line?
-             && index < words.Count)        // Words left?
-      {
-        if (index > 0)
-        {
-          VisualText.Append(line.ToString()); // Add line of last iteration.
-          VisualText.Append("\n");
-
-          // If the next word is a newline, then we can skip it because we start a new line
-          // anyways.
-          if (words[index] == null)
-            index++;
-        }
-
-        // Start with empty line.
-        line.Remove(0, line.Length);
-        lineWordCount = 0;
-
-        // Build line.
-        while (index < words.Count             // As long as we have words.
-               && words[index] != null)        // And as long the next word is not a newline.
-        {
-          // Add spaces after first word.
-          if (lineWordCount > 0)
-            line.Append(" ");
-
-          // Add next word.
-          line.Append(words[index]);
-          lineWordCount++;
-          index++;
-
-          float lineWidth = font.MeasureString(line).X;
-          if (lineWidth > contentSize.X)
-          {
-            // Line is too long! Remove last word + blank. But keep at least one word per line.
-            if (lineWordCount > 1)
-            {
-              index--;
-              lineWordCount--;
-              int wordLength = words[index].Length;
-              line.Remove(line.Length - wordLength - 1, wordLength + 1);
-            }
-            else
-            {
-              VisualClip = true;  // A single word is too long and must be clipped.
-            }
-
-            break;
-          }
-        }
-
-        currentHeight += lineHeight;
-      }
-
-      // Nearly all visible text is in VisualText.
-      // The last line is in "line" and was not yet added to VisualText.
-      if (UseEllipsis)
-      {
-        if ((index < words.Count                            // Not enough space to print all words.
-            || font.MeasureString(line).X > contentSize.X)) // The last line is too long and needs to be trimmed.
-        {
-          // Trim the last line and add an ellipsis.
-          line.Append("�");
-          while (lineWordCount > 0 && font.MeasureString(line).X > contentSize.X)
-          {
-            index--;
-
-            // We have to remove one word before the ellipsis.
-            int wordLength = words[index].Length;
-            line.Remove(line.Length - 1 - wordLength, wordLength);
-
-            // Remove ' ' before ellipsis.
-            int indexBeforeEllipsis = line.Length - 2;
-            if (indexBeforeEllipsis > 0 && line[indexBeforeEllipsis] == ' ')
-              line.Remove(indexBeforeEllipsis, 1);
-
-            lineWordCount--;
-          }
-        }
-      }
-
-      // Add last line.
-      VisualText.Append(line);
-
-      size = (Vector2)font.MeasureString(VisualText);
+      _richText.Width = WrapText ? (int)contentSize.X : null;
+      Vector2 size = _richText.Size.ToVector2();
       return new Vector2(
         hasWidth ? width : size.X + padding.X + padding.Z,
         hasHeight ? height : size.Y + padding.Y + padding.W);
     }
 
-
-    private static void TrimText(StringBuilder text, SpriteFontBase font, float maxWidth)
-    {
-      // Remove last character because we know that we have to trim at least 1 but probably more.
-      text.Remove(text.Length - 1, 1);
-
-      // Add ellipsis.
-      text.Append("�");
-
-      // Remove characters before "�" until the string is shorter than or equal to maxWidth.
-      // (Note: The ellipsis "�" is also removed if there is not enough space for single 
-      // character.)
-      while (font.MeasureString(text).X > maxWidth && text.Length > 0)
-      {
-        int index = Math.Max(0, text.Length - 2);
-        text.Remove(index, 1);
-      }
-    }
-
-
-    /// <summary>
-    /// Gets the list of words for the current <see cref="Text"/>.
-    /// </summary>
-    /// <remarks>
-    /// Words are separated by spaces. <see langword="null"/> is added to the list for newline 
-    /// symbols.
-    /// </remarks>
-    private List<string> SplitText()
-    {
-      var words = new List<string>();
-
-      int i = 0;
-      string text = Text;
-      while (i < text.Length)
-      {
-        // Skip all blanks.
-        while (i < text.Length && text[i] == ' ')
-          i++;
-
-        // A new word starts.
-        int wordStart = i;
-
-        // Move index to the next blank, newline or end of text.
-        while (i < text.Length && text[i] != ' ' && text[i] != '\n')
-          i++;
-
-        // Have we found a word?
-        if (wordStart < i)
-        {
-          // Add word.
-          words.Add(text.Substring(wordStart, i - wordStart));
-        }
-
-        // Is the next char a newline symbol?
-        if (i < text.Length && text[i] == '\n')
-        {
-          // null indicates a newline.
-          words.Add(null);
-          i++;
-        }
-      }
-
-      return words;
-    }
     #endregion
   }
 }
