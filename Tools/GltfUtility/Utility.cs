@@ -7,6 +7,7 @@ using System.Numerics;
 using static glTFLoader.Schema.Accessor;
 using System.IO;
 using System.Runtime.InteropServices;
+using DigitalRise.Mathematics;
 
 namespace DigitalRise
 {
@@ -61,6 +62,123 @@ namespace DigitalRise
 		static bool IsFinite(this Vector3 v)
 		{
 			return IsFinite(v.X) && IsFinite(v.Y) && IsFinite(v.Z);
+		}
+
+		private static Vector3 Normalize(Vector3 v)
+		{
+			float length = v.Length();
+			if (length > 0)
+				length = 1.0f / length;
+
+			v.X *= length;
+			v.Y *= length;
+			v.Z *= length;
+
+			return v;
+		}
+
+		/// <summary>
+		/// Clamps the specified value.
+		/// </summary>
+		/// <typeparam name="T">The type of the value.</typeparam>
+		/// <param name="value">The value which should be clamped.</param>
+		/// <param name="min">The min limit.</param>
+		/// <param name="max">The max limit.</param>
+		/// <returns>
+		/// <paramref name="value"/> clamped to the interval
+		/// [<paramref name="min"/>, <paramref name="max"/>].
+		/// </returns>
+		/// <remarks>
+		/// Values within the limits are not changed. Values exceeding the limits are cut off.
+		/// </remarks>
+		public static T Clamp<T>(T value, T min, T max) where T : IComparable<T>
+		{
+			if (min.CompareTo(max) > 0)
+			{
+				// min and max are swapped.
+				var dummy = max;
+				max = min;
+				min = dummy;
+			}
+
+			if (value.CompareTo(min) < 0)
+				value = min;
+			else if (value.CompareTo(max) > 0)
+				value = max;
+
+			return value;
+		}
+
+		private static Vector3[] StoreNormals(Vector3[] normals, IList<int> indices, bool clockwiseOrder)
+		{
+			var result = new Vector3[normals.Length];
+			for (int i = 0; i < normals.Length; i++)
+			{
+				normals[i] = clockwiseOrder ? -Normalize(normals[i]) : Normalize(normals[i]);
+			}
+
+			for(var i = 0; i < indices.Count; i++)
+			{
+				result[i] = normals[indices[i]];
+			}
+			
+			return result;
+		}
+
+		public static Vector3[] ComputeNormalsWeightedByAngle(IList<Vector3> positions, IList<int> indices, bool clockwiseOrder)
+		{
+			int numberOfVertices = positions.Count;
+			int numberOfFaces = indices.Count / 3;
+			Vector3[] normals = new Vector3[numberOfVertices];
+
+			for (int face = 0; face < numberOfFaces; face++)
+			{
+				int i0 = indices[face * 3 + 0];
+				int i1 = indices[face * 3 + 1];
+				int i2 = indices[face * 3 + 2];
+
+				if (i0 == -1 || i1 == -1 || i2 == -1)
+					continue;
+
+				if (i0 >= numberOfVertices || i1 >= numberOfVertices || i2 >= numberOfVertices)
+					throw new IndexOutOfRangeException("Index exceeds number of vertices.");
+
+				Vector3 p0 = positions[i0];
+				Vector3 p1 = positions[i1];
+				Vector3 p2 = positions[i2];
+
+				Vector3 u = p1 - p0;
+				Vector3 v = p2 - p0;
+
+				Vector3 n = Normalize(Vector3.Cross(u, v));
+
+				// Corner 0:
+				Vector3 a = Normalize(u);
+				Vector3 b = Normalize(v);
+				float w0 = Vector3.Dot(a, b);
+				w0 = Clamp(w0, -1, 1);
+				w0 = (float)Math.Acos(w0);
+
+				// Corner 1:
+				Vector3 c = Normalize(p2 - p1);
+				Vector3 d = Normalize(p0 - p1);
+				float w1 = Vector3.Dot(c, d);
+				w1 = Clamp(w1, -1, 1);
+				w1 = (float)Math.Acos(w1);
+
+				// Corner 2:
+				Vector3 e = Normalize(p0 - p2);
+				Vector3 f = Normalize(p1 - p2);
+				float w2 = Vector3.Dot(e, f);
+				w2 = Clamp(w2, -1, 1);
+				w2 = (float)Math.Acos(w2);
+
+				normals[i0] += n * w0;
+				normals[i1] += n * w1;
+				normals[i2] += n * w2;
+			}
+
+			return StoreNormals(normals, indices, clockwiseOrder);
 		}
 
 		public static void CalculateTangentFrames(IList<Vector3> positions,

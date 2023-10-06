@@ -1,5 +1,4 @@
-﻿#if false
-using System;
+﻿using System;
 using System.Linq;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Geometry;
@@ -116,7 +115,7 @@ from the player camera to make best use of the texture resolution.",
 
       // Use another instance of the mesh as a wall.
       var wallMesh = groundMesh.Clone();
-      wallMesh.ScaleLocal = new Vector3(0.2f, 1, 0.1f);
+      wallMesh.ScaleLocal *= new Vector3(0.2f, 1, 0.1f);
       wallMesh.PoseWorld = new Pose(new Vector3(5, 2, -5), Matrix33F.CreateRotationY(-0.7f) * Matrix33F.CreateRotationX(ConstantsF.PiOver2));
       _graphicsScreen.Scene.Children.Add(wallMesh);
 
@@ -196,4 +195,3 @@ from the player camera to make best use of the texture resolution.",
     }
   }
 }
-#endif

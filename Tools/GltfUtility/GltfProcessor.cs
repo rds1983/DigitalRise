@@ -113,8 +113,7 @@ namespace DigitalRise
 
 						if (!hasNormals)
 						{
-							Log($"Warning: can't generate the tangent frames, since {primitive}'s primitive of Mesh {meshName} lacks normals.");
-							return;
+							Log($"Warning: {primitive}'s primitive of Mesh {meshName} lacks normals. It would be generated");
 						}
 
 						if (!hasTexCoords)
@@ -124,7 +123,6 @@ namespace DigitalRise
 
 
 						var positions = GetAccessorAs<Vector3>(primitive.FindAttribute("POSITION"));
-						var normals = GetAccessorAs<Vector3>(primitive.FindAttribute("NORMAL"));
 
 						Vector2[] texCoords;
 
@@ -175,6 +173,16 @@ namespace DigitalRise
 							}
 						}
 
+						Vector3[] normals;
+						if (!hasNormals)
+						{
+							normals = Utility.ComputeNormalsWeightedByAngle(positions, indices, false);
+						}
+						else
+						{
+							normals = GetAccessorAs<Vector3>(primitive.FindAttribute("NORMAL"));
+						}
+
 						Vector3[] tangents, bitangents;
 						Utility.CalculateTangentFrames(positions, indices, normals, texCoords, out tangents, out bitangents);
 
@@ -187,6 +195,11 @@ namespace DigitalRise
 							if (!hasTexCoords)
 							{
 								primitive.Attributes["TEXCOORD_0"] = ms.WriteData(bufferViews, accessors, texCoords);
+							}
+
+							if (!hasNormals)
+							{
+								primitive.Attributes["NORMAL"] = ms.WriteData(bufferViews, accessors, normals);
 							}
 
 							if (!hasTangents)

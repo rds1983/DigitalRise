@@ -2,7 +2,7 @@
   "profiles": {
     "GltfUtility": {
       "commandName": "Project",
-      "commandLineArgs": "-f \"D:\\Projects\\DigitalRise\\SampleBrowser\\Assets\\Car\\Wheel.glb\" -p"
+      "commandLineArgs": "-f \"D:\\Projects\\DigitalRise\\Samples\\Assets\\Ground\\Ground2.gltf\" -t -u"
     }
   }
 }

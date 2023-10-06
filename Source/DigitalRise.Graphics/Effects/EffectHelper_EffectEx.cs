@@ -105,20 +105,6 @@ namespace DigitalRise.Graphics.Effects
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters")]
     internal static EffectParameterHint? GetHintFromAnnotations(EffectParameter parameter)
     {
-#if !MONOGAME
-      var annotation = parameter.Annotations["Hint"];
-      if (annotation != null && annotation.ParameterType == EffectParameterType.String)
-      {
-        string value = annotation.GetValueString();
-        EffectParameterHint hint;
-        if (EnumHelper.TryParse(value, true, out hint))
-        {
-          // Custom hint found.
-          return hint;
-        }
-      }
-#endif
-
       return null;
     }
   }
