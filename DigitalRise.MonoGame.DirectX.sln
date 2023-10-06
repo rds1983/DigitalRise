@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9E6E150B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{43377E56-9E7A-4ECD-BD27-44B9F85E01AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.ServiceLocation", "Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj", "{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.CommandLine", "Source\DigitalRise.CommandLine\DigitalRise.CommandLine.csproj", "{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Mathematics.MonoGame", "Source\DigitalRise.Mathematics\DigitalRise.Mathematics.MonoGame.csproj", "{4C0A7B03-DAE3-4457-A452-BB9CDB6BAA86}"
@@ -73,10 +71,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -190,7 +184,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{4C0A7B03-DAE3-4457-A452-BB9CDB6BAA86} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{76B9EAB2-76E6-4D9B-8FC2-94C3DA0C9A80} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
