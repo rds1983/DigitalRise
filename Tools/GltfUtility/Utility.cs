@@ -329,19 +329,13 @@ namespace DigitalRise
 			return ms.ToArray();
 		}
 
-		public static int WriteData<T>(this Stream output, List<BufferView> bufferViews, List<Accessor> accessors, T[] data)
+		private unsafe static int WriteData<T>(this Stream output, List<BufferView> bufferViews, List<Accessor> accessors, void *ptr, int length)
 		{
 			var pos = (int)output.Position;
 
 			// Write data to the binary buffer
-			var bytes = new byte[data.Length * Marshal.SizeOf(typeof(T))];
-			unsafe
-			{
-				fixed(void *ptr = data)
-				{
-					Marshal.Copy(new IntPtr(ptr), bytes, 0, bytes.Length);
-				}
-			}
+			var bytes = new byte[length * Marshal.SizeOf(typeof(T))];
+			Marshal.Copy(new IntPtr(ptr), bytes, 0, bytes.Length);
 
 			output.Write(bytes);
 
@@ -353,11 +347,27 @@ namespace DigitalRise
 			{ 
 				ComponentType = ComponentTypeEnum.FLOAT, 
 				Type = TypeEnum.VEC3,
-				Count = data.Length,
+				Count = length,
 				BufferView = bufferViews.Count - 1,
 			});
 
 			return accessors.Count - 1;
+		}
+
+		public unsafe static int WriteData(this Stream output, List<BufferView> bufferViews, List<Accessor> accessors, Vector3[] data)
+		{
+			fixed(void *ptr = data)
+			{
+				return output.WriteData<Vector3>(bufferViews, accessors, ptr, data.Length);
+			}
+		}
+
+		public unsafe static int WriteData(this Stream output, List<BufferView> bufferViews, List<Accessor> accessors, Vector2[] data)
+		{
+			fixed (void* ptr = data)
+			{
+				return output.WriteData<Vector2>(bufferViews, accessors, ptr, data.Length);
+			}
 		}
 	}
 }

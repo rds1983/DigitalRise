@@ -84,7 +84,6 @@ from the player camera to make best use of the texture resolution.",
         GameObjectService.Objects.Add(new StaticObject(Services, "PalmTree/palm_tree.drmdl", scale, new Pose(position, orientation)));
       }
 
-#if MONOGAME
       // ----- Workaround for missing effect parameter semantics in MonoGame.
       // The effect used by the reflecting ground object defines some new effect
       // parameters and sets the EffectParameterHint to "PerInstance", e.g.:
@@ -102,7 +101,6 @@ from the player camera to make best use of the texture resolution.",
         effectInterpreter.ParameterDescriptions.Add("ReflectionMatrix", (parameter, index) => new EffectParameterDescription(parameter, "ReflectionMatrix", index, EffectParameterHint.PerInstance));
         effectInterpreter.ParameterDescriptions.Add("ReflectionNormal", (parameter, index) => new EffectParameterDescription(parameter, "ReflectionNormal", index, EffectParameterHint.PerInstance));
       }
-#endif
 
       // Get a ground model which can render a planar reflection. See 
       // GroundReflective/MaterialReflective.fx.
