@@ -306,8 +306,6 @@ namespace DigitalRise
 					{
 						continue;
 					}
-
-					var k = 5;
 				}
 			}
 		}
