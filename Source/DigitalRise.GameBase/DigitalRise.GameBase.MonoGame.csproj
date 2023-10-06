@@ -7,11 +7,9 @@
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
-    <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
-    <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
+    <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.MonoGame.csproj" />
   </ItemGroup>
 </Project>

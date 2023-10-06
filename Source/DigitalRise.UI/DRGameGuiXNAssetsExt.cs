@@ -1,10 +1,8 @@
-﻿using System.IO;
-using System;
+﻿using System;
 using System.Xml.Linq;
 using DigitalRise.UI.Rendering;
 using System.Xml;
 using System.Linq;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -113,7 +111,7 @@ namespace AssetManagementBase
 			}
 		}
 
-		private static void ProcessTextures(Theme theme, XDocument document, AssetManager manager, GraphicsDevice device)
+		private static void ProcessTextures(Theme theme, XDocument document, AssetManager manager)
 		{
 			if (document.Root.Elements("Texture").Any())
 			{
@@ -132,7 +130,7 @@ namespace AssetManagementBase
 				string filename = GetMandatoryAttributeString(textureElement, "File");
 				bool premultiplyAlpha = (bool?)textureElement.Attribute("PremultiplyAlpha") ?? true;
 
-				var texture = manager.LoadTexture2D(device, filename, premultiplyAlpha);
+				var texture = manager.LoadTexture2D(filename, premultiplyAlpha);
 
 				var themeTexture = new ThemeTexture
 				{
@@ -148,7 +146,7 @@ namespace AssetManagementBase
 				throw new Exception("The UI theme does not contain any textures. At least 1 texture is required.");
 		}
 
-		private static void ProcessStyles(Theme theme, XDocument document, AssetManager manager, GraphicsDevice device)
+		private static void ProcessStyles(Theme theme, XDocument document)
 		{
 			var stylesElement = document.Root.Element("Styles");
 			if (stylesElement == null)
@@ -269,20 +267,18 @@ namespace AssetManagementBase
 				throw new Exception(message);
 			}
 
-			var device = (GraphicsDevice)tag;
-
 			var theme = new Theme();
 			ProcessCursors(theme, document);
 			ProcessFonts(theme, document, manager);
-			ProcessTextures(theme, document, manager, device);
-			ProcessStyles(theme, document, manager, device);
+			ProcessTextures(theme, document, manager);
+			ProcessStyles(theme, document);
 
 			return theme;
 		};
 
-		public static Theme LoadTheme(this AssetManager manager, string assetName, GraphicsDevice graphicsDevice)
+		public static Theme LoadTheme(this AssetManager manager, string assetName)
 		{
-			return manager.UseLoader(_themeLoader, assetName, tag: graphicsDevice);
+			return manager.UseLoader(_themeLoader, assetName);
 		}
 	}
 }

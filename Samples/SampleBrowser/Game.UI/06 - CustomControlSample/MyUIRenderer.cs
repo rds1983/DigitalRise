@@ -1,4 +1,5 @@
-﻿using DigitalRise.UI.Controls;
+﻿using DigitalRise;
+using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using Microsoft.Xna.Framework;
 
@@ -8,11 +9,14 @@ namespace Samples.Game.UI
   // This UIRenderer adds a render callback for TreeViewItems.
   internal class MyUIRenderer : UIRenderer
   {
-    public MyUIRenderer(Microsoft.Xna.Framework.Game game, Theme theme)
-      : base(game, theme)
+    public MyUIRenderer(Theme theme): base(theme)
     {
       // Add a new render method for the style "TreeViewItem".
       RenderCallbacks.Add("TreeViewItem", RenderTreeViewItem);
+    }
+
+    public MyUIRenderer(): this(UIDefaults.Theme)
+    {
     }
 
 

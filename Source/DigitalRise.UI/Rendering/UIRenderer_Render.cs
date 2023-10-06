@@ -46,20 +46,20 @@ namespace DigitalRise.UI.Rendering
     /// Gets a white 1x1 texture.
     /// </summary>
     /// <value>A texture with a single white texel.</value>
-    public Texture2D WhiteTexture
+    public static Texture2D WhiteTexture
     {
       get
       {
         if (_whiteTexture == null)
         {
-          _whiteTexture = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+          _whiteTexture = new Texture2D(DRBase.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
           _whiteTexture.SetData(new[] { Color.White });
         }
 
         return _whiteTexture;
       }
     }
-    private Texture2D _whiteTexture;
+    private static Texture2D _whiteTexture;
 
 
     /// <summary>
@@ -337,15 +337,16 @@ namespace DigitalRise.UI.Rendering
       EndBatch();
 
       // Render Content and clip with scissor rectangle.
-      Rectangle originalScissorRectangle = GraphicsDevice.ScissorRectangle;
+      var device = DRBase.GraphicsDevice;
+      Rectangle originalScissorRectangle = device.ScissorRectangle;
       Rectangle scissorRectangle = context.RenderTransform.Transform(contentControl.ContentBounds).ToRectangle(true);
-      GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
+			device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
 
       BeginBatch();
       contentControl.Content.Render(context);
       EndBatch();
 
-      GraphicsDevice.ScissorRectangle = originalScissorRectangle;
+			device.ScissorRectangle = originalScissorRectangle;
 
       BeginBatch();
 
@@ -376,14 +377,15 @@ namespace DigitalRise.UI.Rendering
       if (textBlock != null && !string.IsNullOrEmpty(textBlock.Text))
       {
         RectangleF contentBounds = GetContentBoundsRounded(textBlock);
-        Rectangle originalScissorRectangle = GraphicsDevice.ScissorRectangle;
+        var device = DRBase.GraphicsDevice;
+        Rectangle originalScissorRectangle = device.ScissorRectangle;
         if (textBlock.VisualClip)
         {
           // If clipping is enabled - set scissors rectangle.
           EndBatch();
 
           Rectangle scissorRectangle = context.RenderTransform.Transform(contentBounds).ToRectangle(true);
-          GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
+          device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
 
           BeginBatch();
         }
@@ -397,7 +399,7 @@ namespace DigitalRise.UI.Rendering
         {
           // If clipping is enabled - remove scissors rectangle.
           EndBatch();
-          GraphicsDevice.ScissorRectangle = originalScissorRectangle;
+          device.ScissorRectangle = originalScissorRectangle;
           BeginBatch();
         }
       }
@@ -597,12 +599,13 @@ namespace DigitalRise.UI.Rendering
       var textBox = control as TextBox;
       if (textBox != null)
       {
-        RectangleF contentBounds = GetContentBoundsRounded(textBox);
-        Rectangle originalScissorRectangle = GraphicsDevice.ScissorRectangle;
+				var device = DRBase.GraphicsDevice;
+				RectangleF contentBounds = GetContentBoundsRounded(textBox);
+        Rectangle originalScissorRectangle = device.ScissorRectangle;
 
         EndBatch();
         Rectangle scissorRectangle = context.RenderTransform.Transform(textBox.VisualClip).ToRectangle(true);
-        GraphicsDevice.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
+        device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
         BeginBatch();
 
         bool hasSelection = (textBox.VisualSelectionBounds.Count > 0);
@@ -646,7 +649,7 @@ namespace DigitalRise.UI.Rendering
         }
 
         EndBatch();
-        GraphicsDevice.ScissorRectangle = originalScissorRectangle;
+        device.ScissorRectangle = originalScissorRectangle;
         BeginBatch();
       }
 

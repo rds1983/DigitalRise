@@ -7,9 +7,7 @@
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
+    <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.FNA.Core.csproj" />
   </ItemGroup>
 </Project>

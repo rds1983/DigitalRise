@@ -48,8 +48,7 @@ namespace Samples.Game.UI
       // We could use the same renderer as the "Default" screen (see StartScreenComponent.cs).
       // But usually, the debug screen will use a more efficient theme (smaller fonts, no
       // fancy graphics). Here, we simply use the BlendBlue theme again.
-      var theme = DefaultAssets.DefaultTheme;
-      UIRenderer renderer = new UIRenderer(Game, theme);
+      UIRenderer renderer = new UIRenderer();
 
       // Create a UIScreen and add it to the UI service. 
       _uiScreen = new UIScreen("Debug", renderer)

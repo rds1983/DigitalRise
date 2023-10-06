@@ -64,11 +64,8 @@ namespace Samples.Game.UI
     // thread-safe things.
     public void LoadStuff()
     {
-      // Load a UI theme, which defines the appearance and default values of UI controls.
-      var theme = DefaultAssets.DefaultTheme;
-
-      // Create a UI renderer, which uses the theme info to renderer UI controls.
-      UIRenderer renderer = new UIRenderer(Game, theme);
+      // Create a UI renderer
+      UIRenderer renderer = new UIRenderer();
 
       // Create a UIScreen and add it to the UI service. The screen is the root of the 
       // tree of UI controls. Each screen can have its own renderer. 

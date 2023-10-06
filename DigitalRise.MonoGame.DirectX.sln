@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise", "Source\DigitalRise\DigitalRise.csproj", "{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{43377E56-9E7A-4ECD-BD27-44B9F85E01AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.ServiceLocation", "Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj", "{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}"
@@ -67,16 +65,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{9CB0DAA8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GltfUtility", "Tools\GltfUtility\GltfUtility.csproj", "{63395A7C-9DB5-4F50-85D2-6A4BC4856EF8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Common.MonoGame", "Source\DigitalRise.Common\DigitalRise.Common.MonoGame.csproj", "{4DED8431-4545-4C9C-A188-302D5E67972C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -185,12 +181,15 @@ Global
 		{63395A7C-9DB5-4F50-85D2-6A4BC4856EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63395A7C-9DB5-4F50-85D2-6A4BC4856EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63395A7C-9DB5-4F50-85D2-6A4BC4856EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DED8431-4545-4C9C-A188-302D5E67972C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DED8431-4545-4C9C-A188-302D5E67972C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DED8431-4545-4C9C-A188-302D5E67972C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DED8431-4545-4C9C-A188-302D5E67972C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3555D3AC-F13A-4743-83DD-F16FC2BF2BE3} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{C12654BD-DA50-409E-B8CF-07E2C4FD24F5} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{6DC3B3C3-AE37-4088-9ADC-BF7B86771FC2} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{4C0A7B03-DAE3-4457-A452-BB9CDB6BAA86} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
@@ -218,6 +217,7 @@ Global
 		{BF0952CE-E6C2-4461-8017-9B8BD7C29624} = {9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}
 		{C3DAE0BF-3C26-484C-9AA3-296BE8BD83AB} = {9E6E150B-162E-4D9A-8782-9BAFA9DE73FB}
 		{63395A7C-9DB5-4F50-85D2-6A4BC4856EF8} = {9CB0DAA8-0CF9-4618-A20C-9DDAE411FB09}
+		{4DED8431-4545-4C9C-A188-302D5E67972C} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ACDF4E-2CE2-46B1-A19F-35DC131069A1}

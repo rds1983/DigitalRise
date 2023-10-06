@@ -31,13 +31,6 @@ namespace DigitalRise.UI.Rendering
   public interface IUIRenderer 
   {
     /// <summary>
-    /// Gets the graphics device.
-    /// </summary>
-    /// <value>The graphics device.</value>
-    GraphicsDevice GraphicsDevice { get; }
-
-    
-    /// <summary>
     /// Gets the sprite batch that is used to draw all images for the UI controls.
     /// </summary>
     /// <value>The sprite batch that is used to draw all images for the UI controls.</value>

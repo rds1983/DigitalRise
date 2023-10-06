@@ -460,9 +460,9 @@ namespace DigitalRise.UI.Controls
       float desiredHeight = Height;
 
       if (!Numeric.IsPositiveFinite(desiredWidth))
-        desiredWidth = Renderer.GraphicsDevice.Viewport.Width;
+        desiredWidth = DRBase.GraphicsDevice.Viewport.Width;
       if (!Numeric.IsPositiveFinite(desiredHeight))
-        desiredHeight = Renderer.GraphicsDevice.Viewport.Height;
+        desiredHeight = DRBase.GraphicsDevice.Viewport.Height;
 
       foreach (var child in VisualChildren)
         child.Measure(new Vector2(desiredWidth, desiredHeight));
@@ -515,18 +515,18 @@ namespace DigitalRise.UI.Controls
       // Make sure the layout is up-to-date.
       UpdateLayout();
 
-      var originalScissorRectangle = Renderer.GraphicsDevice.ScissorRectangle;
+      var originalScissorRectangle = DRBase.GraphicsDevice.ScissorRectangle;
 
-      // The renderer uses scissor test. We need to set a default rectangle. 
-      // (In MonoGame with OpenGL, the default scissor rectangle might not cover the full screen.)
-      Renderer.GraphicsDevice.ScissorRectangle = ActualBounds.ToRectangle(true);
+			// The renderer uses scissor test. We need to set a default rectangle. 
+			// (In MonoGame with OpenGL, the default scissor rectangle might not cover the full screen.)
+			DRBase.GraphicsDevice.ScissorRectangle = ActualBounds.ToRectangle(true);
 
       // Start the rendering process.
       Renderer.BeginBatch();
       Renderer.Render(this, context);
       Renderer.EndBatch();
 
-      Renderer.GraphicsDevice.ScissorRectangle = originalScissorRectangle;
+			DRBase.GraphicsDevice.ScissorRectangle = originalScissorRectangle;
     }
 
 

@@ -112,6 +112,8 @@ namespace Samples
     // Initializes services and adds game components.
     protected override void Initialize()
     {
+      DRBase.Game = this;
+
 #if WINDOWS || WINDOWS_UWP || XBOX
       if (GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
       {
@@ -238,7 +240,6 @@ namespace Samples
 			var initialSample = typeof(PlanarReflectionSample);
 			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
-			DefaultAssets.DefaultTheme = assetManager.LoadTheme("UI Themes/BlendBlue/Theme.xml", GraphicsDevice);
 
 			_services.Register(typeof(AssetManager), null, assetManager);
 

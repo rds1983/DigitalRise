@@ -5,6 +5,6 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
+    <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.MonoGame.csproj" />
   </ItemGroup>
 </Project>

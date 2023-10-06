@@ -205,7 +205,8 @@ namespace DigitalRise.UI.Controls
 
       // Measure text size.
       _richText.Width = WrapText ? (int)contentSize.X : null;
-      Vector2 size = _richText.Size.ToVector2();
+      var sz = _richText.Size;
+      Vector2 size = new Vector2(sz.X, sz.Y);
       return new Vector2(
         hasWidth ? width : size.X + padding.X + padding.Z,
         hasHeight ? height : size.Y + padding.Y + padding.W);

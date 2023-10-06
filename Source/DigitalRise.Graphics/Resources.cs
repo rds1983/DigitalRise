@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise
 {
-	public static class Resources
+	internal static class Resources
 	{
 #if FNA
 		private const string StockEffectsPrefix = "EffectsSource.FNA.bin";

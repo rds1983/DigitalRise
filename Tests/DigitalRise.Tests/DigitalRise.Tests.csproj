@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\DigitalRise.ServiceLocation\DigitalRise.ServiceLocation.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRise\DigitalRise.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>  
 </Project>

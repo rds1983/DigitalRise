@@ -4,7 +4,7 @@ using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using MouseButtons = DigitalRise.Input.MouseButtons;
-
+using DigitalRise;
 
 namespace Samples.Game.UI
 {
@@ -34,13 +34,11 @@ The DigitalRise Blog contains a detailed description for this project; see secti
       };
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
-      // Create a theme. A theme defines the images of the controls and the default values of 
-      // the UI control properties.
-      Theme theme = DefaultAssets.DefaultTheme;
+      Theme theme = UIDefaults.Theme;
 
       // Create a renderer that uses the theme information. We do not use the default UIRenderer
       // class, instead we use our own MyUIRenderer that adds rendering of tree view items.
-      var renderer = new MyUIRenderer(Game, theme);
+      var renderer = new MyUIRenderer(theme);
 
       // Create the screen. A screen is the root of the UI control hierarchy.
       _uiScreen = new UIScreen("SampleUIScreen", renderer);

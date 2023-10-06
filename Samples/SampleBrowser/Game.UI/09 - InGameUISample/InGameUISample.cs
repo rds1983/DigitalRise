@@ -85,8 +85,8 @@ When the user presses <Esc>, the mouse is released.",
         GameObjectService.Objects.Add(new DynamicObject(Services, 3));
 
       // Create the UIScreen which is rendered into the back buffer.
-      Theme theme = AssetManager.LoadTheme("UI Themes/Aero/Theme.xml", GraphicsService.GraphicsDevice);
-      UIRenderer renderer = new UIRenderer(Game, theme);
+      Theme theme = AssetManager.LoadTheme("UI Themes/Aero/Theme.xml");
+      UIRenderer renderer = new UIRenderer(theme);
       _normalUIScreen = new NormalUIScreen(renderer);
       UIService.Screens.Add(_normalUIScreen);
 

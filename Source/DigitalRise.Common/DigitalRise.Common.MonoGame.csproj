@@ -1,18 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>DigitalRise.Mathematics.MonoGame</PackageId>
-    <AssemblyName>DigitalRise.Mathematics</AssemblyName>
-    <Description>DigitalRise.Mathematics for MonoGame</Description>
+    <PackageId>DigitalRise.Common.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.Common</AssemblyName>
+    <Description>DigitalRise.Common for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" PrivateAssets="All" Version="$(MonoGameVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.MonoGame.csproj" />
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.2.8" />
+    <PackageReference Include="XNAssets.MonoGame" Version="0.6.6" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
   </ItemGroup>
 </Project>

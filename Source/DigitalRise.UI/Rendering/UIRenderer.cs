@@ -84,10 +84,6 @@ namespace DigitalRise.UI.Rendering
 
 
     /// <inheritdoc/>
-    public GraphicsDevice GraphicsDevice { get; set; }
-
-
-    /// <inheritdoc/>
     public SpriteBatch SpriteBatch { get; private set; }
 
 
@@ -111,30 +107,19 @@ namespace DigitalRise.UI.Rendering
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    /// <overloads>
     /// <summary>
     /// Initializes a new instance of the <see cref="UIRenderer"/> class.
     /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UIRenderer"/> class.
-    /// (Not available in Silverlight.)
-    /// </summary>
-    /// <param name="game">The XNA Game instance.</param>
     /// <param name="theme">The loaded UI theme.</param>
     /// <exception cref="ArgumentNullException">
-    /// <paramref name="game"/> or <paramref name="theme"/> is <see langword="null"/>.
+    /// <paramref name="theme"/> is <see langword="null"/>.
     /// </exception>
-    public UIRenderer(Microsoft.Xna.Framework.Game game, Theme theme)
+    public UIRenderer(Theme theme)
     {
-      if (game == null)
-        throw new ArgumentNullException("game");
       if (theme == null)
         throw new ArgumentNullException("theme");
 
-      GraphicsDevice = game.GraphicsDevice;
-      SpriteBatch = new SpriteBatch(GraphicsDevice);
+      SpriteBatch = new SpriteBatch(DRBase.GraphicsDevice);
       Theme = theme;
 
       InitializeDefaultCursor();
@@ -143,34 +128,16 @@ namespace DigitalRise.UI.Rendering
       InitializeRendering();
     }
 
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="UIRenderer"/> class.
-    /// </summary>
-    /// <param name="graphicsDevice">The graphics device.</param>
-    /// <param name="theme">The loaded UI theme.</param>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="graphicsDevice"/> or <paramref name="theme"/> is <see langword="null"/>.
-    /// </exception>
-    public UIRenderer(GraphicsDevice graphicsDevice, Theme theme)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UIRenderer"/> class.
+		/// </summary>
+		/// <exception cref="ArgumentNullException">
+		/// </exception>
+		public UIRenderer(): this(Resources.DefaultTheme)
     {
-      if (graphicsDevice == null)
-        throw new ArgumentNullException("graphicsDevice");
-      if (theme == null)
-        throw new ArgumentNullException("theme");
-
-      GraphicsDevice = graphicsDevice;
-      SpriteBatch = new SpriteBatch(GraphicsDevice);
-      Theme = theme;
-
-      InitializeDefaultCursor();
-      InitializeDefaultFont();
-      InitializeDefaultTexture();
-      InitializeRendering();
     }
 
-
-    private void InitializeDefaultCursor()
+		private void InitializeDefaultCursor()
     {
       if (Theme.Cursors != null)
       {

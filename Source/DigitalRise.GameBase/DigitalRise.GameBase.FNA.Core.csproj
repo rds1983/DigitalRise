@@ -4,11 +4,7 @@
     <PackageId>DigitalRise.GameBase</PackageId>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise\DigitalRise.csproj" />
-    <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
-    <ProjectReference Include="..\..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
+    <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.FNA.Core.csproj" />
   </ItemGroup>
 </Project>

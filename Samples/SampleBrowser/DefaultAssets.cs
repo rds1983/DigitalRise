@@ -7,6 +7,5 @@ namespace Samples
 	{
 		public static SpriteFontBase DefaultFont;
 		public static SpriteFontBase Segoe15 => DefaultFont;
-		public static Theme DefaultTheme;
 	}
 }

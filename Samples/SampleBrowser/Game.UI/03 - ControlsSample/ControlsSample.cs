@@ -71,10 +71,10 @@ namespace Samples.Game.UI
       else
         themeName = "UI Themes/Aero/Theme.xml";
 
-      Theme theme = AssetManager.LoadTheme(themeName, GraphicsService.GraphicsDevice);
+      Theme theme = AssetManager.LoadTheme(themeName);
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
-      UIRenderer renderer = new UIRenderer(Game, theme);
+      UIRenderer renderer = new UIRenderer(theme);
 
       // Create a UIScreen and add it to the UI service. The screen is the root of the 
       // tree of UI controls. Each screen can have its own renderer.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
