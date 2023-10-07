@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>DigitalRise.CommadLine</AssemblyName>
+    <RootNamespace>DigitalRise.CommadLine</RootNamespace>
     <PackageId>DigitalRise.CommadLine</PackageId>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>

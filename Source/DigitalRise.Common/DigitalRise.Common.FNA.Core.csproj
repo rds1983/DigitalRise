@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Common.FNA</PackageId>
     <AssemblyName>DigitalRise.Common</AssemblyName>
+    <RootNamespace>DigitalRise.Common</RootNamespace>
     <Description>DigitalRise.Common for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>

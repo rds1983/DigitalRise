@@ -4,9 +4,7 @@
 
 using System;
 using Microsoft.Xna.Framework.Input;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
-using DigitalRise.Mathematics;
 
 namespace DigitalRise.Input
 {
@@ -168,7 +166,7 @@ namespace DigitalRise.Input
         // Check for double-click.
         if (pressedMouseButton == _lastMouseButton.Button
             && _lastMouseButton.TimeSinceLastClick < Settings.DoubleClickTime - deltaTime
-            && Mathematics.MathHelper.Absolute(_lastMouseButton.MouseClickPosition - MousePosition).IsLessThen(Settings.DoubleClickSize))
+            && (_lastMouseButton.MouseClickPosition - MousePosition).Absolute().IsLessThen(Settings.DoubleClickSize))
         {
           // Double-click detected.
           _lastMouseButton.IsDoubleClick = true;

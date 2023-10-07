@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using DigitalRise.Mathematics.Algebra;
 
 
 namespace DigitalRise.Input

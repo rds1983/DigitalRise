@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Mathematics.MonoGame</PackageId>
     <AssemblyName>DigitalRise.Mathematics</AssemblyName>
+    <RootNamespace>DigitalRise.Mathematics</RootNamespace>
     <Description>DigitalRise.Mathematics for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>

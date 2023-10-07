@@ -4,7 +4,6 @@
 
 using System;
 using Microsoft.Xna.Framework.Input;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Input

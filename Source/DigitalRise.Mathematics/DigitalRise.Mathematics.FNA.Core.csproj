@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Mathematics.FNA</PackageId>
     <AssemblyName>DigitalRise.Mathematics</AssemblyName>
+    <RootNamespace>DigitalRise.Mathematics</RootNamespace>
     <Description>DigitalRise.Mathematics for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>

@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Geometry.MonoGame</PackageId>
     <AssemblyName>DigitalRise.Geometry</AssemblyName>
+    <RootNamespace>DigitalRise.Geometry</RootNamespace>
     <Description>DigitalRise.Geometry for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>

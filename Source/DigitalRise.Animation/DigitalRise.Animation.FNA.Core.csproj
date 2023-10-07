@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Animation.FNA</PackageId>
     <AssemblyName>DigitalRise.Animation</AssemblyName>
+    <RootNamespace>DigitalRise.Animation</RootNamespace>
     <Description>DigitalRise.Animation for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>

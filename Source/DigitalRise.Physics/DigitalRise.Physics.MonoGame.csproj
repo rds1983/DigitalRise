@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Physics.MonoGame</PackageId>
     <AssemblyName>DigitalRise.Physics</AssemblyName>
+    <RootNamespace>DigitalRise.Physics</RootNamespace>
     <Description>DigitalRise.Physics for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MonoGame</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>

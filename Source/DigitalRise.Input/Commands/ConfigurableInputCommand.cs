@@ -4,8 +4,7 @@
 
 using System;
 using System.Diagnostics;
-using DigitalRise.Mathematics;
-
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Input
 {

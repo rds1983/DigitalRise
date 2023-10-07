@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Animation.MonoGame</PackageId>
     <AssemblyName>DigitalRise.Animation</AssemblyName>
+    <RootNamespace>DigitalRise.Animation</RootNamespace>
     <Description>DigitalRise.Animation for MonoGame</Description>
     <DefineConstants>$(DefineConstants);MONOGAME</DefineConstants>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>

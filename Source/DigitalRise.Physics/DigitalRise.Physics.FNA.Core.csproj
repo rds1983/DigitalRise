@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Physics.FNA</PackageId>
     <AssemblyName>DigitalRise.Physics</AssemblyName>
+    <RootNamespace>DigitalRise.Physics</RootNamespace>
     <Description>DigitalRise.Physics for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>

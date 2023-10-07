@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>DigitalRise.Particles.FNA</PackageId>
     <AssemblyName>DigitalRise.Particles</AssemblyName>
+    <RootNamespace>DigitalRise.Particles</RootNamespace>
     <Description>DigitalRise.Particles for FNA.Core</Description>
     <DefineConstants>$(DefineConstants);FNA</DefineConstants>
     <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
