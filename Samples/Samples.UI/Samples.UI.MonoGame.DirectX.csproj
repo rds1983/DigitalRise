@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\SampleBrowser\Sample Framework\ControlsAttribute.cs" Link="Sample Framework\ControlsAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRise.Animation\DigitalRise.Animation.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.MonoGame.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="$(MonoGameVersion)" />
+  </ItemGroup>
+</Project>

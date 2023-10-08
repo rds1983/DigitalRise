@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>

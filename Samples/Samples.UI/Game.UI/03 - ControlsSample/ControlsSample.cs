@@ -1,0 +1,200 @@
+﻿using DigitalRise.UI;
+using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
+using Microsoft.Xna.Framework;
+using AssetManagementBase;
+using DigitalRise;
+
+namespace Samples.UI
+{
+	[Sample(@"This sample shows how to use the DigitalRise Game UI controls.",
+		@"This sample shows:
+- All controls provided by the UI library.
+- How to create a resizable window with scrollable content.
+- How to use a render transform to scale and rotate a control.
+- How to a modal dialog can be created in code or loaded from an XML file.
+- How to open a console for debugging, print a message in the console and
+  create a new console command.
+- How to add a custom text block control that displays the frame rate.",
+		3)]
+	public class ControlsSample : Sample
+	{
+		// Important note: 
+		// If we want the UIControls to handle gamepad input, we must set a logical player. 
+		// This is done in GamePadComponent.cs
+
+		private UIScreen _uiScreen;
+
+		private int _themeNumber;
+		private bool _changeTheme;
+
+
+		public ControlsSample()
+		{
+			CreateGui();
+		}
+
+
+		private void CreateGui()
+		{
+			// Remove old screen.
+			if (_uiScreen != null)
+				UIService.Screens.Remove(_uiScreen);
+
+			// Load a UI theme, which defines the appearance and default values of UI controls.
+			Theme theme;
+			if (_themeNumber == 0)
+			{
+				theme = UIDefaults.Theme;
+			}
+			else
+			{
+				var themeName = "UI Themes/Aero/Theme.xml";
+				theme = AssetManager.LoadTheme(themeName);
+			}
+
+			// Create a UI renderer, which uses the theme info to renderer UI controls.
+			UIRenderer renderer = new UIRenderer(theme);
+
+			// Create a UIScreen and add it to the UI service. The screen is the root of the 
+			// tree of UI controls. Each screen can have its own renderer.
+			_uiScreen = new UIScreen("SampleUIScreen", renderer);
+			UIService.Screens.Add(_uiScreen);
+
+			// Add a text block that displays the frame rate.
+			_uiScreen.Children.Add(new FpsTextBlock
+			{
+				HorizontalAlignment = HorizontalAlignment.Right,
+				VerticalAlignment = VerticalAlignment.Top,
+				Margin = new Vector4(40),
+			});
+
+			// Add a text label.
+			var textBlock = new TextBlock
+			{
+				Text = "Press button to open window: ",
+				Margin = new Vector4(4)
+			};
+
+			// Add buttons that open samples.
+			var button0 = new Button
+			{
+				Content = new TextBlock { Text = "Sample #1: Controls" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch,
+			};
+			button0.Click += (s, e) =>
+			{
+				var allControlsWindow = new AllControlsWindow(AssetManager, renderer);
+				allControlsWindow.Show(_uiScreen);
+			};
+
+			var button1 = new Button
+			{
+				Content = new TextBlock { Text = "Sample #2: ScrollViewer" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch
+			};
+			button1.Click += (s, e) =>
+			{
+				var resizableWindow = new ResizableWindow(AssetManager);
+				resizableWindow.Show(_uiScreen);
+			};
+
+			var button2 = new Button
+			{
+				Content = new TextBlock { Text = "Sample #3: Transformations" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch
+			};
+			button2.Click += (s, e) =>
+			{
+				var renderTransformWindow = new RenderTransformWindow();
+				renderTransformWindow.Show(_uiScreen);
+			};
+
+			var button3 = new Button
+			{
+				Content = new TextBlock { Text = "Sample #4: Dialogs" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch
+			};
+			button3.Click += (s, e) =>
+			{
+				var dialogDemoWindow = new DialogDemoWindow();
+				dialogDemoWindow.Show(_uiScreen);
+			};
+
+			var button4 = new Button
+			{
+				Content = new TextBlock { Text = "Sample #5: Console" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch
+			};
+			button4.Click += (s, e) =>
+			{
+				var consoleWindow = new ConsoleWindow();
+				consoleWindow.Show(_uiScreen);
+			};
+
+			var button5 = new Button
+			{
+				Content = new TextBlock { Text = "Switch UI Theme" },
+				Margin = new Vector4(4),
+				Padding = new Vector4(6),
+				HorizontalAlignment = HorizontalAlignment.Stretch
+			};
+			button5.Click += (s, e) =>
+			{
+				// Set a flag. In the next Update() we will load a new theme.
+				// Note: We should not load the theme here because the UI is currently updated.
+				_changeTheme = true;
+			};
+
+			var stackPanel = new StackPanel { Margin = new Vector4(40) };
+			stackPanel.Children.Add(textBlock);
+			stackPanel.Children.Add(button0);
+			stackPanel.Children.Add(button1);
+			stackPanel.Children.Add(button2);
+			stackPanel.Children.Add(button3);
+			stackPanel.Children.Add(button4);
+			stackPanel.Children.Add(button5);
+			_uiScreen.Children.Add(stackPanel);
+
+			// Optional: If we want to allow the user to use buttons in the screen with 
+			// keyboard or game pad, we have to make it a focus scope. Normally, only 
+			// windows are focus scopes.
+			_uiScreen.IsFocusScope = true;
+			_uiScreen.Focus();
+		}
+
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+
+			if (_changeTheme)
+			{
+				// Load a new theme.
+				_themeNumber = (_themeNumber + 1) % 2;
+				CreateGui();
+				_changeTheme = false;
+			}
+	}
+
+		public override void Render(GameTime gameTime)
+		{
+			base.Render(gameTime);
+
+			// Draw the UIScreen. UIScreen.Draw() must be called manually. (That means, 
+			// we can decide where and when it is called. For example, we could also
+			// render the screen into an offscreen render target.)
+			_uiScreen.Draw(gameTime);
+		}
+	}
+}
