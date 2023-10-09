@@ -95,7 +95,9 @@ namespace Samples.Game.UI
         Value = 75,
         Margin = new Vector4(4, 8, 4, 4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
+#if MONOGAME
         Cursor = renderer.GetCursor("Wait"),
+#endif
       };
 
       // ----- Progress bar without value (indeterminate)
@@ -104,7 +106,9 @@ namespace Samples.Game.UI
         IsIndeterminate = true,
         Margin = new Vector4(4),
         HorizontalAlignment = HorizontalAlignment.Stretch,
+#if MONOGAME
         Cursor = renderer.GetCursor("Wait"),
+#endif
       };
 
       // ----- Slider connected with a text box.

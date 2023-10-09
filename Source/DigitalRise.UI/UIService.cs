@@ -5,6 +5,7 @@
 using System;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
+using Microsoft.Xna.Framework.Input;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 
@@ -20,6 +21,7 @@ namespace DigitalRise.UI
   /// </remarks>
   public interface IUIService
   {
+#if MONOGAME
     /// <summary>
     /// Gets or sets the mouse cursor, overriding the default mouse cursor.
     /// </summary>
@@ -29,17 +31,13 @@ namespace DigitalRise.UI
     /// </value>
     /// <remarks>
     /// <para>
-    /// This object must be of type <strong>System.Windows.Forms.Cursor</strong>. (The type 
-    /// <see cref="System.Object"/> is used to avoid referencing 
-    /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
-    /// </para>
-    /// <para>
     /// Normally, the control under the mouse determines the current mouse cursor. If this property
     /// is set, the automatically determined cursor is overridden. This is useful, for example,
     /// if a Wait cursor should displayed.
     /// </para>
     /// </remarks>
-    object Cursor { get; set; }
+    MouseCursor Cursor { get; set; }
+#endif
 
 
     /// <summary>

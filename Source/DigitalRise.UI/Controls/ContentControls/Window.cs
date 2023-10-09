@@ -668,9 +668,19 @@ namespace DigitalRise.UI.Controls
       }
     }
 
+    private void SetDefaultMouseCursor()
+    {
+      if (UIService != null)
+      {
+#if MONOGAME
+        UIService.Cursor = null;
+#endif
+      }
+		}
 
-    /// <inheritdoc/>
-    protected override void OnUnload()
+
+		/// <inheritdoc/>
+		protected override void OnUnload()
     {
       // Clean up and remove controls for icon, title and close button.
       if (_icon != null)
@@ -706,7 +716,7 @@ namespace DigitalRise.UI.Controls
 
       if (_setSpecialCursor && UIService != null)
       {
-        UIService.Cursor = null;
+        SetDefaultMouseCursor();
         _setSpecialCursor = false;
       }
 
@@ -825,8 +835,7 @@ namespace DigitalRise.UI.Controls
 
       if (_isResizing || _isDragging)
       {
-        if (UIService != null)
-          UIService.Cursor = null;
+        SetDefaultMouseCursor();
 
         _setSpecialCursor = false;
         _isResizing = false;
@@ -884,7 +893,7 @@ namespace DigitalRise.UI.Controls
         // window has the mouse.
         // Minor problem: If the other window has also changed the cursor, then we remove
         // its special cursor. But this case should be rare.
-        uiService.Cursor = null;
+        SetDefaultMouseCursor();
         _setSpecialCursor = false;
       }
 
@@ -924,6 +933,7 @@ namespace DigitalRise.UI.Controls
       // Check whether to start resizing or dragging.
       StartResizeAndDrag(context);
 
+#if MONOGAME
       // Update mouse cursor.
       if ((uiService.Cursor == null || _setSpecialCursor)          // Cursor of UIService was set by this window.
           && (!inputService.IsMouseOrTouchHandled || _isResizing)) // Mouse was not yet handled or is currently resizing.
@@ -956,6 +966,7 @@ namespace DigitalRise.UI.Controls
             break;
         }
       }
+#endif
 
       // Mouse cannot act through a window.
       if (IsMouseOver)
@@ -1079,7 +1090,9 @@ namespace DigitalRise.UI.Controls
           || _isResizing && !CanResize            // CanResize has been reset by user during resizing.
           || _isDragging && !CanDrag)             // CanDrag has been reset by user during dragging.
       {
+#if MONOGAME
         screen.UIService.Cursor = null;
+#endif
         _setSpecialCursor = false;
         _isResizing = false;
         _isDragging = false;
@@ -1246,6 +1259,6 @@ namespace DigitalRise.UI.Controls
 
       return null;
     }
-    #endregion
+#endregion
   }
 }

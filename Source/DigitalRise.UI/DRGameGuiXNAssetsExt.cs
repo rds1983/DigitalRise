@@ -5,6 +5,12 @@ using System.Xml;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.IO;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using DigitalRise;
 
 namespace AssetManagementBase
 {
@@ -56,29 +62,75 @@ namespace AssetManagementBase
 			return (float)attribute;
 		}
 
-		private static void ProcessCursors(Theme theme, XDocument document)
+#if MONOGAME
+		private static void AddDefaultCursorIfNotExists(Theme theme, string name, MouseCursor cursor, bool isDefault)
+		{
+			if (theme.Cursors.Contains(name))
+			{
+				return;
+			}
+
+			// Default values
+			theme.Cursors.Add(new ThemeCursor
+			{
+				Name = name,
+				MouseCursor = cursor,
+				IsDefault = isDefault
+			});
+		}
+
+		private static void ProcessCursors(Theme theme, XDocument document, AssetManager manager)
 		{
 			var cursorsElement = document.Root.Element("Cursors");
-			if (cursorsElement == null)
-				return;
-
-			foreach (var cursorElement in cursorsElement.Elements("Cursor"))
+			if (cursorsElement != null)
 			{
-				string name = GetMandatoryAttributeString(cursorElement, "Name");
-				bool isDefault = (bool?)cursorElement.Attribute("IsDefault") ?? false;
-
-				// TODO: Cursor loading(can't copy the existing code, since it works only under win
-				string filename = GetMandatoryAttributeString(cursorElement, "File");
-
-				var cursor = new ThemeCursor
+				foreach (var cursorElement in cursorsElement.Elements("Cursor"))
 				{
-					Name = name,
-					IsDefault = isDefault,
-				};
+					string name = GetMandatoryAttributeString(cursorElement, "Name");
+					bool isDefault = (bool?)cursorElement.Attribute("IsDefault") ?? false;
 
-				theme.Cursors.Add(cursor);
+					// TODO: Cursor loading(can't copy the existing code, since it works only under win
+					string filename = GetMandatoryAttributeString(cursorElement, "File");
+
+					var jsonData = manager.ReadAsString(filename);
+					var jObj = (JsonObject)JsonSerializer.Deserialize(jsonData, typeof(JsonObject));
+					var bitmapFile = Path.ChangeExtension(filename, "png");
+
+					Texture2D image;
+					using (var stream = manager.Open(bitmapFile))
+					{
+						image = Texture2D.FromStream(DRBase.GraphicsDevice, stream, data =>
+						{
+							var k = 5;
+
+						});
+					}
+
+					var cursor = new ThemeCursor
+					{
+						Name = name,
+						IsDefault = isDefault,
+						MouseCursor = MouseCursor.FromTexture2D(image, jObj["HotspotX"].GetValue<int>(), jObj["HotspotY"].GetValue<int>())
+					};
+
+					theme.Cursors.Add(cursor);
+				}
 			}
+
+			AddDefaultCursorIfNotExists(theme, "Arrow", MouseCursor.Arrow, true);
+			AddDefaultCursorIfNotExists(theme, "IBeam", MouseCursor.IBeam, false);
+			AddDefaultCursorIfNotExists(theme, "Wait", MouseCursor.Wait, false);
+			AddDefaultCursorIfNotExists(theme, "Crosshair", MouseCursor.Crosshair, false);
+			AddDefaultCursorIfNotExists(theme, "WaitArror", MouseCursor.WaitArrow, false);
+			AddDefaultCursorIfNotExists(theme, "SizeNWSE", MouseCursor.SizeNWSE, false);
+			AddDefaultCursorIfNotExists(theme, "SizeNESW", MouseCursor.SizeNESW, false);
+			AddDefaultCursorIfNotExists(theme, "SizeWE", MouseCursor.SizeWE, false);
+			AddDefaultCursorIfNotExists(theme, "SizeNS", MouseCursor.SizeNS, false);
+			AddDefaultCursorIfNotExists(theme, "SizeAll", MouseCursor.SizeAll, false);
+			AddDefaultCursorIfNotExists(theme, "No", MouseCursor.No, false);
+			AddDefaultCursorIfNotExists(theme, "Hand", MouseCursor.Hand, false);
 		}
+#endif
 
 		private static void ProcessFonts(Theme theme, XDocument document, AssetManager manager)
 		{
@@ -268,7 +320,9 @@ namespace AssetManagementBase
 			}
 
 			var theme = new Theme();
-			ProcessCursors(theme, document);
+#if MONOGAME
+			ProcessCursors(theme, document, manager);
+#endif
 			ProcessFonts(theme, document, manager);
 			ProcessTextures(theme, document, manager);
 			ProcessStyles(theme, document);

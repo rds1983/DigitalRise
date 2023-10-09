@@ -12,6 +12,7 @@ using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.GameBase;
+using Microsoft.Xna.Framework.Input;
 
 namespace DigitalRise.UI.Rendering
 {
@@ -62,7 +63,9 @@ namespace DigitalRise.UI.Rendering
       ScissorTestEnable = true,
     };
 
-    private object _defaultCursor;
+#if MONOGAME
+    private MouseCursor _defaultCursor;
+#endif
     private SpriteFontBase _defaultFont;
     private Texture2D _defaultTexture;
     private bool _batchIsActive;
@@ -122,7 +125,9 @@ namespace DigitalRise.UI.Rendering
       SpriteBatch = new SpriteBatch(DRBase.GraphicsDevice);
       Theme = theme;
 
+#if MONOGAME
       InitializeDefaultCursor();
+#endif
       InitializeDefaultFont();
       InitializeDefaultTexture();
       InitializeRendering();
@@ -137,26 +142,22 @@ namespace DigitalRise.UI.Rendering
     {
     }
 
-		private void InitializeDefaultCursor()
+#if MONOGAME
+    private void InitializeDefaultCursor()
     {
       if (Theme.Cursors != null)
       {
         // Get cursor with attribute "IsDefault=true".
-        _defaultCursor = Theme.Cursors
-                              .Where(c => c.IsDefault)
-                              .Select(c => c.Cursor)
-                              .FirstOrDefault();
+        _defaultCursor = (from c in Theme.Cursors where c.IsDefault select c.MouseCursor).FirstOrDefault();
         if (_defaultCursor == null)
         {
           // The theme does not define a font with "IsDefault=true".
           // Check if a font is named "Default".
-          _defaultCursor = Theme.Cursors
-                                .Where(c => c.Name.Equals("default", StringComparison.OrdinalIgnoreCase))
-                                .Select(c => c.Cursor)
-                                .FirstOrDefault();
+          _defaultCursor = (from c in Theme.Cursors where c.Name.Equals("default", StringComparison.OrdinalIgnoreCase) select c.MouseCursor).FirstOrDefault();
         }
       }
     }
+#endif
 
 
     private void InitializeDefaultFont()
@@ -253,7 +254,7 @@ namespace DigitalRise.UI.Rendering
         IsDisposed = true;
       }
     }
-    #endregion
+#endregion
 
 
     //--------------------------------------------------------------
@@ -379,17 +380,18 @@ namespace DigitalRise.UI.Rendering
       return true;
     }
 
-
+#if MONOGAME
     /// <inheritdoc/>
-    public object GetCursor(string name)
+    public MouseCursor GetCursor(string name)
     {
       if (string.IsNullOrEmpty(name))
         return _defaultCursor;
 
       ThemeCursor cursor;
       bool exists = Theme.Cursors.TryGet(name, out cursor);
-      return (exists) ? cursor.Cursor : _defaultCursor;
+      return (exists) ? cursor.MouseCursor : _defaultCursor;
     }
+#endif
 
 
     /// <inheritdoc/>

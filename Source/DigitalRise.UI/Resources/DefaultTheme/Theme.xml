@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Theme>
-
   <Fonts>
     <Font Name="Default" File="Inter-Regular.ttf" Size="14" IsDefault="True"/>
     <Font Name="Console" File="CourierPrime-Regular.ttf" Size="14"/>

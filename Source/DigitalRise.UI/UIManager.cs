@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
-
+using DigitalRise.UI.Rendering;
+using Microsoft.Xna.Framework.Input;
 
 namespace DigitalRise.UI
 {
@@ -57,8 +58,10 @@ namespace DigitalRise.UI
     #region Properties & Events
     //--------------------------------------------------------------
 
+#if MONOGAME
     /// <inheritdoc/>
-    public object Cursor { get; set; }
+    public MouseCursor Cursor { get; set; }
+#endif
 
 
     /// <inheritdoc/>
@@ -166,7 +169,52 @@ namespace DigitalRise.UI
       foreach (UIScreen screen in _sortedScreens)
         screen.Update(deltaTime);
 
-      // ----- Update mouse cursor.
+#if MONOGAME
+			// ----- Update mouse cursor.
+			var desiredCursor = Cursor;
+
+			if (desiredCursor == null)
+			{
+				// Search screens and check if the control under the mouse wants a special cursor.
+				foreach (var screen in _sortedScreens)
+				{
+					if (screen.IsEnabled && screen.IsVisible)
+					{
+						// Search for Cursor beginning at ControlUnderMouse up the control hierarchy.
+						var control = screen.ControlUnderMouse;
+						while (control != null)
+						{
+							if (control.Cursor != null)
+							{
+								desiredCursor = control.Cursor;
+								break;
+							}
+							control = control.VisualParent;
+						}
+					}
+				}
+			}
+
+			if (desiredCursor == null)
+			{
+				// Search for a default cursor in screens.
+				foreach (var screen in _sortedScreens)
+				{
+					if (screen.Renderer != null && screen.IsEnabled && screen.IsVisible)
+					{
+						desiredCursor = screen.Renderer.GetCursor(null);
+						if (desiredCursor != null)
+							break;
+					}
+				}
+			}
+
+      if (desiredCursor != null)
+      {
+        Mouse.SetCursor(desiredCursor);
+      }
+#endif
+
       // TODO:
     }
     #endregion

@@ -1,6 +1,10 @@
-﻿// DigitalRune Engine - Copyright (C) DigitalRune GmbH
+﻿#if MONOGAME
+
+// DigitalRune Engine - Copyright (C) DigitalRune GmbH
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
+
+using Microsoft.Xna.Framework.Input;
 
 namespace DigitalRise.UI.Rendering
 {
@@ -25,7 +29,6 @@ namespace DigitalRise.UI.Rendering
     /// </value>
     public bool IsDefault { get; set; }
 
-
     /// <summary>
     /// Gets or sets the cursor.
     /// </summary>
@@ -35,6 +38,8 @@ namespace DigitalRise.UI.Rendering
     /// <see cref="System.Object"/> is used to avoid referencing 
     /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
     /// </remarks>
-    public object Cursor { get; set; }
+    public MouseCursor MouseCursor { get; set; }
   }
 }
+
+#endif

@@ -9,11 +9,11 @@ using System.Diagnostics;
 using DigitalRise.Input;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using MouseButtons = DigitalRise.Input.MouseButtons;
 using DigitalRise.GameBase;
+using Microsoft.Xna.Framework.Input;
 
 namespace DigitalRise.UI.Controls
 {
@@ -351,6 +351,7 @@ namespace DigitalRise.UI.Controls
     public ContextMenu ContextMenu { get; set; }
 
 
+#if MONOGAME
     /// <summary>
     /// Gets or sets the mouse cursor that should be displayed when the mouse is over this control.
     /// </summary>
@@ -362,7 +363,8 @@ namespace DigitalRise.UI.Controls
     /// <see cref="System.Object"/> is used to avoid referencing 
     /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
     /// </remarks>
-    public object Cursor { get; set; }
+    public MouseCursor Cursor { get; set; }
+#endif
 
 
     /// <summary>
