@@ -5,10 +5,12 @@ using System;
 using System.ComponentModel;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
+using DigitalRise.Mathematics.Algebra;
+
 
 
 namespace DigitalRise.UI.Controls
@@ -672,9 +674,7 @@ namespace DigitalRise.UI.Controls
     {
       if (UIService != null)
       {
-#if MONOGAME
-        UIService.Cursor = null;
-#endif
+				UIService.Cursor = null;
       }
 		}
 
@@ -933,7 +933,6 @@ namespace DigitalRise.UI.Controls
       // Check whether to start resizing or dragging.
       StartResizeAndDrag(context);
 
-#if MONOGAME
       // Update mouse cursor.
       if ((uiService.Cursor == null || _setSpecialCursor)          // Cursor of UIService was set by this window.
           && (!inputService.IsMouseOrTouchHandled || _isResizing)) // Mouse was not yet handled or is currently resizing.
@@ -961,12 +960,11 @@ namespace DigitalRise.UI.Controls
             _setSpecialCursor = true;
             break;
           default:
-            uiService.Cursor = null;
-            _setSpecialCursor = false;
+						uiService.Cursor = null;
+						_setSpecialCursor = false;
             break;
         }
       }
-#endif
 
       // Mouse cannot act through a window.
       if (IsMouseOver)
@@ -1090,10 +1088,8 @@ namespace DigitalRise.UI.Controls
           || _isResizing && !CanResize            // CanResize has been reset by user during resizing.
           || _isDragging && !CanDrag)             // CanDrag has been reset by user during dragging.
       {
-#if MONOGAME
         screen.UIService.Cursor = null;
-#endif
-        _setSpecialCursor = false;
+				_setSpecialCursor = false;
         _isResizing = false;
         _isDragging = false;
         return;

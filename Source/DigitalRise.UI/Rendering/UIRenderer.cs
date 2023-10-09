@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.GameBase;
-using Microsoft.Xna.Framework.Input;
+
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI.Rendering
 {
@@ -63,9 +65,7 @@ namespace DigitalRise.UI.Rendering
       ScissorTestEnable = true,
     };
 
-#if MONOGAME
     private MouseCursor _defaultCursor;
-#endif
     private SpriteFontBase _defaultFont;
     private Texture2D _defaultTexture;
     private bool _batchIsActive;
@@ -125,9 +125,7 @@ namespace DigitalRise.UI.Rendering
       SpriteBatch = new SpriteBatch(DRBase.GraphicsDevice);
       Theme = theme;
 
-#if MONOGAME
       InitializeDefaultCursor();
-#endif
       InitializeDefaultFont();
       InitializeDefaultTexture();
       InitializeRendering();
@@ -142,7 +140,6 @@ namespace DigitalRise.UI.Rendering
     {
     }
 
-#if MONOGAME
     private void InitializeDefaultCursor()
     {
       if (Theme.Cursors != null)
@@ -157,7 +154,6 @@ namespace DigitalRise.UI.Rendering
         }
       }
     }
-#endif
 
 
     private void InitializeDefaultFont()
@@ -380,7 +376,6 @@ namespace DigitalRise.UI.Rendering
       return true;
     }
 
-#if MONOGAME
     /// <inheritdoc/>
     public MouseCursor GetCursor(string name)
     {
@@ -391,7 +386,6 @@ namespace DigitalRise.UI.Rendering
       bool exists = Theme.Cursors.TryGet(name, out cursor);
       return (exists) ? cursor.MouseCursor : _defaultCursor;
     }
-#endif
 
 
     /// <inheritdoc/>

@@ -1,10 +1,10 @@
-﻿#if MONOGAME
-
-// DigitalRune Engine - Copyright (C) DigitalRune GmbH
+﻿// DigitalRune Engine - Copyright (C) DigitalRune GmbH
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
-using Microsoft.Xna.Framework.Input;
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI.Rendering
 {
@@ -41,5 +41,3 @@ namespace DigitalRise.UI.Rendering
     public MouseCursor MouseCursor { get; set; }
   }
 }
-
-#endif

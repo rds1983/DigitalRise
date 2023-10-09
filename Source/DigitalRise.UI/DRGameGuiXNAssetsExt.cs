@@ -9,13 +9,35 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using DigitalRise;
+
+#if !MONOGAME
+using static SDL2.SDL;
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace AssetManagementBase
 {
 	public static partial class DRGameGuiXNAssetsExt
 	{
+#if !MONOGAME
+		private static readonly Dictionary<SDL_SystemCursor, IntPtr> _systemCursors = new Dictionary<SDL_SystemCursor, IntPtr>();
+
+		private static IntPtr GetSystemCursor(SDL_SystemCursor type)
+		{
+			IntPtr result;
+			if (_systemCursors.TryGetValue(type, out result))
+			{
+				return result;
+			}
+
+			result = SDL_CreateSystemCursor(type);
+			_systemCursors[type] = result;
+
+			return result;
+		}
+#endif
+
 		private static string GetExceptionMessage(XElement element, string format, params object[] args)
 		{
 			string message = string.Format(format, args);
@@ -62,7 +84,6 @@ namespace AssetManagementBase
 			return (float)attribute;
 		}
 
-#if MONOGAME
 		private static void AddDefaultCursorIfNotExists(Theme theme, string name, MouseCursor cursor, bool isDefault)
 		{
 			if (theme.Cursors.Contains(name))
@@ -81,6 +102,7 @@ namespace AssetManagementBase
 
 		private static void ProcessCursors(Theme theme, XDocument document, AssetManager manager)
 		{
+#if MONOGAME
 			var cursorsElement = document.Root.Element("Cursors");
 			if (cursorsElement != null)
 			{
@@ -99,11 +121,7 @@ namespace AssetManagementBase
 					Texture2D image;
 					using (var stream = manager.Open(bitmapFile))
 					{
-						image = Texture2D.FromStream(DRBase.GraphicsDevice, stream, data =>
-						{
-							var k = 5;
-
-						});
+						image = Texture2D.FromStream(DRBase.GraphicsDevice, stream);
 					}
 
 					var cursor = new ThemeCursor
@@ -129,8 +147,21 @@ namespace AssetManagementBase
 			AddDefaultCursorIfNotExists(theme, "SizeAll", MouseCursor.SizeAll, false);
 			AddDefaultCursorIfNotExists(theme, "No", MouseCursor.No, false);
 			AddDefaultCursorIfNotExists(theme, "Hand", MouseCursor.Hand, false);
-		}
+#else
+			AddDefaultCursorIfNotExists(theme, "Arrow", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_ARROW), true);
+			AddDefaultCursorIfNotExists(theme, "IBeam", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_IBEAM), false);
+			AddDefaultCursorIfNotExists(theme, "Wait", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_WAIT), false);
+			AddDefaultCursorIfNotExists(theme, "Crosshair", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_CROSSHAIR), false);
+			AddDefaultCursorIfNotExists(theme, "WaitArror", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_WAITARROW), false);
+			AddDefaultCursorIfNotExists(theme, "SizeNWSE", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENWSE), false);
+			AddDefaultCursorIfNotExists(theme, "SizeNESW", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENESW), false);
+			AddDefaultCursorIfNotExists(theme, "SizeWE", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZEWE), false);
+			AddDefaultCursorIfNotExists(theme, "SizeNS", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZENS), false);
+			AddDefaultCursorIfNotExists(theme, "SizeAll", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_SIZEALL), false);
+			AddDefaultCursorIfNotExists(theme, "No", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_NO), false);
+			AddDefaultCursorIfNotExists(theme, "Hand", GetSystemCursor(SDL_SystemCursor.SDL_SYSTEM_CURSOR_HAND), false);
 #endif
+		}
 
 		private static void ProcessFonts(Theme theme, XDocument document, AssetManager manager)
 		{
@@ -320,9 +351,7 @@ namespace AssetManagementBase
 			}
 
 			var theme = new Theme();
-#if MONOGAME
 			ProcessCursors(theme, document, manager);
-#endif
 			ProcessFonts(theme, document, manager);
 			ProcessTextures(theme, document, manager);
 			ProcessStyles(theme, document);

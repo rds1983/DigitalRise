@@ -519,12 +519,10 @@ namespace DigitalRise.UI.Controls
         var scrollBarValue = _verticalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
         scrollBarValue.Changed += (s, e) => VisualOffset = _verticalScrollBar.Value;
 
-#if MONOGAME
         // The I beam cursor should not be visible over the scroll bar. Therefore, 
         // the scroll bar sets its desired cursor to the default cursor to override 
         // the I beam of the text box.
         _verticalScrollBar.Cursor = Screen.Renderer.GetCursor(null);
-#endif
       }
     }
 
@@ -541,9 +539,7 @@ namespace DigitalRise.UI.Controls
 
     private void UpdateCursor()
     {
-#if MONOGAME
       Cursor = (IsReadOnly || Screen == null) ? null : Screen.Renderer.GetCursor("IBeam");
-#endif
     }
 
 

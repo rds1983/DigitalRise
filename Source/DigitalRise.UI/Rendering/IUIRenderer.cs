@@ -8,7 +8,10 @@ using DigitalRise.GameBase;
 using DigitalRise.UI.Controls;
 using FontStashSharp;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI.Rendering
 {
@@ -70,7 +73,6 @@ namespace DigitalRise.UI.Rendering
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
     bool GetAttribute<T>(string style, string name, out T result);
 
-#if MONOGAME
     /// <summary>
     /// Gets a mouse cursor.
     /// </summary>
@@ -86,7 +88,6 @@ namespace DigitalRise.UI.Rendering
     /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
     /// </remarks>
     MouseCursor GetCursor(string name);
-#endif
 
 
     /// <summary>

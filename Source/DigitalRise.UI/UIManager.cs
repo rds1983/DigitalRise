@@ -5,11 +5,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
-using DigitalRise.UI.Rendering;
-using Microsoft.Xna.Framework.Input;
+
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI
 {
@@ -58,10 +59,8 @@ namespace DigitalRise.UI
     #region Properties & Events
     //--------------------------------------------------------------
 
-#if MONOGAME
     /// <inheritdoc/>
     public MouseCursor Cursor { get; set; }
-#endif
 
 
     /// <inheritdoc/>
@@ -169,7 +168,6 @@ namespace DigitalRise.UI
       foreach (UIScreen screen in _sortedScreens)
         screen.Update(deltaTime);
 
-#if MONOGAME
 			// ----- Update mouse cursor.
 			var desiredCursor = Cursor;
 
@@ -211,12 +209,15 @@ namespace DigitalRise.UI
 
       if (desiredCursor != null)
       {
+#if MONOGAME
         Mouse.SetCursor(desiredCursor);
-      }
+#else
+        SDL2.SDL.SDL_SetCursor(desiredCursor.Value);
 #endif
+      }
 
       // TODO:
     }
-    #endregion
+#endregion
   }
 }

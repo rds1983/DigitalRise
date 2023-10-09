@@ -48,13 +48,11 @@ namespace DigitalRise.UI.Rendering
   /// </remarks>
   public class Theme
   {
-#if MONOGAME
     /// <summary>
     /// Gets the cursor definitions.
     /// </summary>
     /// <value>The cursors.</value>
     public NamedObjectCollection<ThemeCursor> Cursors { get; private set; }
-#endif
 
 
     /// <summary>
@@ -83,9 +81,7 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     public Theme()
     {
-#if MONOGAME
       Cursors = new NamedObjectCollection<ThemeCursor>();
-#endif
       Fonts = new NamedObjectCollection<ThemeFont>();
       Textures = new NamedObjectCollection<ThemeTexture>();
       Styles = new NamedObjectCollection<ThemeStyle>();

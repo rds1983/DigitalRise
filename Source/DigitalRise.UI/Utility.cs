@@ -1,4 +1,6 @@
-﻿namespace DigitalRise
+﻿using System;
+
+namespace DigitalRise
 {
 	internal static class Utility
 	{

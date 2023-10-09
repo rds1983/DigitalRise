@@ -5,9 +5,11 @@
 using System;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
-using Microsoft.Xna.Framework.Input;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI
 {
@@ -21,12 +23,11 @@ namespace DigitalRise.UI
   /// </remarks>
   public interface IUIService
   {
-#if MONOGAME
     /// <summary>
     /// Gets or sets the mouse cursor, overriding the default mouse cursor.
     /// </summary>
     /// <value>
-    /// The mouse cursor, overriding the current mouse cursor. Set to <see langword="null"/> to 
+    /// The mouse cursor, overriding the current mouse cursor. Set   to <see langword="null"/> to 
     /// use the default mouse cursor. 
     /// </value>
     /// <remarks>
@@ -37,7 +38,6 @@ namespace DigitalRise.UI
     /// </para>
     /// </remarks>
     MouseCursor Cursor { get; set; }
-#endif
 
 
     /// <summary>

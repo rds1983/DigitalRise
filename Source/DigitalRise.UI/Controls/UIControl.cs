@@ -13,7 +13,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using MouseButtons = DigitalRise.Input.MouseButtons;
 using DigitalRise.GameBase;
-using Microsoft.Xna.Framework.Input;
+
+#if !MONOGAME
+using MouseCursor = System.Nullable<System.IntPtr>;
+#endif
 
 namespace DigitalRise.UI.Controls
 {
@@ -351,7 +354,6 @@ namespace DigitalRise.UI.Controls
     public ContextMenu ContextMenu { get; set; }
 
 
-#if MONOGAME
     /// <summary>
     /// Gets or sets the mouse cursor that should be displayed when the mouse is over this control.
     /// </summary>
@@ -364,7 +366,6 @@ namespace DigitalRise.UI.Controls
     /// <strong>System.Windows.Forms.dll</strong> in this portable library.)
     /// </remarks>
     public MouseCursor Cursor { get; set; }
-#endif
 
 
     /// <summary>
