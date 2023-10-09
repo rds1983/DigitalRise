@@ -11,6 +11,7 @@ using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.GameBase;
+using Microsoft.Xna.Framework.Input;
 
 #if !MONOGAME
 using MouseCursor = System.Nullable<System.IntPtr>;

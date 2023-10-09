@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
+using Microsoft.Xna.Framework.Input;
 
 #if !MONOGAME
 using MouseCursor = System.Nullable<System.IntPtr>;

@@ -10,6 +10,7 @@ using System.Text.Json.Nodes;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise;
+using Microsoft.Xna.Framework.Input;
 
 #if !MONOGAME
 using static SDL2.SDL;

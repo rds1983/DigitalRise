@@ -6,6 +6,8 @@
 using MouseCursor = System.Nullable<System.IntPtr>;
 #endif
 
+using Microsoft.Xna.Framework.Input;
+
 namespace DigitalRise.UI.Rendering
 {
   /// <summary>

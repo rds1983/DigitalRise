@@ -5,6 +5,7 @@
 using System;
 using DigitalRise.Input;
 using DigitalRise.UI.Controls;
+using Microsoft.Xna.Framework.Input;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 #if !MONOGAME
