@@ -51,7 +51,7 @@ controls. The controls are sorted by their z value before rendering.",
       GraphicsService.Screens.Insert(1, graphicsScreen);
 
       // Create a UIScreen.
-      UIRenderer renderer = new UIRenderer();
+      UIRenderer renderer = new UIRenderer(GraphicsDevice);
       _uiScreen = new UIScreen("HealthBarScreen", renderer)
       {
         Background = Color.Transparent,   // Background must not hide the 3D graphics screen.

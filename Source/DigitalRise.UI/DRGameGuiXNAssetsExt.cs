@@ -5,12 +5,11 @@ using System.Xml;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Text.Json;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Text.Json.Nodes;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
-using DigitalRise;
-using Microsoft.Xna.Framework.Input;
+using System.Text.Json;
 
 #if !MONOGAME
 using static SDL2.SDL;
@@ -122,7 +121,7 @@ namespace AssetManagementBase
 					Texture2D image;
 					using (var stream = manager.Open(bitmapFile))
 					{
-						image = Texture2D.FromStream(DRBase.GraphicsDevice, stream);
+						image = Texture2D.FromStream(theme.GraphicsDevice, stream);
 					}
 
 					var cursor = new ThemeCursor
@@ -214,7 +213,7 @@ namespace AssetManagementBase
 				string filename = GetMandatoryAttributeString(textureElement, "File");
 				bool premultiplyAlpha = (bool?)textureElement.Attribute("PremultiplyAlpha") ?? true;
 
-				var texture = manager.LoadTexture2D(filename, premultiplyAlpha);
+				var texture = manager.LoadTexture2D(theme.GraphicsDevice, filename, premultiplyAlpha);
 
 				var themeTexture = new ThemeTexture
 				{
@@ -351,7 +350,9 @@ namespace AssetManagementBase
 				throw new Exception(message);
 			}
 
-			var theme = new Theme();
+			var graphicsDevice = (GraphicsDevice)tag;
+
+			var theme = new Theme(graphicsDevice);
 			ProcessCursors(theme, document, manager);
 			ProcessFonts(theme, document, manager);
 			ProcessTextures(theme, document, manager);
@@ -360,9 +361,9 @@ namespace AssetManagementBase
 			return theme;
 		};
 
-		public static Theme LoadTheme(this AssetManager manager, string assetName)
+		public static Theme LoadTheme(this AssetManager manager, GraphicsDevice graphicsDevice, string assetName)
 		{
-			return manager.UseLoader(_themeLoader, assetName);
+			return manager.UseLoader(_themeLoader, assetName, tag: graphicsDevice);
 		}
 	}
 }

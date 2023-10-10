@@ -5,6 +5,7 @@ using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using DigitalRise.UI.Rendering;
 
 namespace Samples.UI
 {
@@ -25,6 +26,7 @@ also be changed.",
     private readonly IInputCommand _commandMoveHorizontal;
     private readonly IInputCommand _commandMoveVertical;
 
+    private Texture2D _whiteTexture;
 
     public InputCommandSample()
     {
@@ -93,6 +95,8 @@ also be changed.",
       InputService.Commands.Add(_commandChangeColor);
       InputService.Commands.Add(_commandMoveHorizontal);
       InputService.Commands.Add(_commandMoveVertical);
+
+      _whiteTexture = UIRenderer.CreateWhiteTexture(GraphicsDevice);
     }
 
 
@@ -125,9 +129,7 @@ also be changed.",
         _color = new Color((Vector3)RandomHelper.Random.NextVector3(0, 1));
 
       // Draw a sphere.
-      var whiteTexture = MyUIRenderer.WhiteTexture;
-
-      _spriteBatch.Draw(whiteTexture, new Rectangle((int)_position.X - 100, (int)_position.Y - 100, 200, 200), _color);
+      _spriteBatch.Draw(_whiteTexture, new Rectangle((int)_position.X - 100, (int)_position.Y - 100, 200, 200), _color);
     }
   }
 }

@@ -45,12 +45,12 @@ namespace Samples.UI
 			Theme theme;
 			if (_themeNumber == 0)
 			{
-				theme = UIDefaults.Theme;
+				theme = Theme.GetDefault(GraphicsDevice);
 			}
 			else
 			{
 				var themeName = "UI Themes/Aero/Theme.xml";
-				theme = AssetManager.LoadTheme(themeName);
+				theme = AssetManager.LoadTheme(GraphicsDevice, themeName);
 			}
 
 			// Create a UI renderer, which uses the theme info to renderer UI controls.
@@ -99,7 +99,7 @@ namespace Samples.UI
 			};
 			button1.Click += (s, e) =>
 			{
-				var resizableWindow = new ResizableWindow(AssetManager);
+				var resizableWindow = new ResizableWindow(GraphicsDevice, AssetManager);
 				resizableWindow.Show(_uiScreen);
 			};
 

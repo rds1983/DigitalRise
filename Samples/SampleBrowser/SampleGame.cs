@@ -112,8 +112,6 @@ namespace Samples
     // Initializes services and adds game components.
     protected override void Initialize()
     {
-      DRBase.Game = this;
-
 #if WINDOWS || WINDOWS_UWP || XBOX
       if (GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
       {

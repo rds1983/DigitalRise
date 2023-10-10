@@ -12,6 +12,7 @@ using DigitalRise.ServiceLocation;
 using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Samples
 {
@@ -43,6 +44,8 @@ namespace Samples
     protected readonly SampleFramework SampleFramework;
 
     private readonly GraphicsScreen[] _originalGraphicsScreens;
+
+    public GraphicsDevice GraphicsDevice => GraphicsService.GraphicsDevice;
 
 
     protected Sample(Microsoft.Xna.Framework.Game game)

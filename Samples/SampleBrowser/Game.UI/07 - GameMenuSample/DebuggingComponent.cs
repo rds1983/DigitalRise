@@ -9,12 +9,10 @@ using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Console = DigitalRise.UI.Controls.Console;
-
-
 namespace Samples.Game.UI
 {
-  // Creates a UIScreen for debugging. The screen contains a console, but other controls
-  // or text could be added as well.
+	// Creates a UIScreen for debugging. The screen contains a console, but other controls
+	// or text could be added as well.
   public class DebuggingComponent : GameComponent
   {
     private readonly IInputService _inputService;
@@ -48,7 +46,7 @@ namespace Samples.Game.UI
       // We could use the same renderer as the "Default" screen (see StartScreenComponent.cs).
       // But usually, the debug screen will use a more efficient theme (smaller fonts, no
       // fancy graphics). Here, we simply use the BlendBlue theme again.
-      UIRenderer renderer = new UIRenderer();
+      UIRenderer renderer = new UIRenderer(_graphicsService.GraphicsDevice);
 
       // Create a UIScreen and add it to the UI service. 
       _uiScreen = new UIScreen("Debug", renderer)

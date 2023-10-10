@@ -33,7 +33,7 @@ namespace Samples.Game.UI
       {
         Width = 16,
         Height = 16,
-        Texture = assetManager.LoadTexture2D("Icon.png")
+        Texture = assetManager.LoadTexture2D(renderer.GraphicsDevice, "Icon.png")
       });
 
       buttonContentPanel.Children.Add(new TextBlock
@@ -199,7 +199,7 @@ namespace Samples.Game.UI
       // ----- Scroll viewer showing an image
       var image = new Image
       {
-        Texture = assetManager.LoadTexture2D("Sky.png"),
+        Texture = assetManager.LoadTexture2D(renderer.GraphicsDevice, "Sky.png"),
       };
 
       var scrollViewer = new ScrollViewer

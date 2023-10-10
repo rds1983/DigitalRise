@@ -96,8 +96,6 @@ namespace Samples
     // Initializes services and adds game components.
     protected override void Initialize()
     {
-      DRBase.Game = this;
-
 #if WINDOWS || WINDOWS_UWP || XBOX
       if (GraphicsDevice.GraphicsProfile == GraphicsProfile.Reach)
       {
@@ -181,7 +179,9 @@ namespace Samples
 #else
       const bool useGamerServices = false;
 #endif
-      _inputManager = new InputManager(useGamerServices);
+			_services.Register(typeof(GraphicsDevice), null, GraphicsDevice);
+
+			_inputManager = new InputManager(useGamerServices);
       _services.Register(typeof(IInputService), null, _inputManager);
 
       // GUI

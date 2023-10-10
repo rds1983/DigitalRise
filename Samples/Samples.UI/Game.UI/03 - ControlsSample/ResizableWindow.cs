@@ -9,7 +9,7 @@ namespace Samples.UI
   // A resizable window with a ScrollViewer.
   public class ResizableWindow : Window
   {
-    public ResizableWindow(AssetManager assetManager)
+    public ResizableWindow(GraphicsDevice graphicsDevice, AssetManager assetManager)
     {
       Title = "Resizable Window";
       Width = 320;
@@ -18,7 +18,7 @@ namespace Samples.UI
 
       var image = new Image
       {
-        Texture = assetManager.LoadTexture2D("Sky.png"),
+        Texture = assetManager.LoadTexture2D(graphicsDevice, "Sky.png"),
       };
 
       var scrollViewer = new ScrollViewer

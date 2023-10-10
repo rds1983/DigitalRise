@@ -27,7 +27,7 @@ namespace Samples.Game.UI
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = AssetManager.LoadTheme("UI Themes/WindowsPhone7/ThemeDark.xml");
+      Theme theme = AssetManager.LoadTheme(GraphicsDevice, "UI Themes/WindowsPhone7/ThemeDark.xml");
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(theme);

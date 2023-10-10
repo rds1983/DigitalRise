@@ -65,7 +65,7 @@ namespace Samples.Game.UI
     public void LoadStuff()
     {
       // Create a UI renderer
-      UIRenderer renderer = new UIRenderer();
+      UIRenderer renderer = new UIRenderer(_graphicsService.GraphicsDevice);
 
       // Create a UIScreen and add it to the UI service. The screen is the root of the 
       // tree of UI controls. Each screen can have its own renderer. 

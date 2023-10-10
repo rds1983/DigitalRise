@@ -25,7 +25,7 @@ Open the file Content/UI Themes/TilingSample/Theme.xml to see how the styles are
     public TilingSample()
     {
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = AssetManager.LoadTheme("UI Themes/TilingSample/Theme.xml");
+      Theme theme = AssetManager.LoadTheme(GraphicsDevice, "UI Themes/TilingSample/Theme.xml");
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(theme);

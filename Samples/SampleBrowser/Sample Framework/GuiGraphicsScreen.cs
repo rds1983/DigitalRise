@@ -61,7 +61,7 @@ namespace Samples
 
       // Load a UI theme and create the UI renderer and the UI screen. See the
       // DigitalRise Game UI documentation and samples for more details.
-      var renderer = new UIRenderer();
+      var renderer = new UIRenderer(GraphicsService.GraphicsDevice);
       UIScreen = new UIScreen("Default", renderer)
       {
         Background = Color.Transparent,

@@ -56,7 +56,7 @@ GameComponent with a StateMachine.",
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
       // Load a UI theme, which defines the appearance and default values of UI controls.
-      Theme theme = AssetManager.LoadTheme("UI Themes/GameStatesSample/Theme.xml");
+      Theme theme = AssetManager.LoadTheme(GraphicsDevice, "UI Themes/GameStatesSample/Theme.xml");
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.
       UIRenderer renderer = new UIRenderer(theme);

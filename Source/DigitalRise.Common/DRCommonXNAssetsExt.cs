@@ -1,5 +1,4 @@
-﻿using DigitalRise;
-using FontStashSharp;
+﻿using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
@@ -77,12 +76,5 @@ namespace AssetManagementBase
 		{
 			return assetManager.UseLoader(_staticFontLoader, assetName, tag: graphicsDevice);
 		}
-
-		public static TextureCube LoadTextureCube(this AssetManager assetManager, string assetName) => assetManager.LoadTextureCube(DRBase.GraphicsDevice, assetName);
-
-		public static Texture LoadTexture(this AssetManager assetManager, string assetName) => assetManager.LoadTexture(DRBase.GraphicsDevice, assetName);
-
-		public static Texture2D LoadTexture2D(this AssetManager assetManager, string assetName, bool premultiplyAlpha = false) =>
-			assetManager.LoadTexture2D(DRBase.GraphicsDevice, assetName, premultiplyAlpha);
 	}
 }

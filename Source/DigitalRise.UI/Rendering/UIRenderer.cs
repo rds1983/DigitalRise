@@ -86,9 +86,12 @@ namespace DigitalRise.UI.Rendering
     /// </value>
     public bool IsDisposed { get; private set; }
 
-
     /// <inheritdoc/>
-    public SpriteBatch SpriteBatch { get; private set; }
+    public GraphicsDevice GraphicsDevice => Theme.GraphicsDevice;
+
+
+		/// <inheritdoc/>
+		public SpriteBatch SpriteBatch { get; private set; }
 
 
     /// <summary>
@@ -123,7 +126,7 @@ namespace DigitalRise.UI.Rendering
       if (theme == null)
         throw new ArgumentNullException("theme");
 
-      SpriteBatch = new SpriteBatch(DRBase.GraphicsDevice);
+      SpriteBatch = new SpriteBatch(theme.GraphicsDevice);
       Theme = theme;
 
       InitializeDefaultCursor();
@@ -133,11 +136,13 @@ namespace DigitalRise.UI.Rendering
     }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="UIRenderer"/> class.
+		/// Initializes a new instance of the <see cref="UIRenderer"/> class that uses the default theme. 
 		/// </summary>
+    /// <param name="graphicsDevice"></param>
 		/// <exception cref="ArgumentNullException">
+		/// <paramref name="theme"/> is <see langword="null"/>.
 		/// </exception>
-		public UIRenderer(): this(Resources.DefaultTheme)
+		public UIRenderer(GraphicsDevice graphicsDevice): this(Theme.GetDefault(graphicsDevice))
     {
     }
 

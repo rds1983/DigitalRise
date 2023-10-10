@@ -2,7 +2,7 @@
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Samples.Game.UI
 {
@@ -15,7 +15,7 @@ namespace Samples.Game.UI
       RenderCallbacks.Add("TreeViewItem", RenderTreeViewItem);
     }
 
-    public MyUIRenderer(): this(UIDefaults.Theme)
+    public MyUIRenderer(GraphicsDevice graphicsDevice): this(Theme.GetDefault(graphicsDevice))
     {
     }
 

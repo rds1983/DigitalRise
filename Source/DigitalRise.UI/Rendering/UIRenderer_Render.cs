@@ -46,14 +46,13 @@ namespace DigitalRise.UI.Rendering
     /// Gets a white 1x1 texture.
     /// </summary>
     /// <value>A texture with a single white texel.</value>
-    public static Texture2D WhiteTexture
+    public Texture2D WhiteTexture
     {
       get
       {
         if (_whiteTexture == null)
         {
-          _whiteTexture = new Texture2D(DRBase.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-          _whiteTexture.SetData(new[] { Color.White });
+          _whiteTexture = CreateWhiteTexture(GraphicsDevice);
         }
 
         return _whiteTexture;
@@ -337,7 +336,7 @@ namespace DigitalRise.UI.Rendering
       EndBatch();
 
       // Render Content and clip with scissor rectangle.
-      var device = DRBase.GraphicsDevice;
+      var device = GraphicsDevice;
       Rectangle originalScissorRectangle = device.ScissorRectangle;
       Rectangle scissorRectangle = context.RenderTransform.Transform(contentControl.ContentBounds).ToRectangle(true);
 			device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
@@ -377,7 +376,7 @@ namespace DigitalRise.UI.Rendering
       if (textBlock != null && !string.IsNullOrEmpty(textBlock.Text))
       {
         RectangleF contentBounds = GetContentBoundsRounded(textBlock);
-        var device = DRBase.GraphicsDevice;
+        var device = GraphicsDevice;
         Rectangle originalScissorRectangle = device.ScissorRectangle;
         if (textBlock.VisualClip)
         {
@@ -599,7 +598,7 @@ namespace DigitalRise.UI.Rendering
       var textBox = control as TextBox;
       if (textBox != null)
       {
-				var device = DRBase.GraphicsDevice;
+				var device = GraphicsDevice;
 				RectangleF contentBounds = GetContentBoundsRounded(textBox);
         Rectangle originalScissorRectangle = device.ScissorRectangle;
 
@@ -1189,6 +1188,18 @@ namespace DigitalRise.UI.Rendering
       return false;
     }
 
-    #endregion
-  }
+    /// <summary>
+    /// Create a white 1x1 texture.
+    /// </summary>
+    /// <value>A texture with a single white texel.</value>
+    public static Texture2D CreateWhiteTexture(GraphicsDevice graphicsDevice)
+    {
+      var _whiteTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+      _whiteTexture.SetData(new[] { Color.White });
+
+      return _whiteTexture;
+    }
+
+		#endregion
+	}
 }

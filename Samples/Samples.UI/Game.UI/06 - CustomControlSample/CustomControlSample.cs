@@ -22,7 +22,7 @@ The DigitalRise Blog contains a detailed description for this project; see secti
 
     public CustomControlSample()
     {
-      Theme theme = UIDefaults.Theme;
+      Theme theme = Theme.GetDefault(GraphicsDevice);
 
       // Create a renderer that uses the theme information. We do not use the default UIRenderer
       // class, instead we use our own MyUIRenderer that adds rendering of tree view items.

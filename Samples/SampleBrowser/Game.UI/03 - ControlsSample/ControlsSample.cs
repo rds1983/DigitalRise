@@ -69,12 +69,12 @@ namespace Samples.Game.UI
       Theme theme;
       if (_themeNumber == 0)
       {
-        theme = UIDefaults.Theme;
+        theme = Theme.GetDefault(GraphicsDevice);
       }
       else
       {
         var themeName = "UI Themes/Aero/Theme.xml";
-				theme = AssetManager.LoadTheme(themeName);
+				theme = AssetManager.LoadTheme(GraphicsDevice, themeName);
 			}
 
       // Create a UI renderer, which uses the theme info to renderer UI controls.

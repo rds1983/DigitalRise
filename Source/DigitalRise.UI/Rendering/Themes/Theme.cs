@@ -2,8 +2,11 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.TXT', which is part of this source code package.
 
+using AssetManagementBase;
 using DigitalRise.Collections;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DigitalRise.UI.Rendering
 {
@@ -48,6 +51,13 @@ namespace DigitalRise.UI.Rendering
   /// </remarks>
   public class Theme
   {
+		private static Theme _defaultTheme;
+
+		/// <summary>
+		/// Graphics Device
+		/// </summary>
+		public GraphicsDevice GraphicsDevice { get; private set; } 
+
     /// <summary>
     /// Gets the cursor definitions.
     /// </summary>
@@ -79,12 +89,25 @@ namespace DigitalRise.UI.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="Theme"/> class.
     /// </summary>
-    public Theme()
+    public Theme(GraphicsDevice graphicsDevice)
     {
+      GraphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
       Cursors = new NamedObjectCollection<ThemeCursor>();
       Fonts = new NamedObjectCollection<ThemeFont>();
       Textures = new NamedObjectCollection<ThemeTexture>();
       Styles = new NamedObjectCollection<ThemeStyle>();
     }
-  }
+
+		public static Theme GetDefault(GraphicsDevice graphicsDevice)
+		{
+			if (_defaultTheme != null)
+			{
+				return _defaultTheme;
+			}
+
+			_defaultTheme = Resources.AssetManager.LoadTheme(graphicsDevice, "DefaultTheme/Theme.xml");
+
+			return _defaultTheme;
+		}
+	}
 }

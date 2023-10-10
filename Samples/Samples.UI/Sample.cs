@@ -44,7 +44,7 @@ namespace Samples
       InputService = Services.GetInstance<IInputService>();
       AnimationService = Services.GetInstance<IAnimationService>();
       UIService = Services.GetInstance<IUIService>();
-      GraphicsDevice = DRBase.GraphicsDevice;
+      GraphicsDevice = Services.GetInstance<GraphicsDevice>();
     }
 
 		~Sample()

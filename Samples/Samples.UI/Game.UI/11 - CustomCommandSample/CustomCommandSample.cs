@@ -26,8 +26,10 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
     private float _buttonTapProgress;
     private float _buttonSequenceProgress;
 
+		private Texture2D _whiteTexture;
 
-    public CustomCommandSample()
+
+		public CustomCommandSample()
     {
       _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -45,6 +47,8 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
       InputService.Commands.Add(_buttonHoldCommand);
       InputService.Commands.Add(_buttonTapCommand);
       InputService.Commands.Add(_buttonSequenceCommand);
+
+      _whiteTexture = UIRenderer.CreateWhiteTexture(GraphicsDevice);
     }
 
 
@@ -110,24 +114,22 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
 
     private void DrawProgressBar(Rectangle bounds, float progress)
     {
-      var whiteTexture = UIRenderer.WhiteTexture;
-
       // Draw border.
-      _spriteBatch.Draw(whiteTexture, bounds, null, Color.White);
+      _spriteBatch.Draw(_whiteTexture, bounds, null, Color.White);
 
       // Draw inner rectangle.
       bounds.X += 2;
       bounds.Y += 2;
       bounds.Width -= 4;
       bounds.Height -= 4;
-      _spriteBatch.Draw(whiteTexture, bounds, null, Color.Black);
+      _spriteBatch.Draw(_whiteTexture, bounds, null, Color.Black);
 
       // Draw progress indicator.
       if (progress > 0)
       {
         bounds.Width = (int)(bounds.Width * MathHelper.Clamp(progress, 0, 1));
         var color = (progress < 1) ? Color.Lime : Color.Yellow;
-        _spriteBatch.Draw(whiteTexture, bounds, null, color);
+        _spriteBatch.Draw(_whiteTexture, bounds, null, color);
       }
     }
   }
