@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>DigitalRise.Tests</RootNamespace>
-    <AssemblyName>DigitalRise.Tests</AssemblyName>
+    <RootNamespace>DigitalRise.Common.Tests</RootNamespace>
+    <AssemblyName>DigitalRise.Common.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
