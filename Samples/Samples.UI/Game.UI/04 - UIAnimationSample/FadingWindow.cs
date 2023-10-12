@@ -1,7 +1,6 @@
 ﻿using System;
 using DigitalRise.Animation;
 using DigitalRise.UI.Controls;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 
 namespace Samples.UI
@@ -9,7 +8,7 @@ namespace Samples.UI
   // A window that animates the Opacity when the windows is loaded/closed.
   public class FadingWindow : AnimatedWindow
   {
-    public FadingWindow(IServiceLocator services) 
+    public FadingWindow(IServiceProvider services) 
       : base(services)
     {
       Title = "FadingWindow";

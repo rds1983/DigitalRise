@@ -1,12 +1,10 @@
 using System;
+using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
-using DigitalRise.Threading;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
@@ -20,7 +18,7 @@ namespace Samples.Game.UI
   // After that, this component is replaced by the MainMenuComponent.
   public class StartScreenComponent : GameComponent
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
     private readonly IGraphicsService _graphicsService;
     private readonly IUIService _uiService;
@@ -30,7 +28,7 @@ namespace Samples.Game.UI
     private UIScreen _uiScreen;
 
 
-    public StartScreenComponent(Microsoft.Xna.Framework.Game game, IServiceLocator services)
+    public StartScreenComponent(Microsoft.Xna.Framework.Game game, IServiceProvider services)
       : base(game)
     {
       _services = services;

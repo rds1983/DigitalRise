@@ -1,11 +1,11 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
 using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
@@ -26,7 +26,7 @@ namespace Samples.Game.UI
     private readonly Slider _slider;
 
 
-    public EasingWindow(IServiceLocator services) 
+    public EasingWindow(IServiceProvider services) 
       : base(services)
     {
       _inputService = services.GetInstance<IInputService>();

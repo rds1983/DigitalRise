@@ -1,12 +1,11 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 #if MONOGAME || WINDOWS_PHONE
@@ -33,7 +32,7 @@ namespace Samples
     private const float ThumbStickFactor = 15;
     private const float SpeedBoost = 20;
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
 
     private float _farDistance;
@@ -53,13 +52,13 @@ namespace Samples
     public bool IsEnabled { get; set; }
 
 
-    public CameraObject(IServiceLocator services)
+    public CameraObject(IServiceProvider services)
       : this(services, 1000)
     {
     }
 
 
-    public CameraObject(IServiceLocator services, float farDistance)
+    public CameraObject(IServiceProvider services, float farDistance)
     {
       Name = "Camera";
 

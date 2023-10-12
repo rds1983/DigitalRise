@@ -1,21 +1,19 @@
-﻿using DigitalRise.GameBase;
-using DigitalRise.Geometry;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples
 {
 	// Loads the "Sandbox" model and creates 5 rigid bodies that represent the walls.
   public class SandboxObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private ModelNode _modelNode;
     private RigidBody _floorRigidBody;
     private RigidBody _leftWallRigidBody;
@@ -24,7 +22,7 @@ namespace Samples
     private RigidBody _frontWallRigidBody;
 
 
-    public SandboxObject(IServiceLocator services)
+    public SandboxObject(IServiceProvider services)
     {
       _services = services;
       Name = "Sandbox";

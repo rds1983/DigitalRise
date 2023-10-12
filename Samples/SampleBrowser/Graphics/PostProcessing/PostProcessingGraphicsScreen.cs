@@ -1,12 +1,10 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -61,7 +59,7 @@ namespace Samples
     public bool DrawReticle { get; set; }
 
 
-    public PostProcessingGraphicsScreen(IServiceLocator services)
+    public PostProcessingGraphicsScreen(IServiceProvider services)
       : base(services.GetInstance<IGraphicsService>())
     {
       _sampleFramework = services.GetInstance<SampleFramework>();
@@ -316,4 +314,3 @@ namespace Samples
     }
   }
 }
-#endif

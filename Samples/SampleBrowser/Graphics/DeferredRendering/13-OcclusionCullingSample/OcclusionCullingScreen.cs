@@ -1,4 +1,4 @@
-﻿#if !WP7 && !WP8
+﻿using System;
 using System.Collections.Generic;
 using DigitalRise.Diagnostics;
 using DigitalRise.Geometry;
@@ -6,8 +6,6 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
@@ -54,7 +52,7 @@ namespace Samples
     public SceneNode DebugObject { get; set; }
 
 
-    public OcclusionCullingScreen(IServiceLocator services)
+    public OcclusionCullingScreen(IServiceProvider services)
       : base(services)
     {
       _sceneNodes = new List<SceneNode>();
@@ -178,7 +176,7 @@ namespace Samples
         // Render top-down scene into an offscreen render target.
         var format = new RenderTargetFormat(context.RenderTarget)
         {
-          Width = topDownViewSize, 
+          Width = topDownViewSize,
           Height = topDownViewSize,
         };
         topDownRenderTarget = renderTargetPool.Obtain2D(format);
@@ -272,4 +270,3 @@ namespace Samples
     }
   }
 }
-#endif

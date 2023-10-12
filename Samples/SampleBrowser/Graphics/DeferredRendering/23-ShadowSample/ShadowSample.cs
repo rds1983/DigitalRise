@@ -1,7 +1,7 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
 using AssetManagementBase;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
@@ -12,7 +12,6 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics.ForceEffects;
-using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -49,8 +48,8 @@ To focus on shadows, the other lights and the materials are not rendered when th
 
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());
@@ -63,7 +62,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
 
       GameObjectService.Objects.Add(new GrabObject(Services));
 
-      CreateScene(Services, AssetManager, _graphicsScreen);
+      CreateScene(Services, _graphicsScreen);
 
       // Disable existing lights.
       foreach (var lightNode in _graphicsScreen.Scene.GetDescendants().OfType<LightNode>())
@@ -110,7 +109,7 @@ To focus on shadows, the other lights and the materials are not rendered when th
 
 
     // Creates a test scene with a lot of randomly placed objects.
-    internal static void CreateScene(ServiceContainer services, AssetManager assetManager, DeferredGraphicsScreen graphicsScreen)
+    internal static void CreateScene(IServiceProvider services, DeferredGraphicsScreen graphicsScreen)
     {
       var gameObjectService = services.GetInstance<IGameObjectService>();
       var graphicsService = services.GetInstance<IGraphicsService>();
@@ -444,4 +443,3 @@ To focus on shadows, the other lights and the materials are not rendered when th
     }
   }
 }
-#endif

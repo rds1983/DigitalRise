@@ -29,9 +29,8 @@ namespace Samples
 
       // GameObjects that need to render stuff will retrieve the DebugRenderers or
       // Scene through the service provider.
-      Services.Register(typeof(DebugRenderer), null, GraphicsScreen.DebugRenderer);
-      Services.Register(typeof(DebugRenderer), "DebugRenderer2D", GraphicsScreen.DebugRenderer2D);
-      Services.Register(typeof(IScene), null, GraphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), GraphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), GraphicsScreen.Scene);
 
       // Add a default light setup (ambient light + 3 directional lights).
       var defaultLightsObject = new DefaultLightsObject(Services);

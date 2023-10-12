@@ -51,7 +51,7 @@ See also: Samples/Geometry/07 - ContentPipelineSample/README.TXT",
       _collisionDomain = new CollisionDomain(new CollisionDetection());
 
       // Register CollisionDomain in service container.
-      Services.Register(typeof(CollisionDomain), null, _collisionDomain);
+      Services.AddService(typeof(CollisionDomain), _collisionDomain);
       
       // Add game objects which manage graphics models and their collision representations.  
       _saucerObject = new SaucerObject(Services) { Name = "Saucer" };

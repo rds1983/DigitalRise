@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
@@ -6,7 +7,6 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
@@ -16,7 +16,7 @@ namespace Samples
 	// Represents the "Saucer" model.
   public class SaucerObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private ModelNode _modelNode;
     private GeometricObject _geometricObject;
     private CollisionObject _collisionObject;
@@ -41,7 +41,7 @@ namespace Samples
     }
 
 
-    public SaucerObject(IServiceLocator services)
+    public SaucerObject(IServiceProvider services)
     {
       _services = services;
     }

@@ -48,8 +48,8 @@ Have a look at the source code comments of the DeferredGraphicsScreen for more d
       // screen to the Options window.
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());

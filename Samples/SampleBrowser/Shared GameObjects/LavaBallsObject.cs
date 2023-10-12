@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
 using DigitalRise.GameBase;
@@ -8,21 +9,17 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
-using System.Linq;
 
 namespace Samples
 {
   // Spawns lava balls and controls all lava ball instances.
   public class LavaBallsObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private ModelNode _modelPrototype;
     private RigidBody _bodyPrototype;
     private PointLight _pointLight;
@@ -34,7 +31,7 @@ namespace Samples
     private readonly List<RigidBody> _bodies = new List<RigidBody>();
 
 
-    public LavaBallsObject(IServiceLocator services)
+    public LavaBallsObject(IServiceProvider services)
     {
       _services = services;
       Name = "LavaBalls";

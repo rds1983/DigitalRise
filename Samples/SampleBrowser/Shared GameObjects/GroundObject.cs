@@ -1,24 +1,24 @@
-﻿using DigitalRise.GameBase;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples
 {
 	// Loads a ground plane model and creates a static rigid body for the ground plane.
   public class GroundObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private ModelNode _modelNode;
     private RigidBody _rigidBody;
 
 
-    public GroundObject(IServiceLocator services)
+    public GroundObject(IServiceProvider services)
     {
       _services = services;
       Name = "Ground";

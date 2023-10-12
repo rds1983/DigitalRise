@@ -5,7 +5,6 @@ using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 
@@ -49,7 +48,7 @@ namespace Samples
     /// Initializes a new instance of the <see cref="GuiGraphicsScreen"/> class.
     /// </summary>
     /// <param name="services">The service locator.</param>
-    public GuiGraphicsScreen(IServiceLocator services)
+    public GuiGraphicsScreen(IServiceProvider services)
       : base(services.GetInstance<IGraphicsService>())
     {
       Name = "GUI"; // Just for debugging.

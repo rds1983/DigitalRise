@@ -38,16 +38,16 @@ namespace MyGame
             _services = new ServiceContainer();
             ServiceLocator.SetLocatorProvider(() => _services);
 
-            _services.Register(typeof(IGraphicsDeviceService), null, _graphicsDeviceManager); // NEW
-            _services.Register(typeof(GraphicsDeviceManager), null, _graphicsDeviceManager);  // NEW
+            _services.AddService(typeof(IGraphicsDeviceService), _graphicsDeviceManager); // NEW
+            _services.AddService(typeof(GraphicsDeviceManager), _graphicsDeviceManager);  // NEW
 
             Content = new ContentManager(_services, "Content");                               // NEW
 
             _inputManager = new InputManager(false);
-            _services.Register(typeof(IInputService), null, _inputManager);
+            _services.AddService(typeof(IInputService), _inputManager);
 
             _graphicsManager = new GraphicsManager(GraphicsDevice, Window, Content);          // NEW
-            _services.Register(typeof(IGraphicsService), null, _graphicsManager);             // NEW
+            _services.AddService(typeof(IGraphicsService), _graphicsManager);             // NEW
 
             Components.Add(new MyGameComponent(this));
 

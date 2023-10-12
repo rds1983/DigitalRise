@@ -31,10 +31,10 @@ namespace Samples.Graphics
       GraphicsService.Screens.Insert(0, _graphicsScreen);
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
 
       var scene = _graphicsScreen.Scene;
-      Services.Register(typeof(IScene), null, scene);
+      Services.AddService(typeof(IScene), scene);
 
       // Add standard game objects.
       var cameraGameObject = new CameraObject(Services, 5000);

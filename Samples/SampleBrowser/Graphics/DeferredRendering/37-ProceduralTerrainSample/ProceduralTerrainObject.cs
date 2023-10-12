@@ -10,7 +10,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
@@ -38,7 +37,7 @@ namespace Samples.Graphics
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private IGraphicsService _graphicsService;
     private Simulation _simulation;
     private CameraObject _cameraObject;
@@ -71,7 +70,7 @@ namespace Samples.Graphics
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public ProceduralTerrainObject(IServiceLocator services)
+    public ProceduralTerrainObject(IServiceProvider services)
     {
       if (services == null)
         throw new ArgumentNullException("services");

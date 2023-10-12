@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
 
@@ -18,12 +17,12 @@ namespace Samples
   // is created in code and not loaded with the content manager.
   public sealed class ProceduralObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private MeshNode _meshNode;
     private RigidBody _rigidBody;
 
 
-    public ProceduralObject(IServiceLocator services)
+    public ProceduralObject(IServiceProvider services)
     {
       _services = services;
     }

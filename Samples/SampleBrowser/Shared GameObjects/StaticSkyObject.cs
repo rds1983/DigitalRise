@@ -1,13 +1,13 @@
-﻿using DigitalRise.GameBase;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
+using System;
 
 namespace Samples
 {
@@ -15,7 +15,7 @@ namespace Samples
   // lights and adds a lens flare for the sun.
   public class StaticSkyObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private SkyboxNode _skyboxNode;
     private LightNode _ambientLightNode;
     private LightNode _sunlightNode;
@@ -25,7 +25,7 @@ namespace Samples
     public float SkyExposure { get; set; }
 
 
-    public StaticSkyObject(IServiceLocator services)
+    public StaticSkyObject(IServiceProvider services)
     {
       _services = services;
       Name = "StaticSky";

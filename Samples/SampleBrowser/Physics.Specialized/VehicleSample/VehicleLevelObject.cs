@@ -1,15 +1,14 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -20,10 +19,10 @@ namespace Samples.Physics.Specialized
   /// </summary>
   public class VehicleLevelObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
 
-    public VehicleLevelObject(IServiceLocator services)
+    public VehicleLevelObject(IServiceProvider services)
     {
       _services = services;
       Name = "VehicleLevel";

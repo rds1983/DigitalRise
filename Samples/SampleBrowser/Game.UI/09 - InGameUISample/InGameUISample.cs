@@ -71,8 +71,8 @@ When the user presses <Esc>, the mouse is released.",
       graphicsScreen.DrawReticle = true;
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
-      Services.Register(typeof(DebugRenderer), null, graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), graphicsScreen.Scene);
 
       // some 3D objects
       var cameraGameObject = new CameraObject(Services);

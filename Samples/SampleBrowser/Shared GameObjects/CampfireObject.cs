@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
@@ -9,8 +10,6 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using CommonServiceLocator;
-using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
 
@@ -19,7 +18,7 @@ namespace Samples
   // Adds particle effects for fire and smoke and a flickering point light.
   public class CampfireObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IGraphicsService _graphicsService;
     private SceneNode _campfire;
     private ParticleSystemNode _fireParticles;
@@ -42,7 +41,7 @@ namespace Samples
     }
 
 
-    public CampfireObject(IServiceLocator services)
+    public CampfireObject(IServiceProvider services)
     {
       _services = services;
       _graphicsService = _services.GetInstance<IGraphicsService>();

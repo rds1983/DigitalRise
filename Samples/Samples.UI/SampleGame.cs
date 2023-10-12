@@ -2,13 +2,10 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using AssetManagementBase;
-using CommonServiceLocator;
-using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Diagnostics;
 using DigitalRise.Input;
 using DigitalRise.UI;
-using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Samples.UI;
@@ -23,9 +20,6 @@ namespace Samples
   {
     // The XNA GraphicsDeviceManager.
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
-
-    // The IoC service container providing access to all services.
-    private ServiceContainer _services;
 
     // Services of the game:
     private InputManager _inputManager;                   // Input
@@ -106,67 +100,14 @@ namespace Samples
       }
 #endif
 
-      // ----- Service Container
-      // The DigitalRise ServiceContainer is an "inversion of control" container.
-      // All game services (such as input, graphics, physics, etc.) are registered
-      // in this container. Other game components can access these services via lookup
-      // in the service container.
-      // The DigitalRise ServiceContainer replaces the XNA GameServiceContainer (see 
-      // property Game.Services).
-
-      // Note: The DigitalRise libraries do not require the use of the ServiceContainer
-      // or any other IoC container. The ServiceContainer is only used in the sample
-      // for convenience - but it is not mandatory.
-      _services = new ServiceContainer();
-
-      // The service container is either passed directly to the game components
-      // or accessed through the global variable ServiceLocator.Current.
-      // The following call makes the service container publicly available in 
-      // ServiceLocator.Current.
-      ServiceLocator.SetLocatorProvider(() => _services);
-
-      // ----- Storage
-      // For XNA the assets are stored in the following folders:
-      //
-      //   <gameLocation>/
-      //     Content/
-      //       DigitalRise/
-      //         ... DigitalRise assets ...
-      //       ... other assets ...
-      //
-      // For MonoGame the assets (*.xnb files) are stored in ZIP packages. The
-      // sample assets are stored in "Content/Content.zip" and the DigitalRise
-      // assets are stored in "Content/DigitalRise.zip".
-      //
-      //   <gameLocation>/
-      //     Content/
-      //       Content.zip
-      //       DigitalRise.zip
-      //
-      // DigitalRise introduces the concept of "storages". Storages can be used
-      // to access files on disk or files stored in packages (e.g. ZIP archives).
-      // These storages can be mapped into a "virtual file system", which makes
-      // it easier to write portable code. (The game logic can read the files
-      // from the virtual file system and does not need to know the specifics
-      // about the platform.)
-      //
-      // The virtual files system should look like this:
-      //
-      //   /                                     <-- root of virtual file system
-      //       DigitalRise/
-      //           ... DigitalRise assets ...
-      //       ... other assets ...
-
-      // ----- Content Managers
       // The GraphicsDeviceManager needs to be registered in the service container.
       // (This is required by the XNA content managers.)
-      _services.Register(typeof(IGraphicsDeviceService), null, _graphicsDeviceManager);
-      _services.Register(typeof(GraphicsDeviceManager), null, _graphicsDeviceManager);
+      Services.AddService(typeof(GraphicsDeviceManager), _graphicsDeviceManager);
 
       // ----- Initialize Services
       // Register the game class.
-      _services.Register(typeof(Game), null, this);
-      _services.Register(typeof(SampleGame), null, this);
+      Services.AddService(typeof(Game), this);
+      Services.AddService(typeof(SampleGame), this);
 
 #if XBOX
       // On Xbox, we use the XNA gamer services (e.g. for text input).
@@ -179,26 +120,26 @@ namespace Samples
 #else
       const bool useGamerServices = false;
 #endif
-			_services.Register(typeof(GraphicsDevice), null, GraphicsDevice);
+			Services.AddService(typeof(GraphicsDevice), GraphicsDevice);
 
 			_inputManager = new InputManager(useGamerServices);
-      _services.Register(typeof(IInputService), null, _inputManager);
+      Services.AddService(typeof(IInputService), _inputManager);
 
       // GUI
       _uiManager = new UIManager(this, _inputManager);
-      _services.Register(typeof(IUIService), null, _uiManager);
+      Services.AddService(typeof(IUIService), _uiManager);
 
       // Animation
       _animationManager = new AnimationManager();
-      _services.Register(typeof(IAnimationService), null, _animationManager);
+      Services.AddService(typeof(IAnimationService), _animationManager);
 
       // Game logic
       _gameObjectManager = new GameObjectManager();
-      _services.Register(typeof(IGameObjectService), null, _gameObjectManager);
+      Services.AddService(typeof(IGameObjectService), _gameObjectManager);
 
       // Profiler
       _profiler = new HierarchicalProfiler("Main");
-      _services.Register(typeof(HierarchicalProfiler), "Main", _profiler);
+      Services.AddService(typeof(HierarchicalProfiler), _profiler);
 
       // Initialize delegates for running tasks in parallel.
       // (Creating delegates allocates memory, therefore we do this only once and
@@ -212,7 +153,7 @@ namespace Samples
 			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
       DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
 
-			_services.Register(typeof(AssetManager), null, assetManager);
+			Services.AddService(typeof(AssetManager), assetManager);
 
       IsMouseVisible = true;
 

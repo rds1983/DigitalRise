@@ -1,6 +1,5 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
-using DigitalRise.Geometry.Shapes;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
@@ -8,6 +7,7 @@ using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace Samples.Particles
@@ -16,7 +16,7 @@ namespace Samples.Particles
   // particles bounce. Particles are stretched in motion direction.
   public static class BouncingSparks
   {
-    public static ParticleSystem Create(IServiceLocator services)
+    public static ParticleSystem Create(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

@@ -4,7 +4,6 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using DigitalRise.Graphics;
@@ -18,7 +17,7 @@ namespace Samples.Particles
   public class RocketTrail : ParticleSystem
   {
     private static readonly ResourcePool<ParticleSystem> Pool = new ResourcePool<ParticleSystem>(
-      () => new RocketTrail(ServiceLocator.Current),
+      () => new RocketTrail(SampleGame.Instance.Services),
       null,
       null);
 
@@ -29,7 +28,7 @@ namespace Samples.Particles
     }
 
 
-    private RocketTrail(IServiceLocator services)
+    private RocketTrail(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

@@ -10,11 +10,8 @@ using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using DigitalRise.ServiceLocation;
 using DigitalRise.Text;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
@@ -76,7 +73,6 @@ namespace Samples
 
     private readonly SampleGame _game;
     private readonly Type _initialSample;
-    private readonly ServiceContainer _services;
     private readonly IInputService _inputService;
     private readonly IGraphicsService _graphicsService;
     private readonly IGameObjectService _gameObjectService;
@@ -180,6 +176,8 @@ namespace Samples
       get { return _guiGraphicsScreen.IsVisible; }
       set { _guiGraphicsScreen.IsVisible = value; }
     }
+
+    public IServiceProvider _services => _game.Services;
     #endregion
 
 
@@ -198,8 +196,7 @@ namespace Samples
       _initialSample = initialSample;
 
       // Get all required services.
-      _services = (ServiceContainer)ServiceLocator.Current;
-      _inputService = ServiceLocator.Current.GetInstance<IInputService>();
+      _inputService = SampleGame.Instance.Services.GetService<IInputService>();
       _graphicsService = _services.GetInstance<IGraphicsService>();
       _gameObjectService = _services.GetInstance<IGameObjectService>();
 
@@ -917,9 +914,9 @@ namespace Samples
       // arguments.
       try
       {
-        _sample = (Sample)_services.CreateInstance(type);
+        _sample = (Sample)Activator.CreateInstance(type, _game);
       }
-      catch (TargetInvocationException exception)
+      catch (TargetInvocationException)
       {
         // Samples are created using reflection. If the sample constructor throws an exception,
         // we land here.

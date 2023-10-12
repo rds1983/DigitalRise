@@ -1,7 +1,6 @@
 ﻿using System;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 

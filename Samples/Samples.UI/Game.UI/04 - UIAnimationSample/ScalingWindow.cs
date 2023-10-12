@@ -3,7 +3,6 @@ using DigitalRise.Animation;
 using DigitalRise.Animation.Easing;
 using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 
 namespace Samples.UI
@@ -11,7 +10,7 @@ namespace Samples.UI
   // A window that animates the RenderScale when the windows is loaded/closed.
   public class ScalingWindow : AnimatedWindow
   {
-    public ScalingWindow(IServiceLocator services) 
+    public ScalingWindow(IServiceProvider services) 
       : base(services)
     {
       Title = "ScalingWindow";

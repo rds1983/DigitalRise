@@ -1,5 +1,5 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
@@ -9,7 +9,7 @@ using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
@@ -23,7 +23,7 @@ namespace Samples.Particles
     private readonly IParticleParameter<bool> _isDepthSortedParameter;
 
 
-    public BrownOut(IServiceLocator services)
+    public BrownOut(IServiceProvider services)
     {
 			Pose = new Pose(Matrix33F.CreateRotationX(-ConstantsF.PiOver2));
 
@@ -52,7 +52,7 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSmoke(IServiceLocator services)
+    private static ParticleSystem CreateSmoke(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

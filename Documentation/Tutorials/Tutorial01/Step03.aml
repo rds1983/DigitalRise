@@ -180,10 +180,10 @@ namespace MyGame
             ServiceLocator.SetLocatorProvider(() => _services);                     // NEW
 
             _services.Register(typeof(Microsoft.Xna.Framework.Game), null, this);   // NEW
-            _services.Register(typeof(Game1), null, this);                          // NEW
+            _services.AddService(typeof(Game1), this);                          // NEW
 
             _inputManager = new InputManager(false);
-            _services.Register(typeof(IInputService), null, _inputManager);         // NEW
+            _services.AddService(typeof(IInputService), _inputManager);         // NEW
 
             Components.Add(new MyGameComponent(this));
 

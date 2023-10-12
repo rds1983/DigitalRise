@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -11,7 +12,6 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Materials;
 using DigitalRise.Physics.Specialized;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
@@ -36,7 +36,7 @@ namespace Samples.Physics.Specialized
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
 
     private readonly Simulation _simulation;
@@ -63,7 +63,7 @@ namespace Samples.Physics.Specialized
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public ConstraintVehicleObject(IServiceLocator services)
+    public ConstraintVehicleObject(IServiceProvider services)
     {
       Name = "Vehicle";
 

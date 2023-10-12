@@ -31,8 +31,8 @@ namespace Samples.Graphics
 
       // GameObjects that need to render stuff will retrieve the DebugRenderers or
       // Scene through the service provider.
-      Services.Register(typeof(DebugRenderer), null, GraphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, GraphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), GraphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), GraphicsScreen.Scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());

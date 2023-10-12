@@ -1,8 +1,8 @@
 ﻿using DigitalRise;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples.Particles
 {
@@ -12,7 +12,7 @@ namespace Samples.Particles
   public class RocketExplosion : ParticleSystem
   {
     private static readonly ResourcePool<ParticleSystem> Pool = new ResourcePool<ParticleSystem>(
-      () => new RocketExplosion(ServiceLocator.Current),
+      () => new RocketExplosion(SampleGame.Instance.Services),
       null,
       null);
 
@@ -23,7 +23,7 @@ namespace Samples.Particles
     }
 
 
-    private RocketExplosion(IServiceLocator services)
+    private RocketExplosion(IServiceProvider services)
     {
       Children = new ParticleSystemCollection
       {

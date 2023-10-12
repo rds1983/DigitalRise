@@ -1,19 +1,18 @@
-#if !WP7 && !WP8
 using System.Linq;
+using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-
+using System;
 
 namespace Samples.Game.UI
 {
   // Displays the main menu of the game.
   public class MainMenuComponent : GameComponent
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
     private readonly IGraphicsService _graphicsService;
     private readonly IUIService _uiService;
@@ -24,7 +23,7 @@ namespace Samples.Game.UI
     private UIScreen _uiScreen;
 
 
-    public MainMenuComponent(Microsoft.Xna.Framework.Game game, IServiceLocator services)
+    public MainMenuComponent(Microsoft.Xna.Framework.Game game, IServiceProvider services)
       : base(game)
     {
       _services = services;
@@ -88,7 +87,7 @@ namespace Samples.Game.UI
         // Here, we would exit the game.
         //Game.Exit();
         // In this project we switch to the next sample instead.
-        ServiceLocator.Current.GetInstance<SampleFramework>().LoadNextSample();
+        SampleGame.Instance.Services.GetService<SampleFramework>().LoadNextSample();
       }
     }
 
@@ -102,4 +101,3 @@ namespace Samples.Game.UI
     }
   }
 }
-#endif

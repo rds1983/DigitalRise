@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
@@ -25,7 +23,7 @@ namespace Samples
 	// flicker, if more than 8 shadow-casting light sources overlap on screen.
   public class DynamicObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly int _type;
 
 
@@ -33,7 +31,7 @@ namespace Samples
     public RigidBody RigidBody { get; private set; }
 
 
-    public DynamicObject(IServiceLocator services, int type)
+    public DynamicObject(IServiceProvider services, int type)
     {
       if (type < 1 || type > 7)
         throw new ArgumentOutOfRangeException("type");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Animation.Character;
 using DigitalRise.GameBase;
@@ -7,7 +8,6 @@ using DigitalRise.Geometry;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
@@ -17,7 +17,7 @@ namespace Samples
   // Loads a skinned model and starts an animation.
   public class DudeObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly string _assetName;
     private Pose _defaultPose;
     private ModelNode _modelNode;
@@ -38,13 +38,13 @@ namespace Samples
     public AnimationController AnimationController { get; private set; }
 
 
-    public DudeObject(IServiceLocator services) 
+    public DudeObject(IServiceProvider services) 
       : this(services, "Dude/dude.drmdl")
     {
     }
 
 
-    public DudeObject(IServiceLocator services, string assetName)
+    public DudeObject(IServiceProvider services, string assetName)
     {
       _services = services;
       _assetName = assetName;

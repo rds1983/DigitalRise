@@ -1,4 +1,4 @@
-#if !WP7 && !WP8
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.UI;
@@ -9,11 +9,10 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
-using DigitalRise.ServiceLocation;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
+using System;
+using System.ComponentModel.Design;
 
 namespace Samples.Game.UI
 {
@@ -21,7 +20,7 @@ namespace Samples.Game.UI
   // The user can press BACK to pause the game and display the game menu window.
   public class MyGameComponent : GameComponent
   {
-    private readonly IServiceLocator _services;
+    private readonly ServiceContainer _services;
     private readonly IInputService _inputService;
     private readonly Simulation _simulation;
     private readonly IGraphicsService _graphicsService;
@@ -35,11 +34,11 @@ namespace Samples.Game.UI
     private readonly CameraObject _cameraGameObject;
 
 
-    public MyGameComponent(Microsoft.Xna.Framework.Game game, IServiceLocator services)
+    public MyGameComponent(Microsoft.Xna.Framework.Game game, IServiceProvider services)
       : base(game)
     {
       // Get the services that this component needs regularly.
-      _services = services;
+      _services = new ServiceContainer(services);
       _inputService = services.GetInstance<IInputService>();
       _simulation = services.GetInstance<Simulation>();
       _graphicsService = services.GetInstance<IGraphicsService>();
@@ -57,9 +56,8 @@ namespace Samples.Game.UI
 
       // The GameObjects below expect try to retrieve DebugRenderer and Scene via
       // service container.
-      var serviceContainer = (ServiceContainer)services;
-      serviceContainer.Register(typeof(DebugRenderer), null, _deferredGraphicsScreen.DebugRenderer);
-      serviceContainer.Register(typeof(IScene), null, _deferredGraphicsScreen.Scene);
+      _services.AddService(typeof(DebugRenderer), _deferredGraphicsScreen.DebugRenderer);
+			_services.AddService(typeof(IScene), _deferredGraphicsScreen.Scene);
 
       _cameraGameObject = new CameraObject(services);
       _gameObjectService.Objects.Add(_cameraGameObject);
@@ -162,4 +160,3 @@ namespace Samples.Game.UI
     }
   }
 }
-#endif

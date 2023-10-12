@@ -12,8 +12,4 @@
     <ProjectReference Include="..\..\..\FontStashSharp\src\XNA\FontStashSharp.FNA.Core.csproj" />
     <ProjectReference Include="..\..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
-  </ItemGroup>  
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.UI.Controls;
 using DigitalRise.Mathematics.Statistics;
@@ -27,7 +27,7 @@ namespace Samples.Game.UI
     public ITimeline ClosingAnimation { get; set; }
 
 
-    public AnimatedWindow(IServiceLocator services)
+    public AnimatedWindow(IServiceProvider services)
     {
       // Get the animation service.
       _animationService = services.GetInstance<IAnimationService>();

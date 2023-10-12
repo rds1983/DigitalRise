@@ -1,19 +1,19 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
   // A particle system that draws one ribbon by connecting all particles.
   public static class RibbonEffect
   {
-    public static ParticleSystem Create(IServiceLocator services)
+    public static ParticleSystem Create(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

@@ -1,5 +1,5 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
@@ -13,8 +13,8 @@ namespace WpfInteropSample2
   {
     public static Scene Create()
     {
-      var graphicsService = ServiceLocator.Current.GetInstance<IGraphicsService>();
-      var assetManager = ServiceLocator.Current.GetInstance<AssetManager>();
+      var graphicsService = MyGame.Instance.Services.GetInstance<IGraphicsService>();
+      var assetManager = MyGame.Instance.Services.GetInstance<AssetManager>();
 
       var screen = new MyGraphicsScreen(graphicsService, assetManager);
       graphicsService.Screens.Add(screen);

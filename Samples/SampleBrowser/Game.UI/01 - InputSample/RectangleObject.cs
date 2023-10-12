@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -35,11 +35,11 @@ namespace Samples.Game.UI
     private Vector2 _lastMousePosition;
 
 
-    public RectangleObject(IServiceLocator services)
+    public RectangleObject(IServiceProvider services, DebugRenderer debugRenderer)
     {
       _inputService = services.GetInstance<IInputService>();
       _gameObjectService = services.GetInstance<IGameObjectService>();
-      _debugRenderer = services.GetInstance<DebugRenderer>("DebugRenderer2D");
+      _debugRenderer = debugRenderer;
 
       _left = RandomHelper.Random.NextInteger(0, 1000);
       _top = RandomHelper.Random.NextInteger(0, 600);

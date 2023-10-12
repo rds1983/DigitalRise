@@ -1,15 +1,15 @@
-﻿using DigitalRise.GameBase;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using CommonServiceLocator;
-
+using System;
 
 namespace Samples
 {
   // Adds distance and height-based fog. Fog is disabled by default.
   public class FogObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
 
     public FogNode FogNode { get; private set; }
@@ -51,7 +51,7 @@ namespace Samples
     private bool _attachToCamera;
 
 
-    public FogObject(IServiceLocator services)
+    public FogObject(IServiceProvider services)
     {
       _services = services;
       Name = "Fog";

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AssetManagementBase;
-using CommonServiceLocator;
 using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
@@ -182,7 +181,7 @@ namespace Samples.Graphics
     /// <exception cref="ArgumentNullException">
     /// <paramref name="graphicsService"/> is <see langword="null"/>.
     /// </exception>
-    public VolumetricLightRenderer(IServiceLocator services)
+    public VolumetricLightRenderer(IServiceProvider services)
     {
 			var graphicsService = services.GetInstance<IGraphicsService>();
 			var assetManager = services.GetInstance<AssetManager>();

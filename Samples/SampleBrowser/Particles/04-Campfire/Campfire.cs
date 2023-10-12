@@ -1,19 +1,19 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples.Particles
 {
   // Creates a fire effect for a campfire.
   public class Campfire
   {
-    public static ParticleSystem CreateCampfire(IServiceLocator services)
+    public static ParticleSystem CreateCampfire(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

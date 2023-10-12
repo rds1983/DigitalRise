@@ -54,8 +54,8 @@ Press <F4> to show the Options window where you can disable shadow map caching."
 
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());
@@ -69,7 +69,7 @@ Press <F4> to show the Options window where you can disable shadow map caching."
       GameObjectService.Objects.Add(new GrabObject(Services));
 
       // Create test scene.
-      ShadowSample.CreateScene(Services, AssetManager, _graphicsScreen);
+      ShadowSample.CreateScene(Services, _graphicsScreen);
 
       // Create 3 different shadows:
       // The VarianceShadow covers the whole level.

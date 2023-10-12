@@ -1,5 +1,5 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
@@ -7,14 +7,14 @@ using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
   // Creates the hot glowing core of an explosion.
   public class RocketExplosionCore : ParticleSystem
   {
-    public RocketExplosionCore(IServiceLocator services)
+    public RocketExplosionCore(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

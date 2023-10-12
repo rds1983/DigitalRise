@@ -35,10 +35,10 @@ namespace MyGame
         {
             …
             _gameObjectManager = new GameObjectManager();
-            _services.Register(typeof(IGameObjectService), null, _gameObjectManager);
+            _services.AddService(typeof(IGameObjectService), _gameObjectManager);
 
             _animationManager = new AnimationManager();                               // NEW
-            _services.Register(typeof(IAnimationService), null, _animationManager);   // NEW
+            _services.AddService(typeof(IAnimationService), _animationManager);   // NEW
 
             Components.Add(new MyGameComponent(this));
 

@@ -47,8 +47,8 @@ updates over several frames and to update distant cascades less often.",
 
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());
@@ -61,7 +61,7 @@ updates over several frames and to update distant cascades less often.",
 
       GameObjectService.Objects.Add(new GrabObject(Services));
 
-      ShadowSample.CreateScene(Services, AssetManager, _graphicsScreen);
+      ShadowSample.CreateScene(Services, _graphicsScreen);
 
       // Get the cascaded shadow of the sunlight (which was created by the DynamicSkyObject).
       _cascadedShadow = (CascadedShadow)((LightNode)_graphicsScreen.Scene.GetSceneNode("Sunlight")).Shadow;

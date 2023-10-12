@@ -1,6 +1,6 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
@@ -9,7 +9,6 @@ using DigitalRise.Linq;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using AssetManagementBase;
 using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
@@ -25,13 +24,13 @@ namespace Samples
   // models should be rendered.
   public class LodTestObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private RigidBody _rigidBody;
     private ModelNode _modelNode0;  // Original LOD model.
     private ModelNode _modelNode1;  // Colored LOD model.
 
 
-    public LodTestObject(IServiceLocator services)
+    public LodTestObject(IServiceProvider services)
     {
       _services = services;
     }
@@ -119,4 +118,3 @@ namespace Samples
     }
   }
 }
-#endif

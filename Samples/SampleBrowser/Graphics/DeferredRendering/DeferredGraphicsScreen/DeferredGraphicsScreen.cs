@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Samples.Graphics;
@@ -100,7 +99,7 @@ namespace Samples
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public DeferredGraphicsScreen(IServiceLocator services)
+    public DeferredGraphicsScreen(IServiceProvider services)
       : base(services.GetInstance<IGraphicsService>())
     {
       _sampleFramework = services.GetInstance<SampleFramework>();

@@ -32,10 +32,10 @@ efficient to use a TerrainDecalLayer to add a decal to terrain tiles.",
       GraphicsService.Screens.Insert(0, _graphicsScreen);
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
 
       var scene = _graphicsScreen.Scene;
-      Services.Register(typeof(IScene), null, scene);
+      Services.AddService(typeof(IScene), scene);
 
       // Add gravity and damping to the physics simulation.
       Simulation.ForceEffects.Add(new Gravity());

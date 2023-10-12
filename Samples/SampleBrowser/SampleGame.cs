@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using AssetManagementBase;
-using CommonServiceLocator;
 using DigitalRise;
 using DigitalRise.Animation;
 using DigitalRise.Diagnostics;
@@ -13,12 +12,11 @@ using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Graphics;
 using DigitalRise.Particles;
 using DigitalRise.Physics;
-using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Samples.Game.UI;
 using DigitalRise.GameBase;
+using Samples.Geometry;
 using Samples.Graphics;
 
 namespace Samples
@@ -30,9 +28,6 @@ namespace Samples
   {
     // The XNA GraphicsDeviceManager.
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
-
-    // The IoC service container providing access to all services.
-    private ServiceContainer _services;
 
     // The SampleFramework manages loading of samples and switching between samples.
     private SampleFramework _sampleFramework;
@@ -69,9 +64,13 @@ namespace Samples
 		// services will be updated in parallel.
 		public bool EnableParallelGameLoop { get; set; }
 
+    public static SampleGame Instance { get; private set; }
+    public AssetManager AssetManager { get; private set; }
+
 
     public SampleGame()
     {
+      Instance = this;
 #if MONOGAME && DEBUG
       // Optional: Enable Direct3D debug layer to get additional debug information during development.
       //GraphicsAdapter.UseDebugDevice = true;
@@ -122,67 +121,15 @@ namespace Samples
       }
 #endif
 
-      // ----- Service Container
-      // The DigitalRise ServiceContainer is an "inversion of control" container.
-      // All game services (such as input, graphics, physics, etc.) are registered
-      // in this container. Other game components can access these services via lookup
-      // in the service container.
-      // The DigitalRise ServiceContainer replaces the XNA GameServiceContainer (see 
-      // property Game.Services).
 
-      // Note: The DigitalRise libraries do not require the use of the ServiceContainer
-      // or any other IoC container. The ServiceContainer is only used in the sample
-      // for convenience - but it is not mandatory.
-      _services = new ServiceContainer();
-
-      // The service container is either passed directly to the game components
-      // or accessed through the global variable ServiceLocator.Current.
-      // The following call makes the service container publicly available in 
-      // ServiceLocator.Current.
-      ServiceLocator.SetLocatorProvider(() => _services);
-
-      // ----- Storage
-      // For XNA the assets are stored in the following folders:
-      //
-      //   <gameLocation>/
-      //     Content/
-      //       DigitalRise/
-      //         ... DigitalRise assets ...
-      //       ... other assets ...
-      //
-      // For MonoGame the assets (*.xnb files) are stored in ZIP packages. The
-      // sample assets are stored in "Content/Content.zip" and the DigitalRise
-      // assets are stored in "Content/DigitalRise.zip".
-      //
-      //   <gameLocation>/
-      //     Content/
-      //       Content.zip
-      //       DigitalRise.zip
-      //
-      // DigitalRise introduces the concept of "storages". Storages can be used
-      // to access files on disk or files stored in packages (e.g. ZIP archives).
-      // These storages can be mapped into a "virtual file system", which makes
-      // it easier to write portable code. (The game logic can read the files
-      // from the virtual file system and does not need to know the specifics
-      // about the platform.)
-      //
-      // The virtual files system should look like this:
-      //
-      //   /                                     <-- root of virtual file system
-      //       DigitalRise/
-      //           ... DigitalRise assets ...
-      //       ... other assets ...
-
-      // ----- Content Managers
       // The GraphicsDeviceManager needs to be registered in the service container.
       // (This is required by the XNA content managers.)
-      _services.Register(typeof(IGraphicsDeviceService), null, _graphicsDeviceManager);
-      _services.Register(typeof(GraphicsDeviceManager), null, _graphicsDeviceManager);
+      Services.AddService(typeof(GraphicsDeviceManager), _graphicsDeviceManager);
 
       // ----- Initialize Services
       // Register the game class.
-      _services.Register(typeof(Microsoft.Xna.Framework.Game), null, this);
-      _services.Register(typeof(SampleGame), null, this);
+      Services.AddService(typeof(Microsoft.Xna.Framework.Game), this);
+      Services.AddService(typeof(SampleGame), this);
 
 #if XBOX
       // On Xbox, we use the XNA gamer services (e.g. for text input).
@@ -196,34 +143,34 @@ namespace Samples
       const bool useGamerServices = false;
 #endif
       _inputManager = new InputManager(useGamerServices);
-      _services.Register(typeof(IInputService), null, _inputManager);
+      Services.AddService(typeof(IInputService), _inputManager);
 
       // Graphics
       _graphicsManager = new GraphicsManager(GraphicsDevice, Window);
-      _services.Register(typeof(IGraphicsService), null, _graphicsManager);
+      Services.AddService(typeof(IGraphicsService), _graphicsManager);
 
       // GUI
       _uiManager = new UIManager(this, _inputManager);
-      _services.Register(typeof(IUIService), null, _uiManager);
+      Services.AddService(typeof(IUIService), _uiManager);
 
       // Animation
       _animationManager = new AnimationManager();
-      _services.Register(typeof(IAnimationService), null, _animationManager);
+      Services.AddService(typeof(IAnimationService), _animationManager);
 
       // Particle simulation
       _particleSystemManager = new ParticleSystemManager();
-      _services.Register(typeof(IParticleSystemService), null, _particleSystemManager);
+      Services.AddService(typeof(IParticleSystemService), _particleSystemManager);
 
       // Physics simulation
       ResetPhysicsSimulation();
 
       // Game logic
       _gameObjectManager = new GameObjectManager();
-      _services.Register(typeof(IGameObjectService), null, _gameObjectManager);
+      Services.AddService(typeof(IGameObjectService), _gameObjectManager);
 
       // Profiler
       _profiler = new HierarchicalProfiler("Main");
-      _services.Register(typeof(HierarchicalProfiler), "Main", _profiler);
+      Services.AddService(typeof(HierarchicalProfiler), _profiler);
 
       // Initialize delegates for running tasks in parallel.
       // (Creating delegates allocates memory, therefore we do this only once and
@@ -235,14 +182,14 @@ namespace Samples
 			// SampleFramework
 			// The SampleFramework automatically discovers all samples using reflection, provides 
 			// controls for switching samples and starts the initial sample.
-			var initialSample = typeof(ControlsSample);
-			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
-      DefaultAssets.DefaultFont = assetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
+			var initialSample = typeof(OceanSample);
+			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
+      DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
 
-			_services.Register(typeof(AssetManager), null, assetManager);
+			Services.AddService(typeof(AssetManager), AssetManager);
 
       _sampleFramework = new SampleFramework(this, initialSample);
-      _services.Register(typeof(SampleFramework), null, _sampleFramework);
+      Services.AddService(typeof(SampleFramework), _sampleFramework);
 
       IsMouseVisible = true;
 
@@ -304,7 +251,8 @@ namespace Samples
       // collision group 1.
       filter.Set(1, 2, false);
 
-      _services.Register(typeof(Simulation), null, _simulation);
+      Services.RemoveService(typeof(Simulation));
+      Services.AddService(typeof(Simulation), _simulation);
     }
 
 

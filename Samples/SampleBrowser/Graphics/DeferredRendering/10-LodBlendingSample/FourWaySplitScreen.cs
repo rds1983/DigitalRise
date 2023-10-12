@@ -1,9 +1,7 @@
-﻿#if !WP7 && !WP8
-using DigitalRise.Graphics;
-using CommonServiceLocator;
+﻿using DigitalRise.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Graphics
 {
@@ -21,8 +19,7 @@ namespace Samples.Graphics
   // Other than that, rendering is the same as in the DeferredGraphicsScreen.
   sealed class FourWaySplitScreen : DeferredGraphicsScreen
   {
-    public FourWaySplitScreen(IServiceLocator services)
-      : base(services)
+    public FourWaySplitScreen(IServiceProvider services): base(services)
     {
     }
 
@@ -136,4 +133,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

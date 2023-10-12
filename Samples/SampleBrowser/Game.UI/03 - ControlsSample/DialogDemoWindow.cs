@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
+using DigitalRise;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
 using AssetManagementBase;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 
 namespace Samples.Game.UI
@@ -95,7 +94,7 @@ namespace Samples.Game.UI
     {
       // ----- Load a dialog from an XML file.
       // Load the XML file that contains a layout that the LayoutSerializer can read.
-      var storage = ServiceLocator.Current.GetInstance<AssetManager>();
+      var storage = SampleGame.Instance.Services.GetService<AssetManager>();
       var xDocument = XDocument.Parse(storage.ReadAsString("Layout.xml"));
 
       // Deserialize the objects in the XML document.

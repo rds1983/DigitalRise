@@ -6,7 +6,6 @@ using DigitalRise.GameBase;
 using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
-using CommonServiceLocator;
 
 
 namespace Samples
@@ -14,10 +13,10 @@ namespace Samples
   // Adds GUI controls for the DeferredGraphicsScreen to the Options window.
   public class DeferredGraphicsOptionsObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
 
-    public DeferredGraphicsOptionsObject(IServiceLocator services)
+    public DeferredGraphicsOptionsObject(IServiceProvider services)
     {
       _services = services;
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -8,7 +9,6 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
@@ -45,7 +45,7 @@ namespace Samples
     }
 
 
-    public GrabObject(IServiceLocator services)
+    public GrabObject(IServiceProvider services)
     {
       Name = "Grab";
 

@@ -2,7 +2,6 @@ using System;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -71,7 +70,7 @@ namespace Samples.Graphics
     public CameraNode ActiveCameraNode { get; set; }
 
 
-    public WeightedBlendedOITScreen(IServiceLocator services)
+    public WeightedBlendedOITScreen(IServiceProvider services)
       : base(services.GetInstance<IGraphicsService>())
     {
       Coverage = GraphicsScreenCoverage.Full;

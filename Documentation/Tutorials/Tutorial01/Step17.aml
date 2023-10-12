@@ -145,7 +145,7 @@ namespace MyGame
             //_myGraphicsScreen = new MyGraphicsScreen(_graphicsService);                 // Comment out
             _myGraphicsScreen = new DeferredGraphicsScreen(ServiceLocator.Current);       // New
             _graphicsService.Screens.Add(_myGraphicsScreen);
-            ((ServiceContainer)ServiceLocator.Current).Register(typeof(IScene), null, _myGraphicsScreen.Scene);
+            ((ServiceContainer)ServiceLocator.Current).AddService(typeof(IScene), _myGraphicsScreen.Scene);
             …
         }
         …

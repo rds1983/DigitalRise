@@ -1,3 +1,4 @@
+using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.UI;
 using DigitalRise.UI.Consoles;
@@ -5,10 +6,11 @@ using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Console = DigitalRise.UI.Controls.Console;
+using System;
+
 namespace Samples.Game.UI
 {
 	// Creates a UIScreen for debugging. The screen contains a console, but other controls
@@ -25,7 +27,7 @@ namespace Samples.Game.UI
     private readonly Console _console;
 
 
-    public DebuggingComponent(Microsoft.Xna.Framework.Game game, IServiceLocator services)
+    public DebuggingComponent(Microsoft.Xna.Framework.Game game, IServiceProvider services)
       : base(game)
     {
       _inputService = services.GetInstance<IInputService>();

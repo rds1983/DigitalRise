@@ -1,19 +1,19 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
 using DigitalRise.Geometry.Meshes;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
   public static class GlowingMeshEffect
   {
-    public static ParticleSystem Create(ITriangleMesh mesh, IServiceLocator services)
+    public static ParticleSystem Create(ITriangleMesh mesh, IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

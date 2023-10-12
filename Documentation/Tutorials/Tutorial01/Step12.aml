@@ -73,10 +73,10 @@ namespace MyGame
             _simulation = new Simulation();
             _simulation.ForceEffects.Add(new Gravity());
             _simulation.ForceEffects.Add(new Damping());
-            _services.Register(typeof(Simulation), null, _simulation);
+            _services.AddService(typeof(Simulation), _simulation);
 
             _particleSystemManager = new ParticleSystemManager();                             // NEW
-            _services.Register(typeof(IParticleSystemService), null, _particleSystemManager); // NEW
+            _services.AddService(typeof(IParticleSystemService), _particleSystemManager); // NEW
 
             Components.Add(new MyGameComponent(this));
 

@@ -1,12 +1,10 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 
 namespace Samples
@@ -16,13 +14,13 @@ namespace Samples
   // in the scene and uses this to control the GodRayFilter.
   public class GodRayObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly GodRayFilter _godRayFilter;
     private readonly float _defaultScale;
     private LightNode _directionalLightNode;
 
 
-    public GodRayObject(IServiceLocator services, GodRayFilter godRayFilter)
+    public GodRayObject(IServiceProvider services, GodRayFilter godRayFilter)
     {
       if (godRayFilter == null)
         throw new ArgumentNullException("godRayFilter");
@@ -79,4 +77,3 @@ namespace Samples
     }
   }
 }
-#endif

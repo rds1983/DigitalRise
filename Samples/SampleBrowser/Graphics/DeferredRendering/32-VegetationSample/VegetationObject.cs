@@ -1,4 +1,4 @@
-﻿#if !WP7 && !WP8
+﻿using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Geometry;
@@ -7,7 +7,6 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -60,7 +59,7 @@ namespace Samples.Graphics
     // This vegetation object is very simple. In a real game you will want to choose
     // a better placement strategy for mesh instances depending on the terrain.
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private IScene _scene;
     private CameraObject _cameraObject;
 
@@ -142,7 +141,7 @@ namespace Samples.Graphics
     /// <param name="numberOfCellsX">The number of cells in x direction.</param>
     /// <param name="numberOfCellsZ">The number of cells in z direction.</param>
     /// <param name="randomSeed">A random seed.</param>
-    public VegetationObject(IServiceLocator services, Mesh mesh, int numberOfInstancesPerCell,
+    public VegetationObject(IServiceProvider services, Mesh mesh, int numberOfInstancesPerCell,
                             float cellSize, int numberOfCellsX, int numberOfCellsZ, int randomSeed)
     {
       if (services == null)
@@ -336,4 +335,3 @@ namespace Samples.Graphics
     }
   }
 }
-#endif

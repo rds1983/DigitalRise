@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
@@ -11,7 +12,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -67,7 +67,7 @@ namespace Samples
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
     private IGraphicsService _graphicsService;
     private IInputService _inputService;
@@ -260,13 +260,13 @@ namespace Samples
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public DynamicSkyObject(IServiceLocator services)
+    public DynamicSkyObject(IServiceProvider services)
       : this(services, true, false, false)
     {
     }
 
 
-    public DynamicSkyObject(IServiceLocator services, bool enableClouds, bool enableCloudAnimation, bool cacheSky)
+    public DynamicSkyObject(IServiceProvider services, bool enableClouds, bool enableCloudAnimation, bool cacheSky)
     {
       _services = services;
       Name = "DynamicSky";

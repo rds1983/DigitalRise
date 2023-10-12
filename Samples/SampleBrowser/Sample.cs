@@ -4,15 +4,13 @@ using DigitalRise.Animation;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.UI;
-using DigitalRise.UI.Controls;
 using DigitalRise.Graphics;
 using DigitalRise.Particles;
 using DigitalRise.Physics;
-using DigitalRise.ServiceLocation;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 using Microsoft.Xna.Framework.Graphics;
+using System.ComponentModel.Design;
 
 namespace Samples
 {
@@ -31,9 +29,9 @@ namespace Samples
   // Other objects have to be cleaned up manually (e.g. UIScreens, Animations, etc.)!
   public abstract class Sample : GameComponent
   {
-    // Services which can be used in derived classes.
-    protected readonly ServiceContainer Services;
-    protected readonly AssetManager AssetManager;
+		// Services which can be used in derived classes.
+		protected readonly ServiceContainer Services;
+		protected readonly AssetManager AssetManager;
     protected readonly IInputService InputService;
     protected readonly IAnimationService AnimationService;
     protected readonly Simulation Simulation;
@@ -52,26 +50,26 @@ namespace Samples
       : base(game)
     {
       // Get services from the global service container.
-      var services = (ServiceContainer)ServiceLocator.Current;
-      SampleFramework = services.GetInstance<SampleFramework>();
-      AssetManager = services.GetInstance<AssetManager>();
-      InputService = services.GetInstance<IInputService>();
-      AnimationService = services.GetInstance<IAnimationService>();
-      Simulation = services.GetInstance<Simulation>();
-      ParticleSystemService = services.GetInstance<IParticleSystemService>();
-      GraphicsService = services.GetInstance<IGraphicsService>();
-      GameObjectService = services.GetInstance<IGameObjectService>();
-      UIService = services.GetInstance<IUIService>();
+      var services = game.Services;
+      SampleFramework = services.GetService<SampleFramework>();
+      AssetManager = services.GetService<AssetManager>();
+      InputService = services.GetService<IInputService>();
+      AnimationService = services.GetService<IAnimationService>();
+      Simulation = services.GetService<Simulation>();
+      ParticleSystemService = services.GetService<IParticleSystemService>();
+      GraphicsService = services.GetService<IGraphicsService>();
+      GameObjectService = services.GetService<IGameObjectService>();
+      UIService = services.GetService<IUIService>();
 
       // Create a local service container which can be modified in samples:
       // The local service container is a child container, i.e. it inherits the
       // services of the global service container. Samples can add new services
       // or override existing entries without affecting the global services container
       // or other samples.
-      Services = services.CreateChildContainer();
+      Services = new ServiceContainer(services);
 
-      // Store a copy of the original graphics screens.
-      _originalGraphicsScreens = GraphicsService.Screens.ToArray();
+			// Store a copy of the original graphics screens.
+			_originalGraphicsScreens = GraphicsService.Screens.ToArray();
 
       // Mouse is visible by default.
       SampleFramework.IsMouseVisible = true;
@@ -104,8 +102,8 @@ namespace Samples
         // Remove all particle systems.
         ParticleSystemService.ParticleSystems.Clear();
 
-        // Dispose the local service container.
-        Services.Dispose();
+				// Dispose the local service container.
+				Services.Dispose();
       }
 
       base.Dispose(disposing);

@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -6,7 +7,6 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
@@ -26,7 +26,7 @@ namespace Samples.Physics.Specialized
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
 
     // The player to which the camera is attached.
@@ -49,7 +49,7 @@ namespace Samples.Physics.Specialized
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public ThirdPersonCameraObject(CharacterControllerObject characterControllerObject, IServiceLocator services)
+    public ThirdPersonCameraObject(CharacterControllerObject characterControllerObject, IServiceProvider services)
     {
       Name = "ThirdPersonCamera";
 

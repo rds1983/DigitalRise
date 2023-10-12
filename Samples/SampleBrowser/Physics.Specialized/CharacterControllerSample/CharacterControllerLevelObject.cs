@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Collisions;
@@ -11,7 +12,6 @@ using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Physics;
 using DigitalRise.Physics.Constraints;
 using DigitalRise.Physics.Materials;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -26,7 +26,7 @@ namespace Samples.Physics.Specialized
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
     // An platform that moves up-down.
     private RigidBody _elevator;
@@ -46,7 +46,7 @@ namespace Samples.Physics.Specialized
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public CharacterControllerLevelObject(IServiceLocator services)
+    public CharacterControllerLevelObject(IServiceProvider services)
     {
       _services = services;
       Name = "CharacterControllerLevel";

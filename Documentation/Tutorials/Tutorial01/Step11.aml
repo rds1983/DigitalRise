@@ -35,12 +35,12 @@ namespace MyGame
         {
             …
             _animationManager = new AnimationManager();
-            _services.Register(typeof(IAnimationService), null, _animationManager);
+            _services.AddService(typeof(IAnimationService), _animationManager);
 
             _simulation = new Simulation();                                             // NEW
             _simulation.ForceEffects.Add(new Gravity());                                // NEW
             _simulation.ForceEffects.Add(new Damping());                                // NEW
-            _services.Register(typeof(Simulation), null, _simulation);                  // NEW
+            _services.AddService(typeof(Simulation), _simulation);                  // NEW
 
             Components.Add(new MyGameComponent(this));
 

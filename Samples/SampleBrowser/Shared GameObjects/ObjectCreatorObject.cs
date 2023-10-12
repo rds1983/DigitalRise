@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -13,12 +13,12 @@ namespace Samples
   Press <1> - <9> to create new objects.")]
   public class ObjectCreatorObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
     private readonly IGameObjectService _gameObjectService;
 
 
-    public ObjectCreatorObject(IServiceLocator services)
+    public ObjectCreatorObject(IServiceProvider services)
     {
       _services = services;
       _inputService = services.GetInstance<IInputService>();

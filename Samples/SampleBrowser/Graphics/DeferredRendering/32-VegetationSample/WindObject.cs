@@ -1,11 +1,11 @@
-﻿using DigitalRise.GameBase;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.Graphics.Effects;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -40,7 +40,7 @@ namespace Samples.Graphics
   /// </remarks>
   public sealed class WindObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
     private float _lastAngle;
     private float _lastSpeed;
@@ -100,7 +100,7 @@ namespace Samples.Graphics
     /// Initializes a new instance of the <see cref="WindObject"/> class.
     /// </summary>
     /// <param name="services">The service provider.</param>
-    public WindObject(IServiceLocator services)
+    public WindObject(IServiceProvider services)
     {
       _services = services;
       MaxSpeed = 10;

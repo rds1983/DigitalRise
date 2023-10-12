@@ -237,13 +237,13 @@ namespace MyGame
           ServiceLocator.SetLocatorProvider(() => _services);
 
           _inputManager = new InputManager(false);
-          _services.Register(typeof(IInputService), null, _inputManager);
+          _services.AddService(typeof(IInputService), _inputManager);
 
           _graphicsManager = new GraphicsManager(GraphicsDevice, Window, Content);
-          _services.Register(typeof(IGraphicsService), null, _graphicsManager);
+          _services.AddService(typeof(IGraphicsService), _graphicsManager);
            
           _gameObjectManager = new GameObjectManager();                                 // NEW
-          _services.Register(typeof(IGameObjectService), null, _gameObjectManager);     // NEW
+          _services.AddService(typeof(IGameObjectService), _gameObjectManager);     // NEW
 
           Components.Add(new MyGameComponent(this));
 

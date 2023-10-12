@@ -1,10 +1,9 @@
 ﻿using System;
 using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
@@ -32,7 +31,7 @@ namespace Samples.Particles
     }
 
 
-    public void Initialize(IServiceLocator services)
+    public void Initialize(IServiceProvider services)
     {
       if (ParticleSystemNode == null)
       {
@@ -95,7 +94,7 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSparkles(IServiceLocator services)
+    private static ParticleSystem CreateSparkles(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();
@@ -183,7 +182,7 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateFastBeams(IServiceLocator services)
+    private static ParticleSystem CreateFastBeams(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();
@@ -246,7 +245,7 @@ namespace Samples.Particles
     }
 
 
-    private static ParticleSystem CreateSlowBeams(IServiceLocator services)
+    private static ParticleSystem CreateSlowBeams(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

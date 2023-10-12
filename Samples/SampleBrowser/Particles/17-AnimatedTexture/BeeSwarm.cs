@@ -1,14 +1,12 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
@@ -16,7 +14,7 @@ namespace Samples.Particles
   // The "CameraPose" particle parameter must be set externally each frame.
   public class BeeSwarm
   {
-    public static ParticleSystem Create(IServiceLocator services)
+    public static ParticleSystem Create(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

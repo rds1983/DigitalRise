@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Meshes;
@@ -8,9 +8,9 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples
 {
@@ -20,7 +20,7 @@ namespace Samples
   // to use simpler collision shapes if possible.)
   public class StaticObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly string _assetName;
     private readonly Vector3 _scale;
     private readonly Pose _pose;
@@ -30,13 +30,13 @@ namespace Samples
     private RigidBody _rigidBody;
 
 
-    public StaticObject(IServiceLocator services, string assetName, float scale, Pose pose)
+    public StaticObject(IServiceProvider services, string assetName, float scale, Pose pose)
       : this(services, assetName, new Vector3(scale), pose, true, false)
     {
     }
 
 
-    public StaticObject(IServiceLocator services, string assetName, Vector3 scale, Pose pose, bool castsShadows, bool addRigidBody)
+    public StaticObject(IServiceProvider services, string assetName, Vector3 scale, Pose pose, bool castsShadows, bool addRigidBody)
     {
       _services = services;
       _assetName = assetName;

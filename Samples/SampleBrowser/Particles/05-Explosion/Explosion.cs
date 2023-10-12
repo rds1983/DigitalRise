@@ -1,21 +1,20 @@
 ﻿using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using DigitalRise.Particles;
 using DigitalRise.Particles.Effectors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples.Particles
 {
   // This class inherits from class ParticleSystem and creates an explosion effect.
   public class Explosion : ParticleSystem
   {
-    public Explosion(IServiceLocator services)
+    public Explosion(IServiceProvider services)
     {
       // The explosion particle systems owns 3 child particle systems. 
       // (The parent particle system does not have any particles.)
@@ -43,7 +42,7 @@ namespace Samples.Particles
 
     // Creates a particle system that display a single particle: a bright billboard 
     // for a "flash" effect.
-    private ParticleSystem CreateFlash(IServiceLocator services)
+    private ParticleSystem CreateFlash(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();
@@ -104,7 +103,7 @@ namespace Samples.Particles
 
 
     // Creates a hot red glowing core particle system for an explosion effect.
-    private ParticleSystem CreateHotCore(IServiceLocator services)
+    private ParticleSystem CreateHotCore(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();
@@ -218,7 +217,7 @@ namespace Samples.Particles
     }
 
 
-    private ParticleSystem CreateSmoke(IServiceLocator services)
+    private ParticleSystem CreateSmoke(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

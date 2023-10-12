@@ -21,9 +21,9 @@ react to input if the top rectangle has already handled the input.",
       GraphicsScreen.ClearBackground = true;
 
       // Add 3 simple game objects which draw rectangles and demonstrate input handling.
-      GameObjectService.Objects.Add(new RectangleObject(Services));
-      GameObjectService.Objects.Add(new RectangleObject(Services));
-      GameObjectService.Objects.Add(new RectangleObject(Services));
+      GameObjectService.Objects.Add(new RectangleObject(Services, GraphicsScreen.DebugRenderer2D));
+      GameObjectService.Objects.Add(new RectangleObject(Services, GraphicsScreen.DebugRenderer2D));
+      GameObjectService.Objects.Add(new RectangleObject(Services, GraphicsScreen.DebugRenderer2D));
     }
 
 

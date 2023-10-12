@@ -1,12 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Windows.Media;
 using AssetManagementBase;
-using CommonServiceLocator;
 using DigitalRise;
 using DigitalRise.GameBase.Timing;
 using DigitalRise.Graphics;
-using DigitalRise.ServiceLocation;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -23,18 +22,22 @@ namespace WpfInteropSample2
     private readonly IGameTimer _timer;
     private readonly GraphicsManager _graphicsManager;
 
+    public ServiceContainer Services => _serviceContainer;
+
+    public static MyGame Instance { get; private set; }
 
     public MyGame()
     {
+      Instance = this;
+
       // ----- Service Container
       // The MyGame uses a ServiceContainer, which is a simple service locator 
       // and Inversion of Control (IoC) container. (The ServiceContainer can be 
       // replaced by any other container that implements System.IServiceProvider.)
       _serviceContainer = new ServiceContainer();
-      ServiceLocator.SetLocatorProvider(() => _serviceContainer);
 
 			var assetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
-			_serviceContainer.Register(typeof(AssetManager), null, assetManager);
+			_serviceContainer.AddService(typeof(AssetManager), assetManager);
 
       // ----- Graphics
       // Create Direct3D 11 device.
@@ -48,11 +51,11 @@ namespace WpfInteropSample2
       var graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, presentationParameters);
 
       // An IGraphicsDeviceService is required by the MonoGame/XNA content manager.
-      _serviceContainer.Register(typeof(IGraphicsDeviceService), null, new DummyGraphicsDeviceManager(graphicsDevice));
+      _serviceContainer.AddService(typeof(IGraphicsDeviceService), new DummyGraphicsDeviceManager(graphicsDevice));
 
       // Create and register the graphics manager.
       _graphicsManager = new GraphicsManager(graphicsDevice);
-      _serviceContainer.Register(typeof(IGraphicsService), null, _graphicsManager);
+      _serviceContainer.AddService(typeof(IGraphicsService), _graphicsManager);
 
       // ----- Timing
       // We can use the CompositionTarget.Rendering event to trigger our game loop.

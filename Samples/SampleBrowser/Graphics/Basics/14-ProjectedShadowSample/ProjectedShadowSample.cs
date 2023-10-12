@@ -52,7 +52,7 @@ turns the mesh into the flat, black shadow.",
 
       // Create a new empty scene.
       _scene = new Scene();
-      Services.Register(typeof(IScene), null, _scene);
+      Services.AddService(typeof(IScene), _scene);
 
       // Add a custom game object which controls the camera.
       _cameraObject = new CameraObject(Services);

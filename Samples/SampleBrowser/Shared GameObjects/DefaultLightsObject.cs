@@ -1,10 +1,10 @@
-﻿using CommonServiceLocator;
+﻿using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
+using System;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace Samples
@@ -13,14 +13,14 @@ namespace Samples
 	// in the XNA Framework.
 	public class DefaultLightsObject : GameObject
 	{
-		private readonly IServiceLocator _services;
+		private readonly IServiceProvider _services;
 		private LightNode _ambientLightNode;
 		private LightNode _keyLightNode;
 		private LightNode _fillLightNode;
 		private LightNode _backLightNode;
 
 
-		public DefaultLightsObject(IServiceLocator services)
+		public DefaultLightsObject(IServiceProvider services)
 		{
 			_services = services;
 			Name = "DefaultLights";

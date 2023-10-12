@@ -1,16 +1,16 @@
-﻿#if !WP7 && !WP8
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
+using System;
 
 namespace Samples
 {
@@ -19,7 +19,7 @@ namespace Samples
   Press <F4> to show Options window where you can toggle decals.")]
   public class EnvironmentDecalsObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private DebugRenderer _debugRenderer;
     private readonly List<DecalNode> _decals = new List<DecalNode>();
 
@@ -35,7 +35,7 @@ namespace Samples
     }
 
 
-    public EnvironmentDecalsObject(IServiceLocator services)
+    public EnvironmentDecalsObject(IServiceProvider services)
     {
       _services = services;
       Name = "EnvironmentDecals";
@@ -182,4 +182,3 @@ namespace Samples
     }
   }
 }
-#endif

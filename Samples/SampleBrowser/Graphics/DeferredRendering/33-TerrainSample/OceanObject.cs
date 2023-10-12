@@ -1,13 +1,12 @@
 ﻿using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
-using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Samples
 {
@@ -16,11 +15,11 @@ namespace Samples
   /// </summary>
   public class OceanObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private WaterNode _waterNode;
 
 
-    public OceanObject(IServiceLocator services)
+    public OceanObject(IServiceProvider services)
     {
       _services = services;
       Name = "Ocean";

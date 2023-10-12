@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -15,7 +16,6 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics.Specialized;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
@@ -116,7 +116,7 @@ namespace Samples.Physics.Specialized
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public CharacterControllerObject(IServiceLocator services)
+    public CharacterControllerObject(IServiceProvider services)
     {
       Name = "CharacterController";
 

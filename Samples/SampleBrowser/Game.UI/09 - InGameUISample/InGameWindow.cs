@@ -1,10 +1,9 @@
-﻿using DigitalRise.GameBase;
+﻿using DigitalRise;
+using DigitalRise.GameBase;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-
+using System;
 
 namespace Samples.Game.UI
 {
@@ -15,10 +14,10 @@ namespace Samples.Game.UI
   // - a button that drops a new object
   class InGameWindow : Window
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
 
 
-    public InGameWindow(IServiceLocator services)
+    public InGameWindow(IServiceProvider services)
     {
       _services = services;
       Title = "In-Game GUI Window";

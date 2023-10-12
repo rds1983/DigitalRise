@@ -1,6 +1,6 @@
 ﻿using System;
 using AssetManagementBase;
-using CommonServiceLocator;
+using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
@@ -17,7 +17,7 @@ namespace Samples.Particles
   // water. The whole effect is preloaded to hide the start of the waterfall from the user.
   public static class WaterFall
   {
-    public static ParticleSystem CreateWaterFall(IServiceLocator services)
+    public static ParticleSystem CreateWaterFall(IServiceProvider services)
     {
       var ps = new ParticleSystem
       {
@@ -46,7 +46,7 @@ namespace Samples.Particles
       return ps;
     }
 
-    public static ParticleSystem CreateSpray(IServiceLocator services)
+    public static ParticleSystem CreateSpray(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();
@@ -140,7 +140,7 @@ namespace Samples.Particles
     }
 
 
-    public static ParticleSystem CreateWater(IServiceLocator services)
+    public static ParticleSystem CreateWater(IServiceProvider services)
     {
 			var assetManager = services.GetInstance<AssetManager>();
 			var graphicsService = services.GetInstance<IGraphicsService>();

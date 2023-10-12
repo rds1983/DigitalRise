@@ -51,8 +51,8 @@ than 5 morph targets are active, the morph targets with the largest weights are 
     {
       _graphicsScreen = new DeferredGraphicsScreen(Services) { DrawReticle = false };
       GraphicsService.Screens.Insert(0, _graphicsScreen);
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add a game object which adds some GUI controls for the deferred graphics
       // screen to the Options window.

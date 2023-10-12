@@ -1,13 +1,12 @@
 ﻿using DigitalRise.Animation;
 using DigitalRise.Input;
 using DigitalRise.UI;
-using DigitalRise.ServiceLocation;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using AssetManagementBase;
 using System;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise;
+using System.ComponentModel.Design;
 
 namespace Samples
 {
@@ -28,7 +27,7 @@ namespace Samples
   {
     // Services which can be used in derived classes.
     protected readonly GraphicsDevice GraphicsDevice;
-    protected readonly IServiceLocator Services;
+    protected readonly ServiceContainer Services;
     protected readonly AssetManager AssetManager;
     protected readonly IInputService InputService;
     protected readonly IAnimationService AnimationService;
@@ -39,7 +38,7 @@ namespace Samples
     protected Sample()
     {
       // Get services from the global service container.
-      Services = (ServiceContainer)ServiceLocator.Current;
+      Services = new ServiceContainer(SampleGame.Instance.Services);
       AssetManager = Services.GetInstance<AssetManager>();
       InputService = Services.GetInstance<IInputService>();
       AnimationService = Services.GetInstance<IAnimationService>();

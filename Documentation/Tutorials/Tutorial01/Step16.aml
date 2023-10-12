@@ -115,10 +115,10 @@ namespace MyGame
         {
             …
             _particleSystemManager = new ParticleSystemManager();
-            _services.Register(typeof(IParticleSystemService), null, _particleSystemManager);
+            _services.AddService(typeof(IParticleSystemService), _particleSystemManager);
 
             _uiManager = new UIManager(this, _inputManager);                // NEW
-            _services.Register(typeof(IUIService), null, _uiManager);       // NEW
+            _services.AddService(typeof(IUIService), _uiManager);       // NEW
 
             Components.Add(new MyGameComponent(this));
 
@@ -345,7 +345,7 @@ namespace MyGame
             
             _myGraphicsScreen = new MyGraphicsScreen(_graphicsService);
             _graphicsService.Screens.Add(_myGraphicsScreen);
-            ((ServiceContainer)ServiceLocator.Current).Register(typeof(IScene), null, _myGraphicsScreen.Scene);
+            ((ServiceContainer)ServiceLocator.Current).AddService(typeof(IScene), _myGraphicsScreen.Scene);
             
             var guiGraphicsScreen = new GuiGraphicsScreen(_graphicsService);                // NEW
             _graphicsService.Screens.Add(guiGraphicsScreen);                                // NEW

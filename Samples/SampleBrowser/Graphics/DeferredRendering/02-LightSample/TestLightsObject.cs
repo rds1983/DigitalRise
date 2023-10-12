@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics;
@@ -7,7 +8,6 @@ using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
@@ -19,12 +19,12 @@ namespace Samples
   // Adds an array of different lights to the scene for testing.
   public class TestLightsObject : GameObject
   {
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private DebugRenderer _debugRenderer;
     private readonly List<LightNode> _lights = new List<LightNode>();
 
 
-    public TestLightsObject(IServiceLocator services)
+    public TestLightsObject(IServiceProvider services)
     {
       _services = services;
       Name = "TestLights";

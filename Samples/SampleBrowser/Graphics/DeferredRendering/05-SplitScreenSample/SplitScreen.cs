@@ -1,10 +1,9 @@
-﻿#if !WP7 && !WP8
+﻿using DigitalRise;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace Samples
 {
@@ -16,7 +15,7 @@ namespace Samples
     public CameraNode ActiveCameraNodeB { get; set; }
 
 
-    public SplitScreen(IServiceLocator services)
+    public SplitScreen(IServiceProvider services)
       : base(services)
     {
     }
@@ -96,4 +95,3 @@ namespace Samples
     }
   }
 }
-#endif

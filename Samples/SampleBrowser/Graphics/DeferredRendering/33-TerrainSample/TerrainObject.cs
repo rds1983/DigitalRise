@@ -11,7 +11,6 @@ using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
@@ -66,7 +65,7 @@ namespace Samples.Graphics
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private IGraphicsService _graphicsService;
     private DeferredGraphicsScreen _graphicsScreen;
     private Simulation _simulation;
@@ -114,7 +113,7 @@ namespace Samples.Graphics
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public TerrainObject(IServiceLocator services, HolesType holesType = HolesType.None, MappingType mappingType = MappingType.Simple)
+    public TerrainObject(IServiceProvider services, HolesType holesType = HolesType.None, MappingType mappingType = MappingType.Simple)
     {
       if (services == null)
         throw new ArgumentNullException("services");

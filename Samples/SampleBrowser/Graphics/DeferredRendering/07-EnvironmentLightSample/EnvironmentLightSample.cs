@@ -40,8 +40,8 @@ The built-in ImageBasedLights offer a lot more features. See sample 29 ""ImageBa
       GraphicsService.Screens.Insert(0, _graphicsScreen);
       GameObjectService.Objects.Add(new DeferredGraphicsOptionsObject(Services));
 
-      Services.Register(typeof(DebugRenderer), null, _graphicsScreen.DebugRenderer);
-      Services.Register(typeof(IScene), null, _graphicsScreen.Scene);
+      Services.AddService(typeof(DebugRenderer), _graphicsScreen.DebugRenderer);
+      Services.AddService(typeof(IScene), _graphicsScreen.Scene);
 
       // Add gravity and damping to the physics Simulation.
       Simulation.ForceEffects.Add(new Gravity());

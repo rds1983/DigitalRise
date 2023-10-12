@@ -192,7 +192,7 @@ namespace MyGame
             
             _myGraphicsScreen = new MyGraphicsScreen(_graphicsService);
             _graphicsService.Screens.Add(_myGraphicsScreen);
-            ((ServiceContainer)ServiceLocator.Current).Register(typeof(IScene), null, _myGraphicsScreen.Scene);   // NEW
+            ((ServiceContainer)ServiceLocator.Current).AddService(typeof(IScene), _myGraphicsScreen.Scene);   // NEW
 
             var gameObjectService = ServiceLocator.Current.GetInstance<IGameObjectService>();
             var cameraObject = new CameraObject();

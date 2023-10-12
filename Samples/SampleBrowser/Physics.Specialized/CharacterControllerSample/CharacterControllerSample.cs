@@ -23,8 +23,6 @@ upright capsule as collision shape of the avatar. The camera is attached to the 
     public CharacterControllerSample(Microsoft.Xna.Framework.Game game)
       : base(game)
     {
-      Services.Register(typeof(DebugRenderer), null, GraphicsScreen.DebugRenderer);
-
       // Add basic force effects.
       Simulation.ForceEffects.Add(new Gravity());
       Simulation.ForceEffects.Add(new Damping());

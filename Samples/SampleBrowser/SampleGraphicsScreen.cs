@@ -3,8 +3,6 @@ using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AssetManagementBase;
@@ -61,7 +59,7 @@ namespace Samples
     public Scene Scene { get; private set; }
 
 
-    public SampleGraphicsScreen(IServiceLocator services)
+    public SampleGraphicsScreen(IServiceProvider services)
       : base(services.GetInstance<IGraphicsService>())
     {
       _sampleFramework = services.GetInstance<SampleFramework>();

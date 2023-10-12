@@ -1,10 +1,10 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
@@ -27,7 +27,7 @@ namespace Samples
     public float Speed { get; set; }
 
 
-    public BallShooterObject(IServiceLocator services)
+    public BallShooterObject(IServiceProvider services)
     {
       Name = "BallShooter";
       Speed = 100;

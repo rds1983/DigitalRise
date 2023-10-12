@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
@@ -7,9 +8,8 @@ using DigitalRise.Geometry.Collisions;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework;
-
+using System;
 
 namespace Samples.Game.UI
 {
@@ -26,7 +26,7 @@ namespace Samples.Game.UI
     private Vector2 _lastMousePosition;
 
 
-    public InGameUIScreen(IServiceLocator services, IUIRenderer renderer)
+    public InGameUIScreen(IServiceProvider services, IUIRenderer renderer)
       : base("InGame", renderer)
     {
       var gameObjectService = services.GetInstance<IGameObjectService>();

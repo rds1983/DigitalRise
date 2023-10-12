@@ -1,7 +1,7 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.UI;
 using DigitalRise.UI.Controls;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
@@ -284,7 +284,7 @@ namespace Samples.Game.UI
       // Here, we would exit the game.
       //_game.Exit();
       // In this project we switch to the next sample instead.
-      ServiceLocator.Current.GetInstance<SampleFramework>().LoadNextSample();
+      SampleGame.Instance.Services.GetService<SampleFramework>().LoadNextSample();
     }
   }
 }

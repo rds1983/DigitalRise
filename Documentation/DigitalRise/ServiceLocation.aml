@@ -108,7 +108,7 @@ container.Register(typeof(IService1), null, typeof(Service1));
 // Register service instance. 
 // (The service container will always return the specified instance.)
 var service2 = new Service2();
-container.Register(typeof(IService2), null, service2);
+container.AddService(typeof(IService2), service2);
 
 // Register a service using a factory method.
 // (If required, the service container will create a new instance using the

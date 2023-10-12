@@ -1,4 +1,5 @@
 ﻿using System;
+using DigitalRise;
 using DigitalRise.GameBase;
 using DigitalRise.Input;
 using DigitalRise.Geometry;
@@ -6,7 +7,6 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using CommonServiceLocator;
 using Microsoft.Xna.Framework.Input;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using Microsoft.Xna.Framework;
@@ -29,7 +29,7 @@ namespace Samples.Physics.Specialized
     #region Fields
     //--------------------------------------------------------------
 
-    private readonly IServiceLocator _services;
+    private readonly IServiceProvider _services;
     private readonly IInputService _inputService;
     private readonly IGeometricObject _vehicle;
     private bool _useSpectatorView;
@@ -50,7 +50,7 @@ namespace Samples.Physics.Specialized
     #region Creation & Cleanup
     //--------------------------------------------------------------
 
-    public VehicleCameraObject(IGeometricObject vehicle, IServiceLocator services)
+    public VehicleCameraObject(IGeometricObject vehicle, IServiceProvider services)
     {
       Name = "VehicleCamera";
 
