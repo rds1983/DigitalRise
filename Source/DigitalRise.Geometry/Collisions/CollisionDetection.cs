@@ -195,19 +195,13 @@ namespace DigitalRise.Geometry.Collisions
 
 
     /// <summary>
-    /// Occurs when the <see cref="CollisionFilter"/> changed. (This event is implemented as a
-    /// <i>weak event</i>.)
+    /// Occurs when the <see cref="CollisionFilter"/> changed.
     /// </summary>
     /// <remarks>
     /// This event is triggered when the <see cref="CollisionFilter"/> property was changed or when
     /// the current <see cref="CollisionFilter"/> triggered a Changed event.
     /// </remarks>
-    internal event EventHandler<EventArgs> CollisionFilterChanged
-    {
-      add { _collisionFilterChangedEvent.Add(value); }
-      remove { _collisionFilterChangedEvent.Remove(value); }
-    }
-    private readonly WeakEvent<EventHandler<EventArgs>> _collisionFilterChangedEvent = new WeakEvent<EventHandler<EventArgs>>();
+    internal event EventHandler CollisionFilterChanged;
     #endregion
 
 
@@ -496,7 +490,7 @@ namespace DigitalRise.Geometry.Collisions
     /// </remarks>
     internal void OnCollisionFilterChanged(object sender, EventArgs eventArgs)
     {
-      _collisionFilterChangedEvent.Invoke(this, eventArgs);
+      CollisionFilterChanged?.Invoke(this, eventArgs);
     }
     #endregion
   }

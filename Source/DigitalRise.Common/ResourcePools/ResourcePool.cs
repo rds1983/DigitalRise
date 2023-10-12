@@ -81,7 +81,6 @@ namespace DigitalRise
 
     private static readonly WeakCollection<ResourcePool> PoolsInternal = new WeakCollection<ResourcePool>();
 
-    private static readonly WeakEvent<EventHandler<EventArgs>> _clearingAllEvent = new WeakEvent<EventHandler<EventArgs>>();
     #endregion
 
 
@@ -132,15 +131,6 @@ namespace DigitalRise
       }
     }
 
-
-    /// <summary>
-    /// Occurs at the start of <see cref="ClearAll"/>.
-    /// </summary>
-    internal static event EventHandler<EventArgs> ClearingAll
-    {
-      add { _clearingAllEvent.Add(value); }
-      remove { _clearingAllEvent.Remove(value); }
-    }
     #endregion
 
 
@@ -186,8 +176,6 @@ namespace DigitalRise
     /// </summary>
     public static void ClearAll()
     {
-      OnClearingAll(EventArgs.Empty);
-
       lock (PoolsInternal)
       {
         foreach (var pool in PoolsInternal)
@@ -201,11 +189,6 @@ namespace DigitalRise
     /// </summary>
     public abstract void Clear();
 
-
-    private static void OnClearingAll(EventArgs eventArgs)
-    {
-      _clearingAllEvent.Invoke(null, eventArgs);
-    }  
     #endregion
   }
 }

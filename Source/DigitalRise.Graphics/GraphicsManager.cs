@@ -348,6 +348,8 @@ namespace DigitalRise.Graphics
       GraphicsDevice.ResetTextures();
     }
 
+    public void ResetShapeMechCache() => ShapeMeshCache.MakeWeakAll();
+
 
     //private void OnGraphicsDeviceReset(object sender, EventArgs eventArgs)
     //{

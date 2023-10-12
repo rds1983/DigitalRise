@@ -226,10 +226,12 @@ namespace DigitalRise.Graphics
     Dictionary<string, object> Data { get; }
 
     /// <summary>
-    /// Retrieves stock digital rune effect
+    /// Retrieves stock effect
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
     Effect GetStockEffect(string path, Dictionary<string, string> defs = null);
-  }
+
+    public void ResetShapeMechCache();
+	}
 }

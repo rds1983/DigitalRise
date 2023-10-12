@@ -208,8 +208,6 @@ namespace DigitalRise.Graphics
       _graphicsService = graphicsService;
       _tempEntry = new CacheEntry(null);
       _cache = new List<CacheEntry>();
-
-      ResourcePool.ClearingAll += OnClearingResourcePools;
     }
 
 
@@ -221,9 +219,6 @@ namespace DigitalRise.Graphics
       if (!IsDisposed)
       {
         IsDisposed = true;
-
-        // (Note: ClearingAll is weak event.)
-        ResourcePool.ClearingAll -= OnClearingResourcePools;
 
         // Unregister all events and dispose meshes. 
         for (int i = 0; i < _cache.Count; i++)
@@ -273,14 +268,13 @@ namespace DigitalRise.Graphics
       entry.SubmeshWeak.Target = null;
     }
 
-
-    private void OnClearingResourcePools(object sender, EventArgs eventArgs)
+    public void MakeWeakAll()
     {
-      // We release all strong references, when the resource pools are cleared. This usually
-      // happens when the game loads a new level.
-      for (int i = 0; i < _cache.Count; i++)
-        MakeWeak(_cache[i]);
-    }
+			// We release all strong references, when the resource pools are cleared. This usually
+			// happens when the game loads a new level.
+			for (int i = 0; i < _cache.Count; i++)
+				MakeWeak(_cache[i]);
+		}
 
 
     /// <summary>

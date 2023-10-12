@@ -958,6 +958,8 @@ namespace Samples
 
         Profiler.ClearAll();
         ResourcePool.ClearAll();
+        _graphicsService.ResetShapeMechCache();
+
         GC.Collect();
       }
     }
