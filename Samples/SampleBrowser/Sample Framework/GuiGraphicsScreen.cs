@@ -49,14 +49,14 @@ namespace Samples
     /// </summary>
     /// <param name="services">The service locator.</param>
     public GuiGraphicsScreen(IServiceProvider services)
-      : base(services.GetInstance<IGraphicsService>())
+      : base(services.GetService<IGraphicsService>())
     {
       Name = "GUI"; // Just for debugging.
 
       // Get required services.
-      _inputService = services.GetInstance<IInputService>();
-      _uiService = services.GetInstance<IUIService>();
-      var assetManager = services.GetInstance<AssetManager>();
+      _inputService = services.GetService<IInputService>();
+      _uiService = services.GetService<IUIService>();
+      var assetManager = services.GetService<AssetManager>();
 
       // Load a UI theme and create the UI renderer and the UI screen. See the
       // DigitalRise Game UI documentation and samples for more details.

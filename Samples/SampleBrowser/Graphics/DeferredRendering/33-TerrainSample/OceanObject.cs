@@ -28,9 +28,9 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var scene = (Scene)_services.GetInstance<IScene>();
-      var graphicsService = _services.GetInstance<IGraphicsService>();
-      var assetManager = _services.GetInstance<AssetManager>();
+      var scene = (Scene)_services.GetService<IScene>();
+      var graphicsService = _services.GetService<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
 
       // Define the appearance of the water.
       var waterOcean = new Water
@@ -100,7 +100,7 @@ namespace Samples
     // Add GUI controls to the Options window.
     private void CreateGuiControls()
     {
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "OceanObject");
 

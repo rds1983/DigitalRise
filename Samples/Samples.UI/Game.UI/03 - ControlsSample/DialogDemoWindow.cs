@@ -94,7 +94,7 @@ namespace Samples.UI
     {
       // ----- Load a dialog from an XML file.
       // Load the XML file that contains a layout that the LayoutSerializer can read.
-      var storage = SampleGame.Instance.Services.GetInstance<AssetManager>();
+      var storage = Utility.GetService<AssetManager>(SampleGame.Instance.Services);
       var xDocument = XDocument.Parse(storage.ReadAsString("Layout.xml"));
 
       // Deserialize the objects in the XML document.

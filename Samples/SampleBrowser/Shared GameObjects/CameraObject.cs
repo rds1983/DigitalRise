@@ -63,7 +63,7 @@ namespace Samples
       Name = "Camera";
 
       _services = services;
-      _inputService = services.GetInstance<IInputService>();
+      _inputService = services.GetService<IInputService>();
 
       IsEnabled = true;
       _farDistance = farDistance;
@@ -88,7 +88,7 @@ namespace Samples
       // it  makes no difference if the camera is actually part of the scene graph or
       // not. - Except when other scene nodes are attached to the camera. In this case
       // the camera needs to be in the scene.)
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       if (scene != null)
         scene.Children.Add(CameraNode);
 
@@ -96,7 +96,7 @@ namespace Samples
       ResetProjection();
 
       // Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "CameraObject");
 
@@ -158,7 +158,7 @@ namespace Samples
     {
       if (IsLoaded)
       {
-        var graphicsService = _services.GetInstance<IGraphicsService>();
+        var graphicsService = _services.GetService<IGraphicsService>();
         var projection = (PerspectiveProjection)CameraNode.Camera.Projection;
         projection.SetFieldOfView(
           ConstantsF.PiOver4,

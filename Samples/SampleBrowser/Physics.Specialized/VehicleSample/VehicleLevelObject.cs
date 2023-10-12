@@ -32,7 +32,7 @@ namespace Samples.Physics.Specialized
     protected override void OnLoad()
     {
       // Add rigid bodies to simulation.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
 
       // ----- Add a ground plane.
       AddBody(simulation, "GroundPlane", Pose.Identity, new PlaneShape(Vector3.UnitY, 0), MotionType.Static);

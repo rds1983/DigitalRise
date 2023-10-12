@@ -32,9 +32,9 @@ namespace Samples
       Name = "BallShooter";
       Speed = 100;
 
-      _inputService = services.GetInstance<IInputService>();
-      _simulation = services.GetInstance<Simulation>();
-      _gameObjectService = services.GetInstance<IGameObjectService>();
+      _inputService = services.GetService<IInputService>();
+      _simulation = services.GetService<Simulation>();
+      _gameObjectService = services.GetService<IGameObjectService>();
     }
 
 

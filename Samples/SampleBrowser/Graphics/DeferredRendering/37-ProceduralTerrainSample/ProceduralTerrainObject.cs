@@ -87,10 +87,10 @@ namespace Samples.Graphics
     protected override void OnLoad()
     {
       // Get common services and game objects.
-      _graphicsService = _services.GetInstance<IGraphicsService>();
-      var scene = _services.GetInstance<IScene>();
-      _simulation = _services.GetInstance<Simulation>();
-      var gameObjectService = _services.GetInstance<IGameObjectService>();
+      _graphicsService = _services.GetService<IGraphicsService>();
+      var scene = _services.GetService<IScene>();
+      _simulation = _services.GetService<Simulation>();
+      var gameObjectService = _services.GetService<IGameObjectService>();
       _cameraObject = gameObjectService.Objects.OfType<CameraObject>().First();
       _previousCameraFar = _cameraObject.CameraNode.Camera.Projection.Far;
 
@@ -214,7 +214,7 @@ namespace Samples.Graphics
     // The materials are blended based on the terrain heights and slopes.
     private void InitializeTerrainLayers()
     {
-      var assetManager = _services.GetInstance<AssetManager>();
+      var assetManager = _services.GetService<AssetManager>();
 
       var materialGravel = new TerrainMaterialLayer(_graphicsService)
       {
@@ -389,7 +389,7 @@ namespace Samples.Graphics
     // Add GUI controls to the Options window.
     private void CreateGuiControls()
     {
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "ProceduralTerrainObject");
 

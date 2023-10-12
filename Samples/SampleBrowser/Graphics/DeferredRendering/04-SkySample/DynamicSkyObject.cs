@@ -285,11 +285,11 @@ namespace Samples
     protected override void OnLoad()
     {
       // Get services.
-      _inputService = _services.GetInstance<IInputService>();
-      _graphicsService = _services.GetInstance<IGraphicsService>();
-      _scene = _services.GetInstance<IScene>();
-      var content = _services.GetInstance<AssetManager>();
-      var gameObjectService = _services.GetInstance<IGameObjectService>();
+      _inputService = _services.GetService<IInputService>();
+      _graphicsService = _services.GetService<IGraphicsService>();
+      _scene = _services.GetService<IScene>();
+      var content = _services.GetService<AssetManager>();
+      var gameObjectService = _services.GetService<IGameObjectService>();
 
       // Get camera game object.
       _cameraObject = (CameraObject)gameObjectService.Objects["Camera"];
@@ -363,7 +363,7 @@ namespace Samples
         UpdateCubeMap(TimeSpan.Zero);
 
       // Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "DynamicSkyObject");
 
@@ -446,7 +446,7 @@ namespace Samples
         _scene.Children.Add(_skyGroupNode);
 
       // Add a skybox with milky way cube map.
-      _milkyWayNode = new SkyboxNode(content.LoadTextureCube(_services.GetInstance<IGraphicsService>().GraphicsDevice, "Sky/MilkyWay.dds"))
+      _milkyWayNode = new SkyboxNode(content.LoadTextureCube(_services.GetService<IGraphicsService>().GraphicsDevice, "Sky/MilkyWay.dds"))
       {
         Color = new Vector3(MilkyWayLightScale),
       };
@@ -466,7 +466,7 @@ namespace Samples
       // Add a node which draws a moon texture including moon phase.
       _moonNode = new SkyObjectNode
       {
-        Texture = new PackedTexture(content.LoadTexture2D(_services.GetInstance<IGraphicsService>().GraphicsDevice, "Sky/Moon.png")),
+        Texture = new PackedTexture(content.LoadTexture2D(_services.GetService<IGraphicsService>().GraphicsDevice, "Sky/Moon.png")),
         LightWrap = 0.1f,
         LightSmoothness = 1,
         AngularDiameter = new Vector2(MathHelper.ToRadians(5)),
@@ -513,7 +513,7 @@ namespace Samples
       // Load star positions and luminance from file with 9110 predefined stars.
       const int numberOfStars = 9110;
       var stars = new Star[numberOfStars];
-      var storage = _services.GetInstance<AssetManager>();
+      var storage = _services.GetService<AssetManager>();
 
       using (var reader = new BinaryReader(storage.Open("Sky/Stars.bin")))
       {

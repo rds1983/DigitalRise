@@ -100,9 +100,9 @@ namespace Samples
     //--------------------------------------------------------------
 
     public DeferredGraphicsScreen(IServiceProvider services)
-      : base(services.GetInstance<IGraphicsService>())
+      : base(services.GetService<IGraphicsService>())
     {
-      _sampleFramework = services.GetInstance<SampleFramework>();
+      _sampleFramework = services.GetService<SampleFramework>();
 
       SpriteBatch = GraphicsService.GetSpriteBatch();
 
@@ -240,7 +240,7 @@ namespace Samples
         BloomIntensity = 1,
         BloomThreshold = 0.6f,
       });
-			var assetManager = services.GetInstance<AssetManager>();
+			var assetManager = services.GetService<AssetManager>();
 			_underwaterPostProcessor = new UnderwaterPostProcessor(GraphicsService, assetManager);
       PostProcessors.Add(_underwaterPostProcessor);
 

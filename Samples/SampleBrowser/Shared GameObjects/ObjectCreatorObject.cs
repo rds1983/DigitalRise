@@ -21,8 +21,8 @@ namespace Samples
     public ObjectCreatorObject(IServiceProvider services)
     {
       _services = services;
-      _inputService = services.GetInstance<IInputService>();
-      _gameObjectService = services.GetInstance<IGameObjectService>();
+      _inputService = services.GetService<IInputService>();
+      _gameObjectService = services.GetService<IGameObjectService>();
     }
 
 

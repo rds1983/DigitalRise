@@ -183,8 +183,8 @@ namespace Samples.Graphics
     /// </exception>
     public VolumetricLightRenderer(IServiceProvider services)
     {
-			var graphicsService = services.GetInstance<IGraphicsService>();
-			var assetManager = services.GetInstance<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
 
 			// Load effect.
 			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "VolumetricLight.efb");

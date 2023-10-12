@@ -44,8 +44,8 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-			var assetManager = _services.GetInstance<AssetManager>();
-			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
 
 			if (_type == 1)
       {
@@ -171,10 +171,10 @@ namespace Samples
       ModelNode.PoseWorld = RigidBody.Pose;
 
       // Add rigid body to physics simulation and model to scene.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
       simulation.RigidBodies.Add(RigidBody);
 
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(ModelNode);
     }
 

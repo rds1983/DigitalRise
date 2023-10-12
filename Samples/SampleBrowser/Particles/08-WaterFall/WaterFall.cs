@@ -48,8 +48,8 @@ namespace Samples.Particles
 
     public static ParticleSystem CreateSpray(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {
@@ -142,8 +142,8 @@ namespace Samples.Particles
 
     public static ParticleSystem CreateWater(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {

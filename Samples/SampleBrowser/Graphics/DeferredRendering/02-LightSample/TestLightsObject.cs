@@ -33,8 +33,8 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var assetManager = _services.GetInstance<AssetManager>();
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
+      var graphicsService = _services.GetService<IGraphicsService>();
 
       _lights.Add(new LightNode(new AmbientLight
       {
@@ -212,8 +212,8 @@ namespace Samples
         }
       });
 
-      var scene = _services.GetInstance<IScene>();
-      _debugRenderer = _services.GetInstance<DebugRenderer>();
+      var scene = _services.GetService<IScene>();
+      _debugRenderer = _services.GetService<DebugRenderer>();
 
       foreach (var lightNode in _lights)
         scene.Children.Add(lightNode);

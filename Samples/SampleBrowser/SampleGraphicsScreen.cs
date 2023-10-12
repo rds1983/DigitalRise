@@ -60,9 +60,9 @@ namespace Samples
 
 
     public SampleGraphicsScreen(IServiceProvider services)
-      : base(services.GetInstance<IGraphicsService>())
+      : base(services.GetService<IGraphicsService>())
     {
-      _sampleFramework = services.GetInstance<SampleFramework>();
+      _sampleFramework = services.GetService<SampleFramework>();
 
       Name = "SampleScreen";
       ClearBackground = false;
@@ -71,7 +71,7 @@ namespace Samples
       UseFixedWidthFont = false;
 
       // Use 2D texture for reticle.
-      var assetManager = services.GetInstance<AssetManager>();
+      var assetManager = services.GetService<AssetManager>();
 			var graphicsDevice = GraphicsService.GraphicsDevice;
 			_reticle = assetManager.LoadTexture2D(graphicsDevice, "Reticle.png");
 

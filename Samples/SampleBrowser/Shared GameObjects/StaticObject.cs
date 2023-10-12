@@ -51,8 +51,8 @@ namespace Samples
     protected override void OnLoad()
     {
       // Load model.
-      var assetManager = _services.GetInstance<AssetManager>();
-      _modelNode = assetManager.LoadDRModel(_services.GetInstance<IGraphicsService>(), _assetName).Clone();
+      var assetManager = _services.GetService<AssetManager>();
+      _modelNode = assetManager.LoadDRModel(_services.GetService<IGraphicsService>(), _assetName).Clone();
 
       // Optional: Create rigid body using the triangle mesh of the model.
       if (_addRigidBody)
@@ -72,7 +72,7 @@ namespace Samples
       }
 
       // Add model node to scene graph.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_modelNode);
     }
 
@@ -118,7 +118,7 @@ namespace Samples
       };
 
       // Add rigid body to physics simulation and model to scene.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
       simulation.RigidBodies.Add(_rigidBody);
     }
 

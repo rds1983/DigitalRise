@@ -55,14 +55,14 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var contentManager = _services.GetInstance<AssetManager>();
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var contentManager = _services.GetService<AssetManager>();
+      var graphicsService = _services.GetService<IGraphicsService>();
 
       _modelNode = contentManager.LoadDRModel(graphicsService, _assetName).Clone();
       _modelNode.PoseWorld = _defaultPose;
       SampleHelper.EnablePerPixelLighting(_modelNode);
 
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_modelNode);
 
       // Create looping animation.
@@ -75,7 +75,7 @@ namespace Samples
       };
 
       // Start animation.
-      var animationService = _services.GetInstance<IAnimationService>();
+      var animationService = _services.GetService<IAnimationService>();
       AnimationController = animationService.StartAnimation(animationClip, (IAnimatableProperty)meshNode.SkeletonPose);
       AnimationController.UpdateAndApply();
     }

@@ -36,8 +36,8 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var graphicsService = _services.GetInstance<IGraphicsService>();
-      var assetManager = _services.GetInstance<AssetManager>();
+      var graphicsService = _services.GetService<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
       _skyboxNode = new SkyboxNode(assetManager.LoadTextureCube(graphicsService.GraphicsDevice, "Sky2.dds"))
       {
         Color = new Vector3(SkyExposure),
@@ -116,7 +116,7 @@ namespace Samples
       _sunlightNode.Children.Add(lensFlareNode);
 
       // Add scene nodes to scene graph.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_skyboxNode);
       scene.Children.Add(_ambientLightNode);
       scene.Children.Add(_sunlightNode);

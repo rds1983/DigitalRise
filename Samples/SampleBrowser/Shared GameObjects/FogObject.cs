@@ -70,7 +70,7 @@ namespace Samples
       AddFogNodeToScene();
 
       // Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "FogObject");
 
@@ -140,7 +140,7 @@ namespace Samples
 
     private void AddFogNodeToScene()
     {
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       if (!_attachToCamera)
       {
         scene.Children.Add(FogNode);

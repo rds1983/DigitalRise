@@ -15,8 +15,8 @@ namespace Samples.Particles
   {
     public static ParticleSystem Create(ITriangleMesh mesh, IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {

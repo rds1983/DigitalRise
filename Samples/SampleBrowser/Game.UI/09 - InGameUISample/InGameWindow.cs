@@ -126,7 +126,7 @@ namespace Samples.Game.UI
       button.Click += (s, e) =>
       {
         // Create a new DynamicObject.
-        var gameObjectService = _services.GetInstance<IGameObjectService>();
+        var gameObjectService = _services.GetService<IGameObjectService>();
         gameObjectService.Objects.Add(new DynamicObject(_services, 1));
       };
       panel.Children.Add(button);

@@ -110,7 +110,7 @@ namespace Samples.Graphics
     protected override void OnLoad()
     {
       // ----- Register info for "Wind" effect parameter.
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
 
       // Tell the graphics service some information about effect parameters with
       // the name or semantic "Wind". The hint "Global" tells the engine that this
@@ -130,7 +130,7 @@ namespace Samples.Graphics
 
 
       // ----- Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "Wind");
 
@@ -169,7 +169,7 @@ namespace Samples.Graphics
     protected override void OnUnload()
     {
       // ----- Unregister effect parameter info for "Wind".
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
       var defaultEffectInterpreter = graphicsService.EffectInterpreters.OfType<DefaultEffectInterpreter>().First();
       defaultEffectInterpreter.ParameterDescriptions.Remove("Wind");
       var defaultEffectBinder = graphicsService.EffectBinders.OfType<DefaultEffectBinder>().First();

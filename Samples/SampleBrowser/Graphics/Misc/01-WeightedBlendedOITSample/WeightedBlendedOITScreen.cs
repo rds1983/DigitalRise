@@ -71,7 +71,7 @@ namespace Samples.Graphics
 
 
     public WeightedBlendedOITScreen(IServiceProvider services)
-      : base(services.GetInstance<IGraphicsService>())
+      : base(services.GetService<IGraphicsService>())
     {
       Coverage = GraphicsScreenCoverage.Full;
       Scene = new Scene();
@@ -79,8 +79,8 @@ namespace Samples.Graphics
 
       _meshRenderer = new MeshRenderer();
 
-      var content = services.GetInstance<AssetManager>();
-      _wboitEffect = content.LoadEffect(services.GetInstance<IGraphicsService>().GraphicsDevice, Utility.EffectsPrefix + "WeightedBlendedOIT/WeightedBlendedOIT.efb");
+      var content = services.GetService<AssetManager>();
+      _wboitEffect = content.LoadEffect(services.GetService<IGraphicsService>().GraphicsDevice, Utility.EffectsPrefix + "WeightedBlendedOIT/WeightedBlendedOIT.efb");
       _parameterViewportSize = _wboitEffect.Parameters["ViewportSize"];
       _parameterTextureA = _wboitEffect.Parameters["TextureA"];
       _parameterTextureB = _wboitEffect.Parameters["TextureB"];

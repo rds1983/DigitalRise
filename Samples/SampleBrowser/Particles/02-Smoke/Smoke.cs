@@ -16,8 +16,8 @@ namespace Samples.Particles
   {
     public static ParticleSystem Create(IServiceProvider services)
     {
-      var assetManager = services.GetInstance<AssetManager>();
-      var graphicsService = services.GetInstance<IGraphicsService>();
+      var assetManager = services.GetService<AssetManager>();
+      var graphicsService = services.GetService<IGraphicsService>();
 
       ParticleSystem ps = new ParticleSystem
       {

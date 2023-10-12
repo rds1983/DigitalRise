@@ -68,13 +68,13 @@ namespace Samples.Physics.Specialized
       Name = "Vehicle";
 
       _services = services;
-      _inputService = services.GetInstance<IInputService>();
+      _inputService = services.GetService<IInputService>();
 
-      _simulation = services.GetInstance<Simulation>();
+      _simulation = services.GetService<Simulation>();
 
       // Load models for rendering.
-			var assetManager = _services.GetInstance<AssetManager>();
-			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
 
 			_vehicleModelNode = assetManager.LoadDRModel(graphicsService, "Car/Car.drmdl").Clone();
       _wheelModelNodes = new ModelNode[4];
@@ -171,7 +171,7 @@ namespace Samples.Physics.Specialized
       Vehicle.Enabled = true;
 
       // Add graphics model to scene graph.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_vehicleModelNode);
     }
 

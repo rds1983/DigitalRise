@@ -33,8 +33,8 @@ namespace Samples
     protected override void OnLoad()
     {
       // Load sandbox model.
-			var assetManager = _services.GetInstance<AssetManager>();
-			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
 
 			_modelNode = assetManager.LoadDRModel(graphicsService, "Sandbox/Sandbox.drmdl").Clone();
 
@@ -50,7 +50,7 @@ namespace Samples
       }
 
       // Add the "Sandbox" model to the scene.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_modelNode);
 
       // Create rigid bodies for the sides of the sandbox.
@@ -86,7 +86,7 @@ namespace Samples
       _frontWallRigidBody.CollisionObject.CollisionGroup = 1;
 
       // Add rigid bodies to simulation.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
       simulation.RigidBodies.Add(_floorRigidBody);
       simulation.RigidBodies.Add(_leftWallRigidBody);
       simulation.RigidBodies.Add(_rightWallRigidBody);

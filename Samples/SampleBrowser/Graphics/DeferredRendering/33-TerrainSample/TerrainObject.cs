@@ -157,7 +157,7 @@ namespace Samples.Graphics
         defs["PARALLAX_MAPPING"] = "1";
       }
 
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
       shadowMapEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainShadowMap", defs);
       gBufferEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainGBuffer", defs);
       materialEffect = graphicsService.GetStockEffect("DigitalRise/Terrain/TerrainMaterial", defs);
@@ -189,12 +189,12 @@ namespace Samples.Graphics
     protected override void OnLoad()
     {
       // Get common services and game objects.
-      _graphicsService = _services.GetInstance<IGraphicsService>();
+      _graphicsService = _services.GetService<IGraphicsService>();
       _graphicsScreen = _graphicsService.Screens.OfType<DeferredGraphicsScreen>().First();
-      var assetManager = _services.GetInstance<AssetManager>();
-      var scene = _services.GetInstance<IScene>();
-      _simulation = _services.GetInstance<Simulation>();
-      var gameObjectService = _services.GetInstance<IGameObjectService>();
+      var assetManager = _services.GetService<AssetManager>();
+      var scene = _services.GetService<IScene>();
+      _simulation = _services.GetService<Simulation>();
+      var gameObjectService = _services.GetService<IGameObjectService>();
       _cameraObject = gameObjectService.Objects.OfType<CameraObject>().First();
       _previousCameraFar = _cameraObject.CameraNode.Camera.Projection.Far;
 
@@ -294,8 +294,8 @@ namespace Samples.Graphics
     // Initialize the terrain geometry from height textures.
     public void InitializeHeightsAndNormals()
     {
-      var assetManager = _services.GetInstance<AssetManager>();
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
+      var graphicsService = _services.GetService<IGraphicsService>();
 
       // Create the height and normal texture for the 4 tiles.
       // We can do this in parallel. We use following lock for parts which are not thread-safe.
@@ -394,7 +394,7 @@ namespace Samples.Graphics
     // the terrain.
     private void InitializeTerrainLayers(AssetManager assetManager)
     {
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
       // The appearance of each terrain tile can be specified using layers. Each layer usually
       // specifies one material type, e.g. grass, rock, snow. Layers can also be used to add
       // decals or roads to the terrain, which is demonstrated in other samples.
@@ -769,7 +769,7 @@ namespace Samples.Graphics
     // Add GUI controls to the Options window.
     private void CreateGuiControls()
     {
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "TerrainObject");
 

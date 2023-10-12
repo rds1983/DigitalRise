@@ -49,7 +49,7 @@ namespace WpfInteropSample2
       if (GraphicsService == null)
       {
         // Register the presentation target in the graphics service.
-        var graphicsService = MyGame.Instance.Services.GetInstance<IGraphicsService>();
+        var graphicsService = MyGame.Instance.Services.GetService<IGraphicsService>();
         graphicsService.PresentationTargets.Add(this);
       }
     }
@@ -60,7 +60,7 @@ namespace WpfInteropSample2
       if (GraphicsService != null)
       {
         // Unregister the presentation target from the graphics service.
-        var graphicsService = MyGame.Instance.Services.GetInstance<IGraphicsService>();
+        var graphicsService = MyGame.Instance.Services.GetService<IGraphicsService>();
         graphicsService.PresentationTargets.Remove(this);
       }
     }
@@ -71,7 +71,7 @@ namespace WpfInteropSample2
       base.OnRenderSizeChanged(sizeInfo);
 
       // Update the field-of-view of the cameras of all graphics screens.
-      var graphicsService = MyGame.Instance.Services.GetInstance<IGraphicsService>();
+      var graphicsService = MyGame.Instance.Services.GetService<IGraphicsService>();
       foreach (var screen in graphicsService.Screens.OfType<MyGraphicsScreen>())
       {
         var cameraNode = screen.CameraNode;

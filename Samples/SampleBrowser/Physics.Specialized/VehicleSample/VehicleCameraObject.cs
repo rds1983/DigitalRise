@@ -56,7 +56,7 @@ namespace Samples.Physics.Specialized
 
       _vehicle = vehicle;
       _services = services;
-      _inputService = services.GetInstance<IInputService>();
+      _inputService = services.GetService<IInputService>();
     }
     #endregion
 
@@ -67,7 +67,7 @@ namespace Samples.Physics.Specialized
 
     protected override void OnLoad()
     {
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
 
       // Define camera projection.
       var projection = new PerspectiveProjection();

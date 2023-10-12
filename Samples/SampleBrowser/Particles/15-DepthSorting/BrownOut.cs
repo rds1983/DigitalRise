@@ -54,8 +54,8 @@ namespace Samples.Particles
 
     private static ParticleSystem CreateSmoke(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {

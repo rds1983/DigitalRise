@@ -44,7 +44,7 @@ namespace Samples
     public CampfireObject(IServiceProvider services)
     {
       _services = services;
-      _graphicsService = _services.GetInstance<IGraphicsService>();
+      _graphicsService = _services.GetService<IGraphicsService>();
       Name = "Campfire";
     }
 
@@ -52,7 +52,7 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var particleSystemService = _services.GetInstance<IParticleSystemService>();
+      var particleSystemService = _services.GetService<IParticleSystemService>();
 
       // The campfire consists of two particle systems (fire + smoke) and a light source.
       // 
@@ -73,7 +73,7 @@ namespace Samples
       };
 
       // Add fire particles.
-      var assetManager = _services.GetInstance<AssetManager>();
+      var assetManager = _services.GetService<AssetManager>();
       var particleSystem = CreateFire();
       particleSystemService.ParticleSystems.Add(particleSystem);
       _fireParticles = new ParticleSystemNode(particleSystem)
@@ -110,7 +110,7 @@ namespace Samples
       _campfire.Children.Add(_light);
 
       // Add campfire to scene.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_campfire);
 
       // Particle effects can be added multiple times to the scene (= "instancing").
@@ -131,7 +131,7 @@ namespace Samples
       //}
 
       // Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "CampfireObject");
       SampleHelper.AddCheckBox(
@@ -148,8 +148,8 @@ namespace Samples
     // parameters that are supported by DigitalRise Graphics!
     private ParticleSystem CreateFire()
     {
-			var graphicsService = _services.GetInstance<IGraphicsService>();
-			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
 
       ParticleSystem ps = new ParticleSystem
       {
@@ -280,8 +280,8 @@ namespace Samples
 
     private ParticleSystem CreateSmoke()
     {
-			var graphicsService = _services.GetInstance<IGraphicsService>();
-			var assetManager = _services.GetInstance<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
 
 			ParticleSystem ps = new ParticleSystem
       {

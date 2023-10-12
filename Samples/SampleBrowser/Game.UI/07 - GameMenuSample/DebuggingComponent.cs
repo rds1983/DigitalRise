@@ -30,9 +30,9 @@ namespace Samples.Game.UI
     public DebuggingComponent(Microsoft.Xna.Framework.Game game, IServiceProvider services)
       : base(game)
     {
-      _inputService = services.GetInstance<IInputService>();
-      _graphicsService = services.GetInstance<IGraphicsService>();
-      _uiService = services.GetInstance<IUIService>();
+      _inputService = services.GetService<IInputService>();
+      _graphicsService = services.GetService<IGraphicsService>();
+      _uiService = services.GetService<IUIService>();
 
       // Get graphics service and add a DelegateGraphicsScreen as the first 
       // graphics screen. This lets us do the rendering in the Render method of

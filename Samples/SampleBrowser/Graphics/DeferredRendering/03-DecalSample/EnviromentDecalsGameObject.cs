@@ -44,10 +44,10 @@ namespace Samples
 
     protected override void OnLoad()
     {
-      var graphicsService = _services.GetInstance<IGraphicsService>();
-      var assetManager = _services.GetInstance<AssetManager>();
-      var scene = _services.GetInstance<IScene>();
-      _debugRenderer = _services.GetInstance<DebugRenderer>();
+      var graphicsService = _services.GetService<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
+      var scene = _services.GetService<IScene>();
+      _debugRenderer = _services.GetService<DebugRenderer>();
 
       // Load materials (*.drmat files) which define the used shaders and material 
       // properties (e.g. textures, colors, etc.).
@@ -147,7 +147,7 @@ namespace Samples
       _decals.Add(bulletHole7);
 
       // Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "EnvironmentDecalsObject");
       SampleHelper.AddCheckBox(

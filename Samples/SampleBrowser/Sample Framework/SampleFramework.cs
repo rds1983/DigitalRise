@@ -197,8 +197,8 @@ namespace Samples
 
       // Get all required services.
       _inputService = SampleGame.Instance.Services.GetService<IInputService>();
-      _graphicsService = _services.GetInstance<IGraphicsService>();
-      _gameObjectService = _services.GetInstance<IGameObjectService>();
+      _graphicsService = _services.GetService<IGraphicsService>();
+      _gameObjectService = _services.GetService<IGameObjectService>();
 
       InitializeSamples();
       InitializeController();
@@ -609,7 +609,7 @@ namespace Samples
       _optionsWindow.Content = _optionsTabControl;
 
       var panel = SampleHelper.AddTabItem(_optionsTabControl, "General");
-      var graphicsDeviceManager = _services.GetInstance<GraphicsDeviceManager>();
+      var graphicsDeviceManager = _services.GetService<GraphicsDeviceManager>();
       SampleHelper.AddCheckBox(
         panel,
         "Use fixed frame rate",
@@ -1044,7 +1044,7 @@ namespace Samples
       }
 
       // Capture general interesting info.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
       Profiler.AddValue("NumBodies", simulation.RigidBodies.Count);
       Profiler.AddValue("NumContacts", simulation.ContactConstraints.Count);
     }

@@ -47,8 +47,8 @@ namespace Samples
       _bodyPrototype = new RigidBody(new SphereShape(0.5f));
 
       // Load the graphics model.
-      var graphicsService = _services.GetInstance<IGraphicsService>();
-      var assetManager = _services.GetInstance<AssetManager>();
+      var graphicsService = _services.GetService<IGraphicsService>();
+      var assetManager = _services.GetService<AssetManager>();
       _modelPrototype = assetManager.LoadDRModel(graphicsService, "LavaBall/LavaBall.drmdl").Clone();
 
       // Attach a point light to the model. The light projects the glowing lava 
@@ -78,7 +78,7 @@ namespace Samples
       _emissiveColorBinding = (ConstParameterBinding<Vector3>)material["Material"].ParameterBindings["EmissiveColor"];
 
       // Use the animation service to animate glow intensity of the lava.
-      var animationService = _services.GetInstance<IAnimationService>();
+      var animationService = _services.GetService<IAnimationService>();
 
       // Create an AnimatableProperty<float>, which stores the animation value.
       _glowIntensity = new AnimatableProperty<float>();
@@ -103,8 +103,8 @@ namespace Samples
 
     public void Spawn()
     {
-      var scene = _services.GetInstance<IScene>();
-      var simulation = _services.GetInstance<Simulation>();
+      var scene = _services.GetService<IScene>();
+      var simulation = _services.GetService<Simulation>();
 
       // Create a new instance by cloning the prototype.
       var model = _modelPrototype.Clone();
@@ -148,7 +148,7 @@ namespace Samples
       _bodyPrototype = null;
 
       // Stop animation.
-      var animationService = _services.GetInstance<IAnimationService>();
+      var animationService = _services.GetService<IAnimationService>();
       animationService.StopAnimation(_glowIntensity);
       _glowIntensity = null;
     }

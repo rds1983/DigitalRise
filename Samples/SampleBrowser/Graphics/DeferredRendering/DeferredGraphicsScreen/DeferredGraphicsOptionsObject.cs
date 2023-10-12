@@ -25,14 +25,14 @@ namespace Samples
     protected override void OnLoad()
     {
       // ----- Get common services, game objects, etc.
-      var graphicsService = _services.GetInstance<IGraphicsService>();
+      var graphicsService = _services.GetService<IGraphicsService>();
       var deferredGraphicsScreen = graphicsService.Screens.OfType<DeferredGraphicsScreen>().FirstOrDefault();
       if (deferredGraphicsScreen == null)
         return;
 
       var hdrFilter = deferredGraphicsScreen.PostProcessors.OfType<HdrFilter>().FirstOrDefault();
 
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("DeferredGraphicsScreen");
       var intermediateTargetPanel = SampleHelper.AddGroupBox(optionsPanel, "Render targets");
 

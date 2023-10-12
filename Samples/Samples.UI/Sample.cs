@@ -39,11 +39,11 @@ namespace Samples
     {
       // Get services from the global service container.
       Services = new ServiceContainer(SampleGame.Instance.Services);
-      AssetManager = Services.GetInstance<AssetManager>();
-      InputService = Services.GetInstance<IInputService>();
-      AnimationService = Services.GetInstance<IAnimationService>();
-      UIService = Services.GetInstance<IUIService>();
-      GraphicsDevice = Services.GetInstance<GraphicsDevice>();
+      AssetManager = Services.GetService<AssetManager>();
+      InputService = Services.GetService<IInputService>();
+      AnimationService = Services.GetService<IAnimationService>();
+      UIService = Services.GetService<IUIService>();
+      GraphicsDevice = Services.GetService<GraphicsDevice>();
     }
 
 		~Sample()

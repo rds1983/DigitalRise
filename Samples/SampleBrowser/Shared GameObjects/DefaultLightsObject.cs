@@ -76,7 +76,7 @@ namespace Samples
 				PoseWorld = new Pose(MathHelper.CreateRotation(Vector3.Forward, new Vector3(0.4545195f, -0.7660444f, 0.4545195f))),
 			};
 
-			var scene = _services.GetInstance<IScene>();
+			var scene = _services.GetService<IScene>();
 			scene.Children.Add(_ambientLightNode);
 			scene.Children.Add(_keyLightNode);
 			scene.Children.Add(_fillLightNode);

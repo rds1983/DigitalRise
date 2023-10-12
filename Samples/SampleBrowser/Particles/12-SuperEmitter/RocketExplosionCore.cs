@@ -16,8 +16,8 @@ namespace Samples.Particles
   {
     public RocketExplosionCore(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			MaxNumberOfParticles = 200;
 

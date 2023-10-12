@@ -39,11 +39,11 @@ namespace Samples.Game.UI
     {
       // Get the services that this component needs regularly.
       _services = new ServiceContainer(services);
-      _inputService = services.GetInstance<IInputService>();
-      _simulation = services.GetInstance<Simulation>();
-      _graphicsService = services.GetInstance<IGraphicsService>();
-      _gameObjectService = services.GetInstance<IGameObjectService>();
-      _uiService = services.GetInstance<IUIService>();
+      _inputService = services.GetService<IInputService>();
+      _simulation = services.GetService<Simulation>();
+      _graphicsService = services.GetService<IGraphicsService>();
+      _gameObjectService = services.GetService<IGameObjectService>();
+      _uiService = services.GetService<IUIService>();
 
       // Add gravity and damping to the physics simulation.
       _simulation.ForceEffects.Add(new Gravity());

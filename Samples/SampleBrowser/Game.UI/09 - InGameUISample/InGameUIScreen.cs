@@ -29,10 +29,10 @@ namespace Samples.Game.UI
     public InGameUIScreen(IServiceProvider services, IUIRenderer renderer)
       : base("InGame", renderer)
     {
-      var gameObjectService = services.GetInstance<IGameObjectService>();
+      var gameObjectService = services.GetService<IGameObjectService>();
       _cameraObject = (CameraObject)gameObjectService.Objects["Camera"];
 
-      _simulation = services.GetInstance<Simulation>();
+      _simulation = services.GetService<Simulation>();
 
       Background = Color.White;
 

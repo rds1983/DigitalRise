@@ -29,8 +29,8 @@ namespace Samples
     protected override void OnLoad()
     {
 			// Load model.
-			var assetManager = _services.GetInstance<AssetManager>();
-			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
       _modelNode = assetManager.LoadDRModel(graphicsService, "Ground/Ground.drmdl").Clone();
 			_modelNode.ScaleLocal = new Vector3(0.5f);
 
@@ -48,7 +48,7 @@ namespace Samples
       }
 
       // Add model node to scene graph.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_modelNode);
 
       // Create rigid body.
@@ -58,7 +58,7 @@ namespace Samples
       };
 
       // Add rigid body to the physics simulation.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
       simulation.RigidBodies.Add(_rigidBody);
     }
 

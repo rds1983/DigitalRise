@@ -13,8 +13,8 @@ namespace WpfInteropSample2
   {
     public static Scene Create()
     {
-      var graphicsService = MyGame.Instance.Services.GetInstance<IGraphicsService>();
-      var assetManager = MyGame.Instance.Services.GetInstance<AssetManager>();
+      var graphicsService = MyGame.Instance.Services.GetService<IGraphicsService>();
+      var assetManager = MyGame.Instance.Services.GetService<AssetManager>();
 
       var screen = new MyGraphicsScreen(graphicsService, assetManager);
       graphicsService.Screens.Add(screen);

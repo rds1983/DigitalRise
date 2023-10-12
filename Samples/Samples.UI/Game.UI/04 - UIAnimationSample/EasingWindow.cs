@@ -28,8 +28,8 @@ namespace Samples.UI
     public EasingWindow(IServiceProvider services) 
       : base(services)
     {
-      _inputService = services.GetInstance<IInputService>();
-      _animationService = services.GetInstance<IAnimationService>();
+      _inputService = services.GetService<IInputService>();
+      _animationService = services.GetService<IAnimationService>();
 
       Title = "EasingWindow";
 

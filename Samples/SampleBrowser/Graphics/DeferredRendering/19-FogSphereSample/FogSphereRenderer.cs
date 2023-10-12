@@ -66,8 +66,8 @@ namespace Samples.Graphics
     /// </exception>
     public FogSphereRenderer(IServiceProvider services)
     {
-      var graphicsService = services.GetInstance<IGraphicsService>();
-      var assetManager = services.GetInstance<AssetManager>();
+      var graphicsService = services.GetService<IGraphicsService>();
+      var assetManager = services.GetService<AssetManager>();
 
       // Load effect.
       _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "FogSphere.efb");

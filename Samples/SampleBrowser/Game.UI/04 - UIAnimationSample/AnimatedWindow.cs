@@ -30,7 +30,7 @@ namespace Samples.Game.UI
     public AnimatedWindow(IServiceProvider services)
     {
       // Get the animation service.
-      _animationService = services.GetInstance<IAnimationService>();
+      _animationService = services.GetService<IAnimationService>();
 
       // Catch closing event.
       Closing += OnClosing;

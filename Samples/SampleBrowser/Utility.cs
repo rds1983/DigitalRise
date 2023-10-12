@@ -22,5 +22,7 @@ namespace DigitalRise
 				return Path.GetDirectoryName(path);
 			}
 		}
+
+		public static T GetService<T>(this IServiceProvider servies) => (T)servies.GetService(typeof(T));
 	}
 }

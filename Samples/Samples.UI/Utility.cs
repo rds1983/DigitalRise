@@ -58,5 +58,7 @@ namespace Samples
 
 			stringBuilder.AppendLine("-");
 		}
+
+		public static T GetService<T>(this IServiceProvider servies) => (T)servies.GetService(typeof(T));
 	}
 }

@@ -111,8 +111,8 @@ To focus on shadows, the other lights and the materials are not rendered when th
     // Creates a test scene with a lot of randomly placed objects.
     internal static void CreateScene(IServiceProvider services, DeferredGraphicsScreen graphicsScreen)
     {
-      var gameObjectService = services.GetInstance<IGameObjectService>();
-      var graphicsService = services.GetInstance<IGraphicsService>();
+      var gameObjectService = services.GetService<IGameObjectService>();
+      var graphicsService = services.GetService<IGraphicsService>();
 
       gameObjectService.Objects.Add(new DynamicSkyObject(services, true, false, true)
       {

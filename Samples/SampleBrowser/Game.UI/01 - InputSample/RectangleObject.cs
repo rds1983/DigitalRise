@@ -37,8 +37,8 @@ namespace Samples.Game.UI
 
     public RectangleObject(IServiceProvider services, DebugRenderer debugRenderer)
     {
-      _inputService = services.GetInstance<IInputService>();
-      _gameObjectService = services.GetInstance<IGameObjectService>();
+      _inputService = services.GetService<IInputService>();
+      _gameObjectService = services.GetService<IGameObjectService>();
       _debugRenderer = debugRenderer;
 
       _left = RandomHelper.Random.NextInteger(0, 1000);

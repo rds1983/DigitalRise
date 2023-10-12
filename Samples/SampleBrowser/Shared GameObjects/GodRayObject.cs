@@ -35,7 +35,7 @@ namespace Samples
     // OnLoad() is called when the GameObject is added to the IGameObjectService.
     protected override void OnLoad()
     {
-      var scene = (SceneNode)_services.GetInstance<IScene>();
+      var scene = (SceneNode)_services.GetService<IScene>();
 
       // Find the most important directional light. 
       _directionalLightNode = scene.GetDescendants()

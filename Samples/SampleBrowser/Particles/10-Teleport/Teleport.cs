@@ -96,8 +96,8 @@ namespace Samples.Particles
 
     private static ParticleSystem CreateSparkles(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {
@@ -184,8 +184,8 @@ namespace Samples.Particles
 
     private static ParticleSystem CreateFastBeams(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {
@@ -247,8 +247,8 @@ namespace Samples.Particles
 
     private static ParticleSystem CreateSlowBeams(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {

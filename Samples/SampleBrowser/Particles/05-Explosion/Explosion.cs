@@ -44,8 +44,8 @@ namespace Samples.Particles
     // for a "flash" effect.
     private ParticleSystem CreateFlash(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {
@@ -105,8 +105,8 @@ namespace Samples.Particles
     // Creates a hot red glowing core particle system for an explosion effect.
     private ParticleSystem CreateHotCore(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {
@@ -219,8 +219,8 @@ namespace Samples.Particles
 
     private ParticleSystem CreateSmoke(IServiceProvider services)
     {
-			var assetManager = services.GetInstance<AssetManager>();
-			var graphicsService = services.GetInstance<IGraphicsService>();
+			var assetManager = services.GetService<AssetManager>();
+			var graphicsService = services.GetService<IGraphicsService>();
 
 			var ps = new ParticleSystem
       {

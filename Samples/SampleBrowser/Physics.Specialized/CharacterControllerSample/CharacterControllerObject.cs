@@ -120,9 +120,9 @@ namespace Samples.Physics.Specialized
     {
       Name = "CharacterController";
 
-      _inputService = services.GetInstance<IInputService>();
-      _debugRenderer = services.GetInstance<DebugRenderer>();
-      _simulation = services.GetInstance<Simulation>();
+      _inputService = services.GetService<IInputService>();
+      _debugRenderer = services.GetService<DebugRenderer>();
+      _simulation = services.GetService<Simulation>();
 
       // Create character controller.
 #if USE_DYNAMIC_CHARACTER_CONTROLLER

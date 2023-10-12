@@ -33,7 +33,7 @@ namespace Samples.Animation
       // screens (menu, GUI, help, ...) should be on top.
       GraphicsService.Screens.Insert(0, graphicsScreen);
 
-      var assetManager = Services.GetInstance<AssetManager>();
+      var assetManager = Services.GetService<AssetManager>();
       // Provide a SpriteBatch, SpriteFont and images for rendering.
       SpriteBatch = GraphicsService.GetSpriteBatch();
       SpriteFont = DefaultAssets.DefaultFont;

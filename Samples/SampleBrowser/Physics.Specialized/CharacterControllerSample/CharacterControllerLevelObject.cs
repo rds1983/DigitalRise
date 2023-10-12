@@ -61,7 +61,7 @@ namespace Samples.Physics.Specialized
     protected override void OnLoad()
     {
       // Add rigid bodies to simulation.
-      var simulation = _services.GetInstance<Simulation>();
+      var simulation = _services.GetService<Simulation>();
 
       // We use a random number generator with a custom seed.
       RandomHelper.Random = new Random(123);

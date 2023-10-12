@@ -27,9 +27,9 @@ namespace Samples.Game.UI
       : base(game)
     {
       _services = services;
-      _inputService = services.GetInstance<IInputService>();
-      _graphicsService = services.GetInstance<IGraphicsService>();
-      _uiService = services.GetInstance<IUIService>();
+      _inputService = services.GetService<IInputService>();
+      _graphicsService = services.GetService<IGraphicsService>();
+      _uiService = services.GetService<IUIService>();
     }
 
 

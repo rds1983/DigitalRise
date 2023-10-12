@@ -49,8 +49,8 @@ namespace Samples
 
     protected override void OnLoad()
     {
-			var assetManager = _services.GetInstance<AssetManager>();
-			var graphicsService = _services.GetInstance<IGraphicsService>();
+			var assetManager = _services.GetService<AssetManager>();
+			var graphicsService = _services.GetService<IGraphicsService>();
 
       // ----- Graphics
       // Load graphics model (created using the ModelWithCollisionMeshProcessor).
@@ -66,7 +66,7 @@ namespace Samples
       var shape = (Shape)_modelNode.UserData;
 
       // Add model to the scene for rendering.
-      var scene = _services.GetInstance<IScene>();
+      var scene = _services.GetService<IScene>();
       scene.Children.Add(_modelNode);
 
       // ----- Collision Detection
@@ -80,7 +80,7 @@ namespace Samples
       // dramatically.
       _collisionObject.Type = CollisionObjectType.Trigger;
 
-      var collisionDomain = _services.GetInstance<CollisionDomain>();
+      var collisionDomain = _services.GetService<CollisionDomain>();
       collisionDomain.CollisionObjects.Add(_collisionObject);
     }
 

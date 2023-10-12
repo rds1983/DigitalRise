@@ -60,9 +60,9 @@ namespace Samples
 
 
     public PostProcessingGraphicsScreen(IServiceProvider services)
-      : base(services.GetInstance<IGraphicsService>())
+      : base(services.GetService<IGraphicsService>())
     {
-      _sampleFramework = services.GetInstance<SampleFramework>();
+      _sampleFramework = services.GetService<SampleFramework>();
 
       _spriteBatch = new SpriteBatch(GraphicsService.GraphicsDevice);
       _clearGBufferRenderer = new ClearGBufferRenderer(GraphicsService);
@@ -75,7 +75,7 @@ namespace Samples
       PostProcessors = new PostProcessorChain(GraphicsService);
 
       // Use 2D texture for reticle.
-      var assetManager = services.GetInstance<AssetManager>();
+      var assetManager = services.GetService<AssetManager>();
       _reticle = assetManager.LoadTexture2D(GraphicsService.GraphicsDevice, "Reticle.png");
 
       // Use the sprite font of the GUI.

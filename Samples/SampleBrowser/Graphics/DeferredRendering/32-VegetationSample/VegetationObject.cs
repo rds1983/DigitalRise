@@ -164,7 +164,7 @@ namespace Samples.Graphics
 
     protected override void OnLoad()
     {
-      _scene = _services.GetInstance<IScene>();
+      _scene = _services.GetService<IScene>();
 
       // Get a bounding shape for the cells. We use a box with the cell size and
       // make it bigger by some arbitrary values. The boxes must be bigger because
@@ -212,7 +212,7 @@ namespace Samples.Graphics
       UpdateLodDistances();
 
       // ----- Add GUI controls to the Options window.
-      var sampleFramework = _services.GetInstance<SampleFramework>();
+      var sampleFramework = _services.GetService<SampleFramework>();
       var optionsPanel = sampleFramework.AddOptions("Game Objects");
       var panel = SampleHelper.AddGroupBox(optionsPanel, "VegetationObject " + Name);
 
@@ -256,7 +256,7 @@ namespace Samples.Graphics
       if (_cameraObject == null)
       {
         // Get the camera game object.
-        var gameObjectService = _services.GetInstance<IGameObjectService>();
+        var gameObjectService = _services.GetService<IGameObjectService>();
         _cameraObject = gameObjectService.Objects.OfType<CameraObject>().First();
       }
 
