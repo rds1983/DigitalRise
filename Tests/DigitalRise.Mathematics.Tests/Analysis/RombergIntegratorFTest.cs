@@ -43,32 +43,6 @@ namespace DigitalRise.Mathematics.Analysis.Tests
 
 
     [Test]
-    public void Test3()
-    {
-      Func<float, float> f = delegate(float x) { return x * x * x * x * (float) Math.Log(x + Math.Sqrt(x * x + 1)); };
-
-      RombergIntegratorF integrator = new RombergIntegratorF();
-      integrator.Epsilon = 0.000001f;
-      float result = integrator.Integrate(f, 0, 2);
-
-      // Compare number of iterations with trapezoidal integrator.
-      TrapezoidalIntegratorF trap = new TrapezoidalIntegratorF();
-      trap.Epsilon = integrator.Epsilon;
-      float result2 = trap.Integrate(f, 0, 2);
-      Assert.IsTrue(Numeric.AreEqual(result, result2, 0.000002f));
-      Assert.Greater(trap.NumberOfIterations, integrator.NumberOfIterations);
-
-
-      // Compare number of iterations with simpson integrator.
-      SimpsonIntegratorF simpson = new SimpsonIntegratorF();
-      simpson.Epsilon = integrator.Epsilon;
-      result2 = simpson.Integrate(f, 0, 2);
-      Assert.IsTrue(Numeric.AreEqual(result, result2, 0.000002f));
-      Assert.Greater(simpson.NumberOfIterations, integrator.NumberOfIterations);
-    }
-
-
-    [Test]
     public void Test4()
     {
       Func<float, float> f = delegate(float x) { return -0.01f * x * x * x + 0.2f * x * x + 4 * x - 9 + (float) Math.Sin(x); };

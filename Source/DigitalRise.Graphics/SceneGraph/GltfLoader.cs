@@ -437,7 +437,7 @@ namespace DigitalRise.Graphics.SceneGraph
 					}
 				}
 
-				mesh.BoundingShape = GeometryHelper.CreateBoundingShape(positions);
+				// mesh.BoundingShape = GeometryHelper.CreateBoundingShape(positions);
 
 				_meshes.Add(mesh);
 			}

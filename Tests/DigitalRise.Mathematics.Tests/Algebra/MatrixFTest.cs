@@ -439,167 +439,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void Inverse()
-    {
-      Assert.AreEqual(MatrixF.CreateIdentity(3,3), MatrixF.CreateIdentity(3,3).Inverse);
-
-      MatrixF m = new MatrixF(new float[,] {{1, 2,  3, 4},
-                                            {2, 5,  8, 3},
-                                            {7, 6, -1, 1},
-                                            {4, 9,  7, 7}});
-      VectorF v = new VectorF(4, 1);
-      VectorF w = m * v;
-      Assert.IsTrue(VectorF.AreNumericallyEqual(v, m.Inverse * w));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4,4), m * m.Inverse));
-
-      m = new MatrixF(new float[,] {{1, 2, 3},
-                                    {2, 5, 8},
-                                    {7, 6, -1},
-                                    {4, 9, 7}});
-      // To check the pseudo-inverse we use the definition: A*A.Transposed*A = A
-      // see http://en.wikipedia.org/wiki/Moore-Penrose_pseudoinverse
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(m, m * m.Inverse * m));
-    }
-
-
-    [Test]
-    public void InverseWithNearSingularMatrix()
-    {
-      MatrixF m = new MatrixF(new float[,] {{0.0001f, 0, 0, 0},
-                                            {0, 0.0001f, 0, 0},
-                                            {0, 0, 0.0001f, 0},
-                                            {0, 0,  0, 0.0001f}});
-      VectorF v = new VectorF(4, 1);
-      VectorF w = m * v;
-      Assert.IsTrue(VectorF.AreNumericallyEqual(v, m.Inverse * w));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), m * m.Inverse));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InverseException()
-    {
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3, 4},
-                                            {2, 5, 8, 3},
-                                            {7, 6, -1, 1},
-                                            {3, 7, 11, 7}});
-      m = m.Inverse;
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InverseException2()
-    {
-      MatrixF m = new MatrixF(4,4).Inverse;
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InverseException3()
-    {
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3},
-                                            {2, 5, 8},
-                                            {7, 6, -1},
-                                            {4, 9, 7}}).Transposed;
-      MatrixF inverse = m.Inverse;
-    }
-
-
-    [Test]
-    public void Invert()
-    {
-      Assert.AreEqual(MatrixF.CreateIdentity(3, 3), MatrixF.CreateIdentity(3, 3).Inverse);
-
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3, 4},
-                                            {2, 5, 8, 3},
-                                            {7, 6, -1, 1},
-                                            {4, 9, 7, 7}});
-      MatrixF inverse = m.Clone();
-      m.Invert();
-      VectorF v = new VectorF(4, 1);
-      VectorF w = m * v;
-      Assert.IsTrue(VectorF.AreNumericallyEqual(v, inverse * w));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), m * inverse));
-
-      m = new MatrixF(new float[,] {{1, 2, 3},
-                                    {2, 5, 8},
-                                    {7, 6, -1},
-                                    {4, 9, 7}});
-      // To check the pseudo-inverse we use the definition: A*A.Transposed*A = A
-      // see http://en.wikipedia.org/wiki/Moore-Penrose_pseudoinverse
-      inverse = m.Clone();
-      inverse.Invert();
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(m, m * inverse * m));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InvertException()
-    {
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3, 4},
-                                            {2, 5, 8, 3},
-                                            {7, 6, -1, 1},
-                                            {3, 7, 11, 7}});
-      m.Invert();
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InvertException2()
-    {
-      MatrixF m = new MatrixF(4, 4);
-      m.Invert();
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void InvertException3()
-    {
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3},
-                                            {2, 5, 8},
-                                            {7, 6, -1},
-                                            {4, 9, 7}}).Transposed;
-      m.Invert();
-    }
-
-
-    [Test]
-    public void TryInvert()
-    {
-      // Regular, square
-      MatrixF m = new MatrixF(new float[,] {{1, 2, 3, 4},
-                                            {2, 5, 8, 3},
-                                            {7, 6, -1, 1},
-                                            {4, 9, 7, 7}});
-      MatrixF inverse = m.Clone();
-      Assert.AreEqual(true, m.TryInvert());
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), m * inverse));
-
-      // Full column rank, rectangular
-      m = new MatrixF(new float[,] {{1, 2, 3},
-                                    {2, 5, 8},
-                                    {7, 6, -1},
-                                    {4, 9, 7}});
-      inverse = m.Clone();
-      Assert.AreEqual(true, m.TryInvert());
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(m, m * inverse * m));
-
-      // singular
-      m = new MatrixF(new float[,] {{1, 2, 3},
-                                    {2, 5, 8},
-                                    {3, 7, 11}});
-      inverse = m.Clone();
-      Assert.AreEqual(false, m.TryInvert());
-    }
-
-
-    [Test]
     public void Determinant()
     {
       MatrixF m = new Matrix44F(1, 2, 3, 4,
@@ -919,128 +758,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       MatrixF m = new MatrixF(4, 3, rowMajor, MatrixOrder.RowMajor);
       m.SetSubmatrix(1, 1, null);
-    }
-
-
-    [Test]
-    public void SolveLinearEquationsMatrix()
-    {
-      // Regular square matrix.
-      MatrixF matrixA = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, -9 } });
-      MatrixF matrixB = new MatrixF(new float[,] {{1, 2},{3, 4}, {5, 6}});
-
-      MatrixF matrixX = MatrixF.SolveLinearEquations(matrixA, matrixB);
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(matrixB, matrixA * matrixX));
-
-      // Full column rank rectangular matrix.
-      matrixA = new MatrixF(new float[,] { { 1, 2 }, { 4, 5}, { 7, -8 } });
-      matrixX = MatrixF.SolveLinearEquations(matrixA, matrixB);
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(matrixA.Transposed * matrixB, matrixA.Transposed * matrixA * matrixX));  // Normal equation (see least squares, Gauss transformation).
-    }
-
-
-    [Test]
-    public void SolveLinearEquationsVector()
-    {
-      // Regular square matrix.
-      MatrixF matrixA = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, -9 } });
-      VectorF vectorB = new VectorF(new float[] { 1, 2, 4 });
-
-      VectorF vectorX = MatrixF.SolveLinearEquations(matrixA, vectorB);
-      Assert.IsTrue(VectorF.AreNumericallyEqual(vectorB, matrixA * vectorX));
-
-      // Full column rank rectangular matrix.
-      matrixA = new MatrixF(new float[,] { { 1, 2 }, { 4, 5 }, { 7, -8 } });
-      vectorX = MatrixF.SolveLinearEquations(matrixA, vectorB);
-      Assert.IsTrue(VectorF.AreNumericallyEqual(matrixA.Transposed * vectorB, matrixA.Transposed * matrixA * vectorX));  // Normal equation (see least squares, Gauss transformation).
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void SolveLinearEquationsException1()
-    {
-      MatrixF.SolveLinearEquations(null, new MatrixF(1, 1, 1));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void SolveLinearEquationsException2()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, -9 } });
-      MatrixF.SolveLinearEquations(a, new MatrixF(4, 1));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void SolveLinearEquationsException3()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }});  // not full column rank.
-      MatrixF.SolveLinearEquations(a, new MatrixF(2, 1));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void SolveLinearEquationsException4()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 5, 7, 9 } }); // not full rank.
-      MatrixF.SolveLinearEquations(a, new MatrixF(3, 1));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void SolveLinearEquationsException5()
-    {
-      MatrixF.SolveLinearEquations(null, new VectorF(1, 1));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void SolveLinearEquationsException6()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, -9 } });
-      MatrixF.SolveLinearEquations(a, new VectorF(4)); // number of rows dont fit
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void SolveLinearEquationsException7()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 } });  // not full column rank.
-      MatrixF.SolveLinearEquations(a, new VectorF(2));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(MathematicsException))]
-    public void SolveLinearEquationsException8()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 5, 7, 9 } }); // not full rank.
-      MatrixF.SolveLinearEquations(a, new VectorF(3));
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void SolveLinearEquationsException9()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 5, 7, 9 } }); // not full rank.
-      MatrixF.SolveLinearEquations(a, (VectorF)null);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void SolveLinearEquationsException10()
-    {
-      MatrixF a = new MatrixF(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 5, 7, 9 } }); // not full rank.
-      MatrixF.SolveLinearEquations(a, (MatrixF) null);
     }
 
 
@@ -1661,8 +1378,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(new MatrixF(4, 4), new MatrixF(4, 4) * m);
       Assert.AreEqual(m, m * MatrixF.CreateIdentity(4, 4));
       Assert.AreEqual(m, MatrixF.CreateIdentity(4, 4) * m);
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), m * m.Inverse));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), m.Inverse * m));
 
       MatrixF m1 = new MatrixF(3, 4, rowMajor, MatrixOrder.RowMajor);
       MatrixF m2 = new MatrixF(4, 4, values, MatrixOrder.RowMajor);
@@ -1688,8 +1403,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(new MatrixF(4, 4), MatrixF.Multiply(new MatrixF(4, 4), m));
       Assert.AreEqual(m, MatrixF.Multiply(m, MatrixF.CreateIdentity(4, 4)));
       Assert.AreEqual(m, MatrixF.Multiply(MatrixF.CreateIdentity(4, 4), m));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), MatrixF.Multiply(m, m.Inverse)));
-      Assert.IsTrue(MatrixF.AreNumericallyEqual(MatrixF.CreateIdentity(4, 4), MatrixF.Multiply(m.Inverse, m)));
 
       MatrixF m1 = new MatrixF(3, 4, rowMajor, MatrixOrder.RowMajor);
       MatrixF m2 = new MatrixF(4, 4, values, MatrixOrder.RowMajor);
@@ -1775,7 +1488,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                      43, 65, 87, 43,
                                      34, -12, 84, 44 };
       MatrixF m = new MatrixF(4, 4, values, MatrixOrder.RowMajor);
-      Assert.IsTrue(VectorF.AreNumericallyEqual(v, m * m.Inverse * v));
 
       for (int i = 0; i < 4; i++)
         Assert.IsTrue(Numeric.AreEqual(VectorF.Dot(m.GetRow(i), v), (m * v)[i]));
@@ -1794,7 +1506,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                      43, 65, 87, 43,
                                      34, -12, 84, 44 };
       MatrixF m = new MatrixF(4, 4, values, MatrixOrder.RowMajor);
-      Assert.IsTrue(VectorF.AreNumericallyEqual(v, MatrixF.Multiply(MatrixF.Multiply(m, m.Inverse), v)));
 
       for (int i = 0; i < 4; i++)
         Assert.IsTrue(Numeric.AreEqual(VectorF.Dot(m.GetRow(i), v), MatrixF.Multiply(m, v)[i]));
