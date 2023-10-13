@@ -6,7 +6,6 @@ using DigitalRise.Animation.Character;
 using DigitalRise.Character.Skeleton_Animations;
 using DigitalRise.Geometry;
 using DigitalRise.Graphics.Effects;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using glTFLoader;
 using glTFLoader.Schema;
@@ -231,7 +230,7 @@ namespace DigitalRise.Graphics.SceneGraph
 			foreach (var gltfMesh in _gltf.Meshes)
 			{
 				var mesh = new Mesh();
-				var boundingBox = new BoundingBox();
+				var positions = new List<Vector3>();
 				foreach (var primitive in gltfMesh.Primitives)
 				{
 					if (primitive.Mode != MeshPrimitive.ModeEnum.TRIANGLES)
@@ -319,7 +318,6 @@ namespace DigitalRise.Graphics.SceneGraph
 
 					// Set vertex data
 					var vertexData = new byte[vertexCount.Value * vd.VertexStride];
-					var positions = new List<Vector3>();
 					offset = 0;
 					for (var i = 0; i < vertexInfos.Count; ++i)
 					{
@@ -345,9 +343,6 @@ namespace DigitalRise.Graphics.SceneGraph
 
 						offset += sz;
 					}
-
-					var newBoundingBox = BoundingBox.CreateFromPoints(positions);
-					boundingBox = BoundingBox.CreateMerged(boundingBox, newBoundingBox);
 
 					/*					var vertices = new VertexPositionNormalTexture[vertexCount.Value];
 										unsafe
@@ -442,9 +437,7 @@ namespace DigitalRise.Graphics.SceneGraph
 					}
 				}
 
-				/*				mesh.BoundingShape = new BoxShape(boundingBox.Max.X - boundingBox.Min.X,
-								boundingBox.Max.Y - boundingBox.Min.Y,
-								boundingBox.Max.Z - boundingBox.Min.Z);*/
+				mesh.BoundingShape = GeometryHelper.CreateBoundingShape(positions);
 
 				_meshes.Add(mesh);
 			}
