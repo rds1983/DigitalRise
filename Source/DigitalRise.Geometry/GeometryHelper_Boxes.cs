@@ -48,7 +48,7 @@ namespace DigitalRise.Geometry
         throw new ArgumentException("The list of 'points' is empty.");
 
       // Covariance matrix.
-      MatrixF cov = null;
+      Matrix33F? cov = null;
 
       // ReSharper disable EmptyGeneralCatchClause
       try
@@ -76,7 +76,7 @@ namespace DigitalRise.Geometry
       // If anything happens in the convex hull creation, we can still go on including the
       // interior points and compute the covariance matrix for the points instead of the 
       // surface.
-      if (cov == null || Numeric.IsNaN(cov.Determinant))
+      if (cov == null || Numeric.IsNaN(cov.Value.Determinant))
       {
         // Make copy of points list because ComputeBoundingBox() will reorder the points.
         points = points.ToList();
@@ -84,10 +84,10 @@ namespace DigitalRise.Geometry
       }
 
       // Perform Eigenvalue decomposition.
-      EigenvalueDecompositionF evd = new EigenvalueDecompositionF(cov);
+      EigenvalueDecompositionF evd = new EigenvalueDecompositionF(cov.Value);
 
       // v transforms from local coordinate space of the box into world space.
-      var v = evd.V.ToMatrix33F();
+      var v = evd.V;
 
       Debug.Assert(v.GetColumn(0).IsNumericallyNormalized());
       Debug.Assert(v.GetColumn(1).IsNumericallyNormalized());
@@ -169,23 +169,14 @@ namespace DigitalRise.Geometry
 
 
     // Computes the covariance matrix for a list of points.
-    private static MatrixF ComputeCovarianceMatrixFromPoints(IList<Vector3> points)
+    private static Matrix33F ComputeCovarianceMatrixFromPoints(IList<Vector3> points)
     {
-      // Convert IList<Vector3> to IList<VectorF> which is required for PCA.
-      int numberOfPoints = points.Count;
-      List<VectorF> pointsCopy = new List<VectorF>(numberOfPoints);
-      for (int i = 0; i < numberOfPoints; i++)
-      {
-        var point = points[i];
-        pointsCopy.Add(point.ToVectorF());
-      }
-
-      return StatisticsHelper.ComputeCovarianceMatrix(pointsCopy);
+      return StatisticsHelper.ComputeCovarianceMatrix(points);
     }
 
 
     // Computes the surface covariance matrix for a convex hull of the given points.
-    private static MatrixF ComputeCovarianceMatrixFromSurface(ITriangleMesh mesh)
+    private static Matrix33F ComputeCovarianceMatrixFromSurface(ITriangleMesh mesh)
     {
       // Compute covariance matrix for the surface of the triangle mesh.
       // See Physics-Based Animation for a derivation. Variable names are the same as in
@@ -193,7 +184,7 @@ namespace DigitalRise.Geometry
       // ... Better look at Real-Time Collision Detection p. 108. The Physics-Based Animation
       // book has errors.
 
-      MatrixF C = new MatrixF(3, 3);          // The covariance matrix.
+      Matrix33F C = new Matrix33F();          // The covariance matrix.
       float A = 0;                            // Total surface area.
       Vector3 mS = Vector3.Zero;            // Mean point of the entire surface.
       for (int k = 0; k < mesh.NumberOfTriangles; k++)

@@ -262,10 +262,10 @@ namespace DigitalRise.Animation.Character
       int numberOfBones = SkeletonPose.GetNumberOfBones(RootBoneIndex, TipBoneIndex);
 
       // The transposed jacobian matrix.
-      var jacobianTransposed = new MatrixF(numberOfBones, 6);
+      var jacobianTransposed = new float[numberOfBones, 6];
 
       // The force vector (3 linear and 3 angular (torque) entries).
-      VectorF force = new VectorF(6);
+      var force = new float[6];
 
       // The rotation axes of the bones.
       Vector3[] axes = new Vector3[numberOfBones];
@@ -329,8 +329,14 @@ namespace DigitalRise.Animation.Character
         force[4] = 0;
         force[5] = 0;
 
-        // Compute pseudo velocities.
-        VectorF velocities = jacobianTransposed * force;   // TODO: Garbage!
+				// Compute pseudo velocities.
+				var velocities = new float[numberOfBones];
+        for (int j = 0; j < numberOfBones; j++)
+        {
+          velocities[j] = 0;
+          for (int k = 0; k < 6; k++)
+            velocities[j] += jacobianTransposed[j, k] * force[k];
+        }
 
         // Euler integration step.
         currentBoneIndex = TipBoneIndex;

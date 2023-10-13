@@ -38,7 +38,7 @@ namespace DigitalRise.Geometry
         throw new ArgumentNullException("points");
 
       // Covariance matrix.
-      MatrixF cov = null;
+      Matrix33F? cov = null;
 
       // ReSharper disable EmptyGeneralCatchClause
       try
@@ -65,14 +65,14 @@ namespace DigitalRise.Geometry
       // If anything happens in the convex hull creation, we can still go on including the
       // interior points and compute the covariance matrix for the points instead of the 
       // surface.
-      if (cov == null || Numeric.IsNaN(cov.Determinant))
+      if (cov == null || Numeric.IsNaN(cov.Value.Determinant))
         cov = ComputeCovarianceMatrixFromPoints(points);
 
       // Perform Eigenvalue decomposition.
-      EigenvalueDecompositionF evd = new EigenvalueDecompositionF(cov);
+      EigenvalueDecompositionF evd = new EigenvalueDecompositionF(cov.Value);
 
       // v transforms from local coordinate space of the capsule into world space.
-      var v = evd.V.ToMatrix33F();
+      var v = evd.V;
 
       Debug.Assert(v.GetColumn(0).IsNumericallyNormalized());
       Debug.Assert(v.GetColumn(1).IsNumericallyNormalized());
@@ -83,7 +83,7 @@ namespace DigitalRise.Geometry
       v.SetColumn(2, Vector3.Cross(v.GetColumn(0), v.GetColumn(1)));
 
       // Make local Y the largest axis. (Y is the long capsule axis.)
-      Vector3 eigenValues = evd.RealEigenvalues.ToVector3();
+      Vector3 eigenValues = evd.RealEigenvalues;
       int largestComponentIndex = eigenValues.IndexOfLargestComponent();
       if (largestComponentIndex != 1)
       {

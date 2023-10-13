@@ -1071,36 +1071,6 @@ namespace DigitalRise.Mathematics.Algebra
     }
 
 
-    /// <overloads>
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Matrix33F"/> to another data type.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Performs an implicit conversion from <see cref="Matrix33F"/> to <see cref="MatrixF"/>.
-    /// </summary>
-    /// <param name="matrix">The matrix.</param>
-    /// <returns>The result of the conversion.</returns>
-    public static implicit operator MatrixF(Matrix33F matrix)
-    {
-      MatrixF result = new MatrixF(3, 3);
-      result[0, 0] = matrix.M00; result[0, 1] = matrix.M01; result[0, 2] = matrix.M02;
-      result[1, 0] = matrix.M10; result[1, 1] = matrix.M11; result[1, 2] = matrix.M12;
-      result[2, 0] = matrix.M20; result[2, 1] = matrix.M21; result[2, 2] = matrix.M22;
-      return result;
-    }
-
-
-    /// <summary>
-    /// Converts this <see cref="Matrix33F"/> to <see cref="MatrixF"/>.
-    /// </summary>
-    /// <returns>The result of the conversion.</returns>
-    public MatrixF ToMatrixF()
-    {
-      return this;
-    }
-
     #endregion
 
 

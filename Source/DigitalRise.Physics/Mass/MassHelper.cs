@@ -49,9 +49,9 @@ namespace DigitalRise.Physics
       // for cubic equations and computation of bounding boxes.
 
       // Perform eigenvalue decomposition.
-      var eigenValueDecomposition = new EigenvalueDecompositionF(inertia.ToMatrixF());
-      inertiaDiagonal = eigenValueDecomposition.RealEigenvalues.ToVector3();
-      rotation = eigenValueDecomposition.V.ToMatrix33F();
+      var eigenValueDecomposition = new EigenvalueDecompositionF(inertia);
+      inertiaDiagonal = eigenValueDecomposition.RealEigenvalues;
+      rotation = eigenValueDecomposition.V;
 
       if (!rotation.IsRotation)
       {

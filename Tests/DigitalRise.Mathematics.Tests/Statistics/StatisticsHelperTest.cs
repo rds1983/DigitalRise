@@ -27,14 +27,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
 
     [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void ComputeCovarianceMatrixFWithArgumentNull()
-    {
-      StatisticsHelper.ComputeCovarianceMatrix((List<VectorF>)null);
-    }
-
-
-    [Test]
     public void ComputeCovarianceMatrix3FWithEmptyList()
     {
       var result = StatisticsHelper.ComputeCovarianceMatrix(new List<Vector3>());
@@ -49,28 +41,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       var result = StatisticsHelper.ComputeCovarianceMatrix(new List<Vector3>());
       foreach (var element in result.ToList(MatrixOrder.RowMajor))
         Assert.IsNaN(element);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void ComputeCovarianceMatrixFWithEmptyList()
-    {
-      var result = StatisticsHelper.ComputeCovarianceMatrix(new List<VectorF>());
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void ComputeCovarianceMatrixFWithVectorsOfDifferentLength()
-    {
-      List<VectorF> points = new List<VectorF>(new[]
-      {
-        new VectorF(new float[] { -1, -2, 1 }),
-        new VectorF(new float[] { 2, -1, 3 }),
-        new VectorF(new float[] { 2, -1, 2, 3 }),
-      }); 
-      var result = StatisticsHelper.ComputeCovarianceMatrix(points);
     }
   }
 }

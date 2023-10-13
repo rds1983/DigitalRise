@@ -1093,22 +1093,5 @@ namespace DigitalRise.Mathematics.Algebra.Tests
         for (int j = 0; j < 2; j++)
           Assert.AreEqual(i * 2 + j + 1, array[i][j]);
     }
-
-
-    [Test]
-    public void ToMatrixF()
-    {
-      Matrix22F m22 = new Matrix22F(1, 2, 3, 4);
-
-      MatrixF m = m22.ToMatrixF();
-      for (int i = 0; i < 2; i++)
-        for (int j = 0; j < 2; j++)
-          Assert.AreEqual(i * 2 + j + 1, m[i, j]);
-
-      m = m22;
-      for (int i = 0; i < 2; i++)
-        for (int j = 0; j < 2; j++)
-          Assert.AreEqual(i * 2 + j + 1, m[i, j]);
-    }
   }
 }

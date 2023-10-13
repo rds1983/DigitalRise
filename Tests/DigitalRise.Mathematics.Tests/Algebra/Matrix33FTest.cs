@@ -1339,22 +1339,5 @@ namespace DigitalRise.Mathematics.Algebra.Tests
         for (int j = 0; j < 3; j++)
           Assert.AreEqual(i * 3 + j + 1, array[i][j]);
     }
-
-
-    [Test]
-    public void ToMatrixF()
-    {
-      Matrix33F m33 = new Matrix33F(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-      MatrixF m = m33.ToMatrixF();
-      for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++)
-          Assert.AreEqual(i * 3 + j + 1, m[i, j]);
-
-      m = m33;
-      for (int i = 0; i < 3; i++)
-        for (int j = 0; j < 3; j++)
-          Assert.AreEqual(i * 3 + j + 1, m[i, j]);
-    }
   }
 }

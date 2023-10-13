@@ -223,28 +223,6 @@ namespace DigitalRise.Mathematics.Statistics
 
 
     /// <summary>
-    /// Fills a <see cref="VectorF"/> with random values.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="vector">The vector that should be filled with random values.</param>
-    /// <param name="min">The minimal allowed value for a vector element.</param>
-    /// <param name="max">The maximal allowed value for a vector element.</param>
-    /// <returns>A random <see cref="VectorF"/>.</returns>
-    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void NextVectorF(this Random random, VectorF vector, float min, float max)
-    {
-      if (random == null)
-        random = Random;
-
-      for (int i = 0; i < vector.NumberOfElements; i++)
-        vector[i] = NextFloat(random, min, max);
-    }
-
-
-    /// <summary>
     /// Gets a random <see cref="Matrix22F"/>.
     /// </summary>
     /// <param name="random">
@@ -304,28 +282,6 @@ namespace DigitalRise.Mathematics.Statistics
                            NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max),
                            NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max),
                            NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max), NextFloat(random, min, max));
-    }
-
-
-    /// <summary>
-    /// Fills a <see cref="MatrixF"/> with random values.
-    /// </summary>
-    /// <param name="random">
-    /// The random number generator. If this parameter is <see langword="null"/>, the global random
-    /// number generator (see <see cref="RandomHelper.Random"/>) is used.
-    /// </param>
-    /// <param name="matrix">The matrix that is filled with random values.</param>
-    /// <param name="min">The minimal allowed value for a matrix element.</param>
-    /// <param name="max">The maximal allowed value for a matrix element.</param>
-    [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", Justification = "Performance")]
-    public static void NextMatrixF(this Random random, MatrixF matrix, float min, float max)
-    {
-      if (random == null)
-        random = Random;
-
-      for (int r = 0; r < matrix.NumberOfRows; r++)
-        for (int c = 0; c < matrix.NumberOfColumns; c++)
-          matrix[r, c] = NextFloat(random, min, max);
     }
 
 

@@ -698,19 +698,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    public void ToVectorF()
-    {
-      Vector3 v = new Vector3(1.1f, 2.2f, 3.3f);
-      VectorF v2 = v.ToVectorF();
-
-      Assert.AreEqual(3, v2.NumberOfElements);
-      Assert.AreEqual(1.1f, v2[0]);
-      Assert.AreEqual(2.2f, v2[1]);
-      Assert.AreEqual(3.3f, v2[2]);
-    }
-
-
-    [Test]
     public void ExplicitFromXnaCast()
     {
       Vector3 xna = new Vector3(6, 7, 8);

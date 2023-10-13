@@ -78,47 +78,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
 
     [Test]
-    public void LerpVectorF()
-    {
-      VectorF v = new VectorF(new[] { 1.0f, 10.0f, 100.0f, 1000.0f });
-      VectorF w = new VectorF(new[] { 2.0f, 20.0f, 200.0f, 2000.0f });
-      VectorF lerp0 = InterpolationHelper.Lerp(v, w, 0.0f);
-      VectorF lerp1 = InterpolationHelper.Lerp(v, w, 1.0f);
-      VectorF lerp05 = InterpolationHelper.Lerp(v, w, 0.5f);
-      VectorF lerp025 = InterpolationHelper.Lerp(v, w, 0.25f);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new VectorF(new[] {1.5f, 15.0f, 150.0f, 1500.0f}), lerp05);
-      Assert.AreEqual(new VectorF(new[] {1.25f, 12.5f, 125.0f, 1250.0f}), lerp025);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void LerpVectorFException()
-    {
-      InterpolationHelper.Lerp(null, new VectorF(), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void LerpVectorFException2()
-    {
-      InterpolationHelper.Lerp(new VectorF(), null, 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void LerpVectorFException3()
-    {
-      InterpolationHelper.Lerp(new VectorF(3), new VectorF(4), 0);
-    }
-
-
-    [Test]
     public void LerpQuaternion()
     {
       // Warning: The not all results are not verified
@@ -393,45 +352,6 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(v, lerp0);
       Assert.AreEqual(w, lerp1);
       Assert.AreEqual(new Vector4(1.5f, 15.0f, 150.0f, 1500.0f), lerp05);
-    }
-
-
-    [Test]
-    public void CosineInterpolationVectorF()
-    {
-      VectorF v = new VectorF(new[] { 1.0f, 10.0f, 100.0f, 1000.0f });
-      VectorF w = new VectorF(new[] { 2.0f, 20.0f, 200.0f, 2000.0f });
-      VectorF lerp0 = InterpolationHelper.CosineInterpolation(v, w, 0.0f);
-      VectorF lerp1 = InterpolationHelper.CosineInterpolation(v, w, 1.0f);
-      VectorF lerp05 = InterpolationHelper.CosineInterpolation(v, w, 0.5f);
-
-      Assert.AreEqual(v, lerp0);
-      Assert.AreEqual(w, lerp1);
-      Assert.AreEqual(new VectorF(new[] { 1.5f, 15.0f, 150.0f, 1500.0f }), lerp05);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CosineInterpolationVectorFException()
-    {
-      InterpolationHelper.CosineInterpolation(null, new VectorF(), 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CosineInterpolationVectorFException2()
-    {
-      InterpolationHelper.CosineInterpolation(new VectorF(), null, 0);
-    }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void CosineInterpolationVectorFException3()
-    {
-      InterpolationHelper.CosineInterpolation(new VectorF(3), new VectorF(4), 0);
     }
 
 

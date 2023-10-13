@@ -146,21 +146,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
       RandomHelper.NextVector4(null, 1, 3);
     }
 
-
-    [Test]
-    public void RandomVectorF()
-    {
-      var vector = new VectorF(6);
-      RandomHelper.Random.NextVectorF(vector, -2.0f, 0.5f);
-      for (int i = 0; i < 6; i++)
-      {
-        Assert.IsTrue(-2.0f <= vector[i] && vector[i] <= 0.5f);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextVectorF(null, vector, 1, 3);
-    }
-
     
     [Test]
     public void RandomMatrix22F()
@@ -201,21 +186,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
 
       // Must not throw exception.
       RandomHelper.NextMatrix44F(null, 1, 3);
-    }
-
-
-    [Test]
-    public void RandomMatrixF()
-    {
-      var matrix = new MatrixF(2, 3);
-      RandomHelper.Random.NextMatrixF(matrix, -2.0f, 0.5f);
-      for (int i = 0; i < 6; i++)
-      {
-        Assert.IsTrue(-2.0f <= matrix[i] && matrix[i] <= 0.5f);
-      }
-
-      // Must not throw exception.
-      RandomHelper.NextMatrixF(null, matrix, 1, 3);
     }
 
 

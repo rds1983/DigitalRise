@@ -49,13 +49,5 @@ namespace DigitalRise.Mathematics.Statistics.Tests
         Assert.IsTrue(angle <= 0.1f);
       }
     }
-
-
-    [Test]
-    [ExpectedException(typeof(ArgumentException))]
-    public void InvalidDirection()
-    {
-      new DirectionDistribution { Direction = new Vector3(Numeric.EpsilonF / 10, 0, 0) };
-    }
   }
 }
