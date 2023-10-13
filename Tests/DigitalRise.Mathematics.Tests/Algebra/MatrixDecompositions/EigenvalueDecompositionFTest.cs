@@ -33,14 +33,14 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
     private static bool IsNaN(Vector3 v)
     {
-      return v.X == float.NaN && v.Y == float.NaN && v.Z == float.NaN;
+			return float.IsNaN(v.X) && float.IsNaN(v.Y) && float.IsNaN(v.Z);
     }
 
     private static bool IsNaN(Matrix33F v)
     {
       for(var i = 0; i < 9; ++i)
       {
-        if (v[i] != float.NaN)
+        if (!float.IsNaN(v[i]))
         {
           return false;
         }
