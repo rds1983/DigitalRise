@@ -141,7 +141,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(1, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 0, 0)));
     //  Assert.AreEqual(2, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(0, 1, 0)));
     //  Assert.AreEqual(3, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(0, 0, 1)));
-    //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(1, 1, 1)).Length, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 1, 1))));
+    //  AssertExt.AreNumericallyEqual(MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(1, 1, 1)).Length, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 

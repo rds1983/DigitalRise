@@ -1,10 +1,9 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -72,7 +71,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(false, algo.HaveContact(ray, box));
       Assert.AreEqual(false, algo.HaveContact(box, ray));
       Assert.AreEqual(0, set.Count);
-      Assert.IsTrue(Numeric.AreEqual(-(float) Math.Sqrt(0.5*0.5 + 0.5*0.5), algo.GetClosestPoints(ray, box)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-(float) Math.Sqrt(0.5*0.5 + 0.5*0.5), algo.GetClosestPoints(ray, box)[0].PenetrationDepth);
 
       // Face is separating plane.
       ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(3, 2, -2));
@@ -89,7 +88,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(true, algo.HaveContact(ray, box));
       Assert.AreEqual(true, algo.HaveContact(box, ray));
-      Assert.IsTrue(Numeric.AreEqual((float)Math.Sqrt(3*3 + 3*3), set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual((float)Math.Sqrt(3*3 + 3*3), set[0].PenetrationDepth);
       Assert.AreEqual(-Vector3.UnitX, set[0].Normal);
     }
   }

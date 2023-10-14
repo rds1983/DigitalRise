@@ -129,14 +129,14 @@ namespace DigitalRise.Graphics.Tests
       // Sphere at near plane.
       geometricObject.Pose = cameraNode.PoseWorld * new Pose(new Vector3(0.123f, -0.543f, -1));
       screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
-      Assert.IsTrue(Numeric.AreEqual(screenSize.X, 50.0f, 10f));
-      Assert.IsTrue(Numeric.AreEqual(screenSize.Y, 50.0f, 10f));
+      AssertExt.AreNumericallyEqual(screenSize.X, 50.0f, 10f);
+      AssertExt.AreNumericallyEqual(screenSize.Y, 50.0f, 10f);
 
       // Double distance --> half size
       geometricObject.Pose = cameraNode.PoseWorld * new Pose(new Vector3(0.123f, -0.543f, -2));
       screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
-      Assert.IsTrue(Numeric.AreEqual(screenSize.X, 25.0f, 5f));
-      Assert.IsTrue(Numeric.AreEqual(screenSize.Y, 25.0f, 5f));
+      AssertExt.AreNumericallyEqual(screenSize.X, 25.0f, 5f);
+      AssertExt.AreNumericallyEqual(screenSize.Y, 25.0f, 5f);
     }
 
 
@@ -179,20 +179,20 @@ namespace DigitalRise.Graphics.Tests
       // Sphere at camera position.
       geometricObject.Pose = cameraNode.PoseWorld;
       screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
-      Assert.IsTrue(Numeric.AreEqual(screenSize.X, 50.0f, 10f));
-      Assert.IsTrue(Numeric.AreEqual(screenSize.Y, 50.0f, 10f));
+      AssertExt.AreNumericallyEqual(screenSize.X, 50.0f, 10f);
+      AssertExt.AreNumericallyEqual(screenSize.Y, 50.0f, 10f);
 
       // Sphere at near plane.
       geometricObject.Pose = cameraNode.PoseWorld * new Pose(new Vector3(0.123f, -0.543f, -1));
       screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
-      Assert.IsTrue(Numeric.AreEqual(screenSize.X, 50.0f, 10f));
-      Assert.IsTrue(Numeric.AreEqual(screenSize.Y, 50.0f, 10f));
+      AssertExt.AreNumericallyEqual(screenSize.X, 50.0f, 10f);
+      AssertExt.AreNumericallyEqual(screenSize.Y, 50.0f, 10f);
 
       // Double distance --> same size
       geometricObject.Pose = cameraNode.PoseWorld * new Pose(new Vector3(0.123f, -0.543f, -2));
       screenSize = GraphicsHelper.GetScreenSize(cameraNode, viewport, geometricObject);
-      Assert.IsTrue(Numeric.AreEqual(screenSize.X, 50.0f, 10f));
-      Assert.IsTrue(Numeric.AreEqual(screenSize.Y, 50.0f, 10f));
+      AssertExt.AreNumericallyEqual(screenSize.X, 50.0f, 10f);
+      AssertExt.AreNumericallyEqual(screenSize.Y, 50.0f, 10f);
     }
   }
 }

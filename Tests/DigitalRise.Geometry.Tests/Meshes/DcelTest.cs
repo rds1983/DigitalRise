@@ -4,6 +4,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
 
 namespace DigitalRise.Geometry.Meshes.Tests
@@ -301,12 +302,12 @@ namespace DigitalRise.Geometry.Meshes.Tests
       var aabb2 = mesh.GetAabb();
 
       Assert.IsTrue(mesh.IsConvex());
-      Assert.IsTrue(Numeric.AreEqual(aabb.Minimum.X - skinWidth, aabb2.Minimum.X));
-      Assert.IsTrue(Numeric.AreEqual(aabb.Minimum.Y - skinWidth, aabb2.Minimum.Y));
-      Assert.IsTrue(Numeric.AreEqual(aabb.Minimum.Z - skinWidth, aabb2.Minimum.Z));
-      Assert.IsTrue(Numeric.AreEqual(aabb.Maximum.X + skinWidth, aabb2.Maximum.X));
-      Assert.IsTrue(Numeric.AreEqual(aabb.Maximum.Y + skinWidth, aabb2.Maximum.Y));
-      Assert.IsTrue(Numeric.AreEqual(aabb.Maximum.Z + skinWidth, aabb2.Maximum.Z));
+      AssertExt.AreNumericallyEqual(aabb.Minimum.X - skinWidth, aabb2.Minimum.X);
+      AssertExt.AreNumericallyEqual(aabb.Minimum.Y - skinWidth, aabb2.Minimum.Y);
+      AssertExt.AreNumericallyEqual(aabb.Minimum.Z - skinWidth, aabb2.Minimum.Z);
+      AssertExt.AreNumericallyEqual(aabb.Maximum.X + skinWidth, aabb2.Maximum.X);
+      AssertExt.AreNumericallyEqual(aabb.Maximum.Y + skinWidth, aabb2.Maximum.Y);
+      AssertExt.AreNumericallyEqual(aabb.Maximum.Z + skinWidth, aabb2.Maximum.Z);
     }
   }
 }

@@ -48,9 +48,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = new Vector2(-1, 9),
       };
 
-      Assert.IsTrue(Numeric.AreEqual((s.Point2 - s.Point1).Length(), s.GetLength(0, 1, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual((s.Point2 - s.Point1).Length() * 0.3f, s.GetLength(0.6f, 0.3f, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual((s.Point2 - s.Point1).Length() * 0.3f, s.GetLength(0.1f, 0.4f, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual((s.Point2 - s.Point1).Length(), s.GetLength(0, 1, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual((s.Point2 - s.Point1).Length() * 0.3f, s.GetLength(0.6f, 0.3f, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual((s.Point2 - s.Point1).Length() * 0.3f, s.GetLength(0.1f, 0.4f, 100, Numeric.EpsilonF));
     }
 
 

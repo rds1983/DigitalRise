@@ -969,7 +969,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
       m = m / s;
       for (int i = 0; i < 9; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 
@@ -980,14 +980,14 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix33F m = new Matrix33F(columnMajor, MatrixOrder.ColumnMajor);
       m = Matrix33F.Divide(m, s);
       for (int i = 0; i < 9; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 
     [Test]
     public void MultiplyMatrixOperator()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
@@ -1014,7 +1014,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void MultiplyMatrix()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
@@ -1041,7 +1041,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void MultiplyVectorOperator()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
         Assert.AreEqual(v, Matrix33F.Identity * v);
@@ -1061,7 +1061,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void MultiplyVector()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
         Assert.AreEqual(v, Matrix33F.Multiply(Matrix33F.Identity, v));

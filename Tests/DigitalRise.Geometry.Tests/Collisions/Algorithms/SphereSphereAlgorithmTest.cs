@@ -1,8 +1,8 @@
 using System;
 using NUnit.Framework;
-using DigitalRise.Mathematics;
 using DigitalRise.Geometry.Shapes;
 using Microsoft.Xna.Framework;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -106,7 +106,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(1, 0, 0), cs[0].Position);
       Assert.AreEqual(new Vector3(1, 0, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(0, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0, cs[0].PenetrationDepth);
     }
 
 
@@ -132,7 +132,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, 0.85f, 0), cs[0].Position);
       Assert.AreEqual(new Vector3(0, 1, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(0.3f, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.3f, cs[0].PenetrationDepth);
     }
 
 
@@ -201,7 +201,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, 0, 1), cs[0].Position);
       //Assert.AreEqual(new Vector3(0, 0, 1), cs.Contacts[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(0, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0, cs[0].PenetrationDepth);
     }
 
 
@@ -227,7 +227,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, 0, 0.625f), cs[0].Position);
       Assert.AreEqual(new Vector3(0, 0, 1), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(0.75f, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.75f, cs[0].PenetrationDepth);
     }
 
     [Test]
@@ -252,7 +252,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, 0, 0.5f), cs[0].Position);
       Assert.AreEqual(new Vector3(0, 0, 1), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(1, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(1, cs[0].PenetrationDepth);
     }
 
 
@@ -278,7 +278,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(1, 1.25f, 1), cs[0].Position);
       Assert.AreEqual(new Vector3(0, 1, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(1.5f, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(1.5f, cs[0].PenetrationDepth);
     }
 
 

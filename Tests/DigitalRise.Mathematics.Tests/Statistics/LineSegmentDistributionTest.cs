@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Microsoft.Xna.Framework;
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Statistics.Tests
 {
@@ -31,8 +32,8 @@ namespace DigitalRise.Mathematics.Statistics.Tests
         var factorX = (r.X - d.Start.X) / (d.End.X - d.Start.X);
         var factorY = (r.Y - d.Start.Y) / (d.End.Y - d.Start.Y);
         var factorZ = (r.Z - d.Start.Z) / (d.End.Z - d.Start.Z);
-        Assert.IsTrue(Numeric.AreEqual(factorX, factorY));
-        Assert.IsTrue(Numeric.AreEqual(factorX, factorZ));
+        AssertExt.AreNumericallyEqual(factorX, factorY);
+        AssertExt.AreNumericallyEqual(factorX, factorZ);
         Assert.IsTrue(-0.00001f < factorX &&  factorX < 1.00001f);
       }
 
@@ -62,8 +63,8 @@ namespace DigitalRise.Mathematics.Statistics.Tests
         var factorX = (r.X - d.Start.X) / (d.End.X - d.Start.X);
         var factorY = (r.Y - d.Start.Y) / (d.End.Y - d.Start.Y);
         var factorZ = (r.Z - d.Start.Z) / (d.End.Z - d.Start.Z);
-        Assert.IsTrue(Numeric.AreEqual(factorX, factorY));
-        Assert.IsTrue(Numeric.AreEqual(factorX, factorZ));
+        AssertExt.AreNumericallyEqual(factorX, factorY);
+        AssertExt.AreNumericallyEqual(factorX, factorZ);
         Assert.IsTrue(-0.00001f < factorX && factorX < 1.00001f);
       }
     }

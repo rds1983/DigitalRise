@@ -266,10 +266,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector4 v = new Vector4(x, y, z, w);
       Vector4 u = v / s;
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
-      Assert.IsTrue(Numeric.AreEqual(z / s, u.Z));
-      Assert.IsTrue(Numeric.AreEqual(w / s, u.W));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
+      AssertExt.AreNumericallyEqual(z / s, u.Z);
+      AssertExt.AreNumericallyEqual(w / s, u.W);
     }
 
 
@@ -284,10 +284,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector4 v = new Vector4(x, y, z, w);
       Vector4 u = Vector4.Divide(v, s);
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
-      Assert.IsTrue(Numeric.AreEqual(z / s, u.Z));
-      Assert.IsTrue(Numeric.AreEqual(w / s, u.W));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
+      AssertExt.AreNumericallyEqual(z / s, u.Z);
+      AssertExt.AreNumericallyEqual(w / s, u.W);
     }
 
 
@@ -514,13 +514,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       // 45�
       float angle = (float)Math.Acos(Vector4.Dot(new Vector4(1, 1, 0, 0).Normalized(), Vector4.UnitX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector4.Dot(new Vector4(0, 1, 1, 0).Normalized(), Vector4.UnitY));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector4.Dot(new Vector4(1, 0, 1, 0).Normalized(), Vector4.UnitZ));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector4.Dot(new Vector4(1, 0, 0, 1).Normalized(), Vector4.UnitW));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
     }
 
 

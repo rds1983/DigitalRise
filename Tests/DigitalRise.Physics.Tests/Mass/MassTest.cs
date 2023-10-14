@@ -57,7 +57,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(b, new Vector3(1, -2, -3), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -80,7 +80,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -89,7 +89,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 10, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(m0 * 0.7f, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0 * 0.7f, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 0.7f, i2, e * (1 + i0.Trace));
 
@@ -98,7 +98,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -121,7 +121,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -130,7 +130,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 10, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(m0 * 0.7f, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0 * 0.7f, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 0.7f, i2, e * (1 + i0.Trace));
 
@@ -139,7 +139,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -162,7 +162,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -171,7 +171,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 10, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(m0 * 0.7f, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0 * 0.7f, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 0.7f, i2, e * (1 + i0.Trace));
 
@@ -180,7 +180,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -203,7 +203,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -212,7 +212,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 10, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(m0 * 0.7f, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0 * 0.7f, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 0.7f, i2, e * (1 + i0.Trace));
 
@@ -221,7 +221,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -288,7 +288,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -297,7 +297,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 10, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(m0 * 0.7f, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0 * 0.7f, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 0.7f, i2, e * (1 + i0.Trace));
     }
@@ -320,7 +320,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
     }
@@ -343,7 +343,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
     }
@@ -392,7 +392,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, 0.7f * m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, 0.7f * m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, 0.7f * i1, e * (1 + i0.Trace));
 
@@ -401,7 +401,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com3;
       Matrix33F i3;
       MassHelper.GetMass(s, new Vector3(2, 2.1f, 2.8f), 23, false, 0.001f, 10, out m3, out com3, out i3);
-      Assert.IsTrue(Numeric.AreEqual(23, m3, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m3, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com3, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i3, e * (1 + i0.Trace));
     }
@@ -426,7 +426,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(m, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
     }
@@ -463,7 +463,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(s1, new Vector3(1), 100, true, 0.001f, 10, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
     }
@@ -516,7 +516,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(s2, new Vector3(1.2f, 2.1f, 0.6f), 0.7f, true, 0.001f, 0, out m1, out com1, out i1);
 
       const float e = 0.0001f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
     }
@@ -539,7 +539,7 @@ namespace DigitalRise.Physics.Tests
       MassHelper.GetMass(s2, new Vector3(1, -2, -3), 0.7f, true, 0.001f, 4, out m1, out com1, out i1);
 
       const float e = 0.01f;
-      Assert.IsTrue(Numeric.AreEqual(m0, m1, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(m0, m1, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com1, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0, i1, e * (1 + i0.Trace));
 
@@ -548,7 +548,7 @@ namespace DigitalRise.Physics.Tests
       Vector3 com2;
       Matrix33F i2;
       MassHelper.GetMass(s2, new Vector3(1, -2, -3), 23, false, 0.001f, 4, out m2, out com2, out i2);
-      Assert.IsTrue(Numeric.AreEqual(23, m2, e * (1 + m0)));
+      AssertExt.AreNumericallyEqual(23, m2, e * (1 + m0));
       AssertExt.AreNumericallyEqual(com0, com2, e * (1 + com0.Length()));
       AssertExt.AreNumericallyEqual(i0 * 23 / m0, i2, e * (1 + i0.Trace));
     }

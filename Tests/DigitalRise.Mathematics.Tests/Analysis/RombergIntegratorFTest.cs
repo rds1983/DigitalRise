@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Analysis.Tests
 {
@@ -24,7 +24,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       integrator.Epsilon = 0.000001f;
       float result = integrator.Integrate(fDerived, -1.1f, 2.3f);
       float numberOfIterations = integrator.NumberOfIterations;
-      Assert.IsTrue(Numeric.AreEqual(f(2.3f) - f(-1.1f), result, 0.000002f));
+      AssertExt.AreNumericallyEqual(f(2.3f) - f(-1.1f), result, 0.000002f);
     }
 
 
@@ -38,7 +38,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       integrator.Epsilon = 0.000001f;
       float result = integrator.Integrate(fDerived, -2f, 2f);
       float numberOfIterations = integrator.NumberOfIterations;
-      Assert.IsTrue(Numeric.AreEqual(f(2f) - f(-2f), result, 0.000002f));
+      AssertExt.AreNumericallyEqual(f(2f) - f(-2f), result, 0.000002f);
     }
 
 
@@ -53,7 +53,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       integrator.MaxNumberOfIterations = 5;
       float result = integrator.Integrate(fDerived, -1.1f, 2.3f);
       
-      Assert.IsTrue(Numeric.AreEqual(f(2.3f) - f(-1.1f), result, 0.000002f));
+      AssertExt.AreNumericallyEqual(f(2.3f) - f(-1.1f), result, 0.000002f);
     }
 
 
@@ -67,7 +67,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       integrator.Epsilon = 0.0001f;
       float result = integrator.Integrate(fDerived, 2.3f, -1.1f);
 
-      Assert.IsTrue(Numeric.AreEqual(f(-1.1f) - f(2.3f), result, 0.0002f));
+      AssertExt.AreNumericallyEqual(f(-1.1f) - f(2.3f), result, 0.0002f);
     }
 
 
@@ -117,7 +117,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       // Make one less iteration.
       integrator.MaxNumberOfIterations = integrator.NumberOfIterations - 1;
       result = integrator.Integrate(fDerived, -1, -3);
-      Assert.IsTrue(Numeric.AreEqual(f(-3) - f(-1), result, integrator.Epsilon*10));
+      AssertExt.AreNumericallyEqual(f(-3) - f(-1), result, integrator.Epsilon*10);
     }
   }
 }

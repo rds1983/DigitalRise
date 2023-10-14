@@ -71,7 +71,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
       var shape = GeometryHelper.CreateBoundingShape(points);
       SphereShape s = (SphereShape)shape;
-      Assert.IsTrue(Numeric.AreEqual(3, s.Radius));
+      AssertExt.AreNumericallyEqual(3, s.Radius);
 
       var cd = new CollisionDetection();
 
@@ -108,9 +108,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Vector3 box;
       Pose pose;
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(6, pose.ToWorldDirection(box).X));
-      Assert.IsTrue(Numeric.AreEqual(0, pose.ToWorldDirection(box).Y));
-      Assert.IsTrue(Numeric.AreEqual(0, pose.ToWorldDirection(box).Z));
+      AssertExt.AreNumericallyEqual(6, pose.ToWorldDirection(box).X);
+      AssertExt.AreNumericallyEqual(0, pose.ToWorldDirection(box).Y);
+      AssertExt.AreNumericallyEqual(0, pose.ToWorldDirection(box).Z);
     }
 
 
@@ -194,9 +194,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(1, 0, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
+      AssertExt.AreNumericallyEqual(box.X, 0);
+      AssertExt.AreNumericallyEqual(box.Y, 0);
+      AssertExt.AreNumericallyEqual(box.Z, 0);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), pose.Position);
 
       points = new List<Vector3>()
@@ -205,9 +205,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(1, 0, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
+      AssertExt.AreNumericallyEqual(box.X, 0);
+      AssertExt.AreNumericallyEqual(box.Y, 0);
+      AssertExt.AreNumericallyEqual(box.Z, 0);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), pose.Position);
 
       points = new List<Vector3>()
@@ -216,9 +216,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(0, 3, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
+      AssertExt.AreNumericallyEqual(box.X, 0);
+      AssertExt.AreNumericallyEqual(box.Y, 2);
+      AssertExt.AreNumericallyEqual(box.Z, 0);
       AssertExt.AreNumericallyEqual(new Vector3(0, 2, 0), pose.Position);
 
       points = new List<Vector3>()
@@ -229,9 +229,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(0, 1, 0),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 0));
+      AssertExt.AreNumericallyEqual(box.X, 0);
+      AssertExt.AreNumericallyEqual(box.Y, 2);
+      AssertExt.AreNumericallyEqual(box.Z, 0);
       AssertExt.AreNumericallyEqual(new Vector3(0, 2, 0), pose.Position);
 
       points = new List<Vector3>()
@@ -242,9 +242,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(0, 5, 2),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 0));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 4));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
+      AssertExt.AreNumericallyEqual(box.X, 0);
+      AssertExt.AreNumericallyEqual(box.Y, 4);
+      AssertExt.AreNumericallyEqual(box.Z, 2);
       AssertExt.AreNumericallyEqual(new Vector3(0, 3, 1), pose.Position);
 
       // Cube
@@ -260,9 +260,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(1, 1, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
+      AssertExt.AreNumericallyEqual(box.X, 2);
+      AssertExt.AreNumericallyEqual(box.Y, 2);
+      AssertExt.AreNumericallyEqual(box.Z, 2);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position);
 
       // Cube
@@ -281,9 +281,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(1, 1, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 2));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
+      AssertExt.AreNumericallyEqual(box.X, 2);
+      AssertExt.AreNumericallyEqual(box.Y, 2);
+      AssertExt.AreNumericallyEqual(box.Z, 2);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position);
 
       // Box
@@ -302,9 +302,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         new Vector3(2, 3, 1),
       };
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 4));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 6));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 2));
+      AssertExt.AreNumericallyEqual(box.X, 4);
+      AssertExt.AreNumericallyEqual(box.Y, 6);
+      AssertExt.AreNumericallyEqual(box.Z, 2);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), pose.Position);
     }
 
@@ -334,9 +334,9 @@ namespace DigitalRise.Geometry.Shapes.Tests
         points[i] = cubePose.ToWorldPosition(points[i]);
 
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.X, 2, 0.2f));
-      Assert.IsTrue(Numeric.AreEqual(box.Y, 2, 0.2f));
-      Assert.IsTrue(Numeric.AreEqual(box.Z, 2, 0.2f));
+      AssertExt.AreNumericallyEqual(box.X, 2, 0.2f);
+      AssertExt.AreNumericallyEqual(box.Y, 2, 0.2f);
+      AssertExt.AreNumericallyEqual(box.Z, 2, 0.2f);
       AssertExt.AreNumericallyEqual(new Vector3(10, 2, 3), pose.Position);
     }
 
@@ -354,8 +354,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
         points[i] = cubePose.ToWorldPosition(points[i]);
 
       GeometryHelper.ComputeBoundingBox(points, out box, out pose);
-      Assert.IsTrue(Numeric.AreEqual(box.LargestComponent(), 3, 0.2f));
-      Assert.IsTrue(Numeric.AreEqual(box.SmallestComponent(), 2, 0.2f));
+      AssertExt.AreNumericallyEqual(box.LargestComponent(), 3, 0.2f);
+      AssertExt.AreNumericallyEqual(box.SmallestComponent(), 2, 0.2f);
       AssertExt.AreNumericallyEqual(new Vector3(10, 2, 3), pose.Position);
     }
 
@@ -507,7 +507,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(0, radius));
+      AssertExt.AreNumericallyEqual(0, radius);
 
       points = new List<Vector3>()
       {
@@ -516,7 +516,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(0, radius));
+      AssertExt.AreNumericallyEqual(0, radius);
 
       points = new List<Vector3>()
       {
@@ -525,7 +525,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -535,7 +535,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -546,7 +546,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -556,7 +556,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -567,7 +567,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -579,7 +579,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -593,7 +593,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -610,7 +610,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -626,7 +626,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
 
       points = new List<Vector3>()
       {
@@ -644,7 +644,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       };
       GeometryHelper.ComputeBoundingSphere(points, out radius, out center);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), center);
-      Assert.IsTrue(Numeric.AreEqual(1, radius));
+      AssertExt.AreNumericallyEqual(1, radius);
     }
 
 
@@ -727,11 +727,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
       float distance = (p0 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p1 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p2 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
 
       // Compute sphere and test if all points are on the surface.
       p0 = new Vector3(0, 0, 1);
@@ -741,11 +741,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
       distance = (p0 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p1 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p2 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
 
 
       // Compute sphere and test if all points are on the surface.
@@ -756,11 +756,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, out radius, out center);
 
       distance = (p0 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p1 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p2 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
 
       // Test a degenerate case.
       p0 = new Vector3(120, -44, 45);
@@ -788,13 +788,13 @@ namespace DigitalRise.Geometry.Shapes.Tests
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, p3, out radius, out center);
 
       float distance = (p0 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p1 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p2 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p3 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
 
       // Compute sphere and test if all points are on the surface.
       p0 = new Vector3(120, -44, 45);
@@ -805,13 +805,13 @@ namespace DigitalRise.Geometry.Shapes.Tests
       GeometryHelper.ComputeCircumscribedSphere(p0, p1, p2, p3, out radius, out center);
 
       distance = (p0 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p1 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p2 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
       distance = (p3 - center).Length();
-      Assert.IsTrue(Numeric.AreEqual(distance, radius));
+      AssertExt.AreNumericallyEqual(distance, radius);
 
 
       // Test a degenerate case.
@@ -1177,26 +1177,26 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
       Assert.IsTrue(hit);
-      Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
+      AssertExt.AreNumericallyEqual(1, hitDistance);
 
       hit = GeometryHelper.GetContact(ray, triangle, false, out hitDistance);
       Assert.IsTrue(hit);
-      Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
+      AssertExt.AreNumericallyEqual(1, hitDistance);
 
       ray = new Ray(new Vector3(-1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, false, out hitDistance);
       Assert.IsFalse(hit);
-      //Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
+      //AssertExt.AreNumericallyEqual(1, hitDistance);
 
       ray = new Ray(new Vector3(1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, false, out hitDistance);
       Assert.IsFalse(hit);
-      //Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
+      //AssertExt.AreNumericallyEqual(1, hitDistance);
 
       ray = new Ray(new Vector3(1, 0, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
       Assert.IsTrue(hit);
-      Assert.IsTrue(Numeric.AreEqual(1, hitDistance));
+      AssertExt.AreNumericallyEqual(1, hitDistance);
 
       ray = new Ray(new Vector3(1, 1.1f, 0), -Vector3.UnitX, 2);
       hit = GeometryHelper.GetContact(ray, triangle, true, out hitDistance);
@@ -1290,7 +1290,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
     private static void ComparePlanes(Plane plane0, Plane plane1)
     {
-      Assert.IsTrue(Numeric.AreEqual(plane0.DistanceFromOrigin, plane1.DistanceFromOrigin));
+      AssertExt.AreNumericallyEqual(plane0.DistanceFromOrigin, plane1.DistanceFromOrigin);
       AssertExt.AreNumericallyEqual(plane0.Normal, plane1.Normal);
     }
 

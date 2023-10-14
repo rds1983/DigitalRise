@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Tests
 {
@@ -242,43 +242,39 @@ namespace DigitalRise.Mathematics.Tests
     [Test]
     public void BigNumbersD()
     {
-      double originalEpsilon = Numeric.EpsilonD;
-      Numeric.EpsilonD = 1e-8;
+      using (var setEpsilon = new SetEpsilonD(1E-8))
+      {
+        Assert.AreEqual(-1, Numeric.Compare(1e20, 1.0000002e20));
+        Assert.AreEqual(0, Numeric.Compare(1e20, 1.00000001e20));
+        Assert.AreEqual(1, Numeric.Compare(1.0000002e20, 1e20));
 
-      Assert.AreEqual(-1, Numeric.Compare(1e20, 1.0000002e20));
-      Assert.AreEqual(0, Numeric.Compare(1e20, 1.00000001e20));
-      Assert.AreEqual(1, Numeric.Compare(1.0000002e20, 1e20));
+        Assert.AreEqual(-1, Numeric.Compare(1e20, 1.002e20, 0.001e20));
+        Assert.AreEqual(0, Numeric.Compare(1e20, 1.0001e20, 0.001e20));
+        Assert.AreEqual(1, Numeric.Compare(1.002e20, 1e20, 0.001e20));
 
-      Assert.AreEqual(-1, Numeric.Compare(1e20, 1.002e20, 0.001e20));
-      Assert.AreEqual(0, Numeric.Compare(1e20, 1.0001e20, 0.001e20));
-      Assert.AreEqual(1, Numeric.Compare(1.002e20, 1e20, 0.001e20));
-
-      Assert.IsTrue(Numeric.AreEqual(1e20, 1.00000001e20));
-      Assert.IsFalse(Numeric.AreEqual(1e20, 1.0000002e20));
-      Assert.IsTrue(Numeric.AreEqual(1e20, 1.0001e20, 0.001e20));
-
-      Numeric.EpsilonD = originalEpsilon;
+        AssertExt.AreNumericallyEqual(1e20, 1.00000001e20);
+        Assert.IsFalse(Numeric.AreEqual(1e20, 1.0000002e20));
+        AssertExt.AreNumericallyEqual(1e20, 1.0001e20, 0.001e20);
+      }
     }
 
     [Test]
     public void BigNumbersF()
     {
-      float originalEpsilon = Numeric.EpsilonF;
-      Numeric.EpsilonF = 1e-8f;
+      using (var setEpsilon = new SetEpsilonF(1E-8f))
+      {
+        Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.0000002e10f));
+        Assert.AreEqual(0, Numeric.Compare(1e10f, 1.00000001e10f));
+        Assert.AreEqual(1, Numeric.Compare(1.0000002e10f, 1e10f));
 
-      Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.0000002e10f));
-      Assert.AreEqual(0, Numeric.Compare(1e10f, 1.00000001e10f));
-      Assert.AreEqual(1, Numeric.Compare(1.0000002e10f, 1e10f));
+        Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.002e10f, 0.001e10f));
+        Assert.AreEqual(0, Numeric.Compare(1e10f, 1.0001e10f, 0.001e10f));
+        Assert.AreEqual(1, Numeric.Compare(1.002e10f, 1e10f, 0.001e10f));
 
-      Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.002e10f, 0.001e10f));
-      Assert.AreEqual(0, Numeric.Compare(1e10f, 1.0001e10f, 0.001e10f));
-      Assert.AreEqual(1, Numeric.Compare(1.002e10f, 1e10f, 0.001e10f));
-
-      Assert.IsTrue(Numeric.AreEqual(1e10f, 1.00000001e10f));
-      Assert.IsFalse(Numeric.AreEqual(1e10f, 1.0000002e10f));
-      Assert.IsTrue(Numeric.AreEqual(1e10f, 1.0001e10f, 0.001e10f));
-
-      Numeric.EpsilonF = originalEpsilon;
+        AssertExt.AreNumericallyEqual(1e10f, 1.00000001e10f);
+        Assert.IsFalse(Numeric.AreEqual(1e10f, 1.0000002e10f));
+        AssertExt.AreNumericallyEqual(1e10f, 1.0001e10f, 0.001e10f);
+      }
     }
 
     [Test]
@@ -289,11 +285,11 @@ namespace DigitalRise.Mathematics.Tests
       Assert.AreEqual(1, Numeric.Compare(1.002e-20, 1e-20, 0.001e-20));
 
       // Values near zero are treated as zero
-      Assert.IsTrue(Numeric.AreEqual(1e-20, 1.00000001e-20));
-      Assert.IsTrue(Numeric.AreEqual(1e-20, 1.0000002e-20));
+      AssertExt.AreNumericallyEqual(1e-20, 1.00000001e-20);
+      AssertExt.AreNumericallyEqual(1e-20, 1.0000002e-20);
 
       // Values near zero can only be compared by specifying an epsilon value.
-      Assert.IsTrue(Numeric.AreEqual(1e-20, 1.0001e-20, 0.001e-20));
+      AssertExt.AreNumericallyEqual(1e-20, 1.0001e-20, 0.001e-20);
       Assert.IsFalse(Numeric.AreEqual(1e-20, 1.0002e-20, 0.0001e-20));
     }
 
@@ -305,11 +301,11 @@ namespace DigitalRise.Mathematics.Tests
       Assert.AreEqual(1, Numeric.Compare(1.002e-10f, 1e-10f, 0.001e-10f));
 
       // Values near zero are treated as zero
-      Assert.IsTrue(Numeric.AreEqual(1e-10f, 1.0000001e-10f));
-      Assert.IsTrue(Numeric.AreEqual(1e-10f, 1.000002e-10f));
+      AssertExt.AreNumericallyEqual(1e-10f, 1.0000001e-10f);
+      AssertExt.AreNumericallyEqual(1e-10f, 1.000002e-10f);
 
       // Values near zero can only be compared by specifying an epsilon value.
-      Assert.IsTrue(Numeric.AreEqual(1e-10f, 1.0001e-10f, 0.001e-10f));
+      AssertExt.AreNumericallyEqual(1e-10f, 1.0001e-10f, 0.001e-10f);
       Assert.IsFalse(Numeric.AreEqual(1e-10f, 1.0002e-10f, 0.0001e-10f));
     }
 
@@ -413,7 +409,7 @@ namespace DigitalRise.Mathematics.Tests
     public void NegativeValuesD()
     {
       // Test case for bug fix
-      Assert.IsTrue(Numeric.AreEqual(-1000.0, -1000.0));
+      AssertExt.AreNumericallyEqual(-1000.0, -1000.0);
       Assert.IsFalse(Numeric.AreEqual(-1000.0, 1000.0));
       Assert.IsFalse(Numeric.AreEqual(1000.0, -1000.0));
 
@@ -426,7 +422,7 @@ namespace DigitalRise.Mathematics.Tests
     public void NegativeValuesF()
     {
       // Test case for bug fix
-      Assert.IsTrue(Numeric.AreEqual(-1000.0f, -1000.0f));
+      AssertExt.AreNumericallyEqual(-1000.0f, -1000.0f);
       Assert.IsFalse(Numeric.AreEqual(-1000.0f, 1000.0f));
       Assert.IsFalse(Numeric.AreEqual(1000.0f, -1000.0f));
 
@@ -439,14 +435,14 @@ namespace DigitalRise.Mathematics.Tests
     public void ComparisionsWithZeroD()
     {
       // Test case for bug fix
-      Assert.IsTrue(Numeric.AreEqual(0.0, 0.0));
+      AssertExt.AreNumericallyEqual(0.0, 0.0);
       Assert.AreEqual(0, Numeric.Compare(0.0, 0.0));
 
       // Values near zero are treated as zero
-      Assert.IsTrue(Numeric.AreEqual(0.0, 1e-20));
-      Assert.IsTrue(Numeric.AreEqual(0.0, -1e-20));
-      Assert.IsTrue(Numeric.AreEqual(-1e-20, 0.0));
-      Assert.IsTrue(Numeric.AreEqual(1e-20, 0.0));
+      AssertExt.AreNumericallyEqual(0.0, 1e-20);
+      AssertExt.AreNumericallyEqual(0.0, -1e-20);
+      AssertExt.AreNumericallyEqual(-1e-20, 0.0);
+      AssertExt.AreNumericallyEqual(1e-20, 0.0);
 
       Assert.IsFalse(Numeric.AreEqual(0.0, 1e-6));
       Assert.IsFalse(Numeric.AreEqual(0.0, -1e-6));
@@ -469,14 +465,14 @@ namespace DigitalRise.Mathematics.Tests
     public void ComparisionsWithZeroF()
     {
       // Test case for bug fix
-      Assert.IsTrue(Numeric.AreEqual(0.0f, 0.0f));
+      AssertExt.AreNumericallyEqual(0.0f, 0.0f);
       Assert.AreEqual(0, Numeric.Compare(0.0f, 0.0f));
 
       // Values near zero are treated as zero
-      Assert.IsTrue(Numeric.AreEqual(0.0f, 1e-10f));
-      Assert.IsTrue(Numeric.AreEqual(0.0f, -1e-10f));
-      Assert.IsTrue(Numeric.AreEqual(-1e-10f, 0.0f));
-      Assert.IsTrue(Numeric.AreEqual(1e-10f, 0.0f));
+      AssertExt.AreNumericallyEqual(0.0f, 1e-10f);
+      AssertExt.AreNumericallyEqual(0.0f, -1e-10f);
+      AssertExt.AreNumericallyEqual(-1e-10f, 0.0f);
+      AssertExt.AreNumericallyEqual(1e-10f, 0.0f);
 
       Assert.IsFalse(Numeric.AreEqual(0.0f, 1e-4f));
       Assert.IsFalse(Numeric.AreEqual(0.0f, -1e-4f));
@@ -498,10 +494,10 @@ namespace DigitalRise.Mathematics.Tests
     [Test]
     public void InfinityEqualityF()
     {      
-      Assert.IsTrue(Numeric.AreEqual(float.PositiveInfinity, float.PositiveInfinity));
-      Assert.IsTrue(Numeric.AreEqual(float.PositiveInfinity, float.PositiveInfinity, 0.1f));
-      Assert.IsTrue(Numeric.AreEqual(float.NegativeInfinity, float.NegativeInfinity));
-      Assert.IsTrue(Numeric.AreEqual(float.NegativeInfinity, float.NegativeInfinity, 0.1f));
+      AssertExt.AreNumericallyEqual(float.PositiveInfinity, float.PositiveInfinity);
+      AssertExt.AreNumericallyEqual(float.PositiveInfinity, float.PositiveInfinity, 0.1f);
+      AssertExt.AreNumericallyEqual(float.NegativeInfinity, float.NegativeInfinity);
+      AssertExt.AreNumericallyEqual(float.NegativeInfinity, float.NegativeInfinity, 0.1f);
       
       Assert.IsFalse(Numeric.AreEqual(float.PositiveInfinity, float.NegativeInfinity));
       Assert.IsFalse(Numeric.AreEqual(float.NegativeInfinity, float.PositiveInfinity, 0.1f));
@@ -521,10 +517,10 @@ namespace DigitalRise.Mathematics.Tests
     [Test]
     public void InfinityEqualityD()
     {
-      Assert.IsTrue(Numeric.AreEqual(double.PositiveInfinity, double.PositiveInfinity));
-      Assert.IsTrue(Numeric.AreEqual(double.PositiveInfinity, double.PositiveInfinity, 0.1d));
-      Assert.IsTrue(Numeric.AreEqual(double.NegativeInfinity, double.NegativeInfinity));
-      Assert.IsTrue(Numeric.AreEqual(double.NegativeInfinity, double.NegativeInfinity, 0.1d));
+      AssertExt.AreNumericallyEqual(double.PositiveInfinity, double.PositiveInfinity);
+      AssertExt.AreNumericallyEqual(double.PositiveInfinity, double.PositiveInfinity, 0.1d);
+      AssertExt.AreNumericallyEqual(double.NegativeInfinity, double.NegativeInfinity);
+      AssertExt.AreNumericallyEqual(double.NegativeInfinity, double.NegativeInfinity, 0.1d);
 
       Assert.IsFalse(Numeric.AreEqual(double.PositiveInfinity, double.NegativeInfinity));
       Assert.IsFalse(Numeric.AreEqual(double.NegativeInfinity, double.PositiveInfinity, 0.1d));

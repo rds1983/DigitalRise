@@ -1,7 +1,6 @@
 ﻿using System;
-using DigitalRise.Mathematics;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Animation.Easing.Tests
 {
@@ -64,19 +63,19 @@ namespace DigitalRise.Animation.Easing.Tests
       TestEase();
 
       // Check center.
-      Assert.IsTrue(Numeric.AreEqual(0.5f, EasingFunction.Ease(0.5f)), "Easing function using EaseInOut failed for t = 0.5.");
+      AssertExt.AreNumericallyEqual(0.5f, EasingFunction.Ease(0.5f));
 
       EasingFunction.Base = 1.5f;
       TestEase();
-      Assert.IsTrue(Numeric.AreEqual(0.5f, EasingFunction.Ease(0.5f)), "Easing function using EaseInOut failed for t = 0.5.");
+      AssertExt.AreNumericallyEqual(0.5f, EasingFunction.Ease(0.5f));
 
       EasingFunction.Base = 4.0f;
       TestEase();
-      Assert.IsTrue(Numeric.AreEqual(0.5f, EasingFunction.Ease(0.5f)), "Easing function using EaseInOut failed for t = 0.5.");
+      AssertExt.AreNumericallyEqual(0.5f, EasingFunction.Ease(0.5f));
 
       EasingFunction.Base = 10.3f;
       TestEase();
-      Assert.IsTrue(Numeric.AreEqual(0.5f, EasingFunction.Ease(0.5f)), "Easing function using EaseInOut failed for t = 0.5.");
+      AssertExt.AreNumericallyEqual(0.5f, EasingFunction.Ease(0.5f));
     }
   }
 }

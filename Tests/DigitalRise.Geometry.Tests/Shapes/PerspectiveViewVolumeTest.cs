@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -18,15 +19,15 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float horizontalFieldOfView = PerspectiveViewVolume.GetFieldOfViewX(MathHelper.ToRadians(60), 1);
       float expectedFieldOfView = MathHelper.ToRadians(60);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, horizontalFieldOfView);
 
       horizontalFieldOfView = PerspectiveViewVolume.GetFieldOfViewX(MathHelper.ToRadians(60), (float)(4.0 / 3.0));
       expectedFieldOfView = (float)MathHelper.ToRadians(75.178179f);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, horizontalFieldOfView);
 
       horizontalFieldOfView = PerspectiveViewVolume.GetFieldOfViewX(MathHelper.ToRadians(45), (float)(16.0 / 9.0));
       expectedFieldOfView = (float)MathHelper.ToRadians(72.734351f);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, horizontalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, horizontalFieldOfView);
     }
 
     [Test]
@@ -34,15 +35,15 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float verticalFieldOfView = PerspectiveViewVolume.GetFieldOfViewY(MathHelper.ToRadians(90), 1);
       float expectedFieldOfView = MathHelper.ToRadians(90);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, verticalFieldOfView);
 
       verticalFieldOfView = PerspectiveViewVolume.GetFieldOfViewY(MathHelper.ToRadians(75), (float)(4.0 / 3.0));
       expectedFieldOfView = (float)MathHelper.ToRadians(59.840444f);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, verticalFieldOfView);
 
       verticalFieldOfView = PerspectiveViewVolume.GetFieldOfViewY(MathHelper.ToRadians(90), (float)(16.0 / 9.0));
       expectedFieldOfView = (float)MathHelper.ToRadians(58.715507f);
-      Assert.IsTrue(Numeric.AreEqual(expectedFieldOfView, verticalFieldOfView));
+      AssertExt.AreNumericallyEqual(expectedFieldOfView, verticalFieldOfView);
     }
 
     [Test]
@@ -78,10 +79,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float extent;
       extent = PerspectiveViewVolume.GetExtent(MathHelper.ToRadians(90), 1);
-      Assert.IsTrue(Numeric.AreEqual(2, extent));
+      AssertExt.AreNumericallyEqual(2, extent);
 
       extent = PerspectiveViewVolume.GetExtent(MathHelper.ToRadians(60), 10);
-      Assert.IsTrue(Numeric.AreEqual(11.547005f, extent));
+      AssertExt.AreNumericallyEqual(11.547005f, extent);
     }
 
     [Test]
@@ -103,12 +104,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float width, height;
       PerspectiveViewVolume.GetWidthAndHeight(MathHelper.ToRadians(90), 1, 1, out width, out height);
-      Assert.IsTrue(Numeric.AreEqual(2, width));
-      Assert.IsTrue(Numeric.AreEqual(2, height));
+      AssertExt.AreNumericallyEqual(2, width);
+      AssertExt.AreNumericallyEqual(2, height);
 
       PerspectiveViewVolume.GetWidthAndHeight(MathHelper.ToRadians(60), 16.0f / 9.0f, 1, out width, out height);
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f, width));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f, height));
+      AssertExt.AreNumericallyEqual(2.0528009f, width);
+      AssertExt.AreNumericallyEqual(1.1547005f, height);
     }
 
     [Test]
@@ -140,10 +141,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
     {
       float fieldOfView;
       fieldOfView = PerspectiveViewVolume.GetFieldOfView(2, 1);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(90), fieldOfView));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(90), fieldOfView);
 
       fieldOfView = PerspectiveViewVolume.GetFieldOfView(1.1547005f, 1);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(60), fieldOfView));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(60), fieldOfView);
     }
 
     [Test]
@@ -204,8 +205,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(2, frustum.Height);
       Assert.AreEqual(8, frustum.Depth);
       Assert.AreEqual(2, frustum.AspectRatio);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(90), frustum.FieldOfViewX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(53.130102f), frustum.FieldOfViewY));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(90), frustum.FieldOfViewX);
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(53.130102f), frustum.FieldOfViewY);
 
 
       frustum = new PerspectiveViewVolume
@@ -228,8 +229,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(2, frustum.Height);
       Assert.AreEqual(8, frustum.Depth);
       Assert.AreEqual(2, frustum.AspectRatio);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(90), frustum.FieldOfViewX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(53.130102f), frustum.FieldOfViewY));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(90), frustum.FieldOfViewX);
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(53.130102f), frustum.FieldOfViewY);
     }
 
     [Test]
@@ -300,18 +301,18 @@ namespace DigitalRise.Geometry.Shapes.Tests
       PerspectiveViewVolume frustum = new PerspectiveViewVolume();
       frustum.SetFieldOfView(MathHelper.ToRadians(60), 16.0f / 9.0f, 1, 10);
 
-      Assert.IsTrue(Numeric.AreEqual(-2.0528009f / 2.0f, frustum.Left));
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f / 2.0f, frustum.Right));
-      Assert.IsTrue(Numeric.AreEqual(-1.1547005f / 2.0f, frustum.Bottom));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f / 2.0f, frustum.Top));
+      AssertExt.AreNumericallyEqual(-2.0528009f / 2.0f, frustum.Left);
+      AssertExt.AreNumericallyEqual(2.0528009f / 2.0f, frustum.Right);
+      AssertExt.AreNumericallyEqual(-1.1547005f / 2.0f, frustum.Bottom);
+      AssertExt.AreNumericallyEqual(1.1547005f / 2.0f, frustum.Top);
       Assert.AreEqual(1, frustum.Near);
       Assert.AreEqual(10, frustum.Far);
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f, frustum.Width));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f, frustum.Height));
+      AssertExt.AreNumericallyEqual(2.0528009f, frustum.Width);
+      AssertExt.AreNumericallyEqual(1.1547005f, frustum.Height);
       Assert.AreEqual(9, frustum.Depth);
       Assert.AreEqual(16.0f / 9.0f, frustum.AspectRatio);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(91.492843f), frustum.FieldOfViewX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(60), frustum.FieldOfViewY));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(91.492843f), frustum.FieldOfViewX);
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(60), frustum.FieldOfViewY);
     }
 
     [Test]
@@ -374,18 +375,18 @@ namespace DigitalRise.Geometry.Shapes.Tests
       PerspectiveViewVolume frustum = new PerspectiveViewVolume();
       frustum.SetWidthAndHeight(2.0528009f, 1.1547005f, 1, 10);
 
-      Assert.IsTrue(Numeric.AreEqual(-2.0528009f / 2.0f, frustum.Left));
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f / 2.0f, frustum.Right));
-      Assert.IsTrue(Numeric.AreEqual(-1.1547005f / 2.0f, frustum.Bottom));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f / 2.0f, frustum.Top));
+      AssertExt.AreNumericallyEqual(-2.0528009f / 2.0f, frustum.Left);
+      AssertExt.AreNumericallyEqual(2.0528009f / 2.0f, frustum.Right);
+      AssertExt.AreNumericallyEqual(-1.1547005f / 2.0f, frustum.Bottom);
+      AssertExt.AreNumericallyEqual(1.1547005f / 2.0f, frustum.Top);
       Assert.AreEqual(1, frustum.Near);
       Assert.AreEqual(10, frustum.Far);
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f, frustum.Width));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f, frustum.Height));
+      AssertExt.AreNumericallyEqual(2.0528009f, frustum.Width);
+      AssertExt.AreNumericallyEqual(1.1547005f, frustum.Height);
       Assert.AreEqual(9, frustum.Depth);
       Assert.AreEqual(16.0f / 9.0f, frustum.AspectRatio);
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(91.492843f), frustum.FieldOfViewX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(60), frustum.FieldOfViewY));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(91.492843f), frustum.FieldOfViewX);
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(60), frustum.FieldOfViewY);
     }
 
     [Test]

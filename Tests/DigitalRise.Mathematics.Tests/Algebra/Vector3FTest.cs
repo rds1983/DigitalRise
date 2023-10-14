@@ -313,9 +313,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector3 v = new Vector3(x, y, z);
       Vector3 u = v / s;
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
-      Assert.IsTrue(Numeric.AreEqual(z / s, u.Z));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
+      AssertExt.AreNumericallyEqual(z / s, u.Z);
     }
 
 
@@ -329,9 +329,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector3 v = new Vector3(x, y, z);
       Vector3 u = Vector3.Divide(v, s);
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
-      Assert.IsTrue(Numeric.AreEqual(z / s, u.Z));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
+      AssertExt.AreNumericallyEqual(z / s, u.Z);
     }
 
 
@@ -522,7 +522,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Vector3 v = new Vector3(1.0f, 2.0f, 3.0f);
       v.SetLength(0.5f);
-      Assert.IsTrue(Numeric.AreEqual(0.5f, v.Length()));
+      AssertExt.AreNumericallyEqual(0.5f, v.Length());
     }
 
 
@@ -643,11 +643,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       // 45�
       float angle = (float)Math.Acos(Vector3.Dot(new Vector3(1f, 1f, 0f).Normalized(), Vector3.UnitX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector3.Dot(new Vector3(0f, 1f, 1f).Normalized(), Vector3.UnitY));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector3.Dot(new Vector3(1f, 0f, 1f).Normalized(), Vector3.UnitZ));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
     }
 
 
@@ -673,10 +673,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector3 halfvector = x + y;
 
       // 90�
-      Assert.IsTrue(Numeric.AreEqual((float)Math.PI / 4f, MathHelper.GetAngle(x, halfvector)));
+      AssertExt.AreNumericallyEqual((float)Math.PI / 4f, MathHelper.GetAngle(x, halfvector));
 
       // 45�
-      Assert.IsTrue(Numeric.AreEqual((float)Math.PI / 2f, MathHelper.GetAngle(x, y)));
+      AssertExt.AreNumericallyEqual((float)Math.PI / 2f, MathHelper.GetAngle(x, y));
     }
 
 

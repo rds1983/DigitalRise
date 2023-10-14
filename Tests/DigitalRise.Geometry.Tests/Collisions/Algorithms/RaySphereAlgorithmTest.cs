@@ -61,13 +61,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(10, 0, 0), sphere.GeometricObject.Pose.Orientation);
       set = algo.GetClosestPoints(sphere, ray);
-      Assert.IsTrue(Numeric.AreEqual(9, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(9, set[0].PenetrationDepth);
       AssertExt.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
 
       ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, -2, 1), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(sphere, ray);
-      Assert.IsTrue(Numeric.AreEqual(-9, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-9, set[0].PenetrationDepth);
       AssertExt.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal);
       AssertExt.AreNumericallyEqual(new Vector3(4.5f, 0, 0), set[0].Position);
       Assert.AreEqual(false, algo.HaveContact(ray, sphere));

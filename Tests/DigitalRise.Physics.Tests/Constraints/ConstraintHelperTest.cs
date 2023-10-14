@@ -21,8 +21,8 @@ namespace DigitalRise.Physics.Constraints.Tests
       float spring = ConstraintHelper.ComputeSpringConstant(1 / 60f, erp, cfm);
       float damping = ConstraintHelper.ComputeDampingConstant(1 / 60f, erp, cfm);
       
-      Assert.IsTrue(Numeric.AreEqual(erp, ConstraintHelper.ComputeErrorReduction(1 / 60f, spring, damping)));
-      Assert.IsTrue(Numeric.AreEqual(cfm, ConstraintHelper.ComputeSoftness(1 / 60f, spring, damping)));
+      AssertExt.AreNumericallyEqual(erp, ConstraintHelper.ComputeErrorReduction(1 / 60f, spring, damping));
+      AssertExt.AreNumericallyEqual(cfm, ConstraintHelper.ComputeSoftness(1 / 60f, spring, damping));
     }
 
     [Test]

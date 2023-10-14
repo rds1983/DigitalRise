@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -16,9 +16,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(1, s.GetPoint(0)));
-      Assert.IsTrue(Numeric.AreEqual(8, s.GetPoint(1)));
-      Assert.IsTrue(Numeric.AreEqual(1 + 7*0.3f, s.GetPoint(0.3f))); 
+      AssertExt.AreNumericallyEqual(1, s.GetPoint(0));
+      AssertExt.AreNumericallyEqual(8, s.GetPoint(1));
+      AssertExt.AreNumericallyEqual(1 + 7*0.3f, s.GetPoint(0.3f)); 
     }
 
 
@@ -31,9 +31,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetTangent(0)));
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetTangent(0.3f)));
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(7, s.GetTangent(0));
+      AssertExt.AreNumericallyEqual(7, s.GetTangent(0.3f));
+      AssertExt.AreNumericallyEqual(7, s.GetTangent(1));
     }
 
 
@@ -46,9 +46,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetLength(0, 1, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual(7 * 0.3f, s.GetLength(0.6f, 0.3f, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual(7 * 0.3f, s.GetLength(0.1f, 0.4f, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(7, s.GetLength(0, 1, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual(7 * 0.3f, s.GetLength(0.6f, 0.3f, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual(7 * 0.3f, s.GetLength(0.1f, 0.4f, 100, Numeric.EpsilonF));
     }
 
 

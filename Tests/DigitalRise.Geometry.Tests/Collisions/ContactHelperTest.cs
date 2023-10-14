@@ -1,9 +1,7 @@
-﻿using System;
-using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
+﻿using DigitalRise.Geometry.Shapes;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Tests
 {
@@ -318,14 +316,14 @@ namespace DigitalRise.Geometry.Collisions.Tests
       ContactHelper.UpdateContacts(set, 0.01f, 0.3f);
       Assert.AreEqual(0.02f, set[0].Lifetime);
       Assert.AreEqual(0.02f, set[1].Lifetime);
-      Assert.IsTrue(Numeric.AreEqual(0.2f, set[0].PenetrationDepth));
-      Assert.IsTrue(Numeric.AreEqual(0.1f, set[1].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.2f, set[0].PenetrationDepth);
+      AssertExt.AreNumericallyEqual(0.1f, set[1].PenetrationDepth);
 
       // Remove first contact because it separates.
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2.1f, 0, -0.1f));
       ContactHelper.UpdateContacts(set, 0.01f, 0.4f);
       Assert.AreEqual(0.03f, set[0].Lifetime);
-      Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.1f, set[0].PenetrationDepth);
 
       // Remove second contact because of horizontal drift.
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2.2f, 0.0f, -0.1f));
@@ -340,12 +338,12 @@ namespace DigitalRise.Geometry.Collisions.Tests
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(1.9f, 0, 0));
       ContactHelper.UpdateContacts(set, 0.01f, 0.2f);
       Assert.AreEqual(2, set.Count);
-      Assert.IsTrue(Numeric.AreEqual(0f, set[0].PenetrationDepth));
-      Assert.IsTrue(Numeric.AreEqual(0.1f, set[1].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0f, set[0].PenetrationDepth);
+      AssertExt.AreNumericallyEqual(0.1f, set[1].PenetrationDepth);
 
       ContactHelper.UpdateContacts(set, 0.01f, 0.1f);
       Assert.AreEqual(1, set.Count);
-      Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.1f, set[0].PenetrationDepth);
     }
   }
 }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Particles.Effectors;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Particles.Tests.Effectors
 {
@@ -122,7 +120,7 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.IsTrue(Numeric.AreEqual(-10 + 2 * ConstantsF.TwoPi, angle.DefaultValue));
+      AssertExt.AreNumericallyEqual(-10 + 2 * ConstantsF.TwoPi, angle.DefaultValue);
     }
 
     [Test]
@@ -164,7 +162,7 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.IsTrue(Numeric.AreEqual(-10 + 2 * ConstantsF.TwoPi, angle.Values[11]));
+      AssertExt.AreNumericallyEqual(-10 + 2 * ConstantsF.TwoPi, angle.Values[11]);
     }
 
 
@@ -207,7 +205,7 @@ namespace DigitalRise.Particles.Tests.Effectors
       e.UpdateParticles(dt, 10, 20);
       e.EndUpdate(dt);
 
-      Assert.IsTrue(Numeric.AreEqual(-10 + 2 * ConstantsF.TwoPi, angle.Values[11]));
+      AssertExt.AreNumericallyEqual(-10 + 2 * ConstantsF.TwoPi, angle.Values[11]);
     }
   }
 }

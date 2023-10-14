@@ -93,7 +93,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void GetPoint()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Curve2F empty = new Curve2F();
         Assert.IsTrue(float.IsNaN(empty.GetPoint(1).X));
@@ -766,10 +766,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y));
+      AssertExt.AreNumericallyEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y);
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
       Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
-      Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y));
+      AssertExt.AreNumericallyEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
@@ -812,10 +812,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y));
+      AssertExt.AreNumericallyEqual(curve.GetPoint(2).Y - 2, curve.GetPoint(0).Y);
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
       Assert.AreEqual(new Vector2(3, 4), curve.GetPoint(3));
-      Assert.IsTrue(Numeric.AreEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y));
+      AssertExt.AreNumericallyEqual(curve.GetPoint(2).Y + 2, curve.GetPoint(4).Y);
       curve.PreLoop = CurveLoopType.Oscillate;
       curve.PostLoop = CurveLoopType.Oscillate;
       Assert.AreEqual(curve.GetPoint(2).Y, curve.GetPoint(0).Y);
@@ -897,7 +897,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void BSplineTest()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         // BSpline are difficult because the spline does not start/end at the given x parameter values
         // if the x distances of the keys are different.

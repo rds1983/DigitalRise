@@ -1,8 +1,7 @@
 ﻿using System;
 using DigitalRise.Animation.Traits;
-using DigitalRise.Mathematics;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Animation.Tests
 {
@@ -177,16 +176,16 @@ namespace DigitalRise.Animation.Tests
       };
 
       Assert.AreEqual(defaultSource, animationClip.GetValue(TimeSpan.FromSeconds(99.0), defaultSource, defaultTarget));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(125.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(175.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(125.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(175.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.5), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(125.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(175.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(125.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(175.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(150.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.5), defaultSource, defaultTarget));
     }
 
 
@@ -219,16 +218,16 @@ namespace DigitalRise.Animation.Tests
 
       Assert.IsTrue(animationClip.IsClipReversed);
       Assert.AreEqual(defaultSource, animationClip.GetValue(TimeSpan.FromSeconds(99.0), defaultSource, defaultTarget));
-      Assert.IsTrue(Numeric.AreEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(155.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(130.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(145.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(155.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(130.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(145.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.5), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.0), defaultSource, defaultTarget)));
-      Assert.IsTrue(Numeric.AreEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.5), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(155.0f, animationClip.GetValue(TimeSpan.FromSeconds(100.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(130.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(145.0f, animationClip.GetValue(TimeSpan.FromSeconds(101.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(155.0f, animationClip.GetValue(TimeSpan.FromSeconds(102.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(130.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(145.0f, animationClip.GetValue(TimeSpan.FromSeconds(103.5), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(170.0f, animationClip.GetValue(TimeSpan.FromSeconds(104.5), defaultSource, defaultTarget));
     }
   }
 }

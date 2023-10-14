@@ -64,7 +64,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(new Vector3(0, -1, 0), set[0].Normal);
       Assert.AreEqual(new Vector3(0, -1, 0), set[1].Normal);
       Assert.AreEqual(2, set[0].PenetrationDepth);
-      Assert.IsTrue(Numeric.AreEqual(1, set[1].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(1, set[1].PenetrationDepth);
 
       algo.UpdateClosestPoints(set, 0);
       Assert.AreEqual(1, set.Count);

@@ -26,9 +26,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       for (float u = 0; u <= 1.0f - step; u += step)
         approxLength += (b.GetPoint(u) - b.GetPoint(u + step)).Length();
 
-      Assert.IsTrue(Numeric.AreEqual(approxLength, length1, 0.001f));
-      Assert.IsTrue(Numeric.AreEqual(b.GetLength(0, 1, 100, Numeric.EpsilonF), b.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + b.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual(b.GetLength(0, 1, 100, Numeric.EpsilonF), b.GetLength(1, 0, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(approxLength, length1, 0.001f);
+      AssertExt.AreNumericallyEqual(b.GetLength(0, 1, 100, Numeric.EpsilonF), b.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + b.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual(b.GetLength(0, 1, 100, Numeric.EpsilonF), b.GetLength(1, 0, 100, Numeric.EpsilonF));
     }
 
 

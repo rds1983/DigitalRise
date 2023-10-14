@@ -66,7 +66,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1,algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(1, 0, 0), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0.55f, 0, 0), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(-1.6f, 0, 0));
@@ -75,7 +75,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(-1, 0, 0), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(-0.55f, 0, 0), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 2.1f, 0));
@@ -84,7 +84,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(0, 1, 0), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0, 1.05f, 0), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, -2.1f, 0));
@@ -93,7 +93,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(0, -1, 0), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0, -1.05f, 0), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0, 2.6f));
@@ -102,7 +102,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, 1), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0, 0, 1.55f), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0, -2.6f));
@@ -111,7 +111,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, -1), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0, 0, -1.55f), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.1f, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       Assert.AreEqual(0, algo.GetContacts(a, b).Count);
     }

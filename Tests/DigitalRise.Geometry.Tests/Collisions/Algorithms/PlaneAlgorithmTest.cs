@@ -1,9 +1,8 @@
 using System;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -75,14 +74,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1,algo.GetClosestPoints(a, b).Count);
       Assert.AreEqual(new Vector3(0, -1, 0), algo.GetClosestPoints(a, b)[0].Normal);
       Assert.AreEqual(new Vector3(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(a, b)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-1, algo.GetClosestPoints(a, b)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-1, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
 
       // Test swapped.
       Assert.AreEqual(false, algo.HaveContact(b, a));
       Assert.AreEqual(1, algo.GetClosestPoints(b, a).Count);
       Assert.AreEqual(new Vector3(0, 1, 0), algo.GetClosestPoints(b, a)[0].Normal);
       Assert.AreEqual(new Vector3(0.5f, 0.5f, 1.5f), algo.GetClosestPoints(b, a)[0].Position);
-      Assert.IsTrue(Numeric.AreEqual(-1, algo.GetClosestPoints(b, a)[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-1, algo.GetClosestPoints(b, a)[0].PenetrationDepth);
 
       Assert.AreEqual(0, algo.GetContacts(a, b).Count);
     }   

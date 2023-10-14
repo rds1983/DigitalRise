@@ -16,6 +16,32 @@ namespace NUnit.Utils
 			Assert.Fail($"Expected: {expected}\nActual: {actual}\nEpsilon: {epsilon}");
 		}
 
+		public static void AreNumericallyEqual(float expected, float actual, float epsilon)
+		{
+			if (Numeric.AreEqual(expected, actual, epsilon))
+			{
+				return;
+			}
+
+			ReportEqualFailure(expected, actual, epsilon);
+		}
+
+		public static void AreNumericallyEqual(float expected, float actual) =>
+			AreNumericallyEqual(expected, actual, Numeric.EpsilonF);
+
+		public static void AreNumericallyEqual(double expected, double actual, double epsilon)
+		{
+			if (Numeric.AreEqual(expected, actual, epsilon))
+			{
+				return;
+			}
+
+			ReportEqualFailure(expected, actual, epsilon);
+		}
+
+		public static void AreNumericallyEqual(double expected, double actual) =>
+			AreNumericallyEqual(expected, actual, Numeric.EpsilonD);
+
 		public static void AreNumericallyEqual(Vector2 expected, Vector2 actual, float epsilon)
 		{
 			if (MathHelper.AreNumericallyEqual(expected, actual, epsilon))

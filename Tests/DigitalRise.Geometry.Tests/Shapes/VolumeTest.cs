@@ -1,11 +1,10 @@
 ﻿using System;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Tests.Shapes
 {
@@ -59,7 +58,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var m = s.GetMesh(0.001f, 10);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -85,7 +84,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var m = s.GetMesh(0.001f, 10);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -98,7 +97,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var m = s.GetMesh(0.001f, 10);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -111,7 +110,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var m = s.GetMesh(0.001f, 10);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -124,7 +123,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var s1 = new ConvexHullOfPoints(s.GetMesh(0.1f, 1).Vertices);
       var v1 = s1.GetVolume(0.001f, 10);
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -138,7 +137,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var s1 = new TriangleMeshShape(m);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -152,7 +151,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var s1 = new TriangleMeshShape(m);
       var v1 = m.GetVolume();
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -166,7 +165,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var s1 = new TriangleMeshShape(m);
       var v1 = s1.GetVolume(0.0001f, 10);
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 
@@ -179,7 +178,7 @@ namespace DigitalRise.Geometry.Tests.Shapes
       var s1 = new ScaledConvexShape(new CylinderShape(10, 10), new Vector3(0.1f, 0.2f, 0.1f));
       var v1 = s1.GetVolume(0.0001f, 10);
 
-      Assert.IsTrue(Numeric.AreEqual(v0, v1, 0.01f * (1 + v0)));  // 1% error is allowed.
+      AssertExt.AreNumericallyEqual(v0, v1, 0.01f * (1 + v0));  // 1% error is allowed.
     }
 
 

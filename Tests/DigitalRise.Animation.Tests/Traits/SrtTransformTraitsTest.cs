@@ -41,7 +41,7 @@ namespace DigitalRise.Animation.Traits.Tests
     [Test]
     public void MultiplyTest()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         var traits = SrtTransformTraits.Instance;
         var value = NextRandomValue();
@@ -77,7 +77,7 @@ namespace DigitalRise.Animation.Traits.Tests
     [Test]
     public void CycleOffsetTest()
     {
-      using (var setEpsilon = new SetEpsilon(1E-03f))
+      using (var setEpsilon = new SetEpsilonF(1E-03f))
       {
         // IAnimationValueTraits<T> is used in a cyclic animation to a add the cycle offset in
         // each iteration.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -44,7 +44,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point3 = 7,
         Point4 = 9,
       };
-      Assert.IsTrue(Numeric.AreEqual(bSymmetric.GetTangent(0), bSymmetric.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(bSymmetric.GetTangent(0), bSymmetric.GetTangent(1));
     }
 
 

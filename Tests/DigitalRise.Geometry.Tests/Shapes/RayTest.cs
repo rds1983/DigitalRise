@@ -141,7 +141,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void NonuniformScaling()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Vector3 scale = new Vector3(1, 2, 3);
         Vector3 origin = new Vector3(1, 2, 3);
@@ -166,7 +166,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ToWorld()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Vector3 startPoint = new Vector3(10, 20, -40);
         Vector3 endPoint = new Vector3(-22, 34, 45);

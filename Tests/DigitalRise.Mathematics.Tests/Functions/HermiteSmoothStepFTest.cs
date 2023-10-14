@@ -1,6 +1,6 @@
 ﻿using DigitalRise.Mathematics.Interpolation;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Functions.Tests
 {
@@ -10,12 +10,12 @@ namespace DigitalRise.Mathematics.Functions.Tests
     [Test]
     public void Compute()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(-1)));
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(0)));
-      Assert.IsTrue(Numeric.AreEqual(0.5f, InterpolationHelper.HermiteSmoothStep(0.5f)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(1)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(2)));
-      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.HermiteSmoothStep(1f-0.3f), InterpolationHelper.HermiteSmoothStep(0.3f)));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(-1));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(0));
+      AssertExt.AreNumericallyEqual(0.5f, InterpolationHelper.HermiteSmoothStep(0.5f));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(1));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(2));
+      AssertExt.AreNumericallyEqual(1 - InterpolationHelper.HermiteSmoothStep(1f-0.3f), InterpolationHelper.HermiteSmoothStep(0.3f));
       Assert.Greater(InterpolationHelper.HermiteSmoothStep(1f - 0.3f), InterpolationHelper.HermiteSmoothStep(0.3f));
     }
   }

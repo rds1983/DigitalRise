@@ -100,7 +100,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       algo.UpdateClosestPoints(contacts, 0);
       Assert.AreEqual(false, contacts.HaveContact);
       Assert.AreEqual(1, contacts.Count);
-      Assert.IsTrue(Numeric.AreEqual(-0.001f, contacts[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(-0.001f, contacts[0].PenetrationDepth);
 
     }
   }

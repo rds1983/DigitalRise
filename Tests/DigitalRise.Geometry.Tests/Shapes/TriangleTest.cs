@@ -63,7 +63,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       AssertExt.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal);
 
       // Degenerate triangles can have any normal.
-      Assert.IsTrue(Numeric.AreEqual(1, new Triangle().Normal.Length()));
+      AssertExt.AreNumericallyEqual(1, new Triangle().Normal.Length());
     }
 
 

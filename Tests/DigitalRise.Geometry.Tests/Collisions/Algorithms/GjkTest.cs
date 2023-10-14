@@ -50,7 +50,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2, 0.1f, 0.2f));
       algo.UpdateClosestPoints(set, 0);
       Assert.AreEqual(false, algo.HaveContact(a, b));
-      Assert.IsTrue(Numeric.AreEqual(-1, set[0].PenetrationDepth, 0.001f));
+      AssertExt.AreNumericallyEqual(-1, set[0].PenetrationDepth, 0.001f);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.1f, 0.2f), set[0].PositionAWorld, 0.01f);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0.1f, 0.2f), set[0].PositionBWorld, 0.01f);
     }

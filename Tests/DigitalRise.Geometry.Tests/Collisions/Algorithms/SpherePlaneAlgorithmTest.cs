@@ -94,7 +94,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       AssertExt.AreNumericallyEqual(new Vector3(10, -2, 20), cs[0].Position);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(0, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0, cs[0].PenetrationDepth);
     }
 
 
@@ -119,7 +119,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, -1.5f, 0), cs[0].Position);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(3, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(3, cs[0].PenetrationDepth);
 
       // Test swapped case:
       cs = ContactSet.Create(objectB, objectA);
@@ -130,7 +130,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, -1.5f, 0), cs[0].Position);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal);
-      Assert.IsTrue(Numeric.AreEqual(3, cs[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(3, cs[0].PenetrationDepth);
     }
 
 

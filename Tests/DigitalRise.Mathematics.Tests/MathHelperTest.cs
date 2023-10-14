@@ -1,6 +1,5 @@
-using System;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Tests
 {
@@ -76,8 +75,8 @@ namespace DigitalRise.Mathematics.Tests
       Assert.AreEqual(0.0f, MathHelper.ToDegrees(0f));
       Assert.AreEqual(360.0f, MathHelper.ToDegrees(ConstantsF.TwoPi));
       Assert.AreEqual(-360.0f, MathHelper.ToDegrees(-ConstantsF.TwoPi));
-      Assert.IsTrue(Numeric.AreEqual(180.0f, MathHelper.ToDegrees(ConstantsF.Pi)));
-      Assert.IsTrue(Numeric.AreEqual(-180.0f, MathHelper.ToDegrees(-ConstantsF.Pi)));
+      AssertExt.AreNumericallyEqual(180.0f, MathHelper.ToDegrees(ConstantsF.Pi));
+      AssertExt.AreNumericallyEqual(-180.0f, MathHelper.ToDegrees(-ConstantsF.Pi));
     }
 
 
@@ -148,7 +147,7 @@ namespace DigitalRise.Mathematics.Tests
       Assert.Greater(MathHelper.Gaussian(11f, 4, 10, 2), MathHelper.Gaussian(12f, 4, 10, 2));
       Assert.Greater(MathHelper.Gaussian(14f, 4, 10, 2), MathHelper.Gaussian(16f, 4, 10, 2));
 
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.Gaussian(8f, 4, 10, 2), MathHelper.Gaussian(12f, 4, 10, 2)));
+      AssertExt.AreNumericallyEqual(MathHelper.Gaussian(8f, 4, 10, 2), MathHelper.Gaussian(12f, 4, 10, 2));
     }
 
 
@@ -162,7 +161,7 @@ namespace DigitalRise.Mathematics.Tests
       Assert.Greater(MathHelper.Gaussian(11d, 4, 10, 2), MathHelper.Gaussian(12d, 4, 10, 2));
       Assert.Greater(MathHelper.Gaussian(14d, 4, 10, 2), MathHelper.Gaussian(16d, 4, 10, 2));
 
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.Gaussian(8d, 4, 10, 2), MathHelper.Gaussian(12d, 4, 10, 2)));
+      AssertExt.AreNumericallyEqual(MathHelper.Gaussian(8d, 4, 10, 2), MathHelper.Gaussian(12d, 4, 10, 2));
     }
 
     [Test]

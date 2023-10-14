@@ -253,8 +253,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector2 v = new Vector2(x, y);
       Vector2 u = v / s;
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
     }
 
 
@@ -267,8 +267,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       Vector2 v = new Vector2(x, y);
       Vector2 u = Vector2.Divide(v, s);
-      Assert.IsTrue(Numeric.AreEqual(x / s, u.X));
-      Assert.IsTrue(Numeric.AreEqual(y / s, u.Y));
+      AssertExt.AreNumericallyEqual(x / s, u.X);
+      AssertExt.AreNumericallyEqual(y / s, u.Y);
     }
 
 
@@ -471,9 +471,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       // 45�
       float angle = (float)Math.Acos(Vector2.Dot(new Vector2(1f, 1f).Normalized(), Vector2.UnitX));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
       angle = (float)Math.Acos(Vector2.Dot(new Vector2(1f, 1f).Normalized(), Vector2.UnitY));
-      Assert.IsTrue(Numeric.AreEqual(MathHelper.ToRadians(45), angle));
+      AssertExt.AreNumericallyEqual(MathHelper.ToRadians(45), angle);
     }
 
 

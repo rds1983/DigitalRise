@@ -1,6 +1,6 @@
 ﻿using DigitalRise.Mathematics;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Animation.Easing.Tests
 {
@@ -15,7 +15,7 @@ namespace DigitalRise.Animation.Easing.Tests
     {
       // Check limits.
       Assert.IsTrue(Numeric.IsZero(EasingFunction.Ease(0.0f)), "Easing function failed for t = 0.");
-      Assert.IsTrue(Numeric.AreEqual(1.0f, EasingFunction.Ease(1.0f)), "Easing function failed for t = 1.");
+      AssertExt.AreNumericallyEqual(1.0f, EasingFunction.Ease(1.0f));
 
       // Sample function at several intervals.
       const float from = -2.5f;

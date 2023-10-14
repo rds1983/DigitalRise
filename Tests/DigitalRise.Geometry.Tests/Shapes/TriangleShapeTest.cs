@@ -66,7 +66,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       AssertExt.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal);
 
       // Degenerate triangles can have any normal.
-      Assert.IsTrue(Numeric.AreEqual(1, new TriangleShape().Normal.Length()));
+      AssertExt.AreNumericallyEqual(1, new TriangleShape().Normal.Length());
     }
 
 
@@ -193,7 +193,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(1, new TriangleShape(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 0, 0)));
     //  Assert.AreEqual(2, new TriangleShape(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(0, 1, 0)));
     //  Assert.AreEqual(3, new TriangleShape(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(0, 0, 1)));
-    //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(1, 1, 1)).Length, new TriangleShape(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 1, 1))));
+    //  AssertExt.AreNumericallyEqual(MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(1, 1, 1)).Length, new TriangleShape(new Vector3(1, 2, 3)).GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 
@@ -224,14 +224,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(1, w);
 
       GeometryHelper.GetClosestPoint(t, new Vector3(-1, 9, 0), out u, out v, out w);
-      Assert.IsTrue(Numeric.AreEqual(0.1f, u));
-      Assert.IsTrue(Numeric.AreEqual(0f, v));
-      Assert.IsTrue(Numeric.AreEqual(0.9f, w));
+      AssertExt.AreNumericallyEqual(0.1f, u);
+      AssertExt.AreNumericallyEqual(0f, v);
+      AssertExt.AreNumericallyEqual(0.9f, w);
 
       GeometryHelper.GetClosestPoint(t, new Vector3(100, 100, -2), out u, out v, out w);
-      Assert.IsTrue(Numeric.AreEqual(0f, u));
-      Assert.IsTrue(Numeric.AreEqual(0.5f, v));
-      Assert.IsTrue(Numeric.AreEqual(0.5f, w));
+      AssertExt.AreNumericallyEqual(0f, u);
+      AssertExt.AreNumericallyEqual(0.5f, v);
+      AssertExt.AreNumericallyEqual(0.5f, w);
 
       GeometryHelper.GetClosestPoint(t, new Vector3(2, 4, 5), out u, out v, out w);
       AssertExt.AreNumericallyEqual(new Vector3(2, 4, 0), GeometryHelper.GetPointFromBarycentric(t, u, v, w));

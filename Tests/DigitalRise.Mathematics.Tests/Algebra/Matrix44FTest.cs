@@ -1034,7 +1034,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       m = m / s;
       for (int i = 0; i < 16; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 
@@ -1045,7 +1045,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F m = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       m = Matrix44F.Divide(m, s);
       for (int i = 0; i < 16; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 

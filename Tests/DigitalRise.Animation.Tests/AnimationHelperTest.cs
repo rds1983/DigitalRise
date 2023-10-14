@@ -247,7 +247,7 @@ namespace DigitalRise.Animation.Tests
     [Test]
     public void ComputeLinearVelocity()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         var v = new Vector3(1, 2, 3);
         var p = new Vector3(-7, 8, 4);

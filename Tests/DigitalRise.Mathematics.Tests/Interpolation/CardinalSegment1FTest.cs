@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -27,9 +27,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Tension = 0.3f,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(3, s.GetPoint(0)));
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetPoint(1)));
-      Assert.IsTrue(Numeric.AreEqual(h.GetPoint(0.3f), s.GetPoint(0.3f)));
+      AssertExt.AreNumericallyEqual(3, s.GetPoint(0));
+      AssertExt.AreNumericallyEqual(7, s.GetPoint(1));
+      AssertExt.AreNumericallyEqual(h.GetPoint(0.3f), s.GetPoint(0.3f));
     }
 
 
@@ -53,9 +53,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Tension = 0.3f,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(h.Tangent1, s.GetTangent(0)));
-      Assert.IsTrue(Numeric.AreEqual(h.Tangent2, s.GetTangent(1)));
-      Assert.IsTrue(Numeric.AreEqual(h.GetTangent(0.81f), s.GetTangent(0.81f)));
+      AssertExt.AreNumericallyEqual(h.Tangent1, s.GetTangent(0));
+      AssertExt.AreNumericallyEqual(h.Tangent2, s.GetTangent(1));
+      AssertExt.AreNumericallyEqual(h.GetTangent(0.81f), s.GetTangent(0.81f));
     }
 
 
@@ -71,7 +71,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Tension = 0.3f,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(4, s.GetLength(0, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(4, s.GetLength(0, 1, 100, Numeric.EpsilonF));
 
       CardinalSegment1F sSymmetric = new CardinalSegment1F
       {
@@ -81,7 +81,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point4 = 9,
         Tension = 0.3f,
       };
-      Assert.IsTrue(Numeric.AreEqual(2f, sSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(2f, sSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
     }
 
 

@@ -202,7 +202,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void GetHeight()
     {
-      Assert.IsTrue(Numeric.AreEqual(4, _field.GetHeight(1050, 2000 + 200 / 7.0f)));
+      AssertExt.AreNumericallyEqual(4, _field.GetHeight(1050, 2000 + 200 / 7.0f));
     }
   }
 }

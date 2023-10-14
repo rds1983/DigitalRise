@@ -112,24 +112,24 @@ namespace DigitalRise.Mathematics.Statistics.Tests
     [Test]
     public void NoiseIsPeriodicWith256()
     {
-      using (var setEpsilon = new SetEpsilon(1E-03f))
+      using (var setEpsilon = new SetEpsilonF(1E-03f))
       {
         Random random = new Random(1234567);
         for (int i = 0; i < 100; i++)
         {
           var v = random.NextVector4(-1000, 1000);
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X - 256)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X + 256)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X - 256));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X + 256));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X - 256, v.Y - 256)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X + 256, v.Y + 256)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X - 256, v.Y - 256));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X + 256, v.Y + 256));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z), PerlinNoise.Compute(v.X - 256, v.Y - 256, v.Z - 256)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z), PerlinNoise.Compute(v.X + 256, v.Y + 256, v.Z + 256)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z), PerlinNoise.Compute(v.X - 256, v.Y - 256, v.Z - 256));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z), PerlinNoise.Compute(v.X + 256, v.Y + 256, v.Z + 256));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W), PerlinNoise.Compute(v.X - 256, v.Y - 256, v.Z - 256, v.W - 256)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W), PerlinNoise.Compute(v.X + 256, v.Y + 256, v.Z + 256, v.W + 256)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W), PerlinNoise.Compute(v.X - 256, v.Y - 256, v.Z - 256, v.W - 256));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W), PerlinNoise.Compute(v.X + 256, v.Y + 256, v.Z + 256, v.W + 256));
         }
       }
 		}
@@ -138,7 +138,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
     [Test]
     public void NoiseIsPeriodicWithUserPeriod()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Random random = new Random(1234567);
         for (int i = 0; i < 100; i++)
@@ -151,17 +151,17 @@ namespace DigitalRise.Mathematics.Statistics.Tests
           var pz = (int)randomPeriod.Z;
           var pw = (int)randomPeriod.W;
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, px), PerlinNoise.Compute(v.X - px, px)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, px), PerlinNoise.Compute(v.X + px, px)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, px), PerlinNoise.Compute(v.X - px, px));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, px), PerlinNoise.Compute(v.X + px, px));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, px, py), PerlinNoise.Compute(v.X - px, v.Y - py, px, py)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, px, py), PerlinNoise.Compute(v.X + px, v.Y + py, px, py)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, px, py), PerlinNoise.Compute(v.X - px, v.Y - py, px, py));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, px, py), PerlinNoise.Compute(v.X + px, v.Y + py, px, py));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, px, py, pz), PerlinNoise.Compute(v.X - px, v.Y - py, v.Z - pz, px, py, pz)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, px, py, pz), PerlinNoise.Compute(v.X + px, v.Y + py, v.Z + pz, px, py, pz)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, px, py, pz), PerlinNoise.Compute(v.X - px, v.Y - py, v.Z - pz, px, py, pz));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, px, py, pz), PerlinNoise.Compute(v.X + px, v.Y + py, v.Z + pz, px, py, pz));
 
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W, px, py, pz, pw), PerlinNoise.Compute(v.X - px, v.Y - py, v.Z - pz, v.W - pw, px, py, pz, pw)));
-          Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W, px, py, pz, pw), PerlinNoise.Compute(v.X + px, v.Y + py, v.Z + pz, v.W + pw, px, py, pz, pw)));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W, px, py, pz, pw), PerlinNoise.Compute(v.X - px, v.Y - py, v.Z - pz, v.W - pw, px, py, pz, pw));
+          AssertExt.AreNumericallyEqual(PerlinNoise.Compute(v.X, v.Y, v.Z, v.W, px, py, pz, pw), PerlinNoise.Compute(v.X + px, v.Y + py, v.Z + pz, v.W + pw, px, py, pz, pw));
         }
       }
     }

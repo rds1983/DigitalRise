@@ -15,12 +15,12 @@ namespace DigitalRise.Graphics.Tests
     {
       float width, height;
       PerspectiveViewVolume.GetWidthAndHeight(MathHelper.ToRadians(90), 1, 1, out width, out height);
-      Assert.IsTrue(Numeric.AreEqual(2, width));
-      Assert.IsTrue(Numeric.AreEqual(2, height));
+      AssertExt.AreNumericallyEqual(2, width);
+      AssertExt.AreNumericallyEqual(2, height);
 
       PerspectiveViewVolume.GetWidthAndHeight(MathHelper.ToRadians(60), 16.0f / 9.0f, 1, out width, out height);
-      Assert.IsTrue(Numeric.AreEqual(2.0528009f, width));
-      Assert.IsTrue(Numeric.AreEqual(1.1547005f, height));
+      AssertExt.AreNumericallyEqual(2.0528009f, width);
+      AssertExt.AreNumericallyEqual(1.1547005f, height);
 
       // We are pretty confident that the Projection.CreateProjectionXxx() works. 
       // Use Projection.CreateProjectionXxx() to test GetWidthAndHeight().

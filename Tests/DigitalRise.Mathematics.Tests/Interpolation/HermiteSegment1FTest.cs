@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -18,9 +18,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(1, s.GetPoint(0)));
-      Assert.IsTrue(Numeric.AreEqual(8, s.GetPoint(1)));
-      Assert.IsTrue(Numeric.AreEqual(2.638f, s.GetPoint(0.3f)));
+      AssertExt.AreNumericallyEqual(1, s.GetPoint(0));
+      AssertExt.AreNumericallyEqual(8, s.GetPoint(1));
+      AssertExt.AreNumericallyEqual(2.638f, s.GetPoint(0.3f));
     }
 
 
@@ -35,8 +35,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(3 * (3 - 1), s.GetTangent(0)));
-      Assert.IsTrue(Numeric.AreEqual(3 * (8 - 4), s.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(3 * (3 - 1), s.GetTangent(0));
+      AssertExt.AreNumericallyEqual(3 * (8 - 4), s.GetTangent(1));
     }
 
 
@@ -51,7 +51,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(7, s.GetLength(0, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(7, s.GetLength(0, 1, 100, Numeric.EpsilonF));
 
       HermiteSegment1F sSymmetric = new HermiteSegment1F
       {
@@ -60,7 +60,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Tangent2 = (6 - 4) * 3,
         Point2 = 6,
       };
-      Assert.IsTrue(Numeric.AreEqual(2.5f, sSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(2.5f, sSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
     }
 
 

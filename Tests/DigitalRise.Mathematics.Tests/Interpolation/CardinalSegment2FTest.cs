@@ -83,16 +83,16 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
       float length1 = c.GetLength(0, 1, 20, Numeric.EpsilonF);
       float length2 = h.GetLength(0, 1, 20, Numeric.EpsilonF);
-      Assert.IsTrue(Numeric.AreEqual(length1, length2));
+      AssertExt.AreNumericallyEqual(length1, length2);
 
       float approxLength = 0;
       const float step = 0.0001f;
       for (float u = 0; u <= 1.0f; u += step)
         approxLength += (c.GetPoint(u) - c.GetPoint(u + step)).Length();
 
-      Assert.IsTrue(Numeric.AreEqual(approxLength, length1, 0.01f));
-      Assert.IsTrue(Numeric.AreEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + c.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
-      Assert.IsTrue(Numeric.AreEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(1, 0, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(approxLength, length1, 0.01f);
+      AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + c.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
+      AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(1, 0, 100, Numeric.EpsilonF));
     }
 
 

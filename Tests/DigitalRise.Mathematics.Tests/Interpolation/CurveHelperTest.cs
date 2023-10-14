@@ -4,7 +4,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -22,13 +22,13 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(0, CurveHelper.GetParameter(b, 1, 100)));
-      Assert.IsTrue(Numeric.AreEqual(1, CurveHelper.GetParameter(b, 8, 100)));
-      Assert.IsTrue(Numeric.AreEqual(0.3f, CurveHelper.GetParameter(b, b.GetPoint(0.3f), 100)));
-      Assert.IsTrue(Numeric.AreEqual(0.4f, CurveHelper.GetParameter(b, b.GetPoint(0.4f), 100)));
-      Assert.IsTrue(Numeric.AreEqual(0.5f, CurveHelper.GetParameter(b, b.GetPoint(0.5f), 100)));
-      Assert.IsTrue(Numeric.AreEqual(0.6f, CurveHelper.GetParameter(b, b.GetPoint(0.6f), 100)));
-      Assert.IsTrue(Numeric.AreEqual(0.9f, CurveHelper.GetParameter(b, b.GetPoint(0.9f), 100)));
+      AssertExt.AreNumericallyEqual(0, CurveHelper.GetParameter(b, 1, 100));
+      AssertExt.AreNumericallyEqual(1, CurveHelper.GetParameter(b, 8, 100));
+      AssertExt.AreNumericallyEqual(0.3f, CurveHelper.GetParameter(b, b.GetPoint(0.3f), 100));
+      AssertExt.AreNumericallyEqual(0.4f, CurveHelper.GetParameter(b, b.GetPoint(0.4f), 100));
+      AssertExt.AreNumericallyEqual(0.5f, CurveHelper.GetParameter(b, b.GetPoint(0.5f), 100));
+      AssertExt.AreNumericallyEqual(0.6f, CurveHelper.GetParameter(b, b.GetPoint(0.6f), 100));
+      AssertExt.AreNumericallyEqual(0.9f, CurveHelper.GetParameter(b, b.GetPoint(0.9f), 100));
 
       Assert.IsFalse(Numeric.AreEqual(0.9f, CurveHelper.GetParameter(b, b.GetPoint(0.9f), 1))); // limited iterations.
 
@@ -36,14 +36,14 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       {
         float u = RandomHelper.Random.NextFloat(0, 1);
         float point = b.GetPoint(u);
-        Assert.IsTrue(Numeric.AreEqual(u, CurveHelper.GetParameter(b, point, 100)));
+        AssertExt.AreNumericallyEqual(u, CurveHelper.GetParameter(b, point, 100));
       }
 
       for (int i = 0; i < 1000; i++)
       {
         float u = RandomHelper.Random.NextFloat(0, 1);
         float point = b.GetPoint(u);
-        Assert.IsTrue(Numeric.AreEqual(u, CurveHelper.GetParameter(b, point, 100), 0.01f));
+        AssertExt.AreNumericallyEqual(u, CurveHelper.GetParameter(b, point, 100), 0.01f);
       }
     }
 

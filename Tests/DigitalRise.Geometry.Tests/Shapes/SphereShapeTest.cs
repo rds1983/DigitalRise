@@ -193,7 +193,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.Greater(mesh.NumberOfTriangles, 1);
       
       for (int i = 0; i < mesh.Vertices.Count; i++)
-        Assert.IsTrue(Numeric.AreEqual(3, mesh.Vertices[i].Length()));
+        AssertExt.AreNumericallyEqual(3, mesh.Vertices[i].Length());
 
     }
   }

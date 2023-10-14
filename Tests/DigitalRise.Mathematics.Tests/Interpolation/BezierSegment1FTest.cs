@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
 {
@@ -19,9 +18,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(1, b.GetPoint(0)));
-      Assert.IsTrue(Numeric.AreEqual(8, b.GetPoint(1)));
-      Assert.IsTrue(Numeric.AreEqual(2.638f, b.GetPoint(0.3f)));
+      AssertExt.AreNumericallyEqual(1, b.GetPoint(0));
+      AssertExt.AreNumericallyEqual(8, b.GetPoint(1));
+      AssertExt.AreNumericallyEqual(2.638f, b.GetPoint(0.3f));
     }
 
 
@@ -36,8 +35,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(3 * (3 - 1), b.GetTangent(0)));
-      Assert.IsTrue(Numeric.AreEqual(3 * (8 - 4), b.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(3 * (3 - 1), b.GetTangent(0));
+      AssertExt.AreNumericallyEqual(3 * (8 - 4), b.GetTangent(1));
     }
 
 
@@ -52,7 +51,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = 8,
       };
 
-      Assert.IsTrue(Numeric.AreEqual(7, b.GetLength(0, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(7, b.GetLength(0, 1, 100, Numeric.EpsilonF));
 
       BezierSegment1F bSymmetric = new BezierSegment1F
       {
@@ -61,7 +60,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         ControlPoint2 = 4,
         Point2 = 6,
       };
-      Assert.IsTrue(Numeric.AreEqual(2.5f, bSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF)));
+      AssertExt.AreNumericallyEqual(2.5f, bSymmetric.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
     }
 
 

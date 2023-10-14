@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using DigitalRise.Mathematics;
 using NUnit.Framework;
+using NUnit.Utils;
 
 #if !NETFX_CORE && !SILVERLIGHT
 using System.Drawing;
@@ -157,12 +157,12 @@ namespace DigitalRise.Tests
       Assert.AreEqual(TestEnum.A | TestEnum.C | TestEnum.D, e);
 
       var va = (VectorA)ObjectHelper.Parse(typeof(VectorA), "(1.01; 2.02)");
-      Assert.IsTrue(Numeric.AreEqual(va.X, 1.01f));
-      Assert.IsTrue(Numeric.AreEqual(va.Y, 2.02f));
+      AssertExt.AreNumericallyEqual(va.X, 1.01f);
+      AssertExt.AreNumericallyEqual(va.Y, 2.02f);
 
       var vb = (VectorB)ObjectHelper.Parse(typeof(VectorB), "(1.01; 2.02)");      // Use this if culture in the test is de.
-      Assert.IsTrue(Numeric.AreEqual(vb.X, 1.01f));
-      Assert.IsTrue(Numeric.AreEqual(vb.Y, 2.02f));
+      AssertExt.AreNumericallyEqual(vb.X, 1.01f);
+      AssertExt.AreNumericallyEqual(vb.Y, 2.02f);
 
       Assert.Throws(typeof(NotSupportedException), () => ObjectHelper.Parse<VectorC>("(1.01; 2.02)"));
     }

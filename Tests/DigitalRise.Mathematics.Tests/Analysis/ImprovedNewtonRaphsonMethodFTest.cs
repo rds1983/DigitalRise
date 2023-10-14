@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Mathematics.Analysis.Tests
 {
@@ -34,47 +34,47 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       rootFinder.EpsilonX = Numeric.EpsilonF / 100;
 
       float xRoot = rootFinder.FindRoot(0, 2);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(4, 10);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(10, 4);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(10, 12);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(2, 0);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(0, 3);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(3, 0);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(-6, 2);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(-1, 1);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(-1, 1);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(0.9f, 9.9f);
-      Assert.IsTrue(Numeric.AreEqual(0, polynomial(xRoot)));
+      AssertExt.AreNumericallyEqual(0, polynomial(xRoot));
       Console.WriteLine("NumberOfIterations: {0}", rootFinder.NumberOfIterations);
 
       xRoot = rootFinder.FindRoot(2, 3);

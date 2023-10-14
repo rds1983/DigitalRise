@@ -1,6 +1,5 @@
-﻿using DigitalRise.Mathematics;
-using NUnit.Framework;
-
+﻿using NUnit.Framework;
+using NUnit.Utils;
 
 namespace DigitalRise.Graphics.Tests.Data
 {
@@ -30,8 +29,8 @@ namespace DigitalRise.Graphics.Tests.Data
 
       fog.Density0 = d0;
       fog.Density1 = d1;
-      Assert.IsTrue(Numeric.AreEqual(0.77f, fog.Density));
-      Assert.IsTrue(Numeric.AreEqual(0.023f, fog.HeightFalloff));
+      AssertExt.AreNumericallyEqual(0.77f, fog.Density);
+      AssertExt.AreNumericallyEqual(0.023f, fog.HeightFalloff);
 
       fog.Density = 12;
       fog.HeightFalloff = 0; 

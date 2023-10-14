@@ -40,7 +40,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       set = algo.GetContacts(a, b);
       Assert.AreEqual(true, algo.HaveContact(a, b));
-      Assert.IsTrue(Numeric.AreEqual(1, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(1, set[0].PenetrationDepth);
 
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(2, 0.1f, 0.2f));
       algo.UpdateContacts(set, 0);      
@@ -75,13 +75,13 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       set = algo.GetContacts(box, sphere);
       Assert.AreEqual(1, set.Count);
-      Assert.IsTrue(Numeric.AreEqual(0, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0, set[0].PenetrationDepth);
       AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), set[0].Normal, 0.001f);
 
       ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(0.2f, 0, 0));
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(1, set.Count);
-      Assert.IsTrue(Numeric.AreEqual(0.2f, set[0].PenetrationDepth));
+      AssertExt.AreNumericallyEqual(0.2f, set[0].PenetrationDepth);
       AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), set[0].Normal, 0.001f);
     }
 

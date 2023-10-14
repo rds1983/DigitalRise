@@ -136,11 +136,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(0, new ConeShape().GetSupportPointDistance(new Vector3(0, 0, 1)));
     //  Assert.AreEqual(0, new ConeShape().GetSupportPointDistance(new Vector3(1, 1, 1)));
 
-    //  Assert.IsTrue(Numeric.AreEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(1, 0, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(30, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(0, 1, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(0, 0, 1))));
-    //  Assert.IsTrue(Numeric.AreEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(-1, 0, -1))));
-    //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(0, 30, 0), new Vector3(1, 1, 1)).Length, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(1, 1, 1))));
+    //  AssertExt.AreNumericallyEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(1, 0, 0)));
+    //  AssertExt.AreNumericallyEqual(30, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(0, 1, 0)));
+    //  AssertExt.AreNumericallyEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(0, 0, 1)));
+    //  AssertExt.AreNumericallyEqual(10, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(-1, 0, -1)));
+    //  AssertExt.AreNumericallyEqual(MathHelper.ProjectTo(new Vector3(0, 30, 0), new Vector3(1, 1, 1)).Length, new ConeShape(10, 30).GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 

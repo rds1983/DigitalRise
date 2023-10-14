@@ -179,7 +179,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ToLocal()
     {
-      using (var setEpsilon = new SetEpsilon(1E-04f))
+      using (var setEpsilon = new SetEpsilonF(1E-04f))
       {
         Vector3 point0 = new Vector3(1, 0.5f, 0.5f);
         Vector3 point1 = new Vector3(0.5f, 1, 0.5f);
@@ -223,7 +223,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
       Assert.IsTrue(p2.TryNormalize());
       AssertExt.AreNumericallyEqual(p.Normal, p2.Normal);
-      Assert.IsTrue(Numeric.AreEqual(p.DistanceFromOrigin, p2.DistanceFromOrigin));
+      AssertExt.AreNumericallyEqual(p.DistanceFromOrigin, p2.DistanceFromOrigin);
 
       // Scale all parts of the plane equation.
       p2 = p;

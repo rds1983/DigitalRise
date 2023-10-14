@@ -770,7 +770,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
       m = m / s;
       for (int i = 0; i < 4; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 
@@ -781,7 +781,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix22F m = new Matrix22F(columnMajor, MatrixOrder.ColumnMajor);
       m = Matrix22F.Divide(m, s);
       for (int i = 0; i < 4; i++)
-        Assert.IsTrue(Numeric.AreEqual(rowMajor[i] / s, m[i]));
+        AssertExt.AreNumericallyEqual(rowMajor[i] / s, m[i]);
     }
 
 

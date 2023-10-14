@@ -30,7 +30,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -46,7 +46,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -62,7 +62,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -78,7 +78,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -94,7 +94,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -110,7 +110,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -126,7 +126,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -142,7 +142,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -158,7 +158,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -174,7 +174,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -190,7 +190,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -206,7 +206,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
     #endregion
 
@@ -228,7 +228,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -244,7 +244,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -260,7 +260,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -276,7 +276,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -292,7 +292,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -308,7 +308,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -324,7 +324,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -340,7 +340,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -356,7 +356,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -372,7 +372,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -388,7 +388,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -404,7 +404,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -420,7 +420,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -436,7 +436,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -452,7 +452,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -468,7 +468,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -484,7 +484,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
     [Test]
@@ -500,7 +500,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
     #endregion
 
@@ -820,7 +820,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
 
@@ -837,7 +837,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
       AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
-      Assert.IsTrue(Numeric.AreEqual(1, d));
+      AssertExt.AreNumericallyEqual(1, d);
     }
 
 
@@ -887,7 +887,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       Assert.AreEqual(true, haveContact);
       AssertExt.AreNumericallyEqual(tA.Vertex0, p);
-      Assert.IsTrue(Numeric.AreEqual(0, d));
+      AssertExt.AreNumericallyEqual(0, d);
     }
     #endregion
 
@@ -920,7 +920,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
               AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
             else
               AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
-            Assert.IsTrue(Numeric.AreEqual(1, d));
+            AssertExt.AreNumericallyEqual(1, d);
 
             // "Rotate" triangle to test next edges.
             var oldB = tB;

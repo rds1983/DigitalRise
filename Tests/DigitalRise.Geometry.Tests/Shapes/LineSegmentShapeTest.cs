@@ -109,8 +109,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(4, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(1, 0, 0)));
     //  Assert.AreEqual(5, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(0, 1, 0)));
     //  Assert.AreEqual(6, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(0, 0, 1)));
-    //  Assert.IsTrue(Numeric.AreEqual(-MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(-1, 0, -1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(-1, 0, -1))));
-    //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(4, 5, 6), new Vector3(1, 1, 1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(1, 1, 1))));
+    //  AssertExt.AreNumericallyEqual(-MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(-1, 0, -1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(-1, 0, -1)));
+    //  AssertExt.AreNumericallyEqual(MathHelper.ProjectTo(new Vector3(4, 5, 6), new Vector3(1, 1, 1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 

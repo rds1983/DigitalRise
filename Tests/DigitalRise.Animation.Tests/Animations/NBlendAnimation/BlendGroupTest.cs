@@ -172,7 +172,7 @@ namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
       blendGroup.SetWeight(1, 2);
       manager.Update(TimeSpan.Zero);       // t = 0.25
       manager.ApplyAnimations();
-      Assert.IsTrue(Numeric.AreEqual(10.0f / 12.0f * 25.0f + 2.0f / 12.0f * 125.0f, property1.Value));
+      AssertExt.AreNumericallyEqual(10.0f / 12.0f * 25.0f + 2.0f / 12.0f * 125.0f, property1.Value);
 
       blendGroup.SetWeight(0, 0);
       manager.Update(TimeSpan.Zero);       // t = 0.25
@@ -188,11 +188,11 @@ namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
       blendGroup.SetWeight(1, 2);
       manager.Update(TimeSpan.FromSeconds(0.25));      // t = 0.5
       manager.ApplyAnimations();
-      Assert.IsTrue(Numeric.AreEqual(10.0f / 12.0f * 50.0f + 2.0f / 12.0f * 150.0f, property1.Value));
+      AssertExt.AreNumericallyEqual(10.0f / 12.0f * 50.0f + 2.0f / 12.0f * 150.0f, property1.Value);
 
       manager.Update(TimeSpan.FromSeconds(1.0));       // t = 1.5
       manager.ApplyAnimations();
-      Assert.IsTrue(Numeric.AreEqual(10.0f / 12.0f * 100.0f + 2.0f / 12.0f * 250.0f, property1.Value));
+      AssertExt.AreNumericallyEqual(10.0f / 12.0f * 100.0f + 2.0f / 12.0f * 250.0f, property1.Value);
 
       manager.Update(TimeSpan.FromSeconds(1.0));       // t = 2.5
       manager.ApplyAnimations();
@@ -295,7 +295,7 @@ namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
       manager.Update(TimeSpan.FromSeconds(0.5));       // t = 1.5
       manager.ApplyAnimations();
       Assert.AreEqual(AnimationState.Filling, controller.State);
-      Assert.IsTrue(Numeric.AreEqual(100.0f * 10.0f / 11.0f + 300.0f * 1.0f / 11.0f, property1.Value));
+      AssertExt.AreNumericallyEqual(100.0f * 10.0f / 11.0f + 300.0f * 1.0f / 11.0f, property1.Value);
 
       controller.Stop();
       controller.UpdateAndApply();

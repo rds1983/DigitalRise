@@ -396,9 +396,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     {
       var points = new[] { new Vector2(0, 1), new Vector2(3, 4), new Vector2(5, -1) };
 
-      Assert.IsTrue(Numeric.AreEqual(points[0].Y, InterpolationHelper.PolynomialInterpolation(points, points[0].X)));
-      Assert.IsTrue(Numeric.AreEqual(points[1].Y, InterpolationHelper.PolynomialInterpolation(points, points[1].X)));
-      Assert.IsTrue(Numeric.AreEqual(points[2].Y, InterpolationHelper.PolynomialInterpolation(points, points[2].X)));
+      AssertExt.AreNumericallyEqual(points[0].Y, InterpolationHelper.PolynomialInterpolation(points, points[0].X));
+      AssertExt.AreNumericallyEqual(points[1].Y, InterpolationHelper.PolynomialInterpolation(points, points[1].X));
+      AssertExt.AreNumericallyEqual(points[2].Y, InterpolationHelper.PolynomialInterpolation(points, points[2].X));
     }
 
 
@@ -538,12 +538,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void HermiteSmoothStepD()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(-1.0f)));
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(0.0f)));
-      Assert.IsTrue(Numeric.AreEqual(0.5, InterpolationHelper.HermiteSmoothStep(0.5f)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(1.0f)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(2.0f)));
-      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.HermiteSmoothStep(1 - 0.3f), InterpolationHelper.HermiteSmoothStep(0.3f)));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(-1.0f));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(0.0f));
+      AssertExt.AreNumericallyEqual(0.5, InterpolationHelper.HermiteSmoothStep(0.5f));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(1.0f));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(2.0f));
+      AssertExt.AreNumericallyEqual(1 - InterpolationHelper.HermiteSmoothStep(1 - 0.3f), InterpolationHelper.HermiteSmoothStep(0.3f));
       Assert.Greater(InterpolationHelper.HermiteSmoothStep(1 - 0.3f), InterpolationHelper.HermiteSmoothStep(0.3f));
     }
 
@@ -551,12 +551,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void HermiteSmoothStepF()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(-1.0)));
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.HermiteSmoothStep(0.0)));
-      Assert.IsTrue(Numeric.AreEqual(0.5, InterpolationHelper.HermiteSmoothStep(0.5)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(1.0)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.HermiteSmoothStep(2.0)));
-      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.HermiteSmoothStep(1 - 0.3), InterpolationHelper.HermiteSmoothStep(0.3)));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(-1.0));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.HermiteSmoothStep(0.0));
+      AssertExt.AreNumericallyEqual(0.5, InterpolationHelper.HermiteSmoothStep(0.5));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(1.0));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.HermiteSmoothStep(2.0));
+      AssertExt.AreNumericallyEqual(1 - InterpolationHelper.HermiteSmoothStep(1 - 0.3), InterpolationHelper.HermiteSmoothStep(0.3));
       Assert.Greater(InterpolationHelper.HermiteSmoothStep(1 - 0.3), InterpolationHelper.HermiteSmoothStep(0.3));
     }
 
@@ -564,12 +564,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void EaseInOutSmoothStepF()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(-1.0f)));
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(0.0f)));
-      Assert.IsTrue(Numeric.AreEqual(0.5, InterpolationHelper.EaseInOutSmoothStep(0.5f)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(1.0f)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(2.0f)));
-      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.EaseInOutSmoothStep(1 - 0.3f), InterpolationHelper.EaseInOutSmoothStep(0.3f)));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.EaseInOutSmoothStep(-1.0f));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.EaseInOutSmoothStep(0.0f));
+      AssertExt.AreNumericallyEqual(0.5, InterpolationHelper.EaseInOutSmoothStep(0.5f));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.EaseInOutSmoothStep(1.0f));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.EaseInOutSmoothStep(2.0f));
+      AssertExt.AreNumericallyEqual(1 - InterpolationHelper.EaseInOutSmoothStep(1 - 0.3f), InterpolationHelper.EaseInOutSmoothStep(0.3f));
       Assert.Greater(InterpolationHelper.EaseInOutSmoothStep(1 - 0.3f), InterpolationHelper.EaseInOutSmoothStep(0.3f));
 
       Assert.Greater(0.5f, InterpolationHelper.EaseInOutSmoothStep(0.3f));
@@ -580,12 +580,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     [Test]
     public void EaseInOutSmoothStepD()
     {
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(-1.0)));
-      Assert.IsTrue(Numeric.AreEqual(0, InterpolationHelper.EaseInOutSmoothStep(0.0)));
-      Assert.IsTrue(Numeric.AreEqual(0.5, InterpolationHelper.EaseInOutSmoothStep(0.5)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(1.0)));
-      Assert.IsTrue(Numeric.AreEqual(1, InterpolationHelper.EaseInOutSmoothStep(2.0)));
-      Assert.IsTrue(Numeric.AreEqual(1 - InterpolationHelper.EaseInOutSmoothStep(1 - 0.3), InterpolationHelper.EaseInOutSmoothStep(0.3)));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.EaseInOutSmoothStep(-1.0));
+      AssertExt.AreNumericallyEqual(0, InterpolationHelper.EaseInOutSmoothStep(0.0));
+      AssertExt.AreNumericallyEqual(0.5, InterpolationHelper.EaseInOutSmoothStep(0.5));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.EaseInOutSmoothStep(1.0));
+      AssertExt.AreNumericallyEqual(1, InterpolationHelper.EaseInOutSmoothStep(2.0));
+      AssertExt.AreNumericallyEqual(1 - InterpolationHelper.EaseInOutSmoothStep(1 - 0.3), InterpolationHelper.EaseInOutSmoothStep(0.3));
       Assert.Greater(InterpolationHelper.EaseInOutSmoothStep(1 - 0.3), InterpolationHelper.EaseInOutSmoothStep(0.3));
 
       Assert.Greater(0.5f, InterpolationHelper.EaseInOutSmoothStep(0.3));

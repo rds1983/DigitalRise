@@ -168,14 +168,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.AreEqual(0, new Aabb().GetSupportPointDistance(new Vector3(1, 1, 1)));
 
     //  Aabb aabb = new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6));
-    //  Assert.IsTrue(Numeric.AreEqual(4, aabb.GetSupportPointDistance(new Vector3(1, 0, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(5, aabb.GetSupportPointDistance(new Vector3(0, 1, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(6, aabb.GetSupportPointDistance(new Vector3(0, 0, 1))));
-    //  Assert.IsTrue(Numeric.AreEqual(-1, aabb.GetSupportPointDistance(new Vector3(-1, 0, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(-2, aabb.GetSupportPointDistance(new Vector3(0, -1, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(-3, aabb.GetSupportPointDistance(new Vector3(0, 0, -1))));
-    //  Assert.IsTrue(Numeric.AreEqual(Vector3.Dot(new Vector3(1, 2, 6), new Vector3(-1, -1, 0).Normalized()), aabb.GetSupportPointDistance(new Vector3(-1, -1, 0))));
-    //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(4, 5, 6), new Vector3(1, 1, 1)).Length, aabb.GetSupportPointDistance(new Vector3(1, 1, 1))));
+    //  AssertExt.AreNumericallyEqual(4, aabb.GetSupportPointDistance(new Vector3(1, 0, 0)));
+    //  AssertExt.AreNumericallyEqual(5, aabb.GetSupportPointDistance(new Vector3(0, 1, 0)));
+    //  AssertExt.AreNumericallyEqual(6, aabb.GetSupportPointDistance(new Vector3(0, 0, 1)));
+    //  AssertExt.AreNumericallyEqual(-1, aabb.GetSupportPointDistance(new Vector3(-1, 0, 0)));
+    //  AssertExt.AreNumericallyEqual(-2, aabb.GetSupportPointDistance(new Vector3(0, -1, 0)));
+    //  AssertExt.AreNumericallyEqual(-3, aabb.GetSupportPointDistance(new Vector3(0, 0, -1)));
+    //  AssertExt.AreNumericallyEqual(Vector3.Dot(new Vector3(1, 2, 6), new Vector3(-1, -1, 0).Normalized()), aabb.GetSupportPointDistance(new Vector3(-1, -1, 0)));
+    //  AssertExt.AreNumericallyEqual(MathHelper.ProjectTo(new Vector3(4, 5, 6), new Vector3(1, 1, 1)).Length, aabb.GetSupportPointDistance(new Vector3(1, 1, 1)));
     //}
 
 
