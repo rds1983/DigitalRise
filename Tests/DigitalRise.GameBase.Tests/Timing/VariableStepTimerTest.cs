@@ -294,7 +294,7 @@ namespace DigitalRise.GameBase.Timing.Tests
 
       clock.Update(TimeSpan.FromMilliseconds(10));
       CheckNoIdleEvent();
-      CheckTimeChangedEvent(TimeSpan.FromSeconds(-0.06f), TimeSpan.FromMilliseconds(-20));
+      CheckTimeChangedEvent(TimeSpan.FromMilliseconds(-60f), TimeSpan.FromMilliseconds(-20));
 
       clock.Update(TimeSpan.FromMilliseconds(9));
       CheckIdleEvent(TimeSpan.FromMilliseconds(20 - 18));
