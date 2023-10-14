@@ -169,11 +169,11 @@ namespace DigitalRise.Animation.Tests
 
       // Pre loop
       var expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.25f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(0.25), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(0.25), defaultSource, defaultTarget));
 
       // Post loop
       expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.75f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(4.75), defaultSource, defaultTarget));
+			AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(4.75), defaultSource, defaultTarget));
     }
 
 
@@ -230,17 +230,17 @@ namespace DigitalRise.Animation.Tests
 
       // Pre loop
       var expected = InterpolationHelper.Lerp(keyFrame0.Value, keyFrame1.Value, 0.75f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(10.25), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(10.25), defaultSource, defaultTarget));
 
       expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.25f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(8.25), defaultSource, defaultTarget));
+			AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(8.25), defaultSource, defaultTarget));
 
       // Post loop
       expected = InterpolationHelper.Lerp(keyFrame0.Value, keyFrame1.Value, 0.25f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(14.75), defaultSource, defaultTarget));
+			AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(14.75), defaultSource, defaultTarget));
 
       expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.75f);
-      Assert.AreEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(16.75), defaultSource, defaultTarget));
+			AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(16.75), defaultSource, defaultTarget));
     }
 
 

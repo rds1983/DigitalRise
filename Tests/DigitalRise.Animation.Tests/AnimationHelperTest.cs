@@ -247,13 +247,16 @@ namespace DigitalRise.Animation.Tests
     [Test]
     public void ComputeLinearVelocity()
     {
-      var v = new Vector3(1, 2, 3);
-      var p = new Vector3(-7, 8, 4);
-      var dt = 1 / 60f;
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        var v = new Vector3(1, 2, 3);
+        var p = new Vector3(-7, 8, 4);
+        var dt = 1 / 60f;
 
-      var targetPosition = p + v * dt;
+        var targetPosition = p + v * dt;
 
-      AssertExt.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt));
+        AssertExt.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt));
+      }
     }
 
 

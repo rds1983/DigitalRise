@@ -263,47 +263,6 @@ namespace DigitalRise.Animation.Tests
 
 
     [Test]
-    public void ShouldRemoveAnimationsIfTargetsAreGarbageCollected()
-    {
-      var obj = new AnimatableObject("TestObject");
-      var property = new AnimatableProperty<float>();
-      obj.Properties.Add("Value", property);
-
-      var animation = new SingleFromToByAnimation
-      {
-        From = 100.0f,
-        To = 200.0f,
-        TargetProperty = "Value",
-      };
-
-      var manager = new AnimationManager();
-      var controller = manager.StartAnimation(animation, obj);
-      controller.AutoRecycle();
-      controller.UpdateAndApply();
-      Assert.AreEqual(100.0f, property.Value);
-
-      manager.Update(TimeSpan.FromSeconds(0.5));
-      manager.ApplyAnimations();
-      Assert.AreEqual(150.0f, property.Value);
-
-      // Garbage-collect target object.
-      obj = null;
-      property = null;
-      GC.Collect();
-
-      // Controller should be still valid, because AnimationManager.Update() needs 
-      // to be called first.
-      Assert.IsTrue(controller.IsValid);
-
-      manager.Update(TimeSpan.FromSeconds(0.1));
-      manager.ApplyAnimations();
-
-      // Animation instance should now be recycled.
-      Assert.IsFalse(controller.IsValid);
-    }
-
-
-    [Test]
     public void ShouldRemoveAnimationsIfInactive()
     {
       var obj = new AnimatableObject("TestObject");

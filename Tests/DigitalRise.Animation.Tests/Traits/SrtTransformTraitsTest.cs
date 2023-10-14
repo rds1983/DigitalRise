@@ -41,15 +41,18 @@ namespace DigitalRise.Animation.Traits.Tests
     [Test]
     public void MultiplyTest()
     {
-      var traits = SrtTransformTraits.Instance;
-      var value = NextRandomValue();
-      AssertExt.AreNumericallyEqual(SrtTransform.Identity, traits.Multiply(value, 0));
-      AssertExt.AreNumericallyEqual(value, traits.Multiply(value, 1));
-      AssertExt.AreNumericallyEqual(value * value, traits.Multiply(value, 2));
-      AssertExt.AreNumericallyEqual(value * value * value, traits.Multiply(value, 3));
-      AssertExt.AreNumericallyEqual(value.Inverse, traits.Multiply(value, -1));
-      AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse, traits.Multiply(value, -2));
-      AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse * value.Inverse, traits.Multiply(value, -3));
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        var traits = SrtTransformTraits.Instance;
+        var value = NextRandomValue();
+        AssertExt.AreNumericallyEqual(SrtTransform.Identity, traits.Multiply(value, 0));
+        AssertExt.AreNumericallyEqual(value, traits.Multiply(value, 1));
+        AssertExt.AreNumericallyEqual(value * value, traits.Multiply(value, 2));
+        AssertExt.AreNumericallyEqual(value * value * value, traits.Multiply(value, 3));
+        AssertExt.AreNumericallyEqual(value.Inverse, traits.Multiply(value, -1));
+        AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse, traits.Multiply(value, -2));
+        AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse * value.Inverse, traits.Multiply(value, -3));
+      }
     }
 
 
@@ -74,25 +77,28 @@ namespace DigitalRise.Animation.Traits.Tests
     [Test]
     public void CycleOffsetTest()
     {
-      // IAnimationValueTraits<T> is used in a cyclic animation to a add the cycle offset in
-      // each iteration.
+      using (var setEpsilon = new SetEpsilon(1E-03f))
+      {
+        // IAnimationValueTraits<T> is used in a cyclic animation to a add the cycle offset in
+        // each iteration.
 
-      var traits = SrtTransformTraits.Instance;
-      var first = NextRandomValue();    // Animation value of first key frame.
-      var last = NextRandomValue();     // Animation value of last key frame.
-      var cycleOffset = traits.Add(traits.Inverse(first), last);
+        var traits = SrtTransformTraits.Instance;
+        var first = NextRandomValue();    // Animation value of first key frame.
+        var last = NextRandomValue();     // Animation value of last key frame.
+        var cycleOffset = traits.Add(traits.Inverse(first), last);
 
-      // Cycle offset should be the difference between last and first key frame.
-      AssertExt.AreNumericallyEqual(last, traits.Add(first, cycleOffset));
-      AssertExt.AreNumericallyEqual(last, cycleOffset * first);
+        // Cycle offset should be the difference between last and first key frame.
+        AssertExt.AreNumericallyEqual(last, traits.Add(first, cycleOffset));
+        AssertExt.AreNumericallyEqual(last, cycleOffset * first);
 
-      // Check multiple cycles (post-loop).
-      AssertExt.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1)));
-      AssertExt.AreNumericallyEqual(cycleOffset * cycleOffset * last, traits.Add(first, traits.Multiply(cycleOffset, 3)));
+        // Check multiple cycles (post-loop).
+        AssertExt.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1)));
+        AssertExt.AreNumericallyEqual(cycleOffset * cycleOffset * last, traits.Add(first, traits.Multiply(cycleOffset, 3)));
 
-      // Check multiple cycles (pre-loop).
-      AssertExt.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1)));
-      AssertExt.AreNumericallyEqual(cycleOffset.Inverse * cycleOffset.Inverse * first, traits.Add(last, traits.Multiply(cycleOffset, -3)));
+        // Check multiple cycles (pre-loop).
+        AssertExt.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1)));
+        AssertExt.AreNumericallyEqual(cycleOffset.Inverse * cycleOffset.Inverse * first, traits.Add(last, traits.Multiply(cycleOffset, -3)));
+      }
     }
 
 

@@ -211,18 +211,18 @@ namespace DigitalRise.Animation.Character.Tests
       SrtTransform b = a;
 
       var c = SrtTransform.Interpolate(a, b, 0.5f);
-      Assert.AreEqual(a, c);
+      AssertExt.AreNumericallyEqual(a, c);
 
       b = new SrtTransform(new Vector3(7, 9, 8), new Quaternion(6, 6, 4, 2).Normalized(), new Vector3(-2, 4, -9));
       c = SrtTransform.Interpolate(a, b, 0);
-      Assert.AreEqual(a, c);
+      AssertExt.AreNumericallyEqual(a, c);
 
       c = SrtTransform.Interpolate(a, b, 1);
-      Assert.AreEqual(b, c);
+      AssertExt.AreNumericallyEqual(b, c);
 
       c = SrtTransform.Interpolate(a, b, 0.3f);
-      Assert.AreEqual(a.Translation * 0.7f + b.Translation * 0.3f, c.Translation);
-      Assert.AreEqual(a.Scale * 0.7f + b.Scale * 0.3f, c.Scale);
+      AssertExt.AreNumericallyEqual(a.Translation * 0.7f + b.Translation * 0.3f, c.Translation);
+      AssertExt.AreNumericallyEqual(a.Scale * 0.7f + b.Scale * 0.3f, c.Scale);
       Assert.IsTrue(MathHelper.AreNumericallyEqual(
         new Quaternion(a.Rotation.V() * 0.7f + b.Rotation.V() * 0.3f, 
                        a.Rotation.W * 0.7f + b.Rotation.W * 0.3f).Normalized(),

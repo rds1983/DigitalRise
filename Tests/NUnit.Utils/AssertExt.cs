@@ -3,6 +3,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
+using NUnit.Framework;
 using System;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
@@ -10,10 +11,9 @@ namespace NUnit.Utils
 {
 	public static class AssertExt
 	{
-		public static void ReportEqualFailure(object expected, object actual, float epsilon)
+		public static void ReportEqualFailure(object expected, object actual, object epsilon)
 		{
-			throw new Exception($"Expected: {expected}, Actual: {actual}, Epsilon: {epsilon}");
-
+			Assert.Fail($"Expected: {expected}\nActual: {actual}\nEpsilon: {epsilon}");
 		}
 
 		public static void AreNumericallyEqual(Vector2 expected, Vector2 actual, float epsilon)
@@ -131,6 +131,19 @@ namespace NUnit.Utils
 		}
 
 		public static void AreNumericallyEqual(Aabb expected, Aabb actual) =>
+			AreNumericallyEqual(expected, actual, Numeric.EpsilonF);
+
+		public static void AreNumericallyEqual(TimeSpan expected, TimeSpan actual, float epsilon)
+		{
+			if (Numeric.AreEqual((float)expected.TotalSeconds, (float)actual.TotalSeconds, epsilon))
+			{
+				return;
+			}
+
+			ReportEqualFailure(expected, actual, epsilon);
+		}
+
+		public static void AreNumericallyEqual(TimeSpan expected, TimeSpan actual) =>
 			AreNumericallyEqual(expected, actual, Numeric.EpsilonF);
 	}
 }

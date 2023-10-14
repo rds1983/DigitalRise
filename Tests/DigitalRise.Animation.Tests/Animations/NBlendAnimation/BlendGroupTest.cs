@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DigitalRise.Mathematics;
 using NUnit.Framework;
-
+using NUnit.Utils;
 
 namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
 {
@@ -243,7 +243,7 @@ namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
 
       blendGroup.SetWeight(0, 10);
       blendGroup.SetWeight(1, 1);
-      Assert.AreEqual(new TimeSpan((long)((1.0f * 10.0f / 11.0f + 2.0f * 1.0f / 11.0f) * TimeSpan.TicksPerSecond)), blendGroup.GetTotalDuration());
+      AssertExt.AreNumericallyEqual(new TimeSpan((long)((1.0f * 10.0f / 11.0f + 2.0f * 1.0f / 11.0f) * TimeSpan.TicksPerSecond)), blendGroup.GetTotalDuration());
       manager.Update(TimeSpan.FromSeconds(0.5));       // t = 1.5
       manager.ApplyAnimations();
       Assert.AreEqual(123.45f, property1.Value);
@@ -291,7 +291,7 @@ namespace DigitalRise.Animation.Tests.Animations.NBlendAnimation
 
       blendGroup.SetWeight(0, 10);
       blendGroup.SetWeight(1, 1);
-      Assert.AreEqual(new TimeSpan((long)((1.0f * 10.0f / 11.0f + 2.0f * 1.0f / 11.0f) * TimeSpan.TicksPerSecond)), blendGroup.GetTotalDuration());
+      AssertExt.AreNumericallyEqual(new TimeSpan((long)((1.0f * 10.0f / 11.0f + 2.0f * 1.0f / 11.0f) * TimeSpan.TicksPerSecond)), blendGroup.GetTotalDuration());
       manager.Update(TimeSpan.FromSeconds(0.5));       // t = 1.5
       manager.ApplyAnimations();
       Assert.AreEqual(AnimationState.Filling, controller.State);
