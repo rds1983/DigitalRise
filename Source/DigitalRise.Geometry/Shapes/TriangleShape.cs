@@ -7,6 +7,7 @@ using System.Globalization;
 using DigitalRise.Geometry.Meshes;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes
 {
@@ -241,8 +242,8 @@ namespace DigitalRise.Geometry.Shapes
       Vector3 vertex0 = pose.ToWorldPosition(_vertex0 * scale);
       Vector3 vertex1 = pose.ToWorldPosition(_vertex1 * scale);
       Vector3 vertex2 = pose.ToWorldPosition(_vertex2 * scale);
-      Vector3 minimum = Vector3.Min(vertex0, Vector3.Min(vertex1, vertex2));
-      Vector3 maximum = Vector3.Max(vertex0, Vector3.Max(vertex1, vertex2));
+      Vector3 minimum = MathHelper.Min(vertex0, MathHelper.Min(vertex1, vertex2));
+      Vector3 maximum = MathHelper.Max(vertex0, MathHelper.Max(vertex1, vertex2));
       return new Aabb(minimum, maximum);
     }
 

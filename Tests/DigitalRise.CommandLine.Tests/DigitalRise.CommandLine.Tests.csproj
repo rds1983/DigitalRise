@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
+    <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
+  </ItemGroup>  
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Source\DigitalRise.CommandLine\DigitalRise.CommandLine.csproj" />
     <ProjectReference Include="..\NUnit.Utils\NUnit.Utils.csproj" />
   </ItemGroup>

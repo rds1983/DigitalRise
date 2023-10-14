@@ -7,6 +7,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace DigitalRise.Graphics
@@ -238,7 +239,7 @@ namespace DigitalRise.Graphics
     public override Vector3 GetIntensity(float distance)
     {
       float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, Attenuation);
-      return Vector3.Max(Color * (DiffuseIntensity * HdrScale * attenuation), 
+      return MathHelper.Max(Color * (DiffuseIntensity * HdrScale * attenuation), 
                           Color * (SpecularIntensity * HdrScale * attenuation));
     }
     #endregion

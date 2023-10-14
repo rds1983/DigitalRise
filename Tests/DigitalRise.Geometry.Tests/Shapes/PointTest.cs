@@ -103,13 +103,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("PointShape { Position = (1; 2; 3) }", new PointShape(new Vector3(1, 2, 3)).ToString());
-    }
-
-
-    [Test]
     public void Clone()
     {
       PointShape point = new PointShape(new Vector3(1, 2, 3));

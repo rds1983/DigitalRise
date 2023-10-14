@@ -446,8 +446,8 @@ namespace DigitalRise.Geometry.Shapes
     /// <param name="point">The point to include.</param>
     public void Grow(Vector3 point)
     {
-      Minimum = Vector3.Min(Minimum, point);
-      Maximum = Vector3.Max(Maximum, point);
+      Minimum = MathHelper.Min(Minimum, point);
+      Maximum = MathHelper.Max(Maximum, point);
     }
 
 
@@ -458,8 +458,8 @@ namespace DigitalRise.Geometry.Shapes
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
     public void Grow(Aabb aabb)
     {
-      Minimum = Vector3.Min(Minimum, aabb.Minimum);
-      Maximum = Vector3.Max(Maximum, aabb.Maximum);
+      Minimum = MathHelper.Min(Minimum, aabb.Minimum);
+      Maximum = MathHelper.Max(Maximum, aabb.Maximum);
     }
 
 
@@ -471,8 +471,8 @@ namespace DigitalRise.Geometry.Shapes
     public void Grow(IGeometricObject geometricObject)
     {
       Aabb geometryAabb = geometricObject.Aabb;
-      Minimum = Vector3.Min(Minimum, geometryAabb.Minimum);
-      Maximum = Vector3.Max(Maximum, geometryAabb.Maximum);
+      Minimum = MathHelper.Min(Minimum, geometryAabb.Minimum);
+      Maximum = MathHelper.Max(Maximum, geometryAabb.Maximum);
     }
 
 

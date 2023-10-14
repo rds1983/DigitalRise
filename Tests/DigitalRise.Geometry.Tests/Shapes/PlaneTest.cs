@@ -179,32 +179,35 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void ToLocal()
     {
-      Vector3 point0 = new Vector3(1, 0.5f, 0.5f);
-      Vector3 point1 = new Vector3(0.5f, 1, 0.5f);
-      Vector3 point2 = new Vector3(0.5f, 0.5f, 1);
-      Plane plane = new Plane(point0, point1, point2);
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        Vector3 point0 = new Vector3(1, 0.5f, 0.5f);
+        Vector3 point1 = new Vector3(0.5f, 1, 0.5f);
+        Vector3 point2 = new Vector3(0.5f, 0.5f, 1);
+        Plane plane = new Plane(point0, point1, point2);
 
-      Vector3 pointAbove = plane.Normal * plane.DistanceFromOrigin * 2;
-      Vector3 pointBelow = plane.Normal * plane.DistanceFromOrigin * 0.5f;
-      Assert.IsTrue(Vector3.Dot(plane.Normal, pointAbove) > plane.DistanceFromOrigin);
-      Assert.IsTrue(Vector3.Dot(plane.Normal, pointBelow) < plane.DistanceFromOrigin);
+        Vector3 pointAbove = plane.Normal * plane.DistanceFromOrigin * 2;
+        Vector3 pointBelow = plane.Normal * plane.DistanceFromOrigin * 0.5f;
+        Assert.IsTrue(Vector3.Dot(plane.Normal, pointAbove) > plane.DistanceFromOrigin);
+        Assert.IsTrue(Vector3.Dot(plane.Normal, pointBelow) < plane.DistanceFromOrigin);
 
-      Pose pose = new Pose(new Vector3(-5, 100, -20), Matrix33F.CreateRotation(new Vector3(1, 2, 3), 0.123f));
-      point0 = pose.ToLocalPosition(point0);
-      point1 = pose.ToLocalPosition(point1);
-      point2 = pose.ToLocalPosition(point2);
-      pointAbove = pose.ToLocalPosition(pointAbove);
-      pointBelow = pose.ToLocalPosition(pointBelow);
-      plane.ToLocal(ref pose);
+        Pose pose = new Pose(new Vector3(-5, 100, -20), Matrix33F.CreateRotation(new Vector3(1, 2, 3), 0.123f));
+        point0 = pose.ToLocalPosition(point0);
+        point1 = pose.ToLocalPosition(point1);
+        point2 = pose.ToLocalPosition(point2);
+        pointAbove = pose.ToLocalPosition(pointAbove);
+        pointBelow = pose.ToLocalPosition(pointBelow);
+        plane.ToLocal(ref pose);
 
-      Assert.IsTrue(plane.Normal.IsNumericallyNormalized());
+        Assert.IsTrue(plane.Normal.IsNumericallyNormalized());
 
-      Vector3 dummy;
-      Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point0, out dummy));
-      Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point1, out dummy));
-      Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point2, out dummy));
-      Assert.IsTrue(Vector3.Dot(plane.Normal, pointAbove) > plane.DistanceFromOrigin);
-      Assert.IsTrue(Vector3.Dot(plane.Normal, pointBelow) < plane.DistanceFromOrigin);
+        Vector3 dummy;
+        Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point0, out dummy));
+        Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point1, out dummy));
+        Assert.IsTrue(GeometryHelper.GetClosestPoint(plane, point2, out dummy));
+        Assert.IsTrue(Vector3.Dot(plane.Normal, pointAbove) > plane.DistanceFromOrigin);
+        Assert.IsTrue(Vector3.Dot(plane.Normal, pointBelow) < plane.DistanceFromOrigin);
+      }
     }
 
 

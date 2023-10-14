@@ -809,7 +809,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Vector3 v1 = new Vector3(1.0f, 2.0f, 2.5f);
       Vector3 v2 = new Vector3(-1.0f, 2.0f, 3.0f);
-      Vector3 min = Vector3.Min(v1, v2);
+      Vector3 min = MathHelper.Min(v1, v2);
       Assert.AreEqual(new Vector3(-1.0f, 2.0f, 2.5f), min);
     }
 
@@ -819,7 +819,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       Vector3 v1 = new Vector3(1.0f, 2.0f, 3.0f);
       Vector3 v2 = new Vector3(-1.0f, 2.1f, 3.0f);
-      Vector3 max = Vector3.Max(v1, v2);
+      Vector3 max = MathHelper.Max(v1, v2);
       Assert.AreEqual(new Vector3(1.0f, 2.1f, 3.0f), max);
     }
 

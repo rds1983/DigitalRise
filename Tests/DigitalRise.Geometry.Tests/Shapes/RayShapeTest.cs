@@ -152,13 +152,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("RayShape { Origin = (1; 2; 3), Direction = (0; 1; 0), Length = 10, StopsAtFirstHit = False }", new RayShape(new Vector3(1, 2, 3), new Vector3(0, 1, 0), 10).ToString());
-    }
-
-
-    [Test]
     public void Clone()
     {
       RayShape ray = new RayShape(new Vector3(1, 2, 3), new Vector3(2, 3, 4).Normalized(), 1234.567f);

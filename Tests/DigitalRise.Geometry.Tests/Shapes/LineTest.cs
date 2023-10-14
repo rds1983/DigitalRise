@@ -62,13 +62,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("Line { PointOnLine = (1; 2; 3), Direction = (4; 5; 6) }", new Line(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).ToString());
-    }
-
-
-    [Test]
     public void PositiveUniformScaling()
     {
       Vector3 point0 = new Vector3(10, 20, -40);

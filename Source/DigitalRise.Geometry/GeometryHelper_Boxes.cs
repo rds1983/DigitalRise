@@ -375,8 +375,8 @@ namespace DigitalRise.Geometry
     {
       // Short version: Fast when using SIMD instructions.
       //pointOnAabb = point;
-      //pointOnAabb = Vector3.Max(pointOnAabb, aabb.Minimum);
-      //pointOnAabb = Vector3.Min(pointOnAabb, aabb.Maximum);
+      //pointOnAabb = MathHelper.Max(pointOnAabb, aabb.Minimum);
+      //pointOnAabb = MathHelper.Min(pointOnAabb, aabb.Maximum);
       //return (point == pointOnAabb);
 
       bool haveContact = true;
@@ -803,7 +803,7 @@ namespace DigitalRise.Geometry
     {
       // To fight numerical problems: Extrude the box.
       Vector3 halfExtent = 0.5f * boxExtent;
-      halfExtent = halfExtent + Vector3.Max(halfExtent, new Vector3(1)) * Numeric.EpsilonF;
+      halfExtent = halfExtent + MathHelper.Max(halfExtent, new Vector3(1)) * Numeric.EpsilonF;
       return point.X >= -halfExtent.X && point.X <= halfExtent.X
              && point.Y >= -halfExtent.Y && point.Y <= halfExtent.Y
              && point.Z >= -halfExtent.Z && point.Z <= halfExtent.Z;

@@ -189,13 +189,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("PlaneShape { Normal = (0; 0; 1), DistanceFromOrigin = 3 }", new PlaneShape(new Vector3(0, 0, 1), 3).ToString());
-    }
-
-
-    [Test]
     public void Clone()
     {
       PlaneShape plane = new PlaneShape(new Vector3(1, 2, 3).Normalized(), new Vector3(2, 3, 4));

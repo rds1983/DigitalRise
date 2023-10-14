@@ -186,8 +186,8 @@ namespace DigitalRise.Geometry.Shapes
         Vector3 p1 = pose.ToWorldPosition(new Vector3(0, halfHeightWithoutCaps, 0));
         Vector3 p2 = pose.ToWorldPosition(new Vector3(0, -halfHeightWithoutCaps, 0));
         Vector3 radius = new Vector3(scaledRadius);
-        Vector3 minimum = Vector3.Min(p1, p2) - radius;
-        Vector3 maximum = Vector3.Max(p1, p2) + radius;
+        Vector3 minimum = MathHelper.Min(p1, p2) - radius;
+        Vector3 maximum = MathHelper.Max(p1, p2) + radius;
         return new Aabb(minimum, maximum);
       }
       else

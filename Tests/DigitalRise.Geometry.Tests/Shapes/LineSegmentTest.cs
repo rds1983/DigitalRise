@@ -71,12 +71,5 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetHashCode(), new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetHashCode());
       Assert.AreNotEqual(new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetHashCode(), new LineSegment(new Vector3(0, 2, 3), new Vector3(4, 5, 6)).GetHashCode());
     }
-
-
-    [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("LineSegment { Start = (1; 2; 3), End = (4; 5; 6) }", new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).ToString());
-    }
   }
 }

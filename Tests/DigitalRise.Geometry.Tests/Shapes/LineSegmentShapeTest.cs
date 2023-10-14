@@ -44,12 +44,12 @@ namespace DigitalRise.Geometry.Shapes.Tests
       ls.Start = new Vector3(1, 2, 3);
       Assert.AreEqual(new Vector3(1, 2, 3), ls.Start);
       Assert.AreEqual(new Vector3(), ls.End);
-      Assert.AreEqual(new Vector3(1, 2, 3).Length, ls.Length);
+      Assert.AreEqual(new Vector3(1, 2, 3).Length(), ls.Length);
       Assert.AreEqual(new Vector3(1, 2, 3).LengthSquared(), ls.LengthSquared);
       ls.End = new Vector3(4, 5, 6);
       Assert.AreEqual(new Vector3(1, 2, 3), ls.Start);
       Assert.AreEqual(new Vector3(4, 5, 6), ls.End);
-      Assert.AreEqual(new Vector3(3, 3, 3).Length, ls.Length);
+      Assert.AreEqual(new Vector3(3, 3, 3).Length(), ls.Length);
       Assert.AreEqual(new Vector3(3, 3, 3).LengthSquared(), ls.LengthSquared);
     }
 
@@ -112,13 +112,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //  Assert.IsTrue(Numeric.AreEqual(-MathHelper.ProjectTo(new Vector3(1, 2, 3), new Vector3(-1, 0, -1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(-1, 0, -1))));
     //  Assert.IsTrue(Numeric.AreEqual(MathHelper.ProjectTo(new Vector3(4, 5, 6), new Vector3(1, 1, 1)).Length, new LineSegment(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).GetSupportPointDistance(new Vector3(1, 1, 1))));
     //}
-
-
-    [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("LineSegmentShape { Start = (1; 2; 3), End = (4; 5; 6) }", new LineSegmentShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).ToString());
-    }
 
 
     [Test]

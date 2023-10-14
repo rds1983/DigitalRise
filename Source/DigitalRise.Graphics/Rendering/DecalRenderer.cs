@@ -14,6 +14,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 
 namespace DigitalRise.Graphics.Rendering
@@ -425,7 +426,7 @@ namespace DigitalRise.Graphics.Rendering
         max = cameraPose.ToWorldPosition(max);
 
         // Get world space aabb
-        _cameraNearPlaneAabbWorld = new Aabb(Vector3.Min(min, max), Vector3.Max(min, max));
+        _cameraNearPlaneAabbWorld = new Aabb(MathHelper.Min(min, max), MathHelper.Max(min, max));
       }
 
       // The BlendState is set below.

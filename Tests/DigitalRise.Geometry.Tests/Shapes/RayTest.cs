@@ -141,39 +141,45 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void NonuniformScaling()
     {
-      Vector3 scale = new Vector3(1, 2, 3);
-      Vector3 origin = new Vector3(1, 2, 3);
-      Vector3 direction = new Vector3(-2, 3, -5).Normalized();
-      float length = 100;
-      Ray ray = new Ray(origin, direction, length);
-      Vector3 endPoint = ray.Origin + ray.Direction * ray.Length;
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        Vector3 scale = new Vector3(1, 2, 3);
+        Vector3 origin = new Vector3(1, 2, 3);
+        Vector3 direction = new Vector3(-2, 3, -5).Normalized();
+        float length = 100;
+        Ray ray = new Ray(origin, direction, length);
+        Vector3 endPoint = ray.Origin + ray.Direction * ray.Length;
 
-      ray.Scale(ref scale);
+        ray.Scale(ref scale);
 
-      origin = origin * scale;
-      endPoint = endPoint * scale;
+        origin = origin * scale;
+        endPoint = endPoint * scale;
 
-      Assert.AreEqual(origin, ray.Origin);
-      Assert.AreEqual((endPoint - origin).Normalized(), ray.Direction);
-      Assert.AreEqual((endPoint - origin).Length, ray.Length);
-      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
+        Assert.AreEqual(origin, ray.Origin);
+        Assert.AreEqual((endPoint - origin).Normalized(), ray.Direction);
+        Assert.AreEqual((endPoint - origin).Length(), ray.Length);
+        AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
+      }
     }
 
 
     [Test]
     public void ToWorld()
     {
-      Vector3 startPoint = new Vector3(10, 20, -40);
-      Vector3 endPoint = new Vector3(-22, 34, 45);
-      Ray ray = new Ray(startPoint, (endPoint - startPoint).Normalized(), (endPoint - startPoint).Length());
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        Vector3 startPoint = new Vector3(10, 20, -40);
+        Vector3 endPoint = new Vector3(-22, 34, 45);
+        Ray ray = new Ray(startPoint, (endPoint - startPoint).Normalized(), (endPoint - startPoint).Length());
 
-      Pose pose = new Pose(new Vector3(-5, 100, -20), Matrix33F.CreateRotation(new Vector3(1, 2, 3), 0.123f));
-      startPoint = pose.ToWorldPosition(startPoint);
-      endPoint = pose.ToWorldPosition(endPoint);
-      ray.ToWorld(ref pose);
+        Pose pose = new Pose(new Vector3(-5, 100, -20), Matrix33F.CreateRotation(new Vector3(1, 2, 3), 0.123f));
+        startPoint = pose.ToWorldPosition(startPoint);
+        endPoint = pose.ToWorldPosition(endPoint);
+        ray.ToWorld(ref pose);
 
-      AssertExt.AreNumericallyEqual(startPoint, ray.Origin);
-      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
+        AssertExt.AreNumericallyEqual(startPoint, ray.Origin);
+        AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
+      }
     }
 
 

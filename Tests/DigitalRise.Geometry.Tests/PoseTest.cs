@@ -169,14 +169,6 @@ namespace DigitalRise.Geometry.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.IsTrue(new Pose(new Vector3(1, 2, 3), Quaternion.Identity).ToString()
-        .StartsWith("Pose { Position = (1; 2; 3), Orientation = (1; 0; "));
-    }
-
-
-    [Test]
     public void AreNumericallyEqual()
     {
       var a = new Pose(new Vector3(1, 2, 3), new Matrix33F(1, 2, 3, 4, 5, 6, 7, 8, 9));

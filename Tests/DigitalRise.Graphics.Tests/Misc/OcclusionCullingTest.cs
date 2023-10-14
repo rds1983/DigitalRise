@@ -49,26 +49,26 @@ namespace DigitalRise.Graphics.Tests
       Vector3 minimumClip = v0;
       Vector3 maximumClip = v0;
       Vector3 v1 = (viewProj * new Vector4(maximum.X, minimum.Y, minimum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v1);
-      maximumClip = Vector3.Max(maximumClip, v1);
+      minimumClip = MathHelper.Min(minimumClip, v1);
+      maximumClip = MathHelper.Max(maximumClip, v1);
       Vector3 v2 = (viewProj * new Vector4(minimum.X, maximum.Y, minimum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v2);
-      maximumClip = Vector3.Max(maximumClip, v2);
+      minimumClip = MathHelper.Min(minimumClip, v2);
+      maximumClip = MathHelper.Max(maximumClip, v2);
       Vector3 v3 = (viewProj * new Vector4(maximum.X, maximum.Y, minimum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v3);
-      maximumClip = Vector3.Max(maximumClip, v3);
+      minimumClip = MathHelper.Min(minimumClip, v3);
+      maximumClip = MathHelper.Max(maximumClip, v3);
       Vector3 v4 = (viewProj * new Vector4(minimum.X, minimum.Y, maximum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v4);
-      maximumClip = Vector3.Max(maximumClip, v4);
+      minimumClip = MathHelper.Min(minimumClip, v4);
+      maximumClip = MathHelper.Max(maximumClip, v4);
       Vector3 v5 = (viewProj * new Vector4(maximum.X, minimum.Y, maximum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v5);
-      maximumClip = Vector3.Max(maximumClip, v5);
+      minimumClip = MathHelper.Min(minimumClip, v5);
+      maximumClip = MathHelper.Max(maximumClip, v5);
       Vector3 v6 = (viewProj * new Vector4(minimum.X, maximum.Y, maximum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v6);
-      maximumClip = Vector3.Max(maximumClip, v6);
+      minimumClip = MathHelper.Min(minimumClip, v6);
+      maximumClip = MathHelper.Max(maximumClip, v6);
       Vector3 v7 = (viewProj * new Vector4(maximum.X, maximum.Y, maximum.Z, 1)).XYZ();
-      minimumClip = Vector3.Min(minimumClip, v7);
-      maximumClip = Vector3.Max(maximumClip, v7);
+      minimumClip = MathHelper.Min(minimumClip, v7);
+      maximumClip = MathHelper.Max(maximumClip, v7);
 
       aabbClip.Minimum = minimumClip;
       aabbClip.Maximum = maximumClip;
@@ -90,26 +90,26 @@ namespace DigitalRise.Graphics.Tests
       Vector3 d2 = extent.Z * viewProj.GetColumn(2).XYZ();
 
       Vector3 v1 = v0 + d0;
-      minimumClip = Vector3.Min(minimumClip, v1);
-      maximumClip = Vector3.Max(maximumClip, v1);
+      minimumClip = MathHelper.Min(minimumClip, v1);
+      maximumClip = MathHelper.Max(maximumClip, v1);
       Vector3 v2 = v0 + d1;
-      minimumClip = Vector3.Min(minimumClip, v2);
-      maximumClip = Vector3.Max(maximumClip, v2);
+      minimumClip = MathHelper.Min(minimumClip, v2);
+      maximumClip = MathHelper.Max(maximumClip, v2);
       Vector3 v3 = v0 + d2;
-      minimumClip = Vector3.Min(minimumClip, v3);
-      maximumClip = Vector3.Max(maximumClip, v3);
+      minimumClip = MathHelper.Min(minimumClip, v3);
+      maximumClip = MathHelper.Max(maximumClip, v3);
       Vector3 v4 = v1 + d1;
-      minimumClip = Vector3.Min(minimumClip, v4);
-      maximumClip = Vector3.Max(maximumClip, v4);
+      minimumClip = MathHelper.Min(minimumClip, v4);
+      maximumClip = MathHelper.Max(maximumClip, v4);
       Vector3 v5 = v1 + d2;
-      minimumClip = Vector3.Min(minimumClip, v5);
-      maximumClip = Vector3.Max(maximumClip, v5);
+      minimumClip = MathHelper.Min(minimumClip, v5);
+      maximumClip = MathHelper.Max(maximumClip, v5);
       Vector3 v6 = v2 + d2;
-      minimumClip = Vector3.Min(minimumClip, v6);
-      maximumClip = Vector3.Max(maximumClip, v6);
+      minimumClip = MathHelper.Min(minimumClip, v6);
+      maximumClip = MathHelper.Max(maximumClip, v6);
       Vector3 v7 = v4 + d2;
-      minimumClip = Vector3.Min(minimumClip, v7);
-      maximumClip = Vector3.Max(maximumClip, v7);
+      minimumClip = MathHelper.Min(minimumClip, v7);
+      maximumClip = MathHelper.Max(maximumClip, v7);
 
       aabbClip.Minimum = minimumClip;
       aabbClip.Maximum = maximumClip;
@@ -185,8 +185,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v1.XYZ() / v1.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v2 = (viewProj * new Vector4(minimum.X, maximum.Y, minimum.Z, 1));
       if (v2.Z < 0)
@@ -194,8 +194,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v2.XYZ() / v2.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v3 = (viewProj * new Vector4(maximum.X, maximum.Y, minimum.Z, 1));
       if (v3.Z < 0)
@@ -203,8 +203,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v3.XYZ() / v3.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v4 = (viewProj * new Vector4(minimum.X, minimum.Y, maximum.Z, 1));
       if (v4.Z < 0)
@@ -212,8 +212,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v4.XYZ() / v4.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v5 = (viewProj * new Vector4(maximum.X, minimum.Y, maximum.Z, 1));
       if (v5.Z < 0)
@@ -221,8 +221,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v5.XYZ() / v5.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v6 = (viewProj * new Vector4(minimum.X, maximum.Y, maximum.Z, 1));
       if (v6.Z < 0)
@@ -230,8 +230,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v6.XYZ() / v6.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       Vector4 v7 = (viewProj * new Vector4(maximum.X, maximum.Y, maximum.Z, 1));
       if (v7.Z < 0)
@@ -239,8 +239,8 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v7.XYZ() / v7.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       aabbClip.Minimum = minimumClip;
       aabbClip.Maximum = maximumClip;
@@ -280,56 +280,56 @@ namespace DigitalRise.Graphics.Tests
       else
         v = v1.XYZ() / v1.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v2.Z < 0)
         v = new Vector3();
       else
         v = v2.XYZ() / v2.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v3.Z < 0)
         v = new Vector3();
       else
         v = v3.XYZ() / v3.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v4.Z < 0)
         v = new Vector3();
       else
         v = v4.XYZ() / v4.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v5.Z < 0)
         v = new Vector3();
       else
         v = v5.XYZ() / v5.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v6.Z < 0)
         v = new Vector3();
       else
         v = v6.XYZ() / v6.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       if (v7.Z < 0)
         v = new Vector3();
       else
         v = v7.XYZ() / v7.W;
 
-      minimumClip = Vector3.Min(minimumClip, v);
-      maximumClip = Vector3.Max(maximumClip, v);
+      minimumClip = MathHelper.Min(minimumClip, v);
+      maximumClip = MathHelper.Max(maximumClip, v);
 
       aabbClip.Minimum = minimumClip;
       aabbClip.Maximum = maximumClip;

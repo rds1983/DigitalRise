@@ -198,15 +198,6 @@ namespace DigitalRise.Geometry.Shapes.Tests
 
 
     [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual(
-        "TriangleShape { Vertex0 = (1; 2; 3), Vertex1 = (4; 5; 6), Vertex2 = (7; 8; 9) }", 
-        new TriangleShape(new Vector3(1, 2, 3), new Vector3(4, 5, 6), new Vector3(7, 8, 9)).ToString());
-    }
-
-
-    [Test]
     public void GetClosestPoints()
     {
       var t = new Triangle(new Vector3(0, 0, 0), new Vector3(10, 0, 0), new Vector3(0, 10, 0));

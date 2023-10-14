@@ -324,7 +324,7 @@ namespace DigitalRise.Geometry.Meshes
 
         // The assert after the cutting may fail for very low skin widths. But not when
         // the debugger is attached :-(. 
-        //skinWidthScale = Vector3.Max(skinWidthScale, new Vector3(100 * Numeric.EpsilonF));
+        //skinWidthScale = MathHelper.Max(skinWidthScale, new Vector3(100 * Numeric.EpsilonF));
 
         _mesh.ModifyConvex(vertexLimit, skinWidthScale);
 

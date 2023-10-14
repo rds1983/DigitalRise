@@ -344,7 +344,7 @@ namespace DigitalRise.Graphics
     public override Vector3 GetIntensity(float distance)
     {
       float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, Attenuation);
-      return Vector3.Max(Color * (DiffuseIntensity * HdrScale * attenuation),
+      return MathHelper.Max(Color * (DiffuseIntensity * HdrScale * attenuation),
                           Color * (SpecularIntensity * HdrScale * attenuation));
     }
 
@@ -355,7 +355,7 @@ namespace DigitalRise.Graphics
     //  float angle = !position.IsNumericallyZero() ? MathHelper.GetAngle(Vector3.Forward, position) : 0;
     //  float attenuation = GraphicsHelper.GetDistanceAttenuation(distance, Range, AttenuationExponent);
     //  float spotlightFalloff = GraphicsHelper.GetAngularAttenuation(angle, FalloffAngle, CutoffAngle);
-    //  return Vector3.Max(Color * (DiffuseIntensity * HdrScale * spotlightFalloff * attenuation),
+    //  return MathHelper.Max(Color * (DiffuseIntensity * HdrScale * spotlightFalloff * attenuation),
     //                      Color * (SpecularIntensity * HdrScale * spotlightFalloff * attenuation));
     //}
     #endregion

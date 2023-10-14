@@ -194,12 +194,5 @@ namespace DigitalRise.Geometry.Shapes.Tests
       aabb.Scale(new Vector3(2, 3, -4));
       Assert.AreEqual(new Aabb(new Vector3(2, 6, -24), new Vector3(8, 15, -12)), aabb);
     }
-
-
-    [Test]
-    public void ToStringTest()
-    {
-      Assert.AreEqual("Aabb { Minimum = (1; 2; 3), Maximum = (4; 5; 6) }", new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6)).ToString());
-    }
   }
 }

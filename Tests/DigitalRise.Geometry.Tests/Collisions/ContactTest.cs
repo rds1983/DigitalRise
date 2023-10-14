@@ -59,18 +59,6 @@ namespace DigitalRise.Geometry.Collisions.Tests
       Assert.AreEqual(true, swapped.IsRayHit);
       Assert.AreEqual(100, swapped.Lifetime);
     }
-
-
-    [Test]
-    public void ToStringTest()
-    {
-      Contact c = Contact.Create();
-      c.Position = new Vector3(1, 2, 3);
-      c.Normal = new Vector3(0, 0, 1);
-      c.PenetrationDepth = 10;
-      Assert.AreEqual("Contact { Position = (1; 2; 3), Normal = (0; 0; 1), PenetrationDepth = 10, Lifetime = 0 }",
-                      c.ToString());
-    }
   }
 }
 

@@ -9,6 +9,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Physics.Materials;
 using Microsoft.Xna.Framework;
+using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Specialized
 {
@@ -507,7 +508,7 @@ namespace DigitalRise.Physics.Specialized
           }
         }
 
-        _jumpVelocity = Vector3.Max(jumpVelocity * Vector3.UnitY, _jumpVelocity);
+        _jumpVelocity = MathHelper.Max(jumpVelocity * Vector3.UnitY, _jumpVelocity);
         Body.LinearVelocity = moveVelocity + _jumpVelocity + _gravityVelocity;
 
         // Down steps: 

@@ -443,7 +443,7 @@ namespace DigitalRise.Physics.Specialized
           desiredMovement = InterpolationHelper.Lerp(lastMovement, desiredMovement, JumpManeuverability);
 
           // Add jump velocity to the desired movement.
-          _jumpVelocity = Vector3.Max(jumpVelocity * UpVector, _jumpVelocity);
+          _jumpVelocity = MathHelper.Max(jumpVelocity * UpVector, _jumpVelocity);
           desiredMovement += _jumpVelocity * deltaTime;
 
           if (jumpVelocity > 0)
