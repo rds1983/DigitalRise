@@ -1041,34 +1041,40 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void MultiplyVectorOperator()
     {
-      Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
-      Assert.AreEqual(v, Matrix33F.Identity * v);
-      Assert.AreEqual(Vector3.Zero, Matrix33F.Zero * v);
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
+        Assert.AreEqual(v, Matrix33F.Identity * v);
+        Assert.AreEqual(Vector3.Zero, Matrix33F.Zero * v);
 
-      Matrix33F m = new Matrix33F(12, 23, 45,
-                                67, 89, 90,
-                                43, 65, 87);
-      AssertExt.AreNumericallyEqual(v, m * m.Inverse * v);
+        Matrix33F m = new Matrix33F(12, 23, 45,
+                                  67, 89, 90,
+                                  43, 65, 87);
+        AssertExt.AreNumericallyEqual(v, m * m.Inverse * v);
 
-      for (int i = 0; i < 3; i++)
-        Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
+        for (int i = 0; i < 3; i++)
+          Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
+      }
     }
 
 
     [Test]
     public void MultiplyVector()
     {
-      Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
-      Assert.AreEqual(v, Matrix33F.Multiply(Matrix33F.Identity, v));
-      Assert.AreEqual(Vector3.Zero, Matrix33F.Multiply(Matrix33F.Zero, v));
+      using (var setEpsilon = new SetEpsilon(1E-04f))
+      {
+        Vector3 v = new Vector3(2.34f, 3.45f, 4.56f);
+        Assert.AreEqual(v, Matrix33F.Multiply(Matrix33F.Identity, v));
+        Assert.AreEqual(Vector3.Zero, Matrix33F.Multiply(Matrix33F.Zero, v));
 
-      Matrix33F m = new Matrix33F(12, 23, 45,
-                                67, 89, 90,
-                                43, 65, 87);
-      AssertExt.AreNumericallyEqual(v, Matrix33F.Multiply(m * m.Inverse, v));
+        Matrix33F m = new Matrix33F(12, 23, 45,
+                                  67, 89, 90,
+                                  43, 65, 87);
+        AssertExt.AreNumericallyEqual(v, Matrix33F.Multiply(m * m.Inverse, v));
 
-      for (int i = 0; i < 3; i++)
-        Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), Matrix33F.Multiply(m, v).GetComponentByIndex(i));
+        for (int i = 0; i < 3; i++)
+          Assert.AreEqual(Vector3.Dot(m.GetRow(i), v), Matrix33F.Multiply(m, v).GetComponentByIndex(i));
+      }
     }
 
 

@@ -122,15 +122,6 @@ namespace DigitalRise.Mathematics.Statistics.Tests
           Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X - 256)));
           Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X), PerlinNoise.Compute(v.X + 256)));
 
-          var a = PerlinNoise.Compute(v.X, v.Y);
-          var b = PerlinNoise.Compute(v.X - 256, v.Y - 256);
-          if (!Numeric.AreEqual(a, b))
-          {
-            a = PerlinNoise.Compute(v.X, v.Y);
-            b = PerlinNoise.Compute(v.X - 256, v.Y - 256);
-          }
-
-
           Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X - 256, v.Y - 256)));
           Assert.IsTrue(Numeric.AreEqual(PerlinNoise.Compute(v.X, v.Y), PerlinNoise.Compute(v.X + 256, v.Y + 256)));
 

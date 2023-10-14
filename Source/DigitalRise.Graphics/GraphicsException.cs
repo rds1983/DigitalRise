@@ -10,6 +10,7 @@ namespace DigitalRise.Graphics
   /// <summary>
   /// The exception that is raised when an error occurs in DigitalRise Graphics.
   /// </summary>
+  [Serializable]
   public class GraphicsException : Exception
   {
     /// <overloads>

@@ -13,6 +13,7 @@ namespace NUnit.Utils
 			_oldEpsilonF = Numeric.EpsilonF;
 			_oldEpsilonD = Numeric.EpsilonD;
 			Numeric.EpsilonF = newEpsilon;
+			Numeric.EpsilonD = newEpsilon;
 		}
 
 		public void Dispose()
