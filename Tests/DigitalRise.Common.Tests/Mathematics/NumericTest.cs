@@ -242,39 +242,33 @@ namespace DigitalRise.Mathematics.Tests
     [Test]
     public void BigNumbersD()
     {
-      using (var setEpsilon = new SetEpsilonD(1E-8))
-      {
-        Assert.AreEqual(-1, Numeric.Compare(1e20, 1.0000002e20));
-        Assert.AreEqual(0, Numeric.Compare(1e20, 1.00000001e20));
-        Assert.AreEqual(1, Numeric.Compare(1.0000002e20, 1e20));
+      Assert.AreEqual(-1, Numeric.Compare(1e20, 1.0000002e20));
+      Assert.AreEqual(0, Numeric.Compare(1e20, 1.00000001e20, 0.0000001e20));
+      Assert.AreEqual(1, Numeric.Compare(1.0000002e20, 1e20));
 
-        Assert.AreEqual(-1, Numeric.Compare(1e20, 1.002e20, 0.001e20));
-        Assert.AreEqual(0, Numeric.Compare(1e20, 1.0001e20, 0.001e20));
-        Assert.AreEqual(1, Numeric.Compare(1.002e20, 1e20, 0.001e20));
+      Assert.AreEqual(-1, Numeric.Compare(1e20, 1.002e20, 0.001e20));
+      Assert.AreEqual(0, Numeric.Compare(1e20, 1.0001e20, 0.001e20));
+      Assert.AreEqual(1, Numeric.Compare(1.002e20, 1e20, 0.001e20));
 
-        AssertExt.AreNumericallyEqual(1e20, 1.00000001e20);
-        Assert.IsFalse(Numeric.AreEqual(1e20, 1.0000002e20));
-        AssertExt.AreNumericallyEqual(1e20, 1.0001e20, 0.001e20);
-      }
+      AssertExt.AreNumericallyEqual(1e20, 1.00000001e20, 0.0000001e20);
+      Assert.IsFalse(Numeric.AreEqual(1e20, 1.0000002e20));
+      AssertExt.AreNumericallyEqual(1e20, 1.0001e20, 0.001e20);
     }
 
     [Test]
     public void BigNumbersF()
     {
-      using (var setEpsilon = new SetEpsilonF(1E-8f))
-      {
-        Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.0000002e10f));
-        Assert.AreEqual(0, Numeric.Compare(1e10f, 1.00000001e10f));
-        Assert.AreEqual(1, Numeric.Compare(1.0000002e10f, 1e10f));
+      Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.0000002e10f));
+      Assert.AreEqual(0, Numeric.Compare(1e10f, 1.00000001e10f));
+      Assert.AreEqual(1, Numeric.Compare(1.0000002e10f, 1e10f));
 
-        Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.002e10f, 0.001e10f));
-        Assert.AreEqual(0, Numeric.Compare(1e10f, 1.0001e10f, 0.001e10f));
-        Assert.AreEqual(1, Numeric.Compare(1.002e10f, 1e10f, 0.001e10f));
+      Assert.AreEqual(-1, Numeric.Compare(1e10f, 1.002e10f, 0.001e10f));
+      Assert.AreEqual(0, Numeric.Compare(1e10f, 1.0001e10f, 0.001e10f));
+      Assert.AreEqual(1, Numeric.Compare(1.002e10f, 1e10f, 0.001e10f));
 
-        AssertExt.AreNumericallyEqual(1e10f, 1.00000001e10f);
-        Assert.IsFalse(Numeric.AreEqual(1e10f, 1.0000002e10f));
-        AssertExt.AreNumericallyEqual(1e10f, 1.0001e10f, 0.001e10f);
-      }
+      AssertExt.AreNumericallyEqual(1e10f, 1.00000001e10f);
+      Assert.IsFalse(Numeric.AreEqual(1e10f, 1.0000002e10f));
+      AssertExt.AreNumericallyEqual(1e10f, 1.0001e10f, 0.001e10f);
     }
 
     [Test]

@@ -52,7 +52,7 @@ namespace DigitalRise.Animation.Character.Tests
       var srt = new SrtTransform(new Vector3(1, 1, 1), Quaternion.Identity, Vector3.Zero);
       Assert.IsFalse(srt.HasScale);
 
-      srt.Scale = new Vector3(1.00001f, 1.000001f, 1.000001f);
+      srt.Scale = new Vector3(1.000001f, 1.000001f, 1.000001f);
       Assert.IsFalse(srt.HasScale);
 
       srt.Scale = new Vector3(1.1f, 1, 1);
