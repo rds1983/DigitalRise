@@ -1,10 +1,10 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
@@ -62,14 +62,14 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(10, 0, 0), sphere.GeometricObject.Pose.Orientation);
       set = algo.GetClosestPoints(sphere, ray);
       Assert.IsTrue(Numeric.AreEqual(9, set[0].PenetrationDepth));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));
+      AssertExt.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(ray, sphere));
 
       ((GeometricObject)ray.GeometricObject).Pose = new Pose(new Vector3(0, -2, 1), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       set = algo.GetClosestPoints(sphere, ray);
       Assert.IsTrue(Numeric.AreEqual(-9, set[0].PenetrationDepth));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(4.5f, 0, 0), set[0].Position));
+      AssertExt.AreNumericallyEqual(-Vector3.UnitX, set[0].Normal);
+      AssertExt.AreNumericallyEqual(new Vector3(4.5f, 0, 0), set[0].Position);
       Assert.AreEqual(false, algo.HaveContact(ray, sphere));
 
       algo.UpdateContacts(set, 0);

@@ -5,6 +5,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
@@ -27,8 +28,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -43,8 +44,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -59,8 +60,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -75,8 +76,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -91,8 +92,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -107,8 +108,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -123,8 +124,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -139,8 +140,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -155,8 +156,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -171,8 +172,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -187,8 +188,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -203,8 +204,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.5f, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
     #endregion
@@ -225,8 +226,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -241,8 +242,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -257,8 +258,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -273,8 +274,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -289,8 +290,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -305,8 +306,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -321,8 +322,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -337,8 +338,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -353,8 +354,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -369,8 +370,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -385,8 +386,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -401,8 +402,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -417,8 +418,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -433,8 +434,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -449,8 +450,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -465,8 +466,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -481,8 +482,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -497,8 +498,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
     #endregion
@@ -817,8 +818,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -834,8 +835,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), n));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.5f, 0, 0), p);
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), n);
       Assert.IsTrue(Numeric.AreEqual(1, d));
     }
 
@@ -885,7 +886,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       bool haveContact = TriangleTriangleAlgorithm.GetContact(ref tA, ref tB, out p, out n, out d);
 
       Assert.AreEqual(true, haveContact);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(tA.Vertex0, p));
+      AssertExt.AreNumericallyEqual(tA.Vertex0, p);
       Assert.IsTrue(Numeric.AreEqual(0, d));
     }
     #endregion
@@ -916,9 +917,9 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
                           || MathHelper.AreNumericallyEqual(new Vector3(5, -0.5f, 0), p));
             Assert.IsTrue(GeometryHelper.IsOver(tB, p));
             if (i == 0)
-              Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n));
+              AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), n);
             else
-              Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
+              AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), n);
             Assert.IsTrue(Numeric.AreEqual(1, d));
 
             // "Rotate" triangle to test next edges.
@@ -1001,7 +1002,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
             Assert.AreEqual(true, haveContact);
             Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), n)
                           || MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
-            Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), p));
+            AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), p);
             Assert.AreEqual(0, d);
 
             // "Rotate" triangle to test next edges.
@@ -1048,7 +1049,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
                               || MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), n));
                 Assert.IsTrue(GeometryHelper.IsOver(tA, p, 0.00001f));
                 Assert.IsTrue(GeometryHelper.IsOver(tB, p, 0.00001f));
-                //Assert.IsTrue(MathHelper.AreNumericallyEqual(?, p));
+                //AssertExt.AreNumericallyEqual(?, p);
                 Assert.AreEqual(0, d);
 
                 // "Rotate" triangle to test next edges.

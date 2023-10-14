@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Algebra.Tests
@@ -16,7 +17,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                            { 2, 1, -1}});
       EigenvalueDecompositionF d = new EigenvalueDecompositionF(a);
 
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(a * d.V, d.V * d.D));
+      AssertExt.AreNumericallyEqual(a * d.V, d.V * d.D);
     }
 
 
@@ -28,7 +29,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                            { 2, 3, 5}});
       EigenvalueDecompositionF d = new EigenvalueDecompositionF(a);
 
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(a, d.V * d.D * d.V.Transposed));
+      AssertExt.AreNumericallyEqual(a, d.V * d.D * d.V.Transposed);
     }
 
     private static bool IsNaN(Vector3 v)

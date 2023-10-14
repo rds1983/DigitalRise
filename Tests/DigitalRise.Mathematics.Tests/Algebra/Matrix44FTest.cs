@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Algebra.Tests
@@ -396,7 +397,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       float angle = 0.3f;
       Vector3 axis = new Vector3(1.0f, 2.0f, 3.0f);
       Matrix44F m = Matrix44F.CreateRotation(axis, angle);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(MathHelper.CreateRotation(axis, angle).ToRotationMatrix44(), m));
+      AssertExt.AreNumericallyEqual(MathHelper.CreateRotation(axis, angle).ToRotationMatrix44(), m);
     }
 
 
@@ -452,8 +453,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                 4, 9, 7, 7);
       Vector4 v = Vector4.One;
       Vector4 w = m * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse));
+      AssertExt.AreNumericallyEqual(v, m.Inverse * w);
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse);
     }
 
 
@@ -466,8 +467,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                   0, 0, 0, 0.0001f);
       Vector4 v = Vector4.One;
       Vector4 w = m * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m.Inverse * w));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse));
+      AssertExt.AreNumericallyEqual(v, m.Inverse * w);
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse);
     }
 
 
@@ -501,8 +502,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector4 w = m * v;
       Matrix44F im = m;
       im.Invert();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * im));
+      AssertExt.AreNumericallyEqual(v, im * w);
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m * im);
 
       m = new Matrix44F(0.4f, 34, 0.33f, 4,
                                 2, 5, -8, 3,
@@ -512,8 +513,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       w = m * v;
       im = m;
       im.Invert();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, im * w));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * im));
+      AssertExt.AreNumericallyEqual(v, im * w);
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m * im);
     }
 
 
@@ -762,9 +763,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F m2 = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       m2 += new Matrix44F(0.00000001f);
 
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m0, m0));
+      AssertExt.AreNumericallyEqual(m0, m0);
       Assert.IsFalse(Matrix44F.AreNumericallyEqual(m0, m1));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m0, m2));
+      AssertExt.AreNumericallyEqual(m0, m2);
 
       Numeric.EpsilonF = originalEpsilon;
     }
@@ -780,9 +781,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F m2 = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       m2 += new Matrix44F(0.0001f);
 
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m0, m0, epsilon));
+      AssertExt.AreNumericallyEqual(m0, m0, epsilon);
       Assert.IsFalse(Matrix44F.AreNumericallyEqual(m0, m1, epsilon));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m0, m2, epsilon));
+      AssertExt.AreNumericallyEqual(m0, m2, epsilon);
     }
 
 
@@ -826,13 +827,13 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix44F.Identity, m);
 
       m = Matrix44F.CreateRotation(Vector3.UnitX, (float)Math.PI / 2);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitZ, m.TransformPosition(Vector3.UnitY)));
+      AssertExt.AreNumericallyEqual(Vector3.UnitZ, m.TransformPosition(Vector3.UnitY));
 
       m = Matrix44F.CreateRotation(Vector3.UnitY, (float)Math.PI / 2);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitX, m.TransformPosition(Vector3.UnitZ)));
+      AssertExt.AreNumericallyEqual(Vector3.UnitX, m.TransformPosition(Vector3.UnitZ));
 
       m = Matrix44F.CreateRotation(Vector3.UnitZ, (float)Math.PI / 2);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitY, m.TransformPosition(Vector3.UnitX)));
+      AssertExt.AreNumericallyEqual(Vector3.UnitY, m.TransformPosition(Vector3.UnitX));
     }
 
 
@@ -849,7 +850,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float)MathHelper.ToRadians(30);
       Matrix44F m = Matrix44F.CreateRotationX(angle);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitX, angle), m));
+      AssertExt.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitX, angle), m);
     }
 
 
@@ -858,7 +859,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = (float)MathHelper.ToRadians(30);
       Matrix44F m = Matrix44F.CreateRotationY(angle);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitY, angle), m));
+      AssertExt.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitY, angle), m);
     }
 
 
@@ -867,7 +868,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     {
       float angle = MathHelper.ToRadians(30.0f);
       Matrix44F m = Matrix44F.CreateRotationZ(angle);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitZ, angle), m));
+      AssertExt.AreNumericallyEqual(Matrix44F.CreateRotation(Vector3.UnitZ, angle), m);
     }
 
 
@@ -882,7 +883,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector4 v = new Vector4(0.3f, -2.4f, 5.6f, 1.0f);
       Vector4 result1 = matrix * v;
       Vector4 result2 = matrixFromQuaternion * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -1059,8 +1060,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix44F.Zero, Matrix44F.Zero * m);
       Assert.AreEqual(m, m * Matrix44F.Identity);
       Assert.AreEqual(m, Matrix44F.Identity * m);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, m.Inverse * m));
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m * m.Inverse);
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, m.Inverse * m);
 
       Matrix44F m1 = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       Matrix44F m2 = new Matrix44F(12, 23, 45, 56,
@@ -1085,8 +1086,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.AreEqual(Matrix44F.Zero, Matrix44F.Multiply(Matrix44F.Zero, m));
       Assert.AreEqual(m, Matrix44F.Multiply(m, Matrix44F.Identity));
       Assert.AreEqual(m, Matrix44F.Multiply(Matrix44F.Identity, m));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, Matrix44F.Multiply(m, m.Inverse)));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(Matrix44F.Identity, Matrix44F.Multiply(m.Inverse, m)));
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, Matrix44F.Multiply(m, m.Inverse));
+      AssertExt.AreNumericallyEqual(Matrix44F.Identity, Matrix44F.Multiply(m.Inverse, m));
 
       Matrix44F m1 = new Matrix44F(rowMajor, MatrixOrder.RowMajor);
       Matrix44F m2 = new Matrix44F(12, 23, 45, 56,
@@ -1111,7 +1112,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                   67, 89, 90, 12,
                                   43, 65, 87, 43,
                                   34, -12, 84, 44);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, m * m.Inverse * v));
+      AssertExt.AreNumericallyEqual(v, m * m.Inverse * v);
 
       for (int i = 0; i < 4; i++)
         Assert.AreEqual(Vector4.Dot(m.GetRow(i), v), (m * v).GetComponentByIndex(i));
@@ -1129,7 +1130,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
                                   67, 89, 90, 12,
                                   43, 65, 87, 43,
                                   34, -12, 84, 44);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, Matrix44F.Multiply(m * m.Inverse, v)));
+      AssertExt.AreNumericallyEqual(v, Matrix44F.Multiply(m * m.Inverse, v));
 
       for (int i = 0; i < 4; i++)
         Assert.AreEqual(Vector4.Dot(m.GetRow(i), v), Matrix44F.Multiply(m, v).GetComponentByIndex(i));
@@ -1150,12 +1151,12 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
       v4 = transform * v4;
       v3 = transform.TransformPosition(v3);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(v4.X / v4.W, v4.Y / v4.W, v4.Z / v4.W), v3));
+      AssertExt.AreNumericallyEqual(new Vector3(v4.X / v4.W, v4.Y / v4.W, v4.Z / v4.W), v3);
 
       // Test that involves a homogenous coordinate W component.
       translation = Matrix44F.CreateTranslation(2, 4, 6);
       translation.M33 = 2;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(5, 8, 11) / 2, translation.TransformPosition(new Vector3(3, 4, 5))));
+      AssertExt.AreNumericallyEqual(new Vector3(5, 8, 11) / 2, translation.TransformPosition(new Vector3(3, 4, 5)));
     }
 
 
@@ -1179,7 +1180,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       p2 /= p2.W;
       d = p1 - p2;
       v = transform.TransformDirection(v);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(d.X, d.Y, d.Z), v));
+      AssertExt.AreNumericallyEqual(new Vector3(d.X, d.Y, d.Z), v);
     }
 
 
@@ -1660,9 +1661,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector3 translationOfMatrix;
       bool result = srt.Decompose(out scaleOfMatrix, out rotationOfMatrix, out translationOfMatrix);
       Assert.IsTrue(result);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(scale, scaleOfMatrix));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotation, rotationOfMatrix));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(translation, translationOfMatrix));
+      AssertExt.AreNumericallyEqual(scale, scaleOfMatrix);
+      AssertExt.AreNumericallyEqual(rotation, rotationOfMatrix);
+      AssertExt.AreNumericallyEqual(translation, translationOfMatrix);
     }
 
 
@@ -1681,7 +1682,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       bool result = srt.Decompose(out scaleOfMatrix, out rotationOfMatrix, out translationOfMatrix);
       Assert.IsTrue(result);
       Matrix44F srt2 = Matrix44F.CreateTranslation(translationOfMatrix) * Matrix44F.CreateRotation(rotationOfMatrix) * Matrix44F.CreateScale(scaleOfMatrix);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt, srt2));
+      AssertExt.AreNumericallyEqual(srt, srt2);
     }
 
 
@@ -1718,7 +1719,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       bool result = srt0.Decompose(out s1, out r1, out t1);
       Matrix44F srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
       Assert.IsTrue(result);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(-2, 0, 3);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
@@ -1726,7 +1727,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       result = srt0.Decompose(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
       Assert.IsTrue(result);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(2, -3, 0);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
@@ -1734,7 +1735,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       result = srt0.Decompose(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
       Assert.IsTrue(result);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(1, 0, 0);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
@@ -1768,33 +1769,33 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector3 t1;
       srt0.DecomposeFast(out s1, out r1, out t1);
       Matrix44F srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(2, -2, 3);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
       srt0.DecomposeFast(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(0, -2, 3);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
       srt0.DecomposeFast(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(-2, 0, 3);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
 
       srt0.DecomposeFast(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
 
       s0 = new Vector3(2, -3, 0);
       srt0 = Matrix44F.CreateTranslation(t0) * Matrix44F.CreateRotation(r0) * Matrix44F.CreateScale(s0);
 
       srt0.DecomposeFast(out s1, out r1, out t1);
       srt1 = Matrix44F.CreateTranslation(t1) * Matrix44F.CreateRotation(r1) * Matrix44F.CreateScale(s1);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(srt0, srt1));
+      AssertExt.AreNumericallyEqual(srt0, srt1);
     }
 
 
@@ -1819,7 +1820,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       point += 1 * cameraRight;
 
       point = view.TransformPosition(point);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 2, -3), point));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 2, -3), point);
     }
 
 
@@ -1855,7 +1856,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F projection = Matrix44F.CreateOrthographic(4, 3, 1, 11);
 
       Vector3 pointProjectionSpace = projection.TransformPosition(new Vector3(2, 0.75f, -6));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0.5f, 0.5f), pointProjectionSpace));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0.5f, 0.5f), pointProjectionSpace);
 
       // zNear = 0 should be allowed.
       Matrix44F.CreateOrthographic(4, 3, 0, 11);
@@ -1886,9 +1887,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void OrthographicWithNegativeNear()
     {
       Matrix44F projection = Matrix44F.CreateOrthographic(4, 3, -1, 11);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(-2, 1.5f, 1, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(2, 1.5f, -5, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(2, -1.5f, -11, 1)));
+      AssertExt.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(-2, 1.5f, 1, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(2, 1.5f, -5, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(2, -1.5f, -11, 1));
     }
 
     [Test]
@@ -1897,7 +1898,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F projection = Matrix44F.CreateOrthographicOffCenter(0, 4, 0, 3, 1, 11);
 
       Vector3 pointProjectionSpace = projection.TransformPosition(new Vector3(4, 2.25f, -6));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0.5f, 0.5f), pointProjectionSpace));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0.5f, 0.5f), pointProjectionSpace);
 
       // zNear = 0 should be allowed.
       Matrix44F.CreateOrthographicOffCenter(0, 4, 0, 3, 0, 11);
@@ -1928,9 +1929,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     public void OrthographicOffCenterWithNegativeNear()
     {
       Matrix44F projection = Matrix44F.CreateOrthographicOffCenter(0, 4, 0, 3, -1, 11);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(0, 3, 1, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(4, 3, -5, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(4, 0, -11, 1)));
+      AssertExt.AreNumericallyEqual(new Vector4(-1, 1, 0, 1), projection * new Vector4(0, 3, 1, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(1, 1, 0.5f, 1), projection * new Vector4(4, 3, -5, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(1, -1, 1, 1), projection * new Vector4(4, 0, -11, 1));
     }
 
     [Test]
@@ -1939,11 +1940,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F projection = Matrix44F.CreatePerspective(4, 3, 1, 11);
 
       Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(-2, -1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(2, 1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), p));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1), p);
     }
 
     [Test]
@@ -1989,11 +1990,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F projection = Matrix44F.CreatePerspectiveFieldOfView(fieldOfView, 4f / 3f, 1, 11);
 
       Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(-2, -1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(2, 1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), p));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1), p);
     }
 
     [Test]
@@ -2044,11 +2045,11 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F projection = Matrix44F.CreatePerspectiveOffCenter(0, 4, 0, 3, 1, 11);
 
       Vector3 p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(4, 3, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), p));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), p);
       p = MathHelper.HomogeneousDivide(projection * new Vector4(0, 0, -11, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 1), p));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 1), p);
     }
 
     [Test]
@@ -2092,9 +2093,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F pInfinite = Matrix44F.CreatePerspective(4, 3, 1, float.PositiveInfinity);
 
       Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(-2, -1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(2, 1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(0, v.X);
       Assert.AreEqual(0, v.Y);
@@ -2109,9 +2110,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F pInfinite = Matrix44F.CreatePerspectiveFieldOfView(fieldOfView, 4f / 3f, 1, float.PositiveInfinity);
 
       Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(-2, -1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(2, 1.5f, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(0, v.X);
       Assert.AreEqual(0, v.Y);
@@ -2124,9 +2125,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Matrix44F pInfinite = Matrix44F.CreatePerspectiveOffCenter(0, 4, 0, 3, 1, float.PositiveInfinity);
 
       Vector3 v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, -1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, -1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(4, 3, -1, 1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 1, 0), v));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 1, 0), v);
       v = MathHelper.HomogeneousDivide(pInfinite * new Vector4(0, 0, -1000, 1));
       Assert.AreEqual(-1, v.X);
       Assert.AreEqual(-1, v.Y);

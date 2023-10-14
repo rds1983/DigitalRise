@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
@@ -27,9 +28,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = new Vector2(10, 2),
       };
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Point1, s.GetPoint(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Point2, s.GetPoint(1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.GetPoint(0.33f), s.GetPoint(0.33f)));
+      AssertExt.AreNumericallyEqual(s.Point1, s.GetPoint(0));
+      AssertExt.AreNumericallyEqual(s.Point2, s.GetPoint(1));
+      AssertExt.AreNumericallyEqual(b.GetPoint(0.33f), s.GetPoint(0.33f));
     }
 
 
@@ -52,9 +53,9 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = new Vector2(10, 2),
       };
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Tangent1, s.GetTangent(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s.Tangent2, s.GetTangent(1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.GetTangent(0.7f), s.GetTangent(0.7f)));
+      AssertExt.AreNumericallyEqual(s.Tangent1, s.GetTangent(0));
+      AssertExt.AreNumericallyEqual(s.Tangent2, s.GetTangent(1));
+      AssertExt.AreNumericallyEqual(b.GetTangent(0.7f), s.GetTangent(0.7f));
     }
 
 

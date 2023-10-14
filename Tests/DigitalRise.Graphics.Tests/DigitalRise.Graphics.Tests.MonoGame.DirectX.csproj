@@ -10,10 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.20.69" />
-    <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
-    <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
-    <PackageReference Include="System.Reactive" Version="$(ReactiveVersion)" />
   </ItemGroup>
 
   <ItemGroup>

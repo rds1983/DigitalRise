@@ -2,6 +2,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -49,14 +50,14 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Vector3(0, 0, 0), new ConvexHullOfShapes().GetSupportPoint(new Vector3(0, 0, 1)));
       Assert.AreEqual(new Vector3(0, 0, 0), new ConvexHullOfShapes().GetSupportPoint(new Vector3(1, 1, 1)));
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(3, 5, 0), cs.GetSupportPoint(new Vector3(1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(3, 5, 0), cs.GetSupportPoint(new Vector3(0, 1, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 5, 3), cs.GetSupportPoint(new Vector3(0, 0, 1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-3, 5, 0), cs.GetSupportPoint(new Vector3(-1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(3, -5, 0), cs.GetSupportPoint(new Vector3(0, -1, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 5, -3), cs.GetSupportPoint(new Vector3(0, 0, -1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 5, 0) + 3 * new Vector3(1, 0, 1).Normalized(), cs.GetSupportPoint(new Vector3(1, 1, 1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -5, 0) + 3 * new Vector3(-1, 0, -1).Normalized(), cs.GetSupportPoint(new Vector3(-1, -1, -1))));
+      AssertExt.AreNumericallyEqual(new Vector3(3, 5, 0), cs.GetSupportPoint(new Vector3(1, 0, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(3, 5, 0), cs.GetSupportPoint(new Vector3(0, 1, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 5, 3), cs.GetSupportPoint(new Vector3(0, 0, 1)));
+      AssertExt.AreNumericallyEqual(new Vector3(-3, 5, 0), cs.GetSupportPoint(new Vector3(-1, 0, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(3, -5, 0), cs.GetSupportPoint(new Vector3(0, -1, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 5, -3), cs.GetSupportPoint(new Vector3(0, 0, -1)));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 5, 0) + 3 * new Vector3(1, 0, 1).Normalized(), cs.GetSupportPoint(new Vector3(1, 1, 1)));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -5, 0) + 3 * new Vector3(-1, 0, -1).Normalized(), cs.GetSupportPoint(new Vector3(-1, -1, -1)));
     }
 
 

@@ -1,7 +1,7 @@
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -61,7 +61,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
     [Test]
     public void AreNumericallyEqual()
     {
-      Assert.IsTrue(Aabb.AreNumericallyEqual(new Aabb(), new Aabb()));
+      AssertExt.AreNumericallyEqual(new Aabb(), new Aabb());
       Assert.IsTrue(Aabb.AreNumericallyEqual(new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6)), 
                                              new Aabb(new Vector3(1, 2, 3 + Numeric.EpsilonF / 2), new Vector3(4, 5, 6))));
       Assert.IsTrue(Aabb.AreNumericallyEqual(new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6)),
@@ -69,7 +69,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsFalse(Aabb.AreNumericallyEqual(new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6)),
                                               new Aabb(new Vector3(1, 2, 3 + 10 * Numeric.EpsilonF), new Vector3(4, 5, 6))));
 
-      Assert.IsTrue(Aabb.AreNumericallyEqual(new Aabb(), new Aabb()));
+      AssertExt.AreNumericallyEqual(new Aabb(), new Aabb());
       Assert.IsTrue(Aabb.AreNumericallyEqual(new Aabb(new Vector3(1, 2, 3), new Vector3(4, 5, 6)),
                                              new Aabb(new Vector3(1, 2, 3.1f), new Vector3(4, 5, 6)),
                                              0.2f));

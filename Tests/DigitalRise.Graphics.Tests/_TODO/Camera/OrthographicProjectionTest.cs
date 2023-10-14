@@ -1,8 +1,6 @@
-﻿using DigitalRise.Geometry;
-using DigitalRise.Geometry.Collisions;
-using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics.Algebra;
+﻿using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Graphics.Tests
@@ -32,9 +30,9 @@ namespace DigitalRise.Graphics.Tests
       };
 
       Matrix44F expected = Matrix44F.CreateOrthographic(4, 3, 2, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, camera2));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, camera3.ToMatrix44F()));
+      AssertExt.AreNumericallyEqual(expected, projection);
+      AssertExt.AreNumericallyEqual(expected, camera2);
+      AssertExt.AreNumericallyEqual(expected, camera3.ToMatrix44F());
     }
 
     [Test]
@@ -59,9 +57,9 @@ namespace DigitalRise.Graphics.Tests
       };
 
       Matrix44F expected = Matrix44F.CreateOrthographicOffCenter(0, 4, 1, 4, 2, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, camera2));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, camera3.ToMatrix44F()));
+      AssertExt.AreNumericallyEqual(expected, projection);
+      AssertExt.AreNumericallyEqual(expected, camera2);
+      AssertExt.AreNumericallyEqual(expected, camera3.ToMatrix44F());
     }
   }
 }

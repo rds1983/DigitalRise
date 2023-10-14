@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
 using DigitalRise.Mathematics;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Algebra.Tests
@@ -103,9 +104,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector4 v = new Vector4(1.000001f, 2.000001f, 3.000001f, 4.000001f);
       Vector4 w = new Vector4(1.00000001f, 2.00000001f, 3.00000001f, 4.00000001f);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(u, u));
+      AssertExt.AreNumericallyEqual(u, u);
       Assert.IsFalse(MathHelper.AreNumericallyEqual(u, v));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(u, w));
+      AssertExt.AreNumericallyEqual(u, w);
 
       Numeric.EpsilonF = originalEpsilon;
     }
@@ -450,7 +451,7 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Assert.IsFalse(MathHelper.AreNumericallyEqual(nonZero, Vector4.Zero));
 
       Vector4 zero = new Vector4(0.0000001f, 0.0000001f, 0.0f, 0.0000001f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(zero, Vector4.Zero));
+      AssertExt.AreNumericallyEqual(zero, Vector4.Zero);
     }
 
 

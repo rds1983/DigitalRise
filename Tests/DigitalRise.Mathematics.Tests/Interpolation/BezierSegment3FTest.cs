@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
@@ -19,8 +20,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = new Vector3(10, 2, 12),
       };
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.Point1, b.GetPoint(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(b.Point2, b.GetPoint(1)));
+      AssertExt.AreNumericallyEqual(b.Point1, b.GetPoint(0));
+      AssertExt.AreNumericallyEqual(b.Point2, b.GetPoint(1));
     }
 
 
@@ -35,8 +36,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point2 = new Vector3(10, 2, 12),
       };
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(3 * (b.ControlPoint1 - b.Point1), b.GetTangent(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(3 * (b.Point2 - b.ControlPoint2), b.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(3 * (b.ControlPoint1 - b.Point1), b.GetTangent(0));
+      AssertExt.AreNumericallyEqual(3 * (b.Point2 - b.ControlPoint2), b.GetTangent(1));
     }
 
 

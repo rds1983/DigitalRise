@@ -3,6 +3,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Graphics.Tests
@@ -28,14 +29,14 @@ namespace DigitalRise.Graphics.Tests
       Aabb aabb0, aabb1;
       GetBoundsOrtho(aabb, viewProj, out aabb0);
       GetBoundsOrthoSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
 
       center = new Vector3(-9, 20, -110);
       halfExtent = new Vector3(5, 2, 10);
       aabb = new Aabb(center - halfExtent, center + halfExtent);
       GetBoundsOrtho(aabb, viewProj, out aabb0);
       GetBoundsOrthoSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
     }
 
 
@@ -135,7 +136,7 @@ namespace DigitalRise.Graphics.Tests
       Aabb aabb0, aabb1;
       GetBoundsPersp(aabb, viewProj, out aabb0);
       GetBoundsPerspSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
 
       // AABB inside frustum.
       center = view.Inverse.TransformPosition(new Vector3(2, -3, -50));
@@ -143,7 +144,7 @@ namespace DigitalRise.Graphics.Tests
       aabb = new Aabb(center - halfExtent, center + halfExtent);
       GetBoundsPersp(aabb, viewProj, out aabb0);
       GetBoundsPerspSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
 
       // Behind camera.
       center = view.Inverse.TransformPosition(new Vector3(2, -3, 50));
@@ -151,7 +152,7 @@ namespace DigitalRise.Graphics.Tests
       aabb = new Aabb(center - halfExtent, center + halfExtent);
       GetBoundsPersp(aabb, viewProj, out aabb0);
       GetBoundsPerspSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
 
       // Camera inside AABB.
       center = view.Inverse.TransformPosition(new Vector3(2, -3, -50));
@@ -159,7 +160,7 @@ namespace DigitalRise.Graphics.Tests
       aabb = new Aabb(center - halfExtent, center + halfExtent);
       GetBoundsPersp(aabb, viewProj, out aabb0);
       GetBoundsPerspSmart(aabb, viewProj, out aabb1);
-      Assert.IsTrue(Aabb.AreNumericallyEqual(aabb0, aabb1));
+      AssertExt.AreNumericallyEqual(aabb0, aabb1);
     }
 
 

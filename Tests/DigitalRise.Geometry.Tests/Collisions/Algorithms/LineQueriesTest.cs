@@ -4,6 +4,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
 
@@ -50,7 +51,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       set = algo.GetClosestPoints(line0, line1);
       Assert.IsTrue(Numeric.AreEqual(0, set[0].PenetrationDepth));
       Assert.AreEqual(new Vector3(1, 2, 3), set[0].Position);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitZ, set[0].Normal));
+      AssertExt.AreNumericallyEqual(Vector3.UnitZ, set[0].Normal);
       Assert.AreEqual(true, algo.HaveContact(line0, line1));
 
       ((GeometricObject)line1.GeometricObject).Pose = new Pose(new Vector3(1, 2, 4), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
@@ -84,19 +85,19 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
       set = algo.GetClosestPoints(line0, sphere);
       Assert.IsTrue(Numeric.AreEqual(-2, set[0].PenetrationDepth));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(-Vector3.UnitZ, set[0].Normal));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 2), set[0].Position, 0.001f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionALocal, 0.001f));
+      AssertExt.AreNumericallyEqual(-Vector3.UnitZ, set[0].Normal);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 2), set[0].Position, 0.001f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionALocal, 0.001f);
       Assert.AreEqual(false, algo.HaveContact(line0, sphere));
 
       set = set.Swapped;
       ((GeometricObject)sphere.GeometricObject).Pose = new Pose(new Vector3(0, 0, 2.1f));
       algo.UpdateContacts(set, 0);
       Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth, 0.001f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.UnitZ, set[0].Normal, 0.1f));   // Large epsilon because MPR for spheres is not very accurate.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 3), set[0].Position, 0.1f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionALocal, 0.1f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionBLocal, 0.1f));
+      AssertExt.AreNumericallyEqual(Vector3.UnitZ, set[0].Normal, 0.1f);   // Large epsilon because MPR for spheres is not very accurate.
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 3), set[0].Position, 0.1f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionALocal, 0.1f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1), set[0].PositionBLocal, 0.1f);
       Assert.AreEqual(true, algo.HaveContact(line0, sphere));
     }
 

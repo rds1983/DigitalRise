@@ -4,6 +4,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Physics.Constraints.Tests
@@ -59,7 +60,7 @@ namespace DigitalRise.Physics.Constraints.Tests
       Assert.AreNotEqual(targetVelocity, body.GetVelocityOfLocalPoint(pointLocal));
       
       ConstraintHelper.SetVelocityOfWorldPoint(body, point, targetVelocity);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(targetVelocity, body.GetVelocityOfLocalPoint(pointLocal)));
+      AssertExt.AreNumericallyEqual(targetVelocity, body.GetVelocityOfLocalPoint(pointLocal));
     }
   }
 }

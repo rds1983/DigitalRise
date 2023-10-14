@@ -4,10 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -144,11 +143,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
     public void GetSupportPoint()
     {
       RayShape r = new RayShape(new Vector3(1, 0, 0), new Vector3(1, 1, 0).Normalized(), 10);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), r.GetSupportPointNormalized(new Vector3(-1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(r.Origin + r.Direction * r.Length, r.GetSupportPointNormalized(new Vector3(1, 0, 0))));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), r.GetSupportPointNormalized(new Vector3(-1, 0, 0)));
+      AssertExt.AreNumericallyEqual(r.Origin + r.Direction * r.Length, r.GetSupportPointNormalized(new Vector3(1, 0, 0)));
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 0, 0), r.GetSupportPoint(new Vector3(-2, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(r.Origin + r.Direction * r.Length, r.GetSupportPoint(new Vector3(2, 0, 0))));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 0, 0), r.GetSupportPoint(new Vector3(-2, 0, 0)));
+      AssertExt.AreNumericallyEqual(r.Origin + r.Direction * r.Length, r.GetSupportPoint(new Vector3(2, 0, 0)));
     }
 
 

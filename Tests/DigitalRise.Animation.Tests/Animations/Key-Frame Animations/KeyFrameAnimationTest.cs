@@ -4,6 +4,7 @@ using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Tests
@@ -101,21 +102,21 @@ namespace DigitalRise.Animation.Tests
 
       // Without interpolation
       animation.EnableInterpolation = false;
-      Assert.AreEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.0), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.75), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.0), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.75), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.75), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.75), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.0), defaultSource, defaultTarget));
 
       // With interpolation
       animation.EnableInterpolation = true;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.0), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(1.0), defaultSource, defaultTarget));
       var expected = InterpolationHelper.Lerp(keyFrame0.Value, keyFrame1.Value, 0.75f);
-      Assert.AreEqual(expected, animation.GetValue(TimeSpan.FromSeconds(1.75), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(expected, animation.GetValue(TimeSpan.FromSeconds(1.75), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame1.Value, animation.GetValue(TimeSpan.FromSeconds(2.0), defaultSource, defaultTarget));
       expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.75f);
-      Assert.AreEqual(expected, animation.GetValue(TimeSpan.FromSeconds(2.75), defaultSource, defaultTarget));
-      Assert.AreEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.0), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(expected, animation.GetValue(TimeSpan.FromSeconds(2.75), defaultSource, defaultTarget));
+      AssertExt.AreNumericallyEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.0), defaultSource, defaultTarget));
     }
 
 
@@ -134,10 +135,10 @@ namespace DigitalRise.Animation.Tests
       var defaultTarget = _random.NextQuaternion();
 
       // Pre loop
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(keyFrame0.Value, animation.GetValue(TimeSpan.FromSeconds(0.0), defaultSource, defaultTarget));
 
       // Post loop
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.75), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(keyFrame2.Value, animation.GetValue(TimeSpan.FromSeconds(3.75), defaultSource, defaultTarget));
     }
 
 
@@ -198,11 +199,11 @@ namespace DigitalRise.Animation.Tests
       // Pre loop
       var cycleOffset = keyFrame2.Value * keyFrame0.Value.Inverse();
       var expected = InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.25f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, cycleOffset * animationClip.GetValue(TimeSpan.FromSeconds(0.25), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(expected, cycleOffset * animationClip.GetValue(TimeSpan.FromSeconds(0.25), defaultSource, defaultTarget));
 
       // Post loop
       expected = cycleOffset * cycleOffset * InterpolationHelper.Lerp(keyFrame1.Value, keyFrame2.Value, 0.75f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(6.75), defaultSource, defaultTarget)));
+      AssertExt.AreNumericallyEqual(expected, animationClip.GetValue(TimeSpan.FromSeconds(6.75), defaultSource, defaultTarget));
     }
 
 

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -63,7 +63,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Vector3(4, 5, 6), t.Vertex1);
       Assert.AreEqual(new Vector3(9, 7, 8), t.Vertex2);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal));
+      AssertExt.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal);
 
       // Degenerate triangles can have any normal.
       Assert.IsTrue(Numeric.AreEqual(1, new TriangleShape().Normal.Length()));
@@ -143,8 +143,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //                                                                     Quaternion.Identity)));
     //  Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
     //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));
+    //  AssertExt.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum);
+    //  AssertExt.AreNumericallyEqual(worldPos, new TriangleShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum);
     //}
 
 
@@ -243,7 +243,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.IsTrue(Numeric.AreEqual(0.5f, w));
 
       GeometryHelper.GetClosestPoint(t, new Vector3(2, 4, 5), out u, out v, out w);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(2, 4, 0), GeometryHelper.GetPointFromBarycentric(t, u, v, w)));
+      AssertExt.AreNumericallyEqual(new Vector3(2, 4, 0), GeometryHelper.GetPointFromBarycentric(t, u, v, w));
 
       // Two identical vertices in the triangle.
       var degeneratedTriangle = new Triangle(new Vector3(-1, 1, 0), new Vector3(1, 1, 0), new Vector3(1, 1, 0));

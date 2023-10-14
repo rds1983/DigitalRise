@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Algebra.Tests
@@ -114,9 +115,9 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       Vector2 v = new Vector2(1.000001f, 2.000001f);
       Vector2 w = new Vector2(1.00000001f, 2.00000001f);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(u, u));
+      AssertExt.AreNumericallyEqual(u, u);
       Assert.IsFalse(MathHelper.AreNumericallyEqual(u, v));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(u, w));
+      AssertExt.AreNumericallyEqual(u, w);
 
       Numeric.EpsilonF = originalEpsilon;
     }

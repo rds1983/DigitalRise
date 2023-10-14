@@ -8,6 +8,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Interpolation;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Tests
@@ -28,29 +29,29 @@ namespace DigitalRise.Geometry.Tests
       p.Position = new Vector3(1, 2, 3);
 
       p.Orientation = Matrix33F.CreateRotation(new Vector3(3, -4, 9), 0.49f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitX), 0), p * new Vector4(1, 0, 0, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitY), 0), p * new Vector4(0, 1, 0, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitZ), 0), p * new Vector4(0, 0, 1, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitX), 1), p * new Vector4(1, 0, 0, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitY), 1), p * new Vector4(0, 1, 0, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitZ), 1), p * new Vector4(0, 0, 1, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitX), 0), p.Inverse * new Vector4(1, 0, 0, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitY), 0), p.Inverse * new Vector4(0, 1, 0, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitZ), 0), p.Inverse * new Vector4(0, 0, 1, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitX), 1), p.Inverse * new Vector4(1, 0, 0, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitY), 1), p.Inverse * new Vector4(0, 1, 0, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitZ), 1), p.Inverse * new Vector4(0, 0, 1, 1)));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitX), 0), p * new Vector4(1, 0, 0, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitY), 0), p * new Vector4(0, 1, 0, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldDirection(Vector3.UnitZ), 0), p * new Vector4(0, 0, 1, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitX), 1), p * new Vector4(1, 0, 0, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitY), 1), p * new Vector4(0, 1, 0, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToWorldPosition(Vector3.UnitZ), 1), p * new Vector4(0, 0, 1, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitX), 0), p.Inverse * new Vector4(1, 0, 0, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitY), 0), p.Inverse * new Vector4(0, 1, 0, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalDirection(Vector3.UnitZ), 0), p.Inverse * new Vector4(0, 0, 1, 0));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitX), 1), p.Inverse * new Vector4(1, 0, 0, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitY), 1), p.Inverse * new Vector4(0, 1, 0, 1));
+      AssertExt.AreNumericallyEqual(new Vector4(p.ToLocalPosition(Vector3.UnitZ), 1), p.Inverse * new Vector4(0, 0, 1, 1));
 
       Pose p2 = Pose.FromMatrix(new Matrix44F(p.Orientation, Vector3.Zero));
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(p.Orientation, p2.Orientation));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2.Position, Vector3.Zero));
+      AssertExt.AreNumericallyEqual(p.Orientation, p2.Orientation);
+      AssertExt.AreNumericallyEqual(p2.Position, Vector3.Zero);
 
       Matrix44F m = p2;
       m.SetColumn(3, new Vector4(p.Position, 1));
       p2 = Pose.FromMatrix(m);
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(p.Orientation, p2.Orientation));
+      AssertExt.AreNumericallyEqual(p.Orientation, p2.Orientation);
       Assert.AreEqual(p.Position, p2.Position);
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(p.Position, p2.Position));
+      //AssertExt.AreNumericallyEqual(p.Position, p2.Position);
 
       // Test other constructors.
       Assert.AreEqual(Vector3.Zero, new Pose(MathHelper.CreateRotationX(0.3f)).Position);
@@ -153,13 +154,13 @@ namespace DigitalRise.Geometry.Tests
       Pose p1 = new Pose(new Vector3(1, 2, 3), MathHelper.CreateRotationY(0.3f));
       Pose p2 = new Pose(new Vector3(-4, 5, -6), MathHelper.CreateRotationZ(-0.1f));
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p1.Position, Pose.Interpolate(p1, p2, 0).Position));
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(p1.Orientation, Pose.Interpolate(p1, p2, 0).Orientation));
+      AssertExt.AreNumericallyEqual(p1.Position, Pose.Interpolate(p1, p2, 0).Position);
+      AssertExt.AreNumericallyEqual(p1.Orientation, Pose.Interpolate(p1, p2, 0).Orientation);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2.Position, Pose.Interpolate(p1, p2, 1).Position));
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(p2.Orientation, Pose.Interpolate(p1, p2, 1).Orientation));
+      AssertExt.AreNumericallyEqual(p2.Position, Pose.Interpolate(p1, p2, 1).Position);
+      AssertExt.AreNumericallyEqual(p2.Orientation, Pose.Interpolate(p1, p2, 1).Orientation);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(InterpolationHelper.Lerp(p1.Position, p2.Position, 0.3f), Pose.Interpolate(p1, p2, 0.3f).Position));
+      AssertExt.AreNumericallyEqual(InterpolationHelper.Lerp(p1.Position, p2.Position, 0.3f), Pose.Interpolate(p1, p2, 0.3f).Position);
       Assert.IsTrue(
         MathHelper.AreNumericallyEqual(
           InterpolationHelper.Lerp(MathHelper.CreateRotation(p1.Orientation), MathHelper.CreateRotation(p2.Orientation), 0.3f),

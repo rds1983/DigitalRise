@@ -5,7 +5,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -45,8 +45,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, algo.HaveContact(b, a));
       Assert.AreEqual(1, set.Count);
       Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth, 0.001f));
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 0), set[0].PositionALocal, 0.01f));  // MPR will not return the perfect contact point.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f));
+      //AssertExt.AreNumericallyEqual(new Vector3(0, 0, 0), set[0].PositionALocal, 0.01f);  // MPR will not return the perfect contact point.
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f);
 
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0.1f, 0.9f, 0.1f));
       algo.UpdateContacts(set, 0);
@@ -54,16 +54,16 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(true, algo.HaveContact(b, a));
       Assert.AreEqual(1, set.Count);
       Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth, 0.001f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.1f, 0, 0.1f), set[0].PositionALocal, 0.01f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f));
+      AssertExt.AreNumericallyEqual(new Vector3(0.1f, 0, 0.1f), set[0].PositionALocal, 0.01f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f);
 
       // The same with a swapped set.
       set = set.Swapped;
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(1, set.Count);
       Assert.IsTrue(Numeric.AreEqual(0.1f, set[0].PenetrationDepth, 0.001f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.1f, 0, 0.1f), set[0].PositionBLocal, 0.01f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), set[0].Normal, 0.1f));
+      AssertExt.AreNumericallyEqual(new Vector3(0.1f, 0, 0.1f), set[0].PositionBLocal, 0.01f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), set[0].Normal, 0.1f);
 
       // Separation.
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0.2f, 1.2f, 0.3f));
@@ -72,8 +72,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(false, algo.HaveContact(b, a));
       algo.UpdateClosestPoints(set, 0);
       Assert.IsTrue(Numeric.AreEqual(-0.2f, set[0].PenetrationDepth, 0.001f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.2f, 0, 0.3f), set[0].PositionALocal, 0.01f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f));
+      AssertExt.AreNumericallyEqual(new Vector3(0.2f, 0, 0.3f), set[0].PositionALocal, 0.01f);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), set[0].Normal, 0.1f);
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);      
     }

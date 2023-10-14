@@ -5,11 +5,10 @@ using System.Linq;
 using DigitalRise.Collections;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 using Ray = DigitalRise.Geometry.Shapes.Ray;
 
 namespace DigitalRise.Geometry.Partitioning.Tests
@@ -319,8 +318,8 @@ namespace DigitalRise.Geometry.Partitioning.Tests
       else
       {
         // The AABB should be identical.
-        Assert.IsTrue(MathHelper.AreNumericallyEqual(desiredAabb.Minimum, partition.Aabb.Minimum));
-        Assert.IsTrue(MathHelper.AreNumericallyEqual(desiredAabb.Maximum, partition.Aabb.Maximum));        
+        AssertExt.AreNumericallyEqual(desiredAabb.Minimum, partition.Aabb.Minimum);
+        AssertExt.AreNumericallyEqual(desiredAabb.Maximum, partition.Aabb.Maximum);        
       }
     }
 

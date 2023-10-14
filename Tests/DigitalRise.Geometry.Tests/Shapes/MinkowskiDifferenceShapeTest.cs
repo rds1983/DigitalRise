@@ -5,6 +5,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -100,8 +101,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
     //                                                                     Quaternion.Identity)));
     //  Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
     //  Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));
+    //  AssertExt.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum);
+    //  AssertExt.AreNumericallyEqual(worldPos, new ConvexHullOfPoints(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum);
     //}
 
 
@@ -113,11 +114,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Vector3(0, 0, 0), new MinkowskiDifferenceShape().GetSupportPoint(new Vector3(0, 0, 1)));
       Assert.AreEqual(new Vector3(0, 0, 0), new MinkowskiDifferenceShape().GetSupportPoint(new Vector3(1, 1, 1)));
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(4, 5, 0), cs.GetSupportPoint(new Vector3(1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(4, 5, 0), cs.GetSupportPoint(new Vector3(0, 1, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(1, 5, 3), cs.GetSupportPoint(new Vector3(0, 0, 1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-2, 5, 0), cs.GetSupportPoint(new Vector3(-1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(4, -5, 0), cs.GetSupportPoint(new Vector3(0, -1, 0))));
+      AssertExt.AreNumericallyEqual(new Vector3(4, 5, 0), cs.GetSupportPoint(new Vector3(1, 0, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(4, 5, 0), cs.GetSupportPoint(new Vector3(0, 1, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(1, 5, 3), cs.GetSupportPoint(new Vector3(0, 0, 1)));
+      AssertExt.AreNumericallyEqual(new Vector3(-2, 5, 0), cs.GetSupportPoint(new Vector3(-1, 0, 0)));
+      AssertExt.AreNumericallyEqual(new Vector3(4, -5, 0), cs.GetSupportPoint(new Vector3(0, -1, 0)));
 
       MinkowskiDifferenceShape m = new MinkowskiDifferenceShape();
       ((GeometricObject)m.ObjectB).Shape = new LineSegmentShape(new Vector3(1, 0, 0), new Vector3(3, 0, 0));

@@ -7,6 +7,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -72,10 +73,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Vector3 p0 = new Vector3(2, 0, 0);
       Vector3 p1 = new Vector3(-1, -1, -2);
       Vector3 p2 = new Vector3(0, 2, -3);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p0, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(1, 0, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(0, 1, 0))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p2, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(0, 0, -1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p1, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(-1, 0, 1))));
+      AssertExt.AreNumericallyEqual(p0, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(1, 0, 0)));
+      AssertExt.AreNumericallyEqual(p2, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(0, 1, 0)));
+      AssertExt.AreNumericallyEqual(p2, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(0, 0, -1)));
+      AssertExt.AreNumericallyEqual(p1, new ConvexPolyhedron(new[] { p0, p1, p2 }).GetSupportPoint(new Vector3(-1, 0, 1)));
     }
 
 

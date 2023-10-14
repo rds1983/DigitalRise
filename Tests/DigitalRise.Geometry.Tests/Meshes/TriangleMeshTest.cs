@@ -4,10 +4,10 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Geometry.Shapes;
-using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Meshes.Tests
@@ -215,7 +215,7 @@ namespace DigitalRise.Geometry.Meshes.Tests
       {
         var n0 = mesh.GetTriangle(i).Normal;
         var n1 = clone.GetTriangle(i).Normal;
-        Assert.IsTrue(MathHelper.AreNumericallyEqual(n0, -n1));
+        AssertExt.AreNumericallyEqual(n0, -n1);
       }
     }
 

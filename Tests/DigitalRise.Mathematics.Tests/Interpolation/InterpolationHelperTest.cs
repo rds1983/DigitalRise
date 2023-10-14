@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 
@@ -87,38 +88,38 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(lerp.IsNumericallyNormalized());
 
       lerp = InterpolationHelper.Lerp(q1, q2, 0);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, lerp));
+      AssertExt.AreNumericallyEqual(q1, lerp);
 
       lerp = InterpolationHelper.Lerp(q1, q2, 1);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, lerp));
+      AssertExt.AreNumericallyEqual(q2, lerp);
 
       q1 = Quaternion.Identity;
       q2 = MathHelper.CreateRotation(Vector3.UnitZ, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       Vector3 v = lerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
 
       q1 = Quaternion.Identity;
       q2 = MathHelper.CreateRotation(Vector3.UnitY, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitZ);
       result = new Vector3(1.0f, 0.0f, 1.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
 
       q1 = Quaternion.Identity;
       q2 = MathHelper.CreateRotation(Vector3.UnitX, (float) Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitY);
       result = new Vector3(0.0f, 1.0f, 1.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
 
       q1 = new Quaternion(0.0f, 0.0f, 0.0f, -1.0f);
       q2 = MathHelper.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
       lerp = InterpolationHelper.Lerp(q1, q2, 0.5f);
       v = lerp.Rotate(Vector3.UnitX);
       result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -171,10 +172,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector2 t2 = new Vector2(0.0f, 2.0f); t2.Normalize();
 
     //  Vector2 hermite = Vector2.Hermite(v1, t1, v2, t2, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v1, hermite));
+    //  AssertExt.AreNumericallyEqual(v1, hermite);
 
     //  hermite = Vector2.Hermite(v1, t1, v2, t2, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, hermite));
+    //  AssertExt.AreNumericallyEqual(v2, hermite);
     //}
 
 
@@ -187,20 +188,20 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector2 v4 = new Vector2(0.0f, 2.0f);
 
     //  Vector2 catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v2, catmullRom);
 
     //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v3, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v3, catmullRom);
 
     //  Vector2 t2 = (v3 - v1) / 2.0f;
     //  Vector2 t3 = (v4 - v2) / 2.0f;
     //  Vector2 hermite = Vector2.Hermite(v2, t2, v3, t3, 0.3f);
     //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.3f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
 
     //  hermite = Vector2.Hermite(v2, t2, v3, t3, 0.6f);
     //  catmullRom = Vector2.CatmullRom(v1, v2, v3, v4, 0.6f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
     //}
 
 
@@ -213,10 +214,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector3 t2 = new Vector3(0.0f, 2.0f, -3.0f); t2.Normalize();
 
     //  Vector3 hermite = Vector3.Hermite(v1, t1, v2, t2, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v1, hermite));
+    //  AssertExt.AreNumericallyEqual(v1, hermite);
 
     //  hermite = Vector3.Hermite(v1, t1, v2, t2, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, hermite));
+    //  AssertExt.AreNumericallyEqual(v2, hermite);
     //}
 
 
@@ -229,20 +230,20 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector3 v4 = new Vector3(0.0f, 2.0f, -3.0f);
 
     //  Vector3 catmullRom = Vector3.CatmullRom(v1, v2, v3, v4, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v2, catmullRom);
 
     //  catmullRom = Vector3.CatmullRom(v1, v2, v3, v4, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v3, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v3, catmullRom);
 
     //  Vector3 t2 = (v3 - v1) / 2.0f;
     //  Vector3 t3 = (v4 - v2) / 2.0f;
     //  Vector3 hermite = Vector3.Hermite(v2, t2, v3, t3, 0.3f);
     //  catmullRom = Vector3.CatmullRom(v1, v2, v3, v4, 0.3f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
 
     //  hermite = Vector3.Hermite(v2, t2, v3, t3, 0.6f);
     //  catmullRom = Vector3.CatmullRom(v1, v2, v3, v4, 0.6f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
     //}
 
 
@@ -257,10 +258,10 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector4 t2 = new Vector4(0.0f, 2.0f, -3.0f, 0.0f); t2.Normalize();
 
     //  Vector4 hermite = Vector4.Hermite(v1, t1, v2, t2, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v1, hermite));
+    //  AssertExt.AreNumericallyEqual(v1, hermite);
 
     //  hermite = Vector4.Hermite(v1, t1, v2, t2, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, hermite));
+    //  AssertExt.AreNumericallyEqual(v2, hermite);
     //}
 
 
@@ -273,20 +274,20 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
     //  Vector4 v4 = new Vector4(0.0f, 2.0f, -3.0f, 1.0f);
 
     //  Vector4 catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v2, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v2, catmullRom);
 
     //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 1.0f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(v3, catmullRom));
+    //  AssertExt.AreNumericallyEqual(v3, catmullRom);
 
     //  Vector4 t2 = (v3 - v1) / 2.0f;
     //  Vector4 t3 = (v4 - v2) / 2.0f;
     //  Vector4 hermite = Vector4.Hermite(v2, t2, v3, t3, 0.3f);
     //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.3f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
 
     //  hermite = Vector4.Hermite(v2, t2, v3, t3, 0.6f);
     //  catmullRom = Vector4.CatmullRom(v1, v2, v3, v4, 0.6f);
-    //  Assert.IsTrue(MathHelper.AreNumericallyEqual(hermite, catmullRom));
+    //  AssertExt.AreNumericallyEqual(hermite, catmullRom);
     //}
 
 
@@ -412,11 +413,11 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
       slerp = InterpolationHelper.Slerp(q1, q2, 0);
       Assert.IsTrue(slerp.IsNumericallyNormalized());
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, slerp));
+      AssertExt.AreNumericallyEqual(q1, slerp);
 
       slerp = InterpolationHelper.Slerp(q1, q2, 1);
       Assert.IsTrue(slerp.IsNumericallyNormalized());
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, slerp));
+      AssertExt.AreNumericallyEqual(q2, slerp);
     }
 
 
@@ -429,7 +430,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -442,7 +443,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitZ);
       Vector3 result = new Vector3(1.0f, 0.0f, 1.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -455,7 +456,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitY);
       Vector3 result = new Vector3(0.0f, 1.0f, 1.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -468,7 +469,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f, 1.0f, 0.0f).Normalized();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -481,7 +482,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       Vector3 v = slerp.Rotate(Vector3.UnitX);
       Vector3 result = new Vector3(1.0f / 3.0f, 2.0f / 3.0f, 2.0f / 3.0f);  // I hope this is correct.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
 
       q1 = MathHelper.CreateRotation(-Vector3.UnitY, (float) Math.PI / 2);
       q2 = MathHelper.CreateRotation(-Vector3.UnitZ, (float) -Math.PI / 2);
@@ -489,7 +490,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.IsTrue(slerp.IsNumericallyNormalized());
       v = slerp.Rotate(Vector3.UnitX);
       result = new Vector3(1.0f / 3.0f, 2.0f / 3.0f, 2.0f / 3.0f);  // I hope this is correct.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result, v));
+      AssertExt.AreNumericallyEqual(result, v);
     }
 
 
@@ -508,11 +509,11 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
 
       // t = 0
       Quaternion result = InterpolationHelper.Squad(q, a, b, p, 0.0f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1, result));
+      AssertExt.AreNumericallyEqual(q1, result);
 
       // t = 1.0f
       result = InterpolationHelper.Squad(q, a, b, p, 1.0f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2, result));
+      AssertExt.AreNumericallyEqual(q2, result);
 
       // Check series (just for debugging)
       Quaternion r1, r2, r3, r4, r5, r6, r7, r8, r9;
@@ -530,7 +531,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       InterpolationHelper.SquadSetup(q1, q1, q2, q2, out q, out a, out b, out p);
       result = InterpolationHelper.Squad(q, a, b, p, 0.5f);
       expected = InterpolationHelper.Slerp(q1, q2, 0.5f);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, result));
+      AssertExt.AreNumericallyEqual(expected, result);
     }
 
 

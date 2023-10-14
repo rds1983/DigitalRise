@@ -1,6 +1,7 @@
 ﻿using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Traits.Tests
@@ -23,13 +24,13 @@ namespace DigitalRise.Animation.Traits.Tests
     {
       var traits = Vector4Traits.Instance;
       var value = new Vector4(-1, -2, 3, 1);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector4.Zero, traits.Multiply(value, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(value, traits.Multiply(value, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((value + value), traits.Multiply(value, 2)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((value + value + value), traits.Multiply(value, 3)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value), traits.Multiply(value, -1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value - value), traits.Multiply(value, -2)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((-value - value - value), traits.Multiply(value, -3)));
+      AssertExt.AreNumericallyEqual(Vector4.Zero, traits.Multiply(value, 0));
+      AssertExt.AreNumericallyEqual(value, traits.Multiply(value, 1));
+      AssertExt.AreNumericallyEqual((value + value), traits.Multiply(value, 2));
+      AssertExt.AreNumericallyEqual((value + value + value), traits.Multiply(value, 3));
+      AssertExt.AreNumericallyEqual((-value), traits.Multiply(value, -1));
+      AssertExt.AreNumericallyEqual((-value - value), traits.Multiply(value, -2));
+      AssertExt.AreNumericallyEqual((-value - value - value), traits.Multiply(value, -3));
     }
 
 
@@ -44,10 +45,10 @@ namespace DigitalRise.Animation.Traits.Tests
       var by = new Vector4(4, -5, 6, 1);
 
       var to = traits.Add(from, by);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((by + from), to));
+      AssertExt.AreNumericallyEqual((by + from), to);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(from, traits.Add(to, traits.Inverse(by))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(by, traits.Add(traits.Inverse(from), to)));
+      AssertExt.AreNumericallyEqual(from, traits.Add(to, traits.Inverse(by)));
+      AssertExt.AreNumericallyEqual(by, traits.Add(traits.Inverse(from), to));
     }
 
 
@@ -63,16 +64,16 @@ namespace DigitalRise.Animation.Traits.Tests
       var cycleOffset = traits.Add(traits.Inverse(first), last);
 
       // Cycle offset should be the difference between last and first key frame.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, traits.Add(first, cycleOffset)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, (cycleOffset + first)));
+      AssertExt.AreNumericallyEqual(last, traits.Add(first, cycleOffset));
+      AssertExt.AreNumericallyEqual(last, (cycleOffset + first));
 
       // Check multiple cycles (post-loop).
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((cycleOffset + cycleOffset + last), traits.Add(first, traits.Multiply(cycleOffset, 3))));
+      AssertExt.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1)));
+      AssertExt.AreNumericallyEqual((cycleOffset + cycleOffset + last), traits.Add(first, traits.Multiply(cycleOffset, 3)));
 
       // Check multiple cycles (pre-loop).
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((first - cycleOffset - cycleOffset), traits.Add(last, traits.Multiply(cycleOffset, -3))));
+      AssertExt.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1)));
+      AssertExt.AreNumericallyEqual((first - cycleOffset - cycleOffset), traits.Add(last, traits.Multiply(cycleOffset, -3)));
     }
 
 
@@ -82,9 +83,9 @@ namespace DigitalRise.Animation.Traits.Tests
       var traits = Vector4Traits.Instance;
       var value0 = new Vector4(1, 2, 3, 1);
       var value1 = new Vector4(-4, 5, -6, 5);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(value1, traits.Interpolate(value0, value1, 1.0f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((0.25f * value0 + 0.75f * value1), traits.Interpolate(value0, value1, 0.75f)));
+      AssertExt.AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f));
+      AssertExt.AreNumericallyEqual(value1, traits.Interpolate(value0, value1, 1.0f));
+      AssertExt.AreNumericallyEqual((0.25f * value0 + 0.75f * value1), traits.Interpolate(value0, value1, 0.75f));
     }
   }
 }

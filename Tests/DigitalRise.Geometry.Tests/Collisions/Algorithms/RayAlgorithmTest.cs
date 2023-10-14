@@ -1,9 +1,8 @@
 using System;
-using DigitalRise.Mathematics;
 using DigitalRise.Geometry.Shapes;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -77,7 +76,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       algo.UpdateContacts(set, 0);
       Assert.AreEqual(0, set.Count);
       algo.UpdateClosestPoints(set, 0);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1.1f, 0.1f), set[0].PositionBWorld));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1.1f, 0.1f), set[0].PositionBWorld);
       Assert.AreEqual(false, algo.HaveContact(ray, triangle));
       Assert.AreEqual(false, algo.HaveContact(triangle, ray));
     }

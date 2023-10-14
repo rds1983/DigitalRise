@@ -4,6 +4,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -59,7 +60,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Vector3(4, 5, 6), t.Vertex1);
       Assert.AreEqual(new Vector3(9, 7, 8), t.Vertex2);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal));
+      AssertExt.AreNumericallyEqual(Vector3.Cross(new Vector3(3, 3, 3), new Vector3(8, 5, 5)).Normalized(), t.Normal);
 
       // Degenerate triangles can have any normal.
       Assert.IsTrue(Numeric.AreEqual(1, new Triangle().Normal.Length()));

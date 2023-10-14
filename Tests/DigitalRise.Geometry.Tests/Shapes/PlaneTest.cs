@@ -3,7 +3,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -219,7 +219,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       p2.DistanceFromOrigin *= 3.33f;
 
       Assert.IsTrue(p2.TryNormalize());
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(p.Normal, p2.Normal));
+      AssertExt.AreNumericallyEqual(p.Normal, p2.Normal);
       Assert.IsTrue(Numeric.AreEqual(p.DistanceFromOrigin, p2.DistanceFromOrigin));
 
       // Scale all parts of the plane equation.

@@ -3,6 +3,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Character.Tests
@@ -18,18 +19,18 @@ namespace DigitalRise.Animation.Character.Tests
       var srt = new SrtTransform(rotationQ.ToRotationMatrix33());
 
       Assert.AreEqual(Vector3.One, srt.Scale);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
+      AssertExt.AreNumericallyEqual(rotationQ, srt.Rotation);
       Assert.AreEqual(Vector3.Zero, srt.Translation);
 
       srt = new SrtTransform(rotationQ);
 
       Assert.AreEqual(Vector3.One, srt.Scale);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
+      AssertExt.AreNumericallyEqual(rotationQ, srt.Rotation);
       Assert.AreEqual(Vector3.Zero, srt.Translation);
 
       srt = new SrtTransform(new Vector3(-1, 2, -3), rotationQ.ToRotationMatrix33(), new Vector3(10, 9, -8));
       Assert.AreEqual(new Vector3(-1, 2, -3), srt.Scale);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(rotationQ, srt.Rotation));
+      AssertExt.AreNumericallyEqual(rotationQ, srt.Rotation);
       Assert.AreEqual(new Vector3(10, 9, -8), srt.Translation);
     }
 
@@ -239,15 +240,15 @@ namespace DigitalRise.Animation.Character.Tests
       var m = Matrix44F.CreateTranslation(t) * Matrix44F.CreateRotation(r) * Matrix44F.CreateScale(s);
 
       var srt = SrtTransform.FromMatrix(m);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(t, srt.Translation));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(r, srt.Rotation));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s, srt.Scale));
+      AssertExt.AreNumericallyEqual(t, srt.Translation);
+      AssertExt.AreNumericallyEqual(r, srt.Rotation);
+      AssertExt.AreNumericallyEqual(s, srt.Scale);
 
       // XNA:
       srt = SrtTransform.FromMatrix((Matrix)m);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(t, srt.Translation));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(r, srt.Rotation));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(s, srt.Scale));
+      AssertExt.AreNumericallyEqual(t, srt.Translation);
+      AssertExt.AreNumericallyEqual(r, srt.Rotation);
+      AssertExt.AreNumericallyEqual(s, srt.Scale);
 
       // With negative scale, the decomposition is not unique (many possible combinations of 
       // axis mirroring + rotation).
@@ -257,19 +258,19 @@ namespace DigitalRise.Animation.Character.Tests
       m = Matrix44F.CreateTranslation(t) * Matrix44F.CreateRotation(r) * Matrix44F.CreateScale(s);
       srt = SrtTransform.FromMatrix(m);
       var m2 = (Matrix44F)srt;
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m, m2));
+      AssertExt.AreNumericallyEqual(m, m2);
 
       m2 = srt.ToMatrix44F();
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m, m2));
+      AssertExt.AreNumericallyEqual(m, m2);
 
       m2 = srt;
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m, m2));
+      AssertExt.AreNumericallyEqual(m, m2);
 
       Matrix mXna = srt.ToXna();
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m, (Matrix44F)mXna));
+      AssertExt.AreNumericallyEqual(m, (Matrix44F)mXna);
 
       mXna = srt;
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(m, (Matrix44F)mXna));
+      AssertExt.AreNumericallyEqual(m, (Matrix44F)mXna);
     }
 
 
@@ -281,20 +282,20 @@ namespace DigitalRise.Animation.Character.Tests
       var aInverse = a.Inverse;
       
       var aa = a * aInverse;
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(identity, aa));
+      AssertExt.AreNumericallyEqual(identity, aa);
 
       aa = aInverse * a;
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(identity, aa));
+      AssertExt.AreNumericallyEqual(identity, aa);
 
 
       a = new SrtTransform(new Vector3(-3, 7, -4), Quaternion.Identity, new Vector3(4, -5, 6));
       aInverse = a.Inverse;
 
       aa = a * aInverse;
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(identity, aa));
+      AssertExt.AreNumericallyEqual(identity, aa);
 
       aa = aInverse * a;
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(identity, aa));
+      AssertExt.AreNumericallyEqual(identity, aa);
     }
 
 
@@ -306,7 +307,7 @@ namespace DigitalRise.Animation.Character.Tests
       var c = new SrtTransform(new Vector3(4), new Quaternion(7, -5, 3, 1).Normalized(), new Vector3(-8, -1, -7));
 
       // Assocative for uniform scale
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual((a*b)*c, a*(b*c)));
+      AssertExt.AreNumericallyEqual((a*b)*c, a*(b*c));
     }
 
 
@@ -318,7 +319,7 @@ namespace DigitalRise.Animation.Character.Tests
       var c = new SrtTransform(new Vector3(4), Quaternion.Identity, new Vector3(-8, -1, -7));
 
       // Assocative for uniform scale
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual((a * b) * c, a * (b * c)));
+      AssertExt.AreNumericallyEqual((a * b) * c, a * (b * c));
     }
 
 
@@ -331,7 +332,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = (a * b).ToMatrix44F();
       var result2 = a.ToMatrix44F() * b.ToMatrix44F();
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -344,7 +345,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = (a * b).ToMatrix44F();
       var result2 = a.ToMatrix44F() * b.ToMatrix44F();
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -356,7 +357,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = SrtTransform.Multiply(a, b).ToMatrix44F();
       var result2 = a * b;
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -368,11 +369,11 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = a * v;
       var result2 = a.ToMatrix44F() * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
 
       result1 = SrtTransform.Multiply(a, v);
       result2 = a.ToMatrix44F() * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -384,7 +385,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = a.ToParentDirection(v);
       var result2 = a.Rotation.ToRotationMatrix33() * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -396,7 +397,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = a.ToLocalDirection(v);
       var result2 = a.Rotation.ToRotationMatrix33().Transposed * v;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -408,7 +409,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = a.ToParentPosition(v);
       var result2 = a.ToMatrix44F().TransformPosition(v);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -420,7 +421,7 @@ namespace DigitalRise.Animation.Character.Tests
 
       var result1 = a.ToLocalPosition(v);
       var result2 = a.ToMatrix44F().Inverse.TransformPosition(v);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(result1, result2));
+      AssertExt.AreNumericallyEqual(result1, result2);
     }
 
 
@@ -432,14 +433,14 @@ namespace DigitalRise.Animation.Character.Tests
 
       Assert.AreEqual(Vector3.One, srt.Scale);
       Assert.AreEqual(pose.Position, srt.Translation);
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
+      AssertExt.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33());
       
       pose = new Pose(new Vector3(1, 2, 3), new Quaternion(1, 2, 3, 4).Normalized());
       srt = pose;
 
       Assert.AreEqual(Vector3.One, srt.Scale);
       Assert.AreEqual(pose.Position, srt.Translation);
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
+      AssertExt.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33());
     }
 
 
@@ -450,13 +451,13 @@ namespace DigitalRise.Animation.Character.Tests
       var pose = srt.ToPose();
 
       Assert.AreEqual(pose.Position, srt.Translation);
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
+      AssertExt.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33());
 
       srt = new SrtTransform(new Vector3(4, 5, 6), new Quaternion(1, 2, 3, 4).Normalized(), new Vector3(1, 2, 3));
       pose = (Pose)srt;
 
       Assert.AreEqual(pose.Position, srt.Translation);
-      Assert.IsTrue(Matrix33F.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33()));
+      AssertExt.AreNumericallyEqual(pose.Orientation, srt.Rotation.ToRotationMatrix33());
     }
   }
 }

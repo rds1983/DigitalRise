@@ -4,6 +4,7 @@ using DigitalRise.Mathematics.Interpolation;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Traits.Tests
@@ -28,8 +29,8 @@ namespace DigitalRise.Animation.Traits.Tests
       var q1Xna = (Quaternion)q1;
       var q2Xna = (Quaternion)q2;
       
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q1 * q2, (Quaternion)(q1Xna * q2Xna)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(q2 * q1, (Quaternion)(q2Xna * q1Xna)));
+      AssertExt.AreNumericallyEqual(q1 * q2, (Quaternion)(q1Xna * q2Xna));
+      AssertExt.AreNumericallyEqual(q2 * q1, (Quaternion)(q2Xna * q1Xna));
     }
 
 
@@ -50,13 +51,13 @@ namespace DigitalRise.Animation.Traits.Tests
       var value = (Quaternion)_random.NextQuaternion();
       Quaternion valueInverse = value;
       valueInverse.Conjugate();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)Quaternion.Identity, (Quaternion)traits.Multiply(value, 0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)value, (Quaternion)traits.Multiply(value, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)(value * value), (Quaternion)traits.Multiply(value, 2)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)(value * value * value), (Quaternion)traits.Multiply(value, 3)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)valueInverse * (Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -2)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)valueInverse * (Quaternion)valueInverse * (Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -3)));
+      AssertExt.AreNumericallyEqual((Quaternion)Quaternion.Identity, (Quaternion)traits.Multiply(value, 0));
+      AssertExt.AreNumericallyEqual((Quaternion)value, (Quaternion)traits.Multiply(value, 1));
+      AssertExt.AreNumericallyEqual((Quaternion)(value * value), (Quaternion)traits.Multiply(value, 2));
+      AssertExt.AreNumericallyEqual((Quaternion)(value * value * value), (Quaternion)traits.Multiply(value, 3));
+      AssertExt.AreNumericallyEqual((Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -1));
+      AssertExt.AreNumericallyEqual((Quaternion)valueInverse * (Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -2));
+      AssertExt.AreNumericallyEqual((Quaternion)valueInverse * (Quaternion)valueInverse * (Quaternion)valueInverse, (Quaternion)traits.Multiply(value, -3));
     }
 
 
@@ -71,10 +72,10 @@ namespace DigitalRise.Animation.Traits.Tests
       var by = (Quaternion)_random.NextQuaternion();
 
       var to = traits.Add(from, by);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)by * (Quaternion)from, (Quaternion)to));
+      AssertExt.AreNumericallyEqual((Quaternion)by * (Quaternion)from, (Quaternion)to);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)from, (Quaternion)traits.Add(to, traits.Inverse(by))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)by, (Quaternion)traits.Add(traits.Inverse(from), to)));
+      AssertExt.AreNumericallyEqual((Quaternion)from, (Quaternion)traits.Add(to, traits.Inverse(by)));
+      AssertExt.AreNumericallyEqual((Quaternion)by, (Quaternion)traits.Add(traits.Inverse(from), to));
     }
 
 
@@ -92,16 +93,16 @@ namespace DigitalRise.Animation.Traits.Tests
       cycleOffsetInverse.Conjugate();
 
       // Cycle offset should be the difference between last and first key frame.
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)last, (Quaternion)traits.Add(first, cycleOffset)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)last, (Quaternion)(cycleOffset * first)));
+      AssertExt.AreNumericallyEqual((Quaternion)last, (Quaternion)traits.Add(first, cycleOffset));
+      AssertExt.AreNumericallyEqual((Quaternion)last, (Quaternion)(cycleOffset * first));
 
       // Check multiple cycles (post-loop).
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)last, (Quaternion)traits.Add(first, traits.Multiply(cycleOffset, 1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)cycleOffset * (Quaternion)cycleOffset * (Quaternion)last, (Quaternion)traits.Add(first, traits.Multiply(cycleOffset, 3))));
+      AssertExt.AreNumericallyEqual((Quaternion)last, (Quaternion)traits.Add(first, traits.Multiply(cycleOffset, 1)));
+      AssertExt.AreNumericallyEqual((Quaternion)cycleOffset * (Quaternion)cycleOffset * (Quaternion)last, (Quaternion)traits.Add(first, traits.Multiply(cycleOffset, 3)));
 
       // Check multiple cycles (pre-loop).
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)first, (Quaternion)traits.Add(last, traits.Multiply(cycleOffset, -1))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)cycleOffsetInverse * (Quaternion)cycleOffsetInverse * (Quaternion)first, (Quaternion)traits.Add(last, traits.Multiply(cycleOffset, -3))));
+      AssertExt.AreNumericallyEqual((Quaternion)first, (Quaternion)traits.Add(last, traits.Multiply(cycleOffset, -1)));
+      AssertExt.AreNumericallyEqual((Quaternion)cycleOffsetInverse * (Quaternion)cycleOffsetInverse * (Quaternion)first, (Quaternion)traits.Add(last, traits.Multiply(cycleOffset, -3)));
     }
 
 
@@ -111,9 +112,9 @@ namespace DigitalRise.Animation.Traits.Tests
       var traits = QuaternionTraits.Instance;
       var value0 = (Quaternion)_random.NextQuaternion();
       var value1 = (Quaternion)_random.NextQuaternion();
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)value0, (Quaternion)traits.Interpolate(value0, value1, 0.0f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual((Quaternion)value1, (Quaternion)traits.Interpolate(value0, value1, 1.0f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(InterpolationHelper.Lerp((Quaternion)value0, (Quaternion)value1, 0.75f), (Quaternion)traits.Interpolate(value0, value1, 0.75f)));
+      AssertExt.AreNumericallyEqual((Quaternion)value0, (Quaternion)traits.Interpolate(value0, value1, 0.0f));
+      AssertExt.AreNumericallyEqual((Quaternion)value1, (Quaternion)traits.Interpolate(value0, value1, 1.0f));
+      AssertExt.AreNumericallyEqual(InterpolationHelper.Lerp((Quaternion)value0, (Quaternion)value1, 0.75f), (Quaternion)traits.Interpolate(value0, value1, 0.75f));
     }
   }
 }

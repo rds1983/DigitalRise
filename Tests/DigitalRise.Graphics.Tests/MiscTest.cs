@@ -1,8 +1,7 @@
 ﻿using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Graphics.Tests
 {
@@ -36,8 +35,8 @@ namespace DigitalRise.Graphics.Tests
       Vector3 axisMajor1, axisMinor1;
       float radiusMajor1, radiusMinor1;
       GetEllipseCoefficients_Optimized(normalView, out axisMajor1, out axisMinor1, out radiusMajor1, out radiusMinor1);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(axisMajor0, axisMajor1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(axisMinor0, axisMinor1));
+      AssertExt.AreNumericallyEqual(axisMajor0, axisMajor1);
+      AssertExt.AreNumericallyEqual(axisMinor0, axisMinor1);
       Assert.AreEqual(radiusMajor0, radiusMajor1);
       Assert.AreEqual(radiusMinor0, radiusMinor1);
     }

@@ -7,6 +7,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Tests
@@ -252,7 +253,7 @@ namespace DigitalRise.Animation.Tests
 
       var targetPosition = p + v * dt;
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt)));
+      AssertExt.AreNumericallyEqual(v, AnimationHelper.ComputeLinearVelocity(p, targetPosition, dt));
     }
 
 
@@ -270,8 +271,8 @@ namespace DigitalRise.Animation.Tests
       o1 = -o1;
 
       // We use a big epsilon. Quaternion multiplication seems to create a large error...?
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0, o1, dt), 0.01f));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0.ToRotationMatrix33(), o1.ToRotationMatrix33(), dt), 0.01f));
+      AssertExt.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0, o1, dt), 0.01f);
+      AssertExt.AreNumericallyEqual(v, AnimationHelper.ComputeAngularVelocity(o0.ToRotationMatrix33(), o1.ToRotationMatrix33(), dt), 0.01f);
 
       // Zero rotation.
       Assert.AreEqual(Vector3.Zero, AnimationHelper.ComputeAngularVelocity(o0, -o0, dt));
@@ -552,7 +553,7 @@ namespace DigitalRise.Animation.Tests
         var valueNew = new SrtTransform();
         srtAnimation.GetValue(time, ref defaultSource, ref defaultTarget, ref valueNew);
 
-        Assert.IsTrue(SrtTransform.AreNumericallyEqual(valueRef, valueNew));
+        AssertExt.AreNumericallyEqual(valueRef, valueNew);
       }
     }
 

@@ -3,7 +3,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Shapes.Tests
 {
@@ -111,7 +111,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(origin, ray.Origin);
       Assert.AreEqual(direction, ray.Direction);
       Assert.AreEqual(length, ray.Length);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(pointOnRay, ray.Origin + ray.Direction * 10 * 3.5f));
+      AssertExt.AreNumericallyEqual(pointOnRay, ray.Origin + ray.Direction * 10 * 3.5f);
     }
 
 
@@ -134,7 +134,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(origin, ray.Origin);
       Assert.AreEqual(direction, ray.Direction);
       Assert.AreEqual(length, ray.Length);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length));
+      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
     }
 
 
@@ -156,7 +156,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(origin, ray.Origin);
       Assert.AreEqual((endPoint - origin).Normalized(), ray.Direction);
       Assert.AreEqual((endPoint - origin).Length, ray.Length);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length));
+      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
     }
 
 
@@ -172,8 +172,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       endPoint = pose.ToWorldPosition(endPoint);
       ray.ToWorld(ref pose);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(startPoint, ray.Origin));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length));
+      AssertExt.AreNumericallyEqual(startPoint, ray.Origin);
+      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
     }
 
 
@@ -189,8 +189,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
       endPoint = pose.ToLocalPosition(endPoint);
       ray.ToLocal(ref pose);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(startPoint, ray.Origin));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length));
+      AssertExt.AreNumericallyEqual(startPoint, ray.Origin);
+      AssertExt.AreNumericallyEqual(endPoint, ray.Origin + ray.Direction * ray.Length);
     }
   }
 }

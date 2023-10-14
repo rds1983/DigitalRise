@@ -3,9 +3,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -52,8 +52,8 @@ namespace DigitalRise.Geometry.Shapes.Tests
                                                                          Quaternion.Identity)));
       Quaternion rotation = MathHelper.CreateRotation(new Vector3(1, 1, 1), 0.7f);
       Vector3 worldPos = rotation.Rotate(new Vector3(1, 2, 3)) + new Vector3(10, 100, 1000);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new PointShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(worldPos, new PointShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum));
+      AssertExt.AreNumericallyEqual(worldPos, new PointShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Minimum);
+      AssertExt.AreNumericallyEqual(worldPos, new PointShape(new Vector3(1, 2, 3)).GetAabb(new Pose(new Vector3(10, 100, 1000), rotation)).Maximum);
     }
 
     [Test]

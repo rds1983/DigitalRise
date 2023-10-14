@@ -7,6 +7,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -82,7 +83,7 @@ namespace DigitalRise.Geometry.Shapes.Tests
       Assert.AreEqual(new Vector3(10, 0, 0), new SphereShape(10).GetSupportPoint(new Vector3(1, 0, 0)));
       Assert.AreEqual(new Vector3(0, 10, 0), new SphereShape(10).GetSupportPoint(new Vector3(0, 1, 0)));
       Assert.AreEqual(new Vector3(0, 0, 10), new SphereShape(10).GetSupportPoint(new Vector3(0, 0, 1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(5.773502f), new SphereShape(10).GetSupportPoint(new Vector3(1, 1, 1))));
+      AssertExt.AreNumericallyEqual(new Vector3(5.773502f), new SphereShape(10).GetSupportPoint(new Vector3(1, 1, 1)));
     }
 
 

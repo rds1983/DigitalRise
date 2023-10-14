@@ -461,12 +461,19 @@ namespace DigitalRise.Animation.Character
     {
       return new SrtTransform(pose.Orientation, pose.Position);
     }
-    #endregion
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Static Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Static Methods
+		//--------------------------------------------------------------
+
+		public static bool AreNumericallyEqual(SrtTransform srtA, SrtTransform srtB, float epsilon)
+		{
+			return MathHelper.AreNumericallyEqual(srtA.Rotation, srtB.Rotation, epsilon)
+						 && MathHelper.AreNumericallyEqual(srtA.Translation, srtB.Translation, epsilon)
+						 && MathHelper.AreNumericallyEqual(srtA.Scale, srtB.Scale, epsilon);
+		}
 
     /// <summary>
     /// Determines whether two SRT transforms are equal (within a numerical tolerance).
@@ -477,12 +484,8 @@ namespace DigitalRise.Animation.Character
     /// <see langword="true"/> if the given transforms are numerically equal; otherwise, 
     /// <see langword="false"/>.
     /// </returns>
-    public static bool AreNumericallyEqual(SrtTransform srtA, SrtTransform srtB)
-    {
-      return MathHelper.AreNumericallyEqual(srtA.Rotation, srtB.Rotation)
-             && MathHelper.AreNumericallyEqual(srtA.Translation, srtB.Translation)
-             && MathHelper.AreNumericallyEqual(srtA.Scale, srtB.Scale);
-    }
+    public static bool AreNumericallyEqual(SrtTransform srtA, SrtTransform srtB) =>
+      AreNumericallyEqual(srtA, srtB, Numeric.EpsilonF);
 
 
     /// <overloads>

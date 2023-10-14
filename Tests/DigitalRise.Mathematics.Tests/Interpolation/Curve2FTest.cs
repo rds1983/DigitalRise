@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
@@ -100,18 +100,18 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Curve2F curve = CreateCurve();
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Oscillate;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, 1), curve.GetPoint(-10)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(11, 1 + 2f/5f), curve.GetPoint(11)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(19, 5), curve.GetPoint(19)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(23, 5), curve.GetPoint(23)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(24, 4), curve.GetPoint(24)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(29, 4), curve.GetPoint(29)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(30, 7), curve.GetPoint(30)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(33.9999f, 10), curve.GetPoint(33.9999f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(40, 3), curve.GetPoint(40)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(45, 10), curve.GetPoint(45)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(48, 5), curve.GetPoint(48)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(49, curve.GetPoint(47).Y), curve.GetPoint(49)));
+      AssertExt.AreNumericallyEqual(new Vector2(-10, 1), curve.GetPoint(-10));
+      AssertExt.AreNumericallyEqual(new Vector2(11, 1 + 2f/5f), curve.GetPoint(11));
+      AssertExt.AreNumericallyEqual(new Vector2(19, 5), curve.GetPoint(19));
+      AssertExt.AreNumericallyEqual(new Vector2(23, 5), curve.GetPoint(23));
+      AssertExt.AreNumericallyEqual(new Vector2(24, 4), curve.GetPoint(24));
+      AssertExt.AreNumericallyEqual(new Vector2(29, 4), curve.GetPoint(29));
+      AssertExt.AreNumericallyEqual(new Vector2(30, 7), curve.GetPoint(30));
+      AssertExt.AreNumericallyEqual(new Vector2(33.9999f, 10), curve.GetPoint(33.9999f));
+      AssertExt.AreNumericallyEqual(new Vector2(40, 3), curve.GetPoint(40));
+      AssertExt.AreNumericallyEqual(new Vector2(45, 10), curve.GetPoint(45));
+      AssertExt.AreNumericallyEqual(new Vector2(48, 5), curve.GetPoint(48));
+      AssertExt.AreNumericallyEqual(new Vector2(49, curve.GetPoint(47).Y), curve.GetPoint(49));
 
       // Tested with internal assert in Debug Build.
       curve.GetPoint(31);
@@ -130,8 +130,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       //  Point3 = new Vector3(20, 14, 8),
       //  Point4 = new Vector3(20, 14, 8),
       //};
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(catmullOscillate.GetPoint(0.3f), curve.GetPoint(43)));
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(catmullOscillate.GetPoint(0.9f), curve.GetPoint(51)));
+      //AssertExt.AreNumericallyEqual(catmullOscillate.GetPoint(0.3f), curve.GetPoint(43));
+      //AssertExt.AreNumericallyEqual(catmullOscillate.GetPoint(0.9f), curve.GetPoint(51));
 
       //CatmullRomSegment3F catmullCircle = new CatmullRomSegment3F()
       //{
@@ -142,17 +142,17 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       //};
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Cycle;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, -7), curve.GetPoint(-10)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(49, 1 + 2f/5f), curve.GetPoint(49)));
+      AssertExt.AreNumericallyEqual(new Vector2(-10, -7), curve.GetPoint(-10));
+      AssertExt.AreNumericallyEqual(new Vector2(49, 1 + 2f/5f), curve.GetPoint(49));
 
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.CycleOffset;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y), curve.GetPoint(4)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(50, 5 + 4f/5f), curve.GetPoint(50)));
+      AssertExt.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y), curve.GetPoint(4));
+      AssertExt.AreNumericallyEqual(new Vector2(50, 5 + 4f/5f), curve.GetPoint(50));
 
       curve.PreLoop = CurveLoopType.CycleOffset;
       curve.PostLoop = CurveLoopType.Linear;
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y - 4), curve.GetPoint(4f)));
+      AssertExt.AreNumericallyEqual(new Vector2(4, curve.GetPoint(42).Y - 4), curve.GetPoint(4f));
       CatmullRomSegment3F catmull = new CatmullRomSegment3F 
       { 
         Point1 = new Vector3(40, 3, 0),
@@ -161,8 +161,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         Point4 = new Vector3(48, 5, 0),
       };
       Vector3 endTangent = catmull.GetTangent(1);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(55f, 5 + (55-48) * endTangent.Y / endTangent.X), curve.GetPoint(55f)));
-      //Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f)));
+      AssertExt.AreNumericallyEqual(new Vector2(55f, 5 + (55-48) * endTangent.Y / endTangent.X), curve.GetPoint(55f));
+      //AssertExt.AreNumericallyEqual(new Vector3(20, 14, 8) + catmullOscillate.GetTangent(1) / 10 * 50, curve.GetPoint(100f));
 
       // Test more linear pre- and post-behavior.
       curve = new Curve2F();
@@ -182,8 +182,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         TangentIn = new Vector2(8, 2),
         TangentOut = new Vector2(15, 4),
       });
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, 10), curve.GetPoint(-10f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(15, 4), curve.GetPoint(15f)));
+      AssertExt.AreNumericallyEqual(new Vector2(-10, 10), curve.GetPoint(-10f));
+      AssertExt.AreNumericallyEqual(new Vector2(15, 4), curve.GetPoint(15f));
 
       curve = new Curve2F();
       curve.PreLoop = CurveLoopType.Linear;
@@ -202,8 +202,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         TangentIn = new Vector2(8, 2),
         TangentOut = new Vector2(2, -1),
       });
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(-10, -20), curve.GetPoint(-10f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(15, 3 - 0.5f * 5), curve.GetPoint(15f)));
+      AssertExt.AreNumericallyEqual(new Vector2(-10, -20), curve.GetPoint(-10f));
+      AssertExt.AreNumericallyEqual(new Vector2(15, 3 - 0.5f * 5), curve.GetPoint(15f));
     }
 
 
@@ -491,24 +491,24 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       Assert.AreEqual(new Vector2(0, 2), curve.GetPoint(0));
       Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
       Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(0));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2)));
+      AssertExt.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1));
+      AssertExt.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Constant;
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
       Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
       Assert.AreEqual(new Vector2(2, 2), curve.GetPoint(2));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(1)));
+      AssertExt.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0));
+      AssertExt.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(1));
       Assert.AreEqual(new Vector2(1, 0), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Linear;
       curve.PostLoop = CurveLoopType.Linear;
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
       Assert.AreEqual(new Vector2(0, 3), curve.GetPoint(0));
       Assert.AreEqual(new Vector2(2, 3), curve.GetPoint(2));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2)));
+      AssertExt.AreNumericallyEqual(new Vector2(2, -2), curve.GetTangent(0));
+      AssertExt.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(1));
+      AssertExt.AreNumericallyEqual(new Vector2(2, 2), curve.GetTangent(2));
       curve.PreLoop = CurveLoopType.Cycle;
       curve.PostLoop = CurveLoopType.Cycle;
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
@@ -915,12 +915,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.9f, 3.8f), curve.GetPoint(1.9f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2, 4), curve.GetPoint(2)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(2.1f, 4.2f), curve.GetPoint(2.1f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10)));
+      AssertExt.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f));
+      AssertExt.AreNumericallyEqual(new Vector2(1.9f, 3.8f), curve.GetPoint(1.9f));
+      AssertExt.AreNumericallyEqual(new Vector2(2, 4), curve.GetPoint(2));
+      AssertExt.AreNumericallyEqual(new Vector2(2.1f, 4.2f), curve.GetPoint(2.1f));
+      AssertExt.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f));
+      AssertExt.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10));
 
       curve = new Curve2F();
       curve.Add(new CurveKey2F()
@@ -941,12 +941,12 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       curve.PreLoop = CurveLoopType.Constant;
       curve.PostLoop = CurveLoopType.Constant;
       Assert.AreEqual(new Vector2(1, 2), curve.GetPoint(1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(8.9f, 17.8f), curve.GetPoint(8.9f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9, 18), curve.GetPoint(9)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.1f, 18.2f), curve.GetPoint(9.1f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10)));
+      AssertExt.AreNumericallyEqual(new Vector2(1.1f, 2.2f), curve.GetPoint(1.1f));
+      AssertExt.AreNumericallyEqual(new Vector2(8.9f, 17.8f), curve.GetPoint(8.9f));
+      AssertExt.AreNumericallyEqual(new Vector2(9, 18), curve.GetPoint(9));
+      AssertExt.AreNumericallyEqual(new Vector2(9.1f, 18.2f), curve.GetPoint(9.1f));
+      AssertExt.AreNumericallyEqual(new Vector2(9.9f, 19.8f), curve.GetPoint(9.9f));
+      AssertExt.AreNumericallyEqual(new Vector2(10, 20), curve.GetPoint(10));
     }
 
 

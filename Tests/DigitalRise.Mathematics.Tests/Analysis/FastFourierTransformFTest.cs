@@ -2,6 +2,7 @@
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Analysis.Tests
@@ -52,7 +53,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       FastFourierTransformF.Transform1D(t, false);
 
       for (int i = 0; i < s.Length; i++)
-        Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i], t[i]));
+        AssertExt.AreNumericallyEqual(s[i], t[i]);
     }
 
 
@@ -74,7 +75,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
       FastFourierTransformF.Transform1D(t, true);
 
       for (int i = 0; i < s.Length; i++)
-        Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i], t[i]));
+        AssertExt.AreNumericallyEqual(s[i], t[i]);
     }
 
 
@@ -179,7 +180,7 @@ namespace DigitalRise.Mathematics.Analysis.Tests
 
       for (int i = 0; i < s.GetLength(0); i++)
         for (int j = 0; j < s.GetLength(1); j++)
-          Assert.IsTrue(MathHelper.AreNumericallyEqual(s[i, j], t[i, j]));
+          AssertExt.AreNumericallyEqual(s[i, j], t[i, j]);
     }
   }
 }

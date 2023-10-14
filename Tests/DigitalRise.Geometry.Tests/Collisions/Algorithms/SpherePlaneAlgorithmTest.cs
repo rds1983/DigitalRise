@@ -5,6 +5,7 @@ using DigitalRise.Mathematics;
 using DigitalRise.Geometry.Shapes;
 using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
+using NUnit.Utils;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 {
@@ -91,8 +92,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(objectA, cs.ObjectA);
       Assert.AreEqual(objectB, cs.ObjectB);
       Assert.AreEqual(1, cs.Count);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(10, -2, 20), cs[0].Position));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal));
+      AssertExt.AreNumericallyEqual(new Vector3(10, -2, 20), cs[0].Position);
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal);
       Assert.IsTrue(Numeric.AreEqual(0, cs[0].PenetrationDepth));
     }
 
@@ -117,7 +118,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(objectB, cs.ObjectB);
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, -1.5f, 0), cs[0].Position);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -1, 0), cs[0].Normal));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -1, 0), cs[0].Normal);
       Assert.IsTrue(Numeric.AreEqual(3, cs[0].PenetrationDepth));
 
       // Test swapped case:
@@ -128,7 +129,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       Assert.AreEqual(objectA, cs.ObjectB);
       Assert.AreEqual(1, cs.Count);
       Assert.AreEqual(new Vector3(0, -1.5f, 0), cs[0].Position);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 1, 0), cs[0].Normal);
       Assert.IsTrue(Numeric.AreEqual(3, cs[0].PenetrationDepth));
     }
 

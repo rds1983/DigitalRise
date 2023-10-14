@@ -5,6 +5,7 @@ using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Mathematics.Statistics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Traits.Tests
@@ -42,13 +43,13 @@ namespace DigitalRise.Animation.Traits.Tests
     {
       var traits = SrtTransformTraits.Instance;
       var value = NextRandomValue();
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(SrtTransform.Identity, traits.Multiply(value, 0)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value, traits.Multiply(value, 1)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value * value, traits.Multiply(value, 2)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value * value * value, traits.Multiply(value, 3)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value.Inverse, traits.Multiply(value, -1)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value.Inverse * value.Inverse, traits.Multiply(value, -2)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value.Inverse * value.Inverse * value.Inverse, traits.Multiply(value, -3)));
+      AssertExt.AreNumericallyEqual(SrtTransform.Identity, traits.Multiply(value, 0));
+      AssertExt.AreNumericallyEqual(value, traits.Multiply(value, 1));
+      AssertExt.AreNumericallyEqual(value * value, traits.Multiply(value, 2));
+      AssertExt.AreNumericallyEqual(value * value * value, traits.Multiply(value, 3));
+      AssertExt.AreNumericallyEqual(value.Inverse, traits.Multiply(value, -1));
+      AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse, traits.Multiply(value, -2));
+      AssertExt.AreNumericallyEqual(value.Inverse * value.Inverse * value.Inverse, traits.Multiply(value, -3));
     }
 
 
@@ -63,10 +64,10 @@ namespace DigitalRise.Animation.Traits.Tests
       var by = NextRandomValue();
 
       var to = traits.Add(from, by);
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(by * from, to));
+      AssertExt.AreNumericallyEqual(by * from, to);
 
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(from, traits.Add(to, traits.Inverse(by))));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(by, traits.Add(traits.Inverse(from), to)));
+      AssertExt.AreNumericallyEqual(from, traits.Add(to, traits.Inverse(by)));
+      AssertExt.AreNumericallyEqual(by, traits.Add(traits.Inverse(from), to));
     }
 
 
@@ -82,16 +83,16 @@ namespace DigitalRise.Animation.Traits.Tests
       var cycleOffset = traits.Add(traits.Inverse(first), last);
 
       // Cycle offset should be the difference between last and first key frame.
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(last, traits.Add(first, cycleOffset)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(last, cycleOffset * first));
+      AssertExt.AreNumericallyEqual(last, traits.Add(first, cycleOffset));
+      AssertExt.AreNumericallyEqual(last, cycleOffset * first);
 
       // Check multiple cycles (post-loop).
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1))));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(cycleOffset * cycleOffset * last, traits.Add(first, traits.Multiply(cycleOffset, 3))));
+      AssertExt.AreNumericallyEqual(last, traits.Add(first, traits.Multiply(cycleOffset, 1)));
+      AssertExt.AreNumericallyEqual(cycleOffset * cycleOffset * last, traits.Add(first, traits.Multiply(cycleOffset, 3)));
 
       // Check multiple cycles (pre-loop).
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1))));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(cycleOffset.Inverse * cycleOffset.Inverse * first, traits.Add(last, traits.Multiply(cycleOffset, -3))));
+      AssertExt.AreNumericallyEqual(first, traits.Add(last, traits.Multiply(cycleOffset, -1)));
+      AssertExt.AreNumericallyEqual(cycleOffset.Inverse * cycleOffset.Inverse * first, traits.Add(last, traits.Multiply(cycleOffset, -3)));
     }
 
 
@@ -101,10 +102,10 @@ namespace DigitalRise.Animation.Traits.Tests
       var traits = SrtTransformTraits.Instance;
       var value0 = NextRandomValue();
       var value1 = NextRandomValue();
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f)));
+      AssertExt.AreNumericallyEqual(value0, traits.Interpolate(value0, value1, 0.0f));
       Assert.IsTrue(SrtTransform.AreNumericallyEqual(value1, traits.Interpolate(value0, value1, 1.0f))
                     || SrtTransform.AreNumericallyEqual(new SrtTransform(value1.Scale, -value1.Rotation, value1.Translation), traits.Interpolate(value0, value1, 1.0f)));
-      Assert.IsTrue(SrtTransform.AreNumericallyEqual(SrtTransform.Interpolate(value0, value1, 0.75f), traits.Interpolate(value0, value1, 0.75f)));
+      AssertExt.AreNumericallyEqual(SrtTransform.Interpolate(value0, value1, 0.75f), traits.Interpolate(value0, value1, 0.75f));
     }
 
 
@@ -127,8 +128,8 @@ namespace DigitalRise.Animation.Traits.Tests
       traits.BlendNext(ref result, ref value2, w2);
       traits.EndBlend(ref result);
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Scale * w0 + value1.Scale * w1 + value2.Scale * w2, result.Scale));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(value0.Translation * w0 + value1.Translation * w1 + value2.Translation * w2, result.Translation));
+      AssertExt.AreNumericallyEqual(value0.Scale * w0 + value1.Scale * w1 + value2.Scale * w2, result.Scale);
+      AssertExt.AreNumericallyEqual(value0.Translation * w0 + value1.Translation * w1 + value2.Translation * w2, result.Translation);
 
       Quaternion expected;
       expected = value0.Rotation * w0;
@@ -141,7 +142,7 @@ namespace DigitalRise.Animation.Traits.Tests
       expected += value2.Rotation * w2;
       expected.Normalize();
 
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(expected, result.Rotation));
+      AssertExt.AreNumericallyEqual(expected, result.Rotation);
     }
   }
 }

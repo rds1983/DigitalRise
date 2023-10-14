@@ -1,9 +1,8 @@
-﻿using DigitalRise.Geometry;
-using DigitalRise.Geometry.Collisions;
-using DigitalRise.Geometry.Shapes;
+﻿using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Graphics.Tests
@@ -27,7 +26,7 @@ namespace DigitalRise.Graphics.Tests
       // Use Projection.CreateProjectionXxx() to test GetWidthAndHeight().
       Matrix44F projection = Matrix44F.CreatePerspectiveFieldOfView(MathHelper.ToRadians(60), 16.0f / 9.0f, 1, 10);
       Matrix44F projection2 = Matrix44F.CreatePerspective(width, height, 1, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(projection, projection2));
+      AssertExt.AreNumericallyEqual(projection, projection2);
     }
 
     [Test]
@@ -52,9 +51,9 @@ namespace DigitalRise.Graphics.Tests
       };
 
       Matrix44F expected = Matrix44F.CreatePerspective(4, 3, 2, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection2));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection3.ToMatrix44F()));
+      AssertExt.AreNumericallyEqual(expected, projection);
+      AssertExt.AreNumericallyEqual(expected, projection2);
+      AssertExt.AreNumericallyEqual(expected, projection3.ToMatrix44F());
     }
 
     [Test]
@@ -79,9 +78,9 @@ namespace DigitalRise.Graphics.Tests
       };
 
       Matrix44F expected = Matrix44F.CreatePerspectiveFieldOfView(MathHelper.ToRadians(60), 16.0f / 9.0f, 1, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection2));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection3.ToMatrix44F()));
+      AssertExt.AreNumericallyEqual(expected, projection);
+      AssertExt.AreNumericallyEqual(expected, projection2);
+      AssertExt.AreNumericallyEqual(expected, projection3.ToMatrix44F());
     }
 
     [Test]
@@ -96,8 +95,8 @@ namespace DigitalRise.Graphics.Tests
       projection2.Far = 10;
 
       Matrix44F expected = Matrix44F.CreatePerspectiveOffCenter(0, 4, 1, 4, 2, 10);
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection));
-      Assert.IsTrue(Matrix44F.AreNumericallyEqual(expected, projection2.ToMatrix44F()));
+      AssertExt.AreNumericallyEqual(expected, projection);
+      AssertExt.AreNumericallyEqual(expected, projection2.ToMatrix44F());
     }  
   }
 }

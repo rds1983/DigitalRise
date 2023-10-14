@@ -2,6 +2,7 @@
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Animation.Tests
@@ -115,7 +116,7 @@ namespace DigitalRise.Animation.Tests
       animation.To = null;
       animation.By = new Vector4(1.0f, 10.0f, 100.0f, 1000.0f);
       Assert.AreEqual(new Vector4(0.2f, 2.0f, 20.0f, 200.0f), animation.GetValue(TimeSpan.FromSeconds(0.0), new Vector4(0.0f, 0.0f, 0.0f, 0.0f), new Vector4(1.0f, 10.0f, 100.0f, 1000.0f)));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector4(0.7f, 7.0f, 70.0f, 700.0f), animation.GetValue(TimeSpan.FromSeconds(0.5), new Vector4(0.0f, 0.0f, 0.0f, 0.0f), new Vector4(1.0f, 10.0f, 100.0f, 1000.0f))));
+      AssertExt.AreNumericallyEqual(new Vector4(0.7f, 7.0f, 70.0f, 700.0f), animation.GetValue(TimeSpan.FromSeconds(0.5), new Vector4(0.0f, 0.0f, 0.0f, 0.0f), new Vector4(1.0f, 10.0f, 100.0f, 1000.0f)));
       Assert.AreEqual(new Vector4(1.2f, 12.0f, 120.0f, 1200.0f), animation.GetValue(TimeSpan.FromSeconds(1.0), new Vector4(0.0f, 0.0f, 0.0f, 0.0f), new Vector4(1.0f, 10.0f, 100.0f, 1000.0f)));
 
       animation.By = new Vector4(-0.1f, -1.0f, -10.0f, -100.0f);

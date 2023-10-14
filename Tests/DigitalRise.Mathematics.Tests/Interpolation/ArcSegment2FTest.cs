@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 
 
 namespace DigitalRise.Mathematics.Interpolation.Tests
@@ -42,8 +43,8 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       var points = new List<Vector2>();
       var tolerance = 1f;
       s.Flatten(points, 10, tolerance);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(points[0], s.Point1));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(points.Last(), s.Point2));
+      AssertExt.AreNumericallyEqual(points[0], s.Point1);
+      AssertExt.AreNumericallyEqual(points.Last(), s.Point2);
       var curveLength = s.GetLength(0, 1, 10, tolerance);
       Assert.IsTrue(CurveHelper.GetLength(points) >= curveLength - tolerance * points.Count / 2);
       Assert.IsTrue(CurveHelper.GetLength(points) <= curveLength);

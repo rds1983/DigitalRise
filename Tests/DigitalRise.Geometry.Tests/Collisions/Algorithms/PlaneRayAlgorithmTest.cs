@@ -1,9 +1,9 @@
 using System;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
@@ -64,7 +64,7 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 1, 0), MathHelper.CreateRotationZ(ConstantsF.PiOver2));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(1, algo.GetContacts(b, a)[0].PenetrationDepth);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-1, 0, 0), algo.GetContacts(b, a)[0].PositionALocal));
+      AssertExt.AreNumericallyEqual(new Vector3(-1, 0, 0), algo.GetContacts(b, a)[0].PositionALocal);
       Assert.AreEqual(1, algo.GetClosestPoints(a, b)[0].PenetrationDepth);
     }
 

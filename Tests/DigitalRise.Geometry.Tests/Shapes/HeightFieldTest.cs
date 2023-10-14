@@ -1,8 +1,8 @@
 using System;
 using DigitalRise.Mathematics;
-using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Shapes.Tests
@@ -135,11 +135,11 @@ namespace DigitalRise.Geometry.Shapes.Tests
       _field.Depth = 0;
       var box = new TransformedShape(
         new GeometricObject(new BoxShape(100, 6, 200), new Pose(new Vector3(1050, 2, 2100))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(box.GetAabb(pose).Minimum, _field.GetAabb(pose).Minimum));
+      AssertExt.AreNumericallyEqual(box.GetAabb(pose).Minimum, _field.GetAabb(pose).Minimum);
       _field.Depth = 4;
       box = new TransformedShape(
         new GeometricObject(new BoxShape(100, 10, 200), new Pose(new Vector3(1000, 0, 2000))));
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(box.GetAabb(pose).Minimum + rotation.Rotate(new Vector3(50, 0, 100)), _field.GetAabb(pose).Minimum));
+      AssertExt.AreNumericallyEqual(box.GetAabb(pose).Minimum + rotation.Rotate(new Vector3(50, 0, 100)), _field.GetAabb(pose).Minimum);
     }
 
 

@@ -3,6 +3,7 @@ using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
+using NUnit.Utils;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
@@ -130,44 +131,44 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0.4f, 0, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(1, 0, 0), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.35f, 0, 0), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0.35f, 0, 0), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(-0.4f, 0, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(-1, 0, 0), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.35f, 0, 0), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.35f, 0, 0), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0.9f, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 1, 0), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0.85f, 0), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0.85f, 0), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, -0.9f, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, -1, 0), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, -0.85f, 0), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, -0.85f, 0), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0, 1.4f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, 1), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1.35f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1.35f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0, -1.4f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, -1), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, -1.35f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, -1.35f), algo.GetContacts(a, b)[0].Position);
 
       // Test swapping.
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0, 0, -1.4f));
       Assert.AreEqual(1, algo.GetContacts(b, a).Count);
       Assert.AreEqual(new Vector3(0, 0, 1), algo.GetContacts(b, a)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, -1.35f), algo.GetContacts(b, a)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, -1.35f), algo.GetContacts(b, a)[0].Position);
     }
 
 
@@ -191,37 +192,37 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0.5f, 0, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(1, 0, 0).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.4f, 0, 0f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0.4f, 0, 0f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0f, 1, 0));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 1, 0).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.0f, 0.9f, 0f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0.0f, 0.9f, 0f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0f, 0, 1.5f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, 1).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, 1.4f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, 1.4f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(-0.5f, -1, -1.5f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(-1, 0, 0).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(-0.4f, -1, -1.5f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(-0.4f, -1, -1.5f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0f, -1, 1.5f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, -1, 0).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0.0f, -0.9f, 1.5f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0.0f, -0.9f, 1.5f), algo.GetContacts(a, b)[0].Position);
 
       ((GeometricObject)a.GeometricObject).Pose = new Pose(new Vector3(0, 0, 0));
       ((GeometricObject)b.GeometricObject).Pose = new Pose(new Vector3(0f, 0, -1.5f));
       Assert.AreEqual(1, algo.GetContacts(a, b).Count);
       Assert.AreEqual(new Vector3(0, 0, -1).Normalized(), algo.GetContacts(a, b)[0].Normal);
-      Assert.IsTrue(MathHelper.AreNumericallyEqual(new Vector3(0, 0, -1.4f), algo.GetContacts(a, b)[0].Position));
+      AssertExt.AreNumericallyEqual(new Vector3(0, 0, -1.4f), algo.GetContacts(a, b)[0].Position);
     }
   }
 }
