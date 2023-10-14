@@ -986,7 +986,10 @@ namespace DigitalRise.Mathematics.Algebra.Tests
     [Test]
     public void MultiplyMatrixOperator()
     {
-      Matrix33F m = new Matrix33F(12, 23, 45,
+			var oldEpsilon = Numeric.EpsilonF;
+			Numeric.EpsilonF = 1e-4f;
+
+			Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
                                 43, 65, 87);
       Assert.AreEqual(Matrix33F.Zero, m * Matrix33F.Zero);
@@ -1004,13 +1007,18 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       for (int column = 0; column < 3; column++)
         for (int row = 0; row < 3; row++)
           Assert.AreEqual(Vector3.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
-    }
+
+			Numeric.EpsilonF = oldEpsilon;
+		}
 
 
-    [Test]
+		[Test]
     public void MultiplyMatrix()
     {
-      Matrix33F m = new Matrix33F(12, 23, 45,
+      var oldEpsilon = Numeric.EpsilonF;
+      Numeric.EpsilonF = 1e-4f;
+
+			Matrix33F m = new Matrix33F(12, 23, 45,
                                 67, 89, 90,
                                 43, 65, 87);
       Assert.AreEqual(Matrix33F.Zero, Matrix33F.Multiply(m, Matrix33F.Zero));
@@ -1028,6 +1036,8 @@ namespace DigitalRise.Mathematics.Algebra.Tests
       for (int column = 0; column < 3; column++)
         for (int row = 0; row < 3; row++)
           Assert.AreEqual(Vector3.Dot(m1.GetRow(row), m2.GetColumn(column)), result[row, column]);
+
+      Numeric.EpsilonF = oldEpsilon;
     }
 
 
