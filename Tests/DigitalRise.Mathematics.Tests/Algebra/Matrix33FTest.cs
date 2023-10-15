@@ -1114,7 +1114,6 @@ namespace DigitalRise.Mathematics.Algebra.Tests
 
 
     [Test]
-    [Ignore("Binary serialization not supported in PCL version.")]
     public void SerializationBinary()
     {
       Matrix33F m1 = new Matrix33F(12, 23, 45, 

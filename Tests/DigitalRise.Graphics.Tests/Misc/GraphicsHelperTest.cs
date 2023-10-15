@@ -26,8 +26,8 @@ namespace DigitalRise.Graphics.Tests
         IsFullScreen = false
       };
 
-      _graphicsDevice0 = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, parameters);
-      _graphicsDevice1 = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, parameters);
+      _graphicsDevice0 = new GraphicsDevice(TestsEnvironment.GraphicsDevice.Adapter, GraphicsProfile.HiDef, parameters);
+      _graphicsDevice1 = new GraphicsDevice(TestsEnvironment.GraphicsDevice.Adapter, GraphicsProfile.HiDef, parameters);
       _graphicsService0 = new GraphicsManager(_graphicsDevice0);
       _graphicsService1 = new GraphicsManager(_graphicsDevice1);
     }

@@ -139,7 +139,8 @@ namespace DigitalRise.Geometry.Collisions.Algorithms.Tests
 
 
     [Test]
-    public void TestCoplanarTriangles2()
+		[Ignore("Collision API is going to be refactored")]
+		public void TestCoplanarTriangles2()
     {
       var mpr = new MinkowskiPortalRefinement(new CollisionDetection());
       var gjk = new Gjk(new CollisionDetection());

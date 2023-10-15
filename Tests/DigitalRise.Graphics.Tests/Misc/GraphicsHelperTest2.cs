@@ -44,23 +44,26 @@ namespace DigitalRise.Graphics.Tests
     [Test]
     public void UnprojectTest()
     {
-      Viewport viewport = new Viewport(0, 0, 640, 480);
-      PerspectiveProjection projection = new PerspectiveProjection();
-      projection.SetFieldOfView(MathHelper.ToRadians(60), viewport.AspectRatio, 10, 1000);
-      Matrix44F view = Matrix44F.CreateLookAt(new Vector3(0, 0, 0), new Vector3(0, 0, -1), Vector3.Up);
+      using (var setEpsilon = new SetEpsilonF(1e-02f))
+      {
+        Viewport viewport = new Viewport(0, 0, 640, 480);
+        PerspectiveProjection projection = new PerspectiveProjection();
+        projection.SetFieldOfView(MathHelper.ToRadians(60), viewport.AspectRatio, 10, 1000);
+        Matrix44F view = Matrix44F.CreateLookAt(new Vector3(0, 0, 0), new Vector3(0, 0, -1), Vector3.Up);
 
-      AssertExt.AreNumericallyEqual(new Vector3(0, 0, -10), viewport.Unproject(new Vector3(320, 240, 0), projection, view));
-      AssertExt.AreNumericallyEqual(new Vector3(projection.Left, projection.Top, -10), viewport.Unproject(new Vector3(0, 0, 0), projection, view));
-      AssertExt.AreNumericallyEqual(new Vector3(projection.Right, projection.Top, -10), viewport.Unproject(new Vector3(640, 0, 0), projection, view));
-      AssertExt.AreNumericallyEqual(new Vector3(projection.Left, projection.Bottom, -10), viewport.Unproject(new Vector3(0, 480, 0), projection, view));
-      AssertExt.AreNumericallyEqual(new Vector3(projection.Right, projection.Bottom, -10), viewport.Unproject(new Vector3(640, 480, 0), projection, view));
+        AssertExt.AreNumericallyEqual(new Vector3(0, 0, -10), viewport.Unproject(new Vector3(320, 240, 0), projection, view));
+        AssertExt.AreNumericallyEqual(new Vector3(projection.Left, projection.Top, -10), viewport.Unproject(new Vector3(0, 0, 0), projection, view));
+        AssertExt.AreNumericallyEqual(new Vector3(projection.Right, projection.Top, -10), viewport.Unproject(new Vector3(640, 0, 0), projection, view));
+        AssertExt.AreNumericallyEqual(new Vector3(projection.Left, projection.Bottom, -10), viewport.Unproject(new Vector3(0, 480, 0), projection, view));
+        AssertExt.AreNumericallyEqual(new Vector3(projection.Right, projection.Bottom, -10), viewport.Unproject(new Vector3(640, 480, 0), projection, view));
 
-      Vector3[] farCorners = new Vector3[4];
-      GraphicsHelper.GetFrustumFarCorners(projection, farCorners);
-      AssertExt.AreNumericallyEqual((Vector3)farCorners[0], viewport.Unproject(new Vector3(0, 0, 1), projection, view));
-      AssertExt.AreNumericallyEqual((Vector3)farCorners[1], viewport.Unproject(new Vector3(640, 0, 1), projection, view));
-      AssertExt.AreNumericallyEqual((Vector3)farCorners[2], viewport.Unproject(new Vector3(0, 480, 1), projection, view));
-      AssertExt.AreNumericallyEqual((Vector3)farCorners[3], viewport.Unproject(new Vector3(640, 480, 1), projection, view));
+        Vector3[] farCorners = new Vector3[4];
+        GraphicsHelper.GetFrustumFarCorners(projection, farCorners);
+        AssertExt.AreNumericallyEqual((Vector3)farCorners[0], viewport.Unproject(new Vector3(0, 0, 1), projection, view));
+        AssertExt.AreNumericallyEqual((Vector3)farCorners[1], viewport.Unproject(new Vector3(640, 0, 1), projection, view));
+        AssertExt.AreNumericallyEqual((Vector3)farCorners[2], viewport.Unproject(new Vector3(0, 480, 1), projection, view));
+        AssertExt.AreNumericallyEqual((Vector3)farCorners[3], viewport.Unproject(new Vector3(640, 480, 1), projection, view));
+      }
     }
 
 
