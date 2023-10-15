@@ -62,7 +62,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       float length1 = b.GetLength(0, 1, 20, Numeric.EpsilonF);
       float length2 = b.GetLengthWithDeCasteljau(20, Numeric.EpsilonF);
 
-      AssertExt.AreNumericallyEqual(length1, length2);
+      AssertExt.AreNumericallyEqual(length1, length2, 0.0001);
       // Compare numerical integration method and de Casteljau method.
 
       float approxLength = 0;

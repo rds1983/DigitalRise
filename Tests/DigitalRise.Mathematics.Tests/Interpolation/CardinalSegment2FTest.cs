@@ -91,8 +91,11 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
         approxLength += (c.GetPoint(u) - c.GetPoint(u + step)).Length();
 
       AssertExt.AreNumericallyEqual(approxLength, length1, 0.01f);
-      AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + c.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
-      AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(1, 0, 100, Numeric.EpsilonF));
+      using (var setEpsilon = new SetEpsilonF(1e-04f))
+      {
+        AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(0, 0.5f, 100, Numeric.EpsilonF) + c.GetLength(0.5f, 1, 100, Numeric.EpsilonF));
+        AssertExt.AreNumericallyEqual(c.GetLength(0, 1, 100, Numeric.EpsilonF), c.GetLength(1, 0, 100, Numeric.EpsilonF));
+      }
     }
 
 

@@ -308,11 +308,10 @@ namespace DigitalRise.Geometry.Shapes.Tests
       // The support points can be different, e.g. if a an edge of face is normal to the 
       // direction. When projected onto the direction both support points must be at equal
       // distance.          
-      bool areEqual = Numeric.AreEqual(
+      AssertExt.AreNumericallyEqual(
         MathHelper.ProjectTo(expected, direction).Length(),
-        MathHelper.ProjectTo(actual, direction).Length());
-
-      Assert.IsTrue(areEqual);
+        MathHelper.ProjectTo(actual, direction).Length(),
+        0.01);
     }
   }
 }

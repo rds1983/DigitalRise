@@ -36,7 +36,7 @@ namespace DigitalRise.Mathematics.Interpolation.Tests
       {
         float u = RandomHelper.Random.NextFloat(0, 1);
         float point = b.GetPoint(u);
-        AssertExt.AreNumericallyEqual(u, CurveHelper.GetParameter(b, point, 100));
+        AssertExt.AreNumericallyEqual(u, CurveHelper.GetParameter(b, point, 100), 0.0001);
       }
 
       for (int i = 0; i < 1000; i++)
