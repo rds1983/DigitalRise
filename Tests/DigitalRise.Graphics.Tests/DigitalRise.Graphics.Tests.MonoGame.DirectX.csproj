@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="$(MonoGameVersion)" />
+
     <PackageReference Include="NUnit" Version="$(NUnitVersion)" />
     <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapterVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MNTestSdkVersion)" />
