@@ -8,8 +8,6 @@ namespace DigitalRise.Graphics.Tests
   [TestFixture]
   public class GraphicsHelperTest
   {
-    private GraphicsDevice _graphicsDevice0;
-    private GraphicsDevice _graphicsDevice1;
     private IGraphicsService _graphicsService0;
     private IGraphicsService _graphicsService1;
 
@@ -26,19 +24,9 @@ namespace DigitalRise.Graphics.Tests
         IsFullScreen = false
       };
 
-      _graphicsDevice0 = new GraphicsDevice(TestsEnvironment.GraphicsDevice.Adapter, GraphicsProfile.HiDef, parameters);
-      _graphicsDevice1 = new GraphicsDevice(TestsEnvironment.GraphicsDevice.Adapter, GraphicsProfile.HiDef, parameters);
-      _graphicsService0 = new GraphicsManager(_graphicsDevice0);
-      _graphicsService1 = new GraphicsManager(_graphicsDevice1);
+      _graphicsService0 = new GraphicsManager(TestsEnvironment.GraphicsDevice);
+      _graphicsService1 = new GraphicsManager(TestsEnvironment.GraphicsDevice);
     }
-
-    [TearDown]
-    public void TearDown()
-    {
-      _graphicsDevice0.Dispose();
-      _graphicsDevice1.Dispose();
-    }
-
 
     [Test]
     public void DefaultTextures()
@@ -47,7 +35,6 @@ namespace DigitalRise.Graphics.Tests
       Assert.AreNotEqual(_graphicsService0.GetDefaultTexture2DBlack(), _graphicsService1.GetDefaultTexture2DBlack());
 
       var t = _graphicsService1.GetDefaultTexture2DWhite();
-      _graphicsDevice1.Dispose();
       
       // Note: Since the graphics device is also disposed and re-created when the game is
       // moved between screens - we must not auto-dispose our textures.

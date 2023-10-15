@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics.Tests
 {
@@ -11,7 +12,10 @@ namespace DigitalRise.Graphics.Tests
 			_graphics = new GraphicsDeviceManager(this)
 			{
 				PreferredBackBufferWidth = 1200,
-				PreferredBackBufferHeight = 800
+				PreferredBackBufferHeight = 800,
+				PreferredBackBufferFormat = SurfaceFormat.Color,
+				PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8,
+				IsFullScreen = false
 			};
 
 			((IGraphicsDeviceManager)Services.GetService(typeof(IGraphicsDeviceManager))).CreateDevice();
