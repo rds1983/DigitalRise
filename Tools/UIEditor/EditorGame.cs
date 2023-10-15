@@ -4,6 +4,7 @@ using DigitalRise.UI.Controls;
 using DigitalRise.UI.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.ComponentModel.DataAnnotations;
 
 namespace UIEditor
 {
@@ -14,6 +15,7 @@ namespace UIEditor
 		private UIManager _uiManager;
 		private UIRenderer _uiRenderer;
 		private UIScreen _uiScreen;
+		private Point? _lastViewPortSize;
 
 		public EditorGame(string[] args)
 		{
@@ -63,18 +65,33 @@ namespace UIEditor
 
 			grid.ShowGridLines = true;
 
-			var textBlock = new TextBlock
+			var stackPanel = new StackPanel
 			{
-				Text = "Test",
-				GridRow = 2,
-				GridColumn = 3,
+				Orientation = Orientation.Vertical
 			};
+
+			for(var i = 0; i < 20; ++i)
+			{
+				stackPanel.Children.Add(new TextBlock { Text = "StackPanelItem" + i });
+			}
+
+			var scrollViewer = new ScrollViewer
+			{
+				Content = stackPanel,
+				VerticalAlignment = VerticalAlignment.Stretch
+			};
+
+			var listBox = new ListBox();
+			for(var i = 0; i < 20; ++i)
+			{
+				listBox.Items.Add("ListBoxItem" + i);
+			}
 
 			var splitPane = new SplitPane
 			{
 				Orientation = Orientation.Horizontal,
 				First = grid,
-				Second = textBlock
+				Second = listBox
 			};
 
 			_uiScreen.Children.Add(splitPane);
@@ -83,6 +100,16 @@ namespace UIEditor
 		protected override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+
+			var viewPortSize = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+			if (_lastViewPortSize == null)
+			{
+				_lastViewPortSize = viewPortSize;
+			} else if (_lastViewPortSize.Value != viewPortSize)
+			{
+				_uiScreen.InvalidateMeasure();
+				_lastViewPortSize = viewPortSize;
+			}
 
 			_inputManager.Update(gameTime.ElapsedGameTime);
 			_uiManager.Update(gameTime.ElapsedGameTime);
