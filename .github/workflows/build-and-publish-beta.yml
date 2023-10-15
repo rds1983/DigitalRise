@@ -24,3 +24,5 @@ jobs:
         dotnet-version: '6.0.x'
     - name: Build DigitalRise.MonoGame
       run: dotnet build DigitalRise.MonoGame.DirectX.sln --configuration Release
+    - name: Test DigitalRise.MonoGame
+      run: dotnet test DigitalRise.MonoGame.DirectX.sln
