@@ -1,4 +1,5 @@
-﻿using DigitalRise.UI.Rendering;
+﻿using DigitalRise.UI.Controls;
+using DigitalRise.UI.Rendering;
 using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -48,7 +49,7 @@ The ButtonSequenceCommand detects whether a certain sequence of buttons is press
       InputService.Commands.Add(_buttonTapCommand);
       InputService.Commands.Add(_buttonSequenceCommand);
 
-      _whiteTexture = UIRenderer.CreateWhiteTexture(GraphicsDevice);
+      _whiteTexture = UIRenderContext.CreateWhiteTexture(GraphicsDevice);
     }
 
 

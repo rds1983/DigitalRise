@@ -26,12 +26,7 @@ namespace Samples.UI
       if (treeViewItem != null && treeViewItem.IsSelected && treeViewItem.Header != null)
       {
         // Draw a blue rectangle behind selected tree view items.
-        context.RenderTransform.Draw(
-          SpriteBatch,
-          WhiteTexture,
-          treeViewItem.Header.ActualBounds,
-          null,
-          Color.CornflowerBlue);
+        context.FillRectangle(treeViewItem.Header.ActualBounds, Color.CornflowerBlue);
       }
 
       // Call the default render callback to draw all the rest.

@@ -70,9 +70,14 @@ namespace UIEditor
 				GridColumn = 3,
 			};
 
-			grid.Children.Add(textBlock);
+			var splitPane = new SplitPane
+			{
+				Orientation = Orientation.Horizontal,
+				First = grid,
+				Second = textBlock
+			};
 
-			_uiScreen.Children.Add(grid);
+			_uiScreen.Children.Add(splitPane);
 		}
 
 		protected override void Update(GameTime gameTime)

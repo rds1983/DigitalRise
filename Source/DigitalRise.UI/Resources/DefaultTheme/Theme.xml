@@ -153,6 +153,25 @@
       </State>
     </Style>
 
+	<Style Name="SplitPaneThumb" Inherits="Thumb">
+		<Width>14</Width>
+		<Height>14</Height>
+		<VerticalAlignment>Stretch</VerticalAlignment>
+		<State Name="Default">
+			<Image Source="206,23,11,20" Border="4,4,4,4" Margin="0,0,-1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+		</State>
+		<State Name="MouseOver">
+			<Image Source="218,23,11,20" Border="4,4,4,4" Margin="0,0,-1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+		</State>
+		<State Name="Selected">
+			<Image Source="230,23,11,20" Border="4,4,4,4" Margin="0,0,-1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+		</State>
+		<State Name="Disabled">
+			<Image Source="206,23,11,20" Border="4,4,4,4" Margin="0,0,-1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+			<Foreground>230,230,230,255</Foreground>
+			<Opacity>0.5</Opacity>
+		</State>
+	</Style>
 
     <Style Name="ScrollBar" Inherits="RangeBase">
     </Style>

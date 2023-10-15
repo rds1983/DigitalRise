@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using DigitalRise.UI.Rendering;
+using DigitalRise.UI.Controls;
 
 namespace Samples.UI
 {
@@ -96,7 +97,7 @@ also be changed.",
       InputService.Commands.Add(_commandMoveHorizontal);
       InputService.Commands.Add(_commandMoveVertical);
 
-      _whiteTexture = UIRenderer.CreateWhiteTexture(GraphicsDevice);
+      _whiteTexture = UIRenderContext.CreateWhiteTexture(GraphicsDevice);
     }
 
 
