@@ -48,7 +48,7 @@ namespace UIEditor
 				SelectionBackground = new SolidBrush(Color.Cyan)
 			};
 
-			grid.GridSelectionMode = GridSelectionMode.Column;
+			grid.GridSelectionMode = GridSelectionMode.Cell;
 
 			grid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 1));
 			grid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 1));

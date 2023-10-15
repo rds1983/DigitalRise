@@ -1,3 +1,4 @@
+using DigitalRise.Input;
 using DigitalRise.Mathematics;
 using DigitalRise.UI.Rendering;
 using Microsoft.Xna.Framework;
@@ -866,43 +867,38 @@ namespace DigitalRise.UI.Controls
 			} else
 			{
 				UpdateHoverPosition(context.MousePosition);
+
+				var inputService = InputService;
+				// Check if button gets pressed down.
+				if (!inputService.IsMouseOrTouchHandled
+						&& inputService.IsPressed(MouseButtons.Left, false))
+				{
+					inputService.IsMouseOrTouchHandled = true;
+					if (HoverRowIndex != null)
+					{
+						if (SelectedRowIndex != HoverRowIndex)
+						{
+							SelectedRowIndex = HoverRowIndex;
+						}
+						else if (CanSelectNothing)
+						{
+							SelectedRowIndex = null;
+						}
+					}
+
+					if (HoverColumnIndex != null)
+					{
+						if (SelectedColumnIndex != HoverColumnIndex)
+						{
+							SelectedColumnIndex = HoverColumnIndex;
+						}
+						else if (CanSelectNothing)
+						{
+							SelectedColumnIndex = null;
+						}
+					}
+				}
 			}
 		}
-
-/*		public override bool OnTouchDown()
-		{
-			base.OnTouchDown();
-
-			if (Desktop == null)
-			{
-				return false;
-			}
-
-			UpdateHoverPosition(Desktop.TouchPosition);
-
-			if (HoverRowIndex != null)
-			{
-				if (SelectedRowIndex != HoverRowIndex)
-				{
-					SelectedRowIndex = HoverRowIndex;
-				} else if (CanSelectNothing)
-				{
-					SelectedRowIndex = null;
-				}
-			}
-
-			if (HoverColumnIndex != null)
-			{
-				if (SelectedColumnIndex != HoverColumnIndex)
-				{
-					SelectedColumnIndex = HoverColumnIndex;
-				} else if (CanSelectNothing)
-				{
-					SelectedColumnIndex = null;
-				}
-			}
-
-			return (SelectedRowIndex != null && SelectedColumnIndex != null);
-		}*/
 	}
 }
