@@ -49,7 +49,7 @@ namespace DigitalRise.UI.Controls
 
     // We reuse the InputContext and RenderContext instances between frames.
     private readonly InputContext _inputContext = new InputContext();
-    private readonly UIRenderContext _renderContext = new UIRenderContext();
+    private readonly UIRenderContext _renderContext;
     #endregion
 
 
@@ -348,6 +348,7 @@ namespace DigitalRise.UI.Controls
 
       Name = name;
       Renderer = renderer;
+      _renderContext = new UIRenderContext(renderer.GraphicsDevice);
 
       Style = "UIScreen";
 
@@ -522,9 +523,9 @@ namespace DigitalRise.UI.Controls
 			Renderer.GraphicsDevice.ScissorRectangle = ActualBounds.ToRectangle(true);
 
       // Start the rendering process.
-      Renderer.BeginBatch();
+      context.BeginBatch();
       Renderer.Render(this, context);
-      Renderer.EndBatch();
+			context.EndBatch();
 
 			Renderer.GraphicsDevice.ScissorRectangle = originalScissorRectangle;
     }

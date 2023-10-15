@@ -43,25 +43,6 @@ namespace DigitalRise.UI.Rendering
     //--------------------------------------------------------------
 
     /// <summary>
-    /// Gets a white 1x1 texture.
-    /// </summary>
-    /// <value>A texture with a single white texel.</value>
-    public Texture2D WhiteTexture
-    {
-      get
-      {
-        if (_whiteTexture == null)
-        {
-          _whiteTexture = CreateWhiteTexture(GraphicsDevice);
-        }
-
-        return _whiteTexture;
-      }
-    }
-    private static Texture2D _whiteTexture;
-
-
-    /// <summary>
     /// Gets the render callbacks.
     /// </summary>
     /// <value>The render callbacks.</value>
@@ -106,15 +87,16 @@ namespace DigitalRise.UI.Rendering
       RenderCallbacks.Add("Console", RenderConsole);
       RenderCallbacks.Add("ContentControl", RenderContentControl);
       RenderCallbacks.Add("TextBox", RenderTextBox);
-    }
-    #endregion
+			RenderCallbacks.Add("Grid", RenderGrid);
+		}
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-    private static void SetState(UIRenderContext context, ThemeState state)
+		private static void SetState(UIRenderContext context, ThemeState state)
     {
       if (state != null)
         context.Data[StateId] = state;
@@ -163,12 +145,14 @@ namespace DigitalRise.UI.Rendering
         context.RenderTransform *= control.RenderTransform;
 
       // Make sure that the sprite batch is active. BeginBatch() safely handles redundant calls.
-      BeginBatch();
+      context.BeginBatch();
 
       // Clear background if necessary.
       Color background = GetBackground(control, state, context.Opacity);
       if (background.A != 0)
-        context.RenderTransform.Draw(SpriteBatch, WhiteTexture, GetActualBoundsRounded(control), null, background);
+      {
+        context.FillRectangle(GetActualBoundsRounded(control), background);
+      }
 
       // The rest is done by the render callback.
       Action<UIControl, UIRenderContext> callback = GetRenderCallback(control, style);
@@ -333,7 +317,7 @@ namespace DigitalRise.UI.Rendering
       // Background images.
       RenderImages(control, context, false);
 
-      EndBatch();
+      context.EndBatch();
 
       // Render Content and clip with scissor rectangle.
       var device = GraphicsDevice;
@@ -341,13 +325,13 @@ namespace DigitalRise.UI.Rendering
       Rectangle scissorRectangle = context.RenderTransform.Transform(contentControl.ContentBounds).ToRectangle(true);
 			device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
 
-      BeginBatch();
+      context.BeginBatch();
       contentControl.Content.Render(context);
-      EndBatch();
+      context.EndBatch();
 
 			device.ScissorRectangle = originalScissorRectangle;
 
-      BeginBatch();
+      context.BeginBatch();
 
       // Visual children except Content.
       foreach (var child in control.VisualChildren)
@@ -381,25 +365,25 @@ namespace DigitalRise.UI.Rendering
         if (textBlock.VisualClip)
         {
           // If clipping is enabled - set scissors rectangle.
-          EndBatch();
+          context.EndBatch();
 
           Rectangle scissorRectangle = context.RenderTransform.Transform(contentBounds).ToRectangle(true);
           device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
 
-          BeginBatch();
+          context.BeginBatch();
         }
 
         // Render text.
         Vector2 position = new Vector2(contentBounds.X, contentBounds.Y);
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
-        context.RenderTransform.DrawRichText(SpriteBatch, textBlock.RichTextLayout, position, foreground);
+        context.DrawRichText(textBlock.RichTextLayout, position, foreground);
 
         if (textBlock.VisualClip)
         {
           // If clipping is enabled - remove scissors rectangle.
-          EndBatch();
+          context.EndBatch();
           device.ScissorRectangle = originalScissorRectangle;
-          BeginBatch();
+          context.BeginBatch();
         }
       }
 
@@ -421,7 +405,7 @@ namespace DigitalRise.UI.Rendering
       if (image != null && image.Texture != null)
       {
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
-        context.RenderTransform.Draw(SpriteBatch, image.Texture, GetContentBoundsRounded(image), image.SourceRectangle, foreground);
+        context.Draw(image.Texture, GetContentBoundsRounded(image), image.SourceRectangle, foreground);
       }
 
       // Visual children.
@@ -451,7 +435,7 @@ namespace DigitalRise.UI.Rendering
           if (image.Name == "Indicator")
             indicatorImage = image;
           else if (!image.IsOverlay)
-            RenderImage(GetActualBoundsRounded(control), image, context.Opacity, context.RenderTransform);
+            RenderImage(GetActualBoundsRounded(control), image, context.Opacity, context);
         }
       }
 
@@ -464,7 +448,7 @@ namespace DigitalRise.UI.Rendering
         // Size of indicator image depends on the slider value.
         indicatorBounds.Width = (int)((slider.Value - slider.Minimum)/ (slider.Maximum - slider.Minimum) * indicatorBounds.Width);
         if (indicatorBounds.Width > 0 && indicatorBounds.Height > 0)
-          RenderImage(indicatorBounds, indicatorImage, context.Opacity, context.RenderTransform);
+          RenderImage(indicatorBounds, indicatorImage, context.Opacity, context);
       }
 
       // Visual children.
@@ -492,7 +476,7 @@ namespace DigitalRise.UI.Rendering
           if (image.Name == "Indicator")
             indicatorImage = image;
           else if (!image.IsOverlay)
-            RenderImage(GetActualBoundsRounded(control), image, context.Opacity, context.RenderTransform);
+            RenderImage(GetActualBoundsRounded(control), image, context.Opacity, context);
         }
       }
 
@@ -517,7 +501,7 @@ namespace DigitalRise.UI.Rendering
         }
 
         if (indicatorBounds.Width > 0 && indicatorBounds.Height > 0)
-          RenderImage(indicatorBounds, indicatorImage, context.Opacity, context.RenderTransform);
+          RenderImage(indicatorBounds, indicatorImage, context.Opacity, context);
       }
 
       foreach (var child in control.VisualChildren)
@@ -549,8 +533,7 @@ namespace DigitalRise.UI.Rendering
         for (int i = 0; i < console.VisualLines.Count; i++)
         {
           if (console.VisualLines[i] != null)
-            context.RenderTransform.DrawString(
-              SpriteBatch,
+            context.DrawString(
               font,
               console.VisualLines[i],
               new Vector2(contentBounds.X, contentBounds.Y + i * font.LineHeight),
@@ -570,8 +553,8 @@ namespace DigitalRise.UI.Rendering
             console.ActualY + padding.Y + console.VisualCaretY * font.LineHeight - 1,
             1,
             font.LineHeight + 2);
-
-          context.RenderTransform.Draw(SpriteBatch, WhiteTexture, caretRectangle, null, foreground);
+          
+          context.FillRectangle(caretRectangle, foreground);
         }
       }
 
@@ -602,10 +585,10 @@ namespace DigitalRise.UI.Rendering
 				RectangleF contentBounds = GetContentBoundsRounded(textBox);
         Rectangle originalScissorRectangle = device.ScissorRectangle;
 
-        EndBatch();
+        context.EndBatch();
         Rectangle scissorRectangle = context.RenderTransform.Transform(textBox.VisualClip).ToRectangle(true);
         device.ScissorRectangle = Rectangle.Intersect(scissorRectangle, originalScissorRectangle);
-        BeginBatch();
+        context.BeginBatch();
 
         bool hasSelection = (textBox.VisualSelectionBounds.Count > 0);
         bool hasFocus = textBox.IsFocused;
@@ -622,7 +605,7 @@ namespace DigitalRise.UI.Rendering
             rectangle.Width = Math.Max(rectangle.Width, 4);
 
             // Draw rectangle using TextBox.SelectionColor.
-            context.RenderTransform.Draw(SpriteBatch, WhiteTexture, rectangle, null, selectionColor);
+            context.FillRectangle(rectangle, selectionColor);
           }
         }
 
@@ -635,7 +618,7 @@ namespace DigitalRise.UI.Rendering
 
         var font = GetFont(textBox.Font);
         Color foreground = GetForeground(control, GetState(context), context.Opacity);
-        context.RenderTransform.DrawString(SpriteBatch, font, textBox.VisualText, position, foreground);
+        context.DrawString(font, textBox.VisualText, position, foreground);
 
         if (!hasSelection
             && hasFocus
@@ -644,12 +627,12 @@ namespace DigitalRise.UI.Rendering
         {
           // Render caret.
           RectangleF caret = new RectangleF(textBox.VisualCaret.X, textBox.VisualCaret.Y, 2, font.LineHeight);
-          context.RenderTransform.Draw(SpriteBatch, WhiteTexture, caret, null, foreground);
+          context.FillRectangle(caret, foreground);
         }
 
-        EndBatch();
+        context.EndBatch();
         device.ScissorRectangle = originalScissorRectangle;
-        BeginBatch();
+        context.BeginBatch();
       }
 
       // Visual children.
@@ -720,7 +703,7 @@ namespace DigitalRise.UI.Rendering
         if (image.IsOverlay != drawOverlays)
           continue;
 
-        RenderImage(bounds, image, context.Opacity, context.RenderTransform);
+        RenderImage(bounds, image, context.Opacity, context);
       }
     }
 
@@ -731,12 +714,12 @@ namespace DigitalRise.UI.Rendering
     /// <param name="bounds">The control's bounding rectangle.</param>
     /// <param name="image">The image.</param>
     /// <param name="opacity">The opacity.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context"></param>
     /// <remarks>
     /// This method uses the <paramref name="image"/> properties (alignment, margin, etc.) and the 
     /// render transformation to render the image into the target (<paramref name="bounds"/>).
     /// </remarks>
-    public void RenderImage(RectangleF bounds, ThemeImage image, float opacity, RenderTransform transform)
+    public void RenderImage(RectangleF bounds, ThemeImage image, float opacity, UIRenderContext context)
     {
       if (image == null)
         return;
@@ -761,12 +744,12 @@ namespace DigitalRise.UI.Rendering
       if (image.HorizontalAlignment == HorizontalAlignment.Stretch || image.VerticalAlignment == VerticalAlignment.Stretch)
       {
         // Draw stretched image using a 9-grid layout.
-        RenderStretchedImage(texture, image, bounds, transform, color);
+        RenderStretchedImage(texture, image, bounds, context, color);
       }
       else
       {
         // Draw a non-stretched image.
-        RenderImage(texture, bounds, source, image.HorizontalAlignment, image.VerticalAlignment, image.TileMode, transform, color);
+        RenderImage(texture, bounds, source, image.HorizontalAlignment, image.VerticalAlignment, image.TileMode, context, color);
       }
     }
 
@@ -777,9 +760,9 @@ namespace DigitalRise.UI.Rendering
     /// <param name="texture">The UI texture.</param>
     /// <param name="image">The image.</param>
     /// <param name="area">The area to fill.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context"></param>
     /// <param name="color">The tint color.</param>
-    private void RenderStretchedImage(Texture2D texture, ThemeImage image, RectangleF area, RenderTransform transform, Color color)
+    private void RenderStretchedImage(Texture2D texture, ThemeImage image, RectangleF area, UIRenderContext context, Color color)
     {
       Rectangle source = image.SourceRectangle;
       int left = (int)image.Border.X;
@@ -840,47 +823,47 @@ namespace DigitalRise.UI.Rendering
       // Cell #1 (no stretching)
       destinationPosition = new Vector2(area.X, area.Y);
       sourceRectangle = new Rectangle(source.X, source.Y, left, top);
-      transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
+      context.Draw(texture, destinationPosition, sourceRectangle, color);
 
       // Cell #2 (horizontal stretching)
       destinationRectangle = new RectangleF(area.X + left, area.Y, area.Width - left - right, top);
       sourceRectangle = new Rectangle(source.X + left, source.Y, source.Width - left - right, top);
-      transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
+      context.Draw(texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #3 (no stretching)
       destinationPosition = new Vector2(area.X + area.Width - right, area.Y);
       sourceRectangle = new Rectangle(source.X + source.Width - right, source.Y, right, top);
-      transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
+			context.Draw(texture, destinationPosition, sourceRectangle, color);
 
       // Cell #4 (vertical stretching)
       destinationRectangle = new RectangleF(area.X, area.Y + top, left, area.Height - top - bottom);
       sourceRectangle = new Rectangle(source.X, source.Y + top, left, source.Height - top - bottom);
-      transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
+			context.Draw(texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #5 (horizontal and vertical stretching)
       destinationRectangle = new RectangleF(area.X + left, area.Y + top, area.Width - left - right, area.Height - top - bottom);
       sourceRectangle = new Rectangle(source.X + left, source.Y + top, source.Width - left - right, source.Height - top - bottom);
-      transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
+			context.Draw(texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #6 (vertical stretching)
       destinationRectangle = new RectangleF(area.X + area.Width - right, area.Y + top, right, area.Height - top - bottom);
       sourceRectangle = new Rectangle(source.X + source.Width - right, source.Y + top, right, source.Height - top - bottom);
-      transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
+			context.Draw(texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #7 (no stretching)
       destinationPosition = new Vector2(area.X, area.Y + area.Height - bottom);
       sourceRectangle = new Rectangle(source.X, source.Y + source.Height - bottom, left, bottom);
-      transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
+			context.Draw(texture, destinationPosition, sourceRectangle, color);
 
       // Cell #8 (horizontal stretching)
       destinationRectangle = new RectangleF(area.X + left, area.Y + area.Height - bottom, area.Width - left - right, bottom);
       sourceRectangle = new Rectangle(source.X + left, source.Y + source.Height - bottom, source.Width - left - right, bottom);
-      transform.Draw(SpriteBatch, texture, destinationRectangle, sourceRectangle, color);
+			context.Draw(texture, destinationRectangle, sourceRectangle, color);
 
       // Cell #9 (no stretching)
       destinationPosition = new Vector2(area.X + area.Width - right, area.Y + area.Height - bottom);
       sourceRectangle = new Rectangle(source.X + source.Width - right, source.Y + source.Height - bottom, right, bottom);
-      transform.Draw(SpriteBatch, texture, destinationPosition, sourceRectangle, color);
+			context.Draw(texture, destinationPosition, sourceRectangle, color);
     }
 
 
@@ -893,9 +876,9 @@ namespace DigitalRise.UI.Rendering
     /// <param name="horizontalAlignment">The horizontal alignment.</param>
     /// <param name="verticalAlignment">The vertical alignment.</param>
     /// <param name="tileMode">The tile mode.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context">The render transform.</param>
     /// <param name="color">The tint color.</param>
-    private void RenderImage(Texture2D texture, RectangleF area, Rectangle source, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment, TileMode tileMode, RenderTransform transform, Color color)
+    private void RenderImage(Texture2D texture, RectangleF area, Rectangle source, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment, TileMode tileMode, UIRenderContext context, Color color)
     {
       bool tileHorizontally = (tileMode == TileMode.TileX || tileMode == TileMode.TileXY);
       bool tileVertically = (tileMode == TileMode.TileY || tileMode == TileMode.TileXY);
@@ -973,21 +956,21 @@ namespace DigitalRise.UI.Rendering
         case TileMode.None:
           ClipX(area, ref destination, ref source);
           ClipY(area, ref destination, ref source);
-          transform.Draw(SpriteBatch, texture, destination, source, color);
+          context.Draw(texture, destination, source, color);
           break;
 
         case TileMode.TileX:
           ClipY(area, ref destination, ref source);
-          RenderTileX(texture, area, destination, source, transform, color);
+          RenderTileX(texture, area, destination, source, context, color);
           break;
         
         case TileMode.TileY:
           ClipX(area, ref destination, ref source);
-          RenderTileY(texture, area, destination, source, transform, color);
+          RenderTileY(texture, area, destination, source, context, color);
           break;
         
         case TileMode.TileXY:
-          RenderTileXY(texture, area, destination, source, transform, color);
+          RenderTileXY(texture, area, destination, source, context, color);
           break;
       }      
     }
@@ -1000,15 +983,15 @@ namespace DigitalRise.UI.Rendering
     /// <param name="area">The area to fill.</param>
     /// <param name="destination">The destination rectangle of the left, top tile.</param>
     /// <param name="source">The source rectangle of the image in the UI texture.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context">The render transform.</param>
     /// <param name="color">The tint color.</param>
-    private void RenderTileX(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, RenderTransform transform, Color color)
+    private void RenderTileX(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, UIRenderContext context, Color color)
     {
       // Clip and draw first tile.
       RectangleF clippedDestination = destination;
       Rectangle clippedSource = source;
       bool rightEdgeClipped = ClipX(area, ref clippedDestination, ref clippedSource);
-      transform.Draw(SpriteBatch, texture, clippedDestination, clippedSource, color);
+      context.Draw(texture, clippedDestination, clippedSource, color);
 
       if (rightEdgeClipped)
       {
@@ -1021,7 +1004,7 @@ namespace DigitalRise.UI.Rendering
       float areaRight = area.Right;
       while (destination.Right < areaRight)
       {
-        transform.Draw(SpriteBatch, texture, destination, source, color);
+        context.Draw(texture, destination, source, color);
         destination.X += destination.Width;
       }
 
@@ -1029,7 +1012,7 @@ namespace DigitalRise.UI.Rendering
       clippedDestination = destination;
       clippedSource = source;
       ClipX(area, ref clippedDestination, ref clippedSource);
-      transform.Draw(SpriteBatch, texture, clippedDestination, clippedSource, color);
+      context.Draw(texture, clippedDestination, clippedSource, color);
     }
 
 
@@ -1040,15 +1023,15 @@ namespace DigitalRise.UI.Rendering
     /// <param name="area">The area to fill.</param>
     /// <param name="destination">The destination rectangle of the left, top tile.</param>
     /// <param name="source">The source rectangle of the image in the UI texture.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context">The render transform.</param>
     /// <param name="color">The tint color.</param>
-    private void RenderTileY(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, RenderTransform transform, Color color)
+    private void RenderTileY(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, UIRenderContext context, Color color)
     {
       // Clip and draw first tile.
       RectangleF clippedDestination = destination;
       Rectangle clippedSource = source;
       bool bottomEdgeClipped = ClipY(area, ref clippedDestination, ref clippedSource);
-      transform.Draw(SpriteBatch, texture, clippedDestination, clippedSource, color);
+      context.Draw(texture, clippedDestination, clippedSource, color);
 
       if (bottomEdgeClipped)
         return;
@@ -1058,7 +1041,7 @@ namespace DigitalRise.UI.Rendering
       float areaBottom = area.Bottom;
       while (destination.Bottom < areaBottom)
       {
-        transform.Draw(SpriteBatch, texture, destination, source, color);
+        context.Draw(texture, destination, source, color);
         destination.Y += destination.Height;
       }
 
@@ -1066,7 +1049,7 @@ namespace DigitalRise.UI.Rendering
       clippedDestination = destination;
       clippedSource = source;
       ClipY(area, ref clippedDestination, ref clippedSource);
-      transform.Draw(SpriteBatch, texture, clippedDestination, clippedSource, color);
+      context.Draw(texture, clippedDestination, clippedSource, color);
     }
 
 
@@ -1077,15 +1060,15 @@ namespace DigitalRise.UI.Rendering
     /// <param name="area">The area to fill.</param>
     /// <param name="destination">The destination rectangle of the left, top tile.</param>
     /// <param name="source">The source rectangle of the image in the UI texture.</param>
-    /// <param name="transform">The render transform.</param>
+    /// <param name="context">The render transform.</param>
     /// <param name="color">The tint color.</param>
-    private void RenderTileXY(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, RenderTransform transform, Color color)
+    private void RenderTileXY(Texture2D texture, RectangleF area, RectangleF destination, Rectangle source, UIRenderContext context, Color color)
     {
       // Clip and draw first row.
       RectangleF clippedDestination = destination;
       Rectangle clippedSource = source;
       bool bottomEdgeClipped = ClipY(area, ref clippedDestination, ref clippedSource);
-      RenderTileX(texture, area, clippedDestination, clippedSource, transform, color);
+      RenderTileX(texture, area, clippedDestination, clippedSource, context, color);
 
       if (bottomEdgeClipped)
         return;
@@ -1095,7 +1078,7 @@ namespace DigitalRise.UI.Rendering
       float areaBottom = area.Bottom;
       while (destination.Bottom < areaBottom)
       {
-        RenderTileX(texture, area, destination, source, transform, color);
+        RenderTileX(texture, area, destination, source, context, color);
         destination.Y += destination.Height;
       }
 
@@ -1103,7 +1086,7 @@ namespace DigitalRise.UI.Rendering
       clippedDestination = destination;
       clippedSource = source;
       ClipY(area, ref clippedDestination, ref clippedSource);
-      RenderTileX(texture, area, clippedDestination, clippedSource, transform, color);
+      RenderTileX(texture, area, clippedDestination, clippedSource, context, color);
     }
 
 
@@ -1186,18 +1169,6 @@ namespace DigitalRise.UI.Rendering
       }
 
       return false;
-    }
-
-    /// <summary>
-    /// Create a white 1x1 texture.
-    /// </summary>
-    /// <value>A texture with a single white texel.</value>
-    public static Texture2D CreateWhiteTexture(GraphicsDevice graphicsDevice)
-    {
-      var _whiteTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
-      _whiteTexture.SetData(new[] { Color.White });
-
-      return _whiteTexture;
     }
 
 		#endregion

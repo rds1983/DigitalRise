@@ -1127,11 +1127,66 @@ namespace DigitalRise.UI.Controls
       set { SetValue(MaxHeightPropertyId, value); }
     }
 
+		/// <summary> 
+		/// The ID of the <see cref="GridColumn"/> game object property.
+		/// </summary>
+		[Browsable(false)]
+		public static readonly int GridColumnPropertyId = CreateProperty(
+			typeof(UIControl), "GridColumn", GamePropertyCategories.Layout, null, 0,
+			UIPropertyOptions.AffectsMeasure);
 
-    /// <summary> 
-    /// The ID of the <see cref="Padding"/> game object property.
-    /// </summary>
-    [Browsable(false)]
+		public int GridColumn
+		{
+			get { return GetValue<int>(GridColumnPropertyId); }
+			set { SetValue(GridColumnPropertyId, value); }
+		}
+
+		/// <summary> 
+		/// The ID of the <see cref="GridRow"/> game object property.
+		/// </summary>
+		[Browsable(false)]
+		public static readonly int GridRowSpanPropertyId = CreateProperty(
+			typeof(UIControl), "GridRowSpan", GamePropertyCategories.Layout, null, 1,
+			UIPropertyOptions.AffectsMeasure);
+
+		public int GridRowSpan
+		{
+			get { return GetValue<int>(GridRowSpanPropertyId); }
+			set { SetValue(GridRowSpanPropertyId, value); }
+		}
+
+		/// <summary> 
+		/// The ID of the <see cref="GridColumnSpan"/> game object property.
+		/// </summary>
+		[Browsable(false)]
+		public static readonly int GridColumnSpanPropertyId = CreateProperty(
+			typeof(UIControl), "GridColumnSpan", GamePropertyCategories.Layout, null, 1,
+			UIPropertyOptions.AffectsMeasure);
+
+		public int GridColumnSpan
+		{
+			get { return GetValue<int>(GridColumnSpanPropertyId); }
+			set { SetValue(GridColumnSpanPropertyId, value); }
+		}
+
+		/// <summary> 
+		/// The ID of the <see cref="GridRowSpan"/> game object property.
+		/// </summary>
+		[Browsable(false)]
+		public static readonly int GridRowPropertyId = CreateProperty(
+			typeof(UIControl), "GridRow", GamePropertyCategories.Layout, null, 0,
+			UIPropertyOptions.AffectsMeasure);
+
+		public int GridRow
+		{
+			get { return GetValue<int>(GridRowPropertyId); }
+			set { SetValue(GridRowPropertyId, value); }
+		}
+
+		/// <summary> 
+		/// The ID of the <see cref="Padding"/> game object property.
+		/// </summary>
+		[Browsable(false)]
     public static readonly int PaddingPropertyId = CreateProperty(
       typeof(UIControl), "Padding", GamePropertyCategories.Layout, null, Vector4.Zero,
       UIPropertyOptions.AffectsMeasure);
