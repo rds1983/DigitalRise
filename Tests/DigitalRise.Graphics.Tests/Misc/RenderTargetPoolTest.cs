@@ -8,13 +8,32 @@ namespace DigitalRise.Graphics.Tests
   [TestFixture]
   public class RenderTargetPoolTest
   {
+    private GraphicsDevice _graphicsDevice;
     private IGraphicsService _graphicsService;
 
     [SetUp]
     public void SetUp()
     {
-      _graphicsService = new GraphicsManager(TestsEnvironment.GraphicsDevice);
+      var parameters = new PresentationParameters
+      {
+        BackBufferWidth = 1280,
+        BackBufferHeight = 720,
+        BackBufferFormat = SurfaceFormat.Color,
+        DepthStencilFormat = DepthFormat.Depth24Stencil8,
+        PresentationInterval = PresentInterval.Immediate,
+        IsFullScreen = false
+      };
+
+      _graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, parameters);
+      _graphicsService = new GraphicsManager(_graphicsDevice);
     }
+
+    [TearDown]
+    public void TearDown()
+    {
+      _graphicsDevice.Dispose();
+    }
+
 
     [Test]
     public void Properties()
