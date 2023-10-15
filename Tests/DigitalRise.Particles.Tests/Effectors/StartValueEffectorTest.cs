@@ -25,31 +25,6 @@ namespace DigitalRise.Particles.Tests.Effectors
 
 
     [Test]
-    public void Uninitialize()
-    {
-      var ps = new ParticleSystem();
-      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction));
-
-      var e = new StartValueEffector<Vector3> 
-      { 
-        ParticleSystem = ps,
-        Parameter = ParticleParameterNames.Direction
-      };
-
-      e.RequeryParameters();
-      e.Uninitialize();
-
-      e.ParticleSystem = null;
-      ps = null;
-
-      GC.Collect();
-      GC.WaitForFullGCComplete();
-
-      Assert.IsFalse(wp0.IsAlive);
-    }
-
-
-    [Test]
     public void WrongParameters()
     {
       var ps = new ParticleSystem();

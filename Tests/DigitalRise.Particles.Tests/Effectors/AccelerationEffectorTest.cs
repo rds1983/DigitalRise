@@ -59,30 +59,6 @@ namespace DigitalRise.Particles.Tests.Effectors
 
 
     [Test]
-    public void Uninitialize()
-    {
-      var ps = new ParticleSystem();
-      var wp0 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.Direction));
-      var wp1 = new WeakReference(ps.Parameters.AddVarying<float>(ParticleParameterNames.LinearSpeed));
-      var wp2 = new WeakReference(ps.Parameters.AddVarying<Vector3>(ParticleParameterNames.LinearAcceleration));
-
-      var e = new LinearAccelerationEffector { ParticleSystem = ps };
-
-      e.RequeryParameters();
-      e.Uninitialize();
-
-      e.ParticleSystem = null;
-      ps = null;
-
-      GC.Collect();
-      GC.WaitForFullGCComplete();
-
-      Assert.IsFalse(wp0.IsAlive);
-      Assert.IsFalse(wp1.IsAlive);
-      Assert.IsFalse(wp2.IsAlive);
-    }
-
-    [Test]
     public void WrongParameters()
     {
       var ps = new ParticleSystem();

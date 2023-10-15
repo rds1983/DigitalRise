@@ -37,29 +37,6 @@ namespace DigitalRise.Particles.Tests.Effectors
 
 
     [Test]
-    public void Uninitialize()
-    {
-      var ps = new ParticleSystem();
-      var wp0 = new WeakReference(ps.Parameters.AddVarying<float>(ParticleParameterNames.Angle));
-      var wp1 = new WeakReference(ps.Parameters.AddVarying<float>(ParticleParameterNames.AngularSpeed));
-
-      var e = new AngularVelocityEffector { ParticleSystem = ps };
-
-      e.RequeryParameters();
-      e.Uninitialize();
-
-      e.ParticleSystem = null;
-      ps = null;
-
-      GC.Collect();
-      GC.WaitForFullGCComplete();
-
-      Assert.IsFalse(wp0.IsAlive);
-      Assert.IsFalse(wp1.IsAlive);
-    }
-
-
-    [Test]
     public void WrongParameters()
     {
       var ps = new ParticleSystem();

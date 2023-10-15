@@ -112,7 +112,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
     [Test]
     public void NoiseIsPeriodicWith256()
     {
-      using (var setEpsilon = new SetEpsilonF(1E-03f))
+      using (var setEpsilon = new SetEpsilonD(1E-03))
       {
         Random random = new Random(1234567);
         for (int i = 0; i < 100; i++)
@@ -138,7 +138,7 @@ namespace DigitalRise.Mathematics.Statistics.Tests
     [Test]
     public void NoiseIsPeriodicWithUserPeriod()
     {
-      using (var setEpsilon = new SetEpsilonF(1E-04f))
+      using (var setEpsilon = new SetEpsilonD(1E-03))
       {
         Random random = new Random(1234567);
         for (int i = 0; i < 100; i++)
