@@ -14,16 +14,6 @@ namespace DigitalRise.Graphics.Tests
     [SetUp]
     public void SetUp()
     {
-      var parameters = new PresentationParameters
-      {
-        BackBufferWidth = 1280,
-        BackBufferHeight = 720,
-        BackBufferFormat = SurfaceFormat.Color,
-        DepthStencilFormat = DepthFormat.Depth24Stencil8,
-        PresentationInterval = PresentInterval.Immediate,
-        IsFullScreen = false
-      };
-
       _graphicsService0 = new GraphicsManager(TestsEnvironment.GraphicsDevice);
       _graphicsService1 = new GraphicsManager(TestsEnvironment.GraphicsDevice);
     }

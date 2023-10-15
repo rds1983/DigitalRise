@@ -13,9 +13,6 @@ namespace DigitalRise.Graphics.Tests
 			{
 				PreferredBackBufferWidth = 1200,
 				PreferredBackBufferHeight = 800,
-				PreferredBackBufferFormat = SurfaceFormat.Color,
-				PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8,
-				IsFullScreen = false
 			};
 
 			((IGraphicsDeviceManager)Services.GetService(typeof(IGraphicsDeviceManager))).CreateDevice();
