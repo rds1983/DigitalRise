@@ -4,12 +4,12 @@
 
 namespace DigitalRise.UI.Rendering
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.UI.Rendering"/> namespace provides types for rendering the
-  /// graphical user interface.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.UI.Rendering"/> namespace provides types for rendering the
+	/// graphical user interface.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

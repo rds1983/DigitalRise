@@ -1,6 +1,6 @@
 namespace DigitalRise.UI.Controls
 {
-	partial class FileDialog: Window
+	partial class FileDialog : Window
 	{
 		private void BuildUI()
 		{
@@ -111,7 +111,7 @@ namespace DigitalRise.UI.Controls
 			Content = verticalStackPanel1;
 		}
 
-		
+
 		public Button _buttonBack;
 		public Button _buttonForward;
 		public TextBox _textFieldPath;

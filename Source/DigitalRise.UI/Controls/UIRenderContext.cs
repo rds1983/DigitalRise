@@ -18,8 +18,8 @@ namespace DigitalRise.UI.Controls
 	/// <summary>
 	/// Provides information during rendering of UI controls.
 	/// </summary>
-  public class UIRenderContext: IDisposable
-  {
+	public class UIRenderContext : IDisposable
+	{
 		// Copy from CullNone but with activate scissors test.
 		private static readonly RasterizerState CullNoneWithScissors = new RasterizerState
 		{
@@ -53,21 +53,21 @@ namespace DigitalRise.UI.Controls
 		public TimeSpan DeltaTime { get; set; }
 
 
-    /// <summary>
-    /// Gets or sets the absolute opacity.
-    /// </summary>
-    /// <value>The absolute opacity. The default value is 1.0f.</value>
-    public float Opacity { get; set; }
+		/// <summary>
+		/// Gets or sets the absolute opacity.
+		/// </summary>
+		/// <value>The absolute opacity. The default value is 1.0f.</value>
+		public float Opacity { get; set; }
 
 
-    /// <summary>
-    /// Gets or sets the absolute render transformation.
-    /// </summary>
-    /// <value>
-    /// The absolute render transformation. The default value is 
-    /// <see cref="Rendering.RenderTransform.Identity"/>.
-    /// </value>
-    public RenderTransform RenderTransform { get; set; }
+		/// <summary>
+		/// Gets or sets the absolute render transformation.
+		/// </summary>
+		/// <value>
+		/// The absolute render transformation. The default value is 
+		/// <see cref="Rendering.RenderTransform.Identity"/>.
+		/// </value>
+		public RenderTransform RenderTransform { get; set; }
 
 		/// <summary>
 		/// Gets the sprite batch that is used to draw all images for the UI controls.
@@ -111,12 +111,12 @@ namespace DigitalRise.UI.Controls
 		/// Initializes a new instance of the <see cref="UIRenderContext"/> class.
 		/// </summary>
 		public UIRenderContext(GraphicsDevice graphicsDevice)
-    {
-      Opacity = 1.0f;
-      RenderTransform = RenderTransform.Identity;
-      Data = new Dictionary<string, object>();
+		{
+			Opacity = 1.0f;
+			RenderTransform = RenderTransform.Identity;
+			Data = new Dictionary<string, object>();
 			SpriteBatch = new SpriteBatch(graphicsDevice);
-    }
+		}
 
 		/// <summary>
 		/// Releases all resources used by an instance of the <see cref="UIRenderer"/> class.
@@ -155,13 +155,13 @@ namespace DigitalRise.UI.Controls
 			}
 		}
 
-    /// <summary>
-    /// Calls the <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin"/> method of the
-    /// <see cref="SpriteBatch"/> with default settings.
-    /// </summary>
-    /// <remarks>
-    /// This method remembers if it was already called. Redundant calls of this method are safe.
-    /// </remarks>
+		/// <summary>
+		/// Calls the <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin"/> method of the
+		/// <see cref="SpriteBatch"/> with default settings.
+		/// </summary>
+		/// <remarks>
+		/// This method remembers if it was already called. Redundant calls of this method are safe.
+		/// </remarks>
 		public void BeginBatch()
 		{
 			if (!_batchIsActive)
@@ -470,7 +470,5 @@ namespace DigitalRise.UI.Controls
 
 			return result;
 		}
-
-
 	}
 }

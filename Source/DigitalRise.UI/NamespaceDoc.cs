@@ -4,12 +4,12 @@
 
 namespace DigitalRise.UI
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.UI"/> namespace provides general types to manage a graphical
-  /// user interface (GUI).
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.UI"/> namespace provides general types to manage a graphical
+	/// user interface (GUI).
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

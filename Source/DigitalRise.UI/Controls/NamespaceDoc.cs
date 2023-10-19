@@ -4,12 +4,12 @@
 
 namespace DigitalRise.UI.Controls
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.UI.Controls"/> namespace provides graphical user interface
-  /// controls.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.UI.Controls"/> namespace provides graphical user interface
+	/// controls.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

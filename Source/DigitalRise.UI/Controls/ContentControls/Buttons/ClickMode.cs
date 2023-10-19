@@ -5,23 +5,23 @@
 
 namespace DigitalRise.UI.Controls
 {
-  /// <summary>
-  /// Specifies when the <see cref="ButtonBase.Click"/> event should be raised for a control. 
-  /// </summary>
-  public enum ClickMode
-  {
-    /// <summary>
-    /// Specifies that the <see cref="ButtonBase.Click"/> event should be raised when the button is
-    /// pressed and released.
-    /// </summary>
-    Release,
+	/// <summary>
+	/// Specifies when the <see cref="ButtonBase.Click"/> event should be raised for a control. 
+	/// </summary>
+	public enum ClickMode
+	{
+		/// <summary>
+		/// Specifies that the <see cref="ButtonBase.Click"/> event should be raised when the button is
+		/// pressed and released.
+		/// </summary>
+		Release,
 
-    /// <summary>
-    /// Specifies that the <see cref="ButtonBase.Click"/> event should be raised when the button is
-    /// pressed.
-    /// </summary>
-    Press,
+		/// <summary>
+		/// Specifies that the <see cref="ButtonBase.Click"/> event should be raised when the button is
+		/// pressed.
+		/// </summary>
+		Press,
 
-    //Hover,
-  }
+		//Hover,
+	}
 }

@@ -533,7 +533,7 @@ namespace DigitalRise.UI.Controls
 							colProportion.Type != ProportionType.Pixels)
 						{
 							UIControl.Measure(availableSize);
-							measuredSize = new Vector2 (UIControl.DesiredWidth, UIControl.DesiredHeight);
+							measuredSize = new Vector2(UIControl.DesiredWidth, UIControl.DesiredHeight);
 						}
 
 						if (UIControl.GridColumnSpan != 1)
@@ -866,7 +866,8 @@ namespace DigitalRise.UI.Controls
 			if (!IsMouseOver)
 			{
 				UpdateHoverPosition(null);
-			} else
+			}
+			else
 			{
 				UpdateHoverPosition(context.MousePosition);
 

@@ -91,7 +91,7 @@ namespace DigitalRise.UI.Controls
 
 				if (!string.IsNullOrEmpty(FileName))
 				{
-					for(var i = 0; i < _listBoxFiles.Items.Count; i++)
+					for (var i = 0; i < _listBoxFiles.Items.Count; i++)
 					{
 						var listItem = (ListItem)_listBoxFiles.Items[i];
 						if (listItem.Path == FileName)
@@ -174,7 +174,7 @@ namespace DigitalRise.UI.Controls
 			}
 
 			var drives = DriveInfo.GetDrives();
-//			var iconDrive = DefaultAssets.UITextureRegionAtlas["icon-drive"];
+			//			var iconDrive = DefaultAssets.UITextureRegionAtlas["icon-drive"];
 			foreach (var d in drives)
 			{
 				if (d.DriveType == DriveType.Ram || d.DriveType == DriveType.Unknown)
@@ -204,7 +204,7 @@ namespace DigitalRise.UI.Controls
 
 			_buttonParent.Click += OnButtonParent;
 
-//			_textFieldFileName.TextChanged += (s, a) => UpdateEnabled();
+			//			_textFieldFileName.TextChanged += (s, a) => UpdateEnabled();
 
 			_buttonBack.Click += OnButtonBack;
 			_buttonForward.Click += OnButtonForward;
@@ -452,58 +452,58 @@ namespace DigitalRise.UI.Controls
 			}
 		}
 
-/*		protected internal override bool CanCloseByOk()
-		{
-			if (_mode != FileDialogMode.SaveFile)
-			{
-				return true;
-			}
-
-			var fileName = FileName;
-
-			if (AutoAddFilterExtension && !string.IsNullOrEmpty(Filter))
-			{
-				var idx = Filter.LastIndexOf('.');
-				if (idx != -1)
+		/*		protected internal override bool CanCloseByOk()
 				{
-					var ext = Filter.Substring(idx);
-
-					if (!fileName.EndsWith(ext))
+					if (_mode != FileDialogMode.SaveFile)
 					{
-						fileName += ext;
-					}
-				}
-			}
-
-			if (System.IO.File.Exists(Path.Combine(Folder, fileName)))
-			{
-				var dlg = CreateMessageBox("Confirm Replace",
-					string.Format("File named '{0}' already exists. Do you want to replace it?", fileName));
-
-				dlg.Closed += (s, a) =>
-				{
-					if (!dlg.Result)
-					{
-						return;
+						return true;
 					}
 
-					FileName = fileName;
+					var fileName = FileName;
 
-					Result = true;
-					Close();
-				};
+					if (AutoAddFilterExtension && !string.IsNullOrEmpty(Filter))
+					{
+						var idx = Filter.LastIndexOf('.');
+						if (idx != -1)
+						{
+							var ext = Filter.Substring(idx);
 
-				dlg.ShowModal(Desktop);
-			}
-			else
-			{
-				FileName = fileName;
+							if (!fileName.EndsWith(ext))
+							{
+								fileName += ext;
+							}
+						}
+					}
 
-				Result = true;
-				Close();
-			}
+					if (System.IO.File.Exists(Path.Combine(Folder, fileName)))
+					{
+						var dlg = CreateMessageBox("Confirm Replace",
+							string.Format("File named '{0}' already exists. Do you want to replace it?", fileName));
 
-			return false;
-		}*/
+						dlg.Closed += (s, a) =>
+						{
+							if (!dlg.Result)
+							{
+								return;
+							}
+
+							FileName = fileName;
+
+							Result = true;
+							Close();
+						};
+
+						dlg.ShowModal(Desktop);
+					}
+					else
+					{
+						FileName = fileName;
+
+						Result = true;
+						Close();
+					}
+
+					return false;
+				}*/
 	}
 }
