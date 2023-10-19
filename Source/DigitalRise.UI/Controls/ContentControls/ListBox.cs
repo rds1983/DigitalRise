@@ -124,7 +124,7 @@ namespace DigitalRise.UI.Controls
 				return CreateControlForItem(item);
 			}
 
-			var control = new ListBoxItem
+			var control = new ListBoxItem(this)
 			{
 				Content = new TextBlock
 				{
@@ -133,23 +133,18 @@ namespace DigitalRise.UI.Controls
 				}
 			};
 
-			control.Click += OnListBoxItemClick;
-
 			return control;
 		}
 
 
-		private void OnListBoxItemClick(object sender, EventArgs eventArgs)
+		internal void SetSelectedItem(ListBoxItem listBoxItem)
 		{
-			// Set SelectedIndex of DropDownButton to the index of the clicked item and close the
-			// DropDown.
-			var listBoxItem = (ListBoxItem)sender;
 			int index = _itemsPanel.Children.IndexOf(listBoxItem);
 			SelectedIndex = index;
 
 			Debug.WriteLine(SelectedIndex);
 		}
-		#endregion
 
+		#endregion
 	}
 }

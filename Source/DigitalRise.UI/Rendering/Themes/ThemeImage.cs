@@ -24,16 +24,6 @@ namespace DigitalRise.UI.Rendering
 
 
     /// <summary>
-    /// Gets or sets the texture atlas containing the image.
-    /// </summary>
-    /// <value>
-    /// The texture atlas containing the image. (Can be <see langword="null"/> to use the default 
-    /// texture atlas.)
-    /// </value>
-    public ThemeTexture Texture { get; set; }
-
-
-    /// <summary>
     /// Gets or sets the source rectangle of the image in the texture atlas of the theme.
     /// </summary>
     /// <value>The source rectangle.</value>

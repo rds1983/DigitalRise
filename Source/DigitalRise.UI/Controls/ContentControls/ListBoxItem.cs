@@ -3,6 +3,8 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 
+using System;
+
 namespace DigitalRise.UI.Controls
 {
 	/// <summary>
@@ -43,14 +45,24 @@ namespace DigitalRise.UI.Controls
 	/// </example>
 	public class ListBoxItem : ButtonBase
 	{
-		// This ListBoxItem is like a ButtonBase - but with a different style.
+		private readonly ListBox _listBox;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ListBoxItem"/> class.
 		/// </summary>
-		public ListBoxItem()
+		public ListBoxItem(ListBox listBox)
 		{
 			Style = "ListBoxItem";
+			_listBox = listBox ?? throw new ArgumentNullException(nameof(listBox));
+			Properties.Get<bool>(IsFocusedPropertyId).Changed += OnFocusChanged;
+		}
+
+		private void OnFocusChanged(object sender, GameBase.GamePropertyEventArgs<bool> e)
+		{
+			if (IsFocused)
+			{
+				_listBox.SetSelectedItem(this);
+			}
 		}
 	}
 }

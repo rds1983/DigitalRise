@@ -20,6 +20,19 @@ namespace AssetManagementBase
 {
 	public static partial class DRGameGuiXNAssetsExt
 	{
+		private const string TextureAtlasName = "TextureAtlas";
+		private const string ImageName = "Image";
+		private const string TextureRegionName = "TextureRegion";
+		private const string NinePatchRegionName = "NinePatchRegion";
+		private const string LeftName = "Left";
+		private const string TopName = "Top";
+		private const string WidthName = "Width";
+		private const string HeightName = "Height";
+		private const string NinePatchLeftName = "NinePatchLeft";
+		private const string NinePatchTopName = "NinePatchTop";
+		private const string NinePatchRightName = "NinePatchRight";
+		private const string NinePatchBottomName = "NinePatchBottom";
+
 #if !MONOGAME
 		private static readonly Dictionary<SDL_SystemCursor, IntPtr> _systemCursors = new Dictionary<SDL_SystemCursor, IntPtr>();
 
@@ -37,6 +50,27 @@ namespace AssetManagementBase
 			return result;
 		}
 #endif
+
+		struct Padding
+		{
+			public int Left, Top, Right, Bottom;
+		}
+
+		class TextureRegion
+		{
+			public Rectangle Rectangle;
+		}
+
+		class NinePatchRegion: TextureRegion
+		{
+			public Padding Padding;
+		}
+
+		class TextureAtlas
+		{
+			public Texture2D Texture;
+			public readonly Dictionary<string, TextureRegion> TextureRegions = new Dictionary<string, TextureRegion>();
+		}
 
 		private static string GetExceptionMessage(XElement element, string format, params object[] args)
 		{
@@ -163,6 +197,64 @@ namespace AssetManagementBase
 #endif
 		}
 
+		private static TextureAtlas LoadTextureAtlas(GraphicsDevice device, string name, AssetManager manager)
+		{
+			var doc = XDocument.Parse(manager.LoadString(name));
+
+			var root = doc.Root;
+
+			var result = new TextureAtlas();
+			var imageFileAttr = root.Attribute(ImageName);
+			if (imageFileAttr == null)
+			{
+				throw new Exception("Mandatory attribute 'ImageFile' doesnt exist");
+			}
+
+			result.Texture = manager.LoadTexture2D(device, imageFileAttr.Value);
+			foreach (XElement entry in root.Elements())
+			{
+				var id = entry.Attribute("Id").Value;
+
+				var bounds = new Rectangle(
+					int.Parse(entry.Attribute(LeftName).Value),
+					int.Parse(entry.Attribute(TopName).Value),
+					int.Parse(entry.Attribute(WidthName).Value),
+					int.Parse(entry.Attribute(HeightName).Value)
+				);
+
+				var isNinePatch = entry.Name == NinePatchRegionName;
+
+				TextureRegion region;
+				if (!isNinePatch)
+				{
+					region = new TextureRegion
+					{
+						Rectangle = bounds
+					};
+				}
+				else
+				{
+					var padding = new Padding
+					{
+						Left = int.Parse(entry.Attribute(NinePatchLeftName).Value),
+						Top = int.Parse(entry.Attribute(NinePatchTopName).Value),
+						Right = int.Parse(entry.Attribute(NinePatchRightName).Value),
+						Bottom = int.Parse(entry.Attribute(NinePatchBottomName).Value)
+					};
+
+					region = new NinePatchRegion
+					{
+						Rectangle = bounds,
+						Padding = padding
+					};
+				}
+
+				result.TextureRegions[id] = region;
+			}
+
+			return result;
+		}
+
 		private static void ProcessFonts(Theme theme, XDocument document, AssetManager manager)
 		{
 			var fontsElement = document.Root.Element("Fonts");
@@ -194,42 +286,7 @@ namespace AssetManagementBase
 			}
 		}
 
-		private static void ProcessTextures(Theme theme, XDocument document, AssetManager manager)
-		{
-			if (document.Root.Elements("Texture").Any())
-			{
-				// Issue error because theme file is using old alpha version format.
-				throw new Exception("Given theme file is using a format which is no longer supported. All textures need to be defined inside a 'Textures' node.");
-			}
-
-			var texturesElement = document.Root.Element("Textures");
-			if (texturesElement == null)
-				throw new Exception("Given theme file does not contain a 'Textures' node.");
-
-			foreach (var textureElement in texturesElement.Elements("Texture"))
-			{
-				string name = GetMandatoryAttributeString(textureElement, "Name");
-				bool isDefault = (bool?)textureElement.Attribute("IsDefault") ?? false;
-				string filename = GetMandatoryAttributeString(textureElement, "File");
-				bool premultiplyAlpha = (bool?)textureElement.Attribute("PremultiplyAlpha") ?? true;
-
-				var texture = manager.LoadTexture2D(theme.GraphicsDevice, filename, premultiplyAlpha);
-
-				var themeTexture = new ThemeTexture
-				{
-					Name = name,
-					IsDefault = isDefault,
-					Texture = texture,
-				};
-
-				theme.Textures.Add(themeTexture);
-			}
-
-			if (theme.Textures.Count == 0)
-				throw new Exception("The UI theme does not contain any textures. At least 1 texture is required.");
-		}
-
-		private static void ProcessStyles(Theme theme, XDocument document)
+		private static void ProcessStyles(Theme theme, XDocument document, TextureAtlas textureAtlas)
 		{
 			var stylesElement = document.Root.Element("Styles");
 			if (stylesElement == null)
@@ -264,27 +321,27 @@ namespace AssetManagementBase
 							var image = new ThemeImage
 							{
 								Name = (string)imageElement.Attribute("Name"),
-								SourceRectangle = ThemeHelper.ParseRectangle((string)imageElement.Attribute("Source")),
 								Margin = ThemeHelper.ParseVector4((string)imageElement.Attribute("Margin")),
 								HorizontalAlignment = ThemeHelper.ParseHorizontalAlignment((string)imageElement.Attribute("HorizontalAlignment")),
 								VerticalAlignment = ThemeHelper.ParseVerticalAlignment((string)imageElement.Attribute("VerticalAlignment")),
 								TileMode = ThemeHelper.ParseTileMode((string)imageElement.Attribute("TileMode")),
-								Border = ThemeHelper.ParseVector4((string)imageElement.Attribute("Border")),
 								IsOverlay = (bool?)imageElement.Attribute("IsOverlay") ?? false,
 								Color = ThemeHelper.ParseColor((string)imageElement.Attribute("Color"), Color.White),
 							};
 
-							var imageTexture = (string)imageElement.Attribute("Texture");
-							if (!string.IsNullOrEmpty(imageTexture))
+							TextureRegion region;
+							var imageName = (string)imageElement.Attribute("Image");
+							if (!textureAtlas.TextureRegions.TryGetValue(imageName, out region))
 							{
-								ThemeTexture themeTexture;
-								if (!theme.Textures.TryGet(imageTexture, out themeTexture))
-								{
-									string message = string.Format("Missing texture: The image '{0}' in state '{1}' of style '{2}' requires a texture named '{3}'.", image.Name, state.Name, style.Name, image.Texture);
-									throw new Exception(message);
-								}
+								throw new Exception($"Could not find region '{imageName}'");
+							}
 
-								image.Texture = themeTexture;
+							image.SourceRectangle = region.Rectangle;
+							var asNinePatch = region as NinePatchRegion;
+							if (asNinePatch != null)
+							{
+								var p = asNinePatch.Padding;
+								image.Border = new Vector4(p.Left, p.Top, p.Right, p.Bottom);
 							}
 
 							state.Images.Add(image);
@@ -301,6 +358,23 @@ namespace AssetManagementBase
 						state.Opacity = (float?)element.Element("Opacity");
 
 						style.States.Add(state);
+					}
+					else if (element.Name == "IconSourceRectangle")
+					{
+						TextureRegion region;
+						var imageName = element.Value;
+						if (!textureAtlas.TextureRegions.TryGetValue(imageName, out region))
+						{
+							throw new Exception($"Could not find region '{imageName}'");
+						}
+
+						var r = region.Rectangle;
+						var attribute = new ThemeAttribute
+						{
+							Name = "IconResourceRectangle",
+							Value = $"{r.X},{r.Y},{r.Width},{r.Height}"
+						};
+						style.Attributes.Add(attribute);
 					}
 					else
 					{
@@ -351,12 +425,19 @@ namespace AssetManagementBase
 			}
 
 			var graphicsDevice = (GraphicsDevice)tag;
+			var atlasPathAttr = document.Root.Attribute("TextureAtlas");
+			if (atlasPathAttr == null)
+			{
+				throw new Exception($"The UI theme lacks texture atlas attribute");
+			}
 
 			var theme = new Theme(graphicsDevice);
 			ProcessCursors(theme, document, manager);
 			ProcessFonts(theme, document, manager);
-			ProcessTextures(theme, document, manager);
-			ProcessStyles(theme, document);
+
+			var textureAtlas = LoadTextureAtlas(graphicsDevice, atlasPathAttr.Value, manager);
+			theme.Texture = textureAtlas.Texture;
+			ProcessStyles(theme, document, textureAtlas);
 
 			return theme;
 		};

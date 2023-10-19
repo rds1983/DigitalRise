@@ -56,7 +56,6 @@ namespace DigitalRise.UI.Rendering
 
 		private MouseCursor _defaultCursor;
 		private SpriteFontBase _defaultFont;
-		private Texture2D _defaultTexture;
 		#endregion
 
 
@@ -73,6 +72,8 @@ namespace DigitalRise.UI.Rendering
 		/// </summary>
 		/// <value>The UI theme.</value>
 		public Theme Theme { get; private set; }
+
+		public Texture2D _defaultTexture => Theme.Texture;
 
 
 		/// <inheritdoc/>
@@ -104,7 +105,6 @@ namespace DigitalRise.UI.Rendering
 
 			InitializeDefaultCursor();
 			InitializeDefaultFont();
-			InitializeDefaultTexture();
 			InitializeRendering();
 		}
 
@@ -161,35 +161,6 @@ namespace DigitalRise.UI.Rendering
 
 			if (_defaultFont == null)
 				throw new UIException("No default font found.");
-		}
-
-
-		private void InitializeDefaultTexture()
-		{
-			if (Theme.Textures != null)
-			{
-				_defaultTexture = Theme.Textures
-															 .Where(t => t.IsDefault)
-															 .Select(t => t.Texture)
-															 .FirstOrDefault();
-				if (_defaultTexture == null)
-				{
-					// The theme does not define a texture with "IsDefault=true".
-					// Check if a texture is named "Default".
-					_defaultTexture = Theme.Textures
-																 .Where(t => t.Name.Equals("default", StringComparison.OrdinalIgnoreCase))
-																 .Select(t => t.Texture)
-																 .FirstOrDefault();
-				}
-				if (_defaultTexture == null)
-				{
-					// No default texture found so far. --> Just use the first available texture.
-					_defaultTexture = Theme.Textures.Select(t => t.Texture).FirstOrDefault();
-				}
-			}
-
-			if (_defaultTexture == null)
-				throw new UIException("No default texture found.");
 		}
 
 		#endregion
@@ -299,10 +270,6 @@ namespace DigitalRise.UI.Rendering
 			{
 				result = (T)(object)ThemeHelper.ParseRectangle(attribute.Value);
 			}
-			else if (typeof(T).IsAssignableFrom(typeof(Texture2D)))
-			{
-				result = (T)(object)GetTexture(attribute.Value);
-			}
 			else
 			{
 				try
@@ -339,18 +306,6 @@ namespace DigitalRise.UI.Rendering
 			ThemeFont font;
 			bool exists = Theme.Fonts.TryGet(name, out font);
 			return (exists) ? font.Font : _defaultFont;
-		}
-
-
-		/// <inheritdoc/>
-		public Texture2D GetTexture(string name)
-		{
-			if (string.IsNullOrEmpty(name))
-				return _defaultTexture;
-
-			ThemeTexture texture;
-			bool exists = Theme.Textures.TryGet(name, out texture);
-			return (exists) ? texture.Texture : _defaultTexture;
 		}
 
 		#endregion

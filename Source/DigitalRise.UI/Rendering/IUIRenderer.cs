@@ -102,19 +102,6 @@ namespace DigitalRise.UI.Rendering
 
 
 		/// <summary>
-		/// Gets a texture.
-		/// </summary>
-		/// <param name="name">
-		/// The name of the texture. This name is any string - usually the asset name - that identifies 
-		/// the texture, e.g. "UITexture". Can be <see langword="null"/> to get the default texture.
-		/// </param>
-		/// <returns>
-		/// The font.
-		/// </returns>
-		Texture2D GetTexture(string name);
-
-
-		/// <summary>
 		/// Renders the specified control.
 		/// </summary>
 		/// <param name="control">The control.</param>

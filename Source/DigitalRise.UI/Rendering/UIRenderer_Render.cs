@@ -725,7 +725,7 @@ namespace DigitalRise.UI.Rendering
         return;
 
       // Get the texture atlas containing the image.
-      Texture2D texture = (image.Texture != null) ? image.Texture.Texture : _defaultTexture;
+      Texture2D texture = _defaultTexture;
       
       // Get bounds without margin.
       Rectangle source = image.SourceRectangle;

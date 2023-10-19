@@ -59,6 +59,11 @@ namespace DigitalRise.UI.Rendering
 		public GraphicsDevice GraphicsDevice { get; private set; } 
 
     /// <summary>
+    /// Gets the UI Texture
+    /// </summary>
+    public Texture2D Texture { get; internal set; }
+
+    /// <summary>
     /// Gets the cursor definitions.
     /// </summary>
     /// <value>The cursors.</value>
@@ -70,13 +75,6 @@ namespace DigitalRise.UI.Rendering
     /// </summary>
     /// <value>The fonts.</value>
     public NamedObjectCollection<ThemeFont> Fonts { get; private set; }
-
-
-    /// <summary>
-    /// Gets the textures.
-    /// </summary>
-    /// <value>The textures.</value>
-    public NamedObjectCollection<ThemeTexture> Textures { get; private set; }
 
 
     /// <summary>
@@ -94,7 +92,6 @@ namespace DigitalRise.UI.Rendering
       GraphicsDevice = graphicsDevice ?? throw new ArgumentNullException(nameof(graphicsDevice));
       Cursors = new NamedObjectCollection<ThemeCursor>();
       Fonts = new NamedObjectCollection<ThemeFont>();
-      Textures = new NamedObjectCollection<ThemeTexture>();
       Styles = new NamedObjectCollection<ThemeStyle>();
     }
 
