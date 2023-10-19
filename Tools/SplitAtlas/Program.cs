@@ -580,11 +580,6 @@ namespace SplitAtlas
 					continue;
 				}
 
-				if (imageInfo.StyleName == "Window")
-				{
-					var k = 5;
-				}
-
 				var width = r.Width;
 				var height = r.Height;
 				var data = new byte[r.Width * r.Height * 4];

@@ -1,4 +1,4 @@
-/*namespace DigitalRise.UI.Controls
+namespace DigitalRise.UI.Controls
 {
 	partial class FileDialog: Window
 	{
@@ -17,6 +17,7 @@
 
 			_textFieldPath = new TextBox();
 			_textFieldPath.IsReadOnly = true;
+			_textFieldPath.HorizontalAlignment = HorizontalAlignment.Stretch;
 			_textFieldPath.VerticalAlignment = VerticalAlignment.Center;
 			_textFieldPath.GridColumn = 2;
 			_textFieldPath.Name = "_textFieldPath";
@@ -52,40 +53,26 @@
 
 			_listBoxPlaces = new ListBox();
 			_listBoxPlaces.HorizontalAlignment = HorizontalAlignment.Stretch;
-			_listBoxPlaces.ClipContent = true;
 			_listBoxPlaces.Name = "_listBoxPlaces";
 
-			_gridFiles = new Grid();
-			_gridFiles.ColumnSpacing = 4;
-			_gridFiles.RowSpacing = 4;
-			_gridFiles.ColumnsProportions.Add(new Proportion
-			{
-				Type = ProportionType.Auto,
-			});
-			_gridFiles.ColumnsProportions.Add(new Proportion
-			{
-				Type = ProportionType.Fill,
-			});
-			_gridFiles.GridSelectionMode = GridSelectionMode.Row;
-			_gridFiles.Name = "_gridFiles";
-
-			_scrollPane = new ScrollViewer();
-			_scrollPane.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
-			_scrollPane.Name = "_scrollPane";
-			_scrollPane.Content = _gridFiles;
+			_listBoxFiles = new ListBox();
+			_listBoxFiles.Name = "_listBoxFiles";
 
 			_splitPane = new SplitPane();
 			_splitPane.Orientation = Orientation.Horizontal;
 			_splitPane.Name = "_splitPane";
 			_splitPane.First = _listBoxPlaces;
-			_splitPane.Second = _scrollPane;
+			_splitPane.Second = _listBoxFiles;
 
 			_textBlockFileName = new TextBlock();
 			_textBlockFileName.Text = "File name";
+			_textBlockFileName.VerticalAlignment = VerticalAlignment.Center;
 			_textBlockFileName.Name = "_textBlockFileName";
 
 			_textFieldFileName = new TextBox();
+			_textFieldFileName.IsReadOnly = true;
 			_textFieldFileName.GridColumn = 1;
+			_textFieldFileName.HorizontalAlignment = HorizontalAlignment.Stretch;
 			_textFieldFileName.Name = "_textFieldFileName";
 
 			var grid2 = new Grid();
@@ -116,7 +103,6 @@
 			verticalStackPanel1.Children.Add(_splitPane);
 			verticalStackPanel1.Children.Add(grid2);
 
-			
 			Title = "Open File...";
 			X = 176;
 			Y = 18;
@@ -131,10 +117,9 @@
 		public TextBox _textFieldPath;
 		public Button _buttonParent;
 		public ListBox _listBoxPlaces;
-		public Grid _gridFiles;
-		public ScrollViewer _scrollPane;
+		public ListBox _listBoxFiles;
 		public SplitPane _splitPane;
 		public TextBlock _textBlockFileName;
 		public TextBox _textFieldFileName;
 	}
-}*/
+}

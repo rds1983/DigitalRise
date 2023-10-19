@@ -107,7 +107,12 @@ namespace DigitalRise.UI.Controls
 
 		private void OnItemsChanged(object sender, CollectionChangedEventArgs<object> eventArgs)
 		{
-			foreach (var item in eventArgs.NewItems)
+			_scrollViewer.HorizontalOffset = 0;
+			_scrollViewer.VerticalOffset = 0;
+
+			_itemsPanel.Children.Clear();
+
+			foreach (var item in Items)
 			{
 				_itemsPanel.Children.Add(CreateControl(item));
 			}

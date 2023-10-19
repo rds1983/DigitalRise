@@ -246,6 +246,8 @@ namespace DigitalRise.UI.Controls
 			_columnsProportions.CollectionChanged += OnProportionsChanged;
 			_rowsProportions.CollectionChanged += OnProportionsChanged;
 
+			Width = float.PositiveInfinity;
+			Height = float.PositiveInfinity;
 			HorizontalAlignment = HorizontalAlignment.Stretch;
 			VerticalAlignment = VerticalAlignment.Stretch;
 

@@ -908,7 +908,8 @@ namespace DigitalRise.UI.Controls
       {
         if (inputService.MouseWheelDelta != 0
             && VerticalScrollBarVisibility != ScrollBarVisibility.Disabled
-            && _verticalScrollBar != null)
+            && _verticalScrollBar != null
+            && _verticalScrollBar.IsVisible)
         {
           inputService.IsMouseOrTouchHandled = true;
 

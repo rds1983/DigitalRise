@@ -87,6 +87,10 @@ namespace UIEditor
 				listBox.Items.Add("ListBoxItem" + i);
 			}
 
+			listBox.Properties.Get<int>("SelectedIndex").Changed += (s, a) =>
+			{
+			};
+
 			var splitPane = new SplitPane
 			{
 				Orientation = Orientation.Horizontal,
@@ -115,9 +119,19 @@ namespace UIEditor
 			_uiManager.Update(gameTime.ElapsedGameTime);
 		}
 
+		bool fileDialogVisible = false;
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.Black);
+
+			if (!fileDialogVisible)
+			{
+				var fileDialog = new FileDialog(FileDialogMode.OpenFile);
+				fileDialog.FilePath = @"D:\Temp";
+
+				fileDialog.Show(_uiScreen); 
+				fileDialogVisible = true;
+			}
 
 			_uiScreen.Draw(gameTime);
 

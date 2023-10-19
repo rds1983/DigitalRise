@@ -123,15 +123,12 @@ namespace DigitalRise.UI.Controls
 
 		public SplitPane()
 		{
+			Width = float.PositiveInfinity;
+			Height = float.PositiveInfinity;
 			HorizontalAlignment = HorizontalAlignment.Stretch;
 			VerticalAlignment = VerticalAlignment.Stretch;
 
 			Style = "SplitPane";
-		}
-
-		protected override void OnLoad()
-		{
-			base.OnLoad();
 
 			Content = new Grid();
 			_buttonSplitter = new Thumb
@@ -195,6 +192,8 @@ namespace DigitalRise.UI.Controls
 
 		private void GetProportions(out Proportion leftProportion, out Proportion rightProportion)
 		{
+			Update();
+
 			var grid = Grid;
 			leftProportion = Orientation == Orientation.Horizontal
 				? grid.ColumnsProportions[0]

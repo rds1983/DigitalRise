@@ -1427,8 +1427,8 @@ namespace DigitalRise.UI.Controls
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
     internal void HandleInput(InputContext context)
     {
-      // This method is automatically called by the visual parent.
-      Debug.Assert(Screen != null, "Cannot process input. Screen is not set.");
+			// This method is automatically called by the visual parent.
+			Debug.Assert(Screen != null, "Cannot process input. Screen is not set.");
       Debug.Assert(InputService != null, "Cannot process input. Input service is not set.");
 
       if (!IsEnabled || !IsVisible || !IsLoaded)
@@ -1505,8 +1505,8 @@ namespace DigitalRise.UI.Controls
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
     protected virtual void OnHandleInput(InputContext context)
     {
-      // Should only be called for visible and enabled controls.
-      if (!IsLoaded)
+			// Should only be called for visible and enabled controls.
+			if (!IsLoaded)
         return;
 
       // Check if the mouse is over this control. 
@@ -1548,8 +1548,8 @@ namespace DigitalRise.UI.Controls
       {
         UIControl child = _visualChildrenCopy[i];
 
-        // The focused child was already updated.
-        if (child == focusedChild)
+				// The focused child was already updated.
+				if (child == focusedChild)
           continue;
 
         HandleInput(child, context);

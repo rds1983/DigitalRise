@@ -1,4 +1,6 @@
-﻿/*using Microsoft.Xna.Framework;
+﻿using DigitalRise.Input;
+using DigitalRise.UI.TextureAtlases;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +9,20 @@ namespace DigitalRise.UI.Controls
 {
 	public partial class FileDialog
 	{
+		class ListItem
+		{
+			public string Name { get; private set; }
+			public string Path { get; private set; }
+			public TextureRegion Image { get; private set; }
+
+			public ListItem(string name, string path, TextureRegion image)
+			{
+				Name = name;
+				Path = path;
+				Image = image;
+			}
+		}
+
 		private const int ImageTextSpacing = 4;
 
 		private static readonly string[] Folders =
@@ -14,7 +30,6 @@ namespace DigitalRise.UI.Controls
 			"Desktop", "Downloads"
 		};
 
-		private readonly List<string> _paths = new List<string>();
 		private readonly List<string> _history = new List<string>();
 		private int _historyPosition;
 		private readonly FileDialogMode _mode;
@@ -76,18 +91,12 @@ namespace DigitalRise.UI.Controls
 
 				if (!string.IsNullOrEmpty(FileName))
 				{
-					foreach (var widget in _gridFiles.VisualChildren)
+					for(var i = 0; i < _listBoxFiles.Items.Count; i++)
 					{
-						var asLabel = widget as TextBlock;
-
-						if (asLabel == null)
+						var listItem = (ListItem)_listBoxFiles.Items[i];
+						if (listItem.Path == FileName)
 						{
-							continue;
-						}
-
-						if (asLabel.Text == FileName)
-						{
-							_gridFiles.SelectedRowIndex = asLabel.GridRow;
+							_listBoxFiles.SelectedIndex = i;
 							break;
 						}
 					}
@@ -100,8 +109,13 @@ namespace DigitalRise.UI.Controls
 		public FileDialog(FileDialogMode mode)
 		{
 			_mode = mode;
+			Style = "FileDialog";
+			IsModal = true;
 
 			BuildUI();
+
+			_listBoxPlaces.CreateControlForItem = CreateControlPlaces;
+			_listBoxFiles.CreateControlForItem = CreateControlFiles;
 
 			switch (mode)
 			{
@@ -126,22 +140,10 @@ namespace DigitalRise.UI.Controls
 
 			_splitPane.SplitterPosition = 0.3f;
 
-			_buttonBack.Background = Color.Transparent;
-			_buttonForward.Background = Color.Transparent;
-			_buttonParent.Background = Color.Transparent;
-
-			_listBoxPlaces.Background = Color.Transparent;
-
-			_buttonBack.Image = DefaultAssets.UITextureRegionAtlas["icon-arrow-left"];
-			_buttonForward.Image = DefaultAssets.UITextureRegionAtlas["icon-arrow-right"];
-			_buttonParent.Image = DefaultAssets.UITextureRegionAtlas["icon-folder-parent"];
-
 			var homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
 							Environment.OSVersion.Platform == PlatformID.MacOSX)
 				? Environment.GetEnvironmentVariable("HOME")
 				: Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-
-			var iconFolder = DefaultAssets.UITextureRegionAtlas["icon-folder"];
 
 			var places = new List<string>
 			{
@@ -153,6 +155,9 @@ namespace DigitalRise.UI.Controls
 				places.Add(Path.Combine(homePath, f));
 			}
 
+			TextureRegion iconFolder = null;
+			TextureRegion iconDrive = null;
+
 			foreach (var p in places)
 			{
 				if (!Directory.Exists(p))
@@ -160,25 +165,16 @@ namespace DigitalRise.UI.Controls
 					continue;
 				}
 
-				_listBoxPlaces.Items.Add(new ListItem(Path.GetFileName(p), null, p)
-				{
-					Image = iconFolder,
-					ImageTextSpacing = ImageTextSpacing
-				});
+				_listBoxPlaces.Items.Add(new ListItem(Path.GetFileName(p), p, iconFolder));
 			}
 
 			if (_listBoxPlaces.Items.Count > 0)
 			{
-				SetFolder((string)_listBoxPlaces.Items[0].Tag, false);
+				SetFolder(((ListItem)_listBoxPlaces.Items[0]).Path, false);
 			}
 
-			_listBoxPlaces.Items.Add(new ListItem
-			{
-				IsSeparator = true
-			});
-
 			var drives = DriveInfo.GetDrives();
-			var iconDrive = DefaultAssets.UITextureRegionAtlas["icon-drive"];
+//			var iconDrive = DefaultAssets.UITextureRegionAtlas["icon-drive"];
 			foreach (var d in drives)
 			{
 				if (d.DriveType == DriveType.Ram || d.DriveType == DriveType.Unknown)
@@ -195,32 +191,84 @@ namespace DigitalRise.UI.Controls
 						s += " (" + d.VolumeLabel + ")";
 					}
 
-					_listBoxPlaces.Items.Add(new ListItem(s, null, d.RootDirectory.FullName)
-					{
-						Image = iconDrive,
-						ImageTextSpacing = ImageTextSpacing
-					});
+					_listBoxPlaces.Items.Add(new ListItem(s, d.RootDirectory.FullName, iconDrive));
 				}
 				catch (Exception)
 				{
 				}
 			}
 
-			_listBoxPlaces.SelectedIndexChanged += OnPlacesSelectedIndexChanged;
-
-			_gridFiles.SelectionBackground = DefaultAssets.UITextureRegionAtlas["tree-selection"];
-			_gridFiles.SelectionHoverBackground = DefaultAssets.UITextureRegionAtlas["button-over"];
-			_gridFiles.SelectedIndexChanged += OnGridFilesSelectedIndexChanged;
-			_gridFiles.TouchDoubleClick += OnGridFilesDoubleClick;
+			_listBoxPlaces.Properties.Get<int>("SelectedIndex").Changed += OnPlacesSelectedIndexChanged;
+			_listBoxFiles.Properties.Get<int>("SelectedIndex").Changed += OnFilesSelectedIndexChanged;
+			_listBoxFiles.InputProcessed += _listBoxFiles_InputProcessed;
 
 			_buttonParent.Click += OnButtonParent;
 
-			_textFieldFileName.TextChanged += (s, a) => UpdateEnabled();
+//			_textFieldFileName.TextChanged += (s, a) => UpdateEnabled();
 
 			_buttonBack.Click += OnButtonBack;
 			_buttonForward.Click += OnButtonForward;
 
 			UpdateEnabled();
+		}
+
+		private void _listBoxFiles_InputProcessed(object sender, InputEventArgs e)
+		{
+			if (!InputService.IsDoubleClick(MouseButtons.Left) ||
+				_listBoxFiles.SelectedIndex == -1)
+			{
+				return;
+			}
+
+			var path = ((ListItem)_listBoxFiles.Items[_listBoxFiles.SelectedIndex]).Path;
+
+			if (Directory.Exists(path))
+			{
+				_listBoxPlaces.SelectedIndex = -1;
+				Folder = path;
+			}
+			else
+			{
+				//				OnOk();
+			}
+		}
+
+		private UIControl CreateControlPlaces(object obj)
+		{
+			ListItem item = (ListItem)obj;
+
+			var result = new ListBoxItem(_listBoxPlaces)
+			{
+				Content = new TextBlock
+				{
+					Style = "ListBoxItemTextBlock",
+					Text = item.Name
+				}
+			};
+
+			return result;
+		}
+
+		private UIControl CreateControlFiles(object obj)
+		{
+			ListItem item = (ListItem)obj;
+
+			var result = new ListBoxItem(_listBoxFiles)
+			{
+				Content = new TextBlock
+				{
+					Style = "ListBoxItemTextBlock",
+					Text = item.Name
+				}
+			};
+
+			return result;
+		}
+
+		protected override void OnLoad()
+		{
+			base.OnLoad();
+
 		}
 
 		private void UpdateEnabled()
@@ -239,7 +287,7 @@ namespace DigitalRise.UI.Controls
 					break;
 			}
 
-			ButtonOk.Enabled = enabled;
+			// ButtonOk.Enabled = enabled;
 		}
 
 		private void OnButtonParent(object sender, EventArgs args)
@@ -308,35 +356,16 @@ namespace DigitalRise.UI.Controls
 			_historyPosition = _history.Count - 1;
 		}
 
-		private void OnGridFilesDoubleClick(object sender, EventArgs args)
+		private void OnFilesSelectedIndexChanged(object sender, EventArgs args)
 		{
-			if (_gridFiles.SelectedRowIndex == null)
+			if (_listBoxFiles.SelectedIndex == -1)
 			{
 				return;
 			}
 
-			var path = _paths[_gridFiles.SelectedRowIndex.Value];
+			_listBoxPlaces.SelectedIndex = -1;
 
-			if (Directory.Exists(path))
-			{
-				_listBoxPlaces.SelectedIndex = null;
-				Folder = path;
-			} else
-			{
-				OnOk();
-			}
-		}
-
-		private void OnGridFilesSelectedIndexChanged(object sender, EventArgs args)
-		{
-			if (_gridFiles.SelectedRowIndex == null)
-			{
-				return;
-			}
-
-			_listBoxPlaces.SelectedIndex = null;
-
-			var path = _paths[_gridFiles.SelectedRowIndex.Value];
+			var path = ((ListItem)_listBoxFiles.Items[_listBoxFiles.SelectedIndex]).Path;
 			var fi = new FileInfo(path);
 			if (fi.Attributes.HasFlag(FileAttributes.Directory) && _mode == FileDialogMode.ChooseFolder)
 			{
@@ -350,29 +379,25 @@ namespace DigitalRise.UI.Controls
 
 		private void OnPlacesSelectedIndexChanged(object sender, EventArgs args)
 		{
-			if (_listBoxPlaces.SelectedIndex == null)
+			if (_listBoxPlaces.SelectedIndex == -1)
 			{
 				return;
 			}
 
-			var path = (string)_listBoxPlaces.Items[_listBoxPlaces.SelectedIndex.Value].Tag;
+			var selectedItem = (ListItem)_listBoxPlaces.Items[_listBoxPlaces.SelectedIndex];
+			var path = (string)selectedItem.Path;
 			Folder = path;
 		}
 
 		private void UpdateFolder()
 		{
-			_gridFiles.RowsProportions.Clear();
-			_gridFiles.Children.Clear();
-			_paths.Clear();
-
-			_scrollPane.ScrollPosition = Mathematics.PointZero;
+			_listBoxFiles.Items.Clear();
 
 			var path = _textFieldPath.Text;
 			var folders = Directory.EnumerateDirectories(path);
 
-			var iconFolder = DefaultAssets.UITextureRegionAtlas["icon-folder"];
+			TextureRegion iconFolder = null;
 
-			var gridY = 0;
 			foreach (var f in folders)
 			{
 				var fileInfo = new FileInfo(f);
@@ -381,32 +406,14 @@ namespace DigitalRise.UI.Controls
 					continue;
 				}
 
-				var prop = new Proportion();
-
-				_gridFiles.RowsProportions.Add(prop);
-
 				var image = new Image
 				{
-					Renderable = iconFolder,
-					GridRow = gridY,
+					// Renderable = iconFolder,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				_gridFiles.Children.Add(image);
-
-				var name = new Label
-				{
-					Text = Path.GetFileName(f),
-					GridColumn = 1,
-					GridRow = gridY
-				};
-
-				_gridFiles.Children.Add(name);
-
-				_paths.Add(f);
-
-				++gridY;
+				_listBoxFiles.Items.Add(new ListItem(Path.GetFileName(f), f, null));
 			}
 
 			if (_mode == FileDialogMode.ChooseFolder)
@@ -441,26 +448,11 @@ namespace DigitalRise.UI.Controls
 					continue;
 				}
 
-				var prop = new Proportion();
-
-				_gridFiles.RowsProportions.Add(prop);
-
-				var name = new TextBlock
-				{
-					Text = Path.GetFileName(f),
-					GridColumn = 1,
-					GridRow = gridY
-				};
-
-				_gridFiles.Children.Add(name);
-
-				_paths.Add(f);
-
-				++gridY;
+				_listBoxFiles.Items.Add(new ListItem(Path.GetFileName(f), f, null));
 			}
 		}
 
-		protected internal override bool CanCloseByOk()
+/*		protected internal override bool CanCloseByOk()
 		{
 			if (_mode != FileDialogMode.SaveFile)
 			{
@@ -512,6 +504,6 @@ namespace DigitalRise.UI.Controls
 			}
 
 			return false;
-		}
+		}*/
 	}
-}*/
+}

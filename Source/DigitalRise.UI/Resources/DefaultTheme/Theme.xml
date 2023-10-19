@@ -667,6 +667,40 @@
       <State Name="Active" />
       <State Name="Disabled" />
     </Style>
+
+	<Style Name="FileDialog" Inherits="Window">
+		<BackButtonStyle>FileDialogBack</BackButtonStyle>
+		<ForwardButtonStyle>FileDialogForward</ForwardButtonStyle>
+		<ParentButtonStyle>FileDialogParent</ParentButtonStyle>
+		<State Name="Default">
+			<Image Margin="-15,-15,-15,-15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Default" />
+		</State>
+		<State Name="Active">
+			<Image Margin="-20,-20,-20,-20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Disabled" />
+		</State>
+		<State Name="Disabled">
+			<Image Margin="-20,-20,-20,-20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Disabled" />
+		</State>
+	</Style>
+	
+	<Style Name="FileDialogBack" Inherits="Button">
+		<State Name="Default">
+			<Image Image="IconArrowLeft" />
+		</State>
+	</Style>
+
+	<Style Name="FileDialogForward" Inherits="Button">
+		<State Name="Default">
+			<Image Image="IconArrowRight" />
+		</State>
+	</Style>
+
+	<Style Name="FileDialogParent" Inherits="Button">
+		<State Name="Default">
+			<Image Image="IconFolderParent" />
+		</State>
+	</Style>
+
     <!--- TreeView styles for the CustomControlSample-->
     <Style Name="TreeView" Inherits="UIControl">
       <Background>128,128,128,255</Background>
