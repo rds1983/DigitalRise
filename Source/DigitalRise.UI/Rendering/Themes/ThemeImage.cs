@@ -3,6 +3,7 @@
 // file 'LICENSE.TXT', which is part of this source code package.
 
 using DigitalRise.Mathematics.Algebra;
+using DigitalRise.UI.TextureAtlases;
 using Microsoft.Xna.Framework;
 
 
@@ -22,12 +23,10 @@ namespace DigitalRise.UI.Rendering
     /// <value>The name of the image.</value>
     public string Name { get; set; }
 
-
     /// <summary>
-    /// Gets or sets the source rectangle of the image in the texture atlas of the theme.
+    /// Texture Region
     /// </summary>
-    /// <value>The source rectangle.</value>
-    public Rectangle SourceRectangle { get; set; }
+    public TextureRegion TextureRegion { get; set; }
 
 
     /// <summary>
@@ -66,21 +65,6 @@ namespace DigitalRise.UI.Rendering
     /// the image is never tiled.
     /// </remarks>
     public TileMode TileMode { get; set; }
-
-
-    /// <summary>
-    /// Gets or sets the border that defines the 9-grid layout for image stretching.
-    /// </summary>
-    /// <value>The border that defines the 9-grid layout.</value>
-    /// <remarks>
-    /// When the alignment is set to <i>Stretch</i>, the image will be stretched to fill the control 
-    /// area. A typical <i>9-grid scaling</i> is applied and the <see cref="Border"/> defines the 
-    /// left/right/top/bottom margins. The left-top, left-bottom, right-top and right-bottom parts 
-    /// of the image will not be stretched. The center-top and center-bottom parts will be stretched 
-    /// horizontally. The left-center and right-center parts will be stretched vertically. The 
-    /// center part will be stretched horizontally and vertically.
-    /// </remarks>
-    public Vector4 Border { get; set; }
 
 
     /// <summary>

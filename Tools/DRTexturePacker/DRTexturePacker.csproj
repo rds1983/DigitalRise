@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Authors>DRTexturePackerTeam</Authors>
+    <Product>DRTexturePacker</Product>
+    <PackageId>DRTexturePacker</PackageId>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <Description>Console Texture Packer Utility</Description>
+    <PackageProjectUrl>https://github.com/rds1983/DRTexturePacker</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.9.3</Version>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="StbImageSharp" Version="2.22.5" />
+    <PackageReference Include="StbImageWriteSharp" Version="1.13.5" />
+    <PackageReference Include="StbRectPackSharp" Version="1.0.4" />
+  </ItemGroup>
+</Project>

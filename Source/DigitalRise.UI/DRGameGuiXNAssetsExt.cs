@@ -2,7 +2,6 @@
 using System.Xml.Linq;
 using DigitalRise.UI.Rendering;
 using System.Xml;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Text.Json.Nodes;
 using System.IO;
 using System.Text.Json;
+using DigitalRise.UI.TextureAtlases;
 
 #if !MONOGAME
 using static SDL2.SDL;
@@ -20,19 +20,6 @@ namespace AssetManagementBase
 {
 	public static partial class DRGameGuiXNAssetsExt
 	{
-		private const string TextureAtlasName = "TextureAtlas";
-		private const string ImageName = "Image";
-		private const string TextureRegionName = "TextureRegion";
-		private const string NinePatchRegionName = "NinePatchRegion";
-		private const string LeftName = "Left";
-		private const string TopName = "Top";
-		private const string WidthName = "Width";
-		private const string HeightName = "Height";
-		private const string NinePatchLeftName = "NinePatchLeft";
-		private const string NinePatchTopName = "NinePatchTop";
-		private const string NinePatchRightName = "NinePatchRight";
-		private const string NinePatchBottomName = "NinePatchBottom";
-
 #if !MONOGAME
 		private static readonly Dictionary<SDL_SystemCursor, IntPtr> _systemCursors = new Dictionary<SDL_SystemCursor, IntPtr>();
 
@@ -50,27 +37,6 @@ namespace AssetManagementBase
 			return result;
 		}
 #endif
-
-		struct Padding
-		{
-			public int Left, Top, Right, Bottom;
-		}
-
-		class TextureRegion
-		{
-			public Rectangle Rectangle;
-		}
-
-		class NinePatchRegion: TextureRegion
-		{
-			public Padding Padding;
-		}
-
-		class TextureAtlas
-		{
-			public Texture2D Texture;
-			public readonly Dictionary<string, TextureRegion> TextureRegions = new Dictionary<string, TextureRegion>();
-		}
 
 		private static string GetExceptionMessage(XElement element, string format, params object[] args)
 		{
@@ -197,64 +163,6 @@ namespace AssetManagementBase
 #endif
 		}
 
-		private static TextureAtlas LoadTextureAtlas(GraphicsDevice device, string name, AssetManager manager)
-		{
-			var doc = XDocument.Parse(manager.LoadString(name));
-
-			var root = doc.Root;
-
-			var result = new TextureAtlas();
-			var imageFileAttr = root.Attribute(ImageName);
-			if (imageFileAttr == null)
-			{
-				throw new Exception("Mandatory attribute 'ImageFile' doesnt exist");
-			}
-
-			result.Texture = manager.LoadTexture2D(device, imageFileAttr.Value);
-			foreach (XElement entry in root.Elements())
-			{
-				var id = entry.Attribute("Id").Value;
-
-				var bounds = new Rectangle(
-					int.Parse(entry.Attribute(LeftName).Value),
-					int.Parse(entry.Attribute(TopName).Value),
-					int.Parse(entry.Attribute(WidthName).Value),
-					int.Parse(entry.Attribute(HeightName).Value)
-				);
-
-				var isNinePatch = entry.Name == NinePatchRegionName;
-
-				TextureRegion region;
-				if (!isNinePatch)
-				{
-					region = new TextureRegion
-					{
-						Rectangle = bounds
-					};
-				}
-				else
-				{
-					var padding = new Padding
-					{
-						Left = int.Parse(entry.Attribute(NinePatchLeftName).Value),
-						Top = int.Parse(entry.Attribute(NinePatchTopName).Value),
-						Right = int.Parse(entry.Attribute(NinePatchRightName).Value),
-						Bottom = int.Parse(entry.Attribute(NinePatchBottomName).Value)
-					};
-
-					region = new NinePatchRegion
-					{
-						Rectangle = bounds,
-						Padding = padding
-					};
-				}
-
-				result.TextureRegions[id] = region;
-			}
-
-			return result;
-		}
-
 		private static void ProcessFonts(Theme theme, XDocument document, AssetManager manager)
 		{
 			var fontsElement = document.Root.Element("Fonts");
@@ -336,13 +244,7 @@ namespace AssetManagementBase
 								throw new Exception($"Could not find region '{imageName}'");
 							}
 
-							image.SourceRectangle = region.Rectangle;
-							var asNinePatch = region as NinePatchRegion;
-							if (asNinePatch != null)
-							{
-								var p = asNinePatch.Padding;
-								image.Border = new Vector4(p.Left, p.Top, p.Right, p.Bottom);
-							}
+							image.TextureRegion = region;
 
 							state.Images.Add(image);
 						}
@@ -435,8 +337,9 @@ namespace AssetManagementBase
 			ProcessCursors(theme, document, manager);
 			ProcessFonts(theme, document, manager);
 
-			var textureAtlas = LoadTextureAtlas(graphicsDevice, atlasPathAttr.Value, manager);
-			theme.Texture = textureAtlas.Texture;
+			var xml = manager.LoadString(atlasPathAttr.Value);
+			var textureAtlas = TextureAtlas.FromXml(xml, name => manager.LoadTexture2D(graphicsDevice, name));
+			theme.TextureAtlas = textureAtlas;
 			ProcessStyles(theme, document, textureAtlas);
 
 			return theme;

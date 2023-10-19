@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DRTexturePacker": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\Projects\\DigitalRise\\UIRawAssets\\DefaultTheme\" DefaultTheme.png"
+    }
+  }
+}

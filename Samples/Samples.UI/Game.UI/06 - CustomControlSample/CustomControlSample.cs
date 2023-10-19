@@ -101,7 +101,7 @@ The DigitalRise Blog contains a detailed description for this project; see secti
                 },
                 new TreeViewItem
                 {
-                  Header = new Image { Texture = theme.Texture, SourceRectangle = new Rectangle(214, 66, 16, 16), Padding = padding, },
+                  Header = new Image { Texture = theme.TextureAtlas.Texture, SourceRectangle =  theme.TextureAtlas["Window_IconSourceRectangle"].Rectangle, Padding = padding, },
                   UserData = "3.3",
                 },
                 new TreeViewItem

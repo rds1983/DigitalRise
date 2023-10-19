@@ -73,9 +73,6 @@ namespace DigitalRise.UI.Rendering
 		/// <value>The UI theme.</value>
 		public Theme Theme { get; private set; }
 
-		public Texture2D _defaultTexture => Theme.Texture;
-
-
 		/// <inheritdoc/>
 		public Dictionary<string, GameObject> Templates
 		{

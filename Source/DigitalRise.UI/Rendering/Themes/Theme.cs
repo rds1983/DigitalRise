@@ -4,6 +4,7 @@
 
 using AssetManagementBase;
 using DigitalRise.Collections;
+using DigitalRise.UI.TextureAtlases;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -59,9 +60,9 @@ namespace DigitalRise.UI.Rendering
 		public GraphicsDevice GraphicsDevice { get; private set; } 
 
     /// <summary>
-    /// Gets the UI Texture
+    /// Gets the UI Texture Atlas
     /// </summary>
-    public Texture2D Texture { get; internal set; }
+    public TextureAtlas TextureAtlas { get; internal set; }
 
     /// <summary>
     /// Gets the cursor definitions.

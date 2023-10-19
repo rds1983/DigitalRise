@@ -64,12 +64,12 @@
       <Padding>1,1,1,1</Padding>
       <MinHeight>13</MinHeight>
       <State Name="Default">
-        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled" />
-        <Image Name="Indicator" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled" />
+        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled_Track" />
+        <Image Name="Indicator" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled_Indicator" />
       </State>
       <State Name="Disabled">
-        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled" />
-        <Image Name="Indicator" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled" />
+        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled_Track" />
+        <Image Name="Indicator" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ProgressBar_Disabled_Indicator" />
         <Opacity>0.5</Opacity>
       </State>
     </Style>
@@ -77,10 +77,10 @@
       <ThumbStyle>SliderThumb</ThumbStyle>
       <Height>14</Height>
       <State Name="Default">
-        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Image="Slider_Disabled" />
+        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Image="Slider_Disabled_Track" />
       </State>
       <State Name="Disabled">
-        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Image="Slider_Disabled" />
+        <Image Name="Track" Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Image="Slider_Disabled_Track" />
         <Opacity>0.5</Opacity>
       </State>
     </Style>
@@ -217,13 +217,13 @@
       <HorizontalAlignment>Stretch</HorizontalAlignment>
       <State Name="Default"></State>
       <State Name="MouseOver">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Pressed">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Focused">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Disabled"></State>
     </Style>
@@ -408,23 +408,23 @@
       <ContentStyle>DropDownButtonTextBlock</ContentStyle>
       <State Name="Default">
         <Image Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownButton_Disabled" />
-        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled" />
+        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled_Arrow" />
       </State>
       <State Name="MouseOver">
         <Image Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownButton_Focused" />
-        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled" />
+        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled_Arrow" />
       </State>
       <State Name="Pressed">
         <Image Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownButton_Focused" />
-        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled" />
+        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled_Arrow" />
       </State>
       <State Name="Focused">
         <Image Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownButton_Focused" />
-        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled" />
+        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled_Arrow" />
       </State>
       <State Name="Disabled">
         <Image Margin="0,0,0,-1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownButton_Disabled" />
-        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled" />
+        <Image Name="Arrow" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center" Image="DropDownButton_Disabled_Arrow" />
         <Opacity>0.5</Opacity>
       </State>
     </Style>
@@ -451,13 +451,13 @@
       <HorizontalAlignment>Stretch</HorizontalAlignment>
       <State Name="Default"></State>
       <State Name="MouseOver">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Pressed">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Focused">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Disabled">
         <Opacity>0.5</Opacity>
@@ -487,13 +487,13 @@
       <HorizontalAlignment>Stretch</HorizontalAlignment>
       <State Name="Default"></State>
       <State Name="MouseOver">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Pressed">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Focused">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="ListBoxItem_Focused" />
+        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Disabled">
         <Opacity>0.5</Opacity>
@@ -636,27 +636,27 @@
       <ToolTip>Close Window</ToolTip>
       <State Name="MouseOver">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Focused" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
       <State Name="Pressed">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Pressed" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
       <State Name="Focused">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Focused" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
       <State Name="Disabled">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Default" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
       <State Name="Active" IsInherited="True">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Active" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
       <State Name="Default">
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="WindowCloseButton_Default" />
-        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default" />
+        <Image Name="X" HorizontalAlignment="Center" VerticalAlignment="Center" Image="WindowCloseButton_Default_X" />
       </State>
     </Style>
     <Style Name="InvisibleWindow" Inherits="ContentControl">
