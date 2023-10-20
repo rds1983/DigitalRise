@@ -1,6 +1,6 @@
 namespace DigitalRise.UI.Controls
 {
-	partial class FileDialog : Window
+	partial class FileDialog
 	{
 		private void BuildUI()
 		{

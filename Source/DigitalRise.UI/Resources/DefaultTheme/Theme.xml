@@ -667,8 +667,21 @@
       <State Name="Active" />
       <State Name="Disabled" />
     </Style>
-
-	<Style Name="FileDialog" Inherits="Window">
+	
+	<Style Name="Dialog" Inherits="Window">
+		<Padding>7,32,7,32</Padding>
+		<State Name="Default">
+			<Image Margin="-15,-15,-15,-15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Default" />
+		</State>
+		<State Name="Active">
+			<Image Margin="-20,-20,-20,-20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Disabled" />
+		</State>
+		<State Name="Disabled">
+			<Image Margin="-20,-20,-20,-20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="Window_Disabled" />
+		</State>	
+	</Style>
+	
+	<Style Name="FileDialog" Inherits="Dialog">
 		<BackButtonStyle>FileDialogBack</BackButtonStyle>
 		<ForwardButtonStyle>FileDialogForward</ForwardButtonStyle>
 		<ParentButtonStyle>FileDialogParent</ParentButtonStyle>

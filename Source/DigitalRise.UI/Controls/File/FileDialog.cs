@@ -7,7 +7,7 @@ using System.IO;
 
 namespace DigitalRise.UI.Controls
 {
-	public partial class FileDialog
+	public partial class FileDialog : Dialog
 	{
 		class ListItem
 		{
@@ -204,7 +204,7 @@ namespace DigitalRise.UI.Controls
 
 			_buttonParent.Click += OnButtonParent;
 
-			//			_textFieldFileName.TextChanged += (s, a) => UpdateEnabled();
+			_textFieldFileName.Properties.Get<string>("Text").Changed += (s, a) => UpdateEnabled();
 
 			_buttonBack.Click += OnButtonBack;
 			_buttonForward.Click += OnButtonForward;
@@ -277,7 +277,7 @@ namespace DigitalRise.UI.Controls
 			switch (_mode)
 			{
 				case FileDialogMode.OpenFile:
-					enabled = !string.IsNullOrEmpty(FileName) && System.IO.File.Exists(FilePath);
+					enabled = !string.IsNullOrEmpty(FileName) && File.Exists(FilePath);
 					break;
 				case FileDialogMode.SaveFile:
 					enabled = !string.IsNullOrEmpty(FileName);
@@ -287,7 +287,10 @@ namespace DigitalRise.UI.Controls
 					break;
 			}
 
-			// ButtonOk.Enabled = enabled;
+			if (OkButton != null)
+			{
+				OkButton.IsEnabled = enabled;
+			}
 		}
 
 		private void OnButtonParent(object sender, EventArgs args)

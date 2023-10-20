@@ -261,6 +261,7 @@ namespace DigitalRise.UI.Controls
 			// be the values from the renderer/theme, the overridden default values, or simply 
 			// the GamePropertyMetadata<T>.DefaultValue.
 			Type type = GetType();
+
 			do
 			{
 				// Set game object properties.
