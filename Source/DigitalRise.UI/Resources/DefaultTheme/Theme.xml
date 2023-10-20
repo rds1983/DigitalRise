@@ -484,14 +484,9 @@
       <ContentStyle>ListBoxItemTextBlock</ContentStyle>
       <Padding>4,4,4,4</Padding>
       <HorizontalAlignment>Stretch</HorizontalAlignment>
-      <State Name="Default"></State>
-      <State Name="MouseOver">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
+      <State Name="Default">
       </State>
-      <State Name="Pressed">
-        <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
-      </State>
-      <State Name="Focused">
+      <State Name="Selected">
         <Image Margin="1,0,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="DropDownItem_Focused" />
       </State>
       <State Name="Disabled">
@@ -500,17 +495,11 @@
     </Style>
     <Style Name="ListBoxItemTextBlock" Inherits="TextBlock">
       <UseEllipsis>true</UseEllipsis>
-      <State Name="MouseOver" IsInherited="True">
-        <Foreground>0,0,0,255</Foreground>
-      </State>
-      <State Name="Pressed" IsInherited="True">
-        <Foreground>0,0,0,255</Foreground>
-      </State>
-      <State Name="Focused" IsInherited="True">
-        <Foreground>0,0,0,255</Foreground>
-      </State>
       <State Name="Default">
         <Foreground>230,230,230,255</Foreground>
+      </State>
+      <State Name="Selected" IsInherited="True">
+        <Foreground>0,0,0,255</Foreground>
       </State>
       <State Name="Disabled">
         <Foreground>230,230,230,255</Foreground>

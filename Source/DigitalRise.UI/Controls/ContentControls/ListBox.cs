@@ -16,7 +16,7 @@ namespace DigitalRise.UI.Controls
 		#region Fields
 		//--------------------------------------------------------------
 
-		private StackPanel _itemsPanel;
+		internal StackPanel _itemsPanel;
 		private ScrollViewer _scrollViewer;
 		#endregion
 

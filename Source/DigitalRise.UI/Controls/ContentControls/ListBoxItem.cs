@@ -47,6 +47,34 @@ namespace DigitalRise.UI.Controls
 	{
 		private readonly ListBox _listBox;
 
+		public bool IsSelected
+		{
+			get
+			{
+				if (_listBox.SelectedIndex == -1)
+				{
+					return false;
+				}
+
+				var index = _listBox._itemsPanel.Children.IndexOf(this);
+
+				return index == _listBox.SelectedIndex; 
+			}
+		}
+
+		public override string VisualState
+		{
+			get
+			{
+				if (!IsSelected)
+				{
+					return base.VisualState;
+				}
+
+				return "Selected";
+			}
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ListBoxItem"/> class.
 		/// </summary>
