@@ -305,7 +305,7 @@ GameComponent with a StateMachine.",
       // We want to apply the animation to the "Opacity" property of the TextBlock.
       // All "game object properties" of a UIControl can be made "animatable".      
       // First, get a handle to the "Opacity" property.
-      var opacityProperty = _startTextBlock.Properties.Get<float>(TextBlock.OpacityPropertyId);
+      var opacityProperty = TextBlock.OpacityProperty.Get(_startTextBlock);
 
       // Then cast the "Opacity" property to an IAnimatableProperty. 
       var animatableOpacityProperty = opacityProperty.AsAnimatable();
@@ -370,7 +370,7 @@ GameComponent with a StateMachine.",
           To = 0,                                // Animate the opacity from the current value to 0
           Duration = TimeSpan.FromSeconds(0.5),  // over a duration of 0.5 seconds.
         };
-        var opacityProperty = _startTextBlock.Properties.Get<float>(TextBlock.OpacityPropertyId).AsAnimatable();
+        var opacityProperty = TextBlock.OpacityProperty.Get(_startTextBlock).AsAnimatable();
         _exitAnimationController = AnimationService.StartAnimation(fadeOutAnimation, opacityProperty);
 
         // When the fade-out animation finished trigger the transition from the "Start" 

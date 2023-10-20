@@ -247,7 +247,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="LineOffset"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int LineOffsetPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> LineOffsetProperty = CreateProperty(
 			typeof(Console), "LineOffset", GamePropertyCategories.Default, null, 0,
 			UIPropertyOptions.AffectsArrange);
 
@@ -261,8 +261,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int LineOffset
 		{
-			get { return GetValue<int>(LineOffsetPropertyId); }
-			set { SetValue(LineOffsetPropertyId, value); }
+			get => LineOffsetProperty.GetValue(this);
+			set => LineOffsetProperty.SetValue(this, value);
 		}
 
 
@@ -270,7 +270,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MaxLines"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxLinesPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MaxLinesProperty = CreateProperty(
 			typeof(Console), "MaxLines", GamePropertyCategories.Default, null, 100,
 			UIPropertyOptions.None);
 
@@ -285,8 +285,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public int MaxLines
 		{
-			get { return GetValue<int>(MaxLinesPropertyId); }
-			set { SetValue(MaxLinesPropertyId, value); }
+			get => MaxLinesProperty.GetValue(this);
+			set => MaxLinesProperty.SetValue(this, value);
 		}
 
 
@@ -294,7 +294,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalScrollBarStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(
 			typeof(Console), "VerticalScrollBarStyle", GamePropertyCategories.Style, null,
 			"VerticalScrollBar", UIPropertyOptions.None);
 
@@ -308,8 +308,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string VerticalScrollBarStyle
 		{
-			get { return GetValue<string>(VerticalScrollBarStylePropertyId); }
-			set { SetValue(VerticalScrollBarStylePropertyId, value); }
+			get => VerticalScrollBarStyleProperty.GetValue(this);
+			set => VerticalScrollBarStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -325,7 +325,7 @@ namespace DigitalRise.UI.Controls
 		static Console()
 		{
 			// Focusable per default.
-			OverrideDefaultValue(typeof(Console), FocusablePropertyId, true);
+			OverrideDefaultValue(typeof(Console), FocusableProperty.Id, true);
 		}
 
 
@@ -344,7 +344,7 @@ namespace DigitalRise.UI.Controls
 			Prompt = "> ";
 			VisualLines = new List<string>();
 
-			var lineOffset = Properties.Get<int>(LineOffsetPropertyId);
+			var lineOffset = LineOffsetProperty.Get(this);
 			lineOffset.Changing += OnCoerceLineOffset;
 		}
 		#endregion
@@ -371,7 +371,7 @@ namespace DigitalRise.UI.Controls
 				};
 				VisualChildren.Add(_verticalScrollBar);
 
-				var scrollBarValue = _verticalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_verticalScrollBar);
 				scrollBarValue.Changed += (s, e) =>
 				{
 					// The line offset is the "inverse" of the scroll bar value:

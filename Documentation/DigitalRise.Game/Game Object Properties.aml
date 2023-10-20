@@ -169,8 +169,8 @@ public class MyGameObject : GameObject
   /// <value>The x-position.</value>
   public float X
   {
-    get { return GetValue<float>(XPropertyId); }
-    set { SetValue(XPropertyId, value); }
+    get => XProperty.GetValue(this);
+    set => XProperty.SetValue(this, value);
   }
 
   ...

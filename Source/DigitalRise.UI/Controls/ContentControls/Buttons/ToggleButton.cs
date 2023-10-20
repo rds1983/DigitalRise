@@ -62,7 +62,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsChecked"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsCheckedPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsCheckedProperty = CreateProperty(
 			typeof(ToggleButton), "IsChecked", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -75,8 +75,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsChecked
 		{
-			get { return GetValue<bool>(IsCheckedPropertyId); }
-			set { SetValue(IsCheckedPropertyId, value); }
+			get => IsCheckedProperty.GetValue(this);
+			set => IsCheckedProperty.SetValue(this, value);
 		}
 		#endregion
 

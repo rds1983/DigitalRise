@@ -63,7 +63,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsDragging"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsDraggingPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsDraggingProperty = CreateProperty(
 			typeof(Thumb), "IsDragging", GamePropertyCategories.Default, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -77,8 +77,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsDragging
 		{
-			get { return GetValue<bool>(IsDraggingPropertyId); }
-			private set { SetValue(IsDraggingPropertyId, value); }
+			get => IsDraggingProperty.GetValue(this);
+			private set => IsDraggingProperty.SetValue(this, value);
 		}
 
 
@@ -86,7 +86,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="DragDelta"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int DragDeltaPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector2> DragDeltaProperty = CreateProperty(
 			typeof(Thumb), "DragDelta", GamePropertyCategories.Default, null, Vector2.Zero,
 			UIPropertyOptions.AffectsRender);
 
@@ -97,8 +97,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The dragging distance relative to the start position of the drag operation.</value>
 		public Vector2 DragDelta
 		{
-			get { return GetValue<Vector2>(DragDeltaPropertyId); }
-			private set { SetValue(DragDeltaPropertyId, value); }
+			get => DragDeltaProperty.GetValue(this);
+			private set => DragDeltaProperty.SetValue(this, value);
 		}
 		#endregion
 

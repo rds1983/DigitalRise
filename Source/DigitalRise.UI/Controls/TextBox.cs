@@ -189,7 +189,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Text"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TextPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TextProperty = CreateProperty(
 			typeof(TextBox), "Text", GamePropertyCategories.Common, null, string.Empty,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -200,8 +200,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The text.</value>
 		public string Text
 		{
-			get { return GetValue<string>(TextPropertyId); }
-			set { SetValue(TextPropertyId, value); }
+			get => TextProperty.GetValue(this);
+			set => TextProperty.SetValue(this, value);
 		}
 
 
@@ -209,7 +209,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="GuideTitle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GuideTitlePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> GuideTitleProperty = CreateProperty(
 			typeof(TextBox), "GuideTitle", GamePropertyCategories.Default, null, (string)null,
 			UIPropertyOptions.None);
 
@@ -220,8 +220,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The title that is displayed with the software keyboard.</value>
 		public string GuideTitle
 		{
-			get { return GetValue<string>(GuideTitlePropertyId); }
-			set { SetValue(GuideTitlePropertyId, value); }
+			get => GuideTitleProperty.GetValue(this);
+			set => GuideTitleProperty.SetValue(this, value);
 		}
 
 
@@ -229,7 +229,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="GuideDescription"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GuideDescriptionPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> GuideDescriptionProperty = CreateProperty(
 			typeof(TextBox), "GuideDescription", GamePropertyCategories.Default, null, (string)null,
 			UIPropertyOptions.None);
 
@@ -240,8 +240,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The description that is displayed with the software keyboard.</value>
 		public string GuideDescription
 		{
-			get { return GetValue<string>(GuideDescriptionPropertyId); }
-			set { SetValue(GuideDescriptionPropertyId, value); }
+			get => GuideDescriptionProperty.GetValue(this);
+			set => GuideDescriptionProperty.SetValue(this, value);
 		}
 
 
@@ -250,7 +250,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsReadOnly"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsReadOnlyPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsReadOnlyProperty = CreateProperty(
 			typeof(TextBox), "IsReadOnly", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsArrange);
 
@@ -264,8 +264,8 @@ namespace DigitalRise.UI.Controls
 		[Browsable(false)]
 		public bool IsReadOnly
 		{
-			get { return GetValue<bool>(IsReadOnlyPropertyId); }
-			set { SetValue(IsReadOnlyPropertyId, value); }
+			get => IsReadOnlyProperty.GetValue(this);
+			set => IsReadOnlyProperty.SetValue(this, value);
 		}
 
 
@@ -273,7 +273,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsPassword"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsPasswordPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsPasswordProperty = CreateProperty(
 			typeof(TextBox), "IsPassword", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -290,8 +290,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsPassword
 		{
-			get { return GetValue<bool>(IsPasswordPropertyId); }
-			set { SetValue(IsPasswordPropertyId, value); }
+			get => IsPasswordProperty.GetValue(this);
+			set => IsPasswordProperty.SetValue(this, value);
 		}
 
 
@@ -299,7 +299,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="PasswordCharacter"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int PasswordCharacterPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<char> PasswordCharacterProperty = CreateProperty(
 			typeof(TextBox), "PasswordCharacter", GamePropertyCategories.Behavior, null, '•',
 			UIPropertyOptions.AffectsMeasure);
 
@@ -316,8 +316,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public char PasswordCharacter
 		{
-			get { return GetValue<char>(PasswordCharacterPropertyId); }
-			set { SetValue(PasswordCharacterPropertyId, value); }
+			get => PasswordCharacterProperty.GetValue(this);
+			set => PasswordCharacterProperty.SetValue(this, value);
 		}
 
 
@@ -325,7 +325,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MaxLength"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxLengthPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MaxLengthProperty = CreateProperty(
 			typeof(TextBox), "MaxLength", GamePropertyCategories.Default, null, int.MaxValue,
 			UIPropertyOptions.None);
 
@@ -336,8 +336,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The maximal number of characters in the <see cref="Text"/>.</value>
 		public int MaxLength
 		{
-			get { return GetValue<int>(MaxLengthPropertyId); }
-			set { SetValue(MaxLengthPropertyId, value); }
+			get => MaxLengthProperty.GetValue(this);
+			set => MaxLengthProperty.SetValue(this, value);
 		}
 
 
@@ -345,7 +345,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MinLines"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MinLinesPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MinLinesProperty = CreateProperty(
 			typeof(TextBox), "MinLines", GamePropertyCategories.Default, null, 1,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -356,8 +356,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The minimal number of visible lines.</value>
 		public int MinLines
 		{
-			get { return GetValue<int>(MinLinesPropertyId); }
-			set { SetValue(MinLinesPropertyId, value); }
+			get => MinLinesProperty.GetValue(this);
+			set => MinLinesProperty.SetValue(this, value);
 		}
 
 
@@ -365,7 +365,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MaxLines"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxLinesPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MaxLinesProperty = CreateProperty(
 			typeof(TextBox), "MaxLines", GamePropertyCategories.Default, null, int.MaxValue,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -379,8 +379,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int MaxLines
 		{
-			get { return GetValue<int>(MaxLinesPropertyId); }
-			set { SetValue(MaxLinesPropertyId, value); }
+			get => MaxLinesProperty.GetValue(this);
+			set => MaxLinesProperty.SetValue(this, value);
 		}
 
 
@@ -388,7 +388,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SelectionColor"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SelectionColorPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Color> SelectionColorProperty = CreateProperty(
 			typeof(TextBox), "SelectionColor", GamePropertyCategories.Appearance, null,
 			new Color(51, 153, 255, 168), UIPropertyOptions.None);
 
@@ -401,8 +401,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public Color SelectionColor
 		{
-			get { return GetValue<Color>(SelectionColorPropertyId); }
-			set { SetValue(SelectionColorPropertyId, value); }
+			get => SelectionColorProperty.GetValue(this);
+			set => SelectionColorProperty.SetValue(this, value);
 		}
 
 
@@ -410,7 +410,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalScrollBarVisibility"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalScrollBarVisibilityPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<ScrollBarVisibility> VerticalScrollBarVisibilityProperty = CreateProperty(
 			typeof(TextBox), "VerticalScrollBarVisibility", GamePropertyCategories.Behavior, null,
 			ScrollBarVisibility.Auto, UIPropertyOptions.AffectsMeasure);
 
@@ -423,8 +423,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public ScrollBarVisibility VerticalScrollBarVisibility
 		{
-			get { return GetValue<ScrollBarVisibility>(VerticalScrollBarVisibilityPropertyId); }
-			set { SetValue(VerticalScrollBarVisibilityPropertyId, value); }
+			get => VerticalScrollBarVisibilityProperty.GetValue(this);
+			set => VerticalScrollBarVisibilityProperty.SetValue(this, value);
 		}
 
 
@@ -432,7 +432,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalScrollBarStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(
 			typeof(TextBox), "VerticalScrollBarStyle", GamePropertyCategories.Style, null,
 			"ScrollBarVertical", UIPropertyOptions.None);
 
@@ -446,8 +446,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string VerticalScrollBarStyle
 		{
-			get { return GetValue<string>(VerticalScrollBarStylePropertyId); }
-			set { SetValue(VerticalScrollBarStylePropertyId, value); }
+			get => VerticalScrollBarStyleProperty.GetValue(this);
+			set => VerticalScrollBarStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -463,8 +463,8 @@ namespace DigitalRise.UI.Controls
 		static TextBox()
 		{
 			// Focusable by default.
-			OverrideDefaultValue(typeof(TextBox), FocusablePropertyId, true);
-			OverrideDefaultValue(typeof(TextBox), MaxLinesPropertyId, 1);
+			OverrideDefaultValue(typeof(TextBox), FocusableProperty.Id, true);
+			OverrideDefaultValue(typeof(TextBox), MaxLinesProperty.Id, 1);
 		}
 
 
@@ -481,11 +481,11 @@ namespace DigitalRise.UI.Controls
 
 			// When IsReadOnly is changed, we must update the cursor because the I beam 
 			// cursor should not be used over read-only text boxes.
-			var isReadOnlyProperty = Properties.Get<bool>(IsReadOnlyPropertyId);
+			var isReadOnlyProperty = IsReadOnlyProperty.Get(this);
 			isReadOnlyProperty.Changed += (s, e) => UpdateCursor();
 
 			// Clear selection when text is updated.
-			var textProperty = Properties.Get<string>(TextPropertyId);
+			var textProperty = TextProperty.Get(this);
 			textProperty.Changed += (s, e) => ClearSelection();
 		}
 		#endregion
@@ -516,7 +516,7 @@ namespace DigitalRise.UI.Controls
 					_verticalScrollBar.Width = 16;
 
 				// The scroll bar value changes the VisualOffset value.
-				var scrollBarValue = _verticalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_verticalScrollBar);
 				scrollBarValue.Changed += (s, e) => VisualOffset = _verticalScrollBar.Value;
 
 				// The I beam cursor should not be visible over the scroll bar. Therefore, 

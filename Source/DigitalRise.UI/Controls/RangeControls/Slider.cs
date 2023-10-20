@@ -96,7 +96,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ThumbStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ThumbStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> ThumbStyleProperty = CreateProperty(
 			typeof(Slider), "ThumbStyle", GamePropertyCategories.Style, null, "Thumb",
 			UIPropertyOptions.None);
 
@@ -110,8 +110,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string ThumbStyle
 		{
-			get { return GetValue<string>(ThumbStylePropertyId); }
-			set { SetValue(ThumbStylePropertyId, value); }
+			get => ThumbStyleProperty.GetValue(this);
+			set => ThumbStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -127,7 +127,7 @@ namespace DigitalRise.UI.Controls
 		static Slider()
 		{
 			// Sliders can have the focus.
-			OverrideDefaultValue(typeof(Slider), FocusablePropertyId, true);
+			OverrideDefaultValue(typeof(Slider), FocusableProperty.Id, true);
 		}
 
 

@@ -92,8 +92,8 @@ namespace Samples
 
       // Disable bilateral check box if blur is not checked.
       bilateralCheckBox.IsEnabled = blurCheckBox.IsChecked;
-      var blurIsCheckedProperty = blurCheckBox.Properties.Get<bool>(ToggleButton.IsCheckedPropertyId);
-      var bilateralIsEnabledProperty = bilateralCheckBox.Properties.Get<bool>(UIControl.IsEnabledPropertyId);
+      var blurIsCheckedProperty = ToggleButton.IsCheckedProperty.Get(blurCheckBox);
+      var bilateralIsEnabledProperty = UIControl.IsEnabledProperty.Get(bilateralCheckBox);
       blurIsCheckedProperty.Changed += bilateralIsEnabledProperty.Change;
 
       var anisotropicCheckBox = SampleHelper.AddCheckBox(
@@ -104,7 +104,7 @@ namespace Samples
 
       // Disable anisotropic check box if blur is not checked.
       anisotropicCheckBox.IsEnabled = blurCheckBox.IsChecked;
-      var anisotropicIsEnabledProperty = anisotropicCheckBox.Properties.Get<bool>(UIControl.IsEnabledPropertyId);
+      var anisotropicIsEnabledProperty = UIControl.IsEnabledProperty.Get(anisotropicCheckBox);
       blurIsCheckedProperty.Changed += anisotropicIsEnabledProperty.Change;
 
       var depthScaleSlider = SampleHelper.AddSlider(
@@ -144,8 +144,8 @@ namespace Samples
 
       // Disable depth sensitivity slider if half-res is not checked.
       upsampleDepthSensitivitySlider.IsEnabled = halfResCheckBox.IsChecked;
-      var upsampleDepthSensitivityIsEnabledProperty = upsampleDepthSensitivitySlider.Properties.Get<bool>(UIControl.IsEnabledPropertyId);
-      var halfResIsCheckedProperty = halfResCheckBox.Properties.Get<bool>(ToggleButton.IsCheckedPropertyId);
+      var upsampleDepthSensitivityIsEnabledProperty = UIControl.IsEnabledProperty.Get(upsampleDepthSensitivitySlider);
+      var halfResIsCheckedProperty = ToggleButton.IsCheckedProperty.Get(halfResCheckBox);
       halfResIsCheckedProperty.Changed += upsampleDepthSensitivityIsEnabledProperty.Change;
 
       var postProcessingPanel = SampleHelper.AddGroupBox(optionsPanel, "Post processing");

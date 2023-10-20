@@ -83,7 +83,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ContentStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ContentStylePropertyId = CreateProperty<string>(
+		public static readonly GamePropertyInfo<string> ContentStyleProperty = CreateProperty<string>(
 			typeof(ContentControl), "ContentStyle", GamePropertyCategories.Style, null, null,
 			UIPropertyOptions.None);
 
@@ -97,8 +97,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string ContentStyle
 		{
-			get { return GetValue<string>(ContentStylePropertyId); }
-			set { SetValue(ContentStylePropertyId, value); }
+			get => ContentStyleProperty.GetValue(this);
+			set => ContentStyleProperty.SetValue(this, value);
 		}
 
 
@@ -106,7 +106,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ClipContent"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ClipContentPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> ClipContentProperty = CreateProperty(
 			typeof(ContentControl), "ClipContent", GamePropertyCategories.Appearance, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -124,8 +124,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool ClipContent
 		{
-			get { return GetValue<bool>(ClipContentPropertyId); }
-			set { SetValue(ClipContentPropertyId, value); }
+			get => ClipContentProperty.GetValue(this);
+			set => ClipContentProperty.SetValue(this, value);
 		}
 		#endregion
 

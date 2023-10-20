@@ -77,7 +77,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Texture"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TexturePropertyId = CreateProperty<Texture2D>(
+		public static readonly GamePropertyInfo<Texture2D> TextureProperty = CreateProperty<Texture2D>(
 			typeof(Image), "Texture", GamePropertyCategories.Appearance, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -88,8 +88,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The texture with the image that should be displayed.</value>
 		public Texture2D Texture
 		{
-			get { return GetValue<Texture2D>(TexturePropertyId); }
-			set { SetValue(TexturePropertyId, value); }
+			get => TextureProperty.GetValue(this);
+			set => TextureProperty.SetValue(this, value);
 		}
 
 
@@ -97,7 +97,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SourceRectangle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SourceRectanglePropertyId = CreateProperty<Rectangle?>(
+		public static readonly GamePropertyInfo<Rectangle?> SourceRectangleProperty = CreateProperty<Rectangle?>(
 			typeof(Image), "SourceRectangle", GamePropertyCategories.Appearance, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -120,8 +120,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Rectangle? SourceRectangle
 		{
-			get { return GetValue<Rectangle?>(SourceRectanglePropertyId); }
-			set { SetValue(SourceRectanglePropertyId, value); }
+			get => SourceRectangleProperty.GetValue(this);
+			set => SourceRectangleProperty.SetValue(this, value);
 		}
 
 		#endregion
@@ -139,7 +139,7 @@ namespace DigitalRise.UI.Controls
 		{
 			// The default Foreground color must be white because the Foreground color is used for
 			// tinting.
-			OverrideDefaultValue(typeof(Image), ForegroundPropertyId, Color.White);
+			OverrideDefaultValue(typeof(Image), ForegroundProperty.Id, Color.White);
 		}
 
 

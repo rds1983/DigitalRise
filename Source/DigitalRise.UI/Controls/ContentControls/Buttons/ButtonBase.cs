@@ -67,7 +67,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ClickMode"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ClickModePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<ClickMode> ClickModeProperty = CreateProperty(
 			typeof(ButtonBase), "ClickMode", GamePropertyCategories.Behavior, null, ClickMode.Release,
 			UIPropertyOptions.None);
 
@@ -78,8 +78,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The <see cref="Controls.ClickMode"/>.</value>
 		public ClickMode ClickMode
 		{
-			get { return GetValue<ClickMode>(ClickModePropertyId); }
-			set { SetValue(ClickModePropertyId, value); }
+			get => ClickModeProperty.GetValue(this);
+			set => ClickModeProperty.SetValue(this, value);
 		}
 
 
@@ -87,7 +87,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsDown"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsDownPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsDownProperty = CreateProperty(
 			typeof(ButtonBase), "IsDown", GamePropertyCategories.Default, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -101,8 +101,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsDown
 		{
-			get { return GetValue<bool>(IsDownPropertyId); }
-			private set { SetValue(IsDownPropertyId, value); }
+			get => IsDownProperty.GetValue(this);
+			private set => IsDownProperty.SetValue(this, value);
 		}
 
 
@@ -110,7 +110,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsClicked"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsClickedPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsClickedProperty = CreateProperty(
 			typeof(ButtonBase), "IsClicked", GamePropertyCategories.Default, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -124,8 +124,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsClicked
 		{
-			get { return GetValue<bool>(IsClickedPropertyId); }
-			protected set { SetValue(IsClickedPropertyId, value); }
+			get => IsClickedProperty.GetValue(this);
+			protected set => IsClickedProperty.SetValue(this, value);
 		}
 
 
@@ -167,7 +167,7 @@ namespace DigitalRise.UI.Controls
 		static ButtonBase()
 		{
 			// Buttons are focusable by default.
-			OverrideDefaultValue(typeof(ButtonBase), FocusablePropertyId, true);
+			OverrideDefaultValue(typeof(ButtonBase), FocusableProperty.Id, true);
 		}
 
 
@@ -179,13 +179,13 @@ namespace DigitalRise.UI.Controls
 			Style = "ButtonBase";
 
 			// IsClicked raises ClickEvent automatically.
-			var isClicked = Properties.Get<bool>(IsClickedPropertyId);
+			var isClicked = IsClickedProperty.Get(this);
 			isClicked.Changed += (s, e) => { if (e.NewValue) OnClick(EventArgs.Empty); };
 
 			// When IsEnabled or IsVisible are changed, OnDisable should be called.
-			var isEnabled = Properties.Get<bool>(IsEnabledPropertyId);
+			var isEnabled = IsEnabledProperty.Get(this);
 			isEnabled.Changed += OnDisable;
-			var isVisible = Properties.Get<bool>(IsVisiblePropertyId);
+			var isVisible = IsVisibleProperty.Get(this);
 			isVisible.Changed += OnDisable;
 		}
 		#endregion

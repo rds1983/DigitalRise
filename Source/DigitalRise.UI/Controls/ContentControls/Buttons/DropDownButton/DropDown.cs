@@ -84,7 +84,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="DropDownItemStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int DropDownItemStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> DropDownItemStyleProperty = CreateProperty(
 			typeof(DropDown), "DropDownItemStyle", GamePropertyCategories.Style, null, "DropDownItem",
 			UIPropertyOptions.None);
 
@@ -97,8 +97,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string DropDownItemStyle
 		{
-			get { return GetValue<string>(DropDownItemStylePropertyId); }
-			set { SetValue(DropDownItemStylePropertyId, value); }
+			get => DropDownItemStyleProperty.GetValue(this);
+			set => DropDownItemStyleProperty.SetValue(this, value);
 		}
 
 
@@ -106,7 +106,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(
 			typeof(DropDown), "TitleTextBlockStyle", GamePropertyCategories.Style, null,
 			"TitleTextBlock", UIPropertyOptions.None);
 
@@ -120,8 +120,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string TitleTextBlockStyle
 		{
-			get { return GetValue<string>(TitleTextBlockStylePropertyId); }
-			set { SetValue(TitleTextBlockStylePropertyId, value); }
+			get => TitleTextBlockStyleProperty.GetValue(this);
+			set => TitleTextBlockStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -137,7 +137,7 @@ namespace DigitalRise.UI.Controls
 		static DropDown()
 		{
 			// TODO: Is this needed?
-			OverrideDefaultValue(typeof(DropDown), IsFocusScopePropertyId, true);
+			OverrideDefaultValue(typeof(DropDown), IsFocusScopeProperty.Id, true);
 		}
 
 

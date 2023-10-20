@@ -62,7 +62,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsIndeterminate"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsIndeterminatePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsIndeterminateProperty = CreateProperty(
 			typeof(ProgressBar), "IsIndeterminate", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -78,8 +78,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsIndeterminate
 		{
-			get { return GetValue<bool>(IsIndeterminatePropertyId); }
-			set { SetValue(IsIndeterminatePropertyId, value); }
+			get => IsIndeterminateProperty.GetValue(this);
+			set => IsIndeterminateProperty.SetValue(this, value);
 		}
 
 
@@ -87,7 +87,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsIndeterminate"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IndeterminateCycleTimePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<TimeSpan> IndeterminateCycleTimeProperty = CreateProperty(
 			typeof(ProgressBar), "IndeterminateCycleTime", GamePropertyCategories.Appearance, null,
 			TimeSpan.FromSeconds(4), UIPropertyOptions.AffectsRender);
 
@@ -101,8 +101,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public TimeSpan IndeterminateCycleTime
 		{
-			get { return GetValue<TimeSpan>(IndeterminateCycleTimePropertyId); }
-			set { SetValue(IndeterminateCycleTimePropertyId, value); }
+			get => IndeterminateCycleTimeProperty.GetValue(this);
+			set => IndeterminateCycleTimeProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -117,7 +117,7 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
 		static ProgressBar()
 		{
-			OverrideDefaultValue(typeof(ProgressBar), IndeterminateCycleTimePropertyId, TimeSpan.FromSeconds(4));
+			OverrideDefaultValue(typeof(ProgressBar), IndeterminateCycleTimeProperty.Id, TimeSpan.FromSeconds(4));
 		}
 
 

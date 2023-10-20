@@ -39,7 +39,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Minimum"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MinimumPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MinimumProperty = CreateProperty(
 			typeof(RangeBase), "Minimum", GamePropertyCategories.Common, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -52,8 +52,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float Minimum
 		{
-			get { return GetValue<float>(MinimumPropertyId); }
-			set { SetValue(MinimumPropertyId, value); }
+			get => MinimumProperty.GetValue(this);
+			set => MinimumProperty.SetValue(this, value);
 		}
 
 
@@ -61,7 +61,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Maximum"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaximumPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MaximumProperty = CreateProperty(
 			typeof(RangeBase), "Maximum", GamePropertyCategories.Common, null, float.MaxValue,
 			UIPropertyOptions.AffectsArrange);
 
@@ -74,8 +74,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float Maximum
 		{
-			get { return GetValue<float>(MaximumPropertyId); }
-			set { SetValue(MaximumPropertyId, value); }
+			get => MaximumProperty.GetValue(this);
+			set => MaximumProperty.SetValue(this, value);
 		}
 
 
@@ -83,7 +83,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Value"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ValuePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> ValueProperty = CreateProperty(
 			typeof(RangeBase), "Value", GamePropertyCategories.Common, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -97,8 +97,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
 		public float Value
 		{
-			get { return GetValue<float>(ValuePropertyId); }
-			set { SetValue(ValuePropertyId, value); }
+			get => ValueProperty.GetValue(this);
+			set => ValueProperty.SetValue(this, value);
 		}
 
 
@@ -106,7 +106,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SmallChange"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SmallChangePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> SmallChangeProperty = CreateProperty(
 			typeof(RangeBase), "SmallChange", GamePropertyCategories.Common, null, 1.0f,
 			UIPropertyOptions.None);
 
@@ -123,8 +123,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public float SmallChange
 		{
-			get { return GetValue<float>(SmallChangePropertyId); }
-			set { SetValue(SmallChangePropertyId, value); }
+			get => SmallChangeProperty.GetValue(this);
+			set => SmallChangeProperty.SetValue(this, value);
 		}
 
 
@@ -132,7 +132,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="LargeChange"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int LargeChangePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> LargeChangeProperty = CreateProperty(
 			typeof(RangeBase), "LargeChange", GamePropertyCategories.Common, null, 10.0f,
 			UIPropertyOptions.None);
 
@@ -149,8 +149,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public float LargeChange
 		{
-			get { return GetValue<float>(LargeChangePropertyId); }
-			set { SetValue(LargeChangePropertyId, value); }
+			get => LargeChangeProperty.GetValue(this);
+			set => LargeChangeProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -165,9 +165,9 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
 		static RangeBase()
 		{
-			OverrideDefaultValue(typeof(RangeBase), MaximumPropertyId, 100.0f);
-			OverrideDefaultValue(typeof(RangeBase), SmallChangePropertyId, 1.0f);
-			OverrideDefaultValue(typeof(RangeBase), LargeChangePropertyId, 10.0f);
+			OverrideDefaultValue(typeof(RangeBase), MaximumProperty.Id, 100.0f);
+			OverrideDefaultValue(typeof(RangeBase), SmallChangeProperty.Id, 1.0f);
+			OverrideDefaultValue(typeof(RangeBase), LargeChangeProperty.Id, 10.0f);
 		}
 
 
@@ -179,7 +179,7 @@ namespace DigitalRise.UI.Controls
 			Style = "RangeBase";
 
 			// When value changes: Coerce it to allowed range.
-			var value = Properties.Get<float>(ValuePropertyId);
+			var value = ValueProperty.Get(this);
 			value.Changing += (s, e) => e.CoercedValue = MathHelper.Clamp(e.CoercedValue, Minimum, Maximum);
 		}
 		#endregion

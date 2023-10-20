@@ -492,7 +492,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Background"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int BackgroundPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Color> BackgroundProperty = CreateProperty(
 			typeof(UIControl), "Background", GamePropertyCategories.Appearance, null, Color.Transparent,
 			UIPropertyOptions.AffectsRender);
 
@@ -508,8 +508,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Color Background
 		{
-			get { return GetValue<Color>(BackgroundPropertyId); }
-			set { SetValue(BackgroundPropertyId, value); }
+			get => BackgroundProperty.GetValue(this);
+			set => BackgroundProperty.SetValue(this, value);
 		}
 
 
@@ -517,7 +517,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Foreground"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ForegroundPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Color> ForegroundProperty = CreateProperty(
 			typeof(UIControl), "Foreground", GamePropertyCategories.Appearance, null, Color.Black,
 			UIPropertyOptions.AffectsRender);
 
@@ -531,8 +531,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Color Foreground
 		{
-			get { return GetValue<Color>(ForegroundPropertyId); }
-			set { SetValue(ForegroundPropertyId, value); }
+			get => ForegroundProperty.GetValue(this);
+			set => ForegroundProperty.SetValue(this, value);
 		}
 
 
@@ -540,7 +540,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Opacity"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int OpacityPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> OpacityProperty = CreateProperty(
 			typeof(UIControl), "Opacity", GamePropertyCategories.Appearance, null, 1.0f,
 			UIPropertyOptions.AffectsRender);
 
@@ -557,8 +557,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public float Opacity
 		{
-			get { return GetValue<float>(OpacityPropertyId); }
-			set { SetValue(OpacityPropertyId, value); }
+			get => OpacityProperty.GetValue(this);
+			set => OpacityProperty.SetValue(this, value);
 		}
 
 
@@ -566,7 +566,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Font"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int FontPropertyId = CreateProperty<string>(
+		public static readonly GamePropertyInfo<string> FontProperty = CreateProperty<string>(
 			typeof(UIControl), "Font", GamePropertyCategories.Appearance, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -577,8 +577,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The font.</value>
 		public string Font
 		{
-			get { return GetValue<string>(FontPropertyId); }
-			set { SetValue(FontPropertyId, value); }
+			get => FontProperty.GetValue(this);
+			set => FontProperty.SetValue(this, value);
 		}
 
 
@@ -586,7 +586,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsEnabled"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsEnabledPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsEnabledProperty = CreateProperty(
 			typeof(UIControl), "IsEnabled", GamePropertyCategories.Common, null, true,
 			UIPropertyOptions.AffectsRender);
 
@@ -603,8 +603,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsEnabled
 		{
-			get { return GetValue<bool>(IsEnabledPropertyId); }
-			set { SetValue(IsEnabledPropertyId, value); }
+			get => IsEnabledProperty.GetValue(this);
+			set => IsEnabledProperty.SetValue(this, value);
 		}
 
 
@@ -612,7 +612,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsVisible"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsVisiblePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsVisibleProperty = CreateProperty(
 			typeof(UIControl), "IsVisible", GamePropertyCategories.Appearance, null, true,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -630,8 +630,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsVisible
 		{
-			get { return GetValue<bool>(IsVisiblePropertyId); }
-			set { SetValue(IsVisiblePropertyId, value); }
+			get => IsVisibleProperty.GetValue(this);
+			set => IsVisibleProperty.SetValue(this, value);
 		}
 
 
@@ -639,7 +639,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsMouseOver"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsMouseOverPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsMouseOverProperty = CreateProperty(
 			typeof(UIControl), "IsMouseOver", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -664,8 +664,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsMouseOver
 		{
-			get { return GetValue<bool>(IsMouseOverPropertyId); }
-			private set { SetValue(IsMouseOverPropertyId, value); }
+			get => IsMouseOverProperty.GetValue(this);
+			private set => IsMouseOverProperty.SetValue(this, value);
 		}
 
 
@@ -673,7 +673,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ToolTip"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ToolTipPropertyId = CreateProperty<object>(
+		public static readonly GamePropertyInfo<object> ToolTipProperty = CreateProperty<object>(
 			typeof(UIControl), "ToolTip", GamePropertyCategories.Default, null, null,
 			UIPropertyOptions.None);
 
@@ -726,8 +726,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public object ToolTip
 		{
-			get { return GetValue<object>(ToolTipPropertyId); }
-			set { SetValue(ToolTipPropertyId, value); }
+			get => ToolTipProperty.GetValue(this);
+			set => ToolTipProperty.SetValue(this, value);
 		}
 
 
@@ -735,7 +735,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="RenderTransformOrigin"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int RenderTransformOriginPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector2> RenderTransformOriginProperty = CreateProperty(
 			typeof(UIControl), "RenderTransformOrigin", GamePropertyCategories.Appearance, null,
 			Vector2.Zero, UIPropertyOptions.AffectsRender);
 
@@ -750,8 +750,8 @@ namespace DigitalRise.UI.Controls
 		/// <seealso cref="RenderTransform"/>
 		public Vector2 RenderTransformOrigin
 		{
-			get { return GetValue<Vector2>(RenderTransformOriginPropertyId); }
-			set { SetValue(RenderTransformOriginPropertyId, value); }
+			get => RenderTransformOriginProperty.GetValue(this);
+			set => RenderTransformOriginProperty.SetValue(this, value);
 		}
 
 
@@ -759,7 +759,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="RenderScale"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int RenderScalePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector2> RenderScaleProperty = CreateProperty(
 			typeof(UIControl), "RenderScale", GamePropertyCategories.Appearance, null, Vector2.One,
 			UIPropertyOptions.AffectsRender);
 
@@ -771,8 +771,8 @@ namespace DigitalRise.UI.Controls
 		/// <seealso cref="RenderTransform"/>
 		public Vector2 RenderScale
 		{
-			get { return GetValue<Vector2>(RenderScalePropertyId); }
-			set { SetValue(RenderScalePropertyId, value); }
+			get => RenderScaleProperty.GetValue(this);
+			set => RenderScaleProperty.SetValue(this, value);
 		}
 
 
@@ -780,7 +780,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="RenderRotation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int RenderRotationPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> RenderRotationProperty = CreateProperty(
 			typeof(UIControl), "RenderRotation", GamePropertyCategories.Appearance, null, 0.0f,
 			UIPropertyOptions.AffectsRender);
 
@@ -792,8 +792,8 @@ namespace DigitalRise.UI.Controls
 		/// <seealso cref="RenderTransform"/>
 		public float RenderRotation
 		{
-			get { return GetValue<float>(RenderRotationPropertyId); }
-			set { SetValue(RenderRotationPropertyId, value); }
+			get => RenderRotationProperty.GetValue(this);
+			set => RenderRotationProperty.SetValue(this, value);
 		}
 
 
@@ -801,7 +801,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="RenderTranslation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int RenderTranslationPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector2> RenderTranslationProperty = CreateProperty(
 			typeof(UIControl), "RenderTranslation", GamePropertyCategories.Appearance, null,
 			Vector2.Zero, UIPropertyOptions.AffectsRender);
 
@@ -813,8 +813,8 @@ namespace DigitalRise.UI.Controls
 		/// <seealso cref="RenderTransform"/>
 		public Vector2 RenderTranslation
 		{
-			get { return GetValue<Vector2>(RenderTranslationPropertyId); }
-			set { SetValue(RenderTranslationPropertyId, value); }
+			get => RenderTranslationProperty.GetValue(this);
+			set => RenderTranslationProperty.SetValue(this, value);
 		}
 
 
@@ -822,7 +822,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsFocused"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsFocusedPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsFocusedProperty = CreateProperty(
 			typeof(UIControl), "IsFocused", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -839,8 +839,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsFocused
 		{
-			get { return GetValue<bool>(IsFocusedPropertyId); }
-			internal set { SetValue(IsFocusedPropertyId, value); }
+			get => IsFocusedProperty.GetValue(this);
+			internal set => IsFocusedProperty.SetValue(this, value);
 		}
 
 
@@ -848,7 +848,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsFocusScope"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsFocusScopePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsFocusScopeProperty = CreateProperty(
 			typeof(UIControl), "IsFocusScope", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.None);
 
@@ -865,8 +865,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsFocusScope
 		{
-			get { return GetValue<bool>(IsFocusScopePropertyId); }
-			set { SetValue(IsFocusScopePropertyId, value); }
+			get => IsFocusScopeProperty.GetValue(this);
+			set => IsFocusScopeProperty.SetValue(this, value);
 		}
 
 
@@ -875,7 +875,7 @@ namespace DigitalRise.UI.Controls
 		/// </summary>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Unfocus")]
 		[Browsable(false)]
-		public static readonly int AutoUnfocusPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> AutoUnfocusProperty = CreateProperty(
 			typeof(UIControl), "AutoUnfocus", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.None);
 
@@ -895,8 +895,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
 		public bool AutoUnfocus
 		{
-			get { return GetValue<bool>(AutoUnfocusPropertyId); }
-			set { SetValue(AutoUnfocusPropertyId, value); }
+			get => AutoUnfocusProperty.GetValue(this);
+			set => AutoUnfocusProperty.SetValue(this, value);
 		}
 
 
@@ -904,7 +904,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Focusable"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int FocusablePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> FocusableProperty = CreateProperty(
 			typeof(UIControl), "Focusable", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -922,8 +922,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool Focusable
 		{
-			get { return GetValue<bool>(FocusablePropertyId); }
-			set { SetValue(FocusablePropertyId, value); }
+			get => FocusableProperty.GetValue(this);
+			set => FocusableProperty.SetValue(this, value);
 		}
 
 
@@ -931,7 +931,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="FocusWhenMouseOver"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int FocusWhenMouseOverPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> FocusWhenMouseOverProperty = CreateProperty(
 			typeof(UIControl), "FocusWhenMouseOver", GamePropertyCategories.Input, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -949,8 +949,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool FocusWhenMouseOver
 		{
-			get { return GetValue<bool>(FocusWhenMouseOverPropertyId); }
-			set { SetValue(FocusWhenMouseOverPropertyId, value); }
+			get => FocusWhenMouseOverProperty.GetValue(this);
+			set => FocusWhenMouseOverProperty.SetValue(this, value);
 		}
 
 
@@ -964,7 +964,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="X"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int XPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> XProperty = CreateProperty(
 			typeof(UIControl), "X", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -976,8 +976,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
 		public float X
 		{
-			get { return GetValue<float>(XPropertyId); }
-			set { SetValue(XPropertyId, value); }
+			get => XProperty.GetValue(this);
+			set => XProperty.SetValue(this, value);
 		}
 
 
@@ -985,7 +985,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Y"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int YPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> YProperty = CreateProperty(
 			typeof(UIControl), "Y", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -997,8 +997,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
 		public float Y
 		{
-			get { return GetValue<float>(YPropertyId); }
-			set { SetValue(YPropertyId, value); }
+			get => YProperty.GetValue(this);
+			set => YProperty.SetValue(this, value);
 		}
 
 
@@ -1006,7 +1006,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Width"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int WidthPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> WidthProperty = CreateProperty(
 			typeof(UIControl), "Width", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1020,8 +1020,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float Width
 		{
-			get { return GetValue<float>(WidthPropertyId); }
-			set { SetValue(WidthPropertyId, value); }
+			get => WidthProperty.GetValue(this);
+			set => WidthProperty.SetValue(this, value);
 		}
 
 
@@ -1029,7 +1029,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Height"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HeightPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> HeightProperty = CreateProperty(
 			typeof(UIControl), "Height", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1043,8 +1043,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float Height
 		{
-			get { return GetValue<float>(HeightPropertyId); }
-			set { SetValue(HeightPropertyId, value); }
+			get => HeightProperty.GetValue(this);
+			set => HeightProperty.SetValue(this, value);
 		}
 
 
@@ -1052,7 +1052,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MinWidth"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MinWidthPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MinWidthProperty = CreateProperty(
 			typeof(UIControl), "MinWidth", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1063,8 +1063,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The minimal width of the control.</value>
 		public float MinWidth
 		{
-			get { return GetValue<float>(MinWidthPropertyId); }
-			set { SetValue(MinWidthPropertyId, value); }
+			get => MinWidthProperty.GetValue(this);
+			set => MinWidthProperty.SetValue(this, value);
 		}
 
 
@@ -1072,7 +1072,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MinHeight"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MinHeightPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MinHeightProperty = CreateProperty(
 			typeof(UIControl), "MinHeight", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1083,8 +1083,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The minimal height of the control.</value>
 		public float MinHeight
 		{
-			get { return GetValue<float>(MinHeightPropertyId); }
-			set { SetValue(MinHeightPropertyId, value); }
+			get => MinHeightProperty.GetValue(this);
+			set => MinHeightProperty.SetValue(this, value);
 		}
 
 
@@ -1092,7 +1092,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MaxWidth"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxWidthPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MaxWidthProperty = CreateProperty(
 			typeof(UIControl), "MaxWidth", GamePropertyCategories.Layout, null, float.NaN,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1103,8 +1103,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The maximal width of the control.</value>
 		public float MaxWidth
 		{
-			get { return GetValue<float>(MaxWidthPropertyId); }
-			set { SetValue(MaxWidthPropertyId, value); }
+			get => MaxWidthProperty.GetValue(this);
+			set => MaxWidthProperty.SetValue(this, value);
 		}
 
 
@@ -1112,7 +1112,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MaxHeight"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxHeightPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MaxHeightProperty = CreateProperty(
 			typeof(UIControl), "MaxHeight", GamePropertyCategories.Layout, null, float.NaN,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1123,71 +1123,71 @@ namespace DigitalRise.UI.Controls
 		/// <value>The maximal height of the control.</value>
 		public float MaxHeight
 		{
-			get { return GetValue<float>(MaxHeightPropertyId); }
-			set { SetValue(MaxHeightPropertyId, value); }
+			get => MaxHeightProperty.GetValue(this);
+			set => MaxHeightProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="GridColumn"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GridColumnPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> GridColumnProperty = CreateProperty(
 			typeof(UIControl), "GridColumn", GamePropertyCategories.Layout, null, 0,
 			UIPropertyOptions.AffectsMeasure);
 
 		public int GridColumn
 		{
-			get { return GetValue<int>(GridColumnPropertyId); }
-			set { SetValue(GridColumnPropertyId, value); }
+			get => GridColumnProperty.GetValue(this);
+			set => GridColumnProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="GridRow"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GridRowSpanPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> GridRowSpanProperty = CreateProperty(
 			typeof(UIControl), "GridRowSpan", GamePropertyCategories.Layout, null, 1,
 			UIPropertyOptions.AffectsMeasure);
 
 		public int GridRowSpan
 		{
-			get { return GetValue<int>(GridRowSpanPropertyId); }
-			set { SetValue(GridRowSpanPropertyId, value); }
+			get => GridRowSpanProperty.GetValue(this);
+			set => GridRowSpanProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="GridColumnSpan"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GridColumnSpanPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> GridColumnSpanProperty = CreateProperty(
 			typeof(UIControl), "GridColumnSpan", GamePropertyCategories.Layout, null, 1,
 			UIPropertyOptions.AffectsMeasure);
 
 		public int GridColumnSpan
 		{
-			get { return GetValue<int>(GridColumnSpanPropertyId); }
-			set { SetValue(GridColumnSpanPropertyId, value); }
+			get => GridColumnSpanProperty.GetValue(this);
+			set => GridColumnSpanProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="GridRowSpan"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int GridRowPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> GridRowProperty = CreateProperty(
 			typeof(UIControl), "GridRow", GamePropertyCategories.Layout, null, 0,
 			UIPropertyOptions.AffectsMeasure);
 
 		public int GridRow
 		{
-			get { return GetValue<int>(GridRowPropertyId); }
-			set { SetValue(GridRowPropertyId, value); }
+			get => GridRowProperty.GetValue(this);
+			set => GridRowProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="Padding"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int PaddingPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector4> PaddingProperty = CreateProperty(
 			typeof(UIControl), "Padding", GamePropertyCategories.Layout, null, Vector4.Zero,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1201,8 +1201,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Vector4 Padding
 		{
-			get { return GetValue<Vector4>(PaddingPropertyId); }
-			set { SetValue(PaddingPropertyId, value); }
+			get => PaddingProperty.GetValue(this);
+			set => PaddingProperty.SetValue(this, value);
 		}
 
 
@@ -1210,7 +1210,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Margin"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MarginPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector4> MarginProperty = CreateProperty(
 			typeof(UIControl), "Margin", GamePropertyCategories.Layout, null, Vector4.Zero,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -1221,8 +1221,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The margin as 4D vector (left, top, right bottom).</value>
 		public Vector4 Margin
 		{
-			get { return GetValue<Vector4>(MarginPropertyId); }
-			set { SetValue(MarginPropertyId, value); }
+			get => MarginProperty.GetValue(this);
+			set => MarginProperty.SetValue(this, value);
 		}
 
 
@@ -1230,7 +1230,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="HorizontalAlignment"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HorizontalAlignmentPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<HorizontalAlignment> HorizontalAlignmentProperty = CreateProperty(
 			typeof(UIControl), "HorizontalAlignment", GamePropertyCategories.Layout, null,
 			HorizontalAlignment.Left, UIPropertyOptions.AffectsMeasure);
 
@@ -1246,8 +1246,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public HorizontalAlignment HorizontalAlignment
 		{
-			get { return GetValue<HorizontalAlignment>(HorizontalAlignmentPropertyId); }
-			set { SetValue(HorizontalAlignmentPropertyId, value); }
+			get => HorizontalAlignmentProperty.GetValue(this);
+			set => HorizontalAlignmentProperty.SetValue(this, value);
 		}
 
 
@@ -1255,7 +1255,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalAlignment"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalAlignmentPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<VerticalAlignment> VerticalAlignmentProperty = CreateProperty(
 			typeof(UIControl), "VerticalAlignment", GamePropertyCategories.Layout, null,
 			VerticalAlignment.Top, UIPropertyOptions.AffectsMeasure);
 
@@ -1271,8 +1271,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public VerticalAlignment VerticalAlignment
 		{
-			get { return GetValue<VerticalAlignment>(VerticalAlignmentPropertyId); }
-			set { SetValue(VerticalAlignmentPropertyId, value); }
+			get => VerticalAlignmentProperty.GetValue(this);
+			set => VerticalAlignmentProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -1287,8 +1287,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
 		static UIControl()
 		{
-			OverrideDefaultValue(typeof(UIControl), WidthPropertyId, float.NaN);
-			OverrideDefaultValue(typeof(UIControl), HeightPropertyId, float.NaN);
+			OverrideDefaultValue(typeof(UIControl), WidthProperty.Id, float.NaN);
+			OverrideDefaultValue(typeof(UIControl), HeightProperty.Id, float.NaN);
 		}
 
 
@@ -1302,10 +1302,10 @@ namespace DigitalRise.UI.Controls
 			VisualChildren = new VisualChildCollection(this);
 			_visualChildrenCopy = new List<UIControl>();
 
-			var isVisible = Properties.Get<bool>(IsVisiblePropertyId);
+			var isVisible = IsVisibleProperty.Get(this);
 			isVisible.Changed += OnIsVisibleChanged;
 
-			var isEnabled = Properties.Get<bool>(IsEnabledPropertyId);
+			var isEnabled = IsEnabledProperty.Get(this);
 			isEnabled.Changed += OnIsEnabledChanged;
 		}
 		#endregion
@@ -1819,9 +1819,9 @@ namespace DigitalRise.UI.Controls
 			else if ((options & UIPropertyOptions.AffectsRender) != 0)
 				InvalidateVisual();
 
-			if (propertyId == RenderScalePropertyId
-					|| propertyId == RenderRotationPropertyId
-					|| propertyId == RenderTranslationPropertyId)
+			if (propertyId == RenderScaleProperty.Id
+					|| propertyId == RenderRotationProperty.Id
+					|| propertyId == RenderTranslationProperty.Id)
 			{
 				// Invalidate HasRenderTransform flag.
 				_hasRenderTransform = null;

@@ -105,7 +105,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="DropDownStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int DropDownStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> DropDownStyleProperty = CreateProperty(
 			typeof(DropDownButton), "DropDownStyle", GamePropertyCategories.Style, null, "DropDown",
 			UIPropertyOptions.None);
 
@@ -119,8 +119,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string DropDownStyle
 		{
-			get { return GetValue<string>(DropDownStylePropertyId); }
-			set { SetValue(DropDownStylePropertyId, value); }
+			get => DropDownStyleProperty.GetValue(this);
+			set => DropDownStyleProperty.SetValue(this, value);
 		}
 
 
@@ -128,7 +128,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SelectedIndex"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SelectedIndexPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(
 			typeof(DropDownButton), "SelectedIndex", GamePropertyCategories.Default, null, -1,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -141,15 +141,15 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int SelectedIndex
 		{
-			get { return GetValue<int>(SelectedIndexPropertyId); }
-			set { SetValue(SelectedIndexPropertyId, value); }
+			get => SelectedIndexProperty.GetValue(this);
+			set => SelectedIndexProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="MaxDropDownHeight"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MaxDropDownHeightPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> MaxDropDownHeightProperty = CreateProperty(
 			typeof(DropDownButton), "MaxDropDownHeight", GamePropertyCategories.Default, null, 400.0f,
 			UIPropertyOptions.None);
 
@@ -162,15 +162,15 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float MaxDropDownHeight
 		{
-			get { return GetValue<float>(MaxDropDownHeightPropertyId); }
-			set { SetValue(MaxDropDownHeightPropertyId, value); }
+			get => MaxDropDownHeightProperty.GetValue(this);
+			set => MaxDropDownHeightProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="Title"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitlePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(
 			typeof(DropDownButton), "Title", GamePropertyCategories.Common, null, "Unnamed",
 			UIPropertyOptions.AffectsMeasure);
 
@@ -183,8 +183,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string Title
 		{
-			get { return GetValue<string>(TitlePropertyId); }
-			set { SetValue(TitlePropertyId, value); }
+			get => TitleProperty.GetValue(this);
+			set => TitleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -201,7 +201,7 @@ namespace DigitalRise.UI.Controls
 		static DropDownButton()
 		{
 			// Using ClickMode.Press per default.
-			OverrideDefaultValue(typeof(DropDownButton), ClickModePropertyId, ClickMode.Press);
+			OverrideDefaultValue(typeof(DropDownButton), ClickModeProperty.Id, ClickMode.Press);
 		}
 
 
@@ -216,7 +216,7 @@ namespace DigitalRise.UI.Controls
 			Items.CollectionChanged += OnItemsChanged;
 
 			// Connect OnSelectedIndexChanged() to SelectedIndex property.
-			var selectedIndex = Properties.Get<int>(SelectedIndexPropertyId);
+			var selectedIndex = SelectedIndexProperty.Get(this);
 			selectedIndex.Changed += OnSelectedIndexChanged;
 
 			// We have a DropDown. It is opened or closed, when this DropDownButton is clicked.

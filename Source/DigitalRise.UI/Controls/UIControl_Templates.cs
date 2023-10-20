@@ -135,7 +135,7 @@ namespace DigitalRise.UI.Controls
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="ownerType"/> is <see langword="null"/>.
 		/// </exception>
-		public static int CreateProperty<T>(Type ownerType, string name, string category,
+		public static GamePropertyInfo<T> CreateProperty<T>(Type ownerType, string name, string category,
 			string description, T defaultValue, UIPropertyOptions options)
 		{
 			if (ownerType == null)
@@ -164,7 +164,7 @@ namespace DigitalRise.UI.Controls
 			// Add property to list of ownerType's properties.
 			properties.Add(new UIProperty<T> { Name = name });
 
-			return propertyId;
+			return new GamePropertyInfo<T>(propertyId);
 		}
 
 

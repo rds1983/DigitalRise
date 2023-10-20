@@ -79,14 +79,14 @@
 class UIControl : GameObject
 {
   ...
-  public static readonly int IsEnabledPropertyId = CreateProperty(
+  public static readonly GamePropertyInfo<int> IsEnabledProperty = CreateProperty2(
     typeof(UIControl), "IsEnabled", GamePropertyCategories.Common, null, true,
     UIPropertyOptions.AffectsRender);
  
   public bool IsEnabled
   {
-    get { return GetValue<bool>(IsEnabledPropertyId); }
-    set { SetValue(IsEnabledPropertyId, value); }
+    get => IsEnabledProperty.GetValue(this);
+    set => IsEnabledProperty.SetValue(this, value);
   }
   ...
 }
@@ -333,7 +333,7 @@ var animation = new SingleFromToByAnimation
                 </para>
                 <code language="cs">
                     <![CDATA[
-GameProperty<bool> isEnabledProperty= myControl.Properties.Get<bool>(UIControl.IsClickedPropertyId);
+GameProperty<bool> isEnabledProperty= UIControl.IsClickedProperty.Get(myControl);
 ]]>
                 </code>
                 <para>
@@ -380,8 +380,8 @@ protected override void OnLoad()
 { 
   ...   
   // Connect ScrollBar.Value with HorizontalOffset (two-way connection). 
-  var scrollBarValue = _horizontalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId); 
-  var horizontalOffset = Properties.Get<float>(HorizontalOffsetPropertyId); 
+  var scrollBarValue = RangeBase.ValueProperty.Get(_horizontalScrollBar); 
+  var horizontalOffset = HorizontalOffsetProperty.Get(this); 
   scrollBarValue.Changed += horizontalOffset.Change; 
   horizontalOffset.Changed += scrollBarValue.Change; 
   ... 

@@ -198,8 +198,8 @@ namespace DigitalRise.UI.Controls
 				}
 			}
 
-			_listBoxPlaces.Properties.Get<int>("SelectedIndex").Changed += OnPlacesSelectedIndexChanged;
-			_listBoxFiles.Properties.Get<int>("SelectedIndex").Changed += OnFilesSelectedIndexChanged;
+			ListBox.SelectedIndexProperty.Get(_listBoxPlaces).Changed += OnPlacesSelectedIndexChanged;
+			ListBox.SelectedIndexProperty.Get(_listBoxFiles).Changed += OnFilesSelectedIndexChanged;
 			_listBoxFiles.InputProcessed += _listBoxFiles_InputProcessed;
 
 			_buttonParent.Click += OnButtonParent;

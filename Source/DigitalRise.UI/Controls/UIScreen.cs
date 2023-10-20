@@ -228,7 +228,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ToolTipDelay"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ToolTipDelayPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<TimeSpan> ToolTipDelayProperty = CreateProperty(
 			typeof(UIScreen), "ToolTipDelay", GamePropertyCategories.Default, null,
 			TimeSpan.FromMilliseconds(500), UIPropertyOptions.None);
 
@@ -239,8 +239,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The time which the mouse has to stand still before a tool tip pops up.</value>
 		public TimeSpan ToolTipDelay
 		{
-			get { return GetValue<TimeSpan>(ToolTipDelayPropertyId); }
-			set { SetValue(ToolTipDelayPropertyId, value); }
+			get => ToolTipDelayProperty.GetValue(this);
+			set => ToolTipDelayProperty.SetValue(this, value);
 		}
 
 
@@ -248,7 +248,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ToolTipOffset"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ToolTipOffsetPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> ToolTipOffsetProperty = CreateProperty(
 			typeof(UIScreen), "ToolTipOffset", GamePropertyCategories.Default, null, 20f,
 			UIPropertyOptions.None);
 
@@ -259,8 +259,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The offset of the tool tip to the mouse position.</value>
 		public float ToolTipOffset
 		{
-			get { return GetValue<float>(ToolTipOffsetPropertyId); }
-			set { SetValue(ToolTipOffsetPropertyId, value); }
+			get => ToolTipOffsetProperty.GetValue(this);
+			set => ToolTipOffsetProperty.SetValue(this, value);
 		}
 
 
@@ -268,7 +268,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="MouseWheelScrollDelta"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MouseWheelScrollDeltaPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MouseWheelScrollDeltaProperty = CreateProperty(
 			typeof(UIScreen), "MouseWheelScrollDelta", GamePropertyCategories.Behavior, null,
 			Utility.MouseWheelScrollDelta,
 			UIPropertyOptions.None);
@@ -282,15 +282,15 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int MouseWheelScrollDelta
 		{
-			get { return GetValue<int>(MouseWheelScrollDeltaPropertyId); }
-			set { SetValue(MouseWheelScrollDeltaPropertyId, value); }
+			get => MouseWheelScrollDeltaProperty.GetValue(this);
+			set => MouseWheelScrollDeltaProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="MouseWheelScrollLines"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int MouseWheelScrollLinesPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> MouseWheelScrollLinesProperty = CreateProperty(
 			typeof(UIScreen), "MouseWheelScrollLines", GamePropertyCategories.Behavior, null,
 			Utility.MouseWheelScrollLines,
 			UIPropertyOptions.None);
@@ -302,8 +302,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The number of lines to scroll when the mouse wheel is rotated.</value>
 		public int MouseWheelScrollLines
 		{
-			get { return GetValue<int>(MouseWheelScrollLinesPropertyId); }
-			set { SetValue(MouseWheelScrollLinesPropertyId, value); }
+			get => MouseWheelScrollLinesProperty.GetValue(this);
+			set => MouseWheelScrollLinesProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -320,7 +320,7 @@ namespace DigitalRise.UI.Controls
 		{
 			// Screens do auto-unfocus because the screen area usually shows the game graphics and
 			// when the user clicks the game it should remove the focus.
-			OverrideDefaultValue(typeof(UIScreen), AutoUnfocusPropertyId, true);
+			OverrideDefaultValue(typeof(UIScreen), AutoUnfocusProperty.Id, true);
 		}
 
 
@@ -359,7 +359,7 @@ namespace DigitalRise.UI.Controls
 			ToolTipManager = new ToolTipManager(this);
 
 			// Call OnVisibleChanged when IsVisible changes.
-			var isVisible = Properties.Get<bool>(IsVisiblePropertyId);
+			var isVisible = IsVisibleProperty.Get(this);
 			isVisible.Changed += (s, e) => OnVisibleChanged(EventArgs.Empty);
 
 			InputEnabled = true;

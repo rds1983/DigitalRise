@@ -103,7 +103,7 @@ scrollBar.Value = scrollBar.Maximum;
                 </para>
                 <code language="cs">
                     <![CDATA[
-var isClickedProperty = myButton.Properties.Get<bool>(ButtonBase.IsClickedPropertyId);
+var isClickedProperty = ButtonBase.IsClickedProperty.Get(myButton);
 isClickedProperty.Value = true;
 ]]>
                 </code>

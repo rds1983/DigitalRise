@@ -51,7 +51,7 @@ namespace DigitalRise.UI.Controls
 		static DropDownItem()
 		{
 			// Per default, the item should be focused when the mouse moves over the item.
-			OverrideDefaultValue(typeof(DropDownItem), FocusWhenMouseOverPropertyId, true);
+			OverrideDefaultValue(typeof(DropDownItem), FocusWhenMouseOverProperty.Id, true);
 		}
 
 

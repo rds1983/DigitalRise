@@ -57,25 +57,25 @@ namespace Samples.Game.UI
     }
 
 
-    public static readonly int IsExpandedPropertyId = CreateProperty(
+    public static readonly GamePropertyInfo<bool> IsExpandedProperty = CreateProperty(
       typeof(TreeViewItem), "IsExpanded", GamePropertyCategories.Default, null, true,
       UIPropertyOptions.AffectsMeasure);
 
     public bool IsExpanded
     {
-      get { return GetValue<bool>(IsExpandedPropertyId); }
-      set { SetValue(IsExpandedPropertyId, value); }
+      get => IsExpandedProperty.GetValue(this);
+      set => IsExpandedProperty.SetValue(this, value);
     }
 
 
-    public static readonly int IsSelectedPropertyId = CreateProperty(
+    public static readonly GamePropertyInfo<bool> IsSelectedProperty = CreateProperty(
       typeof(TreeViewItem), "IsSelected", GamePropertyCategories.Default, null, false,
       UIPropertyOptions.AffectsRender);
 
     public bool IsSelected
     {
-      get { return GetValue<bool>(IsSelectedPropertyId); }
-      set { SetValue(IsSelectedPropertyId, value); }
+      get => IsSelectedProperty.GetValue(this);
+      set => IsSelectedProperty.SetValue(this, value);
     }
 
 
@@ -90,7 +90,7 @@ namespace Samples.Game.UI
       //Vector3 color = RandomHelper.Random.NextVector3(0, 1);
       //Background = new Color(color.X, color.Y, color.Z, 0.4f);
 
-      var isExpandedProperty = Properties.Get<bool>(IsExpandedPropertyId);
+      var isExpandedProperty = IsExpandedProperty.Get(this);
       isExpandedProperty.Changed += OnExpandedChanged;
     }
 
@@ -126,8 +126,8 @@ namespace Samples.Game.UI
         };
 
         // Whenever the padding is changed, the panel margin should be updated.
-        var panelMargin = _panel.Properties.Get<Vector4>(UIControl.MarginPropertyId);
-        var padding = this.Properties.Get<Vector4>(UIControl.PaddingPropertyId);
+        var panelMargin = UIControl.MarginProperty.Get(_panel);
+        var padding = UIControl.PaddingProperty.Get(this);
         padding.Changed += panelMargin.Change;
 
         // Add Items to the panel.

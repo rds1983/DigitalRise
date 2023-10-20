@@ -121,7 +121,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(
 			typeof(GroupBox), "TitleTextBlockStyle", GamePropertyCategories.Style, null, "TitleTextBlock",
 			UIPropertyOptions.AffectsRender);
 
@@ -135,8 +135,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string TitleTextBlockStyle
 		{
-			get { return GetValue<string>(TitleTextBlockStylePropertyId); }
-			set { SetValue(TitleTextBlockStylePropertyId, value); }
+			get => TitleTextBlockStyleProperty.GetValue(this);
+			set => TitleTextBlockStyleProperty.SetValue(this, value);
 		}
 
 
@@ -144,7 +144,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Title"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitlePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(
 			typeof(GroupBox), "Title", GamePropertyCategories.Common, null, "Unnamed",
 			UIPropertyOptions.AffectsRender);
 
@@ -155,8 +155,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The title.</value>
 		public string Title
 		{
-			get { return GetValue<string>(TitlePropertyId); }
-			set { SetValue(TitlePropertyId, value); }
+			get => TitleProperty.GetValue(this);
+			set => TitleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -197,8 +197,8 @@ namespace DigitalRise.UI.Controls
 				VisualChildren.Add(_titleTextBlock);
 
 				// Connect Title with TextBlock.Text.
-				var title = Properties.Get<string>(TitlePropertyId);
-				var text = _titleTextBlock.Properties.Get<string>(TextBlock.TextPropertyId);
+				var title = TitleProperty.Get(this);
+				var text = TextBlock.TextProperty.Get(_titleTextBlock);
 				title.Changed += text.Change;
 			}
 		}
@@ -210,8 +210,8 @@ namespace DigitalRise.UI.Controls
 			if (_titleTextBlock != null)
 			{
 				// Disconnect Title and TextBlock.Text.
-				var title = Properties.Get<string>(TitlePropertyId);
-				var text = _titleTextBlock.Properties.Get<string>(TextBlock.TextPropertyId);
+				var title = TitleProperty.Get(this);
+				var text = TextBlock.TextProperty.Get(_titleTextBlock);
 				title.Changed -= text.Change;
 
 				VisualChildren.Remove(_titleTextBlock);

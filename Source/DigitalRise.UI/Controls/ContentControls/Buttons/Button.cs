@@ -56,7 +56,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsCancel"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsCancelPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsCancelProperty = CreateProperty(
 			typeof(Button), "IsCancel", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.None);
 
@@ -74,8 +74,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsCancel
 		{
-			get { return GetValue<bool>(IsCancelPropertyId); }
-			set { SetValue(IsCancelPropertyId, value); }
+			get => IsCancelProperty.GetValue(this);
+			set => IsCancelProperty.SetValue(this, value);
 		}
 
 
@@ -83,7 +83,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsDefault"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsDefaultPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsDefaultProperty = CreateProperty(
 			typeof(Button), "IsDefault", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.None);
 
@@ -101,8 +101,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsDefault
 		{
-			get { return GetValue<bool>(IsDefaultPropertyId); }
-			set { SetValue(IsDefaultPropertyId, value); }
+			get => IsDefaultProperty.GetValue(this);
+			set => IsDefaultProperty.SetValue(this, value);
 		}
 
 
@@ -110,7 +110,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsRepeatButton"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsRepeatButtonPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsRepeatButtonProperty = CreateProperty(
 			typeof(Button), "IsRepeatButton", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.None);
 
@@ -129,8 +129,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsRepeatButton
 		{
-			get { return GetValue<bool>(IsRepeatButtonPropertyId); }
-			set { SetValue(IsRepeatButtonPropertyId, value); }
+			get => IsRepeatButtonProperty.GetValue(this);
+			set => IsRepeatButtonProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -148,7 +148,7 @@ namespace DigitalRise.UI.Controls
 
 			// Handle IsRepeatButton changes:
 			// If the button is turned into a repeat button, the mode must change to Press.
-			var isRepeatButtonProperty = Properties.Get<bool>(IsRepeatButtonPropertyId);
+			var isRepeatButtonProperty = IsRepeatButtonProperty.Get(this);
 			isRepeatButtonProperty.Changed += (s, e) =>
 																				{
 																					if (IsRepeatButton)

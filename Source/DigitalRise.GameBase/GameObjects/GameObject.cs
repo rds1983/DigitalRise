@@ -225,7 +225,7 @@ namespace DigitalRise.GameBase
       // Force execution of static constructor which forces the execution of
       // static field initializers. This is necessary to execute all CreateProperty
       // and CreateEvent methods when they are used like this:
-      //   public static readonly int FooPropertyId = CreateProperty(...).Id;
+      //   public static readonly GamePropertyInfo<int> FooProperty = CreateProperty2(...).Id;
       // This is necessary because a .NET runtime can defer the static field 
       // initialization until first use of a static field (e.g. in NETFX_CORE).
       System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(GetType().TypeHandle);

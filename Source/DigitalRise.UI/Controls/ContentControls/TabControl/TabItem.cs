@@ -136,7 +136,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsSelected"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsSelectedPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsSelectedProperty = CreateProperty(
 			typeof(TabItem), "IsSelected", GamePropertyCategories.Common, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -150,8 +150,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsSelected
 		{
-			get { return GetValue<bool>(IsSelectedPropertyId); }
-			set { SetValue(IsSelectedPropertyId, value); }
+			get => IsSelectedProperty.GetValue(this);
+			set => IsSelectedProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -169,7 +169,7 @@ namespace DigitalRise.UI.Controls
 
 			// The user might change the IsSelected property directly. For this case we catch the
 			// Changed event of the IsSelected property.
-			var isSelected = Properties.Get<bool>(IsSelectedPropertyId);
+			var isSelected = IsSelectedProperty.Get(this);
 			isSelected.Changed += (s, e) =>
 														{
 															// The user has set IsSelected directly:

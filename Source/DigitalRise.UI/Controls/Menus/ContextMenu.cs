@@ -98,7 +98,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Offset"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int OffsetPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> OffsetProperty = CreateProperty(
 			typeof(ContextMenu), "Offset", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.None);
 
@@ -109,8 +109,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The offset to the opening position.</value>
 		public float Offset
 		{
-			get { return GetValue<float>(OffsetPropertyId); }
-			set { SetValue(OffsetPropertyId, value); }
+			get => OffsetProperty.GetValue(this);
+			set => OffsetProperty.SetValue(this, value);
 		}
 
 
@@ -118,7 +118,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsOpen"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsOpenPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsOpenProperty = CreateProperty(
 			typeof(ContextMenu), "IsOpen", GamePropertyCategories.Default, null, false,
 			UIPropertyOptions.None);
 
@@ -132,8 +132,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool IsOpen
 		{
-			get { return GetValue<bool>(IsOpenPropertyId); }
-			private set { SetValue(IsOpenPropertyId, value); }
+			get => IsOpenProperty.GetValue(this);
+			private set => IsOpenProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -149,7 +149,7 @@ namespace DigitalRise.UI.Controls
 		static ContextMenu()
 		{
 			// TODO: Check whether this is needed?
-			OverrideDefaultValue(typeof(ContextMenu), IsFocusScopePropertyId, true);
+			OverrideDefaultValue(typeof(ContextMenu), IsFocusScopeProperty.Id, true);
 		}
 
 

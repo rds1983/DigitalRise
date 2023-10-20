@@ -300,7 +300,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="HorizontalScrollBarVisibility"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HorizontalScrollBarVisibilityPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<ScrollBarVisibility> HorizontalScrollBarVisibilityProperty = CreateProperty(
 			typeof(ScrollViewer), "HorizontalScrollBarVisibility", GamePropertyCategories.Behavior, null,
 			ScrollBarVisibility.Auto, UIPropertyOptions.AffectsMeasure);
 
@@ -313,8 +313,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public ScrollBarVisibility HorizontalScrollBarVisibility
 		{
-			get { return GetValue<ScrollBarVisibility>(HorizontalScrollBarVisibilityPropertyId); }
-			set { SetValue(HorizontalScrollBarVisibilityPropertyId, value); }
+			get => HorizontalScrollBarVisibilityProperty.GetValue(this);
+			set => HorizontalScrollBarVisibilityProperty.SetValue(this, value);
 		}
 
 
@@ -322,7 +322,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalScrollBarVisibility"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalScrollBarVisibilityPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<ScrollBarVisibility> VerticalScrollBarVisibilityProperty = CreateProperty(
 			typeof(ScrollViewer), "VerticalScrollBarVisibility", GamePropertyCategories.Behavior, null,
 			ScrollBarVisibility.Auto, UIPropertyOptions.AffectsMeasure);
 
@@ -335,8 +335,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public ScrollBarVisibility VerticalScrollBarVisibility
 		{
-			get { return GetValue<ScrollBarVisibility>(VerticalScrollBarVisibilityPropertyId); }
-			set { SetValue(VerticalScrollBarVisibilityPropertyId, value); }
+			get => VerticalScrollBarVisibilityProperty.GetValue(this);
+			set => VerticalScrollBarVisibilityProperty.SetValue(this, value);
 		}
 
 
@@ -344,7 +344,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="HorizontalOffset"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HorizontalOffsetPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> HorizontalOffsetProperty = CreateProperty(
 			typeof(ScrollViewer), "HorizontalOffset", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -358,8 +358,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float HorizontalOffset
 		{
-			get { return GetValue<float>(HorizontalOffsetPropertyId); }
-			set { SetValue(HorizontalOffsetPropertyId, value); }
+			get => HorizontalOffsetProperty.GetValue(this);
+			set => HorizontalOffsetProperty.SetValue(this, value);
 		}
 
 
@@ -367,7 +367,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalOffset"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalOffsetPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> VerticalOffsetProperty = CreateProperty(
 			typeof(ScrollViewer), "VerticalOffset", GamePropertyCategories.Layout, null, 0.0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -381,8 +381,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public float VerticalOffset
 		{
-			get { return GetValue<float>(VerticalOffsetPropertyId); }
-			set { SetValue(VerticalOffsetPropertyId, value); }
+			get => VerticalOffsetProperty.GetValue(this);
+			set => VerticalOffsetProperty.SetValue(this, value);
 		}
 
 
@@ -390,7 +390,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="HorizontalScrollBarStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HorizontalScrollBarStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> HorizontalScrollBarStyleProperty = CreateProperty(
 			typeof(ScrollViewer), "HorizontalScrollBarStyle", GamePropertyCategories.Style, null,
 			"HorizontalScrollBar", UIPropertyOptions.None);
 
@@ -404,8 +404,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string HorizontalScrollBarStyle
 		{
-			get { return GetValue<string>(HorizontalScrollBarStylePropertyId); }
-			set { SetValue(HorizontalScrollBarStylePropertyId, value); }
+			get => HorizontalScrollBarStyleProperty.GetValue(this);
+			set => HorizontalScrollBarStyleProperty.SetValue(this, value);
 		}
 
 
@@ -413,7 +413,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int VerticalScrollBarStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(
 			typeof(ScrollViewer), "VerticalScrollBarStyle", GamePropertyCategories.Style, null,
 			"VerticalScrollBar", UIPropertyOptions.None);
 
@@ -427,8 +427,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string VerticalScrollBarStyle
 		{
-			get { return GetValue<string>(VerticalScrollBarStylePropertyId); }
-			set { SetValue(VerticalScrollBarStylePropertyId, value); }
+			get => VerticalScrollBarStyleProperty.GetValue(this);
+			set => VerticalScrollBarStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -454,11 +454,11 @@ namespace DigitalRise.UI.Controls
 			TouchPanel.EnabledGestures |= GestureType.Flick;
 
 			// Update _virtualHorizontalOffset whenever HorizontalOffset is changes.
-			var horizontalOffsetProperty = Properties.Get<float>(HorizontalOffsetPropertyId);
+			var horizontalOffsetProperty = HorizontalOffsetProperty.Get(this);
 			horizontalOffsetProperty.Changed += (s, e) => _virtualOffset.X = e.NewValue;
 
 			// Update _virtualVerticalOffset whenever VerticalOffset changes.
-			var verticalOffsetProperty = Properties.Get<float>(VerticalOffsetPropertyId);
+			var verticalOffsetProperty = VerticalOffsetProperty.Get(this);
 			verticalOffsetProperty.Changed += (s, e) => _virtualOffset.Y = e.NewValue;
 		}
 		#endregion
@@ -489,8 +489,8 @@ namespace DigitalRise.UI.Controls
 					_horizontalScrollBar.Height = 16;
 
 				// Connect ScrollBar.Value with HorizontalOffset (two-way connection).
-				var scrollBarValue = _horizontalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
-				var horizontalOffset = Properties.Get<float>(HorizontalOffsetPropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_horizontalScrollBar);
+				var horizontalOffset = HorizontalOffsetProperty.Get(this);
 				scrollBarValue.Changed += horizontalOffset.Change;
 				horizontalOffset.Changed += scrollBarValue.Change;
 
@@ -514,8 +514,8 @@ namespace DigitalRise.UI.Controls
 					_verticalScrollBar.Width = 16;
 
 				// Connect ScrollBar.Value with VerticalOffset (two-way connection).
-				var scrollBarValue = _verticalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
-				var verticalOffset = Properties.Get<float>(VerticalOffsetPropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_verticalScrollBar);
+				var verticalOffset = VerticalOffsetProperty.Get(this);
 				scrollBarValue.Changed += verticalOffset.Change;
 				verticalOffset.Changed += scrollBarValue.Change;
 
@@ -531,8 +531,8 @@ namespace DigitalRise.UI.Controls
 			// Remove scroll bars.
 			if (_horizontalScrollBar != null)
 			{
-				var scrollBarValue = _horizontalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
-				var horizontalOffset = Properties.Get<float>(HorizontalOffsetPropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_horizontalScrollBar);
+				var horizontalOffset = HorizontalOffsetProperty.Get(this);
 
 				scrollBarValue.Changed -= horizontalOffset.Change;
 				horizontalOffset.Changed -= scrollBarValue.Change;
@@ -543,8 +543,8 @@ namespace DigitalRise.UI.Controls
 
 			if (_verticalScrollBar != null)
 			{
-				var scrollBarValue = _verticalScrollBar.Properties.Get<float>(RangeBase.ValuePropertyId);
-				var verticalOffset = Properties.Get<float>(VerticalOffsetPropertyId);
+				var scrollBarValue = RangeBase.ValueProperty.Get(_verticalScrollBar);
+				var verticalOffset = VerticalOffsetProperty.Get(this);
 
 				scrollBarValue.Changed -= verticalOffset.Change;
 				verticalOffset.Changed -= scrollBarValue.Change;

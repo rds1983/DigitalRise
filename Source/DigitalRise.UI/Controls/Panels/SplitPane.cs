@@ -14,7 +14,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Orientation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int OrientationPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Orientation> OrientationProperty = CreateProperty(
 			typeof(SplitPane), "Orientation", GamePropertyCategories.Layout, null, Orientation.Horizontal,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -25,15 +25,15 @@ namespace DigitalRise.UI.Controls
 		/// <value>The orientation of the split pane.</value>
 		public Orientation Orientation
 		{
-			get { return GetValue<Orientation>(OrientationPropertyId); }
-			set { SetValue(OrientationPropertyId, value); }
+			get => OrientationProperty.GetValue(this);
+			set => OrientationProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="Orientation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HandleSizePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> HandleSizeProperty = CreateProperty(
 			typeof(SplitPane), "HandleSize", GamePropertyCategories.Layout, null, 8.0f,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -44,8 +44,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The orientation of the split pane.</value>
 		public float HandleSize
 		{
-			get { return GetValue<float>(HandleSizePropertyId); }
-			set { SetValue(HandleSizePropertyId, value); }
+			get => HandleSizeProperty.GetValue(this);
+			set => HandleSizeProperty.SetValue(this, value);
 		}
 
 		/// <summary>

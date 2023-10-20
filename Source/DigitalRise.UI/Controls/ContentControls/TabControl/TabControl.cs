@@ -88,7 +88,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SelectedIndex"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SelectedIndexPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(
 			typeof(TabControl), "SelectedIndex", GamePropertyCategories.Default, null, -1,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -101,8 +101,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int SelectedIndex
 		{
-			get { return GetValue<int>(SelectedIndexPropertyId); }
-			set { SetValue(SelectedIndexPropertyId, value); }
+			get => SelectedIndexProperty.GetValue(this);
+			set => SelectedIndexProperty.SetValue(this, value);
 		}
 
 
@@ -110,7 +110,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="TabItemPanelStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TabItemPanelStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TabItemPanelStyleProperty = CreateProperty(
 			typeof(TabControl), "TabItemPanelStyle", GamePropertyCategories.Style, null, "TabItemPanel",
 			UIPropertyOptions.None);
 
@@ -124,8 +124,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string TabItemPanelStyle
 		{
-			get { return GetValue<string>(TabItemPanelStylePropertyId); }
-			set { SetValue(TabItemPanelStylePropertyId, value); }
+			get => TabItemPanelStyleProperty.GetValue(this);
+			set => TabItemPanelStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -146,7 +146,7 @@ namespace DigitalRise.UI.Controls
 
 			// When selected index changes, call Select. The user might have changed SelectedIndex 
 			// directly without using Select().
-			var selectedIndex = Properties.Get<int>(SelectedIndexPropertyId);
+			var selectedIndex = SelectedIndexProperty.Get(this);
 			selectedIndex.Changed += (s, e) => Select(e.NewValue);
 		}
 		#endregion

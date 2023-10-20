@@ -80,7 +80,7 @@ namespace DigitalRise.UI.Controls
 				/// The ID of the <see cref="UseEllipsis"/> game object property.
 				/// </summary>
 				[Browsable(false)]
-				public static readonly int UseEllipsisPropertyId = CreateProperty(
+				public static readonly GamePropertyInfo<int> UseEllipsisProperty = CreateProperty2(
 					typeof(TextBlock), "UseEllipsis", GamePropertyCategories.Appearance, null, false,
 					UIPropertyOptions.AffectsRender);
 
@@ -94,8 +94,8 @@ namespace DigitalRise.UI.Controls
 				/// </value>
 				public bool UseEllipsis
 				{
-					get { return GetValue<bool>(UseEllipsisPropertyId); }
-					set { SetValue(UseEllipsisPropertyId, value); }
+					get => UseEllipsisProperty.GetValue(this);
+					set => UseEllipsisProperty.SetValue(this, value);
 				}*/
 
 
@@ -103,7 +103,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="WrapText"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int WrapTextPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> WrapTextProperty = CreateProperty(
 			typeof(TextBlock), "WrapText", GamePropertyCategories.Layout, null, false,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -117,8 +117,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool WrapText
 		{
-			get { return GetValue<bool>(WrapTextPropertyId); }
-			set { SetValue(WrapTextPropertyId, value); }
+			get => WrapTextProperty.GetValue(this);
+			set => WrapTextProperty.SetValue(this, value);
 		}
 
 
@@ -126,7 +126,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Text"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TextPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TextProperty = CreateProperty(
 			typeof(TextBlock), "Text", GamePropertyCategories.Common, null, string.Empty,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -137,8 +137,8 @@ namespace DigitalRise.UI.Controls
 		/// <value>The text.</value>
 		public string Text
 		{
-			get { return GetValue<string>(TextPropertyId); }
-			set { SetValue(TextPropertyId, value); }
+			get => TextProperty.GetValue(this);
+			set => TextProperty.SetValue(this, value);
 		}
 		#endregion
 

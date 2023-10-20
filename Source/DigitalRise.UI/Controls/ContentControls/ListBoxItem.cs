@@ -54,7 +54,7 @@ namespace DigitalRise.UI.Controls
 		{
 			Style = "ListBoxItem";
 			_listBox = listBox ?? throw new ArgumentNullException(nameof(listBox));
-			Properties.Get<bool>(IsFocusedPropertyId).Changed += OnFocusChanged;
+			IsFocusedProperty.Get(this).Changed += OnFocusChanged;
 		}
 
 		private void OnFocusChanged(object sender, GameBase.GamePropertyEventArgs<bool> e)

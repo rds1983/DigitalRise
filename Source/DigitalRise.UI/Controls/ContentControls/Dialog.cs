@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DigitalRise.GameBase;
+using Microsoft.Xna.Framework;
+using System.ComponentModel;
 
 namespace DigitalRise.UI.Controls
 {
@@ -10,7 +12,6 @@ namespace DigitalRise.UI.Controls
 
 		public Button OkButton => _okButton;
 		public Button CancelButton => _cancelButton;
-
 
 		public Dialog()
 		{

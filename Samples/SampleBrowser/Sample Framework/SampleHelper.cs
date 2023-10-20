@@ -625,7 +625,7 @@ namespace Samples
       foreach (var item in items)
         dropDownButton.Items.Add(item);
 
-      var selectedIndexProperty = dropDownButton.Properties.Get<int>(DropDownButton.SelectedIndexPropertyId);
+      var selectedIndexProperty = DropDownButton.SelectedIndexProperty.Get(dropDownButton);
       selectedIndexProperty.Changed += (s, e) =>
         selectedIndexChangedHandler((T)dropDownButton.Items[dropDownButton.SelectedIndex]);
     }
@@ -667,7 +667,7 @@ namespace Samples
       };
       horizontalStackPanel.Children.Add(slider);
 
-      var valueProperty = slider.Properties.Get<float>(RangeBase.ValuePropertyId);
+      var valueProperty = RangeBase.ValueProperty.Get(slider);
 
       // Coerce value to integers?
       if (isIntScale)

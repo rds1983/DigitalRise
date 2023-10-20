@@ -186,7 +186,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="CanDrag"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int CanDragPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> CanDragProperty = CreateProperty(
 			typeof(Window), "CanDrag", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -200,8 +200,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool CanDrag
 		{
-			get { return GetValue<bool>(CanDragPropertyId); }
-			set { SetValue(CanDragPropertyId, value); }
+			get => CanDragProperty.GetValue(this);
+			set => CanDragProperty.SetValue(this, value);
 		}
 
 
@@ -209,7 +209,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="CanResize"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int CanResizePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> CanResizeProperty = CreateProperty(
 			typeof(Window), "CanResize", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -227,8 +227,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool CanResize
 		{
-			get { return GetValue<bool>(CanResizePropertyId); }
-			set { SetValue(CanResizePropertyId, value); }
+			get => CanResizeProperty.GetValue(this);
+			set => CanResizeProperty.SetValue(this, value);
 		}
 
 
@@ -236,7 +236,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ResizeBorder"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ResizeBorderPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Vector4> ResizeBorderProperty = CreateProperty(
 			typeof(Window), "ResizeBorder", GamePropertyCategories.Layout, null, new Vector4(4),
 			UIPropertyOptions.AffectsRender);
 
@@ -250,8 +250,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public Vector4 ResizeBorder
 		{
-			get { return GetValue<Vector4>(ResizeBorderPropertyId); }
-			set { SetValue(ResizeBorderPropertyId, value); }
+			get => ResizeBorderProperty.GetValue(this);
+			set => ResizeBorderProperty.SetValue(this, value);
 		}
 
 
@@ -259,7 +259,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="DialogResult"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int DialogResultPropertyId = CreateProperty<bool?>(
+		public static readonly GamePropertyInfo<bool?> DialogResultProperty = CreateProperty<bool?>(
 			typeof(Window), "DialogResult", GamePropertyCategories.Default, null, null,
 			UIPropertyOptions.None);
 
@@ -286,15 +286,15 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool? DialogResult
 		{
-			get { return GetValue<bool?>(DialogResultPropertyId); }
-			set { SetValue(DialogResultPropertyId, value); }
+			get => DialogResultProperty.GetValue(this);
+			set => DialogResultProperty.SetValue(this, value);
 		}
 
 		/// <summary> 
 		/// The ID of the <see cref="HideOnClose"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int HideOnClosePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> HideOnCloseProperty = CreateProperty(
 			typeof(Window), "HideOnClose", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.None);
 
@@ -310,8 +310,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public bool HideOnClose
 		{
-			get { return GetValue<bool>(HideOnClosePropertyId); }
-			set { SetValue(HideOnClosePropertyId, value); }
+			get => HideOnCloseProperty.GetValue(this);
+			set => HideOnCloseProperty.SetValue(this, value);
 		}
 
 
@@ -319,7 +319,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsActive"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsActivePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsActiveProperty = CreateProperty(
 			typeof(Window), "IsActive", GamePropertyCategories.Common, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -338,8 +338,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsActive
 		{
-			get { return GetValue<bool>(IsActivePropertyId); }
-			private set { SetValue(IsActivePropertyId, value); }
+			get => IsActiveProperty.GetValue(this);
+			private set => IsActiveProperty.SetValue(this, value);
 		}
 
 
@@ -348,7 +348,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IsModal"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IsModalPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<bool> IsModalProperty = CreateProperty(
 			typeof(Window), "IsModal", GamePropertyCategories.Behavior, null, false,
 			UIPropertyOptions.AffectsRender);
 
@@ -366,8 +366,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public bool IsModal
 		{
-			get { return GetValue<bool>(IsModalPropertyId); }
-			set { SetValue(IsModalPropertyId, value); }
+			get => IsModalProperty.GetValue(this);
+			set => IsModalProperty.SetValue(this, value);
 		}
 
 
@@ -375,7 +375,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IconStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IconStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> IconStyleProperty = CreateProperty(
 			typeof(Window), "IconStyle", GamePropertyCategories.Style, null, "Icon",
 			UIPropertyOptions.None);
 
@@ -390,8 +390,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string IconStyle
 		{
-			get { return GetValue<string>(IconStylePropertyId); }
-			set { SetValue(IconStylePropertyId, value); }
+			get => IconStyleProperty.GetValue(this);
+			set => IconStyleProperty.SetValue(this, value);
 		}
 
 
@@ -399,7 +399,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Icon"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IconPropertyId = CreateProperty<Texture2D>(
+		public static readonly GamePropertyInfo<Texture2D> IconProperty = CreateProperty<Texture2D>(
 			typeof(Window), "Icon", GamePropertyCategories.Appearance, null, null,
 			UIPropertyOptions.AffectsRender);
 
@@ -412,8 +412,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public Texture2D Icon
 		{
-			get { return GetValue<Texture2D>(IconPropertyId); }
-			set { SetValue(IconPropertyId, value); }
+			get => IconProperty.GetValue(this);
+			set => IconProperty.SetValue(this, value);
 		}
 
 
@@ -421,7 +421,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IconSourceRectangle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IconSourceRectanglePropertyId = CreateProperty<Rectangle?>(
+		public static readonly GamePropertyInfo<Rectangle?> IconSourceRectangleProperty = CreateProperty<Rectangle?>(
 			typeof(Window), "IconSourceRectangle", GamePropertyCategories.Appearance, null, null,
 			UIPropertyOptions.AffectsRender);
 
@@ -445,8 +445,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Rectangle? IconSourceRectangle
 		{
-			get { return GetValue<Rectangle?>(IconSourceRectanglePropertyId); }
-			set { SetValue(IconSourceRectanglePropertyId, value); }
+			get => IconSourceRectangleProperty.GetValue(this);
+			set => IconSourceRectangleProperty.SetValue(this, value);
 		}
 
 
@@ -454,7 +454,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitleTextBlockStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(
 			typeof(Window), "TitleTextBlockStyle", GamePropertyCategories.Style, null, "TitleTextBlock",
 			UIPropertyOptions.None);
 
@@ -469,8 +469,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string TitleTextBlockStyle
 		{
-			get { return GetValue<string>(TitleTextBlockStylePropertyId); }
-			set { SetValue(TitleTextBlockStylePropertyId, value); }
+			get => TitleTextBlockStyleProperty.GetValue(this);
+			set => TitleTextBlockStyleProperty.SetValue(this, value);
 		}
 
 
@@ -478,7 +478,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Title"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int TitlePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(
 			typeof(Window), "Title", GamePropertyCategories.Common, null, "Unnamed",
 			UIPropertyOptions.AffectsRender);
 
@@ -491,8 +491,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string Title
 		{
-			get { return GetValue<string>(TitlePropertyId); }
-			set { SetValue(TitlePropertyId, value); }
+			get => TitleProperty.GetValue(this);
+			set => TitleProperty.SetValue(this, value);
 		}
 
 
@@ -500,7 +500,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="CloseButtonStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int CloseButtonStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> CloseButtonStyleProperty = CreateProperty(
 			typeof(Window), "CloseButtonStyle", GamePropertyCategories.Style, null, "CloseButton",
 			UIPropertyOptions.None);
 
@@ -514,8 +514,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string CloseButtonStyle
 		{
-			get { return GetValue<string>(CloseButtonStylePropertyId); }
-			set { SetValue(CloseButtonStylePropertyId, value); }
+			get => CloseButtonStyleProperty.GetValue(this);
+			set => CloseButtonStyleProperty.SetValue(this, value);
 		}
 
 
@@ -589,7 +589,7 @@ namespace DigitalRise.UI.Controls
 		static Window()
 		{
 			// Windows are the standard focus scopes.
-			OverrideDefaultValue(typeof(Window), IsFocusScopePropertyId, true);
+			OverrideDefaultValue(typeof(Window), IsFocusScopeProperty.Id, true);
 		}
 
 
@@ -626,13 +626,13 @@ namespace DigitalRise.UI.Controls
 				VisualChildren.Add(_icon);
 
 				// Connect Icon property with Image.Texture.
-				GameProperty<Texture2D> icon = Properties.Get<Texture2D>(IconPropertyId);
-				GameProperty<Texture2D> imageTexture = _icon.Properties.Get<Texture2D>(Image.TexturePropertyId);
+				GameProperty<Texture2D> icon = IconProperty.Get(this);
+				GameProperty<Texture2D> imageTexture = Image.TextureProperty.Get(_icon);
 				icon.Changed += imageTexture.Change;
 
 				// Connect IconSourceRectangle property with Image.SourceRectangle.
-				GameProperty<Rectangle?> iconSourceRectangle = Properties.Get<Rectangle?>(IconSourceRectanglePropertyId);
-				GameProperty<Rectangle?> imageSourceRectangle = _icon.Properties.Get<Rectangle?>(Image.SourceRectanglePropertyId);
+				GameProperty<Rectangle?> iconSourceRectangle = IconSourceRectangleProperty.Get(this);
+				GameProperty<Rectangle?> imageSourceRectangle = Image.SourceRectangleProperty.Get(_icon);
 				iconSourceRectangle.Changed += imageSourceRectangle.Change;
 			}
 
@@ -649,8 +649,8 @@ namespace DigitalRise.UI.Controls
 				VisualChildren.Add(_caption);
 
 				// Connect Title property with TextBlock.Text.
-				GameProperty<string> title = Properties.Get<string>(TitlePropertyId);
-				GameProperty<string> captionText = _caption.Properties.Get<string>(TextBlock.TextPropertyId);
+				GameProperty<string> title = TitleProperty.Get(this);
+				GameProperty<string> captionText = TextBlock.TextProperty.Get(_caption);
 				title.Changed += captionText.Change;
 			}
 
@@ -685,12 +685,12 @@ namespace DigitalRise.UI.Controls
 			// Clean up and remove controls for icon, title and close button.
 			if (_icon != null)
 			{
-				var icon = Properties.Get<Texture2D>(IconPropertyId);
-				var imageTexture = _icon.Properties.Get<Texture2D>(Image.TexturePropertyId);
+				var icon = IconProperty.Get(this);
+				var imageTexture = Image.TextureProperty.Get(_icon);
 				icon.Changed -= imageTexture.Change;
 
-				var iconSourceRectangle = Properties.Get<Rectangle?>(IconSourceRectanglePropertyId);
-				var imageSourceRectangle = _icon.Properties.Get<Rectangle?>(Image.SourceRectanglePropertyId);
+				var iconSourceRectangle = IconSourceRectangleProperty.Get(this);
+				var imageSourceRectangle = Image.SourceRectangleProperty.Get(_icon);
 				iconSourceRectangle.Changed -= imageSourceRectangle.Change;
 
 				VisualChildren.Remove(_icon);
@@ -699,8 +699,8 @@ namespace DigitalRise.UI.Controls
 
 			if (_caption != null)
 			{
-				var title = Properties.Get<string>(TitlePropertyId);
-				var captionText = _caption.Properties.Get<string>(TextBlock.TextPropertyId);
+				var title = TitleProperty.Get(this);
+				var captionText = TextBlock.TextProperty.Get(_caption);
 				title.Changed -= captionText.Change;
 
 				VisualChildren.Remove(_caption);

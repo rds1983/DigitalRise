@@ -50,7 +50,7 @@ namespace DigitalRise.UI.Controls
 		static MenuItem()
 		{
 			// Per default, the item should be focused when the mouse moves over the item.
-			OverrideDefaultValue(typeof(MenuItem), FocusWhenMouseOverPropertyId, true);
+			OverrideDefaultValue(typeof(MenuItem), FocusWhenMouseOverProperty.Id, true);
 		}
 
 

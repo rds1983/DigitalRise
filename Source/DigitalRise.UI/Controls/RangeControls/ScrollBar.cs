@@ -55,7 +55,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="Orientation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int OrientationPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<Orientation> OrientationProperty = CreateProperty(
 			typeof(ScrollBar), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -69,8 +69,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public Orientation Orientation
 		{
-			get { return GetValue<Orientation>(OrientationPropertyId); }
-			set { SetValue(OrientationPropertyId, value); }
+			get => OrientationProperty.GetValue(this);
+			set => OrientationProperty.SetValue(this, value);
 		}
 
 
@@ -78,7 +78,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ViewportSize"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ViewportSizePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<float> ViewportSizeProperty = CreateProperty(
 			typeof(ScrollBar), "ViewportSize", GamePropertyCategories.Default, null, 0f,
 			UIPropertyOptions.AffectsArrange);
 
@@ -98,8 +98,8 @@ namespace DigitalRise.UI.Controls
 		/// </remarks>
 		public float ViewportSize
 		{
-			get { return GetValue<float>(ViewportSizePropertyId); }
-			set { SetValue(ViewportSizePropertyId, value); }
+			get => ViewportSizeProperty.GetValue(this);
+			set => ViewportSizeProperty.SetValue(this, value);
 		}
 
 
@@ -107,7 +107,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="ThumbStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int ThumbStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> ThumbStyleProperty = CreateProperty(
 			typeof(ScrollBar), "ThumbStyle", GamePropertyCategories.Style, null, "Thumb",
 			UIPropertyOptions.None);
 
@@ -121,8 +121,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string ThumbStyle
 		{
-			get { return GetValue<string>(ThumbStylePropertyId); }
-			set { SetValue(ThumbStylePropertyId, value); }
+			get => ThumbStyleProperty.GetValue(this);
+			set => ThumbStyleProperty.SetValue(this, value);
 		}
 
 
@@ -130,7 +130,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="DecrementButtonStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int DecrementButtonStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> DecrementButtonStyleProperty = CreateProperty(
 			typeof(ScrollBar), "DecrementButtonStyle", GamePropertyCategories.Style, null,
 			"ScrollBarButton", UIPropertyOptions.None);
 
@@ -144,8 +144,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string DecrementButtonStyle
 		{
-			get { return GetValue<string>(DecrementButtonStylePropertyId); }
-			set { SetValue(DecrementButtonStylePropertyId, value); }
+			get => DecrementButtonStyleProperty.GetValue(this);
+			set => DecrementButtonStyleProperty.SetValue(this, value);
 		}
 
 
@@ -153,7 +153,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="IncrementButtonStyle"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int IncrementButtonStylePropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<string> IncrementButtonStyleProperty = CreateProperty(
 			typeof(ScrollBar), "IncrementButtonStyle", GamePropertyCategories.Style, null,
 			"ScrollBarButton", UIPropertyOptions.None);
 
@@ -167,8 +167,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public string IncrementButtonStyle
 		{
-			get { return GetValue<string>(IncrementButtonStylePropertyId); }
-			set { SetValue(IncrementButtonStylePropertyId, value); }
+			get => IncrementButtonStyleProperty.GetValue(this);
+			set => IncrementButtonStyleProperty.SetValue(this, value);
 		}
 		#endregion
 
@@ -183,7 +183,7 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
 		static ScrollBar()
 		{
-			OverrideDefaultValue(typeof(ScrollBar), ViewportSizePropertyId, 0.1f);
+			OverrideDefaultValue(typeof(ScrollBar), ViewportSizeProperty.Id, 0.1f);
 		}
 
 

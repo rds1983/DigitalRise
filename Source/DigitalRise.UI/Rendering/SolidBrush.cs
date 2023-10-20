@@ -40,7 +40,6 @@ namespace DigitalRise.UI.Rendering
 
 		public void Draw(UIRenderContext context, RectangleF dest, Color color)
 		{
-
 			if (color == Color.White)
 			{
 				context.FillRectangle(dest, Color);

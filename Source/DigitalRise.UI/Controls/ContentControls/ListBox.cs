@@ -24,7 +24,7 @@ namespace DigitalRise.UI.Controls
 		/// The ID of the <see cref="SelectedIndex"/> game object property.
 		/// </summary>
 		[Browsable(false)]
-		public static readonly int SelectedIndexPropertyId = CreateProperty(
+		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(
 			typeof(DropDownButton), "SelectedIndex", GamePropertyCategories.Default, null, -1,
 			UIPropertyOptions.AffectsMeasure);
 
@@ -37,8 +37,8 @@ namespace DigitalRise.UI.Controls
 		/// </value>
 		public int SelectedIndex
 		{
-			get { return GetValue<int>(SelectedIndexPropertyId); }
-			set { SetValue(SelectedIndexPropertyId, value); }
+			get => SelectedIndexProperty.GetValue(this);
+			set => SelectedIndexProperty.SetValue(this, value);
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace DigitalRise.UI.Controls
 		static ListBox()
 		{
 			// TODO: Is this needed?
-			OverrideDefaultValue(typeof(ListBox), IsFocusScopePropertyId, true);
+			OverrideDefaultValue(typeof(ListBox), IsFocusScopeProperty.Id, true);
 		}
 
 
