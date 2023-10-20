@@ -59,7 +59,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="IsChecked"/> game object property.
+		/// The game object property for <see cref="IsChecked"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsCheckedProperty = CreateProperty(

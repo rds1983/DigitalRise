@@ -133,7 +133,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="IsSelected"/> game object property.
+		/// The game object property for <see cref="IsSelected"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsSelectedProperty = CreateProperty(

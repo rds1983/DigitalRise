@@ -244,7 +244,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="LineOffset"/> game object property.
+		/// The game object property for <see cref="LineOffset"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> LineOffsetProperty = CreateProperty(
@@ -267,7 +267,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxLines"/> game object property.
+		/// The game object property for <see cref="MaxLines"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MaxLinesProperty = CreateProperty(
@@ -291,7 +291,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
+		/// The game object property for <see cref="VerticalScrollBarStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(

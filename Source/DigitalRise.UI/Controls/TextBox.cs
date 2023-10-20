@@ -186,7 +186,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Text"/> game object property.
+		/// The game object property for <see cref="Text"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TextProperty = CreateProperty(
@@ -206,7 +206,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="GuideTitle"/> game object property.
+		/// The game object property for <see cref="GuideTitle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> GuideTitleProperty = CreateProperty(
@@ -226,7 +226,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="GuideDescription"/> game object property.
+		/// The game object property for <see cref="GuideDescription"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> GuideDescriptionProperty = CreateProperty(
@@ -247,7 +247,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsReadOnly"/> game object property.
+		/// The game object property for <see cref="IsReadOnly"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsReadOnlyProperty = CreateProperty(
@@ -270,7 +270,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsPassword"/> game object property.
+		/// The game object property for <see cref="IsPassword"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsPasswordProperty = CreateProperty(
@@ -296,7 +296,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="PasswordCharacter"/> game object property.
+		/// The game object property for <see cref="PasswordCharacter"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<char> PasswordCharacterProperty = CreateProperty(
@@ -322,7 +322,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxLength"/> game object property.
+		/// The game object property for <see cref="MaxLength"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MaxLengthProperty = CreateProperty(
@@ -342,7 +342,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MinLines"/> game object property.
+		/// The game object property for <see cref="MinLines"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MinLinesProperty = CreateProperty(
@@ -362,7 +362,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxLines"/> game object property.
+		/// The game object property for <see cref="MaxLines"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MaxLinesProperty = CreateProperty(
@@ -385,7 +385,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="SelectionColor"/> game object property.
+		/// The game object property for <see cref="SelectionColor"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Color> SelectionColorProperty = CreateProperty(
@@ -407,7 +407,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalScrollBarVisibility"/> game object property.
+		/// The game object property for <see cref="VerticalScrollBarVisibility"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<ScrollBarVisibility> VerticalScrollBarVisibilityProperty = CreateProperty(
@@ -429,7 +429,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
+		/// The game object property for <see cref="VerticalScrollBarStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(

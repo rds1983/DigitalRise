@@ -118,7 +118,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
+		/// The game object property for <see cref="TitleTextBlockStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(
@@ -141,7 +141,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Title"/> game object property.
+		/// The game object property for <see cref="Title"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(

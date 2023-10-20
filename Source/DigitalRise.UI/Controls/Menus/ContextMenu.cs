@@ -95,7 +95,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Offset"/> game object property.
+		/// The game object property for <see cref="Offset"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> OffsetProperty = CreateProperty(
@@ -115,7 +115,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsOpen"/> game object property.
+		/// The game object property for <see cref="IsOpen"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsOpenProperty = CreateProperty(

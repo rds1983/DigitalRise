@@ -59,7 +59,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="IsIndeterminate"/> game object property.
+		/// The game object property for <see cref="IsIndeterminate"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsIndeterminateProperty = CreateProperty(
@@ -84,7 +84,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsIndeterminate"/> game object property.
+		/// The game object property for <see cref="IsIndeterminate"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<TimeSpan> IndeterminateCycleTimeProperty = CreateProperty(

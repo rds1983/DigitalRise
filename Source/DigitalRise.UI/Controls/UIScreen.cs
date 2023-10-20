@@ -225,7 +225,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="ToolTipDelay"/> game object property.
+		/// The game object property for <see cref="ToolTipDelay"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<TimeSpan> ToolTipDelayProperty = CreateProperty(
@@ -245,7 +245,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ToolTipOffset"/> game object property.
+		/// The game object property for <see cref="ToolTipOffset"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> ToolTipOffsetProperty = CreateProperty(
@@ -265,7 +265,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MouseWheelScrollDelta"/> game object property.
+		/// The game object property for <see cref="MouseWheelScrollDelta"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MouseWheelScrollDeltaProperty = CreateProperty(
@@ -287,7 +287,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="MouseWheelScrollLines"/> game object property.
+		/// The game object property for <see cref="MouseWheelScrollLines"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> MouseWheelScrollLinesProperty = CreateProperty(

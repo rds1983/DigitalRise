@@ -183,7 +183,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="CanDrag"/> game object property.
+		/// The game object property for <see cref="CanDrag"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> CanDragProperty = CreateProperty(
@@ -206,7 +206,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="CanResize"/> game object property.
+		/// The game object property for <see cref="CanResize"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> CanResizeProperty = CreateProperty(
@@ -233,7 +233,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ResizeBorder"/> game object property.
+		/// The game object property for <see cref="ResizeBorder"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector4> ResizeBorderProperty = CreateProperty(
@@ -256,7 +256,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="DialogResult"/> game object property.
+		/// The game object property for <see cref="DialogResult"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool?> DialogResultProperty = CreateProperty<bool?>(
@@ -291,7 +291,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="HideOnClose"/> game object property.
+		/// The game object property for <see cref="HideOnClose"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> HideOnCloseProperty = CreateProperty(
@@ -316,7 +316,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsActive"/> game object property.
+		/// The game object property for <see cref="IsActive"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsActiveProperty = CreateProperty(
@@ -345,7 +345,7 @@ namespace DigitalRise.UI.Controls
 
 		// blocks all input for objects behind the window.
 		/// <summary> 
-		/// The ID of the <see cref="IsModal"/> game object property.
+		/// The game object property for <see cref="IsModal"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsModalProperty = CreateProperty(
@@ -372,7 +372,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IconStyle"/> game object property.
+		/// The game object property for <see cref="IconStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> IconStyleProperty = CreateProperty(
@@ -396,7 +396,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Icon"/> game object property.
+		/// The game object property for <see cref="Icon"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Texture2D> IconProperty = CreateProperty<Texture2D>(
@@ -418,7 +418,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IconSourceRectangle"/> game object property.
+		/// The game object property for <see cref="IconSourceRectangle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Rectangle?> IconSourceRectangleProperty = CreateProperty<Rectangle?>(
@@ -451,7 +451,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
+		/// The game object property for <see cref="TitleTextBlockStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(
@@ -475,7 +475,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Title"/> game object property.
+		/// The game object property for <see cref="Title"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(
@@ -497,7 +497,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="CloseButtonStyle"/> game object property.
+		/// The game object property for <see cref="CloseButtonStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> CloseButtonStyleProperty = CreateProperty(

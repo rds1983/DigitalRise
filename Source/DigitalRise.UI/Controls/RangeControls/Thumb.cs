@@ -60,7 +60,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="IsDragging"/> game object property.
+		/// The game object property for <see cref="IsDragging"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsDraggingProperty = CreateProperty(
@@ -83,7 +83,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="DragDelta"/> game object property.
+		/// The game object property for <see cref="DragDelta"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector2> DragDeltaProperty = CreateProperty(

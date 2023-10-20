@@ -93,7 +93,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="ThumbStyle"/> game object property.
+		/// The game object property for <see cref="ThumbStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> ThumbStyleProperty = CreateProperty(

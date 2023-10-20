@@ -64,7 +64,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="ClickMode"/> game object property.
+		/// The game object property for <see cref="ClickMode"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<ClickMode> ClickModeProperty = CreateProperty(
@@ -84,7 +84,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsDown"/> game object property.
+		/// The game object property for <see cref="IsDown"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsDownProperty = CreateProperty(
@@ -107,7 +107,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsClicked"/> game object property.
+		/// The game object property for <see cref="IsClicked"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsClickedProperty = CreateProperty(

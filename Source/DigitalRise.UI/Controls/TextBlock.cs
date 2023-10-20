@@ -77,7 +77,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/*    /// <summary> 
-				/// The ID of the <see cref="UseEllipsis"/> game object property.
+				/// The game object property for <see cref="UseEllipsis"/>
 				/// </summary>
 				[Browsable(false)]
 				public static readonly GamePropertyInfo<int> UseEllipsisProperty = CreateProperty2(
@@ -100,7 +100,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="WrapText"/> game object property.
+		/// The game object property for <see cref="WrapText"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> WrapTextProperty = CreateProperty(
@@ -123,7 +123,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Text"/> game object property.
+		/// The game object property for <see cref="Text"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TextProperty = CreateProperty(

@@ -21,7 +21,7 @@ namespace DigitalRise.UI.Controls
 		#endregion
 
 		/// <summary> 
-		/// The ID of the <see cref="SelectedIndex"/> game object property.
+		/// The game object property for <see cref="SelectedIndex"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(

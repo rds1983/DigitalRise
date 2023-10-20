@@ -158,7 +158,7 @@ property.Value = 10.0f;
 public class MyGameObject : GameObject
 {
   /// <summary> 
-  /// The ID of the <see cref="X"/> game object property.
+  /// The game object property for <see cref="X"/>
   /// </summary>
   public static readonly int XPropertyId = 
     CreateProperty<float>("X", "Common", "Defines the x-position.", 0.0f).Id;

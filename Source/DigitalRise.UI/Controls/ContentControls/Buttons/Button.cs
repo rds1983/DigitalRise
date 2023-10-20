@@ -53,7 +53,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="IsCancel"/> game object property.
+		/// The game object property for <see cref="IsCancel"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsCancelProperty = CreateProperty(
@@ -80,7 +80,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsDefault"/> game object property.
+		/// The game object property for <see cref="IsDefault"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsDefaultProperty = CreateProperty(
@@ -107,7 +107,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsRepeatButton"/> game object property.
+		/// The game object property for <see cref="IsRepeatButton"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsRepeatButtonProperty = CreateProperty(

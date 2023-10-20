@@ -36,7 +36,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Minimum"/> game object property.
+		/// The game object property for <see cref="Minimum"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MinimumProperty = CreateProperty(
@@ -58,7 +58,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Maximum"/> game object property.
+		/// The game object property for <see cref="Maximum"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MaximumProperty = CreateProperty(
@@ -80,7 +80,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Value"/> game object property.
+		/// The game object property for <see cref="Value"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> ValueProperty = CreateProperty(
@@ -103,7 +103,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="SmallChange"/> game object property.
+		/// The game object property for <see cref="SmallChange"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> SmallChangeProperty = CreateProperty(
@@ -129,7 +129,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="LargeChange"/> game object property.
+		/// The game object property for <see cref="LargeChange"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> LargeChangeProperty = CreateProperty(

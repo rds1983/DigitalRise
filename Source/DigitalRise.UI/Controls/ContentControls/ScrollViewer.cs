@@ -297,7 +297,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="HorizontalScrollBarVisibility"/> game object property.
+		/// The game object property for <see cref="HorizontalScrollBarVisibility"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<ScrollBarVisibility> HorizontalScrollBarVisibilityProperty = CreateProperty(
@@ -319,7 +319,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalScrollBarVisibility"/> game object property.
+		/// The game object property for <see cref="VerticalScrollBarVisibility"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<ScrollBarVisibility> VerticalScrollBarVisibilityProperty = CreateProperty(
@@ -341,7 +341,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="HorizontalOffset"/> game object property.
+		/// The game object property for <see cref="HorizontalOffset"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> HorizontalOffsetProperty = CreateProperty(
@@ -364,7 +364,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalOffset"/> game object property.
+		/// The game object property for <see cref="VerticalOffset"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> VerticalOffsetProperty = CreateProperty(
@@ -387,7 +387,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="HorizontalScrollBarStyle"/> game object property.
+		/// The game object property for <see cref="HorizontalScrollBarStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> HorizontalScrollBarStyleProperty = CreateProperty(
@@ -410,7 +410,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalScrollBarStyle"/> game object property.
+		/// The game object property for <see cref="VerticalScrollBarStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> VerticalScrollBarStyleProperty = CreateProperty(

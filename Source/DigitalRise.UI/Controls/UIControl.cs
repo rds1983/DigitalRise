@@ -489,7 +489,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Background"/> game object property.
+		/// The game object property for <see cref="Background"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Color> BackgroundProperty = CreateProperty(
@@ -514,7 +514,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Foreground"/> game object property.
+		/// The game object property for <see cref="Foreground"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Color> ForegroundProperty = CreateProperty(
@@ -537,7 +537,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Opacity"/> game object property.
+		/// The game object property for <see cref="Opacity"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> OpacityProperty = CreateProperty(
@@ -563,7 +563,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Font"/> game object property.
+		/// The game object property for <see cref="Font"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> FontProperty = CreateProperty<string>(
@@ -583,7 +583,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsEnabled"/> game object property.
+		/// The game object property for <see cref="IsEnabled"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsEnabledProperty = CreateProperty(
@@ -609,7 +609,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsVisible"/> game object property.
+		/// The game object property for <see cref="IsVisible"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsVisibleProperty = CreateProperty(
@@ -636,7 +636,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsMouseOver"/> game object property.
+		/// The game object property for <see cref="IsMouseOver"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsMouseOverProperty = CreateProperty(
@@ -670,7 +670,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ToolTip"/> game object property.
+		/// The game object property for <see cref="ToolTip"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<object> ToolTipProperty = CreateProperty<object>(
@@ -732,7 +732,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="RenderTransformOrigin"/> game object property.
+		/// The game object property for <see cref="RenderTransformOrigin"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector2> RenderTransformOriginProperty = CreateProperty(
@@ -756,7 +756,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="RenderScale"/> game object property.
+		/// The game object property for <see cref="RenderScale"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector2> RenderScaleProperty = CreateProperty(
@@ -777,7 +777,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="RenderRotation"/> game object property.
+		/// The game object property for <see cref="RenderRotation"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> RenderRotationProperty = CreateProperty(
@@ -798,7 +798,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="RenderTranslation"/> game object property.
+		/// The game object property for <see cref="RenderTranslation"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector2> RenderTranslationProperty = CreateProperty(
@@ -819,7 +819,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsFocused"/> game object property.
+		/// The game object property for <see cref="IsFocused"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsFocusedProperty = CreateProperty(
@@ -845,7 +845,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IsFocusScope"/> game object property.
+		/// The game object property for <see cref="IsFocusScope"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> IsFocusScopeProperty = CreateProperty(
@@ -871,7 +871,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="AutoUnfocus"/> game object property.
+		/// The game object property for <see cref="AutoUnfocus"/>
 		/// </summary>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Unfocus")]
 		[Browsable(false)]
@@ -901,7 +901,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Focusable"/> game object property.
+		/// The game object property for <see cref="Focusable"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> FocusableProperty = CreateProperty(
@@ -928,7 +928,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="FocusWhenMouseOver"/> game object property.
+		/// The game object property for <see cref="FocusWhenMouseOver"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> FocusWhenMouseOverProperty = CreateProperty(
@@ -961,7 +961,7 @@ namespace DigitalRise.UI.Controls
 		// when computing their desired size in OnMeasure.
 
 		/// <summary> 
-		/// The ID of the <see cref="X"/> game object property.
+		/// The game object property for <see cref="X"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> XProperty = CreateProperty(
@@ -982,7 +982,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Y"/> game object property.
+		/// The game object property for <see cref="Y"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> YProperty = CreateProperty(
@@ -1003,7 +1003,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Width"/> game object property.
+		/// The game object property for <see cref="Width"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> WidthProperty = CreateProperty(
@@ -1026,7 +1026,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Height"/> game object property.
+		/// The game object property for <see cref="Height"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> HeightProperty = CreateProperty(
@@ -1049,7 +1049,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MinWidth"/> game object property.
+		/// The game object property for <see cref="MinWidth"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MinWidthProperty = CreateProperty(
@@ -1069,7 +1069,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MinHeight"/> game object property.
+		/// The game object property for <see cref="MinHeight"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MinHeightProperty = CreateProperty(
@@ -1089,7 +1089,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxWidth"/> game object property.
+		/// The game object property for <see cref="MaxWidth"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MaxWidthProperty = CreateProperty(
@@ -1109,7 +1109,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxHeight"/> game object property.
+		/// The game object property for <see cref="MaxHeight"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MaxHeightProperty = CreateProperty(
@@ -1128,7 +1128,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="GridColumn"/> game object property.
+		/// The game object property for <see cref="GridColumn"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> GridColumnProperty = CreateProperty(
@@ -1142,7 +1142,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="GridRow"/> game object property.
+		/// The game object property for <see cref="GridRow"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> GridRowSpanProperty = CreateProperty(
@@ -1156,7 +1156,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="GridColumnSpan"/> game object property.
+		/// The game object property for <see cref="GridColumnSpan"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> GridColumnSpanProperty = CreateProperty(
@@ -1170,7 +1170,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="GridRowSpan"/> game object property.
+		/// The game object property for <see cref="GridRowSpan"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> GridRowProperty = CreateProperty(
@@ -1184,7 +1184,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="Padding"/> game object property.
+		/// The game object property for <see cref="Padding"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector4> PaddingProperty = CreateProperty(
@@ -1207,7 +1207,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="Margin"/> game object property.
+		/// The game object property for <see cref="Margin"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Vector4> MarginProperty = CreateProperty(
@@ -1227,7 +1227,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="HorizontalAlignment"/> game object property.
+		/// The game object property for <see cref="HorizontalAlignment"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<HorizontalAlignment> HorizontalAlignmentProperty = CreateProperty(
@@ -1252,7 +1252,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="VerticalAlignment"/> game object property.
+		/// The game object property for <see cref="VerticalAlignment"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<VerticalAlignment> VerticalAlignmentProperty = CreateProperty(

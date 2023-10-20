@@ -52,7 +52,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Orientation"/> game object property.
+		/// The game object property for <see cref="Orientation"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Orientation> OrientationProperty = CreateProperty(
@@ -75,7 +75,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ViewportSize"/> game object property.
+		/// The game object property for <see cref="ViewportSize"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> ViewportSizeProperty = CreateProperty(
@@ -104,7 +104,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ThumbStyle"/> game object property.
+		/// The game object property for <see cref="ThumbStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> ThumbStyleProperty = CreateProperty(
@@ -127,7 +127,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="DecrementButtonStyle"/> game object property.
+		/// The game object property for <see cref="DecrementButtonStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> DecrementButtonStyleProperty = CreateProperty(
@@ -150,7 +150,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="IncrementButtonStyle"/> game object property.
+		/// The game object property for <see cref="IncrementButtonStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> IncrementButtonStyleProperty = CreateProperty(

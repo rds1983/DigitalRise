@@ -81,7 +81,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="DropDownItemStyle"/> game object property.
+		/// The game object property for <see cref="DropDownItemStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> DropDownItemStyleProperty = CreateProperty(
@@ -103,7 +103,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="TitleTextBlockStyle"/> game object property.
+		/// The game object property for <see cref="TitleTextBlockStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleTextBlockStyleProperty = CreateProperty(

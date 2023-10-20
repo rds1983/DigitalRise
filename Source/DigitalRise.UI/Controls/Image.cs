@@ -74,7 +74,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="Texture"/> game object property.
+		/// The game object property for <see cref="Texture"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Texture2D> TextureProperty = CreateProperty<Texture2D>(
@@ -94,7 +94,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="SourceRectangle"/> game object property.
+		/// The game object property for <see cref="SourceRectangle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Rectangle?> SourceRectangleProperty = CreateProperty<Rectangle?>(

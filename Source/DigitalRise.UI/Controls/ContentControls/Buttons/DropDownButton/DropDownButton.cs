@@ -102,7 +102,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="DropDownStyle"/> game object property.
+		/// The game object property for <see cref="DropDownStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> DropDownStyleProperty = CreateProperty(
@@ -125,7 +125,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="SelectedIndex"/> game object property.
+		/// The game object property for <see cref="SelectedIndex"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(
@@ -146,7 +146,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="MaxDropDownHeight"/> game object property.
+		/// The game object property for <see cref="MaxDropDownHeight"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<float> MaxDropDownHeightProperty = CreateProperty(
@@ -167,7 +167,7 @@ namespace DigitalRise.UI.Controls
 		}
 
 		/// <summary> 
-		/// The ID of the <see cref="Title"/> game object property.
+		/// The game object property for <see cref="Title"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TitleProperty = CreateProperty(

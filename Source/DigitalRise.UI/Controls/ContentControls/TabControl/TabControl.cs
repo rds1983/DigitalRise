@@ -85,7 +85,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="SelectedIndex"/> game object property.
+		/// The game object property for <see cref="SelectedIndex"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<int> SelectedIndexProperty = CreateProperty(
@@ -107,7 +107,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="TabItemPanelStyle"/> game object property.
+		/// The game object property for <see cref="TabItemPanelStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> TabItemPanelStyleProperty = CreateProperty(

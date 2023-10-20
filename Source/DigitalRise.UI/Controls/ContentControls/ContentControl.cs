@@ -80,7 +80,7 @@ namespace DigitalRise.UI.Controls
 		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The ID of the <see cref="ContentStyle"/> game object property.
+		/// The game object property for <see cref="ContentStyle"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<string> ContentStyleProperty = CreateProperty<string>(
@@ -103,7 +103,7 @@ namespace DigitalRise.UI.Controls
 
 
 		/// <summary> 
-		/// The ID of the <see cref="ClipContent"/> game object property.
+		/// The game object property for <see cref="ClipContent"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<bool> ClipContentProperty = CreateProperty(
