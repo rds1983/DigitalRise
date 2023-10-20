@@ -123,8 +123,6 @@ namespace DigitalRise.UI.Controls
 
 		public SplitPane()
 		{
-			Width = float.PositiveInfinity;
-			Height = float.PositiveInfinity;
 			HorizontalAlignment = HorizontalAlignment.Stretch;
 			VerticalAlignment = VerticalAlignment.Stretch;
 
@@ -133,11 +131,7 @@ namespace DigitalRise.UI.Controls
 			Content = new Grid();
 			_buttonSplitter = new Thumb
 			{
-				Style = "SplitPaneThumb",
-				HorizontalAlignment = HorizontalAlignment.Stretch,
-				VerticalAlignment = VerticalAlignment.Stretch,
-				Width = float.PositiveInfinity,
-				Height = float.PositiveInfinity,
+				Style = "SplitPaneThumb"
 			};
 		}
 
@@ -168,14 +162,14 @@ namespace DigitalRise.UI.Controls
 
 				if (Orientation == Orientation.Horizontal)
 				{
-					fp = 2 * ((float)context.MousePosition.X - ActualX) / ActualWidth;
+					fp = 2 * (context.MousePosition.X - ActualX) / ActualWidth;
 
 					firstProportion = grid.ColumnsProportions[0];
 					secondProportion = grid.ColumnsProportions[2];
 				}
 				else
 				{
-					fp = 2 * ((float)context.MousePosition.Y - ActualY) / ActualHeight;
+					fp = 2 * (context.MousePosition.Y - ActualY) / ActualHeight;
 
 					firstProportion = grid.RowsProportions[0];
 					secondProportion = grid.RowsProportions[2];
@@ -254,7 +248,7 @@ namespace DigitalRise.UI.Controls
 			grid.Children.Add(_buttonSplitter);
 
 			// Second control
-			AddProportion(Proportion.Fill);
+			AddProportion(new Proportion(ProportionType.Fill, 1.0f));
 			if (_second != null)
 			{
 				if (Orientation == Orientation.Horizontal)

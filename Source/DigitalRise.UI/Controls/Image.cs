@@ -168,14 +168,14 @@ namespace DigitalRise.UI.Controls
 			if (Texture == null)
 				return result;
 
-			float width = Width;
-			float height = Height;
+			var width = Width;
+			var height = Height;
 			Vector4 padding = Padding;
 			Vector2 desiredSize = Vector2.Zero;
 
-			if (Numeric.IsPositiveFinite(width))
+			if (width != null)
 			{
-				desiredSize.X = width;
+				desiredSize.X = width.Value;
 			}
 			else
 			{
@@ -183,9 +183,9 @@ namespace DigitalRise.UI.Controls
 				desiredSize.X = padding.X + padding.Z + imageWidth;
 			}
 
-			if (Numeric.IsPositiveFinite(height))
+			if (height != null)
 			{
-				desiredSize.Y = height;
+				desiredSize.Y = height.Value;
 			}
 			else
 			{

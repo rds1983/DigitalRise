@@ -92,16 +92,14 @@ namespace DigitalRise.UI.Controls
 				text = new String(PasswordCharacter, text.Length);
 			}
 
-			float width = Width;
-			float height = Height;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			bool hasHeight = Numeric.IsPositiveFinite(height);
+			var width = Width;
+			var height = Height;
 
 			// Limit constraint size by user-defined width and height.
-			if (hasWidth && width < availableSize.X)
-				availableSize.X = width;
-			if (hasHeight && height < availableSize.Y)
-				availableSize.Y = height;
+			if (width != null && width.Value < availableSize.X)
+				availableSize.X = width.Value;
+			if (height != null && height.Value < availableSize.Y)
+				availableSize.Y = height.Value;
 
 			// Remove padding from constraint size.
 			Vector4 padding = Padding;
@@ -114,7 +112,7 @@ namespace DigitalRise.UI.Controls
 			var font = screen.Renderer.GetFont(Font);
 
 			// Limit height if MaxLines is set.
-			if (!hasHeight)
+			if (height == null)
 			{
 				float maxHeight = MaxLines * font.LineHeight;
 				if (contentSize.Y > maxHeight)
@@ -139,14 +137,14 @@ namespace DigitalRise.UI.Controls
 
 			// Determine desired size of text box.
 			Vector2 desiredSize = contentSize;
-			if (!hasWidth)
+			if (width == null)
 			{
 				// Automatic width.
 				float textWidth = font.MeasureString(VisualText).X;
 				desiredSize.X = Math.Min(contentSize.X, textWidth);
 			}
 
-			if (!hasHeight)
+			if (height == null)
 			{
 				// Automatic height.
 				// Don't use font.MeasureString(VisualText).Y. The measured height may vary

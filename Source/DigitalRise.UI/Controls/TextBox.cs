@@ -512,7 +512,7 @@ namespace DigitalRise.UI.Controls
 				};
 				VisualChildren.Add(_verticalScrollBar);
 
-				if (Numeric.IsNaN(_verticalScrollBar.Width))
+				if (_verticalScrollBar.Width == null)
 					_verticalScrollBar.Width = 16;
 
 				// The scroll bar value changes the VisualOffset value.

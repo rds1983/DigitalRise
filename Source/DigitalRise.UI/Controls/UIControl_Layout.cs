@@ -283,28 +283,28 @@ namespace DigitalRise.UI.Controls
 			availableSize.Y -= margin.Y + margin.W;
 
 			// Restrict available size to MaxWidth/MaxHeight.
-			float maxWidth = MaxWidth;
-			if (availableSize.X > maxWidth)
-				availableSize.X = maxWidth;
+			var maxWidth = MaxWidth;
+			if (maxWidth != null && availableSize.X > maxWidth.Value)
+				availableSize.X = maxWidth.Value;
 
-			float maxHeight = MaxHeight;
-			if (availableSize.Y > maxHeight)
-				availableSize.Y = maxHeight;
+			var maxHeight = MaxHeight;
+			if (maxHeight != null && availableSize.Y > maxHeight.Value)
+				availableSize.Y = maxHeight.Value;
 
 			Vector2 desiredSize = OnMeasure(availableSize);
 
 			// Ensure MinWidth, MinHeight, MaxWidth, and MaxHeight.
-			float minWidth = MinWidth;
-			if (desiredSize.X < minWidth)
-				desiredSize.X = minWidth;
-			else if (desiredSize.X > maxWidth)
-				desiredSize.X = maxWidth;
+			var minWidth = MinWidth;
+			if (minWidth != null && desiredSize.X < minWidth.Value)
+				desiredSize.X = minWidth.Value;
+			else if (maxWidth != null && desiredSize.X > maxWidth.Value)
+				desiredSize.X = maxWidth.Value;
 
-			float minHeight = MinHeight;
-			if (desiredSize.Y < minHeight)
-				desiredSize.Y = minHeight;
-			else if (desiredSize.Y > maxHeight)
-				desiredSize.Y = maxHeight;
+			var minHeight = MinHeight;
+			if (minHeight != null && desiredSize.Y < minHeight.Value)
+				desiredSize.Y = minHeight.Value;
+			else if (maxHeight != null && desiredSize.Y > maxHeight.Value)
+				desiredSize.Y = maxHeight.Value;
 
 			// Add margin to desired size.
 			DesiredWidth = desiredSize.X + margin.X + margin.Z;
@@ -335,10 +335,10 @@ namespace DigitalRise.UI.Controls
 		protected virtual Vector2 OnMeasure(Vector2 availableSize)
 		{
 			// If Width/Height are set, they further restrict the allowed area.
-			if (Numeric.IsPositiveFinite(Width) && Width < availableSize.X)
-				availableSize.X = Width;
-			if (Numeric.IsPositiveFinite(Height) && Height < availableSize.Y)
-				availableSize.Y = Height;
+			if (Width != null && Width.Value < availableSize.X)
+				availableSize.X = Width.Value;
+			if (Height != null && Height.Value < availableSize.Y)
+				availableSize.Y = Height.Value;
 
 			// Measure children.
 			foreach (var child in VisualChildren)
@@ -347,9 +347,9 @@ namespace DigitalRise.UI.Controls
 			// The desired size is either Width/Height if they are set, or the max of the child 
 			// desired sizes.
 			Vector2 desiredSize = Vector2.Zero;
-			if (Numeric.IsPositiveFinite(Width))
+			if (Width != null)
 			{
-				desiredSize.X = Width;
+				desiredSize.X = Width.Value;
 			}
 			else
 			{
@@ -357,9 +357,9 @@ namespace DigitalRise.UI.Controls
 					desiredSize.X = Math.Max(desiredSize.X, child.DesiredWidth);
 			}
 
-			if (Numeric.IsPositiveFinite(Height))
+			if (Height != null)
 			{
-				desiredSize.Y = Height;
+				desiredSize.Y = Height.Value;
 			}
 			else
 			{
@@ -406,14 +406,12 @@ namespace DigitalRise.UI.Controls
 			ActualY = position.Y + margin.Y;
 
 			// Determine actual width.
-			float width = Width;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			ActualWidth = hasWidth ? width : Math.Max(0, size.X - margin.X - margin.Z);
+			var width = Width;
+			ActualWidth = width != null ? width.Value : Math.Max(0, size.X - margin.X - margin.Z);
 
 			// Determine actual height.
-			float height = Height;
-			bool hasHeight = Numeric.IsPositiveFinite(height);
-			ActualHeight = hasHeight ? height : Math.Max(0, size.Y - margin.Y - margin.W);
+			var height = Height;
+			ActualHeight = height != null ? height.Value : Math.Max(0, size.Y - margin.Y - margin.W);
 
 			OnArrange(new Vector2(ActualX, ActualY), new Vector2(ActualWidth, ActualHeight));
 

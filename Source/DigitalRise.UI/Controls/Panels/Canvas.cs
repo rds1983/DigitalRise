@@ -35,17 +35,15 @@ namespace DigitalRise.UI.Controls
 			foreach (var child in VisualChildren)
 				child.Measure(new Vector2(float.PositiveInfinity));
 
-			float width = Width;
-			float height = Height;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			bool hasHeight = Numeric.IsPositiveFinite(height);
+			var width = Width;
+			var height = Height;
 
 			// When computing the desired size.
 			// (The Canvas checks UIControl.X/Y. Other controls do not do this.)
 			Vector2 desiredSize = Vector2.Zero;
-			if (hasWidth)
+			if (width != null)
 			{
-				desiredSize.X = width;
+				desiredSize.X = width.Value;
 			}
 			else
 			{
@@ -53,9 +51,9 @@ namespace DigitalRise.UI.Controls
 					desiredSize.X = Math.Max(desiredSize.X, child.X + child.DesiredWidth);
 			}
 
-			if (hasHeight)
+			if (height != null)
 			{
-				desiredSize.Y = height;
+				desiredSize.Y = height.Value;
 			}
 			else
 			{

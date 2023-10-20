@@ -105,8 +105,7 @@
       </State>
     </Style>
     <Style Name="SplitPaneThumb" Inherits="Thumb">
-      <Width>14</Width>
-      <Height>14</Height>
+      <HorizontalAlignment>Stretch</HorizontalAlignment>
       <VerticalAlignment>Stretch</VerticalAlignment>
       <State Name="Default">
         <Image Margin="0,0,-1,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Image="TabItem_Disabled" />

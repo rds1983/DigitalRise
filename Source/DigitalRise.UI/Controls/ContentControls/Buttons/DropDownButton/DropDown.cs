@@ -316,7 +316,7 @@ namespace DigitalRise.UI.Controls
 
 			// Measure height.
 			_scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-			Height = float.NaN;
+			Height = null;
 			Measure(new Vector2(float.PositiveInfinity));
 			float height = Math.Min(DesiredHeight, Owner.MaxDropDownHeight);
 			_scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;

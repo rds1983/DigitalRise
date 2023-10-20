@@ -86,8 +86,6 @@ namespace DigitalRise.UI.Controls
 
 		public StackPanel()
 		{
-			Width = float.PositiveInfinity;
-			Height = float.PositiveInfinity;
 			HorizontalAlignment = HorizontalAlignment.Stretch;
 			VerticalAlignment = VerticalAlignment.Stretch;
 

@@ -201,18 +201,16 @@ namespace DigitalRise.UI.Controls
 		protected override Vector2 OnMeasure(Vector2 availableSize)
 		{
 			// Similar to UIControl.OnMeasure, but for the content the Padding is applied.
+			var width = Width;
+			var height = Height;
 
-			float width = Width;
-			float height = Height;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			bool hasHeight = Numeric.IsPositiveFinite(height);
 			bool hasContent = (Content != null);
 
-			if (hasWidth && width < availableSize.X)
-				availableSize.X = width;
+			if (width != null && width.Value < availableSize.X)
+				availableSize.X = width.Value;
 
-			if (hasHeight && height < availableSize.Y)
-				availableSize.Y = height;
+			if (height != null && height.Value < availableSize.Y)
+				availableSize.Y = height.Value;
 
 			foreach (var child in VisualChildren)
 				if (child != Content)
@@ -227,9 +225,9 @@ namespace DigitalRise.UI.Controls
 			}
 
 			Vector2 desiredSize = Vector2.Zero;
-			if (hasWidth)
+			if (width != null)
 			{
-				desiredSize.X = width;
+				desiredSize.X = width.Value;
 			}
 			else
 			{
@@ -238,9 +236,9 @@ namespace DigitalRise.UI.Controls
 				foreach (var child in VisualChildren)
 					desiredSize.X = Math.Max(desiredSize.X, child.DesiredWidth);
 			}
-			if (hasHeight)
+			if (height != null)
 			{
-				desiredSize.Y = height;
+				desiredSize.Y = height.Value;
 			}
 			else
 			{

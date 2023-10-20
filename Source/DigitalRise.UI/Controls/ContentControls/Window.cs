@@ -139,8 +139,8 @@ namespace DigitalRise.UI.Controls
 		private Vector2 _mouseStartPosition;
 		private float _originalX;
 		private float _originalY;
-		private float _originalWidth;
-		private float _originalHeight;
+		private float? _originalWidth;
+		private float? _originalHeight;
 		private Vector2 _startPosition;
 		private Vector2 _startSize;
 		#endregion
@@ -1130,13 +1130,13 @@ namespace DigitalRise.UI.Controls
 					if ((_resizeDirection & ResizeDirection.E) != 0)
 					{
 						float width = _startSize.X + delta.X;
-						width = MathHelper.Clamp(width, MinWidth, MaxWidth);
+						width = Mathematics.MathHelper.Clamp(width, MinWidth, MaxWidth);
 						delta.X = width - _startSize.X;
 					}
 					else if ((_resizeDirection & ResizeDirection.W) != 0)
 					{
 						float width = _startSize.X - delta.X;
-						width = MathHelper.Clamp(width, MinWidth, MaxWidth);
+						width = Mathematics.MathHelper.Clamp(width, MinWidth, MaxWidth);
 						delta.X = _startSize.X - width;
 					}
 					else
@@ -1147,13 +1147,13 @@ namespace DigitalRise.UI.Controls
 					if ((_resizeDirection & ResizeDirection.S) != 0)
 					{
 						float height = _startSize.Y + delta.Y;
-						height = MathHelper.Clamp(height, MinHeight, MaxHeight);
+						height = Mathematics.MathHelper.Clamp(height, MinHeight, MaxHeight);
 						delta.Y = height - _startSize.Y;
 					}
 					else if ((_resizeDirection & ResizeDirection.N) != 0)
 					{
 						float height = _startSize.Y - delta.Y;
-						height = MathHelper.Clamp(height, MinHeight, MaxHeight);
+						height = Mathematics.MathHelper.Clamp(height, MinHeight, MaxHeight);
 						delta.Y = _startSize.Y - height;
 					}
 					else

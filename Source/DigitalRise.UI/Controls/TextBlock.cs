@@ -176,24 +176,20 @@ namespace DigitalRise.UI.Controls
 			_richText.Font = screen.Renderer.GetFont(Font);
 
 			string text = Text;
-			float width = Width;
-			float height = Height;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			bool hasHeight = Numeric.IsPositiveFinite(height);
+			var width = Width;
+			var height = Height;
 
 			if (string.IsNullOrEmpty(text))
 			{
 				// No text --> Abort.
-				return new Vector2(
-					hasWidth ? width : 0,
-					hasHeight ? height : 0);
+				return new Vector2(width ?? 0, height ?? 0);
 			}
 
 			// Limit constraint size by user-defined width and height.
-			if (hasWidth && width < availableSize.X)
-				availableSize.X = width;
-			if (hasHeight && height < availableSize.Y)
-				availableSize.Y = height;
+			if (width != null && width < availableSize.X)
+				availableSize.X = width.Value;
+			if (height != null && height < availableSize.Y)
+				availableSize.Y = height.Value;
 
 			// Remove padding from constraint size.
 			Vector4 padding = Padding;
@@ -206,8 +202,8 @@ namespace DigitalRise.UI.Controls
 			var sz = _richText.Size;
 			Vector2 size = new Vector2(sz.X, sz.Y);
 			return new Vector2(
-				hasWidth ? width : size.X + padding.X + padding.Z,
-				hasHeight ? height : size.Y + padding.Y + padding.W);
+				width != null ? width.Value : size.X + padding.X + padding.Z,
+				height != null ? height.Value : size.Y + padding.Y + padding.W);
 		}
 
 		protected override void OnArrange(Vector2 position, Vector2 size)

@@ -485,7 +485,7 @@ namespace DigitalRise.UI.Controls
 				VisualChildren.Add(_horizontalScrollBar);
 
 				// If not set, we set a fixed Height for the scroll bar. This simplifies our layout process.
-				if (Numeric.IsNaN(_horizontalScrollBar.Height))
+				if (_horizontalScrollBar.Height == null)
 					_horizontalScrollBar.Height = 16;
 
 				// Connect ScrollBar.Value with HorizontalOffset (two-way connection).
@@ -510,7 +510,7 @@ namespace DigitalRise.UI.Controls
 				VisualChildren.Add(_verticalScrollBar);
 
 				// If not set, we set a fixed Width for the scroll bar. This simplifies our layout process.
-				if (Numeric.IsNaN(_verticalScrollBar.Width))
+				if (_verticalScrollBar.Width == null)
 					_verticalScrollBar.Width = 16;
 
 				// Connect ScrollBar.Value with VerticalOffset (two-way connection).
@@ -560,16 +560,14 @@ namespace DigitalRise.UI.Controls
 		/// <inheritdoc/>
 		protected override Vector2 OnMeasure(Vector2 availableSize)
 		{
-			float width = Width;
-			float height = Height;
-			bool hasWidth = Numeric.IsPositiveFinite(width);
-			bool hasHeight = Numeric.IsPositiveFinite(height);
+			var width = Width;
+			var height = Height;
 			bool hasContent = (Content != null);
 
-			if (hasWidth && width < availableSize.X)
-				availableSize.X = width;
-			if (hasHeight && height < availableSize.Y)
-				availableSize.Y = height;
+			if (width != null && width < availableSize.X)
+				availableSize.X = width.Value;
+			if (height != null && height < availableSize.Y)
+				availableSize.Y = height.Value;
 
 			// Measure all children, except the ScrollBars and the Content.
 			foreach (var child in VisualChildren)
@@ -620,9 +618,9 @@ namespace DigitalRise.UI.Controls
 			// The desired size is determined by the VisualChildren - except the Content.
 			// The Content is only relevant if the scroll bars are disabled.
 			Vector2 desiredSize = new Vector2(padding.X + padding.Z, padding.Y + padding.W);
-			if (hasWidth)
+			if (width != null)
 			{
-				desiredSize.X = width;
+				desiredSize.X = width.Value;
 			}
 			else
 			{
@@ -635,9 +633,9 @@ namespace DigitalRise.UI.Controls
 				}
 			}
 
-			if (hasHeight)
+			if (height != null)
 			{
-				desiredSize.Y = height;
+				desiredSize.Y = height.Value;
 			}
 			else
 			{

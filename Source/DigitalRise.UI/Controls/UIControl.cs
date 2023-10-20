@@ -1006,8 +1006,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="Width"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> WidthProperty = CreateProperty(
-			typeof(UIControl), "Width", GamePropertyCategories.Layout, null, 0.0f,
+		public static readonly GamePropertyInfo<float?> WidthProperty = CreateProperty<float?>(
+			typeof(UIControl), "Width", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1015,10 +1015,10 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>
-		/// The user-defined width. If this value is NaN, the desired width of the control is computed
+		/// The user-defined width. If this value is null, the desired width of the control is computed
 		/// automatically.
 		/// </value>
-		public float Width
+		public float? Width
 		{
 			get => WidthProperty.GetValue(this);
 			set => WidthProperty.SetValue(this, value);
@@ -1029,8 +1029,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="Height"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> HeightProperty = CreateProperty(
-			typeof(UIControl), "Height", GamePropertyCategories.Layout, null, 0.0f,
+		public static readonly GamePropertyInfo<float?> HeightProperty = CreateProperty<float?>(
+			typeof(UIControl), "Height", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1038,10 +1038,10 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>
-		/// The user-defined height. If this value is NaN, the desired height of the control is computed
-		/// automatically. The default value is NaN
+		/// The user-defined height. If this value is null, the desired height of the control is computed
+		/// automatically. The default value is null
 		/// </value>
-		public float Height
+		public float? Height
 		{
 			get => HeightProperty.GetValue(this);
 			set => HeightProperty.SetValue(this, value);
@@ -1052,8 +1052,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="MinWidth"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> MinWidthProperty = CreateProperty(
-			typeof(UIControl), "MinWidth", GamePropertyCategories.Layout, null, 0.0f,
+		public static readonly GamePropertyInfo<float?> MinWidthProperty = CreateProperty<float?>(
+			typeof(UIControl), "MinWidth", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1061,7 +1061,7 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>The minimal width of the control.</value>
-		public float MinWidth
+		public float? MinWidth
 		{
 			get => MinWidthProperty.GetValue(this);
 			set => MinWidthProperty.SetValue(this, value);
@@ -1072,8 +1072,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="MinHeight"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> MinHeightProperty = CreateProperty(
-			typeof(UIControl), "MinHeight", GamePropertyCategories.Layout, null, 0.0f,
+		public static readonly GamePropertyInfo<float?> MinHeightProperty = CreateProperty<float?>(
+			typeof(UIControl), "MinHeight", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1081,7 +1081,7 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>The minimal height of the control.</value>
-		public float MinHeight
+		public float? MinHeight
 		{
 			get => MinHeightProperty.GetValue(this);
 			set => MinHeightProperty.SetValue(this, value);
@@ -1092,8 +1092,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="MaxWidth"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> MaxWidthProperty = CreateProperty(
-			typeof(UIControl), "MaxWidth", GamePropertyCategories.Layout, null, float.NaN,
+		public static readonly GamePropertyInfo<float?> MaxWidthProperty = CreateProperty<float?>(
+			typeof(UIControl), "MaxWidth", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1101,7 +1101,7 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>The maximal width of the control.</value>
-		public float MaxWidth
+		public float? MaxWidth
 		{
 			get => MaxWidthProperty.GetValue(this);
 			set => MaxWidthProperty.SetValue(this, value);
@@ -1112,8 +1112,8 @@ namespace DigitalRise.UI.Controls
 		/// The game object property for <see cref="MaxHeight"/>
 		/// </summary>
 		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> MaxHeightProperty = CreateProperty(
-			typeof(UIControl), "MaxHeight", GamePropertyCategories.Layout, null, float.NaN,
+		public static readonly GamePropertyInfo<float?> MaxHeightProperty = CreateProperty<float?>(
+			typeof(UIControl), "MaxHeight", GamePropertyCategories.Layout, null, null,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -1121,7 +1121,7 @@ namespace DigitalRise.UI.Controls
 		/// This is a game object property.
 		/// </summary>
 		/// <value>The maximal height of the control.</value>
-		public float MaxHeight
+		public float? MaxHeight
 		{
 			get => MaxHeightProperty.GetValue(this);
 			set => MaxHeightProperty.SetValue(this, value);
@@ -1287,8 +1287,8 @@ namespace DigitalRise.UI.Controls
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
 		static UIControl()
 		{
-			OverrideDefaultValue(typeof(UIControl), WidthProperty.Id, float.NaN);
-			OverrideDefaultValue(typeof(UIControl), HeightProperty.Id, float.NaN);
+			OverrideDefaultValue<float?>(typeof(UIControl), WidthProperty.Id, null);
+			OverrideDefaultValue<float?>(typeof(UIControl), HeightProperty.Id, null);
 		}
 
 

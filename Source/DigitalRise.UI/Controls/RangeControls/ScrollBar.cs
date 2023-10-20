@@ -395,10 +395,10 @@ namespace DigitalRise.UI.Controls
 
 					// ViewPortSize determines thumb width.
 					float thumbWidth = contentWidth * ViewportSize;
-					if (thumbWidth < _thumb.MinWidth)
-						thumbWidth = _thumb.MinWidth;
-					else if (thumbWidth > _thumb.MaxWidth)
-						thumbWidth = _thumb.MaxWidth;
+					if (_thumb.MinWidth != null && thumbWidth < _thumb.MinWidth.Value)
+						thumbWidth = _thumb.MinWidth.Value;
+					else if (_thumb.MaxWidth != null && thumbWidth > _thumb.MaxWidth.Value)
+						thumbWidth = _thumb.MaxWidth.Value;
 
 					_thumb.Width = thumbWidth;
 					_thumb.Measure(new Vector2(float.PositiveInfinity));
@@ -417,10 +417,10 @@ namespace DigitalRise.UI.Controls
 					float contentHeight = ActualHeight - padding.Y - padding.W;
 
 					float thumbHeight = contentHeight * ViewportSize;
-					if (thumbHeight < _thumb.MinHeight)
-						thumbHeight = _thumb.MinHeight;
-					else if (thumbHeight > _thumb.MaxHeight)
-						thumbHeight = _thumb.MaxHeight;
+					if (_thumb.MinHeight != null && thumbHeight < _thumb.MinHeight.Value)
+						thumbHeight = _thumb.MinHeight.Value;
+					else if (_thumb.MaxHeight != null && thumbHeight > _thumb.MaxHeight.Value)
+						thumbHeight = _thumb.MaxHeight.Value;
 
 					_thumb.Height = thumbHeight;
 					_thumb.Measure(new Vector2(float.PositiveInfinity));
