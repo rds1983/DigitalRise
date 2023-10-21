@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.FNA.Core", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalRise.Common.FNA.Core", "Source\DigitalRise.Common\DigitalRise.Common.FNA.Core.csproj", "{84452B8C-D819-4A3C-AA43-DF18798DD61B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Myra.FNA.Core", "..\Myra\src\Myra\Myra.FNA.Core.csproj", "{ED96E1E1-B21F-4D66-8008-9326646E6B55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,14 @@ Global
 		{84452B8C-D819-4A3C-AA43-DF18798DD61B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84452B8C-D819-4A3C-AA43-DF18798DD61B}.Release|x64.ActiveCfg = Release|Any CPU
 		{84452B8C-D819-4A3C-AA43-DF18798DD61B}.Release|x64.Build.0 = Release|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Debug|x64.Build.0 = Debug|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Release|x64.ActiveCfg = Release|Any CPU
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +219,7 @@ Global
 		{36C2D024-7DAC-47B3-AD28-5B37FCD3BA1C} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
 		{178095DB-4A8A-4A71-A300-E06EA864F0EA} = {56281A5D-B334-49CF-B649-A0DEB9598D07}
 		{84452B8C-D819-4A3C-AA43-DF18798DD61B} = {43377E56-9E7A-4ECD-BD27-44B9F85E01AE}
+		{ED96E1E1-B21F-4D66-8008-9326646E6B55} = {0FFA10CA-4DF2-4C48-9E7B-C81E66F6EF3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ACDF4E-2CE2-46B1-A19F-35DC131069A1}

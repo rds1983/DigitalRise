@@ -115,5 +115,32 @@ namespace DigitalRise.UI.Rendering
 				context.FillRectangle(new RectangleF(bounds.Left, y, bounds.Width, 1), grid.GridLinesColor);
 			}
 		}
+
+		private void RenderStackPanel(UIControl control, UIRenderContext context)
+		{
+			RenderUIControl(control, context);
+
+			var stackPanel = (StackPanel)control;
+			var bounds = GetContentBoundsRounded(stackPanel);
+
+			if (!stackPanel.ShowGridLines)
+			{
+				return;
+			}
+
+			int i;
+			for (i = 0; i < stackPanel.GridLinesX.Count; ++i)
+			{
+				var x = stackPanel.GridLinesX[i] + bounds.Left;
+				context.FillRectangle(new RectangleF(x, bounds.Top, 1, bounds.Height), stackPanel.GridLinesColor);
+			}
+
+			for (i = 0; i < stackPanel.GridLinesY.Count; ++i)
+			{
+				var y = stackPanel.GridLinesY[i] + bounds.Top;
+
+				context.FillRectangle(new RectangleF(bounds.Left, y, bounds.Width, 1), stackPanel.GridLinesColor);
+			}
+		}
 	}
 }

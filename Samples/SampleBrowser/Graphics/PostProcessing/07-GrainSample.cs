@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System;
+﻿using System;
 using DigitalRise.Input;
 using DigitalRise.Graphics.PostProcessing;
 using Microsoft.Xna.Framework;
@@ -78,4 +77,3 @@ the scene.",
     }
   }
 }
-#endif

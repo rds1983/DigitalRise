@@ -1,5 +1,4 @@
-﻿using DigitalRise.UI.Rendering;
-using FontStashSharp;
+﻿using FontStashSharp;
 
 namespace Samples
 {

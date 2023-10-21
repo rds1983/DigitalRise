@@ -1,24 +1,25 @@
 ﻿using DigitalRise.Collections;
 using DigitalRise.GameBase;
+using DigitalRise.UI.Controls.Panels;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace DigitalRise.UI.Controls
 {
-	public class StackPanel : ContentControl
+	public class StackPanel : Panel
 	{
+		private readonly GridLayout _gridLayout = new GridLayout();
 		private bool _dirty = true;
-
-		private Grid Grid => (Grid)Content;
 
 		/// <summary> 
 		/// The game object property for <see cref="Orientation"/>
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Orientation> OrientationProperty = CreateProperty(
-			typeof(SplitPane), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
+			typeof(StackPanel), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
 			UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
@@ -32,28 +33,55 @@ namespace DigitalRise.UI.Controls
 			set => OrientationProperty.SetValue(this, value);
 		}
 
-		[Category("StackPanel")]
-		[DefaultValue(false)]
+		/// <summary> 
+		/// The game object property for <see cref="ShowGridLines"/>
+		/// </summary>
+		[Browsable(false)]
+		public static readonly GamePropertyInfo<bool> ShowGridLinesProperty = CreateProperty(
+			typeof(StackPanel), "ShowGridLines", GamePropertyCategories.Behavior, null, false,
+			UIPropertyOptions.None);
+
 		public bool ShowGridLines
 		{
-			get => Grid.ShowGridLines;
-			set => Grid.ShowGridLines = value;
+			get => ShowGridLinesProperty.GetValue(this);
+			set => ShowGridLinesProperty.SetValue(this, value);
 		}
 
-		[Category("StackPanel")]
-		[DefaultValue(0)]
+		/// <summary> 
+		/// The game object property for <see cref="GridLinesColor"/>
+		/// </summary>
+		[Browsable(false)]
+		public static readonly GamePropertyInfo<Color> GridLinesColorProperty = CreateProperty(
+			typeof(StackPanel), "GridLinesColor", GamePropertyCategories.Behavior, null, Color.White,
+			UIPropertyOptions.None);
+
+		public Color GridLinesColor
+		{
+			get => GridLinesColorProperty.GetValue(this);
+			set => GridLinesColorProperty.SetValue(this, value);
+		}
+
+		/// <summary> 
+		/// The game object property for <see cref="Spacing"/>
+		/// </summary>
+		[Browsable(false)]
+		public static readonly GamePropertyInfo<float> SpacingProperty = CreateProperty(
+			typeof(StackPanel), "Spacing", GamePropertyCategories.Behavior, null, 0.0f,
+			UIPropertyOptions.None);
+
 		public float Spacing
 		{
-			get => Orientation == Orientation.Horizontal ? Grid.ColumnSpacing : Grid.RowSpacing;
+			get => SpacingProperty.GetValue(this);
 			set
 			{
+				SpacingProperty.SetValue(this, value);
 				if (Orientation == Orientation.Horizontal)
 				{
-					Grid.ColumnSpacing = value;
+					_gridLayout.ColumnSpacing = value;
 				}
 				else
 				{
-					Grid.RowSpacing = value;
+					_gridLayout.RowSpacing = value;
 				}
 			}
 		}
@@ -61,16 +89,16 @@ namespace DigitalRise.UI.Controls
 		[Browsable(false)]
 		public Proportion DefaultProportion
 		{
-			get => Orientation == Orientation.Horizontal ? Grid.DefaultColumnProportion : Grid.DefaultRowProportion;
+			get => Orientation == Orientation.Horizontal ? _gridLayout.DefaultColumnProportion : _gridLayout.DefaultRowProportion;
 			set
 			{
 				if (Orientation == Orientation.Horizontal)
 				{
-					Grid.DefaultColumnProportion = value;
+					_gridLayout.DefaultColumnProportion = value;
 				}
 				else
 				{
-					Grid.DefaultRowProportion = value;
+					_gridLayout.DefaultRowProportion = value;
 				}
 			}
 		}
@@ -78,11 +106,17 @@ namespace DigitalRise.UI.Controls
 		[Browsable(false)]
 		public ObservableCollection<Proportion> Proportions
 		{
-			get => Orientation == Orientation.Horizontal ? Grid.ColumnsProportions : Grid.RowsProportions;
+			get => Orientation == Orientation.Horizontal ? _gridLayout.ColumnsProportions : _gridLayout.RowsProportions;
 		}
 
 		[Browsable(false)]
-		public NotifyingCollection<UIControl> Children => Grid.Children;
+		[XmlIgnore]
+		public List<float> GridLinesX => _gridLayout.GridLinesX;
+
+		[Browsable(false)]
+		[XmlIgnore]
+		public List<float> GridLinesY => _gridLayout.GridLinesY;
+
 
 		public StackPanel()
 		{
@@ -91,7 +125,6 @@ namespace DigitalRise.UI.Controls
 
 			Style = "StackPanel";
 
-			Content = new Grid();
 			DefaultProportion = Proportion.StackPanelDefault;
 			Children.CollectionChanged += Children_CollectionChanged;
 		}
@@ -130,14 +163,14 @@ namespace DigitalRise.UI.Controls
 		{
 			UpdateGrid();
 
-			return base.OnMeasure(availableSize);
+			return _gridLayout.Measure(availableSize, Children);
 		}
 
 		protected override void OnArrange(Vector2 position, Vector2 size)
 		{
 			UpdateGrid();
 
-			base.OnArrange(position, size);
+			_gridLayout.Arrange(size, ActualBounds, Children, Arrange);
 		}
 	}
 }

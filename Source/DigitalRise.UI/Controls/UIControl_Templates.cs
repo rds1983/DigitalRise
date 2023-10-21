@@ -198,6 +198,7 @@ namespace DigitalRise.UI.Controls
 			}
 
 			var metadata = GetPropertyMetadata<T>(propertyId);
+
 			properties.Add(new UIProperty<T>
 			{
 				Name = metadata.Name,

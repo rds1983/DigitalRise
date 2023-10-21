@@ -369,7 +369,7 @@ namespace DigitalRise.UI.Controls
 				origin.Y = (int)origin.Y;
 			}
 
-			richText.Draw(SpriteBatch, position, color, Scale, Rotation, origin);
+			richText.Draw(SpriteBatch, position, color, Rotation, origin, Scale);
 		}
 
 
@@ -414,7 +414,7 @@ namespace DigitalRise.UI.Controls
 				origin.Y = (int)origin.Y;
 			}
 
-			SpriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
+			SpriteBatch.DrawString(spriteFont, text, (Vector2)position, color, Rotation, origin, Scale, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
 		}
 
 
@@ -450,7 +450,7 @@ namespace DigitalRise.UI.Controls
 				origin.Y = (int)origin.Y;
 			}
 
-			SpriteBatch.DrawString(spriteFont, text, (Vector2)position, color, (Vector2)Scale, Rotation, (Vector2)origin, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
+			SpriteBatch.DrawString(spriteFont, text, (Vector2)position, color, Rotation, origin, Scale, textStyle: textStyle, effect: effect, effectAmount: effectAmount);
 		}
 
 

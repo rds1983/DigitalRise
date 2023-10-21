@@ -110,6 +110,8 @@ namespace DigitalRise.UI.Controls
 			_scrollViewer.HorizontalOffset = 0;
 			_scrollViewer.VerticalOffset = 0;
 
+			SelectedIndex = -1;
+
 			_itemsPanel.Children.Clear();
 
 			foreach (var item in Items)

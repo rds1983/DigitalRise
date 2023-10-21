@@ -1,10 +1,9 @@
 ﻿using DigitalRise;
-#if !WP7 && !WP8
-using DigitalRise.UI.Controls;
+using Myra.Graphics2D.UI;
+using Myra.Graphics2D;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Mathematics.Algebra;
 using DigitalRise.Physics.ForceEffects;
 using Microsoft.Xna.Framework;
 
@@ -223,10 +222,9 @@ updates over several frames and to update distant cascades less often.",
       // ----- Shadow map caching
       var cachingPanel = SampleHelper.AddGroupBox(optionsPanel, "Shadow map caching");
 
-      cachingPanel.Children.Add(new TextBlock
+      cachingPanel.Widgets.Add(new Label
       {
         Text = "Set a value > 0 to update shadow map less frequently.",
-        Margin = new Vector4(0, 0, SampleHelper.Margin, 0),
       });
 
       SampleHelper.AddSlider(
@@ -269,4 +267,3 @@ updates over several frames and to update distant cascades less often.",
     }
   }
 }
-#endif

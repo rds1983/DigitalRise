@@ -56,7 +56,8 @@
       </State>
     </Style>
     <Style Name="Panel" Inherits="UIControl"></Style>
-    <Style Name="StackPanel" Inherits="Panel"></Style>
+    <Style Name="StackPanel" Inherits="Panel">
+	</Style>
     <Style Name="Canvas" Inherits="Panel"></Style>
     <Style Name="Thumb" Inherits="UIControl"></Style>
     <Style Name="RangeBase" Inherits="UIControl"></Style>

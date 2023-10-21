@@ -265,12 +265,6 @@ namespace DigitalRise.UI.Controls
 			return result;
 		}
 
-		protected override void OnLoad()
-		{
-			base.OnLoad();
-
-		}
-
 		private void UpdateEnabled()
 		{
 			var enabled = false;

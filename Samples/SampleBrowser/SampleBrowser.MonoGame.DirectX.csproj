@@ -6,8 +6,12 @@
     <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Myra" Version="1.4.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.MonoGame.DirectX.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Input\DigitalRise.Input.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.MonoGame.csproj" />
-    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.MonoGame.csproj" />
   </ItemGroup>
 </Project>
