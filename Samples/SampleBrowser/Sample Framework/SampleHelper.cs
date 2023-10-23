@@ -498,7 +498,7 @@ namespace Samples
 		// This is used to quickly add controls to the Options window.
 
 		// Adds a TabItem to a TabControl.
-		public static IMultipleItemsContainer AddTabItem(TabControl parent, string title, int index)
+		public static MultipleItemsContainerBase AddTabItem(TabControl parent, string title, int index)
 		{
 			var tabItem = new TabItem
 			{
@@ -528,13 +528,13 @@ namespace Samples
 		}
 
 
-		public static IMultipleItemsContainer AddTabItem(TabControl parent, string title)
+		public static MultipleItemsContainerBase AddTabItem(TabControl parent, string title)
 		{
 			return AddTabItem(parent, title, -1);
 		}
 
 
-		public static IMultipleItemsContainer AddGroupBox(IMultipleItemsContainer parent, string title)
+		public static MultipleItemsContainerBase AddGroupBox(MultipleItemsContainerBase parent, string title)
 		{
 /*			var groupBox = new GroupBox
 			{
@@ -546,20 +546,20 @@ namespace Samples
 				// (different title background color).
 				TitleLabelStyle = "GroupBoxTitleInTabPage",
 			};
-			parent.AddChild(groupBox);*/
+			parent.Widgets.Add(groupBox);*/
 
 			var panel = new VerticalStackPanel
 			{
 				Spacing = DefaultSpacing
 			};
 
-			parent.AddChild(panel);
+			parent.Widgets.Add(panel);
 
 			return panel;
 		}
 
 
-		public static TextButton AddButton(IMultipleItemsContainer parent, string title, Action clickHandler, string toolTip)
+		public static TextButton AddButton(MultipleItemsContainerBase parent, string title, Action clickHandler, string toolTip)
 		{
 			var button = new TextButton
 			{
@@ -567,12 +567,12 @@ namespace Samples
 			};
 			button.Click += (s, e) => clickHandler();
 
-			parent.AddChild(button);
+			parent.Widgets.Add(button);
 			return button;
 		}
 
 
-		public static CheckBox AddCheckBox(IMultipleItemsContainer parent, string title, bool defaultValue, Action<bool> isCheckedHandler, string toolTip)
+		public static CheckBox AddCheckBox(MultipleItemsContainerBase parent, string title, bool defaultValue, Action<bool> isCheckedHandler, string toolTip)
 		{
 			var checkBox = new CheckBox
 			{
@@ -580,18 +580,18 @@ namespace Samples
 				IsChecked = defaultValue,
 			};
 			checkBox.Click += (s, e) => isCheckedHandler(((CheckBox)s).IsChecked);
-			parent.AddChild(checkBox);
+			parent.Widgets.Add(checkBox);
 			return checkBox;
 		}
 
 
-		public static CheckBox AddCheckBox(IMultipleItemsContainer parent, string title, bool defaultValue, Action<bool> isCheckedHandler)
+		public static CheckBox AddCheckBox(MultipleItemsContainerBase parent, string title, bool defaultValue, Action<bool> isCheckedHandler)
 		{
 			return AddCheckBox(parent, title, defaultValue, isCheckedHandler, null);
 		}
 
 
-		public static void AddDropDown<T>(IMultipleItemsContainer parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler, string toolTip)
+		public static void AddDropDown<T>(MultipleItemsContainerBase parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler, string toolTip)
 		{
 			var horizontalStackPanel = new HorizontalStackPanel
 			{
@@ -599,12 +599,9 @@ namespace Samples
 				Spacing = DefaultSpacing
 			};
 
-			horizontalStackPanel.Proportions.Add(Proportion.Auto);
-			horizontalStackPanel.Proportions.Add(Proportion.Fill);
+			parent.Widgets.Add(horizontalStackPanel);
 
-			parent.AddChild(horizontalStackPanel);
-
-			horizontalStackPanel.AddChild(new Label
+			horizontalStackPanel.Widgets.Add(new Label
 			{
 				Text = title + ": ",
 				Margin = new Thickness(0, 4, 0, 0),
@@ -616,7 +613,9 @@ namespace Samples
 				SelectedIndex = selectedIndex,
 				HorizontalAlignment = HorizontalAlignment.Stretch,
 			};
-			horizontalStackPanel.AddChild(dropDownButton);
+
+			StackPanel.SetProportionType(dropDownButton, ProportionType.Fill);
+			horizontalStackPanel.Widgets.Add(dropDownButton);
 
 			foreach (var item in items)
 			{
@@ -635,13 +634,13 @@ namespace Samples
 		}
 
 
-		public static void AddDropDown<T>(IMultipleItemsContainer parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler)
+		public static void AddDropDown<T>(MultipleItemsContainerBase parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler)
 		{
 			AddDropDown(parent, title, items, selectedIndex, selectedIndexChangedHandler, null);
 		}
 
 
-		public static IMultipleItemsContainer AddSlider(IMultipleItemsContainer parent, string title, string format, float min, float max,
+		public static MultipleItemsContainerBase AddSlider(MultipleItemsContainerBase parent, string title, string format, float min, float max,
 									 float defaultValue, Action<float> valueChangedHandler, string toolTip)
 		{
 			var horizontalStackPanel = new HorizontalStackPanel
@@ -649,17 +648,14 @@ namespace Samples
 				Spacing = DefaultSpacing
 			};
 
-			horizontalStackPanel.Proportions.Add(Proportion.Auto);
-			horizontalStackPanel.Proportions.Add(Proportion.Fill);
-
-			parent.AddChild(horizontalStackPanel);
+			parent.Widgets.Add(horizontalStackPanel);
 
 			var textBlock = new Label
 			{
 				Text = title + ": " + defaultValue.ToString(format),
 				Width = DefaultLabelWidth,
 			};
-			horizontalStackPanel.AddChild(textBlock);
+			horizontalStackPanel.Widgets.Add(textBlock);
 
 			var slider = new HorizontalSlider
 			{
@@ -668,7 +664,9 @@ namespace Samples
 				HorizontalAlignment = HorizontalAlignment.Stretch,
 				Tag = title
 			};
-			horizontalStackPanel.AddChild(slider);
+
+			StackPanel.SetProportionType(slider, ProportionType.Fill);
+			horizontalStackPanel.Widgets.Add(slider);
 
 			// Coerce value to integers?
 			if (format == "F0")
@@ -691,7 +689,7 @@ namespace Samples
 		}
 
 
-		public static IMultipleItemsContainer AddSlider(IMultipleItemsContainer parent, string title, string format, float min, float max,
+		public static MultipleItemsContainerBase AddSlider(MultipleItemsContainerBase parent, string title, string format, float min, float max,
 									 float defaultValue, Action<float> valueChangedHandler)
 		{
 			return AddSlider(parent, title, format, min, max, defaultValue, valueChangedHandler, null);

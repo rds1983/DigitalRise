@@ -1075,7 +1075,7 @@ namespace Samples
 		/// The panel that hosts the UI controls in the Options window.
 		/// Add the new controls to this panel!
 		/// </returns>
-		public IMultipleItemsContainer AddOptions(string tabName)
+		public MultipleItemsContainerBase AddOptions(string tabName)
 		{
 			return AddOptions(tabName, -1);
 		}
@@ -1090,12 +1090,12 @@ namespace Samples
 		/// The panel that hosts the UI controls in the Options window.
 		/// Add the new controls to this panel!
 		/// </returns>
-		public IMultipleItemsContainer AddOptions(string tabName, int tabIndex)
+		public MultipleItemsContainerBase AddOptions(string tabName, int tabIndex)
 		{
 			// Check if tab control already contains the specified tab.
 			var optionsPanel = (from tabItem in _optionsTabControl.Items where 
 								tabItem.Text == tabName 
-								select (IMultipleItemsContainer)((ScrollViewer)tabItem.Content).Content).FirstOrDefault();
+								select (MultipleItemsContainerBase)((ScrollViewer)tabItem.Content).Content).FirstOrDefault();
 			if (optionsPanel == null)
 				optionsPanel = SampleHelper.AddTabItem(_optionsTabControl, tabName, tabIndex);
 
