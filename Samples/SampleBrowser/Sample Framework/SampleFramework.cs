@@ -370,9 +370,12 @@ namespace Samples
 
 		private void AddButton(StackPanel panel, string text, Action clickHandler)
 		{
-			var button = new TextButton
+			var button = new Button
 			{
-				Text = text,
+				Content = new Label
+				{
+					Text = text
+				},
 				HorizontalAlignment = HorizontalAlignment.Stretch,
 				MinWidth = 100
 			};
@@ -492,9 +495,12 @@ namespace Samples
 					itemsPanel.Widgets.Add(item);
 
 					string title = sample.Name;
-					var button = new TextButton
+					var button = new Button
 					{
-						Text = title,
+						Content = new Label
+						{
+							Text = title
+						},
 						Width = 300,
 #if WINDOWS_PHONE || ANDROID || IOS
             Margin = new Thickness(10),
@@ -1075,7 +1081,7 @@ namespace Samples
 		/// The panel that hosts the UI controls in the Options window.
 		/// Add the new controls to this panel!
 		/// </returns>
-		public MultipleItemsContainerBase AddOptions(string tabName)
+		public Container AddOptions(string tabName)
 		{
 			return AddOptions(tabName, -1);
 		}
@@ -1090,12 +1096,12 @@ namespace Samples
 		/// The panel that hosts the UI controls in the Options window.
 		/// Add the new controls to this panel!
 		/// </returns>
-		public MultipleItemsContainerBase AddOptions(string tabName, int tabIndex)
+		public Container AddOptions(string tabName, int tabIndex)
 		{
 			// Check if tab control already contains the specified tab.
 			var optionsPanel = (from tabItem in _optionsTabControl.Items where 
 								tabItem.Text == tabName 
-								select (MultipleItemsContainerBase)((ScrollViewer)tabItem.Content).Content).FirstOrDefault();
+								select (Container)((ScrollViewer)tabItem.Content).Content).FirstOrDefault();
 			if (optionsPanel == null)
 				optionsPanel = SampleHelper.AddTabItem(_optionsTabControl, tabName, tabIndex);
 

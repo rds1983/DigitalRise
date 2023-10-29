@@ -6,7 +6,7 @@
     <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Myra" Version="1.5.0" />
+    <PackageReference Include="Myra" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />

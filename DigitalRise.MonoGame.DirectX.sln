@@ -73,6 +73,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SplitAtlas", "Tools\SplitAt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DRTexturePacker", "Tools\DRTexturePacker\DRTexturePacker.csproj", "{51697635-A9DE-49BA-BE8F-FAA476B459F6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LevelEditor.MonoGame.DirectX", "Samples\LevelEditor\LevelEditor.MonoGame.DirectX.csproj", "{799029B7-1879-4251-B287-7C9577C7C88F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +205,10 @@ Global
 		{51697635-A9DE-49BA-BE8F-FAA476B459F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51697635-A9DE-49BA-BE8F-FAA476B459F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51697635-A9DE-49BA-BE8F-FAA476B459F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799029B7-1879-4251-B287-7C9577C7C88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799029B7-1879-4251-B287-7C9577C7C88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799029B7-1879-4251-B287-7C9577C7C88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799029B7-1879-4251-B287-7C9577C7C88F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,6 +245,7 @@ Global
 		{33B24AD8-2C78-4D77-A136-61BD99308232} = {9CB0DAA8-0CF9-4618-A20C-9DDAE411FB09}
 		{AEDE2C34-2246-4220-B063-83DEA8027288} = {9CB0DAA8-0CF9-4618-A20C-9DDAE411FB09}
 		{51697635-A9DE-49BA-BE8F-FAA476B459F6} = {9CB0DAA8-0CF9-4618-A20C-9DDAE411FB09}
+		{799029B7-1879-4251-B287-7C9577C7C88F} = {4E3892B6-8A51-42F9-A3F3-8BADC5D000AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ACDF4E-2CE2-46B1-A19F-35DC131069A1}

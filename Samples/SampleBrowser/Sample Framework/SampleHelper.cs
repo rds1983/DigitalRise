@@ -498,7 +498,7 @@ namespace Samples
 		// This is used to quickly add controls to the Options window.
 
 		// Adds a TabItem to a TabControl.
-		public static MultipleItemsContainerBase AddTabItem(TabControl parent, string title, int index)
+		public static Container AddTabItem(TabControl parent, string title, int index)
 		{
 			var tabItem = new TabItem
 			{
@@ -528,13 +528,13 @@ namespace Samples
 		}
 
 
-		public static MultipleItemsContainerBase AddTabItem(TabControl parent, string title)
+		public static Container AddTabItem(TabControl parent, string title)
 		{
 			return AddTabItem(parent, title, -1);
 		}
 
 
-		public static MultipleItemsContainerBase AddGroupBox(MultipleItemsContainerBase parent, string title)
+		public static Container AddGroupBox(Container parent, string title)
 		{
 /*			var groupBox = new GroupBox
 			{
@@ -559,12 +559,9 @@ namespace Samples
 		}
 
 
-		public static TextButton AddButton(MultipleItemsContainerBase parent, string title, Action clickHandler, string toolTip)
+		public static Button AddButton(Container parent, string title, Action clickHandler, string toolTip)
 		{
-			var button = new TextButton
-			{
-				Text = title,
-			};
+			var button = Button.CreateTextButton(title);
 			button.Click += (s, e) => clickHandler();
 
 			parent.Widgets.Add(button);
@@ -572,7 +569,7 @@ namespace Samples
 		}
 
 
-		public static CheckBox AddCheckBox(MultipleItemsContainerBase parent, string title, bool defaultValue, Action<bool> isCheckedHandler, string toolTip)
+		public static CheckBox AddCheckBox(Container parent, string title, bool defaultValue, Action<bool> isCheckedHandler, string toolTip)
 		{
 			var checkBox = new CheckBox
 			{
@@ -585,13 +582,13 @@ namespace Samples
 		}
 
 
-		public static CheckBox AddCheckBox(MultipleItemsContainerBase parent, string title, bool defaultValue, Action<bool> isCheckedHandler)
+		public static CheckBox AddCheckBox(Container parent, string title, bool defaultValue, Action<bool> isCheckedHandler)
 		{
 			return AddCheckBox(parent, title, defaultValue, isCheckedHandler, null);
 		}
 
 
-		public static void AddDropDown<T>(MultipleItemsContainerBase parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler, string toolTip)
+		public static void AddDropDown<T>(Container parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler, string toolTip)
 		{
 			var horizontalStackPanel = new HorizontalStackPanel
 			{
@@ -634,13 +631,13 @@ namespace Samples
 		}
 
 
-		public static void AddDropDown<T>(MultipleItemsContainerBase parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler)
+		public static void AddDropDown<T>(Container parent, string title, IList<T> items, int selectedIndex, Action<T> selectedIndexChangedHandler)
 		{
 			AddDropDown(parent, title, items, selectedIndex, selectedIndexChangedHandler, null);
 		}
 
 
-		public static MultipleItemsContainerBase AddSlider(MultipleItemsContainerBase parent, string title, string format, float min, float max,
+		public static Container AddSlider(Container parent, string title, string format, float min, float max,
 									 float defaultValue, Action<float> valueChangedHandler, string toolTip)
 		{
 			var horizontalStackPanel = new HorizontalStackPanel
@@ -689,7 +686,7 @@ namespace Samples
 		}
 
 
-		public static MultipleItemsContainerBase AddSlider(MultipleItemsContainerBase parent, string title, string format, float min, float max,
+		public static Container AddSlider(Container parent, string title, string format, float min, float max,
 									 float defaultValue, Action<float> valueChangedHandler)
 		{
 			return AddSlider(parent, title, format, min, max, defaultValue, valueChangedHandler, null);
