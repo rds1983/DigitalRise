@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.UI\DigitalRise.UI.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Windows.Interop\DigitalRise.Windows.Interop.MonoGame.DirectX.csproj" />
   </ItemGroup>
 
