@@ -87,8 +87,6 @@ namespace DigitalRise.UI.Rendering
 			RenderCallbacks.Add("Console", RenderConsole);
 			RenderCallbacks.Add("ContentControl", RenderContentControl);
 			RenderCallbacks.Add("TextBox", RenderTextBox);
-			RenderCallbacks.Add("Grid", RenderGrid);
-			RenderCallbacks.Add("StackPanel", RenderStackPanel);
 		}
 		#endregion
 

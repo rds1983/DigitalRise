@@ -1,26 +1,68 @@
-﻿using DigitalRise.Collections;
-using DigitalRise.GameBase;
-using DigitalRise.UI.Controls.Panels;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿// DigitalRune Engine - Copyright (C) DigitalRune GmbH
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.TXT', which is part of this source code package.
+
+using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
+using DigitalRise.GameBase;
+using DigitalRise.Mathematics;
+using DigitalRise.Mathematics.Algebra;
+using Microsoft.Xna.Framework;
 
 namespace DigitalRise.UI.Controls
 {
+	/// <summary>
+	/// Arranges child elements into a single line that can be oriented horizontally or vertically. 
+	/// </summary>
+	/// <example>
+	/// The following examples shows how to create a button containing an icon and a text label.
+	/// <code lang="csharp">
+	/// <![CDATA[
+	/// // Create a horizontal stack panel containing an icon and a label.
+	/// var buttonContentPanel = new StackPanel { Orientation = Orientation.Horizontal };
+	/// 
+	/// buttonContentPanel.Children.Add(new Image
+	/// {
+	///   Width = 16,
+	///   Height = 16,
+	///   Texture = content.Load<Texture2D>("Icons"),   // Load existing texture.
+	///   SourceRectangle = new Rectangle(0, 0, 16, 16) // Optional: Select region in texture.
+	/// });
+	/// 
+	/// buttonContentPanel.Children.Add(new TextBlock
+	/// {
+	///   Margin = new Vector4(4, 0, 0, 0),
+	///   Text = "Label",
+	///   VerticalAlignment = VerticalAlignment.Center,
+	/// });
+	/// 
+	/// var button = new Button
+	/// {
+	///   Content = buttonContentPanel,
+	///   Margin = new Vector4(4),
+	/// };
+	/// 
+	/// // To show the button, add it to an existing content control or panel.
+	/// panel.Children.Add(button);
+	/// 
+	/// // To handle button clicks simply add an event handler to the Click event.
+	/// button.Click += OnButtonClicked;
+	/// ]]>
+	/// </code>
+	/// </example>
 	public class StackPanel : Panel
 	{
-		private readonly GridLayout _gridLayout = new GridLayout();
-		private bool _dirty = true;
+		//--------------------------------------------------------------
+		#region Game Object Properties & Events
+		//--------------------------------------------------------------
 
 		/// <summary> 
-		/// The game object property for <see cref="Orientation"/>
+		/// The ID of the <see cref="Orientation"/> game object property.
 		/// </summary>
 		[Browsable(false)]
 		public static readonly GamePropertyInfo<Orientation> OrientationProperty = CreateProperty(
-			typeof(StackPanel), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
-			UIPropertyOptions.AffectsMeasure);
+		  typeof(StackPanel), "Orientation", GamePropertyCategories.Layout, null, Orientation.Vertical,
+		  UIPropertyOptions.AffectsMeasure);
 
 		/// <summary>
 		/// Gets or sets the orientation of the stack panel. 
@@ -32,145 +74,137 @@ namespace DigitalRise.UI.Controls
 			get => OrientationProperty.GetValue(this);
 			set => OrientationProperty.SetValue(this, value);
 		}
+		#endregion
 
-		/// <summary> 
-		/// The game object property for <see cref="ShowGridLines"/>
+
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StackPanel"/> class.
 		/// </summary>
-		[Browsable(false)]
-		public static readonly GamePropertyInfo<bool> ShowGridLinesProperty = CreateProperty(
-			typeof(StackPanel), "ShowGridLines", GamePropertyCategories.Behavior, null, false,
-			UIPropertyOptions.None);
-
-		public bool ShowGridLines
-		{
-			get => ShowGridLinesProperty.GetValue(this);
-			set => ShowGridLinesProperty.SetValue(this, value);
-		}
-
-		/// <summary> 
-		/// The game object property for <see cref="GridLinesColor"/>
-		/// </summary>
-		[Browsable(false)]
-		public static readonly GamePropertyInfo<Color> GridLinesColorProperty = CreateProperty(
-			typeof(StackPanel), "GridLinesColor", GamePropertyCategories.Behavior, null, Color.White,
-			UIPropertyOptions.None);
-
-		public Color GridLinesColor
-		{
-			get => GridLinesColorProperty.GetValue(this);
-			set => GridLinesColorProperty.SetValue(this, value);
-		}
-
-		/// <summary> 
-		/// The game object property for <see cref="Spacing"/>
-		/// </summary>
-		[Browsable(false)]
-		public static readonly GamePropertyInfo<float> SpacingProperty = CreateProperty(
-			typeof(StackPanel), "Spacing", GamePropertyCategories.Behavior, null, 0.0f,
-			UIPropertyOptions.None);
-
-		public float Spacing
-		{
-			get => SpacingProperty.GetValue(this);
-			set
-			{
-				SpacingProperty.SetValue(this, value);
-				if (Orientation == Orientation.Horizontal)
-				{
-					_gridLayout.ColumnSpacing = value;
-				}
-				else
-				{
-					_gridLayout.RowSpacing = value;
-				}
-			}
-		}
-
-		[Browsable(false)]
-		public Proportion DefaultProportion
-		{
-			get => Orientation == Orientation.Horizontal ? _gridLayout.DefaultColumnProportion : _gridLayout.DefaultRowProportion;
-			set
-			{
-				if (Orientation == Orientation.Horizontal)
-				{
-					_gridLayout.DefaultColumnProportion = value;
-				}
-				else
-				{
-					_gridLayout.DefaultRowProportion = value;
-				}
-			}
-		}
-
-		[Browsable(false)]
-		public ObservableCollection<Proportion> Proportions
-		{
-			get => Orientation == Orientation.Horizontal ? _gridLayout.ColumnsProportions : _gridLayout.RowsProportions;
-		}
-
-		[Browsable(false)]
-		[XmlIgnore]
-		public List<float> GridLinesX => _gridLayout.GridLinesX;
-
-		[Browsable(false)]
-		[XmlIgnore]
-		public List<float> GridLinesY => _gridLayout.GridLinesY;
-
-
 		public StackPanel()
 		{
-			HorizontalAlignment = HorizontalAlignment.Stretch;
-			VerticalAlignment = VerticalAlignment.Stretch;
-
 			Style = "StackPanel";
-
-			DefaultProportion = Proportion.StackPanelDefault;
-			Children.CollectionChanged += Children_CollectionChanged;
 		}
+		#endregion
 
-		private void UpdateGrid()
-		{
-			if (!_dirty)
-			{
-				return;
-			}
 
-			var index = 0;
-			foreach (var widget in Children)
-			{
-				if (Orientation == Orientation.Horizontal)
-				{
-					widget.GridColumn = index;
-				}
-				else
-				{
-					widget.GridRow = index;
-				}
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-				++index;
-			}
-
-			_dirty = false;
-		}
-
-		private void Children_CollectionChanged(object sender, CollectionChangedEventArgs<UIControl> e)
-		{
-			_dirty = true;
-		}
-
+		/// <inheritdoc/>
 		protected override Vector2 OnMeasure(Vector2 availableSize)
 		{
-			UpdateGrid();
+			// Similar to UIControl.OnMeasure, but we sum up the desired sizes in the stack panel 
+			// orientation. In the other direction we take the maximum of the children - unless a 
+			// Width or Height was set explicitly. If there are VisualChildren that are not Children, 
+			// they do not contribute to the DesiredSize.
 
-			return _gridLayout.Measure(availableSize, Children);
+			float width = Width ?? 0;
+			float height = Height ?? 0;
+			bool hasWidth = Numeric.IsPositiveFinite(width);
+			bool hasHeight = Numeric.IsPositiveFinite(height);
+
+			if (hasWidth && width < availableSize.X)
+				availableSize.X = width;
+			if (hasHeight && height < availableSize.Y)
+				availableSize.Y = height;
+
+			Vector4 padding = Padding;
+			availableSize.X -= padding.X + padding.Z;
+			availableSize.Y -= padding.Y + padding.W;
+
+			foreach (var child in VisualChildren)
+				child.Measure(availableSize);
+
+			if (hasWidth && hasHeight)
+				return new Vector2(width, height);
+
+			Vector2 desiredSize = new Vector2(width, height);
+
+			float maxWidth = 0;
+			float sumWidth = 0;
+			float maxHeight = 0;
+			float sumHeight = 0;
+
+			// Sum up widths and heights.
+			foreach (var child in Children)
+			{
+				float childWidth = child.DesiredWidth;
+				float childHeight = child.DesiredHeight;
+				maxWidth = Math.Max(maxWidth, childWidth);
+				maxHeight = Math.Max(maxHeight, childHeight);
+				sumWidth += childWidth;
+				sumHeight += childHeight;
+			}
+
+			if (!hasWidth)
+			{
+				if (Orientation == Orientation.Horizontal)
+					desiredSize.X = sumWidth;
+				else
+					desiredSize.X = maxWidth;
+			}
+
+			if (!hasHeight)
+			{
+				if (Orientation == Orientation.Vertical)
+					desiredSize.Y = sumHeight;
+				else
+					desiredSize.Y = maxHeight;
+			}
+
+			desiredSize.X += padding.X + padding.Z;
+			desiredSize.Y += padding.Y + padding.W;
+			return desiredSize;
 		}
 
+
+		/// <inheritdoc/>
 		protected override void OnArrange(Vector2 position, Vector2 size)
 		{
-			UpdateGrid();
+			Vector4 padding = Padding;
+			position.X += padding.X;
+			position.Y += padding.Y;
+			size.X -= padding.X + padding.Z;
+			size.Y -= padding.Y + padding.W;
 
-			_gridLayout.Arrange(size, ActualBounds, Children, Arrange);
+			// Get extreme positions of arrange area.
+			float left = position.X;
+			float top = position.Y;
+			float right = left + size.X;
+			float bottom = top + size.Y;
+
+			if (Orientation == Orientation.Horizontal)
+			{
+				// ----- Horizontal: 
+				// Each child gets its desired width or the rest of the available space.
+				foreach (var child in VisualChildren)
+				{
+					float availableSize = Math.Max(0.0f, right - left);
+					float sizeX = Math.Min(availableSize, child.DesiredWidth);
+					float sizeY = size.Y;
+					Arrange(child, new Vector2(left, top), new Vector2(sizeX, sizeY));
+					left += sizeX;
+				}
+			}
+			else
+			{
+				// ----- Vertical
+				// Each child gets its desired height or the rest of the available space.
+				foreach (var child in VisualChildren)
+				{
+					float sizeX = size.X;
+					float availableSize = Math.Max(0.0f, bottom - top);
+					float sizeY = Math.Min(availableSize, child.DesiredHeight);
+					Arrange(child, new Vector2(left, top), new Vector2(sizeX, sizeY));
+					top += sizeY;
+				}
+			}
 		}
+		#endregion
 	}
 }
