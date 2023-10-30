@@ -69,7 +69,7 @@ namespace DigitalRise.Graphics.Rendering
 			Cube
 		}
 
-		private const int EffectsCount = 60;
+		private const int EffectsCount = 256;
 
 		private static EffectData[] _effectCache = new EffectData[EffectsCount];
 
@@ -319,15 +319,29 @@ namespace DigitalRise.Graphics.Rendering
 		#region Methods
 		//--------------------------------------------------------------
 
-		private static int GetEffectKey(ShaderType shaderType, ReflectionType reflectionType, bool underwater)
+		private static int GetEffectKey(ShaderType shaderType, ReflectionType reflectionType, bool underwater, bool fog)
 		{
-			return (int)shaderType * 6 + (int)reflectionType * 2 + (underwater ? 1 : 0);
+			// 4 bits for shader type, 2 bits for reflection type, 1 bit for underwater & fog
+			int result = 0;
+			result |= ((int)shaderType) << 4;
+			result |= ((int)reflectionType) << 2;
+			if (underwater)
+			{
+				result |= 2;
+			}
+
+			if (fog)
+			{
+				result |= 1;
+			}
+
+			return result;
 		}
 
 		private static EffectData GetEffect(IGraphicsService service,
-		  ShaderType shaderType, ReflectionType reflectionType, bool underwater)
+		  ShaderType shaderType, ReflectionType reflectionType, bool underwater, bool fog)
 		{
-			var key = GetEffectKey(shaderType, reflectionType, underwater);
+			var key = GetEffectKey(shaderType, reflectionType, underwater, fog);
 			if (_effectCache[key] != null)
 			{
 				return _effectCache[key];
@@ -390,6 +404,11 @@ namespace DigitalRise.Graphics.Rendering
 			if (underwater)
 			{
 				dict["UNDERWATER"] = "1";
+			}
+
+			if (fog)
+			{
+				dict["FOG"] = "1";
 			}
 
 			var effect = service.GetStockEffect("Water/Water", dict);
@@ -511,7 +530,9 @@ namespace DigitalRise.Graphics.Rendering
 					useProjectedGrid = false;
 				}
 
-				var effectData = GetEffectData(node, useProjectedGrid, isCameraUnderwater);
+				var fogNodes = context.Scene.Query<FogQuery>(cameraNode, context).FogNodes;
+				var hasFog = HasFog(fogNodes);
+				var effectData = GetEffectData(node, useProjectedGrid, isCameraUnderwater, hasFog);
 				context.Validate(effectData._effect);
 
 				effectData._parameterView.SetValue(view);
@@ -557,7 +578,6 @@ namespace DigitalRise.Graphics.Rendering
 
 				#region ----- Fog Parameters -----
 
-				var fogNodes = context.Scene.Query<FogQuery>(cameraNode, context).FogNodes;
 				SetFogParameters(effectData, fogNodes, cameraNode, directionalLightDirection);
 				#endregion
 
@@ -1074,7 +1094,7 @@ namespace DigitalRise.Graphics.Rendering
 		}
 
 
-		private EffectData GetEffectData(WaterNode node, bool useProjectedGrid, bool underwater)
+		private EffectData GetEffectData(WaterNode node, bool useProjectedGrid, bool underwater, bool fog)
 		{
 			var reflectionType = GetReflectionType(node);
 
@@ -1129,8 +1149,8 @@ namespace DigitalRise.Graphics.Rendering
 				}
 			}
 
-			var key = GetEffectKey(shaderType, reflectionType, underwater);
-			var result = GetEffect(_graphicsService, shaderType, reflectionType, underwater);
+			var key = GetEffectKey(shaderType, reflectionType, underwater, fog);
+			var result = GetEffect(_graphicsService, shaderType, reflectionType, underwater, fog);
 
 			if (!_usedEffectsMap.Contains(key))
 			{
@@ -1339,6 +1359,24 @@ namespace DigitalRise.Graphics.Rendering
 			effectData._parameterPushedBackCameraPosition.SetValue((Vector3)pushedBackCameraPosition);
 			effectData._parameterNearCorners.SetValue(_projectedGridNearCorners);
 			effectData._parameterWorld.SetValue(node.PoseWorld);
+			return true;
+		}
+
+		private static bool HasFog(IList<FogNode> fogNodes)
+		{
+			FogNode fogNode = null;
+			Fog fog = null;
+			if (fogNodes.Count > 0)
+			{
+				fogNode = fogNodes[0];
+				fog = fogNode.Fog;
+			}
+
+			if (fogNode == null || fog.Density <= Numeric.EpsilonF)
+			{
+				return false;
+			}
+
 			return true;
 		}
 

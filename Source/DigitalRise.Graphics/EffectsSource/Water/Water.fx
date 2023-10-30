@@ -791,8 +791,8 @@ float4 PS(VSOutput input) : COLOR
   // ----- Fog (see also FogRenderer and Fog.fx)
   float4 fogColor = 0;
   float fogIntensity = 0;
-  [branch]
-  if (FogDensity > 0)
+  
+#if FOG
   {
     // Height in world space.
     float height = input.PositionWorld.y;
@@ -820,6 +820,7 @@ float4 PS(VSOutput input) : COLOR
     fogColor.rgb *= FogPhaseFunction(nDotV, FogScatteringSymmetry);
     fogIntensity = fogColor.a * smoothRamp * exponentialFog;
   }
+#endif
   
   // Underwater the specular highlight is part of the refraction.
   // Foam hides the refraction.
