@@ -4,12 +4,12 @@
 
 namespace DigitalRise.Graphics
 {
-  /// <summary>
-  /// Represents the default encoding of color values.
-  /// </summary>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-  public class RgbEncoding : ColorEncoding
-  {
-    // RGB in DigitalRise Graphics are color values in linear space.
-  }
+	/// <summary>
+	/// Represents the default encoding of color values.
+	/// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+	public class RgbEncoding : ColorEncoding
+	{
+		// RGB in DigitalRise Graphics are color values in linear space.
+	}
 }

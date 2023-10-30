@@ -11,224 +11,224 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics.Rendering
 {
-  /// <summary>
-  /// Creates the shadow map of a <see cref="StandardShadow"/>.
-  /// </summary>
-  /// <inheritdoc cref="ShadowMapRenderer"/>
-  internal class StandardShadowMapRenderer : SceneNodeRenderer, IShadowMapRenderer
-  {
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
+	/// <summary>
+	/// Creates the shadow map of a <see cref="StandardShadow"/>.
+	/// </summary>
+	/// <inheritdoc cref="ShadowMapRenderer"/>
+	internal class StandardShadowMapRenderer : SceneNodeRenderer, IShadowMapRenderer
+	{
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
 
-    private readonly CameraNode _perspectiveCameraNode;
-    private readonly CameraNode _orthographicCameraNode;
-    #endregion
-
-
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
-
-    /// <inheritdoc/>
-    public Func<RenderContext, bool> RenderCallback
-    {
-      get { return _renderCallback; }
-      set
-      {
-        if (value == null)
-          throw new ArgumentNullException("value");
-
-        _renderCallback = value;
-      }
-    }
-    private Func<RenderContext, bool> _renderCallback;
-    #endregion
+		private readonly CameraNode _perspectiveCameraNode;
+		private readonly CameraNode _orthographicCameraNode;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StandardShadowMapRenderer"/> class.
-    /// </summary>
-    /// <param name="renderCallback">
-    /// The method which renders the scene into the shadow map. Must not be <see langword="null"/>.
-    /// See <see cref="RenderCallback"/> for more information.
-    /// </param>
-    public StandardShadowMapRenderer(Func<RenderContext, bool> renderCallback)
-    {
-      if (renderCallback == null)
-        throw new ArgumentNullException("renderCallback");
+		/// <inheritdoc/>
+		public Func<RenderContext, bool> RenderCallback
+		{
+			get { return _renderCallback; }
+			set
+			{
+				if (value == null)
+					throw new ArgumentNullException("value");
 
-      RenderCallback = renderCallback;
-      _perspectiveCameraNode = new CameraNode(new Camera(new PerspectiveProjection()));
-      _orthographicCameraNode = new CameraNode(new Camera(new OrthographicProjection()));
-    }
-    #endregion
+				_renderCallback = value;
+			}
+		}
+		private Func<RenderContext, bool> _renderCallback;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    public override bool CanRender(SceneNode node, RenderContext context)
-    {
-      var lightNode = node as LightNode;
-      return lightNode != null && lightNode.Shadow is StandardShadow;
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StandardShadowMapRenderer"/> class.
+		/// </summary>
+		/// <param name="renderCallback">
+		/// The method which renders the scene into the shadow map. Must not be <see langword="null"/>.
+		/// See <see cref="RenderCallback"/> for more information.
+		/// </param>
+		public StandardShadowMapRenderer(Func<RenderContext, bool> renderCallback)
+		{
+			if (renderCallback == null)
+				throw new ArgumentNullException("renderCallback");
+
+			RenderCallback = renderCallback;
+			_perspectiveCameraNode = new CameraNode(new Camera(new PerspectiveProjection()));
+			_orthographicCameraNode = new CameraNode(new Camera(new OrthographicProjection()));
+		}
+		#endregion
 
 
-    /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    public override void Render(IList<SceneNode> nodes, RenderContext context, RenderOrder order)
-    {
-      if (nodes == null)
-        throw new ArgumentNullException("nodes");
-      if (context == null)
-        throw new ArgumentNullException("context");
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      int numberOfNodes = nodes.Count;
-      if (numberOfNodes == 0)
-        return;
+		/// <inheritdoc/>
+		public override bool CanRender(SceneNode node, RenderContext context)
+		{
+			var lightNode = node as LightNode;
+			return lightNode != null && lightNode.Shadow is StandardShadow;
+		}
 
-      // Note: The camera node is not used by the StandardShadowMapRenderer.
-      // Still throw an exception if null for consistency. (All other shadow map
-      // renderers need a camera node.)
-      context.ThrowIfCameraMissing();
-      context.ThrowIfSceneMissing();
 
-      var originalRenderTarget = context.RenderTarget;
-      var originalViewport = context.Viewport;
-      var originalReferenceNode = context.ReferenceNode;
+		/// <inheritdoc/>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+		public override void Render(IList<SceneNode> nodes, RenderContext context, RenderOrder order)
+		{
+			if (nodes == null)
+				throw new ArgumentNullException("nodes");
+			if (context == null)
+				throw new ArgumentNullException("context");
 
-      var cameraNode = context.CameraNode;
+			int numberOfNodes = nodes.Count;
+			if (numberOfNodes == 0)
+				return;
 
-      // Update SceneNode.LastFrame for all visible nodes.
-      int frame = context.Frame;
-      cameraNode.LastFrame = frame;
+			// Note: The camera node is not used by the StandardShadowMapRenderer.
+			// Still throw an exception if null for consistency. (All other shadow map
+			// renderers need a camera node.)
+			context.ThrowIfCameraMissing();
+			context.ThrowIfSceneMissing();
 
-      context.Technique = "Default";
+			var originalRenderTarget = context.RenderTarget;
+			var originalViewport = context.Viewport;
+			var originalReferenceNode = context.ReferenceNode;
 
-      var graphicsService = context.GraphicsService;
-      var graphicsDevice = graphicsService.GraphicsDevice;
-      var savedRenderState = new RenderStateSnapshot(graphicsDevice);
+			var cameraNode = context.CameraNode;
 
-      for (int i = 0; i < numberOfNodes; i++)
-      {
-        var lightNode = nodes[i] as LightNode;
-        if (lightNode == null)
-          continue;
+			// Update SceneNode.LastFrame for all visible nodes.
+			int frame = context.Frame;
+			cameraNode.LastFrame = frame;
 
-        var shadow = lightNode.Shadow as StandardShadow;
-        if (shadow == null)
-          continue;
+			context.Technique = "Default";
 
-        // LightNode is visible in current frame.
-        lightNode.LastFrame = frame;
+			var graphicsService = context.GraphicsService;
+			var graphicsDevice = graphicsService.GraphicsDevice;
+			var savedRenderState = new RenderStateSnapshot(graphicsDevice);
 
-        // Get a new shadow map if necessary.
-        if (shadow.ShadowMap == null)
-        {
-          shadow.ShadowMap = graphicsService.RenderTargetPool.Obtain2D(
-            new RenderTargetFormat(
-              shadow.PreferredSize,
-              shadow.PreferredSize,
-              false,
-              shadow.Prefer16Bit ? SurfaceFormat.HalfSingle : SurfaceFormat.Single,
-              DepthFormat.Depth24));
-        }
+			for (int i = 0; i < numberOfNodes; i++)
+			{
+				var lightNode = nodes[i] as LightNode;
+				if (lightNode == null)
+					continue;
 
-        // Create a suitable shadow camera.
-        CameraNode lightCameraNode;
-        if (lightNode.Light is ProjectorLight)
-        {
-          var light = (ProjectorLight)lightNode.Light;
-          if (light.Projection is PerspectiveProjection)
-          {
-            var lp = (PerspectiveProjection)light.Projection;
-            var cp = (PerspectiveProjection)_perspectiveCameraNode.Camera.Projection;
-            cp.SetOffCenter(lp.Left, lp.Right, lp.Bottom, lp.Top, lp.Near, lp.Far);
+				var shadow = lightNode.Shadow as StandardShadow;
+				if (shadow == null)
+					continue;
 
-            lightCameraNode = _perspectiveCameraNode;
-          }
-          else //if (light.Projection is OrthographicProjection)
-          {
-            var lp = (OrthographicProjection)light.Projection;
-            var cp = (OrthographicProjection)_orthographicCameraNode.Camera.Projection;
-            cp.SetOffCenter(lp.Left, lp.Right, lp.Bottom, lp.Top, lp.Near, lp.Far);
+				// LightNode is visible in current frame.
+				lightNode.LastFrame = frame;
 
-            lightCameraNode = _orthographicCameraNode;
-          }
-        }
-        else if (lightNode.Light is Spotlight)
-        {
-          var light = (Spotlight)lightNode.Light;
-          var cp = (PerspectiveProjection)_perspectiveCameraNode.Camera.Projection;
-          cp.SetFieldOfView(2 * light.CutoffAngle, 1, shadow.DefaultNear, light.Range);
+				// Get a new shadow map if necessary.
+				if (shadow.ShadowMap == null)
+				{
+					shadow.ShadowMap = graphicsService.RenderTargetPool.Obtain2D(
+					  new RenderTargetFormat(
+						shadow.PreferredSize,
+						shadow.PreferredSize,
+						false,
+						shadow.Prefer16Bit ? SurfaceFormat.HalfSingle : SurfaceFormat.Single,
+						DepthFormat.Depth24));
+				}
 
-          lightCameraNode = _perspectiveCameraNode;
-        }
-        else
-        {
-          throw new GraphicsException("StandardShadow can only be used with a Spotlight or a ProjectorLight.");
-        }
+				// Create a suitable shadow camera.
+				CameraNode lightCameraNode;
+				if (lightNode.Light is ProjectorLight)
+				{
+					var light = (ProjectorLight)lightNode.Light;
+					if (light.Projection is PerspectiveProjection)
+					{
+						var lp = (PerspectiveProjection)light.Projection;
+						var cp = (PerspectiveProjection)_perspectiveCameraNode.Camera.Projection;
+						cp.SetOffCenter(lp.Left, lp.Right, lp.Bottom, lp.Top, lp.Near, lp.Far);
 
-        lightCameraNode.PoseWorld = lightNode.PoseWorld;
+						lightCameraNode = _perspectiveCameraNode;
+					}
+					else //if (light.Projection is OrthographicProjection)
+					{
+						var lp = (OrthographicProjection)light.Projection;
+						var cp = (OrthographicProjection)_orthographicCameraNode.Camera.Projection;
+						cp.SetOffCenter(lp.Left, lp.Right, lp.Bottom, lp.Top, lp.Near, lp.Far);
 
-        // Store data for use in StandardShadowMaskRenderer.
-        shadow.Near = lightCameraNode.Camera.Projection.Near;
-        shadow.Far = lightCameraNode.Camera.Projection.Far;
-        shadow.View = lightCameraNode.PoseWorld.Inverse;
-        shadow.Projection = lightCameraNode.Camera.Projection;
+						lightCameraNode = _orthographicCameraNode;
+					}
+				}
+				else if (lightNode.Light is Spotlight)
+				{
+					var light = (Spotlight)lightNode.Light;
+					var cp = (PerspectiveProjection)_perspectiveCameraNode.Camera.Projection;
+					cp.SetFieldOfView(2 * light.CutoffAngle, 1, shadow.DefaultNear, light.Range);
 
-        // World units per texel at a planar distance of 1 world unit.
-        float unitsPerTexel = lightCameraNode.Camera.Projection.Width / (shadow.ShadowMap.Height * shadow.Near);
+					lightCameraNode = _perspectiveCameraNode;
+				}
+				else
+				{
+					throw new GraphicsException("StandardShadow can only be used with a Spotlight or a ProjectorLight.");
+				}
 
-        // Convert depth bias from "texel" to world space.
-        // Minus to move receiver depth closer to light.
-        shadow.EffectiveDepthBias = -shadow.DepthBias * unitsPerTexel;
+				lightCameraNode.PoseWorld = lightNode.PoseWorld;
 
-        // Convert normal offset from "texel" to world space.
-        shadow.EffectiveNormalOffset = shadow.NormalOffset * unitsPerTexel;
+				// Store data for use in StandardShadowMaskRenderer.
+				shadow.Near = lightCameraNode.Camera.Projection.Near;
+				shadow.Far = lightCameraNode.Camera.Projection.Far;
+				shadow.View = lightCameraNode.PoseWorld.Inverse;
+				shadow.Projection = lightCameraNode.Camera.Projection;
 
-        graphicsDevice.SetRenderTarget(shadow.ShadowMap);
-        context.RenderTarget = shadow.ShadowMap;
-        context.Viewport = graphicsDevice.Viewport;
+				// World units per texel at a planar distance of 1 world unit.
+				float unitsPerTexel = lightCameraNode.Camera.Projection.Width / (shadow.ShadowMap.Height * shadow.Near);
 
-        graphicsDevice.Clear(Color.White);
+				// Convert depth bias from "texel" to world space.
+				// Minus to move receiver depth closer to light.
+				shadow.EffectiveDepthBias = -shadow.DepthBias * unitsPerTexel;
 
-        // The scene node renderer should use the light camera instead of the player camera.
-        context.CameraNode = lightCameraNode;
-        context.ReferenceNode = lightNode;
-        context.Object = shadow;
+				// Convert normal offset from "texel" to world space.
+				shadow.EffectiveNormalOffset = shadow.NormalOffset * unitsPerTexel;
 
-        graphicsDevice.DepthStencilState = DepthStencilState.Default;
-        graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-        graphicsDevice.BlendState = BlendState.Opaque;
+				graphicsDevice.SetRenderTarget(shadow.ShadowMap);
+				context.RenderTarget = shadow.ShadowMap;
+				context.Viewport = graphicsDevice.Viewport;
 
-        bool shadowMapContainsSomething = RenderCallback(context);
-        if (!shadowMapContainsSomething)
-        {
-          // Shadow map is empty. Recycle it.
-          graphicsService.RenderTargetPool.Recycle(shadow.ShadowMap);
-          shadow.ShadowMap = null;
-        }
-      }
+				graphicsDevice.Clear(Color.White);
 
-      graphicsDevice.SetRenderTarget(null);
-      savedRenderState.Restore();
+				// The scene node renderer should use the light camera instead of the player camera.
+				context.CameraNode = lightCameraNode;
+				context.ReferenceNode = lightNode;
+				context.Object = shadow;
 
-      context.CameraNode = cameraNode;
-      context.Technique = null;
-      context.RenderTarget = originalRenderTarget;
-      context.Viewport = originalViewport;
-      context.ReferenceNode = originalReferenceNode;
-      context.Object = null;
-    }
-    #endregion
-  }
+				graphicsDevice.DepthStencilState = DepthStencilState.Default;
+				graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+				graphicsDevice.BlendState = BlendState.Opaque;
+
+				bool shadowMapContainsSomething = RenderCallback(context);
+				if (!shadowMapContainsSomething)
+				{
+					// Shadow map is empty. Recycle it.
+					graphicsService.RenderTargetPool.Recycle(shadow.ShadowMap);
+					shadow.ShadowMap = null;
+				}
+			}
+
+			graphicsDevice.SetRenderTarget(null);
+			savedRenderState.Restore();
+
+			context.CameraNode = cameraNode;
+			context.Technique = null;
+			context.RenderTarget = originalRenderTarget;
+			context.Viewport = originalViewport;
+			context.ReferenceNode = originalReferenceNode;
+			context.Object = null;
+		}
+		#endregion
+	}
 }

@@ -4,12 +4,12 @@
 
 namespace DigitalRise.Graphics.Effects
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.Graphics.Effects"/> namespace provides types for managing DirectX
-  /// Effects.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.Graphics.Effects"/> namespace provides types for managing DirectX
+	/// Effects.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

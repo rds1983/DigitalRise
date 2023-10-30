@@ -7,47 +7,47 @@ using System.Collections.Generic;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
-  /// <summary>
-  /// Sorts <see cref="FogNode"/>s by their <see cref="FogNode.Priority"/> and then by
-  /// their <see cref="SceneNode.SortTag"/> in descending order.
-  /// </summary>
-  internal sealed class DescendingFogNodeComparer
-    : Singleton<DescendingFogNodeComparer>, IComparer<FogNode>
-  {
-    /// <summary>
-    /// Compares two <see cref="FogNode"/>s.
-    /// </summary>
-    /// <param name="x">The first <see cref="SceneNode"/> to compare.</param>
-    /// <param name="y">The second <see cref="SceneNode"/> to compare.</param>
-    /// <returns>
-    /// <list type="table">
-    /// <listheader>
-    /// <term>Value</term>
-    /// <description>Condition</description>
-    /// </listheader>
-    /// <item>
-    /// <term>Less than zero</term>
-    /// <description><paramref name="x"/> is less than <paramref name="y"/>.</description>
-    /// </item>
-    /// <item>
-    /// <term>Zero</term>
-    /// <description><paramref name="x"/> equals <paramref name="y"/>.</description>
-    /// </item>
-    /// <item>
-    /// <term>Greater than zero</term>
-    /// <description><paramref name="x"/> is greater than <paramref name="y"/>.</description>
-    /// </item>
-    /// </list>
-    /// </returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    public int Compare(FogNode x, FogNode y)
-    {
-      if (x.Priority < y.Priority)
-        return +1;
-      if (x.Priority > y.Priority)
-        return -1;
+	/// <summary>
+	/// Sorts <see cref="FogNode"/>s by their <see cref="FogNode.Priority"/> and then by
+	/// their <see cref="SceneNode.SortTag"/> in descending order.
+	/// </summary>
+	internal sealed class DescendingFogNodeComparer
+	  : Singleton<DescendingFogNodeComparer>, IComparer<FogNode>
+	{
+		/// <summary>
+		/// Compares two <see cref="FogNode"/>s.
+		/// </summary>
+		/// <param name="x">The first <see cref="SceneNode"/> to compare.</param>
+		/// <param name="y">The second <see cref="SceneNode"/> to compare.</param>
+		/// <returns>
+		/// <list type="table">
+		/// <listheader>
+		/// <term>Value</term>
+		/// <description>Condition</description>
+		/// </listheader>
+		/// <item>
+		/// <term>Less than zero</term>
+		/// <description><paramref name="x"/> is less than <paramref name="y"/>.</description>
+		/// </item>
+		/// <item>
+		/// <term>Zero</term>
+		/// <description><paramref name="x"/> equals <paramref name="y"/>.</description>
+		/// </item>
+		/// <item>
+		/// <term>Greater than zero</term>
+		/// <description><paramref name="x"/> is greater than <paramref name="y"/>.</description>
+		/// </item>
+		/// </list>
+		/// </returns>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+		public int Compare(FogNode x, FogNode y)
+		{
+			if (x.Priority < y.Priority)
+				return +1;
+			if (x.Priority > y.Priority)
+				return -1;
 
-      return y.SortTag.CompareTo(x.SortTag);
-    }
-  }
+			return y.SortTag.CompareTo(x.SortTag);
+		}
+	}
 }

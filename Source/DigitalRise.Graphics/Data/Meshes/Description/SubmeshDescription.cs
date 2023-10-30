@@ -4,9 +4,9 @@
 
 namespace DigitalRise.Graphics
 {
-  internal class SubmeshDescription
-  {
-    public bool GenerateTangentFrames { get; set; }
-    public string Material { get; set; }
-  }
+	internal class SubmeshDescription
+	{
+		public bool GenerateTangentFrames { get; set; }
+		public string Material { get; set; }
+	}
 }

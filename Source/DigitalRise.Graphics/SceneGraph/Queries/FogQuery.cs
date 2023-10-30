@@ -8,93 +8,93 @@ using System.Diagnostics;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
-  /// <summary>
-  /// Returns the <see cref="FogNodes"/> that affect a specific scene node.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// A <see cref="FogQuery"/> can be executed against a scene by calling 
-  /// <see cref="IScene.Query{T}"/>. The query can be used to get all <see cref="FogNodes"/> that
-  /// affect the current a certain reference node in the scene. The reference node is typically 
-  /// the current <see cref="CameraNode"/>.
-  /// </para>
-  /// <para>
-  /// The <see cref="FogNodes"/> are sorted by their <see cref="FogNode.Priority"/> (descending),
-  /// which means that the first node in the list is the most important fog effect.
-  /// </para>
-  /// </remarks>
-  public class FogQuery : ISceneQuery
-  {
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-    #endregion
+	/// <summary>
+	/// Returns the <see cref="FogNodes"/> that affect a specific scene node.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// A <see cref="FogQuery"/> can be executed against a scene by calling 
+	/// <see cref="IScene.Query{T}"/>. The query can be used to get all <see cref="FogNodes"/> that
+	/// affect the current a certain reference node in the scene. The reference node is typically 
+	/// the current <see cref="CameraNode"/>.
+	/// </para>
+	/// <para>
+	/// The <see cref="FogNodes"/> are sorted by their <see cref="FogNode.Priority"/> (descending),
+	/// which means that the first node in the list is the most important fog effect.
+	/// </para>
+	/// </remarks>
+	public class FogQuery : ISceneQuery
+	{
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    public SceneNode ReferenceNode { get; private set; }
-
-
-    /// <summary>
-    /// Gets the fog nodes.
-    /// </summary>
-    /// <value>The fog nodes.</value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Performance")]
-    public List<FogNode> FogNodes { get; private set; }
-    #endregion
+		/// <inheritdoc/>
+		public SceneNode ReferenceNode { get; private set; }
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FogQuery"/> class.
-    /// </summary>
-    public FogQuery()
-    {
-      FogNodes = new List<FogNode>();
-    }
-    #endregion
+		/// <summary>
+		/// Gets the fog nodes.
+		/// </summary>
+		/// <value>The fog nodes.</value>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Performance")]
+		public List<FogNode> FogNodes { get; private set; }
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    public void Reset()
-    {
-      ReferenceNode = null;
-      FogNodes.Clear();
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="FogQuery"/> class.
+		/// </summary>
+		public FogQuery()
+		{
+			FogNodes = new List<FogNode>();
+		}
+		#endregion
 
 
-    /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    public void Set(SceneNode referenceNode, IList<SceneNode> nodes, RenderContext context)
-    {
-      Reset();
-      ReferenceNode = referenceNode;
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      int numberOfNodes = nodes.Count;
-      for (int i = 0; i < numberOfNodes; i++)
-      {
-        var fogNode = nodes[i] as FogNode;
-        if (fogNode != null)
-        {
-          Debug.Assert(fogNode.ActualIsEnabled, "Scene query contains disabled nodes.");
-          FogNodes.Add(fogNode);
-        }
-      }
+		/// <inheritdoc/>
+		public void Reset()
+		{
+			ReferenceNode = null;
+			FogNodes.Clear();
+		}
 
-      // Sort fog nodes.
-      FogNodes.Sort(DescendingFogNodeComparer.Instance);
-    }
-    #endregion
-  }
+
+		/// <inheritdoc/>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
+		public void Set(SceneNode referenceNode, IList<SceneNode> nodes, RenderContext context)
+		{
+			Reset();
+			ReferenceNode = referenceNode;
+
+			int numberOfNodes = nodes.Count;
+			for (int i = 0; i < numberOfNodes; i++)
+			{
+				var fogNode = nodes[i] as FogNode;
+				if (fogNode != null)
+				{
+					Debug.Assert(fogNode.ActualIsEnabled, "Scene query contains disabled nodes.");
+					FogNodes.Add(fogNode);
+				}
+			}
+
+			// Sort fog nodes.
+			FogNodes.Sort(DescendingFogNodeComparer.Instance);
+		}
+		#endregion
+	}
 }

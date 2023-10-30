@@ -7,21 +7,21 @@ using System.Collections.Generic;
 
 namespace DigitalRise.Graphics
 {
-  internal class MeshDescription
-  {
-    public string Name { get; set; }
-    public bool GenerateTangentFrames { get; set; }
-    public float MaxDistance { get; set; }
-    public float LodDistance { get; set; }
-    public List<SubmeshDescription> Submeshes { get; set; }
+	internal class MeshDescription
+	{
+		public string Name { get; set; }
+		public bool GenerateTangentFrames { get; set; }
+		public float MaxDistance { get; set; }
+		public float LodDistance { get; set; }
+		public List<SubmeshDescription> Submeshes { get; set; }
 
 
-    public SubmeshDescription GetSubmeshDescription(int submeshIndex)
-    {
-      if (Submeshes == null || submeshIndex < 0 || submeshIndex >= Submeshes.Count)
-        return null;
+		public SubmeshDescription GetSubmeshDescription(int submeshIndex)
+		{
+			if (Submeshes == null || submeshIndex < 0 || submeshIndex >= Submeshes.Count)
+				return null;
 
-      return Submeshes[submeshIndex];
-    }
-  }
+			return Submeshes[submeshIndex];
+		}
+	}
 }

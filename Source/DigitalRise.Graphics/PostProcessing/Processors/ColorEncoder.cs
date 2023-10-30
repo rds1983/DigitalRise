@@ -15,7 +15,7 @@ namespace DigitalRise.Graphics.PostProcessing
 	/// Changes the <see cref="ColorEncoding"/> of a texture.
 	/// </summary>
 	public class ColorEncoder : PostProcessor
-  {
+	{
 		private enum ColorEncodingType
 		{
 			RGB,
@@ -26,17 +26,17 @@ namespace DigitalRise.Graphics.PostProcessing
 		}
 
 		private class EffectData
-    {
-      public readonly Effect Effect;
+		{
+			public readonly Effect Effect;
 			public readonly EffectParameter ViewportSizeParameter;
 			public readonly EffectParameter SourceTextureParameter;
 			public readonly EffectParameter SourceParamParameter;
 			public readonly EffectParameter TargetParamParameter;
 
-      public EffectData(Effect effect, 
-				EffectParameter viewportSizeParameter, EffectParameter sourceTextureParameter,
-				EffectParameter sourceParamParameter, EffectParameter targetParamParameter)
-      {
+			public EffectData(Effect effect,
+					  EffectParameter viewportSizeParameter, EffectParameter sourceTextureParameter,
+					  EffectParameter sourceParamParameter, EffectParameter targetParamParameter)
+			{
 				Effect = effect;
 				ViewportSizeParameter = viewportSizeParameter;
 				SourceTextureParameter = sourceTextureParameter;
@@ -45,9 +45,9 @@ namespace DigitalRise.Graphics.PostProcessing
 			}
 		}
 
-    //--------------------------------------------------------------
-    #region Fields
-    private static readonly EffectData[] _effectsCache = new EffectData[25];
+		//--------------------------------------------------------------
+		#region Fields
+		private static readonly EffectData[] _effectsCache = new EffectData[25];
 		private readonly EffectData _effect;
 
 		//--------------------------------------------------------------
@@ -81,8 +81,8 @@ namespace DigitalRise.Graphics.PostProcessing
 		/// <paramref name="value"/> is <see langword="null"/>.
 		/// </exception>
 		public readonly ColorEncoding TargetEncoding;
-		
-    #endregion
+
+		#endregion
 
 
 		//--------------------------------------------------------------
@@ -96,9 +96,9 @@ namespace DigitalRise.Graphics.PostProcessing
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="graphicsService"/> is <see langword="null"/>.
 		/// </exception>
-		public ColorEncoder(IGraphicsService graphicsService, ColorEncoding source, ColorEncoding target):
+		public ColorEncoder(IGraphicsService graphicsService, ColorEncoding source, ColorEncoding target) :
 			base(graphicsService)
-    {
+		{
 			SourceEncoding = source ?? throw new ArgumentNullException(nameof(source));
 			TargetEncoding = target ?? throw new ArgumentNullException(nameof(target));
 			_effect = GetEffect(GraphicsService, ToType(SourceEncoding), ToType(TargetEncoding));
@@ -112,7 +112,7 @@ namespace DigitalRise.Graphics.PostProcessing
 
 		private static ColorEncodingType ToType(ColorEncoding enc)
 		{
-			switch(enc)
+			switch (enc)
 			{
 				case RgbEncoding _:
 					return ColorEncodingType.RGB;
@@ -130,7 +130,7 @@ namespace DigitalRise.Graphics.PostProcessing
 		}
 
 		private static EffectData GetEffect(IGraphicsService service, ColorEncodingType source, ColorEncodingType target)
-    {
+		{
 			var key = ((int)source) * 5 + (int)target;
 
 			if (_effectsCache[key] != null)
@@ -156,20 +156,20 @@ namespace DigitalRise.Graphics.PostProcessing
 
 		/// <inheritdoc/>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods")]
-    protected override void OnProcess(RenderContext context)
-    {
-      var graphicsDevice = GraphicsService.GraphicsDevice;
+		protected override void OnProcess(RenderContext context)
+		{
+			var graphicsDevice = GraphicsService.GraphicsDevice;
 
-      if (TextureHelper.IsFloatingPointFormat(context.SourceTexture.Format))
-        graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-      else
-        graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+			if (TextureHelper.IsFloatingPointFormat(context.SourceTexture.Format))
+				graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+			else
+				graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
 
-      graphicsDevice.SetRenderTarget(context.RenderTarget);
-      graphicsDevice.Viewport = context.Viewport;
+			graphicsDevice.SetRenderTarget(context.RenderTarget);
+			graphicsDevice.Viewport = context.Viewport;
 
-      _effect.ViewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
-      _effect.SourceTextureParameter.SetValue(context.SourceTexture);
+			_effect.ViewportSizeParameter.SetValue(new Vector2(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height));
+			_effect.SourceTextureParameter.SetValue(context.SourceTexture);
 
 			var asRgbm = SourceEncoding as RgbmEncoding;
 			if (asRgbm != null)
@@ -187,10 +187,10 @@ namespace DigitalRise.Graphics.PostProcessing
 
 
 			_effect.Effect.CurrentTechnique.Passes[0].Apply();
-      graphicsDevice.DrawFullScreenQuad();
+			graphicsDevice.DrawFullScreenQuad();
 
 			_effect.SourceTextureParameter.SetValue((Texture2D)null);
-    }
-  }
-  #endregion
+		}
+	}
+	#endregion
 }

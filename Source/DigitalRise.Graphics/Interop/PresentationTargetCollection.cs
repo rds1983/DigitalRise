@@ -7,16 +7,16 @@ using DigitalRise.Collections;
 
 namespace DigitalRise.Graphics.Interop
 {
-  /// <summary>
-  /// Manages a collection of <see cref="IPresentationTarget"/>s.
-  /// </summary>
-  public class PresentationTargetCollection : NotifyingCollection<IPresentationTarget>
-  {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PresentationTargetCollection"/> class.
-    /// </summary>
-    public PresentationTargetCollection() : base(false, false)
-    {
-    }
-  }
+	/// <summary>
+	/// Manages a collection of <see cref="IPresentationTarget"/>s.
+	/// </summary>
+	public class PresentationTargetCollection : NotifyingCollection<IPresentationTarget>
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="PresentationTargetCollection"/> class.
+		/// </summary>
+		public PresentationTargetCollection() : base(false, false)
+		{
+		}
+	}
 }

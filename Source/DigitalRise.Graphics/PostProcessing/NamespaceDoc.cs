@@ -4,12 +4,12 @@
 
 namespace DigitalRise.Graphics.PostProcessing
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.Graphics.PostProcessing"/> namespace provides support for image
-  /// post-processing.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.Graphics.PostProcessing"/> namespace provides support for image
+	/// post-processing.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

@@ -10,161 +10,161 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics.Rendering
 {
-  /// <summary>
-  /// Renders a batch of textures (usually for debugging).
-  /// </summary>
-  /// <remarks>
-  /// A valid <see cref="SpriteBatch"/> must be set; otherwise, <see cref="Render"/> will not draw
-  /// any points.
-  /// </remarks>
-  internal sealed class TextureBatch 
-  {
-    //--------------------------------------------------------------
-    #region Nested Types
-    //--------------------------------------------------------------
+	/// <summary>
+	/// Renders a batch of textures (usually for debugging).
+	/// </summary>
+	/// <remarks>
+	/// A valid <see cref="SpriteBatch"/> must be set; otherwise, <see cref="Render"/> will not draw
+	/// any points.
+	/// </remarks>
+	internal sealed class TextureBatch
+	{
+		//--------------------------------------------------------------
+		#region Nested Types
+		//--------------------------------------------------------------
 
-    /// <summary>Describes a draw info for a texture.</summary>
-    private struct TextureInfo
-    {
-      /// <summary>The texture.</summary>
-      public readonly Texture2D Texture;
+		/// <summary>Describes a draw info for a texture.</summary>
+		private struct TextureInfo
+		{
+			/// <summary>The texture.</summary>
+			public readonly Texture2D Texture;
 
-      /// <summary>The target position and size in screen space.</summary>
-      public readonly Rectangle Rectangle;
+			/// <summary>The target position and size in screen space.</summary>
+			public readonly Rectangle Rectangle;
 
-      /// <summary>
-      /// Initializes a new instance of the <see cref="TextureInfo"/> struct.
-      /// </summary>
-      /// <param name="texture">The texture.</param>
-      /// <param name="rectangle">The position rectangle in screen space.</param>
-      public TextureInfo(Texture2D texture, Rectangle rectangle)
-      {
-        Texture = texture;
-        Rectangle = rectangle;
-      }
-    }
-    #endregion
-
-
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-
-    private readonly List<TextureInfo> _textures = new List<TextureInfo>();
-    #endregion
+			/// <summary>
+			/// Initializes a new instance of the <see cref="TextureInfo"/> struct.
+			/// </summary>
+			/// <param name="texture">The texture.</param>
+			/// <param name="rectangle">The position rectangle in screen space.</param>
+			public TextureInfo(Texture2D texture, Rectangle rectangle)
+			{
+				Texture = texture;
+				Rectangle = rectangle;
+			}
+		}
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Gets or sets the sprite batch.
-    /// </summary>
-    /// <value>The sprite batch.</value>
-    /// <remarks>
-    /// If this value is <see langword="null"/>, then <see cref="Render"/> does nothing.
-    /// </remarks>
-    public SpriteBatch SpriteBatch { get; set; }
-    #endregion
+		private readonly List<TextureInfo> _textures = new List<TextureInfo>();
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TextureBatch"/> class.
-    /// </summary>
-    /// <param name="spriteBatch">
-    /// The sprite batch. If this value is <see langword="null"/>, then the batch will not draw 
-    /// anything when <see cref="Render"/> is called.
-    /// </param>
-    public TextureBatch(SpriteBatch spriteBatch)
-    {
-      SpriteBatch = spriteBatch;
-    }
-    #endregion
+		/// <summary>
+		/// Gets or sets the sprite batch.
+		/// </summary>
+		/// <value>The sprite batch.</value>
+		/// <remarks>
+		/// If this value is <see langword="null"/>, then <see cref="Render"/> does nothing.
+		/// </remarks>
+		public SpriteBatch SpriteBatch { get; set; }
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Removes all textures.
-    /// </summary>
-    public void Clear()
-    {
-      _textures.Clear();
-    }
-
-
-    /// <summary>
-    /// Adds a texture.
-    /// </summary>
-    /// <param name="texture">The texture.</param>
-    /// <param name="rectangle">The target position and size in screen space.</param>
-    public void Add(Texture2D texture, Rectangle rectangle)
-    {
-      if (texture != null)
-        _textures.Add(new TextureInfo(texture, rectangle));
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TextureBatch"/> class.
+		/// </summary>
+		/// <param name="spriteBatch">
+		/// The sprite batch. If this value is <see langword="null"/>, then the batch will not draw 
+		/// anything when <see cref="Render"/> is called.
+		/// </param>
+		public TextureBatch(SpriteBatch spriteBatch)
+		{
+			SpriteBatch = spriteBatch;
+		}
+		#endregion
 
 
-    /// <summary>
-    /// Draws the textures.
-    /// </summary>
-    /// <param name="context">The render context.</param>
-    /// <remarks>
-    /// If <see cref="SpriteBatch"/> is <see langword="null"/>, then <see cref="Render"/> does 
-    /// nothing.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// <paramref name="context"/> is <see langword="null"/>.
-    /// </exception>
-    public void Render(RenderContext context)
-    {
-      if (context == null)
-        throw new ArgumentNullException("context");
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      if (SpriteBatch == null)
-        return;
+		/// <summary>
+		/// Removes all textures.
+		/// </summary>
+		public void Clear()
+		{
+			_textures.Clear();
+		}
 
-      var count = _textures.Count;
-      if (count == 0)
-        return;
 
-      context.Validate(SpriteBatch);
+		/// <summary>
+		/// Adds a texture.
+		/// </summary>
+		/// <param name="texture">The texture.</param>
+		/// <param name="rectangle">The target position and size in screen space.</param>
+		public void Add(Texture2D texture, Rectangle rectangle)
+		{
+			if (texture != null)
+				_textures.Add(new TextureInfo(texture, rectangle));
+		}
 
-      var savedRenderState = new RenderStateSnapshot(SpriteBatch.GraphicsDevice);
 
-      SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone);
+		/// <summary>
+		/// Draws the textures.
+		/// </summary>
+		/// <param name="context">The render context.</param>
+		/// <remarks>
+		/// If <see cref="SpriteBatch"/> is <see langword="null"/>, then <see cref="Render"/> does 
+		/// nothing.
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">
+		/// <paramref name="context"/> is <see langword="null"/>.
+		/// </exception>
+		public void Render(RenderContext context)
+		{
+			if (context == null)
+				throw new ArgumentNullException("context");
 
-      for (int i = 0; i < count; i++)
-      {
-        var textureInfo = _textures[i];
+			if (SpriteBatch == null)
+				return;
 
-        if (textureInfo.Texture.IsDisposed)
-          continue;
+			var count = _textures.Count;
+			if (count == 0)
+				return;
 
-        if (TextureHelper.IsFloatingPointFormat(textureInfo.Texture.Format))
-        {
-          // Floating-point textures must not use linear hardware filtering!
-          SpriteBatch.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-          SpriteBatch.Draw(textureInfo.Texture, textureInfo.Rectangle, Color.White);
-          SpriteBatch.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
-        }
-        else
-        {
-          SpriteBatch.Draw(textureInfo.Texture, textureInfo.Rectangle, Color.White);
-        }
-      }
+			context.Validate(SpriteBatch);
 
-      SpriteBatch.End();
+			var savedRenderState = new RenderStateSnapshot(SpriteBatch.GraphicsDevice);
 
-      savedRenderState.Restore();
-    }
-    #endregion
-  }
+			SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone);
+
+			for (int i = 0; i < count; i++)
+			{
+				var textureInfo = _textures[i];
+
+				if (textureInfo.Texture.IsDisposed)
+					continue;
+
+				if (TextureHelper.IsFloatingPointFormat(textureInfo.Texture.Format))
+				{
+					// Floating-point textures must not use linear hardware filtering!
+					SpriteBatch.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+					SpriteBatch.Draw(textureInfo.Texture, textureInfo.Rectangle, Color.White);
+					SpriteBatch.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+				}
+				else
+				{
+					SpriteBatch.Draw(textureInfo.Texture, textureInfo.Rectangle, Color.White);
+				}
+			}
+
+			SpriteBatch.End();
+
+			savedRenderState.Restore();
+		}
+		#endregion
+	}
 }

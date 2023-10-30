@@ -7,67 +7,67 @@ using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics
 {
-  /// <summary>
-  /// Represents a figure that is composed of several figures.
-  /// </summary>
-  public class CompositeFigure : Figure
-  {
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-    #endregion
+	/// <summary>
+	/// Represents a figure that is composed of several figures.
+	/// </summary>
+	public class CompositeFigure : Figure
+	{
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Gets the children.
-    /// </summary>
-    /// <value>The children.</value>
-    public FigureCollection Children { get; private set; }
-
-
-    /// <inheritdoc/>
-    internal override bool HasFill
-    {
-      get
-      {
-        foreach (var child in Children)
-          if (child.HasFill)
-            return true;
-
-        return false;
-      }
-    }
-    #endregion
+		/// <summary>
+		/// Gets the children.
+		/// </summary>
+		/// <value>The children.</value>
+		public FigureCollection Children { get; private set; }
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		/// <inheritdoc/>
+		internal override bool HasFill
+		{
+			get
+			{
+				foreach (var child in Children)
+					if (child.HasFill)
+						return true;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CompositeFigure"/> class.
-    /// </summary>
-    public CompositeFigure()
-    {
-      Children = new FigureCollection(this);
-    }
-    #endregion
+				return false;
+			}
+		}
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
-    {
-      foreach (var child in Children)
-        child.Flatten(vertices, strokeIndices, fillIndices);
-    }
-    #endregion
-  }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="CompositeFigure"/> class.
+		/// </summary>
+		public CompositeFigure()
+		{
+			Children = new FigureCollection(this);
+		}
+		#endregion
+
+
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
+
+		/// <inheritdoc/>
+		internal override void Flatten(ArrayList<Vector3> vertices, ArrayList<int> strokeIndices, ArrayList<int> fillIndices)
+		{
+			foreach (var child in Children)
+				child.Flatten(vertices, strokeIndices, fillIndices);
+		}
+		#endregion
+	}
 }

@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace DigitalRise.Graphics
 {
-    internal class AnimationDescription
-    {
-        public string MergeFiles { get; set; }
-        public float ScaleCompression { get; set; }
-        public float RotationCompression { get; set; }
-        public float TranslationCompression { get; set; }
-        public bool? AddLoopFrame { get; set; }
-    }
+	internal class AnimationDescription
+	{
+		public string MergeFiles { get; set; }
+		public float ScaleCompression { get; set; }
+		public float RotationCompression { get; set; }
+		public float TranslationCompression { get; set; }
+		public bool? AddLoopFrame { get; set; }
+	}
 }

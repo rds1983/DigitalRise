@@ -7,126 +7,126 @@ using Microsoft.Xna.Framework;
 
 namespace DigitalRise.Graphics.SceneGraph
 {
-  /// <summary>
-  /// Represents a set of stars.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// This class renders a list of stars (see property <see cref="Stars"/>). Each star is rendered 
-  /// using a billboard projected onto the far plane. Anti-aliasing in the shader is used to get 
-  /// smooth dots.
-  /// </para>
-  /// <para>
-  /// <strong>Cloning:</strong> When a <see cref="StarfieldNode"/> is cloned the <see cref="Stars"/> 
-  /// property is copied by reference (shallow copy). The original <see cref="StarfieldNode"/> and 
-  /// the cloned instance will reference the same list of stars.
-  /// </para>
-  /// </remarks>
-  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-  public class StarfieldNode : SkyNode
-  {
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
-    #endregion
+	/// <summary>
+	/// Represents a set of stars.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// This class renders a list of stars (see property <see cref="Stars"/>). Each star is rendered 
+	/// using a billboard projected onto the far plane. Anti-aliasing in the shader is used to get 
+	/// smooth dots.
+	/// </para>
+	/// <para>
+	/// <strong>Cloning:</strong> When a <see cref="StarfieldNode"/> is cloned the <see cref="Stars"/> 
+	/// property is copied by reference (shallow copy). The original <see cref="StarfieldNode"/> and 
+	/// the cloned instance will reference the same list of stars.
+	/// </para>
+	/// </remarks>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+	public class StarfieldNode : SkyNode
+	{
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Gets the tint color.
-    /// </summary>
-    /// <value>
-    /// The tint color which is multiplied with the star colors. The default value is (1, 1, 1).
-    /// </value>
-    /// <remarks>
-    /// This color can be used to change the color or the brightness of the stars.
-    /// </remarks>
-    public Vector3 Color { get; set; }
-
-
-    /// <summary>
-    /// Gets or sets the stars.
-    /// </summary>
-    /// <value>The stars.</value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public IList<Star> Stars
-    {
-      get { return _stars; }
-      set
-      {
-        _stars = value;
-
-        // Invalidate render data.
-        RenderData.SafeDispose();
-      }
-    }
-    private IList<Star> _stars;
-    #endregion
+		/// <summary>
+		/// Gets the tint color.
+		/// </summary>
+		/// <value>
+		/// The tint color which is multiplied with the star colors. The default value is (1, 1, 1).
+		/// </value>
+		/// <remarks>
+		/// This color can be used to change the color or the brightness of the stars.
+		/// </remarks>
+		public Vector3 Color { get; set; }
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		/// <summary>
+		/// Gets or sets the stars.
+		/// </summary>
+		/// <value>The stars.</value>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+		public IList<Star> Stars
+		{
+			get { return _stars; }
+			set
+			{
+				_stars = value;
 
-    /// <overloads>
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StarfieldNode"/> class.
-    /// </summary>
-    /// </overloads>
-    /// 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StarfieldNode"/> class.
-    /// </summary>
-    public StarfieldNode() : this(null)
-    {
-    }
-
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="StarfieldNode" /> class with the given set of
-    /// stars.
-    /// </summary>
-    /// <param name="stars">The stars.</param>
-    public StarfieldNode(IList<Star> stars)
-    {
-      Color = Vector3.One;
-      Stars = stars;
-    }
-    #endregion
+				// Invalidate render data.
+				RenderData.SafeDispose();
+			}
+		}
+		private IList<Star> _stars;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <inheritdoc cref="SceneNode.Clone"/>
-    public new StarfieldNode Clone()
-    {
-      return (StarfieldNode)base.Clone();
-    }
+		/// <overloads>
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StarfieldNode"/> class.
+		/// </summary>
+		/// </overloads>
+		/// 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StarfieldNode"/> class.
+		/// </summary>
+		public StarfieldNode() : this(null)
+		{
+		}
 
 
-    /// <inheritdoc/>
-    protected override SceneNode CreateInstanceCore()
-    {
-      return new SkyboxNode();
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StarfieldNode" /> class with the given set of
+		/// stars.
+		/// </summary>
+		/// <param name="stars">The stars.</param>
+		public StarfieldNode(IList<Star> stars)
+		{
+			Color = Vector3.One;
+			Stars = stars;
+		}
+		#endregion
 
 
-    /// <inheritdoc/>
-    protected override void CloneCore(SceneNode source)
-    {
-      // Clone SceneNode properties.
-      base.CloneCore(source);
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      // Clone StarfieldNode properties.
-      var sourceTyped = (StarfieldNode)source;
-      Color = sourceTyped.Color;
-      Stars = sourceTyped.Stars;
-    }
-    #endregion
-  }
+		/// <inheritdoc cref="SceneNode.Clone"/>
+		public new StarfieldNode Clone()
+		{
+			return (StarfieldNode)base.Clone();
+		}
+
+
+		/// <inheritdoc/>
+		protected override SceneNode CreateInstanceCore()
+		{
+			return new SkyboxNode();
+		}
+
+
+		/// <inheritdoc/>
+		protected override void CloneCore(SceneNode source)
+		{
+			// Clone SceneNode properties.
+			base.CloneCore(source);
+
+			// Clone StarfieldNode properties.
+			var sourceTyped = (StarfieldNode)source;
+			Color = sourceTyped.Color;
+			Stars = sourceTyped.Stars;
+		}
+		#endregion
+	}
 }

@@ -12,187 +12,187 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics.Rendering
 {
-  partial class BillboardRenderer
-  {
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
+	partial class BillboardRenderer
+	{
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
 
-    // The sprite batch and effect are created on demand.
-    private SpriteBatch _spriteBatch;
-    private BasicEffect _textEffect;
+		// The sprite batch and effect are created on demand.
+		private SpriteBatch _spriteBatch;
+		private BasicEffect _textEffect;
 
-    // Default font used if no other font is specified.
-    private SpriteFont _defaultFont;
-    #endregion
-
-
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
-    #endregion
+		// Default font used if no other font is specified.
+		private SpriteFont _defaultFont;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
-
-    private void InitializeText(SpriteFont spriteFont)
-    {
-      _defaultFont = spriteFont;
-    }
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
+		#endregion
 
 
-    private void DisposeText()
-    {
-      if (_textEffect != null)
-        _textEffect.Dispose();
-    }
-    #endregion
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
+
+		private void InitializeText(SpriteFont spriteFont)
+		{
+			_defaultFont = spriteFont;
+		}
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		private void DisposeText()
+		{
+			if (_textEffect != null)
+				_textEffect.Dispose();
+		}
+		#endregion
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-    private void DrawText(int index, int endIndex, RenderContext context)
-    {
-      var graphicsDevice = context.GraphicsService.GraphicsDevice;
-      var savedRenderStates = new RenderStateSnapshot(graphicsDevice);
 
-      // The sprite batch and text effect are only created when needed.
-      if (_spriteBatch == null)
-      {
-        _spriteBatch = context.GraphicsService.GetSpriteBatch();
-        _textEffect = new BasicEffect(graphicsDevice)
-        {
-          TextureEnabled = true,
-          VertexColorEnabled = true,
-        };
-      }
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      _textEffect.View = (Matrix)context.CameraNode.View;
-      _textEffect.Projection = context.CameraNode.Camera.Projection;
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		private void DrawText(int index, int endIndex, RenderContext context)
+		{
+			var graphicsDevice = context.GraphicsService.GraphicsDevice;
+			var savedRenderStates = new RenderStateSnapshot(graphicsDevice);
 
-      var jobs = _jobs.Array;
-      while (index < endIndex)
-      {
-        var node = jobs[index++].Node as BillboardNode;
-        if (node == null)
-          continue;
-        
-        var billboard = node.Billboard as TextBillboard;
-        if (billboard == null)
-          continue;
-        
-        var font = billboard.Font ?? _defaultFont;
-        if (font == null)
-          continue;
-        
-        var text = billboard.Text as string;
-        var stringBuilder = billboard.Text as StringBuilder;
-        if (string.IsNullOrEmpty(text) && (stringBuilder == null || stringBuilder.Length == 0))
-          continue;
+			// The sprite batch and text effect are only created when needed.
+			if (_spriteBatch == null)
+			{
+				_spriteBatch = context.GraphicsService.GetSpriteBatch();
+				_textEffect = new BasicEffect(graphicsDevice)
+				{
+					TextureEnabled = true,
+					VertexColorEnabled = true,
+				};
+			}
 
-        Vector3 position = node.PoseWorld.Position;
-        var orientation = billboard.Orientation;
+			_textEffect.View = (Matrix)context.CameraNode.View;
+			_textEffect.Projection = context.CameraNode.Camera.Projection;
 
-        #region ----- Billboarding -----
+			var jobs = _jobs.Array;
+			while (index < endIndex)
+			{
+				var node = jobs[index++].Node as BillboardNode;
+				if (node == null)
+					continue;
 
-        // (Code copied from BillboardBatchReach.)
+				var billboard = node.Billboard as TextBillboard;
+				if (billboard == null)
+					continue;
 
-        // Normal
-        Vector3 normal;
-        if (orientation.Normal == BillboardNormal.ViewPlaneAligned)
-        {
-          normal = _defaultNormal;
-        }
-        else if (orientation.Normal == BillboardNormal.ViewpointOriented)
-        {
-          Vector3 n = _cameraPose.Position - position;
-          normal = n.TryNormalize() ? n : _defaultNormal;
-        }
-        else
-        {
-          normal = node.Normal;
-        }
+				var font = billboard.Font ?? _defaultFont;
+				if (font == null)
+					continue;
 
-        // Axis = up vector
-        Vector3 axis = node.Axis;
-        if (orientation.IsAxisInViewSpace)
-          axis = _cameraPose.ToWorldDirection(axis);
+				var text = billboard.Text as string;
+				var stringBuilder = billboard.Text as StringBuilder;
+				if (string.IsNullOrEmpty(text) && (stringBuilder == null || stringBuilder.Length == 0))
+					continue;
 
-        if (1 - Vector3.Dot(normal, axis) < Numeric.EpsilonF)
-        {
-          // Normal and axis are parallel.
-          // --> Bend normal by adding a fraction of the camera down vector.
-          Vector3 cameraDown = -_cameraPose.Orientation.GetColumn(1);
-          normal += cameraDown * 0.001f;
-          normal.Normalize();
-        }
+				Vector3 position = node.PoseWorld.Position;
+				var orientation = billboard.Orientation;
 
-        // Compute right.
-        //Vector3 right = Vector3.Cross(axis, normal);
-        // Inlined:
-        Vector3 right;
-        right.X = axis.Y * normal.Z - axis.Z * normal.Y;
-        right.Y = axis.Z * normal.X - axis.X * normal.Z;
-        right.Z = axis.X * normal.Y - axis.Y * normal.X;
-        if (!right.TryNormalize())
-          right = normal.Orthonormal1();   // Normal and axis are parallel --> Choose random perpendicular vector.
+				#region ----- Billboarding -----
 
-        if (orientation.IsAxisFixed)
-        {
-          // Make sure normal is perpendicular to right and up.
-          //normal = Vector3.Cross(right, axis);
-          // Inlined:
-          normal.X = right.Y * axis.Z - right.Z * axis.Y;
-          normal.Y = right.Z * axis.X - right.X * axis.Z;
-          normal.Z = right.X * axis.Y - right.Y * axis.X;
+				// (Code copied from BillboardBatchReach.)
 
-          // No need to normalize because right and up are normalized and perpendicular.
-        }
-        else
-        {
-          // Make sure axis is perpendicular to normal and right.
-          //axis = Vector3.Cross(normal, right);
-          // Inlined:
-          axis.X = normal.Y * right.Z - normal.Z * right.Y;
-          axis.Y = normal.Z * right.X - normal.X * right.Z;
-          axis.Z = normal.X * right.Y - normal.Y * right.X;
+				// Normal
+				Vector3 normal;
+				if (orientation.Normal == BillboardNormal.ViewPlaneAligned)
+				{
+					normal = _defaultNormal;
+				}
+				else if (orientation.Normal == BillboardNormal.ViewpointOriented)
+				{
+					Vector3 n = _cameraPose.Position - position;
+					normal = n.TryNormalize() ? n : _defaultNormal;
+				}
+				else
+				{
+					normal = node.Normal;
+				}
 
-          // No need to normalize because normal and right are normalized and perpendicular.
-        }
-        #endregion
+				// Axis = up vector
+				Vector3 axis = node.Axis;
+				if (orientation.IsAxisInViewSpace)
+					axis = _cameraPose.ToWorldDirection(axis);
 
-        _textEffect.World = new Matrix(right.X, right.Y, right.Z, 0,
-                                       -axis.X, -axis.Y, -axis.Z, 0,
-                                       normal.X, normal.Y, normal.Z, 0,
-                                       position.X, position.Y, position.Z, 1);
+				if (1 - Vector3.Dot(normal, axis) < Numeric.EpsilonF)
+				{
+					// Normal and axis are parallel.
+					// --> Bend normal by adding a fraction of the camera down vector.
+					Vector3 cameraDown = -_cameraPose.Orientation.GetColumn(1);
+					normal += cameraDown * 0.001f;
+					normal.Normalize();
+				}
 
-        Vector3 color3F = node.Color * billboard.Color;
-        float alpha = node.Alpha * billboard.Alpha;
-        Color color = new Color(color3F.X * alpha,
-                                color3F.Y * alpha,
-                                color3F.Z * alpha,
-                                alpha);
+				// Compute right.
+				//Vector3 right = Vector3.Cross(axis, normal);
+				// Inlined:
+				Vector3 right;
+				right.X = axis.Y * normal.Z - axis.Z * normal.Y;
+				right.Y = axis.Z * normal.X - axis.X * normal.Z;
+				right.Z = axis.X * normal.Y - axis.Y * normal.X;
+				if (!right.TryNormalize())
+					right = normal.Orthonormal1();   // Normal and axis are parallel --> Choose random perpendicular vector.
 
-        Vector2 size = (text != null) ? font.MeasureString(text) : font.MeasureString(stringBuilder);
-        Vector2 origin = size / 2;
-        float scale = node.ScaleWorld.Y; // Assume uniform scale.
+				if (orientation.IsAxisFixed)
+				{
+					// Make sure normal is perpendicular to right and up.
+					//normal = Vector3.Cross(right, axis);
+					// Inlined:
+					normal.X = right.Y * axis.Z - right.Z * axis.Y;
+					normal.Y = right.Z * axis.X - right.X * axis.Z;
+					normal.Z = right.X * axis.Y - right.Y * axis.X;
 
-        _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, graphicsDevice.DepthStencilState, RasterizerState.CullNone, _textEffect);
-        if (text != null)
-          _spriteBatch.DrawString(font, text, Vector2.Zero, color, 0, origin, scale, SpriteEffects.None, 0);
-        else
-          _spriteBatch.DrawString(font, stringBuilder, Vector2.Zero, color, 0, origin, scale, SpriteEffects.None, 0);
+					// No need to normalize because right and up are normalized and perpendicular.
+				}
+				else
+				{
+					// Make sure axis is perpendicular to normal and right.
+					//axis = Vector3.Cross(normal, right);
+					// Inlined:
+					axis.X = normal.Y * right.Z - normal.Z * right.Y;
+					axis.Y = normal.Z * right.X - normal.X * right.Z;
+					axis.Z = normal.X * right.Y - normal.Y * right.X;
 
-        _spriteBatch.End();
-      }
+					// No need to normalize because normal and right are normalized and perpendicular.
+				}
+				#endregion
 
-      savedRenderStates.Restore();
-    }
-    #endregion
-  }
+				_textEffect.World = new Matrix(right.X, right.Y, right.Z, 0,
+											   -axis.X, -axis.Y, -axis.Z, 0,
+											   normal.X, normal.Y, normal.Z, 0,
+											   position.X, position.Y, position.Z, 1);
+
+				Vector3 color3F = node.Color * billboard.Color;
+				float alpha = node.Alpha * billboard.Alpha;
+				Color color = new Color(color3F.X * alpha,
+										color3F.Y * alpha,
+										color3F.Z * alpha,
+										alpha);
+
+				Vector2 size = (text != null) ? font.MeasureString(text) : font.MeasureString(stringBuilder);
+				Vector2 origin = size / 2;
+				float scale = node.ScaleWorld.Y; // Assume uniform scale.
+
+				_spriteBatch.Begin(SpriteSortMode.Immediate, null, null, graphicsDevice.DepthStencilState, RasterizerState.CullNone, _textEffect);
+				if (text != null)
+					_spriteBatch.DrawString(font, text, Vector2.Zero, color, 0, origin, scale, SpriteEffects.None, 0);
+				else
+					_spriteBatch.DrawString(font, stringBuilder, Vector2.Zero, color, 0, origin, scale, SpriteEffects.None, 0);
+
+				_spriteBatch.End();
+			}
+
+			savedRenderStates.Restore();
+		}
+		#endregion
+	}
 }

@@ -4,12 +4,12 @@
 
 namespace DigitalRise.Graphics.SceneGraph
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.Graphics.SceneGraph"/> namespace provides types to build
-  /// hierarchical scene graphs for rendering 3D scenes.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.Graphics.SceneGraph"/> namespace provides types to build
+	/// hierarchical scene graphs for rendering 3D scenes.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }

@@ -13,234 +13,234 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DigitalRise.Graphics.Rendering
 {
-  /// <summary>
-  /// Creates the shadow map of a <see cref="CubeMapShadow"/>.
-  /// </summary>
-  /// <inheritdoc cref="ShadowMapRenderer"/>
-  internal class CubeMapShadowMapRenderer : SceneNodeRenderer, IShadowMapRenderer
-  {
-    //--------------------------------------------------------------
-    #region Constants
-    //--------------------------------------------------------------
+	/// <summary>
+	/// Creates the shadow map of a <see cref="CubeMapShadow"/>.
+	/// </summary>
+	/// <inheritdoc cref="ShadowMapRenderer"/>
+	internal class CubeMapShadowMapRenderer : SceneNodeRenderer, IShadowMapRenderer
+	{
+		//--------------------------------------------------------------
+		#region Constants
+		//--------------------------------------------------------------
 
-    private static readonly CubeMapFace[] CubeMapFaces =
-    { 
-      CubeMapFace.PositiveX, CubeMapFace.NegativeX, 
-      CubeMapFace.PositiveY, CubeMapFace.NegativeY,
-      CubeMapFace.PositiveZ, CubeMapFace.NegativeZ 
+		private static readonly CubeMapFace[] CubeMapFaces =
+		{
+	  CubeMapFace.PositiveX, CubeMapFace.NegativeX,
+	  CubeMapFace.PositiveY, CubeMapFace.NegativeY,
+	  CubeMapFace.PositiveZ, CubeMapFace.NegativeZ
+	};
+
+		// Note: Cube map faces are left-handed! Therefore +Z is actually -Z.
+		private static readonly Vector3[] CubeMapForwardVectors =
+		{
+	  Vector3.UnitX, -Vector3.UnitX,
+	  Vector3.UnitY, -Vector3.UnitY,
+	  -Vector3.UnitZ, Vector3.UnitZ   // Switch Z because cube maps are left handed
     };
 
-    // Note: Cube map faces are left-handed! Therefore +Z is actually -Z.
-    private static readonly Vector3[] CubeMapForwardVectors =
-    { 
-      Vector3.UnitX, -Vector3.UnitX, 
-      Vector3.UnitY, -Vector3.UnitY,
-      -Vector3.UnitZ, Vector3.UnitZ   // Switch Z because cube maps are left handed
-    };
-
-    private static readonly Vector3[] CubeMapUpVectors =
-    { 
-      Vector3.UnitY, Vector3.UnitY,
-      Vector3.UnitZ, -Vector3.UnitZ,
-      Vector3.UnitY, Vector3.UnitY
-    };
+		private static readonly Vector3[] CubeMapUpVectors =
+		{
+	  Vector3.UnitY, Vector3.UnitY,
+	  Vector3.UnitZ, -Vector3.UnitZ,
+	  Vector3.UnitY, Vector3.UnitY
+	};
 
 
-    // Boxed integers to avoid allocation.
-    internal static object[] BoxedIntegers = { 0, 1, 2, 3, 4, 5 };
-    #endregion
+		// Boxed integers to avoid allocation.
+		internal static object[] BoxedIntegers = { 0, 1, 2, 3, 4, 5 };
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Fields
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Fields
+		//--------------------------------------------------------------
 
-    private readonly CameraNode _perspectiveCameraNode;
-    #endregion
-
-
-    //--------------------------------------------------------------
-    #region Properties & Events
-    //--------------------------------------------------------------
-
-    /// <inheritdoc/>
-    public Func<RenderContext, bool> RenderCallback
-    {
-      get { return _renderCallback; }
-      set
-      {
-        if (value == null)
-          throw new ArgumentNullException("value");
-
-        _renderCallback = value;
-      }
-    }
-    private Func<RenderContext, bool> _renderCallback;
-    #endregion
+		private readonly CameraNode _perspectiveCameraNode;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Creation & Cleanup
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Properties & Events
+		//--------------------------------------------------------------
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CubeMapShadowMapRenderer"/> class.
-    /// </summary>
-    /// <param name="renderCallback">
-    /// The method which renders the scene into the shadow map. Must not be <see langword="null"/>. 
-    /// See <see cref="RenderCallback"/> for more information.
-    /// </param>
-    public CubeMapShadowMapRenderer(Func<RenderContext, bool> renderCallback)
-    {
-      if (renderCallback == null)
-        throw new ArgumentNullException("renderCallback");
+		/// <inheritdoc/>
+		public Func<RenderContext, bool> RenderCallback
+		{
+			get { return _renderCallback; }
+			set
+			{
+				if (value == null)
+					throw new ArgumentNullException("value");
 
-      RenderCallback = renderCallback;
-      _perspectiveCameraNode = new CameraNode(new Camera(new PerspectiveProjection()));
-    }
-    #endregion
+				_renderCallback = value;
+			}
+		}
+		private Func<RenderContext, bool> _renderCallback;
+		#endregion
 
 
-    //--------------------------------------------------------------
-    #region Methods
-    //--------------------------------------------------------------
+		//--------------------------------------------------------------
+		#region Creation & Cleanup
+		//--------------------------------------------------------------
 
-    /// <inheritdoc/>
-    public override bool CanRender(SceneNode node, RenderContext context)
-    {
-      var lightNode = node as LightNode;
-      return lightNode != null && lightNode.Shadow is CubeMapShadow;
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="CubeMapShadowMapRenderer"/> class.
+		/// </summary>
+		/// <param name="renderCallback">
+		/// The method which renders the scene into the shadow map. Must not be <see langword="null"/>. 
+		/// See <see cref="RenderCallback"/> for more information.
+		/// </param>
+		public CubeMapShadowMapRenderer(Func<RenderContext, bool> renderCallback)
+		{
+			if (renderCallback == null)
+				throw new ArgumentNullException("renderCallback");
+
+			RenderCallback = renderCallback;
+			_perspectiveCameraNode = new CameraNode(new Camera(new PerspectiveProjection()));
+		}
+		#endregion
 
 
-    /// <inheritdoc/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-    public override void Render(IList<SceneNode> nodes, RenderContext context, RenderOrder order)
-    {
-      if (nodes == null)
-        throw new ArgumentNullException("nodes");
-      if (context == null)
-        throw new ArgumentNullException("context");
+		//--------------------------------------------------------------
+		#region Methods
+		//--------------------------------------------------------------
 
-      int numberOfNodes = nodes.Count;
-      if (numberOfNodes == 0)
-        return;
+		/// <inheritdoc/>
+		public override bool CanRender(SceneNode node, RenderContext context)
+		{
+			var lightNode = node as LightNode;
+			return lightNode != null && lightNode.Shadow is CubeMapShadow;
+		}
 
-      context.ThrowIfCameraMissing();
-      context.ThrowIfSceneMissing();
 
-      var originalRenderTarget = context.RenderTarget;
-      var originalViewport = context.Viewport;
-      var originalReferenceNode = context.ReferenceNode;
+		/// <inheritdoc/>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+		public override void Render(IList<SceneNode> nodes, RenderContext context, RenderOrder order)
+		{
+			if (nodes == null)
+				throw new ArgumentNullException("nodes");
+			if (context == null)
+				throw new ArgumentNullException("context");
 
-      var cameraNode = context.CameraNode;
+			int numberOfNodes = nodes.Count;
+			if (numberOfNodes == 0)
+				return;
 
-      // Update SceneNode.LastFrame for all visible nodes.
-      int frame = context.Frame;
-      cameraNode.LastFrame = frame;
+			context.ThrowIfCameraMissing();
+			context.ThrowIfSceneMissing();
 
-      // The scene node renderer should use the light camera instead of the player camera.
-      context.CameraNode = _perspectiveCameraNode;
-      context.Technique = "Omnidirectional";
+			var originalRenderTarget = context.RenderTarget;
+			var originalViewport = context.Viewport;
+			var originalReferenceNode = context.ReferenceNode;
 
-      var graphicsService = context.GraphicsService;
-      var graphicsDevice = graphicsService.GraphicsDevice;
-      var renderTargetPool = graphicsService.RenderTargetPool;
-      var savedRenderState = new RenderStateSnapshot(graphicsDevice);
+			var cameraNode = context.CameraNode;
 
-      for (int i = 0; i < numberOfNodes; i++)
-      {
-        var lightNode = nodes[i] as LightNode;
-        if (lightNode == null)
-          continue;
+			// Update SceneNode.LastFrame for all visible nodes.
+			int frame = context.Frame;
+			cameraNode.LastFrame = frame;
 
-        var shadow = lightNode.Shadow as CubeMapShadow;
-        if (shadow == null)
-          continue;
+			// The scene node renderer should use the light camera instead of the player camera.
+			context.CameraNode = _perspectiveCameraNode;
+			context.Technique = "Omnidirectional";
 
-        var light = lightNode.Light as PointLight;
-        if (light == null)
-          throw new GraphicsException("CubeMapShadow can only be used with a PointLight.");
+			var graphicsService = context.GraphicsService;
+			var graphicsDevice = graphicsService.GraphicsDevice;
+			var renderTargetPool = graphicsService.RenderTargetPool;
+			var savedRenderState = new RenderStateSnapshot(graphicsDevice);
 
-        // LightNode is visible in current frame.
-        lightNode.LastFrame = frame;
+			for (int i = 0; i < numberOfNodes; i++)
+			{
+				var lightNode = nodes[i] as LightNode;
+				if (lightNode == null)
+					continue;
 
-        if (shadow.ShadowMap == null)
-        {
-          shadow.ShadowMap = renderTargetPool.ObtainCube(
-            new RenderTargetFormat(
-              shadow.PreferredSize, 
-              null,
-              false,
-              shadow.Prefer16Bit ? SurfaceFormat.HalfSingle : SurfaceFormat.Single,
-              DepthFormat.Depth24));
-        }
+				var shadow = lightNode.Shadow as CubeMapShadow;
+				if (shadow == null)
+					continue;
 
-        ((PerspectiveProjection)_perspectiveCameraNode.Camera.Projection).SetFieldOfView(
-          ConstantsF.PiOver2, 1, shadow.Near, light.Range);
+				var light = lightNode.Light as PointLight;
+				if (light == null)
+					throw new GraphicsException("CubeMapShadow can only be used with a PointLight.");
 
-        // World units per texel at a planar distance of 1 world unit.
-        float unitsPerTexel = _perspectiveCameraNode.Camera.Projection.Width / (shadow.ShadowMap.Size * shadow.Near);
+				// LightNode is visible in current frame.
+				lightNode.LastFrame = frame;
 
-        // Convert depth bias from "texel" to  world space.
-        // Minus to move receiver closer to light.
-        shadow.EffectiveDepthBias = -shadow.DepthBias * unitsPerTexel;
+				if (shadow.ShadowMap == null)
+				{
+					shadow.ShadowMap = renderTargetPool.ObtainCube(
+					  new RenderTargetFormat(
+						shadow.PreferredSize,
+						null,
+						false,
+						shadow.Prefer16Bit ? SurfaceFormat.HalfSingle : SurfaceFormat.Single,
+						DepthFormat.Depth24));
+				}
 
-        // Convert normal offset from "texel" to world space.
-        shadow.EffectiveNormalOffset = shadow.NormalOffset * unitsPerTexel;
+			  ((PerspectiveProjection)_perspectiveCameraNode.Camera.Projection).SetFieldOfView(
+				ConstantsF.PiOver2, 1, shadow.Near, light.Range);
 
-        var pose = lightNode.PoseWorld;
+				// World units per texel at a planar distance of 1 world unit.
+				float unitsPerTexel = _perspectiveCameraNode.Camera.Projection.Width / (shadow.ShadowMap.Size * shadow.Near);
 
-        context.ReferenceNode = lightNode;
-        context.Object = shadow;
+				// Convert depth bias from "texel" to  world space.
+				// Minus to move receiver closer to light.
+				shadow.EffectiveDepthBias = -shadow.DepthBias * unitsPerTexel;
 
-        bool shadowMapContainsSomething = false;
-        for (int side = 0; side < 6; side++)
-        {
-          context.Data[RenderContextKeys.ShadowTileIndex] = BoxedIntegers[side];
+				// Convert normal offset from "texel" to world space.
+				shadow.EffectiveNormalOffset = shadow.NormalOffset * unitsPerTexel;
 
-          graphicsDevice.SetRenderTarget(shadow.ShadowMap, CubeMapFaces[side]);
-          // context.RenderTarget = shadow.ShadowMap;   // TODO: Support cube maps targets in the render context.
-          context.Viewport = graphicsDevice.Viewport;
+				var pose = lightNode.PoseWorld;
 
-          graphicsDevice.Clear(Color.White);
+				context.ReferenceNode = lightNode;
+				context.Object = shadow;
 
-          _perspectiveCameraNode.View = Matrix44F.CreateLookAt(
-            pose.Position,
-            pose.ToWorldPosition(CubeMapForwardVectors[side]),
-            pose.ToWorldDirection(CubeMapUpVectors[side]));
+				bool shadowMapContainsSomething = false;
+				for (int side = 0; side < 6; side++)
+				{
+					context.Data[RenderContextKeys.ShadowTileIndex] = BoxedIntegers[side];
 
-          // Abort if this cube map frustum does not touch the camera frustum.
-          if (!context.Scene.HaveContact(cameraNode, _perspectiveCameraNode))
-            continue;
+					graphicsDevice.SetRenderTarget(shadow.ShadowMap, CubeMapFaces[side]);
+					// context.RenderTarget = shadow.ShadowMap;   // TODO: Support cube maps targets in the render context.
+					context.Viewport = graphicsDevice.Viewport;
 
-          graphicsDevice.DepthStencilState = DepthStencilState.Default;
-          graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-          graphicsDevice.BlendState = BlendState.Opaque;
+					graphicsDevice.Clear(Color.White);
 
-          shadowMapContainsSomething |= RenderCallback(context);
-        }
+					_perspectiveCameraNode.View = Matrix44F.CreateLookAt(
+					  pose.Position,
+					  pose.ToWorldPosition(CubeMapForwardVectors[side]),
+					  pose.ToWorldDirection(CubeMapUpVectors[side]));
 
-        // Recycle shadow map if empty.
-        if (!shadowMapContainsSomething)
-        {
-          renderTargetPool.Recycle(shadow.ShadowMap);
-          shadow.ShadowMap = null;
-        }
-      }
+					// Abort if this cube map frustum does not touch the camera frustum.
+					if (!context.Scene.HaveContact(cameraNode, _perspectiveCameraNode))
+						continue;
 
-      graphicsDevice.SetRenderTarget(null);
-      savedRenderState.Restore();
+					graphicsDevice.DepthStencilState = DepthStencilState.Default;
+					graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+					graphicsDevice.BlendState = BlendState.Opaque;
 
-      context.CameraNode = cameraNode;
-      context.Technique = null;
-      context.RenderTarget = originalRenderTarget;
-      context.Viewport = originalViewport;
-      context.ReferenceNode = originalReferenceNode;
-      context.Object = null;
-      context.Data[RenderContextKeys.ShadowTileIndex] = null;
-    }
-    #endregion
-  }
+					shadowMapContainsSomething |= RenderCallback(context);
+				}
+
+				// Recycle shadow map if empty.
+				if (!shadowMapContainsSomething)
+				{
+					renderTargetPool.Recycle(shadow.ShadowMap);
+					shadow.ShadowMap = null;
+				}
+			}
+
+			graphicsDevice.SetRenderTarget(null);
+			savedRenderState.Restore();
+
+			context.CameraNode = cameraNode;
+			context.Technique = null;
+			context.RenderTarget = originalRenderTarget;
+			context.Viewport = originalViewport;
+			context.ReferenceNode = originalReferenceNode;
+			context.Object = null;
+			context.Data[RenderContextKeys.ShadowTileIndex] = null;
+		}
+		#endregion
+	}
 }
