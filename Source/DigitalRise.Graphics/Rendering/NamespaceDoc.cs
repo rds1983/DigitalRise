@@ -4,13 +4,13 @@
 
 namespace DigitalRise.Graphics.Rendering
 {
-  /// <summary>
-  /// The <see cref="N:DigitalRise.Graphics.Rendering"/> namespace provides types for rendering 3D
-  /// scenes.
-  /// </summary>
-  [System.Runtime.CompilerServices.CompilerGenerated]
-  class NamespaceDoc
-  {
-  }
+	/// <summary>
+	/// The <see cref="N:DigitalRise.Graphics.Rendering"/> namespace provides types for rendering 3D
+	/// scenes.
+	/// </summary>
+	[System.Runtime.CompilerServices.CompilerGenerated]
+	class NamespaceDoc
+	{
+	}
 }
-}
+
