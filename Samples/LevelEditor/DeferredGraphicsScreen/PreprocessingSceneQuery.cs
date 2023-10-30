@@ -1,5 +1,4 @@
-﻿#if !WP7 && !WP8
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 
@@ -63,4 +62,3 @@ namespace DigitalRise.LevelEditor
     }
   }
 }
-#endif

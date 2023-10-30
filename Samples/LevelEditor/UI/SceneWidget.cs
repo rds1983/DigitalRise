@@ -54,6 +54,8 @@ namespace DigitalRise.LevelEditor.UI
 
 		public SceneWidget(GameServiceContainer services)
 		{
+			ClipToBounds = true;
+
 			services.AddService<IInputService>(_inputManager);
 			services.AddService<IGameObjectService>(_gameObjectService);
 			services.AddService(_simulation);
@@ -155,16 +157,21 @@ namespace DigitalRise.LevelEditor.UI
 
 			var game = Services.GetService<Game>();
 
-			var bounds = ActualBounds;
 			var device = _graphicsScreen.GraphicsService.GraphicsDevice;
-			var oldViewport = device.Viewport;
 
-			var p = ToGlobal(bounds.Location);
-			bounds.X = p.X;
-			bounds.Y = p.Y;
+			var oldViewport = device.Viewport;
+			var oldRenderTargetUsage = device.PresentationParameters.RenderTargetUsage;
+
 
 			try
 			{
+
+				device.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
+
+				var bounds = ActualBounds;
+				var p = ToGlobal(bounds.Location);
+				bounds.X = p.X;
+				bounds.Y = p.Y;
 				device.Viewport = new Viewport(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
 				/*				UpdateMarker();
@@ -204,6 +211,7 @@ namespace DigitalRise.LevelEditor.UI
 			finally
 			{
 				device.Viewport = oldViewport;
+				device.PresentationParameters.RenderTargetUsage = oldRenderTargetUsage;
 			}
 		}
 
