@@ -7,6 +7,10 @@ using Myra.Graphics2D.UI;
 using DigitalRise.LevelEditor.UI;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Graphics;
+using DigitalRise.GameBase;
+using DigitalRise.Graphics.Rendering;
+using DigitalRise.Physics.ForceEffects;
+using DigitalRise.Physics;
 
 namespace DigitalRise.LevelEditor
 {
@@ -25,6 +29,9 @@ namespace DigitalRise.LevelEditor
 			get => _mainForm.Scene;
 			set => _mainForm.Scene = value;
 		}
+
+		public Simulation Simulation => _mainForm.Simulation;
+		public IGameObjectService GameObjectService => _mainForm.GameObjectService;
 
 //		public ForwardRenderer Renderer { get => _mainForm.Renderer; }
 		private SpriteBatch _spriteBatch;
@@ -95,7 +102,36 @@ namespace DigitalRise.LevelEditor
 
 		private void BuildSampleScene()
 		{
+			// Add gravity and damping to the physics simulation.
+			Simulation.ForceEffects.Add(new Gravity());
+			Simulation.ForceEffects.Add(new Damping());
 
+			// Add standard game objects.
+			GameObjectService.Objects.Add(new DynamicSkyObject(Services, true, false, true)
+			{
+				EnableCloudShadows = false,
+				FogSampleAngle = 0.1f,
+				FogSaturation = 1,
+			});
+
+			var fogObject = new FogObject(Services) { AttachToCamera = true };
+			GameObjectService.Objects.Add(fogObject);
+
+			// Set nice fog values.
+			// (Note: If we change the fog values here, the GUI in the Options window is not
+			// automatically updated.)
+			fogObject.FogNode.IsEnabled = true;
+			fogObject.FogNode.Fog.Start = 100;
+			fogObject.FogNode.Fog.End = 2500;
+			fogObject.FogNode.Fog.Start = 100;
+			fogObject.FogNode.Fog.HeightFalloff = 0.25f;
+
+			// Add an ocean at height 0.
+			GameObjectService.Objects.Add(new OceanObject(Services));
+
+			// Add the terrain.
+			var terrainObject = new TerrainObject(Services);
+			GameObjectService.Objects.Add(terrainObject);
 		}
 
 		protected override void Update(GameTime gameTime)

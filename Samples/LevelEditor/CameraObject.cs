@@ -175,14 +175,17 @@ namespace DigitalRise.LevelEditor
       mousePositionDelta = Vector2.Zero;
 #endif
 
-			float deltaYaw = -mousePositionDelta.X - touchDelta.X - gamePadState.ThumbSticks.Right.X * ThumbStickFactor;
-			_currentYaw += deltaYaw * deltaTimeF * AngularVelocityMagnitude;
+			if (_inputService.MouseState.RightButton == ButtonState.Pressed)
+			{
+				float deltaYaw = -mousePositionDelta.X - touchDelta.X - gamePadState.ThumbSticks.Right.X * ThumbStickFactor;
+				_currentYaw += deltaYaw * deltaTimeF * AngularVelocityMagnitude;
 
-			float deltaPitch = -mousePositionDelta.Y - touchDelta.Y + gamePadState.ThumbSticks.Right.Y * ThumbStickFactor;
-			_currentPitch += deltaPitch * deltaTimeF * AngularVelocityMagnitude;
+				float deltaPitch = -mousePositionDelta.Y - touchDelta.Y + gamePadState.ThumbSticks.Right.Y * ThumbStickFactor;
+				_currentPitch += deltaPitch * deltaTimeF * AngularVelocityMagnitude;
 
-			// Limit the pitch angle to +/- 90°.
-			_currentPitch = MathHelper.Clamp(_currentPitch, -ConstantsF.PiOver2, ConstantsF.PiOver2);
+				// Limit the pitch angle to +/- 90°.
+				_currentPitch = MathHelper.Clamp(_currentPitch, -ConstantsF.PiOver2, ConstantsF.PiOver2);
+			}
 
 			// Reset camera position if <Home> or <Right Stick> is pressed.
 			if (_inputService.IsPressed(Keys.Home, false)

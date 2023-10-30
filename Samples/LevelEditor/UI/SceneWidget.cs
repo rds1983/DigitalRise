@@ -1,7 +1,10 @@
 ﻿using DigitalRise.Diagnostics;
+using DigitalRise.GameBase;
 using DigitalRise.GameBase.Timing;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Input;
+using DigitalRise.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,30 +18,30 @@ namespace DigitalRise.LevelEditor.UI
 	public class SceneWidget : Widget
 	{
 		private Scene _scene;
-/*		private readonly ForwardRenderer _renderer = new ForwardRenderer();
-		private CameraInputController _controller;
-		private Mesh _waterMarker;
-		private ModelInstance _modelMarker;*/
+		/*		private readonly ForwardRenderer _renderer = new ForwardRenderer();
+				private CameraInputController _controller;
+				private Mesh _waterMarker;
+				private ModelInstance _modelMarker;*/
 		private Vector3? _touchDownStart;
 		private readonly DeferredGraphicsScreen _graphicsScreen;
 		private readonly GraphicsManager _graphicsManager;
 		private readonly HierarchicalProfiler _profiler = new HierarchicalProfiler("Graphics");
-
-		public Scene Scene
+		private readonly Simulation _simulation = new Simulation();
+		private readonly CameraObject _cameraObject;
+		private readonly GameObjectManager _gameObjectService = new GameObjectManager();
+		private readonly InputManager _inputManager = new InputManager(false)
 		{
-			get => _scene;
-			set
-			{
-				if (_scene == value) return;
+			EnableMouseCentering = true
+		};
 
-				_scene = value;
-//				_controller = _scene == null ? null : new CameraInputController(_scene.Camera);
-			}
-		}
-//		public ForwardRenderer Renderer { get => _renderer; }
+		//		public ForwardRenderer Renderer { get => _renderer; }
 		public Instrument Instrument { get; } = new Instrument();
 
 		public IServiceProvider Services => _graphicsScreen.Services;
+		public Simulation Simulation => _simulation;
+		public IGameObjectService GameObjectService => _gameObjectService;
+		public Scene Scene { get; set; }
+
 
 		private static bool IsMouseLeftButtonDown
 		{
@@ -51,12 +54,26 @@ namespace DigitalRise.LevelEditor.UI
 
 		public SceneWidget(GameServiceContainer services)
 		{
+			services.AddService<IInputService>(_inputManager);
+			services.AddService<IGameObjectService>(_gameObjectService);
+			services.AddService(_simulation);
+
+			Scene = new Scene();
+			services.AddService<IScene>(Scene);
+			services.AddService(Scene);
+
 			var game = services.GetService<Game>();
 			_graphicsManager = new GraphicsManager(game.GraphicsDevice, game.Window);
 			services.AddService<IGraphicsService>(_graphicsManager);
 
-			_graphicsScreen = new DeferredGraphicsScreen(services);
+			_cameraObject = new CameraObject(services);
+			_cameraObject.ResetPose(new Vector3(0, 2, 5), 0, 0);
+			_gameObjectService.Objects.Add(_cameraObject);
 
+			_graphicsScreen = new DeferredGraphicsScreen(services)
+			{
+				ActiveCameraNode = _cameraObject.CameraNode
+			};
 			_graphicsManager.Screens.Add(_graphicsScreen);
 		}
 
@@ -134,16 +151,12 @@ namespace DigitalRise.LevelEditor.UI
 		{
 			base.InternalRender(context);
 
-			if (Scene == null)
-			{
-				return;
-			}
+			//			UpdateKeyboard();
 
-//			UpdateKeyboard();
+			var game = Services.GetService<Game>();
 
 			var bounds = ActualBounds;
 			var device = _graphicsScreen.GraphicsService.GraphicsDevice;
-			var game = Services.GetService<Game>();
 			var oldViewport = device.Viewport;
 
 			var p = ToGlobal(bounds.Location);
@@ -169,6 +182,14 @@ namespace DigitalRise.LevelEditor.UI
 								}
 
 								_renderer.End();*/
+
+				_inputManager.Update(game.TargetElapsedTime);
+
+				_profiler.Start("Simulation.Update          ");
+				_simulation.Update(game.TargetElapsedTime);
+				_profiler.Stop();
+
+				_gameObjectService.Update(game.TargetElapsedTime);
 
 				_profiler.Start("GraphicsManager.Update          ");
 				_graphicsManager.Update(game.TargetElapsedTime);

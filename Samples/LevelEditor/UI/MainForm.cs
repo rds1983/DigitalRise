@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using AssetManagementBase;
+using DigitalRise.GameBase;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Physics;
 using Microsoft.Xna.Framework;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
@@ -39,7 +41,11 @@ namespace DigitalRise.LevelEditor.UI
 			set => _propertyGrid.Settings.AssetManager = value;
 		}
 
-//		public ForwardRenderer Renderer { get => _sceneWidget.Renderer; }
+		public Simulation Simulation => _sceneWidget.Simulation;
+		public IGameObjectService GameObjectService => _sceneWidget.GameObjectService;
+
+
+		//		public ForwardRenderer Renderer { get => _sceneWidget.Renderer; }
 		private List<InstrumentButton> _allButtons = new List<InstrumentButton>();
 
 		public MainForm(GameServiceContainer services)

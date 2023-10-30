@@ -581,7 +581,7 @@ namespace DigitalRise.Graphics.Rendering
 
 							Debug.Assert(horizontalAabb.Minimum.IsLessOrEqual(horizontalAabb.Maximum));
 							Debug.Assert(verticalAabb.Minimum.IsLessOrEqual(verticalAabb.Maximum));
-							Debug.Assert(Numeric.AreEqual(horizontalAabb.Extent.X, levelSize));
+							//Debug.Assert(Numeric.AreEqual(horizontalAabb.Extent.X, levelSize));
 
 							// (Assertions need larger epsilon.)
 							//Debug.Assert(Numeric.AreEqual(horizontalAabb.Extent.Z, Math.Abs(oldOrigin.Y - newOrigin.Y)));

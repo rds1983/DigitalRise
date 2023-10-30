@@ -98,7 +98,7 @@ namespace DigitalRise.LevelEditor
 		#region Creation & Cleanup
 		//--------------------------------------------------------------
 
-		public DeferredGraphicsScreen(IServiceProvider services)
+		public DeferredGraphicsScreen(GameServiceContainer services)
 		  : base(services.GetService<IGraphicsService>())
 		{
 			_services = services;
@@ -222,7 +222,7 @@ namespace DigitalRise.LevelEditor
 			_internalDebugRenderer = new DebugRenderer(GraphicsService, null);
 			_rebuildZBufferRenderer = new RebuildZBufferRenderer(GraphicsService);
 
-			Scene = new Scene();
+			Scene = services.GetService<Scene>();
 
 			// This screen needs a HDR filter to map high dynamic range values back to
 			// low dynamic range (LDR).
