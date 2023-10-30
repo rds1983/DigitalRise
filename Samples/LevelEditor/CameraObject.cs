@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using Microsoft.Xna.Framework.Input.Touch;
 using DigitalRise.Input;
+using System.ComponentModel;
 
 namespace DigitalRise.LevelEditor
 {
@@ -35,6 +36,7 @@ namespace DigitalRise.LevelEditor
 
 		// This property is null while the CameraObject is not added to the game
 		// object service.
+		[Browsable(false)]
 		public CameraNode CameraNode { get; private set; }
 
 		public bool IsEnabled { get; set; }
@@ -145,9 +147,6 @@ namespace DigitalRise.LevelEditor
 			// Mouse centering (controlled by the MenuComponent) is disabled if the game
 			// is inactive or if the GUI is active. In these cases, we do not want to move
 			// the player.
-			if (!_inputService.EnableMouseCentering)
-				return;
-
 			if (!IsEnabled)
 				return;
 

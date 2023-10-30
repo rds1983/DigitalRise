@@ -3,6 +3,7 @@ using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using System;
+using System.ComponentModel;
 
 namespace DigitalRise.LevelEditor
 {
@@ -12,6 +13,7 @@ namespace DigitalRise.LevelEditor
 		private readonly IServiceProvider _services;
 
 
+		[Browsable(false)]
 		public FogNode FogNode { get; private set; }
 
 

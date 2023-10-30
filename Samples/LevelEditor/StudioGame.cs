@@ -78,10 +78,10 @@ namespace DigitalRise.LevelEditor
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// Services
-			Services.AddService<Game>(this);
+			Services.AddService(typeof(Game), this);
 
 			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
-			Services.AddService(AssetManager);
+			Services.AddService(typeof(AssetManager), AssetManager);
 
 			DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
 
@@ -95,9 +95,10 @@ namespace DigitalRise.LevelEditor
 			// Refresh Library
 			var assetFolder = Path.Combine(Utility.ExecutingAssemblyDirectory, "Assets");
 			ModelStorage.Load(Path.Combine(assetFolder, "models"));
-			_mainForm.RefreshLibrary();
 
 			BuildSampleScene();
+			_mainForm.RefreshLibrary();
+			_mainForm.RefreshExplorer();
 		}
 
 		private void BuildSampleScene()

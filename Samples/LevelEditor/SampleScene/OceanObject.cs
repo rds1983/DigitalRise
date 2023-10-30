@@ -18,6 +18,145 @@ namespace DigitalRise.LevelEditor
 		private readonly IServiceProvider _services;
 		private WaterNode _waterNode;
 
+		private Water Water => _waterNode.Water;
+
+/*		public Vector3 NormalMap0Velocity
+		{
+			get => Water.NormalMap0Velocity;
+			set => Water.NormalMap0Velocity = value;
+		}
+
+		public float NormalMap0Scale
+		{
+			get => Water.NormalMap0Scale;
+			set => Water.NormalMap0Scale = value;
+		}
+
+		public float NormalMap0Strength
+		{
+			get => Water.NormalMap0Strength;
+			set => Water.NormalMap0Strength = value;
+		}
+
+		public Vector3 NormalMap1Velocity
+		{
+			get => Water.NormalMap1Velocity;
+			set => Water.NormalMap1Velocity = value;
+		}
+
+		public float NormalMap1Scale
+		{
+			get => Water.NormalMap1Scale;
+			set => Water.NormalMap1Scale = value;
+		}
+
+		public float NormalMap1Strength
+		{
+			get => Water.NormalMap1Strength;
+			set => Water.NormalMap1Strength = value;
+		}*/
+
+		public Color SpecularColor
+		{
+			get => Water.SpecularColor.ToColor();
+			set => Water.SpecularColor = value.ToVector3();
+		}
+
+		public float SpecularPower
+		{
+			get => Water.SpecularPower;
+			set => Water.SpecularPower = value;
+		}
+
+		public Color RefractionColor
+		{
+			get => Water.RefractionColor.ToColor();
+			set => Water.RefractionColor = value.ToVector3();
+		}
+
+		public float RefractionDistortion
+		{
+			get => Water.RefractionDistortion;
+			set => Water.RefractionDistortion = value;
+		}
+
+		public Color ReflectionColor
+		{
+			get => Water.ReflectionColor.ToColor();
+			set => Water.ReflectionColor = value.ToVector3();
+		}
+
+		public float ReflectionDistortion
+		{
+			get => Water.ReflectionDistortion;
+			set => Water.ReflectionDistortion = value;
+		}
+
+		public Vector3 UnderwaterFogDensity
+		{
+			get => Water.UnderwaterFogDensity;
+			set => Water.UnderwaterFogDensity = value;
+		}
+
+		public float FresnelBias
+		{
+			get => Water.FresnelBias;
+			set => Water.FresnelBias = value;
+		}
+
+		public float FresnelScale
+		{
+			get => Water.FresnelScale;
+			set => Water.FresnelScale = value;
+		}
+
+		public float FresnelPower
+		{
+			get => Water.FresnelPower;
+			set => Water.FresnelPower = value;
+		}
+
+		public float IntersectionSoftness
+		{
+			get => Water.IntersectionSoftness;
+			set => Water.IntersectionSoftness = value;
+		}
+
+		public Color WaterColor
+		{
+			get => Water.WaterColor.ToColor();
+			set => Water.WaterColor = value.ToVector3();
+		}
+
+		public Color ScatterColor
+		{
+			get => Water.ScatterColor.ToColor();
+			set => Water.ScatterColor = value.ToVector3();
+		}
+
+		public float FoamMapScale
+		{
+			get => Water.FoamMapScale;
+			set => Water.FoamMapScale = value;
+		}
+
+		public float FoamDistortion
+		{
+			get => Water.FoamDistortion;
+			set => Water.FoamDistortion = value;
+		}
+
+		public Color FoamColor
+		{
+			get => Water.FoamColor.ToColor();
+			set => Water.FoamColor = value.ToVector3();
+		}
+
+		public float FoamShoreIntersection
+		{
+			get => Water.FoamShoreIntersection;
+			set => Water.FoamShoreIntersection = value;
+		}
 
 		public OceanObject(IServiceProvider services)
 		{

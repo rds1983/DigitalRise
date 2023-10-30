@@ -31,7 +31,7 @@ namespace DigitalRise.LevelEditor.UI
 		private readonly GameObjectManager _gameObjectService = new GameObjectManager();
 		private readonly InputManager _inputManager = new InputManager(false)
 		{
-			EnableMouseCentering = true
+			EnableMouseCentering = false
 		};
 
 		//		public ForwardRenderer Renderer { get => _renderer; }
@@ -56,17 +56,17 @@ namespace DigitalRise.LevelEditor.UI
 		{
 			ClipToBounds = true;
 
-			services.AddService<IInputService>(_inputManager);
-			services.AddService<IGameObjectService>(_gameObjectService);
-			services.AddService(_simulation);
+			services.AddService(typeof(IInputService), _inputManager);
+			services.AddService(typeof(IGameObjectService), _gameObjectService);
+			services.AddService(typeof(Simulation), _simulation);
 
 			Scene = new Scene();
-			services.AddService<IScene>(Scene);
-			services.AddService(Scene);
+			services.AddService(typeof(IScene), Scene);
+			services.AddService(typeof(Scene), Scene);
 
 			var game = services.GetService<Game>();
 			_graphicsManager = new GraphicsManager(game.GraphicsDevice, game.Window);
-			services.AddService<IGraphicsService>(_graphicsManager);
+			services.AddService(typeof(IGraphicsService), _graphicsManager);
 
 			_cameraObject = new CameraObject(services);
 			_cameraObject.ResetPose(new Vector3(0, 2, 5), 0, 0);

@@ -19,6 +19,7 @@ using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
 using DigitalRise.GameBase;
+using System.ComponentModel;
 
 namespace DigitalRise.LevelEditor
 {
@@ -114,16 +115,20 @@ namespace DigitalRise.LevelEditor
 		//--------------------------------------------------------------
 
 		// The direction to the sun in world space.
+		[Browsable(false)]
 		public Vector3 SunDirection { get; private set; }
 
 		// The sun light intensity (RGB).
+		[Browsable(false)]
 		public Vector3 SunLight { get; private set; }
 
 		// The ambient light intensity (RGB).
+		[Browsable(false)]
 		public Vector3 AmbientLight { get; private set; }
 
 		// If cacheSky is true, the sky is rendered into a cube map and the cube map
 		// is displayed using this SkyboxNode.
+		[Browsable(false)]
 		public SkyboxNode SkyboxNode { get; private set; }
 
 		// If true, the cloud map is applied to the directional light to create shadows.
@@ -156,6 +161,7 @@ namespace DigitalRise.LevelEditor
 
 
 		// The current date, time and time zone.
+		[Browsable(false)]
 #if !XBOX
 		public DateTimeOffset Time
 #else

@@ -52,55 +52,54 @@ namespace DigitalRise.LevelEditor.UI
 		{
 			BuildUI();
 
-			_propertyGrid = new PropertyGrid();
-/*			_propertyGrid.Settings.ImagePropertyValueGetter = name =>
-			{
-				switch (name)
-				{
-					case "TextureBase":
-						return Scene.Terrain.TextureBaseName;
-					case "TexturePaint1":
-						return Scene.Terrain.TexturePaintName1;
-					case "TexturePaint2":
-						return Scene.Terrain.TexturePaintName2;
-					case "TexturePaint3":
-						return Scene.Terrain.TexturePaintName3;
-					case "TexturePaint4":
-						return Scene.Terrain.TexturePaintName4;
-				}
+			/*			_propertyGrid.Settings.ImagePropertyValueGetter = name =>
+						{
+							switch (name)
+							{
+								case "TextureBase":
+									return Scene.Terrain.TextureBaseName;
+								case "TexturePaint1":
+									return Scene.Terrain.TexturePaintName1;
+								case "TexturePaint2":
+									return Scene.Terrain.TexturePaintName2;
+								case "TexturePaint3":
+									return Scene.Terrain.TexturePaintName3;
+								case "TexturePaint4":
+									return Scene.Terrain.TexturePaintName4;
+							}
 
-				throw new Exception($"Unknown property {name}");
-			};
-			_propertyGrid.Settings.ImagePropertyValueSetter = (name, value) =>
-			{
-				switch (name)
-				{
-					case "TextureBase":
-						Scene.Terrain.TextureBaseName = value;
-						break;
-					case "TexturePaint1":
-						Scene.Terrain.TexturePaintName1 = value;
-						RefreshLibrary();
-						break;
-					case "TexturePaint2":
-						Scene.Terrain.TexturePaintName2 = value;
-						RefreshLibrary();
-						break;
-					case "TexturePaint3":
-						Scene.Terrain.TexturePaintName3 = value;
-						RefreshLibrary();
-						break;
-					case "TexturePaint4":
-						Scene.Terrain.TexturePaintName4 = value;
-						RefreshLibrary();
-						break;
-					default:
-						throw new Exception($"Unknown property {name}");
-				}
+							throw new Exception($"Unknown property {name}");
+						};
+						_propertyGrid.Settings.ImagePropertyValueSetter = (name, value) =>
+						{
+							switch (name)
+							{
+								case "TextureBase":
+									Scene.Terrain.TextureBaseName = value;
+									break;
+								case "TexturePaint1":
+									Scene.Terrain.TexturePaintName1 = value;
+									RefreshLibrary();
+									break;
+								case "TexturePaint2":
+									Scene.Terrain.TexturePaintName2 = value;
+									RefreshLibrary();
+									break;
+								case "TexturePaint3":
+									Scene.Terrain.TexturePaintName3 = value;
+									RefreshLibrary();
+									break;
+								case "TexturePaint4":
+									Scene.Terrain.TexturePaintName4 = value;
+									RefreshLibrary();
+									break;
+								default:
+									throw new Exception($"Unknown property {name}");
+							}
 
-			};
+						};
 
-			_panelProperties.Widgets.Add(_propertyGrid);*/
+						_panelProperties.Widgets.Add(_propertyGrid);*/
 
 			_sceneWidget = new SceneWidget(services)
 			{
@@ -144,7 +143,7 @@ namespace DigitalRise.LevelEditor.UI
 			_propertyGrid.Object = list.SelectedItem.Tag;
 		}
 
-		private void RefreshExplorer()
+		public void RefreshExplorer()
 		{
 			var list = _listExplorer;
 			list.Items.Clear();
@@ -154,38 +153,15 @@ namespace DigitalRise.LevelEditor.UI
 				return;
 			}
 
-			// Lights
-			list.Items.Add(new ListItem
-			{
-				Text = "Directional Light",
-//				Tag = Scene.DirectLights[0]
-			});
-
-			list.Items.Add(new ListItem
-			{
-				Text = "Terrain",
-//				Tag = Scene.Terrain
-			});
-
-			// Skybox
-/*			if (Scene.Skybox != null)
+			list.Items.Clear();
+			foreach(var obj in _sceneWidget.GameObjectService.Objects)
 			{
 				list.Items.Add(new ListItem
 				{
-					Text = "Skybox",
-					Tag = Scene.Skybox
+					Text = obj.Name,
+					Tag = obj
 				});
 			}
-
-			// Water
-			foreach (var water in Scene.WaterTiles)
-			{
-				list.Items.Add(new ListItem
-				{
-					Text = "Water",
-					Tag = water
-				});
-			}*/
 		}
 
 		private void AddButton(Grid container, InstrumentButton button)

@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using AssetManagementBase;
 using System.Data;
 using DigitalRise.LevelEditor;
+using System.ComponentModel;
 
 namespace DigitalRise.LevelEditor
 {
@@ -103,6 +104,7 @@ namespace DigitalRise.LevelEditor
 		//--------------------------------------------------------------
 
 		// The scene node which represents the whole terrain.
+		[Browsable(false)]
 		public TerrainNode TerrainNode { get; private set; }
 
 		public HolesType HolesType => _holesTypes;

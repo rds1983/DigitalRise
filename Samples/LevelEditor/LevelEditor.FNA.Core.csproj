@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DigitalRise.LevelEditor.MonoGame</PackageId>
+    <AssemblyName>DigitalRise.LevelEditor</AssemblyName>
+    <RootNamespace>DigitalRise.LevelEditor</RootNamespace>
+    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Myra\src\Myra\Myra.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Input\DigitalRise.Input.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj" />
+  </ItemGroup>
+</Project>
