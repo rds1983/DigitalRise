@@ -6,6 +6,7 @@ using Myra;
 using Myra.Graphics2D.UI;
 using DigitalRise.LevelEditor.UI;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.Graphics;
 
 namespace DigitalRise.LevelEditor
 {
@@ -14,7 +15,10 @@ namespace DigitalRise.LevelEditor
 		private readonly GraphicsDeviceManager _graphics;
 		private Desktop _desktop = null;
 		private MainForm _mainForm;
-//		private readonly FramesPerSecondCounter _fpsCounter = new FramesPerSecondCounter();
+
+		public AssetManager AssetManager { get; private set; }
+
+		//		private readonly FramesPerSecondCounter _fpsCounter = new FramesPerSecondCounter();
 
 		public Scene Scene
 		{
@@ -30,7 +34,8 @@ namespace DigitalRise.LevelEditor
 			_graphics = new GraphicsDeviceManager(this)
 			{
 				PreferredBackBufferWidth = 1200,
-				PreferredBackBufferHeight = 800
+				PreferredBackBufferHeight = 800,
+				GraphicsProfile = GraphicsProfile.HiDef
 			};
 
 			Window.AllowUserResizing = true;
@@ -46,13 +51,6 @@ namespace DigitalRise.LevelEditor
 		protected override void LoadContent()
 		{
 			base.LoadContent();
-
-			// UI
-			MyraEnvironment.Game = this;
-			_mainForm = new MainForm();
-
-			_desktop = new Desktop();
-			_desktop.Widgets.Add(_mainForm);
 
 /*			var baseFolder = @"D:\Temp\Nursia\scenes\scene1";
 			var assetManager = AssetManager.CreateFileAssetManager(baseFolder);
@@ -72,9 +70,32 @@ namespace DigitalRise.LevelEditor
 
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			var assetFolder = Path.Combine(Utils.ExecutingAssemblyDirectory, "Assets");
+			// Services
+			Services.AddService<Game>(this);
+
+			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
+			Services.AddService(AssetManager);
+
+			DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
+
+			// UI
+			MyraEnvironment.Game = this;
+			_mainForm = new MainForm(Services);
+
+			_desktop = new Desktop();
+			_desktop.Widgets.Add(_mainForm);
+
+			// Refresh Library
+			var assetFolder = Path.Combine(Utility.ExecutingAssemblyDirectory, "Assets");
 			ModelStorage.Load(Path.Combine(assetFolder, "models"));
 			_mainForm.RefreshLibrary();
+
+			BuildSampleScene();
+		}
+
+		private void BuildSampleScene()
+		{
+
 		}
 
 		protected override void Update(GameTime gameTime)

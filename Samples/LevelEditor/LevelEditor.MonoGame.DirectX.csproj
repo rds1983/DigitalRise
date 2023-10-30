@@ -2,6 +2,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);MONOGAME;DIRECTX</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.MonoGame.csproj" />
     <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.MonoGame.DirectX.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Input\DigitalRise.Input.MonoGame.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Physics\DigitalRise.Physics.MonoGame.csproj" />
   </ItemGroup>
 </Project>

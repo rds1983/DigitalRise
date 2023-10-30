@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AssetManagementBase;
 using DigitalRise.Graphics.SceneGraph;
+using Microsoft.Xna.Framework;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D.UI.Properties;
@@ -41,7 +42,7 @@ namespace DigitalRise.LevelEditor.UI
 //		public ForwardRenderer Renderer { get => _sceneWidget.Renderer; }
 		private List<InstrumentButton> _allButtons = new List<InstrumentButton>();
 
-		public MainForm()
+		public MainForm(GameServiceContainer services)
 		{
 			BuildUI();
 
@@ -95,7 +96,7 @@ namespace DigitalRise.LevelEditor.UI
 
 			_panelProperties.Widgets.Add(_propertyGrid);*/
 
-			_sceneWidget = new SceneWidget
+			_sceneWidget = new SceneWidget(services)
 			{
 				HorizontalAlignment = HorizontalAlignment.Stretch,
 				VerticalAlignment = VerticalAlignment.Stretch

@@ -1,7 +1,14 @@
-﻿using DigitalRise.Graphics.SceneGraph;
+﻿using DigitalRise.Diagnostics;
+using DigitalRise.GameBase.Timing;
+using DigitalRise.Graphics;
+using DigitalRise.Graphics.SceneGraph;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Myra.Graphics2D;
 using Myra.Graphics2D.UI;
+using System;
+using RenderContext = Myra.Graphics2D.RenderContext;
 
 namespace DigitalRise.LevelEditor.UI
 {
@@ -13,6 +20,9 @@ namespace DigitalRise.LevelEditor.UI
 		private Mesh _waterMarker;
 		private ModelInstance _modelMarker;*/
 		private Vector3? _touchDownStart;
+		private readonly DeferredGraphicsScreen _graphicsScreen;
+		private readonly GraphicsManager _graphicsManager;
+		private readonly HierarchicalProfiler _profiler = new HierarchicalProfiler("Graphics");
 
 		public Scene Scene
 		{
@@ -28,6 +38,8 @@ namespace DigitalRise.LevelEditor.UI
 //		public ForwardRenderer Renderer { get => _renderer; }
 		public Instrument Instrument { get; } = new Instrument();
 
+		public IServiceProvider Services => _graphicsScreen.Services;
+
 		private static bool IsMouseLeftButtonDown
 		{
 			get
@@ -37,75 +49,86 @@ namespace DigitalRise.LevelEditor.UI
 			}
 		}
 
-/*		private Vector3? CalculateMarkerPosition()
+		public SceneWidget(GameServiceContainer services)
 		{
-			// Build viewport
-			var bounds = ActualBounds;
-			var p = ToGlobal(bounds.Location);
-			bounds.X = p.X;
-			bounds.Y = p.Y;
-			var viewport = new Viewport(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+			var game = services.GetService<Game>();
+			_graphicsManager = new GraphicsManager(game.GraphicsDevice, game.Window);
+			services.AddService<IGraphicsService>(_graphicsManager);
 
-			// Determine marker position
-			var nearPoint = new Vector3(Desktop.MousePosition.X, Desktop.MousePosition.Y, 0);
-			var farPoint = new Vector3(Desktop.MousePosition.X, Desktop.MousePosition.Y, 1);
+			_graphicsScreen = new DeferredGraphicsScreen(services);
 
-			nearPoint = viewport.Unproject(nearPoint, Renderer.Projection, Renderer.View, Matrix.Identity);
-			farPoint = viewport.Unproject(farPoint, Renderer.Projection, Renderer.View, Matrix.Identity);
-
-			var direction = (farPoint - nearPoint);
-			direction.Normalize();
-
-			var ray = new Ray(nearPoint, direction);
-
-			// Firstly determine whether we intersect zero height terrain rectangle
-			var bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, 0, 0, 0, Scene.Terrain.Size.Y);
-			var intersectDist = ray.Intersects(bb);
-			if (intersectDist == null)
-			{
-				return null;
-			}
-
-			var markerPosition = nearPoint + direction * intersectDist.Value;
-
-			// Now determine where we intersect terrain rectangle with real height
-			var height = Scene.Terrain.GetHeight(markerPosition.X, markerPosition.Z);
-			bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, height, height, 0, Scene.Terrain.Size.Y);
-			intersectDist = ray.Intersects(bb);
-			if (intersectDist == null)
-			{
-				return null;
-			}
-
-			markerPosition = nearPoint + direction * intersectDist.Value;
-
-			return markerPosition;
+			_graphicsManager.Screens.Add(_graphicsScreen);
 		}
 
-		private void UpdateMarker()
-		{
-			if (Scene == null || Scene.Terrain == null || Instrument.Type == InstrumentType.None)
-			{
-				return;
-			}
+		/*		private Vector3? CalculateMarkerPosition()
+				{
+					// Build viewport
+					var bounds = ActualBounds;
+					var p = ToGlobal(bounds.Location);
+					bounds.X = p.X;
+					bounds.Y = p.Y;
+					var viewport = new Viewport(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
-			Scene.Marker.Position = CalculateMarkerPosition();
-			Scene.Marker.Radius = Instrument.Radius;
-		}
+					// Determine marker position
+					var nearPoint = new Vector3(Desktop.MousePosition.X, Desktop.MousePosition.Y, 0);
+					var farPoint = new Vector3(Desktop.MousePosition.X, Desktop.MousePosition.Y, 1);
 
-		private void UpdateKeyboard()
-		{
-			var keyboardState = Keyboard.GetState();
+					nearPoint = viewport.Unproject(nearPoint, Renderer.Projection, Renderer.View, Matrix.Identity);
+					farPoint = viewport.Unproject(farPoint, Renderer.Projection, Renderer.View, Matrix.Identity);
 
-			// Manage camera input controller
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Left, keyboardState.IsKeyDown(Keys.A));
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Right, keyboardState.IsKeyDown(Keys.D));
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Forward, keyboardState.IsKeyDown(Keys.W));
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Backward, keyboardState.IsKeyDown(Keys.S));
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Up, keyboardState.IsKeyDown(Keys.Up));
-			_controller.SetControlKeyState(CameraInputController.ControlKeys.Down, keyboardState.IsKeyDown(Keys.Down));
-			_controller.Update();
-		}
+					var direction = (farPoint - nearPoint);
+					direction.Normalize();
+
+					var ray = new Ray(nearPoint, direction);
+
+					// Firstly determine whether we intersect zero height terrain rectangle
+					var bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, 0, 0, 0, Scene.Terrain.Size.Y);
+					var intersectDist = ray.Intersects(bb);
+					if (intersectDist == null)
+					{
+						return null;
+					}
+
+					var markerPosition = nearPoint + direction * intersectDist.Value;
+
+					// Now determine where we intersect terrain rectangle with real height
+					var height = Scene.Terrain.GetHeight(markerPosition.X, markerPosition.Z);
+					bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, height, height, 0, Scene.Terrain.Size.Y);
+					intersectDist = ray.Intersects(bb);
+					if (intersectDist == null)
+					{
+						return null;
+					}
+
+					markerPosition = nearPoint + direction * intersectDist.Value;
+
+					return markerPosition;
+				}
+
+				private void UpdateMarker()
+				{
+					if (Scene == null || Scene.Terrain == null || Instrument.Type == InstrumentType.None)
+					{
+						return;
+					}
+
+					Scene.Marker.Position = CalculateMarkerPosition();
+					Scene.Marker.Radius = Instrument.Radius;
+				}
+
+				private void UpdateKeyboard()
+				{
+					var keyboardState = Keyboard.GetState();
+
+					// Manage camera input controller
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Left, keyboardState.IsKeyDown(Keys.A));
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Right, keyboardState.IsKeyDown(Keys.D));
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Forward, keyboardState.IsKeyDown(Keys.W));
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Backward, keyboardState.IsKeyDown(Keys.S));
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Up, keyboardState.IsKeyDown(Keys.Up));
+					_controller.SetControlKeyState(CameraInputController.ControlKeys.Down, keyboardState.IsKeyDown(Keys.Down));
+					_controller.Update();
+				}*/
 
 		public override void InternalRender(RenderContext context)
 		{
@@ -116,10 +139,11 @@ namespace DigitalRise.LevelEditor.UI
 				return;
 			}
 
-			UpdateKeyboard();
+//			UpdateKeyboard();
 
 			var bounds = ActualBounds;
-			var device = Nrs.GraphicsDevice;
+			var device = _graphicsScreen.GraphicsService.GraphicsDevice;
+			var game = Services.GetService<Game>();
 			var oldViewport = device.Viewport;
 
 			var p = ToGlobal(bounds.Location);
@@ -130,21 +154,31 @@ namespace DigitalRise.LevelEditor.UI
 			{
 				device.Viewport = new Viewport(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
-				UpdateMarker();
-				_renderer.Begin();
-				_renderer.DrawScene(Scene);
+				/*				UpdateMarker();
+								_renderer.Begin();
+								_renderer.DrawScene(Scene);
 
-				if (_waterMarker != null)
-				{
-					_renderer.DrawMesh(_waterMarker, Scene.Camera);
-				}
+								if (_waterMarker != null)
+								{
+									_renderer.DrawMesh(_waterMarker, Scene.Camera);
+								}
 
-				if (_modelMarker != null)
-				{
-					_renderer.DrawModel(_modelMarker, Scene.Camera);
-				}
+								if (_modelMarker != null)
+								{
+									_renderer.DrawModel(_modelMarker, Scene.Camera);
+								}
 
-				_renderer.End();
+								_renderer.End();*/
+
+				_profiler.Start("GraphicsManager.Update          ");
+				_graphicsManager.Update(game.TargetElapsedTime);
+				_profiler.Stop();
+
+				// Render graphics screens to the back buffer.
+				_profiler.Start("GraphicsManager.Render          ");
+				_graphicsManager.Render();
+				_profiler.Stop();
+
 			}
 			finally
 			{
@@ -152,7 +186,7 @@ namespace DigitalRise.LevelEditor.UI
 			}
 		}
 
-		protected override void OnPlacedChanged()
+/*		protected override void OnPlacedChanged()
 		{
 			base.OnPlacedChanged();
 
