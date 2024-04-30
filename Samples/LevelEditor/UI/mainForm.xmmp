@@ -1,20 +1,10 @@
 <Project>
   <Project.ExportOptions Namespace="DigitalRise.LevelEditor.UI" Class="MainForm" OutputPath="D:\Projects\DigitalRise\Samples\LevelEditor\UI" />
-  <VerticalStackPanel>
+  <VerticalStackPanel Id="_mainPanel">
     <HorizontalMenu>
       <MenuItem Text="&amp;File">
-        <MenuItem Text="&amp;Save" Id="_menuItemSave" />
+        <MenuItem Text="&amp;Open Solution" Id="_menuItemOpenSolution" />
         <MenuItem Text="&amp;Quit" Id="_menuItemQuit" />
-      </MenuItem>
-      <MenuItem Text="&amp;Items">
-        <MenuItem Text="&amp;Model" Id="_menuItemAddModel" />
-        <MenuItem Text="&amp;Skybox" Id="_menuItemAddSkybox" />
-        <MenuItem Text="&amp;Terrain" Id="_menuItemAddTerrain" />
-        <MenuItem Text="&amp;Water" Id="_menuItemAddWater" />
-      </MenuItem>
-      <MenuItem Text="&amp;Options">
-        <MenuItem Text="&amp;Grid" Id="_menuItemShowGrid" />
-        <MenuItem Text="&amp;Lock FPS at 60" Id="_menuItemLockFps" />
       </MenuItem>
       <MenuItem Text="&amp;Help">
         <MenuItem Text="&amp;About" Id="_menuItemAbout" />
@@ -22,28 +12,10 @@
     </HorizontalMenu>
     <Panel StackPanel.ProportionType="Fill">
       <HorizontalSplitPane Id="_topSplitPane">
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
-          <TabItem Text="Terrain">
-            <VerticalStackPanel Spacing="4">
-              <Grid ColumnSpacing="8" RowSpacing="8" Id="_gridTerrainLibrary" StackPanel.ProportionType="Fill">
-                <Grid.DefaultColumnProportion Type="Part" />
-                <Grid.DefaultRowProportion Type="Auto" />
-                <TextButton Text="Raise" Toggleable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                <TextButton Text="Lower" Toggleable="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" />
-              </Grid>
-              <Label Text="Radius: 5.0" HorizontalAlignment="Center" Id="_labelTerrainRadius" />
-              <HorizontalSlider Minimum="1" Maximum="10" Value="5" Id="_sliderTerrainRadius" />
-              <Label Text="Power: 0.5" HorizontalAlignment="Center" Id="_labelTerrainPower" />
-              <HorizontalSlider Maximum="1" Value="0.17886178" Id="_sliderTerrainPower" />
-            </VerticalStackPanel>
-          </TabItem>
-          <TabItem Text="Models">
-            <Grid ColumnSpacing="8" RowSpacing="8" Id="_gridModelsLibrary">
-              <Grid.DefaultColumnProportion Type="Part" />
-              <Grid.DefaultRowProportion Type="Auto" />
-            </Grid>
-          </TabItem>
-        </TabControl>
+        <VerticalSplitPane Id="_leftSplitPane">
+          <Panel Id="_panelSceneExplorer" />
+          <Panel Id="_panelFileSystem" />
+        </VerticalSplitPane>
         <Panel Id="_panelScene">
           <VerticalStackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Label Text="FPS: 60.0" Id="_labelFps" />
@@ -51,17 +23,7 @@
             <Label Text="Camera: 0/50/0;270;0" Id="_labelCamera" />
           </VerticalStackPanel>
         </Panel>
-        <VerticalSplitPane>
-          <ListBox HorizontalAlignment="Stretch" Id="_listExplorer">
-            <ListItem Text="Directional Light (#_sun)" />
-            <ListItem Text="Camera (#_mainCamera)" />
-            <ListItem Text="Terrain (#_terrain)" />
-            <ListItem Text="Water (#_water)" />
-          </ListBox>
-          <ScrollViewer>
-            <PropertyGrid Id="_propertyGrid" />
-          </ScrollViewer>
-        </VerticalSplitPane>
+        <PropertyGrid Id="_propertyGrid" />
       </HorizontalSplitPane>
     </Panel>
   </VerticalStackPanel>

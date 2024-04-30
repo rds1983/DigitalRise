@@ -22,6 +22,8 @@ namespace DigitalRise.LevelEditor
 
 		public AssetManager AssetManager { get; private set; }
 
+		public static StudioGame Instance { get; private set; }
+
 		//		private readonly FramesPerSecondCounter _fpsCounter = new FramesPerSecondCounter();
 
 		public Scene Scene
@@ -38,6 +40,8 @@ namespace DigitalRise.LevelEditor
 
 		public StudioGame()
 		{
+			Instance = this;
+
 			_graphics = new GraphicsDeviceManager(this)
 			{
 				PreferredBackBufferWidth = 1200,
@@ -98,7 +102,6 @@ namespace DigitalRise.LevelEditor
 
 			BuildSampleScene();
 			_mainForm.RefreshLibrary();
-			_mainForm.RefreshExplorer();
 		}
 
 		private void BuildSampleScene()

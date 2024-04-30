@@ -18,10 +18,6 @@ namespace DigitalRise.LevelEditor.UI
 	public class SceneWidget : Widget
 	{
 		private Scene _scene;
-		/*		private readonly ForwardRenderer _renderer = new ForwardRenderer();
-				private CameraInputController _controller;
-				private Mesh _waterMarker;
-				private ModelInstance _modelMarker;*/
 		private Vector3? _touchDownStart;
 		private readonly DeferredGraphicsScreen _graphicsScreen;
 		private readonly GraphicsManager _graphicsManager;
