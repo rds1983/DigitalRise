@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageId>DigitalRise.Common.FNA</PackageId>
     <AssemblyName>DigitalRise.Common</AssemblyName>
     <RootNamespace>DigitalRise.Common</RootNamespace>

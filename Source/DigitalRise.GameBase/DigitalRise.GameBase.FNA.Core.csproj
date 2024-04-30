@@ -3,7 +3,7 @@
     <AssemblyName>DigitalRise.GameBase</AssemblyName>
     <RootNamespace>DigitalRise.GameBase</RootNamespace>
     <PackageId>DigitalRise.GameBase</PackageId>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\DigitalRise.Common\DigitalRise.Common.FNA.Core.csproj" />
