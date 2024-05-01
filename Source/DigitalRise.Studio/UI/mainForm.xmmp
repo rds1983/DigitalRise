@@ -1,0 +1,30 @@
+<Project>
+  <Project.ExportOptions Namespace="DigitalRise.Studio.UI" Class="MainForm" OutputPath="D:\Projects\DigitalRise\Samples\LevelEditor\UI" />
+  <VerticalStackPanel Id="_mainPanel">
+    <HorizontalMenu>
+      <MenuItem Text="&amp;File">
+        <MenuItem Text="&amp;Open Solution" Id="_menuItemOpenSolution" />
+        <MenuItem Text="&amp;Quit" Id="_menuItemQuit" />
+      </MenuItem>
+      <MenuItem Text="&amp;Help">
+        <MenuItem Text="&amp;About" Id="_menuItemAbout" />
+      </MenuItem>
+    </HorizontalMenu>
+    <Panel StackPanel.ProportionType="Fill">
+      <HorizontalSplitPane Id="_topSplitPane">
+        <VerticalSplitPane Id="_leftSplitPane">
+          <Panel Id="_panelSceneExplorer" />
+          <Panel Id="_panelFileSystem" />
+        </VerticalSplitPane>
+        <Panel Id="_panelScene">
+          <VerticalStackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Label Text="FPS: 60.0" Id="_labelFps" />
+            <Label Text="Meshes: 15" Id="_labelMeshes" />
+            <Label Text="Camera: 0/50/0;270;0" Id="_labelCamera" />
+          </VerticalStackPanel>
+        </Panel>
+        <PropertyGrid Id="_propertyGrid" />
+      </HorizontalSplitPane>
+    </Panel>
+  </VerticalStackPanel>
+</Project>
