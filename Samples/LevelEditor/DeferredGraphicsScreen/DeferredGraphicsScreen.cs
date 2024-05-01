@@ -8,17 +8,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DirectionalLight = DigitalRise.Graphics.DirectionalLight;
 using AssetManagementBase;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	// Implements a deferred lighting render pipeline, supporting lights and shadows,
-	// Screen Space Ambient Occlusion (SSAO), High Dynamic Range (HDR) lighting, sky
-	// rendering, post-processing, ...
-	// The intermediate render targets (G-buffer, light buffer, shadow masks) can be
-	// visualized for debugging.
-	// Beginners can use this graphics screen as it is. Advanced developers can adapt
-	// the render pipeline to their needs.
-	class DeferredGraphicsScreen : GraphicsScreen, IDisposable
+    // Implements a deferred lighting render pipeline, supporting lights and shadows,
+    // Screen Space Ambient Occlusion (SSAO), High Dynamic Range (HDR) lighting, sky
+    // rendering, post-processing, ...
+    // The intermediate render targets (G-buffer, light buffer, shadow masks) can be
+    // visualized for debugging.
+    // Beginners can use this graphics screen as it is. Advanced developers can adapt
+    // the render pipeline to their needs.
+    class DeferredGraphicsScreen : GraphicsScreen, IDisposable
 	{
 		//--------------------------------------------------------------
 		#region Fields

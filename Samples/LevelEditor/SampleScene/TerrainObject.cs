@@ -16,12 +16,12 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
 using AssetManagementBase;
 using System.Data;
-using DigitalRise.LevelEditor;
 using System.ComponentModel;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	public enum HolesType
+    public enum HolesType
 	{
 		None,
 		Vertex,

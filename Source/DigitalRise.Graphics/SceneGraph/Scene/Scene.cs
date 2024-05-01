@@ -13,7 +13,6 @@ using DigitalRise.Geometry.Partitioning;
 using DigitalRise.Geometry.Shapes;
 using DigitalRise.Mathematics;
 using DigitalRise.Mathematics.Algebra;
-using DigitalRise.Threading;
 using Microsoft.Xna.Framework;
 using Plane = DigitalRise.Geometry.Shapes.Plane;
 

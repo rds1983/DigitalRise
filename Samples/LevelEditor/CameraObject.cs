@@ -10,10 +10,11 @@ using MathHelper = DigitalRise.Mathematics.MathHelper;
 using Microsoft.Xna.Framework.Input.Touch;
 using DigitalRise.Input;
 using System.ComponentModel;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	public class CameraObject : GameObject
+    public class CameraObject : GameObject
 	{
 		// Some constants for motion control.
 		private const float LinearVelocityMagnitude = 5f;

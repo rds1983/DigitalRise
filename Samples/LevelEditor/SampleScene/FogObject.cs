@@ -2,13 +2,14 @@
 using DigitalRise.GameBase;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.LevelEditor.Utility;
 using System;
 using System.ComponentModel;
 
 namespace DigitalRise.LevelEditor
 {
-	// Adds distance and height-based fog. Fog is disabled by default.
-	public class FogObject : GameObject
+    // Adds distance and height-based fog. Fog is disabled by default.
+    public class FogObject : GameObject
 	{
 		private readonly IServiceProvider _services;
 

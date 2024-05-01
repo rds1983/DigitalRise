@@ -4,6 +4,7 @@ using DigitalRise.GameBase.Timing;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.SceneGraph;
 using DigitalRise.Input;
+using DigitalRise.LevelEditor.Utility;
 using DigitalRise.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,7 +16,7 @@ using RenderContext = Myra.Graphics2D.RenderContext;
 
 namespace DigitalRise.LevelEditor.UI
 {
-	public class SceneWidget : Widget
+    public class SceneWidget : Widget
 	{
 		private Scene _scene;
 		private Vector3? _touchDownStart;

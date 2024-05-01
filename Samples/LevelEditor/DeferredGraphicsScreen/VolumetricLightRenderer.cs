@@ -7,6 +7,7 @@ using DigitalRise.Graphics;
 using DigitalRise.Graphics.PostProcessing;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.LevelEditor.Utility;
 using DigitalRise.Mathematics.Algebra;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,41 +16,41 @@ using MathHelper = DigitalRise.Mathematics.MathHelper;
 
 namespace DigitalRise.LevelEditor
 {
-  /// <summary>
-  /// Renders <see cref="VolumetricLightNode"/>s into the current render target.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// Volumetric lights are created using raymarching in the shader: The shader computes the light
-  /// intensities at several position along the view ray (within the camera space AABB of the light)
-  /// and additively blends the result to the scene.
-  /// </para>
-  /// <para>
-  /// <strong>Off-Screen Rendering:</strong><br/>
-  /// Large amounts of volumetric lights or a high number of samples per light can reduce
-  /// the frame rate, if the game is limited by the GPU's fill rate. One solution to this problem
-  /// is to render volumetric lights into a low-resolution off-screen buffer. This reduces the
-  /// amount of work per pixel, at the expense of additional image processing overhead and image
-  /// quality.
-  /// </para>
-  /// <para>
-  /// To enable off-screen rendering set the property <see cref="EnableOffscreenRendering"/> to
-  /// <see langword="true"/>. In addition a low-resolution copy of the depth buffer (half width and
-  /// height) needs to be stored in <c>renderContext.Data[RenderContextKey.DepthBufferHalf]</c>.
-  /// </para>
-  /// <para>
-  /// In XNA off-screen rendering clears the current back buffer. If necessary the renderer will
-  /// automatically rebuild the back buffer including the depth buffer. For the rebuild step it will
-  /// use the same parameters (e.g. near and far bias) as the current
-  /// <see cref="RebuildZBufferRenderer"/> stored in
-  /// <c>renderContext.Data[RenderContextKey.RebuildZBufferRenderer]</c>.
-  /// </para>
-  /// <note type="warning">
-  /// When off-screen rendering is enabled the <see cref="VolumetricLightRenderer"/> automatically 
-  /// switches render targets and invalidates the current depth-stencil buffer.
-  /// </note>
-  /// </remarks>
-  public class VolumetricLightRenderer : SceneNodeRenderer
+    /// <summary>
+    /// Renders <see cref="VolumetricLightNode"/>s into the current render target.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Volumetric lights are created using raymarching in the shader: The shader computes the light
+    /// intensities at several position along the view ray (within the camera space AABB of the light)
+    /// and additively blends the result to the scene.
+    /// </para>
+    /// <para>
+    /// <strong>Off-Screen Rendering:</strong><br/>
+    /// Large amounts of volumetric lights or a high number of samples per light can reduce
+    /// the frame rate, if the game is limited by the GPU's fill rate. One solution to this problem
+    /// is to render volumetric lights into a low-resolution off-screen buffer. This reduces the
+    /// amount of work per pixel, at the expense of additional image processing overhead and image
+    /// quality.
+    /// </para>
+    /// <para>
+    /// To enable off-screen rendering set the property <see cref="EnableOffscreenRendering"/> to
+    /// <see langword="true"/>. In addition a low-resolution copy of the depth buffer (half width and
+    /// height) needs to be stored in <c>renderContext.Data[RenderContextKey.DepthBufferHalf]</c>.
+    /// </para>
+    /// <para>
+    /// In XNA off-screen rendering clears the current back buffer. If necessary the renderer will
+    /// automatically rebuild the back buffer including the depth buffer. For the rebuild step it will
+    /// use the same parameters (e.g. near and far bias) as the current
+    /// <see cref="RebuildZBufferRenderer"/> stored in
+    /// <c>renderContext.Data[RenderContextKey.RebuildZBufferRenderer]</c>.
+    /// </para>
+    /// <note type="warning">
+    /// When off-screen rendering is enabled the <see cref="VolumetricLightRenderer"/> automatically 
+    /// switches render targets and invalidates the current depth-stencil buffer.
+    /// </note>
+    /// </remarks>
+    public class VolumetricLightRenderer : SceneNodeRenderer
   {
     //--------------------------------------------------------------
     #region Fields
@@ -187,7 +188,7 @@ namespace DigitalRise.LevelEditor
 			var assetManager = services.GetService<AssetManager>();
 
 			// Load effect.
-			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "VolumetricLight.efb");
+			var effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, CommonUtils.EffectsPrefix + "VolumetricLight.efb");
 			_parameterViewportSize = effect.Parameters["ViewportSize"];
       _parameterGBuffer0 = effect.Parameters["GBuffer0"];
       _parameterColor = effect.Parameters["Color"];

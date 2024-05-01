@@ -11,10 +11,11 @@ using DigitalRise.GameBase;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Physics.ForceEffects;
 using DigitalRise.Physics;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	public class StudioGame : Game
+    public class StudioGame : Game
 	{
 		private readonly GraphicsDeviceManager _graphics;
 		private Desktop _desktop = null;
@@ -84,7 +85,7 @@ namespace DigitalRise.LevelEditor
 			// Services
 			Services.AddService(typeof(Game), this);
 
-			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(Utility.ExecutingAssemblyDirectory, "../../../../../Assets"));
+			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "../../../../../Assets"));
 			Services.AddService(typeof(AssetManager), AssetManager);
 
 			DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
@@ -97,7 +98,7 @@ namespace DigitalRise.LevelEditor
 			_desktop.Widgets.Add(_mainForm);
 
 			// Refresh Library
-			var assetFolder = Path.Combine(Utility.ExecutingAssemblyDirectory, "Assets");
+			var assetFolder = Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "Assets");
 			ModelStorage.Load(Path.Combine(assetFolder, "models"));
 
 			BuildSampleScene();

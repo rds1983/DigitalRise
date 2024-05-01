@@ -7,13 +7,14 @@ using DigitalRise.Graphics.SceneGraph;
 using AssetManagementBase;
 using Microsoft.Xna.Framework;
 using System;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	/// <summary>
-	/// Adds an infinite ocean to the scene.
-	/// </summary>
-	public class OceanObject : GameObject
+    /// <summary>
+    /// Adds an infinite ocean to the scene.
+    /// </summary>
+    public class OceanObject : GameObject
 	{
 		private readonly IServiceProvider _services;
 		private WaterNode _waterNode;

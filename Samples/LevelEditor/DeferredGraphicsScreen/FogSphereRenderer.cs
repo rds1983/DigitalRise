@@ -5,22 +5,23 @@ using DigitalRise.Geometry;
 using DigitalRise.Graphics;
 using DigitalRise.Graphics.Rendering;
 using DigitalRise.Graphics.SceneGraph;
+using DigitalRise.LevelEditor.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
 namespace DigitalRise.LevelEditor
 {
-  /// <summary>
-  /// Renders <see cref="FogSphereNode"/>s into the current render target.
-  /// </summary>
-  /// <remarks>
-  /// <para>
-  /// <strong>Render Target and Viewport:</strong><br/>
-  /// This renderer renders into the current render target and viewport of the graphics device.
-  /// </para>
-  /// </remarks>
-  public class FogSphereRenderer : SceneNodeRenderer
+    /// <summary>
+    /// Renders <see cref="FogSphereNode"/>s into the current render target.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// <strong>Render Target and Viewport:</strong><br/>
+    /// This renderer renders into the current render target and viewport of the graphics device.
+    /// </para>
+    /// </remarks>
+    public class FogSphereRenderer : SceneNodeRenderer
   {
     //--------------------------------------------------------------
     #region Fields
@@ -68,7 +69,7 @@ namespace DigitalRise.LevelEditor
       var assetManager = services.GetService<AssetManager>();
 
       // Load effect.
-      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, Utility.EffectsPrefix + "FogSphere.efb");
+      _effect = assetManager.LoadEffect(graphicsService.GraphicsDevice, CommonUtils.EffectsPrefix + "FogSphere.efb");
       _parameterViewportSize = _effect.Parameters["ViewportSize"];
       _parameterWorld = _effect.Parameters["World"];
       _parameterWorldInverse = _effect.Parameters["WorldInverse"];

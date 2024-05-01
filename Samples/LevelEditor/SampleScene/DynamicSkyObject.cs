@@ -20,28 +20,29 @@ using MathHelper = DigitalRise.Mathematics.MathHelper;
 using AssetManagementBase;
 using DigitalRise.GameBase;
 using System.ComponentModel;
+using DigitalRise.LevelEditor.Utility;
 
 namespace DigitalRise.LevelEditor
 {
-	// This game object creates a sky using
-	// - a milky way skybox
-	// - the 9110 stars which are visible from earth,
-	// - sun and moon with simulated position and moon phase
-	// - atmospheric scattering to create the sky colors
-	// - cloud layers
-	//
-	// This game object also creates ambient and direct light for the scene using 
-	// simulated sunlight and moonlight. 
-	//
-	// The sky nodes are either 
-	// A) added to the scene directly, or
-	// B) rendered into a skybox (cube map) and a SkyboxNode is added to the scene.
-	// Option B is more efficient if the sky is not animated because the cube map can be rendered
-	// once and be reused until the sky changes. The cube map can also be used for reflections.
-	// However, the quality of B depends on the resolution of the cube map.
-	//
-	// If the scene contains a Fog, the fog color is also updated by the simulation.
-	public class DynamicSkyObject : GameObject
+    // This game object creates a sky using
+    // - a milky way skybox
+    // - the 9110 stars which are visible from earth,
+    // - sun and moon with simulated position and moon phase
+    // - atmospheric scattering to create the sky colors
+    // - cloud layers
+    //
+    // This game object also creates ambient and direct light for the scene using 
+    // simulated sunlight and moonlight. 
+    //
+    // The sky nodes are either 
+    // A) added to the scene directly, or
+    // B) rendered into a skybox (cube map) and a SkyboxNode is added to the scene.
+    // Option B is more efficient if the sky is not animated because the cube map can be rendered
+    // once and be reused until the sky changes. The cube map can also be used for reflections.
+    // However, the quality of B depends on the resolution of the cube map.
+    //
+    // If the scene contains a Fog, the fog color is also updated by the simulation.
+    public class DynamicSkyObject : GameObject
 	{
 		//--------------------------------------------------------------
 		#region Constants

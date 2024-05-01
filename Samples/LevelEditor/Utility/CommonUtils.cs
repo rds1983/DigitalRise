@@ -3,9 +3,9 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace DigitalRise.LevelEditor
+namespace DigitalRise.LevelEditor.Utility
 {
-	public static class Utility
+	public static class CommonUtils
 	{
 #if FNA
 		public const string EffectsPrefix = "FNA/bin/";
