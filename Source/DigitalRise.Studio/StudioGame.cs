@@ -85,7 +85,7 @@ namespace DigitalRise.Studio
 			// Services
 			Services.AddService(typeof(Game), this);
 
-			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "../../../../../Assets"));
+			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "../../../../../../Samples/Assets"));
 			Services.AddService(typeof(AssetManager), AssetManager);
 
 			DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
@@ -96,10 +96,6 @@ namespace DigitalRise.Studio
 
 			_desktop = new Desktop();
 			_desktop.Widgets.Add(_mainForm);
-
-			// Refresh Library
-			var assetFolder = Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "Assets");
-			ModelStorage.Load(Path.Combine(assetFolder, "models"));
 
 			BuildSampleScene();
 			_mainForm.RefreshLibrary();

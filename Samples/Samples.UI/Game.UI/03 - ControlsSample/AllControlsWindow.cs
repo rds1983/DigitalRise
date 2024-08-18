@@ -47,6 +47,7 @@ namespace Samples.UI
       {
         Content = buttonContentPanel,
         Margin = new Vector4(4),
+        ToolTip = "Test"
       };
 
       // ----- Drop-down button
