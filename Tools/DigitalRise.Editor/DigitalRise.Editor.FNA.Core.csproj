@@ -13,9 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Myra\src\Myra\Myra.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise.GameBase\DigitalRise.GameBase.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise.Input\DigitalRise.Input.FNA.Core.csproj" />
-    <ProjectReference Include="..\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.GameBase\DigitalRise.GameBase.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Graphics\DigitalRise.Graphics.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Input\DigitalRise.Input.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\Source\DigitalRise.Physics.Specialized\DigitalRise.Physics.Specialized.FNA.Core.csproj" />
   </ItemGroup>
 </Project>
