@@ -390,21 +390,26 @@ namespace Samples
 
 			_profiler.Stop();
 
-			/*			_spriteBatch.Begin(SpriteSortMode.Deferred, blendState: BlendState.Opaque);
+						_spriteBatch.Begin(SpriteSortMode.Deferred, blendState: BlendState.Opaque);
 
-						DebugDraw(WaterRenderer.GBuffer0, 0, 0);
-						DebugDraw(WaterRenderer.NormalMap0, 1, 0);
-						DebugDraw(WaterRenderer.NormalMap1, 2, 0);
-						DebugDraw(WaterRenderer.RefractionTexture, 3, 0);
+		/*						DebugDraw(WaterRenderer.GBuffer0, 0, 0);
+									DebugDraw(WaterRenderer.NormalMap0, 1, 0);
+									DebugDraw(WaterRenderer.NormalMap1, 2, 0);
+									DebugDraw(WaterRenderer.RefractionTexture, 3, 0);
 
-						DebugDraw(WaterRenderer.FoamMap, 0, 1);
-						DebugDraw(WaterRenderer.NoiseMap, 1, 1);
-						DebugDraw(WaterRenderer.WaveNormalMap, 2, 1);
-						DebugDraw(WaterRenderer.DisplacementTexture, 3, 1);
+									DebugDraw(WaterRenderer.FoamMap, 0, 1);
+									DebugDraw(WaterRenderer.NoiseMap, 1, 1);
+									DebugDraw(WaterRenderer.WaveNormalMap, 2, 1);
+									DebugDraw(WaterRenderer.DisplacementTexture, 3, 1);
 
-						DebugDraw(WaterRenderer.CubeReflectionMap, 2);
+									DebugDraw(WaterRenderer.CubeReflectionMap, 2);*/
 
-						_spriteBatch.End();*/
+			if (CascadedShadow.RRR != null)
+			{
+				//_spriteBatch.Draw(CascadedShadow.RRR, new Rectangle(0, 0, 1024, 256), Color.White);
+			}
+
+						_spriteBatch.End();
 		}
 
 		private void DebugDraw(Texture2D texture, int gridX, int gridY)

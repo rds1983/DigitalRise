@@ -1,43 +1,121 @@
-﻿using DigitalRise.Diagnostics;
-using DigitalRise.GameBase;
-using DigitalRise.GameBase.Timing;
-using DigitalRise.Graphics;
-using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Input;
-using DigitalRise.Studio.Utility;
-using DigitalRise.Physics;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Myra.Graphics2D;
 using Myra.Graphics2D.UI;
-using System;
-using RenderContext = Myra.Graphics2D.RenderContext;
+using DigitalRise;
+using DigitalRise.Rendering;
+using DigitalRise.Modelling;
+using System.Collections.Generic;
+using VertexPosition = DigitalRise.Rendering.Vertices.VertexPosition;
+using DigitalRise.Utilities;
+using static DigitalRise.Utilities.CameraInputController;
+using DigitalRise.Rendering.Lights;
+using DigitalRise.Standard;
+using DigitalRiseEditor.Utility;
+using Microsoft.Build.Construction;
+using Myra.Graphics2D;
 
-namespace DigitalRise.Studio.UI
+namespace DigitalRiseEditor.UI
 {
-    public class SceneWidget : Widget
+	public class SceneWidget : Widget
 	{
-		private Scene _scene;
-		private Vector3? _touchDownStart;
-		private readonly DeferredGraphicsScreen _graphicsScreen;
-		private readonly GraphicsManager _graphicsManager;
-		private readonly HierarchicalProfiler _profiler = new HierarchicalProfiler("Graphics");
-		private readonly Simulation _simulation = new Simulation();
-		private readonly CameraObject _cameraObject;
-		private readonly GameObjectManager _gameObjectService = new GameObjectManager();
-		private readonly InputManager _inputManager = new InputManager(false)
+		private const int GridSize = 200;
+
+		private static readonly Dictionary<Type, Texture2D> _typesIcons = new Dictionary<Type, Texture2D>
 		{
-			EnableMouseCentering = false
+			[typeof(BaseLight)] = DigitalRiseEditor.Resources.IconDirectionalLight,
+			[typeof(Camera)] = DigitalRiseEditor.Resources.IconCamera
 		};
 
-		//		public ForwardRenderer Renderer { get => _renderer; }
+		private Scene _scene;
+		private readonly ForwardRenderer _renderer = new ForwardRenderer();
+		private CameraInputController _controller;
+		private MeshNode _gridMesh;
+		private DigitalRise.Modelling.ModelMesh _waterMarker;
+		private ModelInstance _modelMarker;
+		private Vector3? _touchDownStart;
+		private readonly bool[] _keysDown = new bool[256];
+
+		public Scene Scene
+		{
+			get => _scene;
+			set
+			{
+				if (_scene == value) return;
+
+				_scene = value;
+				_controller = _scene == null ? null : new CameraInputController(_scene.Camera);
+			}
+		}
+
+		public ProjectInSolution Project { get; set; }
+
+		public ForwardRenderer Renderer { get => _renderer; }
+		public RenderStatistics RenderStatistics;
 		public Instrument Instrument { get; } = new Instrument();
 
-		public IServiceProvider Services => _graphicsScreen.Services;
-		public Simulation Simulation => _simulation;
-		public IGameObjectService GameObjectService => _gameObjectService;
-		public Scene Scene { get; set; }
+		private MeshNode GridMesh
+		{
+			get
+			{
+				if (_gridMesh == null)
+				{
+					var vertices = new List<VertexPosition>();
+					var indices = new List<short>();
+
+					short idx = 0;
+					for (var x = -GridSize; x <= GridSize; ++x)
+					{
+						vertices.Add(new VertexPosition
+						{
+							Position = new Vector3(x, 0, -GridSize)
+						});
+
+						vertices.Add(new VertexPosition
+						{
+							Position = new Vector3(x, 0, GridSize)
+						});
+
+						indices.Add(idx);
+						++idx;
+						indices.Add(idx);
+						++idx;
+					}
+
+					for (var z = -GridSize; z <= GridSize; ++z)
+					{
+						vertices.Add(new VertexPosition
+						{
+							Position = new Vector3(-GridSize, 0, z)
+						});
+
+						vertices.Add(new VertexPosition
+						{
+							Position = new Vector3(GridSize, 0, z)
+						});
+
+						indices.Add(idx);
+						++idx;
+						indices.Add(idx);
+						++idx;
+					}
+
+					var mesh = new Mesh(vertices.ToArray(), indices.ToArray(), PrimitiveType.LineList);
+
+					_gridMesh = new MeshNode
+					{
+						Mesh = mesh,
+						Material = new ColorMaterial
+						{
+							Color = Color.Green,
+						},
+					};
+				}
+
+				return _gridMesh;
+			}
+		}
 
 
 		private static bool IsMouseLeftButtonDown
@@ -49,31 +127,10 @@ namespace DigitalRise.Studio.UI
 			}
 		}
 
-		public SceneWidget(GameServiceContainer services)
+		public SceneWidget()
 		{
 			ClipToBounds = true;
-
-			services.AddService(typeof(IInputService), _inputManager);
-			services.AddService(typeof(IGameObjectService), _gameObjectService);
-			services.AddService(typeof(Simulation), _simulation);
-
-			Scene = new Scene();
-			services.AddService(typeof(IScene), Scene);
-			services.AddService(typeof(Scene), Scene);
-
-			var game = services.GetService<Game>();
-			_graphicsManager = new GraphicsManager(game.GraphicsDevice, game.Window);
-			services.AddService(typeof(IGraphicsService), _graphicsManager);
-
-			_cameraObject = new CameraObject(services);
-			_cameraObject.ResetPose(new Vector3(0, 2, 5), 0, 0);
-			_gameObjectService.Objects.Add(_cameraObject);
-
-			_graphicsScreen = new DeferredGraphicsScreen(services)
-			{
-				ActiveCameraNode = _cameraObject.CameraNode
-			};
-			_graphicsManager.Screens.Add(_graphicsScreen);
+			AcceptsKeyboardFocus = true;
 		}
 
 		/*		private Vector3? CalculateMarkerPosition()
@@ -98,7 +155,7 @@ namespace DigitalRise.Studio.UI
 					var ray = new Ray(nearPoint, direction);
 
 					// Firstly determine whether we intersect zero height terrain rectangle
-					var bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, 0, 0, 0, Scene.Terrain.Size.Y);
+					var bb = MathUtils.CreateBoundingBox(0, Scene.Terrain.Size.X, 0, 0, 0, Scene.Terrain.Size.Y);
 					var intersectDist = ray.Intersects(bb);
 					if (intersectDist == null)
 					{
@@ -109,7 +166,7 @@ namespace DigitalRise.Studio.UI
 
 					// Now determine where we intersect terrain rectangle with real height
 					var height = Scene.Terrain.GetHeight(markerPosition.X, markerPosition.Z);
-					bb = Utils.CreateBoundingBox(0, Scene.Terrain.Size.X, height, height, 0, Scene.Terrain.Size.Y);
+					bb = MathUtils.CreateBoundingBox(0, Scene.Terrain.Size.X, height, height, 0, Scene.Terrain.Size.Y);
 					intersectDist = ray.Intersects(bb);
 					if (intersectDist == null)
 					{
@@ -130,49 +187,130 @@ namespace DigitalRise.Studio.UI
 
 					Scene.Marker.Position = CalculateMarkerPosition();
 					Scene.Marker.Radius = Instrument.Radius;
-				}
-
-				private void UpdateKeyboard()
-				{
-					var keyboardState = Keyboard.GetState();
-
-					// Manage camera input controller
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Left, keyboardState.IsKeyDown(Keys.A));
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Right, keyboardState.IsKeyDown(Keys.D));
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Forward, keyboardState.IsKeyDown(Keys.W));
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Backward, keyboardState.IsKeyDown(Keys.S));
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Up, keyboardState.IsKeyDown(Keys.Up));
-					_controller.SetControlKeyState(CameraInputController.ControlKeys.Down, keyboardState.IsKeyDown(Keys.Down));
-					_controller.Update();
 				}*/
+
+		public override void OnKeyDown(Keys k)
+		{
+			base.OnKeyDown(k);
+
+			_keysDown[(int)k] = true;
+		}
+
+		public override void OnKeyUp(Keys k)
+		{
+			base.OnKeyUp(k);
+
+			_keysDown[(int)k] = false;
+		}
+
+		public override void OnLostKeyboardFocus()
+		{
+			base.OnLostKeyboardFocus();
+
+			for(var i = 0; i < _keysDown.Length; i++)
+			{
+				_keysDown[i] = false;
+			}
+		}
+
+		private void UpdateKeyboard()
+		{
+			// Manage camera input controller
+			_controller.SetControlKeyState(ControlKeys.Left, _keysDown[(int)Keys.A]);
+			_controller.SetControlKeyState(ControlKeys.Right, _keysDown[(int)Keys.D]);
+			_controller.SetControlKeyState(ControlKeys.Forward, _keysDown[(int)Keys.W]);
+			_controller.SetControlKeyState(ControlKeys.Backward, _keysDown[(int)Keys.S]);
+			_controller.SetControlKeyState(ControlKeys.Up, _keysDown[(int)Keys.Up]);
+			_controller.SetControlKeyState(ControlKeys.Down, _keysDown[(int)Keys.Down]);
+			_controller.Update();
+		}
 
 		public override void InternalRender(RenderContext context)
 		{
 			base.InternalRender(context);
 
-			//			UpdateKeyboard();
+			if (Scene == null)
+			{
+				return;
+			}
 
-			var game = Services.GetService<Game>();
+			UpdateKeyboard();
 
-			var device = _graphicsScreen.GraphicsService.GraphicsDevice;
-
+			var bounds = ActualBounds;
+			var device = DR.GraphicsDevice;
 			var oldViewport = device.Viewport;
-			var oldRenderTargetUsage = device.PresentationParameters.RenderTargetUsage;
 
+			var p = ToGlobal(bounds.Location);
+			bounds.X = p.X;
+			bounds.Y = p.Y;
+
+			// Save scissor as it would be destroyed on exception
+			var scissor = device.ScissorRectangle;
 
 			try
 			{
-
-				device.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
-
-				var bounds = ActualBounds;
-				var p = ToGlobal(bounds.Location);
-				bounds.X = p.X;
-				bounds.Y = p.Y;
 				device.Viewport = new Viewport(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
-				/*				UpdateMarker();
-								_renderer.Begin();
+				var camera = StudioGame.MainForm.CurrentCamera;
+				_renderer.AddNode(Scene);
+
+				if (DigitalRiseEditorOptions.ShowGrid)
+				{
+					_renderer.AddNode(GridMesh);
+				}
+
+				// Selected object
+				var selectionNode = _3DUtils.GetSelectionNode(StudioGame.MainForm.SelectedObject as SceneNode);
+				if (selectionNode != null && camera == Scene.Camera)
+				{
+					_renderer.AddNode(selectionNode);
+				}
+
+				// Draw lights' icons'
+				Scene.Iterate(n =>
+				{
+					foreach(var pair in _typesIcons)
+					{
+						if (pair.Key.IsAssignableFrom(n.GetType()))
+						{
+							BillboardNode node;
+							if (n.Tag == null)
+							{
+								node = new BillboardNode
+								{
+									Texture = pair.Value
+								};
+
+								n.Tag = node;
+							}
+
+							node = (BillboardNode)n.Tag;
+							node.Translation = n.Translation;
+							_renderer.AddNode(node);
+
+							break;
+						}
+					}
+				});
+
+				_renderer.Render(camera);
+
+				RenderStatistics = _renderer.Statistics;
+
+				device.Viewport = new Viewport(bounds.Right - 160, bounds.Y, 160, 160);
+
+				var m = DigitalRiseEditor.Resources.ModelAxises;
+				var c = Scene.Camera.Clone();
+
+				// Make the gizmo placed always in front of the camera
+				c.Translation = Vector3.Zero;
+				m.Translation = c.Direction * 2;
+
+				_renderer.AddNode(m);
+				_renderer.Render(c);
+
+				//				UpdateMarker();
+				/*				_renderer.Begin();
 								_renderer.DrawScene(Scene);
 
 								if (_waterMarker != null)
@@ -186,33 +324,34 @@ namespace DigitalRise.Studio.UI
 								}
 
 								_renderer.End();*/
+			}
+			catch (Exception ex)
+			{
+				DR.GraphicsDevice.ScissorRectangle = scissor;
+				var font = DigitalRiseEditor.Resources.ErrorFont;
+				var message = ex.ToString();
+				var sz = font.MeasureString(message);
 
-				_inputManager.Update(game.TargetElapsedTime);
+				bounds = ActualBounds;
+				var pos = new Vector2(bounds.X + (bounds.Width - sz.X) / 2,
+					bounds.Y + (bounds.Height - sz.Y) / 2);
 
-				_profiler.Start("Simulation.Update          ");
-				_simulation.Update(game.TargetElapsedTime);
-				_profiler.Stop();
-
-				_gameObjectService.Update(game.TargetElapsedTime);
-
-				_profiler.Start("GraphicsManager.Update          ");
-				_graphicsManager.Update(game.TargetElapsedTime);
-				_profiler.Stop();
-
-				// Render graphics screens to the back buffer.
-				_profiler.Start("GraphicsManager.Render          ");
-				_graphicsManager.Render();
-				_profiler.Stop();
-
+				pos.X = (int)pos.X;
+				pos.Y = (int)pos.Y;
+				context.DrawString(font, message, pos, Color.Red);
 			}
 			finally
 			{
 				device.Viewport = oldViewport;
-				device.PresentationParameters.RenderTargetUsage = oldRenderTargetUsage;
+			}
+
+			if (DigitalRiseEditorOptions.DrawShadowMap)
+			{
+				context.Draw(_renderer.ShadowMap, new Rectangle(0, 0, 512, 512), Color.White);
 			}
 		}
 
-/*		protected override void OnPlacedChanged()
+		protected override void OnPlacedChanged()
 		{
 			base.OnPlacedChanged();
 
@@ -229,124 +368,124 @@ namespace DigitalRise.Studio.UI
 			_controller.SetTouchState(TouchType.Move, false);
 			_controller.SetTouchState(TouchType.Rotate, false);
 
-			if (Instrument.Type == InstrumentType.Water && _touchDownStart != null && Scene.Marker.Position != null)
-			{
-				GetWaterMarkerPos(out Vector3 startPos, out float sizeX, out float sizeZ);
+			/*			if (Instrument.Type == InstrumentType.Water && _touchDownStart != null && Scene.Marker.Position != null)
+						{
+							GetWaterMarkerPos(out Vector3 startPos, out float sizeX, out float sizeZ);
 
-				if (sizeX > 0 && sizeZ > 0)
+							if (sizeX > 0 && sizeZ > 0)
+							{
+								var waterTile = new WaterTile(startPos.X, startPos.Z, Scene.DefaultWaterLevel, sizeX, sizeZ);
+								Scene.WaterTiles.Add(waterTile);
+							}
+
+							_touchDownStart = null;
+							_waterMarker = null;
+						}*/
+		}
+
+		/*		private void UpdateTerrainHeight(Point pos, float power)
 				{
-					var waterTile = new WaterTile(startPos.X, startPos.Z, Scene.DefaultWaterLevel, sizeX, sizeZ);
-					Scene.WaterTiles.Add(waterTile);
+					var height = Scene.Terrain.GetHeightByHeightPos(pos);
+					height += power;
+					Scene.Terrain.SetHeightByHeightPos(pos, height);
 				}
 
-				_touchDownStart = null;
-				_waterMarker = null;
-			}
-		}
-
-		private void UpdateTerrainHeight(Point pos, float power)
-		{
-			var height = Scene.Terrain.GetHeightByHeightPos(pos);
-			height += power;
-			Scene.Terrain.SetHeightByHeightPos(pos, height);
-		}
-
-		private void UpdateTerrainSplatMap(Point splatPos, SplatManChannel channel, float power)
-		{
-			var splatValue = Scene.Terrain.GetSplatValue(splatPos, channel);
-			splatValue += power * 0.5f;
-			Scene.Terrain.SetSplatValue(splatPos, channel, splatValue);
-		}
-
-		private void ApplyLowerRaise()
-		{
-			var power = Instrument.Power;
-			var radius = Scene.Marker.Radius;
-			var markerPos = Scene.Marker.Position.Value;
-
-			var topLeft = Scene.Terrain.ToHeightPosition(markerPos.X - radius, markerPos.Z - radius);
-			var bottomRight = Scene.Terrain.ToHeightPosition(markerPos.X + radius, markerPos.Z + radius);
-
-			for (var x = topLeft.X; x <= bottomRight.X; ++x)
-			{
-				for (var y = topLeft.Y; y <= bottomRight.Y; ++y)
+				private void UpdateTerrainSplatMap(Point splatPos, SplatManChannel channel, float power)
 				{
-					var heightPos = new Point(x, y);
-					var terrainPos = Scene.Terrain.HeightToTerrainPosition(heightPos);
-					var dist = Vector2.Distance(new Vector2(markerPos.X, markerPos.Z), terrainPos);
+					var splatValue = Scene.Terrain.GetSplatValue(splatPos, channel);
+					splatValue += power * 0.5f;
+					Scene.Terrain.SetSplatValue(splatPos, channel, splatValue);
+				}
 
-					if (dist > radius)
-					{
-						continue;
-					}
+				private void ApplyLowerRaise()
+				{
+					var power = Instrument.Power;
+					var radius = Scene.Marker.Radius;
+					var markerPos = Scene.Marker.Position.Value;
 
-					switch (Instrument.Type)
+					var topLeft = Scene.Terrain.ToHeightPosition(markerPos.X - radius, markerPos.Z - radius);
+					var bottomRight = Scene.Terrain.ToHeightPosition(markerPos.X + radius, markerPos.Z + radius);
+
+					for (var x = topLeft.X; x <= bottomRight.X; ++x)
 					{
-						case InstrumentType.None:
-							break;
-						case InstrumentType.RaiseTerrain:
-							UpdateTerrainHeight(heightPos, power);
-							break;
-						case InstrumentType.LowerTerrain:
-							UpdateTerrainHeight(heightPos, -power);
-							break;
+						for (var y = topLeft.Y; y <= bottomRight.Y; ++y)
+						{
+							var heightPos = new Point(x, y);
+							var terrainPos = Scene.Terrain.HeightToTerrainPosition(heightPos);
+							var dist = Vector2.Distance(new Vector2(markerPos.X, markerPos.Z), terrainPos);
+
+							if (dist > radius)
+							{
+								continue;
+							}
+
+							switch (Instrument.Type)
+							{
+								case InstrumentType.None:
+									break;
+								case InstrumentType.RaiseTerrain:
+									UpdateTerrainHeight(heightPos, power);
+									break;
+								case InstrumentType.LowerTerrain:
+									UpdateTerrainHeight(heightPos, -power);
+									break;
+							}
+						}
 					}
 				}
-			}
-		}
 
-		private void ApplyTerrainPaint()
-		{
-			var power = Instrument.Power;
-			var radius = Scene.Marker.Radius;
-			var markerPos = Scene.Marker.Position.Value;
-
-			var topLeft = Scene.Terrain.ToSplatPosition(markerPos.X - radius, markerPos.Z - radius);
-			var bottomRight = Scene.Terrain.ToSplatPosition(markerPos.X + radius, markerPos.Z + radius);
-
-			for (var x = topLeft.X; x <= bottomRight.X; ++x)
-			{
-				for (var y = topLeft.Y; y <= bottomRight.Y; ++y)
+				private void ApplyTerrainPaint()
 				{
-					var splatPos = new Point(x, y);
-					var terrainPos = Scene.Terrain.SplatToTerrainPosition(splatPos);
-					var dist = Vector2.Distance(new Vector2(markerPos.X, markerPos.Z), terrainPos);
+					var power = Instrument.Power;
+					var radius = Scene.Marker.Radius;
+					var markerPos = Scene.Marker.Position.Value;
 
-					if (dist > radius)
-					{
-						continue;
-					}
+					var topLeft = Scene.Terrain.ToSplatPosition(markerPos.X - radius, markerPos.Z - radius);
+					var bottomRight = Scene.Terrain.ToSplatPosition(markerPos.X + radius, markerPos.Z + radius);
 
-					switch (Instrument.Type)
+					for (var x = topLeft.X; x <= bottomRight.X; ++x)
 					{
-						case InstrumentType.PaintTexture1:
-							UpdateTerrainSplatMap(splatPos, SplatManChannel.First, power);
-							break;
-						case InstrumentType.PaintTexture2:
-							UpdateTerrainSplatMap(splatPos, SplatManChannel.Second, power);
-							break;
-						case InstrumentType.PaintTexture3:
-							UpdateTerrainSplatMap(splatPos, SplatManChannel.Third, power);
-							break;
-						case InstrumentType.PaintTexture4:
-							UpdateTerrainSplatMap(splatPos, SplatManChannel.Fourth, power);
-							break;
+						for (var y = topLeft.Y; y <= bottomRight.Y; ++y)
+						{
+							var splatPos = new Point(x, y);
+							var terrainPos = Scene.Terrain.SplatToTerrainPosition(splatPos);
+							var dist = Vector2.Distance(new Vector2(markerPos.X, markerPos.Z), terrainPos);
+
+							if (dist > radius)
+							{
+								continue;
+							}
+
+							switch (Instrument.Type)
+							{
+								case InstrumentType.PaintTexture1:
+									UpdateTerrainSplatMap(splatPos, SplatManChannel.First, power);
+									break;
+								case InstrumentType.PaintTexture2:
+									UpdateTerrainSplatMap(splatPos, SplatManChannel.Second, power);
+									break;
+								case InstrumentType.PaintTexture3:
+									UpdateTerrainSplatMap(splatPos, SplatManChannel.Third, power);
+									break;
+								case InstrumentType.PaintTexture4:
+									UpdateTerrainSplatMap(splatPos, SplatManChannel.Fourth, power);
+									break;
+							}
+						}
 					}
 				}
-			}
-		}
 
-		private void ApplyPaintInstrument()
-		{
-			if (Instrument.Type == InstrumentType.RaiseTerrain || Instrument.Type == InstrumentType.LowerTerrain)
-			{
-				ApplyLowerRaise();
-			}
-			else
-			{
-				ApplyTerrainPaint();
-			}
-		}
+				private void ApplyPaintInstrument()
+				{
+					if (Instrument.Type == InstrumentType.RaiseTerrain || Instrument.Type == InstrumentType.LowerTerrain)
+					{
+						ApplyLowerRaise();
+					}
+					else
+					{
+						ApplyTerrainPaint();
+					}
+				}*/
 
 		public override void OnMouseMoved()
 		{
@@ -355,13 +494,13 @@ namespace DigitalRise.Studio.UI
 			var mouseState = Mouse.GetState();
 			_controller.SetMousePosition(new Point(mouseState.X, mouseState.Y));
 
-			if (Instrument.Type == InstrumentType.Model)
+			/*if (Instrument.Type == InstrumentType.Model)
 			{
 				if (Scene.Marker.Position != null)
 				{
-					if (_modelMarker == null || _modelMarker.Model != Instrument.Model)
+					if (_modelMarker == null || _modelMarker != Instrument.Model)
 					{
-						_modelMarker = Instrument.Model.CreateInstance();
+						_modelMarker = Instrument.Model;
 					}
 
 					var pos = Scene.Marker.Position.Value;
@@ -373,7 +512,7 @@ namespace DigitalRise.Studio.UI
 				{
 					_modelMarker = null;
 				}
-			}
+			}*/
 		}
 
 		public override void OnMouseLeft()
@@ -383,50 +522,48 @@ namespace DigitalRise.Studio.UI
 			_modelMarker = null;
 		}
 
-		public override bool OnTouchDown()
-		{
-			var result = base.OnTouchDown();
+		/*		public override void OnTouchDown()
+				{
+					base.OnTouchDown();
 
-			if (!IsMouseLeftButtonDown || Scene.Marker.Position == null)
-			{
-				return result;
-			}
+					if (!IsMouseLeftButtonDown || Scene.Marker.Position == null)
+					{
+						return;
+					}
 
-			if (Instrument.IsPaintInstrument)
-			{
-				ApplyPaintInstrument();
-			}
-			else if (Instrument.Type == InstrumentType.Water)
-			{
-				_touchDownStart = Scene.Marker.Position.Value;
-			}
-			else if (Instrument.Type == InstrumentType.Model)
-			{
-				var pos = Scene.Marker.Position.Value;
+					if (Instrument.IsPaintInstrument)
+					{
+						ApplyPaintInstrument();
+					}
+					else if (Instrument.Type == InstrumentType.Water)
+					{
+						_touchDownStart = Scene.Marker.Position.Value;
+					}
+					else if (Instrument.Type == InstrumentType.Model)
+					{
+						var pos = Scene.Marker.Position.Value;
 
-				var model = Instrument.Model.CreateInstance();
-				pos.Y = -model.BoundingBox.Min.Y;
-				pos.Y += Scene.Terrain.GetHeight(pos.X, pos.Z);
+						var model = Instrument.Model;
+						pos.Y = -model.BoundingBox.Min.Y;
+						pos.Y += Scene.Terrain.GetHeight(pos.X, pos.Z);
 
-				model.Transform = Matrix.CreateTranslation(pos);
+						model.Transform = Matrix.CreateTranslation(pos);
 
-				Scene.Models.Add(model);
-			}
+						Scene.Models.Add(model);
+					}
+				}
 
-			return result;
-		}
+				private void GetWaterMarkerPos(out Vector3 startPos, out float sizeX, out float sizeZ)
+				{
+					var markerPos = Scene.Marker.Position.Value;
 
-		private void GetWaterMarkerPos(out Vector3 startPos, out float sizeX, out float sizeZ)
-		{
-			var markerPos = Scene.Marker.Position.Value;
+					startPos = new Vector3(Math.Min(markerPos.X, _touchDownStart.Value.X),
+						Scene.DefaultWaterLevel,
+						Math.Min(markerPos.Z, _touchDownStart.Value.Z));
 
-			startPos = new Vector3(Math.Min(markerPos.X, _touchDownStart.Value.X),
-				Scene.DefaultWaterLevel,
-				Math.Min(markerPos.Z, _touchDownStart.Value.Z));
-
-			sizeX = Math.Abs(markerPos.X - _touchDownStart.Value.X);
-			sizeZ = Math.Abs(markerPos.Z - _touchDownStart.Value.Z);
-		}
+					sizeX = Math.Abs(markerPos.X - _touchDownStart.Value.X);
+					sizeZ = Math.Abs(markerPos.Z - _touchDownStart.Value.Z);
+				}*/
 
 		public override void OnTouchMoved()
 		{
@@ -441,7 +578,7 @@ namespace DigitalRise.Studio.UI
 			_controller.SetTouchState(TouchType.Rotate, mouseState.RightButton == ButtonState.Pressed);
 			_controller.Update();
 
-			if (!IsMouseLeftButtonDown || Scene.Marker.Position == null)
+			/*if (!IsMouseLeftButtonDown || Scene.Marker.Position == null)
 			{
 				return;
 			}
@@ -465,7 +602,7 @@ namespace DigitalRise.Studio.UI
 						_waterMarker.Transform = Matrix.CreateScale(sizeX, 0, sizeZ) * Matrix.CreateTranslation(startPos);
 					}
 				}
-			}
-		}*/
+			}*/
+		}
 	}
 }

@@ -1,14 +1,14 @@
 ﻿using Myra.Graphics2D.UI;
-using System;
 using System.Collections.Generic;
+using System;
 
-namespace DigitalRise.Studio.Utility
+namespace DigitalRiseEditor.Utility
 {
 	internal static class UIUtils
 	{
 		public static void BuildContextMenu(this Desktop desktop, IEnumerable<Tuple<string, Action>> items)
 		{
-			if (desktop.ContextMenu != null || desktop.TouchPosition == null)
+			if (desktop.ContextMenu != null)
 			{
 				// Dont show if it's already shown
 				return;
@@ -26,7 +26,7 @@ namespace DigitalRise.Studio.Utility
 				verticalMenu.Items.Add(menuItem);
 			}
 
-			desktop.ShowContextMenu(verticalMenu, desktop.TouchPosition.Value);
+			desktop.ShowContextMenu(verticalMenu, desktop.MousePosition);
 		}
 	}
 }

@@ -1,53 +1,42 @@
-﻿using AssetManagementBase;
-using System.IO;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Myra;
 using Myra.Graphics2D.UI;
-using DigitalRise.Studio.UI;
-using DigitalRise.Graphics.SceneGraph;
-using DigitalRise.Graphics;
-using DigitalRise.GameBase;
-using DigitalRise.Graphics.Rendering;
-using DigitalRise.Physics.ForceEffects;
-using DigitalRise.Physics;
-using DigitalRise.Studio.Utility;
+using DigitalRise;
+using DigitalRiseEditor.UI;
 
-namespace DigitalRise.Studio
+namespace DigitalRiseEditor
 {
-    public class StudioGame : Game
+	public class StudioGame : Game
 	{
 		private readonly GraphicsDeviceManager _graphics;
 		private Desktop _desktop = null;
 		private MainForm _mainForm;
-
-		public AssetManager AssetManager { get; private set; }
+		private readonly FramesPerSecondCounter _fpsCounter = new FramesPerSecondCounter();
+		private readonly State _state;
 
 		public static StudioGame Instance { get; private set; }
-
-		//		private readonly FramesPerSecondCounter _fpsCounter = new FramesPerSecondCounter();
-
-		public Scene Scene
-		{
-			get => _mainForm.Scene;
-			set => _mainForm.Scene = value;
-		}
-
-		public Simulation Simulation => _mainForm.Simulation;
-		public IGameObjectService GameObjectService => _mainForm.GameObjectService;
-
-//		public ForwardRenderer Renderer { get => _mainForm.Renderer; }
-		private SpriteBatch _spriteBatch;
+		public static MainForm MainForm => Instance._mainForm;
 
 		public StudioGame()
 		{
 			Instance = this;
 
+			// Restore state
+			_state = State.Load();
+			if (_state != null)
+			{
+				DigitalRiseEditorOptions.ShowGrid = _state.ShowGrid;
+				DebugSettings.DrawBoundingBoxes = _state.DrawBoundingBoxes;
+				DebugSettings.DrawLightViewFrustrum = _state.DrawLightViewFrustum;
+				DigitalRiseEditorOptions.DrawShadowMap = _state.DrawShadowMap;
+			}
+
 			_graphics = new GraphicsDeviceManager(this)
 			{
 				PreferredBackBufferWidth = 1200,
 				PreferredBackBufferHeight = 800,
-				GraphicsProfile = GraphicsProfile.HiDef
+				PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8
 			};
 
 			Window.AllowUserResizing = true;
@@ -58,88 +47,57 @@ namespace DigitalRise.Studio
 				IsFixedTimeStep = false;
 				_graphics.SynchronizeWithVerticalRetrace = false;
 			}
+
+			if (_state != null)
+			{
+				_graphics.PreferredBackBufferWidth = _state.Size.X;
+				_graphics.PreferredBackBufferHeight = _state.Size.Y;
+			}
+			else
+			{
+				_graphics.PreferredBackBufferWidth = 1280;
+				_graphics.PreferredBackBufferHeight = 800;
+			}
 		}
 
 		protected override void LoadContent()
 		{
 			base.LoadContent();
 
-/*			var baseFolder = @"D:\Temp\Nursia\scenes\scene1";
-			var assetManager = AssetManager.CreateFileAssetManager(baseFolder);
-			var scene = Scene.Load(Path.Combine(baseFolder, @"scene.json"), assetManager);
-
-			_mainForm.Scene = scene;
-
-			_mainForm.BasePath = baseFolder;
-			_mainForm.AssetManager = assetManager;
-
-			// Skybox
-			var textureSkyBox = assetManager.LoadTextureCube(GraphicsDevice, "../../skybox/SkyBox.dds");
-			scene.Skybox = new Skybox(100)
-			{
-				Texture = textureSkyBox
-			};*/
-
-			_spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			// Services
-			Services.AddService(typeof(Game), this);
-
-			AssetManager = AssetManager.CreateFileAssetManager(Path.Combine(CommonUtils.ExecutingAssemblyDirectory, "../../../../../../Samples/Assets"));
-			Services.AddService(typeof(AssetManager), AssetManager);
-
-			DefaultAssets.DefaultFont = AssetManager.LoadFontSystem("Fonts/DroidSans.ttf").GetFont(16);
-
 			// UI
 			MyraEnvironment.Game = this;
-			_mainForm = new MainForm(Services);
+			DR.Game = this;
+
+			/*			DR.ExternalEffects = new FolderWatcher(@"D:\Projects\DigitalRise\DigitalRise\Effects")
+						{
+							BinaryFolder = @"D:\Projects\DigitalRise\DigitalRise\Effects\FNA\bin"
+						};*/
+
+			_mainForm = new MainForm();
 
 			_desktop = new Desktop();
 			_desktop.Widgets.Add(_mainForm);
 
-			BuildSampleScene();
-			_mainForm.RefreshLibrary();
-		}
-
-		private void BuildSampleScene()
-		{
-			// Add gravity and damping to the physics simulation.
-			Simulation.ForceEffects.Add(new Gravity());
-			Simulation.ForceEffects.Add(new Damping());
-
-			// Add standard game objects.
-			GameObjectService.Objects.Add(new DynamicSkyObject(Services, true, false, true)
+			if (_state != null)
 			{
-				EnableCloudShadows = false,
-				FogSampleAngle = 0.1f,
-				FogSaturation = 1,
-			});
+				_mainForm._topSplitPane.SetSplitterPosition(0, _state != null ? _state.TopSplitterPosition : 0.75f);
+				_mainForm._leftSplitPane.SetSplitterPosition(0, _state != null ? _state.LeftSplitterPosition : 0.5f);
 
-			var fogObject = new FogObject(Services) { AttachToCamera = true };
-			GameObjectService.Objects.Add(fogObject);
+				if (!string.IsNullOrEmpty(_state.EditedFile))
+				{
+					_mainForm.LoadSolution(_state.EditedFile);
+				}
+			}
 
-			// Set nice fog values.
-			// (Note: If we change the fog values here, the GUI in the Options window is not
-			// automatically updated.)
-			fogObject.FogNode.IsEnabled = true;
-			fogObject.FogNode.Fog.Start = 100;
-			fogObject.FogNode.Fog.End = 2500;
-			fogObject.FogNode.Fog.Start = 100;
-			fogObject.FogNode.Fog.HeightFalloff = 0.25f;
-
-			// Add an ocean at height 0.
-			GameObjectService.Objects.Add(new OceanObject(Services));
-
-			// Add the terrain.
-			var terrainObject = new TerrainObject(Services);
-			GameObjectService.Objects.Add(terrainObject);
+			DebugSettings.DrawCamerasFrustums = true;
+			DebugSettings.DrawLights = true;
 		}
 
 		protected override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
 
-//			_fpsCounter.Update(gameTime);
+			_fpsCounter.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime)
@@ -148,16 +106,29 @@ namespace DigitalRise.Studio
 
 			GraphicsDevice.Clear(Color.Black);
 
-/*			_mainForm._labelCamera.Text = "Camera: " + Scene.Camera.ToString();
-			_mainForm._labelFps.Text = "FPS: " + _fpsCounter.FramesPerSecond;
-			_mainForm._labelMeshes.Text = "Meshes: " + Renderer.Statistics.MeshesDrawn;*/
-
 			_desktop.Render();
 
-//			_fpsCounter.Draw(gameTime);
+			_fpsCounter.Draw(gameTime);
+		}
 
-			_spriteBatch.Begin();
-			_spriteBatch.End();
+		protected override void EndRun()
+		{
+			base.EndRun();
+
+			var state = new State
+			{
+				Size = new Point(GraphicsDevice.PresentationParameters.BackBufferWidth,
+					GraphicsDevice.PresentationParameters.BackBufferHeight),
+				TopSplitterPosition = _mainForm._topSplitPane.GetSplitterPosition(0),
+				LeftSplitterPosition = _mainForm._leftSplitPane.GetSplitterPosition(0),
+				EditedFile = _mainForm.FilePath,
+				ShowGrid = DigitalRiseEditorOptions.ShowGrid,
+				DrawBoundingBoxes = DebugSettings.DrawBoundingBoxes,
+				DrawLightViewFrustum = DebugSettings.DrawLightViewFrustrum,
+				DrawShadowMap = DigitalRiseEditorOptions.DrawShadowMap,
+			};
+
+			state.Save();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace DigitalRise.Studio
+﻿namespace DigitalRiseEditor
 {
 	static class Configuration
 	{

@@ -1,6 +1,6 @@
-﻿using DigitalRise.Graphics.SceneGraph;
+﻿using DigitalRise.Modelling;
 
-namespace DigitalRise.Studio.UI
+namespace DigitalRiseEditor.UI
 {
 	public enum InstrumentType
 	{
@@ -21,7 +21,7 @@ namespace DigitalRise.Studio.UI
 
 		public float Radius { get; set; } = 4.0f;
 		public float Power { get; set; } = 0.2f;
-		public ModelNode Model { get; set; }
+		public ModelInstance Model { get; set; }
 
 		public bool IsPaintInstrument => Type != InstrumentType.None &&
 				Type != InstrumentType.Water &&

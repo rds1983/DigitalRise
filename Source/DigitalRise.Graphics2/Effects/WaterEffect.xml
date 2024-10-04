@@ -1,0 +1,4 @@
+<Root>
+	<MultiCompile>DEPTH_BUFFER;_</MultiCompile>
+	<MultiCompile>CUBEMAP_REFLECTION;PLANAR_REFLECTION</MultiCompile>
+</Root>

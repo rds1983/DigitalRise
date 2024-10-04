@@ -1,0 +1,7 @@
+<Root>
+	<MultiCompile>TEXTURE;_</MultiCompile>
+	<MultiCompile>CLIP_PLANE;_</MultiCompile>
+	<MultiCompile>SKINNING;_</MultiCompile>
+	<MultiCompile>LIGHTNING;_</MultiCompile>
+	<MultiCompile>SHADOWS;_</MultiCompile>
+</Root>

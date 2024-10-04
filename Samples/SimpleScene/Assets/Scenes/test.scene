@@ -1,0 +1,114 @@
+{
+  "Camera": {
+    "$type": "DigitalRise.Rendering.PerspectiveCamera, DigitalRise",
+    "ViewAngle": 90.0,
+    "NearPlaneDistance": 0.1,
+    "FarPlaneDistance": 1000.0,
+    "Translation": "25.577564, 39.899586, 40.13073",
+    "Scale": "1, 1, 1",
+    "Rotation": "44.600067, 223.69997, 0",
+    "Children": []
+  },
+  "Scale": "1, 1, 1",
+  "Children": [
+    {
+      "$type": "DigitalRise.Rendering.Lights.DirectLight, DigitalRise",
+      "Color": "255, 255, 255, 255",
+      "Translation": "-5, 50, 6",
+      "Scale": "1, 1, 1",
+      "Rotation": "330, 0, 0",
+      "Children": [],
+      "Id": "DirectLight"
+    },
+    {
+      "$type": "DigitalRise.Modelling.DigitalRiseModel, DigitalRise",
+      "ModelPath": "Models\\BrainStem.gltf",
+      "Translation": "-20, 1, 0",
+      "Scale": "4, 4, 4",
+      "Children": []
+    },
+    {
+      "$type": "DigitalRise.Primitives.PrimitiveMeshNode, DigitalRise",
+      "PrimitiveMesh": {
+        "$type": "DigitalRise.Primitives.Plane, DigitalRise",
+        "Size": "1, 1",
+        "Tessellation": "1, 1",
+        "NormalDirection": 1,
+        "UScale": 1.0,
+        "VScale": 1.0
+      },
+      "Material": {
+        "$type": "DigitalRise.Standard.DefaultMaterial, DigitalRise",
+        "CastsShadows": false,
+        "SpecularPower": 250.0,
+        "DiffuseColor": "255, 255, 255, 255"
+      },
+      "CastsShadow": false,
+      "Translation": "0, 1, 0",
+      "Scale": "1000, 1, 1000",
+      "Children": [],
+      "Id": "p"
+    },
+    {
+      "$type": "DigitalRise.Primitives.PrimitiveMeshNode, DigitalRise",
+      "PrimitiveMesh": {
+        "$type": "DigitalRise.Primitives.Torus, DigitalRise",
+        "MajorRadius": 2.5,
+        "MinorRadius": 0.16666,
+        "Tessellation": 32,
+        "UScale": 1.0,
+        "VScale": 1.0
+      },
+      "Material": {
+        "$type": "DigitalRise.Standard.DefaultMaterial, DigitalRise",
+        "SpecularFactor": 1.0,
+        "SpecularPower": 250.0,
+        "DiffuseColor": "91, 198, 250, 255"
+      },
+      "Translation": "21, 14, 19",
+      "Scale": "4, 4, 4",
+      "Children": [],
+      "Id": "t"
+    },
+    {
+      "$type": "DigitalRise.Primitives.PrimitiveMeshNode, DigitalRise",
+      "PrimitiveMesh": {
+        "$type": "DigitalRise.Primitives.Sphere, DigitalRise",
+        "Radius": 0.5,
+        "Tessellation": 16,
+        "UScale": 1.0,
+        "VScale": 1.0
+      },
+      "Material": {
+        "$type": "DigitalRise.Standard.DefaultMaterial, DigitalRise",
+        "SpecularFactor": 2.0,
+        "SpecularPower": 250.0,
+        "DiffuseColor": "75, 217, 97, 255"
+      },
+      "Translation": "0, 18, -14",
+      "Scale": "8, 8, 8",
+      "Children": [],
+      "Id": "s"
+    },
+    {
+      "$type": "DigitalRise.Primitives.PrimitiveMeshNode, DigitalRise",
+      "PrimitiveMesh": {
+        "$type": "DigitalRise.Primitives.Teapot, DigitalRise",
+        "Size": 1.0,
+        "Tessellation": 8,
+        "UScale": 1.0,
+        "VScale": 1.0
+      },
+      "Material": {
+        "$type": "DigitalRise.Standard.DefaultMaterial, DigitalRise",
+        "SpecularPower": 250.0,
+        "DiffuseColor": "254, 57, 48, 255"
+      },
+      "Translation": "0, 24, 64",
+      "Scale": "4, 4, 4",
+      "Children": [],
+      "Id": "tea"
+    }
+  ],
+  "Id": "Root"
+}
