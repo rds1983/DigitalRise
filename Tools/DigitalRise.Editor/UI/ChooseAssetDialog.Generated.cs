@@ -20,7 +20,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 #endif
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	partial class ChooseAssetDialog: Dialog
 	{

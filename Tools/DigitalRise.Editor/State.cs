@@ -3,13 +3,13 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
-using DigitalRiseEditor.Utility;
+using DigitalRise.Editor.Utility;
 
-namespace DigitalRiseEditor
+namespace DigitalRise.Editor
 {
 	public class State
 	{
-		public const string StateFileName = "DigitalRiseEditor.config";
+		public const string StateFileName = "DigitalRise.Editor.config";
 
 		public static string StateFilePath
 		{

@@ -14,9 +14,9 @@ using DigitalRise.Primitives;
 using DigitalRise.Rendering;
 using DigitalRise.Rendering.Lights;
 using DigitalRise.Standard;
-using DigitalRiseEditor.Utility;
+using DigitalRise.Editor.Utility;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public partial class MainForm
 	{
@@ -773,7 +773,7 @@ namespace DigitalRiseEditor.UI
 
 		private void UpdateTitle()
 		{
-			var title = string.IsNullOrEmpty(_filePath) ? "DigitalRiseEditor" : _filePath;
+			var title = string.IsNullOrEmpty(_filePath) ? "DigitalRise.Editor" : _filePath;
 			StudioGame.Instance.Window.Title = title;
 		}
 

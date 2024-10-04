@@ -1,5 +1,5 @@
 <Project>
-  <Project.ExportOptions Namespace="DigitalRiseEditor.UI" Class="AddNewItemDialog" OutputPath="D:\Projects\DigitalRise\DigitalRiseEditor\UI" />
+  <Project.ExportOptions Namespace="DigitalRise.Editor.UI" Class="AddNewItemDialog" OutputPath="D:\Projects\DigitalRise\DigitalRise.Editor\UI" />
   <Dialog Title="Add New Scene" Left="808" Top="247" Width="300">
     <VerticalStackPanel Spacing="8">
       <HorizontalStackPanel Spacing="8">

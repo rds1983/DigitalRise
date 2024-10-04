@@ -7,7 +7,7 @@ using DigitalRise.Rendering.Vertices;
 using DigitalRise.Standard;
 using DigitalRise.Utility;
 
-namespace DigitalRiseEditor.Utility
+namespace DigitalRise.Editor.Utility
 {
 	internal static class _3DUtils
 	{

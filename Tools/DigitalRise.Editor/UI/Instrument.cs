@@ -1,6 +1,6 @@
 ﻿using DigitalRise.Modelling;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public enum InstrumentType
 	{

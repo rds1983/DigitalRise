@@ -1,11 +1,13 @@
 {
   "Camera": {
-    "Position": "-0.8133185, 2.7738385, 6.0870695",
-    "YawAngle": 183.39908,
-    "PitchAngle": 25.000088,
+    "$type": "DigitalRise.Rendering.PerspectiveCamera, DigitalRise",
     "ViewAngle": 60.0,
     "NearPlaneDistance": 0.1,
-    "FarPlaneDistance": 1000.0
+    "FarPlaneDistance": 1000.0,
+    "Translation": "0.3312657, 0.8981895, 8.859503",
+    "Scale": "1, 1, 1",
+    "Rotation": "5.599917, 174.79985, 0",
+    "Children": []
   },
   "Scale": "1, 1, 1",
   "Children": [
@@ -63,7 +65,7 @@
     },
     {
       "Scale": "1, 1, 1",
-      "Rotation": "0, 0, -90",
+      "Rotation": "0, 0, 270",
       "Children": [
         {
           "$type": "DigitalRise.Primitives.PrimitiveMeshNode, DigitalRise",
@@ -174,7 +176,6 @@
       "Color": "255, 255, 255, 255",
       "Translation": "0, 1, 0.05",
       "Scale": "1, 1, 1",
-      "BlendMode": 1,
       "Children": []
     },
     {
@@ -184,7 +185,6 @@
       "Color": "255, 255, 255, 255",
       "Translation": "1, 0.1, 0.05",
       "Scale": "1, 1, 1",
-      "BlendMode": 1,
       "Children": []
     },
     {
@@ -194,7 +194,6 @@
       "Color": "255, 255, 255, 255",
       "Translation": "0, 0, 1.05",
       "Scale": "1, 1, 1",
-      "BlendMode": 1,
       "Children": []
     }
   ],

@@ -1,5 +1,5 @@
 <Project>
-  <Project.ExportOptions Namespace="DigitalRiseEditor.UI" Class="MainForm" OutputPath="D:\Projects\DigitalRise\DigitalRiseEditor\UI" />
+  <Project.ExportOptions Namespace="DigitalRise.Editor.UI" Class="MainForm" OutputPath="D:\Projects\DigitalRise\DigitalRise.Editor\UI" />
   <VerticalStackPanel Id="_mainPanel">
     <HorizontalMenu>
       <MenuItem Text="&amp;File">

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public partial class ChooseAssetDialog
 	{

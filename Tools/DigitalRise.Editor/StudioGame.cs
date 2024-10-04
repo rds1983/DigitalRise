@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Myra;
 using Myra.Graphics2D.UI;
 using DigitalRise;
-using DigitalRiseEditor.UI;
+using DigitalRise.Editor.UI;
 
-namespace DigitalRiseEditor
+namespace DigitalRise.Editor
 {
 	public class StudioGame : Game
 	{

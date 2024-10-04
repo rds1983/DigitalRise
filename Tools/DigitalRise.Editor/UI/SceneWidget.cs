@@ -12,11 +12,11 @@ using DigitalRise.Utilities;
 using static DigitalRise.Utilities.CameraInputController;
 using DigitalRise.Rendering.Lights;
 using DigitalRise.Standard;
-using DigitalRiseEditor.Utility;
+using DigitalRise.Editor.Utility;
 using Microsoft.Build.Construction;
 using Myra.Graphics2D;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public class SceneWidget : Widget
 	{
@@ -24,8 +24,8 @@ namespace DigitalRiseEditor.UI
 
 		private static readonly Dictionary<Type, Texture2D> _typesIcons = new Dictionary<Type, Texture2D>
 		{
-			[typeof(BaseLight)] = DigitalRiseEditor.Resources.IconDirectionalLight,
-			[typeof(Camera)] = DigitalRiseEditor.Resources.IconCamera
+			[typeof(BaseLight)] = DigitalRise.Editor.Resources.IconDirectionalLight,
+			[typeof(Camera)] = DigitalRise.Editor.Resources.IconCamera
 		};
 
 		private Scene _scene;
@@ -299,7 +299,7 @@ namespace DigitalRiseEditor.UI
 
 				device.Viewport = new Viewport(bounds.Right - 160, bounds.Y, 160, 160);
 
-				var m = DigitalRiseEditor.Resources.ModelAxises;
+				var m = DigitalRise.Editor.Resources.ModelAxises;
 				var c = Scene.Camera.Clone();
 
 				// Make the gizmo placed always in front of the camera
@@ -328,7 +328,7 @@ namespace DigitalRiseEditor.UI
 			catch (Exception ex)
 			{
 				DR.GraphicsDevice.ScissorRectangle = scissor;
-				var font = DigitalRiseEditor.Resources.ErrorFont;
+				var font = DigitalRise.Editor.Resources.ErrorFont;
 				var message = ex.ToString();
 				var sz = font.MeasureString(message);
 

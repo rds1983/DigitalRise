@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using DigitalRise;
 using DigitalRise.Rendering;
 
-namespace DigitalRiseEditor
+namespace DigitalRise.Editor
 {
 	internal static class Resources
 	{

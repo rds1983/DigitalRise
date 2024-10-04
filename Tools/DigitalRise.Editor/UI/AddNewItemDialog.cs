@@ -1,7 +1,7 @@
 using Myra.Events;
 using Myra.Graphics2D.UI;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public partial class AddNewItemDialog : Dialog
 	{

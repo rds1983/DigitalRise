@@ -2,7 +2,7 @@
 using DigitalRise.Rendering;
 using System;
 
-namespace DigitalRiseEditor.Utility
+namespace DigitalRise.Editor.Utility
 {
 	internal class EditorNode : SceneNode
 	{

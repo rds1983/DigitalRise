@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace DigitalRiseEditor
+namespace DigitalRise.Editor
 {
 	internal class TabInfo
 	{

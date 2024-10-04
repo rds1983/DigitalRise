@@ -1,4 +1,4 @@
-﻿namespace DigitalRiseEditor
+﻿namespace DigitalRise.Editor
 {
 	internal static class Constants
 	{

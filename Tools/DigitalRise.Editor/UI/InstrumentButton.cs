@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Myra.Graphics2D.UI;
 
-namespace DigitalRiseEditor.UI
+namespace DigitalRise.Editor.UI
 {
 	public class InstrumentButton : ImageTextButton
 	{

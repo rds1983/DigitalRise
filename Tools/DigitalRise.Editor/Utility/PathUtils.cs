@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace DigitalRiseEditor.Utility
+namespace DigitalRise.Editor.Utility
 {
 	internal static class PathUtils
 	{
