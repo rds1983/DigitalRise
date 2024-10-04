@@ -25,6 +25,24 @@ namespace DigitalRise.Rendering.Vertices
 
 		public Vector3 Position;
 
+		public float X
+		{
+			get => Position.X;
+			set => Position.X = value;
+		}
+
+		public float Y
+		{
+			get => Position.Y;
+			set => Position.Y = value;
+		}
+
+		public float Z
+		{
+			get => Position.Z;
+			set => Position.Z = value;
+		}
+
 		#endregion
 
 		#region Public Static Variables
@@ -57,6 +75,10 @@ namespace DigitalRise.Rendering.Vertices
 		public VertexPosition(Vector3 position)
 		{
 			Position = position;
+		}
+
+		public VertexPosition(float x, float y, float z) : this(new Vector3(x, y, z))
+		{
 		}
 
 		#endregion

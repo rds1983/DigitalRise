@@ -596,7 +596,7 @@ namespace DigitalRise.Editor.UI
 				}
 
 				// "Ok" or Enter
-				PrimitiveMesh primitiveMesh = null;
+				PrimitiveMeshNode primitiveMesh = null;
 				switch (dialog.SelectedIndex)
 				{
 					case 0:
@@ -608,7 +608,7 @@ namespace DigitalRise.Editor.UI
 						break;
 
 					case 2:
-						primitiveMesh = new Cube();
+						primitiveMesh = new Box();
 						break;
 
 					case 3:
@@ -642,14 +642,8 @@ namespace DigitalRise.Editor.UI
 
 				if (primitiveMesh != null)
 				{
-					var meshNode = new PrimitiveMeshNode
-					{
-						Id = dialog.ItemName,
-						Material = new DefaultMaterial(),
-						PrimitiveMesh = primitiveMesh
-					};
 
-					AddNewNode(sceneNode, meshNode);
+					AddNewNode(sceneNode, primitiveMesh);
 				}
 			};
 
